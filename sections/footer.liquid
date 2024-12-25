@@ -1,0 +1,245 @@
+{%- assign ss = section.settings -%}
+
+<div class="container" id="inverseHeader" data-inversed="false">
+  <div class="top">
+    {%- if ss.image1 or ss.image2 -%}
+      <div class="images">
+        {%- if ss.image1 -%}
+          <div class="image">
+            {{ ss.image1 | image_url: width: '320' | image_tag: loading: 'lazy' }}
+          </div>
+        {%- endif -%}
+        {%- if ss.image2 -%}
+          <div class="image">
+            {{ ss.image2 | image_url: width: '320' | image_tag: loading: 'lazy' }}
+          </div>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+    {%- if ss.title != blank -%}
+      <div class="title">
+        <h2 class="footer-title">
+          {{ ss.title }}
+        </h2>
+        {%- if ss.button_text != blank -%}
+          <a href="{{ ss.button_url }}" class="button secondary">{{ ss.button_text }}</a>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+  </div>
+
+  {%- if section.blocks.size > 0 -%}
+    <div class="menu-area">
+      {%- for block in section.blocks -%}
+        {%- assign bs = block.settings -%}
+        {%- case block.type -%}
+          {%- when 'share' -%}
+            <div class="social-block">
+              {%- if bs.logo != blank -%}
+                <div class="logo">
+                  {{ bs.logo | image_url: width: '100' | image_tag: loading: 'lazy' }}
+                </div>
+              {%- endif -%}
+              {%- if bs.content -%}
+                <div class="content">
+                  {{ bs.content }}
+                </div>
+              {%- endif -%}
+              <div class="socials">
+                {%- if settings.pinterest != blank -%}
+                  <a target="_blank" title="pinterest" href="{{ settings.pinterest }}" class="social">
+                    {%- render 'icon', type: 'pinterest' -%}
+                  </a>
+                {%- endif -%}
+                {%- if settings.facebook != blank -%}
+                  <a target="_blank" title="facebook" href="{{ settings.facebook }}" class="social">
+                    {%- render 'icon', type: 'facebook' -%}
+                  </a>
+                {%- endif -%}
+                {%- if settings.instagram != blank -%}
+                  <a target="_blank" title="instagram" href="{{ settings.instagram }}" class="social">
+                    {%- render 'icon', type: 'instagram' -%}
+                  </a>
+                {%- endif -%}
+                {%- if settings.twitter != blank -%}
+                  <a target="_blank" title="twitter" href="{{ settings.twitter }}" class="social">
+                    {%- render 'icon', type: 'twitter' -%}
+                  </a>
+                {%- endif -%}
+              </div>
+            </div>
+
+          {%- when 'menu' -%}
+            <div class="menu-wrapper">
+              {%- for link in bs.menu.links -%}
+                <div class="menu">
+                  <div class="title">
+                    {{ link.title }}
+                  </div>
+                  <div class="submenu">
+                    {%- for child in link.links -%}
+                      <a href="{{ child.url }}" class="link">{{ child.title }}</a>
+                    {%- endfor -%}
+                  </div>
+                </div>
+              {%- endfor -%}
+            </div>
+
+          {%- when 'email' -%}
+            <div class="email">
+              {%- if bs.title != blank -%}
+                <div class="title">{{ bs.title }}</div>
+              {%- endif -%}
+              {%- if bs.content != blank -%}
+                <div class="email-content">{{ bs.content }}</div>
+              {%- endif -%}
+              {%- form 'customer', id: 'footer-newsletter', class: 'email-form' -%}
+                {%- if form.posted_successfully? -%}
+                  {{ 'newsletter.subscribed_successfully' | t }}
+                {%- else -%}
+                  {%- if form.errors -%}
+                    {{ form.errors.translated_fields['email'] }} 
+                    {{ form.errors.messages['email'] }}                    
+                  {%- endif -%}
+
+                  <input type="hidden" name="contact[tags]" value="newsletter">
+                  <input class="email-input" type="email" name="contact[email]" id="email" required placeholder="{{ bs.placeholder }}">
+                  <button type="submit">{{ bs.button_text }}</button>
+
+                {%- endif -%}
+              {%- endform -%}
+            </div>
+          {%- endcase -%}
+      {%- endfor -%}
+    </div>
+  {%- endif -%}
+  <div class="bottom">
+    {%- if ss.copy != blank -%}
+      {{ ss.copy }}
+    {%- endif -%}
+    {%- if ss.privacy != blank -%}
+      <div class="privacy">
+        {%- for link in ss.privacy.links -%}
+          <a href="{{ link.url }}" class="privacy-link">{{ link.title }}</a>
+          {%- if forloop.last -%}
+          
+            {%- else -%}
+              <div class="dot"></div>
+            {%- endif -%}
+        {%- endfor -%}
+        
+      </div>
+    {%- endif -%}
+  </div>
+</div>
+
+{% schema %}
+  {
+  "name": "Footer",
+    "tag": "section",
+    "class": "footer-section",
+    "settings": [
+      {
+        "type": "image_picker",
+        "id": "image1",
+        "label": "Image 1"
+      },
+      {
+        "type": "image_picker",
+        "id": "image2",
+        "label": "Image 2"
+      },
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Title"
+      },
+      {
+        "type": "text",
+        "id": "button_text",
+        "label": "Button text"
+      },
+      {
+        "type": "url",
+        "id": "button_url",
+        "label": "Button url"
+      },
+      {
+        "type": "text",
+        "id": "copy",
+        "label": "Copyright text"
+      },
+      {
+        "type": "link_list",
+        "id": "privacy",
+        "label": "Privacy menu"
+      }
+    ],
+    "blocks": [
+      {
+        "name": "Logo block",
+        "type": "share",
+        "limit": 1,
+        "settings": [
+           {
+             "type": "image_picker",
+             "id": "logo",
+             "label": "Logo"
+           },
+           {
+             "type": "richtext",
+             "id": "content",
+             "label": "Content"
+           }
+        ]
+      },
+      {
+        "name": "Menu",
+        "type": "menu",
+        "limit": 1,
+        "settings": [
+          {
+            "type": "link_list",
+            "id": "menu",
+            "label": "Menu",
+            "info": "Only 2 levels menu works here, like current footer menu"
+          }
+        ]
+      },
+      {
+        "name": "Email",
+        "type": "email",
+        "limit": 1,
+        "settings": [
+          {
+            "type": "text",
+            "id": "title",
+            "label": "Title"
+          },
+          {
+            "type": "richtext",
+            "id": "content",
+            "label": "Content"
+          },
+          {
+            "type": "text",
+            "id": "placeholder",
+            "label": "Placeholder"
+          },
+          {
+            "type": "text",
+            "id": "button_text",
+            "label": "Button text"
+          }
+        ]
+      }
+    ],
+    "presets": [
+      {
+      "name": "Footer",
+        "settings": {
+        }
+      }
+    ]
+  }
+{% endschema %}

@@ -1,0 +1,71 @@
+{
+  "sections": {
+    "main_contact_bqTD3g": {
+      "type": "main-contact",
+      "blocks": {
+        "person_6rweKY": {
+          "type": "person",
+          "settings": {
+            "photo": "shopify:\/\/shop_images\/Capture_3fd290e8-941e-49e9-b76b-daa003ab4021.jpg",
+            "name": "Wilhelm Bäckström",
+            "position": "Founder",
+            "phone_text": "+46 73 262 83 85",
+            "phone_url": "tel:+46732628385",
+            "email_text": "wilhelm.backstrom@drye.se",
+            "email_url": "mailto:test@test.com"
+          }
+        },
+        "person_Uyh7pP": {
+          "type": "person",
+          "settings": {
+            "photo": "shopify:\/\/shop_images\/1517450604840.jpg",
+            "name": "Andrew Brathwaite",
+            "position": "Co-Founder",
+            "phone_text": "+46 70 013 51 53",
+            "phone_url": "tel:+46 70 013 51 53",
+            "email_text": "andrew.brathwaite@drye.se",
+            "email_url": ""
+          }
+        },
+        "person_MDrLJ6": {
+          "type": "person",
+          "settings": {
+            "photo": "shopify:\/\/shop_images\/1724264155518.jpg",
+            "name": "Pehr Wessmark",
+            "position": "Analytics",
+            "phone_text": "+46 70 488 46 02",
+            "phone_url": "",
+            "email_text": "pehr.wessmark@drye.se",
+            "email_url": ""
+          }
+        }
+      },
+      "block_order": [
+        "person_6rweKY",
+        "person_Uyh7pP",
+        "person_MDrLJ6"
+      ],
+      "settings": {
+        "title": "Contact us",
+        "form_title": "Fill out the form so we can contact you"
+      }
+    },
+    "benefits_yyVXBi": {
+      "type": "benefits",
+      "disabled": true,
+      "custom_css": [
+        "h2 {font-size: 35px; line-height: 1.5; font-weight: 400;}",
+        "@media only screen and (max-width: 600px) {h2 {font-size: 22px; line-height: 1.5; }}"
+      ],
+      "settings": {
+        "background": "shopify:\/\/shop_images\/Bild_DRYE_3.png",
+        "title": "\"In construction school, I experienced firsthand the discomfort of wearing gloves for long periods—sweaty hands that made everything worse.\" - Wilhelm Bäckström",
+        "bottom_overlap": true
+      }
+    }
+  },
+  "order": [
+    "main_contact_bqTD3g",
+    "benefits_yyVXBi"
+  ]
+}

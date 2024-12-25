@@ -1,0 +1,89 @@
+<style>
+  #shopify-section-{{ section.id }} {
+    .icons-wrapper {
+      grid-template-columns: repeat({{ section.settings.cols_desk }}, minmax(0, 1fr));
+    }
+  }
+
+  @media screen and (max-width: 767px) {
+    #shopify-section-{{ section.id }} {
+      .icons-wrapper {
+        grid-template-columns: repeat({{ section.settings.cols_mob }}, minmax(0, 1fr));
+      }
+    }
+  }
+</style>
+
+<div class="container">
+  {%- if section.blocks.size > 0 -%}
+    <div class="icons-wrapper">
+      {%- for block in section.blocks -%}
+        <div class="icon-block">
+          {%- if block.settings.image != blank -%}
+            <!-- {{ block.settings.image | image_url: width: 400 | image_tag: loading: 'lazy' }} -->
+            <img src="{{ block.settings.image | image_url }}" width="400" height="300" loading="lazy" style="width: {{ block.settings.image_width }}% !important;">
+          {%- endif -%}
+        </div>
+      {%- endfor -%}
+    </div>
+  {%- endif -%}
+</div>
+
+{% schema %}
+  {
+    "name": "Icons",
+    "tag": "section",
+    "class": "section-icons",
+    "settings": [
+      {
+        "type": "range",
+        "id": "cols_desk",
+        "min": 1,
+        "max": 5,
+        "step": 1,
+        "unit": "c",
+        "label": "Columns count on desktop",
+        "default": 4
+      },
+      {
+        "type": "range",
+        "id": "cols_mob",
+        "min": 1,
+        "max": 3,
+        "step": 1,
+        "unit": "c",
+        "label": "Columns count on mobile",
+        "default": 2
+      },
+    ],
+    "blocks": [
+      {
+        "name": "Icon",
+        "type": "icon",
+        "settings": [
+           {
+             "type": "image_picker",
+             "id": "image",
+             "label": "Image"
+           },
+           {
+               "type": "range",
+               "id": "image_width",
+               "label": "Image width",
+              "default": 50,
+              "unit": "%",
+              "min": 20,
+              "max": 100
+           }
+        ]
+      }
+    ],
+    "presets": [
+      {
+        "name": "Icons",
+        "settings": {
+        }
+      }
+    ]
+  }
+{% endschema %}

@@ -1,0 +1,144 @@
+{%- assign ss = section.settings -%}
+<div class="container">
+  {%- if ss.title != blank -%}
+    <h1 class="title">{{ ss.title }}</h1>
+  {%- endif -%}
+  <div class="contacts-wrapper">
+    {%- if section.blocks.size > 0 -%}
+      <div class="persons-wrapper">
+        {%- for block in section.blocks -%}
+          {%- assign bs = block.settings -%}
+          <div class="person">
+            <div class="photo">
+              <div class="image">
+                {%- if bs.photo != blank -%}
+                  {{ bs.photo | image_url: width: '120' | image_tag }}
+                {%- endif -%}
+              </div>
+            </div>
+            <div class="info">
+              {%- if bs.name != blank -%}
+                <div class="name">
+                  {{ bs.name }}
+                </div>
+              {%- endif -%}
+              {%- if bs.position != blank -%}
+                <div class="position">{{ bs.position }}</div>
+              {%- endif -%}
+              {%- if bs.phone_text != blank -%}
+                <a href="{{ bs.phone_url }}">{{ bs.phone_text }}</a>
+              {%- endif -%}
+              {%- if bs.email_text != blank -%}
+                <a href="{{ bs.email_url }}">{{ bs.email_text }}</a>
+              {%- endif -%}
+            </div>
+          </div>
+        {%- endfor -%}
+      </div>
+    {%- endif -%}
+    {% form 'contact' %}
+      {%- if ss.form_title != blank -%}
+        <div class="form-title">{{ ss.form_title }}</div>
+      {%- endif -%}
+      {%- if form.posted_successfully? -%}
+        <div class="message">
+          {{ 'contact.success' | t }}
+        </div>
+      {%- endif -%}
+      {%- if form.errors -%}
+        <div class="alert-message">
+          {{ 'contact.wrong' | t }}
+        </div>
+      {%- endif -%}
+      <div class="form-wrapper">
+        <div class="two-cols">
+          <div class="send-name">
+            <input type="text" name="contact[name]" id="name" placeholder="{{ 'contact.name' | t }}" />
+          </div>
+          <div class="email">
+            <input type="email" name="contact[email]" id="email" placeholder="{{ 'contact.email' | t }}" />
+          </div>
+        </div>
+        <div class="phone">
+          <input type="tel" name="contact[phone]" id="phone" placeholder="{{ 'contact.phone' | t }}" />
+        </div>
+        <div class="message">
+          <textarea name="contact[body]" id="message" placeholder="{{ 'contact.comment' | t }}"></textarea>
+        </div>
+        <div class="submit">
+          <input type="submit" class="button" value="{{ 'contact.send' | t }}" />
+        </div>
+      </div>
+    {% endform %}
+  </div>
+</div>
+
+{% schema %}
+  {
+    "name": "Main Contact",
+    "tag": "section",
+    "class": "main-contact",
+    "settings": [
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Title"
+      },
+      {
+        "type": "text",
+        "id": "form_title",
+        "label": "Form title"
+      }
+    ],
+    "blocks": [
+      {
+        "name": "Person",
+        "type": "person",
+        "settings": [
+          {
+            "type": "image_picker",
+            "id": "photo",
+            "label": "Photo"
+          },
+          {
+            "type": "text",
+            "id": "name",
+            "label": "Name"
+          },
+          {
+            "type": "text",
+            "id": "position",
+            "label": "Position"
+          },
+          {
+            "type": "text",
+            "id": "phone_text",
+            "label": "Phone text"
+          },
+          {
+            "type": "url",
+            "id": "phone_url",
+            "label": "Phone url"
+          },
+          {
+            "type": "text",
+            "id": "email_text",
+            "label": "Email text"
+          },
+          {
+            "type": "url",
+            "id": "email_url",
+            "label": "Email url"
+          }
+        ]
+      }
+    ],
+    "presets": [
+      {
+        "name": "Main Contact",
+        "settings": {
+        }
+      }
+    ]
+  }
+{% endschema %}

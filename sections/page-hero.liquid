@@ -1,0 +1,84 @@
+{%- assign ss = section.settings -%}
+{%- if ss.invert -%}
+  {%- assign id = 'id="inverseHeader" data-inversed="false"' -%} 
+{%- endif -%}
+<div class="video-wrapper" {{ id }}>
+  <div class="video-overlay"></div>
+  {%- if ss.video != blank -%}
+    {{ ss.video | video_tag: autoplay: true, loop: true, muted: true, controls: false }}
+  {%- endif -%}
+</div>
+<div class="container">
+  {%- if ss.title != blank -%}
+    <h1 class="title">
+      {{ ss.title }}
+    </h1>
+  {%- endif -%}
+  <div class="content">
+    {%- if ss.subtitle != blank -%}
+      <div class="subtitle">{{ ss.subtitle }}</div>
+    {%- endif -%}
+    {%- if ss.content != blank -%}
+      <div class="pros">{{ ss.content }}</div>
+    {%- endif -%}
+    {%- if ss.button_text != blank -%}
+      <a href="{{ ss.button_url }}" class="link">
+        {{ ss.button_text }}
+        {%- render 'icon', type: 'arrow-right' -%}
+      </a>
+    {%- endif -%}
+  </div>
+</div>
+
+{% schema %}
+  {
+    "name": "Page Hero",
+    "tag": "section",
+    "class": "page-hero",
+    "settings": [
+      {
+        "type": "video",
+        "id": "video",
+        "label": "Video background"
+      },
+      {
+        "type": "checkbox",
+        "id": "invert",
+        "label": "Inverse header colors on scroll",
+        "default": true
+      },
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Title"
+      },
+      {
+        "type": "text",
+        "id": "subtitle",
+        "label": "Subtitle"
+      },
+      {
+        "type": "richtext",
+        "id": "content",
+        "label": "Content"
+      },
+      {
+        "type": "text",
+        "id": "button_text",
+        "label": "Link text"
+      },
+      {
+        "type": "url",
+        "id": "button_url",
+        "label": "Link url"
+      }
+    ],
+    "presets": [
+      {
+        "name": "Page Hero",
+        "settings": {
+        }
+      }
+    ]
+  }
+{% endschema %}

@@ -1,0 +1,118 @@
+<div class="container">
+  <div class="hot-wrapper">
+    {%- if section.settings.image != blank -%}
+      {{ section.settings.image | image_url: width: '1000' | image_tag }}
+    {%- endif -%}
+    <div class="spots-wrapper">
+      {%- for block in section.blocks -%}
+        {%- assign bs = block.settings -%}
+        <div id="hotSpot" data-index="{{ forloop.index }}" class="spot {% if forloop.index == 1 %} active {% endif %}" style="
+            top: {{ bs.vertical }}%;
+            left: {{ bs.horizontal }}%;
+          "
+        > <div class="plus-wrapper">
+            {%- render 'icon', type: 'plus' -%}
+          </div>
+          
+          <div class="content-area" style="
+            {%- if bs.horizontal < 50-%}
+              left: 100%;
+              right: unset;
+            {%- else -%}
+              right: 100%;
+              left: unset;  
+            {%- endif -%}
+            ">
+            {%- if bs.icon -%}
+              <div class="icon">
+                {{ bs.icon | image_url: width: '48' | image_tag }}
+              </div>
+            {%- endif -%}
+            {%- if bs.content != blank -%}
+              <div class="content">
+                {{ bs.content }}
+              </div>
+            {%- endif -%}
+          </div>
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+  <div class="mobile-info">
+    {%- for block in section.blocks -%}
+      {%- assign bs = block.settings -%}
+      <div data-index="{{ forloop.index }}" class="content-area {% if forloop.index == 1 %} active {% endif %}">
+        {%- if bs.icon -%}
+          <div class="icon">
+            {{ bs.icon | image_url: width: '48' | image_tag }}
+          </div>
+        {%- endif -%}
+        {%- if bs.content != blank -%}
+          <div class="content">
+            {{ bs.content }}
+          </div>
+        {%- endif -%}
+      </div>
+    {%- endfor -%}
+  </div>
+</div>
+
+{% schema %}
+  {
+    "name": "Hot Spot",
+    "tag": "section",
+    "class": "hot-spot",
+    "settings": [
+      {
+        "type": "image_picker",
+        "id": "image",
+        "label": "Image"
+      }
+    ],
+    "blocks": [
+      {
+        "name": "Spot",
+        "type": "spot",
+        "settings": [
+           {
+             "type": "range",
+             "id": "vertical",
+             "min": 1,
+             "max": 100,
+             "step": 1,
+             "unit": "%",
+             "label": "Vertical position",
+             "default": 50
+           },
+           {
+            "type": "range",
+            "id": "horizontal",
+            "min": 1,
+            "max": 100,
+            "step": 1,
+            "unit": "%",
+            "label": "Horizontal position",
+            "default": 50
+          },
+           {
+             "type": "image_picker",
+             "id": "icon",
+             "label": "Icon"
+           },
+           {
+             "type": "richtext",
+             "id": "content",
+             "label": "Content"
+           }
+        ]
+      }
+    ],
+    "presets": [
+      {
+        "name": "Hot Spot",
+        "settings": {
+        }
+      }
+    ]
+  }
+{% endschema %}

@@ -1,0 +1,237 @@
+{%- assign ss = section.settings -%}
+
+<style>
+  #shopify-section-{{ section.id }} {
+    background: {{ ss.bg }} url({{ 'drop.svg' | asset_url }});
+    background-repeat: no-repeat;
+    background-position: 45vw -530px;
+    {% comment %} background-size: contain; {% endcomment %}
+  }
+
+  @media screen and (max-width: 768px) {
+    #shopify-section-{{ section.id }} {
+      background-position: 96px -1002px;
+      background-size: 150% 150%;
+    }
+  }
+</style>
+
+<div class="container">
+  <div class="hero-wrapper">
+    <h1 class="title">
+      {{ product.title }}
+    </h1>
+    <div class="content">
+      {%- if ss.free_shipping != blank -%}
+        <div class="free-shipping">
+          {{ ss.free_shipping }}
+        </div>
+      {%- endif -%}
+      {%- for block in section.blocks -%}
+        {%- case block.type -%}
+          {%- when '@app' -%}
+            <div class="review-section">
+              <div class="reviews-title">{{ ss.review_title }}</div>
+              {%- render block -%}
+            </div>
+        {%- endcase -%}
+      {%- endfor -%}
+      <div class="hr-line"></div>
+      {%- form 'product', product, is: 'product-form' -%}
+        <input type="hidden" name="quantity" value="1">
+        {% comment %} <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}"> {% endcomment %}
+        <div class="variants-head">
+          <div class="size-title">{{ ss.size_title }}</div>
+          <div id="sizeChart" class="link">{{ ss.size_text }}</div>
+        </div>
+        <fieldset>
+          {%- for variant in product.variants -%}
+            {%- if product.selected_or_first_available_variant.id == variant.id -%}
+              <input type="radio" name="id" id="{{ variant.title }}" value="{{ variant.id }}" checked>
+            {%- else -%}
+              <input type="radio" name="id" id="{{ variant.title }}" value="{{ variant.id }}">
+            {%- endif -%}
+            <label for="{{ variant.title }}">{{ variant.title }}</label>
+          {%- endfor -%}
+          {% comment %} <div id="sizeChart" class="link">{{ ss.size_text }}</div> {% endcomment %}
+          {% comment %} <a target="_blank" href="{{ ss.size_url }}" class="link">{{ ss.size_text }}</a> {% endcomment %}
+        </fieldset>
+        <div class="hr-line"></div>
+        <div class="price">{{ product.price | money }}</div>
+        <div class="buttons">
+          <button class="button atcButton" type="submit">{{ ss.add_text }}</button>
+          {% comment %} {{ form | payment_button }} {% endcomment %}
+        </div>
+      {%- endform -%}
+      <div class="hr-line"></div>
+      {%- assign tabs = section.blocks | where: 'type', 'tab' -%}
+      {%- if tabs -%}
+        <div class="tabs-section">
+          <div class="tabs-titles">
+            {%- for tab in tabs -%}
+              <div
+                data-index="{{ forloop.index }}"
+                class="tab {% if forloop.index == 1 %} active {% endif %} tab-primary"
+              >
+                {{ tab.settings.title }}
+                <div class="glider"></div>
+              </div>
+            {%- endfor -%}
+          </div>
+
+          <div class="tabs-contents">
+            {%- for tab in tabs -%}
+              <div
+                class="item {% if forloop.index == 1 %} active {% endif %}"
+                id="content-{{ forloop.index }}"
+                data-index="{{ forloop.index }}"
+              >
+                {{ tab.settings.content }}
+              </div>
+            {%- endfor -%}
+          </div>
+        </div>
+      {%- endif -%}
+      {%- if ss.share_text -%}
+        <div class="share-section">
+          <div class="share-button">
+            {{ ss.share_text }}
+            {%- render 'icon', type: 'share' -%}
+          </div>
+          <div class="share-block">
+            {%- assign url = request.origin | append: request.path -%}
+            <button
+              class="share-button"
+              data-sharer="twitter"
+              data-title="{{ product.title }}"
+              data-hashtags="gloves"
+              data-url="{{ url }}"
+            >
+              {%- render 'icon', type: 'twitter' -%}
+            </button>
+            <button
+              class="share-button"
+              data-sharer="facebook"
+              data-title="{{ product.title }}"
+              data-hashtags="gloves"
+              data-url="{{ url }}"
+            >
+              {%- render 'icon', type: 'facebook' -%}
+            </button>
+            <button
+              class="share-button"
+              data-sharer="pinterest"
+              data-image="{{ product.featured_image.src }}"
+              data-title="{{ product.title }}"
+              data-url="{{ url }}"
+            >
+              {%- render 'icon', type: 'pinterest' -%}
+            </button>
+          </div>
+        </div>
+        <div class="delivery-widget__manual"></div>
+      {%- endif -%}
+    </div>
+
+    <div class="image">
+      {%- if ss.image -%}
+        {{ ss.image | image_url: width: '600' | image_tag }}
+      {%- endif -%}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Product",
+  "tag": "section",
+  "class": "main-product hero-section",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image"
+    },
+    {
+      "type": "text",
+      "id": "free_shipping",
+      "label": "Free shipping text"
+    },
+    {
+      "type": "text",
+      "id": "review_title",
+      "label": "Reviews title",
+      "default": "Reviews"
+    },
+    {
+      "type": "text",
+      "id": "size_title",
+      "label": "Sizes title",
+      "default": "Sizes"
+    },
+    {
+      "type": "text",
+      "id": "size_text",
+      "label": "Size chart text",
+      "default": "Size guide"
+    },
+    {
+      "type": "url",
+      "id": "size_url",
+      "label": "Size chart link"
+    },
+    {
+      "type": "text",
+      "id": "share_text",
+      "label": "Share text",
+      "default": "Share with friends"
+    },
+    {
+      "type": "text",
+      "id": "add_text",
+      "label": "Add to cart text",
+      "default": "Add to cart"
+    },
+    {
+      "type": "text",
+      "id": "check_text",
+      "label": "Checkout text",
+      "default": "Buy now"
+    },
+    {
+      "type": "color",
+      "id": "bg",
+      "label": "Background color",
+      "default": "#e5e5e5"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "@app"
+    },
+    {
+      "type": "tab",
+      "name": "Tab",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Tab title"
+        },
+        {
+          "type": "richtext",
+          "id": "content",
+          "label": "Tab content"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Product",
+      "settings": {
+      }
+    }
+  ]
+}
+{% endschema %}

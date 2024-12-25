@@ -1,0 +1,18 @@
+<script>
+  {% liquid
+    if routes.root_url == '/'
+      assign base = ''
+    else
+      assign base = routes.root_url
+    endif
+  %}
+  window.shopUrl = '{{ base }}';
+  window.routes = {
+    cart_add_url: '{{ routes.cart_add_url }}',
+    cart_change_url: '{{ routes.cart_change_url }}',
+    cart_update_url: '{{ routes.cart_update_url }}',
+    cart_url: '{{ routes.cart_url }}',
+    predictive_search_url: '{{ routes.predictive_search_url }}',
+  };
+</script>
+<script src="https://cdn.jsdelivr.net/npm/sharer.js@latest/sharer.min.js" defer></script>

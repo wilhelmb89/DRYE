@@ -1,0 +1,144 @@
+{%- assign ss = section.settings -%}
+
+<style>
+  #shopify-section-{{ section.id }} {
+    margin-block: {{ ss.m_top }}px {{ ss.m_bottom }}px;
+    @media screen and (max-width: 767px) {
+      margin-block: {{ ss.mobile_m_top }}px {{ ss.mobile_m_bottom }}px;
+    }
+  }
+</style>
+
+
+<div class="container small my">
+  {%- if ss.title -%}
+    <h2 class="title">
+      {{ ss.title }}
+    </h2>
+  {%- endif -%}
+  <div class="content">
+    {%- if ss.image -%}
+      <div class="image">
+        {{ ss.image | image_url: width: '600' | image_tag: loading: 'lazy' }}
+      </div>
+    {%- endif -%}
+      <div class="list-wrapper">
+        {%- if section.blocks.size > 0 -%}
+          <div class="list">
+            {%- for block in section.blocks -%}
+              <div class="list-item">
+                {%- render 'icon', type: 'checkbox' -%}
+                {{ block.settings.title }}
+              </div>
+            {%- endfor -%}
+          </div>
+        {%- endif -%}
+        {%- if ss.content != blank -%}
+          <div class="text">
+            {{ ss.content }}
+          </div>
+        {%- endif -%}
+        {%- if ss.button_text != blank -%}
+          <a href="{{ ss.button_url }}" class="button">
+            {{ ss.button_text }}
+            {%- render 'icon', type: 'arrow-right' -%}
+          </a>
+        {%- endif -%}
+      </div>
+  </div>
+</div>
+
+{% schema %}
+  {
+    "name": "List with Image",
+    "tag": "section",
+    "class": "list-image-section",
+    "settings": [
+      {
+        "type": "image_picker",
+        "id": "image",
+        "label": "Image"
+      },
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Title"
+      },
+      {
+        "type": "richtext",
+        "id": "content",
+        "label": "Content"
+      },
+      {
+        "type": "text",
+        "id": "button_text",
+        "label": "Button text"
+      },
+      {
+        "type": "url",
+        "id": "button_url",
+        "label": "Button url"
+      },
+      {
+        "type": "range",
+        "id": "m_top",
+        "min": 0,
+        "max": 300,
+        "step": 5,
+        "unit": "px",
+        "label": "Margin top",
+        "default": 120
+      },
+      {
+        "type": "range",
+        "id": "m_bottom",
+        "min": 0,
+        "max": 300,
+        "step": 5,
+        "unit": "px",
+        "label": "Margin top",
+        "default": 120
+      },
+      {
+        "type": "range",
+        "id": "mobile_m_top",
+        "min": 0,
+        "max": 300,
+        "step": 5,
+        "unit": "px",
+        "label": "MOBILE Margin top",
+        "default": 120
+      },
+      {
+        "type": "range",
+        "id": "mobile_m_bottom",
+        "min": 0,
+        "max": 300,
+        "step": 5,
+        "unit": "px",
+        "label": "MOBILE Margin top",
+        "default": 120
+      }
+    ],
+    "blocks": [
+      {
+        "name": "List item",
+        "type": "item",
+        "settings": [
+           {
+             "type": "text",
+             "id": "title",
+             "label": "Title"
+           }
+        ]
+      }
+    ],
+    "presets": [
+      {
+        "name": "List with Image",
+        "settings": {
+        }
+      }
+    ]
+  }
+{% endschema %}

@@ -1,0 +1,133 @@
+<div class="container">
+    <div class="titles">
+      <h1 class="title">{{ 'customer.account.title' | t }}</h1>
+      <a class="logout" href="{{ routes.account_logout_url }}">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M9.57031 19H6.90365C6.55002 19 6.21089 18.8361 5.96084 18.5444C5.71079 18.2527 5.57031 17.857 5.57031 17.4444V6.55556C5.57031 6.143 5.71079 5.74733 5.96084 5.45561C6.21089 5.16389 6.55002 5 6.90365 5H9.57031" stroke="#9C9C9C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M14.5703 16L18.5703 12L14.5703 8" stroke="#9C9C9C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M18.5703 12H9.57031" stroke="#9C9C9C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>          
+        {{ 'customer.log_out' | t }}
+      </a>
+    </div>
+    <div class="mobile-switchers">
+      <div id="accountSwitcher" class="switcher active" data-switch="orders">{{ 'customer.orders.title' | t }}</div>
+      <div id="accountSwitcher" class="switcher" data-switch="right-part">{{ 'customer.account.details' | t }}</div>
+    </div>
+    <div class="info">
+      <div class="orders active" data-switch="orders">  
+        {% paginate customer.orders by 20 %}
+          {%- if customer.orders.size > 0 -%}
+
+            <div class="info-title">
+              {{ 'customer.orders.title' | t }}
+            </div>
+            {%- for order in customer.orders -%}
+              <div class="order">
+                <div class="cap">Order</div>
+                <div class="cap">Date</div>
+                <div class="cap">Payment Status</div>
+                <div class="cap">Fulfillment Status</div>
+                <div class="cap">Total</div>
+                <div class="data">
+                  <a
+                    href="{{ order.customer_url }}"
+                    aria-label="{{ 'customer.orders.order_number_link' | t: number: order.name }}"
+                  >
+                    {{ order.name }}
+                  </a>
+                </div>
+                <div class="data">
+                  {{ order.created_at | time_tag: format: 'date' }}
+                </div>
+                <div class="data">
+                  {{ order.financial_status_label }}
+                </div>
+                <div class="data">
+                  {{ order.fulfillment_status_label }}
+                </div>
+                <div class="data">
+                  {{ order.total_net_amount | money_with_currency }}
+                </div>
+              </div>
+            {%- endfor -%}
+          {%- else -%}
+            <div class="info-title">
+              {{ 'customer.orders.title' | t }}
+            </div>
+            <div class="hr-line"></div>
+            <p>{{ 'customer.orders.none' | t }}</p>
+          {%- endif -%}
+  
+          {%- if paginate.pages > 1 -%}
+            {%- if paginate.parts.size > 0 -%}
+              <nav class="pagination" role="navigation" aria-label="{{ 'general.pagination.label' | t }}">
+                <ul role="list">
+                  {%- if paginate.previous -%}
+                    <li>
+                      <a href="{{ paginate.previous.url }}" aria-label="{{ 'general.pagination.previous' | t }}">
+                        <svg aria-hidden="true" focusable="false" width="24" height="24" viewBox="0 0 10 6">
+                          <path fill-rule="evenodd" clip-rule="evenodd" d="M9.354.646a.5.5 0 00-.708 0L5 4.293 1.354.646a.5.5 0 00-.708.708l4 4a.5.5 0 00.708 0l4-4a.5.5 0 000-.708z" fill="currentColor">
+                        </svg>
+                      </a>
+                    </li>
+                  {%- endif -%}
+  
+                  {%- for part in paginate.parts -%}
+                    <li>
+                      {%- if part.is_link -%}
+                        <a href="{{ part.url }}" aria-label="{{ 'general.pagination.page' | t: number: part.title }}">
+                          {{- part.title -}}
+                        </a>
+                      {%- else -%}
+                        {%- if part.title == paginate.current_page -%}
+                          <span aria-current="page" aria-label="{{ 'general.pagination.page' | t: number: part.title }}">
+                            {{- part.title -}}
+                          </span>
+                        {%- else -%}
+                          <span>{{ part.title }}</span>
+                        {%- endif -%}
+                      {%- endif -%}
+                    </li>
+                  {%- endfor -%}
+  
+                  {%- if paginate.next -%}
+                    <li>
+                      <a href="{{ paginate.next.url }}" aria-label="{{ 'general.pagination.next' | t }}">
+                        <svg aria-hidden="true" focusable="false" viewBox="0 0 10 6">
+                          <path fill-rule="evenodd" width="24" heigth="24" clip-rule="evenodd" d="M9.354.646a.5.5 0 00-.708 0L5 4.293 1.354.646a.5.5 0 00-.708.708l4 4a.5.5 0 00.708 0l4-4a.5.5 0 000-.708z" fill="currentColor">
+                        </svg>
+                      </a>
+                    </li>
+                  {%- endif -%}
+                </ul>
+              </nav>
+            {%- endif -%}
+          {%- endif -%}
+        {% endpaginate %}
+      </div>
+  
+      <div class="right-part">
+        <div class="info-title">
+          {{ 'customer.account.details' | t }}
+        </div>
+        <div class="hr-line"></div>
+        {{ customer.default_address | format_address }}
+        
+        <a class="view" href="{{ routes.account_addresses_url }}">
+          {{ 'customer.account.view_addresses' | t }} ({{ customer.addresses_count }})
+        </a>
+      </div>
+    </div>
+ 
+</div>
+
+
+{% schema %}
+{
+  "name": "Main account",
+  "class": "main-account",
+  "settings": [
+  ]
+}
+{% endschema %}

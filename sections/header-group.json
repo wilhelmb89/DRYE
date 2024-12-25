@@ -1,0 +1,22 @@
+{
+  "name": "Header",
+  "type": "header",
+  "sections": {
+    "header_qfAkpw": {
+      "type": "header",
+      "settings": {
+        "hide_account": false,
+        "logo": "{{ shop.brand.logo }}",
+        "menu": "main-menu",
+        "button_text": "",
+        "button_url": "shopify:\/\/products\/moisture-wicking-eczema-gloves",
+        "announce": "",
+        "ann_bg": "#111111",
+        "ann_tx": "#ffffff"
+      }
+    }
+  },
+  "order": [
+    "header_qfAkpw"
+  ]
+}

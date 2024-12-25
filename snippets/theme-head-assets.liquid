@@ -1,0 +1,17 @@
+{% comment %} vars creation
+
+<style>
+  --var: {{ some_theme_settings }}
+</style>
+  
+{% endcomment %}
+
+<script defer src="{{ 'theme.js' | asset_url }}"></script>
+<link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
+/>
+<link rel="stylesheet" href="{{ 'country-flags.css' | asset_url }}" media="print" onload="this.media='all'; this.onload = null">
+{{ 'theme.css' | asset_url | stylesheet_tag }}
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js" defer></script>
+<script defer src="{{ 'vendor.js' | asset_url }}"></script> 

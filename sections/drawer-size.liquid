@@ -1,0 +1,94 @@
+{%- assign ss = section.settings -%}
+{%- if request.page_type == 'product' -%}
+  <div class="size-wrapper">
+    {%- if ss.title != blank -%}
+      <div class="titles">
+        <h3 class="title">{{ ss.title }}</h3>
+        <div id="closeSize" class="close">
+          {%- render 'icon', type: 'close' -%}
+        </div>
+      </div>
+    {%- endif -%}
+    <div class="drawer-body">
+      {%- if ss.heading != blank -%}
+        <div class="heading">{{ ss.heading }}</div>
+      {%- endif -%}
+      {%- if ss.image != blank -%}
+        <div class="image">{{ ss.image | image_url: width: '300' | image_tag: loading: 'lazy' }}</div>
+      {%- endif -%}
+      {%- if section.blocks.size > 0 -%}
+        <div class="table">
+          {%- for block in section.blocks -%}
+            {%- assign bs = block.settings -%}
+              <div class="col">{{ bs.first }}</div>
+              <div class="col">{{ bs.second }}</div>
+              <div class="col">{{ bs.third }}</div>
+          {%- endfor -%}
+        </div>
+      {%- endif -%}
+      {%- if ss.bottom != blank -%}
+        <div class="bottom">{{ ss.bottom }}</div>
+      {%- endif -%}
+    </div>
+  </div>
+{%- endif -%}
+{% schema %}
+  {
+    "name": "Size Chart",
+    "tag": "section",
+    "class": "size-drawer",
+    "settings": [
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Title",
+        "default": "Size Chart"
+      },
+      {
+        "type": "text",
+        "id": "heading",
+        "label": "Heading"
+      },
+      {
+        "type": "image_picker",
+        "id": "image",
+        "label": "Image"
+      },
+      {
+        "type": "richtext",
+        "id": "bottom",
+        "label": "Bottom text"
+      }
+    ],
+    "blocks": [
+      {
+        "name": "table row",
+        "type": "row",
+        "settings": [
+          {
+            "type": "text",
+            "id": "first",
+            "label": "First column"
+          },
+          {
+            "type": "text",
+            "id": "second",
+            "label": "Second column"
+          },
+          {
+            "type": "text",
+            "id": "third",
+            "label": "Third column"
+          }
+        ]
+      }
+    ],
+    "presets": [
+      {
+        "name": "Size Chart",
+        "settings": {
+        }
+      }
+    ]
+  }
+{% endschema %}

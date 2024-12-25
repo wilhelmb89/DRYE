@@ -1,0 +1,76 @@
+{
+  "name": "Pop-ups",
+  "type": "custom.popups",
+  "sections": {
+    "drawer_size_Xcyt3f": {
+      "type": "drawer-size",
+      "blocks": {
+        "row_xfkMYe": {
+          "type": "row",
+          "settings": {
+            "first": "Size",
+            "second": "Lengh",
+            "third": "Circumference"
+          }
+        },
+        "row_WxjHQq": {
+          "type": "row",
+          "settings": {
+            "first": "7 (S)",
+            "second": "176-185",
+            "third": "196-205"
+          }
+        },
+        "row_aX9ct6": {
+          "type": "row",
+          "settings": {
+            "first": "8 (M)",
+            "second": "185-194",
+            "third": "205-214"
+          }
+        },
+        "row_8YK4EY": {
+          "type": "row",
+          "settings": {
+            "first": "9 (L)",
+            "second": "194-203",
+            "third": "214-223"
+          }
+        },
+        "row_77K3fK": {
+          "type": "row",
+          "settings": {
+            "first": "10 (XL)",
+            "second": "203-212",
+            "third": "223-232"
+          }
+        },
+        "row_iYLfMH": {
+          "type": "row",
+          "settings": {
+            "first": "11 (XXL)",
+            "second": "212-219",
+            "third": "232-241"
+          }
+        }
+      },
+      "block_order": [
+        "row_xfkMYe",
+        "row_WxjHQq",
+        "row_aX9ct6",
+        "row_8YK4EY",
+        "row_77K3fK",
+        "row_iYLfMH"
+      ],
+      "settings": {
+        "title": "Size Chart",
+        "heading": "",
+        "image": "shopify:\/\/shop_images\/Size-image_eb3e0aad-33dc-43c3-9659-3a7b68bbd9bd.png",
+        "bottom": "<p><strong>Dimension units - mm<\/strong><\/p><p><strong>Length<\/strong>: The measurement from the first crease of the wrist to the top of the middle finger<\/p><p><\/p><p><strong>Circumference<\/strong>: The measurement around your hand just under the knuckles<\/p>"
+      }
+    }
+  },
+  "order": [
+    "drawer_size_Xcyt3f"
+  ]
+}

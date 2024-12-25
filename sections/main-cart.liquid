@@ -1,0 +1,93 @@
+{%- assign ss = section.settings -%}
+<div class="container">
+  <div class="cart-wrapper">
+    {%- if ss.title != blank -%}
+      <div class="titles">
+        <h3 class="title">{{ ss.title }}</h3>
+      </div>
+    {%- endif -%}
+    <div class="cart-body">
+      {%- if cart.empty? -%}
+        <div class="empty-text">
+          {{ ss.empty_text }}
+        </div>
+      {%- else -%}
+        <div class="cart-items">
+          {%- for item in cart.items -%}
+            <div class="row" id="{{ item.variant.id }}" data-qty="{{ item.quantity }}">
+              <div class="image">{{ item.product.featured_image | image_url: width: '200' | image_tag }}</div>
+              <div class="title">
+                <a href="{{ item.product.url }}">{{ item.title }}</a>
+                <div class="actives">
+                  <div id="decreaseQty" class="decrease">
+                    {%- render 'icon', type: 'caret-left' -%}
+                  </div>
+                  <div class="quantity">{{ item.quantity }}</div>
+                  <div id="increaseQty" class="increase">
+                    {%- render 'icon', type: 'caret-right' -%}
+                  </div>
+                  <div id="removeQty" class="remove">
+                    {%- render 'icon', type: 'trash' -%}
+                  </div>
+                </div>
+              </div>
+              <div class="price">{{ item.final_price | times: item.quantity | money }}</div>
+            </div>
+          {%- endfor -%}
+        </div>
+      {%- endif -%}
+    </div>
+  </div>
+  <div class="cart-footer">
+    {%- if cart.empty? -%}
+      
+    {%- else -%}
+      <div class="totals">
+        <div class="row">
+          Cart Total:
+          <div class="total">{{ cart.total_price | money }}</div>
+        </div>
+      </div>
+      <div class="buttons">
+        {%- form 'cart', cart, attribute: '' -%}
+          <button class="button" type="submit" name="checkout">{{ ss.checkout }}</button>
+        {%- endform -%}
+        {% comment %} <a href="{{ routes.cart_url }}" class="button secondary cart-button">Go to Cart</a>  {% endcomment %}
+      </div>
+    {%- endif -%}
+  </div>
+</div>
+
+{% schema %}
+  {
+    "name": "Main Cart",
+    "tag": "section",
+    "class": "main-cart",
+    "settings": [
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Cart title",
+        "default": "Cart"
+      },
+      {
+        "type": "richtext",
+        "id": "empty_text",
+        "label": "Empty text"
+      },
+      {
+        "type": "text",
+        "id": "checkout",
+        "label": "Checkout button text",
+        "default": "Go to checkout"
+      }
+    ],
+    "presets": [
+      {
+        "name": "Main Cart",
+        "settings": {
+        }
+      }
+    ]
+  }
+{% endschema %}

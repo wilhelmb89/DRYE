@@ -1,0 +1,56 @@
+{%- assign ss = section.settings -%}
+
+<div class="container">
+  {%- if ss.title != blank -%}
+    <div class="h2 title">{{ ss.title }}</div>
+  {%- endif -%}
+  {%- if ss.image_before != blank and ss.image_after != blank -%}
+    <div class="before-after-slider">
+      <div class="before-image">
+        {{ section.settings.image_before | image_url: width: '1000' | image_tag }}
+      </div>
+    
+      <div class="after-image">
+        {{ section.settings.image_after | image_url: width: '1000' | image_tag }}
+      </div>
+  
+      <div class="resizer">
+        <div class="resizer-trigger">
+          {%- render 'icon', type: 'two-carets' -%}
+        </div>
+      </div>
+    </div>
+  {%- endif -%}
+</div>
+
+{% schema %}
+  {
+    "name": "Before-After",
+    "tag": "section",
+    "class": "before-after",
+    "settings": [
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Title"
+      },
+      {
+        "type": "image_picker",
+        "id": "image_before",
+        "label": "Image Before"
+      },
+      {
+        "type": "image_picker",
+        "id": "image_after",
+        "label": "Image after"
+      }
+    ],
+    "presets": [
+      {
+        "name": "Before-After",
+        "settings": {
+        }
+      }
+    ]
+  }
+{% endschema %}

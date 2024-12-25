@@ -1,0 +1,63 @@
+<div class="container">
+  <div class="multicolumn-wrapper">
+    {%- for block in section.blocks -%}
+      {%- assign bs = block.settings -%}
+      <div class="column">
+        {%- if bs.icon != blank -%}
+          <div class="icon">
+            {{ bs.icon | image_url: width: '48' | image_tag }}
+          </div>
+        {%- endif -%}
+        <div class="right-part">
+          {%- if bs.title != blank -%}
+            <div class="title">{{ bs.title }}</div>
+          {%- endif -%}
+          {%- if bs.content != blank -%}
+            <div class="content">{{ bs.content }}</div>
+          {%- endif -%}
+        </div>
+      </div>
+    {%- endfor -%}
+  </div>
+</div>
+
+{% schema %}
+  {
+    "name": "Multicolumn",
+    "tag": "section",
+    "class": "multicolumn",
+    "settings": [
+      
+    ],
+    "blocks": [
+      {
+        "name": "Column",
+        "type": "column",
+        "settings": [
+           {
+             "type": "image_picker",
+             "id": "icon",
+             "label": "Icon"
+           },
+           {
+             "type": "text",
+             "id": "title",
+             "label": "Title"
+           },
+           {
+             "type": "richtext",
+             "id": "content",
+             "label": "Content"
+           }
+        ]
+      }
+    ],
+    "presets": [
+      {
+        "name": "Multicolumn",
+        "settings": {
+        }
+      }
+    ]
+  }
+{% endschema %}

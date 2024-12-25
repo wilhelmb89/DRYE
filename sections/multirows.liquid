@@ -1,0 +1,173 @@
+{%- assign ss = section.settings -%}
+
+<style>
+  #shopify-section-{{ section.id }} {
+    background: {{ ss.bg }};
+    color: {{ ss.tx }};
+    fill: {{ ss.tx }};
+  }
+  {%- if ss.special_title -%}
+    @media screen and (max-width: 767px) {
+      #shopify-section-{{ section.id }} {
+      padding-block: 56px;
+      }
+    }
+  {%- endif -%}
+  {%- if ss.overlap -%}
+    #shopify-section-{{ section.id }} {
+      margin-top: -5vw;
+      position: relative;
+      z-index: 5;
+      @media screen and (max-width: 767px) {
+        margin-top: -28px;
+        }
+      }
+  {%- endif -%}
+</style>
+
+{%- if ss.invert -%}
+  {%- assign id = 'id="inverseHeader" data-inversed="false"' -%} 
+{%- endif -%}
+
+<div class="container" {{ id }}>
+  {%- if ss.title != blank -%}
+    <h2 class="title ">{{ ss.title }}</h2>
+  {%- endif -%}
+  {%- if section.blocks.size > 0 -%}
+    <div class="rows">
+      {%- for block in section.blocks -%}
+        {%- assign bs = block.settings -%}
+        <div class="row" style="flex-direction: {{ bs.position }}">
+          <div class="content">
+            {%- if bs.title != blank -%}
+              <h3 class="row-title">{{ bs.title }}</h3>
+            {%- endif -%}
+            <div class="bottom">
+              {%- if bs.content != blank -%}
+                <div class="text">
+                  {{ bs.content }}
+                </div>
+              {%- endif -%}
+              {%- if bs.button_text != blank -%}
+                <a href="{{ bs.button_url }}" class="link">
+                  {{ bs.button_text }}
+                  {%- render 'icon', type: 'arrow-right' -%}
+                </a>
+              {%- endif -%}
+            </div>
+          </div>
+          {%- if bs.image -%}
+            <div class="image">
+              {{ bs.image | image_url: width: '630' | image_tag: loading: 'lazy' }}
+            </div>
+          {%- endif -%}
+        </div>
+      {%- endfor -%}
+    </div>
+  {%- endif -%}
+</div>
+
+{% schema %}
+  {
+    "name": "Multirows",
+    "tag": "section",
+    "class": "multirows-section",
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "special_title",
+        "label": "Special section styling",
+        "default": false
+      },
+      {
+        "type": "checkbox",
+        "id": "overlap",
+        "label": "Overlap top section",
+        "default": false
+      },
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Title"
+      },
+      {
+        "type": "checkbox",
+        "id": "invert",
+        "label": "Inverse header colors on scroll",
+        "default": true
+      },
+      {
+        "type": "header",
+        "content": "Colors"
+      },
+      {
+        "type": "color",
+        "id": "bg",
+        "label": "Background",
+        "default": "#111111"
+      },
+      {
+        "type": "color",
+        "id": "tx",
+        "label": "Text",
+        "default": "#FFFFFF"
+      }
+    ],
+    "blocks": [
+      {
+        "name": "Row",
+        "type": "row",
+        "settings": [
+           {
+             "type": "text",
+             "id": "title",
+             "label": "Title"
+           },
+           {
+             "type": "richtext",
+             "id": "content",
+             "label": "Content"
+           },
+           {
+             "type": "text",
+             "id": "button_text",
+             "label": "Link text"
+           },
+           {
+             "type": "url",
+             "id": "button_url",
+             "label": "Link url"
+           },
+           {
+             "type": "image_picker",
+             "id": "image",
+             "label": "Image"
+           },
+           {
+             "type": "select",
+             "id": "position",
+             "label": "Image positiom",
+             "options": [
+               {
+                 "value": "row-reverse",
+                 "label": "Left"
+               },
+               {
+                "value": "row",
+                "label": "Right"
+               }
+             ],
+             "default": "row"
+           }
+        ]
+      }
+    ],
+    "presets": [
+      {
+        "name": "Multirows",
+        "settings": {
+        }
+      }
+    ]
+  }
+{% endschema %}

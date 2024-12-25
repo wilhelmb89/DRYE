@@ -1,0 +1,160 @@
+<style>
+  #shopify-section-{{ section.id }} {
+    background: {{ section.settings.bg }};
+    padding-block: {{ section.settings.p_top }}px {{ section.settings.p_bottom }}px;
+    @media screen and (max-width: 767px) {
+      padding-block: {{ section.settings.p_m_top }}px {{ section.settings.p_m_bottom }}px;
+    }
+  }
+</style>
+
+<div class="container">
+  {%- if section.settings.title != blank -%}
+    <h2 class="title">{{ section.settings.title }}</h2>
+  {%- endif -%}
+  {%- if section.blocks.size > 0 -%}
+    <div class="accordion">
+      {%- for block in section.blocks -%}
+        {%- assign bs = block.settings -%}
+        <div class="tab">
+          
+          <input type="checkbox" name="accordion-{{ forloop.index }}" id="cb{{ forloop.index }}-{{ block.id }}" {% if forloop.index == 1 %} checked {% endif %}>
+          <label for="cb{{ forloop.index }}-{{ block.id }}">
+            {{ bs.title }}
+            <div class="plus">
+              {%- render 'icon', type: 'plus' -%}
+            </div>
+          </label>
+          <div class="content-wrapper">
+            <div class="tab_content" style="flex-direction: {{ bs.pos }}">
+              {%- if bs.image != blank -%}
+                <div class="image">
+                  {{ bs.image | image_url: width: '1000' | image_tag: loading: 'lazy' }}
+                </div>
+              {%- endif -%}
+              {%- if bs.content != blank -%}
+                <div class="content">{{ bs.content }}</div>
+              {%- endif -%}
+            </div>
+          </div>
+        </div>
+      {%- endfor -%}
+    </div>
+  {%- endif -%}
+</div>
+
+{% schema %}
+  {
+    "name": "FAQs",
+    "tag": "section",
+    "class": "faq-section",
+    "settings": [
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Title"
+      },
+      {
+        "type": "color",
+        "id": "bg",
+        "label": "Background",
+        "default": "#F3F2F1"
+      },
+      {
+        "type": "header",
+        "content": "Desktop spacing"
+      },
+      {
+        "type": "range",
+        "id": "p_top",
+        "min": 0,
+        "max": 300,
+        "step": 5,
+        "unit": "px",
+        "label": "Padding top",
+        "default": 160
+      },
+      {
+        "type": "range",
+        "id": "p_bottom",
+        "min": 0,
+        "max": 300,
+        "step": 5,
+        "unit": "px",
+        "label": "Padding bottom",
+        "default": 300
+      },
+      {
+        "type": "header",
+        "content": "Mobile spacing"
+      },
+      {
+        "type": "range",
+        "id": "p_m_top",
+        "min": 0,
+        "max": 300,
+        "step": 5,
+        "unit": "px",
+        "label": "Padding top",
+        "default": 35
+      },
+      {
+        "type": "range",
+        "id": "p_m_bottom",
+        "min": 0,
+        "max": 300,
+        "step": 5,
+        "unit": "px",
+        "label": "Padding bottom",
+        "default": 110
+      }
+    ],
+    "blocks": [
+      {
+        "name": "FAQ item",
+        "type": "item",
+        "settings": [
+          {
+            "type": "text",
+            "id": "title",
+            "label": "Title"
+          },
+          {
+            "type": "richtext",
+            "id": "content",
+            "label": "Content"
+          },
+          {
+            "type": "image_picker",
+            "id": "image",
+            "label": "Image",
+            "info": "Image height related to text amount and rendered as cover. On mobiles image aspect-ration is 1/1"
+          },
+          {
+            "type": "select",
+            "id": "pos",
+            "label": "Image position",
+            "options": [
+              {
+                "value": "row",
+                "label": "Left"
+              },
+              {
+                "value": "row-reverse",
+                "label": "Right"
+              }
+            ],
+            "default": "row"
+          }
+        ]
+      }
+    ],
+    "presets": [
+      {
+        "name": "FAQs",
+        "settings": {
+        }
+      }
+    ]
+  }
+{% endschema %}

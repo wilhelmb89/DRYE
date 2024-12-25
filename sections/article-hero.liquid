@@ -1,0 +1,38 @@
+<style>
+    #shopify-section-{{ section.id }} {
+      background: linear-gradient(rgba(0,0,0,0), rgba(0,0,0,1)), url('{{ article.image | image_url: width: '1920' }}');
+      background-position: center center;
+      background-repeat: no-repeat;
+      background-size: cover;
+      padding-block: 305px;
+      min-height: 1080px;
+      .container {
+        max-width: 980px;
+      }
+    }
+</style>
+{%- if article.metafields.custom.invert_header.value -%}
+  {%- assign id = 'id="inverseHeader" data-inversed="false"' -%} 
+{%- endif -%}
+<div class="container small" {{ id }}>
+  <div class="date">{{ article.created_at | date: '%d.%m.%Y' }}</div>
+  <h1 class="title article__title">{{ article.title }}</h1>
+</div>
+
+{% schema %}
+  {
+    "name": "Article hero",
+    "tag": "section",
+    "class": "section-article-hero",
+    "settings": [
+
+    ],
+    "presets": [
+      {
+        "name": "Article hero",
+        "settings": {
+        }
+      }
+    ]
+  }
+{% endschema %}

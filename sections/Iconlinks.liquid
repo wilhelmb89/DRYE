@@ -1,0 +1,38 @@
+<div class="icon-container">
+    <a href="page1.html"><img src="icon1.png" alt="Icon 1"></a>
+    <a href="page2.html"><img src="icon2.png" alt="Icon 2"></a>
+    <a href="page3.html"><img src="icon3.png" alt="Icon 3"></a>
+    <a href="page4.html"><img src="icon4.png" alt="Icon 4"></a>
+  </div>
+<style>
+.icon-container {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.icon-container a {
+  text-decoration: none;
+}
+
+.icon-container img {
+  width: 50px;
+  height: 50px;
+  cursor: pointer;
+}
+
+/* Responsive Styling */
+@media (max-width: 600px) {
+  .icon-container {
+    flex-wrap: wrap;
+  }
+
+  .icon-container img {
+    width: 40px;
+    height: 40px;
+    margin: 5px;
+  }
+}
+</style>

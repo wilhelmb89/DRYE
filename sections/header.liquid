@@ -1,0 +1,179 @@
+{%- assign ss = section.settings -%}
+{% comment %}
+  additional classes for header:
+  - inversed - white color, white svg
+  - transparent - zero background
+{% endcomment %}
+<header class="">
+  <style>
+      .announce {
+        height: 25px !important;
+      }
+      {%- if request.page_type == 'product' -%}
+        .announce {
+          display: flex;
+        }
+      {%- else -%}
+      .announce {
+        display: none !important;
+      }
+    {%- endif -%}
+  </style>
+
+  <div class="container">
+    <a class="logo" href="{{ routes.root_url }}">
+      {%- if ss.logo != blank -%}
+        {{ ss.logo | image_url: width: '120' | image_tag }}
+      {%- endif -%}
+    </a>
+    <div class="menu">
+      {%- if ss.menu != blank -%}
+        {%- for link in ss.menu.links -%}
+          <a href="{{ link.url }}" class="link centered">{{ link.title }}</a>
+        {%- endfor -%}
+      {%- endif -%}
+    </div>
+    <div id="liveBubble" class="actives">
+      {%- if shop.customer_accounts_enabled and ss.hide_account == false -%}
+        <a
+          href="{%- if customer -%}{{ routes.account_url }}{%- else -%}{{ routes.account_login_url }}{%- endif -%}"
+          class="icon"
+          title="{{ 'account.login' | t }}"
+        >
+          {%- render 'icon', type: 'account' -%}
+        </a>
+      {%- endif -%}
+      <div class="cart icon">
+        {%- if request.page_type == 'cart' -%}
+          <a href="{{ routes.cart_url }}">
+            {%- render 'icon', type: 'cart' -%}
+          </a>
+        {%- else -%}
+          <div id="triggerSlider" class="dynamic-cart">
+            {%- render 'icon', type: 'cart' -%}
+          </div>
+        {%- endif -%}
+        {%- if cart.item_count > 0 -%}
+          <div class="bubble">{{ cart.item_count }}</div>
+        {%- endif -%}
+      </div>
+      <div class="locale">
+        {%- render 'localization' -%}
+      </div>
+    </div>
+    <div id="menuSwitcher" class="menu-switcher">
+      {%- render 'icon', type: 'hamburger' -%}
+    </div>
+  </div>
+</header>
+<div id="menuDrawer" class="menu-drawer">
+  <div class="container">
+    <div class="top-wrapper">
+      <a
+        class="logo"
+        title="{{ shop.title }}"
+        href="{{ shop.url }}"
+      >
+        {%- if ss.logo != blank -%}
+          {{ ss.logo | image_url: width: '120' | image_tag }}
+        {%- endif -%}
+      </a>
+      <div id="menuClose" class="close">
+        {%- render 'icon', type: 'close' -%}
+      </div>
+    </div>
+    <div class="actives">
+      {%- if shop.customer_accounts_enabled and ss.hide_account == false -%}
+        <a
+          href="{%- if customer -%}{{ routes.account_url }}{%- else -%}{{ routes.account_login_url }}{%- endif -%}"
+          class="icon"
+          title="{{ 'account.login' | t }}"
+        >
+          {%- render 'icon', type: 'account' -%}
+        </a>
+      {%- endif -%}
+      <div id="triggerSlider" class="dynamic-cart">
+        {%- render 'icon', type: 'cart' -%}
+      </div>
+      <div class="locale">
+        {%- render 'localization' -%}
+      </div>
+    </div>
+    <div class="middle-wrapper">
+      <div class="menu">
+        {%- if ss.menu != blank -%}
+          {%- for link in ss.menu.links -%}
+            <a href="{{ link.url }}" class="link centered">{{ link.title }}</a>
+          {%- endfor -%}
+        {%- endif -%}
+      </div>
+      {%- if ss.button_text != blank -%}
+        <div class="button-wrapper">
+          <a href="{{ ss.button_url }}" class="button wide">{{ ss.button_text }}</a>
+        </div>
+      {%- endif -%}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Header",
+  "tag": "section",
+  "class": "header-section",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "hide_account",
+      "label": "Hide account",
+      "default": true
+    },
+    {
+      "type": "image_picker",
+      "id": "logo",
+      "label": "Logo"
+    },
+    {
+      "type": "link_list",
+      "id": "menu",
+      "label": "Menu"
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button text"
+    }, {
+      "type": "url",
+      "id": "button_url",
+      "label": "Button url"
+    }, {
+      "type": "header",
+      "content": "Announce"
+    }, {
+      "type": "paragraph",
+      "content": "Will be visible only on product page"
+    }, {
+      "type": "text",
+      "id": "announce",
+      "label": "Announce text",
+      "default": "Free shipping"
+    }, {
+      "type": "color",
+      "id": "ann_bg",
+      "label": "Announce background",
+      "default": "#111111"
+    }, {
+      "type": "color",
+      "id": "ann_tx",
+      "label": "Announce text",
+      "default": "#FFFFFF"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Header",
+      "settings": {}
+    }
+  ]
+}
+{% endschema %}

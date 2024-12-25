@@ -1,0 +1,48 @@
+{
+  "name": "Footer",
+  "type": "footer",
+  "sections": {
+    "footer_K8FzgC": {
+      "type": "footer",
+      "blocks": {
+        "share_HE3Wnj": {
+          "type": "share",
+          "settings": {
+            "logo": "shopify:\/\/shop_images\/DRYE-06_2.webp",
+            "content": "<p>A glove liner designed to manage sweat and reduce itching while offering comfort and durability.<\/p>"
+          }
+        },
+        "menu_CNWPem": {
+          "type": "menu",
+          "settings": {
+            "menu": "footer-menu"
+          }
+        },
+        "email_kNMn4t": {
+          "type": "email",
+          "settings": {
+            "title": "Join our community",
+            "content": "<p>Sign up for our monthly email summaries to receive tips, reviews, news, and updates.<\/p>",
+            "placeholder": "Enter email address",
+            "button_text": "Subscribe"
+          }
+        }
+      },
+      "block_order": [
+        "share_HE3Wnj",
+        "menu_CNWPem",
+        "email_kNMn4t"
+      ],
+      "settings": {
+        "title": "",
+        "button_text": "",
+        "button_url": "shopify:\/\/products\/moisture-wicking-eczema-gloves",
+        "copy": "© 2024 DRYE, All rights reserved.",
+        "privacy": "privacy-menu"
+      }
+    }
+  },
+  "order": [
+    "footer_K8FzgC"
+  ]
+}

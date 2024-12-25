@@ -1,0 +1,144 @@
+{
+  "customer": {
+    "account": {
+      "title": "Konto",
+      "details": "Kontodetaljer",
+      "view_addresses": "Se adress",
+      "return": "Gå tillbaka till kontodetaljer"
+    },
+    "account_fallback": "Konto",
+    "activate_account": {
+      "title": "Aktivera konto",
+      "subtext": "Skapa ditt lösenord för att aktivera ditt lösenord",
+      "password": "Lösenord",
+      "password_confirm": "Bekräfta lösenord",
+      "submit": "Aktivera lösenord",
+      "cancel": "Neka inbjudan"
+    },
+    "addresses": {
+      "title": "Adress",
+      "default": "Förvalt",
+      "add_new": "Lägg till en ny adress",
+      "edit_address": "Ändra adress",
+      "first_name": "Förnamn",
+      "last_name": "Efternamn",
+      "company": "Företag",
+      "address1": "Adress 1",
+      "address2": "Adress 2 ",
+      "city": "Stad",
+      "country": "Land\/region",
+      "province": "Ort",
+      "zip": "Postkod ",
+      "phone": "Telefon",
+      "set_default": "Ställ in som standardadress",
+      "add": "Lägg till adress",
+      "update": "Uppdatera adress",
+      "cancel": "Avbryt",
+      "edit": "Ändra",
+      "delete": "Ta bort",
+      "delete_confirm": "Är du säker att du vill ta bort denna adress?"
+    },
+    "log_in": "Logga in",
+    "login": "Logga in",
+    "log_out": "Logga ut",
+    "login_page": {
+      "cancel": "Avbryt",
+      "dont_have": "Saknar du konto?",
+      "create_account": "Skapa konto",
+      "email": "E-mail",
+      "forgot_password": "Glömt ditt lösenord?",
+      "guest_continue": "Fortsätt som gäst",
+      "guest_title": "eller ",
+      "password": "Lösenord",
+      "title": "Logga in",
+      "sign_in": "Logga in",
+      "submit": "Bekräfta"
+    },
+    "order": {
+      "title": "Order {{ name }}",
+      "date_html": "Placerad {{ name }}",
+      "cancelled_html": "Avbruten order på {{ date }}",
+      "cancelled_reason": "Anledning: {{ reason }}",
+      "billing_address": "Faktureringsadress",
+      "payment_status": "Betalningsstatus ",
+      "shipping_address": "Leveransadress",
+      "fulfillment_status": "Leveransstatus",
+      "discount": "Rabatt",
+      "shipping": "Leverans",
+      "tax": "Moms",
+      "product": "Produkt",
+      "sku": "SKU",
+      "price": "Pris ",
+      "quantity": "Antal",
+      "total": "Total",
+      "total_refunded": "Återbetald",
+      "fulfilled_at_html": "Fullföljd {{ datum }}",
+      "track_shipment": "Spåra leverans",
+      "tracking_url": "Spårningslänk",
+      "tracking_company": "Fraktlösning",
+      "tracking_number": "Spårningsnummer",
+      "subtotal": "Delsumma",
+      "total_duties": "Skatter"
+    },
+    "orders": {
+      "title": "Orderhistorik",
+      "order_number": "Order",
+      "order_number_link": "Ordernummer {{ number }}",
+      "date": "Datum",
+      "payment_status": "Betalningsstatus",
+      "fulfillment_status": "Leveransstatus",
+      "total": "Total",
+      "none": "Du har inte lagt din order än"
+    },
+    "recover_password": {
+      "title": "Återställ ditt lösenord",
+      "subtext": "Vi kommer skicka dig ett mejl för att återställa ditt lösenord.",
+      "success": "Vi har skickat ett e-postmeddelande med en länk för att uppdatera ditt lösenord.\n\n"
+    },
+    "register": {
+      "title": "Skapa konto",
+      "first_name": "Förnamn",
+      "last_name": "Efternamn",
+      "email": "E-mail",
+      "password": "Lösenord",
+      "submit": "Skapa"
+    },
+    "reset_password": {
+      "title": "Återställ ditt lösenord",
+      "subtext": "Skapa nytt lösenord",
+      "password": "Lösenord",
+      "password_confirm": "Bekräfta lösenord",
+      "submit": "Återställ lösenord"
+    }
+  },
+  "blog": {
+    "read_more": "Läs mer",
+    "no_articles": "Inga artiklar "
+  },
+  "contact": {
+    "wrong": "Något gick fel",
+    "success": "Tack, vi hör av oss så snart vi kan!",
+    "name": "Namn *",
+    "email": "E-mail *",
+    "phone": "Telefonnummer",
+    "comment": "Kommentar",
+    "send": "Skicka"
+  },
+  "general": {
+    "common": {
+      "search": "Sök"
+    }
+  },
+  "newsletter": {
+    "subscribed_successfully": "Prenumeration lyckades"
+  },
+  "product": {
+    "price": "Pris"
+  },
+  "reviews": {
+    "see-all": "See recensioner"
+  },
+  "account": {
+    "login": "Logga in"
+  }
+}

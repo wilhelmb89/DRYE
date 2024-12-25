@@ -1,0 +1,203 @@
+<div class="container">
+  <div class="titles">
+    <h1 class="title">{{ 'customer.account.title' | t }}</h1>
+    <a class="logout" href="{{ routes.account_url }}">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M19 12H5" stroke="#9C9C9C" stroke-width="2" stroke-linecap="square" stroke-linejoin="round"/>
+        <path d="M12 19L5 12L12 5" stroke="#9C9C9C" stroke-width="2" stroke-linecap="square" stroke-linejoin="round"/>
+      </svg>      
+      {{ 'customer.account.return' | t }}
+    </a>
+  </div>
+  <div class="info">
+    <div class="orders active" data-switch="orders">  
+      <div class="info-title">
+        {{ 'customer.orders.title' | t }}
+      </div>
+      <div class="placed">
+        {%- assign order_date = order.created_at | time_tag: format: 'date_at_time' -%}
+        <p>{{ 'customer.order.date_html' | t: date: order_date }}</p>
+        {%- if order.cancelled -%}
+          {%- assign cancelled_at = order.cancelled_at | time_tag: format: 'date_at_time' -%}
+          <p>{{ 'customer.order.cancelled_html' | t: date: cancelled_at }}</p>
+          <p>{{ 'customer.order.cancelled_reason' | t: reason: order.cancel_reason_label }}</p>
+        {%- endif -%}
+      </div>
+        <div class="order desktop">
+          {% comment %} headings {% endcomment %}
+          <div class="cap">PRODUCT</div>
+          <div class="cap">SKU</div>
+          <div class="cap">PRICE</div>
+          <div class="cap">QUANTITY</div>
+          <div class="cap">TOTAL</div>
+          {% comment %} order items {% endcomment %}
+          {%- for line_item in order.line_items -%}
+            <div class="data underline">
+              <a href="{{ line_item.url }}">{{ line_item.title }}</a>
+            </div>
+            <div class="data underline">
+              {{ line_item.sku }}
+            </div>
+            <div class="data underline">
+              {{ line_item.final_price | money }}
+            </div>
+            <div class="data underline">
+              {{ line_item.quantity }}
+            </div>
+            <div class="data underline">
+              {{ line_item.original_line_price | money }}
+            </div>
+          {% endfor %}
+          {% comment %} subtotals {% endcomment %}
+          <div class="data">
+            {{ 'customer.order.subtotal' | t }}:
+            {%- if order.cart_level_discount_applications != blank -%}
+              {%- assign discount = 0 -%}
+              <br>
+                {%- for discount_application in order.cart_level_discount_applications -%}
+                      {%- assign discount = discount | plus: discount_application.total_allocated_amount -%}
+                {%- endfor -%}
+                {{ 'customer.order.discount' | t }}:
+            {%- endif -%}
+            
+            {%- for shipping_method in order.shipping_methods -%}
+              <br>  
+              {{ 'customer.order.shipping' | t }}:
+            {%- endfor -%}
+          </div>
+          <div class="data"></div>
+          <div class="data"></div>
+          <div class="data"></div>
+          <div class="data">
+            {{ order.line_items_subtotal_price | money }}
+            {%- if order.cart_level_discount_applications != blank -%}
+              {%- assign discount = 0 -%}
+              <br>
+                {%- for discount_application in order.cart_level_discount_applications -%}
+                      {%- assign discount = discount | plus: discount_application.total_allocated_amount -%}
+                {%- endfor -%}
+                -{{ discount | money }}
+            {%- endif -%}
+            
+            {%- for shipping_method in order.shipping_methods -%}
+              <br>  
+              {{ shipping_method.price | money }}
+            {%- endfor -%}
+          </div>
+          {% comment %} totals {% endcomment %}
+          <div class="data big">
+            {{ 'customer.order.total' | t }}
+          </div>
+          <div class="data"></div>
+          <div class="data"></div>
+          <div class="data"></div>
+          <div class="data big">
+            {{ order.total_net_amount | money }}
+          </div>
+        </div>
+        <div class="order mobile">
+          {%- for line_item in order.line_items -%}
+            <div class="line-item">
+              {% comment %} headings {% endcomment %}
+              <div class="cap">PRODUCT</div>
+              <div class="cap">SKU</div>
+              <div class="cap">PRICE</div>
+              <div class="cap">QUANTITY</div>
+              <div class="cap">TOTAL</div>
+              <div class="data underline">
+                <a href="{{ line_item.url }}">{{ line_item.title }}</a>
+              </div>
+              <div class="data underline">
+                {{ line_item.sku }}
+              </div>
+              <div class="data underline">
+                {{ line_item.final_price | money }}
+              </div>
+              <div class="data underline">
+                {{ line_item.quantity }}
+              </div>
+              <div class="data underline">
+                {{ line_item.original_line_price | money }}
+              </div>
+            </div>
+            <div class="hr-line"></div>
+          {% endfor %}
+          {% comment %} subtotals {% endcomment %}
+          <div class="mobile-columns">
+            <div class="data">
+              {{ 'customer.order.subtotal' | t }}:
+              {%- if order.cart_level_discount_applications != blank -%}
+                {%- assign discount = 0 -%}
+                <br>
+                  {%- for discount_application in order.cart_level_discount_applications -%}
+                        {%- assign discount = discount | plus: discount_application.total_allocated_amount -%}
+                  {%- endfor -%}
+                  {{ 'customer.order.discount' | t }}:
+              {%- endif -%}
+              
+              {%- for shipping_method in order.shipping_methods -%}
+                <br>  
+                {{ 'customer.order.shipping' | t }}:
+              {%- endfor -%}
+            </div>
+            <div class="data">
+              {{ order.line_items_subtotal_price | money }}
+              {%- if order.cart_level_discount_applications != blank -%}
+                {%- assign discount = 0 -%}
+                <br>
+                  {%- for discount_application in order.cart_level_discount_applications -%}
+                        {%- assign discount = discount | plus: discount_application.total_allocated_amount -%}
+                  {%- endfor -%}
+                  -{{ discount | money }}
+              {%- endif -%}
+              
+              {%- for shipping_method in order.shipping_methods -%}
+                <br>  
+                {{ shipping_method.price | money }}
+              {%- endfor -%}
+            </div>
+          </div>
+          <div class="hr-line"></div>
+          <div class="mobile-columns">
+            {% comment %} totals {% endcomment %}
+            <div class="data big">
+              {{ 'customer.order.total' | t }}
+            </div>
+            <div class="data big">
+              {{ order.total_net_amount | money }}
+            </div>
+          </div>
+        </div>
+    </div>
+
+    <div class="right-part active">
+      <div class="info-title">
+        {{ 'customer.order.billing_address' | t }}
+      </div>
+      
+      {{ order.billing_address | format_address }}
+      
+
+      <div class="hr-line"></div>
+
+      <div class="info-title">
+        {{ 'customer.order.shipping_address' | t }}
+      </div>
+      <p>
+        <strong>{{ 'customer.order.fulfillment_status' | t }}:</strong>
+        {{ order.fulfillment_status_label }}
+      </p>
+      {{ order.shipping_address | format_address }}
+    </div>
+  </div>
+
+</div>
+
+{% schema %}
+{
+  "name": "Main order",
+  "class": "main-account main-order",
+  "settings": [
+  ]
+}
+{% endschema %}

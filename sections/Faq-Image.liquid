@@ -1,0 +1,265 @@
+{%- assign ss = section.settings -%}
+
+<style>
+
+  .container.small {
+  height: 1150px;
+}
+  #shopify-section-{{ section.id }} .section-title {
+    font-size: 3rem;
+    line-height: 4.25rem;
+    font-weight: 700;
+    letter-spacing: -3px;
+    text-align: center;
+    font-family: "Inter";
+    margin-bottom: 25px;
+    padding-top: 200px;
+    padding-bottom: 100px;/* Added padding-top for the title */
+  }
+  
+  #shopify-section-{{ section.id }} .faq-image-section {
+    display: flex;
+    gap: 42px!important; /* Increased gap between image and FAQ column */
+    padding: 2rem 0;
+  }
+
+  #shopify-section-{{ section.id }} .image-column {
+    flex: 1;
+  }
+
+  #shopify-section-{{ section.id }} .image img {
+    width: 100%;
+    height: auto;
+    padding-right: 50px;
+    padding-left: 50px;
+    display: block;
+  }
+
+  #shopify-section-{{ section.id }} .faq-column {
+    flex: 1;
+  }
+
+  #shopify-section-{{ section.id }} .faq-list-wrapper {
+    padding-top: 1rem;
+  }
+
+  #shopify-section-{{ section.id }} .faq-item {
+    padding: 1rem 0;
+    border-bottom: 1px solid #e0e0e0;
+  }
+
+  #shopify-section-{{ section.id }} .faq-title {
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+  }
+
+  #shopify-section-{{ section.id }} .faq-icon {
+    font-size: 1.5rem;
+    margin-right: 1rem;
+    transition: transform 0.3s;
+  }
+
+  #shopify-section-{{ section.id }} .content-wrapper {
+    display: none;
+    padding: 0.5rem 0;
+    color: #555;
+  }
+
+  #shopify-section-{{ section.id }} .faq-item input:checked + label .faq-icon {
+    content: "-";
+    transform: rotate(180deg);
+  }
+
+  #shopify-section-{{ section.id }} .faq-item input:checked ~ .content-wrapper {
+    display: block;
+  }
+
+  div.text {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font: inherit;
+    vertical-align: baseline;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    text-size-adjust: none;
+    padding-top: 30px;
+  }
+
+  /* Mobile styles */
+  @media screen and (max-width: 767px) {
+    #shopify-section-{{ section.id }} .faq-image-section {
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    #shopify-section-{{ section.id }} .section-title {
+      font-size: 1.5rem; /* Adjusted font-size for mobile */
+      line-height: 2rem; /* Adjusted line-height for mobile */
+      font-weight: 600; /* Adjusted font-weight for mobile */
+          margin-bottom: 5px!important;
+          padding-top: 69px;
+      padding-bottom: 0px!important;
+          letter-spacing: 0px;
+    }
+
+
+    #shopify-section-{{ section.id }} .image-column,
+    #shopify-section-{{ section.id }} .faq-column {
+      flex: 1;
+      width: 100%;
+    }
+
+    #shopify-section-{{ section.id }} .image img {
+      max-width: 100%;
+      height: auto;
+    }
+
+    #shopify-section-{{ section.id }} .faq-title {
+      font-size: 16px!important;
+  
+    }
+  }
+<style>
+  #shopify-section-{{ section.id }} .faq-title {
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+  }
+
+  #shopify-section-{{ section.id }} .faq-icon {
+    margin-right: 1rem;
+    transition: transform 0.3s, margin-bottom 0.3s; /* Adds rotation and margin transition */
+    margin-bottom: -5px; /* Default margin for the plus icon */
+  }
+
+  /* Hide the vertical line to display as minus when expanded and adjust margin */
+  #shopify-section-{{ section.id }} .faq-item input:checked + label .faq-icon .vertical-line {
+    display: none;
+  }
+
+  #shopify-section-{{ section.id }} .faq-item input:checked + label .faq-icon {
+    margin-bottom: 5px; /* Margin for the minus icon */
+  }
+</style>
+
+<div class="container small">
+  {%- if ss.title != blank -%}
+    <h2 class="section-title">{{ ss.title }}</h2>
+  {%- endif -%}
+
+  <div class="faq-image-section">
+    <div class="image-column">
+      {%- if ss.image -%}
+        <div class="image">
+          {{ ss.image | image_url: width: '500' | image_tag: loading: 'lazy' }}
+        </div>
+      {%- endif -%}
+    </div>
+
+    <div class="faq-column">
+      <div class="faq-list-wrapper">
+        {%- if section.blocks.size > 0 -%}
+          <div class="faq-list">
+            {%- for block in section.blocks -%}
+              <div class="faq-item">
+                <input type="checkbox" id="faq-{{ forloop.index }}" style="display: none;">
+                <label for="faq-{{ forloop.index }}" class="faq-title">
+                  <!-- Updated SVG icon with classes for line control -->
+                  <span class="faq-icon">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <line class="vertical-line" x1="12" y1="5" x2="12" y2="19" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                      <line x1="5" y1="12" x2="19" y2="12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    </svg>
+                  </span>
+                  <span>{{ block.settings.title }}</span>
+                </label>
+                <div class="content-wrapper">
+                  {{ block.settings.content }}
+                </div>
+              </div>
+            {%- endfor -%}
+          </div>
+        {%- endif -%}
+
+        {%- if ss.content != blank -%}
+          <div class="text">
+            {{ ss.content }}
+          </div>
+        {%- endif -%}
+
+        {%- if ss.button_text != blank -%}
+          <a href="{{ ss.button_url }}" class="button">
+            {{ ss.button_text }}
+            {%- render 'icon', type: 'arrow-right' -%}
+          </a>
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+</div>
+
+
+{% schema %}
+  {
+    "name": "FAQ & Image Section",
+    "tag": "section",
+    "class": "faq-image-section",
+    "settings": [
+      {
+        "type": "image_picker",
+        "id": "image",
+        "label": "Image"
+      },
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Title"
+      },
+      {
+        "type": "richtext",
+        "id": "content",
+        "label": "Content"
+      },
+      {
+        "type": "text",
+        "id": "button_text",
+        "label": "Button text"
+      },
+      {
+        "type": "url",
+        "id": "button_url",
+        "label": "Button url"
+      }
+    ],
+    "blocks": [
+      {
+        "name": "FAQ Item",
+        "type": "faq_item",
+        "settings": [
+         {
+           "type": "text",
+           "id": "title",
+           "label": "Title"
+         },
+         {
+           "type": "richtext",
+           "id": "content",
+           "label": "Content"
+         }
+        ]
+      }
+    ],
+    "presets": [
+      {
+        "name": "FAQ & Image Section",
+        "settings": {
+        }
+      }
+    ]
+  }
+{% endschema %}
