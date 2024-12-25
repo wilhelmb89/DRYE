@@ -1,0 +1,12 @@
+development:
+  password: ${DEV_PASSWD}
+  theme_id: ${DEV_THEMEID}
+  store: ${DEV_SHOP}
+  ignores:
+    - themekit_ignores
+production:
+  password: ${PROD_PASSWD}
+  theme_id: ${PROD_THEMEID}
+  store: ${PROD_SHOP}
+  ignores:
+    - themekit_ignores
