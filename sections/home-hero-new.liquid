@@ -1,0 +1,316 @@
+{%- assign ss = section.settings -%}
+
+<style>
+  #shopify-section-{{ section.id }} {
+    background: {{ ss.bg }};
+  }
+  #shopify-section-{{ section.id }} .review-profile-with-button {
+    display: flex;
+    gap: 32px;
+  }
+  #shopify-section-{{ section.id }} .review-profile-image {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  #shopify-section-{{ section.id }} .review-profile-image img:not(:first-child){
+    margin-left: -10px;
+  }
+  #shopify-section-{{ section.id }} .review-profile-block {
+    display: flex;
+    gap: 16px;
+  }
+  #shopify-section-{{ section.id }} .review-check-text {
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 20px;
+    width: 80px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  @media screen and (min-width: 1025px) {
+    #shopify-section-{{ section.id }} .container .hero-wrapper .review {
+      max-width: 100%;
+    }
+    #shopify-section-{{ section.id }} .review-text {
+      font-size: {{ section.settings.review_text_font_size_desktop }}px;
+      line-height: {{ section.settings.review_text_line_height_desktop }}px;
+      max-width: 448px;
+    }
+  }
+  @media (min-width: 768px) and (max-width: 1024px) {
+    #shopify-section-{{ section.id }} .review-text {
+      font-size: {{ section.settings.review_text_font_size_tablet }}px;
+      line-height: {{ section.settings.review_text_line_height_tablet }}px;
+    }
+  }
+  @media screen and (max-width: 767px) {    
+    #shopify-section-{{ section.id }} .image .video-wrapper {
+      height: calc(100vw - 80px);
+    }
+    #shopify-section-{{ section.id }} .container .hero-wrapper .title {
+      font-size: 28px !important;
+      line-height: 32px !important;
+    }
+    #shopify-section-{{ section.id }} .container .hero-wrapper {
+      padding-bottom: 10px;
+    }
+    #shopify-section-{{ section.id }} .review-text {
+      font-size: {{ section.settings.review_text_font_size_mobile }}px;
+      line-height: {{ section.settings.review_text_line_height_mobile }}px;
+    }
+    #shopify-section-{{ section.id }} .review-profile-with-button {
+      flex-direction: column;
+      gap: 40px;
+    }
+    #shopify-section-{{ section.id }} .review-profile-block {
+      justify-content: center;
+    }
+  }  
+</style>
+
+<div class="container">
+  <div class="hero-wrapper">
+    {%- if ss.title != blank -%}
+      <h1 class="title">
+        {{ ss.title }}
+      </h1>
+    {%- endif -%}
+    <div class="review">
+      <div class="top-bar">
+        <div class="vr-line"></div>
+      </div>
+      {%- if ss.review_text != blank -%}
+        <div class="review-text">
+          {{ ss.review_text }}
+        </div>
+      {%- endif -%}
+      <div class="review-profile-with-button">
+        {%- if ss.button_text != blank -%}
+          <a href="{{ ss.button_url }}" class="button">
+            {{ ss.button_text }}
+            {%- render 'icon', type: 'arrow-right' -%}
+          </a>
+        {%- endif -%}
+        <div class="review-profile-block">
+          {%- if section.blocks.size > 0 -%}
+            <div class="review-profile-image">
+            {%- for block in section.blocks -%}
+              {% if block.type == 'review' %}
+                {{ block.settings.review_image | image_url: height: '48' | image_tag: loading: 'lazy' }}
+              {% endif %}
+            {%- endfor -%}
+            </div>
+          {%- endif -%}
+          {%- if section.settings.check_review_text != blank -%}
+            <div class="review-check-text">{{ section.settings.check_review_text }}</div>
+          {%- endif -%}
+        </div>
+      </div>
+    </div>
+    <div class="image">
+      {%- if ss.video -%}
+        <div class="video-wrapper">
+          {{
+            ss.video
+            | video_tag:
+              autoplay: false,
+              loop: true,
+              muted: true,
+              controls: false,
+              image_size: '600x',
+              preload: 'auto',
+              class: 'video'
+          }}
+        </div>
+      {%- endif -%}
+    </div>
+  </div>
+  {% comment %}
+    {%- if section.blocks.size > 0 -%}
+    <div class="icons-wrapper">
+      {%- for block in section.blocks -%}
+        <div class="icon">
+          {{ block.settings.logo | image_url: width: 400 | image_tag: loading: 'lazy' }}
+        </div>
+      {%- endfor -%}
+    </div>
+    {%- endif -%}
+  {% endcomment %}
+</div>
+{%- if section.blocks.size > 0 -%}
+  <swiper-container class="hero-slider" init="false">
+    {%- for block in section.blocks -%}
+      {% if block.type == "logo" %}
+      <swiper-slide>
+        {{ block.settings.logo | image_url: height: '25' | image_tag: loading: 'lazy' }}
+      </swiper-slide>
+      {% endif %}
+    {%- endfor -%}
+    {%- for block in section.blocks -%}
+      {% if block.type == "logo" %}
+      <swiper-slide>
+        {{ block.settings.logo | image_url: height: '25' | image_tag: loading: 'lazy' }}
+      </swiper-slide>
+      {% endif %}
+    {%- endfor -%}
+  </swiper-container>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Homepage Hero(New)",
+  "tag": "section",
+  "class": "hero-section homepage-hero",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title"
+    },
+    {
+      "type": "video",
+      "id": "video",
+      "label": "Video"
+    },
+    {
+      "type": "range",
+      "id": "stars",
+      "min": 1,
+      "max": 5,
+      "step": 0.1,
+      "unit": "str",
+      "label": "Stars",
+      "default": 5
+    },
+    {
+      "type": "richtext",
+      "id": "review_text",
+      "label": "Review text"
+    },
+    {
+      "type": "header",
+      "content": "Review Text Settings"
+    },
+    {
+      "type": "range",
+      "id": "review_text_font_size_desktop",
+      "label": "Review Text Font Size(Desktop)",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "default": 16,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "review_text_line_height_desktop",
+      "label": "Review Text Line Height(Desktop)",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "default": 24,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "review_text_font_size_tablet",
+      "label": "Review Text Font Size(Tablet)",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "default": 16,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "review_text_line_height_tablet",
+      "label": "Review Text Line Height(Tablet)",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "default": 24,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "review_text_font_size_mobile",
+      "label": "Review Text Font Size(Mobile)",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "default": 16,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "review_text_line_height_mobile",
+      "label": "Review Text Line Height(Mobile)",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "default": 24,
+      "unit": "px"
+    },
+    {
+      "type": "url",
+      "id": "reviews_link",
+      "label": "Reviews link"
+    },    
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button text"
+    },
+    {
+      "type": "url",
+      "id": "button_url",
+      "label": "Button url"
+    },
+    {
+      "type": "color",
+      "id": "bg",
+      "label": "Background color",
+      "default": "#E5E5E5"
+    },
+    {
+      "type": "text",
+      "id": "check_review_text",
+      "label": "Check Review text",
+      "default": "Check Reviews"
+    },
+  ],
+  "blocks": [
+    {
+      "name": "Slider image",
+      "type": "logo",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "logo",
+          "label": "Logo"
+        }
+      ]
+    },
+    {
+      "name": "Review Image",
+      "type": "review",
+      "settings":[
+        {
+          "type": "image_picker",
+          "id": "review_image",
+          "label": "Review Profile Image"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Homepage Hero(New)",
+      "settings": {}
+    }
+  ]
+}
+{% endschema %}

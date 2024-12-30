@@ -1,0 +1,302 @@
+{%- assign ss = section.settings -%}
+
+<style>
+  #shopify-section-{{ section.id }} {
+    margin-block: {{ ss.m_top }}px {{ ss.m_bottom }}px;
+    @media screen and (max-width: 767px) {
+      margin-block: {{ ss.mobile_m_top }}px {{ ss.mobile_m_bottom }}px;
+    }
+  }
+  @media screen and (min-width: 1025px) {
+    #shopify-section-{{ section.id }} .title {
+      font-size: {{ section.settings.title_font_size_desktop }}px;
+      line-height: {{ section.settings.title_line_height_desktop }}px;
+    }
+    #shopify-section-{{ section.id }} .list .list-item {
+      font-size: {{ section.settings.list_item_font_size_desktop }}px;
+      line-height: {{ section.settings.list_item_line_height_desktop }}px;
+    }
+  }
+  @media (min-width: 768px) and (max-width: 1024px) {
+    #shopify-section-{{ section.id }} .title {
+      font-size: {{ section.settings.title_font_size_tablet }}px;
+      line-height: {{ section.settings.title_line_height_tablet }}px;
+    }
+    #shopify-section-{{ section.id }} .list .list-item {
+      font-size: {{ section.settings.list_item_font_size_tablet }}px;
+      line-height: {{ section.settings.list_item_line_height_tablet }}px;
+    }
+  }
+  @media screen and (max-width: 767px) {
+    #shopify-section-{{ section.id }} .title {
+      font-size: {{ section.settings.title_font_size_mobile }}px;
+      line-height: {{ section.settings.title_line_height_mobile }}px;
+    }
+    #shopify-section-{{ section.id }} .list .list-item {
+      font-size: {{ section.settings.list_item_font_size_mobile }}px;      
+      line-height: {{ section.settings.list_item_line_height_mobile }}px;
+    }
+  }
+</style>
+
+
+<div class="container small my">
+  {%- if ss.title -%}
+    <h2 class="title">
+      {{ ss.title }}
+    </h2>
+  {%- endif -%}
+  <div class="content">
+    {%- if ss.image -%}
+      <div class="image">
+        {{ ss.image | image_url: width: '600' | image_tag: loading: 'lazy' }}
+      </div>
+    {%- endif -%}
+      <div class="list-wrapper">
+        {%- if section.blocks.size > 0 -%}
+          <div class="list">
+            {%- for block in section.blocks -%}
+              <div class="list-item">
+                {%- render 'icon', type: 'checkbox' -%}
+                {{ block.settings.title }}
+              </div>
+            {%- endfor -%}
+          </div>
+        {%- endif -%}
+        {%- if ss.content != blank -%}
+          <div class="text">
+            {{ ss.content }}
+          </div>
+        {%- endif -%}
+        {%- if ss.button_text != blank -%}
+          <a href="{{ ss.button_url }}" class="button">
+            {{ ss.button_text }}
+            {%- render 'icon', type: 'arrow-right' -%}
+          </a>
+        {%- endif -%}
+      </div>
+  </div>
+</div>
+
+{% schema %}
+  {
+    "name": "List with Image(New)",
+    "tag": "section",
+    "class": "list-image-section",
+    "settings": [
+      {
+        "type": "image_picker",
+        "id": "image",
+        "label": "Image"
+      },
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Title"
+      },
+      {
+        "type": "header",
+        "content": "Title Settings"
+      },
+      {
+        "type": "range",
+        "id": "title_font_size_desktop",
+        "label": "Title Font Size(Desktop)",
+        "min": 0,
+        "max": 100,
+        "step": 1,
+        "default": 38,
+        "unit": "px"
+      },
+      {
+        "type": "range",
+        "id": "title_line_height_desktop",
+        "label": "Title Line Height(Desktop)",
+        "min": 0,
+        "max": 100,
+        "step": 1,
+        "default": 50,
+        "unit": "px"
+      },
+      {
+        "type": "range",
+        "id": "title_font_size_tablet",
+        "label": "Title Font Size(Tablet)",
+        "min": 0,
+        "max": 100,
+        "step": 1,
+        "default": 30,
+        "unit": "px"
+      },
+      {
+        "type": "range",
+        "id": "title_line_height_tablet",
+        "label": "Title Line Height(Tablet)",
+        "min": 0,
+        "max": 100,
+        "step": 1,
+        "default": 39,
+        "unit": "px"
+      },
+      {
+        "type": "range",
+        "id": "title_font_size_mobile",
+        "label": "Title Font Size(Mobile)",
+        "min": 0,
+        "max": 100,
+        "step": 1,
+        "default": 28,
+        "unit": "px"
+      },
+      {
+        "type": "range",
+        "id": "title_line_height_mobile",
+        "label": "Title Line Height(Mobile)",
+        "min": 0,
+        "max": 100,
+        "step": 1,
+        "default": 32,
+        "unit": "px"
+      },
+      {
+        "type": "header",
+        "content": "List Item Settings"
+      },
+      {
+        "type": "range",
+        "id": "list_item_font_size_desktop",
+        "label": "List Item Font Size(Desktop)",
+        "min": 0,
+        "max": 100,
+        "step": 1,
+        "default": 16,
+        "unit": "px"
+      },
+      {
+        "type": "range",
+        "id": "list_item_line_height_desktop",
+        "label": "List Item Line Height(Desktop)",
+        "min": 0,
+        "max": 100,
+        "step": 1,
+        "default": 28,
+        "unit": "px"
+      },
+      {
+        "type": "range",
+        "id": "list_item_font_size_tablet",
+        "label": "List Item Font Size(Tablet)",
+        "min": 0,
+        "max": 100,
+        "step": 1,
+        "default": 13,
+        "unit": "px"
+      },
+      {
+        "type": "range",
+        "id": "list_item_line_height_tablet",
+        "label": "List Item Line Height(tablet)",
+        "min": 0,
+        "max": 100,
+        "step": 1,
+        "default": 24,
+        "unit": "px"
+      },
+      {
+        "type": "range",
+        "id": "list_item_font_size_mobile",
+        "label": "List Item Font Size(Mobile)",
+        "min": 0,
+        "max": 100,
+        "step": 1,
+        "default": 13,
+        "unit": "px"
+      },
+      {
+        "type": "range",
+        "id": "list_item_line_height_mobile",
+        "label": "List Item Line Height(Mobile)",
+        "min": 0,
+        "max": 100,
+        "step": 1,
+        "default": 24,
+        "unit": "px"
+      },
+      {
+        "type": "richtext",
+        "id": "content",
+        "label": "Content"
+      },
+      {
+        "type": "text",
+        "id": "button_text",
+        "label": "Button text"
+      },
+      {
+        "type": "url",
+        "id": "button_url",
+        "label": "Button url"
+      },
+      {
+        "type": "range",
+        "id": "m_top",
+        "min": 0,
+        "max": 300,
+        "step": 5,
+        "unit": "px",
+        "label": "Margin top",
+        "default": 120
+      },
+      {
+        "type": "range",
+        "id": "m_bottom",
+        "min": 0,
+        "max": 300,
+        "step": 5,
+        "unit": "px",
+        "label": "Margin top",
+        "default": 120
+      },
+      {
+        "type": "range",
+        "id": "mobile_m_top",
+        "min": 0,
+        "max": 300,
+        "step": 5,
+        "unit": "px",
+        "label": "MOBILE Margin top",
+        "default": 120
+      },
+      {
+        "type": "range",
+        "id": "mobile_m_bottom",
+        "min": 0,
+        "max": 300,
+        "step": 5,
+        "unit": "px",
+        "label": "MOBILE Margin top",
+        "default": 120
+      }
+    ],
+    "blocks": [
+      {
+        "name": "List item",
+        "type": "item",
+        "settings": [
+           {
+             "type": "text",
+             "id": "title",
+             "label": "Title"
+           }
+        ]
+      }
+    ],
+    "presets": [
+      {
+        "name": "List with Image(New)",
+        "settings": {
+        }
+      }
+    ]
+  }
+{% endschema %}

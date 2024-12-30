@@ -1,5 +1,45 @@
 {%- assign ss = section.settings -%}
-
+<style>
+  .footer-section .container .menu-area .menu-wrapper .menu .title .title-accordion-icon {
+    display: none;
+  }
+  @media screen and (max-width: 767px) {
+    .footer-section .container .menu-area .menu-wrapper {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+    .footer-section .container .menu-area .menu-wrapper .menu {
+      border-bottom: solid 1px #fff;
+      padding: 0 0 8px;
+      gap: 16px;
+    }
+    .footer-section .container .menu-area .menu-wrapper .menu .submenu {
+      display: none;
+    }
+    .footer-section .container .menu-area .menu-wrapper .menu.open .submenu {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      align-self: stretch;
+      gap: 0;
+    }
+    .footer-section .container .menu-area .menu-wrapper .menu .title {
+      display: flex;
+      justify-content: space-between;
+      line-height: 20px;
+    }
+    .footer-section .container .menu-area .menu-wrapper .menu .title .title-accordion-icon {
+      display: flex;
+    }
+    .footer-section .container .menu-area .menu-wrapper .menu .title .title-accordion-icon svg {
+      transition: transform 0.3s ease-in-out;
+    }
+    .footer-section .container .menu-area .menu-wrapper .menu.open .title .title-accordion-icon svg {
+      transform: rotate(180deg);
+    }
+  }
+</style>
 <div class="container" id="inverseHeader" data-inversed="false">
   <div class="top">
     {%- if ss.image1 or ss.image2 -%}
@@ -74,7 +114,10 @@
               {%- for link in bs.menu.links -%}
                 <div class="menu">
                   <div class="title">
-                    {{ link.title }}
+                    <span>{{ link.title }}</span>
+                    <div class="title-accordion-icon">
+                      <svg width="14" height="8" viewBox="0 0 14 8" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="chevron open" role="img" class="chevron-open"><path d="M7.11098 5.15691L2.16098 0.206909L0.746979 1.62091L7.11098 7.98491L13.475 1.62091L12.061 0.206911L7.11098 5.15691Z" fill="white"></path></svg>
+                    </div>
                   </div>
                   <div class="submenu">
                     {%- for child in link.links -%}
@@ -132,7 +175,16 @@
     {%- endif -%}
   </div>
 </div>
-
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    document.querySelectorAll('.footer-section .container .menu-area .title').forEach(button => {
+      button.addEventListener('click', () => {
+        const parentMenu = button.closest('.menu');
+        parentMenu.classList.toggle('open');
+      });
+    });
+  });
+</script>
 {% schema %}
   {
   "name": "Footer",

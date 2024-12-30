@@ -2,6 +2,7 @@
   "sections": {
     "home_hero_94BeYJ": {
       "type": "home-hero",
+      "disabled": true,
       "custom_css": [],
       "settings": {
         "title": "New Eczema Gloves with Anti-Sweat Technology",
@@ -12,6 +13,51 @@
         "button_text": "Explore your fit",
         "button_url": "shopify:\/\/products\/moisture-wicking-eczema-gloves",
         "bg": "#f3f2f1"
+      }
+    },
+    "home_hero_new_GFwDbh": {
+      "type": "home-hero-new",
+      "blocks": {
+        "review_nJYAaN": {
+          "type": "review",
+          "settings": {
+            "review_image": "shopify:\/\/shop_images\/hero-review-profile-1.png"
+          }
+        },
+        "review_QxJ7ai": {
+          "type": "review",
+          "settings": {
+            "review_image": "shopify:\/\/shop_images\/hero-review-profile-2.png"
+          }
+        },
+        "review_XipXxk": {
+          "type": "review",
+          "settings": {
+            "review_image": "shopify:\/\/shop_images\/hero-review-action.png"
+          }
+        }
+      },
+      "block_order": [
+        "review_nJYAaN",
+        "review_QxJ7ai",
+        "review_XipXxk"
+      ],
+      "settings": {
+        "title": "New Eczema Gloves with Anti-Sweat Technology",
+        "video": "shopify:\/\/files\/videos\/Website_9eba16fe-a01f-4640-8d93-208c82201915.mp4",
+        "stars": 5,
+        "review_text": "<p>Discover Drye’s eczema-friendly gloves, designed specifically for sensitive skin and ideal for preventing sweat and irritation. Our breathable, hypoallergenic gloves provide soothing relief for eczema-prone hands, making daily wear comfortable and irritation-free.<\/p>",
+        "review_text_font_size_desktop": 16,
+        "review_text_line_height_desktop": 24,
+        "review_text_font_size_tablet": 16,
+        "review_text_line_height_tablet": 24,
+        "review_text_font_size_mobile": 16,
+        "review_text_line_height_mobile": 24,
+        "reviews_link": "shopify:\/\/products\/moisture-wicking-eczema-gloves",
+        "button_text": "Explore your fit",
+        "button_url": "shopify:\/\/products\/moisture-wicking-eczema-gloves",
+        "bg": "#f3f2f1",
+        "check_review_text": "Check Reviews"
       }
     },
     "faq_image_8GcLCz": {
@@ -96,9 +142,68 @@
         "item_VyQDTn",
         "item_PkG6Jn"
       ],
+      "disabled": true,
       "settings": {
         "image": "shopify:\/\/shop_images\/DRYE_biodegradable_moisture-wicking_gloves.png",
         "title": "The Only Gloves to Keep Moisture Off Skin, Preventing Dryness & Eczema",
+        "content": "<p>Our gloves are a unique invention and the only ones on the market that hold moisture away from the skin layer. This makes them especially helpful for use under nitrile\/latex gloves and for people with hand-related issues like dry, cracked, and eczema-prone skin. Made in Sweden.<\/p>",
+        "button_text": "",
+        "button_url": "",
+        "m_top": 120,
+        "m_bottom": 120,
+        "mobile_m_top": 65,
+        "mobile_m_bottom": 65
+      }
+    },
+    "list_new_4QfTMH": {
+      "type": "list-new",
+      "blocks": {
+        "item_8jxY9i": {
+          "type": "item",
+          "settings": {
+            "title": "New Sweat-Absorbing Technology"
+          }
+        },
+        "item_kej87r": {
+          "type": "item",
+          "settings": {
+            "title": "Eczema-Friendly Materials"
+          }
+        },
+        "item_YB4qWy": {
+          "type": "item",
+          "settings": {
+            "title": "Thermal Insulation and Lasting Durability"
+          }
+        },
+        "item_EttFPG": {
+          "type": "item",
+          "settings": {
+            "title": "Produced Sustainably in Sweden"
+          }
+        }
+      },
+      "block_order": [
+        "item_8jxY9i",
+        "item_kej87r",
+        "item_YB4qWy",
+        "item_EttFPG"
+      ],
+      "settings": {
+        "image": "shopify:\/\/shop_images\/DRYE_biodegradable_moisture-wicking_gloves.png",
+        "title": "The Only Gloves to Keep Moisture Off Skin, Preventing Dryness & Eczema",
+        "title_font_size_desktop": 38,
+        "title_line_height_desktop": 50,
+        "title_font_size_tablet": 30,
+        "title_line_height_tablet": 39,
+        "title_font_size_mobile": 28,
+        "title_line_height_mobile": 32,
+        "list_item_font_size_desktop": 16,
+        "list_item_line_height_desktop": 28,
+        "list_item_font_size_tablet": 13,
+        "list_item_line_height_tablet": 24,
+        "list_item_font_size_mobile": 13,
+        "list_item_line_height_mobile": 24,
         "content": "<p>Our gloves are a unique invention and the only ones on the market that hold moisture away from the skin layer. This makes them especially helpful for use under nitrile\/latex gloves and for people with hand-related issues like dry, cracked, and eczema-prone skin. Made in Sweden.<\/p>",
         "button_text": "",
         "button_url": "",
@@ -150,6 +255,7 @@
         "row_8YRGgi",
         "row_kcxcQT"
       ],
+      "disabled": true,
       "settings": {
         "special_title": true,
         "overlap": false,
@@ -157,6 +263,75 @@
         "invert": false,
         "bg": "#111111",
         "tx": "#ffffff"
+      }
+    },
+    "multirows_new_DQyqpt": {
+      "type": "multirows-new",
+      "blocks": {
+        "row_zrUwEb": {
+          "type": "row",
+          "settings": {
+            "title": "Extended glove wear",
+            "content": "<p>Extended glove use during activities like household chores, working with equipment, or participating in sports often leads to sweaty hands. This moisture can cause discomfort, leading to itching, dryness, and cracked skin.<\/p>",
+            "button_text": "Read more",
+            "button_url": "https:\/\/drye.se\/blogs\/news\/managing-moisture-in-demanding-work-environments",
+            "image": "shopify:\/\/shop_images\/DRYE_gloves.jpg",
+            "image_tablet": "shopify:\/\/shop_images\/DRYE_gloves_tablet.png",
+            "image_mobile": "shopify:\/\/shop_images\/DRYE_gloves_mobile.png",
+            "position": "row"
+          }
+        },
+        "row_nVX7eh": {
+          "type": "row",
+          "settings": {
+            "title": "Moisture buildup",
+            "content": "<p>Continuous exposure to wet conditions can weaken the skin’s natural barrier, leaving it prone to irritation and infection. This breakdown increases the risk of maceration, a condition where the skin becomes overly soft and more susceptible to damage. <\/p>",
+            "button_text": "About us",
+            "button_url": "https:\/\/drye.se\/blogs\/news\/moisture-buildup-in-gloves-what-you-need-to-know",
+            "image": "shopify:\/\/shop_images\/DRYE-Thermal-gloves.jpg",
+            "image_tablet": "shopify:\/\/shop_images\/pexels-roger11reyes-6509862_tablet.png",
+            "image_mobile": "shopify:\/\/shop_images\/pexels-roger11reyes-6509862_mobile.png",
+            "position": "row-reverse"
+          }
+        },
+        "row_9hB88j": {
+          "type": "row",
+          "settings": {
+            "title": "New solution for common hand issues",
+            "content": "<p>Research published in the Journal of Dermatology highlights that prolonged moisture exposure can worsen issues like eczema, encouraging bacterial and fungal growth, and often requiring more intensive treatments. DRYE was founded to address the challenges of moisture exposure.<\/p>",
+            "button_text": "Read more",
+            "button_url": "shopify:\/\/products\/moisture-wicking-eczema-gloves",
+            "image": "shopify:\/\/shop_images\/DRYE_SweatGuard_Gloves_for_Hockeyplayers.jpg",
+            "image_tablet": "shopify:\/\/shop_images\/pexels-tima-miroshnichenko-6847313_tablet.png",
+            "image_mobile": "shopify:\/\/shop_images\/pexels-tima-miroshnichenko-6847313_mobile.png",
+            "position": "row"
+          }
+        }
+      },
+      "block_order": [
+        "row_zrUwEb",
+        "row_nVX7eh",
+        "row_9hB88j"
+      ],
+      "settings": {
+        "special_title": true,
+        "overlap": false,
+        "title": "",
+        "invert": false,
+        "bg": "#111111",
+        "tx": "#ffffff",
+        "sub_title_font_size_desktop": 48,
+        "sub_title_line_height_desktop": 55,
+        "sub_title_font_size_tablet": 34,
+        "sub_title_line_height_tablet": 40,
+        "sub_title_font_size_mobile": 24,
+        "sub_title_line_height_mobile": 30,
+        "sub_body_font_size_desktop": 18,
+        "sub_body_line_height_desktop": 28,
+        "sub_body_font_size_tablet": 18,
+        "sub_body_line_height_tablet": 28,
+        "sub_body_font_size_mobile": 16,
+        "sub_body_line_height_mobile": 24
       }
     },
     "before_after_LKAzay": {
@@ -224,16 +399,111 @@
         "review_3QcXYj",
         "review_yJh8pF"
       ],
+      "disabled": true,
       "settings": {
         "title": "Reviews",
         "subtitle": ""
       }
     },
+    "reviews_new_MdaK4X": {
+      "type": "reviews-new",
+      "blocks": {
+        "review_T9nkgz": {
+          "type": "review",
+          "settings": {
+            "content": "<p>I've had eczema on my hands for a long time, and it's been tough to put on my hockey gloves. These glove liners have improved my experience by reducing friction against my skin. At first, it felt a bit weird, but now I've gotten so used to them that I actually don’t want to play without them anymore. They're just more comfortable.<\/p>",
+            "author": "Linnea Petterson Dove",
+            "prof": "Hockey player, Frölunda HC",
+            "avatar": "shopify:\/\/shop_images\/DRYE_Eczema_Gloves.jpg"
+          }
+        },
+        "review_UGLE6n": {
+          "type": "review",
+          "settings": {
+            "content": "<p>They keep my hands dry and comfortable. It took a little getting used to, but now they’re just part of my routine.<\/p>",
+            "author": "Emilia A",
+            "prof": "Pastry Chef, Robin Delselius Bageri",
+            "avatar": "shopify:\/\/shop_images\/Biodegradable_Moisture-Wicking_Gloves_for_Eczema.jpg"
+          }
+        },
+        "review_6pCHHH": {
+          "type": "review",
+          "settings": {
+            "content": "<p>They’re comfortable to wear, and my hands feel less dry and irritated now. Definitely an improvement.<\/p>",
+            "author": "Sofia Malmberg",
+            "prof": "Hairdresser, Nikita Hair",
+            "avatar": "shopify:\/\/shop_images\/Capture_b4ce3c76-09e5-464d-a280-951cb732a1c1.jpg"
+          }
+        },
+        "review_dbT38F": {
+          "type": "review",
+          "settings": {
+            "content": "<p>I used to have issues with cracked hands and eczema, These gloves have helped a lot. No more itching or sweating, and they fit well.<\/p>",
+            "author": "Adam Hemberg",
+            "prof": "Electrical Mechanic, Tesla",
+            "avatar": "shopify:\/\/shop_images\/DRYE_Moisture_Wicking_Gloves.jpg"
+          }
+        },
+        "review_Lacqmg": {
+          "type": "review",
+          "settings": {
+            "content": "<p>Incredibly good gloves for someone with dry skin.<br\/><br\/>Big plus that these can handle industrial washing and still work perfectly afterward.<\/p>",
+            "author": "Jens Stålnacke",
+            "prof": "Mining worker",
+            "avatar": "shopify:\/\/shop_images\/DRYE_glove_liners.jpg"
+          }
+        }
+      },
+      "block_order": [
+        "review_T9nkgz",
+        "review_UGLE6n",
+        "review_6pCHHH",
+        "review_dbT38F",
+        "review_Lacqmg"
+      ],
+      "settings": {
+        "title": "Reviews",
+        "title_font_size_desktop": 48,
+        "title_line_height_desktop": 55,
+        "title_font_size_tablet": 42,
+        "title_line_height_tablet": 50,
+        "title_font_size_mobile": 24,
+        "title_line_height_mobile": 30,
+        "subtitle": "",
+        "name_font_size_desktop": 18,
+        "name_line_height_desktop": 24,
+        "name_font_size_tablet": 18,
+        "name_line_height_tablet": 24,
+        "name_font_size_mobile": 18,
+        "name_line_height_mobile": 24
+      }
+    },
     "articles_8r4Eei": {
       "type": "articles",
+      "disabled": true,
       "settings": {
         "title": "Insights and Updates",
         "blog": "news",
+        "footer": false
+      }
+    },
+    "articles_new_K6xq4r": {
+      "type": "articles-new",
+      "settings": {
+        "title": "Insights and Updates",
+        "title_font_size_desktop": 48,
+        "title_line_height_desktop": 55,
+        "title_font_size_tablet": 42,
+        "title_line_height_tablet": 50,
+        "title_font_size_mobile": 24,
+        "title_line_height_mobile": 30,
+        "blog": "news",
+        "article_title_font_size_desktop": 24,
+        "article_title_line_height_desktop": 32,
+        "article_title_font_size_tablet": 23,
+        "article_title_line_height_tablet": 32,
+        "article_title_font_size_mobile": 22,
+        "article_title_line_height_mobile": 30,
         "footer": false
       }
     },
@@ -430,12 +700,17 @@
   },
   "order": [
     "home_hero_94BeYJ",
+    "home_hero_new_GFwDbh",
     "faq_image_8GcLCz",
     "list_mHLg67",
+    "list_new_4QfTMH",
     "multirows_bMbUdX",
+    "multirows_new_DQyqpt",
     "before_after_LKAzay",
     "reviews_zhfkEb",
+    "reviews_new_MdaK4X",
     "articles_8r4Eei",
+    "articles_new_K6xq4r",
     "faq_N64yyQ",
     "icons_iEJemf"
   ]
