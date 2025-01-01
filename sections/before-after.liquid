@@ -1,5 +1,9 @@
 {%- assign ss = section.settings -%}
-
+<style>
+  .before-after .container .before-after-slider {
+    border-radius: {{ section.settings.image_border_radius }}px;
+  }
+</style>
 <div class="container">
   {%- if ss.title != blank -%}
     <div class="h2 title">{{ ss.title }}</div>
@@ -43,6 +47,16 @@
         "type": "image_picker",
         "id": "image_after",
         "label": "Image after"
+      },
+      {
+        "type": "range",
+        "id": "image_border_radius",
+        "label": "Image Border Radius",
+        "min": 0,
+        "max": 100,
+        "step": 1,
+        "default": 40,
+        "unit": "px"
       }
     ],
     "presets": [
