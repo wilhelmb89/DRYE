@@ -2,12 +2,38 @@
   "sections": {
     "main_blog_HXgNPx": {
       "type": "main-blog",
+      "disabled": true,
       "settings": {
         "subtitle": ""
+      }
+    },
+    "main_blog_new_WAUzVy": {
+      "type": "main-blog-new",
+      "settings": {
+        "subtitle": "",
+        "title_font_size_desktop": 48,
+        "title_line_height_desktop": 55,
+        "title_font_size_tablet": 42,
+        "title_line_height_tablet": 50,
+        "title_font_size_mobile": 24,
+        "title_line_height_mobile": 30,
+        "sub_title_font_size_desktop": 24,
+        "sub_title_line_height_desktop": 32,
+        "sub_title_font_size_tablet": 24,
+        "sub_title_line_height_tablet": 32,
+        "sub_title_font_size_mobile": 22,
+        "sub_title_line_height_mobile": 30,
+        "sdate_font_size_desktop": 16,
+        "date_line_height_desktop": 20,
+        "date_font_size_tablet": 16,
+        "date_line_height_tablet": 20,
+        "date_font_size_mobile": 16,
+        "date_line_height_mobile": 20
       }
     }
   },
   "order": [
-    "main_blog_HXgNPx"
+    "main_blog_HXgNPx",
+    "main_blog_new_WAUzVy"
   ]
 }
