@@ -3,6 +3,21 @@
   .before-after .container .before-after-slider {
     border-radius: {{ section.settings.image_border_radius }}px;
   }
+  @media screen and (min-width: 1025px) {
+    #shopify-section-{{ section.id }} .container {
+      margin-block: {{ section.settings.section_top_padding_desktop }}px {{ section.settings.section_bottom_padding_desktop }}px;
+    }
+  }
+  @media (min-width: 768px) and (max-width: 1024px) {
+    #shopify-section-{{ section.id }} .container {
+      margin-block: {{ section.settings.section_top_padding_tablet }}px {{ section.settings.section_bottom_padding_tablet }}px;
+    }
+  }
+  @media screen and (max-width: 767px) {
+    #shopify-section-{{ section.id }} .container {
+      margin-block: {{ section.settings.section_top_padding_mobile }}px {{ section.settings.section_bottom_padding_mobile }}px;
+    }
+  }
 </style>
 <div class="container">
   {%- if ss.title != blank -%}
@@ -56,6 +71,70 @@
         "max": 100,
         "step": 1,
         "default": 40,
+        "unit": "px"
+      },
+      {
+        "type": "header",
+        "content": "Section Padding Settings"
+      },
+      {
+        "type": "range",
+        "id": "section_top_padding_desktop",
+        "label": "Top(Desktop)",
+        "min": 0,
+        "max": 160,
+        "step": 4,
+        "default": 120,
+        "unit": "px"
+      },
+      {
+        "type": "range",
+        "id": "section_bottom_padding_desktop",
+        "label": "Bottom(Desktop)",
+        "min": 0,
+        "max": 160,
+        "step": 4,
+        "default": 120,
+        "unit": "px"
+      },
+      {
+        "type": "range",
+        "id": "section_top_padding_tablet",
+        "label": "Top(Tablet)",
+        "min": 0,
+        "max": 160,
+        "step": 4,
+        "default": 80,
+        "unit": "px"
+      },
+      {
+        "type": "range",
+        "id": "section_bottom_padding_tablet",
+        "label": "Bottom(Tablet)",
+        "min": 0,
+        "max": 160,
+        "step": 4,
+        "default": 80,
+        "unit": "px"
+      },
+      {
+        "type": "range",
+        "id": "section_top_padding_mobile",
+        "label": "Top(Mobile)",
+        "min": 0,
+        "max": 160,
+        "step": 4,
+        "default": 64,
+        "unit": "px"
+      },
+      {
+        "type": "range",
+        "id": "section_bottom_padding_mobile",
+        "label": "Bottom(Mobile)",
+        "min": 0,
+        "max": 160,
+        "step": 4,
+        "default": 64,
         "unit": "px"
       }
     ],
