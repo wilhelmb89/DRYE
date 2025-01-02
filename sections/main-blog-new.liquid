@@ -1,0 +1,323 @@
+<style>
+  #shopify-section-{{ section.id }} .container .blog-wrapper .article-wrapper .content .date {
+    margin-bottom: 20px;
+  }
+  #shopify-section-{{ section.id }} .container .blog-wrapper .article-wrapper .content {
+    height: 100%;
+  }
+  #shopify-section-{{ section.id }} .container .blog-wrapper .article-wrapper .content .read-more {
+    height: 100%;
+    align-items: end;
+  }
+  @media screen and (min-width: 1025px) {
+    #shopify-section-{{ section.id }} .container .title {
+      font-size: {{ section.settings.title_font_size_desktop }}px;
+      line-height: {{ section.settings.title_line_height_desktop }}px;
+    }
+    #shopify-section-{{ section.id }} .container .blog-wrapper .article-wrapper .content .article-title {
+      font-size: {{ section.settings.article_title_font_size_desktop }}px;
+      line-height: {{ section.settings.article_title_line_height_desktop }}px;
+    }
+    #shopify-section-{{ section.id }} .container .blog-wrapper .article-wrapper .content .date {
+      font-size: {{ section.settings.date_font_size_desktop }}px;
+      line-height: {{ section.settings.date_line_height_desktop }}px;
+    }
+  }
+  @media (min-width: 768px) and (max-width: 1024px) {
+    #shopify-section-{{ section.id }} .container .title {
+      font-size: {{ section.settings.title_font_size_tablet }}px !important;
+      line-height: {{ section.settings.title_line_height_tablet }}px !important;
+    }
+    #shopify-section-{{ section.id }} .container .blog-wrapper .article-wrapper .content .article-title {
+      font-size: {{ section.settings.article_title_font_size_tablet }}px;
+      line-height: {{ section.settings.article_title_line_height_tablet }}px;
+    }
+    #shopify-section-{{ section.id }} .container .blog-wrapper .article-wrapper .content .date {
+      font-size: {{ section.settings.date_font_size_tablet }}px;
+      line-height: {{ section.settings.date_line_height_tablet }}px;
+    }
+  }
+  @media screen and (max-width: 767px) {
+    #shopify-section-{{ section.id }} .container .blog-wrapper .article-wrapper {
+      gap: 27px;
+    }
+    #shopify-section-{{ section.id }} .container .title {
+      font-size: {{ section.settings.title_font_size_mobile }}px !important;
+      line-height: {{ section.settings.title_line_height_mobile }}px !important;
+    }
+    #shopify-section-{{ section.id }} .container .blog-wrapper .article-wrapper .content .article-title {
+      font-size: {{ section.settings.article_title_font_size_mobile }}px;
+      line-height: {{ section.settings.article_title_line_height_mobile }}px;
+    }
+    #shopify-section-{{ section.id }} .container .blog-wrapper .article-wrapper .content .date {
+      font-size: {{ section.settings.date_font_size_mobile }}px;
+      line-height: {{ section.settings.date_line_height_mobile }}px;
+      margin-bottom: 10px;
+    }
+  }
+</style>
+<div class="container">
+  <h1 class="title">{{ blog.title }}</h1>
+  {%- if section.settings.subtitle != blank -%}
+    <div class="subtitle">{{ section.settings.subtitle }}</div>
+  {%- endif -%}
+  {%- if blog.all_tags.size > 0 -%}
+    <div class="tags-wrapper">
+      <div class="tag-title">Tags</div>
+      <div class="tag-filter">
+        {%- for tag in blog.all_tags -%}
+          {%- if current_tags contains tag -%}
+            <div class="tag active">
+              {%- capture tag_title -%}
+                {{ tag }}
+                {%- render 'icon', type: 'close' -%}
+              {%- endcapture -%}
+              {{ tag_title | link_to_remove_tag: tag }}
+            </div>
+          {%- else -%}
+            <div class="tag inactive">
+              {{ tag  | link_to_add_tag: tag | url_decode }}
+            </div>
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+    </div>
+  {%- endif -%}
+  {%- if blog.articles.size > 0 -%}
+    <div class="blog-wrapper">
+      {%- for article in blog.articles -%}
+        <div class="article-wrapper">
+          {%- if article.image != blank -%}
+            <a class="image" href="{{ article.url }}" title="{{ article.title }}">
+              {{ article.image | image_url: height: '500' | image_tag: loading: 'lazy' }}
+            </a>
+          {%- endif -%}
+          <div class="content">
+            <div class="date">{{ article.created_at | date: "%d.%m.%Y" }}</div>
+            <a href="{{ article.url }}" class="article-title">{{ article.title }}</a>
+            <a href="{{ article.url }}" class="read-more">
+              {{ 'blog.read_more' | t }}
+              {%- render 'icon', type: 'arrow-right' -%}
+            </a>
+          </div>
+        </div>
+      {%- endfor -%}
+    </div>
+  {%- else -%}
+      {{ 'blog.no_articles' | t }}
+  {%- endif -%}
+</div>
+
+{% schema %}
+  {
+    "name": "Main blog(New)",
+    "tag": "section",
+    "class": "main-blog",
+    "settings": [
+      {
+        "type": "text",
+        "id": "subtitle",
+        "label": "Recent blog posts"
+      },
+      {
+        "type": "header",
+        "content": "Title Settings"
+      },
+      {
+        "type": "range",
+        "id": "title_font_size_desktop",
+        "label": "Title Font Size(Desktop)",
+        "min": 0,
+        "max": 100,
+        "step": 1,
+        "default": 48,
+        "unit": "px"
+      },
+      {
+        "type": "range",
+        "id": "title_line_height_desktop",
+        "label": "Title Line Height(Desktop)",
+        "min": 0,
+        "max": 100,
+        "step": 1,
+        "default": 55,
+        "unit": "px"
+      },
+      {
+        "type": "range",
+        "id": "title_font_size_tablet",
+        "label": "Title Font Size(Tablet)",
+        "min": 0,
+        "max": 100,
+        "step": 1,
+        "default": 42,
+        "unit": "px"
+      },
+      {
+        "type": "range",
+        "id": "title_line_height_tablet",
+        "label": "Title Line Height(Tablet)",
+        "min": 0,
+        "max": 100,
+        "step": 1,
+        "default": 50,
+        "unit": "px"
+      },
+      {
+        "type": "range",
+        "id": "title_font_size_mobile",
+        "label": "Title Font Size(Mobile)",
+        "min": 0,
+        "max": 100,
+        "step": 1,
+        "default": 24,
+        "unit": "px"
+      },
+      {
+        "type": "range",
+        "id": "title_line_height_mobile",
+        "label": "Title Line Height(Mobile)",
+        "min": 0,
+        "max": 100,
+        "step": 1,
+        "default": 30,
+        "unit": "px"
+      },
+      {
+        "type": "header",
+        "content": "Article Title Settings"
+      },
+      {
+        "type": "range",
+        "id": "article_title_font_size_desktop",
+        "label": "Article Title Font Size(Desktop)",
+        "min": 0,
+        "max": 100,
+        "step": 1,
+        "default": 24,
+        "unit": "px"
+      },
+      {
+        "type": "range",
+        "id": "article_title_line_height_desktop",
+        "label": "Article Title Line Height(Desktop)",
+        "min": 0,
+        "max": 100,
+        "step": 1,
+        "default": 32,
+        "unit": "px"
+      },
+      {
+        "type": "range",
+        "id": "article_title_font_size_tablet",
+        "label": "Article Title Font Size(Tablet)",
+        "min": 0,
+        "max": 100,
+        "step": 1,
+        "default": 24,
+        "unit": "px"
+      },
+      {
+        "type": "range",
+        "id": "article_title_line_height_tablet",
+        "label": "Article Title Line Height(Tablet)",
+        "min": 0,
+        "max": 100,
+        "step": 1,
+        "default": 32,
+        "unit": "px"
+      },
+      {
+        "type": "range",
+        "id": "article_title_font_size_mobile",
+        "label": "Article Title Font Size(Mobile)",
+        "min": 0,
+        "max": 100,
+        "step": 1,
+        "default": 22,
+        "unit": "px"
+      },
+      {
+        "type": "range",
+        "id": "article_title_line_height_mobile",
+        "label": "Article Title Line Height(Mobile)",
+        "min": 0,
+        "max": 100,
+        "step": 1,
+        "default": 30,
+        "unit": "px"
+      },
+      {
+        "type": "header",
+        "content": "Date Settings"
+      },
+      {
+        "type": "range",
+        "id": "date_font_size_desktop",
+        "label": "Date Font Size(Desktop)",
+        "min": 0,
+        "max": 100,
+        "step": 1,
+        "default": 16,
+        "unit": "px"
+      },
+      {
+        "type": "range",
+        "id": "date_line_height_desktop",
+        "label": "Date Line Height(Desktop)",
+        "min": 0,
+        "max": 100,
+        "step": 1,
+        "default": 20,
+        "unit": "px"
+      },
+      {
+        "type": "range",
+        "id": "date_font_size_tablet",
+        "label": "Date Font Size(Tablet)",
+        "min": 0,
+        "max": 100,
+        "step": 1,
+        "default": 16,
+        "unit": "px"
+      },
+      {
+        "type": "range",
+        "id": "date_line_height_tablet",
+        "label": "Date Line Height(Tablet)",
+        "min": 0,
+        "max": 100,
+        "step": 1,
+        "default": 20,
+        "unit": "px"
+      },
+      {
+        "type": "range",
+        "id": "date_font_size_mobile",
+        "label": "Date Font Size(Mobile)",
+        "min": 0,
+        "max": 100,
+        "step": 1,
+        "default": 16,
+        "unit": "px"
+      },
+      {
+        "type": "range",
+        "id": "date_line_height_mobile",
+        "label": "Date Line Height(Mobile)",
+        "min": 0,
+        "max": 100,
+        "step": 1,
+        "default": 20,
+        "unit": "px"
+      },
+    ],
+    "presets": [
+      {
+        "name": "Main blog(New)",
+        "settings": {
+        }
+      }
+    ]
+  }
+{% endschema %}
