@@ -6,6 +6,22 @@
   </style>
 {%- endif -%}
 <style>
+  #shopify-section-{{ section.id }} .container .slider-wrapper swiper-container swiper-slide {
+    display: block;
+  }
+  #shopify-section-{{ section.id }} .container .slider-wrapper swiper-container swiper-slide .slide-wrapper {
+    height: 100%;
+  }
+  #shopify-section-{{ section.id }} .container .slider-wrapper swiper-container swiper-slide .slide-wrapper .content {
+    height: 100%;
+  }
+  #shopify-section-{{ section.id }} .container .slider-wrapper swiper-container swiper-slide .slide-wrapper .content .read-more {
+    height: 100%;
+    align-items: end;
+  }
+  #shopify-section-{{ section.id }} .container .slider-wrapper prev-next-buttons {
+    margin-top: 32px;
+  }
   @media screen and (min-width: 1025px) {
     #shopify-section-{{ section.id }} .title {
       font-size: {{ section.settings.title_font_size_desktop }}px;

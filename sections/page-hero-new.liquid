@@ -1,0 +1,351 @@
+{%- assign ss = section.settings -%}
+<style>
+  #shopify-section-{{ section.id }} .container .content .subtitle {
+    font-weight: 400;
+  }
+  @media screen and (min-width: 1025px) {
+    #shopify-section-{{ section.id }} .container .content {
+      gap: 16px;
+    }
+    #shopify-section-{{ section.id }} .container .title {
+      font-size: {{ section.settings.title_font_size_desktop }}px !important;
+      line-height: {{ section.settings.title_line_height_desktop }}px !important;
+      max-width: 540px;
+    }
+    #shopify-section-{{ section.id }} .container .content .subtitle {
+      font-size: {{ section.settings.sub_title_font_size_desktop }}px;
+      line-height: {{ section.settings.sub_title_line_height_desktop }}px;
+      max-width: 440px;
+    }
+    #shopify-section-{{ section.id }} .container .content .pros {
+      font-size: {{ section.settings.content_font_size_desktop }}px;
+      line-height: {{ section.settings.content_line_height_desktop }}px;      
+      max-width: 430px;
+    }
+  }
+  @media (min-width: 768px) and (max-width: 1024px) {
+    #shopify-section-{{ section.id }} .container .content {
+      gap: 10.5px;
+    }
+    #shopify-section-{{ section.id }} .container .title {
+      font-size: {{ section.settings.title_font_size_tablet }}px !important;
+      line-height: {{ section.settings.title_line_height_tablet }}px !important;
+      max-width: 400px;
+    }
+    #shopify-section-{{ section.id }} .container .content .subtitle{
+      font-size: {{ section.settings.sub_title_font_size_tablet }}px;
+      line-height: {{ section.settings.sub_title_line_height_tablet }}px;
+      max-width: 430px;
+    }
+    #shopify-section-{{ section.id }} .container .content .pros {
+      font-size: {{ section.settings.content_font_size_tablet }}px;
+      line-height: {{ section.settings.content_line_height_tablet }}px;
+      max-width: 410px;
+    }
+  }
+  @media screen and (max-width: 767px) {
+    #shopify-section-{{ section.id }} .container {
+      gap: 48px;
+      padding-inline: 30px;
+      padding-block: 220px;
+    }
+    #shopify-section-{{ section.id }} .container .content {
+      max-width: 330px;
+      gap: 16px;
+    }
+    #shopify-section-{{ section.id }} .container .title {
+      font-size: {{ section.settings.title_font_size_mobile }}px !important;
+      line-height: {{ section.settings.title_line_height_mobile }}px !important;
+      max-width: 240px;
+      margin-bottom: 0;
+    }
+    #shopify-section-{{ section.id }} .container .content .subtitle {
+      font-size: {{ section.settings.sub_title_font_size_mobile }}px;
+      line-height: {{ section.settings.sub_title_line_height_mobile }}px;
+    }
+    #shopify-section-{{ section.id }} .container .content .pros {
+      font-size: {{ section.settings.content_font_size_mobile }}px;
+      line-height: {{ section.settings.content_line_height_mobile }}px;
+    }
+  }
+  @media screen and (min-width: 1441px) {
+    #shopify-section-{{ section.id }} .container .content .pros {
+      max-width: 460px;
+    }
+  }
+</style>
+{%- if ss.invert -%}
+  {%- assign id = 'id="inverseHeader" data-inversed="false"' -%} 
+{%- endif -%}
+<div class="video-wrapper" {{ id }}>
+  <div class="video-overlay"></div>
+  {%- if ss.video != blank -%}
+    {{ ss.video | video_tag: autoplay: true, loop: true, muted: true, controls: false }}
+  {%- endif -%}
+</div>
+<div class="container">
+  {%- if ss.title != blank -%}
+    <h1 class="title">
+      {{ ss.title }}
+    </h1>
+  {%- endif -%}
+  <div class="content">
+    {%- if ss.subtitle != blank -%}
+      <div class="subtitle">{{ ss.subtitle }}</div>
+    {%- endif -%}
+    {%- if ss.content != blank -%}
+      <div class="pros">{{ ss.content }}</div>
+    {%- endif -%}
+    {%- if ss.button_text != blank -%}
+      <a href="{{ ss.button_url }}" class="link">
+        {{ ss.button_text }}
+        {%- render 'icon', type: 'arrow-right' -%}
+      </a>
+    {%- endif -%}
+  </div>
+</div>
+
+{% schema %}
+  {
+    "name": "Page Hero(New)",
+    "tag": "section",
+    "class": "page-hero",
+    "settings": [
+      {
+        "type": "video",
+        "id": "video",
+        "label": "Video background"
+      },
+      {
+        "type": "checkbox",
+        "id": "invert",
+        "label": "Inverse header colors on scroll",
+        "default": true
+      },
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Title"
+      },
+      {
+        "type": "header",
+        "content": "Title Settings"
+      },
+      {
+        "type": "range",
+        "id": "title_font_size_desktop",
+        "label": "Title Font Size(Desktop)",
+        "min": 0,
+        "max": 100,
+        "step": 1,
+        "default": 50,
+        "unit": "px"
+      },
+      {
+        "type": "range",
+        "id": "title_line_height_desktop",
+        "label": "Title Line Height(Desktop)",
+        "min": 0,
+        "max": 100,
+        "step": 1,
+        "default": 60,
+        "unit": "px"
+      },
+      {
+        "type": "range",
+        "id": "title_font_size_tablet",
+        "label": "Title Font Size(Tablet)",
+        "min": 0,
+        "max": 100,
+        "step": 1,
+        "default": 50,
+        "unit": "px"
+      },
+      {
+        "type": "range",
+        "id": "title_line_height_tablet",
+        "label": "Title Line Height(Tablet)",
+        "min": 0,
+        "max": 100,
+        "step": 1,
+        "default": 60,
+        "unit": "px"
+      },
+      {
+        "type": "range",
+        "id": "title_font_size_mobile",
+        "label": "Title Font Size(Mobile)",
+        "min": 0,
+        "max": 100,
+        "step": 1,
+        "default": 28,
+        "unit": "px"
+      },
+      {
+        "type": "range",
+        "id": "title_line_height_mobile",
+        "label": "Title Line Height(Mobile)",
+        "min": 0,
+        "max": 100,
+        "step": 1,
+        "default": 32,
+        "unit": "px"
+      },
+      {
+        "type": "text",
+        "id": "subtitle",
+        "label": "Subtitle"
+      },
+      {
+        "type": "header",
+        "content": "Sub Title Settings"
+      },
+      {
+        "type": "range",
+        "id": "sub_title_font_size_desktop",
+        "label": "Sub Title Font Size(Desktop)",
+        "min": 0,
+        "max": 100,
+        "step": 1,
+        "default": 24,
+        "unit": "px"
+      },
+      {
+        "type": "range",
+        "id": "sub_title_line_height_desktop",
+        "label": "Sub Title Line Height(Desktop)",
+        "min": 0,
+        "max": 100,
+        "step": 1,
+        "default": 32,
+        "unit": "px"
+      },
+      {
+        "type": "range",
+        "id": "sub_title_font_size_tablet",
+        "label": "Sub Title Font Size(Tablet)",
+        "min": 0,
+        "max": 100,
+        "step": 1,
+        "default": 24,
+        "unit": "px"
+      },
+      {
+        "type": "range",
+        "id": "sub_title_line_height_tablet",
+        "label": "Sub Title Line Height(Tablet)",
+        "min": 0,
+        "max": 100,
+        "step": 1,
+        "default": 32,
+        "unit": "px"
+      },
+      {
+        "type": "range",
+        "id": "sub_title_font_size_mobile",
+        "label": "Sub Title Font Size(Mobile)",
+        "min": 0,
+        "max": 100,
+        "step": 1,
+        "default": 18,
+        "unit": "px"
+      },
+      {
+        "type": "range",
+        "id": "sub_title_line_height_mobile",
+        "label": "Sub Title Line Height(Mobile)",
+        "min": 0,
+        "max": 100,
+        "step": 1,
+        "default": 24,
+        "unit": "px"
+      },
+      {
+        "type": "richtext",
+        "id": "content",
+        "label": "Content"
+      },
+      {
+        "type": "header",
+        "content": "Content Settings"
+      },
+      {
+        "type": "range",
+        "id": "content_font_size_desktop",
+        "label": "Content Font Size(Desktop)",
+        "min": 0,
+        "max": 100,
+        "step": 1,
+        "default": 16,
+        "unit": "px"
+      },
+      {
+        "type": "range",
+        "id": "content_line_height_desktop",
+        "label": "Content Line Height(Desktop)",
+        "min": 0,
+        "max": 100,
+        "step": 1,
+        "default": 24,
+        "unit": "px"
+      },
+      {
+        "type": "range",
+        "id": "content_font_size_tablet",
+        "label": "Content Font Size(Tablet)",
+        "min": 0,
+        "max": 100,
+        "step": 1,
+        "default": 16,
+        "unit": "px"
+      },
+      {
+        "type": "range",
+        "id": "content_line_height_tablet",
+        "label": "Content Line Height(Tablet)",
+        "min": 0,
+        "max": 100,
+        "step": 1,
+        "default": 24,
+        "unit": "px"
+      },
+      {
+        "type": "range",
+        "id": "content_font_size_mobile",
+        "label": "Content Font Size(Mobile)",
+        "min": 0,
+        "max": 100,
+        "step": 1,
+        "default": 16,
+        "unit": "px"
+      },
+      {
+        "type": "range",
+        "id": "content_line_height_mobile",
+        "label": "Content Line Height(Mobile)",
+        "min": 0,
+        "max": 100,
+        "step": 1,
+        "default": 24,
+        "unit": "px"
+      },
+      {
+        "type": "text",
+        "id": "button_text",
+        "label": "Link text"
+      },
+      {
+        "type": "url",
+        "id": "button_url",
+        "label": "Link url"
+      }
+    ],
+    "presets": [
+      {
+        "name": "Page Hero(New)",
+        "settings": {
+        }
+      }
+    ]
+  }
+{% endschema %}

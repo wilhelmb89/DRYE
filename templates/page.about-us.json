@@ -2,12 +2,43 @@
   "sections": {
     "page_hero_YkycRB": {
       "type": "page-hero",
+      "disabled": true,
       "settings": {
         "video": "shopify:\/\/files\/videos\/Sequence 17 (2).mp4",
         "invert": true,
         "title": "Innovating Hand Health with DRYE",
         "subtitle": "At DRYE, we believe that comfort and skin health should go hand in hand",
         "content": "<p>Our mission is simple yet impactful: to create a glove  that genuinely protects hands by keeping moisture away from the skin, preserving the skin’s natural barrier, and reducing irritation.<\/p>",
+        "button_text": "",
+        "button_url": "shopify:\/\/products\/moisture-wicking-eczema-gloves"
+      }
+    },
+    "page_hero_new_GX4m8L": {
+      "type": "page-hero-new",
+      "settings": {
+        "video": "shopify:\/\/files\/videos\/Sequence 17 (2).mp4",
+        "invert": true,
+        "title": "Innovating Hand Health with DRYE",
+        "title_font_size_desktop": 50,
+        "title_line_height_desktop": 60,
+        "title_font_size_tablet": 50,
+        "title_line_height_tablet": 60,
+        "title_font_size_mobile": 28,
+        "title_line_height_mobile": 32,
+        "subtitle": "At DRYE, we believe that comfort and skin health should go hand in hand",
+        "sub_title_font_size_desktop": 24,
+        "sub_title_line_height_desktop": 32,
+        "sub_title_font_size_tablet": 24,
+        "sub_title_line_height_tablet": 32,
+        "sub_title_font_size_mobile": 18,
+        "sub_title_line_height_mobile": 24,
+        "content": "<p>Our mission is simple yet impactful: to create a glove  that genuinely protects hands by keeping moisture away from the skin, preserving the skin’s natural barrier, and reducing irritation.<\/p>",
+        "content_font_size_desktop": 16,
+        "content_line_height_desktop": 24,
+        "content_font_size_tablet": 16,
+        "content_line_height_tablet": 24,
+        "content_font_size_mobile": 16,
+        "content_line_height_mobile": 24,
         "button_text": "",
         "button_url": "shopify:\/\/products\/moisture-wicking-eczema-gloves"
       }
@@ -54,6 +85,7 @@
         "row_hT3xLV",
         "row_6cdFLt"
       ],
+      "disabled": true,
       "settings": {
         "special_title": true,
         "overlap": true,
@@ -63,13 +95,83 @@
         "tx": "#111111"
       }
     },
+    "multirows_general_LFeQWr": {
+      "type": "multirows-general",
+      "blocks": {
+        "row_jjWFfr": {
+          "type": "row",
+          "settings": {
+            "title": "Born from Personal Experience, Driven by a Need for Change",
+            "content": "<p>Founded on a deep personal journey with atopic eczema, our company was born from the realization that existing solutions often fell short. Our founder’s path to DRYE began with years of frustration—endless products, treatments, and advice that over-promised and under-delivered. From sweaty hands in construction school to dealing with eczema flare-ups, these challenges inspired the development of DRYE gloves. We wanted to create a glove that prioritized practicality and reliability. Crafted to meet real needs, offering a solution that allowed people to work, live and play without constant distraction of skin discomfort.<\/p>",
+            "button_text": "",
+            "button_url": "shopify:\/\/blogs\/news",
+            "image": "shopify:\/\/shop_images\/Bild_DRYE_a730e397-3cba-405a-9f5f-e66ffb247940.jpg",
+            "image_tablet": "shopify:\/\/shop_images\/Bild_DRYE_a730e397-3cba-405a-9f5f-e66ffb247940_jpg.png",
+            "image_mobile": "shopify:\/\/shop_images\/Bild_DRYE_a730e397-3cba-405a-9f5f-e66ffb247940-mobile.png",
+            "position": "row"
+          }
+        },
+        "row_FkgQmQ": {
+          "type": "row",
+          "settings": {
+            "title": "Eco-friendly materials, water-conserving, and recyclable.",
+            "content": "<p>At DRYE, we believe in hand protection that cares for the planet. Our glove liners are crafted from sustainably sourced wood cellulose, a renewable material that uses minimal water and pesticides. Through our closed-loop production process, we recycle 99% of solvents, significantly reducing water usage and emissions. Each biodegradable, recyclable glove is designed to last 3 to 12 months, offering a durable, eco-conscious choice that supports a smaller environmental footprint.<\/p>",
+            "button_text": "",
+            "button_url": "shopify:\/\/products\/moisture-wicking-eczema-gloves",
+            "image": "shopify:\/\/shop_images\/New_AntiSweat_Liner_saving_billions_of_liters_of_water.jpg",
+            "image_tablet": "shopify:\/\/shop_images\/New_AntiSweat_Liner_saving_billions_of_liters_of_water_jpg.png",
+            "image_mobile": "shopify:\/\/shop_images\/New_AntiSweat_Liner_saving_billions_of_liters_of_water-mobile.png",
+            "position": "row-reverse"
+          }
+        },
+        "row_xfLqDq": {
+          "type": "row",
+          "settings": {
+            "title": "Meeting the Needs of Diverse Industries",
+            "content": "<p>Today, DRYE gloves are helping thousands across various industries—from hockey players and construction workers to electric vehicle technicians and everyday consumers. By minimizing sweat buildup and friction, our gloves promote hand health, enabling users to focus on their work, hobbies, and lives without the constant worry of skin irritation. Whether used in demanding environments or for daily comfort, DRYE gloves offer a practical and versatile solution for maintaining healthy, irritation-free hands.<\/p>",
+            "button_text": "",
+            "button_url": "",
+            "image": "shopify:\/\/shop_images\/DRYE_SweatGuard_Liner.png",
+            "image_tablet": "shopify:\/\/shop_images\/DRYE_SweatGuard_Liner_png.png",
+            "image_mobile": "shopify:\/\/shop_images\/DRYE_SweatGuard_Liner-mobile.png",
+            "position": "row"
+          }
+        }
+      },
+      "block_order": [
+        "row_jjWFfr",
+        "row_FkgQmQ",
+        "row_xfLqDq"
+      ],
+      "settings": {
+        "special_title": true,
+        "overlap": true,
+        "title": "",
+        "invert": true,
+        "bg": "#e5e5e5",
+        "tx": "#111111",
+        "sub_title_font_size_desktop": 48,
+        "sub_title_line_height_desktop": 55,
+        "sub_title_font_size_tablet": 34,
+        "sub_title_line_height_tablet": 40,
+        "sub_title_font_size_mobile": 24,
+        "sub_title_line_height_mobile": 30,
+        "sub_body_font_size_desktop": 18,
+        "sub_body_line_height_desktop": 28,
+        "sub_body_font_size_tablet": 18,
+        "sub_body_line_height_tablet": 28,
+        "sub_body_font_size_mobile": 16,
+        "sub_body_line_height_mobile": 24
+      }
+    },
     "before_after_Pj7ja6": {
       "type": "before-after",
       "disabled": true,
       "settings": {
         "title": "",
         "image_before": "shopify:\/\/shop_images\/Traditional_Glove_Liners_Fail_to_Keep_Moisture_Away.jpg",
-        "image_after": "shopify:\/\/shop_images\/Born_from_Personal_Struggles_Now_Improving_Hand_Health_for_Billions..jpg"
+        "image_after": "shopify:\/\/shop_images\/Born_from_Personal_Struggles_Now_Improving_Hand_Health_for_Billions..jpg",
+        "image_border_radius": 40
       }
     },
     "before_after_R8wkVk": {
@@ -77,7 +179,8 @@
       "settings": {
         "title": "",
         "image_before": "shopify:\/\/shop_images\/DRYE_Textile_New_Technique_for_People_with_Dry_Cracked_Hands_a446bd38-f3f0-4976-89cd-469535684b92.jpg",
-        "image_after": "shopify:\/\/shop_images\/New_Moisture_Wicking_Liner_shows_promising_result.jpg"
+        "image_after": "shopify:\/\/shop_images\/New_Moisture_Wicking_Liner_shows_promising_result.jpg",
+        "image_border_radius": 40
       }
     },
     "reviews_qKnxAg": {
@@ -88,8 +191,7 @@
           "settings": {
             "content": "<p>Big problems with chapped hands and hand eczema before, now I avoid itching, sweating and moisture. DRYE Liner is really cool and comfortable fit. I ain’t feeling any itching and sweating since starts using it<\/p>",
             "author": "Emilia A",
-            "prof": "Pastry Chef",
-            "avatar": "shopify:\/\/shop_images\/client1.png"
+            "prof": "Pastry Chef"
           }
         },
         "review_xbkWki": {
@@ -97,8 +199,7 @@
           "settings": {
             "content": "<p>Very comfortable to use, I notice a huge difference on my hands!I no longer feel dryness and sensitivity in the same way. Completely satisfied from DRYE gloves.<\/p>",
             "author": "Sofia Magnusson",
-            "prof": "Hairdresser",
-            "avatar": "shopify:\/\/shop_images\/client2.png"
+            "prof": "Hairdresser"
           }
         },
         "review_DYaEBN": {
@@ -106,8 +207,7 @@
           "settings": {
             "content": "<p>Much better product than cotton gloves, because you avoid sweat and get better quality. I've been working with electrical safety gloves for over a year, and I've been sweating all day until DRYE came up with their new glove liner.<\/p>",
             "author": "Michal Ratusznik",
-            "prof": "Electrical Mechanic",
-            "avatar": "shopify:\/\/shop_images\/nedladdning.jpg"
+            "prof": "Electrical Mechanic"
           }
         },
         "review_N4M9RW": {
@@ -115,8 +215,7 @@
           "settings": {
             "content": "<p>I used to have major problems with cracked hands and hand eczema, but now I avoid itching, sweating, and moisture. Cool and comfortable fit.<\/p>",
             "author": "Adam Hemberg",
-            "prof": "Electrical Mechanic",
-            "avatar": "shopify:\/\/shop_images\/36555_3758751091973_1458955685_n_da75b19b-feaa-44d8-b6d3-615e63f8ee0a.jpg"
+            "prof": "Electrical Mechanic"
           }
         },
         "review_FF9Nap": {
@@ -124,8 +223,7 @@
           "settings": {
             "content": "<p>I have been struggling with eczema on my hands for a long time and found it difficult to put on my hockey gloves. Thanks to these liner gloves, I have had a better experience because they reduce friction against the skin. I can't play without them now.<\/p>",
             "author": "Linnea D.",
-            "prof": "Hockey player",
-            "avatar": "shopify:\/\/shop_images\/FrlEU7VXsAYi9hI.jpg"
+            "prof": "Hockey player"
           }
         }
       },
@@ -144,19 +242,43 @@
     },
     "articles_ipAcjc": {
       "type": "articles",
+      "disabled": true,
       "settings": {
         "title": "News & updates",
         "blog": "news",
+        "footer": true
+      }
+    },
+    "articles_new_nnzJaL": {
+      "type": "articles-new",
+      "settings": {
+        "title": "News & updates",
+        "title_font_size_desktop": 48,
+        "title_line_height_desktop": 55,
+        "title_font_size_tablet": 42,
+        "title_line_height_tablet": 50,
+        "title_font_size_mobile": 24,
+        "title_line_height_mobile": 30,
+        "blog": "news",
+        "article_title_font_size_desktop": 24,
+        "article_title_line_height_desktop": 32,
+        "article_title_font_size_tablet": 23,
+        "article_title_line_height_tablet": 32,
+        "article_title_font_size_mobile": 22,
+        "article_title_line_height_mobile": 30,
         "footer": true
       }
     }
   },
   "order": [
     "page_hero_YkycRB",
+    "page_hero_new_GX4m8L",
     "multirows_pfHKrj",
+    "multirows_general_LFeQWr",
     "before_after_Pj7ja6",
     "before_after_R8wkVk",
     "reviews_qKnxAg",
-    "articles_ipAcjc"
+    "articles_ipAcjc",
+    "articles_new_nnzJaL"
   ]
 }
