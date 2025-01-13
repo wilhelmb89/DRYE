@@ -16,6 +16,10 @@
   #shopify-section-{{ section.id }} .review-profile-image img:not(:first-child){
     margin-left: -10px;
   }
+  #shopify-section-{{ section.id }} .review-link {
+    margin-left: -10px;
+    display: flex;
+  }
   #shopify-section-{{ section.id }} .review-profile-block {
     display: flex;
     gap: 16px;
@@ -99,7 +103,13 @@
             <div class="review-profile-image">
             {%- for block in section.blocks -%}
               {% if block.type == 'review' %}
+                {% if block.settings.review_url != blank  %}
+                  <a href="{{ block.settings.review_url }}" class="review-link">
+                {% endif %}
                 {{ block.settings.review_image | image_url: height: '48' | image_tag: loading: 'lazy' }}
+                {% if block.settings.review_url != blank  %}
+                  </a>
+                {% endif %}
               {% endif %}
             {%- endfor -%}
             </div>
@@ -280,7 +290,7 @@
       "id": "check_review_text",
       "label": "Check Review text",
       "default": "Check Reviews"
-    },
+    }
   ],
   "blocks": [
     {
@@ -302,6 +312,11 @@
           "type": "image_picker",
           "id": "review_image",
           "label": "Review Profile Image"
+        },
+        {
+          "type": "url",
+          "id": "review_url",
+          "label": "Url"
         }
       ]
     }
