@@ -21,19 +21,22 @@
         "review_nJYAaN": {
           "type": "review",
           "settings": {
-            "review_image": "shopify:\/\/shop_images\/hero-review-profile-1.png"
+            "review_image": "shopify:\/\/shop_images\/hero-review-profile-1.png",
+            "review_url": ""
           }
         },
         "review_QxJ7ai": {
           "type": "review",
           "settings": {
-            "review_image": "shopify:\/\/shop_images\/hero-review-profile-2.png"
+            "review_image": "shopify:\/\/shop_images\/hero-review-profile-2.png",
+            "review_url": ""
           }
         },
         "review_XipXxk": {
           "type": "review",
           "settings": {
-            "review_image": "shopify:\/\/shop_images\/hero-review-action.png"
+            "review_image": "shopify:\/\/shop_images\/hero-review-action.png",
+            "review_url": "shopify:\/\/products\/moisture-wicking-eczema-gloves"
           }
         }
       },
@@ -192,8 +195,10 @@
       "settings": {
         "image": "shopify:\/\/shop_images\/DRYE_biodegradable_moisture-wicking_gloves.png",
         "title": "The Only Gloves to Keep Moisture Off Skin, Preventing Dryness & Eczema",
-        "title_font_size_desktop": 38,
-        "title_line_height_desktop": 50,
+        "title_font_size_desktop": 50,
+        "title_line_height_desktop": 60,
+        "title_font_size_small_desktop": 38,
+        "title_line_height_small_desktop": 50,
         "title_font_size_tablet": 30,
         "title_line_height_tablet": 39,
         "title_font_size_mobile": 28,
@@ -340,7 +345,14 @@
       "settings": {
         "title": "",
         "image_before": "shopify:\/\/shop_images\/Before_using_DRYE_glove_Liner.jpg",
-        "image_after": "shopify:\/\/shop_images\/After_three_months_of_use_-_DRYE_Glove_Liner.jpg"
+        "image_after": "shopify:\/\/shop_images\/After_three_months_of_use_-_DRYE_Glove_Liner.jpg",
+        "image_border_radius": 40,
+        "section_top_padding_desktop": 120,
+        "section_bottom_padding_desktop": 120,
+        "section_top_padding_tablet": 80,
+        "section_bottom_padding_tablet": 80,
+        "section_top_padding_mobile": 64,
+        "section_bottom_padding_mobile": 64
       }
     },
     "reviews_zhfkEb": {
@@ -504,7 +516,13 @@
         "article_title_line_height_tablet": 32,
         "article_title_font_size_mobile": 22,
         "article_title_line_height_mobile": 30,
-        "footer": false
+        "footer": false,
+        "section_top_padding_desktop": 0,
+        "section_bottom_padding_desktop": 120,
+        "section_top_padding_tablet": 0,
+        "section_bottom_padding_tablet": 80,
+        "section_top_padding_mobile": 0,
+        "section_bottom_padding_mobile": 64
       }
     },
     "faq_N64yyQ": {

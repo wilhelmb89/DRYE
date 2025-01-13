@@ -7,10 +7,23 @@
       margin-block: {{ ss.mobile_m_top }}px {{ ss.mobile_m_bottom }}px;
     }
   }
-  @media screen and (min-width: 1025px) {
+  #shopify-section-{{ section.id }} .list .list-item {
+    font-weight: 400;
+  }
+  @media screen and (min-width: 1441px) {
     #shopify-section-{{ section.id }} .title {
       font-size: {{ section.settings.title_font_size_desktop }}px;
       line-height: {{ section.settings.title_line_height_desktop }}px;
+    }
+    #shopify-section-{{ section.id }} .list .list-item {
+      font-size: {{ section.settings.list_item_font_size_desktop }}px;
+      line-height: {{ section.settings.list_item_line_height_desktop }}px;
+    }
+  }
+  @media (min-width: 1025px) and (max-width: 1440px) {
+    #shopify-section-{{ section.id }} .title {
+      font-size: {{ section.settings.title_font_size_small_desktop }}px;
+      line-height: {{ section.settings.title_line_height_small_desktop }}px;
     }
     #shopify-section-{{ section.id }} .list .list-item {
       font-size: {{ section.settings.list_item_font_size_desktop }}px;
@@ -21,6 +34,7 @@
     #shopify-section-{{ section.id }} .title {
       font-size: {{ section.settings.title_font_size_tablet }}px;
       line-height: {{ section.settings.title_line_height_tablet }}px;
+      margin-bottom: 60px;
     }
     #shopify-section-{{ section.id }} .list .list-item {
       font-size: {{ section.settings.list_item_font_size_tablet }}px;
@@ -28,6 +42,12 @@
     }
   }
   @media screen and (max-width: 767px) {
+    #shopify-section-{{ section.id }} .container.small {
+      gap: 8px;
+    }
+    #shopify-section-{{ section.id }} .container .content {
+      gap: 44px;
+    }
     #shopify-section-{{ section.id }} .title {
       font-size: {{ section.settings.title_font_size_mobile }}px;
       line-height: {{ section.settings.title_line_height_mobile }}px;
@@ -101,7 +121,27 @@
       {
         "type": "range",
         "id": "title_font_size_desktop",
-        "label": "Title Font Size(Desktop)",
+        "label": "Font Size(Desktop)",
+        "min": 0,
+        "max": 100,
+        "step": 1,
+        "default": 50,
+        "unit": "px"
+      },
+      {
+        "type": "range",
+        "id": "title_line_height_desktop",
+        "label": "Line Height(Desktop)",
+        "min": 0,
+        "max": 100,
+        "step": 1,
+        "default": 60,
+        "unit": "px"
+      },
+      {
+        "type": "range",
+        "id": "title_font_size_small_desktop",
+        "label": "Font Size(Small Desktop)",
         "min": 0,
         "max": 100,
         "step": 1,
@@ -110,8 +150,8 @@
       },
       {
         "type": "range",
-        "id": "title_line_height_desktop",
-        "label": "Title Line Height(Desktop)",
+        "id": "title_line_height_small_desktop",
+        "label": "Line Height(Small Desktop)",
         "min": 0,
         "max": 100,
         "step": 1,
@@ -121,7 +161,7 @@
       {
         "type": "range",
         "id": "title_font_size_tablet",
-        "label": "Title Font Size(Tablet)",
+        "label": "Font Size(Tablet)",
         "min": 0,
         "max": 100,
         "step": 1,
@@ -131,7 +171,7 @@
       {
         "type": "range",
         "id": "title_line_height_tablet",
-        "label": "Title Line Height(Tablet)",
+        "label": "Line Height(Tablet)",
         "min": 0,
         "max": 100,
         "step": 1,
@@ -141,7 +181,7 @@
       {
         "type": "range",
         "id": "title_font_size_mobile",
-        "label": "Title Font Size(Mobile)",
+        "label": "Font Size(Mobile)",
         "min": 0,
         "max": 100,
         "step": 1,
@@ -151,7 +191,7 @@
       {
         "type": "range",
         "id": "title_line_height_mobile",
-        "label": "Title Line Height(Mobile)",
+        "label": "Line Height(Mobile)",
         "min": 0,
         "max": 100,
         "step": 1,
