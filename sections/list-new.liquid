@@ -19,6 +19,10 @@
       font-size: {{ section.settings.list_item_font_size_desktop }}px;
       line-height: {{ section.settings.list_item_line_height_desktop }}px;
     }
+    #shopify-section-{{ section.id }} .content .text {
+      font-size: {{ section.settings.content_font_size_desktop }}px;      
+      line-height: {{ section.settings.content_line_height_desktop }}px;
+    }
   }
   @media (min-width: 1025px) and (max-width: 1440px) {
     #shopify-section-{{ section.id }} .title {
@@ -28,6 +32,10 @@
     #shopify-section-{{ section.id }} .list .list-item {
       font-size: {{ section.settings.list_item_font_size_desktop }}px;
       line-height: {{ section.settings.list_item_line_height_desktop }}px;
+    }
+    #shopify-section-{{ section.id }} .content .text {
+      font-size: {{ section.settings.content_font_size_small_desktop }}px;      
+      line-height: {{ section.settings.content_line_height_small_desktop }}px;
     }
   }
   @media (min-width: 768px) and (max-width: 1024px) {
@@ -39,6 +47,10 @@
     #shopify-section-{{ section.id }} .list .list-item {
       font-size: {{ section.settings.list_item_font_size_tablet }}px;
       line-height: {{ section.settings.list_item_line_height_tablet }}px;
+    }
+    #shopify-section-{{ section.id }} .content .text {
+      font-size: {{ section.settings.content_font_size_tablet }}px;      
+      line-height: {{ section.settings.content_line_height_tablet }}px;
     }
   }
   @media screen and (max-width: 767px) {
@@ -55,6 +67,10 @@
     #shopify-section-{{ section.id }} .list .list-item {
       font-size: {{ section.settings.list_item_font_size_mobile }}px;      
       line-height: {{ section.settings.list_item_line_height_mobile }}px;
+    }
+    #shopify-section-{{ section.id }} .content .text {
+      font-size: {{ section.settings.content_font_size_mobile }}px;      
+      line-height: {{ section.settings.content_line_height_mobile }}px;
     }
   }
 </style>
@@ -263,9 +279,93 @@
         "unit": "px"
       },
       {
+        "type": "header",
+        "content": "Content Settings"
+      },
+      {
         "type": "richtext",
         "id": "content",
         "label": "Content"
+      },
+      {
+        "type": "range",
+        "id": "content_font_size_desktop",
+        "label": "Content Font Size(Desktop)",
+        "min": 0,
+        "max": 100,
+        "step": 1,
+        "default": 16,
+        "unit": "px"
+      },
+      {
+        "type": "range",
+        "id": "content_line_height_desktop",
+        "label": "Content Line Height(Desktop)",
+        "min": 0,
+        "max": 100,
+        "step": 1,
+        "default": 24,
+        "unit": "px"
+      },
+      {
+        "type": "range",
+        "id": "content_font_size_small_desktop",
+        "label": "Content Font Size(Small Desktop)",
+        "min": 0,
+        "max": 100,
+        "step": 1,
+        "default": 14,
+        "unit": "px"
+      },
+      {
+        "type": "range",
+        "id": "content_line_height_small_desktop",
+        "label": "Content Line Height(Small Desktop)",
+        "min": 0,
+        "max": 100,
+        "step": 1,
+        "default": 24,
+        "unit": "px"
+      },
+      {
+        "type": "range",
+        "id": "content_font_size_tablet",
+        "label": "Content Font Size(Tablet)",
+        "min": 0,
+        "max": 100,
+        "step": 1,
+        "default": 12,
+        "unit": "px"
+      },
+      {
+        "type": "range",
+        "id": "content_line_height_tablet",
+        "label": "Content Line Height(tablet)",
+        "min": 0,
+        "max": 100,
+        "step": 1,
+        "default": 18,
+        "unit": "px"
+      },
+      {
+        "type": "range",
+        "id": "content_font_size_mobile",
+        "label": "Content Font Size(Mobile)",
+        "min": 0,
+        "max": 100,
+        "step": 1,
+        "default": 12,
+        "unit": "px"
+      },
+      {
+        "type": "range",
+        "id": "content_line_height_mobile",
+        "label": "Content Line Height(Mobile)",
+        "min": 0,
+        "max": 100,
+        "step": 1,
+        "default": 19,
+        "unit": "px"
       },
       {
         "type": "text",
