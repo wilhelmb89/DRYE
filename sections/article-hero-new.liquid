@@ -1,0 +1,204 @@
+<style>
+  #shopify-section-{{ section.id }} {
+    background: linear-gradient(rgba(0,0,0,0), rgba(0,0,0,1)), url('{{ article.image | image_url: width: '1920' }}');
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    padding-block: 305px;
+    min-height: 1080px;
+    .container {
+      max-width: 980px;
+    }
+  }
+  #shopify-section-{{ section.id }} .container .title {
+    font-weight: 300;
+    letter-spacing: 0;
+    font-family: ClashGrotesk-Variable;
+  }
+  @media screen and (min-width: 1025px) {
+    #shopify-section-{{ section.id }} .container {
+      padding-inline: 65px;
+    }
+    #shopify-section-{{ section.id }} .container .title {
+      font-size: {{ section.settings.article_title_font_size_desktop }}px;
+      line-height: {{ section.settings.article_title_line_height_desktop }}px;      
+    }
+    #shopify-section-{{ section.id }} .container .date {
+      font-size: {{ section.settings.date_font_size_desktop }}px;
+      line-height: {{ section.settings.date_line_height_desktop }}px;
+    }
+  }
+  @media (min-width: 768px) and (max-width: 1024px) {
+    #shopify-section-{{ section.id }} .container .title {
+      font-size: {{ section.settings.article_title_font_size_tablet }}px;
+      line-height: {{ section.settings.article_title_line_height_tablet }}px;
+    }
+    #shopify-section-{{ section.id }} .container .date {
+      font-size: {{ section.settings.date_font_size_tablet }}px;
+      line-height: {{ section.settings.date_line_height_tablet }}px;
+    }
+  }
+  @media screen and (max-width: 767px) {
+    #shopify-section-{{ section.id }} .container .title {
+      font-size: {{ section.settings.article_title_font_size_mobile }}px;
+      line-height: {{ section.settings.article_title_line_height_mobile }}px;
+    }
+    #shopify-section-{{ section.id }} .container .date {
+      font-size: {{ section.settings.date_font_size_mobile }}px;
+      line-height: {{ section.settings.date_line_height_mobile }}px;
+      margin-bottom: 10px;
+    }
+  }
+</style>
+{%- if article.metafields.custom.invert_header.value -%}
+  {%- assign id = 'id="inverseHeader" data-inversed="false"' -%} 
+{%- endif -%}
+<div class="container small" {{ id }}>
+  <div class="date">{{ article.created_at | date: '%d.%m.%Y' }}</div>
+  <h1 class="title article__title">{{ article.title }}</h1>
+</div>
+
+{% schema %}
+  {
+    "name": "Article hero(New)",
+    "tag": "section",
+    "class": "section-article-hero",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Article Title Settings"
+      },
+      {
+        "type": "range",
+        "id": "article_title_font_size_desktop",
+        "label": "Article Title Font Size(Desktop)",
+        "min": 0,
+        "max": 100,
+        "step": 1,
+        "default": 50,
+        "unit": "px"
+      },
+      {
+        "type": "range",
+        "id": "article_title_line_height_desktop",
+        "label": "Article Title Line Height(Desktop)",
+        "min": 0,
+        "max": 100,
+        "step": 1,
+        "default": 60,
+        "unit": "px"
+      },
+      {
+        "type": "range",
+        "id": "article_title_font_size_tablet",
+        "label": "Article Title Font Size(Tablet)",
+        "min": 0,
+        "max": 100,
+        "step": 1,
+        "default": 50,
+        "unit": "px"
+      },
+      {
+        "type": "range",
+        "id": "article_title_line_height_tablet",
+        "label": "Article Title Line Height(Tablet)",
+        "min": 0,
+        "max": 100,
+        "step": 1,
+        "default": 60,
+        "unit": "px"
+      },
+      {
+        "type": "range",
+        "id": "article_title_font_size_mobile",
+        "label": "Article Title Font Size(Mobile)",
+        "min": 0,
+        "max": 100,
+        "step": 1,
+        "default": 28,
+        "unit": "px"
+      },
+      {
+        "type": "range",
+        "id": "article_title_line_height_mobile",
+        "label": "Article Title Line Height(Mobile)",
+        "min": 0,
+        "max": 100,
+        "step": 1,
+        "default": 32,
+        "unit": "px"
+      },
+      {
+        "type": "header",
+        "content": "Date Settings"
+      },
+      {
+        "type": "range",
+        "id": "date_font_size_desktop",
+        "label": "Date Font Size(Desktop)",
+        "min": 0,
+        "max": 100,
+        "step": 1,
+        "default": 18,
+        "unit": "px"
+      },
+      {
+        "type": "range",
+        "id": "date_line_height_desktop",
+        "label": "Date Line Height(Desktop)",
+        "min": 0,
+        "max": 100,
+        "step": 1,
+        "default": 28,
+        "unit": "px"
+      },
+      {
+        "type": "range",
+        "id": "date_font_size_tablet",
+        "label": "Date Font Size(Tablet)",
+        "min": 0,
+        "max": 100,
+        "step": 1,
+        "default": 18,
+        "unit": "px"
+      },
+      {
+        "type": "range",
+        "id": "date_line_height_tablet",
+        "label": "Date Line Height(Tablet)",
+        "min": 0,
+        "max": 100,
+        "step": 1,
+        "default": 28,
+        "unit": "px"
+      },
+      {
+        "type": "range",
+        "id": "date_font_size_mobile",
+        "label": "Date Font Size(Mobile)",
+        "min": 0,
+        "max": 100,
+        "step": 1,
+        "default": 14,
+        "unit": "px"
+      },
+      {
+        "type": "range",
+        "id": "date_line_height_mobile",
+        "label": "Date Line Height(Mobile)",
+        "min": 0,
+        "max": 100,
+        "step": 1,
+        "default": 21,
+        "unit": "px"
+      },
+    ],
+    "presets": [
+      {
+        "name": "Article hero(New)",
+        "settings": {
+        }
+      }
+    ]
+  }
+{% endschema %}
