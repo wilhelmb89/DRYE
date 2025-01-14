@@ -32,7 +32,11 @@
   #shopify-section-{{ section.id }} .row-title {
     max-width: 430px;
   }
-  @media screen and (min-width: 1441px) {    
+  @media screen and (min-width: 1441px) {
+    #shopify-section-{{ section.id }}.multirows-section .container .rows {
+      max-width: 1440px;
+      margin: auto;
+    }
     #shopify-section-{{ section.id }}.multirows-section .container .rows .row {
       gap: 122px;
     }
