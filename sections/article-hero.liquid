@@ -1,15 +1,21 @@
 <style>
-    #shopify-section-{{ section.id }} {
-      background: linear-gradient(rgba(0,0,0,0), rgba(0,0,0,1)), url('{{ article.image | image_url: width: '1920' }}');
-      background-position: center center;
-      background-repeat: no-repeat;
-      background-size: cover;
-      padding-block: 305px;
-      min-height: 1080px;
-      .container {
-        max-width: 980px;
-      }
+  #shopify-section-{{ section.id }} {
+    background: linear-gradient(rgba(0,0,0,0), rgba(0,0,0,1)), url('{{ article.image | image_url: width: '1920' }}');
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    padding-block: 305px;
+    min-height: 1080px;
+    .container {
+      max-width: 980px;
     }
+  }
+  #shopify-section-{{ section.id }} .container .title {
+    font-weight: 300;
+    line-height: 3.75rem;
+    letter-spacing: normal;
+    font-family: ClashGrotesk-Variable;
+  }
 </style>
 {%- if article.metafields.custom.invert_header.value -%}
   {%- assign id = 'id="inverseHeader" data-inversed="false"' -%} 

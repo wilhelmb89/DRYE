@@ -7,6 +7,13 @@
     #shopify-section-{{ section.id }} .container {
       margin-block: {{ section.settings.section_top_padding_desktop }}px {{ section.settings.section_bottom_padding_desktop }}px;
     }
+    #shopify-section-{{ section.id }} .container .before-after-slider {
+      max-width: 768px;
+      margin: auto;
+    }
+    #shopify-section-{{ section.id }} .container .before-after-slider img {
+      max-width: 768px;
+    }
   }
   @media (min-width: 768px) and (max-width: 1024px) {
     #shopify-section-{{ section.id }} .container {

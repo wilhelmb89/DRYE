@@ -20,6 +20,11 @@
     margin-left: -10px;
     display: flex;
   }
+  #shopify-section-{{ section.id }} .review-link-text {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
   #shopify-section-{{ section.id }} .review-profile-block {
     display: flex;
     gap: 16px;
@@ -115,7 +120,13 @@
             </div>
           {%- endif -%}
           {%- if section.settings.check_review_text != blank -%}
-            <div class="review-check-text">{{ section.settings.check_review_text }}</div>
+            {% if section.settings.review_url != blank  %}
+              <a href="{{ section.settings.review_url }}" class="review-link-text">
+            {% endif %}
+              <div class="review-check-text">{{ section.settings.check_review_text }}</div>
+            {% if section.settings.review_url != blank  %}
+              </a>
+            {% endif %}
           {%- endif -%}
         </div>
       </div>
@@ -290,6 +301,11 @@
       "id": "check_review_text",
       "label": "Check Review text",
       "default": "Check Reviews"
+    },
+    {
+      "type": "url",
+      "id": "review_url",
+      "label": "Url"
     }
   ],
   "blocks": [

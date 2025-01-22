@@ -1,4 +1,13 @@
 {%- assign ss = section.settings -%}
+{% style %}
+  #shopify-section-{{ section.id }} .container .title,
+  #shopify-section-{{ section.id }} .container .form-title {
+    font-weight: 300;
+    line-height: 3.75rem;
+    letter-spacing: normal;
+    font-family: ClashGrotesk-Variable;
+  }
+{% endstyle %}
 <div class="container">
   {%- if ss.title != blank -%}
     <h1 class="title">{{ ss.title }}</h1>
