@@ -8,13 +8,9 @@
  * ------------------------------------------------------------
  */
 {
-  "sections": {
-    "main": {
-      "type": "main-account",
-      "settings": {}
-    }
+  "parent": "product.json",
+  "context": {
+    "market": "eu"
   },
-  "order": [
-    "main"
-  ]
+  "sections": {}
 }
