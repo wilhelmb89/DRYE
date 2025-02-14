@@ -60,5 +60,247 @@
         "label": "Twitter"
       }
     ]
+  },
+  {
+    "name": "Policy",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Title Settings"
+      },
+      {
+        "type": "text",
+        "id": "policy_title_font_family",
+        "label": "Font Family",
+        "default": "ClashGrotesk-Variable"
+      },
+      {
+        "type": "range",
+        "id": "policy_title_font_weight",
+        "label": "Font Weight",
+        "min": 0,
+        "max": 700,
+        "step": 100,
+        "default": 300
+      },
+      {
+        "type": "range",
+        "id": "policy_title_font_size_desktop",
+        "label": "Font Size (Desktop)",
+        "min": 0,
+        "max": 80,
+        "step": 1,
+        "default": 50,
+        "unit": "px"
+      },
+      {
+        "type": "range",
+        "id": "policy_title_line_height_desktop",
+        "label": "Line Height (Desktop)",
+        "min": 0,
+        "max": 80,
+        "step": 1,
+        "default": 60,
+        "unit": "px"
+      },
+      {
+        "type": "range",
+        "id": "policy_title_font_size_tablet",
+        "label": "Font Size (Tablet)",
+        "min": 0,
+        "max": 80,
+        "step": 1,
+        "default": 50,
+        "unit": "px"
+      },
+      {
+        "type": "range",
+        "id": "policy_title_line_height_tablet",
+        "label": "Line Height (Tablet)",
+        "min": 0,
+        "max": 80,
+        "step": 1,
+        "default": 60,
+        "unit": "px"
+      },
+      {
+        "type": "range",
+        "id": "policy_title_font_size_mobile",
+        "label": "Font Size (Mobile)",
+        "min": 0,
+        "max": 80,
+        "step": 1,
+        "default": 28,
+        "unit": "px"
+      },
+      {
+        "type": "range",
+        "id": "policy_title_line_height_mobile",
+        "label": "Line Height (Mobile)",
+        "min": 0,
+        "max": 80,
+        "step": 1,
+        "default": 32,
+        "unit": "px"
+      },
+      {
+        "type": "header",
+        "content": "Sub Title Settings"
+      },
+      {
+        "type": "text",
+        "id": "policy_sub_title_font_family",
+        "label": "Font Family",
+        "default": "ClashGrotesk-Variable"
+      },
+      {
+        "type": "range",
+        "id": "policy_sub_title_font_weight",
+        "label": "Font Weight",
+        "min": 0,
+        "max": 700,
+        "step": 100,
+        "default": 300
+      },
+      {
+        "type": "range",
+        "id": "policy_sub_title_font_size_desktop",
+        "label": "Font Size (Desktop)",
+        "min": 0,
+        "max": 80,
+        "step": 1,
+        "default": 32,
+        "unit": "px"
+      },
+      {
+        "type": "range",
+        "id": "policy_sub_title_line_height_desktop",
+        "label": "Line Height (Desktop)",
+        "min": 0,
+        "max": 80,
+        "step": 1,
+        "default": 0,
+        "unit": "px"
+      },
+      {
+        "type": "range",
+        "id": "policy_sub_title_font_size_tablet",
+        "label": "Font Size (Tablet)",
+        "min": 0,
+        "max": 80,
+        "step": 1,
+        "default": 32,
+        "unit": "px"
+      },
+      {
+        "type": "range",
+        "id": "policy_sub_title_line_height_tablet",
+        "label": "Line Height (Tablet)",
+        "min": 0,
+        "max": 80,
+        "step": 1,
+        "default": 0,
+        "unit": "px"
+      },
+      {
+        "type": "range",
+        "id": "policy_sub_title_font_size_mobile",
+        "label": "Font Size (Mobile)",
+        "min": 0,
+        "max": 80,
+        "step": 1,
+        "default": 32,
+        "unit": "px"
+      },
+      {
+        "type": "range",
+        "id": "policy_sub_title_line_height_mobile",
+        "label": "Line Height (Mobile)",
+        "min": 0,
+        "max": 80,
+        "step": 1,
+        "default": 0,
+        "unit": "px"
+      },
+      {
+        "type": "header",
+        "content": "Content Settings"
+      },
+      {
+        "type": "text",
+        "id": "policy_content_font_family",
+        "label": "Font Family",
+        "default": "Inter"
+      },
+      {
+        "type": "range",
+        "id": "policy_content_font_weight",
+        "label": "Font Weight",
+        "min": 0,
+        "max": 700,
+        "step": 100,
+        "default": 300
+      },
+      {
+        "type": "range",
+        "id": "policy_content_font_size_desktop",
+        "label": "Font Size (Desktop)",
+        "min": 0,
+        "max": 80,
+        "step": 1,
+        "default": 18,
+        "unit": "px"
+      },
+      {
+        "type": "range",
+        "id": "policy_content_line_height_desktop",
+        "label": "Line Height (Desktop)",
+        "min": 0,
+        "max": 80,
+        "step": 1,
+        "default": 28,
+        "unit": "px"
+      },
+      {
+        "type": "range",
+        "id": "policy_content_font_size_tablet",
+        "label": "Font Size (Tablet)",
+        "min": 0,
+        "max": 80,
+        "step": 1,
+        "default": 18,
+        "unit": "px"
+      },
+      {
+        "type": "range",
+        "id": "policy_content_line_height_tablet",
+        "label": "Line Height (Tablet)",
+        "min": 0,
+        "max": 80,
+        "step": 1,
+        "default": 28,
+        "unit": "px"
+      },
+      {
+        "type": "range",
+        "id": "policy_content_font_size_mobile",
+        "label": "Font Size (Mobile)",
+        "min": 0,
+        "max": 80,
+        "step": 1,
+        "default": 18,
+        "unit": "px"
+      },
+      {
+        "type": "range",
+        "id": "policy_content_line_height_mobile",
+        "label": "Line Height (Mobile)",
+        "min": 0,
+        "max": 80,
+        "step": 1,
+        "default": 28,
+        "unit": "px"
+      }
+    ]
   }
 ]
