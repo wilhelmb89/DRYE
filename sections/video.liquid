@@ -1,0 +1,126 @@
+{% style %}
+  .video-section .container {
+    padding-inline: 0;
+  }
+  .video-section .container .hero-wrapper{
+    padding: 0;
+  }
+  .video-section .container video {
+    width: 100%;
+    margin-bottom: {{section.settings.video_margin_bottom_desktop}}px;
+    border-radius: {{ section.settings.video_radius_desktop }}px {{ section.settings.video_radius_desktop }}px 0px 0px;
+  }
+  @media screen and (max-width: 767px) {
+    .video-section .container video {
+      margin-bottom: {{section.settings.video_margin_bottom_mobile}}px;
+      border-radius: {{ section.settings.video_radius_mobile }}px {{ section.settings.video_radius_mobile }}px 0px 0px;
+    }
+  }
+  @media screen and (min-width: 1440px) {
+    .video-section .container video {
+      margin-bottom: {{section.settings.video_margin_bottom_desktop_large}}px;
+    }
+  }
+{% endstyle %}
+<div class="container">
+  <div class="hero-wrapper">
+    {%- if section.settings.video != blank -%}
+      <div class="video-wrapper">
+        {{
+          section.settings.video
+          | video_tag:
+            autoplay: false,
+            loop: true,
+            muted: true,
+            controls: false,
+            image_size: '100%',
+            preload: 'auto',
+            class: 'video'
+        }}
+      </div>
+    {%- endif -%}    
+  </div>
+</div>
+{% schema %}
+{
+  "name": "Video Section",
+  "tag": "section",
+  "class": "video-section homepage-hero",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title"
+    },
+    {
+      "type": "video",
+      "id": "video",
+      "label": "Video"
+    },
+    {
+      "type": "header",
+      "content": "Border Radius"
+    },
+    {
+      "type": "range",
+      "id": "video_radius_desktop",
+      "label": "Desktop",
+      "min": 0,
+      "max": 60,
+      "step": 1,
+      "default": 56,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "video_radius_mobile",
+      "label": "Mobile",
+      "min": 0,
+      "max": 60,
+      "step": 1,
+      "default": 30,
+      "unit": "px"
+    },
+    {
+      "type": "header",
+      "content": "Margin Settings"
+    },
+    {
+      "type": "range",
+      "id": "video_margin_bottom_desktop_large",
+      "label": "Bottom (>=1440px)",
+      "min": -100,
+      "max": 0,
+      "step": 10,
+      "default": -90,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "video_margin_bottom_desktop",
+      "label": "Bottom",
+      "min": -100,
+      "max": 0,
+      "step": 10,
+      "default": -70,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "video_margin_bottom_mobile",
+      "label": "Bottom (Mobile)",
+      "min": -100,
+      "max": 0,
+      "step": 10,
+      "default": -40,
+      "unit": "px"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Video Section",
+      "settings": {}
+    }
+  ]
+}
+{% endschema %}
