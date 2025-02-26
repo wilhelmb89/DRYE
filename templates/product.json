@@ -81,6 +81,44 @@
         "bg": "#f3f2f1"
       }
     },
+    "before_after_6kFCQK": {
+      "type": "before-after",
+      "settings": {
+        "title": "",
+        "image_before": "shopify:\/\/shop_images\/Traditional_Glove_Liners_Fail_to_Keep_Moisture_Away.jpg",
+        "image_after": "shopify:\/\/shop_images\/New_Moisture_Wicking_Liner_shows_promising_result.jpg",
+        "image_border_radius": 40,
+        "section_top_padding_desktop": 120,
+        "section_bottom_padding_desktop": 120,
+        "section_top_padding_tablet": 80,
+        "section_bottom_padding_tablet": 80,
+        "section_top_padding_mobile": 64,
+        "section_bottom_padding_mobile": 64
+      }
+    },
+    "4d4cfabd4c9b9a806013": {
+      "type": "apps",
+      "blocks": {
+        "yotpo_product_reviews_reviews_carousel_ajEJB4": {
+          "type": "shopify:\/\/apps\/yotpo-product-reviews\/blocks\/reviews_carousel\/eb7dfd7d-db44-4334-bc49-c893b51b36cf",
+          "settings": {
+            "product": "{{product}}"
+          }
+        },
+        "e1cc2ec4-bd25-4cda-bb66-1ed6baa07fab": {
+          "type": "shopify:\/\/apps\/yotpo-product-reviews\/blocks\/reviews\/eb7dfd7d-db44-4334-bc49-c893b51b36cf",
+          "disabled": true,
+          "settings": {
+            "product": "{{product}}"
+          }
+        }
+      },
+      "block_order": [
+        "yotpo_product_reviews_reviews_carousel_ajEJB4",
+        "e1cc2ec4-bd25-4cda-bb66-1ed6baa07fab"
+      ],
+      "settings": {}
+    },
     "multicolumn_jKXbXf": {
       "type": "multicolumn",
       "blocks": {
@@ -125,31 +163,9 @@
       ],
       "settings": {}
     },
-    "4d4cfabd4c9b9a806013": {
-      "type": "apps",
-      "blocks": {
-        "yotpo_product_reviews_reviews_carousel_ajEJB4": {
-          "type": "shopify:\/\/apps\/yotpo-product-reviews\/blocks\/reviews_carousel\/eb7dfd7d-db44-4334-bc49-c893b51b36cf",
-          "settings": {
-            "product": "{{product}}"
-          }
-        },
-        "e1cc2ec4-bd25-4cda-bb66-1ed6baa07fab": {
-          "type": "shopify:\/\/apps\/yotpo-product-reviews\/blocks\/reviews\/eb7dfd7d-db44-4334-bc49-c893b51b36cf",
-          "disabled": true,
-          "settings": {
-            "product": "{{product}}"
-          }
-        }
-      },
-      "block_order": [
-        "yotpo_product_reviews_reviews_carousel_ajEJB4",
-        "e1cc2ec4-bd25-4cda-bb66-1ed6baa07fab"
-      ],
-      "settings": {}
-    },
     "video_pk4xdq": {
       "type": "video",
+      "disabled": true,
       "settings": {
         "title": "Shop Video",
         "video": "shopify:\/\/files\/videos\/introduce.mp4",
@@ -202,22 +218,6 @@
         "background": "shopify:\/\/shop_images\/5Y9A8972_4772b13a-5aa0-44c5-b4f4-ba51f5106ba4.jpg",
         "title": "Key Features of DRYE Gloves:",
         "bottom_overlap": false
-      }
-    },
-    "before_after_6kFCQK": {
-      "type": "before-after",
-      "disabled": true,
-      "settings": {
-        "title": "",
-        "image_before": "shopify:\/\/shop_images\/Traditional_Glove_Liners_Fail_to_Keep_Moisture_Away.jpg",
-        "image_after": "shopify:\/\/shop_images\/New_Moisture_Wicking_Liner_shows_promising_result.jpg",
-        "image_border_radius": 40,
-        "section_top_padding_desktop": 120,
-        "section_bottom_padding_desktop": 120,
-        "section_top_padding_tablet": 80,
-        "section_bottom_padding_tablet": 80,
-        "section_top_padding_mobile": 64,
-        "section_bottom_padding_mobile": 64
       }
     },
     "multirows_HLBpdD": {
@@ -362,6 +362,7 @@
         "review_Kpf3x7",
         "review_7PB4A3"
       ],
+      "disabled": true,
       "custom_css": [],
       "settings": {
         "title": "Reviews",
@@ -845,11 +846,11 @@
   "order": [
     "product_sliders_V9mmYk",
     "main",
-    "multicolumn_jKXbXf",
+    "before_after_6kFCQK",
     "4d4cfabd4c9b9a806013",
+    "multicolumn_jKXbXf",
     "video_pk4xdq",
     "benefits_ADPayN",
-    "before_after_6kFCQK",
     "multirows_HLBpdD",
     "17283064569c8da506",
     "faq_QPiUFJ",
