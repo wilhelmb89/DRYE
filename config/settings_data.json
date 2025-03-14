@@ -8,6 +8,7 @@
     "twitter": "https:\/\/x.com\/DRYESWEDEN",
     "policy_title_font_size_mobile": 50,
     "policy_title_line_height_mobile": 60,
+    "yotpo_reviews_api_key": "SAfL56iSfyjZmoBz0xz5wYjuABSr2xzgu2IWTMSH",
     "checkout_logo_position": "right",
     "checkout_input_background_color_mode": "white",
     "content_for_index": [],
@@ -15,11 +16,6 @@
       "10384935893930344104": {
         "type": "shopify:\/\/apps\/seoant-redirects\/blocks\/brokenlink-404\/cc7b1996-e567-42d0-8862-356092041863",
         "disabled": true,
-        "settings": {}
-      },
-      "585288358657334602": {
-        "type": "shopify:\/\/apps\/cartly-slide-cart-drawer\/blocks\/app-embed\/156e4744-d777-4afa-8826-5d2f440b3936",
-        "disabled": false,
         "settings": {}
       },
       "6146500278089136509": {
@@ -65,6 +61,11 @@
         "type": "shopify:\/\/apps\/triplewhale\/blocks\/triple_pixel_snippet\/483d496b-3f1a-4609-aea7-8eee3b6b7a2a",
         "disabled": false,
         "settings": {}
+      },
+      "585288358657334602": {
+        "type": "shopify:\/\/apps\/cartly-cart-drawer\/blocks\/app-embed\/156e4744-d777-4afa-8826-5d2f440b3936",
+        "disabled": false,
+        "settings": {}
       }
     }
   },
@@ -74,6 +75,8 @@
     }
   },
   "platform_customizations": {
-    "custom_css": []
+    "custom_css": [
+      "#occ3-drawer {z-index: 99999999999 !important;}"
+    ]
   }
 }

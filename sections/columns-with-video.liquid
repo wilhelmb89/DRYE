@@ -1,0 +1,609 @@
+{% style %}
+  .section-{{ section.id }} {
+    background: {{ section.settings.background_color }};
+    padding-top: {{ section.settings.section_top_padding }}px;
+    padding-bottom: {{ section.settings.section_bottom_padding }}px;
+  }
+  .section-{{ section.id }} .page-title {
+    color: {{ section.settings.title_color }};
+    font-family: ClashGrotesk-Variable;
+    font-size: {{ section.settings.title_font_size }}px;
+    font-weight: 300;
+    line-height: {{ section.settings.title_line_height }}px;
+    text-align: {{ section.settings.title_alignment }};
+    margin-top: {{ section.settings.title_top_padding }}px;
+    margin-bottom: {{ section.settings.title_bottom_padding }}px;
+  }
+  .section-{{ section.id }} .page-card-list {
+    display: flex;
+    flex-direction: {{ section.settings.block_direction }};
+    gap: {{ section.settings.block_spacing }}px;
+  }
+  .section-{{ section.id }} .page-card {
+    display: flex;
+    flex-direction: column;
+    gap: {{ section.settings.padding_between_line_and_icon }}px;
+    flex: 1;
+  }
+  .section-{{ section.id }} .page-card .rich-text-image {
+    width: 100%;
+  }
+  .section-{{ section.id }} .video-container{
+    position: relative;
+  }
+  .section-{{ section.id }} .video-container .video-thumbnail {
+    position: absolute;
+  }
+  .section-{{ section.id }} .video-container .video-play-button {
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1;
+  }
+  @media screen and (max-width: 768px) {
+    .section-{{ section.id }} {
+      padding-top: {{ section.settings.section_top_padding_tablet }}px;
+      padding-bottom: {{ section.settings.section_bottom_padding_tablet }}px;
+    }
+  }
+  @media screen and (max-width: 480px) {
+    .section-{{ section.id }} {
+      padding-top: {{ section.settings.section_top_padding_mobile }}px;
+      padding-bottom: {{ section.settings.section_bottom_padding_mobile }}px;
+    }
+    .section-{{ section.id }} .page-title {
+      text-align: {{ section.settings.title_alignment_mobile }};
+      font-size: {{ section.settings.title_font_size_mobile }}px;
+      line-height: {{ section.settings.title_line_height_mobile }}px;
+      margin-top: {{ section.settings.title_top_padding_mobile }}px;
+      margin-bottom: {{ section.settings.title_bottom_padding_mobile }}px;
+    }
+    .section-{{ section.id }} .page-card-list {
+      flex-direction: {{ section.settings.block_direction_mobile }};
+      gap: {{ section.settings.block_spacing_mobile }}px;
+    }
+    .section-{{ section.id }} .page-card {
+      flex-direction: row;
+    }
+  }
+{% endstyle %}
+
+<div class="section-{{ section.id }}">
+  <div class="container">
+    {% if section.settings.title != blank %}
+      <h2 class="page-title" >
+        {{ section.settings.title }}
+      </h2>
+    {% endif %}
+    <div class="page-card-list">
+    {% for block in section.blocks %}
+      {% if forloop.index0 < section.settings.video_count %}
+        {% style %}          
+          .block-{{ block.id }} .video-container .video-play-icon {
+            width: {{ block.settings.icon_width }}px;
+          }
+          @media screen and (max-width: 768px) {
+            .block-{{ block.id }} .video-container .video-play-icon {
+              width: {{ block.settings.icon_width_tablet }}px;
+            }
+          }
+          @media screen and (max-width: 480px) {
+            .block-{{ block.id }} .video-container .video-play-icon {
+              width: {{ block.settings.icon_width_mobile }}px;
+            }
+          }
+        {% endstyle %}
+        <div class="block-{{ block.id }} page-card {% if forloop.last %}page-last-card{% endif %}">
+          <div class="rich-text-image">            
+            {% if block.settings.media_mode == "video" %}
+              {%- if block.settings.video != blank -%}
+                {%- liquid
+                  assign video_preview = block.settings.video.preview_image.src | default: block.settings.video.src
+                  assign video = block.settings.video.sources[0]
+                  for source in block.settings.video.sources
+                    if source.format contains "mp4"
+                      assign video = source
+                      break
+                    endif
+                  endfor
+                  assign video_url = video.url
+                  assign video_width = video.width
+                  assign video_height = video.height
+                  assign aspect_ratio = video_width | times: 1.0 | divided_by: video_height
+                  unless video_preview contains "/cdn/shop"
+                    assign video_preview = video_preview | prepend: "/cdn/shop/"
+                  endunless
+                -%}
+              {%- endif -%}                
+            {% else %} {% comment %}url{% endcomment %}
+              {%- liquid
+                 assign video_preview = block.settings.video_preview | img_url: '1024x'
+                 assign video_url = block.settings.video_url
+                 assign video_width = block.settings.video_width | plus: 0
+                 assign video_height = block.settings.video_height | plus: 0                 
+                 assign aspect_ratio = video_width | times: 1.0 | divided_by: video_height
+                 assign autoplay_url = video_url | append: "?autoplay=1&mute=1&controls=0"
+              -%}
+            {% endif %}
+
+            <div class="video-container">
+              <div class="video-thumbnail-cover">
+                <div class="video-play-button">
+                  <img src="{{ block.settings.play_icon | img_url: '80x' }}" width="80px" height="80px">
+                </div>
+                <img
+                  class="video-thumbnail"
+                  src="{{ video_preview }}"
+                  width="100%"
+                  height="auto"
+                  style="aspect-ratio: {{ aspect_ratio }}"
+                >
+              </div>
+              {% if block.settings.media_mode == "video" %}
+                <video
+                  class="video-player"
+                  src="{{ video_url }}"
+                  poster="{{ video_preview }}"
+                  data-video-source="{{ video_url }}"
+                  content="video/mp4"
+                  playsinline
+                  width="100%">
+                  <source src="{{ video_url }}" type="video/mp4" width="{{ video_width }}px" height="{{ video_height }}px">
+                </video>
+              {% else %}
+                <iframe 
+                  class="video-player"
+                  style="aspect-ratio: {{ aspect_ratio }}"
+                  src="{{ video_url }}"
+                  data-play-src="{{ autoplay_url }}"
+                  data-video-source="{{ video_url }}"
+                  width="100%"
+                  height="auto"
+                  frameborder="0"
+                  allow="autoplay; encrypted-media; picture-in-picture"
+                  allowfullscreen
+                >
+                </iframe>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+      {% endif %}
+    {% endfor %}
+    </div>
+  </div>
+</div>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    document.querySelectorAll(".section-{{ section.id }} .video-container").forEach(container => {
+      const video = container.querySelector(".video-player");
+      const videoThumbnail = container.querySelector(".video-thumbnail-cover");
+      const playBtn = container.querySelector(".video-play-button");
+  
+      if (video && videoThumbnail && playBtn) {
+        playBtn.addEventListener("click", function() {
+          document.querySelectorAll(".section-{{ section.id }} .video-player").forEach(v => {
+            if (video.tagName === "IFRAME") {
+              var originalUrl = v.getAttribute("data-video-source");
+              if (originalUrl) {
+                v.setAttribute("src", originalUrl);
+              }
+            } else {
+              if (v !== video) {
+                v.pause();
+              }
+            }
+            v.parentElement.querySelector(".video-thumbnail-cover").style.display = "block";
+          });
+
+          videoThumbnail.style.display = 'none';
+          if (video.tagName === "IFRAME") {
+            var autoplayUrl = video.getAttribute("data-play-src");
+            if (autoplayUrl) {
+              video.setAttribute("src", autoplayUrl);
+            }
+          } else {          
+            video.currentTime = 0;
+            video.loop = true;
+            video.play();
+          }
+        });
+      }
+    });
+  });
+</script>
+
+{% schema %}
+{
+  "name": "Column With Video",
+  "tag": "section",
+  "class": "section",
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
+  "settings": [
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background Color",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "header",
+      "content": "Title"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title"
+    },
+    {
+      "type": "color",
+      "id": "title_color",
+      "label": "Color",
+      "default": "#000000"
+    },
+    {
+      "type": "select",
+      "id": "title_alignment",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ],
+      "default": "center",
+      "label": "Alignment"
+    },
+    {
+      "type": "range",
+      "id": "title_font_size",
+      "min": 0,
+      "max": 64,
+      "step": 1,
+      "unit": "px",
+      "label": "Font Size",
+      "default": 48
+    },
+    {
+      "type": "range",
+      "id": "title_line_height",
+      "min": 0,
+      "max": 64,
+      "step": 1,
+      "unit": "px",
+      "label": "Line Height",
+      "default": 55
+    },
+    {
+      "type": "range",
+      "id": "title_top_padding",
+      "min": 0,
+      "max": 64,
+      "step": 4,
+      "unit": "px",
+      "label": "Top Padding",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "title_bottom_padding",
+      "min": 0,
+      "max": 64,
+      "step": 4,
+      "unit": "px",
+      "label": "Bottom Padding",
+      "default": 60
+    },
+    {
+      "type": "select",
+      "id": "title_alignment_mobile",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ],
+      "default": "left",
+      "label": "Alignment"
+    },
+    {
+      "type": "range",
+      "id": "title_font_size_mobile",
+      "min": 0,
+      "max": 64,
+      "step": 1,
+      "unit": "px",
+      "label": "Font Size(Mobile)",
+      "default": 48
+    },
+    {
+      "type": "range",
+      "id": "title_line_height_mobile",
+      "min": 0,
+      "max": 64,
+      "step": 1,
+      "unit": "px",
+      "label": "Line Height(Mobile)",
+      "default": 55
+    },
+    {
+      "type": "range",
+      "id": "title_top_padding_mobile",
+      "min": 0,
+      "max": 64,
+      "step": 4,
+      "unit": "px",
+      "label": "Top Padding(Mobile)",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "title_bottom_padding_mobile",
+      "min": 0,
+      "max": 64,
+      "step": 4,
+      "unit": "px",
+      "label": "Bottom Padding(Mobile)",
+      "default": 60
+    },
+    {
+      "type": "header",
+      "content": "Block"
+    },
+    {
+      "type": "range",
+      "id": "block_spacing",
+      "min": 0,
+      "max": 48,
+      "step": 2,
+      "unit": "px",
+      "label": "Block Spacing",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "block_spacing_mobile",
+      "min": 0,
+      "max": 48,
+      "step": 2,
+      "unit": "px",
+      "label": "Block Spacing(Mobile)",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "video_count",
+      "min": 0,
+      "max": 6,
+      "step": 1,
+      "unit": "px",
+      "label": "Video Count",
+      "default": 3
+    },
+    {
+      "type": "select",
+      "id": "block_direction",
+      "options": [
+        {
+          "value": "row",
+          "label": "Row"
+        },
+        {
+          "value": "column",
+          "label": "Column"
+        }
+      ],
+      "default": "row",
+      "label": "Direction"
+    },
+    {
+      "type": "select",
+      "id": "block_direction_mobile",
+      "options": [
+        {
+          "value": "row",
+          "label": "Row"
+        },
+        {
+          "value": "column",
+          "label": "Column"
+        }
+      ],
+      "default": "column",
+      "label": "Direction(Mobile)"
+    },
+    {
+      "type": "header",
+      "content": "Section"
+    },
+    {
+      "type": "range",
+      "id": "section_top_padding",
+      "min": 0,
+      "max": 120,
+      "step": 2,
+      "unit": "px",
+      "label": "Top Padding",
+      "default": 120
+    },
+    {
+      "type": "range",
+      "id": "section_bottom_padding",
+      "min": 0,
+      "max": 120,
+      "step": 2,
+      "unit": "px",
+      "label": "Bottom Padding",
+      "default": 120
+    },
+    {
+      "type": "range",
+      "id": "section_top_padding_tablet",
+      "min": 0,
+      "max": 120,
+      "step": 2,
+      "unit": "px",
+      "label": "Top Padding(Tablet)",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "section_bottom_padding_tablet",
+      "min": 0,
+      "max": 120,
+      "step": 2,
+      "unit": "px",
+      "label": "Bottom Padding(Tablet)",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "section_top_padding_mobile",
+      "min": 0,
+      "max": 120,
+      "step": 2,
+      "unit": "px",
+      "label": "Top Padding(Mobile)",
+      "default": 120
+    },
+    {
+      "type": "range",
+      "id": "section_bottom_padding_mobile",
+      "min": 0,
+      "max": 120,
+      "step": 2,
+      "unit": "px",
+      "label": "Bottom Padding(Mobile)",
+      "default": 120
+    }
+  ],
+  "blocks": [
+    {
+      "type": "card",
+      "name": "Card",
+      "limit": 6,
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title"
+        },
+        {
+          "type": "select",
+          "id": "media_mode",
+          "options": [
+            {
+              "value": "url",
+              "label": "Url"
+            },
+            {
+              "value": "video",
+              "label": "Video"
+            }
+          ],
+          "default": "video",
+          "label": "Media Mode"
+        },
+        {
+          "type": "video",
+          "id": "video",
+          "label": "Video"
+        },
+        {
+          "type": "url",
+          "id": "video_url",
+          "label": "Video URL"
+        },
+        {
+          "type": "image_picker",
+          "id": "video_preview",
+          "label": "Preview Image"
+        },
+        {
+          "type": "text",
+          "id": "video_width",
+          "label": "Video Width",
+          "default": "1108"
+        },
+        {
+          "type": "text",
+          "id": "video_height",
+          "label": "Video Height",
+          "default": "623"
+        },
+        {
+          "type": "image_picker",
+          "id": "play_icon",
+          "label": "Play Icon"          
+        },
+        {
+          "type": "range",
+          "id": "icon_width",
+          "label": "Icon Width",
+          "min": 0,
+          "max": 80,
+          "step": 10,
+          "default": 80,
+          "unit": "px"
+        },        
+        {
+          "type": "range",
+          "id": "icon_width_tablet",
+          "label": "Icon Width (Tablet)",
+          "min": 0,
+          "max": 80,
+          "step": 10,
+          "default": 70,
+          "unit": "px"
+        },        
+        {
+          "type": "range",
+          "id": "icon_width_mobile",
+          "label": "Icon Width (Mobile)",
+          "min": 0,
+          "max": 80,
+          "step": 10,
+          "default": 70,
+          "unit": "px"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Column With Video",
+      "blocks": [
+        {
+          "type": "card"
+        },
+        {
+          "type": "card"
+        },
+        {
+          "type": "card"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
