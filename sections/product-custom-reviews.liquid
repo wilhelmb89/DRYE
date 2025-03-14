@@ -1,0 +1,1129 @@
+{% style %}
+  #shopify-section-template--23899860041993__4d4cfabd4c9b9a806013 {
+    display: none !important;
+  }
+  .section-{{ section.id }} {
+    display: none;
+  }
+  .section-{{ section.id }}-padding {
+    position: relative;
+    padding-top: {{ section.settings.padding_top }}px;
+    padding-bottom: {{ section.settings.padding_bottom }}px;
+    padding-left: {{ section.settings.padding_left }}px;
+    padding-right: {{ section.settings.padding_right }}px;
+  }
+  .section-{{ section.id }} .product-reviews-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: {{ section.settings.spacing_bottom_padding }}px;
+  }
+  .section-{{ section.id }} .reviews-toolbar {
+    display: flex;
+    justify-content: end;
+    align-items: center;
+  }
+  .section-{{ section.id }} .reviews-stars-ratings {
+    display: flex;
+  }
+  .section-{{ section.id }} .reviews-stars-count {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    justify-content: center;
+    gap: 8px;
+  }
+  .section-{{ section.id }} .reviews-stars-ratings .reviews-stars {
+    display: flex;
+  }
+  .section-{{ section.id }} .reviews-counts {
+    display: flex;    
+  }
+  .section-{{ section.id }} .reviews-counts > * {
+    line-height: normal;
+  }
+  .section-{{ section.id }} .reviews-count {
+    padding-right: 8px;
+  }
+  .section-{{ section.id }} .product-custom-reviews {
+    display: flex;
+    /* flex-wrap: wrap; */
+    justify-content: flex-start;
+    gap: 20px;
+  }
+  .section-{{ section.id }} swiper-slide {
+    width: {{ section.settings.review_block_width }}px !important;
+    margin-bottom: {{ section.settings.spacing_bottom_padding }}px;
+  }
+  .section-{{ section.id }} .swiper-pagination {
+    width: 110px !important;
+    position: relative;    
+  }  
+  .swiper-pagination-bullet {
+    width: 8px;
+    height: 8px;
+    background: #000;
+    opacity: 0.5;
+    margin: 0 5px;
+    transform: scale(1) !important;
+  }  
+  .swiper-pagination-bullet-active {
+    background: #000000;
+    opacity: 1;
+  }
+  .section-{{ section.id }} .person-review {
+    width: 100%;
+    max-width: 100%;
+    height: {{ section.settings.review_block_height }}px;
+    padding: {{ section.settings.review_block_y_padding }}px {{ section.settings.review_block_x_padding }}px;
+    border: solid 1px {{ section.settings.border_color }};
+    /* margin-left: 225px; */
+    flex: 1 1 auto;
+
+    .author-info {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 30px;
+
+      .author-profile {
+        display: flex;
+        gap: 26px;
+
+        .author-name-status {
+          display: flex;
+          flex-direction: column;
+          justify-content: space-between;
+
+          .author-name {
+            font-family: "SpaceGrotesk";
+            font-size: 24px;
+            font-style: normal;
+            font-weight: 400;
+            line-height: 24px;
+          }
+
+          .author-status {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+          }
+        }
+      }
+
+      .author-ratings-date {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+
+        .author-stars-ratings {
+          display: flex;
+          gap: 10px;
+
+          .author-stars {
+            display: flex;
+            align-items: center;
+            gap: 2px;
+          }
+        }
+
+        .author-date {
+          display: flex;
+          justify-content: end;
+          font-size: 16px;
+          font-style: normal;
+          font-weight: 400;
+          line-height: 16px;
+        }
+      }
+    }
+    .person-review-tags {
+      display: flex;
+      justify-content: space-between;
+      padding-bottom: 30px;
+      border-bottom: solid 1px #DADADA;
+
+      .person-review-tag {
+        font-family: "SpaceGrotesk";
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+        padding: 9px 18px;
+        background: #DADADA;
+      }
+    }
+    .person-review-title {
+      font-family: "SpaceGrotesk";
+      font-size: 18px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: normal;
+      margin-top: 30px;
+      margin-bottom: 12px;
+    }
+    .person-review-content {
+      font-size: 16px;
+      font-style: normal;
+      font-weight: 300;
+      line-height: 24px;
+    }
+  }
+  @media screen and (min-width: 1441px) {
+    .section-{{ section.id }} swiper-container swiper-slide:first-child {
+      margin-left: calc(50% - 735px);
+    }
+  }
+  @media screen and (max-width: 1440px) {
+    .section-{{ section.id }} swiper-container swiper-slide:first-child {
+      margin-left: 5rem;
+    }
+  }
+  @media screen and (max-width: 768px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top_tablet }}px;
+      padding-bottom: {{ section.settings.padding_bottom_tablet }}px;
+      padding-left: {{ section.settings.padding_left_tablet }}px;
+      padding-right: {{ section.settings.padding_right_tablet }}px;
+    }
+    .section-{{ section.id }} swiper-slide {
+      margin-bottom: {{ section.settings.spacing_bottom_padding_mobile }}px;
+    }
+    .section-{{ section.id }} swiper-container swiper-slide:first-child {
+      margin-left: 3rem;
+    }
+    .section-{{ section.id }} .product-reviews-header {
+      flex-direction: column;
+      gap: 32px;
+      margin-bottom: {{ section.settings.spacing_bottom_padding_mobile }}px;
+    }
+    .section-{{ section.id }} .reviews-toolbar {
+      justify-content: space-between;
+    }
+  }
+  @media screen and (max-width: 480px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top_mobile }}px;
+      padding-bottom: {{ section.settings.padding_bottom_mobile }}px;
+      padding-left: {{ section.settings.padding_left_mobile }}px;
+      padding-right: {{ section.settings.padding_right_mobile }}px;
+    }
+    .section-{{ section.id }} swiper-slide {
+      width: 100% !important;
+    }
+    .section-{{ section.id }} .product-reviews-header {
+      gap: 20px;
+    }
+    .section-{{ section.id }} .reviews-toolbar {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 20px;
+
+      .reviews-write-button {
+        text-align: center;
+        width: 100%;
+      }
+    }
+    .section-{{ section.id }} swiper-container swiper-slide:first-child {
+      margin-left: 1.25rem;
+    }
+    .section-{{ section.id }} .person-review {
+      width: calc(100% - 2.5rem);
+      height: {{ section.settings.review_block_height }}px;
+      padding: {{ section.settings.review_block_y_padding_mobile }}px {{ section.settings.review_block_x_padding_mobile }}px;
+      border: solid 1px {{ section.settings.border_color }};
+  
+      .author-info {
+        flex-direction: column;
+        gap: 10px;
+  
+        .author-profile {
+          display: flex;
+          gap: 26px;
+  
+          .author-name-status {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+  
+            .author-name {
+              font-family: "SpaceGrotesk";
+              font-size: 24px;
+              font-style: normal;
+              font-weight: 400;
+              line-height: 24px;
+            }
+  
+            .author-status {
+              display: flex;
+              align-items: center;
+              gap: 12px;
+            }
+          }
+        }
+  
+        .author-ratings-date {
+          display: flex;
+          flex-direction: column;
+          justify-content: space-between;
+          gap: 15px;
+  
+          .author-stars-ratings {
+            display: flex;
+            gap: 10px;
+  
+            .author-stars {
+              display: flex;
+              align-items: center;
+              gap: 2px;
+            }
+          }
+  
+          .author-date {
+            justify-content: flex-start;
+          }
+        }
+      }
+      .person-review-tags {
+        justify-content: flex-start;
+        flex-wrap: wrap;
+        gap: 10px;
+  
+        .person-review-tag {
+          font-size: 14px;
+          padding: 8px 12px;
+        }
+      }
+      .person-review-title {
+        font-family: "SpaceGrotesk";
+        font-size: 18px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+        margin-top: 30px;
+        margin-bottom: 12px;
+      }
+      .person-review-content {
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 300;
+        line-height: 24px;
+      }
+    }
+  }
+{% endstyle %}
+<div class="section-{{ section.id }} section-{{ section.id }}-padding">
+  <div class="container">
+    <div class="product-reviews-header">
+      {% for block in section.blocks %}
+        {% if block.type == "title" %}
+          {% style %}            
+            .block-{{ block.id }} .page-title{
+              font-family: "ClashGrotesk-Variable";
+              font-size: {{ block.settings.title_font_size }}px;
+              font-weight: 300;
+              line-height: {{ block.settings.title_line_height }}px;
+              color: {{ block.settings.title_color }};
+              text-align: {{ block.settings.title_alignment }};
+            }
+            @media screen and (max-width: 480px) {
+              .section-{{ section.id }} .page-title{
+                font-size: {{ block.settings.title_font_size_mobile }}px;
+                line-height: {{ block.settings.title_line_height_mobile }}px;
+                margin-bottom: {{ block.settings.title_bottom_padding_mobile }}px;
+              }
+            }
+          {% endstyle %}
+          <div class="block-{{ block.id }}">
+          {% if block.settings.title != blank %}            
+            <h2 class="page-title" >
+              {{ block.settings.title }}
+            </h2>
+          {% endif %}
+          </div>
+        {% endif %}
+      {% endfor %}
+      <div class="reviews-toolbar">
+      {% for block in section.blocks %}
+        {% if block.type == "@app" %}          
+          <div class="reviews-star-ratings">
+            {%- render block -%}
+          </div>
+        {% elsif block.type == "ratings" %}
+          {% style %}
+            .reviews-stars-ratings .reviews-ratings{
+              color: #111111;
+              font-size: {{ block.settings.score_font_size }}px;
+              font-weight: 400;
+              {% if block.settings.score_line_height == 0 %}
+              line-height: normal;
+              {% else %}
+              line-height: {{ block.settings.score_line_height }}px;
+              {% endif %}
+              margin-right: {{ block.settings.score_padding_right }}px;
+            }
+            .reviews-stars-ratings .reviews-stars-count {
+              margin-right: {{ block.settings.count_padding_right }}px;
+            }
+            .reviews-stars-ratings .reviews-stars-count .reviews-stars {
+              color: #111111;
+              font-family: Roboto;
+              font-size: {{ block.settings.count_font_size }}px;
+              font-weight: 400;
+              {% if block.settings.count_line_height == 0 %}
+              line-height: normal;
+              {% else %}
+              line-height: {{ block.settings.count_line_height }}px;
+              {% endif %}
+            }
+            .reviews-stars-ratings .reviews-stars-count .reviews-count {
+              
+            }
+          {% endstyle %}
+          <div class="reviews-stars-ratings">
+            <h2 class="reviews-ratings"></h2>
+            <div class="reviews-stars-count">
+              <div class="reviews-stars">
+                {% for i in (1..5) %}
+                  <img
+                  class="page-card-icon"
+                  src="{{ block.settings.toolbar_star | img_url: '21x' }}"
+                  width="21px"
+                  height="auto"/>
+                {% endfor %}
+              </div>
+              <h5 class="reviews-counts">
+                <span class="reviews-count"></span>
+                <span> {{ block.settings.count_string }}</span>
+              </h5>
+            </div>
+          </div>
+        {% elsif block.type == "button" %}
+          {% style %}
+            .reviews-write-button {
+              font-size: {{ block.settings.button_font_size }}px;
+              line-height: {{ block.settings.button_line_height }}px;
+              color: {{ block.settings.color }};
+              background: {{ block.settings.background }};
+              padding: {{ block.settings.button_y_padding }}px {{ block.settings.button_x_padding }}px;
+              cursor: pointer;
+            }
+          {% endstyle %}
+          <div class="reviews-write-button">
+            {{ block.settings.title }}
+          </div>
+        {% endif %}
+      {% endfor %}
+      </div>
+    </div>
+  </div>
+  <swiper-container class="product-custom-reviews" init="false">
+  </swiper-container>
+  <div class="swiper-pagination"></div>
+</div>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    const appKey = "{{ settings.yotpo_reviews_api_key }}";
+  
+    async function fetchAllReviews(page = 1, allReviews = []) {
+      const url = `https://api.yotpo.com/v1/widget/${appKey}/reviews?page=${page}`;
+      console.log('fetchAllReviews = ', page, allReviews);
+  
+      try {
+        const response = await fetch(url);
+        const res = await response.json();
+        const data = res.response;
+        console.log('res = ', res);
+        console.log('data = ', data);
+  
+        if (data.reviews && data.reviews.length > 0) {
+          allReviews = allReviews.concat(data.reviews);
+          console.log(`Fetched ${data.reviews.length} reviews from page ${page}`);
+
+          const totalReviews = data.pagination.total;
+          const totalFetched = allReviews.length;
+          
+          if (totalFetched < totalReviews) {
+            return fetchAllReviews(page + 1, allReviews); // Fetch next page
+          } else {
+            const totalScore = data.bottomline.average_score.toFixed(1);
+            const reviewsCount = data.bottomline.total_review;
+            document.querySelector(".reviews-stars-ratings .reviews-count").innerHTML = `${reviewsCount}`;
+            displayTotalStar(totalScore);
+          }
+        }
+  
+        return allReviews;
+      } catch (error) {
+        console.error("Error fetching Yotpo reviews:", error);
+        return allReviews;
+      }
+    }
+  
+    async function loadReviews() {
+      const allReviews = await fetchAllReviews();
+      console.log(`Total Reviews Fetched: ${allReviews.length}`);
+      displayReviews(allReviews);
+      initSlider();
+      document.querySelector(".section-{{ section.id }}").style.display = 'block';
+    }
+
+    function initSlider() {
+      const sliders = document.querySelectorAll('.product-custom-reviews');
+      sliders.forEach(slider => {
+        const swiperParams = {
+          spaceBetween: 20,
+          centeredSlides: false,
+          loop: false,
+          slidesPerView: 'auto',
+          pagination: {
+            el: ".swiper-pagination",
+            clickable: true,
+            dynamicBullets: true
+          },
+          breakpoints: {
+            1150: {
+              slidesPerView: 3,
+              spaceBetween: 24,
+            },
+            768: {
+               slidesPerView: 2,
+               spaceBetween: 24,
+            },
+            0: {
+               slidesPerView: 1
+            }
+          }
+        };
+        Object.assign(slider, swiperParams);
+        slider.initialize();
+      });
+    }
+
+    function displayTotalStar(totalScore) {
+      const roundedScore = Math.round(totalScore);
+      document.querySelector(".reviews-stars-ratings .reviews-ratings").innerHTML = `${totalScore}`;
+      
+    }
+  
+    function displayReviews(reviews) {
+      const reviewContainer = document.querySelector(".product-custom-reviews");
+      let reviewContainerHTML = "";
+      reviewContainer.innerHTML = "";
+  
+      reviews.forEach(review => {
+        let reviewItem = `
+          <swiper-slide>
+          <div class="person-review">
+            <div class="author-info">
+              <div class="author-profile">
+                <div class="author-profile-img">`;
+        if (review.user.social_image === null) {
+          reviewItem += `
+            <img
+              class="person-profile-icon"
+              src="{{ section.settings.default_profile_img | img_url: '51x' }}"
+              width="51px"
+              height="auto"/>
+          `;
+        } else {
+          reviewItem += `
+            <img
+              class="person-profile-icon"
+              src="${review.user.social_image}"
+              width="51px"
+              height="auto"/>
+          `;
+        }
+        reviewItem += `
+                </div>
+                <div class="author-name-status">
+                  <div class="author-name">${review.user.display_name}</div>
+                  <div class="author-status">
+                    <span>Verified Buyer</span>
+                    <img
+                      class="person-profile-icon"
+                      src="{{ section.settings.verifed_buyer_icon | img_url: '17x' }}"
+                      width="17px"
+                      height="auto"/>
+                  </div>
+                </div>
+              </div>
+              <div class="author-ratings-date">
+                <div class="author-stars-ratings">
+                  <div class="author-stars">`;
+        for (i = 0; i < review.score; i++) {
+          reviewItem += `
+            <img
+              class="person-review-icon"
+              src="{{ section.settings.review_star_success | img_url: '18x' }}"
+              width="18px"
+              height="auto"/>
+          `;
+        }
+        for (i = 0; i < 5 - review.score; i++) {
+          reviewItem += `
+            <img
+              class="person-review-icon"
+              src="{{ section.settings.review_star_fail | img_url: '18x' }}"
+              width="18px"
+              height="auto"/>
+          `;
+        }
+        reviewItem += `
+                  </div>
+                  <div class="author-ratings">${review.score}</div>
+                </div>
+                <div class="author-date">${new Date(review.created_at).toLocaleDateString()}</div>
+              </div>
+            </div>
+            <div class="person-review-tags">`;
+        let reviewTags = "{{ section.settings.review_tags }}";
+        let tagArray = reviewTags.split("|");
+        for (let i = 0; i < tagArray.length; i++) {
+          reviewItem += `<div class="person-review-tag">${tagArray[i]}</div>`;
+        }        
+        reviewItem += `
+            </div>
+            <div class="person-review-title">${review.title}</div>
+            <div class="person-review-content">${review.content}</div>
+          </div>
+          </swiper-slide>
+        `;
+        reviewContainerHTML += reviewItem;
+      });
+      reviewContainer.innerHTML = `
+          ${reviewContainerHTML}
+      `;
+    }
+
+    document.querySelector(".reviews-write-button").addEventListener("click", function() {
+      let checkButton = setInterval(() => {
+        let yotpoWriteButton = document.querySelector("#yotpo-main-widget-btn");
+        if (yotpoWriteButton) {
+            clearInterval(checkButton);
+            yotpoWriteButton.click();
+        }
+      }, 500);
+    });
+
+    loadReviews();
+  });
+</script>
+
+{% schema %}
+{
+  "name": "Product Custom Reviews",
+  "tag": "section",
+  "class": "main-product custom-review-section",
+  "settings": [
+    {
+      "type": "range",
+      "id": "slider_review_count",
+      "min": 0,
+      "max": 20,
+      "step": 2,
+      "unit": "px",
+      "label": "Slider Count",
+      "default": 10
+    },
+    {
+      "type": "header",
+      "content": "Spacing between title and reviews"
+    },
+    {
+      "type": "range",
+      "id": "spacing_bottom_padding",
+      "min": 0,
+      "max": 64,
+      "step": 1,
+      "unit": "px",
+      "label": "Bottom Padding",
+      "default": 48
+    },
+    {
+      "type": "range",
+      "id": "spacing_bottom_padding_mobile",
+      "min": 0,
+      "max": 64,
+      "step": 1,
+      "unit": "px",
+      "label": "Bottom Padding (Mobile)",
+      "default": 48
+    },
+    {
+      "type": "header",
+      "content": "Review Block"
+    },
+    {
+      "type": "color",
+      "id": "border_color",
+      "label": "Border Color",
+      "default": "#000000"
+    },
+    {
+      "type": "range",
+      "id": "review_block_width",
+      "min": 0,
+      "max": 600,
+      "step": 10,
+      "unit": "px",
+      "label": "Width",
+      "default": 580
+    },
+    {
+      "type": "range",
+      "id": "review_block_height",
+      "min": 0,
+      "max": 600,
+      "step": 10,
+      "unit": "px",
+      "label": "Height",
+      "default": 550
+    },
+    {
+      "type": "range",
+      "id": "review_block_x_padding",
+      "min": 0,
+      "max": 100,
+      "step": 10,
+      "unit": "px",
+      "label": "X Padding",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "review_block_y_padding",
+      "min": 0,
+      "max": 100,
+      "step": 10,
+      "unit": "px",
+      "label": "Y Padding",
+      "default": 60
+    },
+    {
+      "type": "range",
+      "id": "review_block_x_padding_mobile",
+      "min": 0,
+      "max": 100,
+      "step": 10,
+      "unit": "px",
+      "label": "X Padding (Mobile)",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "review_block_y_padding_mobile",
+      "min": 0,
+      "max": 100,
+      "step": 10,
+      "unit": "px",
+      "label": "Y Padding (Mobile)",
+      "default": 30
+    },
+    {
+      "type": "image_picker",
+      "id": "default_profile_img",
+      "label": "Profile Image (Default)"
+    },
+    {
+      "type": "image_picker",
+      "id": "verifed_buyer_icon",
+      "label": "Verified Buyer Icon"
+    },
+    {
+      "type": "image_picker",
+      "id": "review_star_success",
+      "label": "Review Star - Success"
+    },
+    {
+      "type": "image_picker",
+      "id": "review_star_fail",
+      "label": "Review Star - Fail"
+    },
+    {
+      "type": "text",
+      "id": "review_tags",
+      "label": "Review Tags"
+    },
+    {
+      "type": "header",
+      "content": "padding Settings (Desktop)"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 200,
+      "step": 10,
+      "unit": "px",
+      "label": "Top",
+      "default": 120
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 200,
+      "step": 10,
+      "unit": "px",
+      "label": "Bottom",
+      "default": 120
+    },
+    {
+      "type": "range",
+      "id": "padding_left",
+      "min": 0,
+      "max": 64,
+      "step": 4,
+      "unit": "px",
+      "label": "Left",
+      "default": 32
+    },
+    {
+      "type": "range",
+      "id": "padding_right",
+      "min": 0,
+      "max": 64,
+      "step": 4,
+      "unit": "px",
+      "label": "Right",
+      "default": 32
+    },
+    {
+      "type": "header",
+      "content": "padding Settings (Tablet)"
+    },
+    {
+      "type": "range",
+      "id": "padding_top_tablet",
+      "min": 0,
+      "max": 200,
+      "step": 10,
+      "unit": "px",
+      "label": "Top",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_tablet",
+      "min": 0,
+      "max": 200,
+      "step": 10,
+      "unit": "px",
+      "label": "Bottom",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "padding_left_tablet",
+      "min": 0,
+      "max": 64,
+      "step": 4,
+      "unit": "px",
+      "label": "Left",
+      "default": 32
+    },
+    {
+      "type": "range",
+      "id": "padding_right_tablet",
+      "min": 0,
+      "max": 64,
+      "step": 4,
+      "unit": "px",
+      "label": "Right",
+      "default": 32
+    },
+    {
+      "type": "header",
+      "content": "padding Settings (Mobile)"
+    },
+    {
+      "type": "range",
+      "id": "padding_top_mobile",
+      "min": 0,
+      "max": 200,
+      "step": 10,
+      "unit": "px",
+      "label": "Top",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_mobile",
+      "min": 0,
+      "max": 200,
+      "step": 10,
+      "unit": "px",
+      "label": "Bottom",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "padding_left_mobile",
+      "min": 0,
+      "max": 64,
+      "step": 4,
+      "unit": "px",
+      "label": "Left",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding_right_mobile",
+      "min": 0,
+      "max": 64,
+      "step": 4,
+      "unit": "px",
+      "label": "Right",
+      "default": 0
+    }
+  ],
+  "blocks": [
+    {
+      "type": "title",
+      "name": "Title",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Reviews and feedback"
+        },
+        {
+          "type": "color",
+          "id": "title_color",
+          "label": "Color",
+          "default": "#000000"
+        },
+        {
+          "type": "select",
+          "id": "title_alignment",
+          "options": [
+            {
+              "value": "left",
+              "label": "Left"
+            },
+            {
+              "value": "center",
+              "label": "Center"
+            },
+            {
+              "value": "right",
+              "label": "Right"
+            }
+          ],
+          "default": "center",
+          "label": "Alignment"
+        },
+        {
+          "type": "header",
+          "content": "Desktop"
+        },
+        {
+          "type": "range",
+          "id": "title_font_size",
+          "min": 0,
+          "max": 64,
+          "step": 1,
+          "unit": "px",
+          "label": "Font Size",
+          "default": 48
+        },
+        {
+          "type": "range",
+          "id": "title_line_height",
+          "min": 0,
+          "max": 64,
+          "step": 1,
+          "unit": "px",
+          "label": "Line Height",
+          "default": 55
+        },        
+        {
+          "type": "header",
+          "content": "Mobile"
+        },
+        {
+          "type": "range",
+          "id": "title_font_size_mobile",
+          "min": 0,
+          "max": 64,
+          "step": 1,
+          "unit": "px",
+          "label": "Font Size (Mobile)",
+          "default": 28
+        },
+        {
+          "type": "range",
+          "id": "title_line_height_mobile",
+          "min": 0,
+          "max": 64,
+          "step": 1,
+          "unit": "px",
+          "label": "Line Height (Mobile)",
+          "default": 32
+        }        
+      ]
+    },
+    {
+      "type": "@app"
+    },
+    {
+      "type": "ratings",
+      "name": "Ratings",
+      "settings": [        
+        {
+          "type": "header",
+          "content": "Total Score"
+        },
+        {
+          "type": "image_picker",
+          "id": "toolbar_star",
+          "label": "Toolbar Star"
+        },
+        {
+          "type": "range",
+          "id": "score_font_size",
+          "min": 0,
+          "max": 64,
+          "step": 2,
+          "unit": "px",
+          "label": "Font Size",
+          "default": 48
+        },
+        {
+          "type": "range",
+          "id": "score_line_height",
+          "min": 0,
+          "max": 64,
+          "step": 2,
+          "unit": "px",
+          "label": "Line Height",
+          "default": 0
+        },
+        {
+          "type": "range",
+          "id": "score_padding_right",
+          "min": 0,
+          "max": 64,
+          "step": 2,
+          "unit": "px",
+          "label": "Right Padding",
+          "default": 20
+        },
+        {
+          "type": "header",
+          "content": "Review Count"
+        },
+        {
+          "type": "text",
+          "id": "count_string",
+          "label": "Text",
+          "default": "reviews"
+        },
+        {
+          "type": "range",
+          "id": "count_font_size",
+          "min": 0,
+          "max": 64,
+          "step": 2,
+          "unit": "px",
+          "label": "Font Size",
+          "default": 14
+        },
+        {
+          "type": "range",
+          "id": "count_line_height",
+          "min": 0,
+          "max": 64,
+          "step": 2,
+          "unit": "px",
+          "label": "Line Height",
+          "default": 0
+        },
+        {
+          "type": "range",
+          "id": "count_padding_right",
+          "min": 0,
+          "max": 64,
+          "step": 2,
+          "unit": "px",
+          "label": "Right Padding",
+          "default": 30
+        }
+      ]
+    },
+    {
+      "type": "button",
+      "name": "Button",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Write A Review"
+        },
+        {
+          "type": "color",
+          "id": "background",
+          "label": "Background",
+          "default": "#111111",
+        },
+        {
+          "type": "color",
+          "id": "color",
+          "label": "Text",
+          "default": "#ffffff",
+        },
+        {
+          "type": "range",
+          "id": "button_font_size",
+          "min": 0,
+          "max": 64,
+          "step": 2,
+          "unit": "px",
+          "label": "Font Size",
+          "default": 16
+        },
+        {
+          "type": "range",
+          "id": "button_line_height",
+          "min": 0,
+          "max": 64,
+          "step": 2,
+          "unit": "px",
+          "label": "Line Height",
+          "default": 16
+        },
+        {
+          "type": "range",
+          "id": "button_x_padding",
+          "min": 0,
+          "max": 64,
+          "step": 2,
+          "unit": "px",
+          "label": "X Padding",
+          "default": 16
+        },
+        {
+          "type": "range",
+          "id": "button_y_padding",
+          "min": 0,
+          "max": 64,
+          "step": 2,
+          "unit": "px",
+          "label": "Y Padding",
+          "default": 16
+        },
+      ]
+    },
+  ],
+  "presets": [
+    {
+      "name": "Product Custom Reviews",
+      "settings": {
+      }
+    }
+  ]
+}
+{% endschema %}

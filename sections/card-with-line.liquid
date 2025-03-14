@@ -1,0 +1,641 @@
+{% style %}
+  .section-{{ section.id }} {
+    background: {{ section.settings.background_color }};
+    padding-top: {{ section.settings.section_top_padding }}px;
+    padding-bottom: {{ section.settings.section_bottom_padding }}px;
+  }
+  .section-{{ section.id }} .page-title {
+    color: {{ section.settings.title_color }};
+    font-family: ClashGrotesk-Variable;
+    font-size: {{ section.settings.title_font_size }}px;
+    font-weight: 300;
+    line-height: {{ section.settings.title_line_height }}px;
+    text-align: {{ section.settings.title_alignment }};
+    margin-top: {{ section.settings.title_top_padding }}px;
+    margin-bottom: {{ section.settings.title_bottom_padding }}px;
+  }
+  .section-{{ section.id }} .page-card-list {
+    display: flex;
+    flex-direction: {{ section.settings.block_direction }};
+  }
+  .section-{{ section.id }} .page-card {
+    display: flex;
+    flex-direction: column;
+    gap: {{ section.settings.padding_between_line_and_icon }}px;
+    flex: 1;
+  }
+  .section-{{ section.id }} .page-card-header {
+    position: relative;
+  }
+  .section-{{ section.id }} .page-card-line {
+    background: {{ section.settings.line_color }};
+    height: {{ section.settings.line_height }}px;
+  }
+  .section-{{ section.id }} .page-card-dot {
+    position: absolute;
+    top: 50%;
+    left: {{ section.settings.dot_position }}px;
+    background: {{ section.settings.dot_color }};
+    width: {{ section.settings.dot_size }}px;
+    height: {{ section.settings.dot_size }}px;
+    border-radius: {{ section.settings.dot_size }}px;
+    transform: translateY(-50%);
+  }
+  .section-{{ section.id }} .page-card-body {
+    display: flex;
+    flex-direction: column;
+    gap: {{ section.settings.padding_between_icon_and_text }}px;
+  }
+  .section-{{ section.id }} .page-card-icon-area {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: {{ section.settings.icon_area_size }}px;
+    background: {{ section.settings.icon_area_color }};
+    width: {{ section.settings.icon_area_size }}px;
+    height: {{ section.settings.icon_area_size }}px;
+  }
+  .section-{{ section.id }} .page-card-text {
+    color: {{ section.settings.text_color }};
+    font-size: {{ section.settings.text_font_size }}px;
+    font-weight: 300;
+    line-height: {{ section.settings.text_line_height }}px;
+  }
+  @media screen and (max-width: 768px) {
+    .section-{{ section.id }} {
+      padding-top: {{ section.settings.section_top_padding_tablet }}px;
+      padding-bottom: {{ section.settings.section_bottom_padding_tablet }}px;
+    }
+  }
+  @media screen and (max-width: 480px) {
+    .section-{{ section.id }} {
+      padding-top: {{ section.settings.section_top_padding_mobile }}px;
+      padding-bottom: {{ section.settings.section_bottom_padding_mobile }}px;
+    }
+    .section-{{ section.id }} .page-title {
+      text-align: {{ section.settings.title_alignment_mobile }};
+      font-size: {{ section.settings.title_font_size_mobile }}px;
+      line-height: {{ section.settings.title_line_height_mobile }}px;
+      margin-top: {{ section.settings.title_top_padding_mobile }}px;
+      margin-bottom: {{ section.settings.title_bottom_padding_mobile }}px;
+    }
+    .section-{{ section.id }} .page-card-list {
+      flex-direction: {{ section.settings.block_direction_mobile }};
+    }
+    .section-{{ section.id }} .page-card {
+      flex-direction: row;
+    }
+    .section-{{ section.id }} .page-card-line {
+      height: 100%;
+      width: 1px;
+    }
+    .section-{{ section.id }} .page-last-card .page-card-line {
+      height: {{ section.settings.icon_area_size | divided_by: 2}}px;
+    }
+    .section-{{ section.id }} .page-card-dot {
+      position: absolute;
+      top: 30px;
+      left: 50%;
+      background: {{ section.settings.dot_color }};
+      width: {{ section.settings.dot_size }}px;
+      height: {{ section.settings.dot_size }}px;
+      border-radius: {{ section.settings.dot_size }}px;
+      transform: translateX(-50%);
+    }    
+    .section-{{ section.id }} .page-card-body {
+      gap: {{ section.settings.padding_between_icon_and_text_mobile }}px;
+    }
+    .section-{{ section.id }} .page-card-text {
+      padding-bottom: {{ section.settings.block_spacing }}px;
+    }
+    .section-{{ section.id }} .page-last-card .page-card-text {
+      padding-bottom: 0;
+    }
+  }
+{% endstyle %}
+
+<div class="section-{{ section.id }}">
+  <div class="container">
+    {% if section.settings.title != blank %}
+      <h2 class="page-title" >
+        {{ section.settings.title }}
+      </h2>
+    {% endif %}
+    <div class="page-card-list">
+    {% for block in section.blocks %}
+      {% if forloop.index0 < section.settings.block_count %}
+        {% style %}
+          @media screen and (min-width: 481px) {
+            .block-{{block.id}} .page-card-dot {
+              {% unless forloop.first %}
+                {% if forloop.last %}
+                left: calc({{ section.settings.dot_position }}px + {{ section.settings.block_spacing }}px * 2 / 3);
+                {% else %}
+                left: calc({{ section.settings.dot_position }}px + {{ section.settings.block_spacing }}px / 3);
+                {% endif %}
+              {% endunless %}
+            }
+            .block-{{block.id}} .page-card-icon-area {
+              {% unless forloop.first %}
+                {% if forloop.last %}
+                margin-left: calc({{ section.settings.block_spacing }}px * 2 / 3);
+                {% else %}
+                margin-left: calc({{ section.settings.block_spacing }}px / 3); 
+                {% endif %}
+              {% endunless %}            
+            }
+            .block-{{block.id}} .page-card-text {
+              {% if forloop.first  %}
+              padding-right: calc({{ section.settings.block_spacing }}px * 2 / 3);
+              {% elsif forloop.last %}
+              padding-left: calc({{ section.settings.block_spacing }}px * 2 / 3);
+              {% else %}
+              padding-left: calc({{ section.settings.block_spacing }}px / 3);
+              padding-right: calc({{ section.settings.block_spacing }}px / 3);
+              {% endif %}
+            }
+          }
+        {% endstyle %}
+        <div class="block-{{ block.id }} page-card {% if forloop.last %}page-last-card{% endif %}">
+          <div class="page-card-header">
+            <div class="page-card-line">&nbsp;</div>
+            <div class="page-card-dot">&nbsp;</div>
+          </div>
+          <div class="page-card-body">
+            <div class="page-card-icon-area">
+              <img
+                class="page-card-icon"
+                src="{{ block.settings.icon | img_url: '30x' }}"
+                width="{{ section.settings.icon_size }}px"
+                height="auto"/>
+            </div>
+            <div class="page-card-text">{{ block.settings.text }}</div>
+          </div>
+        </div>
+      {% endif %}
+    {% endfor %}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Card With Line",
+  "tag": "section",
+  "class": "section",
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
+  "settings": [
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background Color",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "header",
+      "content": "Title"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title"
+    },
+    {
+      "type": "color",
+      "id": "title_color",
+      "label": "Color",
+      "default": "#000000"
+    },
+    {
+      "type": "select",
+      "id": "title_alignment",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ],
+      "default": "center",
+      "label": "Alignment"
+    },
+    {
+      "type": "range",
+      "id": "title_font_size",
+      "min": 0,
+      "max": 64,
+      "step": 1,
+      "unit": "px",
+      "label": "Font Size",
+      "default": 48
+    },
+    {
+      "type": "range",
+      "id": "title_line_height",
+      "min": 0,
+      "max": 64,
+      "step": 1,
+      "unit": "px",
+      "label": "Line Height",
+      "default": 55
+    },
+    {
+      "type": "range",
+      "id": "title_top_padding",
+      "min": 0,
+      "max": 64,
+      "step": 4,
+      "unit": "px",
+      "label": "Top Padding",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "title_bottom_padding",
+      "min": 0,
+      "max": 64,
+      "step": 4,
+      "unit": "px",
+      "label": "Bottom Padding",
+      "default": 60
+    },
+    {
+      "type": "select",
+      "id": "title_alignment_mobile",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ],
+      "default": "left",
+      "label": "Alignment"
+    },
+    {
+      "type": "range",
+      "id": "title_font_size_mobile",
+      "min": 0,
+      "max": 64,
+      "step": 1,
+      "unit": "px",
+      "label": "Font Size(Mobile)",
+      "default": 48
+    },
+    {
+      "type": "range",
+      "id": "title_line_height_mobile",
+      "min": 0,
+      "max": 64,
+      "step": 1,
+      "unit": "px",
+      "label": "Line Height(Mobile)",
+      "default": 55
+    },
+    {
+      "type": "range",
+      "id": "title_top_padding_mobile",
+      "min": 0,
+      "max": 64,
+      "step": 4,
+      "unit": "px",
+      "label": "Top Padding(Mobile)",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "title_bottom_padding_mobile",
+      "min": 0,
+      "max": 64,
+      "step": 4,
+      "unit": "px",
+      "label": "Bottom Padding(Mobile)",
+      "default": 60
+    },
+    {
+      "type": "header",
+      "content": "Line"
+    },
+    {
+      "type": "range",
+      "id": "line_height",
+      "min": 0,
+      "max": 10,
+      "step": 1,
+      "unit": "px",
+      "label": "Height",
+      "default": 1
+    },
+    {
+      "type": "color",
+      "id": "line_color",
+      "label": "Line Color",      
+      "default": "#000000"
+    },
+    {
+      "type": "range",
+      "id": "dot_size",
+      "min": 0,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "label": "Dot Size",
+      "default": 10
+    },
+    {
+      "type": "range",
+      "id": "dot_position",
+      "min": 0,
+      "max": 64,
+      "step": 1,
+      "unit": "px",
+      "label": "Dot Position",
+      "default": 22
+    },
+    {
+      "type": "color",
+      "id": "dot_color",
+      "label": "Dot Color",      
+      "default": "#000000"
+    },
+    {
+      "type": "header",
+      "content": "Block"
+    },
+    {
+      "type": "range",
+      "id": "block_count",
+      "min": 0,
+      "max": 6,
+      "step": 1,
+      "unit": "px",
+      "label": "Block Count",
+      "default": 3
+    },
+    {
+      "type": "select",
+      "id": "block_direction",
+      "options": [
+        {
+          "value": "row",
+          "label": "Row"
+        },
+        {
+          "value": "column",
+          "label": "Column"
+        }
+      ],
+      "default": "row",
+      "label": "Direction"
+    },
+    {
+      "type": "select",
+      "id": "block_direction_mobile",
+      "options": [
+        {
+          "value": "row",
+          "label": "Row"
+        },
+        {
+          "value": "column",
+          "label": "Column"
+        }
+      ],
+      "default": "column",
+      "label": "Direction(Mobile)"
+    },
+    {
+      "type": "range",
+      "id": "block_spacing",
+      "min": 0,
+      "max": 64,
+      "step": 2,
+      "unit": "px",
+      "label": "Block Spacing",
+      "default": 50
+    },
+    {
+      "type": "range",
+      "id": "icon_area_size",
+      "min": 0,
+      "max": 64,
+      "step": 2,
+      "unit": "px",
+      "label": "Icon Area Size",
+      "default": 64
+    },
+    {
+      "type": "color",
+      "id": "icon_area_color",
+      "label": "Icon Area Background",
+      "default": "#E5E5E5"
+    },
+    {
+      "type": "range",
+      "id": "icon_size",
+      "min": 0,
+      "max": 64,
+      "step": 2,
+      "unit": "px",
+      "label": "Icon Size",
+      "default": 30
+    },
+    {
+      "type": "range",
+      "id": "padding_between_line_and_icon",
+      "min": 0,
+      "max": 64,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding between line and icon",
+      "default": 24
+    },
+    {
+      "type": "range",
+      "id": "padding_between_icon_and_text",
+      "min": 0,
+      "max": 64,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding between icon and text",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "padding_between_icon_and_text_mobile",
+      "min": 0,
+      "max": 64,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding between icon and text(Mobile)",
+      "default": 20
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text Color",
+      "default": "#000000"
+    },
+    {
+      "type": "range",
+      "id": "text_font_size",
+      "label": "Font Size",
+      "info": "Default: 16px",
+      "min": 0,
+      "max": 64,
+      "step": 2,
+      "default": 16,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "text_line_height",
+      "label": "Line Height",
+      "info": "Default: 24px",
+      "min": 0,
+      "max": 64,
+      "step": 2,
+      "default": 24,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "text_font_size_mobile",
+      "label": "Font Size(Mobile)",
+      "info": "Default: 16px",
+      "min": 0,
+      "max": 64,
+      "step": 2,
+      "default": 16,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "text_line_height_mobile",
+      "label": "Line Height(Mobile)",
+      "info": "Default: 24px",
+      "min": 0,
+      "max": 64,
+      "step": 2,
+      "default": 24,
+      "unit": "px"
+    },
+    {
+      "type": "header",
+      "content": "Section"
+    },
+    {
+      "type": "range",
+      "id": "section_top_padding",
+      "min": 0,
+      "max": 120,
+      "step": 2,
+      "unit": "px",
+      "label": "Top Padding",
+      "default": 120
+    },
+    {
+      "type": "range",
+      "id": "section_bottom_padding",
+      "min": 0,
+      "max": 120,
+      "step": 2,
+      "unit": "px",
+      "label": "Bottom Padding",
+      "default": 120
+    },
+    {
+      "type": "range",
+      "id": "section_top_padding_tablet",
+      "min": 0,
+      "max": 120,
+      "step": 2,
+      "unit": "px",
+      "label": "Top Padding(Tablet)",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "section_bottom_padding_tablet",
+      "min": 0,
+      "max": 120,
+      "step": 2,
+      "unit": "px",
+      "label": "Bottom Padding(Tablet)",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "section_top_padding_mobile",
+      "min": 0,
+      "max": 120,
+      "step": 2,
+      "unit": "px",
+      "label": "Top Padding(Mobile)",
+      "default": 120
+    },
+    {
+      "type": "range",
+      "id": "section_bottom_padding_mobile",
+      "min": 0,
+      "max": 120,
+      "step": 2,
+      "unit": "px",
+      "label": "Bottom Padding(Mobile)",
+      "default": 120
+    }
+  ],
+  "blocks": [
+    {
+      "type": "card",
+      "name": "Card",
+      "limit": 6,
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "icon",
+          "label": "Icon"
+        },
+        {
+          "type": "richtext",
+          "id": "text",
+          "default": "<p></p>",
+          "label": "Text"
+        }      
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Card With Line",
+      "blocks": [
+        {
+          "type": "card"
+        },
+        {
+          "type": "card"
+        },
+        {
+          "type": "card"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

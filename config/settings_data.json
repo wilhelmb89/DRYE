@@ -8,6 +8,7 @@
     "twitter": "https:\/\/x.com\/DRYESWEDEN",
     "policy_title_font_size_mobile": 50,
     "policy_title_line_height_mobile": 60,
+    "yotpo_reviews_api_key": "SAfL56iSfyjZmoBz0xz5wYjuABSr2xzgu2IWTMSH",
     "checkout_logo_position": "right",
     "checkout_input_background_color_mode": "white",
     "content_for_index": [],
@@ -74,6 +75,8 @@
     }
   },
   "platform_customizations": {
-    "custom_css": []
+    "custom_css": [
+      "#occ3-drawer {z-index: 99999999999 !important;}"
+    ]
   }
 }
