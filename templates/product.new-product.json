@@ -177,6 +177,9 @@
         "shipping_desc_line_height": 12,
         "shipping_top_padding": 40,
         "shipping_bottom_padding": 40,
+        "use_sliderbar": false,
+        "use_sliderbar_tablet": false,
+        "use_sliderbar_mobile": true,
         "media_type": "image",
         "image": "shopify:\/\/shop_images\/25eeced0e7bbd82ea9764d1ff717af9e.png",
         "model": "https:\/\/cdn.shopify.com\/3d\/models\/7db9be4f89a84969\/earth_globe_hologram_2mb_looping_animation.glb",
@@ -758,7 +761,7 @@
           "type": "logo",
           "settings": {
             "logo_title": "DRYE",
-            "logo": "shopify:\/\/shop_images\/Swedish-School-Of-Textiles-1024x251_3.png",
+            "logo": "shopify:\/\/shop_images\/Swedish-School-Of-Textiles-1024x251_7.png",
             "display_border": true,
             "border_position": "right",
             "border_color": "#e5e5e5",
@@ -772,7 +775,7 @@
           "type": "logo",
           "settings": {
             "logo_title": "Stockholm University",
-            "logo": "shopify:\/\/shop_images\/image_70_18d6df9a-b333-47ce-9de9-f3193c920019.png",
+            "logo": "shopify:\/\/shop_images\/uppsala-universitet-logo-png-transparent_1.png",
             "display_border": true,
             "border_position": "right",
             "border_color": "#e5e5e5",
@@ -843,6 +846,90 @@
         "padding_bottom_mobile": 40,
         "padding_left_mobile": 0,
         "padding_right_mobile": 0
+      }
+    },
+    "columns_with_video_kRmqXB": {
+      "type": "columns-with-video",
+      "blocks": {
+        "card_qcVBhn": {
+          "type": "card",
+          "settings": {
+            "title": "Video1",
+            "media_mode": "url",
+            "video": "shopify:\/\/files\/videos\/introduce.mp4",
+            "video_url": "https:\/\/www.youtube.com\/embed\/rQtXsY9Za_c",
+            "video_preview": "shopify:\/\/shop_images\/Screenshot_14.png",
+            "video_width": "1108",
+            "video_height": "623",
+            "play_icon": "shopify:\/\/shop_images\/play.png",
+            "icon_width": 80,
+            "icon_width_tablet": 70,
+            "icon_width_mobile": 70
+          }
+        },
+        "card_yjyLzM": {
+          "type": "card",
+          "settings": {
+            "title": "Video2",
+            "media_mode": "url",
+            "video": "shopify:\/\/files\/videos\/introduce.mp4",
+            "video_url": "https:\/\/www.youtube.com\/embed\/rQtXsY9Za_c",
+            "video_preview": "shopify:\/\/shop_images\/Screenshot_15.png",
+            "video_width": "1108",
+            "video_height": "623",
+            "play_icon": "shopify:\/\/shop_images\/play.png",
+            "icon_width": 80,
+            "icon_width_tablet": 70,
+            "icon_width_mobile": 70
+          }
+        },
+        "card_NapNAi": {
+          "type": "card",
+          "settings": {
+            "title": "Video3",
+            "media_mode": "url",
+            "video": "shopify:\/\/files\/videos\/introduce.mp4",
+            "video_url": "https:\/\/www.youtube.com\/embed\/rQtXsY9Za_c",
+            "video_preview": "shopify:\/\/shop_images\/Screenshot_16.png",
+            "video_width": "1108",
+            "video_height": "623",
+            "play_icon": "shopify:\/\/shop_images\/play.png",
+            "icon_width": 80,
+            "icon_width_tablet": 70,
+            "icon_width_mobile": 70
+          }
+        }
+      },
+      "block_order": [
+        "card_qcVBhn",
+        "card_yjyLzM",
+        "card_NapNAi"
+      ],
+      "settings": {
+        "background_color": "#ffffff",
+        "title": "Areas of use",
+        "title_color": "#000000",
+        "title_alignment": "center",
+        "title_font_size": 48,
+        "title_line_height": 55,
+        "title_top_padding": 0,
+        "title_bottom_padding": 60,
+        "title_alignment_mobile": "center",
+        "title_font_size_mobile": 28,
+        "title_line_height_mobile": 32,
+        "title_top_padding_mobile": 0,
+        "title_bottom_padding_mobile": 24,
+        "block_spacing": 20,
+        "block_spacing_mobile": 20,
+        "video_count": 3,
+        "block_direction": "row",
+        "block_direction_mobile": "column",
+        "section_top_padding": 120,
+        "section_bottom_padding": 114,
+        "section_top_padding_tablet": 80,
+        "section_bottom_padding_tablet": 0,
+        "section_top_padding_mobile": 40,
+        "section_bottom_padding_mobile": 0
       }
     },
     "product_custom_reviews_3chE8r": {
@@ -929,13 +1016,28 @@
         "padding_right_mobile": 0
       }
     },
+    "before_after_DKa9TV": {
+      "type": "before-after",
+      "settings": {
+        "title": "",
+        "image_before": "shopify:\/\/shop_images\/Traditional_Glove_Liners_Fail_to_Keep_Moisture_Away.jpg",
+        "image_after": "shopify:\/\/shop_images\/After_three_months_of_use_-_DRYE_Glove_Liner.jpg",
+        "image_border_radius": 40,
+        "section_top_padding_desktop": 120,
+        "section_bottom_padding_desktop": 120,
+        "section_top_padding_tablet": 80,
+        "section_bottom_padding_tablet": 80,
+        "section_top_padding_mobile": 64,
+        "section_bottom_padding_mobile": 64
+      }
+    },
     "usp_product_JWdjqV": {
       "type": "usp-product",
       "blocks": {
         "heading_VgBNGj": {
           "type": "heading",
           "settings": {
-            "heading": "USP of the product",
+            "heading": "The 4 Biggest Reasons People with Eczema Are Switching to DRYE",
             "heading_color": "#000000",
             "heading_font_size": 48,
             "heading_line_height": 55,
@@ -954,7 +1056,7 @@
         "description_tm8HDj": {
           "type": "description",
           "settings": {
-            "text": "<p>LOREM IPSUM DOLOR SIT AMET CONSECTETUR.<\/p>",
+            "text": "<p>If cotton, silk, and bamboo gloves haven’t worked for you, here’s why DRYE is different.<\/p>",
             "text_color": "#9c9c9c",
             "text_font_size": 20,
             "text_line_height": 28,
@@ -977,14 +1079,14 @@
             "max_width": 292,
             "max_width_tablet": 288,
             "max_width_mobile": 288,
-            "title1": "Superior Moisture Control",
+            "title1": "Instant Relief from Itching & Irritation",
             "text_color1": "#111111",
-            "description1": "<p>Proven, market-leading moisture-wicking fabric that reduces irritation and supports healing.<\/p>",
+            "description1": "<p>Sweat buildup is one of the biggest eczema triggers. DRYE actively moves moisture away from the skin, stopping flare-ups before they start.<\/p>",
             "description_color1": "#111111",
             "icon1": "shopify:\/\/shop_images\/tabler_credit-card-refund.png",
-            "title2": "Breathable and Hypoallergenic",
+            "title2": "Designed to Fit – No More One-Size-Fits-All",
             "text_color2": "#000000",
-            "description2": "<p>Ultra-thin, hypoallergenic design for sensitive skin comfort.<\/p>",
+            "description2": "<p>Moisturizing gloves are too loose or tight, causing friction and discomfort. DRYE is designed for a proper fit, ensuring smooth, irritation-free wear under any glove.<\/p>",
             "description_color2": "#000000",
             "icon2": "shopify:\/\/shop_images\/tabler_credit-card-refund.png"
           }
@@ -997,11 +1099,11 @@
             "max_width": 292,
             "max_width_tablet": 288,
             "max_width_mobile": 288,
-            "title1": "Title",
+            "title1": "Gentle on Sensitive Skin",
             "text_color1": "#000000",
             "description1": "",
             "description_color1": "#000000",
-            "title2": "Title",
+            "title2": "Long-Lasting Comfort & Protection",
             "text_color2": "#000000",
             "description2": "",
             "description_color2": "#000000"
@@ -1014,14 +1116,14 @@
             "max_width": 292,
             "max_width_tablet": 288,
             "max_width_mobile": 288,
-            "title1": "Sustainable and Washable",
+            "title1": "Gentle on Sensitive Skin",
             "text_color1": "#111111",
-            "description1": "<p>Partly biodegradable, lasts 3-12 months, and washable for extended use.<\/p>",
+            "description1": "<p>No more rough, damp, or sticky liners that rub against irritated skin. DRYE’s breathable, hypoallergenic fabric feels soft and smooth while reducing friction that can make eczema worse.<\/p>",
             "description_color1": "#111111",
             "icon1": "shopify:\/\/shop_images\/tabler_credit-card-refund.png",
-            "title2": "Swedish Invention",
+            "title2": "Long-Lasting Comfort & Protection",
             "text_color2": "#000000",
-            "description2": "<p>Developed over 7 years by leading universities, engineers, and professionals in Sweden.<\/p>",
+            "description2": "<p>Unlike cotton, silk, or bamboo liners that wear out fast, DRYE lasts 3-12 months while keeping hands dry and comfortable—wash after wash.<\/p>",
             "description_color2": "#000000",
             "icon2": "shopify:\/\/shop_images\/tabler_credit-card-refund.png"
           }
@@ -1079,21 +1181,21 @@
         "heading_jyz4km": {
           "type": "heading",
           "settings": {
-            "heading": "Why moisture buildup matters",
+            "heading": "New Glove for Immediate Relief",
             "heading_color": "#000000",
             "alignment": "left",
             "heading_font_size": 50,
             "heading_line_height": 60,
             "heading_margin_bottom": 20,
-            "heading_font_size_mobile": 28,
-            "heading_line_height_mobile": 32,
+            "heading_font_size_mobile": 22,
+            "heading_line_height_mobile": 24,
             "heading_margin_bottom_mobile": 20
           }
         },
         "description_aDahtR": {
           "type": "description",
           "settings": {
-            "text": "<p>Our material is made from recycled x and fast-growing wood cellulose, requiring minimal water and pesticides.Our material is made from recycled x and fast-growing wood cellulose, requiring minimal water and pesticides.Our material is made from recycled x and fast-growing wood cellulose, requiring minimal water and pesticides.<\/p>",
+            "text": "<p>If you have hand eczema, you already know—moisture is your worst enemy. The moment sweat gets trapped inside gloves, it creates the perfect storm for irritation, itching, and flare-ups. Traditional liners only absorb the sweat, making the problem worse as they become damp and sticky.<br\/><br\/>The key to relief? Keeping moisture away from your skin before it can trigger symptoms. That’s exactly what DRYE’s glove liners do. By actively transporting sweat away instead of trapping it, they keep your hands dry, reducing the risk of irritation from the first wear.<\/p>",
             "text_color": "#000000",
             "alignment": "left",
             "text_font_size": 16,
@@ -1141,90 +1243,6 @@
         "padding_bottom_mobile": 0,
         "padding_left_mobile": 0,
         "padding_right_mobile": 0
-      }
-    },
-    "columns_with_video_kRmqXB": {
-      "type": "columns-with-video",
-      "blocks": {
-        "card_qcVBhn": {
-          "type": "card",
-          "settings": {
-            "title": "Video1",
-            "media_mode": "url",
-            "video": "shopify:\/\/files\/videos\/introduce.mp4",
-            "video_url": "https:\/\/www.youtube.com\/embed\/rQtXsY9Za_c",
-            "video_preview": "shopify:\/\/shop_images\/459300486_937217345090387_6239524257099267453_n.jpg",
-            "video_width": "1108",
-            "video_height": "623",
-            "play_icon": "shopify:\/\/shop_images\/play.png",
-            "icon_width": 80,
-            "icon_width_tablet": 70,
-            "icon_width_mobile": 70
-          }
-        },
-        "card_yjyLzM": {
-          "type": "card",
-          "settings": {
-            "title": "Video2",
-            "media_mode": "url",
-            "video": "shopify:\/\/files\/videos\/introduce.mp4",
-            "video_url": "https:\/\/www.youtube.com\/embed\/rQtXsY9Za_c",
-            "video_preview": "shopify:\/\/shop_images\/459300486_937217345090387_6239524257099267453_n.jpg",
-            "video_width": "1108",
-            "video_height": "623",
-            "play_icon": "shopify:\/\/shop_images\/play.png",
-            "icon_width": 80,
-            "icon_width_tablet": 70,
-            "icon_width_mobile": 70
-          }
-        },
-        "card_NapNAi": {
-          "type": "card",
-          "settings": {
-            "title": "Video3",
-            "media_mode": "url",
-            "video": "shopify:\/\/files\/videos\/introduce.mp4",
-            "video_url": "https:\/\/www.youtube.com\/embed\/rQtXsY9Za_c",
-            "video_preview": "shopify:\/\/shop_images\/459300486_937217345090387_6239524257099267453_n.jpg",
-            "video_width": "1108",
-            "video_height": "623",
-            "play_icon": "shopify:\/\/shop_images\/play.png",
-            "icon_width": 80,
-            "icon_width_tablet": 70,
-            "icon_width_mobile": 70
-          }
-        }
-      },
-      "block_order": [
-        "card_qcVBhn",
-        "card_yjyLzM",
-        "card_NapNAi"
-      ],
-      "settings": {
-        "background_color": "#ffffff",
-        "title": "Areas of use",
-        "title_color": "#000000",
-        "title_alignment": "center",
-        "title_font_size": 48,
-        "title_line_height": 55,
-        "title_top_padding": 0,
-        "title_bottom_padding": 60,
-        "title_alignment_mobile": "center",
-        "title_font_size_mobile": 28,
-        "title_line_height_mobile": 32,
-        "title_top_padding_mobile": 0,
-        "title_bottom_padding_mobile": 24,
-        "block_spacing": 20,
-        "block_spacing_mobile": 20,
-        "video_count": 3,
-        "block_direction": "row",
-        "block_direction_mobile": "column",
-        "section_top_padding": 120,
-        "section_bottom_padding": 0,
-        "section_top_padding_tablet": 80,
-        "section_bottom_padding_tablet": 0,
-        "section_top_padding_mobile": 40,
-        "section_bottom_padding_mobile": 0
       }
     },
     "table_with_mark_xkzqbz": {
@@ -1578,62 +1596,6 @@
         "section_top_padding_mobile": 40,
         "section_bottom_padding_mobile": 40
       }
-    },
-    "rich_color_text_Y77cab": {
-      "type": "rich-color-text",
-      "blocks": {
-        "heading_pDiqDQ": {
-          "type": "heading",
-          "settings": {
-            "heading": "FAQ",
-            "heading_color": "#000000",
-            "heading_font_size": 50,
-            "heading_line_height": 60,
-            "heading_font_size_mobile": 28,
-            "heading_line_height_mobile": 30
-          }
-        },
-        "description_PHek4C": {
-          "type": "description",
-          "settings": {
-            "text": "<p>Our glove is a natural replacement for traditional materials like cotton, silk, and bamboo, as it effectively wicks moisture away from the skin.<\/p>",
-            "text_color": "#000000",
-            "text_font_size": 16,
-            "text_line_height": 24,
-            "text_font_size_mobile": 16,
-            "text_ling_height_mobile": 24
-          }
-        },
-        "button_9Ke3DU": {
-          "type": "button",
-          "settings": {
-            "button_label": "View More",
-            "button_link": "https:\/\/drye.se\/pages\/faq",
-            "button_x_padding": 112,
-            "button_y_padding": 15
-          }
-        }
-      },
-      "block_order": [
-        "heading_pDiqDQ",
-        "description_PHek4C",
-        "button_9Ke3DU"
-      ],
-      "settings": {
-        "background_color": "#ffffff",
-        "content_position": "center",
-        "content_alignment": "center",
-        "full_width": true,
-        "use_content_max_width": true,
-        "content_max_width": 710,
-        "content_gap": 20,
-        "padding_top": 0,
-        "padding_bottom": 120,
-        "padding_top_tablet": 0,
-        "padding_bottom_tablet": 80,
-        "padding_top_mobile": 0,
-        "padding_bottom_mobile": 40
-      }
     }
   },
   "order": [
@@ -1655,12 +1617,12 @@
     "hot_spot_weVgbh",
     "1708003060fe5b218d",
     "text_with_slider_tjwkBe",
+    "columns_with_video_kRmqXB",
     "product_custom_reviews_3chE8r",
+    "before_after_DKa9TV",
     "usp_product_JWdjqV",
     "rich_text_with_image_VBzyXB",
-    "columns_with_video_kRmqXB",
     "table_with_mark_xkzqbz",
-    "card_with_line_A4cNCy",
-    "rich_color_text_Y77cab"
+    "card_with_line_A4cNCy"
   ]
 }
