@@ -15,6 +15,83 @@
         "bg": "#f3f2f1"
       }
     },
+    "home_hero_with_image_UFQpU7": {
+      "type": "home-hero-with-image",
+      "blocks": {
+        "review_fQkyLi": {
+          "type": "review",
+          "settings": {
+            "review_image": "shopify:\/\/shop_images\/home-review-profile-5.png",
+            "review_url": ""
+          }
+        },
+        "review_GUPjDf": {
+          "type": "review",
+          "settings": {
+            "review_image": "shopify:\/\/shop_images\/home-review-profile-6.png",
+            "review_url": ""
+          }
+        },
+        "review_khAhWe": {
+          "type": "review",
+          "settings": {
+            "review_image": "shopify:\/\/shop_images\/home-review-profile-7.png",
+            "review_url": ""
+          }
+        }
+      },
+      "block_order": [
+        "review_fQkyLi",
+        "review_GUPjDf",
+        "review_khAhWe"
+      ],
+      "disabled": true,
+      "settings": {
+        "background_image": "shopify:\/\/shop_images\/EsGghain_2.jpg",
+        "invert": true,
+        "content_gap": 32,
+        "content_gap_mobile": 14,
+        "title": "New Eczema Gloves with Anti-Sweat Technology",
+        "title_font_size_desktop": 64,
+        "title_line_height_desktop": 60,
+        "title_font_size_tablet": 64,
+        "title_line_height_tablet": 60,
+        "title_font_size_mobile": 36,
+        "title_line_height_mobile": 48,
+        "show_divider": true,
+        "divider_color": "#ffffff",
+        "subtitle": "",
+        "sub_title_font_size_desktop": 24,
+        "sub_title_line_height_desktop": 32,
+        "sub_title_font_size_tablet": 24,
+        "sub_title_line_height_tablet": 32,
+        "sub_title_font_size_mobile": 18,
+        "sub_title_line_height_mobile": 24,
+        "content": "<p>DRYE is the only textile and glove that keeps moisture away from your skin—stopping sweat buildup that triggers irritation and eczema flare-ups. Our breathable, hypoallergenic design ensures all-day comfort for sensitive hands. <\/p>",
+        "content_font_size_desktop": 18,
+        "content_line_height_desktop": 32,
+        "content_font_size_tablet": 18,
+        "content_line_height_tablet": 32,
+        "content_font_size_mobile": 16,
+        "content_line_height_mobile": 24,
+        "button_text": "Explore your fit",
+        "button_url": "shopify:\/\/products\/moisture-wicking-eczema-gloves",
+        "button_color": "#ffffff",
+        "button_text_color": "#000000",
+        "button_font_size": 16,
+        "button_line_height": 21,
+        "show_arrow": false,
+        "check_review_text": "37+  See reviews",
+        "review_url": "shopify:\/\/products\/moisture-wicking-eczema-gloves",
+        "check_review_text_color": "#ffffff",
+        "padding_y": 0,
+        "padding_x": 0,
+        "padding_y_tablet": 64,
+        "padding_x_tablet": 48,
+        "padding_y_mobile": 20,
+        "padding_x_mobile": 20
+      }
+    },
     "home_hero_new_NMJC6g": {
       "type": "home-hero-new",
       "blocks": {
@@ -738,6 +815,7 @@
   },
   "order": [
     "home_hero_94BeYJ",
+    "home_hero_with_image_UFQpU7",
     "home_hero_new_NMJC6g",
     "faq_image_8GcLCz",
     "list_mHLg67",
