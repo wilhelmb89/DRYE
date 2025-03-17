@@ -78,6 +78,7 @@
     border: solid 1px {{ section.settings.border_color }};
     /* margin-left: 225px; */
     flex: 1 1 auto;
+    overflow: hidden;
 
     .author-info {
       display: flex;
@@ -442,8 +443,8 @@
         const response = await fetch(url);
         const res = await response.json();
         const data = res.response;
-        console.log('res = ', res);
-        console.log('data = ', data);
+        // console.log('res = ', res);
+        // console.log('data = ', data);
   
         if (data.reviews && data.reviews.length > 0) {
           allReviews = allReviews.concat(data.reviews);
@@ -528,7 +529,10 @@
               <div class="author-profile">
                 <div class="author-profile-img">`;
         if (review.user.social_image === null) {
-          const profileImg = profileImages[index] ? profileImages[index] : defaultProfileImg;
+          let profileImg = profileImages[index] ? profileImages[index] : defaultProfileImg;
+          if (profileImg.includes("no-image-")) {
+            profileImg = defaultProfileImg;
+          }
           reviewItem += `
             <img
               class="person-profile-icon"
