@@ -310,6 +310,10 @@
     }
   }
 {% endstyle %}
+{%- liquid
+   assign profile_blocks = section.blocks | where: 'type', 'profile'
+   assign default_profile_img = section.settings.default_profile_img | img_url: '51x'
+-%}
 <div class="section-{{ section.id }} section-{{ section.id }}-padding">
   <div class="container">
     <div class="product-reviews-header">
@@ -422,7 +426,13 @@
 
 <script>
   document.addEventListener("DOMContentLoaded", function() {
+    const profileImages = [
+      {%- for block in profile_blocks -%}
+        "{{ block.settings.profile_image | img_url: '51x' }}"{% unless forloop.last %},{% endunless %}
+      {%- endfor -%}
+    ];
     const appKey = "{{ settings.yotpo_reviews_api_key }}";
+    const defaultProfileImg = "{{ default_profile_img }}"; 
   
     async function fetchAllReviews(page = 1, allReviews = []) {
       const url = `https://api.yotpo.com/v1/widget/${appKey}/reviews?page=${page}`;
@@ -510,7 +520,7 @@
       let reviewContainerHTML = "";
       reviewContainer.innerHTML = "";
   
-      reviews.forEach(review => {
+      reviews.forEach((review, index) => {
         let reviewItem = `
           <swiper-slide>
           <div class="person-review">
@@ -518,10 +528,11 @@
               <div class="author-profile">
                 <div class="author-profile-img">`;
         if (review.user.social_image === null) {
+          const profileImg = profileImages[index] ? profileImages[index] : defaultProfileImg;
           reviewItem += `
             <img
               class="person-profile-icon"
-              src="{{ section.settings.default_profile_img | img_url: '51x' }}"
+              src=${profileImg}
               width="51px"
               height="auto"/>
           `;
@@ -1117,6 +1128,17 @@
         },
       ]
     },
+    {
+      "type": "profile",
+      "name": "Profile",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "profile_image",
+          "label": "Profile Image"
+        }
+      ]
+    }
   ],
   "presets": [
     {
