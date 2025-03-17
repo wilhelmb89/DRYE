@@ -47,6 +47,9 @@
       display: flex;
       flex-direction: column;
       gap: 32px;
+      height: auto;
+    }
+    .product-image-section .product-slider .product-slider-item {
       height: 100%;
     }
     .product-image-section .product-thumnail-pagination {
@@ -721,7 +724,7 @@
           <swiper-slide>
             {% if ss.media_type == "image" %}            
               {%- if ss.image != blank -%}
-                <div class="product-slider">
+                <div class="product-slider-item">
                   <img
                   class="preview-trigger"
                   data-preview-id="0"
@@ -743,7 +746,7 @@
           </swiper-slide>
           {% for product_thumbnail in product_thumbnails %}
             <swiper-slide>
-              <div class="product-slider">
+              <div class="product-slider-item">
                 <img
                   class="preview-trigger"
                   data-preview-id="{{ forloop.index }}"
