@@ -706,7 +706,9 @@
     }
   }
 {% endstyle %}
-
+{%- liquid
+   assign description_image_blocks = section.blocks | where: 'type', 'description_image'   
+-%}
 <div class="section-{{ section.id }} section-{{ section.id }}-padding">
   <div class="container">
     <div class="content tablet mobile">
@@ -790,12 +792,12 @@
       </div>
     </div>
     <div class="content">
-      <h5 class="short-description desktop">
-        {{ section.settings.short_description }}
-      </h5>
       <h1 class="title desktop">
         {{ product.title }}
       </h1>
+      <h5 class="short-description desktop">
+        {{ section.settings.short_description }}
+      </h5>
       {%- if ss.free_shipping != blank -%}
         <div class="free-shipping">
           {{ ss.free_shipping }}
@@ -927,7 +929,15 @@
           <div class="accordion-item {% if forloop.index0 == 0 %}active{% endif %}">
             <button class="accordion-header">{{ tab.settings.title }}</button>
             <div class="accordion-content">
-              {{ tab.settings.content }}
+              {%- assign content = tab.settings.content -%}  
+              {%- for block in description_image_blocks %}
+                {%- if content contains block.settings.image_key %}
+                  {%- assign desc_img = block.settings.image | img_url: '640x' -%}
+                  {%- capture img_tag %}<img src="{{ desc_img }}" width="100%" height="auto">{% endcapture %}
+                  {%- assign content = content | replace: block.settings.image_key, img_tag %}
+                {%- endif %}
+              {%- endfor %}              
+              {{ content }}
               {% if tab.settings.use_additional_section %}
                 <div class="accordion-additional-section">
                   {% if tab.settings.icon1 and tab.settings.caption1 %}
@@ -1969,6 +1979,22 @@
           "type": "image_picker",
           "id": "image_mobile",
           "label": "Mobile"
+        }
+      ]
+    },
+    {
+      "type": "description_image",
+      "name": "Description Image",
+      "settings": [
+        {
+          "type": "text",
+          "id": "image_key",
+          "label": "Image Key"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
         }
       ]
     }
