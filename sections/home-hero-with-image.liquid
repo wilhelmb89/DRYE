@@ -1,5 +1,11 @@
 {%- assign ss = section.settings -%}
 <style>
+  #shopify-section-{{ section.id }}.page-hero {
+    background: #ffffff;
+    border-bottom-left-radius: {{ section.settings.section_border_radius }}px;
+    border-bottom-right-radius: {{ section.settings.section_border_radius }}px;
+    overflow: hidden;
+  }
   #shopify-section-{{ section.id }} .home-hero-container {
     display: flex;
     flex-direction: column;
@@ -95,6 +101,10 @@
     display: none;
   }
   @media screen and (max-width: 768px) {
+    #shopify-section-{{ section.id }}.page-hero {
+      border-bottom-left-radius: {{ section.settings.section_border_radius_tablet }}px;
+      border-bottom-right-radius: {{ section.settings.section_border_radius_tablet }}px;
+    }
     #shopify-section-{{ section.id }} .container {
       padding-block: {{section.settings.padding_y_tablet}}px;
       padding-inline: {{ section.settings.padding_x_tablet }}px;
@@ -121,7 +131,11 @@
       display: none;
     }
   }
-  @media screen and (max-width: 767px) {    
+  @media screen and (max-width: 767px) {
+    #shopify-section-{{ section.id }}.page-hero {
+      border-bottom-left-radius: {{ section.settings.section_border_radius_mobile }}px;
+      border-bottom-right-radius: {{ section.settings.section_border_radius_mobile }}px;
+    }
     #shopify-section-{{ section.id }} .mobile {
       display: block;
     }
@@ -604,6 +618,40 @@
         "id": "check_review_text_color",
         "label": "Text Color",
         "default": "#ffffff"
+      },
+      {
+        "type": "header",
+        "content": "Section Settings"
+      },
+      {
+        "type": "range",
+        "id": "section_border_radius",
+        "min": 0,
+        "max": 200,
+        "step": 2,
+        "unit": "px",
+        "label": "Radius Size",
+        "default": 96
+      },
+      {
+        "type": "range",
+        "id": "section_border_radius_tablet",
+        "min": 0,
+        "max": 200,
+        "step": 2,
+        "unit": "px",
+        "label": "Radius Size (Tablet)",
+        "default": 38
+      },
+      {
+        "type": "range",
+        "id": "section_border_radius_mobile",
+        "min": 0,
+        "max": 200,
+        "step": 2,
+        "unit": "px",
+        "label": "Radius Size (Mobile)",
+        "default": 28
       },
       {
         "type": "header",
