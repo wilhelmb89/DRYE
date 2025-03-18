@@ -43,7 +43,10 @@
     display: flex;
     flex-direction: column;
     gap: {{ section.settings.padding_between_blocks }}px;
-    justify-content: end;
+    justify-content: start;
+  }  
+  .section-{{ section.id }} .rich-block__wrapper .rich-block-card.rich-block-image {
+    justify-content: center;
   }
   .section-{{ section.id }} .rich-block__wrapper .rich-block {
     display: flex;
