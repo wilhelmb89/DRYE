@@ -288,12 +288,16 @@
               </div>
             {% else %}
               <div class="rich-block">
+                {% if block.settings.icon1 %}
                 <img class="rich-block__icon" src="{{ block.settings.icon1 | img_url: '34x' }}" width="34px" height="auto">
+                {% endif %}
                 <h2>{{ block.settings.title1 }}</h2>
                 <span>{{ block.settings.description1 }}</span>
               </div>
               <div class="rich-block">
+                {% if block.settings.icon2 %}
                 <img class="rich-block__icon" src="{{ block.settings.icon2 | img_url: '34x' }}" width="34px" height="auto">
+                {% endif %}
                 <h2>{{ block.settings.title2 }}</h2>
                 <span>{{ block.settings.description2 }}</span>
               </div>
