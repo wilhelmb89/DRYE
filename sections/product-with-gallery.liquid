@@ -621,7 +621,7 @@
         flex: 1;
       }
       .content.mobile {
-        .short-description {
+        .title {
           margin-bottom: {{ section.settings.content_gap_mobile }}px;;
         }
       }
@@ -710,12 +710,12 @@
 <div class="section-{{ section.id }} section-{{ section.id }}-padding">
   <div class="container">
     <div class="content tablet mobile">
-      <h5 class="short-description">
-        {{ section.settings.short_description }}
-      </h5>
       <h1 class="title">
         {{ product.title }}
       </h1>
+      <h5 class="short-description">
+        {{ section.settings.short_description }}
+      </h5>
     </div>
     <div class="product-image-section">
       {%- assign product_thumbnails = section.blocks | where: 'type', 'product-image' -%}
