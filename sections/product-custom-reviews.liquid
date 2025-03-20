@@ -56,7 +56,8 @@
   }
   .section-{{ section.id }} .swiper-pagination {
     width: 110px !important;
-    position: relative;    
+    position: relative;
+    margin-top: -16px;
   }  
   .swiper-pagination-bullet {
     width: 8px;
@@ -175,6 +176,52 @@
       line-height: 24px;
     }
   }
+  .section-{{ section.id }} .product-custom-prev-next {
+    max-width: 1470px;
+    margin: auto;
+    display: flex;
+    justify-content: end;
+
+    prev-next-buttons {
+      display: flex;
+      gap: 5px;
+      width: 159px;
+      justify-content: space-between;
+      margin-right: 70px;
+  
+      * {
+        flex: 0 1 auto;
+        overflow: hidden;
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+  
+        svg {
+          flex-shrink: 0;
+        }
+  
+        .stripe {
+          background: #000000;
+          width: 80px;
+          flex: 0 1 60px;
+          height: 2px;
+          transition: 0.3s;
+        }
+  
+        &.next {
+          justify-content: end;
+        }
+      }
+      *.swiper-button-disabled {
+        opacity: 0.65;
+  
+        .stripe {
+          width: 0;
+          flex: 0 1 0px;
+        }
+      }
+    }
+  }
   @media screen and (min-width: 1441px) {
     .section-{{ section.id }} swiper-container swiper-slide:first-child {
       margin-left: calc(50% - 735px);
@@ -232,6 +279,13 @@
     }
     .section-{{ section.id }} swiper-container swiper-slide:first-child {
       margin-left: 1.25rem;
+    }
+    .section-{{ section.id }} .product-custom-prev-next {
+      justify-content: center;
+
+      prev-next-buttons {
+        margin-right: 0;
+      }
     }
     .section-{{ section.id }} .person-review {
       width: calc(100% - 2.5rem);
@@ -429,7 +483,23 @@
   </div>
   <swiper-container class="product-custom-reviews" init="false">
   </swiper-container>
+  {% if section.settings.show_arrow %}
+  <div class="product-custom-prev-next">
+    <prev-next-buttons>
+      <div class="prev">
+        {%- render 'icon', type: 'arrow-left-big', color: '#000000' -%}
+        <div class="stripe"></div>
+      </div>
+      <div class="next">
+        <div class="stripe"></div>
+        {%- render 'icon', type: 'arrow-right-big', color: '#000000' -%}
+      </div>
+    </prev-next-buttons>
+  </div>
+  {% endif %}
+  {% if section.settings.show_dot %}
   <div class="swiper-pagination"></div>
+  {% endif %}
 </div>
 
 <script>
@@ -486,7 +556,7 @@
     }
 
     function initSlider() {
-      const sliders = document.querySelectorAll('.product-custom-reviews');
+      const sliders = document.querySelectorAll('.section-{{ section.id }} .product-custom-reviews');
       sliders.forEach(slider => {
         const swiperParams = {
           spaceBetween: 20,
@@ -494,7 +564,7 @@
           loop: false,
           slidesPerView: 'auto',
           pagination: {
-            el: ".swiper-pagination",
+            el: ".section-{{ section.id }} .swiper-pagination",
             clickable: true,
             dynamicBullets: true
           },
@@ -510,7 +580,11 @@
             0: {
                slidesPerView: 1
             }
-          }
+          },
+          navigation: {
+            nextEl: slider.nextElementSibling.querySelector('.section-{{ section.id }} .next'),
+            prevEl: slider.nextElementSibling.querySelector('.section-{{ section.id }} .prev'),
+          },
         };
         Object.assign(slider, swiperParams);
         slider.initialize();
@@ -647,6 +721,18 @@
       "unit": "px",
       "label": "Slider Count",
       "default": 10
+    },
+    {
+      "type": "checkbox",
+      "id": "show_dot",
+      "label": "Show dot pagination",
+      "default": true
+    },    
+    {
+      "type": "checkbox",
+      "id": "show_arrow",
+      "label": "Show arrow pagination",
+      "default": false
     },
     {
       "type": "header",
