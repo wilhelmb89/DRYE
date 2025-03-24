@@ -1,22 +1,5 @@
 {
   "sections": {
-    "product_sliders_V9mmYk": {
-      "type": "Product-sliders",
-      "disabled": true,
-      "custom_css": [],
-      "settings": {
-        "free_shipping": "",
-        "review_title": "Reviews",
-        "size_title": "Sizes",
-        "size_text": "Size guide",
-        "size_url": "",
-        "share_text": "Share with friends",
-        "add_text": "Add to cart",
-        "check_text": "Buy now",
-        "bg": "#e5e5e5",
-        "custom_description": "<p>Write your custom description here.<\/p>"
-      }
-    },
     "product_with_gallery_GRxyix": {
       "type": "product-with-gallery",
       "blocks": {
@@ -30,7 +13,7 @@
           "type": "tab",
           "settings": {
             "title": "Description",
-            "content": "<p>Struggling with cracked, itchy, irritated skin from eczema, dermatitis, or sweaty gloves? You’re not alone.<br\/><br\/>##image1##<br\/><br\/>Many silently put up with gloves that trap sweat — making skin problems worse, whether during the day or even overnight while sleeping.<br\/><br\/>This is exactly where a textile with active moisture transport (like DRYE’s) makes all the difference. It wicks away sweat and excess moisture, so your cream can actually work on the skin — instead of the glove turning into a damp, soggy rag.<br\/><br\/>##image2##<br\/><br\/>That’s why we developed DRYE liners — together with Sweden’s leading research institutions over seven years. Unlike cotton or silk that absorb sweat and stay wet, our textile actively moves moisture away from your skin.<br\/><br\/>The result? Drier hands, less irritation, and less need for constant creams and ointments.<\/p><p>✅ No more sweaty, sticky gloves<br\/>✅ Reduce your dependence on ointments and barrier creams<br\/>✅ Wear them at work, during sports, or overnight as part of your skin routine<br\/><br\/>##image3##<\/p><p><strong>Tested by:<\/strong><br\/><br\/>✔️ Hairdressers – less irritation from wet gloves during long shifts<br\/>✔️ Hockey players & athletes – better grip and comfort in sweaty gear<br\/>✔️ Miners & mechanics – fewer flare-ups from trapped sweat<br\/>✔️ Everyday users – support skin recovery overnight without waking up to damp gloves<\/p><p><strong>What makes DRYE different:<\/strong><br\/><br\/>Most glove liners—cotton, silk, bamboo—absorb moisture and stay wet. DRYE uses a breathable, hypoallergenic fabric made from sustainable wood cellulose and an innovative stitching technique that helps move sweat out instead of holding it in.<\/p><p>✔️ Designed for sensitive skin—no irritants<br\/>✔️ Lasts 3-12 months with daily use<br\/>✔️ Washable and reusable—cut down on waste and cost<\/p><p><strong>It’s not a miracle cure. But if sweaty gloves or overnight routines are part of your struggle, DRYE liners might just help your skin feel better—day and night.<\/strong><\/p>",
+            "content": "<p>Struggling with cracked, itchy, irritated skin from eczema, dermatitis, or sweaty gloves? You’re not alone.<br\/><br\/>##image1##<br\/><br\/>Many silently put up with gloves that trap sweat — making skin problems worse, whether during the day or even overnight while sleeping.<br\/><br\/>This is exactly where a textile with active moisture transport (like DRYE’s) makes all the difference. It wicks away sweat and excess moisture, so your cream can actually work on the skin — instead of the glove turning into a damp, soggy rag.<br\/><br\/>##image2##<br\/><br\/>That’s why we developed DRYE liners — together with Sweden’s leading research institutions over seven years. Unlike cotton or silk that absorb sweat and stay wet, our textile actively moves moisture away from your skin.<br\/><br\/>The result? Drier hands, less irritation, and less need for constant creams and ointments.<\/p><p>✅ No more sweaty, sticky gloves<br\/>✅ Reduce your dependence on ointments and barrier creams<br\/>✅ Wear them at work, during sports, or overnight as part of your skin routine<br\/><br\/>##image3##<\/p><p><strong>Tested by:<\/strong><br\/><br\/>✔️ Hairdressers – less irritation from wet gloves during long shifts<br\/>✔️ Hockey players & athletes – better grip and comfort in sweaty gear<br\/>✔️ Miners & mechanics – fewer flare-ups from trapped sweat<br\/>✔️ Everyday users – support skin recovery overnight without waking up to damp gloves<br\/><br\/>##image5##<\/p><p><strong>What makes DRYE different:<\/strong><br\/><br\/>Most glove liners—cotton, silk, bamboo—absorb moisture and stay wet. DRYE uses a breathable, hypoallergenic fabric made from sustainable wood cellulose and an innovative stitching technique that helps move sweat out instead of holding it in.<\/p><p>✔️ Designed for sensitive skin—no irritants<br\/>✔️ Lasts 3-12 months with daily use<br\/>✔️ Washable and reusable—cut down on waste and cost<\/p><p><strong>It’s not a miracle cure. But if sweaty gloves or overnight routines are part of your struggle, DRYE liners might just help your skin feel better—day and night.<\/strong><\/p>",
             "use_additional_section": true,
             "icon1": "shopify:\/\/shop_images\/swedish-invention.png",
             "caption1": "Swedish invention",
@@ -61,6 +44,13 @@
           "settings": {
             "image_key": "##image3##",
             "image": "shopify:\/\/shop_images\/Rityta_1-Photoroom.png"
+          }
+        },
+        "description_image_BzEWzW": {
+          "type": "description_image",
+          "settings": {
+            "image_key": "##image5##",
+            "image": "shopify:\/\/shop_images\/Universal-video.gif"
           }
         },
         "tab_yHgdG6": {
@@ -166,6 +156,7 @@
         "description_image_ATmra6",
         "description_image_RpCW9p",
         "description_image_KXaXWr",
+        "description_image_BzEWzW",
         "tab_yHgdG6",
         "tab_Ly7Pf8",
         "tab_NWA7QA",
@@ -179,7 +170,7 @@
       ],
       "settings": {
         "background_color": "#f3f2f1",
-        "short_description": "Advanced Textile Innovation to Keep Moisture, Irritation & Eczema Away",
+        "short_description": "Advanced textile innovation that prevents irritation and eczema flare-ups by keeping moisture away from the skin layer.",
         "content_gap": 24,
         "content_gap_mobile": 14,
         "title_color": "#000000",
@@ -234,86 +225,6 @@
         "padding_right_mobile": 0
       }
     },
-    "main": {
-      "type": "product",
-      "blocks": {
-        "yotpo_product_reviews_ugc_star_rating_R68tj9": {
-          "type": "shopify:\/\/apps\/yotpo-product-reviews\/blocks\/star-rating\/eb7dfd7d-db44-4334-bc49-c893b51b36cf",
-          "settings": {
-            "product": "{{product}}"
-          }
-        },
-        "tab_dTNqU6": {
-          "type": "tab",
-          "settings": {
-            "title": "Description",
-            "content": "<p>Keep your hands dry and comfortable with DRYE gloves – the first gloves that actively wick moisture away from the skin for long-term relief. Developed over seven years in collaboration with Sweden’s top research institutions, these gloves use advanced moisture-wicking technology to help reduce issues like eczema, dermatitis, and Raynaud’s.<br\/><br\/>Made from sustainable wood cellulose, DRYE gloves create a breathable, hypoallergenic barrier that is gentle on the skin and designed for daily use. Unlike cotton, bamboo, and silk, DRYE gloves offer superior moisture control, making them a better choice for people with skin issues.<br\/><br\/>Continual use has been shown to reduce the need for costly creams and ointments. Lifespan: 3–12 months.<\/p>"
-          }
-        },
-        "tab_zjXixb": {
-          "type": "tab",
-          "settings": {
-            "title": "How to use",
-            "content": "<p>To get the best results from your DRYE eczema-friendly gloves, follow these simple steps:<br\/><br\/><strong>1. Start with Clean, Dry Hands: <\/strong>Before wearing your DRYE gloves, ensure your hands are clean and dry. This helps prevent trapped moisture, which could lead to irritation or discomfort. Proper hand hygiene is key to effective skin protection.<br\/><br\/><strong>2. Wear Under Gloves for Extra Protection: <\/strong>DRYE gloves can be worn under work, sport, or protective gloves for added protection. This extra layer helps shield your skin from dryness and irritants while allowing for comfort and full mobility.<br\/><br\/><strong>3. Wear Daily for Consistent Relief:<\/strong> For lasting relief from eczema, dry, or cracked skin, wear DRYE gloves daily. Regular use soothes skin, reduces flare-ups, and maintains a protective barrier against environmental triggers. Make them part of your daily routine for the best results.<br\/><br\/><strong>4. Wash & Reuse for Long-Term Durability: <\/strong>DRYE gloves are machine washable up to 90°C. After washing, air dry to maintain softness and effectiveness. Reuse regularly for continuous support, keeping the gloves fresh, hygienic, and durable<\/p>"
-          }
-        },
-        "tab_JnhyiY": {
-          "type": "tab",
-          "settings": {
-            "title": "Areas of use",
-            "content": "<p><strong>DRYE Eczema Gloves are the perfect choice for:<\/strong><br\/><br\/><strong>Individuals with Skin Conditions: <\/strong>Alleviate symptoms of eczema, psoriasis, atopic dermatitis, and Raynaud's disease. The moisture-wicking properties help protect against common irritants, creating a dry, comfortable environment for sensitive skin. These gloves provide a superior solution for eczema sufferers, offering better moisture control and skin protection.<br\/><br\/><strong>Athletes: <\/strong>For those engaging in high-intensity activities, these gloves provide dependable moisture control, reducing friction and maintaining grip. Whether you're a hockey player, cross-country skier, or gym enthusiast, DRYE gloves support optimal performance and comfort, providing a better alternative to nitrile gloves or organic cotton gloves in sports environments.<br\/><br\/><strong>Industry Workers: <\/strong>Designed to withstand demanding environments, DRYE gloves are compatible with protective gear and can be comfortably worn for extended periods. Ideal for mechanics, construction workers, and those in labor-intensive fields, they keep hands dry and shielded from the rigors of the job, offering greater comfort than other gloves. They provide lasting eczema relief while also being an effective solution for sore hands caused by prolonged exposure to harsh conditions.<\/p>"
-          }
-        },
-        "tab_CNaA8Y": {
-          "type": "tab",
-          "settings": {
-            "title": "Shipping",
-            "content": "<ul><li>USA & Canada: 10–12 days<\/li><li>UK & Europe: 3–5 days<\/li><li>Australia: 5–10 days<\/li><li>Sweden: 1–3 days<br\/><\/li><\/ul><p><strong>Pre-orders: 5-6 weeks<\/strong><\/p><p>We are currently not shipping to Germany.<\/p>"
-          }
-        },
-        "estimated_delivery_date_plus_delivery_coder_theme_FbCxMB": {
-          "type": "shopify:\/\/apps\/estimated-delivery-date-plus\/blocks\/delivery_coder_theme\/4a0685bc-c234-45b2-8382-5ad6a8e3e3fd",
-          "settings": {}
-        }
-      },
-      "block_order": [
-        "yotpo_product_reviews_ugc_star_rating_R68tj9",
-        "tab_dTNqU6",
-        "tab_zjXixb",
-        "tab_JnhyiY",
-        "tab_CNaA8Y",
-        "estimated_delivery_date_plus_delivery_coder_theme_FbCxMB"
-      ],
-      "disabled": true,
-      "settings": {
-        "image": "shopify:\/\/shop_images\/Capture_2.png",
-        "free_shipping": "",
-        "review_title": "",
-        "size_title": "Sizes",
-        "size_text": "Size guide",
-        "size_url": "https:\/\/granqvists.se\/size\/",
-        "share_text": "",
-        "add_text": "Add to cart (pre-order)",
-        "check_text": "",
-        "bg": "#f3f2f1"
-      }
-    },
-    "before_after_6kFCQK": {
-      "type": "before-after",
-      "disabled": true,
-      "settings": {
-        "title": "",
-        "image_before": "shopify:\/\/shop_images\/Traditional_Glove_Liners_Fail_to_Keep_Moisture_Away.jpg",
-        "image_after": "shopify:\/\/shop_images\/New_Moisture_Wicking_Liner_shows_promising_result.jpg",
-        "image_border_radius": 40,
-        "section_top_padding_desktop": 120,
-        "section_bottom_padding_desktop": 120,
-        "section_top_padding_tablet": 80,
-        "section_bottom_padding_tablet": 80,
-        "section_top_padding_mobile": 64,
-        "section_bottom_padding_mobile": 64
-      }
-    },
     "4d4cfabd4c9b9a806013": {
       "type": "apps",
       "blocks": {
@@ -329,51 +240,6 @@
       ],
       "settings": {}
     },
-    "multicolumn_jKXbXf": {
-      "type": "multicolumn",
-      "blocks": {
-        "column_Ph8Ent": {
-          "type": "column",
-          "settings": {
-            "icon": "shopify:\/\/shop_images\/Shield.png",
-            "title": "Superior Moisture Control",
-            "content": "<p>Proven, market-leading moisture-wicking fabric that reduces irritation and supports healing.<\/p>"
-          }
-        },
-        "column_eAHEKe": {
-          "type": "column",
-          "settings": {
-            "icon": "shopify:\/\/shop_images\/Layers_Minimalistic.png",
-            "title": "Breathable and Hypoallergenic",
-            "content": "<p>Ultra-thin, hypoallergenic design for sensitive skin comfort.<\/p>"
-          }
-        },
-        "column_QJmcYc": {
-          "type": "column",
-          "settings": {
-            "icon": "shopify:\/\/shop_images\/Global.png",
-            "title": "Sustainable and Washable",
-            "content": "<p>Partly biodegradable, lasts 3-12 months, and washable for extended use.<\/p>"
-          }
-        },
-        "column_UHCMyt": {
-          "type": "column",
-          "settings": {
-            "icon": "shopify:\/\/shop_images\/Medal_Ribbons_Star.png",
-            "title": "Swedish Invention",
-            "content": "<p>Developed over 7 years by leading universities, engineers, and professionals in Sweden.<\/p>"
-          }
-        }
-      },
-      "block_order": [
-        "column_Ph8Ent",
-        "column_eAHEKe",
-        "column_QJmcYc",
-        "column_UHCMyt"
-      ],
-      "disabled": true,
-      "settings": {}
-    },
     "17283064569c8da506": {
       "type": "apps",
       "blocks": {
@@ -387,108 +253,6 @@
       ],
       "disabled": true,
       "settings": {}
-    },
-    "faq_QPiUFJ": {
-      "type": "faq",
-      "blocks": {
-        "item_aRUU6C": {
-          "type": "item",
-          "settings": {
-            "title": "asdasdasd",
-            "content": "",
-            "pos": "row"
-          }
-        },
-        "item_79CJem": {
-          "type": "item",
-          "settings": {
-            "title": "asfasfasf",
-            "content": "",
-            "pos": "row"
-          }
-        },
-        "item_ydXJ4t": {
-          "type": "item",
-          "settings": {
-            "title": "adfadfsdfds",
-            "content": "",
-            "pos": "row"
-          }
-        }
-      },
-      "block_order": [
-        "item_aRUU6C",
-        "item_79CJem",
-        "item_ydXJ4t"
-      ],
-      "disabled": true,
-      "settings": {
-        "title": "",
-        "bg": "#ffffff",
-        "p_top": 160,
-        "p_bottom": 300,
-        "p_m_top": 35,
-        "p_m_bottom": 110
-      }
-    },
-    "icons_7kQrHf": {
-      "type": "icons",
-      "blocks": {
-        "icon_nqKDjT": {
-          "type": "icon",
-          "settings": {
-            "image": "shopify:\/\/shop_images\/Capture_e1673a80-78de-44df-a801-56af575336f9.jpg",
-            "image_width": 30
-          }
-        }
-      },
-      "block_order": [
-        "icon_nqKDjT"
-      ],
-      "disabled": true,
-      "custom_css": [
-        "{@media screen and (max-width: 749px) {display: none; visibility: hidden; }}"
-      ],
-      "settings": {
-        "cols_desk": 1,
-        "cols_mob": 1
-      }
-    },
-    "icons_MQKfLT": {
-      "type": "icons",
-      "blocks": {
-        "icon_WrdARL": {
-          "type": "icon",
-          "settings": {
-            "image": "shopify:\/\/shop_images\/Capture_e1673a80-78de-44df-a801-56af575336f9.jpg",
-            "image_width": 89
-          }
-        }
-      },
-      "block_order": [
-        "icon_WrdARL"
-      ],
-      "disabled": true,
-      "custom_css": [
-        "{@media screen and (min-width: 750px) {display: none; visibility: hidden; }}"
-      ],
-      "settings": {
-        "cols_desk": 1,
-        "cols_mob": 1
-      }
-    },
-    "benefits_tnLkbp": {
-      "type": "benefits",
-      "disabled": true,
-      "custom_css": [
-        "h2 {font-size: 38px; font-weight: 400; line-height: 1.5;}",
-        "@media only screen and (max-width: 600px) {h2 {font-size: 20px; font-weight: 400; line-height: 1.5; }}"
-      ],
-      "settings": {
-        "background": "shopify:\/\/shop_images\/Bild_DRYE_3.png",
-        "title": "\"I founded DRYE not just as a business idea; I did it because I wish something like this had existed 20 years ago, when I needed it the most.\" - Wilhelm Bäckström",
-        "bottom_overlap": true
-      }
     },
     "text_with_slider_nUzCQJ": {
       "type": "text-with-slider",
@@ -654,69 +418,6 @@
         "padding_right_mobile": 0
       }
     },
-    "reviews_Lc3Ywk": {
-      "type": "reviews",
-      "blocks": {
-        "review_GDfLD3": {
-          "type": "review",
-          "settings": {
-            "content": "<p>I've had eczema on my hands for a long time, and it's been tough to put on my hockey gloves. These glove liners have improved my experience by reducing friction against my skin. At first, it felt a bit weird, but now I've gotten so used to them that I actually don’t want to play without them anymore. It's just more comfortable with them on.<\/p>",
-            "author": "Linnea Petterson Dove",
-            "prof": "Hockey player, Frölunda HC",
-            "avatar": "shopify:\/\/shop_images\/Capture_8920d451-55cf-4532-87fa-74d46ee6a584.jpg"
-          }
-        },
-        "review_MYNYUm": {
-          "type": "review",
-          "settings": {
-            "content": "<p>I used to have issues with cracked hands and eczema, These gloves have helped a lot. No more itching or sweating, and they fit well.<\/p>",
-            "author": "Adam Hemberg",
-            "prof": "Electrical Mechanic, Tesla",
-            "avatar": "shopify:\/\/shop_images\/DRYE_Moisture_Wicking_Gloves.jpg"
-          }
-        },
-        "review_HjBqcd": {
-          "type": "review",
-          "settings": {
-            "content": "<p>Incredibly good gloves for someone with dry skin. Big plus that these can handle industrial washing and still work perfectly afterward.<\/p>",
-            "author": "Jens Stålnacke",
-            "prof": "Mine Worker",
-            "avatar": "shopify:\/\/shop_images\/DRYE_glove_liners.jpg"
-          }
-        },
-        "review_Kpf3x7": {
-          "type": "review",
-          "settings": {
-            "content": "<p>They keep my hands dry and comfortable. It took a little getting used to, but now they’re just part of my routine.<\/p>",
-            "author": "Emilia A",
-            "prof": "Pastry Chef, Robin Delselius Bageri AB",
-            "avatar": "shopify:\/\/shop_images\/Biodegradable_Moisture-Wicking_Gloves_for_Eczema.jpg"
-          }
-        },
-        "review_7PB4A3": {
-          "type": "review",
-          "settings": {
-            "content": "<p>They’re comfortable to wear, and my hands feel less dry and irritated now. Definitely an improvement.<\/p>",
-            "author": "Sofia Malmberg",
-            "prof": "Hairdresser, Nikita Hair",
-            "avatar": "shopify:\/\/shop_images\/Capture_b4ce3c76-09e5-464d-a280-951cb732a1c1.jpg"
-          }
-        }
-      },
-      "block_order": [
-        "review_GDfLD3",
-        "review_MYNYUm",
-        "review_HjBqcd",
-        "review_Kpf3x7",
-        "review_7PB4A3"
-      ],
-      "disabled": true,
-      "custom_css": [],
-      "settings": {
-        "title": "Reviews",
-        "subtitle": ""
-      }
-    },
     "product_custom_reviews_UJVHhY": {
       "type": "product-custom-reviews",
       "blocks": {
@@ -844,6 +545,8 @@
       ],
       "settings": {
         "slider_review_count": 10,
+        "show_dot": true,
+        "show_arrow": false,
         "spacing_bottom_padding": 48,
         "spacing_bottom_padding_mobile": 24,
         "border_color": "#e5e5e5",
@@ -870,113 +573,6 @@
         "padding_bottom_mobile": 0,
         "padding_left_mobile": 0,
         "padding_right_mobile": 0
-      }
-    },
-    "reviews_new_JtTfkx": {
-      "type": "reviews-new",
-      "blocks": {
-        "review_hW63rA": {
-          "type": "review",
-          "settings": {
-            "content": "",
-            "author": "",
-            "prof": "",
-            "avatar": "shopify:\/\/shop_images\/profile-3.png"
-          }
-        },
-        "review_iBhfN7": {
-          "type": "review",
-          "settings": {
-            "content": "<p>I've had eczema on my hands for a long time, and it's been tough to put on my hockey gloves. These glove liners have improved my experience by reducing friction against my skin. At first, it felt a bit weird, but now I've gotten so used to them that I actually don’t want to play without them anymore. They're just more comfortable.<\/p>",
-            "author": "Linnea Petterson Dove",
-            "prof": "Hockey player, Frölunda HC",
-            "avatar": "shopify:\/\/shop_images\/profile-1.png"
-          }
-        },
-        "review_EETKwN": {
-          "type": "review",
-          "settings": {
-            "content": "<p>Incredibly good gloves for someone with dry skin.<br\/><br\/>Big plus that these can handle industrial washing and still work perfectly afterward.<\/p>",
-            "author": "Jens Stålnacke",
-            "prof": "Mining worker",
-            "avatar": "shopify:\/\/shop_images\/profile-2.png"
-          }
-        },
-        "review_NXpALN": {
-          "type": "review",
-          "settings": {
-            "content": "<p>They’re comfortable to wear, and my hands feel less dry and irritated now. Definitely an improvement.<\/p>",
-            "author": "Sofia Malmberg",
-            "prof": "Hairdresser, Nikita Hair",
-            "avatar": "shopify:\/\/shop_images\/Capture_b4ce3c76-09e5-464d-a280-951cb732a1c1.jpg"
-          }
-        },
-        "review_dRQNMR": {
-          "type": "review",
-          "settings": {
-            "content": "<p>I used to have issues with cracked hands and eczema, These gloves have helped a lot. No more itching or sweating, and they fit well.<\/p>",
-            "author": "Adam Hemberg",
-            "prof": "Electrical Mechanic, Tesla",
-            "avatar": "shopify:\/\/shop_images\/DRYE_Moisture_Wicking_Gloves.jpg"
-          }
-        }
-      },
-      "block_order": [
-        "review_hW63rA",
-        "review_iBhfN7",
-        "review_EETKwN",
-        "review_NXpALN",
-        "review_dRQNMR"
-      ],
-      "disabled": true,
-      "settings": {
-        "background_color": "#f3f2f1",
-        "all_text_color": "#000000",
-        "title": "Reviews",
-        "title_font_size_desktop": 48,
-        "title_line_height_desktop": 55,
-        "title_font_size_tablet": 42,
-        "title_line_height_tablet": 50,
-        "title_font_size_mobile": 24,
-        "title_line_height_mobile": 30,
-        "subtitle": "",
-        "name_font_size_desktop": 18,
-        "name_line_height_desktop": 24,
-        "name_font_size_tablet": 18,
-        "name_line_height_tablet": 24,
-        "name_font_size_mobile": 18,
-        "name_line_height_mobile": 24
-      }
-    },
-    "multirows_HLBpdD": {
-      "type": "multirows",
-      "blocks": {
-        "row_3cgMJA": {
-          "type": "row",
-          "settings": {
-            "title": "Pre-Launch Announcement",
-            "content": "<p>Exciting News! Starting in September, DRYE will be available for the consumer market!<br\/><br\/>• Join us to discuss hand health<\/p><p>• Share experiences and insights<\/p><p>• Learn more about our gloves and pre-launch details<\/p><p>• Gain access to benefits <\/p><p>• Enjoy behind-the-scenes content and more!<\/p>",
-            "button_text": "Join our community",
-            "button_url": "https:\/\/www.facebook.com\/groups\/972057658026060",
-            "image": "shopify:\/\/shop_images\/Bild_DRYE_a730e397-3cba-405a-9f5f-e66ffb247940.jpg",
-            "position": "row-reverse"
-          }
-        }
-      },
-      "block_order": [
-        "row_3cgMJA"
-      ],
-      "disabled": true,
-      "custom_css": [
-        "{padding-top: 5px; padding-bottom: 95px;}"
-      ],
-      "settings": {
-        "special_title": true,
-        "overlap": false,
-        "title": "",
-        "invert": true,
-        "bg": "#ffffff",
-        "tx": "#111111"
       }
     },
     "before_after_7gx6fG": {
@@ -1214,7 +810,7 @@
             "title": "Video1",
             "media_mode": "url",
             "video": "shopify:\/\/files\/videos\/introduce.mp4",
-            "video_url": "https:\/\/youtu.be\/EqgUu6xIPGs?si=-EIEPzIC1sE4h6UG",
+            "video_url": "https:\/\/www.youtube.com\/embed\/EqgUu6xIPGs?si=N0ks8laRZNSA6V2b",
             "video_preview": "shopify:\/\/shop_images\/IMG_7446_1.jpg",
             "video_width": "1108",
             "video_height": "623",
@@ -1255,12 +851,27 @@
             "icon_width_tablet": 70,
             "icon_width_mobile": 70
           }
+        },
+        "card_Yzikdx": {
+          "type": "card",
+          "settings": {
+            "title": "Video 4",
+            "media_mode": "url",
+            "video_url": "https:\/\/www.youtube.com\/embed\/Bh0GDDorH1c?si=p0itFh1ptKmW9mup",
+            "video_preview": "shopify:\/\/shop_images\/Screenshot_3.png",
+            "video_width": "1108",
+            "video_height": "623",
+            "icon_width": 80,
+            "icon_width_tablet": 70,
+            "icon_width_mobile": 70
+          }
         }
       },
       "block_order": [
         "card_qcVBhn",
         "card_yjyLzM",
-        "card_NapNAi"
+        "card_NapNAi",
+        "card_Yzikdx"
       ],
       "settings": {
         "background_color": "#ffffff",
@@ -1572,6 +1183,14 @@
     "faq_9EETYf": {
       "type": "faq",
       "blocks": {
+        "item_MYEmmE": {
+          "type": "item",
+          "settings": {
+            "title": "When can I expect results?",
+            "content": "<p>Avoiding moisture has an immediate effect — hands stay dry, irritation decreases, and the skin feels softer right away. Many also notice that within just two weeks, cracks start to heal, redness fades, and the need for moisturizing decreases.<\/p>",
+            "pos": "row"
+          }
+        },
         "item_kP4MFq": {
           "type": "item",
           "settings": {
@@ -1622,6 +1241,7 @@
         }
       },
       "block_order": [
+        "item_MYEmmE",
         "item_kP4MFq",
         "item_8QiHYb",
         "item_3wWBk7",
@@ -1636,79 +1256,6 @@
         "p_bottom": 165,
         "p_m_top": 35,
         "p_m_bottom": 110
-      }
-    },
-    "card_with_line_A4cNCy": {
-      "type": "card-with-line",
-      "blocks": {
-        "card_mWnbcf": {
-          "type": "card",
-          "settings": {
-            "icon": "shopify:\/\/shop_images\/calendar.png",
-            "text": "<p>Lorem ipsum dolor sit amet consectetur. Ut nisl ipsum suspendisse pulvinar risus. Nisl fermentum quis vel arcu.<\/p>"
-          }
-        },
-        "card_phza9F": {
-          "type": "card",
-          "settings": {
-            "icon": "shopify:\/\/shop_images\/package.png",
-            "text": "<p>Lorem ipsum dolor sit amet consectetur. Egestas scelerisque sem egestas ac dui sed. Et pharetra <\/p>"
-          }
-        },
-        "card_BRNM8X": {
-          "type": "card",
-          "settings": {
-            "icon": "shopify:\/\/shop_images\/truck.png",
-            "text": "<p>Lorem ipsum dolor sit amet consectetur. Laoreet ultricies rhoncus lacus sapien. Vel erat eros ullamcorper sed.<\/p>"
-          }
-        }
-      },
-      "block_order": [
-        "card_mWnbcf",
-        "card_phza9F",
-        "card_BRNM8X"
-      ],
-      "disabled": true,
-      "settings": {
-        "background_color": "#ffffff",
-        "title": "Delivery",
-        "title_color": "#000000",
-        "title_alignment": "center",
-        "title_font_size": 48,
-        "title_line_height": 55,
-        "title_top_padding": 0,
-        "title_bottom_padding": 60,
-        "title_alignment_mobile": "left",
-        "title_font_size_mobile": 28,
-        "title_line_height_mobile": 32,
-        "title_top_padding_mobile": 0,
-        "title_bottom_padding_mobile": 60,
-        "line_height": 1,
-        "line_color": "#e5e5e5",
-        "dot_size": 10,
-        "dot_position": 22,
-        "dot_color": "#000000",
-        "block_count": 3,
-        "block_direction": "row",
-        "block_direction_mobile": "column",
-        "block_spacing": 50,
-        "icon_area_size": 64,
-        "icon_area_color": "#e5e5e5",
-        "icon_size": 30,
-        "padding_between_line_and_icon": 24,
-        "padding_between_icon_and_text": 40,
-        "padding_between_icon_and_text_mobile": 20,
-        "text_color": "#000000",
-        "text_font_size": 16,
-        "text_line_height": 24,
-        "text_font_size_mobile": 16,
-        "text_line_height_mobile": 24,
-        "section_top_padding": 120,
-        "section_bottom_padding": 120,
-        "section_top_padding_tablet": 80,
-        "section_bottom_padding_tablet": 80,
-        "section_top_padding_mobile": 40,
-        "section_bottom_padding_mobile": 40
       }
     },
     "rich_color_text_Y77cab": {
@@ -1769,29 +1316,17 @@
     }
   },
   "order": [
-    "product_sliders_V9mmYk",
     "product_with_gallery_GRxyix",
-    "main",
-    "before_after_6kFCQK",
     "4d4cfabd4c9b9a806013",
-    "multicolumn_jKXbXf",
     "17283064569c8da506",
-    "faq_QPiUFJ",
-    "icons_7kQrHf",
-    "icons_MQKfLT",
-    "benefits_tnLkbp",
     "text_with_slider_nUzCQJ",
-    "reviews_Lc3Ywk",
     "product_custom_reviews_UJVHhY",
-    "reviews_new_JtTfkx",
-    "multirows_HLBpdD",
     "before_after_7gx6fG",
     "usp_product_JWdjqV",
     "rich_text_with_image_6awd6R",
     "columns_with_video_kRmqXB",
     "table_with_mark_xkzqbz",
     "faq_9EETYf",
-    "card_with_line_A4cNCy",
     "rich_color_text_Y77cab"
   ]
 }

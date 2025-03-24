@@ -730,7 +730,7 @@
                   <img
                   class="preview-trigger"
                   data-preview-id="0"
-                  src="{{ ss.image | img_url: '600x' }}"
+                  src="{{ ss.image | img_url: '600x', format: 'pjpg' }}"
                   width="100%"
                   height="auto"/>
                 </div>
@@ -752,7 +752,7 @@
                 <img
                   class="preview-trigger"
                   data-preview-id="{{ forloop.index }}"
-                  src="{{ product_thumbnail.settings.preview_image | img_url: '600x' }}"
+                  src="{{ product_thumbnail.settings.preview_image | img_url: '600x', format: 'pjpg' }}"
                   width="100%"
                   height="auto"/>
               </div>
@@ -771,19 +771,19 @@
             <img
               class="desktop preview-trigger"
               data-preview-id="{{ forloop.index }}"
-              src="{{ product_thumbnail.settings.image | img_url: '1024x' }}"
+              src="{{ product_thumbnail.settings.image | img_url: '1024x', format: 'pjpg' }}"
               width="100%"
               height="auto"/>
             <img
               class="tablet preview-trigger"
               data-preview-id="{{ forloop.index }}"
-              src="{{ product_thumbnail.settings.image_tablet | img_url: '1024x' }}"
+              src="{{ product_thumbnail.settings.image_tablet | img_url: '1024x', format: 'pjpg' }}"
               width="100%"
               height="auto"/>
             <img
               class="mobile preview-trigger"
               data-preview-id="{{ forloop.index }}"
-              src="{{ product_thumbnail.settings.image_mobile | img_url: '1024x' }}"
+              src="{{ product_thumbnail.settings.image_mobile | img_url: '1024x', format: 'pjpg' }}"
               width="100%"
               height="auto"/>
           </div>
@@ -932,7 +932,7 @@
               {%- assign content = tab.settings.content -%}  
               {%- for block in description_image_blocks %}
                 {%- if content contains block.settings.image_key %}
-                  {%- assign desc_img = block.settings.image | img_url: '640x' -%}
+                  {%- assign desc_img = block.settings.image | img_url: '640x', format: 'pjpg' -%}
                   {%- capture img_tag %}<img src="{{ desc_img }}" width="100%" height="auto">{% endcapture %}
                   {%- assign content = content | replace: block.settings.image_key, img_tag %}
                 {%- endif %}
@@ -1145,7 +1145,7 @@
             <div class="slider-image">
               <img
               class=""
-              src="{{ ss.image | img_url: '2000x' }}"
+              src="{{ ss.image | img_url: '2000x', format: 'pjpg' }}"
               width="100%"
               height="auto"/>
             </div>
@@ -1166,7 +1166,7 @@
           <div class="slider-image">
             <img
               class=""
-              src="{{ product_thumbnail.settings.preview_image | img_url: '2000x' }}"
+              src="{{ product_thumbnail.settings.preview_image | img_url: '2000x', format: 'pjpg' }}"
               width="100%"
               height="auto"/>
           </div>
