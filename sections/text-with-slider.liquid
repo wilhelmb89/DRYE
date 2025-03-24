@@ -161,7 +161,7 @@
             {%- endstyle -%}
             <div class="block-{{ block.id }} rich-text-logo">
               <img
-                src="{{ block.settings.logo | img_url: '360x' | append: 'x' }}"
+                src="{{ block.settings.logo | img_url: '360x', format: 'pjpg' }}"
                 width="100%"
                 height="auto"/>
             </div>
@@ -201,7 +201,7 @@
               {%- endif -%}                
             {% else %} {% comment %}url{% endcomment %}
               {%- liquid
-                 assign video_preview = block.settings.video_preview | img_url: '1024x'
+                 assign video_preview = block.settings.video_preview | img_url: '1024x', format: 'pjpg'
                  assign video_url = block.settings.video_url
                  assign video_width = block.settings.video_width | plus: 0
                  assign video_height = block.settings.video_height | plus: 0                 
@@ -213,7 +213,7 @@
             <div class="video-container">
               <div class="video-thumbnail-cover">
                 <div class="video-play-button">
-                  <img src="{{ block.settings.play_icon | img_url: '80x' }}" width="80px" height="80px">
+                  <img src="{{ block.settings.play_icon | img_url: '80x', format: 'pjpg' }}" width="80px" height="80px">
                 </div>
                 <img
                   class="video-thumbnail"

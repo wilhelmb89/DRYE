@@ -372,7 +372,7 @@
                     }
                   }
                 {% endstyle %}
-                <img class="rich-block__image" src="{{ block.settings.preview_image | img_url: '480x' }}" width="100%" height="auto">
+                <img class="rich-block__image" src="{{ block.settings.preview_image | img_url: '480x', format: 'pjpg' }}" width="100%" height="auto">
                 <div class="rich-block__icon">
                   {%- render 'icon-quote', color: section.settings.icon_color -%}
                 </div>

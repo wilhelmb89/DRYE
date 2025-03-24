@@ -193,7 +193,7 @@
   {%- if background_image != blank -%}
     <img
       class="background-image desktop"
-      src="{{ background_image | img_url: '1920x' }}"
+      src="{{ background_image | img_url: '1920x', format: 'pjpg' }}"
       width="100%"
       height="auto"/>
     {%- if ss.background_image_tablet != blank -%}
@@ -201,7 +201,7 @@
     {%- endif -%}
     <img
       class="background-image tablet"
-      src="{{ background_image_tablet | img_url: '768x' }}"
+      src="{{ background_image_tablet | img_url: '768x', format: 'pjpg' }}"
       width="100%"
       height="auto"/>
     {%- if ss.background_image_mobile != blank -%}
@@ -209,7 +209,7 @@
     {%- endif -%}
     <img
       class="background-image mobile"
-      src="{{ background_image_mobile | img_url: '480x' }}"
+      src="{{ background_image_mobile | img_url: '480x', format: 'pjpg' }}"
       width="100%"
       height="auto"/>
   {%- endif -%}
