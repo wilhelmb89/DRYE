@@ -610,7 +610,7 @@
         max-height:100%;
       }
       .product-image-section .product-slider {
-        min-height: 908px;
+        min-height: 490px;
       }
       .product-image-section .product-thumnail-pagination {
         {% if section.settings.use_sliderbar_mobile %}
@@ -921,7 +921,7 @@
         <div class="custom-select-wrapper">
           <div class="custom-select">
             <div class="custom-select-trigger">
-              <span>Choose your size</span>
+              <span>{{ 'product.choose_your_size' | t }}</span>
               {% render 'icon-arrow-down' %}
               {% render 'icon-arrow-up' %}
             </div>

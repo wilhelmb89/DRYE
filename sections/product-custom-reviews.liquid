@@ -146,9 +146,11 @@
     }
     .person-review-tags {
       display: flex;
-      justify-content: space-between;
+      justify-content: flex-start;
       padding-bottom: 30px;
       border-bottom: solid 1px #DADADA;
+      gap: 7px;
+      flex-wrap: wrap;
 
       .person-review-tag {
         font-family: "SpaceGrotesk";
@@ -290,8 +292,13 @@
     .section-{{ section.id }} .person-review {
       width: calc(100% - 2.5rem);
       height: {{ section.settings.review_block_height }}px;
+      {% if section.settings.hide_border_mobile %}
+      padding: {{ section.settings.review_block_y_padding_mobile }}px 0;
+      border: 0;
+      {% else %}
       padding: {{ section.settings.review_block_y_padding_mobile }}px {{ section.settings.review_block_x_padding_mobile }}px;
       border: solid 1px {{ section.settings.border_color }};
+      {% endif %}
   
       .author-info {
         flex-direction: column;
@@ -761,6 +768,12 @@
     {
       "type": "header",
       "content": "Review Block"
+    },
+    {
+      "type": "checkbox",
+      "id": "hide_border_mobile",
+      "label": "Hide Border (Mobile)",
+      "default": false
     },
     {
       "type": "color",
