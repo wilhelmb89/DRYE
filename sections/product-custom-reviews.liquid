@@ -292,13 +292,8 @@
     .section-{{ section.id }} .person-review {
       width: calc(100% - 2.5rem);
       height: {{ section.settings.review_block_height }}px;
-      {% if section.settings.hide_border_mobile %}
-      padding: {{ section.settings.review_block_y_padding_mobile }}px 0;
-      border: 0;
-      {% else %}
       padding: {{ section.settings.review_block_y_padding_mobile }}px {{ section.settings.review_block_x_padding_mobile }}px;
       border: solid 1px {{ section.settings.border_color }};
-      {% endif %}
   
       .author-info {
         flex-direction: column;
@@ -355,10 +350,16 @@
         justify-content: flex-start;
         flex-wrap: wrap;
         gap: 10px;
+        {% if section.settings.hide_tags_mobile %}
+        padding-bottom: 0;
+        {% endif %}
   
         .person-review-tag {
           font-size: 14px;
           padding: 8px 12px;
+          {% if section.settings.hide_tags_mobile %}
+          display: none;
+          {% endif %}
         }
       }
       .person-review-title {
@@ -771,8 +772,8 @@
     },
     {
       "type": "checkbox",
-      "id": "hide_border_mobile",
-      "label": "Hide Border (Mobile)",
+      "id": "hide_tags_mobile",
+      "label": "Hide Tags (Mobile)",
       "default": false
     },
     {
