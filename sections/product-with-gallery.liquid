@@ -642,6 +642,10 @@
       .content {
         max-width: 100%;
 
+        &.mobile {
+          margin-bottom: -20px;
+        }
+
         .title {
           font-size: {{ section.settings.title_font_size_mobile }}px !important;
           line-height: {{ section.settings.title_line_height_mobile }}px !important;
@@ -976,7 +980,7 @@
               {%- assign content = tab.settings.content -%}  
               {%- for block in description_image_blocks %}
                 {%- if content contains block.settings.image_key %}
-                  {%- assign desc_img = block.settings.image | img_url: '640x', format: 'pjpg' -%}
+                  {%- assign desc_img = block.settings.image | img_url: '640x' -%}
                   {%- capture img_tag %}<img src="{{ desc_img }}" width="100%" height="auto">{% endcapture %}
                   {%- assign content = content | replace: block.settings.image_key, img_tag %}
                 {%- endif %}
@@ -1307,6 +1311,16 @@
           }
         });
         item.classList.toggle("active");
+
+        let headerOffset = 134;
+        if (window.innerWidth <= 768) {
+          headerOffset = 94;
+        }
+        const itemPosition = item.getBoundingClientRect().top + window.pageYOffset;
+        window.scrollTo({
+          top: itemPosition - headerOffset,
+          behavior: "smooth",
+        });
       });
     });
 

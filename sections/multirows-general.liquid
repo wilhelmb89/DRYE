@@ -20,14 +20,17 @@
       z-index: 5;
       @media screen and (max-width: 767px) {
         margin-top: -28px;
-        }
       }
+    }
   {%- endif -%}
   #shopify-section-{{ section.id }}.multirows-section .container .rows .row .content {
     flex: 1;
   }
   #shopify-section-{{ section.id }}.multirows-section .container .rows .row .image {
     flex: 1;
+  }
+  #shopify-section-{{ section.id }} .row .content .bottom .text ul {
+    list-style: disc;
   }
   @media screen and (min-width: 1025px) {
     #shopify-section-{{ section.id }} .container .rows .row .image.desktop{
@@ -126,17 +129,17 @@
           </div>
           {%- if bs.image -%}
             <div class="image desktop">
-              {{ bs.image | image_url: width: '1024', format: 'pjpg' | image_tag: loading: 'lazy' }}
+              {{ bs.image | image_url: width: '1024' | image_tag: loading: 'lazy' }}
             </div>
           {%- endif -%}
           {%- if bs.image_tablet -%}
             <div class="image tablet">
-              {{ bs.image_tablet | image_url: width: '768', format: 'pjpg' | image_tag: loading: 'lazy' }}
+              {{ bs.image_tablet | image_url: width: '768' | image_tag: loading: 'lazy' }}
             </div>
           {%- endif -%}
           {%- if bs.image_mobile -%}
             <div class="image mobile">
-              {{ bs.image_mobile | image_url: width: '630', format: 'pjpg' | image_tag: loading: 'lazy' }}
+              {{ bs.image_mobile | image_url: width: '630' | image_tag: loading: 'lazy' }}
             </div>
           {%- endif -%}
         </div>
