@@ -1,0 +1,729 @@
+{% style %}
+  .section-{{ section.id }} {
+    background: {{ section.settings.background_color }};
+    padding-top: {{ section.settings.section_top_padding }}px;
+    padding-bottom: {{ section.settings.section_bottom_padding }}px;
+  }
+  .section-{{ section.id }} .page-title {
+    color: {{ section.settings.title_color }};
+    font-family: ClashGrotesk-Variable;
+    font-size: {{ section.settings.title_font_size }}px;
+    font-weight: 300;
+    line-height: {{ section.settings.title_line_height }}px;
+    text-align: {{ section.settings.title_alignment }};
+    margin-top: {{ section.settings.title_top_padding }}px;
+    margin-bottom: {{ section.settings.title_bottom_padding }}px;
+  }
+  .section-{{ section.id }} .page-card-list {
+    display: grid;
+    grid-template-columns: repeat({{ section.settings.columns_count }}, auto);
+    grid-template-rows: repeat({{ section.settings.rows_count }}, auto);
+    width: 100%;
+    margin: auto;
+    border: {{ section.settings.line_height }}px solid {{ section.settings.line_color}};
+  }
+  .section-{{ section.id }} .page-card {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: {{ section.settings.line_height }}px solid {{ section.settings.line_color}};
+  }
+  .section-{{ section.id }} .page-card-body {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: {{ section.settings.content_flex_gap }}px;
+    padding: {{ section.settings.cell_y_padding}}px {{ section.settings.cell_x_padding }}px;
+  }
+  .section-{{ section.id }} .page-header-card .page-card-body {
+    padding: {{ section.settings.header_cell_y_padding}}px {{ section.settings.header_cell_x_padding }}px;
+  }
+  .section-{{ section.id }} .page-card-list .page-card-caption {
+    font-family: "SpaceGrotesk";
+    font-size: {{ section.settings.caption_font_size }}px;
+    line-height: {{ section.settings.caption_line_height }}px;
+  }
+  .section-{{ section.id }} .page-card-list .page-card-description {
+    font-size: {{ section.settings.description_font_size }}px;
+    font-weight: 300;
+    line-height: {{ section.settings.description_line_height }}px;
+    letter-spacing: -.8px;
+  }
+  .section-{{ section.id }} .page-card-body .page-card-icon {
+    width: {{ section.settings.icon_size }}px;
+  }
+  @media screen and (min-width: 1441px) {
+    .container {
+      max-width: 1470px;
+      padding-inline: 0;
+    }
+  }
+  @media screen and (max-width: 768px) {
+    .section-{{ section.id }} {
+      padding-top: {{ section.settings.section_top_padding_tablet }}px;
+      padding-bottom: {{ section.settings.section_bottom_padding_tablet }}px;
+    }
+    .section-{{ section.id }} .page-card-list .page-card-caption {
+      font-size: {{ section.settings.caption_font_size_mobile }}px;
+      {% if section.settings.caption_line_height_mobile == 0 %}
+        line-height: normal;
+      {% else %}
+        line-height: {{ section.settings.caption_line_height_mobile }}px;
+      {% endif %}
+    }
+    .section-{{ section.id }} .page-card-list .page-card-description {
+      font-size: {{ section.settings.description_font_size_mobile }}px;
+      line-height: {{ section.settings.description_line_height_mobile }}px;
+    }    
+    .section-{{ section.id }} .page-card-body .page-card-icon {
+      width: {{ section.settings.icon_size_tablet }}px;
+    }
+    .section-{{ section.id }} .page-card-list {
+      grid-template-columns: 
+        {% for i in (1..section.settings.columns_count) %}
+          {% if forloop.index >= section.settings.start_column_with_fixed_size_tablet %}
+            {% if section.settings.use_fit_content_tablet %}
+              {{ section.settings.cell_width_tablet}}px 
+            {% else %}
+              auto 
+            {% endif %}
+          {% else %}
+            auto 
+          {% endif %}
+        {% endfor %};
+    }
+  }
+  @media screen and (max-width: 480px) {
+    .section-{{ section.id }} {
+      padding-top: {{ section.settings.section_top_padding_mobile }}px;
+      padding-bottom: {{ section.settings.section_bottom_padding_mobile }}px;
+    }
+    .section-{{ section.id }} .page-title {
+      font-size: {{ section.settings.title_font_size_mobile }}px;
+      line-height: {{ section.settings.title_line_height_mobile }}px;
+      margin-top: {{ section.settings.title_top_padding_mobile }}px;
+      margin-bottom: {{ section.settings.title_bottom_padding_mobile }}px;
+    }
+    .section-{{ section.id }} .page-card-body .page-card-icon {
+      width: {{ section.settings.icon_size_mobile }}px;
+    }
+    .section-{{ section.id }} .page-card-list {
+      grid-template-columns: 
+        {% for i in (1..section.settings.columns_count) %}
+          {% if forloop.index >= section.settings.start_column_with_fixed_size_mobile %}
+            {% if section.settings.use_fit_content_mobile %}
+              {{ section.settings.cell_width_mobile }}px 
+            {% else %}
+              auto 
+            {% endif %}
+          {% else %}
+            auto 
+          {% endif %}
+        {% endfor %};
+    }
+  }
+{% endstyle %}
+
+<div class="section-{{ section.id }}">
+  <div class="container">
+    {% if section.settings.title != blank %}
+      <h2 class="page-title" >
+        {{ section.settings.title }}
+      </h2>
+    {% endif %}
+    <div class="page-card-list">
+    {% for block in section.blocks %}
+      {% style %}
+        .block-{{ block.id }} .page-card-body {
+          min-height: {{ block.settings.cell_height }}px;
+          {% if block.settings.content_alignment == "left" %}
+          align-items: start;
+          {% elsif block.settings.content_alignment == "center" %}
+          align-items: center;
+          {% else %}
+          align-items: end;
+          {% endif %}
+        }
+        .block-{{ block.id }} .page-card-body .page-card-caption {
+          text-align: {{ block.settings.content_alignment }};
+        }
+        @media screen and (max-width: 480px) {
+          {% if block.settings.use_vertical_write_mode %}
+            .block-{{ block.id }} .page-card-body .page-card-caption {
+              writing-mode: vertical-rl;
+              transform: rotate(180deg);
+            {% if forloop.index >= section.settings.start_column_with_fixed_size_mobile %}
+              height: {{ section.settings.cell_height_mobile }}px;
+            {% endif %}
+            }
+          {% endif %}
+        }
+      {% endstyle %}
+      <div class="block-{{ block.id }} page-card {% if block.settings.is_header %}page-header-card{% endif %}">
+        <div class="page-card-body">
+          {% if block.settings.caption != blank %}
+          <div class="page-card-caption">{{ block.settings.caption }}</div>
+          {% endif %}
+          {% if block.settings.description != blank %}
+          <div class="page-card-description">{{ block.settings.description }}</div>
+          {% endif %}
+          {% if block.settings.icon != blank %}
+            <img
+              class="page-card-icon"
+              src="{{ block.settings.icon | img_url: section.settings.icon_size | append: 'x' }}"
+              width="{{ section.settings.icon_size }}px"
+              height="auto"/>
+          {% endif %}
+        </div>
+      </div>
+    {% endfor %}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Table With Mark",
+  "tag": "section",
+  "class": "section",
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
+  "settings": [
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background Color",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "header",
+      "content": "Title"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title"
+    },
+    {
+      "type": "color",
+      "id": "title_color",
+      "label": "Color",
+      "default": "#000000"
+    },
+    {
+      "type": "select",
+      "id": "title_alignment",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ],
+      "default": "center",
+      "label": "Alignment"
+    },
+    {
+      "type": "range",
+      "id": "title_font_size",
+      "min": 0,
+      "max": 64,
+      "step": 1,
+      "unit": "px",
+      "label": "Font Size",
+      "default": 48
+    },
+    {
+      "type": "range",
+      "id": "title_line_height",
+      "min": 0,
+      "max": 64,
+      "step": 1,
+      "unit": "px",
+      "label": "Line Height",
+      "default": 55
+    },
+    {
+      "type": "range",
+      "id": "title_top_padding",
+      "min": 0,
+      "max": 64,
+      "step": 4,
+      "unit": "px",
+      "label": "Top Padding",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "title_bottom_padding",
+      "min": 0,
+      "max": 64,
+      "step": 4,
+      "unit": "px",
+      "label": "Bottom Padding",
+      "default": 60
+    },
+    {
+      "type": "range",
+      "id": "title_font_size_mobile",
+      "min": 0,
+      "max": 64,
+      "step": 1,
+      "unit": "px",
+      "label": "Font Size(Mobile)",
+      "default": 48
+    },
+    {
+      "type": "range",
+      "id": "title_line_height_mobile",
+      "min": 0,
+      "max": 64,
+      "step": 1,
+      "unit": "px",
+      "label": "Line Height(Mobile)",
+      "default": 55
+    },
+    {
+      "type": "range",
+      "id": "title_top_padding_mobile",
+      "min": 0,
+      "max": 64,
+      "step": 4,
+      "unit": "px",
+      "label": "Top Padding(Mobile)",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "title_bottom_padding_mobile",
+      "min": 0,
+      "max": 64,
+      "step": 4,
+      "unit": "px",
+      "label": "Bottom Padding(Mobile)",
+      "default": 60
+    },    
+    {
+      "type": "header",
+      "content": "Table"
+    },
+    {
+      "type": "color",
+      "id": "line_color",
+      "label": "Line Color",      
+      "default": "#000000"
+    },
+    {
+      "type": "range",
+      "id": "line_height",
+      "min": 0,
+      "max": 10,
+      "step": 1,
+      "unit": "px",
+      "label": "Height",
+      "default": 1
+    },    
+    {
+      "type": "range",
+      "id": "rows_count",
+      "min": 0,
+      "max": 6,
+      "step": 1,
+      "unit": "x",
+      "label": "Rows Count",
+      "default": 3
+    },
+    {
+      "type": "range",
+      "id": "columns_count",
+      "min": 0,
+      "max": 12,
+      "step": 1,
+      "unit": "x",
+      "label": "Columns Count",
+      "default": 6
+    },
+    {
+      "type": "range",
+      "id": "content_flex_gap",
+      "min": 0,
+      "max": 24,
+      "step": 1,
+      "unit": "x",
+      "label": "Gap",
+      "default": 12
+    },
+    {
+      "type": "range",
+      "id": "icon_size",
+      "min": 0,
+      "max": 32,
+      "step": 1,
+      "unit": "px",
+      "label": "Icon Size",
+      "default": 32
+    },
+    {
+      "type": "range",
+      "id": "icon_size_tablet",
+      "min": 0,
+      "max": 64,
+      "step": 4,
+      "unit": "x",
+      "label": "Icon Size(Tablet)",
+      "default": 24
+    },
+    {
+      "type": "range",
+      "id": "icon_size_mobile",
+      "min": 0,
+      "max": 64,
+      "step": 4,
+      "unit": "x",
+      "label": "Icon Size(Mobile)",
+      "default": 24
+    },
+    {
+      "type": "range",
+      "id": "cell_x_padding",
+      "min": 0,
+      "max": 64,
+      "step": 2,
+      "unit": "px",
+      "label": "Cell Padding(X)",
+      "default": 32
+    },
+    {
+      "type": "range",
+      "id": "cell_y_padding",
+      "min": 0,
+      "max": 64,
+      "step": 2,
+      "unit": "px",
+      "label": "Cell Padding(Y)",
+      "default": 24
+    },
+    {
+      "type": "range",
+      "id": "header_cell_x_padding",
+      "min": 0,
+      "max": 64,
+      "step": 2,
+      "unit": "px",
+      "label": "Header Cell Padding(X)",
+      "default": 32
+    },
+    {
+      "type": "range",
+      "id": "header_cell_y_padding",
+      "min": 0,
+      "max": 64,
+      "step": 2,
+      "unit": "px",
+      "label": "Header Cell Padding(Y)",
+      "default": 32
+    },
+    {
+      "type": "header",
+      "content": "Column"
+    },
+    {
+      "type": "checkbox",
+      "id": "use_fit_content_tablet",
+      "label": "Use Fit Content (Tablet)",
+      "default": false
+    },
+    {
+      "type": "range",
+      "id": "start_column_with_fixed_size_tablet",
+      "min": 0,
+      "max": 12,
+      "step": 1,
+      "unit": "x",
+      "label": "Start Column With Fixed Size (Tablet)",
+      "default": 2
+    },
+    {
+      "type": "range",
+      "id": "cell_width_tablet",
+      "min": 0,
+      "max": 132,
+      "step": 2,
+      "unit": "x",
+      "label": "Cell Width (Tablet)",
+      "default": 130
+    },
+    {
+      "type": "checkbox",
+      "id": "use_fit_content_mobile",
+      "label": "Use Fit Content (Mobile)",
+      "default": false
+    },
+    {
+      "type": "range",
+      "id": "start_column_with_fixed_size_mobile",
+      "min": 0,
+      "max": 12,
+      "step": 1,
+      "unit": "x",
+      "label": "Start Column With Fixed Size (Mobile)",
+      "default": 2
+    },
+    {
+      "type": "range",
+      "id": "cell_width_mobile",
+      "min": 0,
+      "max": 132,
+      "step": 2,
+      "unit": "x",
+      "label": "Cell Width (Mobile)",
+      "default": 100
+    },
+    {
+      "type": "range",
+      "id": "cell_height_mobile",
+      "min": 0,
+      "max": 132,
+      "step": 2,
+      "unit": "x",
+      "label": "Cell Height (Mobile)",
+      "default": 100
+    },
+    {
+      "type": "header",
+      "content": "Caption"
+    },
+    {
+      "type": "range",
+      "id": "caption_font_size",
+      "min": 0,
+      "max": 64,
+      "step": 1,
+      "unit": "px",
+      "label": "Font Size",
+      "default": 24
+    },
+    {
+      "type": "range",
+      "id": "caption_line_height",
+      "min": 0,
+      "max": 64,
+      "step": 1,
+      "unit": "px",
+      "label": "Line Height",
+      "default": 24
+    },
+    {
+      "type": "range",
+      "id": "caption_font_size_mobile",
+      "min": 0,
+      "max": 64,
+      "step": 1,
+      "unit": "px",
+      "label": "Font Size (Mobile)",
+      "default": 24
+    },
+    {
+      "type": "range",
+      "id": "caption_line_height_mobile",
+      "min": 0,
+      "max": 64,
+      "step": 1,
+      "unit": "px",
+      "label": "Line Height (Mobile)",
+      "default": 24
+    },
+    {
+      "type": "header",
+      "content": "Description"
+    },
+    {
+      "type": "range",
+      "id": "description_font_size",
+      "min": 0,
+      "max": 64,
+      "step": 1,
+      "unit": "px",
+      "label": "Font Size",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "description_line_height",
+      "min": 0,
+      "max": 64,
+      "step": 1,
+      "unit": "px",
+      "label": "Line Height",
+      "default": 24
+    },
+    {
+      "type": "range",
+      "id": "description_font_size_mobile",
+      "min": 0,
+      "max": 64,
+      "step": 1,
+      "unit": "px",
+      "label": "Font Size (Mobile)",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "description_line_height_mobile",
+      "min": 0,
+      "max": 64,
+      "step": 1,
+      "unit": "px",
+      "label": "Line Height (Mobile)",
+      "default": 24
+    },
+    {
+      "type": "header",
+      "content": "Section"
+    },
+    {
+      "type": "range",
+      "id": "section_top_padding",
+      "min": 0,
+      "max": 120,
+      "step": 2,
+      "unit": "px",
+      "label": "Top Padding",
+      "default": 120
+    },
+    {
+      "type": "range",
+      "id": "section_bottom_padding",
+      "min": 0,
+      "max": 120,
+      "step": 2,
+      "unit": "px",
+      "label": "Bottom Padding",
+      "default": 120
+    },    
+    {
+      "type": "range",
+      "id": "section_top_padding_tablet",
+      "min": 0,
+      "max": 120,
+      "step": 2,
+      "unit": "px",
+      "label": "Top Padding(Tablet)",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "section_bottom_padding_tablet",
+      "min": 0,
+      "max": 120,
+      "step": 2,
+      "unit": "px",
+      "label": "Bottom Padding(Tablet)",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "section_top_padding_mobile",
+      "min": 0,
+      "max": 120,
+      "step": 2,
+      "unit": "px",
+      "label": "Top Padding (Mobile)",
+      "default": 120
+    },
+    {
+      "type": "range",
+      "id": "section_bottom_padding_mobile",
+      "min": 0,
+      "max": 120,
+      "step": 2,
+      "unit": "px",
+      "label": "Bottom Padding (Mobile)",
+      "default": 120
+    }
+  ],
+  "blocks": [
+    {
+      "type": "card",
+      "name": "Card",
+      "limit": 32,
+      "settings": [
+        {
+          "type": "text",
+          "id": "caption",
+          "label": "Caption"
+        },
+        {
+          "type": "text",
+          "id": "description",
+          "label": "Description"
+        },
+        {
+          "type": "checkbox",
+          "id": "is_header",
+          "label": "Use as header",
+          "default": false
+        },
+        {
+          "type": "image_picker",
+          "id": "icon",
+          "label": "Icon"
+        },        
+        {
+          "type": "range",
+          "id": "cell_height",
+          "min": 0,
+          "max": 132,
+          "step": 2,
+          "unit": "x",
+          "label": "Cell Height",
+          "default": 114
+        },
+        {
+          "type": "select",
+          "id": "content_alignment",
+          "options": [
+            {
+              "value": "left",
+              "label": "Left"
+            },
+            {
+              "value": "center",
+              "label": "Center"
+            },
+            {
+              "value": "right",
+              "label": "Right"
+            }
+          ],
+          "default": "center",
+          "label": "Alignment"
+        },
+        {
+          "type": "checkbox",
+          "id": "use_vertical_write_mode",
+          "label": "Use Vertical Mode (Mobile)",
+          "default": false
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Table With Mark",
+      "blocks": [
+      ]
+    }
+  ]
+}
+{% endschema %}

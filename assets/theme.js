@@ -87,7 +87,8 @@ function invertHeader(trigger) {
 document.addEventListener("DOMContentLoaded", function() {
   // this.document.querySelector('body').style.opacity = 1;
   invertHeader(false);
-  reviewSlider(); 
+  reviewSlider();
+  shippingSlider();
   blogSlider();
   heroSlider();
   beforeAfter();
@@ -341,7 +342,36 @@ function heroSlider() {
   })
 }
 
- 
+function shippingSlider() {
+  const sliders = document.querySelectorAll('.announce-slider');
+  sliders.forEach(slider => {
+    const swiperParams = {
+      spaceBetween: 50,
+      centeredSlides: true,
+      autoplay: {
+        delay: 1,
+      },
+      loop: true,
+      slidesPerView:'auto',
+      allowTouchMove: false,
+      disableOnInteraction: false,
+      breakpoints: {
+        1440: {
+          speed: 20000
+        },
+        1024: {
+          speed: 10000
+        },
+        0: {
+          speed: 6000
+        }
+      }
+    };
+    Object.assign(slider, swiperParams);
+    slider.initialize();
+    document.querySelector('.announce').style.display = 'block';
+  })
+}
 
 // before after
 function beforeAfter() {

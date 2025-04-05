@@ -20,14 +20,18 @@
       z-index: 5;
       @media screen and (max-width: 767px) {
         margin-top: -28px;
-        }
       }
+    }
   {%- endif -%}
   #shopify-section-{{ section.id }}.multirows-section .container .rows .row .content {
     flex: 1;
   }
   #shopify-section-{{ section.id }}.multirows-section .container .rows .row .image {
     flex: 1;
+  }
+  #shopify-section-{{ section.id }} .row .content .bottom .text ul {
+    list-style: disc;
+    padding-left: 18px;
   }
   @media screen and (min-width: 1025px) {
     #shopify-section-{{ section.id }} .container .rows .row .image.desktop{

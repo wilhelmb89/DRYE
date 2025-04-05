@@ -5,10 +5,28 @@
     }
   }
 
+  #shopify-section-{{ section.id }} {
+    .icons-wrapper {
+      .desktop {
+        display: block;
+      }
+      .mobile {
+        display: none;
+      }
+    }
+  }
+
   @media screen and (max-width: 767px) {
     #shopify-section-{{ section.id }} {
       .icons-wrapper {
         grid-template-columns: repeat({{ section.settings.cols_mob }}, minmax(0, 1fr));
+
+        .desktop {
+          display: none;
+        }
+        .mobile {
+          display: block;
+        }
       }
     }
   }
@@ -21,7 +39,8 @@
         <div class="icon-block">
           {%- if block.settings.image != blank -%}
             <!-- {{ block.settings.image | image_url: width: 400 | image_tag: loading: 'lazy' }} -->
-            <img src="{{ block.settings.image | image_url }}" width="400" height="300" loading="lazy" style="width: {{ block.settings.image_width }}% !important;">
+            <img class="desktop" src="{{ block.settings.image | image_url }}" width="400" height="300" loading="lazy" style="width: {{ block.settings.image_width }}% !important;">
+            <img class="mobile" src="{{ block.settings.image_mobile | image_url }}" width="400" height="300" loading="lazy" style="width: {{ block.settings.image_width_mobile }}% !important;">
           {%- endif -%}
         </div>
       {%- endfor -%}
@@ -62,14 +81,36 @@
         "type": "icon",
         "settings": [
            {
+             "type": "header",
+             "content": "Desktop"
+           },
+           {
              "type": "image_picker",
              "id": "image",
              "label": "Image"
            },
            {
-               "type": "range",
-               "id": "image_width",
-               "label": "Image width",
+              "type": "range",
+              "id": "image_width",
+              "label": "Image width",
+              "default": 50,
+              "unit": "%",
+              "min": 20,
+              "max": 100
+           },
+           {
+             "type": "header",
+             "content": "Mobile"
+           },
+           {
+             "type": "image_picker",
+             "id": "image_mobile",
+             "label": "Image (Mobile)"
+           },
+           {
+             "type": "range",
+             "id": "image_width_mobile",
+             "label": "Image width",
               "default": 50,
               "unit": "%",
               "min": 20,

@@ -15,3 +15,100 @@
 {{ 'theme.css' | asset_url | stylesheet_tag }}
 <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js" defer></script>
 <script defer src="{{ 'vendor.js' | asset_url }}"></script> 
+
+<style>
+  .shopify-policy__container .shopify-policy__title {
+    display: none;
+  }
+  .shopify-policy__container .shopify-policy__title h1 {
+    {% if settings.policy_title_font_family != blank %}
+    font-family: {{settings.policy_title_font_family}};
+    {% endif %}
+    font-weight: {{settings.policy_title_font_weight}};
+    font-size: {{settings.policy_title_font_size_desktop}}px !important;
+    {% if settings.policy_title_line_height_desktop == 0 %}
+      line-height: normal;
+    {% else %}
+      line-height: {{settings.policy_title_line_height_desktop}}px !important;
+    {% endif %}
+    letter-spacing: normal;
+  }  
+  .shopify-policy__container .shopify-policy__body h2 {
+    {% if settings.policy_sub_title_font_family != blank %}
+    font-family: {{settings.policy_sub_title_font_family}};
+    {% endif %}
+    font-weight: {{settings.policy_sub_title_font_weight}};
+    font-size: {{settings.policy_sub_title_font_size_desktop}}px;
+    {% if settings.policy_sub_title_line_height_desktop == 0 %}
+      line-height: normal;
+    {% else %}
+      line-height: {{settings.policy_sub_title_line_height_desktop}}px;
+    {% endif %}
+    letter-spacing: normal;
+  }  
+  .shopify-policy__container .shopify-policy__body p {
+    {% if settings.policy_content_font_family != blank %}
+    font-family: {{settings.policy_content_font_family}};
+    {% endif %}
+    font-weight: {{settings.policy_content_font_weight}};
+    font-size: {{settings.policy_content_font_size_desktop}}px;
+    {% if settings.policy_content_line_height_desktop == 0 %}
+      line-height: normal;
+    {% else %}
+      line-height: {{settings.policy_content_line_height_desktop}}px;
+    {% endif %}
+  }
+
+  @media screen and (max-width: 1439px) {
+    .shopify-policy__container .shopify-policy__title h1 {
+      font-size: {{settings.policy_title_font_size_tablet}}px !important;
+      {% if settings.policy_title_line_height_tablet == 0 %}
+        line-height: normal;
+      {% else %}
+        line-height: {{settings.policy_title_line_height_tablet}}px !important;
+      {% endif %}
+    }
+    .shopify-policy__container .shopify-policy__body h2 {
+      font-size: {{settings.policy_sub_title_font_size_tablet}}px;
+      {% if settings.policy_sub_title_line_height_tablet == 0 %}
+        line-height: normal;
+      {% else %}
+        line-height: {{settings.policy_sub_title_line_height_tablet}}px;
+      {% endif %}
+    }
+    .shopify-policy__container .shopify-policy__body p {
+      font-size: {{settings.policy_content_font_size_tablet}}px;
+      {% if settings.policy_content_line_height_tablet == 0 %}
+        line-height: normal;
+      {% else %}
+        line-height: {{settings.policy_content_line_height_tablet}}px;
+      {% endif %}
+    }
+  }
+  @media screen and (max-width: 767px) {
+    .shopify-policy__container .shopify-policy__title h1 {
+      font-size: {{settings.policy_title_font_size_mobile}}px !important;
+      {% if settings.policy_title_line_height_mobile == 0 %}
+        line-height: normal;
+      {% else %}
+        line-height: {{settings.policy_title_line_height_mobile}}px !important;
+      {% endif %}
+    }
+    .shopify-policy__container .shopify-policy__body h2 {
+      font-size: {{settings.policy_sub_title_font_size_mobile}}px;
+      {% if settings.policy_sub_title_line_height_mobile == 0 %}
+        line-height: normal;
+      {% else %}
+        line-height: {{settings.policy_sub_title_line_height_mobile}}px;
+      {% endif %}
+    }
+    .shopify-policy__container .shopify-policy__body p {
+      font-size: {{settings.policy_content_font_size_mobile}}px;
+      {% if settings.policy_content_line_height_mobile == 0 %}
+        line-height: normal;
+      {% else %}
+        line-height: {{settings.policy_content_line_height_mobile}}px;
+      {% endif %}
+    }
+  }
+</style>

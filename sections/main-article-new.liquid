@@ -1,0 +1,108 @@
+<style>
+  #shopify-section-{{ section.id }} {
+    li {
+      color: #6b6b69;
+      font-family: Inter;
+      font-size: 18px;
+      font-weight: 400;
+      line-height: 28px;
+      letter-spacing: -.04em;
+      text-align: left;
+      @media screen and (max-width: 767px) {
+        font-size: 16px;
+      }
+    }
+    strong {
+      font-weight: 600;
+    }
+    .container {
+      max-width: 980px;
+
+      p {
+        font-weight: 300;
+
+        a {
+          line-height: 27px;
+        }
+      }
+    }
+  }
+  #shopify-section-{{ section.id }} ul {
+    list-style: disc;
+    padding-left: 40px;
+    margin-block: 1rem;    
+  }
+  #shopify-section-{{ section.id }} ol {
+    list-style: decimal;
+    padding-left: 40px;
+    margin-block: 1rem;
+  }
+  #shopify-section-{{ section.id }} .container h2 {
+    font-family: 'ClashGrotesk-Variable';
+    font-weight: 300;
+    letter-spacing: 0;
+    font-size: {{ section.settings.title_font_size }}px;
+    line-height: normal;
+  }
+  @media screen and (min-width: 1025px) {
+    #shopify-section-{{ section.id }} .container {
+      padding-inline: 65px;
+    }
+  }
+  @media screen and (max-width: 767px) {    
+    #shopify-section-{{ section.id }} .container iframe {
+      width: 100%;
+      height: auto;
+      aspect-ratio: calc(560 / 315);
+    }
+  }
+</style>
+
+<div class="container medium">
+  {{ article.content }}
+  {%- if article.tags.size > 0 -%}
+    <div class="tags-title">Tags</div>
+    <div class="tags">
+      {%- for tag in article.tags -%}
+        <div class="tag">{{ tag }}</div>
+      {%- endfor -%}
+    </div>
+  {%- endif -%}
+</div>
+
+{% schema %}
+  {
+    "name": "Article(New)",
+    "tag": "section",
+    "class": "main-article",
+    "settings": [
+      {
+        "type": "image_picker",
+        "id": "ul_marker",
+        "label": "List marker"
+      },
+      {
+        "type": "header",
+        "content": "Title Settings"
+      },
+      {
+        "type": "range",
+        "id": "title_font_size",
+        "label": "Title Font Size",
+        "min": 0,
+        "max": 100,
+        "step": 1,
+        "default": 32,
+        "unit": "px"
+      }
+    ],
+    "presets": [
+      {
+        "name": "Article(New)",
+        "settings": {
+
+        }
+      }
+    ]
+  }
+{% endschema %}

@@ -1,5 +1,17 @@
 {%- assign ss = section.settings -%}
 <style>
+  .reviews-section {
+    background: {{section.settings.background_color}};
+  }
+  #shopify-section-{{ section.id }} .top .title,
+  #shopify-section-{{ section.id }} .bottom swiper-container .slide-content,
+  #shopify-section-{{ section.id }} .bottom swiper-container swiper-slide .author .profile .name,
+  #shopify-section-{{ section.id }} .bottom swiper-container swiper-slide .author .profile .prof {
+    color: {{section.settings.all_text_color}};
+  }
+  #shopify-section-{{ section.id }} .container .bottom prev-next-buttons > * .stripe {
+    background: {{section.settings.all_text_color}};
+  } 
   @media screen and (min-width: 1025px) {
     #shopify-section-{{ section.id }} .top .title {
       font-size: {{ section.settings.title_font_size_desktop }}px;
@@ -58,7 +70,7 @@
           {%- assign bs = block.settings -%}
           <swiper-slide>
             <div class="slide-content">
-              {%- render 'icon', type: 'quote' -%}
+              {%- render 'icon', type: 'quote', color: section.settings.all_text_color -%}
               {%- if bs.content != blank -%}
                 {% comment %} <div class="content"> {% endcomment %}
                   {{ bs.content }}
@@ -84,12 +96,12 @@
       </swiper-container>
       <prev-next-buttons>
         <div class="prev">
-          {%- render 'icon', type: 'arrow-left-big' -%}
+          {%- render 'icon', type: 'arrow-left-big', color: section.settings.all_text_color -%}
           <div class="stripe"></div>
         </div>
         <div class="next">
           <div class="stripe"></div>
-          {%- render 'icon', type: 'arrow-right-big' -%}
+          {%- render 'icon', type: 'arrow-right-big', color: section.settings.all_text_color -%}
         </div>
       </prev-next-buttons>
     {%- endif -%}
@@ -102,6 +114,18 @@
     "tag": "section",
     "class": "reviews-section",
     "settings": [
+      {
+        "type": "color",
+        "id": "background_color",
+        "label": "Background",
+        "default": "#111111"
+      },
+      {
+        "type": "color",
+        "id": "all_text_color",
+        "label": "Text Color",
+        "default": "#ffffff"
+      },
       {
         "type": "text",
         "id": "title",

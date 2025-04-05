@@ -39,7 +39,7 @@
           "type": "tab",
           "settings": {
             "title": "Description",
-            "content": "<p>Keep your hands dry and comfortable with DRYE SweatGuard Gloves—the first gloves that keeps moisture away from the skin layer for long-term healing. Developed over seven years in collaboration with Sweden’s top research institutions, these gloves use advanced moisture-wicking technology to help reduce issues like eczema, dermatitis, and Raynaud’s.<br/><br/>Made from sustainable wood cellulose, DRYE gloves create a breathable, hypoallergenic barrier that’s gentle on the skin and built for daily use. Unlike premium cotton gloves or organic cotton gloves, DRYE gloves offer superior moisture control, making them a more effective choice for eczema sufferers. With a long-lasting design, each pair can last 3–12 months, eliminating the need for creams and ointments. DRYE gloves are a choice that’s better for your hands—and the planet.</p>"
+            "content": "<p>Keep your hands dry and comfortable with DRYE gloves – the first gloves that actively wick moisture away from the skin for long-term relief. Developed over seven years in collaboration with Sweden’s top research institutions, these gloves use advanced moisture-wicking technology to help reduce issues like eczema, dermatitis, and Raynaud’s.<br/><br/>Made from sustainable wood cellulose, DRYE gloves create a breathable, hypoallergenic barrier that is gentle on the skin and designed for daily use. Unlike cotton, bamboo, and silk, DRYE gloves offer superior moisture control, making them a better choice for people with skin issues.<br/><br/>Continual use has been shown to reduce the need for costly creams and ointments. Lifespan: 3–12 months.</p>"
           }
         },
         "tab_zjXixb": {
@@ -90,6 +90,44 @@
         "bg": "#f3f2f1"
       }
     },
+    "before_after_6kFCQK": {
+      "type": "before-after",
+      "settings": {
+        "title": "",
+        "image_before": "shopify://shop_images/Traditional_Glove_Liners_Fail_to_Keep_Moisture_Away.jpg",
+        "image_after": "shopify://shop_images/New_Moisture_Wicking_Liner_shows_promising_result.jpg",
+        "image_border_radius": 40,
+        "section_top_padding_desktop": 120,
+        "section_bottom_padding_desktop": 120,
+        "section_top_padding_tablet": 80,
+        "section_bottom_padding_tablet": 80,
+        "section_top_padding_mobile": 64,
+        "section_bottom_padding_mobile": 64
+      }
+    },
+    "4d4cfabd4c9b9a806013": {
+      "type": "apps",
+      "blocks": {
+        "yotpo_product_reviews_reviews_carousel_ajEJB4": {
+          "type": "shopify://apps/yotpo-product-reviews/blocks/reviews_carousel/eb7dfd7d-db44-4334-bc49-c893b51b36cf",
+          "settings": {
+            "product": "{{product}}"
+          }
+        },
+        "e1cc2ec4-bd25-4cda-bb66-1ed6baa07fab": {
+          "type": "shopify://apps/yotpo-product-reviews/blocks/reviews/eb7dfd7d-db44-4334-bc49-c893b51b36cf",
+          "disabled": true,
+          "settings": {
+            "product": "{{product}}"
+          }
+        }
+      },
+      "block_order": [
+        "yotpo_product_reviews_reviews_carousel_ajEJB4",
+        "e1cc2ec4-bd25-4cda-bb66-1ed6baa07fab"
+      ],
+      "settings": {}
+    },
     "multicolumn_jKXbXf": {
       "type": "multicolumn",
       "blocks": {
@@ -134,20 +172,18 @@
       ],
       "settings": {}
     },
-    "4d4cfabd4c9b9a806013": {
-      "type": "apps",
-      "blocks": {
-        "e1cc2ec4-bd25-4cda-bb66-1ed6baa07fab": {
-          "type": "shopify://apps/yotpo-product-reviews/blocks/reviews/eb7dfd7d-db44-4334-bc49-c893b51b36cf",
-          "settings": {
-            "product": "{{product}}"
-          }
-        }
-      },
-      "block_order": [
-        "e1cc2ec4-bd25-4cda-bb66-1ed6baa07fab"
-      ],
-      "settings": {}
+    "video_pk4xdq": {
+      "type": "video",
+      "disabled": true,
+      "settings": {
+        "title": "Shop Video",
+        "video": "shopify://files/videos/introduce.mp4",
+        "video_radius_desktop": 56,
+        "video_radius_mobile": 30,
+        "video_margin_bottom_desktop_large": -10,
+        "video_margin_bottom_desktop": -10,
+        "video_margin_bottom_mobile": -10
+      }
     },
     "benefits_ADPayN": {
       "type": "benefits",
@@ -188,25 +224,9 @@
         "item_y8kn4D"
       ],
       "settings": {
-        "background": "shopify://shop_images/5Y9A8972_4772b13a-5aa0-44c5-b4f4-ba51f5106ba4.jpg",
+        "background": "shopify://shop_images/EsGghain_2.jpg",
         "title": "Key Features of DRYE Gloves:",
         "bottom_overlap": false
-      }
-    },
-    "before_after_6kFCQK": {
-      "type": "before-after",
-      "disabled": true,
-      "settings": {
-        "title": "",
-        "image_before": "shopify://shop_images/Traditional_Glove_Liners_Fail_to_Keep_Moisture_Away.jpg",
-        "image_after": "shopify://shop_images/New_Moisture_Wicking_Liner_shows_promising_result.jpg",
-        "image_border_radius": 40,
-        "section_top_padding_desktop": 120,
-        "section_bottom_padding_desktop": 120,
-        "section_top_padding_tablet": 80,
-        "section_bottom_padding_tablet": 80,
-        "section_top_padding_mobile": 64,
-        "section_bottom_padding_mobile": 64
       }
     },
     "multirows_HLBpdD": {
@@ -351,6 +371,7 @@
         "review_Kpf3x7",
         "review_7PB4A3"
       ],
+      "disabled": true,
       "custom_css": [],
       "settings": {
         "title": "Reviews",
@@ -460,15 +481,6 @@
     },
     "1727019359911a9ef9": {
       "type": "apps",
-      "blocks": {
-        "klaviyo_reviews_product_reviews_kykMc9": {
-          "type": "shopify://apps/klaviyo-reviews/blocks/product-reviews/db20e365-d984-4ac4-9655-e1588d951ca9",
-          "settings": {}
-        }
-      },
-      "block_order": [
-        "klaviyo_reviews_product_reviews_kykMc9"
-      ],
       "disabled": true,
       "settings": {}
     },
@@ -834,10 +846,11 @@
   "order": [
     "product_sliders_V9mmYk",
     "main",
-    "multicolumn_jKXbXf",
-    "4d4cfabd4c9b9a806013",
-    "benefits_ADPayN",
     "before_after_6kFCQK",
+    "4d4cfabd4c9b9a806013",
+    "multicolumn_jKXbXf",
+    "video_pk4xdq",
+    "benefits_ADPayN",
     "multirows_HLBpdD",
     "17283064569c8da506",
     "faq_QPiUFJ",

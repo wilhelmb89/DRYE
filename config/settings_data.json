@@ -15,6 +15,9 @@
     "facebook": "https://www.facebook.com/dryesweden/",
     "instagram": "https://www.instagram.com/dryesweden/",
     "twitter": "https://x.com/DRYESWEDEN",
+    "policy_title_font_size_mobile": 50,
+    "policy_title_line_height_mobile": 60,
+    "yotpo_reviews_api_key": "SAfL56iSfyjZmoBz0xz5wYjuABSr2xzgu2IWTMSH",
     "checkout_logo_position": "right",
     "checkout_input_background_color_mode": "white",
     "content_for_index": [],
@@ -29,11 +32,6 @@
         "disabled": false,
         "settings": {}
       },
-      "17676059084223943535": {
-        "type": "shopify://apps/triplewhale/blocks/triple_pixel_snippet/483d496b-3f1a-4609-aea7-8eee3b6b7a2a",
-        "disabled": true,
-        "settings": {}
-      },
       "6146500278089136509": {
         "type": "shopify://apps/bm-country-blocker-ip-blocker/blocks/boostmark-blocker/bf9db4b9-be4b-45e1-8127-bbcc07d93e7e",
         "disabled": false,
@@ -42,11 +40,6 @@
       "7570552984445421165": {
         "type": "shopify://apps/yotpo-product-photo-reviews/blocks/settings/eb7dfd7d-db44-4334-bc49-c893b51b36cf",
         "disabled": false,
-        "settings": {}
-      },
-      "855628211100114053": {
-        "type": "shopify://apps/klaviyo-email-marketing-sms/blocks/klaviyo-onsite-embed/2632fe16-c075-4321-a88b-50b567f42507",
-        "disabled": true,
         "settings": {}
       },
       "15711573365076306404": {
@@ -63,6 +56,33 @@
         "type": "shopify://apps/yoast-seo-seo-for-everyone/blocks/metatags/7c777011-bc88-4743-a24e-64336e1e5b46",
         "disabled": false,
         "settings": {}
+      },
+      "15683396631634586217": {
+        "type": "shopify://apps/inbox/blocks/chat/841fc607-4181-4ad1-842d-e24d7f8bad6b",
+        "disabled": true,
+        "settings": {
+          "button_color": "#000000",
+          "secondary_color": "#ffffff",
+          "ternary_color": "#ffffff",
+          "button_icon": "chat_bubble",
+          "button_text": "live_chat",
+          "button_horizontal_position": "bottom_right",
+          "button_vertical_position": "lowest",
+          "greeting_message": ""
+        }
+      },
+      "17676059084223943535": {
+        "type": "shopify://apps/triplewhale/blocks/triple_pixel_snippet/483d496b-3f1a-4609-aea7-8eee3b6b7a2a",
+        "disabled": false,
+        "settings": {}
+      },
+      "8962992520437913685": {
+        "type": "shopify://apps/yotpo-loyalty-rewards/blocks/loader-app-embed-block/2f9660df-5018-4e02-9868-ee1fb88d6ccd",
+        "disabled": true,
+        "settings": {
+          "inject_modules_loader": true,
+          "inject_sdk_loader": false
+        }
       }
     }
   },
@@ -72,6 +92,8 @@
     }
   },
   "platform_customizations": {
-    "custom_css": []
+    "custom_css": [
+      "#occ3-drawer {z-index: 99999999999 !important;}"
+    ]
   }
 }
