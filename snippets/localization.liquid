@@ -1,26 +1,4 @@
-{%- case localization.language.iso_code -%}
-  {%- when 'en' -%}
-    {%- assign country = 'GB' -%}
-  {%- when 'sv' -%}
-    {%- assign country = 'SE' -%}
-{%- endcase -%}
-<div id="langSwitcher" class="lang-switcher">
-  <div class="country-flags country-flags--{{ country }}"></div>
-  {{ localization.language.iso_code }}
-  {%- render 'icon', type: 'caret-down' -%}
+<div class="localization-container">
+  {%- render 'language-switcher' -%}
+  {%- render 'country-switcher', priority_countries: section.settings.priority_countries -%}
 </div>
-
-
-<x-popover id="langPopover" class="popover">
-  
-  {%- form 'localization', id: localization_form_id -%}
-    <x-listbox class="popover-listbox popover-listbox--sm" role="listbox">
-      {%- for language in localization.available_languages -%}
-        <button type="submit" class="popover-listbox__option" name="locale_code" role="option" value="{{ language.iso_code }}" {% if language.iso_code == localization.language.iso_code %}aria-selected="true"{% endif %}>
-          {% comment %} <div class="country-flags country-flags--{{ country }}"></div> {% endcomment %}
-          {{- language.endonym_name | capitalize -}}
-        </button>
-      {%- endfor -%}
-    </x-listbox>
-  {%- endform -%}
-</x-popover> 

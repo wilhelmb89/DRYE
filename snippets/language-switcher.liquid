@@ -1,0 +1,54 @@
+{%- liquid
+  assign lang_iso = localization.language.iso_code
+  case localization.language.iso_code
+    when 'en'
+      assign country_iso = 'GB'
+    when 'sv'
+      assign country_iso = 'SE'
+  endcase
+-%}
+
+<details
+  data-unfocus-close
+  class=""
+>
+  <summary
+    class="localization-summary"
+  >
+    <div class="country-flags country-flags--{{ country_iso }}"></div>
+    {{ localization.language.iso_code }}
+    {%- render 'icon', type: 'caret-down' -%}
+  </summary>
+
+  <div
+    class="localization-popover"
+  >
+    {%- form 'localization', data-instant-submit: '' -%}
+      <fieldset
+        class="localization-listbox"
+      >
+        {%- for locale in form.available_locales -%}
+          <label
+            for="locale-{{ locale.iso_code }}"
+            class="localization-listbox-item"
+          >
+            <input
+              class="sr-only peer"
+              name="locale_code"
+              lang="{{ locale.iso_code }}"
+              value="{{ locale.iso_code }}"
+              type="radio"
+              id="locale-{{ locale.iso_code }}"
+              {%- if locale.iso_code == lang_iso -%}
+                checked
+              {%- endif -%}
+            >
+            <span class="">
+              {{ locale.endonym_name | capitalize }}
+            </span>
+          </label>
+        {%- endfor -%}
+      </fieldset>
+    {%- endform -%}
+  </div>
+</details>
