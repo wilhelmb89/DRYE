@@ -1,6 +1,8 @@
 {%- liquid
   assign current_country_name = localization.country.name
   assign current_country_iso = localization.country.iso_code
+  assign current_country_currency = localization.country.currency.symbol
+
   assign priority_countries_string = priority_countries | default: 'SE,GB,US,DE'
   assign priority_countries = priority_countries_string | split: ','
 -%}
@@ -13,7 +15,7 @@
     class="localization-summary"
   >
     <div class="country-flags country-flags--{{ current_country_iso }}"></div>
-    {{ current_country_name }}
+    {{ current_country_iso }} ({{ current_country_currency }})
     {%- render 'icon', type: 'caret-down' -%}
   </summary>
 
@@ -28,6 +30,7 @@
           {%- assign country = localization.available_countries | find: 'iso_code', country_iso -%}
           {%- if country -%}
             {%- liquid
+              assign country_iso = country.iso_code
               assign country_name = country.name | capitalize
               assign country_currency = country.currency.symbol
             -%}
@@ -56,7 +59,7 @@
                 {%- endif -%}
               >
 
-              {{- country_name }} ({{ country_currency }})
+              {{- country_iso }} ({{ country_currency }})
             </label>
           {%- endif -%}
         {%- endfor -%}
@@ -64,6 +67,7 @@
         {%- for country in localization.available_countries -%}
           {%- unless priority_countries contains country.iso_code -%}
             {%- liquid
+              assign country_iso = country.iso_code
               assign country_name = country.name | capitalize
               assign country_currency = country.currency.symbol
             -%}
@@ -92,7 +96,7 @@
                 {%- endif -%}
               >
 
-              {{- country_name }} ({{ country_currency }})
+              {{- country_iso }} ({{ country_currency }})
             </label>
           {%- endunless -%}
         {%- endfor -%}
