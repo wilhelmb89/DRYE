@@ -16,6 +16,12 @@
     }
   }
 
+  @media screen and (min-width: 768px) and (max-width: 1024px) {
+    .icon-block img {
+      width: 100%!important;
+    }
+  }
+
   @media screen and (max-width: 767px) {
     #shopify-section-{{ section.id }} {
       .icons-wrapper {
@@ -39,8 +45,8 @@
         <div class="icon-block">
           {%- if block.settings.image != blank -%}
             <!-- {{ block.settings.image | image_url: width: 400 | image_tag: loading: 'lazy' }} -->
-            <img class="desktop" src="{{ block.settings.image | image_url }}" width="400" height="300" loading="lazy" style="width: {{ block.settings.image_width }}% !important;">
-            <img class="mobile" src="{{ block.settings.image_mobile | image_url }}" width="400" height="300" loading="lazy" style="width: {{ block.settings.image_width_mobile }}% !important;">
+            <img class="desktop" src="{{ block.settings.image | image_url }}" width="400" height="300" loading="lazy" style="width: {{ block.settings.image_width }}%;">
+            <img class="mobile" src="{{ block.settings.image_mobile | image_url }}" width="400" height="300" loading="lazy" style="width: {{ block.settings.image_width_mobile }}%;">
           {%- endif -%}
         </div>
       {%- endfor -%}

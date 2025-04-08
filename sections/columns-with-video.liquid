@@ -33,6 +33,7 @@
   }
   .section-{{ section.id }} .video-container .video-thumbnail {
     position: absolute;
+    object-fit: cover;
   }
   .section-{{ section.id }} .video-container .video-play-button {
     cursor: pointer;
@@ -42,12 +43,7 @@
     transform: translate(-50%, -50%);
     z-index: 1;
   }
-  @media screen and (min-width: 1441px) {
-    .container {
-      max-width: 1470px;
-      padding-inline: 0;
-    }
-  }
+
   @media screen and (max-width: 768px) {
     .section-{{ section.id }} {
       padding-top: {{ section.settings.section_top_padding_tablet }}px;
@@ -115,8 +111,8 @@
                     endif
                   endfor
                   assign video_url = video.url
-                  assign video_width = video.width
-                  assign video_height = video.height
+                  assign video_width = 476
+                  assign video_height = 319
                   assign aspect_ratio = video_width | times: 1.0 | divided_by: video_height
                   unless video_preview contains "/cdn/shop"
                     assign video_preview = video_preview | prepend: "/cdn/shop/"
@@ -127,8 +123,8 @@
               {%- liquid
                  assign video_preview = block.settings.video_preview | img_url: '1024x'
                  assign video_url = block.settings.video_url
-                 assign video_width = block.settings.video_width | plus: 0
-                 assign video_height = block.settings.video_height | plus: 0                 
+                 assign video_width = 476
+                 assign video_height = 319              
                  assign aspect_ratio = video_width | times: 1.0 | divided_by: video_height
                  assign autoplay_url = video_url | append: "?autoplay=1&mute=1&controls=0"
               -%}

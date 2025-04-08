@@ -17,11 +17,7 @@
     {%- endif -%}
   </style>
   {%- if request.page_type == 'product' -%}
-    <div
-      class="announce"
-      style="background: {{ ss.ann_bg }}; color: {{ ss.ann_tx }}"
-      country="{{ request.locale.iso_code }}"
-    >
+    <div class="announce" style="background: {{ ss.ann_bg }}; color: {{ ss.ann_tx }}" country="{{ request.locale.iso_code }}">
       <swiper-container class="announce-slider" init="false">
         {%- for i in (1..30) -%}
           <swiper-slide>
@@ -44,7 +40,7 @@
             </div>
           </swiper-slide>
         {%- endfor -%}
-      </swiper-container>
+    </swiper-container>
     </div>
   {%- endif -%}
   <div class="container">
@@ -169,53 +165,36 @@
       "type": "text",
       "id": "button_text",
       "label": "Button text"
-    },
-    {
+    }, {
       "type": "url",
       "id": "button_url",
       "label": "Button url"
-    },
-    {
+    }, {
       "type": "header",
       "content": "Announce"
-    },
-    {
+    }, {
       "type": "paragraph",
       "content": "Will be visible only on product page"
-    },
-    {
+    }, {
       "type": "text",
       "id": "announce",
       "label": "Announce text",
       "default": "Free shipping"
-    },
-    {
+    }, {
       "type": "text",
       "id": "announce_sv",
       "label": "Announce text (Swedish)",
       "default": "Free shipping"
-    },
-    {
+    }, {
       "type": "color",
       "id": "ann_bg",
       "label": "Announce background",
       "default": "#111111"
-    },
-    {
+    }, {
       "type": "color",
       "id": "ann_tx",
       "label": "Announce text",
       "default": "#FFFFFF"
-    },
-    {
-      "type": "header",
-      "content": "Country switcher"
-    },
-    {
-      "type": "text",
-      "id": "priority_countries",
-      "label": "Priority countries",
-      "default": "SE,GB,US,DE"
     }
   ],
   "presets": [
