@@ -2,3 +2,106 @@
   {%- render 'language-switcher' -%}
   {%- render 'country-switcher', priority_countries: section.settings.priority_countries -%}
 </div>
+
+<style>
+  /* Localization 2 */
+
+  .localization-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 14px;
+  }
+
+  .localization-container details {
+    position: relative;
+  }
+
+  summary {
+    list-style: none;
+  }
+
+  summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .localization-summary {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    text-transform: uppercase;
+    transition: 0.3s;
+  }
+
+  .localization-popover {
+    position: absolute;
+    top: calc(100% + 1rem);
+    right: 0;
+    max-height: 20ch;
+    overflow-y: auto;
+    overflow-x: hidden;
+    background: white;
+    border: 1px solid lightgrey;
+    border-radius: 5px;
+  }
+
+  .localization-listbox {
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+  }
+
+  .localization-listbox-item {
+    display: flex;
+    align-items: center;
+    text-align: left;
+    gap: 8px;
+    border: none;
+    background: white;
+    color: #111111;
+    font-size: 14px;
+    line-height: 1.5;
+    cursor: pointer;
+    padding: 8px 2px;
+    border-radius: 5px;
+    margin: 0;
+  }
+
+  @media (hover: hover) {
+    .localization-listbox-item:hover {
+      background: #f3f2f1;
+    }
+  }
+
+  .menu-drawer .localization-summary {
+    color: white;
+  }
+</style>
+
+<script>
+  function initCloseOnUnfocus() {
+    const detailEls = document.querySelectorAll('[data-unfocus-close]');
+    detailEls.forEach((detailEl) => {
+      detailEl.setAttribute('tabindex', '-1');
+      detailEl.addEventListener('focusout', () => {
+        setTimeout(() => {
+          if (!detailEl.contains(document.activeElement)) {
+            detailEl.open = false;
+          }
+        }, 100);
+      });
+    });
+  }
+  document.addEventListener('DOMContentLoaded', initCloseOnUnfocus);
+
+  function initInstantSubmit() {
+    const formEls = document.querySelectorAll('form[data-instant-submit]');
+    formEls.forEach((formEl) => {
+      formEl.addEventListener('change', () => {
+        formEl.submit();
+      });
+    });
+  }
+  document.addEventListener('DOMContentLoaded', initInstantSubmit);
+</script>
