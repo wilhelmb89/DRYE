@@ -33,55 +33,55 @@ table {
   border-spacing: 0; }
 
 @font-face {
-  font-family: "Inter";
+  font-family: "Inter", sans-serif;
   src: url("./Inter-ExtraBold.woff") format("woff2"), url("./Inter-ExtraBold.woff") format("woff");
   font-weight: bold;
   font-style: normal;
   font-display: swap; }
 @font-face {
-  font-family: "Inter";
+  font-family: "Inter", sans-serif;
   src: url("./Inter-Light.woff2") format("woff2"), url("./Inter-Light.woff") format("woff");
   font-weight: 300;
   font-style: normal;
   font-display: swap; }
 @font-face {
-  font-family: "Inter";
+  font-family: "Inter", sans-serif;
   src: url("./Inter-Black.woff2") format("woff2"), url("./Inter-Black.woff") format("woff");
   font-weight: 900;
   font-style: normal;
   font-display: swap; }
 @font-face {
-  font-family: "Inter";
+  font-family: "Inter", sans-serif;
   src: url("./Inter-ExtraLight.woff2") format("woff2"), url("./Inter-ExtraLight.woff") format("woff");
   font-weight: 200;
   font-style: normal;
   font-display: swap; }
 @font-face {
-  font-family: "Inter";
+  font-family: "Inter", sans-serif;
   src: url("./Inter-Bold.woff2") format("woff2"), url("./Inter-Bold.woff") format("woff");
   font-weight: bold;
   font-style: normal;
   font-display: swap; }
 @font-face {
-  font-family: "Inter";
+  font-family: "Inter", sans-serif;
   src: url("./Inter-Thin.woff2") format("woff2"), url("./Inter-Thin.woff") format("woff");
   font-weight: 100;
   font-style: normal;
   font-display: swap; }
 @font-face {
-  font-family: "Inter";
+  font-family: "Inter", sans-serif;
   src: url("./Inter-Medium.woff2") format("woff2"), url("./Inter-Medium.woff") format("woff");
   font-weight: 500;
   font-style: normal;
   font-display: swap; }
 @font-face {
-  font-family: "Inter";
+  font-family: "Inter", sans-serif;
   src: url("./Inter-SemiBold.woff2") format("woff2"), url("./Inter-SemiBold.woff") format("woff");
   font-weight: 600;
   font-style: normal;
   font-display: swap; }
 @font-face {
-  font-family: "Inter";
+  font-family: "Inter", sans-serif;
   src: url("./Inter-Regular.woff2") format("woff2"), url("./Inter-Regular.woff") format("woff");
   font-weight: normal;
   font-style: normal;
@@ -162,7 +162,7 @@ input[type="text"] {
   outline: none;
   box-sizing: border-box;
   resize: none;
-  font-family: Inter;
+  font-family:"Inter", sans-serif;
   font-size: 1rem;
   line-height: 28px;
   padding-left: 20px;
@@ -186,7 +186,7 @@ input[type="text"] {
   input[type="password"]::placeholder,
   input[type="number"]::placeholder,
   input[type="text"]::placeholder {
-    font-family: Inter;
+    font-family:"Inter", sans-serif;
     font-size: 1rem;
     color: #111;
     opacity: 1; }
@@ -207,7 +207,7 @@ input[type="text"] {
   input[type="password"]:-ms-input-placeholder,
   input[type="number"]:-ms-input-placeholder,
   input[type="text"]:-ms-input-placeholder {
-    font-family: Inter;
+    font-family:"Inter", sans-serif;
     font-size: 1rem;
     color: #111;
     opacity: 1; }
@@ -228,7 +228,7 @@ input[type="text"] {
   input[type="password"]::-ms-input-placeholder,
   input[type="number"]::-ms-input-placeholder,
   input[type="text"]::-ms-input-placeholder {
-    font-family: Inter;
+    font-family:"Inter", sans-serif;
     font-size: 1rem;
     color: #111;
     opacity: 1; }
@@ -512,7 +512,7 @@ form label {
           height: auto; }
 
 body {
-  font-family: Inter;
+  font-family:"Inter", sans-serif;
   font-size: 1rem;
   line-height: 28px;
   opacity: 0;
@@ -537,3 +537,5 @@ body {
 svg {
   pointer-events: none; }
 /*# sourceMappingURL=style.css.map */
+
+}

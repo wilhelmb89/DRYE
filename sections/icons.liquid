@@ -1,58 +1,74 @@
 <style>
-  #shopify-section-{{ section.id }} {
-    .icons-wrapper {
-      grid-template-columns: repeat({{ section.settings.cols_desk }}, minmax(0, 1fr));
-    }
+  .scrolling-container {
+    overflow: hidden;
+    position: relative;
+    width: 100%;
+    padding: 1rem 0; /* lite luft ovan och under */
   }
 
-  #shopify-section-{{ section.id }} {
-    .icons-wrapper {
-      .desktop {
-        display: block;
-      }
-      .mobile {
-        display: none;
-      }
-    }
+  .icons-wrapper {
+    display: flex;
+    align-items: center; /* centrera vertikalt */
+    animation: scroll-left 40s linear infinite;
   }
 
-  @media screen and (min-width: 768px) and (max-width: 1024px) {
-    .icon-block img {
-      width: 100%!important;
+  .icon-block {
+    flex: 0 0 auto;
+    padding: 0 3rem; /* justera avstånd mellan ikoner här */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 80px; /* justera efter behov */
+  }
+
+  .icon-block img {
+    max-height: 100%;
+    max-width: 100%;
+    object-fit: contain;
+    display: block;
+  }
+
+  @keyframes scroll-left {
+    0% {
+      transform: translateX(0%);
+    }
+    100% {
+      transform: translateX(-50%);
     }
   }
 
   @media screen and (max-width: 767px) {
-    #shopify-section-{{ section.id }} {
-      .icons-wrapper {
-        grid-template-columns: repeat({{ section.settings.cols_mob }}, minmax(0, 1fr));
-
-        .desktop {
-          display: none;
-        }
-        .mobile {
-          display: block;
-        }
-      }
+    .icons-wrapper {
+      animation-duration: 30s;
+    }
+    .icon-block {
+      padding: 0 1.5rem;
+      height: 60px;
     }
   }
 </style>
 
-<div class="container">
-  {%- if section.blocks.size > 0 -%}
-    <div class="icons-wrapper">
-      {%- for block in section.blocks -%}
-        <div class="icon-block">
-          {%- if block.settings.image != blank -%}
-            <!-- {{ block.settings.image | image_url: width: 400 | image_tag: loading: 'lazy' }} -->
-            <img class="desktop" src="{{ block.settings.image | image_url }}" width="400" height="300" loading="lazy" style="width: {{ block.settings.image_width }}%;">
-            <img class="mobile" src="{{ block.settings.image_mobile | image_url }}" width="400" height="300" loading="lazy" style="width: {{ block.settings.image_width_mobile }}%;">
-          {%- endif -%}
-        </div>
-      {%- endfor -%}
-    </div>
-  {%- endif -%}
+
+<div class="scrolling-container">
+  <div class="icons-wrapper">
+    {%- for block in section.blocks -%}
+      <div class="icon-block">
+        {%- if block.settings.image != blank -%}
+          <img src="{{ block.settings.image | image_url }}" loading="lazy" style="width: {{ block.settings.image_width }}%;">
+        {%- endif -%}
+      </div>
+    {%- endfor -%}
+    {%- for block in section.blocks -%}
+      <div class="icon-block">
+        {%- if block.settings.image != blank -%}
+          <img src="{{ block.settings.image | image_url }}" loading="lazy" style="width: {{ block.settings.image_width }}%;">
+        {%- endif -%}
+      </div>
+    {%- endfor -%}
+  </div>
 </div>
+
+
 
 {% schema %}
   {
@@ -100,6 +116,21 @@
               "id": "image_width",
               "label": "Image width",
               "default": 50,
+              "step": 1,
+              "unit": "%",
+              "min": 20,
+              "max": 100
+           },
+           {
+             "type": "header",
+             "content": "Tablet"
+           },
+           {
+              "type": "range",
+              "id": "image_width_tablet",
+              "label": "Image width",
+              "default": 50,
+              "step": 1,
               "unit": "%",
               "min": 20,
               "max": 100
@@ -118,6 +149,7 @@
              "id": "image_width_mobile",
              "label": "Image width",
               "default": 50,
+              "step": 1,
               "unit": "%",
               "min": 20,
               "max": 100

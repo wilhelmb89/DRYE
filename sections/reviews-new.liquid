@@ -70,7 +70,8 @@
           {%- assign bs = block.settings -%}
           <swiper-slide>
             <div class="slide-content">
-              {%- render 'icon', type: 'quote', color: section.settings.all_text_color -%}
+              <img class="quote-marks" src="https://cdn.shopify.com/s/files/1/0686/9581/8505/files/right_x5F_quote_x5F_alt.png?v=1744764873" width="30" alt="quotes">
+              {% comment %} {%- render 'icon', type: 'quote', color: section.settings.all_text_color -%} {% endcomment %}
               {%- if bs.content != blank -%}
                 {% comment %} <div class="content"> {% endcomment %}
                   {{ bs.content }}

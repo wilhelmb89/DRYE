@@ -140,94 +140,104 @@
 
   {%- if section.blocks.size > 0 -%}
     <div class="menu-area">
-      {%- for block in section.blocks -%}
-        {%- assign bs = block.settings -%}
-        {%- case block.type -%}
-          {%- when 'share' -%}
-            <div class="social-block">
-              <div class="social-block-logo">
-                {%- if bs.logo != blank -%}
-                  <div class="logo">
-                    {{ bs.logo | image_url: width: '100' | image_tag: loading: 'lazy' }}
-                  </div>
-                {%- endif -%}
-                {%- if bs.content -%}
-                  <div class="content">
-                    {{ bs.content }}
-                  </div>
-                {%- endif -%}
+      <div class="footer-menu__left">
+          {%- for block in section.blocks -%}
+            {%- assign bs = block.settings -%}
+          {%- case block.type -%}
+            {%- when 'share' -%}
+              <div class="social-block">
+                <div class="social-block-logo">
+                  {%- if bs.logo != blank -%}
+                    <div class="logo">
+                      {{ bs.logo | image_url: width: '100' | image_tag: loading: 'lazy' }}
+                    </div>
+                  {%- endif -%}
+                  {%- if bs.content -%}
+                    <div class="content">
+                      {{ bs.content }}
+                    </div>
+                  {%- endif -%}
+                </div>
+                <div class="socials">
+                  {%- if settings.pinterest != blank -%}
+                    <a target="_blank" title="pinterest" href="{{ settings.pinterest }}" class="social">
+                      {%- render 'icon', type: 'pinterest' -%}
+                    </a>
+                  {%- endif -%}
+                  {%- if settings.facebook != blank -%}
+                    <a target="_blank" title="facebook" href="{{ settings.facebook }}" class="social">
+                      {%- render 'icon', type: 'facebook' -%}
+                    </a>
+                  {%- endif -%}
+                  {%- if settings.instagram != blank -%}
+                    <a target="_blank" title="instagram" href="{{ settings.instagram }}" class="social">
+                      {%- render 'icon', type: 'instagram' -%}
+                    </a>
+                  {%- endif -%}
+                  {%- if settings.twitter != blank -%}
+                    <a target="_blank" title="twitter" href="{{ settings.twitter }}" class="social">
+                      {%- render 'icon', type: 'twitter' -%}
+                    </a>
+                  {%- endif -%}
+                </div>
               </div>
-              <div class="socials">
-                {%- if settings.pinterest != blank -%}
-                  <a target="_blank" title="pinterest" href="{{ settings.pinterest }}" class="social">
-                    {%- render 'icon', type: 'pinterest' -%}
-                  </a>
-                {%- endif -%}
-                {%- if settings.facebook != blank -%}
-                  <a target="_blank" title="facebook" href="{{ settings.facebook }}" class="social">
-                    {%- render 'icon', type: 'facebook' -%}
-                  </a>
-                {%- endif -%}
-                {%- if settings.instagram != blank -%}
-                  <a target="_blank" title="instagram" href="{{ settings.instagram }}" class="social">
-                    {%- render 'icon', type: 'instagram' -%}
-                  </a>
-                {%- endif -%}
-                {%- if settings.twitter != blank -%}
-                  <a target="_blank" title="twitter" href="{{ settings.twitter }}" class="social">
-                    {%- render 'icon', type: 'twitter' -%}
-                  </a>
-                {%- endif -%}
-              </div>
-            </div>
+          {%- endcase -%}
+        {%- endfor -%}
+        </div>
 
-          {%- when 'menu' -%}
-            <div class="menu-wrapper">
-              {%- for link in bs.menu.links -%}
-                <div class="menu">
-                  <div class="title">
-                    <span>{{ link.title }}</span>
-                    <div class="title-accordion-icon">
-                      <svg width="14" height="8" viewBox="0 0 14 8" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="chevron open" role="img" class="chevron-open"><path d="M7.11098 5.15691L2.16098 0.206909L0.746979 1.62091L7.11098 7.98491L13.475 1.62091L12.061 0.206911L7.11098 5.15691Z" fill="white"></path></svg>
+        <div class="footer-menu__right">
+          {%- for block in section.blocks -%}
+            {%- assign bs = block.settings -%}
+          {%- case block.type -%}
+            {%- when 'menu' -%}
+              <div class="menu-wrapper">
+                {%- for link in bs.menu.links -%}
+                  <div class="menu">
+                    <div class="title">
+                      <span>{{ link.title }}</span>
+                      <div class="title-accordion-icon">
+                        <svg width="14" height="8" viewBox="0 0 14 8" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="chevron open" role="img" class="chevron-open"><path d="M7.11098 5.15691L2.16098 0.206909L0.746979 1.62091L7.11098 7.98491L13.475 1.62091L12.061 0.206911L7.11098 5.15691Z" fill="white"></path></svg>
+                      </div>
+                    </div>
+                    <div class="submenu">
+                      {%- for child in link.links -%}
+                        <a href="{{ child.url }}" class="link">{{ child.title }}</a>
+                      {%- endfor -%}
                     </div>
                   </div>
-                  <div class="submenu">
-                    {%- for child in link.links -%}
-                      <a href="{{ child.url }}" class="link">{{ child.title }}</a>
-                    {%- endfor -%}
-                  </div>
-                </div>
-              {%- endfor -%}
-            </div>
-
-          {%- when 'email' -%}
-            <div class="email">
-              {%- if bs.title != blank -%}
-                <div class="title">{{ bs.title }}</div>
-              {%- endif -%}
-              <div class="email-box">
-                {%- if bs.content != blank -%}
-                  <div class="email-content">{{ bs.content }}</div>
-                {%- endif -%}
-                {%- form 'customer', id: 'footer-newsletter', class: 'email-form' -%}
-                  {%- if form.posted_successfully? -%}
-                    {{ 'newsletter.subscribed_successfully' | t }}
-                  {%- else -%}
-                    {%- if form.errors -%}
-                      {{ form.errors.translated_fields['email'] }} 
-                      {{ form.errors.messages['email'] }}                    
-                    {%- endif -%}
-  
-                    <input type="hidden" name="contact[tags]" value="newsletter">
-                    <input class="email-input" type="email" name="contact[email]" id="email" required placeholder="{{ bs.placeholder }}">
-                    <button type="submit">{{ bs.button_text }}</button>
-  
-                  {%- endif -%}
-                {%- endform -%}
+                {%- endfor -%}
               </div>
-            </div>
-          {%- endcase -%}
-      {%- endfor -%}
+  
+            {%- when 'email' -%}
+              <div class="email">
+                {%- if bs.title != blank -%}
+                  <div class="title">{{ bs.title }}</div>
+                {%- endif -%}
+                <div class="email-box">
+                  {%- if bs.content != blank -%}
+                    <div class="email-content">{{ bs.content }}</div>
+                  {%- endif -%}
+                  {%- form 'customer', id: 'footer-newsletter', class: 'email-form' -%}
+                    {%- if form.posted_successfully? -%}
+                      {{ 'newsletter.subscribed_successfully' | t }}
+                    {%- else -%}
+                      {%- if form.errors -%}
+                        {{ form.errors.translated_fields['email'] }} 
+                        {{ form.errors.messages['email'] }}                    
+                      {%- endif -%}
+    
+                      <input type="hidden" name="contact[tags]" value="newsletter">
+                      <input class="email-input" type="email" name="contact[email]" id="email" required placeholder="{{ bs.placeholder }}">
+                      <button type="submit">{{ bs.button_text }}</button>
+    
+                    {%- endif -%}
+                  {%- endform -%}
+                </div>
+              </div>
+            {%- endcase -%}
+          {% endfor %}
+        </div>
+
     </div>
   {%- endif -%}
   <div class="bottom">

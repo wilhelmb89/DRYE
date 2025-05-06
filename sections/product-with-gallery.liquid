@@ -27,10 +27,20 @@
       padding: 1px;
     }
 
-    swiper-container swiper-slide img {
-      object-fit: cover;
-      height: 100%;
-    }
+.swiper-container {
+  width: 100%; /* Gör så att swiper-container fyller hela tillgängliga bredden */
+}
+
+.swiper-container .swiper-slide {
+  width: 100%; /* Gör så att varje swiper-slide fyller hela tillgängliga bredden */
+}
+
+.swiper-container .swiper-slide img {
+  object-fit: cover; /* Bibehåller bildens proportioner */
+  width: 100%; /* Gör så att bilden fyller hela swiper-slide */
+  height: 100%; /* Gör så att höjden fyller hela swiper-slide och bibehåller bildens proportioner */
+}
+
     
     .product-image-section {
       display: flex;
@@ -69,11 +79,23 @@
       background: rgba(17, 17, 17, 0.1);
     }
     .product-image-section .product-thumbnail-list {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      grid-template-rows: repeat(2, 1fr);
-      gap: 32px;
-    }
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);  /* 5 columns in the first row */
+  grid-template-rows: auto;  /* Auto adjust the rows based on content */
+  gap: 20px;  /* Space between images */
+  width: 100%;  /* Ensure the container takes full width */
+  justify-items: center;  /* Centers the thumbnails horizontally within each grid cell */
+  padding-left: 40px;  /* Add left padding to create space */
+  padding-right: 40px;  /* Add right padding to create space */
+}
+
+.product-image-section .product-thumbnail-item img {
+  width: 100%;  /* Ensure images fill grid cells */
+  height: auto;  /* Maintain aspect ratio */
+}
+
+
+
     .product-image-section model-viewer {
       height: {{ section.settings.model_height }}px;
       width: 100%;
@@ -100,8 +122,8 @@
       .title {
         font-weight: 300;
         font-family: "ClashGrotesk-Variable";
-        font-size: {{ section.settings.title_font_size }}px !important;
-        line-height: {{ section.settings.title_line_height }}px !important;
+        font-size: {{ section.settings.title_font_size }}px;
+        line-height: {{ section.settings.title_line_height }}px;
         color: {{ section.settings.title_color }};
       }
       .review-section {
@@ -151,7 +173,7 @@
           
           .accordion-header {
             color: #000;
-            font-family: Inter;
+            font-family:"Inter", sans-serif;
             font-size: 16px;
             font-style: normal;
             font-weight: 400;
@@ -204,7 +226,7 @@
 
               span {
                 color: rgba(27, 31, 38, 0.72);
-                font-family: Inter;
+                font-family:"Inter", sans-serif;
                 font-size: 16px;
                 font-style: normal;
                 font-weight: 400;
@@ -310,7 +332,7 @@
 
             .product-shipping-title {
               color: rgba(27, 31, 38, 0.72);
-              font-family: Inter;
+              font-family:"Inter", sans-serif;
               font-size: {{ section.settings.shipping_title_font_size }}px;
               font-style: normal;
               font-weight: 400;
@@ -320,7 +342,7 @@
 
             .product-shipping-description {
               color: rgba(27, 31, 38, 0.72);
-              font-family: Inter;
+              font-family:"Inter", sans-serif;
               font-size: {{ section.settings.shipping_desc_font_size }}px;
               font-style: normal;
               font-weight: 300;
@@ -337,7 +359,7 @@
         margin-bottom: 0;
 
         .quantity-title {
-          font-family: Inter;
+          font-family:"Inter", sans-serif;
           font-size: 16px;
           font-style: normal;
           font-weight: 400;
@@ -348,7 +370,7 @@
           
           .quantity-control {
             background: #fff;
-            font-family: Inter;
+            font-family:"Inter", sans-serif;
             font-size: 16px;
             font-style: normal;
             font-weight: 400;
@@ -364,7 +386,7 @@
           .quantity-value {
             background: #fff;
             width: 44px;
-            font-family: Inter;
+            font-family:"Inter", sans-serif;
             font-size: 16px;
             font-style: normal;
             font-weight: 400;
@@ -380,7 +402,7 @@
 
         .variants-head {
           .size-title {
-            font-family: Inter;
+            font-family:"Inter", sans-serif;
             font-size: 16px;
             font-style: normal;
             font-weight: 400;
@@ -424,7 +446,7 @@
     align-items: center;
     padding: 10px;
     color: rgba(0, 0, 0, 0.30);
-    font-family: Inter;
+    font-family:"Inter", sans-serif;
     font-size: 16px;
     font-style: normal;
     font-weight: 400;
@@ -511,7 +533,7 @@
       .product-image-section {
         display: flex;
         flex-direction: row-reverse;
-        gap: 24px;
+        gap: 0px;
         justify-content: space-between;
       }
       .product-image-section .product-thumnail-pagination {
@@ -523,23 +545,36 @@
         height: {{ section.settings.model_height_tablet }}px;
       }
       .product-image-section .product-main-image {
-        display: flex;
-        width: 100%;
-      }
-      .product-image-section .product-main-image img {        
-        max-width: 360px;
-        margin: auto;
-      }
-      .product-image-section .product-thumbnail-list {
-        width: 76px;
-        min-width: 76px;
-        display: flex;
-        flex-direction: column;
-      }
-      .product-image-section .product-thumbnail-item img{
-        border-radius: 12px;
-        aspect-ratio: 1;
-      }
+  max-width: 360px;
+  margin: auto;
+}
+      .product-image-section .product-main-image img {
+  width: 100%;  /* Ensure the image takes the full width */
+  height: 100%;  /* Ensure the image fills the container's height */
+  object-fit: cover;  /* Ensure the image covers the entire container without distortion */
+}
+
+    .product-image-section .product-thumbnail-list {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);  /* 5 columns in the first row */
+  grid-template-rows: auto;  /* Auto adjust the rows based on content */
+  gap: 20px;  /* Space between images */
+  width: 100%;  /* Ensure the container takes full width */
+  justify-items: center;  /* Centers the thumbnails horizontally within each grid cell */
+  padding-left: 40px;  /* Add left padding to create space */
+  padding-right: 40px;  /* Add right padding to create space */
+}
+
+.product-image-section .product-thumbnail-item img {
+  width: 100%;  /* Ensure images fill grid cells */
+  height: auto;  /* Maintain aspect ratio */
+}
+
+
+
+
+
+
       .content {
         min-width: 100%;
 
@@ -579,10 +614,19 @@
       .mobile {
         display: flex;
       }
-      swiper-container swiper-slide img {
-        max-height: 100%;
-        max-width: 100%;
-      }
+      swiper-container .swiper-slide {
+    width: 100%;
+    height: 100%;
+    padding: 0;   /* Remove padding */
+    margin: 0;    /* Remove margin */
+}
+
+swiper-container .swiper-slide img {
+    object-fit: cover;  /* Ensure the image covers the entire container */
+    width: 100%;         /* Ensure image fills container */
+    height: 100%;        /* Ensure image fills container vertically */
+}
+
       .product-image-section {
         flex-direction: column;
         max-height:100%;
@@ -600,18 +644,27 @@
       .product-image-section model-viewer {
         height: {{ section.settings.model_height_mobile }}px;
       }
-      .product-image-section .product-main-image {
-      }
-      .product-image-section .product-main-image img {  
-      }
       .product-image-section .product-thumbnail-list {
-        flex-direction: row;
-        gap: 10px;
-        width: 100%;
-      }
-      .product-image-section .product-thumbnail-item {
-        flex: 1;
-      }
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);  /* 5 columns in the first row */
+  grid-template-rows: auto;  /* Auto adjust the rows based on content */
+  gap: 20px;  /* Space between images */
+  width: 100%;  /* Ensure the container takes full width */
+  justify-items: center;  /* Centers the thumbnails horizontally within each grid cell */
+  padding-left: 40px;  /* Add left padding to create space */
+  padding-right: 40px;  /* Add right padding to create space */
+}
+
+.product-image-section .product-thumbnail-item img {
+  width: 100%;  /* Ensure images fill grid cells */
+  height: auto;  /* Maintain aspect ratio */
+}
+
+
+
+
+
+
       .content.mobile {
         .title {
           margin-bottom: {{ section.settings.content_gap_mobile }}px;;
@@ -705,7 +758,7 @@
 {%- liquid
    assign description_image_blocks = section.blocks | where: 'type', 'description_image'   
 -%}
-<div class="section-{{ section.id }} section-{{ section.id }}-padding">
+<div class="section-{{ section.id }} section-{{ section.id }}-padding product-main__content">
   <div class="container">
     <div class="content tablet mobile">
       <h1 class="title">
@@ -723,17 +776,13 @@
             {% if ss.media_type == "image" %}            
               {%- if ss.image != blank -%}
                 {% comment %}
-                <img
-                class="preview-trigger"
-                data-preview-id="0"
-                src="{{ ss.image | img_url: '600x', format: 'pjpg' }}"
-                width="100%"
-                height="auto"/>
+                <img class="preview-trigger" src="{{ ss.image | img_url: '600x', format: 'jpg' }}" width="100%" height="auto" object-fit="cover" />
+
                 {% endcomment %}
                 <img
                   class="preview-trigger"
                   data-preview-id="0"
-                  src="{{ ss.image | img_url: '600x', format: 'pjpg' }}"
+                  src="{{ ss.image | img_url: '2200x', format: 'pjpg' }}"
                   srcset="
                     {{ ss.image | img_url: '300x', format: 'pjpg' }} 300w,
                     {{ ss.image | img_url: '600x', format: 'pjpg' }} 600w,
@@ -761,15 +810,12 @@
             <swiper-slide>
               <div class="product-slider-item">
                 {% comment %}
-                <img
-                  class="preview-trigger"
-                  data-preview-id="{{ forloop.index }}"
-                  src="{{ product_thumbnail.settings.preview_image | img_url: '600x', format: 'pjpg' }}"
-                  width="100%"
-                  height="auto"/>
+                <img class="preview-trigger" data-preview-id="{{ forloop.index }}" src="{{ product_thumbnail.settings.preview_image | img_url: '600x', format: 'jpg' }}" width="100%" height="auto" loading="lazy"/>
+
                 {% endcomment %}
                 <img
                   class=""
+                  style=""
                   data-preview-id="{{ forloop.index }}"
                   src="{{ product_thumbnail.settings.preview_image | img_url: '600x', format: 'pjpg' }}"
                   srcset="
@@ -779,14 +825,16 @@
                     {{ product_thumbnail.settings.preview_image | img_url: '1200x', format: 'pjpg' }} 1200w
                   "
                   sizes="(max-width: 600px) 100vw, 600px"
-                  width="100%"
+                  width="40%"
                   height="auto"
                   loading="lazy"
                 />
               </div>
             </swiper-slide>
           {% endfor %}
-        </swiper-container>
+          </swiper-container>
+          <button class="swiper-button-prev"></button>
+          <button class="swiper-button-next"></button>
         <div class="product-thumnail-pagination">
           <div class="product-thumnail-ticker"></div>
           <div class="product-thumnail-progress"></div>
@@ -822,10 +870,11 @@
       {%- endif -%}
       </div>
     </div>
-    <div class="content">
+    <div class="content product-main__meta">
       <h1 class="title desktop">
         {{ product.title }}
       </h1>
+    
       <h5 class="short-description desktop">
         {{ section.settings.short_description }}
       </h5>
@@ -930,7 +979,9 @@
         <div class="hr-line"></div>
         <div class="buttons">
           <button class="button atcButton" type="submit">{{ ss.add_text }}</button>
-          {{ form | payment_button }}
+          {% comment %}
+{{ form | payment_button }}
+{% endcomment %}
         </div>
       {%- endform -%}
       {%- assign shipping_tabs = section.blocks | where: 'type', 'shipping' -%}
@@ -1022,6 +1073,54 @@
         {% endfor %}
         </div>
       {%- endif -%}
+      {% if section.settings.use_additional_section %}
+        <div class="accordion-additional-section">
+          {% if section.settings.icon1 and section.settings.caption1 %}
+            <div class="accordion-additional-item">
+              <img
+                class=""
+                src="{{ section.settings.icon1 | img_url: '24x' }}"
+                width="24px"
+                height="auto"
+                loading="lazy" />
+              <span>{{ section.settings.caption1 }}</span>
+            </div>
+          {% endif %}
+          {% if section.settings.icon2 and section.settings.caption2 %}
+            <div class="accordion-additional-item">
+              <img
+                class=""
+                src="{{ section.settings.icon2 | img_url: '24x' }}"
+                width="24px"
+                height="auto"
+                loading="lazy" />
+              <span>{{ section.settings.caption2 }}</span>
+            </div>
+          {% endif %}
+          {% if section.settings.icon3 and section.settings.caption3 %}
+            <div class="accordion-additional-item">
+              <img
+                class=""
+                src="{{ section.settings.icon3 | img_url: '24x' }}"
+                width="24px"
+                height="auto"
+                loading="lazy" />
+              <span>{{ section.settings.caption3 }}</span>
+            </div>
+          {% endif %}
+          {% if section.settings.icon4 and section.settings.caption4 %}
+            <div class="accordion-additional-item">
+              <img
+                class=""
+                src="{{ section.settings.icon4 | img_url: '24x' }}"
+                width="24px"
+                height="auto"
+                loading="lazy" />
+              <span>{{ section.settings.caption4 }}</span>
+            </div>
+          {% endif %}
+        </div>
+      {% endif %}
     </div>
   </div>
 </div>
@@ -1042,9 +1141,12 @@
   opacity: 0;
   transition: opacity 0.3s ease;
 }
-.image-preview-popup.active {
-  visibility: visible;
-  opacity: 1;
+swiper-container .swiper-slide img {
+    object-fit: cover;  /* Ensure the image covers the entire container */
+    width: 100%;         /* Ensure image fills container */
+    height: 100%;        /* Ensure image fills container vertically */
+}
+
 }
 .image-preview-popup swiper-container {
   height: 100%;
@@ -1223,14 +1325,16 @@
     const ticker = document.querySelector('.product-thumnail-ticker');    
     if (sliders) {
       sliders.forEach(slider => {
+        const prevArrow = slider.closest('div')?.querySelector('.swiper-button-prev');
+        const nextArrow = slider.closest('div')?.querySelector('.swiper-button-next');
         const swiperParams = {
-          spaceBetween: 0,
+          spaceBetween: 10,
           centeredSlides: false,
           loop: false,
           slidesPerView: 'auto',
           navigation: {
-            nextEl: ".swiper-button-next",
-            prevEl: ".swiper-button-prev"
+            nextEl: nextArrow,
+            prevEl: prevArrow
           },
           on: {
             slideChange: function () {
@@ -1343,37 +1447,39 @@
     });
 
     /* review */
-    const reviewLink = document.querySelector(".review-section");
-    console.log('reviewLink = ', reviewLink);
-    if (reviewLink) {
-      reviewLink.addEventListener("click", function() {
-        event.preventDefault();
-        const customReviewSection = document.querySelector(".custom-review-section");
-        console.log('customReviewSection = ', customReviewSection);
-        if (customReviewSection) {
-          customReviewSection.scrollIntoView({
-            behavior: "smooth", 
-            block: "start"
-          });
-        }
+const reviewLink = document.querySelector(".review-section");
+console.log('reviewLink = ', reviewLink);
+
+if (reviewLink) {
+  reviewLink.addEventListener("click", function(e) {  // ← Lägg till 'e' här
+    e.preventDefault();                               // ← och använd 'e' istället för 'event'
+    const customReviewSection = document.querySelector(".custom-review-section");
+    console.log('customReviewSection = ', customReviewSection);
+    if (customReviewSection) {
+      customReviewSection.scrollIntoView({
+        behavior: "smooth", 
+        block: "start"
       });
-    }    
+    }
+  });
+}
+
 
     /* accordion */
     const accordionItems = document.querySelectorAll(".accordion-item");  
     accordionItems.forEach((item) => {
       const header = item.querySelector(".accordion-header");  
       header.addEventListener("click", function () {
-        accordionItems.forEach((otherItem) => {
-          if (otherItem !== item) {
-            otherItem.classList.remove("active");
-          }
-        });
+        // accordionItems.forEach((otherItem) => {
+        //   if (otherItem !== item) {
+        //     otherItem.classList.remove("active");
+        //   }
+        // });
         item.classList.toggle("active");
 
         let headerOffset = 134;
         if (window.innerWidth <= 768) {
-          headerOffset = 94;
+          headerOffset = 120;
         }
         const itemPosition = item.getBoundingClientRect().top + window.pageYOffset;
         // window.scrollTo({
@@ -1384,7 +1490,7 @@
         const scrollToPosition = itemPosition - headerOffset;
         const startPosition = window.pageYOffset;
         const distance = scrollToPosition - startPosition;
-        const duration = 600; // Duration for smooth scroll in ms
+        const duration = 200; // Duration for smooth scroll in ms
         let startTime = null;
     
         function smoothScroll(timestamp) {
@@ -1394,7 +1500,6 @@
     
           window.scrollTo({
             top: startPosition + distance * progress,
-            behavior: 'auto', // Instant scroll, progress handled manually
           });
     
           if (elapsed < duration) {
@@ -1413,6 +1518,7 @@
   "tag": "section",
   "class": "main-product",
   "settings": [
+
     {
       "type": "color",
       "id": "background_color",
@@ -1593,6 +1699,56 @@
       "type": "color",
       "id": "accordion_border_color",
       "label": "Border Color"
+    },
+    {
+      "type": "header",
+      "content": "Additional Section"
+    },
+    {
+      "type": "checkbox",
+      "id": "use_additional_section",
+      "label": "Use Additional Section",
+      "default": false
+    },
+    {
+      "type": "image_picker",
+      "id": "icon1",
+      "label": "Icon #1"
+    },
+    {
+      "type": "text",
+      "id": "caption1",
+      "label": "Caption #1"
+    },
+    {
+      "type": "image_picker",
+      "id": "icon2",
+      "label": "Icon #2"
+    },
+    {
+      "type": "text",
+      "id": "caption2",
+      "label": "Caption #2"
+    },
+    {
+      "type": "image_picker",
+      "id": "icon3",
+      "label": "Icon #3"
+    },
+    {
+      "type": "text",
+      "id": "caption3",
+      "label": "Caption #3"
+    },
+    {
+      "type": "image_picker",
+      "id": "icon4",
+      "label": "Icon #4"
+    },
+    {
+      "type": "text",
+      "id": "caption4",
+      "label": "Caption #4"
     },
     {
       "type": "header",

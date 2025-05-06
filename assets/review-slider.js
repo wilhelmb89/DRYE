@@ -84,8 +84,8 @@ sliders.forEach(slider => {
   
     // Navigation arrows
     navigation: {
-      nextEl: '.swiper-button-next',
-      prevEl: '.swiper-button-prev',
+      nextEl: '.review-slider .swiper-button-next',
+      prevEl: '.review-slider .swiper-button-prev',
     },
   
     // And if we need scrollbar

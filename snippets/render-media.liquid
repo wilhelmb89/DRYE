@@ -1,0 +1,53 @@
+{% comment %}
+  render-media.liquid
+  @properties:
+    * main_image - Liquid Image Object
+    mobile_image - Liquid Image Object
+    padding_override - int
+    * width - int (Set to 2x maximum mobile width when passing in mobile_image)
+    height - int
+    loading - string
+    widths - string
+    sizes - string
+    preload - boolean !! USE WITH CAUTION !!
+{% endcomment %}
+{%- liquid
+  if width == null and height == null
+    assign width = 768
+  endif
+  if width > 1920
+    assign width = 1920
+  endif
+  if padding_override != blank
+    assign padding_override_class = 'luc-media--controlled'
+  endif
+-%}
+
+<div
+  class="luc-media {{ padding_override_class }}"
+  {% if padding_override != blank %}
+    style="padding-top:{{ padding_override }}%"
+  {% endif %}
+>
+  {% if mobile_image != blank %}
+    <picture>
+      <source
+        media="(min-width: 768px)"
+        srcset="{{ main_image | image_url: width: 352 }} 352w,{{ main_image | image_url: width: 832 }} 832w,{{ main_image | image_url: width: 1200 }} 1200w,{{ main_image | image_url: width: 1920 }} 1920w"
+        width="1920"
+        height="{{ 1920 | divided_by: main_image.aspect_ratio }}"
+      >
+      {{
+        mobile_image
+        | image_url: width: width
+        | image_tag: loading: loading, sizes: sizes, preload: preload
+      }}
+    </picture>
+  {% else %}
+    {{
+      main_image
+      | image_url: width: width, height: height
+      | image_tag: loading: loading, widths: widths, sizes: sizes, preload: preload
+    }}
+  {% endif %}
+</div>

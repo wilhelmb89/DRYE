@@ -11,10 +11,34 @@
   "sections": {
     "main": {
       "type": "product",
-      "settings": {}
+      "disabled": true,
+      "settings": {
+        "free_shipping": "",
+        "review_title": "Reviews",
+        "size_title": "Sizes",
+        "size_text": "Size guide",
+        "size_url": "",
+        "share_text": "Share with friends",
+        "add_text": "Add to cart",
+        "check_text": "Buy now",
+        "bg": "#e5e5e5"
+      }
+    },
+    "image_with_titles_jfqW7f": {
+      "type": "image-with-titles",
+      "name": "Image-titles",
+      "settings": {
+        "text_xgcIUMAvfsCmoW4a": "<p>Would couldn't find this page<\/p>",
+        "text_RkPHUp2YW8n7zCV2": "<h3>Go back to homepage<\/h3>",
+        "text_g4s3ichGEaK3lZ9z": "",
+        "text_zsHh21Zjeu0TQXsu": "",
+        "padding_top": 0,
+        "padding_bottom": 0
+      }
     }
   },
   "order": [
-    "main"
+    "main",
+    "image_with_titles_jfqW7f"
   ]
 }

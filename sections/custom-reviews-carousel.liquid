@@ -1,0 +1,353 @@
+<style>
+  .custom-reviews-carousel {width: 100%;}
+  .custom-reviews-carousel__title {font-weight: 300; text-align: center; font-family: ClashGrotesk-Variable; font-size: 50px; margin-bottom: 40px;}
+  .custom-reviews-carousel .button {margin: 0 auto 28px; background-color: transparent; color: #000000; font-weight: 500;}
+  .custom-reviews-carousel .button svg {fill: #000000!important;}
+  .custom-reviews-carousel .button svg path {fill: #000000!important;}
+  .custom-reviews-carousel .button:hover {background-color: transparent; text-decoration: underline}
+  .main-carousel:not(.swiper-initialized) .main-carousel__wrapper {display: flex; gap: 14px;}
+  section:not(.main-article) .container.custom-reviews-carousel__wrapper {max-width: 1280px!important;}
+  .custom-reviews-carousel__review {}
+  .custom-reviews-carousel__images {width: 100%; display: flex; align-items: flex-start; justify-content: center; gap: 8px;}
+  .custom-reviews-carousel__image-wrap {position: relative; border-radius: 12px; overflow: hidden; max-width: 50%; width: 100%}
+  .custom-reviews-carousel__image-tag {position: absolute; bottom: 10px; left: 15px; background-color: #FFFFFF; font-size: 14px; padding: 4px 8px; font-weight: 600; border-radius: 12px;}
+  .custom-reviews-carousel__review-meta {display: flex; flex-direction: column; align-self: flex-start; justify-content: flex-start; gap: 8px; margin-top: 24px;}
+  .custom-reviews-carousel__review-meta .button {margin: 0; background-color: transparent; color: #000000; padding-left: 0; padding-top: 12px; font-weight: 500;}
+  .custom-reviews-carousel__review-meta .button svg {fill: #000000!important;}
+  .custom-reviews-carousel__review-meta .button svg path {fill: #000000!important;}
+  .custom-reviews-carousel__review-meta .button:hover {background-color: transparent; text-decoration: underline;}
+  .custom-reviews-carousel__review-top {display: flex; gap: 16px; align-items: center; justify-content: flex-start;}
+  .custom-reviews-carousel__review-name {font-size: 18px; font-weight: 300; font-family: ClashGrotesk-Variable;}
+  .custom-reviews-carousel__review-rating {display: flex; align-items: center; justify-content: flex-start; gap: 8px; margin-bottom: 4px;}
+  .custom-reviews-carousel__review-rating svg {fill: red; width: 18px;}
+  .custom-reviews-carousel__review-copy {line-height: 1.5; margin-top: 8px;}
+  .custom-reviews-carousel__review-tag-wrap {display: flex; flex-wrap: wrap; gap: 8px; margin-top: 4px;}
+  .custom-reviews-carousel__review-tag {font-size: 14px; font-weight: 600; padding: 4px 14px; color: #FFFFFF; background-color: #000000;}
+  .custom-reviews-carousel .main-carousel__button-prev, .custom-reviews-carousel .main-carousel__button-next {background: #fafafaca; border: 0; color: #000000; width: 48px; height: 48px; border-radius: 50px; z-index: 5; cursor: pointer; transition: background 0.1s ease; border-radius: 12px; top: 27%;}
+  .main-carousel__button-prev:hover, .main-carousel__button-next:hover {background: #fafafa;}
+  .main-carousel__button-prev:after, .main-carousel__button-next:after {font-size: 24px; font-weight: 700;}
+
+  @media screen and (min-width: 768px) {
+    .custom-reviews-carousel .swiper-pagination {display: none;}
+    .mobile-only {display: none;}
+  }
+  @media screen and (max-width: 1440px) {
+    .custom-reviews-carousel__title {font-size: 38px;}
+  }
+  @media screen and (max-width: 1024px) {
+    .custom-reviews-carousel__title {font-size: 30px; margin-bottom: 30px;}
+    .custom-reviews-carousel .main-carousel__button-prev, .custom-reviews-carousel .main-carousel__button-next {top: 37%;}
+  }
+  @media screen and (max-width: 767px) {
+     .custom-reviews-carousel__image-tag {left: 10px;font-size: 13px;}
+    .custom-reviews-carousel .main-carousel__button-prev, .custom-reviews-carousel .main-carousel__button-next {background: rgba(0, 0, 0, 0.3); color: #FFFFFF;}
+    .main-carousel__button-prev:hover, .main-carousel__button-next:hover {background: #000000;}
+    .mobile-only {display: flex;}
+    .desktop-only {display: none;}
+    .custom-reviews-carousel__title {font-size: 28px; line-height: 1.3; margin-bottom: 20px;}
+    .custom-reviews-carousel .swiper.main-carousel {padding-top: 22px;}
+    .custom-reviews-carousel .main-carousel__buttons {position: relative; display: flex; align-items: center; justify-content: space-between; width: 100%; margin-bottom: 28px;}
+    .custom-reviews-carousel .main-carousel__button-prev, .custom-reviews-carousel .main-carousel__button-next {position: relative;}
+    .custom-reviews-carousel .main-carousel__button-prev {left: 0;}
+    .custom-reviews-carousel .main-carousel__button-next {right: 0;}
+    .custom-reviews-carousel .swiper-pagination {top: 12px; z-index: -1; width: fit-content; left: 50%; transform: translateX(-50%);}
+    .swiper-pagination-bullet.swiper-pagination-bullet-active {background-color: #000000;}
+    .custom-reviews-carousel__review-rating {margin-bottom: 3px;}
+    .custom-reviews-carousel__review-copy {font-size: 14px;}
+    .custom-reviews-carousel__review-tag-wrap {margin-top: 8px;}
+    .custom-reviews-carousel .button.mobile-only {margin: 22px auto 28px;}
+    .custom-reviews-carousel__review-tag {font-size: 12px;}
+    .custom-reviews-carousel__review-top {gap: 5px 16px; flex-wrap: wrap;}
+  }
+</style>
+
+{% if section.settings.margin_top_desktop == true %}
+  <style>
+    @media screen and (min-width: 768px) {
+      #shopify-section-{{ section.id }}.custom-reviews-carousel {margin-top: 100px;}
+    }
+  </style>
+{% endif %}
+{% if section.settings.margin_top_mobile == true %}
+  <style>
+    @media screen and (max-width: 767px) {
+      #shopify-section-{{ section.id }}.custom-reviews-carousel {margin-top: 64px;}
+    }
+  </style>
+{% endif %}
+{% if section.settings.margin_bottom_desktop == true %}
+  <style>
+    @media screen and (min-width: 768px) {
+      #shopify-section-{{ section.id }}.custom-reviews-carousel {margin-bottom: 100px;}
+    }
+  </style>
+{% endif %}
+{% if section.settings.margin_bottom_mobile == true %}
+  <style>
+    @media screen and (max-width: 767px) {
+      #shopify-section-{{ section.id }}.custom-reviews-carousel {margin-bottom: 64px;}
+    }
+  </style>
+{% endif %}
+
+<div class="custom-reviews-carousel__wrapper container">
+    {% if section.settings.title != blank %}
+      <h2 class="custom-reviews-carousel__title title">What do 3-5 month hair growth results look like?</h2>
+    {% endif %}
+    {% if section.settings.button_text != blank %}
+      <a href="{{ section.settings.button_link }}" class="button desktop-only">
+        {{ section.settings.button_text }}
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <g clip-path="url(#clip0_179_573)">
+          <path d="M15 5L13.59 6.41L18.17 11H2V13H18.17L13.58 17.59L15 19L22 12L15 5Z" fill="white"></path>
+          </g>
+          <defs>
+          <clipPath id="clip0_179_573">
+          <rect width="24" height="24" fill="white"></rect>
+          </clipPath>
+          </defs>
+        </svg>
+      </a>
+    {% endif %}
+    <main-carousel>
+      <div class="swiper main-carousel" data-carousel-options='
+        {
+        "loop": false,
+        "spaceBetween": 14,
+        "slidesPerView": 1,
+        "speed": 500,
+        "prevButton": "#shopify-section-{{ section.id }} .main-carousel__button-prev",
+        "nextButton": "#shopify-section-{{ section.id }} .main-carousel__button-next",
+        "pagination": {
+          "el": "#shopify-section-{{ section.id }} .swiper-pagination"
+        },
+        "breakpoints": {
+            "768": {
+              "slidesPerView": 1.3
+            },
+            "1025": {
+              "slidesPerView": 2.46
+            }
+          }
+        }
+      '>
+        <!-- Navigation buttons -->
+        <div class="main-carousel__buttons">
+          <div class="swiper-button-prev main-carousel__button-prev"></div>
+          <div class="swiper-button-next main-carousel__button-next"></div>
+        </div>
+        <!-- Pagination -->
+        <div class="swiper-pagination"></div>
+        <div class="swiper-wrapper main-carousel__wrapper">
+          {% for block in section.blocks %}
+            <div class="swiper-slide main-carousel__slide custom-reviews-carousel__review">
+              <div class="custom-reviews-carousel__images">
+                {% if block.settings.image_1 != blank %}
+                  <div class="custom-reviews-carousel__image-wrap">
+                    {% render "render-media", main_image: block.settings.image_1, width: 800 %}
+                    {% if block.settings.image_1_tag != blank %}
+                      <div class="custom-reviews-carousel__image-tag">{{ block.settings.image_1_tag }}</div>
+                    {% endif %}
+                  </div>
+                {% endif %}
+                {% if block.settings.image_2 != blank %}
+                  <div class="custom-reviews-carousel__image-wrap">
+                    {% render "render-media", main_image: block.settings.image_2, width: 800 %}
+                    {% if block.settings.image_2_tag != blank %}
+                      <div class="custom-reviews-carousel__image-tag">{{ block.settings.image_2_tag }}</div>
+                    {% endif %}
+                  </div>
+                {% endif %}
+              </div>
+              <div class="custom-reviews-carousel__review-meta">
+                {% if block.settings.review_name != blank %}
+                  <div class="custom-reviews-carousel__review-top">
+                    <div class="custom-reviews-carousel__review-name">{{ block.settings.review_name }}</div>
+                    <div class="custom-reviews-carousel__review-rating">
+                      {% for i in (1..block.settings.rating) %}
+                        <svg class="yotpo-star-rating-icon yotpo-sr-star-full" width="18" height="18" viewBox="0 0 33 33" fill="none" xmlns="http://www.w3.org/2000/svg" transform="scale(1.2, 1.2)" aria-hidden="true" focusable="false"><defs><linearGradient id="yotpo_stars_gradient_0.3095867272464313"><stop offset="100%" stop-color="#E7721B"></stop><stop offset="100%" stop-color="#FFFFFF" stop-opacity="1"></stop></linearGradient></defs><path d="M17.0919 25.4549L16.8335 25.299L16.5751 25.4549L7.39263 30.9971L9.82942 20.5516L9.89798 20.2577L9.66988 20.0601L1.55658 13.0315L12.2393 12.1252L12.5397 12.0997L12.6574 11.8221L16.8335 1.9688L21.0096 11.8221L21.1273 12.0997L21.4277 12.1252L32.1104 13.0315L23.9971 20.0601L23.769 20.2577L23.8376 20.5516L26.2744 30.9971L17.0919 25.4549Z" stroke="#E7721B" fill="url(#yotpo_stars_gradient_0.3095867272464313)"></path></svg>
+                      {% endfor %}
+                    </div>
+                  </div>
+                {% endif %}
+                {% if block.settings.review_copy != blank %}
+                  <div class="custom-reviews-carousel__review-copy">{{ block.settings.review_copy }}</div>
+                {% endif %}
+                {% if block.settings.review_tag_1 != blank %}
+                  <div class="custom-reviews-carousel__review-tag-wrap">
+                    {% if block.settings.review_tag_1 != blank %}
+                      <div class="custom-reviews-carousel__review-tag">{{ block.settings.review_tag_1 }}</div>
+                    {% endif %}
+                    {% if block.settings.review_tag_2 != blank %}
+                      <div class="custom-reviews-carousel__review-tag">{{ block.settings.review_tag_2 }}</div>
+                    {% endif %}
+                    {% if block.settings.review_tag_3 != blank %}
+                      <div class="custom-reviews-carousel__review-tag">{{ block.settings.review_tag_3 }}</div>
+                    {% endif %}
+                  </div>
+                {% endif %}
+                {% if block.settings.review_text != blank %}
+                  <a href="{{ block.settings.review_link }}" class="button">
+                    {{ block.settings.review_text }}
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <g clip-path="url(#clip0_179_573)">
+                      <path d="M15 5L13.59 6.41L18.17 11H2V13H18.17L13.58 17.59L15 19L22 12L15 5Z" fill="white"></path>
+                      </g>
+                      <defs>
+                      <clipPath id="clip0_179_573">
+                      <rect width="24" height="24" fill="white"></rect>
+                      </clipPath>
+                      </defs>
+                    </svg>
+                  </a>
+                {% endif %}
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+    </main-carousel>
+    {% if section.settings.button_text != blank %}
+      <a href="{{ section.settings.button_link }}" class="button mobile-only">
+        {{ section.settings.button_text }}
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <g clip-path="url(#clip0_179_573)">
+          <path d="M15 5L13.59 6.41L18.17 11H2V13H18.17L13.58 17.59L15 19L22 12L15 5Z" fill="white"></path>
+          </g>
+          <defs>
+          <clipPath id="clip0_179_573">
+          <rect width="24" height="24" fill="white"></rect>
+          </clipPath>
+          </defs>
+        </svg>
+      </a>
+    {% endif %}
+</div>
+
+{% schema %}
+  {
+    "name": "Custom Reviews Carousel",
+    "tag": "section",
+    "class": "custom-reviews-carousel",
+    "settings": [
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Custom Reviews Carousel"
+      },
+      {
+        "type": "text",
+        "id": "button_text",
+        "label": "Button Text"
+      },
+      {
+        "type": "url",
+        "id": "button_link",
+        "label": "Button Link"
+      },
+      {
+        "type": "checkbox",
+        "id": "margin_top_desktop",
+        "label": "Margin Top Desktop",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "margin_top_mobile",
+        "label": "Margin Top Mobile",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "margin_bottom_desktop",
+        "label": "Margin Bottom Desktop",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "margin_bottom_mobile",
+        "label": "Margin Bottom Mobile",
+        "default": true
+      }
+    ],
+    "blocks": [
+       {
+         "name": "Review",
+         "type": "review",
+         "settings": [
+            {
+              "type": "image_picker",
+              "id": "image_1",
+              "label": "Image 1"
+            },
+            {
+              "type": "text",
+              "id": "image_1_tag",
+              "label": "Image 1 Tag"
+            },
+            {
+              "type": "image_picker",
+              "id": "image_2",
+              "label": "Image 2"
+            },
+            {
+              "type": "text",
+              "id": "image_2_tag",
+              "label": "Image 2 Tag"
+            },
+            {
+              "type": "text",
+              "id": "review_name",
+              "label": "Reviewer Name/Location",
+              "default": "Wilhelm, Sweden"
+            },
+            {
+              "type": "range",
+              "id": "rating",
+              "min": 1,
+              "max": 5,
+              "step": 1,
+              "label": "Star Rating",
+              "default": 5
+            },
+            {
+              "type": "textarea",
+              "id": "review_copy",
+              "label": "Review Text",
+              "default": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
+            },
+            {
+              "type": "text",
+              "id": "review_tag_1",
+              "label": "Review Tag 1"
+            },
+            {
+              "type": "text",
+              "id": "review_tag_2",
+              "label": "Review Tag 2"
+            },
+            {
+              "type": "text",
+              "id": "review_tag_3",
+              "label": "Review Tag 3"
+            },
+            {
+              "type": "text",
+              "id": "review_text",
+              "label": "Review Button Text"
+            },
+            {
+              "type": "url",
+              "id": "review_link",
+              "label": "Review Button Link"
+            }
+         ]
+       }
+    ],
+    "presets": [
+      {
+        "name": "Custom Reviews Carousel"
+      }
+    ]
+  }
+  {% endschema %}

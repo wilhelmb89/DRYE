@@ -1,0 +1,34 @@
+{% schema %}
+{
+  "name": "Custom Heading + Text",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "30-Day Money-Back Guarantee"
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Description",
+      "default": "If you're not satisfied, you can return your gloves within 30 days of delivery. No hassle — just contact us, and we'll take care of it."
+    }
+  ],
+  "presets": [
+    {
+      "name": "Custom Heading + Text"
+    }
+  ]
+}
+{% endschema %}
+
+<div class="custom-heading-text" style="max-width: 720px; margin: 0 auto; padding: 40px 20px;">
+  {% if section.settings.heading != blank %}
+    <h2 style="font-size: 24px; font-weight: 600; margin-bottom: 0.5em;">{{ section.settings.heading }}</h2>
+  {% endif %}
+  {% if section.settings.description != blank %}
+    <p style="font-size: 16px; line-height: 1.6; white-space: pre-line;">{{ section.settings.description }}</p>
+  {% endif %}
+</div>

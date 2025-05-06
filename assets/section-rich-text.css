@@ -1,0 +1,39 @@
+/* Apply max-width, margin, padding, and margin-bottom to create space */
+.section-rich-text {
+  max-width: var(--page-width);
+  margin: 0 auto;
+  padding: 40px 20px;
+  display: block;  /* Ensures it behaves as a block element */
+  margin-bottom: 40px; /* Space between sections */
+}
+
+/* Apply margin-top for policy-page section */
+.section-rich-text.policy-page-section {
+  margin-top: 150px;
+}
+
+/* Style for headings (h2) inside policy sections */
+.return-policy-section h2 {
+  font-family: 'Clash Grotesk', sans-serif;
+  font-size: 28px;
+  font-weight: 700;
+  color: #111111;
+  line-height: 1.4;
+  text-align: left;
+  margin-bottom: 20px; /* Adds space between the heading and the text */
+}
+
+/* Style for paragraphs (p) inside policy sections */
+.return-policy-section p {
+  font-family: 'Inter', sans-serif;
+  font-size: 18px;
+  color: #333333;
+  line-height: 1.6;
+  text-align: left;
+  margin-bottom: 20px; /* Space between paragraphs */
+}
+
+/* Bold text within policy sections */
+.return-policy-section b {
+  font-weight: bold;
+}

@@ -2,12 +2,12 @@
   .section-{{ section.id }} {
     background: {{ section.settings.background_color }};
   }
-  .section-{{ section.id }} .container {
-    {% if section.settings.max_fullwidth %}
+.section-{{ section.id }} .container {
+  {% if section.settings.max_fullwidth %}
     max-width: 100%;
     padding-inline: 0;
-    {% endif %}
-  }
+  {% endif %}
+}
   .section-{{ section.id }}-padding {
     padding-top: {{ section.settings.padding_top }}px;
     padding-bottom: {{ section.settings.padding_bottom }}px;
@@ -351,13 +351,15 @@
           {% if block.type == "card" %}
             <swiper-slide>
               <div class="block-{{ block.id }} rich-block-card">
-                <img class="rich-block__image" src="{{ block.settings.preview_image | img_url: '480x', format: 'pjpg' }}" width="100%" height="auto" loading="lazy">
+                <img class="rich-block__image" src="{{ block.settings.preview_image | img_url: '400x', format: 'pjpg' }}" width="100%" height="auto" loading="lazy">
               </div>
             </swiper-slide>
           {% endif %}
         {% endfor %}
         </swiper-container>
-        <prev-next-buttons>
+        <button class="swiper-button-prev"></button>
+        <button class="swiper-button-next"></button>
+        {% comment %} <prev-next-buttons>
           <div class="prev">
             {%- render 'icon', type: 'arrow-left', color: section.settings.icon_color -%}
           </div>
@@ -365,7 +367,7 @@
           <div class="next">
             {%- render 'icon', type: 'arrow-right', color: section.settings.icon_color -%}
           </div>
-        </prev-next-buttons>
+        </prev-next-buttons> {% endcomment %}
       </div>      
       <div class="swiper-pagination"></div>
     </div>
@@ -381,11 +383,11 @@
           spaceBetween: 20,
           centeredSlides: false,
           loop: true,
+          autoplay: true,
           slidesPerView: 'auto',
-          pagination: {
-            el: ".section-{{ section.id }} .swiper-pagination",
-            clickable: true,
-            dynamicBullets: true
+          navigation: {
+            nextEl: ".image-slider__swiper .swiper-button-next",
+            prevEl: ".image-slider__swiper .swiper-button-prev"
           },
           breakpoints: {
             1150: {
@@ -399,11 +401,7 @@
             0: {
                slidesPerView: {{ section.settings.slider_pagination_count_mobile }}
             }
-          },
-          navigation: {
-            nextEl: slider.nextElementSibling.querySelector('.next'),
-            prevEl: slider.nextElementSibling.querySelector('.prev'),
-          },
+          }
         };
         Object.assign(slider, swiperParams);
         slider.initialize();
@@ -417,7 +415,7 @@
 {
   "name": "Image Slider",
   "tag": "section",
-  "class": "section",
+  "class": "section image-slider__swiper",
   "disabled_on": {
     "groups": ["header", "footer"]
   },

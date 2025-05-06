@@ -80,12 +80,16 @@
     .section-{{ section.id }} .rich-block__wrapper .rich-block-card {
       justify-content: center;
     }
-  }
-  @media screen and (max-width: 768px) {
     .section-{{ section.id }}-padding {
       padding-top: {{ section.settings.padding_top_tablet }}px !important;
       padding-bottom: {{ section.settings.padding_bottom_tablet }}px !important;
     }
+  }
+  @media screen and (max-width: 768px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top_mobile }}px !important;
+      padding-bottom: {{ section.settings.padding_bottom_mobile }}px !important;
+    }   
     .section-{{ section.id }} .rich-text__blocks .rich-text__buttons,
     .section-{{ section.id }} .rich-text__blocks .rich-text__buttons a{
       width: 100%;
@@ -122,11 +126,7 @@
       line-height:  {{ section.settings.desc_line_height_tablet }}px;
     }
   }
-  @media screen and (max-width: 480px) {
-    .section-{{ section.id }}-padding {
-      padding-top: {{ section.settings.padding_top_mobile }}px !important;
-      padding-bottom: {{ section.settings.padding_bottom_mobile }}px !important;
-    }    
+  @media screen and (max-width: 480px) { 
     .section-{{ section.id }}.content-container {
       border-radius: {{ section.settings.border_radius_mobile }}px;
     }
