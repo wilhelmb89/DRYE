@@ -4,13 +4,24 @@
     position: relative;
     width: 100%;
     padding: 1rem 0;
+    /* display: grid; */ /* Can often be removed or changed to display: block */
   }
 
-  .icons-wrapper {
+  .scrolling-track { /* New class for the element that will be animated */
+    display: flex;
+    width: max-content; /* Ensures it's wide enough for both duplicated sets */
+  }
+
+  .icons-wrapper { /* This is for one set of icons */
     display: flex;
     align-items: center;
+    /* position: relative; */ /* May not be needed if icon-block handles its own positioning */
+    width: max-content; /* Ensures each set of icons takes up its natural width */
+  }
+
+  .scroll-animation { /* This class will be on .scrolling-track */
     animation: scroll-left {{ section.settings.scroll_speed }}s linear infinite;
-    width: fit-content;
+    will-change: transform;
   }
 
   .icon-block {
@@ -34,16 +45,17 @@
 
   @keyframes scroll-left {
     0% {
-      transform: translateX(0%);
+      transform: translateX(0);
     }
     100% {
-      transform: translateX(-50%);
+      /* This moves the .scrolling-track by half its width, which is one full set of icons */
+      transform: translateX(calc(-100% / 2));
     }
   }
 
   /* Media queries */
   @media screen and (max-width: 767px) {
-    .icons-wrapper {
+    .scroll-animation {
       animation-duration: {{ section.settings.scroll_speed_mobile }}s;
     }
     .icon-block {
@@ -55,44 +67,84 @@
   }
 </style>
 
-<div class="scrolling-container">
-  <div class="icons-wrapper">
-    {%- for block in section.blocks -%}
-      <div class="icon-block" {{ block.shopify_attributes }}>
-        {%- if block.settings.image != blank -%}
-          {% assign image_to_use = block.settings.image %}
-          {% if block.settings.image_mobile != blank and request.device.mobile? %}
-            {% assign image_to_use = block.settings.image_mobile %}
-          {% endif %}
-          <img
-            src="{{ image_to_use | image_url: width: 200 }}"
-            loading="lazy"
-            width="{{ block.settings.image_width }}"
-            height=""
-            alt="{{ image_to_use.alt | escape }}"
-          >
-        {%- endif -%}
+{%- comment -%}
+  Only initialize the slider if there are blocks
+{%- endcomment -%}
+{%- assign icon_count = section.blocks.size -%}
+{%- if icon_count > 0 -%}
+  <div
+    class="scrolling-container"
+    data-speed="{{ section.settings.scroll_speed }}"
+    data-mobile-speed="{{ section.settings.scroll_speed_mobile }}"
+  >
+    {%- comment -%}
+      Capture the HTML for a single set of icons.
+      The .icons-wrapper no longer has .scroll-animation directly.
+    {%- endcomment -%}
+    {%- capture icons_set_html -%}
+      <div class="icons-wrapper">
+        {%- for block in section.blocks -%}
+          <div class="icon-block" {{ block.shopify_attributes }}>
+            {%- if block.settings.image != blank -%}
+              {% assign image_to_use = block.settings.image %}
+              {% if block.settings.image_mobile != blank and request.device.mobile? %}
+                {% assign image_to_use = block.settings.image_mobile %}
+              {% endif %}
+              <img
+                src="{{ image_to_use | image_url: width: 200 }}"
+                loading="lazy"
+                style="width: {{ block.settings.image_width }}%;"
+                alt="{{ image_to_use.alt | escape }}"
+              >
+            {%- endif -%}
+          </div>
+        {%- endfor -%}
       </div>
-    {%- endfor -%}
-    {%- for block in section.blocks -%}
-      <div class="icon-block" {{ block.shopify_attributes }}>
-        {%- if block.settings.image != blank -%}
-          {% assign image_to_use = block.settings.image %}
-          {% if block.settings.image_mobile != blank and request.device.mobile? %}
-            {% assign image_to_use = block.settings.image_mobile %}
-          {% endif %}
-          <img
-            src="{{ image_to_use | image_url: width: 200 }}"
-            loading="lazy"
-            width="{{ block.settings.image_width }}"
-            height=""
-            alt="{{ image_to_use.alt | escape }}"
-          >
-        {%- endif -%}
-      </div>
-    {%- endfor -%}
+    {%- endcapture -%}
+
+    {%- comment -%}
+      Create a track element that holds two copies of the icons_set_html.
+      This .scrolling-track element gets the .scroll-animation class.
+    {%- endcomment -%}
+    <div class="scrolling-track scroll-animation">
+      {{ icons_set_html }}
+      {{ icons_set_html }}
+    </div>
   </div>
-</div>
+
+  <script>
+    // return; // Remove this line to enable the script
+
+    // Prevent animation jumps by resetting when needed
+    document.addEventListener('DOMContentLoaded', function () {
+      // Select the element that has the animation, which is now .scrolling-track
+      const animatedTrack = document.querySelector('.scrolling-track.scroll-animation');
+      if (!animatedTrack) return;
+
+      // Function to reset animation
+      function resetAnimation() {
+        animatedTrack.classList.remove('scroll-animation');
+        void animatedTrack.offsetWidth; // Force reflow
+        animatedTrack.classList.add('scroll-animation');
+      }
+
+      // Reset animation when it iterates.
+      // With a correctly set up continuous animation, this might not always be necessary,
+      // but can help with browser quirks or ensure perfect synchronization.
+      animatedTrack.addEventListener('animationiteration', function () {
+        resetAnimation();
+      });
+
+      // Adjust for window resize
+      let resizeTimer;
+      window.addEventListener('resize', function () {
+        clearTimeout(resizeTimer);
+        // Resetting on resize can help if widths change and the animation needs to readjust.
+        resizeTimer = setTimeout(resetAnimation, 100);
+      });
+    });
+  </script>
+{%- endif -%}
 
 {% schema %}
 {
