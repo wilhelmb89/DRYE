@@ -3,29 +3,33 @@
     overflow: hidden;
     position: relative;
     width: 100%;
-    padding: 1rem 0; /* lite luft ovan och under */
+    padding: 1rem 0;
   }
 
   .icons-wrapper {
     display: flex;
-    align-items: center; /* centrera vertikalt */
-    animation: scroll-left 40s linear infinite;
+    align-items: center;
+    animation: scroll-left {{ section.settings.scroll_speed }}s linear infinite;
+    width: fit-content;
   }
 
   .icon-block {
     flex: 0 0 auto;
-    padding: 0 3rem; /* justera avstånd mellan ikoner här */
+    padding: 0 2rem;
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 80px; /* justera efter behov */
+    height: 80px;
+    width: calc(100% / {{ section.settings.cols_desk }});
+    max-width: 250px;
   }
 
   .icon-block img {
+    height: auto;
+    width: auto;
     max-height: 100%;
     max-width: 100%;
     object-fit: contain;
-    display: block;
   }
 
   @keyframes scroll-left {
@@ -37,132 +41,164 @@
     }
   }
 
+  /* Media queries */
   @media screen and (max-width: 767px) {
     .icons-wrapper {
-      animation-duration: 30s;
+      animation-duration: {{ section.settings.scroll_speed_mobile }}s;
     }
     .icon-block {
       padding: 0 1.5rem;
       height: 60px;
+      width: calc(100% / {{ section.settings.cols_mob }});
+      max-width: 125px;
     }
   }
 </style>
 
-
 <div class="scrolling-container">
   <div class="icons-wrapper">
     {%- for block in section.blocks -%}
-      <div class="icon-block">
+      <div class="icon-block" {{ block.shopify_attributes }}>
         {%- if block.settings.image != blank -%}
-          <img src="{{ block.settings.image | image_url }}" loading="lazy" style="width: {{ block.settings.image_width }}%;">
+          {% assign image_to_use = block.settings.image %}
+          {% if block.settings.image_mobile != blank and request.device.mobile? %}
+            {% assign image_to_use = block.settings.image_mobile %}
+          {% endif %}
+          <img
+            src="{{ image_to_use | image_url: width: 200 }}"
+            loading="lazy"
+            width="{{ block.settings.image_width }}"
+            height=""
+            alt="{{ image_to_use.alt | escape }}"
+          >
         {%- endif -%}
       </div>
     {%- endfor -%}
     {%- for block in section.blocks -%}
-      <div class="icon-block">
+      <div class="icon-block" {{ block.shopify_attributes }}>
         {%- if block.settings.image != blank -%}
-          <img src="{{ block.settings.image | image_url }}" loading="lazy" style="width: {{ block.settings.image_width }}%;">
+          {% assign image_to_use = block.settings.image %}
+          {% if block.settings.image_mobile != blank and request.device.mobile? %}
+            {% assign image_to_use = block.settings.image_mobile %}
+          {% endif %}
+          <img
+            src="{{ image_to_use | image_url: width: 200 }}"
+            loading="lazy"
+            width="{{ block.settings.image_width }}"
+            height=""
+            alt="{{ image_to_use.alt | escape }}"
+          >
         {%- endif -%}
       </div>
     {%- endfor -%}
   </div>
 </div>
 
-
-
 {% schema %}
-  {
-    "name": "Icons",
-    "tag": "section",
-    "class": "section-icons",
-    "settings": [
-      {
-        "type": "range",
-        "id": "cols_desk",
-        "min": 1,
-        "max": 5,
-        "step": 1,
-        "unit": "c",
-        "label": "Columns count on desktop",
-        "default": 4
-      },
-      {
-        "type": "range",
-        "id": "cols_mob",
-        "min": 1,
-        "max": 3,
-        "step": 1,
-        "unit": "c",
-        "label": "Columns count on mobile",
-        "default": 2
-      },
-    ],
-    "blocks": [
-      {
-        "name": "Icon",
-        "type": "icon",
-        "settings": [
-           {
-             "type": "header",
-             "content": "Desktop"
-           },
-           {
-             "type": "image_picker",
-             "id": "image",
-             "label": "Image"
-           },
-           {
-              "type": "range",
-              "id": "image_width",
-              "label": "Image width",
-              "default": 50,
-              "step": 1,
-              "unit": "%",
-              "min": 20,
-              "max": 100
-           },
-           {
-             "type": "header",
-             "content": "Tablet"
-           },
-           {
-              "type": "range",
-              "id": "image_width_tablet",
-              "label": "Image width",
-              "default": 50,
-              "step": 1,
-              "unit": "%",
-              "min": 20,
-              "max": 100
-           },
-           {
-             "type": "header",
-             "content": "Mobile"
-           },
-           {
-             "type": "image_picker",
-             "id": "image_mobile",
-             "label": "Image (Mobile)"
-           },
-           {
-             "type": "range",
-             "id": "image_width_mobile",
-             "label": "Image width",
-              "default": 50,
-              "step": 1,
-              "unit": "%",
-              "min": 20,
-              "max": 100
-           }
-        ]
-      }
-    ],
-    "presets": [
-      {
-        "name": "Icons",
-        "settings": {
+{
+  "name": "Scrolling Icons",
+  "tag": "section",
+  "class": "section-scrolling-icons",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "range",
+      "id": "cols_desk",
+      "min": 2,
+      "max": 6,
+      "step": 1,
+      "unit": "col",
+      "label": "Desktop columns",
+      "default": 4
+    },
+    {
+      "type": "range",
+      "id": "cols_mob",
+      "min": 1,
+      "max": 3,
+      "step": 1,
+      "unit": "col",
+      "label": "Mobile columns",
+      "default": 2
+    },
+    {
+      "type": "header",
+      "content": "Animation"
+    },
+    {
+      "type": "range",
+      "id": "scroll_speed",
+      "min": 10,
+      "max": 120,
+      "step": 5,
+      "unit": "s",
+      "label": "Scroll speed (desktop)",
+      "default": 40,
+      "info": "Higher values = slower scrolling"
+    },
+    {
+      "type": "range",
+      "id": "scroll_speed_mobile",
+      "min": 10,
+      "max": 120,
+      "step": 5,
+      "unit": "s",
+      "label": "Scroll speed (mobile)",
+      "default": 30,
+      "info": "Higher values = slower scrolling"
+    }
+  ],
+  "blocks": [
+    {
+      "name": "Icon",
+      "type": "icon",
+      "limit": 10,
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "range",
+          "id": "image_width",
+          "label": "Image width",
+          "default": 80,
+          "min": 30,
+          "max": 100,
+          "step": 5,
+          "unit": "%"
+        },
+        {
+          "type": "image_picker",
+          "id": "image_mobile",
+          "label": "Alternative mobile image",
+          "info": "Optional. Uses desktop image if none provided."
         }
-      }
-    ]
-  }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Scrolling Icons",
+      "blocks": [
+        {
+          "type": "icon"
+        },
+        {
+          "type": "icon"
+        },
+        {
+          "type": "icon"
+        },
+        {
+          "type": "icon"
+        }
+      ]
+    }
+  ]
+}
 {% endschema %}
