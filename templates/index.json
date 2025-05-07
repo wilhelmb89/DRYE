@@ -66,9 +66,7 @@
           "settings": {
             "image": "shopify://shop_images/Uppsala_univers_2.png",
             "image_width": 80,
-            "image_width_tablet": 80,
-            "image_mobile": "shopify://shop_images/Uppsala_univers_2.png",
-            "image_width_mobile": 100
+            "image_mobile": "shopify://shop_images/Uppsala_univers_2.png"
           }
         },
         "icon_kWJMkc": {
@@ -76,9 +74,7 @@
           "settings": {
             "image": "shopify://shop_images/output-onlinepngtools_8.png",
             "image_width": 80,
-            "image_width_tablet": 80,
-            "image_mobile": "shopify://shop_images/output-onlinepngtools_8.png",
-            "image_width_mobile": 100
+            "image_mobile": "shopify://shop_images/output-onlinepngtools_8.png"
           }
         },
         "icon_Fi3ghA": {
@@ -86,9 +82,7 @@
           "settings": {
             "image": "shopify://shop_images/Logga_HB.png",
             "image_width": 80,
-            "image_width_tablet": 80,
-            "image_mobile": "shopify://shop_images/Logga_HB.png",
-            "image_width_mobile": 100
+            "image_mobile": "shopify://shop_images/Logga_HB.png"
           }
         },
         "icon_HxdmF8": {
@@ -96,9 +90,7 @@
           "settings": {
             "image": "shopify://shop_images/output-onlinepngtools_2_8819a8b6-8fa1-490b-b516-a62bf32f1a93.png",
             "image_width": 80,
-            "image_width_tablet": 50,
-            "image_mobile": "shopify://shop_images/output-onlinepngtools_2_8819a8b6-8fa1-490b-b516-a62bf32f1a93.png",
-            "image_width_mobile": 100
+            "image_mobile": "shopify://shop_images/output-onlinepngtools_2_8819a8b6-8fa1-490b-b516-a62bf32f1a93.png"
           }
         }
       },
@@ -108,9 +100,14 @@
         "icon_Fi3ghA",
         "icon_HxdmF8"
       ],
+      "custom_css": [
+        ".icons-wrapper {padding-top: 30px}"
+      ],
       "settings": {
         "cols_desk": 4,
-        "cols_mob": 2
+        "cols_mob": 2,
+        "scroll_speed": 10,
+        "scroll_speed_mobile": 10
       }
     },
     "list_new_cyzkn8": {
