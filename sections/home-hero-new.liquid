@@ -47,7 +47,7 @@
       display: flex;
       align-items: end;
     }
-    #shopify-section-{{ section.id }} .review-text {      
+    #shopify-section-{{ section.id }} .review-text {
       max-width: 448px;
     }
   }
@@ -79,7 +79,7 @@
       line-height: {{ section.settings.review_text_line_height_tablet }}px;
     }
   }
-  @media screen and (max-width: 767px) {    
+  @media screen and (max-width: 767px) {
     #shopify-section-{{ section.id }} .image .video-wrapper {
       height: calc(100vw - 80px);
     }
@@ -101,7 +101,7 @@
     #shopify-section-{{ section.id }} .review-profile-block {
       justify-content: center;
     }
-  }  
+  }
 </style>
 
 <div class="container">
@@ -130,25 +130,33 @@
         <div class="review-profile-block">
           {%- if section.blocks.size > 0 -%}
             <div class="review-profile-image">
-            {%- for block in section.blocks -%}
-              {% if block.type == 'review' %}
-                {% if block.settings.review_url != blank  %}
-                  <a href="{{ block.settings.review_url }}" class="review-link">
+              {%- for block in section.blocks -%}
+                {% if block.type == 'review' %}
+                  {% if block.settings.review_url != blank %}
+                    <a href="{{ block.settings.review_url }}" class="review-link">
+                  {% endif %}
+                  {{
+                    block.settings.review_image
+                    | image_url: width: '96'
+                    | image_tag:
+                      loading: 'lazy',
+                      widths: '48, 72, 96',
+                      sizes: '48px',
+                      style: 'width: 48px; height: 48px;'
+                  }}
+                  {% if block.settings.review_url != blank %}
+                    </a>
+                  {% endif %}
                 {% endif %}
-                {{ block.settings.review_image | image_url: height: '48' | image_tag: loading: 'lazy' }}
-                {% if block.settings.review_url != blank  %}
-                  </a>
-                {% endif %}
-              {% endif %}
-            {%- endfor -%}
+              {%- endfor -%}
             </div>
           {%- endif -%}
           {%- if section.settings.check_review_text != blank -%}
-            {% if section.settings.review_url != blank  %}
+            {% if section.settings.review_url != blank %}
               <a href="{{ section.settings.review_url }}" class="review-link-text">
             {% endif %}
-              <div class="review-check-text">{{ section.settings.check_review_text }}</div>
-            {% if section.settings.review_url != blank  %}
+            <div class="review-check-text">{{ section.settings.check_review_text }}</div>
+            {% if section.settings.review_url != blank %}
               </a>
             {% endif %}
           {%- endif -%}
@@ -188,17 +196,17 @@
 {%- if section.blocks.size > 0 -%}
   <swiper-container class="hero-slider" init="false">
     {%- for block in section.blocks -%}
-      {% if block.type == "logo" %}
-      <swiper-slide>
-        {{ block.settings.logo | image_url: height: '25' | image_tag: loading: 'lazy' }}
-      </swiper-slide>
+      {% if block.type == 'logo' %}
+        <swiper-slide>
+          {{ block.settings.logo | image_url: height: '25' | image_tag: loading: 'lazy' }}
+        </swiper-slide>
       {% endif %}
     {%- endfor -%}
     {%- for block in section.blocks -%}
-      {% if block.type == "logo" %}
-      <swiper-slide>
-        {{ block.settings.logo | image_url: height: '25' | image_tag: loading: 'lazy' }}
-      </swiper-slide>
+      {% if block.type == 'logo' %}
+        <swiper-slide>
+          {{ block.settings.logo | image_url: height: '25' | image_tag: loading: 'lazy' }}
+        </swiper-slide>
       {% endif %}
     {%- endfor -%}
   </swiper-container>
@@ -303,7 +311,7 @@
       "type": "url",
       "id": "reviews_link",
       "label": "Reviews link"
-    },    
+    },
     {
       "type": "text",
       "id": "button_text",
@@ -347,7 +355,7 @@
     {
       "name": "Review Image",
       "type": "review",
-      "settings":[
+      "settings": [
         {
           "type": "image_picker",
           "id": "review_image",
