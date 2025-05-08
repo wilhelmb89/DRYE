@@ -1,3 +1,7 @@
+{%- comment -%}
+This file has been modified by the Yoast SEO for Shopify app.
+You can learn more about this (and learn how to cleanly revert these changes) at https://yoa.st/removing-theme-changes.
+{%- endcomment -%}
 {% layout none %}
 
 {% assign formatted_initial_value = gift_card.initial_value | money_without_trailing_zeros %}
@@ -13,8 +17,16 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="format-detection" content="telephone=no">
 
-  <title>Here's your {{ formatted_initial_value_stripped }} gift card for {{ shop.name }}!</title>
-  <meta name="description" content="Here's your gift card!">
+  {%- comment -%}Auto-disabled. Yoast plugin is taking care of SEO output.{%- endcomment -%}
+{%- if disabled_by_yoast_seo -%}
+<title>Here's your {{ formatted_initial_value_stripped }} gift card for {{ shop.name }}!</title>
+{%- comment -%} End Yoast auto-disable. {%- endcomment -%}
+{%- endif -%}
+  {%- comment -%}Auto-disabled. Yoast plugin is taking care of Meta Tags output.{%- endcomment -%}
+{%- if disabled_by_yoast_seo -%}
+<meta name="description" content="Here's your gift card!">
+{%- comment -%} End Yoast auto-disable. {%- endcomment -%}
+{%- endif -%}
 
   {{ 'gift-card.css' | shopify_asset_url | stylesheet_tag }}
   {{ 'modernizr.gift-card.js' | shopify_asset_url | script_tag }}
