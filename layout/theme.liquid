@@ -39,7 +39,18 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       'transaction_id': ''
   });
 </script>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=AW-16719226912">
+</script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
 
+  gtag('config', 'AW-16719226912');
+</script>
+
+    
     <!-- Hotjar Tracking Code for www.drye.se -->
 <script>
     (function(h,o,t,j,a,r){
@@ -76,18 +87,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     {%- render 'theme-head-assets' -%}
     {{ content_for_header }}
     <script defer src="{{ 'cart.js' | asset_url }}"></script>
-    
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=AW-16719226912">
-</script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'AW-16719226912');
-</script>
-
+  
     <script
   async
   src="https://cdn.byteboost.io/v1beta/repo/inspector/main.js"
