@@ -68,15 +68,14 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       <link rel="icon" type="image/png" href="{{ settings.favicon | image_url: width: 128, height: 128 }}">
     {%- endif -%}
    
-<link rel="canonical" href="{{ canonical_url }}">
+    <link rel="canonical" href="{{ canonical_url }}">
 
 
-<title>{{ page_title }}</title>
-
+   <title>{{ page_title }}</title>
 
     {% if page_description %}
 
-<meta name="description" content="{{ page_description | escape }}">
+    <meta name="description" content="{{ page_description | escape }}">
 
     {% endif %}
     {%- render 'theme-meta' -%}
