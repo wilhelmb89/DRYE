@@ -94,7 +94,11 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 {%- endif -%}
 
     {% endif %}
-    {%- render 'theme-meta' -%}
+    {%- comment -%}Auto-disabled. Yoast plugin is taking care of Meta Tags output.{%- endcomment -%}
+{%- if disabled_by_yoast_seo -%}
+{%- render 'theme-meta' -%}
+{%- comment -%} End Yoast auto-disable. {%- endcomment -%}
+{%- endif -%}
     <script src="{{ 'swiper-bundle.min.js' | asset_url }}" defer="defer"></script>
     {{ 'swiper-bundle.min.css' | asset_url | stylesheet_tag }}
     {%- render 'theme-head-assets' -%}
