@@ -12,12 +12,6 @@
     "product_with_gallery_GRxyix": {
       "type": "product-with-gallery",
       "blocks": {
-        "klaviyo_reviews_average_rating_zUjnYn": {
-          "type": "shopify://apps/klaviyo-reviews/blocks/average-rating/db20e365-d984-4ac4-9655-e1588d951ca9",
-          "settings": {
-            "product": "{{product}}"
-          }
-        },
         "tab_bQhJVi": {
           "type": "tab",
           "settings": {
@@ -32,6 +26,15 @@
             "caption3": "Proven Wear Resistance",
             "icon4": "shopify://shop_images/hypoallergenic.png",
             "caption4": "Lower Environmental Load"
+          }
+        },
+        "stamped_reviews_star_rating_badge_pYLjae": {
+          "type": "shopify://apps/stamped-reviews/blocks/star-rating-badge/a103faaf-2125-4b0e-89fa-de5149736723",
+          "settings": {
+            "use_metafields": false,
+            "sku_tagtype": "sku",
+            "is_featured_product": false,
+            "featured_product_handle": ""
           }
         },
         "description_image_BzEWzW": {
@@ -193,8 +196,8 @@
         }
       },
       "block_order": [
-        "klaviyo_reviews_average_rating_zUjnYn",
         "tab_bQhJVi",
+        "stamped_reviews_star_rating_badge_pYLjae",
         "description_image_BzEWzW",
         "tab_yHgdG6",
         "tab_Ly7Pf8",
@@ -1119,6 +1122,10 @@
         "p_m_top": 120,
         "p_m_bottom": 60
       }
+    },
+    "1746812877af76f5ce": {
+      "type": "apps",
+      "settings": {}
     }
   },
   "order": [
@@ -1131,6 +1138,7 @@
     "image_slider_4gd6Nt",
     "rich_text_with_image_6awd6R",
     "columns_with_video_kRmqXB",
-    "faq_9EETYf"
+    "faq_9EETYf",
+    "1746812877af76f5ce"
   ]
 }
