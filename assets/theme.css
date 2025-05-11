@@ -5943,48 +5943,12 @@ div#occ3-drawer {
   padding-left: 15px;
   margin-top: 5px;
 }
-.mobile-submenu-item::before {
-  content: "»";
-  position: absolute;
-  left: 0;
-  color: white;
-  font-size: 14px;
-  top: 6px;
-  pointer-events: none;
-}
-}
-.mobile-submenu-item {
-  font-size: 26px;
-  margin-bottom: 6px;
-  position: relative;
-  padding-left: 12px;
-}
 
 
-.mobile-menu-item.active .mobile-submenu {
-  display: block;
-}
-.mobile-submenu-item a:hover {
-  background-color: #333333; /* Mörkgrå, anpassa efter din bakgrund */
-  color: white; /* Valfritt – för kontrast */
-  transition: background-color 0.2s ease;
-  border-radius: 4px; /* Ger lite rundade hörn */
-  padding: 6px 10px; /* Säkerställer att effekten känns som en knapp */
-  display: inline-block;
-}
 
 
-.submenu-toggle {
-  background: none;
-  border: none;
-  color: white;
-  font-size: 16px;       /* mindre teckenstorlek */
-  padding-left: 6px;
-  line-height: 1;         /* justerar höjdplacering */
-  position: relative;
-  top: -2px;              /* flyttar upp +/- symbolen något */
-  cursor: pointer;
-}
+
+
 .rte p,
 .rte li,
 .rte ul,
