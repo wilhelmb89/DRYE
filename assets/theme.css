@@ -6004,4 +6004,9 @@ div#occ3-drawer {
         width: 100%;         /* Ensure image fills container */
         height: 100%;        /* Ensure image fills container vertically */
     }
+}.mobile-link {
+  position: relative;
+  z-index: 9999;
+  pointer-events: auto;
+  background: rgba(255, 0, 0, 0.3); /* röd bakgrund för att se klickytan */
 }
