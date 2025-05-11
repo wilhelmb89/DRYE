@@ -5944,12 +5944,14 @@ div#occ3-drawer {
   margin-top: 5px;
 }
 .mobile-submenu-item::before {
-  content: "›";
+  content: "»";
   position: absolute;
   left: 0;
   color: white;
   font-size: 14px;
-  top: 6px; /* justerar vertikal placering */
+  top: 6px;
+  pointer-events: none;
+}
 }
 .mobile-submenu-item {
   font-size: 26px;
