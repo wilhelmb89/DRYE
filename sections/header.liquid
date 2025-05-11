@@ -153,7 +153,7 @@
   <ul class="mobile-menu-list">
     {% for link in ss.menu.links %}
       <li class="mobile-menu-item{% if link.links != blank %} has-submenu{% endif %}">
-        <a href="{{ link.url }}" class="mobile-link">
+        <a href="{{ link.url }}" class="mobile-link" onclick="event.stopPropagation()">
           {{ link.title }}
         </a>
 
