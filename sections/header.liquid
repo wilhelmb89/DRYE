@@ -55,7 +55,7 @@
   {% for link in ss.menu.links %}
   <li class="menu-item {% if link.links != blank %} has-dropdown {% endif %}">
     {% if link.title == 'Shop' %}
-      <a href="#" onclick="return false;" class="link centered">{{ link.title }}</a>
+      <a href="{{ link.url }}" class="link centered">{{ link.title }}</a>
     {% else %}
       <a href="{{ link.url }}" class="link centered">{{ link.title }}</a>
     {% endif %}
