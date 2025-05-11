@@ -151,24 +151,13 @@
       <div class="menu">
        {% if ss.menu != blank %}
   <ul class="mobile-menu-list">
-    {% for link in ss.menu.links %}
-      <li class="mobile-menu-item{% if link.links != blank %} has-submenu{% endif %}">
-        <a href="{{ link.url }}" class="mobile-link">
-          {{ link.title }}
-        </a>
-
-        {% if link.links != blank %}
-          <button class="submenu-toggle" aria-label="Toggle submenu">+</button>
-          <ul class="mobile-submenu">
-            {% for sublink in link.links %}
-              <li class="mobile-submenu-item">
-                <a href="{{ sublink.url }}">{{ sublink.title }}</a>
-              </li>
-            {% endfor %}
-          </ul>
-        {% endif %}
-      </li>
-    {% endfor %}
+{% for link in ss.menu.links %}
+  <li class="mobile-menu-item">
+    <a href="{{ link.url }}" class="mobile-link">
+      {{ link.title }}
+    </a>
+  </li>
+{% endfor %}
   </ul>
 {% endif %}
 
