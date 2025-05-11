@@ -6009,4 +6009,12 @@ div#occ3-drawer {
   z-index: 9999;
   pointer-events: auto;
   background: rgba(255, 0, 0, 0.3); /* röd bakgrund för att se klickytan */
+}.drawer__overlay,
+.drawer__inner,
+.menu,
+.menu-wrapper {
+  pointer-events: auto !important;
+  z-index: 9999 !important;
+}.drawer__overlay {
+  pointer-events: none !important;
 }
