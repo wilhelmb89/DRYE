@@ -282,6 +282,76 @@
         "padding_right_mobile": 0
       }
     },
+    "rich_text_with_image_6awd6R": {
+      "type": "rich-text-with-image",
+      "blocks": {
+        "heading_gFg6qb": {
+          "type": "heading",
+          "settings": {
+            "heading": "This Is Where It Starts",
+            "heading_color": "#000000",
+            "alignment": "left",
+            "heading_font_size": 50,
+            "heading_line_height": 60,
+            "heading_margin_bottom": 48,
+            "heading_font_size_mobile": 28,
+            "heading_line_height_mobile": 34,
+            "heading_margin_bottom_mobile": 20
+          }
+        },
+        "description_VgrCNQ": {
+          "type": "description",
+          "settings": {
+            "text": "<p>Sweat builds up under the glove. Friction increases. The skin stays damp, softens, and starts to break down. This is how irritation begins — long before you notice it.</p>",
+            "text_color": "#000000",
+            "alignment": "left",
+            "text_font_size": 18,
+            "text_line_height": 24,
+            "text_font_size_mobile": 16,
+            "text_line_height_mobile": 24
+          }
+        },
+        "media_eD4xqB": {
+          "type": "media",
+          "settings": {
+            "media_mode": "url",
+            "image": "shopify://shop_images/3D_rendering_-_thumbnail.png",
+            "video_url": "https://www.youtube.com/embed/rQtXsY9Za_c?si=NHwFlPQgA_n0-dk4",
+            "video_preview": "shopify://shop_images/3D_rendering_-_thumbnail.png",
+            "video_width": "1108",
+            "video_height": "623",
+            "play_icon": "shopify://shop_images/play.png",
+            "image_width": 80,
+            "media_border_radius": 12
+          }
+        }
+      },
+      "block_order": [
+        "heading_gFg6qb",
+        "description_VgrCNQ",
+        "media_eD4xqB"
+      ],
+      "settings": {
+        "background_color": "#ffffff",
+        "content_max_width": 472,
+        "content_gap": 100,
+        "content_gap_mobile": 32,
+        "direction": "row",
+        "direction_mobile": "column",
+        "padding_top": 120,
+        "padding_bottom": 120,
+        "padding_left": 0,
+        "padding_right": 0,
+        "padding_top_tablet": 80,
+        "padding_bottom_tablet": 80,
+        "padding_left_tablet": 0,
+        "padding_right_tablet": 0,
+        "padding_top_mobile": 90,
+        "padding_bottom_mobile": 90,
+        "padding_left_mobile": 0,
+        "padding_right_mobile": 0
+      }
+    },
     "icons_Bt7DUV": {
       "type": "icons",
       "blocks": {
@@ -931,76 +1001,6 @@
       ],
       "settings": {}
     },
-    "rich_text_with_image_6awd6R": {
-      "type": "rich-text-with-image",
-      "blocks": {
-        "heading_gFg6qb": {
-          "type": "heading",
-          "settings": {
-            "heading": "This Is Where It Starts",
-            "heading_color": "#000000",
-            "alignment": "left",
-            "heading_font_size": 50,
-            "heading_line_height": 60,
-            "heading_margin_bottom": 48,
-            "heading_font_size_mobile": 28,
-            "heading_line_height_mobile": 34,
-            "heading_margin_bottom_mobile": 20
-          }
-        },
-        "description_VgrCNQ": {
-          "type": "description",
-          "settings": {
-            "text": "<p>Sweat builds up under the glove. Friction increases. The skin stays damp, softens, and starts to break down. This is how irritation begins — long before you notice it.</p>",
-            "text_color": "#000000",
-            "alignment": "left",
-            "text_font_size": 18,
-            "text_line_height": 24,
-            "text_font_size_mobile": 16,
-            "text_line_height_mobile": 24
-          }
-        },
-        "media_eD4xqB": {
-          "type": "media",
-          "settings": {
-            "media_mode": "url",
-            "image": "shopify://shop_images/3D_rendering_-_thumbnail.png",
-            "video_url": "https://www.youtube.com/embed/rQtXsY9Za_c?si=NHwFlPQgA_n0-dk4",
-            "video_preview": "shopify://shop_images/3D_rendering_-_thumbnail.png",
-            "video_width": "1108",
-            "video_height": "623",
-            "play_icon": "shopify://shop_images/play.png",
-            "image_width": 80,
-            "media_border_radius": 12
-          }
-        }
-      },
-      "block_order": [
-        "heading_gFg6qb",
-        "description_VgrCNQ",
-        "media_eD4xqB"
-      ],
-      "settings": {
-        "background_color": "#ffffff",
-        "content_max_width": 472,
-        "content_gap": 100,
-        "content_gap_mobile": 32,
-        "direction": "row",
-        "direction_mobile": "column",
-        "padding_top": 120,
-        "padding_bottom": 120,
-        "padding_left": 0,
-        "padding_right": 0,
-        "padding_top_tablet": 80,
-        "padding_bottom_tablet": 80,
-        "padding_left_tablet": 0,
-        "padding_right_tablet": 0,
-        "padding_top_mobile": 90,
-        "padding_bottom_mobile": 90,
-        "padding_left_mobile": 0,
-        "padding_right_mobile": 0
-      }
-    },
     "columns_with_video_kRmqXB": {
       "type": "columns-with-video",
       "blocks": {
@@ -1151,6 +1151,7 @@
   },
   "order": [
     "product_with_gallery_GRxyix",
+    "rich_text_with_image_6awd6R",
     "icons_Bt7DUV",
     "table_with_mark_xkzqbz",
     "custom_reviews_carousel_AgmmBD",
@@ -1158,7 +1159,6 @@
     "multirows_general_yWCi4Q",
     "image_slider_4gd6Nt",
     "1746812889a5f81d00",
-    "rich_text_with_image_6awd6R",
     "columns_with_video_kRmqXB",
     "faq_9EETYf",
     "1746812877af76f5ce"
