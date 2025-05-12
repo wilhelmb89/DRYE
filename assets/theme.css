@@ -5905,25 +5905,6 @@ div#occ3-drawer {
   gap: 20px;
 }
 
-.menu-item {
-  position: relative;
-}
-
-.dropdown {
-  display: none;
-  position: absolute;
-  top: 100%;
-  left: 0;
-  background-color: #efefef;
-  padding: 10px 0;
-  box-shadow: 0 8px 16px rgba(0,0,0,0.1);
-  min-width: 200px;
-  z-index: 999;
-}
-
-.menu-item:hover .dropdown {
-  display: block;
-}
 
 .submenu-item {
   padding: 5px 20px;
