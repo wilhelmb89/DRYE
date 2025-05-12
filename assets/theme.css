@@ -5984,4 +5984,8 @@ div#occ3-drawer {
         object-fit: cover;  /* Ensure image covers the entire swiper-slide */
         width: 100%;         /* Ensure image fills container */
         height: 100%;        /* Ensure image fills container vertically */
-    }
+    }.mobile-link {
+  position: relative !important;
+  z-index: 9999 !important;
+  pointer-events: auto !important;
+}
