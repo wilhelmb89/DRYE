@@ -42,6 +42,14 @@
     "faq_4g7Pag": {
       "type": "faq",
       "blocks": {
+        "item_JKKk4G": {
+          "type": "item",
+          "settings": {
+            "title": "Moisture-associated skin damage (MASD)",
+            "content": "<p>Moisture-associated skin damage: overview and pathophysiology<br/>Read the study </p>",
+            "pos": "row"
+          }
+        },
         "item_ciMN4g": {
           "type": "item",
           "settings": {
@@ -73,22 +81,14 @@
             "content": "<p>The studies above are particularly pertinent to professionals in healthcare, cleaning, construction, and other industries where glove use is prevalent.<br/><a href=\"https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3856293/\" target=\"_blank\">Read the study on Occupational Hand Dermatitis (PMC)</a></p>",
             "pos": "row"
           }
-        },
-        "item_JKKk4G": {
-          "type": "item",
-          "settings": {
-            "title": "",
-            "content": "<p>Moisture-associated skin damage: overview and pathophysiology<br/>Read the study </p>",
-            "pos": "row"
-          }
         }
       },
       "block_order": [
+        "item_JKKk4G",
         "item_ciMN4g",
         "item_UDrALC",
         "item_tTTyfk",
-        "item_JLkLVx",
-        "item_JKKk4G"
+        "item_JLkLVx"
       ],
       "settings": {
         "title": "",
