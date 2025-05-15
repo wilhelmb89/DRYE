@@ -26,7 +26,7 @@
   }
   .section-{{ section.id }} .rich-text-image-list {
     flex: 1;
-  }  
+  }
   .section-{{ section.id }} .rich-text-wrapper .rich-text-logo-list .rich-text-logo img{
     display: block;
   }
@@ -107,7 +107,7 @@
                   }
                 }
               {%- endstyle -%}
-              <h2 class="block-{{ block.id }} page-title" >{{ block.settings.heading }}</h2>
+              <h2 class="block-{{ block.id }} page-title">{{ block.settings.heading }}</h2>
             {%- when 'description' -%}
               {%- style -%}
                 .block-{{block.id}}.page-description {
@@ -130,62 +130,63 @@
           {%- endcase -%}
         {%- endfor -%}
         <div class="rich-text-logo-list">
-        {%- for block in section.blocks -%}
-          {%- if block.type == "logo" -%}
-            {%- style -%}
-              .block-{{ block.id }}.rich-text-logo {
-                {%- if block.settings.left_padding > 0 -%}
-                  padding-left: {{ block.settings.left_padding }}px;
-                {%- endif -%}
-                {%- if block.settings.right_padding > 0 -%}
-                  padding-right: {{ block.settings.right_padding }}px;
-                {%- endif -%}
-                {%- if block.settings.display_border -%}
-                  {%- if block.settings.border_position == "left" -%}
-                    border-left: solid 1px {{ block.settings.border_color }};
-                  {%- else -%}
-                    border-right: solid 1px {{ block.settings.border_color }};
-                  {%- endif -%}
-                {%- endif -%}
-              }
-              @media screen and (max-width: 768px) {
+          {%- for block in section.blocks -%}
+            {%- if block.type == 'logo' -%}
+              {%- style -%}
                 .block-{{ block.id }}.rich-text-logo {
-                  {%- if block.settings.left_padding_tablet > 0 -%}
-                    padding-left: {{ block.settings.left_padding_tablet }}px;
+                  {%- if block.settings.left_padding > 0 -%}
+                    padding-left: {{ block.settings.left_padding }}px;
                   {%- endif -%}
-                  {%- if block.settings.right_padding_tablet > 0 -%}
-                    padding-right: {{ block.settings.right_padding_tablet }}px;
+                  {%- if block.settings.right_padding > 0 -%}
+                    padding-right: {{ block.settings.right_padding }}px;
+                  {%- endif -%}
+                  {%- if block.settings.display_border -%}
+                    {%- if block.settings.border_position == "left" -%}
+                      border-left: solid 1px {{ block.settings.border_color }};
+                    {%- else -%}
+                      border-right: solid 1px {{ block.settings.border_color }};
+                    {%- endif -%}
                   {%- endif -%}
                 }
-              }
-            {%- endstyle -%}
-            <div class="block-{{ block.id }} rich-text-logo">
-              <img
-                src="{{ block.settings.logo | img_url: '360x', format: 'pjpg' }}"
-                width="100%"
-                height="auto"/>
-            </div>
-          {%- endif -%}
-        {%- endfor -%}
+                @media screen and (max-width: 768px) {
+                  .block-{{ block.id }}.rich-text-logo {
+                    {%- if block.settings.left_padding_tablet > 0 -%}
+                      padding-left: {{ block.settings.left_padding_tablet }}px;
+                    {%- endif -%}
+                    {%- if block.settings.right_padding_tablet > 0 -%}
+                      padding-right: {{ block.settings.right_padding_tablet }}px;
+                    {%- endif -%}
+                  }
+                }
+              {%- endstyle -%}
+              <div class="block-{{ block.id }} rich-text-logo">
+                <img
+                  src="{{ block.settings.logo | img_url: '360x', format: 'pjpg' }}"
+                  width="100%"
+                  height="auto"
+                >
+              </div>
+            {%- endif -%}
+          {%- endfor -%}
         </div>
       </div>
       <div class="rich-text-image-list">
         {%- for block in section.blocks -%}
-          {%- if block.type == "media" -%}
-            {%- style -%}                
+          {%- if block.type == 'media' -%}
+            {%- style -%}
               .section-{{ section.id }} .rich-text-image-list .page-card-icon,
-              .section-{{ section.id }} .rich-text-image-list .video-thumbnail, 
+              .section-{{ section.id }} .rich-text-image-list .video-thumbnail,
               .section-{{ section.id }} .rich-text-image-list .video-player {
                 border-radius: {{ block.settings.media_border_radius }}px;
               }
             {%- endstyle -%}
-            {% if block.settings.media_mode == "video" %}
+            {% if block.settings.media_mode == 'video' %}
               {%- if block.settings.video != blank -%}
                 {%- liquid
                   assign video_preview = block.settings.video.preview_image.src | default: block.settings.video.src
                   assign video = block.settings.video.sources[0]
                   for source in block.settings.video.sources
-                    if source.format contains "mp4"
+                    if source.format contains 'mp4'
                       assign video = source
                       break
                     endif
@@ -194,19 +195,20 @@
                   assign video_width = video.width
                   assign video_height = video.height
                   assign aspect_ratio = video_width | times: 1.0 | divided_by: video_height
-                  unless video_preview contains "/cdn/shop"
-                    assign video_preview = video_preview | prepend: "/cdn/shop/"
+                  unless video_preview contains '/cdn/shop'
+                    assign video_preview = video_preview | prepend: '/cdn/shop/'
                   endunless
                 -%}
-              {%- endif -%}                
-            {% else %} {% comment %}url{% endcomment %}
+              {%- endif -%}
+            {% else %}
+              {% comment %}url{% endcomment %}
               {%- liquid
-                 assign video_preview = block.settings.video_preview | img_url: '1024x', format: 'pjpg'
-                 assign video_url = block.settings.video_url
-                 assign video_width = block.settings.video_width | plus: 0
-                 assign video_height = block.settings.video_height | plus: 0                 
-                 assign aspect_ratio = video_width | times: 1.0 | divided_by: video_height
-                 assign autoplay_url = video_url | append: "?autoplay=1&mute=1&controls=0"
+                assign video_preview = block.settings.video_preview | img_url: '1024x', format: 'pjpg'
+                assign video_url = block.settings.video_url
+                assign video_width = block.settings.video_width | plus: 0
+                assign video_height = block.settings.video_height | plus: 0
+                assign aspect_ratio = video_width | times: 1.0 | divided_by: video_height
+                assign autoplay_url = video_url | append: '?autoplay=1&mute=1&controls=0'
               -%}
             {% endif %}
 
@@ -223,7 +225,7 @@
                   style="aspect-ratio: {{ aspect_ratio }}"
                 >
               </div>
-              {% if block.settings.media_mode == "video" %}
+              {% if block.settings.media_mode == 'video' %}
                 <video
                   class="video-player"
                   src="{{ video_url }}"
@@ -231,11 +233,17 @@
                   data-video-source="{{ video_url }}"
                   content="video/mp4"
                   playsinline
-                  width="100%">
-                  <source src="{{ video_url }}" type="video/mp4" width="{{ video_width }}px" height="{{ video_height }}px">
+                  width="100%"
+                >
+                  <source
+                    src="{{ video_url }}"
+                    type="video/mp4"
+                    width="{{ video_width }}px"
+                    height="{{ video_height }}px"
+                  >
                 </video>
               {% else %}
-                <iframe 
+                <iframe
                   class="video-player"
                   style="aspect-ratio: {{ aspect_ratio }}"
                   src="{{ video_url }}"
@@ -257,19 +265,19 @@
   </div>
 </div>
 <script>
-  document.addEventListener("DOMContentLoaded", function() {
-    const video = document.querySelector(".section-{{ section.id }} .video-container .video-player");
-    const videoThumbnail = document.querySelector(".section-{{ section.id }} .video-container .video-thumbnail-cover");
-    const playBtn = document.querySelector(".section-{{ section.id }} .video-container .video-play-button");
-    if (video && videoThumbnail) {      
-      playBtn.addEventListener("click", function() {
+  document.addEventListener('DOMContentLoaded', function () {
+    const video = document.querySelector('.section-{{ section.id }} .video-container .video-player');
+    const videoThumbnail = document.querySelector('.section-{{ section.id }} .video-container .video-thumbnail-cover');
+    const playBtn = document.querySelector('.section-{{ section.id }} .video-container .video-play-button');
+    if (video && videoThumbnail) {
+      playBtn.addEventListener('click', function () {
         videoThumbnail.style.display = 'none';
-        if (video.tagName === "IFRAME") {
-          var autoplayUrl = video.getAttribute("data-play-src");
+        if (video.tagName === 'IFRAME') {
+          var autoplayUrl = video.getAttribute('data-play-src');
           if (autoplayUrl) {
-            video.setAttribute("src", autoplayUrl);
+            video.setAttribute('src', autoplayUrl);
           }
-        } else {          
+        } else {
           video.currentTime = 0;
           video.loop = true;
           video.play();
@@ -734,7 +742,7 @@
         {
           "type": "image_picker",
           "id": "logo",
-          "label": "Logo"          
+          "label": "Logo"
         },
         {
           "type": "header",
@@ -826,7 +834,7 @@
         {
           "type": "image_picker",
           "id": "slider_image",
-          "label": "Slider Image"          
+          "label": "Slider Image"
         }
       ]
     },
@@ -885,7 +893,7 @@
         {
           "type": "image_picker",
           "id": "play_icon",
-          "label": "Icon"          
+          "label": "Icon"
         },
         {
           "type": "range",
@@ -893,7 +901,7 @@
           "label": "Width",
           "min": 0,
           "max": 80,
-          "step": 10,
+          "step": 1,
           "default": 80,
           "unit": "px"
         },
