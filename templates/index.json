@@ -11,6 +11,34 @@
   "sections": {
     "home_hero_new_Cy3wJ7": {
       "type": "home-hero-new",
+      "blocks": {
+        "review_aKbVHd": {
+          "type": "review",
+          "settings": {
+            "review_image": "shopify://shop_images/Biodegradable_Moisture-Wicking_Gloves_for_Eczema-modified.png",
+            "review_url": ""
+          }
+        },
+        "review_6EcJYm": {
+          "type": "review",
+          "settings": {
+            "review_image": "shopify://shop_images/profile-1.png",
+            "review_url": ""
+          }
+        },
+        "review_n6MVwK": {
+          "type": "review",
+          "settings": {
+            "review_image": "shopify://shop_images/profile-2.png",
+            "review_url": ""
+          }
+        }
+      },
+      "block_order": [
+        "review_aKbVHd",
+        "review_6EcJYm",
+        "review_n6MVwK"
+      ],
       "settings": {
         "title": "Glove Liner for Moisture Control & Skin Protection",
         "video": "shopify://files/videos/Website_9eba16fe-a01f-4640-8d93-208c82201915.mp4",
@@ -23,10 +51,10 @@
         "review_text_font_size_mobile": 16,
         "review_text_line_height_mobile": 24,
         "reviews_link": "shopify://products/glove-liner-stops-sweat-and-protects-skin",
-        "button_text": "See how it works",
+        "button_text": "",
         "button_url": "shopify://products/glove-liner-stops-sweat-and-protects-skin",
         "bg": "#e7e7e7",
-        "check_review_text": "",
+        "check_review_text": "Reviews",
         "review_url": "shopify://products/glove-liner-stops-sweat-and-protects-skin"
       }
     },
