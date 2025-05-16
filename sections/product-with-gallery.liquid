@@ -27,20 +27,10 @@
       padding: 1px;
     }
 
-.swiper-container {
-  width: 100%; /* Gör så att swiper-container fyller hela tillgängliga bredden */
-}
-
-.swiper-container .swiper-slide {
-  width: 100%; /* Gör så att varje swiper-slide fyller hela tillgängliga bredden */
-}
-
-.swiper-container .swiper-slide img {
-  object-fit: cover; /* Bibehåller bildens proportioner */
-  width: 100%; /* Gör så att bilden fyller hela swiper-slide */
-  height: 100%; /* Gör så att höjden fyller hela swiper-slide och bibehåller bildens proportioner */
-}
-
+    swiper-container swiper-slide img {
+      object-fit: cover;
+      height: 100%;
+    }
     
     .product-image-section {
       display: flex;
@@ -79,23 +69,11 @@
       background: rgba(17, 17, 17, 0.1);
     }
     .product-image-section .product-thumbnail-list {
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);  /* 5 columns in the first row */
-  grid-template-rows: auto;  /* Auto adjust the rows based on content */
-  gap: 20px;  /* Space between images */
-  width: 100%;  /* Ensure the container takes full width */
-  justify-items: center;  /* Centers the thumbnails horizontally within each grid cell */
-  padding-left: 40px;  /* Add left padding to create space */
-  padding-right: 40px;  /* Add right padding to create space */
-}
-
-.product-image-section .product-thumbnail-item img {
-  width: 100%;  /* Ensure images fill grid cells */
-  height: auto;  /* Maintain aspect ratio */
-}
-
-
-
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      grid-template-rows: repeat(2, 1fr);
+      gap: 32px;
+    }
     .product-image-section model-viewer {
       height: {{ section.settings.model_height }}px;
       width: 100%;
@@ -533,7 +511,7 @@
       .product-image-section {
         display: flex;
         flex-direction: row-reverse;
-        gap: 0px;
+        gap: 24px;
         justify-content: space-between;
       }
       .product-image-section .product-thumnail-pagination {
@@ -545,36 +523,23 @@
         height: {{ section.settings.model_height_tablet }}px;
       }
       .product-image-section .product-main-image {
-  max-width: 360px;
-  margin: auto;
-}
-      .product-image-section .product-main-image img {
-  width: 100%;  /* Ensure the image takes the full width */
-  height: 100%;  /* Ensure the image fills the container's height */
-  object-fit: cover;  /* Ensure the image covers the entire container without distortion */
-}
-
-    .product-image-section .product-thumbnail-list {
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);  /* 5 columns in the first row */
-  grid-template-rows: auto;  /* Auto adjust the rows based on content */
-  gap: 20px;  /* Space between images */
-  width: 100%;  /* Ensure the container takes full width */
-  justify-items: center;  /* Centers the thumbnails horizontally within each grid cell */
-  padding-left: 40px;  /* Add left padding to create space */
-  padding-right: 40px;  /* Add right padding to create space */
-}
-
-.product-image-section .product-thumbnail-item img {
-  width: 100%;  /* Ensure images fill grid cells */
-  height: auto;  /* Maintain aspect ratio */
-}
-
-
-
-
-
-
+        display: flex;
+        width: 100%;
+      }
+      .product-image-section .product-main-image img {        
+        max-width: 360px;
+        margin: auto;
+      }
+      .product-image-section .product-thumbnail-list {
+        width: 76px;
+        min-width: 76px;
+        display: flex;
+        flex-direction: column;
+      }
+      .product-image-section .product-thumbnail-item img{
+        border-radius: 12px;
+        aspect-ratio: 1;
+      }
       .content {
         min-width: 100%;
 
@@ -614,19 +579,10 @@
       .mobile {
         display: flex;
       }
-      swiper-container .swiper-slide {
-    width: 100%;
-    height: 100%;
-    padding: 0;   /* Remove padding */
-    margin: 0;    /* Remove margin */
-}
-
-swiper-container .swiper-slide img {
-    object-fit: cover;  /* Ensure the image covers the entire container */
-    width: 100%;         /* Ensure image fills container */
-    height: 100%;        /* Ensure image fills container vertically */
-}
-
+      swiper-container swiper-slide img {
+        max-height: 100%;
+        max-width: 100%;
+      }
       .product-image-section {
         flex-direction: column;
         max-height:100%;
@@ -644,27 +600,18 @@ swiper-container .swiper-slide img {
       .product-image-section model-viewer {
         height: {{ section.settings.model_height_mobile }}px;
       }
+      .product-image-section .product-main-image {
+      }
+      .product-image-section .product-main-image img {  
+      }
       .product-image-section .product-thumbnail-list {
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);  /* 5 columns in the first row */
-  grid-template-rows: auto;  /* Auto adjust the rows based on content */
-  gap: 20px;  /* Space between images */
-  width: 100%;  /* Ensure the container takes full width */
-  justify-items: center;  /* Centers the thumbnails horizontally within each grid cell */
-  padding-left: 40px;  /* Add left padding to create space */
-  padding-right: 40px;  /* Add right padding to create space */
-}
-
-.product-image-section .product-thumbnail-item img {
-  width: 100%;  /* Ensure images fill grid cells */
-  height: auto;  /* Maintain aspect ratio */
-}
-
-
-
-
-
-
+        flex-direction: row;
+        gap: 10px;
+        width: 100%;
+      }
+      .product-image-section .product-thumbnail-item {
+        flex: 1;
+      }
       .content.mobile {
         .title {
           margin-bottom: {{ section.settings.content_gap_mobile }}px;;
@@ -776,13 +723,17 @@ swiper-container .swiper-slide img {
             {% if ss.media_type == "image" %}            
               {%- if ss.image != blank -%}
                 {% comment %}
-                <img class="preview-trigger" src="{{ ss.image | img_url: '600x', format: 'jpg' }}" width="100%" height="auto" object-fit="cover" />
-
+                <img
+                class="preview-trigger"
+                data-preview-id="0"
+                src="{{ ss.image | img_url: '600x', format: 'pjpg' }}"
+                width="100%"
+                height="auto"/>
                 {% endcomment %}
                 <img
                   class="preview-trigger"
                   data-preview-id="0"
-                  src="{{ ss.image | img_url: '2200x', format: 'pjpg' }}"
+                  src="{{ ss.image | img_url: '600x', format: 'pjpg' }}"
                   srcset="
                     {{ ss.image | img_url: '300x', format: 'pjpg' }} 300w,
                     {{ ss.image | img_url: '600x', format: 'pjpg' }} 600w,
@@ -810,12 +761,15 @@ swiper-container .swiper-slide img {
             <swiper-slide>
               <div class="product-slider-item">
                 {% comment %}
-                <img class="preview-trigger" data-preview-id="{{ forloop.index }}" src="{{ product_thumbnail.settings.preview_image | img_url: '600x', format: 'jpg' }}" width="100%" height="auto" loading="lazy"/>
-
+                <img
+                  class="preview-trigger"
+                  data-preview-id="{{ forloop.index }}"
+                  src="{{ product_thumbnail.settings.preview_image | img_url: '600x', format: 'pjpg' }}"
+                  width="100%"
+                  height="auto"/>
                 {% endcomment %}
                 <img
                   class=""
-                  style=""
                   data-preview-id="{{ forloop.index }}"
                   src="{{ product_thumbnail.settings.preview_image | img_url: '600x', format: 'pjpg' }}"
                   srcset="
@@ -825,7 +779,7 @@ swiper-container .swiper-slide img {
                     {{ product_thumbnail.settings.preview_image | img_url: '1200x', format: 'pjpg' }} 1200w
                   "
                   sizes="(max-width: 600px) 100vw, 600px"
-                  width="40%"
+                  width="100%"
                   height="auto"
                   loading="lazy"
                 />
@@ -874,7 +828,6 @@ swiper-container .swiper-slide img {
       <h1 class="title desktop">
         {{ product.title }}
       </h1>
-    
       <h5 class="short-description desktop">
         {{ section.settings.short_description }}
       </h5>
@@ -979,9 +932,7 @@ swiper-container .swiper-slide img {
         <div class="hr-line"></div>
         <div class="buttons">
           <button class="button atcButton" type="submit">{{ ss.add_text }}</button>
-          {% comment %}
-{{ form | payment_button }}
-{% endcomment %}
+          {{ form | payment_button }}
         </div>
       {%- endform -%}
       {%- assign shipping_tabs = section.blocks | where: 'type', 'shipping' -%}
@@ -1141,12 +1092,9 @@ swiper-container .swiper-slide img {
   opacity: 0;
   transition: opacity 0.3s ease;
 }
-swiper-container .swiper-slide img {
-    object-fit: cover;  /* Ensure the image covers the entire container */
-    width: 100%;         /* Ensure image fills container */
-    height: 100%;        /* Ensure image fills container vertically */
-}
-
+.image-preview-popup.active {
+  visibility: visible;
+  opacity: 1;
 }
 .image-preview-popup swiper-container {
   height: 100%;
@@ -1447,23 +1395,21 @@ swiper-container .swiper-slide img {
     });
 
     /* review */
-const reviewLink = document.querySelector(".review-section");
-console.log('reviewLink = ', reviewLink);
-
-if (reviewLink) {
-  reviewLink.addEventListener("click", function(e) {  // ← Lägg till 'e' här
-    e.preventDefault();                               // ← och använd 'e' istället för 'event'
-    const customReviewSection = document.querySelector(".custom-review-section");
-    console.log('customReviewSection = ', customReviewSection);
-    if (customReviewSection) {
-      customReviewSection.scrollIntoView({
-        behavior: "smooth", 
-        block: "start"
+    const reviewLink = document.querySelector(".review-section");
+    console.log('reviewLink = ', reviewLink);
+    if (reviewLink) {
+      reviewLink.addEventListener("click", function() {
+        event.preventDefault();
+        const customReviewSection = document.querySelector(".custom-review-section");
+        console.log('customReviewSection = ', customReviewSection);
+        if (customReviewSection) {
+          customReviewSection.scrollIntoView({
+            behavior: "smooth", 
+            block: "start"
+          });
+        }
       });
-    }
-  });
-}
-
+    }    
 
     /* accordion */
     const accordionItems = document.querySelectorAll(".accordion-item");  
@@ -1518,7 +1464,6 @@ if (reviewLink) {
   "tag": "section",
   "class": "main-product",
   "settings": [
-
     {
       "type": "color",
       "id": "background_color",
@@ -2234,3 +2179,4 @@ if (reviewLink) {
   ]
 }
 {% endschema %}
+
