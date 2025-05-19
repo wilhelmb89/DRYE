@@ -5989,3 +5989,8 @@ div#occ3-drawer {
   z-index: 9999 !important;
   pointer-events: auto !important;
 }
+/* Svart text i hero-sektion */
+.shopify-section.page-hero .container h1,
+.shopify-section.page-hero .container p {
+  color: #000 !important;
+}
