@@ -22,11 +22,6 @@
     "checkout_input_background_color_mode": "white",
     "content_for_index": [],
     "blocks": {
-      "yoast-seo-metatags": {
-        "type": "shopify://apps/yoast-seo/blocks/metatags/7c777011-bc88-4743-a24e-64336e1e5b46",
-        "disabled": false,
-        "settings": {}
-      },
       "585288358657334602": {
         "type": "shopify://apps/cartly-slide-cart-drawer/blocks/app-embed/156e4744-d777-4afa-8826-5d2f440b3936",
         "disabled": false,
@@ -63,6 +58,11 @@
       "10864971697205422121": {
         "type": "shopify://apps/gorgias-live-chat-helpdesk/blocks/gorgias/a66db725-7b96-4e3f-916e-6c8e6f87aaaa",
         "disabled": false,
+        "settings": {}
+      },
+      "yoast-seo-metatags": {
+        "type": "shopify://apps/yoast-seo/blocks/metatags/7c777011-bc88-4743-a24e-64336e1e5b46",
+        "disabled": true,
         "settings": {}
       }
     }
