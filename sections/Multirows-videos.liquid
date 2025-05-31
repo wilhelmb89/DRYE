@@ -177,21 +177,29 @@
               {%- endif -%}
             </div>
           </div>
-          {%- if bs.image -%}
-            <div class="image desktop">
-              {{ bs.image | image_url: width: '1024' | image_tag: loading: 'lazy' }}
-            </div>
-          {%- endif -%}
-          {%- if bs.image_tablet -%}
-            <div class="image tablet">
-              {{ bs.image_tablet | image_url: width: '768' | image_tag: loading: 'lazy' }}
-            </div>
-          {%- endif -%}
-          {%- if bs.image_mobile -%}
-            <div class="image mobile">
-              {{ bs.image_mobile | image_url: width: '630' | image_tag: loading: 'lazy' }}
-            </div>
-          {%- endif -%}
+{%- if bs.use_video and bs.video_url != blank -%}
+  <div class="image desktop">
+    <video autoplay muted loop playsinline style="width:100%; height:auto;">
+      <source src="{{ bs.video_url }}" type="video/mp4">
+    </video>
+  </div>
+{%- else -%}
+  {%- if bs.image -%}
+    <div class="image desktop">
+      {{ bs.image | image_url: width: '1024' | image_tag: loading: 'lazy' }}
+    </div>
+  {%- endif -%}
+  {%- if bs.image_tablet -%}
+    <div class="image tablet">
+      {{ bs.image_tablet | image_url: width: '768' | image_tag: loading: 'lazy' }}
+    </div>
+  {%- endif -%}
+  {%- if bs.image_mobile -%}
+    <div class="image mobile">
+      {{ bs.image_mobile | image_url: width: '630' | image_tag: loading: 'lazy' }}
+    </div>
+  {%- endif -%}
+{%- endif -%}
         </div>
       {%- endfor -%}
     </div>
@@ -411,6 +419,8 @@
              "type": "image_picker",
              "id": "image_mobile",
              "label": "Image(Mobile)"
+
+             
            },
            {
              "type": "select",
