@@ -60,6 +60,16 @@
               {{ bs.image | image_url: width: '630' | image_tag: loading: 'lazy' }}
             </div>
           {%- endif -%}
+          	{% comment  %} video {% endcomment %}
+        {% if block.settings.video %}
+		{{
+		block.settings.video | video_tag: image_size: '1100px' ,
+		autoplay: true, 
+		controls: true, 
+		muted: true, 
+		style: "height: 100%;width:100%;max-width:100%"
+		}}
+	{% endif%}
         </div>
       {%- endfor -%}
     </div>
