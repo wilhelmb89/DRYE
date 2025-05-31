@@ -9,8 +9,31 @@
  */
 {
   "sections": {
+    "home_hero_new_qyDg7D": {
+      "type": "home-hero-new",
+      "name": "Homepage Hero(New)",
+      "settings": {
+        "title": "Inside gloves, moisture is the overlooked variable.",
+        "video": "shopify://files/videos/Textilhögskolan hemsida.mp4",
+        "stars": 5,
+        "review_text": "<p>We addressed it through material design. In occupational and sports settings where gloves are worn for long durations, issues like irritation, flare-ups, and breakdown of the skin barrier are common and often perceived as unavoidable.<br/><br/></p>",
+        "review_text_font_size_desktop": 16,
+        "review_text_line_height_desktop": 24,
+        "review_text_font_size_tablet": 16,
+        "review_text_line_height_tablet": 24,
+        "review_text_font_size_mobile": 16,
+        "review_text_line_height_mobile": 24,
+        "reviews_link": "",
+        "button_text": "",
+        "button_url": "",
+        "bg": "#E5E5E5",
+        "check_review_text": "",
+        "review_url": ""
+      }
+    },
     "page_hero_new_GX4m8L": {
       "type": "page-hero-new",
+      "disabled": true,
       "settings": {
         "background_image": "shopify://shop_images/459300486_937217345090387_6239524257099267453_n.jpg",
         "invert": false,
@@ -88,8 +111,8 @@
         "row_jjWFfr"
       ],
       "settings": {
-        "special_title": true,
-        "overlap": true,
+        "special_title": false,
+        "overlap": false,
         "title": "",
         "invert": true,
         "bg": "#ffffff",
@@ -137,6 +160,7 @@
     }
   },
   "order": [
+    "home_hero_new_qyDg7D",
     "page_hero_new_GX4m8L",
     "multirows_general_LFeQWr",
     "articles_new_nnzJaL"
