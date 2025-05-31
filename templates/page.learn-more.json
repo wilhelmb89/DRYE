@@ -9,8 +9,31 @@
  */
 {
   "sections": {
+    "home_hero_new_3gDgq9": {
+      "type": "home-hero-new",
+      "name": "Homepage Hero(New)",
+      "settings": {
+        "title": "Independent Research on Glove Use, Skin Health, and Textile Performance",
+        "video": "shopify://files/videos/V3 hemsida.mp4",
+        "stars": 5,
+        "review_text": "<p>Independent Research on Glove Use, Skin Health, and Textile Performance<br/><br/></p>",
+        "review_text_font_size_desktop": 16,
+        "review_text_line_height_desktop": 24,
+        "review_text_font_size_tablet": 16,
+        "review_text_line_height_tablet": 24,
+        "review_text_font_size_mobile": 16,
+        "review_text_line_height_mobile": 24,
+        "reviews_link": "",
+        "button_text": "",
+        "button_url": "",
+        "bg": "#ffffff",
+        "check_review_text": "",
+        "review_url": ""
+      }
+    },
     "page_hero_new_GX4m8L": {
       "type": "page-hero-new",
+      "disabled": true,
       "settings": {
         "background_image": "shopify://shop_images/kopia.jpg",
         "invert": false,
@@ -39,28 +62,6 @@
         "button_url": "shopify://products/products-moisture-wicking-glove-liners-for-sensitive-skin"
       }
     },
-    "home_hero_new_3gDgq9": {
-      "type": "home-hero-new",
-      "disabled": true,
-      "name": "Homepage Hero(New)",
-      "settings": {
-        "title": "Independent Research on Glove Use, Skin Health, and Textile Performance",
-        "stars": 5,
-        "review_text": "<p><br/>Independent Research on Glove Use, Skin Health, and Textile Performance<br/><br/></p>",
-        "review_text_font_size_desktop": 16,
-        "review_text_line_height_desktop": 24,
-        "review_text_font_size_tablet": 16,
-        "review_text_line_height_tablet": 24,
-        "review_text_font_size_mobile": 16,
-        "review_text_line_height_mobile": 24,
-        "reviews_link": "",
-        "button_text": "",
-        "button_url": "",
-        "bg": "#E5E5E5",
-        "check_review_text": "",
-        "review_url": ""
-      }
-    },
     "multirows_new_wVN7GV": {
       "type": "multirows-new",
       "blocks": {
@@ -74,7 +75,7 @@
             "image": "shopify://shop_images/Big-Do_London-College-of-Fashion_lab-1024x678.jpg",
             "image_tablet": "shopify://shop_images/Big-Do_London-College-of-Fashion_lab-1024x678.jpg",
             "image_mobile": "shopify://shop_images/Big-Do_London-College-of-Fashion_lab-1024x678.jpg",
-            "position": "row"
+            "position": "row-reverse"
           }
         }
       },
@@ -183,8 +184,8 @@
     }
   },
   "order": [
-    "page_hero_new_GX4m8L",
     "home_hero_new_3gDgq9",
+    "page_hero_new_GX4m8L",
     "multirows_new_wVN7GV",
     "faq_4g7Pag",
     "articles_new_nnzJaL"
