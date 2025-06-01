@@ -70,7 +70,7 @@
     #shopify-section-{{ section.id }} .container .rows .row .image.desktop{
       display: block;
     }
-    #shopify-section-{{ section.id }} .container .rows .row .image.mobile, 
+    #shopify-section-{{ section.id }} .container .rows .row .image.mobile,
     #shopify-section-{{ section.id }} .container .rows .row .image.tablet{
       display: none;
     }
@@ -102,7 +102,7 @@
     #shopify-section-{{ section.id }} .container .rows .row .image.tablet{
       display: block;
     }
-    #shopify-section-{{ section.id }} .container .rows .row .image.desktop, 
+    #shopify-section-{{ section.id }} .container .rows .row .image.desktop,
     #shopify-section-{{ section.id }} .container .rows .row .image.mobile{
       display: none;
     }
@@ -129,7 +129,7 @@
     #shopify-section-{{ section.id }} .container .rows .row .image.mobile{
       display: block;
     }
-    #shopify-section-{{ section.id }} .container .rows .row .image.desktop, 
+    #shopify-section-{{ section.id }} .container .rows .row .image.desktop,
     #shopify-section-{{ section.id }} .container .rows .row .image.tablet{
       display: none;
     }
@@ -147,7 +147,7 @@
 </style>
 
 {%- if ss.invert -%}
-  {%- assign id = 'id="inverseHeader" data-inversed="false"' -%} 
+  {%- assign id = 'id="inverseHeader" data-inversed="false"' -%}
 {%- endif -%}
 
 <div class="container" {{ id }}>
@@ -158,7 +158,10 @@
     <div class="rows">
       {%- for block in section.blocks -%}
         {%- assign bs = block.settings -%}
-        <div class="row {% if bs.position == 'row' %}right{% else %}left{% endif %}" style="flex-direction: {{ bs.position }}">
+        <div
+          class="row {% if bs.position == 'row' %}right{% else %}left{% endif %}"
+          style="flex-direction: {{ bs.position }}"
+        >
           <div class="content">
             {%- if bs.title != blank -%}
               <h3 class="row-title">{{ bs.title }}</h3>
@@ -177,21 +180,36 @@
               {%- endif -%}
             </div>
           </div>
-          {%- if bs.image -%}
-            <div class="image desktop">
-              {{ bs.image | image_url: width: '1024' | image_tag: loading: 'lazy' }}
+          {% if bs.video %}
+            <div class="image">
+              {{
+                bs.video
+                | video_tag:
+                  image_size: '1100px',
+                  autoplay: true,
+                  controls: bs.controls,
+                  loop: true,
+                  muted: true,
+                  style: 'height: 100%;width:100%;max-width:100%'
+              }}
             </div>
-          {%- endif -%}
-          {%- if bs.image_tablet -%}
-            <div class="image tablet">
-              {{ bs.image_tablet | image_url: width: '768' | image_tag: loading: 'lazy' }}
-            </div>
-          {%- endif -%}
-          {%- if bs.image_mobile -%}
-            <div class="image mobile">
-              {{ bs.image_mobile | image_url: width: '630' | image_tag: loading: 'lazy' }}
-            </div>
-          {%- endif -%}
+          {% else %}
+            {%- if bs.image -%}
+              <div class="image desktop">
+                {{ bs.image | image_url: width: '1024' | image_tag: loading: 'lazy' }}
+              </div>
+            {%- endif -%}
+            {%- if bs.image_tablet -%}
+              <div class="image tablet">
+                {{ bs.image_tablet | image_url: width: '768' | image_tag: loading: 'lazy' }}
+              </div>
+            {%- endif -%}
+            {%- if bs.image_mobile -%}
+              <div class="image mobile">
+                {{ bs.image_mobile | image_url: width: '630' | image_tag: loading: 'lazy' }}
+              </div>
+            {%- endif -%}
+          {% endif %}
         </div>
       {%- endfor -%}
     </div>
@@ -199,245 +217,259 @@
 </div>
 
 {% schema %}
-  {
-    "name": "Multirows(New)",
-    "tag": "section",
-    "class": "multirows-section",
-    "settings": [
-      {
-        "type": "checkbox",
-        "id": "special_title",
-        "label": "Special section styling",
-        "default": false
-      },
-      {
-        "type": "checkbox",
-        "id": "overlap",
-        "label": "Overlap top section",
-        "default": false
-      },
-      {
-        "type": "text",
-        "id": "title",
-        "label": "Title"
-      },
-      {
-        "type": "checkbox",
-        "id": "invert",
-        "label": "Inverse header colors on scroll",
-        "default": true
-      },
-      {
-        "type": "header",
-        "content": "Colors"
-      },
-      {
-        "type": "color",
-        "id": "bg",
-        "label": "Background",
-        "default": "#111111"
-      },
-      {
-        "type": "color",
-        "id": "tx",
-        "label": "Text",
-        "default": "#FFFFFF"
-      },
-      {
-        "type": "header",
-        "content": "Sub Title Settings"
-      },
-      {
-        "type": "range",
-        "id": "sub_title_font_size_desktop",
-        "label": "Sub Title Font Size(Desktop)",
-        "min": 0,
-        "max": 100,
-        "step": 1,
-        "default": 48,
-        "unit": "px"
-      },
-      {
-        "type": "range",
-        "id": "sub_title_line_height_desktop",
-        "label": "Sub Title Line Height(Desktop)",
-        "min": 0,
-        "max": 100,
-        "step": 1,
-        "default": 55,
-        "unit": "px"
-      },
-      {
-        "type": "range",
-        "id": "sub_title_font_size_tablet",
-        "label": "Sub Title Font Size(Tablet)",
-        "min": 0,
-        "max": 100,
-        "step": 1,
-        "default": 34,
-        "unit": "px"
-      },
-      {
-        "type": "range",
-        "id": "sub_title_line_height_tablet",
-        "label": "Sub Title Line Height(Tablet)",
-        "min": 0,
-        "max": 100,
-        "step": 1,
-        "default": 40,
-        "unit": "px"
-      },
-      {
-        "type": "range",
-        "id": "sub_title_font_size_mobile",
-        "label": "Sub Title Font Size(Mobile)",
-        "min": 0,
-        "max": 100,
-        "step": 1,
-        "default": 24,
-        "unit": "px"
-      },
-      {
-        "type": "range",
-        "id": "sub_title_line_height_mobile",
-        "label": "Sub Title Line Height(Mobile)",
-        "min": 0,
-        "max": 100,
-        "step": 1,
-        "default": 30,
-        "unit": "px"
-      },
-      {
-        "type": "header",
-        "content": "Sub Body Settings"
-      },
-      {
-        "type": "range",
-        "id": "sub_body_font_size_desktop",
-        "label": "Sub Body Font Size(Desktop)",
-        "min": 0,
-        "max": 100,
-        "step": 1,
-        "default": 18,
-        "unit": "px"
-      },
-      {
-        "type": "range",
-        "id": "sub_body_line_height_desktop",
-        "label": "Sub Body Line Height(Desktop)",
-        "min": 0,
-        "max": 100,
-        "step": 1,
-        "default": 28,
-        "unit": "px"
-      },
-      {
-        "type": "range",
-        "id": "sub_body_font_size_tablet",
-        "label": "Sub Body Font Size(Tablet)",
-        "min": 0,
-        "max": 100,
-        "step": 1,
-        "default": 18,
-        "unit": "px"
-      },
-      {
-        "type": "range",
-        "id": "sub_body_line_height_tablet",
-        "label": "Sub Body Line Height(Tablet)",
-        "min": 0,
-        "max": 100,
-        "step": 1,
-        "default": 28,
-        "unit": "px"
-      },
-      {
-        "type": "range",
-        "id": "sub_body_font_size_mobile",
-        "label": "Sub Body Font Size(Mobile)",
-        "min": 0,
-        "max": 100,
-        "step": 1,
-        "default": 16,
-        "unit": "px"
-      },
-      {
-        "type": "range",
-        "id": "sub_body_line_height_mobile",
-        "label": "Sub Body Line Height(Mobile)",
-        "min": 0,
-        "max": 100,
-        "step": 1,
-        "default": 24,
-        "unit": "px"
-      },
-    ],
-    "blocks": [
-      {
-        "name": "Row",
-        "type": "row",
-        "settings": [
-           {
-             "type": "text",
-             "id": "title",
-             "label": "Title"
-           },
-           {
-             "type": "richtext",
-             "id": "content",
-             "label": "Content"
-           },
-           {
-             "type": "text",
-             "id": "button_text",
-             "label": "Link text"
-           },
-           {
-             "type": "url",
-             "id": "button_url",
-             "label": "Link url"
-           },
-           {
-             "type": "image_picker",
-             "id": "image",
-             "label": "Image"
-           },
-       
-           {
-             "type": "image_picker",
-             "id": "image_tablet",
-             "label": "Image(Tablet)"
-           },
-           {
-             "type": "image_picker",
-             "id": "image_mobile",
-             "label": "Image(Mobile)"
-           },
-           {
-             "type": "select",
-             "id": "position",
-             "label": "Image positiom",
-             "options": [
-               {
-                 "value": "row-reverse",
-                 "label": "Left"
-               },
-               {
-                "value": "row",
-                "label": "Right"
-               }
-             ],
-             "default": "row"
-           }
-        ]
-      }
-    ],
-    "presets": [
-      {
-        "name": "Multirows(New)",
-        "settings": {
+{
+  "name": "Multirows(New)",
+  "tag": "section",
+  "class": "multirows-section",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "special_title",
+      "label": "Special section styling",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "overlap",
+      "label": "Overlap top section",
+      "default": false
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title"
+    },
+    {
+      "type": "checkbox",
+      "id": "invert",
+      "label": "Inverse header colors on scroll",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "bg",
+      "label": "Background",
+      "default": "#111111"
+    },
+    {
+      "type": "color",
+      "id": "tx",
+      "label": "Text",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "header",
+      "content": "Sub Title Settings"
+    },
+    {
+      "type": "range",
+      "id": "sub_title_font_size_desktop",
+      "label": "Sub Title Font Size(Desktop)",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "default": 48,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "sub_title_line_height_desktop",
+      "label": "Sub Title Line Height(Desktop)",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "default": 55,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "sub_title_font_size_tablet",
+      "label": "Sub Title Font Size(Tablet)",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "default": 34,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "sub_title_line_height_tablet",
+      "label": "Sub Title Line Height(Tablet)",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "default": 40,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "sub_title_font_size_mobile",
+      "label": "Sub Title Font Size(Mobile)",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "default": 24,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "sub_title_line_height_mobile",
+      "label": "Sub Title Line Height(Mobile)",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "default": 30,
+      "unit": "px"
+    },
+    {
+      "type": "header",
+      "content": "Sub Body Settings"
+    },
+    {
+      "type": "range",
+      "id": "sub_body_font_size_desktop",
+      "label": "Sub Body Font Size(Desktop)",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "default": 18,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "sub_body_line_height_desktop",
+      "label": "Sub Body Line Height(Desktop)",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "default": 28,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "sub_body_font_size_tablet",
+      "label": "Sub Body Font Size(Tablet)",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "default": 18,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "sub_body_line_height_tablet",
+      "label": "Sub Body Line Height(Tablet)",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "default": 28,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "sub_body_font_size_mobile",
+      "label": "Sub Body Font Size(Mobile)",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "default": 16,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "sub_body_line_height_mobile",
+      "label": "Sub Body Line Height(Mobile)",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "default": 24,
+      "unit": "px"
+    }
+  ],
+  "blocks": [
+    {
+      "name": "Row",
+      "type": "row",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title"
+        },
+        {
+          "type": "richtext",
+          "id": "content",
+          "label": "Content"
+        },
+        {
+          "type": "text",
+          "id": "button_text",
+          "label": "Link text"
+        },
+        {
+          "type": "url",
+          "id": "button_url",
+          "label": "Link url"
+        },
+        {
+          "type": "video",
+          "id": "video",
+          "label": "Video"
+        },
+        {
+          "type": "checkbox",
+          "id": "controls",
+          "label": "Show controls",
+          "default": true,
+          "visible_if": "{{ block.settings.video != blank }}"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image",
+          "visible_if": "{{ block.settings.video == blank }}"
+        },
+
+        {
+          "type": "image_picker",
+          "id": "image_tablet",
+          "label": "Image(Tablet)",
+          "visible_if": "{{ block.settings.video == blank }}"
+        },
+        {
+          "type": "image_picker",
+          "id": "image_mobile",
+          "label": "Image(Mobile)",
+          "visible_if": "{{ block.settings.video == blank }}"
+        },
+        {
+          "type": "select",
+          "id": "position",
+          "label": "Image positiom",
+          "options": [
+            {
+              "value": "row-reverse",
+              "label": "Left"
+            },
+            {
+              "value": "row",
+              "label": "Right"
+            }
+          ],
+          "default": "row"
         }
-      }
-    ]
-  }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Multirows(New)",
+      "settings": {}
+    }
+  ]
+}
 {% endschema %}
