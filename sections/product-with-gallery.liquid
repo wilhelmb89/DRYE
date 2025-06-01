@@ -3,7 +3,6 @@
 {%- assign ss = section.settings -%}
 
 {% style %}
-  
   .section-{{ section.id }}-padding {
     padding-top: {{ section.settings.padding_top | plus: 134 }}px;
     padding-bottom: {{ section.settings.padding_bottom }}px;
@@ -31,7 +30,7 @@
       object-fit: cover;
       height: 100%;
     }
-    
+
     .product-image-section {
       display: flex;
       flex-direction: column;
@@ -127,7 +126,7 @@
       .price-social-section {
         display: flex;
         justify-content: space-between;
-        
+
         .price {
           font-weight: 400;
           font-family: "ClashGrotesk-Variable";
@@ -135,7 +134,7 @@
           line-height: {{ section.settings.price_line_height }}px;
           color: {{ section.settings.price_color }};
           margin-block: 0;
-        }        
+        }
       }
       .buttons {
         flex-direction: column;
@@ -145,17 +144,17 @@
           width: 100%;
         }
       }
-      .accordion {        
+      .accordion {
         .accordion-item {
           border-bottom: 1px solid {{ section.settings.accordion_border_color }};
-          
+
           .accordion-header {
             color: #000;
             font-family:"Inter", sans-serif;
             font-size: 16px;
             font-style: normal;
             font-weight: 400;
-            line-height: 28px;          
+            line-height: 28px;
             background: none;
             border: none;
             width: 100%;
@@ -163,7 +162,7 @@
             padding: 16px 0;
             cursor: pointer;
             display: flex;
-            justify-content: flex-start;          
+            justify-content: flex-start;
           }
 
           &:first-child {
@@ -345,7 +344,7 @@
         }
         .product-quantity {
           display: flex;
-          
+
           .quantity-control {
             background: #fff;
             font-family:"Inter", sans-serif;
@@ -518,7 +517,7 @@
         {% unless section.settings.use_sliderbar_tablet %}
         display: none;
         {% endunless %}
-      } 
+      }
       .product-image-section model-viewer {
         height: {{ section.settings.model_height_tablet }}px;
       }
@@ -526,7 +525,7 @@
         display: flex;
         width: 100%;
       }
-      .product-image-section .product-main-image img {        
+      .product-image-section .product-main-image img {
         max-width: 360px;
         margin: auto;
       }
@@ -546,7 +545,7 @@
         .review-section {
           padding-top: 0;
         }
-        
+
         .product-shipping-section {
           .product-shipping-item {
             .product-shipping-info {
@@ -602,7 +601,7 @@
       }
       .product-image-section .product-main-image {
       }
-      .product-image-section .product-main-image img {  
+      .product-image-section .product-main-image img {
       }
       .product-image-section .product-thumbnail-list {
         flex-direction: row;
@@ -652,17 +651,17 @@
         }
         .review-section {
           padding-bottom: 0;
-          
+
           svg {
             margin-top: 0;
           }
         }
         .accordion {
-          .accordion-content {  
+          .accordion-content {
             .accordion-additional-section {
               .accordion-additional-item {
                 flex-direction: column;
-  
+
                 span {
                   width: 100%;
                   text-align: center;
@@ -674,7 +673,7 @@
         }
         .product-shipping-section {
           gap: 24px;
-          
+
           .product-shipping-item {
             flex-direction: column;
             align-items: center;
@@ -703,7 +702,7 @@
   }
 {% endstyle %}
 {%- liquid
-   assign description_image_blocks = section.blocks | where: 'type', 'description_image'   
+  assign description_image_blocks = section.blocks | where: 'type', 'description_image'
 -%}
 <div class="section-{{ section.id }} section-{{ section.id }}-padding product-main__content">
   <div class="container">
@@ -720,15 +719,15 @@
       <div class="product-slider">
         <swiper-container class="product-image-slider" init="false">
           <swiper-slide>
-            {% if ss.media_type == "image" %}            
+            {% if ss.media_type == 'image' %}
               {%- if ss.image != blank -%}
                 {% comment %}
-                <img
-                class="preview-trigger"
-                data-preview-id="0"
-                src="{{ ss.image | img_url: '600x', format: 'pjpg' }}"
-                width="100%"
-                height="auto"/>
+                  <img
+                  class="preview-trigger"
+                  data-preview-id="0"
+                  src="{{ ss.image | img_url: '600x', format: 'pjpg' }}"
+                  width="100%"
+                  height="auto"/>
                 {% endcomment %}
                 <img
                   class="preview-trigger"
@@ -744,7 +743,7 @@
                   width="100%"
                   height="auto"
                   loading="lazy"
-                />
+                >
               {%- endif -%}
             {% else %}
               {% if ss.model != blank %}
@@ -752,7 +751,8 @@
                   src="{{ ss.model }}"
                   ar
                   auto-rotate
-                  camera-controls>
+                  camera-controls
+                >
                 </model-viewer>
               {% endif %}
             {% endif %}
@@ -761,12 +761,12 @@
             <swiper-slide>
               <div class="product-slider-item">
                 {% comment %}
-                <img
-                  class="preview-trigger"
-                  data-preview-id="{{ forloop.index }}"
-                  src="{{ product_thumbnail.settings.preview_image | img_url: '600x', format: 'pjpg' }}"
-                  width="100%"
-                  height="auto"/>
+                  <img
+                    class="preview-trigger"
+                    data-preview-id="{{ forloop.index }}"
+                    src="{{ product_thumbnail.settings.preview_image | img_url: '600x', format: 'pjpg' }}"
+                    width="100%"
+                    height="auto"/>
                 {% endcomment %}
                 <img
                   class=""
@@ -782,46 +782,49 @@
                   width="100%"
                   height="auto"
                   loading="lazy"
-                />
+                >
               </div>
             </swiper-slide>
           {% endfor %}
-          </swiper-container>
-          <button class="swiper-button-prev"></button>
-          <button class="swiper-button-next"></button>
+        </swiper-container>
+        <button class="swiper-button-prev"></button>
+        <button class="swiper-button-next"></button>
         <div class="product-thumnail-pagination">
           <div class="product-thumnail-ticker"></div>
           <div class="product-thumnail-progress"></div>
         </div>
       </div>
       <div class="product-thumbnail-list">
-      {%- if product_thumbnails -%}
-        {% for product_thumbnail in product_thumbnails %}
-          <div class="product-thumbnail-item" data-preview-id="{{ forloop.index }}">
-            <img
-              class="desktop preview-trigger"
-              data-preview-id="{{ forloop.index }}"
-              src="{{ product_thumbnail.settings.image | img_url: '1024x', format: 'pjpg' }}"
-              width="100%"
-              height="auto"
-              loading="lazy" />
-            <img
-              class="tablet preview-trigger"
-              data-preview-id="{{ forloop.index }}"
-              src="{{ product_thumbnail.settings.image_tablet | img_url: '1024x', format: 'pjpg' }}"
-              width="100%"
-              height="auto"
-              loading="lazy" />
-            <img
-              class="mobile preview-trigger"
-              data-preview-id="{{ forloop.index }}"
-              src="{{ product_thumbnail.settings.image_mobile | img_url: '1024x', format: 'pjpg' }}"
-              width="100%"
-              height="auto"
-              loading="lazy" />
-          </div>
-        {% endfor %}
-      {%- endif -%}
+        {%- if product_thumbnails -%}
+          {% for product_thumbnail in product_thumbnails %}
+            <div class="product-thumbnail-item" data-preview-id="{{ forloop.index }}">
+              <img
+                class="desktop preview-trigger"
+                data-preview-id="{{ forloop.index }}"
+                src="{{ product_thumbnail.settings.image | img_url: '1024x', format: 'pjpg' }}"
+                width="100%"
+                height="auto"
+                loading="lazy"
+              >
+              <img
+                class="tablet preview-trigger"
+                data-preview-id="{{ forloop.index }}"
+                src="{{ product_thumbnail.settings.image_tablet | img_url: '1024x', format: 'pjpg' }}"
+                width="100%"
+                height="auto"
+                loading="lazy"
+              >
+              <img
+                class="mobile preview-trigger"
+                data-preview-id="{{ forloop.index }}"
+                src="{{ product_thumbnail.settings.image_mobile | img_url: '1024x', format: 'pjpg' }}"
+                width="100%"
+                height="auto"
+                loading="lazy"
+              >
+            </div>
+          {% endfor %}
+        {%- endif -%}
       </div>
     </div>
     <div class="content product-main__meta">
@@ -839,7 +842,7 @@
       {%- for block in section.blocks -%}
         {%- case block.type -%}
           {%- when '@app' -%}
-            <div class="review-section">
+            <div class="review-section" {{ block.shopify_attributes }}>
               <div class="reviews-title">{{ ss.review_title }}</div>
               {%- render block -%}
             </div>
@@ -887,9 +890,8 @@
                 </button>
               </div>
             </div>
-            
           {%- endif -%}
-        </div>        
+        </div>
         <div class="hr-line"></div>
         <div class="variants-head">
           <div class="size-title">{{ ss.size_title }}</div>
@@ -916,7 +918,9 @@
             </div>
             <div class="custom-options">
               {%- for variant in product.variants -%}
-                <span class="custom-option" data-title="{{ variant.title }}" data-value="{{ variant.id }}">{{ variant.title }}</span>
+                <span class="custom-option" data-title="{{ variant.title }}" data-value="{{ variant.id }}">
+                  {{- variant.title -}}
+                </span>
               {%- endfor -%}
             </div>
           </div>
@@ -938,90 +942,110 @@
       {%- assign shipping_tabs = section.blocks | where: 'type', 'shipping' -%}
       {%- if shipping_tabs -%}
         <div class="product-shipping-section">
-        {% for tab in shipping_tabs %}
-          <div class="product-shipping-item">
-            <div class="product-shipping-icon">
-              <img
-                class=""
-                src="{{ tab.settings.shipping_icon | img_url: '24x' }}"
-                width="24px"
-                height="auto"/>
+          {% for tab in shipping_tabs %}
+            <div class="product-shipping-item">
+              <div class="product-shipping-icon">
+                <img
+                  class=""
+                  src="{{ tab.settings.shipping_icon | img_url: '24x' }}"
+                  width="24px"
+                  height="auto"
+                >
+              </div>
+              <div class="product-shipping-info">
+                <div class="product-shipping-title">{{ tab.settings.title }}</div>
+                <div class="product-shipping-description">{{ tab.settings.description }}</div>
+              </div>
             </div>
-            <div class="product-shipping-info">
-              <div class="product-shipping-title">{{ tab.settings.title }}</div>
-              <div class="product-shipping-description">{{ tab.settings.description }}</div>
-            </div>
-          </div>
-        {% endfor %}
+          {% endfor %}
         </div>
       {%- endif -%}
       {%- assign tabs = section.blocks | where: 'type', 'tab' -%}
       {%- if tabs -%}
         <div class="accordion product-accordion">
-        {% for tab in tabs %}
-          <div class="accordion-item {% if forloop.index0 == 0 %}active{% endif %}">
-            <button class="accordion-header">{{ tab.settings.title }}</button>
-            <div class="accordion-content">
-              {%- assign content = tab.settings.content -%}  
-              {%- for block in description_image_blocks %}
-                {%- if content contains block.settings.image_key %}
-                  {%- assign desc_img = block.settings.image | img_url: '640x' -%}
-                  {%- capture img_tag %}<img src="{{ desc_img }}" width="100%" height="auto">{% endcapture %}
-                  {%- assign content = content | replace: block.settings.image_key, img_tag %}
-                {%- endif %}
-              {%- endfor %}              
-              {{ content }}
-              {% if tab.settings.use_additional_section %}
-                <div class="accordion-additional-section">
-                  {% if tab.settings.icon1 and tab.settings.caption1 %}
-                    <div class="accordion-additional-item">
-                      <img
-                        class=""
-                        src="{{ tab.settings.icon1 | img_url: '24x' }}"
-                        width="24px"
-                        height="auto"
-                        loading="lazy" />
-                      <span>{{ tab.settings.caption1 }}</span>
-                    </div>
-                  {% endif %}
-                  {% if tab.settings.icon2 and tab.settings.caption2 %}
-                    <div class="accordion-additional-item">
-                      <img
-                        class=""
-                        src="{{ tab.settings.icon2 | img_url: '24x' }}"
-                        width="24px"
-                        height="auto"
-                        loading="lazy" />
-                      <span>{{ tab.settings.caption2 }}</span>
-                    </div>
-                  {% endif %}
-                  {% if tab.settings.icon3 and tab.settings.caption3 %}
-                    <div class="accordion-additional-item">
-                      <img
-                        class=""
-                        src="{{ tab.settings.icon3 | img_url: '24x' }}"
-                        width="24px"
-                        height="auto"
-                        loading="lazy" />
-                      <span>{{ tab.settings.caption3 }}</span>
-                    </div>
-                  {% endif %}
-                  {% if tab.settings.icon4 and tab.settings.caption4 %}
-                    <div class="accordion-additional-item">
-                      <img
-                        class=""
-                        src="{{ tab.settings.icon4 | img_url: '24x' }}"
-                        width="24px"
-                        height="auto"
-                        loading="lazy" />
-                      <span>{{ tab.settings.caption4 }}</span>
-                    </div>
-                  {% endif %}
-                </div>
-              {% endif %}
+          {% for tab in tabs %}
+            <div class="accordion-item {% if forloop.index0 == 0 %}active{% endif %}">
+              <button class="accordion-header">{{ tab.settings.title }}</button>
+              <div class="accordion-content">
+                {%- assign content = tab.settings.content -%}
+                {%- for block in description_image_blocks %}
+                  {%- if content contains block.settings.image_key %}
+                    {%- if block.settings.image -%}
+                      {%- assign desc_img = block.settings.image | img_url: '640x' -%}
+                      {%- capture replace_content %}
+                        <img src="{{ desc_img }}" width="100%" height="auto">
+                      {% endcapture %}
+                    {%- elsif block.settings.video -%}
+                      {%- capture replace_content %}
+                        {{ block.settings.video | video_tag: 
+                          image_size: '640px', 
+                          autoplay: true, 
+                          controls: true, 
+                          loop: true, 
+                          muted: true, 
+                          style: 'height: 100%;width:100%;max-width:100%'
+                        }}
+                      {% endcapture %}
+                    {%- endif -%}
+                    {%- assign content = content | replace: block.settings.image_key, replace_content -%}
+                  {%- endif %}
+                {%- endfor %}
+                {{ content }}
+                {% if tab.settings.use_additional_section %}
+                  <div class="accordion-additional-section">
+                    {% if tab.settings.icon1 and tab.settings.caption1 %}
+                      <div class="accordion-additional-item">
+                        <img
+                          class=""
+                          src="{{ tab.settings.icon1 | img_url: '24x' }}"
+                          width="24px"
+                          height="auto"
+                          loading="lazy"
+                        >
+                        <span>{{ tab.settings.caption1 }}</span>
+                      </div>
+                    {% endif %}
+                    {% if tab.settings.icon2 and tab.settings.caption2 %}
+                      <div class="accordion-additional-item">
+                        <img
+                          class=""
+                          src="{{ tab.settings.icon2 | img_url: '24x' }}"
+                          width="24px"
+                          height="auto"
+                          loading="lazy"
+                        >
+                        <span>{{ tab.settings.caption2 }}</span>
+                      </div>
+                    {% endif %}
+                    {% if tab.settings.icon3 and tab.settings.caption3 %}
+                      <div class="accordion-additional-item">
+                        <img
+                          class=""
+                          src="{{ tab.settings.icon3 | img_url: '24x' }}"
+                          width="24px"
+                          height="auto"
+                          loading="lazy"
+                        >
+                        <span>{{ tab.settings.caption3 }}</span>
+                      </div>
+                    {% endif %}
+                    {% if tab.settings.icon4 and tab.settings.caption4 %}
+                      <div class="accordion-additional-item">
+                        <img
+                          class=""
+                          src="{{ tab.settings.icon4 | img_url: '24x' }}"
+                          width="24px"
+                          height="auto"
+                          loading="lazy"
+                        >
+                        <span>{{ tab.settings.caption4 }}</span>
+                      </div>
+                    {% endif %}
+                  </div>
+                {% endif %}
+              </div>
             </div>
-          </div>
-        {% endfor %}
+          {% endfor %}
         </div>
       {%- endif -%}
       {% if section.settings.use_additional_section %}
@@ -1033,7 +1057,8 @@
                 src="{{ section.settings.icon1 | img_url: '24x' }}"
                 width="24px"
                 height="auto"
-                loading="lazy" />
+                loading="lazy"
+              >
               <span>{{ section.settings.caption1 }}</span>
             </div>
           {% endif %}
@@ -1044,7 +1069,8 @@
                 src="{{ section.settings.icon2 | img_url: '24x' }}"
                 width="24px"
                 height="auto"
-                loading="lazy" />
+                loading="lazy"
+              >
               <span>{{ section.settings.caption2 }}</span>
             </div>
           {% endif %}
@@ -1055,7 +1081,8 @@
                 src="{{ section.settings.icon3 | img_url: '24x' }}"
                 width="24px"
                 height="auto"
-                loading="lazy" />
+                loading="lazy"
+              >
               <span>{{ section.settings.caption3 }}</span>
             </div>
           {% endif %}
@@ -1066,7 +1093,8 @@
                 src="{{ section.settings.icon4 | img_url: '24x' }}"
                 width="24px"
                 height="auto"
-                loading="lazy" />
+                loading="lazy"
+              >
               <span>{{ section.settings.caption4 }}</span>
             </div>
           {% endif %}
@@ -1077,96 +1105,56 @@
 </div>
 
 {% style %}
-.image-preview-popup {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.8);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 9999;
-  visibility: hidden;
-  opacity: 0;
-  transition: opacity 0.3s ease;
-}
-.image-preview-popup.active {
-  visibility: visible;
-  opacity: 1;
-}
-.image-preview-popup swiper-container {
-  height: 100%;
-}
-.image-preview-popup swiper-container swiper-slide {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-.image-preview-popup swiper-container swiper-slide .slider-image {
-  display: flex;
-  justify-content: center;
-}
-.image-preview-popup swiper-container swiper-slide .slider-image img{
-  max-height: 85vh;
-  max-width: 75vw;
-  width: 100%;
-  height: auto;
-}
-.image-preview-popup .swiper-button-prev,
-.image-preview-popup .swiper-button-next {
-  background: rgba(0, 0, 0, 0.3);
-  border: 0;
-  color: #FFF;
-  width: 48px;
-  height: 48px;
-  border-radius: 50px;
-}
-.image-preview-popup .swiper-button-prev:after,
-.image-preview-popup .swiper-button-next:after {
-  font-size: 24px;
-  font-weight: 700;
-}
-.image-preview-popup .swiper-button-prev {
-  left: 48px;
-}
-.image-preview-popup .swiper-button-next {
-  right: 48px;
-}
-.popup-overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-}
-.popup-content {
-  position: relative;
-  height: 100%;
-  width: 100%;
-}
-.popup-close {
-  position: absolute;
-  font-size: 36px;
-  cursor: pointer;
-  transition: 0.3s;
-  top: 32px;
-  right: 48px;
-  background: rgba(0, 0, 0, 0.3);
-  border: 0;
-  color: #FFF;
-  width: 48px;
-  height: 48px;
-  border-radius: 50px;
-  z-index: 99;
-}
-@media screen and (max-width: 768px) {
+  .image-preview-popup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+  .image-preview-popup.active {
+    visibility: visible;
+    opacity: 1;
+  }
+  .image-preview-popup swiper-container {
+    height: 100%;
+  }
+  .image-preview-popup swiper-container swiper-slide {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .image-preview-popup swiper-container swiper-slide .slider-image {
+    display: flex;
+    justify-content: center;
+  }
+  .image-preview-popup swiper-container swiper-slide .slider-image img {
+    max-height: 85vh;
+    max-width: 75vw;
+    width: 100%;
+    height: auto;
+  }
   .image-preview-popup .swiper-button-prev,
-  .image-preview-popup .swiper-button-next,
-  .popup-close {
+  .image-preview-popup .swiper-button-next {
+    background: rgba(0, 0, 0, 0.3);
+    border: 0;
+    color: #fff;
     width: 48px;
     height: 48px;
+    border-radius: 50px;
+  }
+  .image-preview-popup .swiper-button-prev:after,
+  .image-preview-popup .swiper-button-next:after {
+    font-size: 24px;
+    font-weight: 700;
   }
   .image-preview-popup .swiper-button-prev {
     left: 48px;
@@ -1174,48 +1162,87 @@
   .image-preview-popup .swiper-button-next {
     right: 48px;
   }
-  .image-preview-popup .popup-close {
-    right: 48px;
-  }
-  .image-preview-popup swiper-container swiper-slide .slider-image {
-    padding: 64px;
-  }
-  .image-preview-popup swiper-container swiper-slide .slider-image img{
-    max-width: calc(100% - 3rem);
-  }
-}
-@media screen and (max-width: 480px) {
-  .image-preview-popup swiper-container swiper-slide .slider-image {
-    padding: 16px;
-  }
-  .image-preview-popup swiper-container swiper-slide .slider-image img {
-    max-width: 100%;
-    max-height: 100%;
+  .popup-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
     width: 100%;
-    height: auto;
+    height: 100%;
   }
-  .image-preview-popup .swiper-button-prev,
-  .image-preview-popup .swiper-button-next,
+  .popup-content {
+    position: relative;
+    height: 100%;
+    width: 100%;
+  }
   .popup-close {
-    width: 36px;
-    height: 36px;
+    position: absolute;
+    font-size: 36px;
+    cursor: pointer;
+    transition: 0.3s;
+    top: 32px;
+    right: 48px;
+    background: rgba(0, 0, 0, 0.3);
+    border: 0;
+    color: #fff;
+    width: 48px;
+    height: 48px;
+    border-radius: 50px;
+    z-index: 99;
   }
-  .image-preview-popup .swiper-button-prev {
-    left: 12px;
+  @media screen and (max-width: 768px) {
+    .image-preview-popup .swiper-button-prev,
+    .image-preview-popup .swiper-button-next,
+    .popup-close {
+      width: 48px;
+      height: 48px;
+    }
+    .image-preview-popup .swiper-button-prev {
+      left: 48px;
+    }
+    .image-preview-popup .swiper-button-next {
+      right: 48px;
+    }
+    .image-preview-popup .popup-close {
+      right: 48px;
+    }
+    .image-preview-popup swiper-container swiper-slide .slider-image {
+      padding: 64px;
+    }
+    .image-preview-popup swiper-container swiper-slide .slider-image img {
+      max-width: calc(100% - 3rem);
+    }
   }
-  .image-preview-popup .swiper-button-next {
-    right: 12px;
+  @media screen and (max-width: 480px) {
+    .image-preview-popup swiper-container swiper-slide .slider-image {
+      padding: 16px;
+    }
+    .image-preview-popup swiper-container swiper-slide .slider-image img {
+      max-width: 100%;
+      max-height: 100%;
+      width: 100%;
+      height: auto;
+    }
+    .image-preview-popup .swiper-button-prev,
+    .image-preview-popup .swiper-button-next,
+    .popup-close {
+      width: 36px;
+      height: 36px;
+    }
+    .image-preview-popup .swiper-button-prev {
+      left: 12px;
+    }
+    .image-preview-popup .swiper-button-next {
+      right: 12px;
+    }
+    .image-preview-popup .swiper-button-prev:after,
+    .image-preview-popup .swiper-button-next:after {
+      font-size: 16px;
+    }
+    .image-preview-popup .popup-close {
+      right: 12px;
+      font-size: 30px;
+    }
   }
-  .image-preview-popup .swiper-button-prev:after,
-  .image-preview-popup .swiper-button-next:after {
-    font-size: 16px;
-  }
-  .image-preview-popup .popup-close {
-    right: 12px;
-    font-size: 30px;
-  }
-}
-
 {% endstyle %}
 
 <!-- Popup Modal -->
@@ -1225,15 +1252,16 @@
     <button class="popup-close">&times;</button>
     <swiper-container class="product-image-slider" init="false">
       <swiper-slide>
-        {% if ss.media_type == "image" %}            
+        {% if ss.media_type == 'image' %}
           {%- if ss.image != blank -%}
             <div class="slider-image">
               <img
-              class=""
-              src="{{ ss.image | img_url: '2000x', format: 'pjpg' }}"
-              width="100%"
-              height="auto"
-              loading="lazy" />
+                class=""
+                src="{{ ss.image | img_url: '2000x', format: 'pjpg' }}"
+                width="100%"
+                height="auto"
+                loading="lazy"
+              >
             </div>
           {%- endif -%}
         {% else %}
@@ -1242,7 +1270,8 @@
               src="{{ ss.model }}"
               ar
               auto-rotate
-              camera-controls>
+              camera-controls
+            >
             </model-viewer>
           {% endif %}
         {% endif %}
@@ -1255,7 +1284,8 @@
               src="{{ product_thumbnail.settings.preview_image | img_url: '2000x', format: 'pjpg' }}"
               width="100%"
               height="auto"
-              loading="lazy" />
+              loading="lazy"
+            >
           </div>
         </swiper-slide>
       {% endfor %}
@@ -1266,13 +1296,13 @@
 </div>
 
 <script>
-  document.addEventListener("DOMContentLoaded", function () {
+  document.addEventListener('DOMContentLoaded', function () {
     /* slider */
     const sliders = document.querySelectorAll('.product-image-slider');
     const thumbnails = document.querySelectorAll('.product-thumbnail-item');
-    const ticker = document.querySelector('.product-thumnail-ticker');    
+    const ticker = document.querySelector('.product-thumnail-ticker');
     if (sliders) {
-      sliders.forEach(slider => {
+      sliders.forEach((slider) => {
         const prevArrow = slider.closest('div')?.querySelector('.swiper-button-prev');
         const nextArrow = slider.closest('div')?.querySelector('.swiper-button-next');
         const swiperParams = {
@@ -1282,14 +1312,14 @@
           slidesPerView: 'auto',
           navigation: {
             nextEl: nextArrow,
-            prevEl: prevArrow
+            prevEl: prevArrow,
           },
           on: {
             slideChange: function () {
               const activeIndex = slider.swiper.activeIndex;
               updateTicker(activeIndex);
-            }
-          }
+            },
+          },
         };
         Object.assign(slider, swiperParams);
         slider.initialize();
@@ -1297,8 +1327,8 @@
     }
 
     thumbnails.forEach((thumbnail, index) => {
-      thumbnail.addEventListener("click", function () {
-        const orderIndex = this.getAttribute("data-preview-id");
+      thumbnail.addEventListener('click', function () {
+        const orderIndex = this.getAttribute('data-preview-id');
         slider.swiper.slideTo(orderIndex);
         updateTicker(orderIndex);
       });
@@ -1306,56 +1336,56 @@
 
     function updateTicker(index) {
       const totalSlides = thumbnails.length;
-      const percentage = index * 100 / totalSlides;
+      const percentage = (index * 100) / totalSlides;
       ticker.style.left = `${percentage}%`;
     }
-    
+
     /* popup */
-    const previewTriggers = document.querySelectorAll(".preview-trigger");
-    const popup = document.getElementById("image-preview-popup");
-    const popupClose = document.querySelector(".popup-close");
-    previewTriggers.forEach(trigger => {
-      trigger.addEventListener("click", function() {
-        if (!popup.classList.contains("active")) {
-          popup.classList.add("active");
+    const previewTriggers = document.querySelectorAll('.preview-trigger');
+    const popup = document.getElementById('image-preview-popup');
+    const popupClose = document.querySelector('.popup-close');
+    previewTriggers.forEach((trigger) => {
+      trigger.addEventListener('click', function () {
+        if (!popup.classList.contains('active')) {
+          popup.classList.add('active');
         }
-        const orderIndex = this.getAttribute("data-preview-id");
-        const sliders = document.querySelectorAll(".product-image-slider");
+        const orderIndex = this.getAttribute('data-preview-id');
+        const sliders = document.querySelectorAll('.product-image-slider');
         if (sliders) {
-          sliders.forEach(slider => {
+          sliders.forEach((slider) => {
             slider.swiper.slideTo(orderIndex);
           });
         }
         updateTicker(orderIndex);
       });
-    });    
-    popupClose.addEventListener("click", function () {
-      popup.classList.remove("active");
     });
-    document.querySelector(".popup-overlay").addEventListener("click", function () {
-      popup.classList.remove("active");
+    popupClose.addEventListener('click', function () {
+      popup.classList.remove('active');
     });
-    document.addEventListener("keydown", function (e) {
-      if (e.key === "Escape") {
-        popup.classList.remove("active");
+    document.querySelector('.popup-overlay').addEventListener('click', function () {
+      popup.classList.remove('active');
+    });
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape') {
+        popup.classList.remove('active');
       }
     });
 
-    const quantityControls = document.querySelectorAll(".quantity-control");
+    const quantityControls = document.querySelectorAll('.quantity-control');
     quantityControls.forEach((item) => {
-      item.addEventListener("click", function (event) {
+      item.addEventListener('click', function (event) {
         const target = event.target;
-        const quantityValueElement = document.querySelector(".quantity-value");
+        const quantityValueElement = document.querySelector('.quantity-value');
         const formQuantityElement = document.querySelector("form input[name='quantity']");
         if (quantityValueElement && formQuantityElement) {
           let quantity = parseInt(quantityValueElement.textContent, 10);
-    
-          if (target.classList.contains("quantity-minus") && quantity > 1) {
+
+          if (target.classList.contains('quantity-minus') && quantity > 1) {
             quantity--;
-          } else if (target.classList.contains("quantity-plus")) {
+          } else if (target.classList.contains('quantity-plus')) {
             quantity++;
           }
-    
+
           quantityValueElement.textContent = quantity;
           formQuantityElement.value = quantity;
         }
@@ -1363,65 +1393,65 @@
     });
 
     /*dropdown for size variants*/
-    const customSelect = document.querySelector(".custom-select");
-    const customSelectTrigger = document.querySelector(".custom-select-trigger");
-    const customSelectTriggerSpan = document.querySelector(".custom-select-trigger span");
-    const customOptions = document.querySelectorAll(".custom-option");
+    const customSelect = document.querySelector('.custom-select');
+    const customSelectTrigger = document.querySelector('.custom-select-trigger');
+    const customSelectTriggerSpan = document.querySelector('.custom-select-trigger span');
+    const customOptions = document.querySelectorAll('.custom-option');
 
-    customSelectTrigger.addEventListener("click", function () {
-      customSelect.classList.toggle("open");
+    customSelectTrigger.addEventListener('click', function () {
+      customSelect.classList.toggle('open');
     });
 
-    customOptions.forEach(option => {
-      option.addEventListener("click", function () {
-        const variantId = this.getAttribute("data-variant-id");
-        const title = this.getAttribute("data-title");
+    customOptions.forEach((option) => {
+      option.addEventListener('click', function () {
+        const variantId = this.getAttribute('data-variant-id');
+        const title = this.getAttribute('data-title');
 
-        customSelectTriggerSpan.classList.add("selected");
+        customSelectTriggerSpan.classList.add('selected');
         customSelectTriggerSpan.firstChild.textContent = title;
         const label = document.querySelector(`form fieldset label[for='${title}']`);
         if (label) {
           label.click();
         }
 
-        customSelect.classList.remove("open");
+        customSelect.classList.remove('open');
       });
     });
 
-    document.addEventListener("click", function (e) {
-      if (!e.target.closest(".custom-select-wrapper")) {
-        customSelect.classList.remove("open");
+    document.addEventListener('click', function (e) {
+      if (!e.target.closest('.custom-select-wrapper')) {
+        customSelect.classList.remove('open');
       }
     });
 
     /* review */
-    const reviewLink = document.querySelector(".review-section");
+    const reviewLink = document.querySelector('.review-section');
     console.log('reviewLink = ', reviewLink);
     if (reviewLink) {
-      reviewLink.addEventListener("click", function() {
+      reviewLink.addEventListener('click', function () {
         event.preventDefault();
-        const customReviewSection = document.querySelector(".custom-review-section");
+        const customReviewSection = document.querySelector('.custom-review-section');
         console.log('customReviewSection = ', customReviewSection);
         if (customReviewSection) {
           customReviewSection.scrollIntoView({
-            behavior: "smooth", 
-            block: "start"
+            behavior: 'smooth',
+            block: 'start',
           });
         }
       });
-    }    
+    }
 
     /* accordion */
-    const accordionItems = document.querySelectorAll(".accordion-item");  
+    const accordionItems = document.querySelectorAll('.accordion-item');
     accordionItems.forEach((item) => {
-      const header = item.querySelector(".accordion-header");  
-      header.addEventListener("click", function () {
+      const header = item.querySelector('.accordion-header');
+      header.addEventListener('click', function () {
         // accordionItems.forEach((otherItem) => {
         //   if (otherItem !== item) {
         //     otherItem.classList.remove("active");
         //   }
         // });
-        item.classList.toggle("active");
+        item.classList.toggle('active');
 
         let headerOffset = 134;
         if (window.innerWidth <= 768) {
@@ -1438,21 +1468,21 @@
         const distance = scrollToPosition - startPosition;
         const duration = 200; // Duration for smooth scroll in ms
         let startTime = null;
-    
+
         function smoothScroll(timestamp) {
           if (!startTime) startTime = timestamp;
           const elapsed = timestamp - startTime;
           const progress = Math.min(elapsed / duration, 1);
-    
+
           window.scrollTo({
             top: startPosition + distance * progress,
           });
-    
+
           if (elapsed < duration) {
             requestAnimationFrame(smoothScroll);
           }
         }
-    
+
         requestAnimationFrame(smoothScroll);
       });
     });
@@ -2120,7 +2150,7 @@
           "type": "text",
           "id": "description",
           "label": "Description"
-        },
+        }
       ]
     },
     {
@@ -2166,6 +2196,11 @@
           "type": "image_picker",
           "id": "image",
           "label": "Image"
+        },
+        {
+          "type": "video",
+          "id": "video",
+          "label": "Video"
         }
       ]
     }
@@ -2173,10 +2208,8 @@
   "presets": [
     {
       "name": "Product With Gallery",
-      "settings": {
-      }
+      "settings": {}
     }
   ]
 }
 {% endschema %}
-
