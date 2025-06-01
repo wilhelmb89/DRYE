@@ -112,9 +112,11 @@
       </h1>
     {%- endif -%}
     <div class="review">
-      <div class="top-bar">
-        <div class="vr-line"></div>
-      </div>
+      {% comment %}
+        <div class="top-bar">
+          <div class="vr-line"></div>
+        </div>
+      {% endcomment %}
       {%- if ss.review_text != blank -%}
         <div class="review-text">
           {{ ss.review_text }}
