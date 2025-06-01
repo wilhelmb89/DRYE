@@ -178,6 +178,10 @@
               class: 'video'
           }}
         </div>
+      {%- else -%}
+        <div class="video-wrapper">
+          {{ ss.cover_image | image_url: width: 1920 | image_tag: loading: 'lazy', class: 'video' }}
+        </div>
       {%- endif -%}
     </div>
   </div>
@@ -227,6 +231,12 @@
       "type": "video",
       "id": "video",
       "label": "Video"
+    },
+    {
+      "type": "image_picker",
+      "id": "cover_image",
+      "label": "Cover Image",
+      "info": "If no video is selected, this image will be used as the background"
     },
     {
       "type": "range",
