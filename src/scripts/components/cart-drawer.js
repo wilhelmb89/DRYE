@@ -13,6 +13,7 @@ class CartDrawer extends SideDrawer {
         super.init();
 
         document.addEventListener('on:cart:add', this.handleCartAddEvent.bind(this));
+        document.addEventListener('cart:add:loading:start', this.handleCartAddLoadingStart.bind(this));
 
         this.addEventListener('change', debounce(this.handleChange.bind(this)));
         this.addEventListener('click', this.handleClick.bind(this));
@@ -72,6 +73,15 @@ class CartDrawer extends SideDrawer {
             this.renderContents(e.detail.sections);
         } else {
             this.refresh();
+        }
+
+        this.classList.remove('cart-loading');
+    }
+
+    handleCartAddLoadingStart(e) {
+        this.classList.add('cart-loading');
+        if (!this.isOpen) {
+            this.open();
         }
     }
 

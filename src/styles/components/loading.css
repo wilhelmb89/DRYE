@@ -1,0 +1,108 @@
+@layer components {
+    /* Loading spinner animation */
+    @keyframes spin {
+        0% {
+            transform: rotate(0deg);
+        }
+        100% {
+            transform: rotate(360deg);
+        }
+    }
+
+    /* Loading spinner animation with centering */
+    @keyframes spinCentered {
+        0% {
+            transform: translate(-50%, -50%) rotate(0deg);
+        }
+        100% {
+            transform: translate(-50%, -50%) rotate(360deg);
+        }
+    }
+
+    /* Loading spinner component */
+    .loading-spinner {
+        @apply w-5 h-5 border-2 border-gray-200 border-t-gray-600 rounded-full animate-spin;
+    }
+
+    /* Loading overlay for line items */
+    .is-loading {
+        @apply relative pointer-events-none;
+    }
+
+    .is-loading::before {
+        content: "";
+        @apply absolute inset-0 bg-white bg-opacity-75 rounded z-10;
+    }
+
+    .is-loading::after {
+        content: "";
+        @apply absolute top-1/2 left-1/2 w-5 h-5 border-2 border-gray-200 border-t-gray-600 rounded-full z-20;
+        animation: spinCentered 1s linear infinite;
+    }
+
+    .cart-loading::before {
+        content: "";
+        @apply absolute inset-0 bg-white bg-opacity-90 z-50;
+    }
+
+    .cart-loading::after {
+        content: "";
+        @apply absolute top-1/2 left-1/2 w-8 h-8 border-2 border-gray-200 border-t-black rounded-full z-50;
+        animation: spinCentered 1s linear infinite;
+    }
+
+    /* Disable interactions when loading */
+    .is-loading button,
+    .is-loading input,
+    .is-loading a {
+        @apply pointer-events-none;
+    }
+
+    .cart-loading button,
+    .cart-loading input,
+    .cart-loading a {
+        @apply pointer-events-none;
+    }
+
+    /* Loading state for buttons */
+    .button-loading {
+        @apply relative pointer-events-none;
+    }
+
+    .button-loading .button-text {
+        @apply opacity-0;
+    }
+
+    .button-loading::after {
+        content: "";
+        @apply absolute top-1/2 left-1/2 w-4 h-4 border-2 border-current border-t-transparent rounded-full;
+        animation: spinCentered 1s linear infinite;
+    }
+
+    /* Fade animations for smoother loading states */
+    .loading-fade-in {
+        animation: fadeIn 0.2s ease-in-out;
+    }
+
+    .loading-fade-out {
+        animation: fadeOut 0.2s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+        }
+        to {
+            opacity: 1;
+        }
+    }
+
+    @keyframes fadeOut {
+        from {
+            opacity: 1;
+        }
+        to {
+            opacity: 0;
+        }
+    }
+}
