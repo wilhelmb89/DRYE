@@ -1,17 +1,4 @@
 @layer components {
-    .full-screen {
-        @apply fixed top-0 left-0 w-screen h-screen;
-    }
-
-    .overlay {
-        @apply full-screen opacity-0 transition-opacity duration-200 bg-black z-[199] pointer-events-none;
-    }
-
-    .dialog[open] + .overlay,
-    .drawer[open] + .overlay {
-        @apply block opacity-50 pointer-events-auto;
-    }
-
     .drawer {
         @apply invisible z-[2147483637] max-w-[500px] w-full h-[var(--viewport-height,100vh)] overflow-hidden outline-none bg-white right-0 top-0 block fixed;
         transform: translate3d(100%, 0, 0);
@@ -26,6 +13,10 @@
         transition:
             visibility 0s 0s,
             transform 0.7s cubic-bezier(0.19, 1, 0.22, 1);
+    }
+
+    .drawer[open] + .cart-backdrop {
+        @apply opacity-100 visible;
     }
 
     .drawer-left {

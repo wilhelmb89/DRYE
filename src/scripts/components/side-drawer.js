@@ -39,6 +39,7 @@ export default class SideDrawer extends HTMLElement {
         this.addEventListener('keyup', (evt) => {
             if (evt.key === 'Escape') this.close();
         });
+
     }
 
     handleDrawerClick(evt) {
@@ -49,6 +50,7 @@ export default class SideDrawer extends HTMLElement {
         evt.preventDefault();
         this.toggle();
     }
+
 
     handleSectionSelect(event) {
         // Check if the selected section is the one containing this side drawer

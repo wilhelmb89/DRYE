@@ -28,11 +28,13 @@
           if amount_away < 0
             assign amount_away = 0
           endif
+
+          assign amount_away_string = amount_away | times: 100 | money_without_trailing_zeros
         -%}
 
         <div class="px-6 pb-6 ">
           {%- if amount_away > 0 -%}
-            <p class="text-sm mb-3">You are {{ amount_away }} kr away from free shipping</p>
+            <p class="text-sm mb-3">{{ 'cart.free_shipping_away' | t: amount: amount_away_string }}</p>
             <div class="w-full bg-gray-200 rounded-full h-2 overflow-hidden">
               <div
                 class="bg-black h-full rounded-full transition-all duration-300"
@@ -175,7 +177,10 @@
   </div>
 </cart-drawer>
 
-<div class="overlay" data-toggle-cart></div>
+<div
+  class="cart-backdrop fixed inset-0 bg-black bg-opacity-50 z-[2147483636] opacity-0 invisible transition-all duration-300"
+  data-toggle-cart
+></div>
 
 {% schema %}
 {
