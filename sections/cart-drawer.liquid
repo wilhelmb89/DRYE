@@ -91,14 +91,17 @@
                       </div>
                     {%- endif -%}
                   </div>
-                  <a
-                    class="js-remove-item p-1 -mt-1 -mr-1 hover:text-red-500 text-gray-500 transition-colors"
-                    href="{{ line_item.url_to_remove }}"
+                  <button
+                    type="button"
+                    class="js-remove-item flex-shrink-0 p-1.5 rounded-lg text-gray-400 hover:text-red-600 hover:bg-red-50 transition-all duration-200"
+                    data-href="{{ line_item.url_to_remove }}"
                     data-index="{{ line_item.index | plus: 1 }}"
                     aria-label="{{- 'cart.remove_title' | t: title: line_item.title -}}"
                   >
-                    {%- render 'icon', type: 'trash', class: 'w-5 h-5' -%}
-                  </a>
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
+                    </svg>
+                  </button>
                 </div>
 
                 {%- comment -%} Quantity and Price {%- endcomment -%}
@@ -111,7 +114,10 @@
                       <div class="flex items-center border border-gray-300">
                         <button
                           type="button"
-                          class="w-8 h-8 flex items-center justify-center hover:bg-gray-100 transition-colors no-js-hidden"
+                          class="
+                            w-8 h-8 flex items-center justify-center rounded-lg
+                            hover:bg-gray-100 transition-colors no-js-hidden
+                          "
                           name="minus"
                           aria-label="{{ 'cart.decrease_quantity' | t }}"
                         >
@@ -119,7 +125,7 @@
                         </button>
                         <input
                           type="number"
-                          class="w-12 h-8 text-sm text-center border-0 focus:outline-none p-0 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+                          class="w-12 h-8 text-sm mx-[2px] text-center border-0 focus:outline-none p-0 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
                           id="{{ index | prepend: 'quantity-' }}"
                           name="updates[]"
                           min="0"
@@ -130,7 +136,10 @@
                         >
                         <button
                           type="button"
-                          class="w-8 h-8 flex items-center justify-center hover:bg-gray-100 transition-colors no-js-hidden"
+                          class="
+                            w-8 h-8 flex items-center justify-center rounded-lg
+                            hover:bg-gray-100 transition-colors no-js-hidden
+                          "
                           name="plus"
                           aria-label="{{ 'cart.increase_quantity' | t }}"
                         >
@@ -144,7 +153,7 @@
                     </p>
                   {%- endif -%}
 
-                  <p class="text-base font-normal text-right">
+                  <p class="text-base font-bold text-right">
                     {{ line_item.final_line_price | money }}
                   </p>
                 </div>
@@ -159,7 +168,7 @@
     <div class="bg-gray-50 border-t border-gray-200 p-6 space-y-4">
       <div class="flex justify-between items-center">
         <span class="text-lg font-normal">{{ 'cart.subtotal' | t }}</span>
-        <span class="text-lg font-normal">{{ cart.total_price | money }}</span>
+        <span class="text-lg font-bold">{{ cart.total_price | money }}</span>
       </div>
 
       <button
