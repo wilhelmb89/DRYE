@@ -13,7 +13,7 @@
     }
 
     .drawer {
-        @apply invisible z-[200] max-w-xl w-full h-[var(--viewport-height,100vh)] overflow-hidden outline-none bg-white right-0 top-0 block fixed;
+        @apply invisible z-[2147483637] max-w-xl w-full h-[var(--viewport-height,100vh)] overflow-hidden outline-none bg-white right-0 top-0 block fixed;
         transform: translate3d(100%, 0, 0);
         transition:
             visibility 0s 0.6s,
