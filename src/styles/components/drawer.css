@@ -8,7 +8,8 @@
     }
 
     .dialog[open] + .overlay,
-    .drawer[open] + .overlay {
+    .drawer[open] + .overlay,
+    .drawer[open] .overlay {
         @apply block opacity-50 pointer-events-auto;
     }
 

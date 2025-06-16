@@ -2,13 +2,13 @@
   <div class="h-full grid grid-rows-[auto_auto_1fr_auto]">
     {%- comment -%} Header {%- endcomment -%}
     <div class="flex justify-between items-center p-6 border-b border-gray-300">
-      <h2 class="text-xl font-normal">{{ 'cart.title' | t }} ({{ cart.item_count }})</h2>
+      <h2 class="text-lg font-normal">{{ 'cart.title' | t }} ({{ cart.item_count }})</h2>
       <button
-        class="w-6 h-6 flex items-center justify-center cursor-pointer"
+        class="w-6 h-6 flex items-center justify-center cursor-pointer text-black hover:bg-gray-100 rounded transition-colors"
         data-toggle-cart
         aria-label="{{ 'cart.close' | t }}"
       >
-        {%- render 'icon' with 'close' -%}
+        {%- render 'icon', type: 'close', class: 'w-6 h-6' -%}
       </button>
     </div>
 
@@ -31,7 +31,7 @@
 
       <div class="px-6 py-4 border-solid border-b border-gray-200">
         {%- if amount_away > 0 -%}
-          <p class="text-sm mb-2">
+          <p class="text-xs mb-2">
             {{
               'cart.free_shipping_away'
               | t: amount: amount_away
@@ -40,7 +40,7 @@
             }}
           </p>
         {%- else -%}
-          <p class="text-sm mb-2">
+          <p class="text-xs mb-2">
             {{ 'cart.free_shipping_qualified' | t }}
           </p>
         {%- endif -%}
@@ -82,7 +82,7 @@
               <div class="flex-1 min-w-0">
                 <div class="flex justify-between items-start mb-2">
                   <div class="pr-2">
-                    <h3 class="text-base font-normal">{{ line_item.product.title }}</h3>
+                    <h3 class="text-sm font-normal">{{ line_item.product.title }}</h3>
                   </div>
                   <a
                     class="js-remove-item p-1 -mt-1 -mr-1"
@@ -90,12 +90,12 @@
                     data-index="{{ line_item.index | plus: 1 }}"
                     aria-label="{{- 'cart.remove_title' | t: title: line_item.title -}}"
                   >
-                    {%- render 'icon' with 'trash', class: 'w-5 h-5' -%}
+                    {%- render 'icon', type: 'trash', class: 'w-5 h-5' -%}
                   </a>
                 </div>
 
                 {%- if section.settings.show_variant and product.has_only_default_variant == false -%}
-                  <div class="text-sm text-gray-600 mb-2">
+                  <div class="text-xs text-gray-600 mb-2">
                     {%- for option in line_item.options_with_values -%}
                       <span>{{ option.value }}</span>
                       {%- unless forloop.last -%}
@@ -115,18 +115,15 @@
                       <div class="flex items-center">
                         <button
                           type="button"
-                          class="w-8 h-8 flex items-center justify-center border border-gray-30 hover:bg-gray-100 transition-colors no-js-hidden"
+                          class="w-8 h-8 flex items-center justify-center border border-gray-300 hover:bg-gray-100 transition-colors no-js-hidden"
                           name="minus"
                           aria-label="{{ 'cart.decrease_quantity' | t }}"
                         >
-                          <span class="text-lg leading-none">−</span>
+                          <span class="text-base leading-none">−</span>
                         </button>
                         <input
                           type="number"
-                          class="
-                            w-10 h-8 text-center border-none border-t border-b border-gray-300
-                            !rounded-none focus:outline-none p-0
-                          "
+                          class="w-10 h-8 text-sm text-center border-t border-b border-gray-300 !rounded-none focus:outline-none p-0 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
                           id="{{ index | prepend: 'quantity-' }}"
                           name="updates[]"
                           min="0"
@@ -141,7 +138,7 @@
                           name="plus"
                           aria-label="{{ 'cart.increase_quantity' | t }}"
                         >
-                          <span class="text-lg leading-none">+</span>
+                          <span class="text-base leading-none">+</span>
                         </button>
                       </div>
                     </quantity-input>
@@ -151,7 +148,7 @@
                     </p>
                   {%- endif -%}
 
-                  <p class="text-base font-medium">
+                  <p class="text-sm font-medium">
                     {{ line_item.final_line_price | money }}
                   </p>
                 </div>
@@ -165,8 +162,8 @@
     {%- comment -%} Footer with Subtotal and Checkout {%- endcomment -%}
     <div class="bg-gray-50 border-t border-gray-200 p-6 space-y-4">
       <div class="flex justify-between items-center">
-        <span class="text-lg">{{ 'cart.subtotal' | t }}</span>
-        <span class="text-lg font-medium">{{ cart.total_price | money }}</span>
+        <span class="text-base">{{ 'cart.subtotal' | t }}</span>
+        <span class="text-base font-medium">{{ cart.total_price | money }}</span>
       </div>
 
       <button
@@ -182,9 +179,8 @@
       </button>
     </div>
   </div>
+  <div class="overlay" data-toggle-cart></div>
 </cart-drawer>
-
-<div class="overlay" data-toggle-cart></div>
 
 {% schema %}
 {

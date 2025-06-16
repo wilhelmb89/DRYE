@@ -1,6 +1,9 @@
 class QuantityInput extends HTMLElement {
     constructor() {
         super();
+    }
+
+    connectedCallback() {
         this.input = this.querySelector('input');
         this.currentQty = this.input.value;
         this.changeEvent = new Event('change', { bubbles: true });
@@ -14,12 +17,13 @@ class QuantityInput extends HTMLElement {
      * @param {object} evt - Event object.
      */
     handleClick(evt) {
-        if (!evt.target.matches('button')) return;
+        const button = evt.target.closest('button');
+        if (!button) return;
         evt.preventDefault();
 
-        if (evt.target.name === 'plus') {
+        if (button.name === 'plus') {
             this.input.stepUp();
-        } else if (evt.target.name === 'minus') {
+        } else if (button.name === 'minus') {
             this.input.stepDown();
         }
 
