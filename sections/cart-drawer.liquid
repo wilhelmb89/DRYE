@@ -29,7 +29,7 @@
         endif
       -%}
 
-      <div class="px-6 py-4 border-b border-gray-200">
+      <div class="px-6 py-4 border-solid border-b border-gray-200">
         {%- if amount_away > 0 -%}
           <p class="text-sm mb-2">
             {{
@@ -56,13 +56,13 @@
     {%- comment -%} Cart Items {%- endcomment -%}
     <div class="overflow-y-auto">
       <form class="form" id="cart-drawer-form" action="{{ routes.cart_url }}" method="post">
-        <div>
+        <div class="px-6">
           {%- for line_item in cart.items -%}
             {%- liquid
               assign index = line_item.index | plus: 1
               assign product = line_item.product
             -%}
-            <div class="p-6 flex gap-4 border-b border-gray-200" id="line-item-{{ index }}">
+            <div class="py-4 flex gap-4 border-solid border-b border-gray-200" id="line-item-{{ index }}">
               {%- comment -%} Product Image {%- endcomment -%}
               <div class="w-24 h-24 media flex-shrink-0">
                 {%- if line_item.image != blank -%}
@@ -115,7 +115,7 @@
                       <div class="flex items-center">
                         <button
                           type="button"
-                          class="w-8 h-8 flex items-center justify-center border border-gray-300 rounded-sm hover:bg-gray-100 transition-colors no-js-hidden"
+                          class="w-8 h-8 flex items-center justify-center border border-gray-30 hover:bg-gray-100 transition-colors no-js-hidden"
                           name="minus"
                           aria-label="{{ 'cart.decrease_quantity' | t }}"
                         >
@@ -124,7 +124,7 @@
                         <input
                           type="number"
                           class="
-                            w-10 h-8 text-center border-t border-b border-gray-300
+                            w-10 h-8 text-center border-none border-t border-b border-gray-300
                             !rounded-none focus:outline-none p-0
                           "
                           id="{{ index | prepend: 'quantity-' }}"
@@ -137,7 +137,7 @@
                         >
                         <button
                           type="button"
-                          class="w-8 h-8 flex items-center justify-center border border-gray-300 rounded-sm hover:bg-gray-100 transition-colors no-js-hidden"
+                          class="w-8 h-8 flex items-center justify-center border border-gray-300 hover:bg-gray-100 transition-colors no-js-hidden"
                           name="plus"
                           aria-label="{{ 'cart.increase_quantity' | t }}"
                         >
