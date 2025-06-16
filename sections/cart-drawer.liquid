@@ -1,6 +1,6 @@
 <cart-drawer class="drawer" data-toggle-attribute="data-toggle-cart">
   <div class="h-full grid grid-rows-[auto_1fr_auto]">
-    <div class="cart__heading py-half-base px-base flex justify-between border-b border-border">
+    <div class="flex justify-between border-b border-gray-200">
       <div class="flex gap-4 items-center">
         <div
           class="mr-auto w-4 top-4 right-4 z-0 cursor-pointer"
@@ -16,7 +16,7 @@
         {{ 'cart.cart_count' | t: count: cart.item_count }}
       </div>
     </div>
-    <div class="px-base overflow-y-auto">
+    <div class="overflow-y-auto">
       <form class="form" id="cart-drawer-form" action="{{ routes.cart_url }}" method="post">
         <div class="">
           {%- for line_item in cart.items -%}
@@ -55,22 +55,24 @@
                   <div class=" text-xs">{{ product.description }}</div>
                 {%- endif -%}
 
-                {%- if section.settings.show_details -%}
-                  {%- if product.has_only_default_variant == false
-                    or line_item.properties.size != 0
-                    or line_item.selling_plan_allocation != null
-                  -%}
-                    <div class="">
+                {%- if section.settings.show_selling_plan
+                  or section.settings.show_variant
+                  or section.settings.show_properties
+                -%}
+                  <div class="">
+                    {%- if section.settings.show_variant and product.has_only_default_variant == false -%}
                       <dl>
-                        {%- if product.has_only_default_variant == false -%}
-                          {%- for option in line_item.options_with_values -%}
-                            <div class="text-xs">
-                              <dt class="inline">{{ option.name }}:</dt>
-                              <dd class="inline">{{ option.value }}</dd>
-                            </div>
-                          {%- endfor -%}
-                        {%- endif -%}
+                        {%- for option in line_item.options_with_values -%}
+                          <div class="text-xs">
+                            <dt class="inline">{{ option.name }}:</dt>
+                            <dd class="inline">{{ option.value }}</dd>
+                          </div>
+                        {%- endfor -%}
+                      </dl>
+                    {%- endif -%}
 
+                    {%- if section.settings.show_properties and line_item.properties.size != 0 -%}
+                      <dl>
                         {%- for property in line_item.properties -%}
                           {%- assign property_first_char = property.first | slice: 0 -%}
                           {%- if property.last != blank and property_first_char != '_' -%}
@@ -81,12 +83,14 @@
                           {%- endif -%}
                         {%- endfor -%}
                       </dl>
+                    {%- endif -%}
 
-                      {%- if line_item.selling_plan_allocation != null -%}
-                        <p class="text-xs">{{ line_item.selling_plan_allocation.selling_plan.name }}</p>
-                      {%- endif -%}
-                    </div>
-                  {%- endif -%}
+                    {%- if section.settings.show_selling_plan
+                      and line_item.selling_plan_allocation != null
+                    -%}
+                      <p class="text-xs">{{ line_item.selling_plan_allocation.selling_plan.name }}</p>
+                    {%- endif -%}
+                  </div>
                 {%- endif -%}
 
                 <p class=" text-xs">
@@ -126,10 +130,10 @@
       </form>
     </div>
 
-    <div class="p-base bg-white">
+    <div class="bg-white">
       <button
         type="submit"
-        class="btn btn--primary w-full"
+        class="w-full"
         name="checkout"
         form="cart-drawer-form"
         {% if cart == empty %}
@@ -152,18 +156,24 @@
       "type": "checkbox",
       "id": "show_description",
       "label": "Show product description",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "show_variant",
+      "label": "Show variant",
       "default": true
     },
     {
       "type": "checkbox",
-      "id": "show_dimensions",
-      "label": "Show product dimensions",
-      "default": true
+      "id": "show_properties",
+      "label": "Show properties",
+      "default": false
     },
     {
       "type": "checkbox",
-      "id": "show_details",
-      "label": "Show product details",
+      "id": "show_selling_plan",
+      "label": "Show selling plan",
       "default": false
     },
     {
