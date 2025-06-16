@@ -1,0 +1,195 @@
+<cart-drawer class="drawer" data-toggle-attribute="data-toggle-cart">
+  <div class="h-full grid grid-rows-[auto_1fr_auto]">
+    <div class="cart__heading py-half-base px-base flex justify-between border-b border-border">
+      <div class="flex gap-4 items-center">
+        <div
+          class="mr-auto w-4 top-4 right-4 z-0 cursor-pointer"
+          data-toggle-cart
+        >
+          {%- render 'icon' with 'close' -%}
+        </div>
+        <div>
+          {{ 'cart.title' | t }}
+        </div>
+      </div>
+      <div>
+        {{ 'cart.cart_count' | t: count: cart.item_count }}
+      </div>
+    </div>
+    <div class="px-base overflow-y-auto">
+      <form class="form" id="cart-drawer-form" action="{{ routes.cart_url }}" method="post">
+        <div class="cart__items">
+          {%- for line_item in cart.items -%}
+            {%- liquid
+              assign index = line_item.index | plus: 1
+              assign product = line_item.product
+            -%}
+            <div class="line-item" id="line-item-{{ index }}">
+              <div class="line-item__media media">
+                {%- if line_item.image != blank -%}
+                  {% render 'image',
+                    image: line_item.image,
+                    widths: '160, 340, 520',
+                    src_width: 340,
+                    sizes: '160px'
+                  %}
+                {%- else -%}
+                  {{ 'image' | placeholder_svg_tag: 'media__placeholder img-fit' }}
+                {%- endif -%}
+              </div>
+
+              <div class="line-item__content">
+                <div class="flex justify-between w-full">
+                  <p class="line-item__title h4">{{ line_item.title }}</p>
+                  <a
+                    class="js-remove-item"
+                    href="{{ line_item.url_to_remove }}"
+                    data-index="{{ line_item.index | plus: 1 }}"
+                    aria-label="{{- 'cart.remove_title' | t: title: line_item.title -}}"
+                  >
+                    {%- render 'icon' with 'trash' -%}
+                  </a>
+                </div>
+
+                {%- if section.settings.show_description -%}
+                  <div class="line-item__description text-xs">{{ product.description }}</div>
+                {%- endif -%}
+
+                {%- if section.settings.show_details -%}
+                  {%- if product.has_only_default_variant == false
+                    or line_item.properties.size != 0
+                    or line_item.selling_plan_allocation != null
+                  -%}
+                    <div class="line-item__details">
+                      <dl>
+                        {%- if product.has_only_default_variant == false -%}
+                          {%- for option in line_item.options_with_values -%}
+                            <div class="text-xs">
+                              <dt class="inline">{{ option.name }}:</dt>
+                              <dd class="inline">{{ option.value }}</dd>
+                            </div>
+                          {%- endfor -%}
+                        {%- endif -%}
+
+                        {%- for property in line_item.properties -%}
+                          {%- assign property_first_char = property.first | slice: 0 -%}
+                          {%- if property.last != blank and property_first_char != '_' -%}
+                            <div class="text-xs">
+                              <dt class="inline">{{ property.first }}:</dt>
+                              <dd class="inline">{{ property.last }}</dd>
+                            </div>
+                          {%- endif -%}
+                        {%- endfor -%}
+                      </dl>
+
+                      {%- if line_item.selling_plan_allocation != null -%}
+                        <p class="text-xs">{{ line_item.selling_plan_allocation.selling_plan.name }}</p>
+                      {%- endif -%}
+                    </div>
+                  {%- endif -%}
+                {%- endif -%}
+
+                <p class="line-item__price text-xs">
+                  {{ line_item.price | money }}
+                </p>
+
+                {%- if section.settings.quantity_type == 'text' -%}
+                  <p class="line-item__quantity text-xs">
+                    {{ 'cart.line_item_count' | t: count: line_item.quantity }}
+                  </p>
+                {%- elsif section.settings.quantity_type == 'input' -%}
+                  <quantity-input class="inline-block">
+                    <label class=" visually-hidden" for="{{ index | prepend: 'quantity-' }}">
+                      {{- 'cart.headings.quantity' | t -}}
+                    </label>
+                    <div class="flex qty--container text-xs">
+                      <button type="button" class="btn btn--qty btn--qty-minus no-js-hidden" name="minus">
+                        -
+                      </button>
+                      <input
+                        type="number"
+                        class="qty-input input"
+                        id="{{ index | prepend: 'quantity-' }}"
+                        name="updates[]"
+                        min="0"
+                        value="{{ line_item.quantity }}"
+                        data-index="{{ index }}"
+                        data-initial-value="{{ line_item.quantity }}"
+                        aria-label="{{ 'cart.headings.quantity' | t }}"
+                      >
+                      <button type="button" class="btn btn--qty btn--qty-plus no-js-hidden" name="plus">
+                        +
+                      </button>
+                    </div>
+                  </quantity-input>
+                {% endif %}
+              </div>
+            </div>
+          {%- endfor -%}
+        </div>
+      </form>
+    </div>
+
+    <div class="p-base bg-white">
+      <button
+        type="submit"
+        class="btn btn--primary w-full"
+        name="checkout"
+        form="cart-drawer-form"
+        {% if cart == empty %}
+          disabled
+        {% endif %}
+      >
+        {{- 'cart.checkout' | t }}
+      </button>
+    </div>
+  </div>
+</cart-drawer>
+
+<div class="overlay" data-toggle-cart></div>
+
+{% schema %}
+{
+  "name": "Cart Drawer",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "show_description",
+      "label": "Show product description",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_dimensions",
+      "label": "Show product dimensions",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_details",
+      "label": "Show product details",
+      "default": false
+    },
+    {
+      "type": "select",
+      "id": "quantity_type",
+      "label": "Quantity type",
+      "options": [
+        {
+          "value": "text",
+          "label": "Text"
+        },
+        {
+          "value": "input",
+          "label": "Input"
+        },
+        {
+          "value": "none",
+          "label": "None"
+        }
+      ],
+      "default": "input"
+    }
+  ]
+}
+{% endschema %}
