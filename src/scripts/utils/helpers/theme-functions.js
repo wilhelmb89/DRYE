@@ -45,6 +45,9 @@ export function lockBodyScroll() {
     window.unlockedScrollY = window.scrollY;
     console.log('locking body scroll at', window.unlockedScrollY);
 
+    // Add class to body for CSS-based selective scroll locking
+    document.body.classList.add('scroll-locked');
+
     // Check for iOS devices specifically
     const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
     // Check for desktop (non-mobile) devices
@@ -62,10 +65,9 @@ export function lockBodyScroll() {
         }
     }
 
-    // iOS-specific approach
+    // iOS-specific approach - still need fixed positioning
     if (isIOS) {
         document.body.classList.add('fixed');
-        // Save current viewport height before we lock
         document.body.dataset.iosScrollLock = 'true';
         document.body.style.position = 'fixed';
         document.body.style.top = `-${window.unlockedScrollY}px`;
@@ -73,24 +75,27 @@ export function lockBodyScroll() {
         document.body.style.height = '100%';
         document.body.style.overflow = 'hidden';
     }
-    // Desktop devices - minimal locking to prevent keyboard issues
-    else if (isDesktop) {
-        document.documentElement.style.overflow = 'hidden';
-        document.body.style.overflow = 'hidden';
-    }
-    // Android and other mobile devices
+    // For desktop and other devices, rely more on CSS
     else {
+        // Only prevent document scroll, not all scrolling
         document.documentElement.style.overflow = 'hidden';
         document.body.style.overflow = 'hidden';
-        document.body.classList.add('fixed');
-        document.body.style.position = 'fixed';
-        document.body.style.top = `-${window.unlockedScrollY}px`;
-        document.body.style.width = '100%';
+        
+        // On mobile, still use fixed positioning for better control
+        if (!isDesktop) {
+            document.body.classList.add('fixed');
+            document.body.style.position = 'fixed';
+            document.body.style.top = `-${window.unlockedScrollY}px`;
+            document.body.style.width = '100%';
+        }
     }
 }
 
 export function unlockBodyScroll() {
     console.log('unlocking body scroll');
+
+    // Remove CSS class for selective scroll locking
+    document.body.classList.remove('scroll-locked');
 
     // Check for iOS devices specifically
     const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;

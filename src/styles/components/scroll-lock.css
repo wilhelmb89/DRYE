@@ -1,0 +1,50 @@
+@layer components {
+    /* Selective scroll locking - allow specific elements to remain scrollable */
+    .scroll-locked {
+        /* Prevent general scrolling but allow specific containers */
+        touch-action: none;
+    }
+
+    /* Allow Swiper containers to remain scrollable */
+    .scroll-locked .swiper-container,
+    .scroll-locked .product-image-slider,
+    .scroll-locked .swiper-wrapper {
+        touch-action: pan-x pan-y;
+        overflow: visible;
+    }
+
+    /* Allow cart drawer content to scroll */
+    .scroll-locked .drawer,
+    .scroll-locked .overflow-y-auto {
+        touch-action: pan-y;
+        overflow-y: auto;
+    }
+
+    /* Allow image preview popup to scroll */
+    .scroll-locked #image-preview-popup {
+        touch-action: pan-x pan-y;
+    }
+
+    /* Allow any element marked as scrollable to remain scrollable */
+    .scroll-locked .allow-scroll {
+        touch-action: auto;
+        overflow: auto;
+    }
+
+    /* For desktop, be more selective about what gets overflow hidden */
+    @media (min-width: 1024px) {
+        .scroll-locked {
+            /* On desktop, only prevent main document scroll */
+            touch-action: auto;
+        }
+        
+        .scroll-locked .swiper-container,
+        .scroll-locked .product-image-slider,
+        .scroll-locked .drawer,
+        .scroll-locked .overflow-y-auto {
+            /* Reset to normal behavior on desktop */
+            touch-action: auto;
+            overflow: auto;
+        }
+    }
+}
