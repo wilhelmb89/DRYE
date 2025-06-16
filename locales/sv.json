@@ -153,15 +153,27 @@
   },
   "cart": {
     "title": "Din varukorg",
+    "caption": "Varukorgsartiklar",
     "checkout": "Till kassan",
     "remove_title": "Ta bort {{ title }}",
+    "estimated_total": "Beräknad total",
+    "new_estimated_total": "Ny beräknad total",
+    "note": "Orderanteckningar",
+    "empty": "Din varukorg är tom",
+    "cart_error": "Ett fel uppstod vid uppdatering av din varukorg. Vänligen försök igen.",
+    "cart_quantity_error_html": "Du kan bara lägga till {{ quantity }} av denna artikel i din varukorg.",
     "cart_count": {
       "one": "{{ count }} artikel",
       "other": "{{ count }} artiklar"
     },
     "headings": {
-      "quantity": "Antal"
+      "product": "Produkt",
+      "price": "Pris",
+      "total": "Totalt",
+      "quantity": "Antal",
+      "image": "Produktbild"
     },
+    "update": "Uppdatera",
     "line_item_count": "Antal: {{count}}",
     "free_shipping_away": "Du är {{ amount }} kr från fri frakt",
     "free_shipping_qualified": "Du kvalificerar för fri frakt!",
@@ -169,7 +181,19 @@
     "shipping_note": "Frakt & moms beräknas i kassan",
     "close": "Stäng varukorg",
     "decrease_quantity": "Minska antal",
-    "increase_quantity": "Öka antal"
+    "increase_quantity": "Öka antal",
+    "duties_and_taxes_included_shipping_at_checkout_with_policy_html": "Tullar och moms ingår. Rabatter och <a href=\"{{ link }}\">frakt</a> beräknas i kassan.",
+    "duties_and_taxes_included_shipping_at_checkout_without_policy": "Tullar och moms ingår. Rabatter och frakt beräknas i kassan.",
+    "taxes_included_shipping_at_checkout_with_policy_html": "Moms ingår. Rabatter och <a href=\"{{ link }}\">frakt</a> beräknas i kassan.",
+    "taxes_included_shipping_at_checkout_without_policy": "Moms ingår. Rabatter och frakt beräknas i kassan.",
+    "duties_included_taxes_at_checkout_shipping_at_checkout_with_policy_html": "Tullar ingår. Moms, rabatter och <a href=\"{{ link }}\">frakt</a> beräknas i kassan.",
+    "duties_included_taxes_at_checkout_shipping_at_checkout_without_policy": "Tullar ingår. Moms, rabatter och frakt beräknas i kassan.",
+    "taxes_at_checkout_shipping_at_checkout_with_policy_html": "Moms, rabatter och <a href=\"{{ link }}\">frakt</a> beräknas i kassan.",
+    "taxes_at_checkout_shipping_at_checkout_without_policy": "Moms, rabatter och frakt beräknas i kassan.",
+    "login": {
+      "title": "Har du ett konto?",
+      "paragraph_html": "<a href=\"{{ link }}\" class=\"link underlined-link\">Logga in</a> för att checka ut snabbare."
+    }
   },
   "shopify": {
     "checkout": {
@@ -179,18 +203,6 @@
             "shop_cash_not_found": "Shop Cash hittades inte."
           }
         }
-      }
-    }
-  },
-  "customer_accounts": {
-    "payment_methods": {
-      "google_pay": {
-        "iframe_title_accessibility_label": "Lägg till betalningsmetod för Google Pay",
-        "loading_accessibility_message": "Laddar Google Pay"
-      },
-      "pay_pal": {
-        "iframe_title_accessibility_label": "Lägg till PayPal-betalningsmetod",
-        "loading_accessibility_message": "Laddar PayPal"
       }
     }
   }

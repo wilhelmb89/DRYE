@@ -1,7 +1,7 @@
 <cart-drawer class="drawer" data-toggle-attribute="data-toggle-cart">
   <div class="h-full grid grid-rows-[auto_auto_1fr_auto]">
     {%- comment -%} Header {%- endcomment -%}
-    <div class="flex justify-between items-center p-6 border-b border-gray-200">
+    <div class="flex justify-between items-center p-6 border-b border-gray-300">
       <h2 class="text-xl font-normal">{{ 'cart.title' | t }} ({{ cart.item_count }})</h2>
       <button
         class="w-6 h-6 flex items-center justify-center cursor-pointer"
@@ -56,13 +56,13 @@
     {%- comment -%} Cart Items {%- endcomment -%}
     <div class="overflow-y-auto">
       <form class="form" id="cart-drawer-form" action="{{ routes.cart_url }}" method="post">
-        <div class="divide-y divide-gray-200">
+        <div>
           {%- for line_item in cart.items -%}
             {%- liquid
               assign index = line_item.index | plus: 1
               assign product = line_item.product
             -%}
-            <div class="p-6 flex gap-4" id="line-item-{{ index }}">
+            <div class="p-6 flex gap-4 border-b border-gray-200" id="line-item-{{ index }}">
               {%- comment -%} Product Image {%- endcomment -%}
               <div class="w-24 h-24 media flex-shrink-0">
                 {%- if line_item.image != blank -%}
