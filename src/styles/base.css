@@ -31,3 +31,15 @@
 .js-hidden {
     display: none;
 }
+
+quantity-input input[type="number"] {
+    -webkit-appearance: textfield;
+    -moz-appearance: textfield;
+    appearance: textfield;
+}
+
+quantity-input input[type="number"]::-webkit-inner-spin-button,
+quantity-input input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}

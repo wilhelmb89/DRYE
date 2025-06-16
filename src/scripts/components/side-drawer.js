@@ -1,4 +1,4 @@
-import { lockBodyScroll, unlockBodyScroll } from '../utils/theme-functions.js';
+import { lockBodyScroll, unlockBodyScroll } from '../utils/helpers/theme-functions.js';
 
 export default class SideDrawer extends HTMLElement {
     constructor() {

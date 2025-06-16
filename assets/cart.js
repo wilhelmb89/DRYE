@@ -1,6 +1,5 @@
 document.addEventListener("DOMContentLoaded", function() {
     addToCart(); 
-    checkout();
 });
 
 // Function to update the quantity in the cart drawer and main cart
@@ -62,9 +61,6 @@ async function addToCart() {
       evt.stopPropagation();
       const id = this.id.value;
 
-      // Show a loading spinner or animation immediately
-      showCartDrawerLoadingState();
-
       try {
         // Fetch cart data in the background
         const response = await fetch(window.Shopify.routes.root + 'cart/add.js', {
@@ -79,40 +75,22 @@ async function addToCart() {
                 quantity: 1
               }
             ],
-            sections: 'drawer-cart' // Fetch only what you need to update
+            sections: 'cart-drawer' // Fetch only what you need to update
           })
         });
 
         const data = await response.json();
+        console.log('response', data);
 
-        if (data.sections) {
-          // Use a minimal DOM update approach to inject cart contents
-          const parser = new DOMParser();
-          const resDrawer = parser.parseFromString(data.sections['drawer-cart'], 'text/html');
-          const liveDrawer = document.querySelector('.cart-drawer');
-
-          if (liveDrawer) {
-            // Update cart contents using animation or a smooth transition
-            const drawerBody = liveDrawer.querySelector('.cart-body');
-            const drawerFooter = liveDrawer.querySelector('.cart-footer');
-
-            // Replace content with fetched data
-            requestAnimationFrame(() => {
-              drawerBody.innerHTML = resDrawer.querySelector('.cart-body').innerHTML;
-              drawerFooter.innerHTML = resDrawer.querySelector('.cart-footer').innerHTML;
-
-              // Hide loading state and reveal updated cart drawer
-              hideCartDrawerLoadingState();
-              show(liveDrawer);
-
-              // Call the function to update the total quantity after updating the cart drawer
-              // updateTotalQty();
-            });
-          }
-        } else {
-          console.error('Error: Cart drawer sections not found in the response.');
-          window.location.href = '/cart'; // Fallback to cart page
-        }
+        this.dispatchEvent(
+          new CustomEvent('on:cart:add', {
+              bubbles: true,
+              detail: {
+                  variantId: id,
+                  sections: data.sections
+              }
+          })
+      );
       } catch (error) {
         console.error('Error adding item to cart:', error);
         window.location.href = '/cart'; // Fallback to cart page
@@ -121,50 +99,3 @@ async function addToCart() {
   }
 }
 
-// Helper functions to manage perceived performance
-function showCartDrawerLoadingState() {
-  const liveDrawer = document.querySelector('.cart-drawer');
-  if (liveDrawer) {
-    // Show drawer immediately with a spinner or placeholder
-    liveDrawer.classList.add('loading'); // Add a loading class to trigger CSS animations
-    show(document.querySelector('#si-overlay'));
-    show(liveDrawer);
-  }
-}
-
-function hideCartDrawerLoadingState() {
-  const liveDrawer = document.querySelector('.cart-drawer');
-  if (liveDrawer) {
-    // Remove loading state to reveal the actual cart contents
-    liveDrawer.classList.remove('loading');
-  }
-}
-
-
-// Function to update the total quantity after the product is added to the cart
-function updateTotalQty() {
-    const qtyWrappers = document.querySelectorAll('.qty-wrapper');
-    let totalQty = 0;
-    
-    qtyWrappers.forEach(wrapper => {
-        const qty = parseInt(wrapper.querySelector('.quantity').textContent, 10);
-        totalQty += qty;
-    });
-
-    const belowQtyElement = document.querySelector('.below-qty-text');
-    if (belowQtyElement) {
-        belowQtyElement.textContent = totalQty;
-    }
-}
-
-// Function to handle checkout
-function checkout() {
-    const form = document.querySelector('.shopify-cart-form');
-    if (form) {
-        form.addEventListener('submit', function(evt) {
-            evt.preventDefault();
-            evt.stopPropagation();
-            location.href = window.shopUrl + `/checkout?locale=${window.Shopify.locale}`;
-        });
-    }
-}

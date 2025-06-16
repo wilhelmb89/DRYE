@@ -1,0 +1,11 @@
+<script>
+  window.theme = {
+      routes: {
+          cart: '{{ routes.cart_url }}',
+          cartAdd: '{{ routes.cart_add_url }}',
+          cartChange: '{{ routes.cart_change_url }}',
+          cartUpdate: '{{ routes.cart_update_url }}'
+        },
+      moneyWithCurrencyFormat: {{ shop.money_with_currency_format | json }}
+  }
+</script>

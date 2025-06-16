@@ -18,14 +18,14 @@
     </div>
     <div class="px-base overflow-y-auto">
       <form class="form" id="cart-drawer-form" action="{{ routes.cart_url }}" method="post">
-        <div class="cart__items">
+        <div class="">
           {%- for line_item in cart.items -%}
             {%- liquid
               assign index = line_item.index | plus: 1
               assign product = line_item.product
             -%}
-            <div class="line-item" id="line-item-{{ index }}">
-              <div class="line-item__media media">
+            <div class="" id="line-item-{{ index }}">
+              <div class="media">
                 {%- if line_item.image != blank -%}
                   {% render 'image',
                     image: line_item.image,
@@ -38,9 +38,9 @@
                 {%- endif -%}
               </div>
 
-              <div class="line-item__content">
+              <div class="">
                 <div class="flex justify-between w-full">
-                  <p class="line-item__title h4">{{ line_item.title }}</p>
+                  <p class="">{{ line_item.title }}</p>
                   <a
                     class="js-remove-item"
                     href="{{ line_item.url_to_remove }}"
@@ -52,7 +52,7 @@
                 </div>
 
                 {%- if section.settings.show_description -%}
-                  <div class="line-item__description text-xs">{{ product.description }}</div>
+                  <div class=" text-xs">{{ product.description }}</div>
                 {%- endif -%}
 
                 {%- if section.settings.show_details -%}
@@ -60,7 +60,7 @@
                     or line_item.properties.size != 0
                     or line_item.selling_plan_allocation != null
                   -%}
-                    <div class="line-item__details">
+                    <div class="">
                       <dl>
                         {%- if product.has_only_default_variant == false -%}
                           {%- for option in line_item.options_with_values -%}
@@ -89,12 +89,12 @@
                   {%- endif -%}
                 {%- endif -%}
 
-                <p class="line-item__price text-xs">
+                <p class=" text-xs">
                   {{ line_item.price | money }}
                 </p>
 
                 {%- if section.settings.quantity_type == 'text' -%}
-                  <p class="line-item__quantity text-xs">
+                  <p class=" text-xs">
                     {{ 'cart.line_item_count' | t: count: line_item.quantity }}
                   </p>
                 {%- elsif section.settings.quantity_type == 'input' -%}
@@ -102,13 +102,11 @@
                     <label class=" visually-hidden" for="{{ index | prepend: 'quantity-' }}">
                       {{- 'cart.headings.quantity' | t -}}
                     </label>
-                    <div class="flex qty--container text-xs">
-                      <button type="button" class="btn btn--qty btn--qty-minus no-js-hidden" name="minus">
-                        -
-                      </button>
+                    <div class="flex text-xs">
+                      <button type="button" class="no-js-hidden" name="minus">-</button>
                       <input
                         type="number"
-                        class="qty-input input"
+                        class=""
                         id="{{ index | prepend: 'quantity-' }}"
                         name="updates[]"
                         min="0"
@@ -117,9 +115,7 @@
                         data-initial-value="{{ line_item.quantity }}"
                         aria-label="{{ 'cart.headings.quantity' | t }}"
                       >
-                      <button type="button" class="btn btn--qty btn--qty-plus no-js-hidden" name="plus">
-                        +
-                      </button>
+                      <button type="button" class="no-js-hidden" name="plus">+</button>
                     </div>
                   </quantity-input>
                 {% endif %}

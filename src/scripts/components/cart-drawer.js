@@ -1,6 +1,6 @@
 import SideDrawer from '../components/side-drawer.js';
 import { debounce } from '../utils/utils.js';
-import { initLazyImages } from '../utils/lazy-images.js';
+import { initLazyMedia } from '../utils/helpers/lazy-media.js';
 
 class CartDrawer extends SideDrawer {
     static sections = ['cart-drawer', 'cart-icon-bubble'];
@@ -93,7 +93,7 @@ class CartDrawer extends SideDrawer {
             CartDrawer.updateCartIcon(sections);
         }
 
-        initLazyImages();
+        initLazyMedia();
     }
 
     /**
