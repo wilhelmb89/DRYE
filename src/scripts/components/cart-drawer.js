@@ -45,7 +45,7 @@ class CartDrawer extends SideDrawer {
             const response = await fetch(theme.routes.cartChange, {
                 method: 'POST',
                 headers: {
-                    'Accept': 'application/json',
+                    Accept: 'application/json',
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify({
