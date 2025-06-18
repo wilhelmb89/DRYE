@@ -152,9 +152,13 @@
           {%- render 'icon', type: 'cart' -%}
         </div>
       {% endcomment %}
-      <a href="/cart" class="header__icon header__icon--cart" id="cart-icon-bubble">
+      <div
+        data-toggle-cart
+        class="header__icon header__icon--cart"
+        id="cart-icon-bubble"
+      >
         {%- render 'icon', type: 'cart' -%}
-      </a>
+      </div>
       <div class="locale">
         {%- render 'localization' -%}
       </div>
