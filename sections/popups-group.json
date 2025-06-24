@@ -11,6 +11,15 @@
   "name": "Pop-ups",
   "type": "custom.popups",
   "sections": {
+    "cart_drawer": {
+      "type": "cart-drawer",
+      "settings": {
+        "show_free_shipping_bar": true,
+        "free_shipping_threshold": 1350,
+        "show_variant": true,
+        "quantity_type": "input"
+      }
+    },
     "drawer_size_Xcyt3f": {
       "type": "drawer-size",
       "blocks": {
@@ -77,10 +86,6 @@
         "image": "shopify://shop_images/Size-image_eb3e0aad-33dc-43c3-9659-3a7b68bbd9bd.png",
         "bottom": "<p><strong>Dimension units - mm</strong></p><p><strong>Length</strong>: The measurement from the first crease of the wrist to the top of the middle finger</p><p><strong>Circumference</strong>: The measurement around your hand just under the knuckles</p>"
       }
-    },
-    "cart_drawer": {
-      "type": "cart-drawer",
-      "settings": {}
     }
   },
   "order": [
