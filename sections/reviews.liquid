@@ -4,19 +4,19 @@
     {%- if ss.title != blank -%}
       <h2 class="title">{{ ss.title }}</h2>
       <a href="https://se.trustpilot.com/review/hudsverige.se" target="_blank">
-        <img src="{{ 'trustpilot-reviews.png' | asset_url }}" alt="Reviews trustpilot" class="reviews-image h-auto w-auto">
+        <img src="{{ 'trustpilot-reviews.png' | asset_url }}" alt="Reviews trustpilot" class="reviews-image">
       </a>
     {%- endif -%}
     {%- if ss.subtitle != blank -%}
       <div class="subtitle">
-        {{ ss.subtitle | split: "|" | first }}
+        {{ ss.subtitle | split: '|' | first }}
         <span>
-          {{ ss.subtitle | split: "|" | last }}
+          {{ ss.subtitle | split: '|' | last }}
           <svg width="27" height="25" viewBox="0 0 27 25" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M13.5 0.500977L18.2611 7.44794L26.3393 9.82925L21.2036 16.504L21.4351 24.9227L13.5 22.101L5.5649 24.9227L5.79644 16.504L0.660737 9.82925L8.73894 7.44794L13.5 0.500977Z" fill="#FFB800"/>
           </svg>
         </span>
-      </div>   
+      </div>
     {%- endif -%}
   </div>
   <div class="bottom">
@@ -29,24 +29,23 @@
               {%- render 'icon', type: 'quote' -%}
               {%- if bs.content != blank -%}
                 {% comment %} <div class="content"> {% endcomment %}
-                  {{ bs.content }}
+                {{ bs.content }}
                 {% comment %} </div> {% endcomment %}
               {%- endif -%}
             </div>
-              {%- if bs.author != blank -%}
-                <div class="author">
-                  {%- if bs.avatar != blank -%}
-                    <div class="avatar">
-                      {{ bs.avatar | image_url: width: '50' | image_tag: loading: 'lazy' }}
-                    </div>
-                  {%- endif -%}
-                    <div class="profile">
-                      <div class="name">{{ bs.author }}</div>
-                      <div class="prof">{{ bs.prof }}</div>
-                    </div>
+            {%- if bs.author != blank -%}
+              <div class="author">
+                {%- if bs.avatar != blank -%}
+                  <div class="avatar">
+                    {{ bs.avatar | image_url: width: '50' | image_tag: loading: 'lazy' }}
+                  </div>
+                {%- endif -%}
+                <div class="profile">
+                  <div class="name">{{ bs.author }}</div>
+                  <div class="prof">{{ bs.prof }}</div>
                 </div>
-              {%- endif -%}
-            
+              </div>
+            {%- endif -%}
           </swiper-slide>
         {%- endfor -%}
       </swiper-container>
@@ -62,59 +61,58 @@
       </prev-next-buttons>
     {%- endif -%}
   </div>
-</div> 
+</div>
 
 {% schema %}
-  {
-    "name": "Reviews",
-    "tag": "section",
-    "class": "reviews-section",
-    "settings": [
-      {
-        "type": "text",
-        "id": "title",
-        "label": "Title"
-      },
-      {
-        "type": "text",
-        "id": "subtitle",
-        "label": "Subtitle"
-      }
-    ],
-    "blocks": [
-      {
-        "name": "Review",
-        "type": "review",
-        "settings": [
-          {
-            "type": "richtext",
-            "id": "content",
-            "label": "Content"
-          },
-          {
-            "type": "text",
-            "id": "author",
-            "label": "Author"
-          },
-          {
-            "type": "text",
-            "id": "prof",
-            "label": "Profession"
-          },
-          {
-            "type": "image_picker",
-            "id": "avatar",
-            "label": "Avatar"
-          }
-        ]
-      }
-    ],
-    "presets": [
-      {
-        "name": "Reviews",
-        "settings": {
+{
+  "name": "Reviews",
+  "tag": "section",
+  "class": "reviews-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title"
+    },
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Subtitle"
+    }
+  ],
+  "blocks": [
+    {
+      "name": "Review",
+      "type": "review",
+      "settings": [
+        {
+          "type": "richtext",
+          "id": "content",
+          "label": "Content"
+        },
+        {
+          "type": "text",
+          "id": "author",
+          "label": "Author"
+        },
+        {
+          "type": "text",
+          "id": "prof",
+          "label": "Profession"
+        },
+        {
+          "type": "image_picker",
+          "id": "avatar",
+          "label": "Avatar"
         }
-      }
-    ]
-  }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Reviews",
+      "settings": {}
+    }
+  ]
+}
 {% endschema %}
