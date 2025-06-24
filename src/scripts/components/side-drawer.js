@@ -7,6 +7,7 @@ export default class SideDrawer extends HTMLElement {
 
     connectedCallback() {
         this.init();
+        this.sectionId = this.closest('.shopify-section')?.id.replace('shopify-section-', '');
         // Add the listener for Shopify section select event
         if (Shopify.designMode) {
             // Check if in theme editor
@@ -39,7 +40,6 @@ export default class SideDrawer extends HTMLElement {
         this.addEventListener('keyup', (evt) => {
             if (evt.key === 'Escape') this.close();
         });
-
     }
 
     handleDrawerClick(evt) {
@@ -51,19 +51,20 @@ export default class SideDrawer extends HTMLElement {
         this.toggle();
     }
 
-
     handleSectionSelect(event) {
         // Check if the selected section is the one containing this side drawer
-        const sectionId = this.closest('.shopify-section')?.id;
-        if (sectionId && event.detail.sectionId === sectionId) {
+
+        const eventSectionId = event.detail.sectionId;
+
+        if (this.sectionId && eventSectionId === this.sectionId) {
             this.open();
         }
     }
 
     handleSectionDeselect(event) {
         // Optionally close the drawer when its section is deselected
-        const sectionId = this.closest('.shopify-section')?.id;
-        if (sectionId && event.detail.sectionId === sectionId) {
+        const eventSectionId = event.detail.sectionId;
+        if (this.sectionId && eventSectionId === this.sectionId) {
             this.close();
         }
     }

@@ -16,10 +16,19 @@
       {%- comment -%} Free Shipping Progress Bar {%- endcomment -%}
       {%- if section.settings.show_free_shipping_bar and section.settings.free_shipping_threshold > 0 -%}
         {%- liquid
-          assign cart_total_price = cart.total_price | divided_by: 100.0
+          assign current_total = cart.total_price | divided_by: 100.0
           assign free_shipping_threshold = section.settings.free_shipping_threshold
-          assign amount_away = free_shipping_threshold | minus: cart_total_price
-          assign progress_percentage = cart_total_price | divided_by: free_shipping_threshold | times: 100
+
+          if section.settings.use_product_count
+            assign current_total = cart.item_count
+            assign free_shipping_threshold = section.settings.free_shipping_product_count
+          endif
+
+          assign amount_away = free_shipping_threshold | minus: current_total
+
+          assign free_shipping_threshold_100 = free_shipping_threshold | times: 100.0
+          assign current_total_100 = current_total | times: 100.0
+          assign progress_percentage = current_total_100 | divided_by: free_shipping_threshold_100 | times: 100
 
           if progress_percentage > 100
             assign progress_percentage = 100
@@ -29,12 +38,23 @@
             assign amount_away = 0
           endif
 
-          assign amount_away_string = amount_away | times: 100 | money_without_trailing_zeros
+          if section.settings.use_product_count
+            if section.settings.show_as_money and section.settings.free_shipping_product != blank
+              assign product_price = section.settings.free_shipping_product.price
+              assign amount_away_string = amount_away | times: product_price | money_without_trailing_zeros
+              assign free_shipping_away_text = 'cart.free_shipping_away' | t: amount: amount_away_string
+            else
+              assign free_shipping_away_text = 'cart.add_more_to_qualify' | t: count: amount_away
+            endif
+          else
+            assign amount_away_string = amount_away | times: 100 | money_without_trailing_zeros
+            assign free_shipping_away_text = 'cart.free_shipping_away' | t: amount: amount_away_string
+          endif
         -%}
 
         <div class="px-6 pb-6 ">
           {%- if amount_away > 0 -%}
-            <p class="text-sm mb-3">{{ 'cart.free_shipping_away' | t: amount: amount_away_string }}</p>
+            <p class="text-sm mb-3">{{ free_shipping_away_text }}</p>
             <div class="w-full bg-gray-200 rounded-full h-2 overflow-hidden">
               <div
                 class="bg-black h-full rounded-full transition-all duration-300"
@@ -42,7 +62,7 @@
               ></div>
             </div>
           {%- else -%}
-            <p class="text-sm mb-3">You qualify for free shipping!</p>
+            <p class="text-sm mb-3">{{ 'cart.free_shipping_qualified' | t }}</p>
             <div class="w-full bg-black rounded-full h-2"></div>
           {%- endif -%}
         </div>
@@ -206,10 +226,39 @@
       "default": true
     },
     {
+      "type": "checkbox",
+      "id": "use_product_count",
+      "label": "Use product threshold",
+      "default": true
+    },
+    {
+      "type": "number",
+      "id": "free_shipping_product_count",
+      "label": "Free shipping product count",
+      "info": "Number of products required for free shipping",
+      "visible_if": "{{ section.settings.use_product_count == true }}",
+      "default": 3
+    },
+    {
+      "type": "product",
+      "id": "free_shipping_product",
+      "label": "Free shipping product (optional)",
+      "info": "Product that will be used to calculate the free shipping threshold"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_as_money",
+      "label": "Show as money",
+      "info": "If enabled, the free shipping threshold will be shown as money",
+      "visible_if": "{{ section.settings.free_shipping_product != blank }}",
+      "default": true
+    },
+    {
       "type": "number",
       "id": "free_shipping_threshold",
       "label": "Free shipping threshold",
       "info": "Amount in your store's currency required for free shipping",
+      "visible_if": "{{ section.settings.use_product_count == false }}",
       "default": 850
     },
     {
