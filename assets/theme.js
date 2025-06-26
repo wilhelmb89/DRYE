@@ -62,6 +62,7 @@ function fadeIn(element, duration, type) {
 // inverse header colors for dark sections
 
 function invertHeader(trigger) {
+    return;
     const elements = document.querySelectorAll('#inverseHeader');
     const header = document.querySelector('header');
     let inversed = trigger ? true : false;

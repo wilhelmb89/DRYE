@@ -172,10 +172,26 @@
                       {{ 'cart.line_item_count' | t: count: line_item.quantity }}
                     </p>
                   {%- endif -%}
-
-                  <p class="text-base font-bold text-right">
-                    {{ line_item.final_line_price | money }}
-                  </p>
+                  <div class="">
+                    <div class="flex gap-1 items-baseline">
+                      {%- liquid
+                        assign total_discount = line_item.total_discount
+                        assign final_line_price = line_item.final_line_price
+                        assign discounted_price = final_line_price | minus: total_discount
+                      -%}
+                      {%- if total_discount > 0 -%}
+                        <p class="text-sm text-gray-600 line-through">{{ final_line_price | money }}</p>
+                      {%- endif -%}
+                      <p class="text-base font-bold text-right">
+                        {{ discounted_price | money }}
+                      </p>
+                    </div>
+                    {%- if total_discount > 0 -%}
+                      <p class="text-sm text-green-600 font-bold text-right">
+                        - {{ total_discount | money }}
+                      </p>
+                    {%- endif -%}
+                  </div>
                 </div>
               </div>
             </div>
