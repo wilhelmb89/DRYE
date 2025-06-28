@@ -135,7 +135,7 @@
                         <button
                           type="button"
                           class="
-                            w-8 h-8 flex items-center justify-center rounded-lg
+                            w-6 sm:w-8 h-6 sm:h-8 flex items-center justify-center rounded-lg
                             hover:bg-gray-100 transition-colors no-js-hidden
                           "
                           name="minus"
@@ -145,7 +145,7 @@
                         </button>
                         <input
                           type="number"
-                          class="w-12 h-8 text-sm mx-[2px] text-center border-0 focus:outline-none p-0 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+                          class="w-10 sm:w-12 h-6 sm:h-8 text-sm mx-[2px] text-center border-0 focus:outline-none p-0 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
                           id="{{ index | prepend: 'quantity-' }}"
                           name="updates[]"
                           min="0"
@@ -157,7 +157,7 @@
                         <button
                           type="button"
                           class="
-                            w-8 h-8 flex items-center justify-center rounded-lg
+                            w-6 sm:w-8 h-6 sm:h-8 flex items-center justify-center rounded-lg
                             hover:bg-gray-100 transition-colors no-js-hidden
                           "
                           name="plus"
@@ -173,21 +173,23 @@
                     </p>
                   {%- endif -%}
                   <div class="">
-                    <div class="flex gap-1 items-baseline">
+                    <div class="flex gap-1 items-baseline whitespace-nowrap">
                       {%- liquid
                         assign total_discount = line_item.total_discount
                         assign final_line_price = line_item.final_line_price
                         assign discounted_price = final_line_price | minus: total_discount
                       -%}
                       {%- if total_discount > 0 -%}
-                        <p class="text-sm text-gray-600 line-through">{{ final_line_price | money }}</p>
+                        <p class="text-[10px] sm:text-sm text-gray-600 line-through">
+                          {{ final_line_price | money }}
+                        </p>
                       {%- endif -%}
-                      <p class="text-base font-bold text-right">
+                      <p class="text-sm sm:text-base font-bold text-right">
                         {{ discounted_price | money }}
                       </p>
                     </div>
                     {%- if total_discount > 0 -%}
-                      <p class="text-sm text-green-600 font-bold text-right">
+                      <p class="text-xs sm:text-sm text-green-600 font-bold text-right">
                         - {{ total_discount | money }}
                       </p>
                     {%- endif -%}
