@@ -888,6 +888,22 @@
     "faq_9EETYf": {
       "type": "faq",
       "blocks": {
+        "item_MYEmmE": {
+          "type": "item",
+          "settings": {
+            "title": "When will I notice a difference?",
+            "content": "<p>Most users report reduced sweat buildup and improved comfort from the first wear. By minimizing prolonged moisture exposure, the liners help limit common triggers of irritation during extended glove use. Some see results immediately. For others, visible changes in skin condition may take longer and typically depend on consistent use over time.</p>",
+            "pos": "row"
+          }
+        },
+        "item_3wWBk7": {
+          "type": "item",
+          "settings": {
+            "title": "How long do they last?",
+            "content": "<p>Durability ranges from 4 to 12 months of daily use, depending on frequency, mechanical stress (e.g. friction), and washing habits.</p>",
+            "pos": "row"
+          }
+        },
         "item_RkEtwM": {
           "type": "item",
           "settings": {
@@ -904,14 +920,6 @@
             "pos": "row"
           }
         },
-        "item_MYEmmE": {
-          "type": "item",
-          "settings": {
-            "title": "When will I notice a difference?",
-            "content": "<p>Most users report reduced sweat buildup and improved comfort from the first wear. By minimizing prolonged moisture exposure, the liners help limit common triggers of irritation during extended glove use. Some see results immediately. For others, visible changes in skin condition may take longer and typically depend on consistent use over time.</p>",
-            "pos": "row"
-          }
-        },
         "item_kP4MFq": {
           "type": "item",
           "settings": {
@@ -925,14 +933,6 @@
           "settings": {
             "title": "Are these certified as PPE?",
             "content": "<p>No. DRYE liners are not classified as Personal Protective Equipment (PPE) and do not protect against external hazards. They are designed to address internal glove conditions—specifically sweat buildup and moisture-related friction.</p>",
-            "pos": "row"
-          }
-        },
-        "item_3wWBk7": {
-          "type": "item",
-          "settings": {
-            "title": "How long do they last?",
-            "content": "<p>Durability ranges from 4 to 12 months of daily use, depending on frequency, mechanical stress (e.g. friction), and washing habits.</p>",
             "pos": "row"
           }
         },
@@ -962,12 +962,12 @@
         }
       },
       "block_order": [
+        "item_MYEmmE",
+        "item_3wWBk7",
         "item_RkEtwM",
         "item_f6mBfM",
-        "item_MYEmmE",
         "item_kP4MFq",
         "item_8QiHYb",
-        "item_3wWBk7",
         "item_V9AmLR",
         "item_gjbk4P",
         "item_HacX7m"
