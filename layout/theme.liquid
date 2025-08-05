@@ -31,39 +31,24 @@
         r.src = t + h._hjSettings.hjid + j + h._hjSettings.hjsv;
         a.appendChild(r);
       })(window, document, 'https://static.hotjar.com/c/hotjar-', '.js?sv=');
-    </script>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width,initial-scale=1">
-    <meta name="theme-color" content="">
-    {%- if settings.favicon != blank -%}
-      <link rel="icon" type="image/png" href="{{ settings.favicon | image_url: width: 128, height: 128 }}">
-    {%- endif -%}
+   </script>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="">
+{%- if settings.favicon != blank -%}
+  <link rel="icon" type="image/png" href="{{ settings.favicon | image_url: width: 128, height: 128 }}">
+{%- endif -%}
 
-    {%- comment -%}Auto-disabled. Yoast plugin is taking care of Meta Tags output.{%- endcomment -%}
-    {%- if disabled_by_yoast_seo -%}
-      <link rel="canonical" href="{{ canonical_url }}">
-      {%- comment -%} End Yoast auto-disable. {%- endcomment -%}
-    {%- endif -%}
+<link rel="canonical" href="{{ canonical_url }}">
 
-    {%- comment -%}Auto-disabled. Yoast plugin is taking care of SEO output.{%- endcomment -%}
-    {%- if disabled_by_yoast_seo -%}
-      <title>{{ page_title }}</title>
-      {%- comment -%} End Yoast auto-disable. {%- endcomment -%}
-    {%- endif -%}
+<title>{{ page_title }}</title>
 
-    {% if page_description %}
-      {%- comment -%}Auto-disabled. Yoast plugin is taking care of Meta Tags output.{%- endcomment -%}
-      {%- if disabled_by_yoast_seo -%}
-        <meta name="description" content="{{ page_description | escape }}">
-        {%- comment -%} End Yoast auto-disable. {%- endcomment -%}
-      {%- endif -%}
-    {% endif %}
-    {%- comment -%}Auto-disabled. Yoast plugin is taking care of Meta Tags output.{%- endcomment -%}
-    {%- if disabled_by_yoast_seo -%}
-      {%- render 'theme-meta' -%}
-      {%- comment -%} End Yoast auto-disable. {%- endcomment -%}
-    {%- endif -%}
+{% if page_description %}
+  <meta name="description" content="{{ page_description | escape }}">
+{% endif %}
+
+{%- render 'theme-meta' -%}
     <script src="{{ 'swiper-bundle.min.js' | asset_url }}" defer="defer"></script>
     {{ 'swiper-bundle.min.css' | asset_url | stylesheet_tag }}
     {%- render 'theme-head-assets' -%}
