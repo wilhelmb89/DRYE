@@ -6,19 +6,7 @@
 <html lang="{{ request.locale.iso_code }}">
   <head>
     <meta name="facebook-domain-verification" content="wfm34x1wbceob0aooivridsrxzce09">
-    <!-- Google Tag Manager -->
-    <script>
-      (function (w, d, s, l, i) {
-        w[l] = w[l] || [];
-        w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' });
-        var f = d.getElementsByTagName(s)[0],
-          j = d.createElement(s),
-          dl = l != 'dataLayer' ? '&l=' + l : '';
-        j.async = true;
-        j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
-        f.parentNode.insertBefore(j, f);
-      })(window, document, 'script', 'dataLayer', 'GTM-PZMXP9C');
-    </script>
+
 
     <script>
       var ahrefs_analytics_script = document.createElement('script');
@@ -84,11 +72,6 @@
     {%- render 'theme-head-assets' -%}
     {{ content_for_header }}
 
-    <script
-      async
-      src="https://cdn.byteboost.io/v1beta/repo/inspector/main.js"
-      data-byteboost-key="3cb8ab36-0d8e-45ea-a68b-3a389a3f5a80"
-    ></script>
 
     <script type="text/javascript">
       (function (c, l, a, r, i, t, y) {
@@ -152,16 +135,7 @@
     {% endif %}
   </head>
   <body class="{{ page.template_suffix }}__page">
-    <!-- Google Tag Manager (noscript) -->
-    <noscript
-      ><iframe
-        src="https://www.googletagmanager.com/ns.html?id=GTM-PZMXP9C"
-        height="0"
-        width="0"
-        style="display:none;visibility:hidden"
-      ></iframe
-    ></noscript>
-    <!-- End Google Tag Manager (noscript) -->
+
     <div id="si-overlay" class="overlay"></div>
     {%- sections 'header-group' -%}
     <main>
