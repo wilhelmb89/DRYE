@@ -73,42 +73,14 @@ if (!customElements.get('product-form')) {
                 cartData: response,
               });
 
-fetch(`${routes.cart_add_url}`, config)
-  .then((res) => res.json())
-  .then((response) => {
-    if (!this.error) {
-      publish(PUB_SUB_EVENTS.cartUpdate, {
-        source: 'product-form',
-        productVariantId: formData.get('id'),
-        cartData: response,
-      });
+console.log('Shopify AddToCart response:', response);
 
-      const tokenValue = response.token || 
-                         (response.cart && response.cart.token) || 
-                         null;
-
-      // DEBUG: logga exakt vad som skickas till TripleWhale
-      console.log('TripleWhale AddToCart Debug:', {
-        item: formData.get('id'),
-        q: formData.get('quantity') || 1,
-        v: '9898162258244', // ditt TripleWhale-värde
-        token: tokenValue
-      });
-
-      TriplePixel('AddToCart', {
-        item: formData.get('id'),
-        q: formData.get('quantity') || 1,
-        v: '9898162258244', // ditt TripleWhale-värde
-        token: tokenValue
-      });
-    }
-
-    this.error = false;
-    // ...resten av din render logik
-  })
-  .catch((e) => {
-    console.error(e);
-  });
+TriplePixel('AddToCart', {
+  item: formData.get('id'),
+  q: formData.get('quantity') || 1,
+  v: '9898162258244', // ditt värde från TripleWhale
+  token: response.token // från Shopify response
+});
             this.error = false;
             const quickAddModal = this.closest('quick-add-modal');
             if (quickAddModal) {
