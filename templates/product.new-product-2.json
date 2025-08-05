@@ -289,27 +289,6 @@
         "padding_right_mobile": 0
       }
     },
-    "1746812889a5f81d00": {
-      "type": "apps",
-      "blocks": {
-        "stamped_reviews_main_widget_B63yme": {
-          "type": "shopify://apps/stamped-reviews/blocks/main-widget/a103faaf-2125-4b0e-89fa-de5149736723",
-          "settings": {
-            "animation": true,
-            "tags_exclude": "",
-            "tags_include": "",
-            "search": "",
-            "linkify": true,
-            "use_metafields": false,
-            "sku_tagtype": "sku"
-          }
-        }
-      },
-      "block_order": [
-        "stamped_reviews_main_widget_B63yme"
-      ],
-      "settings": {}
-    },
     "icons_Bt7DUV": {
       "type": "icons",
       "blocks": {
@@ -377,6 +356,27 @@
         "scroll_speed": 25,
         "scroll_speed_mobile": 25
       }
+    },
+    "1746812889a5f81d00": {
+      "type": "apps",
+      "blocks": {
+        "stamped_reviews_main_widget_B63yme": {
+          "type": "shopify://apps/stamped-reviews/blocks/main-widget/a103faaf-2125-4b0e-89fa-de5149736723",
+          "settings": {
+            "animation": true,
+            "tags_exclude": "",
+            "tags_include": "",
+            "search": "",
+            "linkify": true,
+            "use_metafields": false,
+            "sku_tagtype": "sku"
+          }
+        }
+      },
+      "block_order": [
+        "stamped_reviews_main_widget_B63yme"
+      ],
+      "settings": {}
     },
     "image_slider_4gd6Nt": {
       "type": "image-slider",
@@ -819,71 +819,6 @@
         "section_bottom_padding_mobile": 50
       }
     },
-    "columns_with_video_kRmqXB": {
-      "type": "columns-with-video",
-      "blocks": {
-        "card_NapNAi": {
-          "type": "card",
-          "settings": {
-            "title": "Video3",
-            "media_mode": "url",
-            "video_url": "https://www.youtube.com/embed/6P_GN2lmgrI?si=7EM9RDSqVquqXOIh",
-            "video_preview": "shopify://shop_images/Screenshot_15.png",
-            "video_width": "1108",
-            "video_height": "623",
-            "play_icon": "shopify://shop_images/play.png",
-            "icon_width": 80,
-            "icon_width_tablet": 70,
-            "icon_width_mobile": 70
-          }
-        },
-        "card_yjyLzM": {
-          "type": "card",
-          "settings": {
-            "title": "Video2",
-            "media_mode": "url",
-            "video_url": "https://www.youtube.com/embed/NoD2-hVRbkc?si=lO1PM_ttBokUjqho",
-            "video_preview": "shopify://shop_images/Screenshot_16.png",
-            "video_width": "1108",
-            "video_height": "623",
-            "play_icon": "shopify://shop_images/play.png",
-            "icon_width": 80,
-            "icon_width_tablet": 70,
-            "icon_width_mobile": 70
-          }
-        }
-      },
-      "block_order": [
-        "card_NapNAi",
-        "card_yjyLzM"
-      ],
-      "settings": {
-        "background_color": "#000000",
-        "title": "",
-        "title_color": "#000000",
-        "title_alignment": "center",
-        "title_font_size": 48,
-        "title_line_height": 55,
-        "title_top_padding": 40,
-        "title_bottom_padding": 60,
-        "title_alignment_mobile": "center",
-        "title_font_size_mobile": 28,
-        "title_line_height_mobile": 32,
-        "title_top_padding_mobile": 28,
-        "title_bottom_padding_mobile": 24,
-        "block_spacing": 20,
-        "block_spacing_mobile": 20,
-        "video_count": 3,
-        "block_direction": "row",
-        "block_direction_mobile": "column",
-        "section_top_padding": 120,
-        "section_bottom_padding": 120,
-        "section_top_padding_tablet": 80,
-        "section_bottom_padding_tablet": 80,
-        "section_top_padding_mobile": 100,
-        "section_bottom_padding_mobile": 100
-      }
-    },
     "faq_9EETYf": {
       "type": "faq",
       "blocks": {
@@ -992,7 +927,6 @@
     "image_slider_4gd6Nt",
     "rich_text_with_image_6awd6R",
     "table_with_mark_xkzqbz",
-    "columns_with_video_kRmqXB",
     "faq_9EETYf",
     "1746812877af76f5ce"
   ]
