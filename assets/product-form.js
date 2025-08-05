@@ -73,13 +73,14 @@ if (!customElements.get('product-form')) {
                 cartData: response,
               });
 
-                TriplePixel('AddToCart', {
-    item: formData.get('id'),
-    q: formData.get('quantity') || 1,
-    v: '9898162258244', // ditt värde från TripleWhale
-    token: response.token // från Shopify response
-  });
+console.log('Shopify AddToCart response:', response);
 
+TriplePixel('AddToCart', {
+  item: formData.get('id'),
+  q: formData.get('quantity') || 1,
+  v: '9898162258244', // ditt värde från TripleWhale
+  token: response.token // från Shopify response
+});
             this.error = false;
             const quickAddModal = this.closest('quick-add-modal');
             if (quickAddModal) {
