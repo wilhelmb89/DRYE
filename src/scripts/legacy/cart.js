@@ -53,12 +53,23 @@ async function addToCart() {
                     })
                 );
 
+                const token = await getCartToken();
+                TriplePixel('AddToCart', {
+                    item: id,
+                    q: 1,
+                    v: '9898162258244',
+                    token: token
+                });
             } catch (error) {
                 console.error('Error adding item to cart:', error);
-
 
                 window.location.href = '/cart'; // Fallback to cart page
             }
         });
     }
+}
+
+async function getCartToken() {
+    const response = await fetch('/cart.json').then((res) => res.json());
+    return response.token;
 }
