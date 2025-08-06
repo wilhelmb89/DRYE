@@ -2,7 +2,7 @@
   <div class="relative">
     {%- liquid
       assign sizes = '(min-width: 768px) 50vw, 100vw'
-      assign desktop_image_container_class = 'rounded-lg overflow-hidden'
+      assign desktop_image_container_class = 'md:rounded-lg overflow-hidden'
       assign desktop_image_class = 'dskt'
 
       if section.settings.square_images
@@ -58,7 +58,10 @@
   </div>
 
   {%- if show_thumbnails -%}
-    <div data-thumbnails class="swiper mt-2 block opacity-0 invisible transition-opacity duration-300">
+    <div
+      data-thumbnails
+      class="swiper md:px-0 px-4 mt-2 block opacity-0 invisible transition-opacity duration-300"
+    >
       <div class="swiper-wrapper z-10" data-slider>
         {{
           images

@@ -491,7 +491,6 @@
       padding-right: {{ section.settings.padding_right_tablet }}px;
     }
     .section-{{ section.id }} .container {
-      flex-direction: column;
 
       .desktop,
       .mobile{
@@ -570,10 +569,6 @@
       }
       .mobile {
         display: flex;
-      }
-      swiper-container swiper-slide img {
-        max-height: 100%;
-        max-width: 100%;
       }
       .product-image-section {
         flex-direction: column;
@@ -699,11 +694,11 @@
   assign description_image_blocks = section.blocks | where: 'type', 'description_image'
 -%}
 <div class="section-{{ section.id }} section-{{ section.id }}-padding product-main__content">
-  <div class="container grid grid-cols-1 md:[grid-template-columns:minmax(0,1fr)_440px]  gap-6 z-0 w-full">
-    <div class="relative w-full md:sticky md:top-[140px] md:self-start">
+  <div class="container px-0 md:px-16 grid grid-cols-1 md:[grid-template-columns:minmax(0,1fr)_440px]  gap-6 z-0 w-full">
+    <div class="relative w-full md:sticky md:top-[140px] md:self-start px-0 md:px-16">
       {%- render 'product-images', product: product, show_thumbnails: true -%}
     </div>
-    <div class="content product-main__meta">
+    <div class="px-6 md:px-16 content product-main__meta">
       <h1 class="title ">
         {{ product.title }}
       </h1>
