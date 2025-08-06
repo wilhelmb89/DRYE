@@ -1,0 +1,122 @@
+<div class="max-w-[600px] mx-auto relative z-0">
+  <div class="relative">
+    {%- liquid
+      assign sizes = '(min-width: 768px) 50vw, 100vw'
+      assign desktop_image_container_class = 'rounded-lg overflow-hidden'
+      assign desktop_image_class = 'dskt'
+
+      if section.settings.square_images
+        assign desktop_image_container_class = desktop_image_container_class | append: 'media pb-[100%]'
+        assign desktop_image_class = 'img-fit'
+        if section.settings.force_crop == false
+          assign desktop_image_class = desktop_image_class | append: ' img-fit--contain'
+        endif
+      endif
+
+      assign mobile_image_container_class = 'media w-full pb-[90%] rounded-lg overflow-hidden'
+      assign mobile_image_class = 'img-fit img-fit--contain'
+    -%}
+
+    {%- capture images -%}
+        {%- for image in product.images -%}
+          {%- if forloop.first -%}
+            {%- assign lazy_load_first_image = false -%}
+          {%- else -%}
+            {%- assign lazy_load_first_image = true -%}
+          {%- endif -%}
+          <div
+            class="
+              swiper-slide w-full {{ hidden_class }}
+            "
+          >
+            <div class="{{ desktop_image_container_class }}">
+              {% render 'image',
+                image: image,
+                widths: '480, 640, 960, 1280, 1920',
+                src_width: 1280,
+                sizes: sizes,
+                class: desktop_image_class,
+                lazy_load: lazy_load_first_image,
+                lazy_type: lazy_type
+              %}
+            </div>
+          </div>
+        {%- endfor -%}
+    {%- endcapture -%}
+
+    <div class="swiper z-10" data-slider>
+      <div class="swiper-wrapper">
+        {{ images }}
+      </div>
+      <div class="swiper-button-next size-8 rounded-lg text-white bg-black/70"></div>
+      <div class="swiper-button-prev size-8 rounded-lg text-white bg-black/70"></div>
+    </div>
+  </div>
+
+  {%- if show_thumbnails -%}
+    <div data-thumbnails class="swiper mt-2 block fade-in-after-load">
+      <div class="swiper-wrapper z-10" data-slider>
+        {{
+          images
+          | replace: desktop_image_class, mobile_image_class
+          | replace: desktop_image_container_class, mobile_image_container_class
+        }}
+      </div>
+    </div>
+  {%- endif -%}
+</div>
+
+<style>
+  [data-thumbnails] .swiper-slide .media {
+    border: 2px solid transparent;
+  }
+  [data-thumbnails] .swiper-slide-thumb-active .media {
+    border-color: #00000080;
+  }
+
+  .swiper-button-next:after,
+  .swiper-button-prev:after {
+    font-size: 16px;
+    font-weight: bold;
+  }
+</style>
+
+<script>
+  if(window.Shopify.designMode) {
+    (() => {
+      const sectionId = document.currentScript.closest('section')?.id?.replace('section-', '');
+
+      document.addEventListener('shopify:section:load', (event) => {
+        console.log(event.sectionId, sectionId);
+        if(event.sectionId === sectionId) {
+          createSwiper();
+        }
+      });
+    })();
+  }
+
+  const createSwiper = () => {
+    const swiperThumbs = new Swiper('[data-thumbnails]', {
+      slidesPerView: 10,
+      spaceBetween: 10,
+      freeMode: true,
+      watchSlidesProgress: true,
+      centeredSlides: false
+    });
+
+    const swiper = new Swiper('[data-slider]', {
+      slidesPerView: 1,
+      spaceBetween: 10,
+      loop: true,
+      autoHeight: {{ section.settings.auto_height }},
+      navigation: {
+        nextEl: '.swiper-button-next',
+        prevEl: '.swiper-button-prev'
+      },
+      thumbs: {
+        swiper: swiperThumbs
+      }
+    });
+  }
+    document.addEventListener('DOMContentLoaded', createSwiper);
+</script>
