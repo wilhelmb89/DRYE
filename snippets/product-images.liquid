@@ -1,4 +1,4 @@
-<div class="max-w-[600px] mx-auto relative z-0">
+<div class="lg:max-w-[600px] mx-auto relative z-0">
   <div class="relative">
     {%- liquid
       assign sizes = '(min-width: 768px) 50vw, 100vw'
@@ -58,16 +58,18 @@
   </div>
 
   {%- if show_thumbnails -%}
-    <div
-      data-thumbnails
-      class="swiper md:px-0 px-4 mt-2 block opacity-0 invisible transition-opacity duration-300 h-[50px] overflow-hidden"
-    >
-      <div class="swiper-wrapper z-10" data-slider>
-        {{
-          images
-          | replace: desktop_image_class, mobile_image_class
-          | replace: desktop_image_container_class, mobile_image_container_class
-        }}
+    <div class="absolute top-2 left-2 right-2 z-10 overflow-hidden">
+      <div
+        data-thumbnails
+        class="swiper block opacity-0 invisible transition-opacity duration-300 "
+      >
+        <div class="swiper-wrapper z-10" data-slider>
+          {{
+            images
+            | replace: desktop_image_class, mobile_image_class
+            | replace: desktop_image_container_class, mobile_image_container_class
+          }}
+        </div>
       </div>
     </div>
   {%- endif -%}
@@ -110,7 +112,7 @@
       watchSlidesProgress: true,
       centeredSlides: false,
       breakpoints: {
-        1200: {
+        768: {
           slidesPerView: 10
         }
       },
