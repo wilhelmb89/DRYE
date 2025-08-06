@@ -6,7 +6,7 @@
       assign desktop_image_class = 'dskt'
 
       if section.settings.square_images
-        assign desktop_image_container_class = desktop_image_container_class | append: 'media pb-[100%]'
+        assign desktop_image_container_class = desktop_image_container_class | append: ' media pb-[100%]'
         assign desktop_image_class = 'img-fit'
         if section.settings.force_crop == false
           assign desktop_image_class = desktop_image_class | append: ' img-fit--contain'
@@ -107,7 +107,7 @@
       watchSlidesProgress: true,
       centeredSlides: false,
       breakpoints: {
-        768: {
+        1200: {
           slidesPerView: 10
         }
       }
