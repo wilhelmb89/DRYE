@@ -699,7 +699,7 @@
 -%}
 <div class="section-{{ section.id }} section-{{ section.id }}-padding product-main__content">
   <div class="container grid grid-cols-1 md:[grid-template-columns:minmax(0,1fr)_440px]  gap-6 z-0 w-full">
-    <div class="relative w-full">
+    <div class="relative w-full md:sticky md:top-[140px] md:self-start">
       {%- render 'product-images', product: product, show_thumbnails: true -%}
     </div>
     <div class="content product-main__meta">
