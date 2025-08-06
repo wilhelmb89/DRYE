@@ -54,11 +54,13 @@
       </div>
       <div class="swiper-button-next size-8 rounded-lg text-white bg-black/70"></div>
       <div class="swiper-button-prev size-8 rounded-lg text-white bg-black/70"></div>
+      <!-- Pagination dots for mobile -->
+      <div class="swiper-pagination md:hidden -mt-[26px]"></div>
     </div>
   </div>
 
   {%- if show_thumbnails -%}
-    <div class="absolute top-2 left-2 right-2 z-10 overflow-hidden">
+    <div class="absolute top-2 left-2 right-2 z-10 overflow-hidden hidden md:block">
       <div
         data-thumbnails
         class="swiper block opacity-0 invisible transition-opacity duration-300 "
@@ -88,6 +90,35 @@
     font-size: 16px;
     font-weight: bold;
   }
+
+  /* Pagination dots styling */
+  .swiper-pagination {
+    position: relative !important;
+    bottom: auto !important;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    z-index: 10;
+    padding: 12px 0;
+  }
+
+  .swiper-pagination-bullet {
+    width: 10px;
+    height: 10px;
+    background: white;
+    opacity: 1;
+    margin: 0 !important;
+    border-radius: 50%;
+    transition: all 0.3s ease;
+    border: 2px solid #1f1d24;
+  }
+
+  .swiper-pagination-bullet-active {
+    background: #000000;
+  }
 </style>
 
 <script>
@@ -105,30 +136,34 @@
   }
 
   const createSwiper = () => {
-    const swiperThumbs = new Swiper('[data-thumbnails]', {
-      slidesPerView: 6,
-      spaceBetween: 10,
-      freeMode: true,
-      watchSlidesProgress: true,
-      centeredSlides: false,
-      breakpoints: {
-        768: {
-          slidesPerView: 10
-        }
-      },
-      on: {
-        init: function() {
-          // Show thumbnails after Swiper is initialized
-          const thumbnailsContainer = document.querySelector('[data-thumbnails]');
-          if (thumbnailsContainer) {
-            thumbnailsContainer.classList.remove('opacity-0', 'invisible', 'h-[50px]');
-            thumbnailsContainer.classList.add('opacity-100');
+    // Initialize thumbnails only on desktop
+    let swiperThumbs = null;
+    if (window.innerWidth >= 768) {
+      swiperThumbs = new Swiper('[data-thumbnails]', {
+        slidesPerView: 6,
+        spaceBetween: 10,
+        freeMode: true,
+        watchSlidesProgress: true,
+        centeredSlides: false,
+        breakpoints: {
+          768: {
+            slidesPerView: 10
+          }
+        },
+        on: {
+          init: function() {
+            // Show thumbnails after Swiper is initialized
+            const thumbnailsContainer = document.querySelector('[data-thumbnails]');
+            if (thumbnailsContainer) {
+              thumbnailsContainer.classList.remove('opacity-0', 'invisible', 'h-[50px]');
+              thumbnailsContainer.classList.add('opacity-100');
+            }
           }
         }
-      }
-    });
+      });
+    }
 
-    const swiper = new Swiper('[data-slider]', {
+    const swiperConfig = {
       slidesPerView: 1,
       spaceBetween: 10,
       loop: true,
@@ -136,11 +171,22 @@
       navigation: {
         nextEl: '.swiper-button-next',
         prevEl: '.swiper-button-prev'
-      },
-      thumbs: {
-        swiper: swiperThumbs
       }
-    });
+    };
+
+    // Add pagination on mobile, thumbnails on desktop
+    if (window.innerWidth < 768) {
+      swiperConfig.pagination = {
+        el: '.swiper-pagination',
+        clickable: true
+      };
+    } else if (swiperThumbs) {
+      swiperConfig.thumbs = {
+        swiper: swiperThumbs
+      };
+    }
+
+    const swiper = new Swiper('[data-slider]', swiperConfig);
   }
     document.addEventListener('DOMContentLoaded', createSwiper);
 </script>
