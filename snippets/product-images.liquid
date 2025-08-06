@@ -60,7 +60,7 @@
   {%- if show_thumbnails -%}
     <div
       data-thumbnails
-      class="swiper md:px-0 px-4 mt-2 block opacity-0 invisible transition-opacity duration-300"
+      class="swiper md:px-0 px-4 mt-2 block opacity-0 invisible transition-opacity duration-300 h-[50px] overflow-hidden"
     >
       <div class="swiper-wrapper z-10" data-slider>
         {{
@@ -119,7 +119,7 @@
           // Show thumbnails after Swiper is initialized
           const thumbnailsContainer = document.querySelector('[data-thumbnails]');
           if (thumbnailsContainer) {
-            thumbnailsContainer.classList.remove('opacity-0', 'invisible');
+            thumbnailsContainer.classList.remove('opacity-0', 'invisible', 'h-[50px]');
             thumbnailsContainer.classList.add('opacity-100');
           }
         }

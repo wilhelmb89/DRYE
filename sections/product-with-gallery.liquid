@@ -4,7 +4,6 @@
 
 {% style %}
   .section-{{ section.id }}-padding {
-    padding-top: {{ section.settings.padding_top | plus: 134 }}px;
     padding-bottom: {{ section.settings.padding_bottom }}px;
     padding-left: {{ section.settings.padding_left }}px;
     padding-right: {{ section.settings.padding_right }}px;
@@ -485,7 +484,6 @@
   }
   @media screen and (max-width: 768px) {
     .section-{{ section.id }}-padding {
-      padding-top: 140px;
       padding-bottom: {{ section.settings.padding_bottom_tablet }}px;
       padding-left: {{ section.settings.padding_left_tablet }}px;
       padding-right: {{ section.settings.padding_right_tablet }}px;
@@ -555,7 +553,6 @@
   }
   @media screen and (max-width: 480px) {
     .section-{{ section.id }}-padding {
-      padding-top: {{ section.settings.padding_top_mobile | plus: 60 }}px;
       padding-bottom: {{ section.settings.padding_bottom_mobile }}px;
       padding-left: {{ section.settings.padding_left_mobile }}px;
       padding-right: {{ section.settings.padding_right_mobile }}px;
@@ -693,9 +690,9 @@
 {%- liquid
   assign description_image_blocks = section.blocks | where: 'type', 'description_image'
 -%}
-<div class="section-{{ section.id }} section-{{ section.id }}-padding product-main__content">
-  <div class="container px-0 md:px-16 grid grid-cols-1 md:[grid-template-columns:minmax(0,1fr)_440px]  gap-6 z-0 w-full">
-    <div class="relative w-full md:sticky md:top-[140px] md:self-start px-0 md:px-16">
+<div class="section-{{ section.id }} section-{{ section.id }}-padding product-main__content pt-[var(--header-height)]">
+  <div class="container px-0 md:px-16 grid grid-cols-1 md:[grid-template-columns:minmax(0,1fr)_440px] md:gap-6 gap-4 z-0 w-full">
+    <div class="relative w-full md:sticky md:top-[140px] md:self-start">
       {%- render 'product-images', product: product, show_thumbnails: true -%}
     </div>
     <div class="px-6 md:px-16 content product-main__meta">

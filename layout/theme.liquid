@@ -30,36 +30,42 @@
         r.src = t + h._hjSettings.hjid + j + h._hjSettings.hjsv;
         a.appendChild(r);
       })(window, document, 'https://static.hotjar.com/c/hotjar-', '.js?sv=');
-   </script>
-<meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="theme-color" content="">
-{%- if settings.favicon != blank -%}
-  <link rel="icon" type="image/png" href="{{ settings.favicon | image_url: width: 128, height: 128 }}">
-{%- endif -%}
+    </script>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="theme-color" content="">
+    {%- if settings.favicon != blank -%}
+      <link rel="icon" type="image/png" href="{{ settings.favicon | image_url: width: 128, height: 128 }}">
+    {%- endif -%}
 
-<link rel="canonical" href="{{ canonical_url }}">
+    <link rel="canonical" href="{{ canonical_url }}">
 
-<title>{{ page_title }}</title>
+    <title>{{ page_title }}</title>
 
-{% if page_description %}
-  <meta name="description" content="{{ page_description | escape }}">
-{% endif %}
+    {% if page_description %}
+      <meta name="description" content="{{ page_description | escape }}">
+    {% endif %}
 
-{%- render 'theme-meta' -%}
+    {%- render 'theme-meta' -%}
     <script src="{{ 'swiper-bundle.min.js' | asset_url }}" defer="defer"></script>
     {{ 'swiper-bundle.min.css' | asset_url | stylesheet_tag }}
     {%- render 'theme-head-assets' -%}
     {{ content_for_header }}
-<!-- Google Tag Manager -->
-<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-})(window,document,'script','dataLayer','GTM-PZMXP9C');</script>
-<!-- End Google Tag Manager -->
-
+    <!-- Google Tag Manager -->
+    <script>
+      (function (w, d, s, l, i) {
+        w[l] = w[l] || [];
+        w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' });
+        var f = d.getElementsByTagName(s)[0],
+          j = d.createElement(s),
+          dl = l != 'dataLayer' ? '&l=' + l : '';
+        j.async = true;
+        j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
+        f.parentNode.insertBefore(j, f);
+      })(window, document, 'script', 'dataLayer', 'GTM-PZMXP9C');
+    </script>
+    <!-- End Google Tag Manager -->
 
     <script type="text/javascript">
       (function (c, l, a, r, i, t, y) {
@@ -123,12 +129,17 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     {% endif %}
   </head>
   <body class="{{ page.template_suffix }}__page">
+    <!-- Google Tag Manager (noscript) -->
+    <noscript
+      ><iframe
+        src="https://www.googletagmanager.com/ns.html?id=GTM-PZMXP9C"
+        height="0"
+        width="0"
+        style="display:none;visibility:hidden"
+      ></iframe
+    ></noscript>
+    <!-- End Google Tag Manager (noscript) -->
 
-<!-- Google Tag Manager (noscript) -->
-<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PZMXP9C"
-height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-<!-- End Google Tag Manager (noscript) -->
-    
     <div id="si-overlay" class="overlay"></div>
     {%- sections 'header-group' -%}
     <main>
@@ -137,6 +148,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <footer>
       {%- sections 'footer-group' -%}
     </footer>
+
+    {%- render 'css-helper-variables' -%}
 
     {%- sections 'popups-group' -%}
     {%- render 'theme-body-assets' -%}
@@ -196,19 +209,24 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         box-shadow: 0 5px 11px #e5e5e5;
       }
     </style>
-<!-- Stamped -->
+    <!-- Stamped -->
 
-<script>function myInit(){ StampedFn.init({
-apiKey: '4442485d-59b7-4e2f-8408-907cf26ba3cd',
-sId: '353360' }); }</script>
+    <script>
+      function myInit() {
+        StampedFn.init({
+          apiKey: '4442485d-59b7-4e2f-8408-907cf26ba3cd',
+          sId: '353360'
+        });
+      }
+    </script>
 
+    <script
+      async
+      onload="myInit()"
+      type="text/javascript"
+      src="https://cdn1.stamped.io/files/widget.min.js"
+    ></script>
 
-<script async onload="myInit()" type="text/javascript"
-src="
-https://cdn1.stamped.io/files/widget.min.js
-"></script>
-
-<!-- End Stamped --> 
-
+    <!-- End Stamped -->
   </body>
 </html>

@@ -1,0 +1,161 @@
+<script>
+  /**
+   * Returns a function that as long as it continues to be invoked, won't be triggered.
+   * @param {Function} fn - Callback function.
+   * @param {number} [wait=300] - Delay (in milliseconds).
+   * @returns {Function}
+   */
+  function debounce(fn, wait = 300) {
+    let t;
+    return (...args) => {
+      clearTimeout(t);
+      t = setTimeout(() => fn.apply(this, args), wait);
+    };
+  }
+
+  /**
+   * Sets a 'viewport-height' custom property on the root element.
+   */
+  function setViewportHeight() {
+    document.documentElement.style.setProperty('--viewport-height', `${window.innerHeight}px`);
+  }
+
+  /**
+   * Sets a 'header-height' custom property on the root element.
+   */
+  function setHeaderHeight() {
+    const header = document.querySelector('.header-section > header');
+    if (header) {
+      const height = header.offsetHeight;
+      document.documentElement.style.setProperty('--header-height', `${height}px`);
+    }
+  }
+
+  // Watch for header height changes using ResizeObserver
+  function watchHeaderHeight() {
+    const header = document.querySelector('.header-section > header');
+    if (header && window.ResizeObserver) {
+      const resizeObserver = new ResizeObserver(() => {
+        setHeaderHeight();
+      });
+      resizeObserver.observe(header);
+    }
+  }
+
+  // Initialize header height watcher
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', watchHeaderHeight);
+  } else {
+    watchHeaderHeight();
+  }
+
+  /**
+   * Sets a 'scrollbar-width' custom property on the root element.
+   */
+  function setScrollbarWidth() {
+    document.documentElement.style.setProperty(
+      '--scrollbar-width',
+      `${window.innerWidth - document.documentElement.clientWidth}px`
+    );
+  }
+  function setHasScrolledPastHeader() {
+    const header = document.querySelector('.header-section');
+    if (!header) return;
+
+    const headerHeight = header.offsetHeight;
+    const scrollPosition = window.unlockedScrollY ?? window.scrollY;
+
+    if (scrollPosition >= headerHeight) {
+      document.body.classList.add('has-scrolled-past-header');
+    } else {
+      document.body.classList.remove('has-scrolled-past-header');
+    }
+  }
+
+  document.addEventListener('scroll', setHasScrolledPastHeader);
+
+  /**
+   * Sets the dimension variables.
+   */
+  function setDimensionVariables() {
+    setViewportHeight();
+    setHeaderHeight();
+    setScrollbarWidth();
+  }
+
+  // Set the dimension variables.
+  setDimensionVariables();
+
+  // Update the dimension variables if viewport resized.
+  window.addEventListener('resize', debounce(setDimensionVariables, 50));
+
+  /**
+   * Sets a 'dom-loaded' class on the body element once the DOM is loaded.
+   */
+  function setDomLoadedClass() {
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', () => {
+        document.body.classList.add('dom-loaded');
+      });
+    } else {
+      document.body.classList.add('dom-loaded');
+    }
+
+    window.addEventListener('theme:loaded', () => {
+      document.body.classList.add('theme-loaded');
+    });
+  }
+
+  // Set dom-loaded class
+  setDomLoadedClass();
+
+  /**
+   * Creates a 'mediaMatches' object from the media queries specified in the theme,
+   * and adds listeners for each media query. If a breakpoint is crossed, the mediaMatches
+   * values are updated and a 'on:breakpoint-change' event is dispatched.
+   * Also includes a check for touch capabilities.
+   */
+  (() => {
+    const { mediaQueries } = theme;
+    if (!mediaQueries) {
+      theme.mediaQueries = {};
+    }
+
+    const customMediaQueries = {
+      ...mediaQueries,
+      hasTouch: '(any-pointer: coarse)'
+    };
+
+    const mqKeys = Object.keys(customMediaQueries);
+    const mqLists = {};
+    theme.mediaMatches = theme.mediaMatches || {};
+
+    /**
+     * Handles a media query (breakpoint or touch capability) change.
+     */
+    const handleMqChange = () => {
+      const newMatches = mqKeys.reduce((acc, media) => {
+        acc[media] = !!(mqLists[media] && mqLists[media].matches);
+        return acc;
+      }, {});
+
+      Object.keys(newMatches).forEach((key) => {
+        theme.mediaMatches[key] = newMatches[key];
+      });
+
+      window.dispatchEvent(new CustomEvent('on:breakpoint-change'));
+    };
+
+    mqKeys.forEach((mq) => {
+      mqLists[mq] = window.matchMedia(customMediaQueries[mq]);
+
+      theme.mediaMatches[mq] = mqLists[mq].matches;
+
+      try {
+        mqLists[mq].addEventListener('change', handleMqChange);
+      } catch (err1) {
+        mqLists[mq].addListener(handleMqChange);
+      }
+    });
+  })();
+</script>
