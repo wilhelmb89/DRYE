@@ -14,7 +14,11 @@
       endif
 
       assign mobile_image_container_class = 'media w-full pb-[90%] rounded-lg overflow-hidden'
-      assign mobile_image_class = 'img-fit img-fit--contain'
+      assign mobile_image_class = 'img-fit'
+
+      if section.settings.force_crop == false
+        assign mobile_image_class = mobile_image_class | append: ' img-fit--contain'
+      endif
     -%}
 
     {%- capture images -%}
@@ -71,7 +75,7 @@
     border: 2px solid transparent;
   }
   [data-thumbnails] .swiper-slide-thumb-active .media {
-    border-color: #00000080;
+    border-color: #000000;
   }
 
   .swiper-button-next:after,
@@ -97,11 +101,16 @@
 
   const createSwiper = () => {
     const swiperThumbs = new Swiper('[data-thumbnails]', {
-      slidesPerView: 10,
+      slidesPerView: 6,
       spaceBetween: 10,
       freeMode: true,
       watchSlidesProgress: true,
-      centeredSlides: false
+      centeredSlides: false,
+      breakpoints: {
+        768: {
+          slidesPerView: 10
+        }
+      }
     });
 
     const swiper = new Swiper('[data-slider]', {
