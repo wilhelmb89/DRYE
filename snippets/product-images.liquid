@@ -14,7 +14,7 @@
       endif
 
       assign mobile_image_container_class = 'media w-full pb-[90%] rounded-lg overflow-hidden'
-      assign mobile_image_class = 'img-fit'
+      assign mobile_image_class = 'img-fit bg-gray-50'
 
       if section.settings.force_crop == false
         assign mobile_image_class = mobile_image_class | append: ' img-fit--contain'
@@ -60,7 +60,7 @@
   </div>
 
   {%- if show_thumbnails -%}
-    <div class="absolute top-2 left-2 right-2 z-10 overflow-hidden hidden md:block">
+    <div class="absolute top-2 left-2 w-[224px] z-10 overflow-hidden hidden md:block">
       <div
         data-thumbnails
         class="swiper block opacity-0 invisible transition-opacity duration-300 "
@@ -142,16 +142,11 @@
     let swiperThumbs = null;
     if (window.innerWidth >= 768) {
       swiperThumbs = new Swiper('[data-thumbnails]', {
-        slidesPerView: 6,
+        slidesPerView: 4,
         spaceBetween: 10,
-        freeMode: true,
+        freeMode: false,
         watchSlidesProgress: true,
         centeredSlides: false,
-        breakpoints: {
-          768: {
-            slidesPerView: 10
-          }
-        },
         on: {
           init: function() {
             // Show thumbnails after Swiper is initialized

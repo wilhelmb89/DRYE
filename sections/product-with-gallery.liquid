@@ -689,7 +689,7 @@
   assign description_image_blocks = section.blocks | where: 'type', 'description_image'
 -%}
 <div class="section-{{ section.id }} section-{{ section.id }}-padding product-main__content pt-[var(--header-height)]">
-  <div class="container px-0 lg:px-16 grid grid-cols-1 lg:[grid-template-columns:minmax(0,1fr)_440px] lg:gap-6 gap-4 z-0 w-full">
+  <div class="container px-0 lg:px-16 grid grid-cols-1 lg:[grid-template-columns:minmax(0,1fr)_440px] lg:gap-12 gap-4 z-0 w-full">
     <div class="relative w-full lg:sticky lg:top-[140px] lg:self-start">
       {%- render 'product-images', product: product, show_thumbnails: true -%}
     </div>
