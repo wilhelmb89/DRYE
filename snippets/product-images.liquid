@@ -48,7 +48,7 @@
         {%- endfor -%}
     {%- endcapture -%}
 
-    <div class="swiper z-10" data-slider>
+    <div class="swiper z-10 overflow-hidden" data-slider>
       <div class="swiper-wrapper">
         {{ images }}
       </div>
@@ -58,7 +58,7 @@
   </div>
 
   {%- if show_thumbnails -%}
-    <div data-thumbnails class="swiper mt-2 block fade-in-after-load">
+    <div data-thumbnails class="swiper mt-2 block opacity-0 invisible transition-opacity duration-300">
       <div class="swiper-wrapper z-10" data-slider>
         {{
           images
@@ -109,6 +109,16 @@
       breakpoints: {
         1200: {
           slidesPerView: 10
+        }
+      },
+      on: {
+        init: function() {
+          // Show thumbnails after Swiper is initialized
+          const thumbnailsContainer = document.querySelector('[data-thumbnails]');
+          if (thumbnailsContainer) {
+            thumbnailsContainer.classList.remove('opacity-0', 'invisible');
+            thumbnailsContainer.classList.add('opacity-100');
+          }
         }
       }
     });
