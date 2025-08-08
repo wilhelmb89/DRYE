@@ -209,25 +209,6 @@ https://cdn1.stamped.io/files/widget.min.js
 "></script>
 
 <!-- End Stamped --> 
-<script>
-document.addEventListener('DOMContentLoaded', function () {
-  const eczemaUrl = '/products/drye-eczema-gloves-for-cracked-and-sensitive-skin';
-  const genericUrl = '/products/products-moisture-wicking-glove-liners-for-sensitive-skin';
-
-  // If they're on eczema page, remember it
-  if (window.location.pathname === eczemaUrl) {
-    localStorage.setItem('entryPage', 'eczema');
-  }
-
-  // If they visit glove-liner and came from eczema, redirect them
-  if (window.location.pathname === genericUrl) {
-    const entry = localStorage.getItem('entryPage');
-    if (entry === 'eczema') {
-      window.location.href = eczemaUrl;
-    }
-  }
-});
-</script>
 
   </body>
 </html>
