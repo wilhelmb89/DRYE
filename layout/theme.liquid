@@ -5,6 +5,29 @@
 <!doctype html>
 <html lang="{{ request.locale.iso_code }}">
   <head>
+
+    <style>html.hide-during-redirect{visibility:hidden}</style>
+<script>
+(function () {
+  var eczemaUrl  = '/products/drye-eczema-gloves-for-cracked-and-sensitive-skin';
+  var genericUrl = '/products/products-moisture-wicking-glove-liners-for-sensitive-skin';
+  var path = location.pathname.replace(/\/+$/,'');
+  if (path === genericUrl) {
+    document.documentElement.classList.add('hide-during-redirect');
+    var fromEczema = false;
+    try {
+      fromEczema = (localStorage.getItem('entryPage') === 'eczema') ||
+                   (document.cookie.indexOf('entryPage=eczema') > -1);
+    } catch(e){}
+    if (fromEczema) {
+      location.replace(eczemaUrl);
+    } else {
+      document.documentElement.classList.remove('hide-during-redirect');
+    }
+  }
+})();
+</script>
+
     <meta name="facebook-domain-verification" content="wfm34x1wbceob0aooivridsrxzce09">
 
     <script>
@@ -209,6 +232,20 @@ https://cdn1.stamped.io/files/widget.min.js
 "></script>
 
 <!-- End Stamped --> 
+<script>
+(function () {
+  var eczemaUrl  = '/products/drye-eczema-gloves-for-cracked-and-sensitive-skin';
+  var path = location.pathname.replace(/\/+$/,'');
+  if (path === eczemaUrl) {
+    try {
+      localStorage.setItem('entryPage', 'eczema');
+      document.cookie = 'entryPage=eczema;path=/;max-age=7200'; // 2h giltighet
+    } catch(e){}
+  }
+})();
+</script>
+
+</script>
 
   </body>
 </html>
