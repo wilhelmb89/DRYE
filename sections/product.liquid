@@ -60,7 +60,7 @@
         <div class="price">{{ product.price | money }}</div>
         <div class="buttons">
           <button class="button atcButton" type="submit">{{ ss.add_text }}</button>
-          {% comment %} {{ form | payment_button }} {% endcomment %}
+          {%- comment -%} {{ form | payment_button }} {%- endcomment -%}
         </div>
       {%- endform -%}
       <div class="hr-line"></div>
