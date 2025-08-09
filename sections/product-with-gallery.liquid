@@ -936,7 +936,7 @@
         <div class="hr-line"></div>
         <div class="buttons">
           <button class="button atcButton" type="submit">{{ ss.add_text }}</button>
-          {{ form | payment_button }}
+          {% comment %} {{ form | payment_button }} {% endcomment %}
         </div>
       {%- endform -%}
       {%- assign shipping_tabs = section.blocks | where: 'type', 'shipping' -%}
