@@ -294,13 +294,13 @@
       .product-shipping-section {
         display: flex;
         justify-content: space-between;
-        gap: 10px;
+        gap: 15px;
         padding-top: {{ section.settings.shipping_top_padding }}px;
         padding-bottom: {{ section.settings.shipping_bottom_padding }}px;
 
         .product-shipping-item {
           display: flex;
-          gap: 10px;
+          gap: 15px;
 
           .product-shipping-info {
             display: flex;
@@ -310,21 +310,21 @@
             .product-shipping-title {
               color: rgba(27, 31, 38, 0.72);
               font-family:"Inter", sans-serif;
-              font-size: {{ section.settings.shipping_title_font_size }}px;
+              font-size: 16px; /* changed here */
               font-style: normal;
-              font-weight: 400;
-              line-height: {{ section.settings.shipping_title_line_height }}px;
-              max-width: 80px;
+              font-weight: 500;
+              line-height: 20px;
+              max-width: 10px;
             }
 
             .product-shipping-description {
               color: rgba(27, 31, 38, 0.72);
               font-family:"Inter", sans-serif;
-              font-size: {{ section.settings.shipping_desc_font_size }}px;
+              font-size: 16px; /* changed here */
               font-style: normal;
-              font-weight: 300;
-              line-height: {{ section.settings.shipping_desc_line_height }}px;
-              max-width: 83px;
+              font-weight: 500;
+              line-height: 20px;
+              max-width: 150px;
             }
           }
         }
