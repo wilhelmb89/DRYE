@@ -5998,16 +5998,3 @@ div#occ3-drawer {
 }
 .shopify-payment-button {
     display: none !important;
-}
-/* Mindre mellanrum mellan “trust badges” */
-.product-shipping-section { gap: 8px; }
-
-/* Låt varje badge ta lika stor plats */
-.product-shipping-item { flex: 1 1 0; }
-
-/* Begränsa textytan så den bryter till två rader */
-.product-shipping-info { max-width: 160px; }  /* testa 150–180px */
-
-/* Säkerställ att text får radbrytas */
-.product-shipping-title,
-.product-shipping-description { white-space: normal; }
