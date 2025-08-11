@@ -5999,12 +5999,12 @@ div#occ3-drawer {
 .shopify-payment-button {
     display: none !important;
     .product-single__description h3, 
-.product-single__description h4 {
-    margin-bottom: 0.3em; /* Justera ner från standard */
-}
-
 .product-single__description ul {
-    margin-top: 0em; /* Minska gapet ovanför listan */
+    margin-top: 0 !important;
+}
+.product-single__description p strong {
+    margin-bottom: 0.3em !important;
+}
 }
 
 .product-single__description p strong {
