@@ -19,15 +19,22 @@
       if section.settings.force_crop == false
         assign mobile_image_class = mobile_image_class | append: ' img-fit--contain'
       endif
+
+      assign image_blocks = section.blocks | where: 'type', 'product-image'
     -%}
 
     {%- capture images -%}
-        {%- for image in product.images -%}
-          {%- if forloop.first -%}
-            {%- assign lazy_load_first_image = false -%}
-          {%- else -%}
-            {%- assign lazy_load_first_image = true -%}
-          {%- endif -%}
+        {%- for image_block in image_blocks -%}
+          {%- liquid
+            assign image = image_block.settings.image
+            
+            if forloop.first
+              assign lazy_load_first_image = false
+            else
+              assign lazy_load_first_image = true
+            endif
+          -%}
+
           <div
             class="
               swiper-slide w-full {{ hidden_class }}
