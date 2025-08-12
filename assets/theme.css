@@ -6010,54 +6010,26 @@ div#occ3-drawer {
 .product-single__description p strong {
     display: block;
     margin-bottom: 0.3em;
-.size-drawer .title {
-  position: sticky;
-  top: 0;
-  background: #fff;
-  padding: 12px 48px 12px 16px;
-  z-index: 1;
+
+    .size-wrapper .titles {
+  position: relative; /* gör att absolut-positionerad close-ikon utgår härifrån */
 }
 
-.size-drawer .close {
+.size-wrapper .titles .close {
   position: absolute;
-  right: 12px;
   top: 12px;
+  right: 12px;
   width: 32px;
   height: 32px;
-  display: grid;
-  place-items: center;
-  cursor: pointer;
-  z-index: 2;
-  color: #111; /* om ikonen är färgsatt med currentColor */
-}
-
-.size-drawer .close svg {
-  width: 22px;
-  height: 22px;
-}
-
-@media (max-width: 480px) {
-  .size-drawer .title {
-    padding-right: 56px;
-  }
-}
-#closeSize.close {
-  position: fixed !important;
-  top: 12px !important;
-  right: 12px !important;
-  width: 32px !important;
-  height: 32px !important;
-  display: flex !important;
+  display: flex;
   align-items: center;
   justify-content: center;
-  background: white; /* valfritt om du vill att det ska synas över allt */
-  z-index: 999999 !important;
-  opacity: 1 !important;
-  visibility: visible !important;
+  z-index: 5;
+  cursor: pointer;
 }
 
-#closeSize.close svg {
-  width: 22px !important;
-  height: 22px !important;
-  color: #111 !important; /* synlig färg */
+.size-wrapper .titles .close svg {
+  width: 22px;
+  height: 22px;
+  color: #111; /* gör den synlig på vit bakgrund */
 }
