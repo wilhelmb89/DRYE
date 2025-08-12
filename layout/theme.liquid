@@ -6,21 +6,30 @@
 <html lang="{{ request.locale.iso_code }}">
   <head>
 
-    <style>html.hide-during-redirect{visibility:hidden}</style>
+<style>html.hide-during-redirect{visibility:hidden}</style>
 <script>
 (function () {
-  var eczemaUrl  = '/products/drye-eczema-gloves-for-cracked-and-sensitive-skin';
-  var genericUrl = '/products/products-moisture-wicking-glove-liners-for-sensitive-skin';
-  var path = location.pathname.replace(/\/+$/,'');
+  // URLs utan Shopify Markets prefix
+  var eczemaUrl  = 'products/drye-eczema-gloves-for-cracked-and-sensitive-skin';
+  var genericUrl = 'products/products-moisture-wicking-glove-liners-for-sensitive-skin';
+
+  // Ta bort ev. markets-prefix (ex /en-ca/) + ledande/trailande snedstreck
+  var path = location.pathname
+    .replace(/^\/[a-z]{2}-[a-z]{2}\//, '') // tar bort språk/land-kod
+    .replace(/^\/+|\/+$/g, ''); // tar bort ev. ledande/trailande "/"
+
   if (path === genericUrl) {
     document.documentElement.classList.add('hide-during-redirect');
     var fromEczema = false;
     try {
       fromEczema = (localStorage.getItem('entryPage') === 'eczema') ||
                    (document.cookie.indexOf('entryPage=eczema') > -1);
-    } catch(e){}
+    } catch(e) {}
     if (fromEczema) {
-      location.replace(eczemaUrl);
+      // Behåller markets-prefix om det finns
+      var prefixMatch = location.pathname.match(/^\/[a-z]{2}-[a-z]{2}\//);
+      var prefix = prefixMatch ? prefixMatch[0] : '/';
+      location.replace(prefix + eczemaUrl);
     } else {
       document.documentElement.classList.remove('hide-during-redirect');
     }
