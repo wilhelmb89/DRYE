@@ -6010,24 +6010,15 @@ div#occ3-drawer {
 .product-single__description p strong {
     display: block;
     margin-bottom: 0.3em;
-/* === Size Chart drawer (mobilfix) === */
-
-/* Lägg hela drawern över allt annat */
-.size-drawer{
-  z-index: 9999;                 /* tidigare 30 */
-}
-
-/* Håll titelraden kvar överst när man scrollar */
-.size-drawer .titles{
+.size-drawer .title {
   position: sticky;
   top: 0;
   background: #fff;
-  padding: 12px 48px 12px 16px;  /* plats för krysset till höger */
-  z-index: 1;                    /* över innehållet i drawern */
+  padding: 12px 48px 12px 16px;
+  z-index: 1;
 }
 
-/* Krysset – absolut positionerat i titelfältet */
-.size-drawer .titles .close{
+.size-drawer .close {
   position: absolute;
   right: 12px;
   top: 12px;
@@ -6036,17 +6027,17 @@ div#occ3-drawer {
   display: grid;
   place-items: center;
   cursor: pointer;
-  z-index: 2;                    /* över titeltexten */
+  z-index: 2;
+  color: #111; /* om ikonen är färgsatt med currentColor */
 }
 
-.size-drawer .titles .close svg{
+.size-drawer .close svg {
   width: 22px;
   height: 22px;
-  /* säkerställ synlig färg om ikonen använder currentColor */
-  color: #111;
 }
 
-/* Extra luft på väldigt små skärmar */
-@media (max-width: 480px){
-  .size-drawer .titles{ padding-right: 56px; }
+@media (max-width: 480px) {
+  .size-drawer .title {
+    padding-right: 56px;
+  }
 }
