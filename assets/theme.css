@@ -6053,3 +6053,27 @@ div#occ3-drawer {
   .size-drawer .titles { padding-right: 56px; }
 }
 
+/* Lägg högre lager så den ligger över headern/chat etc. */
+.size-drawer{
+  z-index: 9999;          /* från 30 → mycket högre */
+}
+
+/* Placera krysset absolut i övre högra hörnet */
+.size-drawer .titles{
+  position: relative;
+}
+.size-drawer .close{
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 28px;            /* valfritt – säkerställ klickyta */
+  height: 28px;
+  display: grid;          /* centrera svg:en */
+  place-items: center;
+  color: #111;            /* så inte blir "osynligt" om currentColor används */
+}
+
+/* Om live chat-bubblan täcker på små skärmar */
+@media (max-width: 480px){
+  .size-drawer { padding-right: 1.25rem; } /* lite luft från kanten */
+}
