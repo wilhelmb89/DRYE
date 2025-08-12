@@ -17,8 +17,8 @@
         "show_free_shipping_bar": true,
         "use_product_count": true,
         "free_shipping_product_count": 3,
-        "free_shipping_product": "products-moisture-wicking-glove-liners-for-sensitive-skin",
-        "show_as_money": false,
+        "free_shipping_product": "",
+        "show_as_money": true,
         "free_shipping_threshold": 850,
         "show_variant": true,
         "quantity_type": "input"
@@ -33,6 +33,22 @@
             "first": "Size",
             "second": "Length",
             "third": "Circumference"
+          }
+        },
+        "row_JiQF3A": {
+          "type": "row",
+          "settings": {
+            "first": "Size 5 (XXS)",
+            "second": "Length: 158–167 mm",
+            "third": "Circumference: 178–187 mm"
+          }
+        },
+        "row_rRwYeg": {
+          "type": "row",
+          "settings": {
+            "first": "",
+            "second": "",
+            "third": ""
           }
         },
         "row_WxjHQq": {
@@ -78,6 +94,8 @@
       },
       "block_order": [
         "row_xfkMYe",
+        "row_JiQF3A",
+        "row_rRwYeg",
         "row_WxjHQq",
         "row_aX9ct6",
         "row_8YK4EY",
