@@ -6021,3 +6021,35 @@ div#occ3-drawer {
     position:absolute; top:10px; right:10px; width:32px; height:32px; z-index:3;
   }
 }
+/* Size-chart drawer: mobi-fix */
+.size-drawer .titles {
+  position: sticky;           /* håll kvar överst när man scrollar */
+  top: 0;
+  background: #fff;
+  z-index: 2;
+  padding: 12px 48px 12px 16px; /* ge plats till krysset till höger */
+}
+
+/* Gör krysset synligt och klickbart */
+.size-drawer .titles .close {
+  position: absolute;
+  right: 12px;
+  top: 12px;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 3;                 /* över allt i drawern */
+}
+
+.size-drawer .titles .close svg {
+  width: 22px; height: 22px;
+}
+
+/* Extra säkerhet på small screens */
+@media (max-width: 480px) {
+  .size-drawer .titles { padding-right: 56px; }
+}
+
