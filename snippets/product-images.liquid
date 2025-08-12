@@ -1,0 +1,205 @@
+<div class="lg:max-w-[926px] mx-auto relative z-0">
+  <div class="relative">
+    {%- liquid
+      assign sizes = '(min-width: 768px) 50vw, 100vw'
+      assign desktop_image_container_class = 'md:rounded-lg overflow-hidden'
+      assign desktop_image_class = 'dskt'
+
+      if section.settings.square_images
+        assign desktop_image_container_class = desktop_image_container_class | append: ' media pb-[100%]'
+        assign desktop_image_class = 'img-fit'
+        if section.settings.force_crop == false
+          assign desktop_image_class = desktop_image_class | append: ' img-fit--contain'
+        endif
+      endif
+
+      assign mobile_image_container_class = 'media w-full pb-[90%] rounded-lg overflow-hidden'
+      assign mobile_image_class = 'img-fit bg-gray-50'
+
+      if section.settings.force_crop == false
+        assign mobile_image_class = mobile_image_class | append: ' img-fit--contain'
+      endif
+
+      assign image_blocks = section.blocks | where: 'type', 'product-image'
+    -%}
+
+    {%- capture images -%}
+        {%- for image_block in image_blocks -%}
+          {%- liquid
+            assign image = image_block.settings.image
+            
+            if forloop.first
+              assign lazy_load_first_image = false
+            else
+              assign lazy_load_first_image = true
+            endif
+          -%}
+
+          <div
+            class="
+              swiper-slide w-full {{ hidden_class }}
+            "
+          >
+            <div class="{{ desktop_image_container_class }}">
+              {% render 'image',
+                image: image,
+                widths: '480, 640, 960, 1280, 1920',
+                src_width: 1280,
+                sizes: sizes,
+                class: desktop_image_class,
+                lazy_load: lazy_load_first_image,
+                lazy_type: lazy_type
+              %}
+            </div>
+          </div>
+        {%- endfor -%}
+    {%- endcapture -%}
+
+    <div class="swiper z-10 overflow-hidden" data-slider>
+      <div class="swiper-wrapper">
+        {{ images }}
+      </div>
+      <div class="swiper-button-next size-12 rounded-lg text-white bg-black/50"></div>
+      <div class="swiper-button-prev size-12 rounded-lg text-white bg-black/50"></div>
+      <!-- Pagination dots for both desktop and mobile -->
+      <div class="swiper-pagination -mt-[26px]"></div>
+    </div>
+  </div>
+
+  {%- if show_thumbnails -%}
+    <div class="absolute top-2 left-2 w-[224px] z-10 overflow-hidden hidden md:block">
+      <div
+        data-thumbnails
+        class="swiper block opacity-0 invisible transition-opacity duration-300 "
+      >
+        <div class="swiper-wrapper z-10" data-slider>
+          {{
+            images
+            | replace: desktop_image_class, mobile_image_class
+            | replace: desktop_image_container_class, mobile_image_container_class
+          }}
+        </div>
+      </div>
+    </div>
+  {%- endif -%}
+</div>
+
+<style>
+  [data-thumbnails] .swiper-slide .media {
+    border: 2px solid transparent;
+  }
+  [data-thumbnails] .swiper-slide-thumb-active .media {
+    border-color: #000000;
+  }
+
+  .swiper-button-next:after,
+  .swiper-button-prev:after {
+    font-size: 20px;
+    font-weight: bold;
+  }
+
+  /* Pagination dots styling */
+  .swiper-pagination {
+    position: relative !important;
+    bottom: auto !important;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 3px;
+    z-index: 10;
+    padding: 12px 0;
+  }
+
+  .swiper-pagination-bullet {
+    width: 24px;
+    height: 2px;
+    background: #d1d5db;
+    opacity: 1;
+    margin: 0 !important;
+    border-radius: 0;
+    transition: all 0.3s ease;
+    transform: scale(1) !important;
+
+    {% comment %} border: 2px solid #1f1d24; {% endcomment %}
+  }
+
+  .swiper-pagination-bullet-active-next-next {
+    opacity: 0;
+  }
+
+  .swiper-pagination-bullet-active {
+    background: #000000;
+    width: 32px;
+  }
+</style>
+
+<script>
+  if(window.Shopify.designMode) {
+    (() => {
+      const sectionId = document.currentScript.closest('section')?.id?.replace('section-', '');
+
+      document.addEventListener('shopify:section:load', (event) => {
+        console.log(event.sectionId, sectionId);
+        if(event.sectionId === sectionId) {
+          createSwiper();
+        }
+      });
+    })();
+  }
+
+  const createSwiper = () => {
+    // Initialize thumbnails only on desktop
+
+    const thumbnailsEnabled = {{ show_thumbnails | default: false }};
+
+    let swiperThumbs = null;
+    if (window.innerWidth >= 768 && thumbnailsEnabled) {
+      swiperThumbs = new Swiper('[data-thumbnails]', {
+        slidesPerView: 4,
+        spaceBetween: 10,
+        freeMode: false,
+        watchSlidesProgress: true,
+        centeredSlides: false,
+        on: {
+          init: function() {
+            // Show thumbnails after Swiper is initialized
+            const thumbnailsContainer = document.querySelector('[data-thumbnails]');
+            if (thumbnailsContainer) {
+              thumbnailsContainer.classList.remove('opacity-0', 'invisible', 'h-[50px]');
+              thumbnailsContainer.classList.add('opacity-100');
+            }
+          }
+        }
+      });
+    }
+
+    const swiperConfig = {
+      slidesPerView: 1,
+      spaceBetween: 10,
+      loop: true,
+      autoHeight: {{ section.settings.auto_height }},
+      navigation: {
+        nextEl: '.swiper-button-next',
+        prevEl: '.swiper-button-prev'
+      }
+    };
+
+    // Add pagination for both desktop and mobile
+    swiperConfig.pagination = {
+      el: '.swiper-pagination',
+      clickable: true
+    };
+
+    // Add thumbnails on desktop if enabled
+    if (swiperThumbs) {
+      swiperConfig.thumbs = {
+        swiper: swiperThumbs
+      };
+    }
+
+    const swiper = new Swiper('[data-slider]', swiperConfig);
+  }
+    document.addEventListener('DOMContentLoaded', createSwiper);
+</script>

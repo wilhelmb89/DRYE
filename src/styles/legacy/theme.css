@@ -289,6 +289,7 @@ a {
     fill: white;
 }
 @media screen and (max-width: 767px) {
+    .shopify-payment-button,
     .button {
         max-width: 364px;
     }
@@ -2474,8 +2475,6 @@ form label {
     }
 }
 .main-product .content {
-    max-width: 625px;
-    grid-area: "content";
     display: flex;
     flex-direction: column;
     letter-spacing: -0.48px;
@@ -4910,28 +4909,25 @@ section:not(.main-article).section-article-hero .container {
 }
 
 .container {
-    padding-left: 64px !important;
-    padding-right: 64px !important;
+    padding-left: 64px;
+    padding-right: 64px;
     width: 100% !important;
     margin-inline: auto !important;
-}
-/* For large screens (max-width: 1440px) */
-@media only screen and (max-width: 1440px) {
 }
 
 /* For tablets (max-width: 1024px) */
 @media only screen and (max-width: 1024px) {
     .container {
-        padding-left: 48px !important;
-        padding-right: 48px !important;
+        padding-left: 48px;
+        padding-right: 48px;
     }
 }
 
 /* For mobile devices (max-width: 767px) */
 @media only screen and (max-width: 767px) {
     .container {
-        padding-left: 20px !important;
-        padding-right: 20px !important;
+        padding-left: 20px;
+        padding-right: 20px;
     }
 }
 
@@ -5233,43 +5229,9 @@ p strong {
     overflow: hidden;
 }
 
-.product-slider .swiper-button-prev,
-.product-slider .swiper-button-next {
-    background: rgba(0, 0, 0, 0.3);
-    border: 0;
-    color: #fff;
-    width: 48px;
-    height: 48px;
-    border-radius: 50px;
-    z-index: 5;
-    cursor: pointer;
-    transition: background 0.1s ease;
-    border-radius: 12px;
-}
-
-.product-slider .swiper-button-prev:hover,
-.product-slider .swiper-button-next:hover {
-    background: #000000;
-}
-
-.product-slider .swiper-button-prev:after,
-.product-slider .swiper-button-next:after {
-    font-size: 24px;
-    font-weight: 700;
-}
-
-.image-preview-popup .swiper-button-prev,
-.image-preview-popup .swiper-button-next {
-    cursor: pointer;
-}
-
 .product-thumbnail-item,
 .preview-trigger {
     cursor: pointer;
-}
-
-.product-main__content {
-    padding-top: 180px !important;
 }
 
 .product-image-section {
@@ -5327,14 +5289,6 @@ footer {
         gap: 20px !important;
     }
 
-    .product-main__content {
-        padding-top: 180px !important;
-    }
-
-    .product-main__meta {
-        width: 35% !important;
-        min-width: 35% !important;
-    }
     .product-main__meta .title {
         font-size: 32px !important;
         line-height: 42px !important;
@@ -5358,9 +5312,7 @@ footer {
     .product-slider {
         gap: 32px !important;
     }
-    .product-main__content {
-        padding-top: 130px !important;
-    }
+
     .product-main__meta {
         width: 100% !important;
         min-width: 100% !important;
