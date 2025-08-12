@@ -6010,4 +6010,14 @@ div#occ3-drawer {
 .product-single__description p strong {
     display: block;
     margin-bottom: 0.3em;
+}/* Size chart drawer – mobile */
+@media (max-width: 480px) {
+  [id*="drawer_size"] .drawer__header { 
+    position: sticky; top: 0; background:#fff; z-index:2; padding-right:44px;
+  }
+  [id*="drawer_size"] .drawer__close,
+  [id*="drawer_size"] .modal-close,
+  [id*="drawer_size"] .size-chart-close {
+    position:absolute; top:10px; right:10px; width:32px; height:32px; z-index:3;
+  }
 }
