@@ -6041,3 +6041,23 @@ div#occ3-drawer {
     padding-right: 56px;
   }
 }
+#closeSize.close {
+  position: fixed !important;
+  top: 12px !important;
+  right: 12px !important;
+  width: 32px !important;
+  height: 32px !important;
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  background: white; /* valfritt om du vill att det ska synas över allt */
+  z-index: 999999 !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+#closeSize.close svg {
+  width: 22px !important;
+  height: 22px !important;
+  color: #111 !important; /* synlig färg */
+}
