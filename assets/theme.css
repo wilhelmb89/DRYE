@@ -5207,7 +5207,8 @@ p strong {
     position: relative;
     width: 100%;
 }
-.product-slider swiper-container swiper-slide img {
+.product-slider swiper-container swiper-slide img,
+.product-slider swiper-container swiper-slide video {
     object-fit: contain !important;
     height: 100%;
     width: 100%;
@@ -5225,6 +5226,10 @@ p strong {
 .product-thumbnail-item {
     border-radius: 12px;
     overflow: hidden;
+}
+
+.product-thumbnail-item video{
+    height: 100%;
 }
 
 .product-slider .swiper-button-prev, .product-slider .swiper-button-next {
