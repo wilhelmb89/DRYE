@@ -769,21 +769,25 @@
                     width="100%"
                     height="auto"/>
                 {% endcomment %}
-                <img
-                  class=""
-                  data-preview-id="{{ forloop.index }}"
-                  src="{{ product_thumbnail.settings.preview_image | img_url: '600x', format: 'pjpg' }}"
-                  srcset="
-                    {{ product_thumbnail.settings.preview_image | img_url: '300x', format: 'pjpg' }} 300w,
-                    {{ product_thumbnail.settings.preview_image | img_url: '600x', format: 'pjpg' }} 600w,
-                    {{ product_thumbnail.settings.preview_image | img_url: '900x', format: 'pjpg' }} 900w,
-                    {{ product_thumbnail.settings.preview_image | img_url: '1200x', format: 'pjpg' }} 1200w
-                  "
-                  sizes="(max-width: 600px) 100vw, (max width: 1024px) 800 px, 1200px"
-                  width="100%"
-                  height="auto"
-                  loading="lazy"
-                >
+                {% if product_thumbnail.settings.type == "image"  %}
+                  <img
+                    class=""
+                    data-preview-id="{{ forloop.index }}"
+                    src="{{ product_thumbnail.settings.preview_image | img_url: '600x', format: 'pjpg' }}"
+                    srcset="
+                      {{ product_thumbnail.settings.preview_image | img_url: '300x', format: 'pjpg' }} 300w,
+                      {{ product_thumbnail.settings.preview_image | img_url: '600x', format: 'pjpg' }} 600w,
+                      {{ product_thumbnail.settings.preview_image | img_url: '900x', format: 'pjpg' }} 900w,
+                      {{ product_thumbnail.settings.preview_image | img_url: '1200x', format: 'pjpg' }} 1200w
+                    "
+                    sizes="(max-width: 600px) 100vw, (max width: 1024px) 800 px, 1200px"
+                    width="100%"
+                    height="auto"
+                    loading="lazy"
+                  >
+                {% else %}
+                  <video data-preview-id="{{ forloop.index }}" src="{{ product_thumbnail.settings.video.sources[1].url }}" autoplay muted playsinline loop preload="none" class="preview-trigger"></video>
+                {% endif %}
               </div>
             </swiper-slide>
           {% endfor %}
@@ -799,30 +803,34 @@
         {%- if product_thumbnails -%}
           {% for product_thumbnail in product_thumbnails %}
             <div class="product-thumbnail-item" data-preview-id="{{ forloop.index }}">
-              <img
-                class="desktop preview-trigger"
-                data-preview-id="{{ forloop.index }}"
-                src="{{ product_thumbnail.settings.image | img_url: '1024x', format: 'pjpg' }}"
-                width="100%"
-                height="auto"
-                loading="lazy"
-              >
-              <img
-                class="tablet preview-trigger"
-                data-preview-id="{{ forloop.index }}"
-                src="{{ product_thumbnail.settings.image_tablet | img_url: '1024x', format: 'pjpg' }}"
-                width="100%"
-                height="auto"
-                loading="lazy"
-              >
-              <img
-                class="mobile preview-trigger"
-                data-preview-id="{{ forloop.index }}"
-                src="{{ product_thumbnail.settings.image_mobile | img_url: '1024x', format: 'pjpg' }}"
-                width="100%"
-                height="auto"
-                loading="lazy"
-              >
+              {% if product_thumbnail.settings.type == "image"  %}
+                <img
+                  class="desktop preview-trigger"
+                  data-preview-id="{{ forloop.index }}"
+                  src="{{ product_thumbnail.settings.image | img_url: '1024x', format: 'pjpg' }}"
+                  width="100%"
+                  height="auto"
+                  loading="lazy"
+                >
+                <img
+                  class="tablet preview-trigger"
+                  data-preview-id="{{ forloop.index }}"
+                  src="{{ product_thumbnail.settings.image_tablet | img_url: '1024x', format: 'pjpg' }}"
+                  width="100%"
+                  height="auto"
+                  loading="lazy"
+                >
+                <img
+                  class="mobile preview-trigger"
+                  data-preview-id="{{ forloop.index }}"
+                  src="{{ product_thumbnail.settings.image_mobile | img_url: '1024x', format: 'pjpg' }}"
+                  width="100%"
+                  height="auto"
+                  loading="lazy"
+                >
+              {% else %}
+                <video data-preview-id="{{ forloop.index }}" src="{{ product_thumbnail.settings.video.sources[1].url }}" autoplay muted playsinline loop preload="none" class="preview-trigger"></video>
+              {% endif %}
             </div>
           {% endfor %}
         {%- endif -%}
@@ -1281,13 +1289,17 @@
       {% for product_thumbnail in product_thumbnails %}
         <swiper-slide>
           <div class="slider-image">
-            <img
-              class=""
-              src="{{ product_thumbnail.settings.preview_image | img_url: '2000x', format: 'pjpg' }}"
-              width="100%"
-              height="auto"
-              loading="lazy"
-            >
+            {% if product_thumbnail.settings.type == "image"  %}
+              <img
+                class=""
+                src="{{ product_thumbnail.settings.preview_image | img_url: '2000x', format: 'pjpg' }}"
+                width="100%"
+                height="auto"
+                loading="lazy"
+              >
+            {% else %}
+              <video data-preview-id="{{ forloop.index }}" src="{{ product_thumbnail.settings.video.sources[1].url }}" autoplay muted playsinline loop preload="none" class="preview-trigger" controls></video>
+            {% endif %}
           </div>
         </swiper-slide>
       {% endfor %}
@@ -2157,12 +2169,34 @@
     },
     {
       "type": "product-image",
-      "name": "Product Image",
+      "name": "Product Media",
       "settings": [
+        {
+          "type": "select",
+          "id": "type",
+          "label": "Media type",
+          "options": [
+            {
+              "value": "image",
+              "label": "Image"
+            },
+            {
+              "value": "video",
+              "label": "Video"
+            }
+          ]
+        },
         {
           "type": "image_picker",
           "id": "preview_image",
-          "label": "Preview Image"
+          "label": "Preview Image",
+          "visible_if": "{{ block.settings.type == 'image' }}"
+        },
+        {
+          "type": "video",
+          "id": "video",
+          "label": "Video",
+          "visible_if": "{{ block.settings.type == 'video' }}"
         },
         {
           "type": "header",
