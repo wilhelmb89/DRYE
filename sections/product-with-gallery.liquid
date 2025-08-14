@@ -830,7 +830,7 @@
       <div class="product-thumbnail-list">
         {%- if product_thumbnails -%}
           {% for product_thumbnail in product_thumbnails %}
-            <div class="product-thumbnail-item {% if product_thumbnail.settings.type == "video" %}product-thumbnail-item-desktop product-thumbnail-item-tablet product-thumbnail-item-mobile{% else %}{% if product_thumbnail.settings.image != blank %}product-thumbnail-item-desktop{% endif %}{% if product_thumbnail.settings.image_tablet != blank %}product-thumbnail-item-tablet{% endif %}{% if product_thumbnail.settings.image_mobile %}product-thumbnail-item-mobile{% endif %}{% endif %}" data-preview-id="{{ forloop.index }}">
+            <div class="product-thumbnail-item {% if product_thumbnail.settings.type == "video" %}product-thumbnail-item-desktop product-thumbnail-item-tablet product-thumbnail-item-mobile{% else %}{% if product_thumbnail.settings.image != blank %}product-thumbnail-item-desktop{% endif %} {% if product_thumbnail.settings.image_tablet != blank %}product-thumbnail-item-tablet{% endif %} {% if product_thumbnail.settings.image_mobile %}product-thumbnail-item-mobile{% endif %}{% endif %}" data-preview-id="{{ forloop.index }}">
               {% if product_thumbnail.settings.type == "image"  %}
                 <img
                   class="desktop preview-trigger"
