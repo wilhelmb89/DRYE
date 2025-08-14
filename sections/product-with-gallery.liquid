@@ -77,18 +77,13 @@
       height: {{ section.settings.model_height }}px;
       width: 100%;
     }
-
-    @media(min-width: 1025px) {
-      .desktop {
-        display: block;
-      }
-
-      .mobile,
-      .tablet {
-        display: none;
-      }
+    .mobile,
+    .tablet {
+      display: none;
     }
-
+    .desktop {
+      display: block;
+    }
     .content {
       width: 440px;
       min-width: 440px;
@@ -496,17 +491,6 @@
   .custom-select.open .icon-arrow-up {
     display: block;
   }
-
-  @media screen and (max-width: 1024px) {
-    .tablet {
-      display: flex;
-    }
-
-    .desktop {
-      display: none;
-    }
-  }
-
   @media screen and (max-width: 768px) {
     .section-{{ section.id }}-padding {
       padding-top: 140px;
@@ -517,14 +501,13 @@
     .section-{{ section.id }} .container {
       flex-direction: column;
 
-      .tablet{
+      .desktop,
+      .mobile{
         display: none;
       }
-      .mobile {
+      .tablet {
         display: flex;
       }
-
-
       .product-image-section {
         display: flex;
         flex-direction: row-reverse;
@@ -594,6 +577,14 @@
     }
     .section-{{ section.id }} .container {
       flex-direction: column;
+
+      .desktop,
+      .tablet{
+        display: none;
+      }
+      .mobile {
+        display: flex;
+      }
       swiper-container swiper-slide img {
         max-height: 100%;
         max-width: 100%;
@@ -721,19 +712,19 @@
     display: none;
   }
 
-  @media(max-width: 768px) {
+  @media(max-width: 767px) {
     .product-thumbnail-item.product-thumbnail-item-mobile {
       display: block;
     }
   }
 
-  @media (min-width: 769px) and (max-width: 1024px) {
+  @media (min-width: 768px) and (max-width: 1023px) {
     .product-thumbnail-item.product-thumbnail-item-tablet {
       display: block;
     }
   }
 
-  @media(min-width: 1025px) {
+  @media(min-width: 1024px) {
     .product-thumbnail-item.product-thumbnail-item-desktop {
       display: block;
     }
@@ -844,7 +835,7 @@
                 <img
                   class="desktop preview-trigger"
                   data-preview-id="{{ forloop.index }}"
-                  src="{{ product_thumbnail.settings.image | image_url }}"
+                  src="{{ product_thumbnail.settings.image | img_url: '1024x', format: 'pjpg' }}"
                   width="100%"
                   height="auto"
                   loading="lazy"
@@ -852,7 +843,7 @@
                 <img
                   class="tablet preview-trigger"
                   data-preview-id="{{ forloop.index }}"
-                  src="{{ product_thumbnail.settings.image_tablet | image_url }}"
+                  src="{{ product_thumbnail.settings.image_tablet | img_url: '1024x', format: 'pjpg' }}"
                   width="100%"
                   height="auto"
                   loading="lazy"
@@ -860,7 +851,7 @@
                 <img
                   class="mobile preview-trigger"
                   data-preview-id="{{ forloop.index }}"
-                  src="{{ product_thumbnail.settings.image_mobile | image_url }}"
+                  src="{{ product_thumbnail.settings.image_mobile | img_url: '1024x', format: 'pjpg' }}"
                   width="100%"
                   height="auto"
                   loading="lazy"
