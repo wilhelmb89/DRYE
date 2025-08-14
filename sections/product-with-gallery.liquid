@@ -712,8 +712,18 @@
     display: none;
   }
 
+  .product-thumbnail-item .mobile,
+  .product-thumbnail-item .tablet,
+  .product-thumbnail-item .desktop {
+    display: none;
+  }
+
   @media(max-width: 767px) {
     .product-thumbnail-item.product-thumbnail-item-mobile {
+      display: block;
+    }
+
+    .product-thumbnail-item .mobile {
       display: block;
     }
   }
@@ -722,10 +732,18 @@
     .product-thumbnail-item.product-thumbnail-item-tablet {
       display: block;
     }
+
+    .product-thumbnail-item .tablet {
+      display: block;
+    }
   }
 
   @media(min-width: 1024px) {
     .product-thumbnail-item.product-thumbnail-item-desktop {
+      display: block;
+    }
+
+    .product-thumbnail-item .desktop {
       display: block;
     }
   }
