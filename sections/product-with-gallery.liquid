@@ -81,9 +81,13 @@
     .tablet {
       display: none;
     }
-    .desktop {
-      display: block;
+
+    @media(min-width: 1025px) {
+      .desktop {
+        display: block;
+      }
     }
+
     .content {
       width: 440px;
       min-width: 440px;
