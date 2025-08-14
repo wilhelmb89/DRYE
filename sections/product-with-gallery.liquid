@@ -491,6 +491,17 @@
   .custom-select.open .icon-arrow-up {
     display: block;
   }
+
+  @media screen and (max-width: 1024px) {
+    .tablet {
+      display: flex;
+    }
+
+    .desktop {
+      display: none;
+    }
+  }
+
   @media screen and (max-width: 768px) {
     .section-{{ section.id }}-padding {
       padding-top: 140px;
@@ -501,13 +512,14 @@
     .section-{{ section.id }} .container {
       flex-direction: column;
 
-      .desktop,
-      .mobile{
+      .tablet{
         display: none;
       }
-      .tablet {
+      .mobile {
         display: flex;
       }
+
+
       .product-image-section {
         display: flex;
         flex-direction: row-reverse;
@@ -577,14 +589,6 @@
     }
     .section-{{ section.id }} .container {
       flex-direction: column;
-
-      .desktop,
-      .tablet{
-        display: none;
-      }
-      .mobile {
-        display: flex;
-      }
       swiper-container swiper-slide img {
         max-height: 100%;
         max-width: 100%;
