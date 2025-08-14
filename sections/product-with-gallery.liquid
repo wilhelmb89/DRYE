@@ -833,7 +833,7 @@
             <div class="product-thumbnail-item {% if product_thumbnail.settings.type == "video" %}product-thumbnail-item-desktop product-thumbnail-item-tablet product-thumbnail-item-mobile{% else %}{% if product_thumbnail.settings.image != blank %}product-thumbnail-item-desktop{% endif %} {% if product_thumbnail.settings.image_tablet != blank %}product-thumbnail-item-tablet{% endif %} {% if product_thumbnail.settings.image_mobile %}product-thumbnail-item-mobile{% endif %}{% endif %}" data-preview-id="{{ forloop.index }}">
               {% if product_thumbnail.settings.type == "image"  %}
                 <img
-                  class="desktop preview-trigger"
+                  class="preview-trigger"
                   data-preview-id="{{ forloop.index }}"
                   src="{{ product_thumbnail.settings.image | img_url: '1024x', format: 'pjpg' }}"
                   width="100%"
@@ -841,7 +841,7 @@
                   loading="lazy"
                 >
                 <img
-                  class="tablet preview-trigger"
+                  class="preview-trigger"
                   data-preview-id="{{ forloop.index }}"
                   src="{{ product_thumbnail.settings.image_tablet | img_url: '1024x', format: 'pjpg' }}"
                   width="100%"
@@ -849,7 +849,7 @@
                   loading="lazy"
                 >
                 <img
-                  class="mobile preview-trigger"
+                  class="preview-trigger"
                   data-preview-id="{{ forloop.index }}"
                   src="{{ product_thumbnail.settings.image_mobile | img_url: '1024x', format: 'pjpg' }}"
                   width="100%"
