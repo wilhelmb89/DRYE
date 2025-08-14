@@ -77,14 +77,15 @@
       height: {{ section.settings.model_height }}px;
       width: 100%;
     }
-    .mobile,
-    .tablet {
-      display: none;
-    }
 
     @media(min-width: 1025px) {
       .desktop {
         display: block;
+      }
+
+      .mobile,
+      .tablet {
+        display: none;
       }
     }
 
