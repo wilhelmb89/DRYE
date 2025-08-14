@@ -808,7 +808,7 @@
       <div class="product-thumbnail-list">
         {%- if product_thumbnails -%}
           {% for product_thumbnail in product_thumbnails %}
-            <div class="product-thumbnail-item" data-preview-id="{{ forloop.index }}">
+            <div class="product-thumbnail-item {% if product_thumbnail.settings.image != blank %}desktop{% elsif product_thumbnail.settings.image_tablet != blank %}tablet{% elsif product_thumbnail.settings.image_mobile %}mobile{% endif %}" data-preview-id="{{ forloop.index }}">
               {% if product_thumbnail.settings.type == "image"  %}
                 <img
                   class="desktop preview-trigger"
