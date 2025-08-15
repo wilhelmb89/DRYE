@@ -907,7 +907,7 @@
         <input type="hidden" name="quantity" value="1">
         {% comment %} <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}"> {% endcomment %}
         <div class="price-social-section">
-          <div class="price">{{ product.price | money }}</div>
+          <div class="price">{{ product.price | money_with_currency }}</div>
           {%- if ss.share_text -%}
             <div class="share-section">
               <div class="share-button" style="order: 2">
