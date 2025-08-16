@@ -10,39 +10,34 @@
 <script>
 (function () {
   // URLs utan Shopify Markets prefix
-  var eczemaUrl   = 'products/drye-eczema-gloves-for-cracked-and-sensitive-skin';
-  var genericUrl  = 'products/products-moisture-wicking-glove-liners-for-sensitive-skin';
-  var mechanicUrl = 'products/drye-liner™-prevents-sweat-related-irritation';
+  var eczemaUrl  = 'products/drye-eczema-gloves-for-cracked-and-sensitive-skin';
+  var genericUrl = 'products/products-moisture-wicking-glove-liners-for-sensitive-skin';
+  var mechanicUrl = 'products/drye-glove-liner-prevents-sweat-related-irritation';
 
-  // Ta bort ev. markets-prefix (ex /en-ca/) + ledande/trailande snedstreck
+  // Ta bort ev. markets-prefix (ex /en-us/) + ledande/trailande snedstreck
   var path = location.pathname
     .replace(/^\/[a-z]{2}-[a-z]{2}\//, '') // tar bort språk/land-kod
-    .replace(/^\/+|\/+$/g, ''); // tar bort ev. ledande/trailande "/"
+    .replace(/^\/+|\/+$/g, '');            // tar bort ev. "/" i början/slutet
 
-  if (path === genericUrl) {
+  if (path === genericUrl || path === mechanicUrl) {
     document.documentElement.classList.add('hide-during-redirect');
-    var entryPage = null;
+    var fromEczema = false;
     try {
-      entryPage = localStorage.getItem('entryPage') || '';
-      if (!entryPage && document.cookie.indexOf('entryPage=') > -1) {
-        entryPage = document.cookie.replace(/(?:(?:^|.*;\s*)entryPage\s*\=\s*([^;]*).*$)|^.*$/, "$1");
-      }
+      fromEczema = (localStorage.getItem('entryPage') === 'eczema') ||
+                   (document.cookie.indexOf('entryPage=eczema') > -1);
     } catch(e) {}
 
-    // Behåller markets-prefix om det finns
-    var prefixMatch = location.pathname.match(/^\/[a-z]{2}-[a-z]{2}\//);
-    var prefix = prefixMatch ? prefixMatch[0] : '/';
-
-    if (entryPage === 'eczema') {
+    if (fromEczema) {
+      var prefixMatch = location.pathname.match(/^\/[a-z]{2}-[a-z]{2}\//);
+      var prefix = prefixMatch ? prefixMatch[0] : '/';
       location.replace(prefix + eczemaUrl);
-    } else if (entryPage === 'mechanic') {
-      location.replace(prefix + mechanicUrl);
     } else {
       document.documentElement.classList.remove('hide-during-redirect');
     }
   }
 })();
 </script>
+
 
     <meta name="facebook-domain-verification" content="wfm34x1wbceob0aooivridsrxzce09">
 
