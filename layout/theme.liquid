@@ -10,9 +10,9 @@
 <script>
 (function () {
   // URLs utan Shopify Markets prefix
-  var eczemaUrl  = 'products/drye-eczema-gloves-for-cracked-and-sensitive-skin';
-  var genericUrl = 'products/products-moisture-wicking-glove-liners-for-sensitive-skin';
-  var mechanicUrl = 'https://drye.se/products/drye-liner%E2%84%A2-prevents-sweat-related-irritation';
+  var eczemaUrl   = 'products/drye-eczema-gloves-for-cracked-and-sensitive-skin';
+  var genericUrl  = 'products/products-moisture-wicking-glove-liners-for-sensitive-skin';
+  var mechanicUrl = 'products/drye-liner%E2%84%A2-prevents-sweat-related-irritation';
 
   // Ta bort ev. markets-prefix (ex /en-ca/) + ledande/trailande snedstreck
   var path = location.pathname
@@ -21,16 +21,22 @@
 
   if (path === genericUrl) {
     document.documentElement.classList.add('hide-during-redirect');
-    var fromEczema = false;
+    var entryPage = null;
     try {
-      fromEczema = (localStorage.getItem('entryPage') === 'eczema') ||
-                   (document.cookie.indexOf('entryPage=eczema') > -1);
+      entryPage = localStorage.getItem('entryPage') || '';
+      if (!entryPage && document.cookie.indexOf('entryPage=') > -1) {
+        entryPage = document.cookie.replace(/(?:(?:^|.*;\s*)entryPage\s*\=\s*([^;]*).*$)|^.*$/, "$1");
+      }
     } catch(e) {}
-    if (fromEczema) {
-      // Behåller markets-prefix om det finns
-      var prefixMatch = location.pathname.match(/^\/[a-z]{2}-[a-z]{2}\//);
-      var prefix = prefixMatch ? prefixMatch[0] : '/';
+
+    // Behåller markets-prefix om det finns
+    var prefixMatch = location.pathname.match(/^\/[a-z]{2}-[a-z]{2}\//);
+    var prefix = prefixMatch ? prefixMatch[0] : '/';
+
+    if (entryPage === 'eczema') {
       location.replace(prefix + eczemaUrl);
+    } else if (entryPage === 'mechanic') {
+      location.replace(prefix + mechanicUrl);
     } else {
       document.documentElement.classList.remove('hide-during-redirect');
     }
