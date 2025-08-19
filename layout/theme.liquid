@@ -7,67 +7,55 @@
   <head>
 
 <style>html.hide-during-redirect{visibility:hidden}</style>
+<style>
+  html.hide-during-redirect {
+    visibility: hidden;
+  }
+</style>
+
 <script>
 (function () {
-  // ---- КОНСТАНТЫ ----
-  // Указываем URL без ведущего "/" и без markets-префикса
-  var eczemaUrl   = 'products/drye-eczema-gloves-for-cracked-and-sensitive-skin';
-  var genericUrl  = 'products/drye-liner-stops-sweat-from-getting-trapped';
-  var mechanicUrl = 'products/drye-glove-liner-prevents-sweat-related-irritation';
+  // -------------------------------
+  // Конфигурация
+  // -------------------------------
+  const eczemaUrl  = 'products/drye-eczema-gloves-for-cracked-and-sensitive-skin';
+  const genericUrl = 'products/products-moisture-wicking-glove-liners-for-sensitive-skin';
 
-  // Карта ключ -> URL
-  var entryMap = {
-    eczema:   eczemaUrl,
-    mechanic: mechanicUrl
-  };
+  // -------------------------------
+  // Определяем текущий путь (без Shopify Markets префикса и лишних "/")
+  // -------------------------------
+  let path = location.pathname
+    .replace(/^\/[a-z]{2}-[a-z]{2}\//, '') // убираем markets-префикс (/en-ca/, /fr-fr/ и т.п.)
+    .replace(/^\/+|\/+$/g, '');            // убираем ведущие/конечные "/"
 
-  // ---- ВСПОМОГАТЕЛЬНЫЕ ФУНКЦИИ ----
-  function getMarketsPrefix(pathname) {
-    var m = pathname.match(/^\/[a-z]{2}-[a-z]{2}\//);
-    return m ? m[0] : '/';
-  }
-
-  function normalizePath(pathname) {
-    return pathname
-      .replace(/^\/[a-z]{2}-[a-z]{2}\//, '') // убираем языковой префикс
-      .replace(/^\/+|\/+$/g, '');            // убираем ведущие/конечные слэши
-  }
-
-  function readEntryKey() {
-    try {
-      var ls = localStorage.getItem('entryPage');
-      if (ls && entryMap[ls]) return ls;
-    } catch(e){}
-    var match = document.cookie.match(/(?:^|;\s*)entryPage=([^;]+)/);
-    if (match && entryMap[match[1]]) return match[1];
-    return null;
-  }
-
-  function writeEntryKey(key) {
-    try { localStorage.setItem('entryPage', key); } catch(e){}
-    document.cookie = 'entryPage=' + key + '; path=/; max-age=' + (60*60*24*30);
-  }
-
-  // ---- ОСНОВНОЙ КОД ----
-  var rawPath = location.pathname;
-  var prefix  = getMarketsPrefix(rawPath);
-  var path    = normalizePath(rawPath);
-
-  // 1) Если мы на одной из entry-страниц → сохранить её ключ
-  if (path === eczemaUrl) {
-    writeEntryKey('eczema');
-  } else if (path === mechanicUrl) {
-    writeEntryKey('mechanic');
-  }
-
-  // 2) Если мы на generic-странице → редиректим на сохранённую entry (если есть)
+  // -------------------------------
+  // Проверяем, что мы на generic URL
+  // -------------------------------
   if (path === genericUrl) {
-    var key = readEntryKey();
-    if (key && entryMap[key]) {
-      document.documentElement.classList.add('hide-during-redirect');
-      location.replace(prefix + entryMap[key]); // редирект с сохранением markets-префикса
-      return;
+    document.documentElement.classList.add('hide-during-redirect');
+
+    // Флаг: пришли ли с eczema LP
+    let fromEczema = false;
+
+    try {
+      const entryFromLocalStorage = localStorage.getItem('entryPage');
+      const entryFromCookies = document.cookie.indexOf('entryPage=eczema') > -1;
+
+      fromEczema = (entryFromLocalStorage === 'eczema') || entryFromCookies;
+    } catch (e) {
+      console.warn('Ошибка доступа к localStorage/cookie:', e);
+    }
+
+    // -------------------------------
+    // Если зашли с eczema LP → редиректим
+    // -------------------------------
+    if (fromEczema) {
+      const prefixMatch = location.pathname.match(/^\/[a-z]{2}-[a-z]{2}\//);
+      const prefix = prefixMatch ? prefixMatch[0] : '/';
+
+      location.replace(prefix + eczemaUrl);
     } else {
+      // Иначе → показываем страницу
       document.documentElement.classList.remove('hide-during-redirect');
     }
   }
