@@ -6,37 +6,71 @@
 <html lang="{{ request.locale.iso_code }}">
   <head>
 
-<style>html.hide-during-redirect{visibility:hidden}</style>
+<style>html.hide-during-redirect { visibility: hidden }</style>
 <script>
 (function () {
-  // URLs utan Shopify Markets prefix
-  var sweatUrl = 'products/drye-liner-stops-sweat-from-getting-trapped';
-  var genericUrl = 'products/products-moisture-wicking-glove-liners-for-sensitive-skin';
+  // --- KONFIGURATION ---
+  // Paths utan Shopify Markets-prefix
+  var genericPath  = 'products/products-moisture-wicking-glove-liners-for-sensitive-skin';
+  var householdPath = 'products/drye-liner-stops-sweat-from-getting-trapped';
+  var mechanicPath  = 'products/drye-glove-liner-prevents-sweat-related-irritation';
 
-  // Ta bort ev. markets-prefix (ex /en-ca/) + ledande/trailande snedstreck
-  var path = location.pathname
-    .replace(/^\/[a-z]{2}-[a-z]{2}\//, '') // tar bort språk/land-kod
-    .replace(/^\/+|\/+$/g, '');            // tar bort ev. ledande/trailande "/"
+  // Map entry keys to destination paths
+  var entryMap = {
+    household: householdPath,
+    mechanic: mechanicPath
+  };
 
-  if (path === genericUrl) {
-    document.documentElement.classList.add('hide-during-redirect');
+  // --- HJÄLPFUNKTIONER ---
+  function getMarketsPrefix(pathname) {
+    var match = pathname.match(/^\/[a-z]{2}-[a-z]{2}\//);
+    return match ? match[0] : '/';
+  }
 
-    var fromsweat = false;
+  function normalizePath(pathname) {
+    return pathname
+      .replace(/^\/[a-z]{2}-[a-z]{2}\//, '')  // Ta bort Shopify Markets-prefix
+      .replace(/^\/+|\/+$/g, '');             // Ta bort inledande/avslutande snedstreck
+  }
+
+  function getEntryPage() {
     try {
-      fromsweat = (localStorage.getItem('entryPage') === 'sweat') || (document.cookie.indexOf('entryPage=sweat') > -1);
-    } catch(e) {}
-
-    if (fromsweat) {
-      // Behåller markets-prefix om det finns
-      var prefixMatch = location.pathname.match(/^\/[a-z]{2}-[a-z]{2}\//);
-      var prefix = prefixMatch ? prefixMatch[0] : '/';
-      location.replace(prefix + sweatUrl);
-    } else {
-      document.documentElement.classList.remove('hide-during-redirect');
+      return localStorage.getItem('entryPage') ||
+             (document.cookie.match(/(?:^|;\s*)entryPage=(household|mechanic)/) || [])[1];
+    } catch (e) {
+      return null;
     }
+  }
+
+  function setEntryPage(source) {
+    try {
+      localStorage.setItem('entryPage', source);
+      document.cookie = 'entryPage=' + source + '; path=/; max-age=2592000'; // 30 dagar
+    } catch (e) {}
+  }
+
+  // --- HUVUDLOGIK ---
+  var pathname = location.pathname;
+  var path = normalizePath(pathname);
+  var prefix = getMarketsPrefix(pathname);
+
+  // Sätt entryPage om det är första gången (på household eller mechanic)
+  if (path === householdPath) {
+    setEntryPage('household');
+  } else if (path === mechanicPath) {
+    setEntryPage('mechanic');
+  }
+
+  var entry = getEntryPage();
+
+  if (path === genericPath && entry && entryMap[entry]) {
+    // Användaren kom via household eller mechanic, men är nu på generic → omdirigera
+    document.documentElement.classList.add('hide-during-redirect');
+    location.href = prefix + entryMap[entry];
   }
 })();
 </script>
+
 
 
 
