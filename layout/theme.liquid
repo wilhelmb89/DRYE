@@ -6,56 +6,73 @@
 <html lang="{{ request.locale.iso_code }}">
   <head>
 
-<style>html.hide-during-redirect{visibility:hidden}</style>
-<script>
-(function () {
-  // -------------------------------
-  // URLs без Shopify Markets префикса
-  // -------------------------------
-  var eczemaUrl  = 'products/drye-eczema-gloves-for-cracked-and-sensitive-skin';
-  var genericUrl = 'products/products-moisture-wicking-glove-liners-for-sensitive-skin';
+  <style>html.hide-during-redirect{visibility:hidden}</style>
+  <script>
+    (function () {
+      // ---- KONFIG ----
+      // URLs utan Shopify Markets-prefix
+      var eczemaUrl   = 'products/drye-eczema-gloves-for-cracked-and-sensitive-skin';
+      var genericUrl  = 'products/products-moisture-wicking-glove-liners-for-sensitive-skin';
+      var mechanicUrl = 'products/drye-glove-liner-prevents-sweat-related-irritation'; // (din URL)
 
-  // -------------------------------
-  // Текущий путь (без /en-ca/ и слэшей в начале/конце)
-  // -------------------------------
-  var path = location.pathname
-    .replace(/^\/[a-z]{2}-[a-z]{2}\//, '') // убираем префикс /en-ca/
-    .replace(/^\/+|\/+$/g, '');            // убираем ведущие/конечные "/"
+      // Nyckel -> path-karta för entry-sidor
+      var entryMap = {
+        eczema:   eczemaUrl,
+        mechanic: mechanicUrl
+      };
 
-  // -------------------------------
-  // Проверка: если мы на generic URL
-  // -------------------------------
-  if (path === genericUrl) {
-    document.documentElement.classList.add('hide-during-redirect');
+      // ---- HJÄLPFUNKTIONER ----
+      function getMarketsPrefix(pathname) {
+        var m = pathname.match(/^\/[a-z]{2}-[a-z]{2}\//);
+        return m ? m[0] : '/';
+      }
 
-    var fromEczema = false;
+      function normalizePath(pathname) {
+        return pathname
+          .replace(/^\/[a-z]{2}-[a-z]{2}\//, '') // ta bort språk/land
+          .replace(/^\/+|\/+$/g, '');            // trimma snedstreck
+      }
 
-    try {
-      // Проверяем метку entryPage в localStorage или cookie
-      fromEczema =
-        (localStorage.getItem('entryPage') === 'eczema') ||
-        (document.cookie.indexOf('entryPage=eczema') > -1);
-    } catch (e) {
-      console.warn('Ошибка доступа к localStorage/cookie:', e);
-    }
+      function readEntryKey() {
+        try {
+          var ls = localStorage.getItem('entryPage');
+          if (ls && entryMap[ls]) return ls;
+        } catch(e){}
+        var match = document.cookie.match(/(?:^|;\s*)entryPage=([^;]+)/);
+        if (match && entryMap[match[1]]) return match[1];
+        return null;
+      }
 
-    // -------------------------------
-    // Редирект если зашли с eczema LP
-    // -------------------------------
-    if (fromEczema) {
-      // Определяем markets-префикс (например /en-ca/)
-      var prefixMatch = location.pathname.match(/^\/[a-z]{2}-[a-z]{2}\//);
-      var prefix = prefixMatch ? prefixMatch[0] : '/';
+      function writeEntryKey(key) {
+        try { localStorage.setItem('entryPage', key); } catch(e){}
+        document.cookie = 'entryPage=' + key + '; path=/; max-age=' + (60*60*24*30);
+      }
 
-      // Редирект на eczema URL
-      location.replace(prefix + eczemaUrl);
-    } else {
-      // Если не с eczema LP — показываем страницу
-      document.documentElement.classList.remove('hide-during-redirect');
-    }
-  }
-})();
-</script>
+      // ---- KÖRNING ----
+      var rawPath = location.pathname;
+      var prefix  = getMarketsPrefix(rawPath);
+      var path    = normalizePath(rawPath);
+
+      // 1) Om vi är på en av entry-sidorna: spara den som "entryPage"
+      if (path === eczemaUrl) {
+        writeEntryKey('eczema');
+      } else if (path === mechanicUrl) {
+        writeEntryKey('mechanic');
+      }
+
+      // 2) Om vi är på den generiska sidan: skicka tillbaka till sparad entry-sida (om sådan finns)
+      if (path === genericUrl) {
+        var key = readEntryKey();
+        if (key && entryMap[key]) {
+          document.documentElement.classList.add('hide-during-redirect');
+          location.replace(prefix + entryMap[key]); // behåll Markets-prefix
+          return;
+        } else {
+          document.documentElement.classList.remove('hide-during-redirect');
+        }
+      }
+    })();
+  </script>
 
 
     <meta name="facebook-domain-verification" content="wfm34x1wbceob0aooivridsrxzce09">
