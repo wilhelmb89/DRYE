@@ -6,26 +6,34 @@
 <html lang="{{ request.locale.iso_code }}">
   <head>
 
+<style>html.hide-during-redirect{visibility:hidden}</style>
 <script>
 (function () {
-  // EXAKTA slugs (utan domän). En matchar även om /en-us/ eller /en-ca/ finns före.
-  var HOUSEHOLD_SLUG = 'products/drye-liner-stops-sweat-from-getting-trapped';
-  var MECHANICS_SLUG = 'products/drye-glove-liner-prevents-sweat-related-irritation';
+  // URLs utan Shopify Markets prefix
+  var sweatUrl = 'products/drye-liner-stops-sweat-from-getting-trapped';
+  var genericUrl = 'products/products-moisture-wicking-glove-liners-for-sensitive-skin';
 
-  // Normalisera path: ta bort ev. /xx-xx/ i början + ledande/trailande "/"
+  // Ta bort ev. markets-prefix (ex /en-ca/) + ledande/trailande snedstreck
   var path = location.pathname
-    .replace(/^\/[a-z]{2}-[a-z]{2}\//, '')
-    .replace(/^\/+|\/+$/g, '');
+    .replace(/^\/[a-z]{2}-[a-z]{2}\//, '') // tar bort språk/land-kod
+    .replace(/^\/+|\/+$/g, '');            // tar bort ev. ledande/trailande "/"
 
-  var key = null;
-  if (path === HOUSEHOLD_SLUG) key = 'household';
-  else if (path === MECHANICS_SLUG) key = 'mechanics';
+  if (path === genericUrl) {
+    document.documentElement.classList.add('hide-during-redirect');
 
-  if (key) {
+    var fromsweat = false;
     try {
-      localStorage.setItem('entryPage', key);
-      document.cookie = 'entryPage=' + key + '; path=/; max-age=15552000; SameSite=Lax';
-    } catch (e) {}
+      fromsweat = (localStorage.getItem('entryPage') === 'sweat') || (document.cookie.indexOf('entryPage=sweat') > -1);
+    } catch(e) {}
+
+    if (fromsweat) {
+      // Behåller markets-prefix om det finns
+      var prefixMatch = location.pathname.match(/^\/[a-z]{2}-[a-z]{2}\//);
+      var prefix = prefixMatch ? prefixMatch[0] : '/';
+      location.replace(prefix + sweatUrl);
+    } else {
+      document.documentElement.classList.remove('hide-during-redirect');
+    }
   }
 })();
 </script>
