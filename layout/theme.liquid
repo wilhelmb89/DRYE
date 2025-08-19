@@ -6,73 +6,73 @@
 <html lang="{{ request.locale.iso_code }}">
   <head>
 
-  <style>html.hide-during-redirect{visibility:hidden}</style>
-  <script>
-    (function () {
-      // ---- KONFIG ----
-      // URLs utan Shopify Markets-prefix
-      var eczemaUrl   = 'products/drye-eczema-gloves-for-cracked-and-sensitive-skin';
-      var genericUrl  = 'products/products-moisture-wicking-glove-liners-for-sensitive-skin';
-      var mechanicUrl = 'products/drye-glove-liner-prevents-sweat-related-irritation'; // (din URL)
+<style>html.hide-during-redirect{visibility:hidden}</style>
+<script>
+(function () {
+  // ---- КОНСТАНТЫ ----
+  // Указываем URL без ведущего "/" и без markets-префикса
+  var eczemaUrl   = 'products/drye-eczema-gloves-for-cracked-and-sensitive-skin';
+  var genericUrl  = 'products/products-moisture-wicking-glove-liners-for-sensitive-skin';
+  var mechanicUrl = 'products/drye-glove-liner-prevents-sweat-related-irritation';
 
-      // Nyckel -> path-karta för entry-sidor
-      var entryMap = {
-        eczema:   eczemaUrl,
-        mechanic: mechanicUrl
-      };
+  // Карта ключ -> URL
+  var entryMap = {
+    eczema:   eczemaUrl,
+    mechanic: mechanicUrl
+  };
 
-      // ---- HJÄLPFUNKTIONER ----
-      function getMarketsPrefix(pathname) {
-        var m = pathname.match(/^\/[a-z]{2}-[a-z]{2}\//);
-        return m ? m[0] : '/';
-      }
+  // ---- ВСПОМОГАТЕЛЬНЫЕ ФУНКЦИИ ----
+  function getMarketsPrefix(pathname) {
+    var m = pathname.match(/^\/[a-z]{2}-[a-z]{2}\//);
+    return m ? m[0] : '/';
+  }
 
-      function normalizePath(pathname) {
-        return pathname
-          .replace(/^\/[a-z]{2}-[a-z]{2}\//, '') // ta bort språk/land
-          .replace(/^\/+|\/+$/g, '');            // trimma snedstreck
-      }
+  function normalizePath(pathname) {
+    return pathname
+      .replace(/^\/[a-z]{2}-[a-z]{2}\//, '') // убираем языковой префикс
+      .replace(/^\/+|\/+$/g, '');            // убираем ведущие/конечные слэши
+  }
 
-      function readEntryKey() {
-        try {
-          var ls = localStorage.getItem('entryPage');
-          if (ls && entryMap[ls]) return ls;
-        } catch(e){}
-        var match = document.cookie.match(/(?:^|;\s*)entryPage=([^;]+)/);
-        if (match && entryMap[match[1]]) return match[1];
-        return null;
-      }
+  function readEntryKey() {
+    try {
+      var ls = localStorage.getItem('entryPage');
+      if (ls && entryMap[ls]) return ls;
+    } catch(e){}
+    var match = document.cookie.match(/(?:^|;\s*)entryPage=([^;]+)/);
+    if (match && entryMap[match[1]]) return match[1];
+    return null;
+  }
 
-      function writeEntryKey(key) {
-        try { localStorage.setItem('entryPage', key); } catch(e){}
-        document.cookie = 'entryPage=' + key + '; path=/; max-age=' + (60*60*24*30);
-      }
+  function writeEntryKey(key) {
+    try { localStorage.setItem('entryPage', key); } catch(e){}
+    document.cookie = 'entryPage=' + key + '; path=/; max-age=' + (60*60*24*30);
+  }
 
-      // ---- KÖRNING ----
-      var rawPath = location.pathname;
-      var prefix  = getMarketsPrefix(rawPath);
-      var path    = normalizePath(rawPath);
+  // ---- ОСНОВНОЙ КОД ----
+  var rawPath = location.pathname;
+  var prefix  = getMarketsPrefix(rawPath);
+  var path    = normalizePath(rawPath);
 
-      // 1) Om vi är på en av entry-sidorna: spara den som "entryPage"
-      if (path === eczemaUrl) {
-        writeEntryKey('eczema');
-      } else if (path === mechanicUrl) {
-        writeEntryKey('mechanic');
-      }
+  // 1) Если мы на одной из entry-страниц → сохранить её ключ
+  if (path === eczemaUrl) {
+    writeEntryKey('eczema');
+  } else if (path === mechanicUrl) {
+    writeEntryKey('mechanic');
+  }
 
-      // 2) Om vi är på den generiska sidan: skicka tillbaka till sparad entry-sida (om sådan finns)
-      if (path === genericUrl) {
-        var key = readEntryKey();
-        if (key && entryMap[key]) {
-          document.documentElement.classList.add('hide-during-redirect');
-          location.replace(prefix + entryMap[key]); // behåll Markets-prefix
-          return;
-        } else {
-          document.documentElement.classList.remove('hide-during-redirect');
-        }
-      }
-    })();
-  </script>
+  // 2) Если мы на generic-странице → редиректим на сохранённую entry (если есть)
+  if (path === genericUrl) {
+    var key = readEntryKey();
+    if (key && entryMap[key]) {
+      document.documentElement.classList.add('hide-during-redirect');
+      location.replace(prefix + entryMap[key]); // редирект с сохранением markets-префикса
+      return;
+    } else {
+      document.documentElement.classList.remove('hide-during-redirect');
+    }
+  }
+})();
+</script>
 
 
     <meta name="facebook-domain-verification" content="wfm34x1wbceob0aooivridsrxzce09">
