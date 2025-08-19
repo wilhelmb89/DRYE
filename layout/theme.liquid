@@ -6,37 +6,26 @@
 <html lang="{{ request.locale.iso_code }}">
   <head>
 
-<style>html.hide-during-redirect{visibility:hidden}</style>
 <script>
 (function () {
-  // URLs utan Shopify Markets-prefix
-  var householdUrl = 'products/drye-liner-stops-sweat-from-getting-trapped'; // tidigare "eczema"
-  var mechanicsUrl = 'products/glove-liner-for-moisture-control-and-skin-protection'; // tidigare "generic"
+  // EXAKTA slugs (utan domän). En matchar även om /en-us/ eller /en-ca/ finns före.
+  var HOUSEHOLD_SLUG = 'products/drye-liner-stops-sweat-from-getting-trapped';
+  var MECHANICS_SLUG = 'products/drye-glove-liner-prevents-sweat-related-irritation';
 
-  // Ta bort ev. markets-prefix (ex /en-ca/) + ledande/trailande snedstreck
+  // Normalisera path: ta bort ev. /xx-xx/ i början + ledande/trailande "/"
   var path = location.pathname
-    .replace(/^\/[a-z]{2}-[a-z]{2}\//, '') // tar bort språk/land-kod
-    .replace(/^\/+|\/+$/g, '');            // tar bort ev. ledande/trailande "/"
+    .replace(/^\/[a-z]{2}-[a-z]{2}\//, '')
+    .replace(/^\/+|\/+$/g, '');
 
-  // Om nuvarande sida är mechanics, och besökaren kommit in via household → redirect till household
-  if (path === mechanicsUrl) {
-    document.documentElement.classList.add('hide-during-redirect');
+  var key = null;
+  if (path === HOUSEHOLD_SLUG) key = 'household';
+  else if (path === MECHANICS_SLUG) key = 'mechanics';
 
-    var fromHousehold = false;
+  if (key) {
     try {
-      fromHousehold =
-        (localStorage.getItem('entryPage') === 'household') ||
-        (document.cookie.indexOf('entryPage=household') > -1);
-    } catch(e) {}
-
-    if (fromHousehold) {
-      // Behåll markets-prefix om det finns
-      var prefixMatch = location.pathname.match(/^\/[a-z]{2}-[a-z]{2}\//);
-      var prefix = prefixMatch ? prefixMatch[0] : '/';
-      location.replace(prefix + householdUrl);
-    } else {
-      document.documentElement.classList.remove('hide-during-redirect');
-    }
+      localStorage.setItem('entryPage', key);
+      document.cookie = 'entryPage=' + key + '; path=/; max-age=15552000; SameSite=Lax';
+    } catch (e) {}
   }
 })();
 </script>
