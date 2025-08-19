@@ -31,6 +31,10 @@
   // -------------------------------
   // Проверяем, что мы на generic URL
   // -------------------------------
+
+  if (document.referrer.includes('facebook.com')) {
+    localStorage.setItem('fromFacebook', 'true');
+  }
   if (path === genericUrl) {
     document.documentElement.classList.add('hide-during-redirect');
 
