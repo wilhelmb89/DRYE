@@ -7,66 +7,40 @@
   <head>
 
 <style>html.hide-during-redirect{visibility:hidden}</style>
-<style>
-  html.hide-during-redirect {
-    visibility: hidden;
-  }
-</style>
-
 <script>
 (function () {
-  // -------------------------------
-  // Конфигурация
-  // -------------------------------
-  const eczemaUrl  = 'products/drye-eczema-gloves-for-cracked-and-sensitive-skin';
-  const genericUrl = 'products/products-moisture-wicking-glove-liners-for-sensitive-skin';
+  // URLs utan Shopify Markets-prefix
+  var householdUrl = 'products/drye-liner-stops-sweat-from-getting-trapped'; // tidigare "eczema"
+  var mechanicsUrl = 'products/glove-liner-for-moisture-control-and-skin-protection'; // tidigare "generic"
 
-  // -------------------------------
-  // Определяем текущий путь (без Shopify Markets префикса и лишних "/")
-  // -------------------------------
-  let path = location.pathname
-    .replace(/^\/[a-z]{2}-[a-z]{2}\//, '') // убираем markets-префикс (/en-ca/, /fr-fr/ и т.п.)
-    .replace(/^\/+|\/+$/g, '');            // убираем ведущие/конечные "/"
+  // Ta bort ev. markets-prefix (ex /en-ca/) + ledande/trailande snedstreck
+  var path = location.pathname
+    .replace(/^\/[a-z]{2}-[a-z]{2}\//, '') // tar bort språk/land-kod
+    .replace(/^\/+|\/+$/g, '');            // tar bort ev. ledande/trailande "/"
 
-  // -------------------------------
-  // Проверяем, что мы на generic URL
-  // -------------------------------
-
-  if (document.referrer.includes('facebook.com')) {
-    localStorage.setItem('fromFacebook', 'true');
-  }
-  if (path === genericUrl) {
+  // Om nuvarande sida är mechanics, och besökaren kommit in via household → redirect till household
+  if (path === mechanicsUrl) {
     document.documentElement.classList.add('hide-during-redirect');
 
-    // Флаг: пришли ли с eczema LP
-    let fromEczema = false;
-
+    var fromHousehold = false;
     try {
-      const entryFromLocalStorage = localStorage.getItem('entryPage');
-      const entryFromCookies = document.cookie.indexOf('entryPage=eczema') > -1;
+      fromHousehold =
+        (localStorage.getItem('entryPage') === 'household') ||
+        (document.cookie.indexOf('entryPage=household') > -1);
+    } catch(e) {}
 
-      fromEczema = (entryFromLocalStorage === 'eczema') || entryFromCookies;
-    } catch (e) {
-      console.warn('Ошибка доступа к localStorage/cookie:', e);
-    }
-
-    // -------------------------------
-    // Если зашли с eczema LP → редиректим
-    // -------------------------------
-    if (fromEczema) {
-      const prefixMatch = location.pathname.match(/^\/[a-z]{2}-[a-z]{2}\//);
-      const prefix = prefixMatch ? prefixMatch[0] : '/';
-
-      location.replace(prefix + eczemaUrl);
+    if (fromHousehold) {
+      // Behåll markets-prefix om det finns
+      var prefixMatch = location.pathname.match(/^\/[a-z]{2}-[a-z]{2}\//);
+      var prefix = prefixMatch ? prefixMatch[0] : '/';
+      location.replace(prefix + householdUrl);
     } else {
-      // Иначе → показываем страницу
       document.documentElement.classList.remove('hide-during-redirect');
     }
-
-    console.log(fromEczema);
   }
 })();
 </script>
+
 
 
     <meta name="facebook-domain-verification" content="wfm34x1wbceob0aooivridsrxzce09">
