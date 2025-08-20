@@ -291,7 +291,40 @@ https://cdn1.stamped.io/files/widget.min.js
 })();
 </script>
 
+<script>
+(function () {
+  function sendATC(form) {
+    try {
+      var variantId = form.querySelector("[name='id']").value;
+      var qty = form.querySelector("[name='quantity']")?.value || 1;
+
+      fetch('/cart.js')
+        .then(function (r) { return r.json(); })
+        .then(function (cart) {
+          if (typeof window.TriplePixel === 'function') {
+            window.TriplePixel('AddToCart', { item: variantId, q: qty, token: cart.token });
+          } else {
+            console.warn('TriplePixel not ready when ATC fired');
+          }
+        });
+    } catch (e) {
+      console.warn('TriplePixel AddToCart failed', e);
+    }
+  }
+
+  document.addEventListener('submit', function (evt) {
+    var form = evt.target;
+    if (form && form.matches("form[action*='/cart/add']")) {
+      if (form.__tw_atc_fired__) return;     // guard mot dubbel-fire
+      form.__tw_atc_fired__ = true;
+      sendATC(form);
+      setTimeout(function(){ form.__tw_atc_fired__ = false; }, 1500);
+    }
+  }, true); // capture=true
+})();
 </script>
+
+
 
   </body>
 </html>
