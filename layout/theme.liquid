@@ -296,8 +296,31 @@ https://cdn1.stamped.io/files/widget.min.js
 <script>
 (function () {
   var lastQty = 1;
+  var DEDUP_WINDOW_MS = 2000;
 
-  // Fånga live-ändringar på qty (fungerar även när temat uppdaterar DOM)
+  // --- Hjälpfunktioner ---
+  function log(level, msg, obj) {
+    var pfx = "[TW ATC]";
+    try {
+      if (obj !== undefined) console[level](pfx, msg, obj);
+      else console[level](pfx, msg);
+    } catch(_) {}
+  }
+
+  // Läs qty robust
+  function readQty(form) {
+    var el = form.querySelector("[name='quantity']");
+    var v  = el ? parseInt(el.value, 10) : NaN;
+    if (!Number.isInteger(v) || v < 1) {
+      var alt = form.querySelector(".product-quantity-section input[type='number'], .quantity input[type='number'], .quantity__input");
+      v = alt ? parseInt(alt.value, 10) : NaN;
+    }
+    if (!Number.isInteger(v) || v < 1) v = lastQty;
+    if (!Number.isInteger(v) || v < 1) v = 1;
+    return v;
+  }
+
+  // Håll koll på qty när användaren klickar +/- etc.
   document.addEventListener('input', function (e) {
     if (e.target.matches("form[action*='/cart/add'] [name='quantity'], .product-quantity-section input[type='number'], .quantity input[type='number'], .quantity__input")) {
       var v = parseInt(e.target.value, 10);
@@ -305,58 +328,83 @@ https://cdn1.stamped.io/files/widget.min.js
     }
   }, true);
 
-  function readQty(form) {
-    // 1) primärt: qty i själva formuläret
-    var el = form.querySelector("[name='quantity']");
-    var v  = el ? parseInt(el.value, 10) : NaN;
-
-    // 2) fallback: vanliga selectors som vissa Shopify-teman använder
-    if (!Number.isInteger(v) || v < 1) {
-      var alt = form.querySelector(".product-quantity-section input[type='number'], .quantity input[type='number'], .quantity__input");
-      v = alt ? parseInt(alt.value, 10) : NaN;
+  // Retry med exponential backoff för /cart.js
+  function fetchCartWithRetry(maxTries) {
+    var tries = 0;
+    function attempt() {
+      tries++;
+      return fetch('/cart.js', { credentials: 'same-origin' })
+        .then(function (r) {
+          if (!r.ok) throw new Error("HTTP " + r.status);
+          return r.json();
+        })
+        .catch(function (err) {
+          if (tries < maxTries) {
+            var delay = Math.min(1500, 200 * Math.pow(2, tries-1));
+            log('warn', "cart.js failed (" + err + "). Retry in " + delay + "ms");
+            return new Promise(function (res) { setTimeout(res, delay); }).then(attempt);
+          }
+          throw err;
+        });
     }
-
-    // 3) sista fallback: senast kända värdet från input-listener
-    if (!Number.isInteger(v) || v < 1) v = lastQty;
-
-    // 4) absolut fallback
-    if (!Number.isInteger(v) || v < 1) v = 1;
-
-    return v;
+    return attempt();
   }
 
+  // Vänta in TriplePixel om den inte hunnit laddas (max ~2s)
+  function whenTriplePixelReady(cb) {
+    var start = Date.now();
+    (function poll() {
+      if (typeof window.TriplePixel === 'function') return cb();
+      if (Date.now() - start > 2000) {
+        log('warn', 'TriplePixel not ready after 2s – proceeding with best effort');
+        return cb(); // kör ändå, ev. utan effekt om scriptet saknas
+      }
+      setTimeout(poll, 100);
+    })();
+  }
+
+  // Skicka ATC med fallback utan token
   function sendATC(form) {
     try {
       var variantId = form.querySelector("[name='id']").value;
       var qty = readQty(form);
 
-      fetch('/cart.js')
-        .then(function (r) { return r.json(); })
-        .then(function (cart) {
-          if (typeof window.TriplePixel === 'function') {
-            var payload = { item: variantId, q: qty, token: cart.token };
-            console.debug('TW AddToCart payload:', payload);
-            window.TriplePixel('AddToCart', payload);
-          } else {
-            console.warn('TriplePixel not ready when ATC fired');
-          }
-        });
+      whenTriplePixelReady(function () {
+        fetchCartWithRetry(3)
+          .then(function (cart) {
+            var payload = { item: variantId, q: qty };
+            if (cart && cart.token) payload.token = cart.token;
+            log('debug', 'payload (with token if present):', payload);
+            try { window.TriplePixel('AddToCart', payload); }
+            catch (e) { log('error', 'TriplePixel call threw', e); }
+          })
+          .catch(function () {
+            // Backup: skicka utan token
+            var payload = { item: variantId, q: qty };
+            log('warn', 'cart.js unavailable – sending without token', payload);
+            try { window.TriplePixel('AddToCart', payload); }
+            catch (e) { log('error', 'TriplePixel call (no token) threw', e); }
+          });
+      });
     } catch (e) {
-      console.warn('TriplePixel AddToCart failed', e);
+      log('warn', 'sendATC failed', e);
     }
   }
 
+  // Deduplicering + fånga ALLA submit på /cart/add
   document.addEventListener('submit', function (evt) {
     var form = evt.target;
-    if (form && form.matches("form[action*='/cart/add']")) {
-      if (form.__tw_atc_fired__) return;
-      form.__tw_atc_fired__ = true;
-      sendATC(form);
-      setTimeout(function(){ form.__tw_atc_fired__ = false; }, 1500);
+    if (!form || !form.matches("form[action*='/cart/add']")) return;
+    var now = Date.now();
+    if (form.__tw_last_fire__ && (now - form.__tw_last_fire__ < DEDUP_WINDOW_MS)) {
+      return; // undvik dubbel-fire
     }
-  }, true);
+    form.__tw_last_fire__ = now;
+    sendATC(form);
+  }, true); // capture
 })();
 </script>
+
 
 
 
