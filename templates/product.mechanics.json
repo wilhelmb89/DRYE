@@ -1098,16 +1098,16 @@
         "button_PneaLi"
       ],
       "custom_css": [
-        "/* Tvinga Rich Color Text att använda samma body-font som övriga sidan */.rich-text, .rich-text__text, .rich-text__text p, .rich-text__text li {font-family: 'Inter', sans-serif !important; font-weight: 300 !important; /* eller 500 om du vill ha lite mer tyngd */ color: #000 !important; /* matcha tabellens textfärg */}"
+        "/* Tvinga Rich Color Text att använda samma body-font som övriga sidan */.rich-text,.rich-text__text,.rich-text__text p,.rich-text__text li {font-family: \"Inter\", sans-serif !important; font-weight: 300 !important; /* eller 500 om du vill ha lite mer tyngd */ color: #000 !important; /* matcha tabellens textfärg */}"
       ],
       "name": "Rich Color Text",
       "settings": {
         "background_color": "#ffffff",
         "content_position": "center",
         "content_alignment": "center",
-        "full_width": true,
+        "full_width": false,
         "use_content_max_width": false,
-        "content_max_width": 830,
+        "content_max_width": 150,
         "content_gap": 20,
         "padding_top": 98,
         "padding_bottom": 138,
