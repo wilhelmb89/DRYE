@@ -420,6 +420,12 @@
     "rich_color_text_bMYEej": {
       "type": "rich-color-text",
       "blocks": {
+        "image_kJPGLa": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/Stockholm_dekal_lansvinnare_2020_page-0001.jpg"
+          }
+        },
         "heading_Faq8yW": {
           "type": "heading",
           "settings": {
@@ -441,23 +447,13 @@
             "text_font_size_mobile": 22,
             "text_ling_height_mobile": 24
           }
-        },
-        "button_hCVEJX": {
-          "type": "button",
-          "settings": {
-            "button_label": "Read more",
-            "button_link": "shopify://pages/contact-glove-liner-support-and-orders",
-            "button_x_padding": 112,
-            "button_y_padding": 15
-          }
         }
       },
       "block_order": [
+        "image_kJPGLa",
         "heading_Faq8yW",
-        "description_bjMLCw",
-        "button_hCVEJX"
+        "description_bjMLCw"
       ],
-      "disabled": true,
       "name": "Rich Color Text",
       "settings": {
         "background_color": "#ffffff",
@@ -753,8 +749,8 @@
         "overlap": false,
         "title": "",
         "invert": true,
-        "bg": "#111111",
-        "tx": "#ffffff",
+        "bg": "#ffffff",
+        "tx": "#111111",
         "sub_title_font_size_desktop": 48,
         "sub_title_line_height_desktop": 55,
         "sub_title_font_size_tablet": 34,
