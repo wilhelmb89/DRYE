@@ -417,6 +417,64 @@
         "padding_right_mobile": 0
       }
     },
+    "rich_color_text_bMYEej": {
+      "type": "rich-color-text",
+      "blocks": {
+        "heading_Faq8yW": {
+          "type": "heading",
+          "settings": {
+            "heading": "Recognized Innovation",
+            "heading_color": "#000000",
+            "heading_font_size": 50,
+            "heading_line_height": 60,
+            "heading_font_size_mobile": 28,
+            "heading_line_height_mobile": 32
+          }
+        },
+        "description_bjMLCw": {
+          "type": "description",
+          "settings": {
+            "text": "<p>DRYE was awarded the SKAPA Prize in memory of Alfred Nobel (2020) for its textile technology helping hundreds of millions of people suffering from hand related issues such as contact dermatitis, cracked, dry or just reactive skin.</p>",
+            "text_color": "#000000",
+            "text_font_size": 18,
+            "text_line_height": 24,
+            "text_font_size_mobile": 22,
+            "text_ling_height_mobile": 24
+          }
+        },
+        "button_hCVEJX": {
+          "type": "button",
+          "settings": {
+            "button_label": "Read more",
+            "button_link": "shopify://pages/contact-glove-liner-support-and-orders",
+            "button_x_padding": 112,
+            "button_y_padding": 15
+          }
+        }
+      },
+      "block_order": [
+        "heading_Faq8yW",
+        "description_bjMLCw",
+        "button_hCVEJX"
+      ],
+      "disabled": true,
+      "name": "Rich Color Text",
+      "settings": {
+        "background_color": "#ffffff",
+        "content_position": "center",
+        "content_alignment": "center",
+        "full_width": false,
+        "use_content_max_width": false,
+        "content_max_width": 150,
+        "content_gap": 20,
+        "padding_top": 98,
+        "padding_bottom": 138,
+        "padding_top_tablet": 80,
+        "padding_bottom_tablet": 80,
+        "padding_top_mobile": 90,
+        "padding_bottom_mobile": 90
+      }
+    },
     "icons_Bt7DUV": {
       "type": "icons",
       "blocks": {
@@ -1124,6 +1182,7 @@
   },
   "order": [
     "product_with_gallery_GRxyix",
+    "rich_color_text_bMYEej",
     "icons_Bt7DUV",
     "1746812889a5f81d00",
     "image_slider_4gd6Nt",
