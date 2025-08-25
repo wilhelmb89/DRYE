@@ -450,6 +450,9 @@ customElements.define("quantity-input", QuantityInput), document.addEventListene
     const form = e.target.closest('form[action*="/cart/add"]');
     if (!form) return;
 
+    e.preventDefault();
+    e.stopPropagation();
+
     const variantId = resolveVariantId(form);
     if (!Number.isInteger(variantId)) {
       console.warn('[ATC] No found variant id');
