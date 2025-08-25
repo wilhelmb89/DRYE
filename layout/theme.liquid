@@ -481,6 +481,62 @@ https://cdn1.stamped.io/files/widget.min.js
 })();
 </script>
 
+<script>
+(function () {
+  var TW_HOSTS = new Set();
+
+  // 1) Попробуем вычислить хосты TW по загруженным <script src=...>
+  Array.from(document.scripts).forEach(function(s){
+    try {
+      var src = s.src || '';
+      if (/triple|whale/i.test(src)) {
+        TW_HOSTS.add(new URL(src).host);
+      }
+    } catch(_) {}
+  });
+
+  function isTwUrl(url){
+    try {
+      var u = new URL(url, location.href);
+      if (TW_HOSTS.has(u.host)) return true;
+      return /triple|whale/i.test(u.host + u.pathname);
+    } catch(_) {
+      return false;
+    }
+  }
+
+  // 2) fetch
+  var _fetch = window.fetch;
+  if (_fetch) {
+    window.fetch = function(){
+      var url = arguments[0];
+      if (isTwUrl(url)) console.log('[TW NET fetch]', url, arguments[1]||{});
+      return _fetch.apply(this, arguments);
+    };
+  }
+
+  // 3) XHR
+  var _open = XMLHttpRequest.prototype.open;
+  XMLHttpRequest.prototype.open = function(method, url){
+    if (isTwUrl(url)) {
+      this.__tw_url = url;
+      console.log('[TW NET xhr]', method, url);
+    }
+    return _open.apply(this, arguments);
+  };
+
+  // 4) sendBeacon
+  if ('sendBeacon' in navigator) {
+    var _sb = navigator.sendBeacon;
+    navigator.sendBeacon = function(url, data){
+      if (isTwUrl(url)) console.log('[TW NET beacon]', url, data);
+      return _sb.apply(this, arguments);
+    };
+  }
+
+  console.log('[TW net hook] hosts:', Array.from(TW_HOSTS));
+})();
+</script>
 
 
 
