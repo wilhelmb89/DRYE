@@ -405,21 +405,45 @@ customElements.define("quantity-input", QuantityInput), document.addEventListene
     if (v && v.id) lastVariantId = Number(v.id);
   }, true);
 
-  function getVariantId(form) {
-    if (Number.isInteger(lastVariantId)) return lastVariantId;
+  // ЗАМЕНИ ЭТУ ФУНКЦИЮ в твоём блоке на эту версию
+async function getVariantId(form) {
+  // а) если тема кинула актуальный id — используем
+  if (Number.isInteger(lastVariantId)) return lastVariantId;
 
-    const urlVar = Number(new URL(location.href).searchParams.get('variant') || NaN);
-    if (Number.isInteger(urlVar)) return urlVar;
+  // б) если тема проставила в URL
+  const urlVar = Number(new URL(location.href).searchParams.get('variant') || NaN);
+  if (Number.isInteger(urlVar)) return urlVar;
 
-    const inputVar = Number(form.querySelector('[name="id"]')?.value || NaN);
-    if (Number.isInteger(inputVar)) return inputVar;
+  // в) пробуем hidden [name=id] (может быть правильным)
+  const inputVar = Number(form.querySelector('[name="id"]')?.value || NaN);
+  if (Number.isInteger(inputVar)) return inputVar;
 
-    const vr = document.querySelector('variant-radios, variant-selects');
-    const ceVar = Number(vr?.currentVariant?.id || NaN);
-    if (Number.isInteger(ceVar)) return ceVar;
+  // г) надёжный путь — матч по выбранным опциям
+  const product = await getProduct();
+  if (!product?.variants?.length) return NaN;
 
-    return NaN;
+  const sel = getSelectedOptions(form); // ['Youth S', 'Blue', ...] в порядке option1..3
+  if (!sel.length) return NaN;
+
+  // ищем вариант, у которого option1..3 совпадают
+  const found = product.variants.find(v => {
+    const opts = [v.option1, v.option2, v.option3].filter(Boolean).map(s => String(s).trim());
+    if (opts.length < sel.length) return false;
+    for (let i = 0; i < sel.length; i++) {
+      if (String(opts[i]).toLowerCase() !== String(sel[i]).toLowerCase()) return false;
+    }
+    return true;
+  });
+
+  if (found?.id) {
+    // подстрахуемся: синхронизируем hidden [name=id], если он есть
+    const idInput = form.querySelector('[name="id"]');
+    if (idInput) idInput.value = String(found.id);
+    return Number(found.id);
   }
+
+  return NaN;
+}
 
   // 2) Делегируем сабмит и отправляем AJAX в /cart/add.js вместо нативной навигации
   document.addEventListener('submit', async (e) => {
