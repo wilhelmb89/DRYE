@@ -482,6 +482,29 @@ https://cdn1.stamped.io/files/widget.min.js
 </script>
 
 
+<script>
+(function(){
+  var orig = window.TriplePixel;
+  if (typeof orig !== 'function') return; // подождать, пока пиксель инициализируется
+
+  window.TriplePixel = function(ev, payload){
+    // Отладочный след (увидите POST в Network)
+    try {
+      fetch('/__tw-probe', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({ ev, payload, ts: Date.now() }),
+        keepalive: true
+      }).catch(function(){});
+    } catch(_) {}
+
+    console.log('[TW hook]', ev, payload);
+    return orig.apply(this, arguments);
+  };
+})();
+</script>
+
+
 <!--Convert Bundle Start-->
 <script id="convert-bundle-loader" src="https://bundle.5gtb.com/loader.js?g_cvt_id=43d6a6b5-1dcc-4430-aaf9-153ca1c9a0bb"></script>
 <!--Convert Bundle End-->
