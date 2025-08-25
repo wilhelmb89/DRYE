@@ -395,83 +395,60 @@ customElements.define("quantity-input", QuantityInput), document.addEventListene
     }))
 })); 
 
-
 (function () {
-  // Получить product JSON рядом с формой (самые типовые варианты тем)
-  function getProductJSON(form) {
-    // 1) Dawn/OS2: <script type="application/json" data-product>
-    let el = form.closest('section, product-form, main, body')?.querySelector('script[type="application/json"][data-product]');
-    if (el) try { return JSON.parse(el.textContent.trim()); } catch(_) {}
+  // Получить variantId из кастомного селекта темы
+  function getVariantIdFromCustomSelect(form) {
+    const cs = form.querySelector('.custom-select');
+    if (!cs) return NaN;
 
-    // 2) Часто встречается id вроде #ProductJson-<id>
-    el = form.closest('section, product-form, main, body')?.querySelector('script[type="application/json"][id*="ProductJson"]');
-    if (el) try { return JSON.parse(el.textContent.trim()); } catch(_) {}
+    const selectedTitle = cs.querySelector('.selected')?.textContent?.trim();
+    if (!selectedTitle) return NaN;
 
-    return null;
-  }
-
-  // Собрать выбранные опции из радиокнопок/селектов темы
-  function getSelectedOptions(form) {
-    const optEls = form.querySelectorAll(
-      'input[name^="options["]:checked, select[name^="options["]'
+    const opt = Array.from(cs.querySelectorAll('.custom-option')).find(o =>
+      o.dataset?.title?.trim() === selectedTitle ||
+      o.textContent?.trim() === selectedTitle
     );
-    const opts = [];
-    optEls.forEach(el => opts.push(el.value?.trim()));
-    return opts.filter(Boolean);
+
+    const id = Number(opt?.dataset?.value || NaN);
+    return Number.isInteger(id) ? id : NaN;
   }
 
-  function findVariantIdByOptions(form) {
-    const product = getProductJSON(form);
-    if (!product || !Array.isArray(product.variants)) return NaN;
-    const selected = getSelectedOptions(form);
-    if (!selected.length) return NaN;
-
-    const variant = product.variants.find(v => {
-      if (Array.isArray(v.options)) {
-        // Совпадение по всем опциям
-        return v.options.length === selected.length &&
-               v.options.every((val, i) => String(val).trim() === String(selected[i]).trim());
-      }
-      // На некоторых темах встречается {option1,option2,...}
-      if (v.option1 || v.option2 || v.option3) {
-        const vv = [v.option1, v.option2, v.option3].filter(Boolean).map(s => String(s).trim());
-        return vv.length === selected.length &&
-               vv.every((val, i) => val === String(selected[i]).trim());
-      }
-      return false;
-    });
-
-    return variant ? Number(variant.id) : NaN;
-  }
-
-  // Универсальный геттер варианта
+  // Резолвер варианта с приоритетом: кастомный селект → отмеченное радио → <select name="id"> → OS2 custom elements → ?variant → скрытое поле
   function resolveVariantId(form) {
-    // a) custom elements OS 2.0
+    const fromCS = getVariantIdFromCustomSelect(form);
+    if (Number.isInteger(fromCS)) return fromCS;
+
+    const radioId = Number(form.querySelector('input[type="radio"][name="id"]:checked')?.value || NaN);
+    if (Number.isInteger(radioId)) return radioId;
+
+    const selId = Number(form.querySelector('select[name="id"]')?.value || NaN);
+    if (Number.isInteger(selId)) return selId;
+
     const vr = form.querySelector('variant-radios, variant-selects') ||
                document.querySelector('variant-radios, variant-selects');
     const ceVar = Number(vr?.currentVariant?.id || NaN);
     if (Number.isInteger(ceVar)) return ceVar;
 
-    // b) классика: <select name="id"><option value="...">
-    const selId = Number(form.querySelector('select[name="id"]')?.value || NaN);
-    if (Number.isInteger(selId)) return selId;
-
-    // c) URL ?variant=...
     const urlVar = Number(new URL(location.href).searchParams.get('variant') || NaN);
     if (Number.isInteger(urlVar)) return urlVar;
 
-    // d) скрытое поле (может быть неактуально)
     const hiddenId = Number(form.querySelector('[name="id"]')?.value || NaN);
     if (Number.isInteger(hiddenId)) return hiddenId;
-
-    // e) восстановление по выбранным опциям + product JSON
-    const byOpts = findVariantIdByOptions(form);
-    if (Number.isInteger(byOpts)) return byOpts;
 
     return NaN;
   }
 
-  // Делегированно ловим submit у /cart/add
+  // Количество: берём из инпута, а если его нет — из .quantity-value
+  function resolveQuantity(form) {
+    const input = form.querySelector('[name="quantity"]');
+    const divQty = form.querySelector('.quantity-value');
+    let q = input ? parseInt(input.value, 10) : NaN;
+    if (!Number.isInteger(q) || q < 1) q = parseInt(divQty?.textContent?.trim() || '1', 10);
+    q = Number.isInteger(q) && q > 0 ? q : 1;
+    if (input) input.value = String(q); // синхронизируем скрытый инпут
+    return q;
+  }
+
   document.addEventListener('submit', async (e) => {
     const form = e.target.closest('form[action*="/cart/add"]');
     if (!form) return;
@@ -479,24 +456,29 @@ customElements.define("quantity-input", QuantityInput), document.addEventListene
     e.preventDefault();
     e.stopPropagation();
 
-    let variantId = resolveVariantId(form);
+    // 1) Надёжно определяем вариант
+    const variantId = resolveVariantId(form);
     if (!Number.isInteger(variantId)) {
-      console.warn('[ATC] Не удалось определить variant id', {
-        selectedOptions: getSelectedOptions(form),
-        product: !!getProductJSON(form)
-      });
+      console.warn('[ATC] Не удалось определить variant id');
       return;
     }
 
-    // Синхронизируем скрытое поле, чтобы тема дальше считала правильный id
-    const idInput = form.querySelector('[name="id"]');
+    // 2) Синхронизируем форму под тему:
+    //    a) отмечаем соответствующее радио (если оно есть)
+    const radioToCheck = form.querySelector(`input[type="radio"][name="id"][value="${variantId}"]`);
+    if (radioToCheck && !radioToCheck.checked) {
+      radioToCheck.checked = true;
+      // Триггерим нативное событие change — вдруг тема слушает
+      radioToCheck.dispatchEvent(new Event('change', { bubbles: true }));
+    }
+    //    b) если есть скрытое поле [name="id"], тоже обновим
+    const idInput = form.querySelector('[name="id"]:not([type="radio"]):not(select)');
     if (idInput && Number(idInput.value) !== variantId) idInput.value = String(variantId);
 
-    // Количество
-    const qtyEl = form.querySelector('[name="quantity"], .product-quantity-section input[type="number"], .quantity__input');
-    const quantity = Math.max(1, parseInt(qtyEl?.value ?? '1', 10) || 1);
+    // 3) Количество
+    const quantity = resolveQuantity(form);
 
-    // Показать лоадер в дровере
+    // 4) Дальше как было: покажем лоадер и отправим /cart/add.js
     document.dispatchEvent(new CustomEvent('cart:add:loading:start', { detail: { variantId, quantity } }));
 
     try {
