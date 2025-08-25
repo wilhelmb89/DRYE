@@ -395,6 +395,54 @@ customElements.define("quantity-input", QuantityInput), document.addEventListene
     }))
 })); 
 
+
+(function () {
+  // Делегированно ловим submit только у форм добавления в корзину
+  document.addEventListener('submit', async (e) => {
+    const form = e.target.closest('form[action*="/cart/add"]');
+    if (!form) return;
+
+    e.preventDefault();
+    e.stopPropagation();
+
+    // Берём именно скрытое поле id из ЭТОЙ формы — тут всегда актуальный вариант
+    const id = Number(form.querySelector('[name="id"]')?.value || NaN);
+    if (!Number.isInteger(id)) {
+      console.warn('[ATC] Не удалось определить variant id');
+      return;
+    }
+
+    // Количество из формы (фолбэк = 1)
+    const qtyEl = form.querySelector('[name="quantity"], .product-quantity-section input[type="number"], .quantity__input');
+    const quantity = Math.max(1, parseInt(qtyEl?.value ?? '1', 10) || 1);
+
+    // Показать лоадер в дровере (тема уже слушает это событие)
+    document.dispatchEvent(new CustomEvent('cart:add:loading:start', { detail: { variantId: id, quantity } }));
+
+    try {
+      const sections = (Array.isArray(window.CartDrawer?.sections) ? window.CartDrawer.sections.join(',') : 'cart-drawer,cart-icon-bubble');
+      const res = await fetch('/cart/add.js', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify({ items: [{ id, quantity }], sections })
+      });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data?.errors || res.status);
+
+      // Кидаем событие, на которое уже подписан cart-drawer — он сам откроется
+      document.dispatchEvent(new CustomEvent('on:cart:add', {
+        bubbles: true,
+        detail: { variantId: id, quantity, sections: data.sections }
+      }));
+    } catch (err) {
+      console.error('ATC error', err);
+      // Фолбэк — обычная корзина
+      location.href = '/cart';
+    }
+  }, true); // capture, чтобы перехватить раньше возможных обработчиков темы
+})();
+
+
 window.theme = window.theme || {}, console.log("main.bundle.js loaded"), document.dispatchEvent(new CustomEvent("theme:loaded")), window.theme.loaded = !0;
 //# sourceMappingURL=main.bundle.js.map
 
