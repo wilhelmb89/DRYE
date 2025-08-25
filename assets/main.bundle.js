@@ -410,47 +410,77 @@ customElements.define("quantity-input", QuantityInput), document.addEventListene
       return (Number.isInteger(v) && v > 0) ? v : 1;
     }
 
-    // Делегирование — один обработчик на весь документ
-document.addEventListener('submit', async (e) => {
-  const form = e.target.closest('form[action*="/cart/add"]');
-  if (!form) return;
+    (function () {
+  // будем хранить последний реально выбранный вариант
+  let lastVariantId = null;
 
-  e.preventDefault();
-  e.stopPropagation();
+  // 1) большинство Shopify-тем (в т.ч. ваш reload-on-event) кидают событие смены варианта
+  document.addEventListener('variant:change', (ev) => {
+    const v = ev.detail && (ev.detail.variant || ev.detail?.productVariant || ev.detail?.currentVariant);
+    if (v && v.id) lastVariantId = Number(v.id);
+  }, true); // capture, чтобы схватить раньше/всегда
 
-  // 1) Пытаемся взять variant из URL, куда тема его пишет при смене размера
-  const urlVar = new URL(location.href).searchParams.get('variant');
-  // 2) Фолбэк — скрытое поле id в форме
-  const inputVar = form.querySelector('[name="id"]')?.value;
-  const variantId = Number(urlVar || inputVar);
-  if (!Number.isInteger(variantId)) return;
+  // 2) вспомогательный геттер варианта
+  function getVariantId(form) {
+    // а) что положила тема в runtime
+    if (Number.isInteger(lastVariantId)) return lastVariantId;
 
-  // Количество
-  const qtyInput = form.querySelector('[name="quantity"], .product-quantity-section input[type="number"], .quantity__input');
-  const quantity = Math.max(1, parseInt(qtyInput?.value ?? '1', 10) || 1);
+    // б) то, что тема положила в URL
+    const urlVar = Number(new URL(location.href).searchParams.get('variant') || NaN);
+    if (Number.isInteger(urlVar)) return urlVar;
 
-  // (опционально) показать лоадер
-  document.dispatchEvent(new CustomEvent('cart:add:loading:start', { detail: { variantId, quantity } }));
+    // в) ближайшее скрытое поле формы
+    const inputVar = Number(form.querySelector('[name="id"]')?.value || NaN);
+    if (Number.isInteger(inputVar)) return inputVar;
 
-  try {
-    const res = await fetch('/cart/add.js', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-      body: JSON.stringify({ items: [{ id: variantId, quantity }] })
-    });
-    const data = await res.json();
-    if (!res.ok) throw new Error(data?.errors || res.status);
+    // г) OS 2.0 кастом-элементы
+    const vr = document.querySelector('variant-radios, variant-selects');
+    const ceVar = Number(vr?.currentVariant?.id || NaN);
+    if (Number.isInteger(ceVar)) return ceVar;
 
-    // обновить дровер/иконку и т.п.
-    document.dispatchEvent(new CustomEvent('on:cart:add', {
-      bubbles: true,
-      detail: { variantId, quantity, sections: data.sections }
-    }));
-  } catch (err) {
-    console.error('ATC error', err);
-    location.href = '/cart'; // безопасный фолбэк
+    return NaN;
   }
-});
+
+  // 3) перехватываем submit (делегирование) и используем геттер
+  document.addEventListener('submit', async (e) => {
+    const form = e.target.closest('form[action*="/cart/add"]');
+    if (!form) return;
+
+    e.preventDefault();
+    e.stopPropagation();
+
+    const variantId = getVariantId(form);
+    if (!Number.isInteger(variantId)) {
+      console.warn('[ATC] variant id not resolved');
+      return;
+    }
+
+    // Количество
+    const qtyEl = form.querySelector('[name="quantity"], .product-quantity-section input[type="number"], .quantity__input');
+    const quantity = Math.max(1, parseInt(qtyEl?.value ?? '1', 10) || 1);
+
+    document.dispatchEvent(new CustomEvent('cart:add:loading:start', { detail: { variantId, quantity }}));
+
+    try {
+      const res = await fetch('/cart/add.js', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify({ items: [{ id: variantId, quantity }] })
+      });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data?.errors || res.status);
+
+      document.dispatchEvent(new CustomEvent('on:cart:add', {
+        bubbles: true,
+        detail: { variantId, quantity, sections: data.sections }
+      }));
+    } catch (err) {
+      console.error('ATC error', err);
+      location.href = '/cart';
+    }
+  });
+})();
+
   }();
 })), window.theme = window.theme || {}, console.log("main.bundle.js loaded"), document.dispatchEvent(new CustomEvent("theme:loaded")), window.theme.loaded = !0;
 //# sourceMappingURL=main.bundle.js.map
