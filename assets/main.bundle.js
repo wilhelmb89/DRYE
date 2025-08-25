@@ -393,49 +393,64 @@ customElements.define("quantity-input", QuantityInput), document.addEventListene
             document.getElementsByTagName("html")[0].style.scrollBehavior = ""
         }), 1e3))
     }))
-})), document.addEventListener("DOMContentLoaded", (function() {
-    !async function addToCart() {
-        const form = document.querySelector(".shopify-product-form"),
-            button = document.querySelector(".shopify-product-form .button");
-        form && (button.removeAttribute("disabled"), form.addEventListener("submit", (async function(evt) {
-            evt.preventDefault(), evt.stopPropagation();
-            const id = this.id.value;
-            document.dispatchEvent(new CustomEvent("cart:add:loading:start", {
-                detail: {
-                    id: id,
-                    form: this
-                }
-            }));
-            try {
-                const response = await fetch(window.Shopify.routes.root + "cart/add.js", {
-                        method: "POST",
-                        headers: {
-                            "Content-Type": "application/json"
-                        },
-                        body: JSON.stringify({
-                            items: [{
-                                id: id,
-                                quantity: 1
-                            }],
-                            sections: "cart-drawer"
-                        })
-                    }),
-                    data = await response.json();
-                console.log("response", data), this.dispatchEvent(new CustomEvent("on:cart:add", {
-                    bubbles: !0,
-                    detail: {
-                        variantId: id,
-                        sections: data.sections
-                    }
-                }));
-                const token = await async function getCartToken() {
-                    const response = await fetch("/cart.json").then((res => res.json()));
-                    return response.token
-                }();
-            } catch (error) {
-                console.error("Error adding item to cart:", error), window.location.href = "/cart"
-            }
-        })))
-    }()
+})), document.addEventListener("DOMContentLoaded", (function () {
+  !function addToCart() {
+    const form   = document.querySelector(".shopify-product-form") || document.querySelector("form[action*='/cart/add']");
+    const button = document.querySelector(".shopify-product-form .button, form[action*='/cart/add'] [type='submit']");
+    if (!form || !button) return;
+
+    button.removeAttribute("disabled");
+    function readQty(f) {
+      let el = f.querySelector("[name='quantity']");
+      let v = el ? parseInt(el.value, 10) : NaN;
+      if (!Number.isInteger(v) || v < 1) {
+        const alt = f.querySelector(".product-quantity-section input[type='number'], .quantity input[type='number'], .quantity__input");
+        v = alt ? parseInt(alt.value, 10) : NaN;
+      }
+      return (Number.isInteger(v) && v > 0) ? v : 1;
+    }
+
+    // Делегирование — один обработчик на весь документ
+document.addEventListener('submit', async (e) => {
+  const form = e.target.closest('form[action*="/cart/add"]');
+  if (!form) return;
+
+  e.preventDefault();
+  e.stopPropagation();
+
+  // 1) Пытаемся взять variant из URL, куда тема его пишет при смене размера
+  const urlVar = new URL(location.href).searchParams.get('variant');
+  // 2) Фолбэк — скрытое поле id в форме
+  const inputVar = form.querySelector('[name="id"]')?.value;
+  const variantId = Number(urlVar || inputVar);
+  if (!Number.isInteger(variantId)) return;
+
+  // Количество
+  const qtyInput = form.querySelector('[name="quantity"], .product-quantity-section input[type="number"], .quantity__input');
+  const quantity = Math.max(1, parseInt(qtyInput?.value ?? '1', 10) || 1);
+
+  // (опционально) показать лоадер
+  document.dispatchEvent(new CustomEvent('cart:add:loading:start', { detail: { variantId, quantity } }));
+
+  try {
+    const res = await fetch('/cart/add.js', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      body: JSON.stringify({ items: [{ id: variantId, quantity }] })
+    });
+    const data = await res.json();
+    if (!res.ok) throw new Error(data?.errors || res.status);
+
+    // обновить дровер/иконку и т.п.
+    document.dispatchEvent(new CustomEvent('on:cart:add', {
+      bubbles: true,
+      detail: { variantId, quantity, sections: data.sections }
+    }));
+  } catch (err) {
+    console.error('ATC error', err);
+    location.href = '/cart'; // безопасный фолбэк
+  }
+});
+  }();
 })), window.theme = window.theme || {}, console.log("main.bundle.js loaded"), document.dispatchEvent(new CustomEvent("theme:loaded")), window.theme.loaded = !0;
 //# sourceMappingURL=main.bundle.js.map
