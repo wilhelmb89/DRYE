@@ -393,5 +393,61 @@ customElements.define("quantity-input", QuantityInput), document.addEventListene
             document.getElementsByTagName("html")[0].style.scrollBehavior = ""
         }), 1e3))
     }))
-})); window.theme = window.theme || {}, console.log("main.bundle.js loaded"), document.dispatchEvent(new CustomEvent("theme:loaded")), window.theme.loaded = !0;
+})); 
+
+// --- Lightweight ATC hooks to open/update cart drawer without overriding variant logic ---
+
+(function () {
+  // 1) При нажатии "Add to cart" показываем лоадер в дровере (не мешая нативному сабмиту)
+  document.addEventListener('submit', (e) => {
+    const form = e.target.closest('form[action*="/cart/add"]');
+    if (!form) return;
+
+    // Попробуем получить количество (для красоты, не обязательно)
+    const qtyEl = form.querySelector('[name="quantity"], .product-quantity-section input[type="number"], .quantity__input');
+    const quantity = Math.max(1, parseInt(qtyEl?.value ?? '1', 10) || 1);
+
+    document.dispatchEvent(new CustomEvent('cart:add:loading:start', {
+      detail: { quantity }
+    }));
+    // ВАЖНО: без preventDefault — пусть тема сама отправляет /cart/add.js с правильным variant id
+  }, true); // capture, чтобы сработать до возможных стопов всплытия
+
+  // 2) Перехватываем успешные запросы на /cart/add.js и триггерим обновление секций дровера
+  const origFetch = window.fetch;
+  window.fetch = async function (input, init) {
+    const resp = await origFetch(input, init);
+
+    try {
+      const url = (typeof input === 'string') ? input : input?.url;
+      const isCartAdd = url && /\/cart\/add\.js(\?|$)/.test(url);
+
+      if (isCartAdd) {
+        // Клонируем, чтобы не ломать потребителя ответа
+        const clone = resp.clone();
+
+        if (resp.ok) {
+          // Подтягиваем нужные секции дровера
+          const sections = await fetch('?sections=cart-drawer,cart-icon-bubble')
+            .then(r => r.json())
+            .catch(() => ({}));
+
+          // Сообщаем дроверу обновиться и (если закрыт) открыться
+          document.dispatchEvent(new CustomEvent('on:cart:add', {
+            bubbles: true,
+            detail: { sections }
+          }));
+        }
+      }
+    } catch (_) {
+      // молча, чтобы ничего не сломать
+    }
+
+    return resp;
+  };
+})();
+
+
+window.theme = window.theme || {}, console.log("main.bundle.js loaded"), document.dispatchEvent(new CustomEvent("theme:loaded")), window.theme.loaded = !0;
 //# sourceMappingURL=main.bundle.js.map
+
