@@ -393,5 +393,8 @@ customElements.define("quantity-input", QuantityInput), document.addEventListene
             document.getElementsByTagName("html")[0].style.scrollBehavior = ""
         }), 1e3))
     }))
-})), window.theme = window.theme || {}, console.log("main.bundle.js loaded"), document.dispatchEvent(new CustomEvent("theme:loaded")), window.theme.loaded = !0;
-//# sourceMappingURL=main.bundle.js.map
+}));
+
+
+window.theme = window.theme || {}, console.log("main.bundle.js loaded"), document.dispatchEvent(new CustomEvent("theme:loaded")), window.theme.loaded = !0;
+
