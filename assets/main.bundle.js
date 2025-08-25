@@ -393,49 +393,77 @@ customElements.define("quantity-input", QuantityInput), document.addEventListene
             document.getElementsByTagName("html")[0].style.scrollBehavior = ""
         }), 1e3))
     }))
-})), document.addEventListener("DOMContentLoaded", (function() {
-    !async function addToCart() {
-        const form = document.querySelector(".shopify-product-form"),
-            button = document.querySelector(".shopify-product-form .button");
-        form && (button.removeAttribute("disabled"), form.addEventListener("submit", (async function(evt) {
-            evt.preventDefault(), evt.stopPropagation();
-            const id = this.id.value;
-            document.dispatchEvent(new CustomEvent("cart:add:loading:start", {
-                detail: {
-                    id: id,
-                    form: this
-                }
-            }));
-            try {
-                const response = await fetch(window.Shopify.routes.root + "cart/add.js", {
-                        method: "POST",
-                        headers: {
-                            "Content-Type": "application/json"
-                        },
-                        body: JSON.stringify({
-                            items: [{
-                                id: id,
-                                quantity: 1
-                            }],
-                            sections: "cart-drawer"
-                        })
-                    }),
-                    data = await response.json();
-                console.log("response", data), this.dispatchEvent(new CustomEvent("on:cart:add", {
-                    bubbles: !0,
-                    detail: {
-                        variantId: id,
-                        sections: data.sections
-                    }
-                }));
-                const token = await async function getCartToken() {
-                    const response = await fetch("/cart.json").then((res => res.json()));
-                    return response.token
-                }();
-            } catch (error) {
-                console.error("Error adding item to cart:", error), window.location.href = "/cart"
-            }
-        })))
-    }()
+})), document.addEventListener("DOMContentLoaded", (function () {
+  !function addToCart() {
+    const form   = document.querySelector(".shopify-product-form") || document.querySelector("form[action*='/cart/add']");
+    const button = document.querySelector(".shopify-product-form .button, form[action*='/cart/add'] [type='submit']");
+    if (!form || !button) return;
+
+    // Разблокируем кнопку (как и было)
+    button.removeAttribute("disabled");
+
+    // Чтение реального quantity из формы (fallback = 1)
+    function readQty(f) {
+      let el = f.querySelector("[name='quantity']");
+      let v = el ? parseInt(el.value, 10) : NaN;
+      if (!Number.isInteger(v) || v < 1) {
+        const alt = f.querySelector(".product-quantity-section input[type='number'], .quantity input[type='number'], .quantity__input");
+        v = alt ? parseInt(alt.value, 10) : NaN;
+      }
+      return (Number.isInteger(v) && v > 0) ? v : 1;
+    }
+
+    form.addEventListener("submit", async function (evt) {
+      // Делаем AJAX вместо нативной отправки
+      const idInput = this.querySelector("[name='id']");
+      if (!idInput) return; // если нет id — пусть нативка работает
+      evt.preventDefault();
+      evt.stopPropagation();
+
+      const id = parseInt(idInput.value, 10);
+      if (!Number.isInteger(id)) return;
+
+      const quantity = readQty(this);
+
+      // Показываем лоадер на дроуэре (как раньше)
+      document.dispatchEvent(new CustomEvent("cart:add:loading:start", {
+        detail: { id, form: this }
+      }));
+
+      try {
+        // ВОТ ТУТ ГЛАВНОЕ: НЕ форсим quantity:1 и просим обе секции
+        const response = await fetch(window.Shopify.routes.root + "cart/add.js", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "Accept": "application/json"
+          },
+          body: JSON.stringify({
+            items: [{ id, quantity }],
+            // Shopify ожидает строку section-ов через запятую
+            sections: (Array.isArray(_CartDrawer.sections) ? _CartDrawer.sections.join(",") : "cart-drawer,cart-icon-bubble")
+          })
+        });
+
+        const data = await response.json();
+        if (!response.ok) throw new Error(data.errors || response.status);
+
+        // Сообщаем дроуэру перерисоваться и ОТКРЫТЬСЯ
+        this.dispatchEvent(new CustomEvent("on:cart:add", {
+          bubbles: !0,
+          detail: {
+            variantId: id,
+            quantity: quantity,
+            sections: data.sections
+          }
+        }));
+
+      } catch (error) {
+        console.error("Error adding item to cart:", error);
+        // Фоллбек: если реально упало — ведём в /cart
+        window.location.href = "/cart";
+      }
+    });
+  }();
 })), window.theme = window.theme || {}, console.log("main.bundle.js loaded"), document.dispatchEvent(new CustomEvent("theme:loaded")), window.theme.loaded = !0;
 //# sourceMappingURL=main.bundle.js.map
