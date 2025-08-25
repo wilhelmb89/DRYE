@@ -395,56 +395,80 @@ customElements.define("quantity-input", QuantityInput), document.addEventListene
     }))
 })); 
 
-// --- Lightweight ATC hooks to open/update cart drawer without overriding variant logic ---
-
+// --- AJAX Add-to-Cart с корректным variant и обновлением cart drawer ---
 (function () {
-  // 1) При нажатии "Add to cart" показываем лоадер в дровере (не мешая нативному сабмиту)
-  document.addEventListener('submit', (e) => {
+  let lastVariantId = null;
+
+  // 1) Запоминаем реально выбранный вариант (темы OS 2.0 кидают такие события)
+  document.addEventListener('variant:change', (ev) => {
+    const v = ev.detail && (ev.detail.variant || ev.detail?.productVariant || ev.detail?.currentVariant);
+    if (v && v.id) lastVariantId = Number(v.id);
+  }, true);
+
+  function getVariantId(form) {
+    if (Number.isInteger(lastVariantId)) return lastVariantId;
+
+    const urlVar = Number(new URL(location.href).searchParams.get('variant') || NaN);
+    if (Number.isInteger(urlVar)) return urlVar;
+
+    const inputVar = Number(form.querySelector('[name="id"]')?.value || NaN);
+    if (Number.isInteger(inputVar)) return inputVar;
+
+    const vr = document.querySelector('variant-radios, variant-selects');
+    const ceVar = Number(vr?.currentVariant?.id || NaN);
+    if (Number.isInteger(ceVar)) return ceVar;
+
+    return NaN;
+  }
+
+  // 2) Делегируем сабмит и отправляем AJAX в /cart/add.js вместо нативной навигации
+  document.addEventListener('submit', async (e) => {
     const form = e.target.closest('form[action*="/cart/add"]');
     if (!form) return;
 
-    // Попробуем получить количество (для красоты, не обязательно)
+    e.preventDefault();
+    e.stopPropagation();
+
+    const variantId = getVariantId(form);
+    if (!Number.isInteger(variantId)) {
+      console.warn('[ATC] Не удалось определить variant id');
+      return;
+    }
+
     const qtyEl = form.querySelector('[name="quantity"], .product-quantity-section input[type="number"], .quantity__input');
     const quantity = Math.max(1, parseInt(qtyEl?.value ?? '1', 10) || 1);
 
+    // Сообщим теме, что началась загрузка (чтобы показать лоадер дровера)
     document.dispatchEvent(new CustomEvent('cart:add:loading:start', {
-      detail: { quantity }
+      detail: { variantId, quantity }
     }));
-    // ВАЖНО: без preventDefault — пусть тема сама отправляет /cart/add.js с правильным variant id
-  }, true); // capture, чтобы сработать до возможных стопов всплытия
-
-  // 2) Перехватываем успешные запросы на /cart/add.js и триггерим обновление секций дровера
-  const origFetch = window.fetch;
-  window.fetch = async function (input, init) {
-    const resp = await origFetch(input, init);
 
     try {
-      const url = (typeof input === 'string') ? input : input?.url;
-      const isCartAdd = url && /\/cart\/add\.js(\?|$)/.test(url);
+      // AJAX добавление
+      const res = await fetch('/cart/add.js', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify({ items: [{ id: variantId, quantity }] })
+      });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data?.errors || res.status);
 
-      if (isCartAdd) {
-        // Клонируем, чтобы не ломать потребителя ответа
-        const clone = resp.clone();
+      // Подтянем секции для дровера/иконки
+      const sections = await fetch('?sections=cart-drawer,cart-icon-bubble')
+        .then(r => r.json())
+        .catch(() => ({}));
 
-        if (resp.ok) {
-          // Подтягиваем нужные секции дровера
-          const sections = await fetch('?sections=cart-drawer,cart-icon-bubble')
-            .then(r => r.json())
-            .catch(() => ({}));
-
-          // Сообщаем дроверу обновиться и (если закрыт) открыться
-          document.dispatchEvent(new CustomEvent('on:cart:add', {
-            bubbles: true,
-            detail: { sections }
-          }));
-        }
-      }
-    } catch (_) {
-      // молча, чтобы ничего не сломать
+      // Сообщим дроверу обновиться и открыться
+      document.dispatchEvent(new CustomEvent('on:cart:add', {
+        bubbles: true,
+        detail: { variantId, quantity, sections }
+      }));
+    } catch (err) {
+      console.error('ATC error', err);
+      // На случай фейла — безопасный фолбэк
+      location.href = '/cart';
     }
-
-    return resp;
-  };
+  }, true);
 })();
 
 
