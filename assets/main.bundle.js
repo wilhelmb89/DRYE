@@ -393,7 +393,7 @@ customElements.define("quantity-input", QuantityInput), document.addEventListene
             document.getElementsByTagName("html")[0].style.scrollBehavior = ""
         }), 1e3))
     }))
-})); 
+}))
 
 // --- Lightweight ATC hooks to open/update cart drawer without overriding variant logic ---
 
@@ -445,7 +445,7 @@ customElements.define("quantity-input", QuantityInput), document.addEventListene
 
     return resp;
   };
-})();
+})(),
 
 
 window.theme = window.theme || {}, console.log("main.bundle.js loaded"), document.dispatchEvent(new CustomEvent("theme:loaded")), window.theme.loaded = !0;
