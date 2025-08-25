@@ -396,7 +396,6 @@ customElements.define("quantity-input", QuantityInput), document.addEventListene
 })); 
 
 (function () {
-  // Получить variantId из кастомного селекта темы
   function getVariantIdFromCustomSelect(form) {
     const cs = form.querySelector('.custom-select');
     if (!cs) return NaN;
@@ -413,7 +412,6 @@ customElements.define("quantity-input", QuantityInput), document.addEventListene
     return Number.isInteger(id) ? id : NaN;
   }
 
-  // Резолвер варианта с приоритетом: кастомный селект → отмеченное радио → <select name="id"> → OS2 custom elements → ?variant → скрытое поле
   function resolveVariantId(form) {
     const fromCS = getVariantIdFromCustomSelect(form);
     if (Number.isInteger(fromCS)) return fromCS;
@@ -438,14 +436,13 @@ customElements.define("quantity-input", QuantityInput), document.addEventListene
     return NaN;
   }
 
-  // Количество: берём из инпута, а если его нет — из .quantity-value
   function resolveQuantity(form) {
     const input = form.querySelector('[name="quantity"]');
     const divQty = form.querySelector('.quantity-value');
     let q = input ? parseInt(input.value, 10) : NaN;
     if (!Number.isInteger(q) || q < 1) q = parseInt(divQty?.textContent?.trim() || '1', 10);
     q = Number.isInteger(q) && q > 0 ? q : 1;
-    if (input) input.value = String(q); // синхронизируем скрытый инпут
+    if (input) input.value = String(q);
     return q;
   }
 
@@ -456,29 +453,21 @@ customElements.define("quantity-input", QuantityInput), document.addEventListene
     e.preventDefault();
     e.stopPropagation();
 
-    // 1) Надёжно определяем вариант
     const variantId = resolveVariantId(form);
     if (!Number.isInteger(variantId)) {
-      console.warn('[ATC] Не удалось определить variant id');
+      console.warn('[ATC] No found variant id');
       return;
     }
 
-    // 2) Синхронизируем форму под тему:
-    //    a) отмечаем соответствующее радио (если оно есть)
     const radioToCheck = form.querySelector(`input[type="radio"][name="id"][value="${variantId}"]`);
     if (radioToCheck && !radioToCheck.checked) {
       radioToCheck.checked = true;
-      // Триггерим нативное событие change — вдруг тема слушает
       radioToCheck.dispatchEvent(new Event('change', { bubbles: true }));
     }
-    //    b) если есть скрытое поле [name="id"], тоже обновим
     const idInput = form.querySelector('[name="id"]:not([type="radio"]):not(select)');
     if (idInput && Number(idInput.value) !== variantId) idInput.value = String(variantId);
 
-    // 3) Количество
     const quantity = resolveQuantity(form);
-
-    // 4) Дальше как было: покажем лоадер и отправим /cart/add.js
     document.dispatchEvent(new CustomEvent('cart:add:loading:start', { detail: { variantId, quantity } }));
 
     try {
