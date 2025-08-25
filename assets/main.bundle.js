@@ -399,10 +399,7 @@ customElements.define("quantity-input", QuantityInput), document.addEventListene
     const button = document.querySelector(".shopify-product-form .button, form[action*='/cart/add'] [type='submit']");
     if (!form || !button) return;
 
-    // Разблокируем кнопку (как и было)
     button.removeAttribute("disabled");
-
-    // Чтение реального quantity из формы (fallback = 1)
     function readQty(f) {
       let el = f.querySelector("[name='quantity']");
       let v = el ? parseInt(el.value, 10) : NaN;
@@ -414,9 +411,8 @@ customElements.define("quantity-input", QuantityInput), document.addEventListene
     }
 
     form.addEventListener("submit", async function (evt) {
-      // Делаем AJAX вместо нативной отправки
       const idInput = this.querySelector("[name='id']");
-      if (!idInput) return; // если нет id — пусть нативка работает
+      if (!idInput) return;
       evt.preventDefault();
       evt.stopPropagation();
 
@@ -425,13 +421,11 @@ customElements.define("quantity-input", QuantityInput), document.addEventListene
 
       const quantity = readQty(this);
 
-      // Показываем лоадер на дроуэре (как раньше)
       document.dispatchEvent(new CustomEvent("cart:add:loading:start", {
         detail: { id, form: this }
       }));
 
       try {
-        // ВОТ ТУТ ГЛАВНОЕ: НЕ форсим quantity:1 и просим обе секции
         const response = await fetch(window.Shopify.routes.root + "cart/add.js", {
           method: "POST",
           headers: {
@@ -440,7 +434,6 @@ customElements.define("quantity-input", QuantityInput), document.addEventListene
           },
           body: JSON.stringify({
             items: [{ id, quantity }],
-            // Shopify ожидает строку section-ов через запятую
             sections: (Array.isArray(_CartDrawer.sections) ? _CartDrawer.sections.join(",") : "cart-drawer,cart-icon-bubble")
           })
         });
@@ -448,7 +441,6 @@ customElements.define("quantity-input", QuantityInput), document.addEventListene
         const data = await response.json();
         if (!response.ok) throw new Error(data.errors || response.status);
 
-        // Сообщаем дроуэру перерисоваться и ОТКРЫТЬСЯ
         this.dispatchEvent(new CustomEvent("on:cart:add", {
           bubbles: !0,
           detail: {
@@ -460,7 +452,6 @@ customElements.define("quantity-input", QuantityInput), document.addEventListene
 
       } catch (error) {
         console.error("Error adding item to cart:", error);
-        // Фоллбек: если реально упало — ведём в /cart
         window.location.href = "/cart";
       }
     });
