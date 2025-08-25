@@ -396,6 +396,129 @@ customElements.define("quantity-input", QuantityInput), document.addEventListene
 })); 
 
 
+(function () {
+  // Получить product JSON рядом с формой (самые типовые варианты тем)
+  function getProductJSON(form) {
+    // 1) Dawn/OS2: <script type="application/json" data-product>
+    let el = form.closest('section, product-form, main, body')?.querySelector('script[type="application/json"][data-product]');
+    if (el) try { return JSON.parse(el.textContent.trim()); } catch(_) {}
+
+    // 2) Часто встречается id вроде #ProductJson-<id>
+    el = form.closest('section, product-form, main, body')?.querySelector('script[type="application/json"][id*="ProductJson"]');
+    if (el) try { return JSON.parse(el.textContent.trim()); } catch(_) {}
+
+    return null;
+  }
+
+  // Собрать выбранные опции из радиокнопок/селектов темы
+  function getSelectedOptions(form) {
+    const optEls = form.querySelectorAll(
+      'input[name^="options["]:checked, select[name^="options["]'
+    );
+    const opts = [];
+    optEls.forEach(el => opts.push(el.value?.trim()));
+    return opts.filter(Boolean);
+  }
+
+  function findVariantIdByOptions(form) {
+    const product = getProductJSON(form);
+    if (!product || !Array.isArray(product.variants)) return NaN;
+    const selected = getSelectedOptions(form);
+    if (!selected.length) return NaN;
+
+    const variant = product.variants.find(v => {
+      if (Array.isArray(v.options)) {
+        // Совпадение по всем опциям
+        return v.options.length === selected.length &&
+               v.options.every((val, i) => String(val).trim() === String(selected[i]).trim());
+      }
+      // На некоторых темах встречается {option1,option2,...}
+      if (v.option1 || v.option2 || v.option3) {
+        const vv = [v.option1, v.option2, v.option3].filter(Boolean).map(s => String(s).trim());
+        return vv.length === selected.length &&
+               vv.every((val, i) => val === String(selected[i]).trim());
+      }
+      return false;
+    });
+
+    return variant ? Number(variant.id) : NaN;
+  }
+
+  // Универсальный геттер варианта
+  function resolveVariantId(form) {
+    // a) custom elements OS 2.0
+    const vr = form.querySelector('variant-radios, variant-selects') ||
+               document.querySelector('variant-radios, variant-selects');
+    const ceVar = Number(vr?.currentVariant?.id || NaN);
+    if (Number.isInteger(ceVar)) return ceVar;
+
+    // b) классика: <select name="id"><option value="...">
+    const selId = Number(form.querySelector('select[name="id"]')?.value || NaN);
+    if (Number.isInteger(selId)) return selId;
+
+    // c) URL ?variant=...
+    const urlVar = Number(new URL(location.href).searchParams.get('variant') || NaN);
+    if (Number.isInteger(urlVar)) return urlVar;
+
+    // d) скрытое поле (может быть неактуально)
+    const hiddenId = Number(form.querySelector('[name="id"]')?.value || NaN);
+    if (Number.isInteger(hiddenId)) return hiddenId;
+
+    // e) восстановление по выбранным опциям + product JSON
+    const byOpts = findVariantIdByOptions(form);
+    if (Number.isInteger(byOpts)) return byOpts;
+
+    return NaN;
+  }
+
+  // Делегированно ловим submit у /cart/add
+  document.addEventListener('submit', async (e) => {
+    const form = e.target.closest('form[action*="/cart/add"]');
+    if (!form) return;
+
+    e.preventDefault();
+    e.stopPropagation();
+
+    let variantId = resolveVariantId(form);
+    if (!Number.isInteger(variantId)) {
+      console.warn('[ATC] Не удалось определить variant id', {
+        selectedOptions: getSelectedOptions(form),
+        product: !!getProductJSON(form)
+      });
+      return;
+    }
+
+    // Синхронизируем скрытое поле, чтобы тема дальше считала правильный id
+    const idInput = form.querySelector('[name="id"]');
+    if (idInput && Number(idInput.value) !== variantId) idInput.value = String(variantId);
+
+    // Количество
+    const qtyEl = form.querySelector('[name="quantity"], .product-quantity-section input[type="number"], .quantity__input');
+    const quantity = Math.max(1, parseInt(qtyEl?.value ?? '1', 10) || 1);
+
+    // Показать лоадер в дровере
+    document.dispatchEvent(new CustomEvent('cart:add:loading:start', { detail: { variantId, quantity } }));
+
+    try {
+      const sections = (Array.isArray(window.CartDrawer?.sections) ? window.CartDrawer.sections.join(',') : 'cart-drawer,cart-icon-bubble');
+      const res = await fetch('/cart/add.js', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify({ items: [{ id: variantId, quantity }], sections })
+      });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data?.errors || res.status);
+
+      document.dispatchEvent(new CustomEvent('on:cart:add', {
+        bubbles: true,
+        detail: { variantId, quantity, sections: data.sections }
+      }));
+    } catch (err) {
+      console.error('ATC error', err);
+      location.href = '/cart';
+    }
+  }, true);
+})();
 
 
 window.theme = window.theme || {}, console.log("main.bundle.js loaded"), document.dispatchEvent(new CustomEvent("theme:loaded")), window.theme.loaded = !0;
