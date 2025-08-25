@@ -295,6 +295,85 @@ https://cdn1.stamped.io/files/widget.min.js
 
 <script>
 (function () {
+  // --- утилиты из нашей логики ---
+  function getVariantIdFromCustomSelect(form) {
+    const cs = form.querySelector('.custom-select');
+    if (!cs) return NaN;
+
+    const selectedTitle = cs.querySelector('.selected')?.textContent?.trim();
+    if (!selectedTitle) return NaN;
+
+    const opt = Array.from(cs.querySelectorAll('.custom-option')).find(o =>
+      (o.dataset?.title?.trim() || o.textContent?.trim()) === selectedTitle
+    );
+    return Number(opt?.dataset?.value || NaN);
+  }
+
+  function resolveVariantId(form) {
+    // 1) кастомный селект
+    const fromCS = getVariantIdFromCustomSelect(form);
+    if (Number.isInteger(fromCS)) return fromCS;
+
+    // 2) радио input[name="id"]:checked
+    const radioId = Number(form.querySelector('input[type="radio"][name="id"]:checked')?.value || NaN);
+    if (Number.isInteger(radioId)) return radioId;
+
+    // 3) select[name="id"]
+    const selId = Number(form.querySelector('select[name="id"]')?.value || NaN);
+    if (Number.isInteger(selId)) return selId;
+
+    // 4) OS2 custom elements
+    const vr = form.querySelector('variant-radios, variant-selects') ||
+               document.querySelector('variant-radios, variant-selects');
+    const ceVar = Number(vr?.currentVariant?.id || NaN);
+    if (Number.isInteger(ceVar)) return ceVar;
+
+    // 5) ?variant=...
+    const urlVar = Number(new URL(location.href).searchParams.get('variant') || NaN);
+    if (Number.isInteger(urlVar)) return urlVar;
+
+    // 6) последнее — скрытое поле (если есть и актуализировано)
+    const hiddenId = Number(form.querySelector('input[type="hidden"][name="id"]')?.value || NaN);
+    if (Number.isInteger(hiddenId)) return hiddenId;
+
+    return NaN;
+  }
+
+  // --- нормализация формы ПЕРЕД ЛЮБЫМИ слушателями TW ---
+  document.addEventListener('submit', function (evt) {
+    const form = evt.target?.closest("form[action*='/cart/add']");
+    if (!form) return;
+
+    // 1) определяем корректный вариант
+    const variantId = resolveVariantId(form);
+    if (!Number.isInteger(variantId)) return;
+
+    // 2) гарантируем скрытый input[name="id"] САМЫМ ПЕРВЫМ в форме
+    let hid = form.querySelector('input[type="hidden"][name="id"]');
+    if (!hid) {
+      hid = document.createElement('input');
+      hid.type = 'hidden';
+      hid.name = 'id';
+    }
+    hid.value = String(variantId);
+    // вставим/переместим на самое начало, чтобы querySelector("[name='id']") нашёл его
+    if (form.firstChild !== hid) form.insertBefore(hid, form.firstChild);
+
+    // 3) на всякий случай — подсветим соответствующее радио (если есть)
+    const radio = form.querySelector(`input[type="radio"][name="id"][value="${variantId}"]`);
+    if (radio && !radio.checked) {
+      radio.checked = true;
+      radio.dispatchEvent(new Event('change', { bubbles: true }));
+    }
+    // ВАЖНО: не отменяем сабмит — пусть дальше работают TW и прочие обработчики
+  }, true); // capture — сработаем максимально рано
+})();
+</script>
+
+
+
+<script>
+(function () {
   var lastQty = 1;
   var DEDUP_WINDOW_MS = 2000;
 
