@@ -482,39 +482,6 @@ https://cdn1.stamped.io/files/widget.min.js
 </script>
 
 
-<script>
-(function waitAndHook(maxWaitMs){
-  var start = Date.now();
-  (function tick(){
-    if (typeof window.TriplePixel === 'function') {
-      var orig = window.TriplePixel;
-      window.TriplePixel = function(ev, payload){
-        // ❶ Лог
-        try { console.log('[TW hook]', ev, payload); } catch(_){}
-
-        // ❷ След в Network (404 ожидаем)
-        try {
-          fetch('/__tw-probe', {
-            method:'POST',
-            headers:{'Content-Type':'application/json'},
-            body: JSON.stringify({ ev, payload, ts: Date.now() }),
-            keepalive: true
-          }).catch(function(){});
-        } catch(_){}
-
-        return orig.apply(this, arguments);
-      };
-      console.log('[TW hook] installed');
-      return;
-    }
-    if (Date.now() - start > (maxWaitMs||5000)) {
-      console.warn('[TW hook] TriplePixel not found in time');
-      return;
-    }
-    setTimeout(tick, 100);
-  })();
-})(5000);
-</script>
 
 
 
