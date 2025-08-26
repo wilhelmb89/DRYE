@@ -295,10 +295,76 @@ https://cdn1.stamped.io/files/widget.min.js
 
 <script>
 (function () {
+  function getVariantIdFromCustomSelect(form) {
+    const cs = form.querySelector('.custom-select');
+    if (!cs) return NaN;
+
+    const selectedTitle = cs.querySelector('.selected')?.textContent?.trim();
+    if (!selectedTitle) return NaN;
+
+    const opt = Array.from(cs.querySelectorAll('.custom-option')).find(o =>
+      (o.dataset?.title?.trim() || o.textContent?.trim()) === selectedTitle
+    );
+    return Number(opt?.dataset?.value || NaN);
+  }
+
+  function resolveVariantId(form) {
+    const fromCS = getVariantIdFromCustomSelect(form);
+    if (Number.isInteger(fromCS)) return fromCS;
+
+    const radioId = Number(form.querySelector('input[type="radio"][name="id"]:checked')?.value || NaN);
+    if (Number.isInteger(radioId)) return radioId;
+
+    const selId = Number(form.querySelector('select[name="id"]')?.value || NaN);
+    if (Number.isInteger(selId)) return selId;
+
+    const vr = form.querySelector('variant-radios, variant-selects') ||
+               document.querySelector('variant-radios, variant-selects');
+    const ceVar = Number(vr?.currentVariant?.id || NaN);
+    if (Number.isInteger(ceVar)) return ceVar;
+
+    const urlVar = Number(new URL(location.href).searchParams.get('variant') || NaN);
+    if (Number.isInteger(urlVar)) return urlVar;
+
+    const hiddenId = Number(form.querySelector('input[type="hidden"][name="id"]')?.value || NaN);
+    if (Number.isInteger(hiddenId)) return hiddenId;
+
+    return NaN;
+  }
+
+  document.addEventListener('submit', function (evt) {
+    const form = evt.target?.closest("form[action*='/cart/add']");
+    if (!form) return;
+
+    const variantId = resolveVariantId(form);
+    if (!Number.isInteger(variantId)) return;
+
+    let hid = form.querySelector('input[type="hidden"][name="id"]');
+    if (!hid) {
+      hid = document.createElement('input');
+      hid.type = 'hidden';
+      hid.name = 'id';
+    }
+    hid.value = String(variantId);
+    if (form.firstChild !== hid) form.insertBefore(hid, form.firstChild);
+
+    const radio = form.querySelector(`input[type="radio"][name="id"][value="${variantId}"]`);
+    if (radio && !radio.checked) {
+      radio.checked = true;
+      radio.dispatchEvent(new Event('change', { bubbles: true }));
+    }
+  }, true);
+})();
+</script>
+
+
+
+<script>
+(function () {
   var lastQty = 1;
   var DEDUP_WINDOW_MS = 2000;
 
-  // --- Hjälpfunktioner ---
+  // --- Logging helper ---
   function log(level, msg, obj) {
     var pfx = "[TW ATC]";
     try {
@@ -307,28 +373,35 @@ https://cdn1.stamped.io/files/widget.min.js
     } catch(_) {}
   }
 
-  // Läs qty robust
+  // --- Read qty robustly ---
   function readQty(form) {
     var el = form.querySelector("[name='quantity']");
-    var v  = el ? parseInt(el.value, 10) : NaN;
+    var v = el ? parseInt(el.value, 10) : NaN;
+
     if (!Number.isInteger(v) || v < 1) {
       var alt = form.querySelector(".product-quantity-section input[type='number'], .quantity input[type='number'], .quantity__input");
       v = alt ? parseInt(alt.value, 10) : NaN;
     }
+
     if (!Number.isInteger(v) || v < 1) v = lastQty;
     if (!Number.isInteger(v) || v < 1) v = 1;
     return v;
   }
 
-  // Håll koll på qty när användaren klickar +/- etc.
+  // Track qty changes
   document.addEventListener('input', function (e) {
-    if (e.target.matches("form[action*='/cart/add'] [name='quantity'], .product-quantity-section input[type='number'], .quantity input[type='number'], .quantity__input")) {
+    if (e.target.matches(
+      "form[action*='/cart/add'] [name='quantity'], " +
+      ".product-quantity-section input[type='number'], " +
+      ".quantity input[type='number'], " +
+      ".quantity__input"
+    )) {
       var v = parseInt(e.target.value, 10);
       if (Number.isInteger(v) && v > 0) lastQty = v;
     }
   }, true);
 
-  // Retry med exponential backoff för /cart.js
+  // --- Retry with exponential backoff for /cart.js ---
   function fetchCartWithRetry(maxTries) {
     var tries = 0;
     function attempt() {
@@ -350,20 +423,20 @@ https://cdn1.stamped.io/files/widget.min.js
     return attempt();
   }
 
-  // Vänta in TriplePixel om den inte hunnit laddas (max ~2s)
+  // --- Wait for TriplePixel (max 2s) ---
   function whenTriplePixelReady(cb) {
     var start = Date.now();
     (function poll() {
       if (typeof window.TriplePixel === 'function') return cb();
       if (Date.now() - start > 2000) {
         log('warn', 'TriplePixel not ready after 2s – proceeding with best effort');
-        return cb(); // kör ändå, ev. utan effekt om scriptet saknas
+        return cb();
       }
       setTimeout(poll, 100);
     })();
   }
 
-  // Skicka ATC med fallback utan token
+  // --- Send ATC with fallback ---
   function sendATC(form) {
     try {
       var variantId = form.querySelector("[name='id']").value;
@@ -379,7 +452,7 @@ https://cdn1.stamped.io/files/widget.min.js
             catch (e) { log('error', 'TriplePixel call threw', e); }
           })
           .catch(function () {
-            // Backup: skicka utan token
+            // Backup: send without token
             var payload = { item: variantId, q: qty };
             log('warn', 'cart.js unavailable – sending without token', payload);
             try { window.TriplePixel('AddToCart', payload); }
@@ -391,19 +464,24 @@ https://cdn1.stamped.io/files/widget.min.js
     }
   }
 
-  // Deduplicering + fånga ALLA submit på /cart/add
+  // --- Deduplication + catch ALL /cart/add submits ---
   document.addEventListener('submit', function (evt) {
     var form = evt.target;
     if (!form || !form.matches("form[action*='/cart/add']")) return;
+
     var now = Date.now();
     if (form.__tw_last_fire__ && (now - form.__tw_last_fire__ < DEDUP_WINDOW_MS)) {
-      return; // undvik dubbel-fire
+      return; // avoid double-fire
     }
     form.__tw_last_fire__ = now;
+
     sendATC(form);
-  }, true); // capture
+  }, true);
+
 })();
 </script>
+
+
 
 <!--Convert Bundle Start-->
 <script id="convert-bundle-loader" src="https://bundle.5gtb.com/loader.js?g_cvt_id=43d6a6b5-1dcc-4430-aaf9-153ca1c9a0bb"></script>
