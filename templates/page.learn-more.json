@@ -14,9 +14,9 @@
       "name": "Homepage Hero(New)",
       "settings": {
         "title": "Independent Research on Glove Use and Skin Health",
-        "cover_image": "shopify://shop_images/kopia.jpg",
+        "cover_image": "shopify://shop_images/2E9A8886ny2.jpg",
         "stars": 5,
-        "review_text": "<p>Independent, peer-reviewed studies show what happens when sweat stays trapped under gloves:<br/><br/>• The skin barrier weakens<br/>• Irritation increases<br/>• Conditions like dermatitis flare up<br/><br/>These studies are not affiliated with DRYE. We share them to highlight why solving moisture inside gloves matters – and why addressing Moisture-Associated Skin Damage (MASD) is critical for anyone wearing gloves for extended periods.</p>",
+        "review_text": "",
         "review_text_font_size_desktop": 16,
         "review_text_line_height_desktop": 24,
         "review_text_font_size_tablet": 16,
@@ -65,6 +65,20 @@
     "multirows_new_wVN7GV": {
       "type": "multirows-new",
       "blocks": {
+        "row_XrjMck": {
+          "type": "row",
+          "settings": {
+            "title": "",
+            "content": "<p>Independent, peer-reviewed studies show what happens when sweat stays trapped under gloves:<br/><br/>• The skin barrier weakens<br/>• Irritation increases<br/>• Conditions like dermatitis flare up<br/><br/>These studies are not affiliated with DRYE. We share them to highlight why solving moisture inside gloves matters – and why addressing Moisture-Associated Skin Damage (MASD) is critical for anyone wearing gloves for extended periods.</p>",
+            "button_text": "",
+            "button_url": "",
+            "controls": true,
+            "image": "shopify://shop_images/kopia.jpg",
+            "image_tablet": "shopify://shop_images/kopia.jpg",
+            "image_mobile": "shopify://shop_images/kopia.jpg",
+            "position": "row"
+          }
+        },
         "row_dLbqHN": {
           "type": "row",
           "settings": {
@@ -81,6 +95,7 @@
         }
       },
       "block_order": [
+        "row_XrjMck",
         "row_dLbqHN"
       ],
       "name": "Multirows(New)",
