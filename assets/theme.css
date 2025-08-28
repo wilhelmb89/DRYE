@@ -774,7 +774,7 @@ form label {
     max-width: 569px;
     font-size: 3.125rem;
     font-weight: 300;
-    line-height: 6rem;
+    line-height: 3.75rem;
     font-family: ClashGrotesk-Variable;
 }
 .hero-section .container .hero-wrapper .title small {
@@ -808,7 +808,7 @@ form label {
 }
 @media screen and (min-width: 768px) and (max-width: 1440px) {
     .hero-section .container .hero-wrapper .review {
-        gap: none;
+        gap: 40px;
         max-width: 100%;
     }
     .hero-section .container .hero-wrapper {
