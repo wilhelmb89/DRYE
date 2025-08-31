@@ -70,6 +70,6 @@ async function addToCart() {
 }
 
 async function getCartToken() {
-    const response = await fetch('/cart.json').then((res) => res.json());
+    const response = await fetch(window.Shopify.routes.root + '/cart.json').then((res) => res.json());
     return response.token;
 }

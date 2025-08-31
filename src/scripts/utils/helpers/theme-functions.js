@@ -28,7 +28,7 @@ document.addEventListener('cart:updated', (e) => {
     if (itemCount) {
         updateCartLength(itemCount);
     } else {
-        fetch('/cart.js')
+        fetch(window.Shopify.routes.root + '/cart.js')
             .then((res) => res.json())
             .then((data) => updateCartLength(data.item_count));
     }
