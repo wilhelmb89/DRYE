@@ -6016,14 +6016,18 @@ div#occ3-drawer {
     display: block;
     margin-bottom: 0.3em;
     
-/* Override success/fail message style */
-.main-contact .container .contacts-wrapper form .success-message,
-.main-contact .container .contacts-wrapper form .alert-message {
-  font-family: 'Clash Grotesk', sans-serif !important;
+/* Kontaktformulär – normalisera textarea */
+.main-contact .contacts-wrapper form textarea#message,
+.main-contact .contacts-wrapper form textarea#message:focus {
+  font-family: 'Clash Grotesk', system-ui, sans-serif !important;
   font-size: 16px !important;
   font-weight: 400 !important;
-  line-height: 22px !important;
-  color: #111 !important;   /* svart text */
-  text-align: left !important;
-  margin-top: 12px;
+  color: #111 !important;
+  -webkit-text-fill-color: #111 !important; /* för Safari/Chrome autofill */
+}
+
+/* Placeholder */
+.main-contact .contacts-wrapper form textarea#message::placeholder {
+  color: #6B7280 !important;
+  font-weight: 400 !important;
 }
