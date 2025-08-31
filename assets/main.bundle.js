@@ -242,7 +242,7 @@ function updateCartLength(amount) {
 //! Lock Body Scroll
 customElements.define("responsive-video", ResponsiveVideo), document.addEventListener("cart:updated", (e => {
     const itemCount = e.detail.cart.item_count;
-    itemCount ? updateCartLength(itemCount) : fetch("/cart.js").then((res => res.json())).then((data => updateCartLength(data.item_count)))
+    itemCount ? updateCartLength(itemCount) : fetch(window.Shopify.routes.root + "/cart.js").then((res => res.json())).then((data => updateCartLength(data.item_count)))
 })), document.addEventListener("DOMContentLoaded", (function detectIOSDevice() {
     /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream && document.documentElement.classList.add("is-ios")
 }));
@@ -349,7 +349,7 @@ const _CartDrawer = class _CartDrawer extends SideDrawer {
         this.classList.add("cart-loading"), this.isOpen || this.open()
     }
     async refresh() {
-        const response = await fetch("?sections=cart-drawer").then((res => res.json()));
+        const response = await fetch(window.Shopify.routes.root +"?sections=cart-drawer").then((res => res.json()));
         this.renderContents(response, !1)
     }
     renderContents(sections, openCart = !0) {
@@ -472,7 +472,7 @@ customElements.define("quantity-input", QuantityInput), document.addEventListene
 
     try {
       const sections = (Array.isArray(window.CartDrawer?.sections) ? window.CartDrawer.sections.join(',') : 'cart-drawer,cart-icon-bubble');
-      const res = await fetch('/cart/add.js', {
+      const res = await fetch(window.Shopify.routes.root + '/cart/add.js', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
         body: JSON.stringify({ items: [{ id: variantId, quantity }], sections })

@@ -86,7 +86,9 @@ class CartDrawer extends SideDrawer {
     }
 
     async refresh() {
-        const response = await fetch('?sections=cart-drawer').then((res) => res.json());
+        const response = await fetch(window.Shopify.routes.root + '?sections=cart-drawer').then((res) =>
+            res.json()
+        );
         this.renderContents(response, false);
     }
 
