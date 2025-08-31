@@ -4073,6 +4073,31 @@ form label {
 }
 .main-contact .container .contacts-wrapper form .form-wrapper textarea {
     height: 11rem;
+
+    /* Tvinga normal typografi i textarean */
+.main-contact .container .contacts-wrapper form .form-wrapper textarea,
+.main-contact .container .contacts-wrapper form textarea {
+    font-family: 'Clash Grotesk', system-ui, sans-serif !important; /* välj din font */
+    font-size: 16px !important;
+    font-weight: 400 !important;
+    line-height: 1.5 !important;
+    color: #111 !important;
+    -webkit-text-fill-color: #111 !important; /* för Chrome/Safari/autofill */
+}
+/* Success/alert-meddelanden – neutral storlek, korrekt färg */
+.main-contact .container .contacts-wrapper form .success-message {
+    color: #111 !important;
+    font-size: 16px !important;
+    font-weight: 400 !important;
+    line-height: 1.4 !important;
+}
+.main-contact .container .contacts-wrapper form .alert-message {
+    color: #d32f2f !important; /* röd för fel */
+    font-size: 16px !important;
+    font-weight: 400 !important;
+    line-height: 1.4 !important;
+}
+
 }
 @media screen and (max-width: 1024px) {
     .main-contact .container .contacts-wrapper form .form-wrapper textarea {
