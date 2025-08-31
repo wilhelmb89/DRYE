@@ -360,126 +360,263 @@ https://cdn1.stamped.io/files/widget.min.js
 
 
 <script>
-(function () {
-  var lastQty = 1;
-  var DEDUP_WINDOW_MS = 2000;
+(() => {
+  'use strict';
+  if (window.__TW_ATC_HOOK__) return;
+  window.__TW_ATC_HOOK__ = true;
 
-  // --- Logging helper ---
-  function log(level, msg, obj) {
-    var pfx = "[TW ATC]";
+  /* ============= CONFIG ============= */
+  const DEDUP_WINDOW_MS = 4000;
+  const PIXEL_WAIT_MS   = 10000;
+  const CART_RETRIES    = 3;
+  const LOG             = true; // выключи на проде
+
+  /* ============= LOG =============== */
+  const PFX='[TW ATC]';
+  const log = {
+    debug: (...a)=>{ if(LOG) try{console.debug(PFX,...a)}catch{} },
+    info:  (...a)=>{ if(LOG) try{console.info (PFX,...a)}catch{} },
+    warn:  (...a)=>{ if(LOG) try{console.warn (PFX,...a)}catch{} },
+    error: (...a)=>{ if(LOG) try{console.error(PFX,...a)}catch{} },
+  };
+
+  /* ====== TriplePixel queue ======== */
+  const queue = [];
+  let waitTimer = null;
+  const ready = () => typeof window.TriplePixel === 'function';
+
+  function flush() {
+    if (!ready()) return;
+    while (queue.length) {
+      const {n, p} = queue.shift();
+      try { window.TriplePixel(n, p); log.debug('Flushed', n, p); }
+      catch (e) { log.error('TriplePixel threw', e); }
+    }
+    if (waitTimer) { clearInterval(waitTimer); waitTimer = null; }
+  }
+
+  function send(name, payload) {
+    if (ready()) {
+      try { window.TriplePixel(name, payload); log.info('Sent', name, payload); }
+      catch (e) { log.error('TriplePixel threw', e); }
+      return;
+    }
+    queue.push({ n: name, p: payload });
+    if (!waitTimer) {
+      const start = Date.now();
+      waitTimer = setInterval(() => {
+        if (ready() || Date.now() - start > PIXEL_WAIT_MS) {
+          if (!ready()) log.warn('TriplePixel not ready; stop waiting');
+          flush();
+        }
+      }, 150);
+    }
+  }
+
+  /* ======== cart.token fast ========= */
+  let CART_TOKEN = null;
+
+  function readTokenFromCookie() {
     try {
-      if (obj !== undefined) console[level](pfx, msg, obj);
-      else console[level](pfx, msg);
-    } catch(_) {}
+      const m = document.cookie.match(/(?:^|;\s*)cart=([^;]+)/);
+      return m ? decodeURIComponent(m[1]) : null;
+    } catch { return null; }
   }
 
-  // --- Read qty robustly ---
-  function readQty(form) {
-    var el = form.querySelector("[name='quantity']");
-    var v = el ? parseInt(el.value, 10) : NaN;
+  async function getCartToken() {
+    if (CART_TOKEN) return CART_TOKEN;
 
-    if (!Number.isInteger(v) || v < 1) {
-      var alt = form.querySelector(".product-quantity-section input[type='number'], .quantity input[type='number'], .quantity__input");
-      v = alt ? parseInt(alt.value, 10) : NaN;
-    }
+    // 1) моментально из cookie
+    const c = readTokenFromCookie();
+    if (c) { CART_TOKEN = c; log.debug('token from cookie'); return CART_TOKEN; }
 
-    if (!Number.isInteger(v) || v < 1) v = lastQty;
-    if (!Number.isInteger(v) || v < 1) v = 1;
-    return v;
-  }
-
-  // Track qty changes
-  document.addEventListener('input', function (e) {
-    if (e.target.matches(
-      "form[action*='/cart/add'] [name='quantity'], " +
-      ".product-quantity-section input[type='number'], " +
-      ".quantity input[type='number'], " +
-      ".quantity__input"
-    )) {
-      var v = parseInt(e.target.value, 10);
-      if (Number.isInteger(v) && v > 0) lastQty = v;
-    }
-  }, true);
-
-  // --- Retry with exponential backoff for /cart.js ---
-  function fetchCartWithRetry(maxTries) {
-    var tries = 0;
-    function attempt() {
-      tries++;
-      return fetch('/cart.js', { credentials: 'same-origin' })
-        .then(function (r) {
-          if (!r.ok) throw new Error("HTTP " + r.status);
-          return r.json();
-        })
-        .catch(function (err) {
-          if (tries < maxTries) {
-            var delay = Math.min(1500, 200 * Math.pow(2, tries-1));
-            log('warn', "cart.js failed (" + err + "). Retry in " + delay + "ms");
-            return new Promise(function (res) { setTimeout(res, delay); }).then(attempt);
-          }
-          throw err;
+    // 2) из /cart.js с keepalive, чтобы не срезало на закрытии вкладки
+    let t = 0;
+    while (t < CART_RETRIES) {
+      t++;
+      try {
+        const r = await fetch('/cart.js', {
+          credentials: 'same-origin',
+          cache: 'no-store',
+          keepalive: true
         });
-    }
-    return attempt();
-  }
-
-  // --- Wait for TriplePixel (max 2s) ---
-  function whenTriplePixelReady(cb) {
-    var start = Date.now();
-    (function poll() {
-      if (typeof window.TriplePixel === 'function') return cb();
-      if (Date.now() - start > 2000) {
-        log('warn', 'TriplePixel not ready after 2s – proceeding with best effort');
-        return cb();
+        if (!r.ok) throw new Error('HTTP ' + r.status);
+        const cart = await r.json();
+        CART_TOKEN = cart?.token || readTokenFromCookie() || null;
+        if (CART_TOKEN) log.debug('token from /cart.js');
+        return CART_TOKEN;
+      } catch (e) {
+        const d = Math.min(1500, 200 * 2 ** (t - 1));
+        log.warn(`cart.js failed #${t}, retry in ${d}ms`, e);
+        await new Promise(res => setTimeout(res, d));
       }
-      setTimeout(poll, 100);
-    })();
+    }
+    return null;
   }
 
-  // --- Send ATC with fallback ---
-  function sendATC(form) {
+  /* ============ Dedup ============== */
+  const fpTimes = new Map(); // "id::qty" -> ts
+  const mk = (id, q) => `${id}::${q||1}`;
+  function dedup(id, qty) {
+    const now = Date.now(), key = mk(id, qty), last = fpTimes.get(key) || 0;
+    if (now - last < DEDUP_WINDOW_MS) return true;
+    fpTimes.set(key, now);
+    for (const [k,t] of fpTimes) if (now - t > DEDUP_WINDOW_MS*3) fpTimes.delete(k);
+    return false;
+  }
+
+  /* ======== Parse bodies =========== */
+  async function parseItems(body) {
     try {
-      var variantId = form.querySelector("[name='id']").value;
-      var qty = readQty(form);
-
-      whenTriplePixelReady(function () {
-        fetchCartWithRetry(3)
-          .then(function (cart) {
-            var payload = { item: variantId, q: qty };
-            if (cart && cart.token) payload.token = cart.token;
-            log('debug', 'payload (with token if present):', payload);
-            try { window.TriplePixel('AddToCart', payload); }
-            catch (e) { log('error', 'TriplePixel call threw', e); }
-          })
-          .catch(function () {
-            // Backup: send without token
-            var payload = { item: variantId, q: qty };
-            log('warn', 'cart.js unavailable – sending without token', payload);
-            try { window.TriplePixel('AddToCart', payload); }
-            catch (e) { log('error', 'TriplePixel call (no token) threw', e); }
+      if (typeof FormData !== 'undefined' && body instanceof FormData) {
+        const idxs = new Set([...body.keys()].map(k => (k.match(/^items\[(\d+)\]\[id\]$/)||[])[1]).filter(Boolean));
+        if (idxs.size) {
+          const out = [];
+          idxs.forEach(i => {
+            const id = body.get(`items[${i}][id]`);
+            const q  = parseInt(body.get(`items[${i}][quantity]`) || '1', 10) || 1;
+            if (id) out.push({ id: String(id), quantity: q });
           });
-      });
-    } catch (e) {
-      log('warn', 'sendATC failed', e);
+          if (out.length) return out;
+        }
+        const id = body.get('id') || body.get('variant_id') || body.get('variantId');
+        const q  = parseInt(body.get('quantity') || body.get('qty') || '1', 10) || 1;
+        if (id) return [{ id: String(id), quantity: q }];
+      }
+      if (typeof URLSearchParams !== 'undefined' && body instanceof URLSearchParams) {
+        const id = body.get('id') || body.get('variant_id') || body.get('variantId');
+        const q  = parseInt(body.get('quantity') || body.get('qty') || '1', 10) || 1;
+        if (id) return [{ id: String(id), quantity: q }];
+      }
+      if (typeof body === 'string') {
+        try {
+          const data = JSON.parse(body);
+          if (Array.isArray(data?.items)) {
+            return data.items.map(it => ({
+              id: String(it.id || it.variant_id),
+              quantity: parseInt(it.quantity || 1, 10) || 1
+            })).filter(it => it.id);
+          }
+          if (data && (data.id || data.variant_id)) {
+            return [{ id: String(data.id || data.variant_id), quantity: parseInt(data.quantity || 1, 10) || 1 }];
+          }
+        } catch {}
+      }
+    } catch (e) { log.warn('parseItems error', e); }
+    return [];
+  }
+
+  /* ======== Emit AddToCart ========= */
+  async function emitATC(items) {
+    if (!items?.length) return;
+    const token = await getCartToken(); // если нет — пошлём без него
+    items.forEach(({ id, quantity }) => {
+      const q = parseInt(quantity || 1, 10) || 1;
+      if (dedup(id, q)) { log.debug('dedup skip', id, q); return; }
+      const payload = { item: String(id), q };
+      if (token) payload.token = token;
+      send('AddToCart', payload);
+    });
+  }
+
+  /* ============ URL match =========== */
+  function isATCUrl(input) {
+    try {
+      const u = typeof input==='string' ? new URL(input, location.origin)
+                                        : new URL(input?.url || String(input), location.origin);
+      return /\/cart\/add(\.js|\.json)?$/.test(u.pathname);
+    } catch {
+      return typeof input==='string' && /\/cart\/add/.test(input);
     }
   }
 
-  // --- Deduplication + catch ALL /cart/add submits ---
-  document.addEventListener('submit', function (evt) {
-    var form = evt.target;
-    if (!form || !form.matches("form[action*='/cart/add']")) return;
+  /* ============ Patch fetch ========== */
+  const _fetch = window.fetch;
+  window.fetch = async function twFetch(input, init = {}) {
+    const atc = isATCUrl(typeof input==='string' ? input : (input?.url || ''));
+    let clone = null;
 
-    var now = Date.now();
-    if (form.__tw_last_fire__ && (now - form.__tw_last_fire__ < DEDUP_WINDOW_MS)) {
-      return; // avoid double-fire
+    if (atc) {
+      const b = init?.body;
+      if (b instanceof FormData)        { clone = new FormData(); for (const [k,v] of b.entries()) clone.append(k,v); }
+      else if (b instanceof URLSearchParams) { clone = new URLSearchParams(b.toString()); }
+      else if (typeof b === 'string')   { clone = String(b); }
+
+      // оптимистично ДО запроса
+      try { const items = await parseItems(clone); emitATC(items); } catch(e){ log.warn('pre-fetch emit error', e); }
     }
-    form.__tw_last_fire__ = now;
 
-    sendATC(form);
+    const resp = await _fetch.apply(this, arguments);
+
+    // подтверждение ПОСЛЕ ответа (дедуп снимет дубль)
+    try { if (atc && resp?.ok && clone) { const items = await parseItems(clone); await emitATC(items); } }
+    catch (e) { log.warn('fetch hook post-emit error', e); }
+
+    return resp;
+  };
+
+  /* ============ Patch XHR ============ */
+  const _XHR = window.XMLHttpRequest;
+  function PatchedXHR() {
+    const xhr = new _XHR();
+    let _url = '', _method = 'GET', _body = null;
+
+    const open = xhr.open;
+    xhr.open = function(method, url) {
+      _method = (method || 'GET').toUpperCase();
+      _url = url;
+      return open.apply(xhr, arguments);
+    };
+
+    const send = xhr.send;
+    xhr.send = function(body) {
+      _body = body;
+
+      try {
+        if (_method === 'POST' && isATCUrl(_url)) {
+          parseItems(_body).then(items => emitATC(items)).catch(()=>{});
+        }
+      } catch {}
+
+      xhr.addEventListener('load', async () => {
+        try {
+          if (_method === 'POST' && isATCUrl(_url) && xhr.status >= 200 && xhr.status < 300) {
+            const items = await parseItems(_body);
+            await emitATC(items);
+          }
+        } catch (e) { log.warn('xhr hook post-emit error', e); }
+      });
+
+      return send.apply(xhr, arguments);
+    };
+    return xhr;
+  }
+  window.XMLHttpRequest = PatchedXHR;
+
+  /* ========== Fallback submit ========= */
+  document.addEventListener('submit', async (evt) => {
+    const form = evt.target?.closest("form[action*='/cart/add']");
+    if (!form) return;
+    try { const fd = new FormData(form); const items = await parseItems(fd); await emitATC(items); }
+    catch (e) { log.warn('submit fallback error', e); }
   }, true);
 
+  /* ======== Hook на on:cart:add ====== */
+  document.addEventListener('on:cart:add', (e) => {
+    try {
+      const v = e?.detail?.variantId, q = e?.detail?.quantity || 1;
+      if (v) emitATC([{ id: v, quantity: q }]);
+    } catch (_) {}
+  });
+
+  /* ===== Flush при закрытии вкладки ==== */
+  window.addEventListener('pagehide', () => { try { flush(); } catch{} }, { capture: true });
+
+  log.info('TW AddToCart interceptor installed');
 })();
 </script>
+
+
 
 
 
