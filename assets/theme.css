@@ -6015,3 +6015,18 @@ div#occ3-drawer {
 .product-single__description p strong {
     display: block;
     margin-bottom: 0.3em;
+    
+/* Kontaktformulär – tvinga typografi på success/alert */
+.shopify-section.main-contact .form-status,
+.shopify-section.main-contact .form__message,
+.shopify-section.main-contact .alert-message,
+.shopify-section.main-contact .success-message,
+.shopify-section.main-contact [data-shopify="contact-form-status"],
+.shopify-section.main-contact .contact-form__success {
+  font-family: 'Clash Grotesk', system-ui, sans-serif !important;
+  font-size: 16px !important;
+  font-weight: 400 !important;
+  line-height: 1.4 !important;
+  color: #111 !important;   /* byt om du vill */
+  margin: 0 0 16px !important;
+}
