@@ -360,126 +360,258 @@ https://cdn1.stamped.io/files/widget.min.js
 
 
 <script>
-(function () {
-  var lastQty = 1;
-  var DEDUP_WINDOW_MS = 2000;
+(() => {
+  'use strict';
 
-  // --- Logging helper ---
-  function log(level, msg, obj) {
-    var pfx = "[TW ATC]";
-    try {
-      if (obj !== undefined) console[level](pfx, msg, obj);
-      else console[level](pfx, msg);
-    } catch(_) {}
+  // --- SINGLETON GUARD ---
+  if (window.__TW_ATC_INTERCEPTOR__) return;
+  window.__TW_ATC_INTERCEPTOR__ = true;
+
+  // --- CONFIG ---
+  const LOG             = true;          // включить/выключить логи
+  const DEDUP_WINDOW_MS = 5000;          // окно дедупликации
+  const PIXEL_MAX_WAIT  = 20000;         // максимум ждать инициализации TriplePixel
+  const SHOW_DEBUG_UI   = /[?&]twdebug=1/i.test(location.search);
+
+  const PFX='[TW ATC]';
+  const log = {
+    debug: (...a)=>{ if(LOG) try{console.debug(PFX,...a)}catch{} },
+    info:  (...a)=>{ if(LOG) try{console.info (PFX,...a)}catch{} },
+    warn:  (...a)=>{ if(LOG) try{console.warn (PFX,...a)}catch{} },
+    error: (...a)=>{ if(LOG) try{console.error(PFX,...a)}catch{} },
+  };
+
+  // --- TriplePixel READY + QUEUE ---
+  const ready = () => typeof window.TriplePixel === 'function';
+  const queue = []; let waiter=null, waitStart=0;
+
+  function debugPanelInit(){
+    if (!SHOW_DEBUG_UI || document.getElementById('tw-debug')) return;
+    const box = document.createElement('div');
+    box.id = 'tw-debug';
+    box.style.cssText = 'position:fixed;z-index:2147483647;bottom:10px;right:10px;width:360px;max-height:50vh;overflow:auto;background:#0b1020;color:#e5f0ff;font:12px/1.4 ui-monospace,Menlo,Consolas;border:1px solid #2e3a6a;border-radius:8px;box-shadow:0 8px 20px rgba(0,0,0,.35)';
+    box.innerHTML = '<div style="padding:8px 10px;border-bottom:1px solid #2e3a6a;display:flex;align-items:center;justify-content:space-between"><strong>TW Debug</strong><button style="background:#18224a;color:#fff;border:0;border-radius:4px;padding:4px 8px;cursor:pointer">clear</button></div><div data-log style="padding:8px 10px"></div>';
+    box.querySelector('button').onclick = ()=> box.querySelector('[data-log]').innerHTML='';
+    document.body.appendChild(box);
+  }
+  function debugPush(entry){
+    if (!SHOW_DEBUG_UI) return;
+    debugPanelInit();
+    const logBox = document.querySelector('#tw-debug [data-log]');
+    const time = new Date().toISOString().split('T')[1].replace('Z','');
+    const row = document.createElement('div');
+    row.style.marginBottom = '8px';
+    row.innerHTML = `<div><span style="opacity:.7">${time}</span> <strong>${entry.dir}</strong> <code>${entry.name}</code> ${entry.note?'<em style="opacity:.7">('+entry.note+')</em>':''}</div><pre style="white-space:pre-wrap;margin:4px 0 0">${JSON.stringify(entry.payload, null, 2)}</pre>`;
+    logBox.prepend(row);
   }
 
-  // --- Read qty robustly ---
-  function readQty(form) {
-    var el = form.querySelector("[name='quantity']");
-    var v = el ? parseInt(el.value, 10) : NaN;
-
-    if (!Number.isInteger(v) || v < 1) {
-      var alt = form.querySelector(".product-quantity-section input[type='number'], .quantity input[type='number'], .quantity__input");
-      v = alt ? parseInt(alt.value, 10) : NaN;
+  function flushQueue(){
+    if (!ready()) return;
+    while (queue.length){
+      const { name, payload } = queue.shift();
+      try { window.TriplePixel(name, payload); debugPush({ dir:'→', name, payload, note:'flushed' }); log.info('Sent', name, payload); }
+      catch (e) { log.error('TriplePixel threw', e); }
     }
-
-    if (!Number.isInteger(v) || v < 1) v = lastQty;
-    if (!Number.isInteger(v) || v < 1) v = 1;
-    return v;
+    if (waiter){ clearInterval(waiter); waiter=null; }
   }
 
-  // Track qty changes
-  document.addEventListener('input', function (e) {
-    if (e.target.matches(
-      "form[action*='/cart/add'] [name='quantity'], " +
-      ".product-quantity-section input[type='number'], " +
-      ".quantity input[type='number'], " +
-      ".quantity__input"
-    )) {
-      var v = parseInt(e.target.value, 10);
-      if (Number.isInteger(v) && v > 0) lastQty = v;
+  function sendPixel(name, payload){
+    if (ready()){
+      try { window.TriplePixel(name, payload); debugPush({ dir:'→', name, payload }); log.info('Sent', name, payload); }
+      catch (e) { log.error('TriplePixel threw', e); }
+      return;
     }
-  }, true);
-
-  // --- Retry with exponential backoff for /cart.js ---
-  function fetchCartWithRetry(maxTries) {
-    var tries = 0;
-    function attempt() {
-      tries++;
-      return fetch('/cart.js', { credentials: 'same-origin' })
-        .then(function (r) {
-          if (!r.ok) throw new Error("HTTP " + r.status);
-          return r.json();
-        })
-        .catch(function (err) {
-          if (tries < maxTries) {
-            var delay = Math.min(1500, 200 * Math.pow(2, tries-1));
-            log('warn', "cart.js failed (" + err + "). Retry in " + delay + "ms");
-            return new Promise(function (res) { setTimeout(res, delay); }).then(attempt);
-          }
-          throw err;
-        });
+    queue.push({ name, payload });
+    debugPush({ dir:'Q', name, payload, note:'queued' });
+    if (!waiter){
+      waitStart = Date.now();
+      waiter = setInterval(() => {
+        if (ready() || Date.now() - waitStart > PIXEL_MAX_WAIT){
+          if (!ready()) log.warn('TriplePixel not ready; giving up queue flush');
+          flushQueue();
+        }
+      }, 150);
     }
-    return attempt();
   }
 
-  // --- Wait for TriplePixel (max 2s) ---
-  function whenTriplePixelReady(cb) {
-    var start = Date.now();
-    (function poll() {
-      if (typeof window.TriplePixel === 'function') return cb();
-      if (Date.now() - start > 2000) {
-        log('warn', 'TriplePixel not ready after 2s – proceeding with best effort');
-        return cb();
-      }
-      setTimeout(poll, 100);
-    })();
+  // --- CART TOKEN (lazy) ---
+  let CART_TOKEN=null;
+  async function getCartToken(){
+    if (CART_TOKEN !== null) return CART_TOKEN;
+    try{
+      const r = await fetch('/cart.js', { credentials:'same-origin', cache:'no-store' });
+      if (!r.ok) return (CART_TOKEN = null);
+      const cart = await r.json();
+      return (CART_TOKEN = cart?.token || null);
+    } catch { return (CART_TOKEN = null); }
   }
 
-  // --- Send ATC with fallback ---
-  function sendATC(form) {
-    try {
-      var variantId = form.querySelector("[name='id']").value;
-      var qty = readQty(form);
+  // --- DEDUP ---
+  const fpTimes = new Map();
+  const fpKey = (p,v,q)=> `${p||'p'}::${v||'v'}::${q||1}`;
+  function isDup(p,v,q){
+    const now = Date.now(), key = fpKey(p,v,q);
+    const last = fpTimes.get(key) || 0;
+    if (now - last < DEDUP_WINDOW_MS) return true;
+    fpTimes.set(key, now);
+    // очистка старых ключей
+    for (const [k,t] of fpTimes) if (now - t > DEDUP_WINDOW_MS*4) fpTimes.delete(k);
+    return false;
+  }
 
-      whenTriplePixelReady(function () {
-        fetchCartWithRetry(3)
-          .then(function (cart) {
-            var payload = { item: variantId, q: qty };
-            if (cart && cart.token) payload.token = cart.token;
-            log('debug', 'payload (with token if present):', payload);
-            try { window.TriplePixel('AddToCart', payload); }
-            catch (e) { log('error', 'TriplePixel call threw', e); }
-          })
-          .catch(function () {
-            // Backup: send without token
-            var payload = { item: variantId, q: qty };
-            log('warn', 'cart.js unavailable – sending without token', payload);
-            try { window.TriplePixel('AddToCart', payload); }
-            catch (e) { log('error', 'TriplePixel call (no token) threw', e); }
+  // --- PARSERS ---
+  function parseItemsFromBody(body){
+    try{
+      if (typeof FormData!=='undefined' && body instanceof FormData){
+        // Бандлы items[0][id], items[1][id] …
+        const idxs = new Set([...body.keys()].map(k=>(k.match(/^items\[(\d+)\]\[id\]$/)||[])[1]).filter(Boolean));
+        if (idxs.size){
+          const out=[]; idxs.forEach(i=>{
+            const id = body.get(`items[${i}][id]`);
+            const q  = parseInt(body.get(`items[${i}][quantity]`)||'1',10)||1;
+            if (id) out.push({ variantId:String(id), quantity:q });
           });
-      });
-    } catch (e) {
-      log('warn', 'sendATC failed', e);
-    }
+          if (out.length) return out;
+        }
+        // Обычная форма
+        const id = body.get('id')||body.get('variant_id')||body.get('variantId');
+        const q  = parseInt(body.get('quantity')||body.get('qty')||'1',10)||1;
+        if (id) return [{ variantId:String(id), quantity:q }];
+      }
+      if (typeof URLSearchParams!=='undefined' && body instanceof URLSearchParams){
+        const id = body.get('id')||body.get('variant_id')||body.get('variantId');
+        const q  = parseInt(body.get('quantity')||body.get('qty')||'1',10)||1;
+        if (id) return [{ variantId:String(id), quantity:q }];
+      }
+      if (typeof body==='string'){
+        try{
+          const data=JSON.parse(body);
+          if (Array.isArray(data?.items)){
+            return data.items.map(it=>({ variantId:String(it.id||it.variant_id), quantity:parseInt(it.quantity||1,10)||1 })).filter(x=>x.variantId && x.variantId!=='NaN');
+          }
+          if (data && (data.id||data.variant_id)){
+            return [{ variantId:String(data.id||data.variant_id), quantity:parseInt(data.quantity||1,10)||1 }];
+          }
+        }catch{}
+      }
+    }catch(e){ log.warn('parseItemsFromBody error', e); }
+    return [];
   }
 
-  // --- Deduplication + catch ALL /cart/add submits ---
-  document.addEventListener('submit', function (evt) {
-    var form = evt.target;
-    if (!form || !form.matches("form[action*='/cart/add']")) return;
-
-    var now = Date.now();
-    if (form.__tw_last_fire__ && (now - form.__tw_last_fire__ < DEDUP_WINDOW_MS)) {
-      return; // avoid double-fire
+  function parseItemsFromResponseJSON(json){
+    // Нормализуем ответ /cart/add.js на универсальный список
+    const rows=[];
+    if (json && typeof json==='object'){
+      if (json.id && (json.product_id || json.variant_id)) rows.push({ product_id: json.product_id || null, variant_id: json.variant_id || json.id, quantity: parseInt(json.quantity||1,10)||1 });
+      if (Array.isArray(json.items)) json.items.forEach(li=> rows.push({ product_id: li.product_id || null, variant_id: li.variant_id || li.id, quantity: parseInt(li.quantity||1,10)||1 }));
+      if (json.item){ const li=json.item; rows.push({ product_id: li.product_id || null, variant_id: li.variant_id || li.id, quantity: parseInt(li.quantity||1,10)||1 }); }
     }
-    form.__tw_last_fire__ = now;
+    // Убираем дубли
+    const out=[], seen=new Set();
+    for (const r of rows){
+      const k = `${r.product_id||''}/${r.variant_id||''}/${r.quantity}`;
+      if (!seen.has(k)){ out.push(r); seen.add(k); }
+    }
+    return out;
+  }
 
-    sendATC(form);
+  async function resolveProductId(variantId){
+    try{
+      const r = await fetch(`/variants/${variantId}.json`, { credentials:'same-origin', cache:'no-store' });
+      if (!r.ok) return null;
+      const data = await r.json();
+      return data?.product?.id || data?.variant?.product_id || null;
+    } catch { return null; }
+  }
+
+  async function emitATC(productId, variantId, quantity){
+    if (!productId || !variantId) return;
+    const q = parseInt(quantity||1,10)||1;
+    if (isDup(productId, variantId, q)) { log.debug('dedup skip', { productId, variantId, q }); return; }
+    const payload = { item:String(productId), v:String(variantId), q };
+    const token = await getCartToken(); if (token) payload.token = token;
+    sendPixel('AddToCart', payload);
+  }
+
+  // --- FETCH PATCH ---
+  const _fetch = window.fetch;
+  window.fetch = async function twFetch(input, init = {}){
+    const url = typeof input==='string' ? input : (input?.url || '');
+    let isATC = false;
+    try { isATC = /\/cart\/add(\.js|\.json)?(?:\?.*)?$/.test(new URL(url, location.origin).pathname); } catch {}
+    let reqClone = null;
+
+    if (isATC){
+      const b = init?.body;
+      if (b instanceof FormData){ reqClone = new FormData(); for (const [k,v] of b.entries()) reqClone.append(k,v); }
+      else if (b instanceof URLSearchParams){ reqClone = new URLSearchParams(b.toString()); }
+      else if (typeof b === 'string'){ reqClone = String(b); }
+    }
+
+    const resp = await _fetch.apply(this, arguments);
+
+    if (isATC && resp && resp.ok){
+      try{
+        const copy = resp.clone();
+        let parsed=null; try{ parsed = await copy.json(); }catch{}
+        const rows = parseItemsFromResponseJSON(parsed);
+        if (rows.length){
+          for (const row of rows){ await emitATC(row.product_id, row.variant_id, row.quantity); }
+        } else if (reqClone){
+          const items = parseItemsFromBody(reqClone);
+          for (const it of items){
+            const pid = await resolveProductId(it.variantId);
+            if (pid) await emitATC(pid, it.variantId, it.quantity);
+          }
+        }
+      } catch(e){ log.warn('ATC fetch-hook error', e); }
+    }
+    return resp;
+  };
+
+  // --- XHR PATCH ---
+  const _XHR = window.XMLHttpRequest;
+  function PatchedXHR(){
+    const xhr = new _XHR(); let _url='', _method='GET', _body=null;
+    const open = xhr.open; xhr.open = function(m,u){ _method=(m||'GET').toUpperCase(); _url=u; return open.apply(xhr, arguments); };
+    const send = xhr.send; xhr.send = function(b){
+      _body=b;
+      xhr.addEventListener('load', async ()=>{
+        try{
+          const isATC = _method==='POST' && /\/cart\/add(\.js|\.json)?(?:\?.*)?$/.test(new URL(_url, location.origin).pathname);
+          if (isATC && xhr.status>=200 && xhr.status<300){
+            const items = parseItemsFromBody(_body);
+            for (const it of items){
+              const pid = await resolveProductId(it.variantId);
+              if (pid) await emitATC(pid, it.variantId, it.quantity);
+            }
+          }
+        } catch(e){ log.warn('ATC xhr-hook error', e); }
+      });
+      return send.apply(xhr, arguments);
+    };
+    return xhr;
+  }
+  window.XMLHttpRequest = PatchedXHR;
+
+  // --- SUBMIT PREVIEW (не отправляет событие, только подсветка кандидатов в debug) ---
+  document.addEventListener('submit', async (evt)=>{
+    const form = evt.target?.closest("form[action*='/cart/add']");
+    if (!form || !SHOW_DEBUG_UI) return;
+    try{
+      const fd = new FormData(form);
+      const items = parseItemsFromBody(fd);
+      for (const it of items){
+        const pid = await resolveProductId(it.variantId);
+        if (pid) debugPush({ dir:'~', name:'ATC candidate', payload:{ item: pid, v: it.variantId, q: it.quantity } });
+      }
+    } catch(e){ log.warn('submit preview error', e); }
   }, true);
 
+  log.info('TW AddToCart interceptor installed');
 })();
 </script>
+
 
 
 
