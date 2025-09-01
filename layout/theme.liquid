@@ -363,14 +363,14 @@ https://cdn1.stamped.io/files/widget.min.js
 (() => {
   'use strict';
 
-  // --- SINGLETON GUARD ---
+  // SINGLETON GUARD
   if (window.__TW_ATC_INTERCEPTOR__) return;
   window.__TW_ATC_INTERCEPTOR__ = true;
 
-  // --- CONFIG ---
-  const LOG             = true;          // включить/выключить логи
-  const DEDUP_WINDOW_MS = 5000;          // окно дедупликации
-  const PIXEL_MAX_WAIT  = 20000;         // максимум ждать инициализации TriplePixel
+  // CONFIG
+  const LOG             = true;
+  const DEDUP_WINDOW_MS = 5000;
+  const PIXEL_MAX_WAIT  = 20000;
   const SHOW_DEBUG_UI   = /[?&]twdebug=1/i.test(location.search);
 
   const PFX='[TW ATC]';
@@ -381,7 +381,7 @@ https://cdn1.stamped.io/files/widget.min.js
     error: (...a)=>{ if(LOG) try{console.error(PFX,...a)}catch{} },
   };
 
-  // --- TriplePixel READY + QUEUE ---
+  // TriplePixel READY + QUEUE
   const ready = () => typeof window.TriplePixel === 'function';
   const queue = []; let waiter=null, waitStart=0;
 
@@ -434,7 +434,7 @@ https://cdn1.stamped.io/files/widget.min.js
     }
   }
 
-  // --- CART TOKEN (lazy) ---
+  // CART TOKEN (lazy)
   let CART_TOKEN=null;
   async function getCartToken(){
     if (CART_TOKEN !== null) return CART_TOKEN;
@@ -446,7 +446,7 @@ https://cdn1.stamped.io/files/widget.min.js
     } catch { return (CART_TOKEN = null); }
   }
 
-  // --- DEDUP ---
+  // DEDUP
   const fpTimes = new Map();
   const fpKey = (p,v,q)=> `${p||'p'}::${v||'v'}::${q||1}`;
   function isDup(p,v,q){
@@ -454,16 +454,14 @@ https://cdn1.stamped.io/files/widget.min.js
     const last = fpTimes.get(key) || 0;
     if (now - last < DEDUP_WINDOW_MS) return true;
     fpTimes.set(key, now);
-    // очистка старых ключей
     for (const [k,t] of fpTimes) if (now - t > DEDUP_WINDOW_MS*4) fpTimes.delete(k);
     return false;
   }
 
-  // --- PARSERS ---
+  // PARSERS
   function parseItemsFromBody(body){
     try{
       if (typeof FormData!=='undefined' && body instanceof FormData){
-        // Бандлы items[0][id], items[1][id] …
         const idxs = new Set([...body.keys()].map(k=>(k.match(/^items\[(\d+)\]\[id\]$/)||[])[1]).filter(Boolean));
         if (idxs.size){
           const out=[]; idxs.forEach(i=>{
@@ -473,7 +471,6 @@ https://cdn1.stamped.io/files/widget.min.js
           });
           if (out.length) return out;
         }
-        // Обычная форма
         const id = body.get('id')||body.get('variant_id')||body.get('variantId');
         const q  = parseInt(body.get('quantity')||body.get('qty')||'1',10)||1;
         if (id) return [{ variantId:String(id), quantity:q }];
@@ -499,14 +496,12 @@ https://cdn1.stamped.io/files/widget.min.js
   }
 
   function parseItemsFromResponseJSON(json){
-    // Нормализуем ответ /cart/add.js на универсальный список
     const rows=[];
     if (json && typeof json==='object'){
       if (json.id && (json.product_id || json.variant_id)) rows.push({ product_id: json.product_id || null, variant_id: json.variant_id || json.id, quantity: parseInt(json.quantity||1,10)||1 });
       if (Array.isArray(json.items)) json.items.forEach(li=> rows.push({ product_id: li.product_id || null, variant_id: li.variant_id || li.id, quantity: parseInt(li.quantity||1,10)||1 }));
       if (json.item){ const li=json.item; rows.push({ product_id: li.product_id || null, variant_id: li.variant_id || li.id, quantity: parseInt(li.quantity||1,10)||1 }); }
     }
-    // Убираем дубли
     const out=[], seen=new Set();
     for (const r of rows){
       const k = `${r.product_id||''}/${r.variant_id||''}/${r.quantity}`;
@@ -533,7 +528,7 @@ https://cdn1.stamped.io/files/widget.min.js
     sendPixel('AddToCart', payload);
   }
 
-  // --- FETCH PATCH ---
+  // FETCH PATCH
   const _fetch = window.fetch;
   window.fetch = async function twFetch(input, init = {}){
     const url = typeof input==='string' ? input : (input?.url || '');
@@ -569,7 +564,7 @@ https://cdn1.stamped.io/files/widget.min.js
     return resp;
   };
 
-  // --- XHR PATCH ---
+  // XHR PATCH
   const _XHR = window.XMLHttpRequest;
   function PatchedXHR(){
     const xhr = new _XHR(); let _url='', _method='GET', _body=null;
@@ -594,7 +589,7 @@ https://cdn1.stamped.io/files/widget.min.js
   }
   window.XMLHttpRequest = PatchedXHR;
 
-  // --- SUBMIT PREVIEW (не отправляет событие, только подсветка кандидатов в debug) ---
+  // SUBMIT PREVIEW
   document.addEventListener('submit', async (evt)=>{
     const form = evt.target?.closest("form[action*='/cart/add']");
     if (!form || !SHOW_DEBUG_UI) return;
