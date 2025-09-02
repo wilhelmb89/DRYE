@@ -474,6 +474,8 @@
             "button_url": "",
             "controls": true,
             "image": "shopify://shop_images/u9738261378_httpss.mj.runLSUHKETq6fE_httpss.mj.runffnPz0rxV8k_510c60cc-f287-4029-b483-e56e9555c930_3.png",
+            "image_tablet": "shopify://shop_images/u9738261378_httpss.mj.runLSUHKETq6fE_httpss.mj.runffnPz0rxV8k_510c60cc-f287-4029-b483-e56e9555c930_3.png",
+            "image_mobile": "shopify://shop_images/u9738261378_httpss.mj.runLSUHKETq6fE_httpss.mj.runffnPz0rxV8k_510c60cc-f287-4029-b483-e56e9555c930_3.png",
             "position": "row"
           }
         }
@@ -481,9 +483,8 @@
       "block_order": [
         "row_prtKDh"
       ],
-      "disabled": true,
       "custom_css": [
-        "h2 {font-family: \"Clash Grotesk\", sans-serif !important; font-weight: 300; /* Light */ font-size: 48px; /* Storlek */ letter-spacing: 0.5px; /* Justera efter smak */}"
+        "h2 {font-family: \"Clash Grotesk\", sans-serif !important; font-weight: 300; /* Light */ font-size: 48px; /* Storlek */ letter-spacing: 0.5px; /* Justera efter smak */ margin-top: 10px; /* minska avstånd uppåt */ margin-bottom: 15px; /* minska avstånd nedåt */}"
       ],
       "name": "Multirows(New)",
       "settings": {
@@ -505,6 +506,82 @@
         "sub_body_line_height_tablet": 28,
         "sub_body_font_size_mobile": 16,
         "sub_body_line_height_mobile": 24
+      }
+    },
+    "list_new_mVw4pi": {
+      "type": "list-new",
+      "blocks": {
+        "item_KhARyF": {
+          "type": "item",
+          "settings": {
+            "title": "Creams rub off, sting, or thin the skin."
+          }
+        },
+        "item_EBKxkC": {
+          "type": "item",
+          "settings": {
+            "title": "Traditional liners feel okay at first but quickly turn wet."
+          }
+        },
+        "item_QjGAdp": {
+          "type": "item",
+          "settings": {
+            "title": "Steroids calm symptoms short-term but can trigger rebound flares and TSW."
+          }
+        },
+        "item_ahjAGE": {
+          "type": "item",
+          "settings": {
+            "title": "Baby powder turns into a wet, grainy mess."
+          }
+        },
+        "item_Dp73zL": {
+          "type": "item",
+          "settings": {
+            "title": "Glove flips and constant swaps waste time and never stop sweat."
+          }
+        }
+      },
+      "block_order": [
+        "item_KhARyF",
+        "item_EBKxkC",
+        "item_QjGAdp",
+        "item_ahjAGE",
+        "item_Dp73zL"
+      ],
+      "name": "List with Image(New)",
+      "settings": {
+        "image": "shopify://shop_images/u9738261378_httpss.mj.runLSUHKETq6fE_httpss.mj.runffnPz0rxV8k_510c60cc-f287-4029-b483-e56e9555c930_3.png",
+        "title": "Why fixes don’t last:",
+        "title_font_size_desktop": 50,
+        "title_line_height_desktop": 60,
+        "title_font_size_small_desktop": 38,
+        "title_line_height_small_desktop": 50,
+        "title_font_size_tablet": 30,
+        "title_line_height_tablet": 39,
+        "title_font_size_mobile": 28,
+        "title_line_height_mobile": 32,
+        "list_item_font_size_desktop": 16,
+        "list_item_line_height_desktop": 28,
+        "list_item_font_size_tablet": 13,
+        "list_item_line_height_tablet": 24,
+        "list_item_font_size_mobile": 13,
+        "list_item_line_height_mobile": 24,
+        "content": "",
+        "content_font_size_desktop": 16,
+        "content_line_height_desktop": 24,
+        "content_font_size_small_desktop": 14,
+        "content_line_height_small_desktop": 24,
+        "content_font_size_tablet": 12,
+        "content_line_height_tablet": 18,
+        "content_font_size_mobile": 12,
+        "content_line_height_mobile": 19,
+        "button_text": "",
+        "button_url": "",
+        "m_top": 35,
+        "m_bottom": 15,
+        "mobile_m_top": 120,
+        "mobile_m_bottom": 120
       }
     },
     "multirows_new_bQbFR7": {
@@ -1143,6 +1220,7 @@
     "product_with_gallery_GRxyix",
     "icons_Bt7DUV",
     "multirows_new_RkhGE7",
+    "list_new_mVw4pi",
     "multirows_new_bQbFR7",
     "1746812889a5f81d00",
     "image_slider_4gd6Nt",
