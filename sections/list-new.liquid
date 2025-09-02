@@ -81,17 +81,18 @@
       font-size: {{ section.settings.content_font_size_mobile }}px;      
       line-height: {{ section.settings.content_line_height_mobile }}px;
     }
-/* --- Force Regular + 0.65 i den här sektionen, över bundlen --- */
+/* --- FORCE: gör listan & brödtexten Regular (400) i denna sektion --- */
 #shopify-section-{{ section.id }} .list-wrapper .list,
 #shopify-section-{{ section.id }} .list-wrapper .list .list-item,
 #shopify-section-{{ section.id }} .list-wrapper .list .list-item *,
 #shopify-section-{{ section.id }} .content .text,
 #shopify-section-{{ section.id }} .content .text * {
   font-family: var(--font-body-family, inherit) !important;
-  font-weight: 400 !important;         /* slå ut Inter Medium (500) */
-  line-height: 28px;                   /* samma luft som Multirows */
-  opacity: 0.65;                       /* samma nedtoning */
+  font-weight: 400 !important;      /* slår ut style.bundle.css (500) */
+  line-height: 28px;                 /* samma luft som Multirows */
+  opacity: 0.65;                     /* samma nedtoning som Multirows */
 }
+
 
 </style>
 
