@@ -81,18 +81,19 @@
       font-size: {{ section.settings.content_font_size_mobile }}px;      
       line-height: {{ section.settings.content_line_height_mobile }}px;
     }
-/* --- FORCE: gör listan & brödtexten Regular (400) i denna sektion --- */
+/* --- FORCE mot style.bundle.css: gör listan + content Regular (400) --- */
+/* Exkludera SVG-ikonerna så de inte påverkas */
+#shopify-section-{{ section.id }} .list-wrapper .list *:not(svg):not(path),
+#shopify-section-{{ section.id }} .content .text *:not(svg):not(path),
 #shopify-section-{{ section.id }} .list-wrapper .list,
-#shopify-section-{{ section.id }} .list-wrapper .list .list-item,
-#shopify-section-{{ section.id }} .list-wrapper .list .list-item *,
-#shopify-section-{{ section.id }} .content .text,
-#shopify-section-{{ section.id }} .content .text * {
+#shopify-section-{{ section.id }} .content .text {
   font-family: var(--font-body-family, inherit) !important;
-  font-weight: 400 !important;      /* slår ut style.bundle.css (500) */
-  line-height: 28px;                 /* samma luft som Multirows */
-  opacity: 0.65;                     /* samma nedtoning som Multirows */
+  font-weight: 400 !important;                    /* slå ut 500 */
+  font-variation-settings: "wght" 400 !important; /* tvinga variabla Inter till 400 */
+  font-synthesis-weight: none;                    /* undvik syntetisk “fetning” */
+  line-height: 28px;
+  opacity: 0.65;
 }
-
 
 </style>
 
