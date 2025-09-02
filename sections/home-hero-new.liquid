@@ -102,12 +102,10 @@
       justify-content: center;
     }
   }
-
-  /* Match Multirows text styling */
-#shopify-section-{{ section.id }} .list .list-item,
-#shopify-section-{{ section.id }} .content .text,
-#shopify-section-{{ section.id }} .list .list-item *:not(svg):not(path),
-#shopify-section-{{ section.id }} .content .text *:not(svg):not(path) {
+/* Hero brödtext – samma grå som Multirow */
+#shopify-section-{{ section.id }} .review-text,
+#shopify-section-{{ section.id }} .review-text p,
+#shopify-section-{{ section.id }} .review-text *:not(svg):not(path) {
   font-family: var(--font-body-family, Inter, sans-serif) !important;
   font-weight: 400 !important;
   font-variation-settings: "wght" 400 !important;
@@ -115,7 +113,12 @@
   font-size: 18px !important;
   line-height: 28px !important;
   letter-spacing: -0.04em;
-  color: rgb(17 17 17 / 65%) !important; /* ger samma grå som Multirow */
+  color: rgb(17 17 17 / 65%) !important; /* mjuk grå */
+}
+
+/* Om brödtexten innehåller länkar – tvinga samma färg */
+#shopify-section-{{ section.id }} .review-text a {
+  color: inherit !important;
 }
 
 </style>
