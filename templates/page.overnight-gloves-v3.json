@@ -24,10 +24,10 @@
         "review_text_font_size_mobile": 16,
         "review_text_line_height_mobile": 24,
         "reviews_link": "",
-        "button_text": "",
+        "button_text": "View product",
         "button_url": "",
         "bg": "#ffffff",
-        "check_review_text": "Check Reviews",
+        "check_review_text": "",
         "review_url": ""
       }
     },
@@ -163,8 +163,40 @@
     },
     "list_new_7GaJqq": {
       "type": "list-new",
+      "blocks": {
+        "item_y3CKnf": {
+          "type": "item",
+          "settings": {
+            "title": "asdasd"
+          }
+        },
+        "item_GqrRmP": {
+          "type": "item",
+          "settings": {
+            "title": "asdasdasd"
+          }
+        },
+        "item_NgHYER": {
+          "type": "item",
+          "settings": {
+            "title": "adasdsad"
+          }
+        },
+        "item_6Bjxnx": {
+          "type": "item",
+          "settings": {
+            "title": "asdsad"
+          }
+        }
+      },
+      "block_order": [
+        "item_y3CKnf",
+        "item_GqrRmP",
+        "item_NgHYER",
+        "item_6Bjxnx"
+      ],
       "settings": {
-        "image": "shopify://shop_images/retouch_2025040920190095_1.jpg",
+        "image": "shopify://shop_images/u9738261378_httpss.mj.runTTsEJsvFDz4_Main_Subject_Automotive__15e85598-ef9d-42cc-b2a3-3dfed3ae559b_0.png",
         "title": "",
         "title_font_size_desktop": 50,
         "title_line_height_desktop": 60,
@@ -189,12 +221,80 @@
         "content_line_height_tablet": 24,
         "content_font_size_mobile": 16,
         "content_line_height_mobile": 24,
-        "button_text": "View Product",
-        "button_url": "shopify://products/drye-eczema-sleep-gloves",
+        "button_text": "",
+        "button_url": "",
         "m_top": 30,
         "m_bottom": 80,
         "mobile_m_top": 65,
         "mobile_m_bottom": 65
+      }
+    },
+    "rich_text_with_image_YNHQDN": {
+      "type": "rich-text-with-image",
+      "blocks": {
+        "heading_BBQwBj": {
+          "type": "heading",
+          "settings": {
+            "heading": "This Is Where It Starts",
+            "heading_color": "#000000",
+            "alignment": "left",
+            "heading_font_size": 50,
+            "heading_line_height": 60,
+            "heading_margin_bottom": 20,
+            "heading_font_size_mobile": 28,
+            "heading_line_height_mobile": 42,
+            "heading_margin_bottom_mobile": 20
+          }
+        },
+        "description_a7fqwY": {
+          "type": "description",
+          "settings": {
+            "text": "<p>When sweat builds up inside gloves, the skin stays damp and softens. Friction increases, and over time, the barrier begins to break down — even before visible irritation appears.</p>",
+            "text_color": "#000000",
+            "alignment": "left",
+            "text_font_size": 16,
+            "text_line_height": 24,
+            "text_font_size_mobile": 16,
+            "text_line_height_mobile": 24
+          }
+        },
+        "media_z3FwBa": {
+          "type": "media",
+          "settings": {
+            "media_mode": "image",
+            "image": "shopify://shop_images/u9738261378_httpss.mj.runLViWZT0SgEE___Person_GenderAge_Young_0_60b5c6e7-a5f2-4baa-be23-f4e29fc6ab7d.png",
+            "video_url": "",
+            "video_width": "1108",
+            "video_height": "623",
+            "image_width": 80,
+            "media_border_radius": 12
+          }
+        }
+      },
+      "block_order": [
+        "heading_BBQwBj",
+        "description_a7fqwY",
+        "media_z3FwBa"
+      ],
+      "settings": {
+        "background_color": "#ffffff",
+        "content_max_width": 472,
+        "content_gap": 100,
+        "content_gap_mobile": 32,
+        "direction": "row",
+        "direction_mobile": "column",
+        "padding_top": 50,
+        "padding_bottom": 120,
+        "padding_left": 0,
+        "padding_right": 0,
+        "padding_top_tablet": 80,
+        "padding_bottom_tablet": 0,
+        "padding_left_tablet": 0,
+        "padding_right_tablet": 0,
+        "padding_top_mobile": 80,
+        "padding_bottom_mobile": 120,
+        "padding_left_mobile": 0,
+        "padding_right_mobile": 0
       }
     },
     "reviews_new_knbT6y": {
@@ -262,75 +362,6 @@
         "name_line_height_mobile": 24
       }
     },
-    "rich_text_with_image_YNHQDN": {
-      "type": "rich-text-with-image",
-      "blocks": {
-        "heading_BBQwBj": {
-          "type": "heading",
-          "settings": {
-            "heading": "This Is Where It Starts",
-            "heading_color": "#000000",
-            "alignment": "left",
-            "heading_font_size": 50,
-            "heading_line_height": 60,
-            "heading_margin_bottom": 20,
-            "heading_font_size_mobile": 28,
-            "heading_line_height_mobile": 42,
-            "heading_margin_bottom_mobile": 20
-          }
-        },
-        "description_a7fqwY": {
-          "type": "description",
-          "settings": {
-            "text": "<p>When sweat builds up inside gloves, the skin stays damp and softens. Friction increases, and over time, the barrier begins to break down — even before visible irritation appears.</p>",
-            "text_color": "#000000",
-            "alignment": "left",
-            "text_font_size": 16,
-            "text_line_height": 24,
-            "text_font_size_mobile": 16,
-            "text_line_height_mobile": 24
-          }
-        },
-        "media_z3FwBa": {
-          "type": "media",
-          "settings": {
-            "media_mode": "url",
-            "image": "shopify://shop_images/u9738261378_httpss.mj.rungzqQct1gxdU__Frame_Breakdown__Person_4d564039-b6f7-4310-a6f7-7812d1849a9b_3.png",
-            "video_url": "",
-            "video_width": "1108",
-            "video_height": "623",
-            "play_icon": "shopify://shop_images/play.png",
-            "image_width": 80,
-            "media_border_radius": 12
-          }
-        }
-      },
-      "block_order": [
-        "heading_BBQwBj",
-        "description_a7fqwY",
-        "media_z3FwBa"
-      ],
-      "settings": {
-        "background_color": "#ffffff",
-        "content_max_width": 472,
-        "content_gap": 100,
-        "content_gap_mobile": 32,
-        "direction": "row",
-        "direction_mobile": "column",
-        "padding_top": 50,
-        "padding_bottom": 120,
-        "padding_left": 0,
-        "padding_right": 0,
-        "padding_top_tablet": 80,
-        "padding_bottom_tablet": 0,
-        "padding_left_tablet": 0,
-        "padding_right_tablet": 0,
-        "padding_top_mobile": 80,
-        "padding_bottom_mobile": 120,
-        "padding_left_mobile": 0,
-        "padding_right_mobile": 0
-      }
-    },
     "multirows_new_m9fyh9": {
       "type": "multirows-new",
       "blocks": {
@@ -341,6 +372,7 @@
             "content": "<p>→ Sweat forms on the skin. The inner layer pulls it away instantly.<br/>→ Moisture is guided outward—through engineered layers that wick and release.<br/>→ The outer layer lets it evaporate, keeping skin dry and irritation-free.</p>",
             "button_text": "",
             "button_url": "",
+            "video": "shopify://files/videos/Textilvideo 20250819_1.mp4",
             "controls": true,
             "position": "row"
           }
@@ -352,6 +384,7 @@
             "content": "<p>For those who sleep with gloves and struggle with moisture buildup, DRYE gloves are designed to provide dryness and comfort overnight, even with prolonged use.</p>",
             "button_text": "See product page",
             "button_url": "shopify://products/products-moisture-wicking-glove-liners-for-sensitive-skin",
+            "video": "shopify://files/videos/hockey,lab, mekaniker septm.mp4",
             "controls": true,
             "position": "row-reverse"
           }
@@ -409,6 +442,27 @@
         "section_top_padding_mobile": 64,
         "section_bottom_padding_mobile": 20
       }
+    },
+    "1756836072efc87e8a": {
+      "type": "apps",
+      "blocks": {
+        "stamped_reviews_main_widget_9JqnqA": {
+          "type": "shopify://apps/stamped-reviews/blocks/main-widget/a103faaf-2125-4b0e-89fa-de5149736723",
+          "settings": {
+            "animation": true,
+            "tags_exclude": "",
+            "tags_include": "",
+            "search": "",
+            "linkify": true,
+            "use_metafields": false,
+            "sku_tagtype": "sku"
+          }
+        }
+      },
+      "block_order": [
+        "stamped_reviews_main_widget_9JqnqA"
+      ],
+      "settings": {}
     },
     "table_with_mark_gqgr3z": {
       "type": "table-with-mark",
@@ -691,44 +745,6 @@
         "section_bottom_padding_mobile": 100
       }
     },
-    "multirows_general_jgVFER": {
-      "type": "multirows-general",
-      "blocks": {
-        "row_DQQ8Wf": {
-          "type": "row",
-          "settings": {
-            "title": "Why Those with Skin Issues on Their Hands Should Read This",
-            "content": "<p>For many with eczema, psoriasis, or sensitive skin (myself included), we’ve tried everything. Creams, supplements, treatments, dietary changes – always searching for the next thing that \"might help us.\"<br/><br/>Based on feedback from hundreds of customers, our fabric has made a significant difference. Many report that they now need to moisturize their hands much less frequently, that cracks have decreased significantly, and that redness and eczema have improved – simply by allowing their skin to rest in our liner. This also applies to those who sleep with gloves.<br/><br/></p>",
-            "button_text": "About us",
-            "button_url": "shopify://pages/why-we-made-glove-liners-for-sweaty-sensitive-hands",
-            "position": "row"
-          }
-        }
-      },
-      "block_order": [
-        "row_DQQ8Wf"
-      ],
-      "settings": {
-        "special_title": false,
-        "overlap": false,
-        "title": "",
-        "invert": true,
-        "bg": "#ffffff",
-        "tx": "#000000",
-        "sub_title_font_size_desktop": 48,
-        "sub_title_line_height_desktop": 55,
-        "sub_title_font_size_tablet": 34,
-        "sub_title_line_height_tablet": 40,
-        "sub_title_font_size_mobile": 28,
-        "sub_title_line_height_mobile": 30,
-        "sub_body_font_size_desktop": 18,
-        "sub_body_line_height_desktop": 28,
-        "sub_body_font_size_tablet": 18,
-        "sub_body_line_height_tablet": 28,
-        "sub_body_font_size_mobile": 16,
-        "sub_body_line_height_mobile": 24
-      }
-    },
     "product_custom_reviews_jaC7QA": {
       "type": "product-custom-reviews",
       "blocks": {
@@ -955,12 +971,12 @@
     "home_hero_with_image_THMMkd",
     "icons_aaQQAK",
     "list_new_7GaJqq",
-    "reviews_new_knbT6y",
     "rich_text_with_image_YNHQDN",
+    "reviews_new_knbT6y",
     "multirows_new_m9fyh9",
     "before_after_TrLrRg",
+    "1756836072efc87e8a",
     "table_with_mark_gqgr3z",
-    "multirows_general_jgVFER",
     "product_custom_reviews_jaC7QA",
     "faq_Mdx4xX"
   ]
