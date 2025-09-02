@@ -7,69 +7,193 @@
   <head>
 
 <style>html.hide-during-redirect { visibility: hidden }</style>
+{%- comment -%}
+  Market-aware Cart (без редиректов):
+  - вычисляет нужный префикс рынка (например, /sv/ или /en-no/)
+  - принудительно использует его для cart/add и cart/change
+  - отдаёт sections сразу в событие on:cart:add, чтобы cart-drawer не делал лишний запрос
+{%- endcomment -%}
 <script>
-(function () {
-  // --- KONFIGURATION ---
-  // Paths utan Shopify Markets-prefix
-  var genericPath  = 'products/products-moisture-wicking-glove-liners-for-sensitive-skin';
-  var householdPath = 'products/drye-liner-stops-sweat-from-getting-trapped';
-  var mechanicPath  = 'products/drye-glove-liner-prevents-sweat-related-irritation';
+(function(){
+  'use strict';
 
-  // Map entry keys to destination paths
-  var entryMap = {
-    household: householdPath,
-    mechanic: mechanicPath
-  };
+  // ===== 1) Определяем нужный market-префикс (без редиректов) =====
+  var LIQ_LANG    = '{{ request.locale.iso_code | downcase }}';          // "sv", "en", ...
+  var LIQ_COUNTRY = '{{ localization.country.iso_code | downcase }}';     // "se", "no", ...
 
-  // --- HJÄLPFUNKTIONER ---
-  function getMarketsPrefix(pathname) {
-    var match = pathname.match(/^\/[a-z]{2}-[a-z]{2}\//);
-    return match ? match[0] : '/';
+  function desiredPrefix(lang, cc) {
+    // Кастомные правила под твой проект:
+    if (lang === 'sv')                 return '/sv/';
+    if (lang === 'en' && cc === 'no')  return '/en-no/';
+
+    // Фолбэк: /{lang}-{cc}/ или /{lang}/
+    if (cc && /^[a-z]{2}$/.test(cc)) return '/' + lang + '-' + cc + '/';
+    return '/' + lang + '/';
   }
 
-  function normalizePath(pathname) {
+  function currentPrefix(pathname) {
+    var m = pathname.match(/^\/([a-z]{2}(?:-[a-z]{2})?)\//i);
+    return m ? '/' + m[1].toLowerCase() + '/' : '';
+  }
+
+  function stripPrefix(pathname) {
     return pathname
-      .replace(/^\/[a-z]{2}-[a-z]{2}\//, '')  // Ta bort Shopify Markets-prefix
-      .replace(/^\/+|\/+$/g, '');             // Ta bort inledande/avslutande snedstreck
+      .replace(/^\/[a-z]{2}(?:-[a-z]{2})?\//i, '')
+      .replace(/^\/+|\/+$/g,'');
   }
 
-  function getEntryPage() {
-    try {
-      return localStorage.getItem('entryPage') ||
-             (document.cookie.match(/(?:^|;\s*)entryPage=(household|mechanic)/) || [])[1];
-    } catch (e) {
-      return null;
+  var pathname     = location.pathname;
+  var currPref     = currentPrefix(pathname);
+  var wantPref     = desiredPrefix(LIQ_LANG, LIQ_COUNTRY);
+  var normalized   = stripPrefix(pathname);
+  // API базовый префикс: если URL уже с префиксом — используем его; иначе — используем желаемый
+  var API_BASE     = (currPref || wantPref || '/');
+  if (!API_BASE.endsWith('/')) API_BASE += '/';
+
+  // Переопределим Shopify.routes.root и theme.routes.* так, чтобы всё cart API шло через нужный префикс
+  try {
+    window.Shopify = window.Shopify || {};
+    Shopify.routes = Shopify.routes || {};
+    Shopify.routes.root = API_BASE;
+
+    // Часто темы кладут свои роуты сюда:
+    window.theme = window.theme || {};
+    theme.routes = theme.routes || {};
+    // Унифицированные пути:
+    theme.routes.cartAdd    = API_BASE + 'cart/add.js';
+    theme.routes.cartChange = API_BASE + 'cart/change.js';
+    theme.routes.cartGet    = API_BASE + 'cart.js';
+  } catch(e){}
+
+  // ===== 2) Хелперы для variantId / quantity =====
+  function getVariantIdFromCustomSelect(form) {
+    const cs = form.querySelector('.custom-select');
+    if (!cs) return NaN;
+    const selectedTitle = cs.querySelector('.selected')?.textContent?.trim();
+    if (!selectedTitle) return NaN;
+    const opt = Array.from(cs.querySelectorAll('.custom-option'))
+      .find(o => (o.dataset?.title?.trim() || o.textContent?.trim()) === selectedTitle);
+    const id = Number(opt?.dataset?.value || NaN);
+    return Number.isInteger(id) ? id : NaN;
+  }
+
+  function resolveVariantId(form) {
+    const fromCS = getVariantIdFromCustomSelect(form);
+    if (Number.isInteger(fromCS)) return fromCS;
+
+    const radioId = Number(form.querySelector('input[type="radio"][name="id"]:checked')?.value || NaN);
+    if (Number.isInteger(radioId)) return radioId;
+
+    const selId = Number(form.querySelector('select[name="id"]')?.value || NaN);
+    if (Number.isInteger(selId)) return selId;
+
+    const vr = form.querySelector('variant-radios, variant-selects') ||
+               document.querySelector('variant-radios, variant-selects');
+    const ceVar = Number(vr?.currentVariant?.id || NaN);
+    if (Number.isInteger(ceVar)) return ceVar;
+
+    const urlVar = Number(new URL(location.href).searchParams.get('variant') || NaN);
+    if (Number.isInteger(urlVar)) return urlVar;
+
+    const hiddenId = Number(form.querySelector('input[type="hidden"][name="id"]')?.value || NaN);
+    if (Number.isInteger(hiddenId)) return hiddenId;
+
+    return NaN;
+  }
+
+  function resolveQuantity(form) {
+    const input = form.querySelector('[name="quantity"]');
+    const divQty = form.querySelector('.quantity-value');
+    let q = input ? parseInt(input.value, 10) : NaN;
+    if (!Number.isInteger(q) || q < 1) q = parseInt(divQty?.textContent?.trim() || '1', 10);
+    q = Number.isInteger(q) && q > 0 ? q : 1;
+    if (input) input.value = String(q);
+    return q;
+  }
+
+  // ===== 3) Грязезащита формы: подставляем id в hidden, чекнем радио =====
+  document.addEventListener('submit', function (evt) {
+    const form = evt.target?.closest("form[action*='/cart/add']");
+    if (!form) return;
+
+    // Не мешаем нативному сабмиту, если это не наш кастом ниже (он preventDefault)
+    const variantId = resolveVariantId(form);
+    if (!Number.isInteger(variantId)) return;
+
+    let hid = form.querySelector('input[type="hidden"][name="id"]');
+    if (!hid) {
+      hid = document.createElement('input');
+      hid.type = 'hidden';
+      hid.name = 'id';
+      form.insertBefore(hid, form.firstChild);
     }
-  }
+    hid.value = String(variantId);
 
-  function setEntryPage(source) {
+    const radioSel = `input[type="radio"][name="id"][value="${variantId}"]`;
+    const radio = form.querySelector(radioSel);
+    if (radio && !radio.checked) {
+      radio.checked = true;
+      radio.dispatchEvent(new Event('change', { bubbles: true }));
+    }
+  }, true);
+
+  // ===== 4) Полный кастом ATC (AJAX → нужный market API), без редиректов URL =====
+  document.addEventListener('submit', async function (e) {
+    const form = e.target?.closest('form[action*="/cart/add"]');
+    if (!form) return;
+
+    e.preventDefault();
+    e.stopPropagation();
+
+    const variantId = resolveVariantId(form);
+    if (!Number.isInteger(variantId)) {
+      console.warn('[ATC] No variant id');
+      return;
+    }
+    const quantity = resolveQuantity(form);
+
+    // Секции, которые нужны дроверу
+    const sectionsList = (Array.isArray(window.CartDrawer?.sections) ? window.CartDrawer.sections : ['cart-drawer','cart-icon-bubble']);
+    const sectionsQS   = encodeURIComponent(sectionsList.join(','));
+
+    // sections_url должен соответствовать МАРКЕТ-странице (а не текущему неприфексному URL)
+    const pathNoPref   = stripPrefix(location.pathname);
+    const marketURL    = API_BASE + pathNoPref;
+    const sectionsURL  = encodeURIComponent(marketURL);
+
+    // Стучимся строго в market-scoped endpoint:
+    const addUrl = API_BASE + 'cart/add.js?sections=' + sectionsQS + '&sections_url=' + sectionsURL;
+
     try {
-      localStorage.setItem('entryPage', source);
-      document.cookie = 'entryPage=' + source + '; path=/; max-age=2592000'; // 30 dagar
-    } catch (e) {}
-  }
+      const res = await fetch(addUrl, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify({ items: [{ id: variantId, quantity }] })
+      });
 
-  // --- HUVUDLOGIK ---
-  var pathname = location.pathname;
-  var path = normalizePath(pathname);
-  var prefix = getMarketsPrefix(pathname);
+      const data = await res.json();
+      if (!res.ok) throw new Error(data?.errors || res.status);
 
-  // Sätt entryPage om det är första gången (på household eller mechanic)
-  if (path === householdPath) {
-    setEntryPage('household');
-  } else if (path === mechanicPath) {
-    setEntryPage('mechanic');
-  }
+      // Отдаём уже с отрендеренными секциями — cart-drawer их возьмёт без доп. фетча
+      document.dispatchEvent(new CustomEvent('on:cart:add', {
+        bubbles: true,
+        detail: { variantId, quantity, sections: data.sections || {} }
+      }));
+      // Покажем состояние загрузки, если используется
+      document.dispatchEvent(new CustomEvent('cart:add:loading:start', { detail: { variantId, quantity } }));
+    } catch (err) {
+      console.error('[ATC] add.js error', err);
+      // Фолбэк — на страницу корзины того же market
+      location.href = API_BASE + 'cart';
+    }
+  }, true);
 
-  var entry = getEntryPage();
-
-  if (path === genericPath && entry && entryMap[entry]) {
-    // Användaren kom via household eller mechanic, men är nu på generic → omdirigera
-    document.documentElement.classList.add('hide-during-redirect');
-    location.href = prefix + entryMap[entry];
-  }
+  // ===== 5) Обновление qty внутри дровера — форсим market-prefix в change.js =====
+  // Если твой CartDrawer уже использует theme.routes.cartChange — он уже указывает на API_BASE.
+  // Ничего дополнительно делать не нужно.
 })();
 </script>
+
 
 
 
