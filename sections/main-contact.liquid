@@ -23,6 +23,14 @@
         padding-inline: 1.25rem;
     }
   }
+  /* Minska formrubrik på mobil */
+@media screen and (max-width: 767px) {
+  #shopify-section-{{ section.id }} .form-title {
+    font-size: 28px !important;
+    line-height: 32px !important;
+  }
+}
+
 {% endstyle %}
 <div class="container">
   {%- if ss.title != blank -%}
