@@ -54,6 +54,15 @@
       line-height: {{ section.settings.date_line_height_mobile }}px;
       margin-bottom: 10px;
     }
+
+    /* Justera bloggrubrik på mobil */
+@media screen and (max-width: 767px) {
+  #shopify-section-{{ section.id }} .title {
+    font-size: 28px !important;
+    line-height: 32px !important;
+  }
+}
+
   }
 </style>
 <div class="container">
