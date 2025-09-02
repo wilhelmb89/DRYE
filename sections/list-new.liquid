@@ -85,46 +85,25 @@
       font-size: {{ section.settings.content_font_size_mobile }}px;      
       line-height: {{ section.settings.content_line_height_mobile }}px;
     }
-  }
-/* Brödtext och listpunkter – exakt som Multirows */
+/* Rubrik i List with Image(New) – samma som Multirows */
+#shopify-section-{{ section.id }} .title{
+  font-family: "Clash Grotesk", sans-serif !important;
+  font-weight: 300 !important;   /* Light */
+  letter-spacing: 0.5px;
+}
+
+/* Brödtext och listpunkter – Inter, luftig känsla */
 #shopify-section-{{ section.id }} .content .text,
 #shopify-section-{{ section.id }} .list .list-item,
 #shopify-section-{{ section.id }} p,
-#shopify-section-{{ section.id }} li {
+#shopify-section-{{ section.id }} li{
   font-family: var(--font-body-family, "Inter"), sans-serif !important;
-  font-weight: 400;           /* samma som Multirows */
-  letter-spacing: normal;     /* Multirows sätter inte särskild tracking */
+  font-weight: 400;        /* samma som Multirows */
+  letter-spacing: -0.2px;  /* lite “luftigare” */
 }
 
-/* Desktop (≥1025px) – Multirows: 18/28 */
-@media (min-width: 1025px) {
-  #shopify-section-{{ section.id }} .content .text,
-  #shopify-section-{{ section.id }} .list .list-item {
-    font-size: 18px;
-    line-height: 28px;
-  }
-}
-
-/* Tablet (768–1024px) – Multirows: 18/28 */
-@media (min-width: 768px) and (max-width: 1024px) {
-  #shopify-section-{{ section.id }} .content .text,
-  #shopify-section-{{ section.id }} .list .list-item {
-    font-size: 18px;
-    line-height: 28px;
-  }
-}
-
-/* Mobil (≤767px) – Multirows: 16/24 */
-@media (max-width: 767px) {
-  #shopify-section-{{ section.id }} .content .text,
-  #shopify-section-{{ section.id }} .list .list-item {
-    font-size: 16px;
-    line-height: 24px;
-  }
-}
-
-/* Behåll layouten för bullets */
-#shopify-section-{{ section.id }} .list .list-item {
+/* Behåll din layout för bullets */
+#shopify-section-{{ section.id }} .list .list-item{
   display: flex;
   align-items: center;
 }
