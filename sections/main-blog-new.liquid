@@ -55,7 +55,12 @@
       margin-bottom: 10px;
     }
 
-
+    /* Justera bloggrubrik på mobil */
+@media screen and (max-width: 767px) {
+  #shopify-section-{{ section.id }} .title {
+    font-size: 28px !important;
+    line-height: 32px !important;
+  }
 }
 
   }
@@ -198,7 +203,7 @@
         "min": 0,
         "max": 100,
         "step": 1,
-        "default": 28,
+        "default": 24,
         "unit": "px"
       },
       {
@@ -218,7 +223,7 @@
         "min": 0,
         "max": 100,
         "step": 1,
-        "default": 28,
+        "default": 24,
         "unit": "px"
       },
       {
