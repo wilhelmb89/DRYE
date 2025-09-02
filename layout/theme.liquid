@@ -437,15 +437,14 @@ https://cdn1.stamped.io/files/widget.min.js
   // CART TOKEN (lazy)
   let CART_TOKEN=null;
   async function getCartToken(){
-  if (CART_TOKEN !== null) return CART_TOKEN;
-  try{
-    const r = await fetch(shopifyPath('cart.js'), { credentials:'same-origin', cache:'no-store' });
-    if (!r.ok) return (CART_TOKEN = null);
-    const cart = await r.json();
-    return (CART_TOKEN = cart?.token || null);
-  } catch { return (CART_TOKEN = null); }
-}
-
+    if (CART_TOKEN !== null) return CART_TOKEN;
+    try{
+      const r = await fetch('/cart.js', { credentials:'same-origin', cache:'no-store' });
+      if (!r.ok) return (CART_TOKEN = null);
+      const cart = await r.json();
+      return (CART_TOKEN = cart?.token || null);
+    } catch { return (CART_TOKEN = null); }
+  }
 
   // DEDUP
   const fpTimes = new Map();
