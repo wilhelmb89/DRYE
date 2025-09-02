@@ -32,6 +32,19 @@
       font-size: {{ section.settings.content_font_size_desktop }}px;      
       line-height: {{ section.settings.content_line_height_desktop }}px;
     }
+
+    /* --- FORCE mot style.bundle.css: gör listan + content Regular (400) --- */
+#shopify-section-{{ section.id }} .list .list-item,
+#shopify-section-{{ section.id }} .list .list-item *:not(svg):not(path),
+#shopify-section-{{ section.id }} .content .text,
+#shopify-section-{{ section.id }} .content .text *:not(svg):not(path) {
+  font-family: var(--font-body-family, inherit) !important;
+  font-weight: 400 !important;                    /* slå ut 500 */
+  font-variation-settings: "wght" 400 !important; /* tvinga variabel Inter till 400 */
+  font-synthesis-weight: none;
+  line-height: 28px;
+  opacity: 0.65;
+}
   }
   @media (min-width: 1025px) and (max-width: 1440px) {
     #shopify-section-{{ section.id }} .title {
@@ -46,6 +59,19 @@
       font-size: {{ section.settings.content_font_size_small_desktop }}px;      
       line-height: {{ section.settings.content_line_height_small_desktop }}px;
     }
+
+    /* --- FORCE mot style.bundle.css: gör listan + content Regular (400) --- */
+#shopify-section-{{ section.id }} .list .list-item,
+#shopify-section-{{ section.id }} .list .list-item *:not(svg):not(path),
+#shopify-section-{{ section.id }} .content .text,
+#shopify-section-{{ section.id }} .content .text *:not(svg):not(path) {
+  font-family: var(--font-body-family, inherit) !important;
+  font-weight: 400 !important;                    /* slå ut 500 */
+  font-variation-settings: "wght" 400 !important; /* tvinga variabel Inter till 400 */
+  font-synthesis-weight: none;
+  line-height: 28px;
+  opacity: 0.65;
+}
   }
   @media (min-width: 768px) and (max-width: 1024px) {
     #shopify-section-{{ section.id }} .title {
@@ -61,6 +87,19 @@
       font-size: {{ section.settings.content_font_size_tablet }}px;      
       line-height: {{ section.settings.content_line_height_tablet }}px;
     }
+
+    /* --- FORCE mot style.bundle.css: gör listan + content Regular (400) --- */
+#shopify-section-{{ section.id }} .list .list-item,
+#shopify-section-{{ section.id }} .list .list-item *:not(svg):not(path),
+#shopify-section-{{ section.id }} .content .text,
+#shopify-section-{{ section.id }} .content .text *:not(svg):not(path) {
+  font-family: var(--font-body-family, inherit) !important;
+  font-weight: 400 !important;                    /* slå ut 500 */
+  font-variation-settings: "wght" 400 !important; /* tvinga variabel Inter till 400 */
+  font-synthesis-weight: none;
+  line-height: 28px;
+  opacity: 0.65;
+}
   }
   @media screen and (max-width: 767px) {
     #shopify-section-{{ section.id }} .container.small {
