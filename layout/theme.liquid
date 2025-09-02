@@ -295,67 +295,211 @@ https://cdn1.stamped.io/files/widget.min.js
 
 <script>
 (function () {
+  // ---------- Helpers ----------
   function getVariantIdFromCustomSelect(form) {
     const cs = form.querySelector('.custom-select');
     if (!cs) return NaN;
-
     const selectedTitle = cs.querySelector('.selected')?.textContent?.trim();
     if (!selectedTitle) return NaN;
-
-    const opt = Array.from(cs.querySelectorAll('.custom-option')).find(o =>
-      (o.dataset?.title?.trim() || o.textContent?.trim()) === selectedTitle
-    );
-    return Number(opt?.dataset?.value || NaN);
+    const opt = Array.from(cs.querySelectorAll('.custom-option')).find((o) => {
+      const t = o.dataset?.title?.trim() || o.textContent?.trim();
+      return t === selectedTitle;
+    });
+    const id = Number(opt?.dataset?.value || NaN);
+    return Number.isInteger(id) ? id : NaN;
   }
 
   function resolveVariantId(form) {
+    // 1) кастомный селект
     const fromCS = getVariantIdFromCustomSelect(form);
     if (Number.isInteger(fromCS)) return fromCS;
 
+    // 2) radio
     const radioId = Number(form.querySelector('input[type="radio"][name="id"]:checked')?.value || NaN);
     if (Number.isInteger(radioId)) return radioId;
 
+    // 3) select[name="id"]
     const selId = Number(form.querySelector('select[name="id"]')?.value || NaN);
     if (Number.isInteger(selId)) return selId;
 
+    // 4) currentVariant из кастом-элементов
     const vr = form.querySelector('variant-radios, variant-selects') ||
                document.querySelector('variant-radios, variant-selects');
     const ceVar = Number(vr?.currentVariant?.id || NaN);
     if (Number.isInteger(ceVar)) return ceVar;
 
+    // 5) ?variant= в URL
     const urlVar = Number(new URL(location.href).searchParams.get('variant') || NaN);
     if (Number.isInteger(urlVar)) return urlVar;
 
+    // 6) скрытый input[name="id"]
     const hiddenId = Number(form.querySelector('input[type="hidden"][name="id"]')?.value || NaN);
     if (Number.isInteger(hiddenId)) return hiddenId;
 
     return NaN;
   }
 
-  document.addEventListener('submit', function (evt) {
-    const form = evt.target?.closest("form[action*='/cart/add']");
+  function resolveQuantity(form) {
+    const input = form.querySelector('[name="quantity"]');
+    const divQty = form.querySelector('.quantity-value');
+    let q = input ? parseInt(input.value, 10) : NaN;
+    if (!Number.isInteger(q) || q < 1) q = parseInt(divQty?.textContent?.trim() || '1', 10);
+    q = Number.isInteger(q) && q > 0 ? q : 1;
+    if (input) input.value = String(q);
+    return q;
+  }
+
+  function getSectionsList() {
+    return Array.isArray(window.CartDrawer?.sections)
+      ? window.CartDrawer.sections.join(',')
+      : 'cart-drawer,cart-icon-bubble';
+  }
+
+  async function fetchSections(sectionsCsv) {
+    // подтягиваем секции безопасно с учётом префикса Markets
+    const url = new URL(window.Shopify.routes.root, location.origin);
+    url.searchParams.set('sections', sectionsCsv);
+    const res = await fetch(url.toString(), { credentials: 'same-origin' });
+    if (!res.ok) throw new Error('Sections fetch failed: ' + res.status);
+    return res.json();
+  }
+
+  function renderDrawer(sectionsJSON) {
+    // совместимо с вашим CartDrawer.renderContents
+    if (sectionsJSON?.['cart-drawer']) {
+      const el = document.querySelector('cart-drawer');
+      if (el && typeof el.renderContents === 'function') {
+        el.renderContents(sectionsJSON, true);
+        return;
+      }
+      // Фолбэк: заменить innerHTML целиком
+      const html = sectionsJSON['cart-drawer'];
+      const tmpl = document.createElement('template');
+      tmpl.innerHTML = html;
+      const srcDrawer = tmpl.content.querySelector('cart-drawer');
+      const dstDrawer = document.querySelector('cart-drawer');
+      if (srcDrawer && dstDrawer) {
+        dstDrawer.innerHTML = srcDrawer.innerHTML;
+        dstDrawer.setAttribute('open', '');
+      }
+    }
+  }
+
+  function safeOpenDrawer() {
+    const drawer = document.querySelector('cart-drawer');
+    if (drawer && typeof drawer.open === 'function') {
+      drawer.open();
+    } else if (drawer) {
+      drawer.setAttribute('open', '');
+    }
+  }
+
+  // ---------- Основной обработчик ----------
+  document.addEventListener('submit', async (e) => {
+    const form = e.target?.closest('form[action*="/cart/add"]');
     if (!form) return;
 
+    e.preventDefault();
+    e.stopPropagation();
+
     const variantId = resolveVariantId(form);
-    if (!Number.isInteger(variantId)) return;
-
-    let hid = form.querySelector('input[type="hidden"][name="id"]');
-    if (!hid) {
-      hid = document.createElement('input');
-      hid.type = 'hidden';
-      hid.name = 'id';
+    if (!Number.isInteger(variantId)) {
+      console.warn('[ATC] Variant id not found');
+      return;
     }
-    hid.value = String(variantId);
-    if (form.firstChild !== hid) form.insertBefore(hid, form.firstChild);
 
-    const radio = form.querySelector(`input[type="radio"][name="id"][value="${variantId}"]`);
-    if (radio && !radio.checked) {
-      radio.checked = true;
-      radio.dispatchEvent(new Event('change', { bubbles: true }));
+    // синхронизируем выбранный radio/hidden id
+    const radioToCheck = form.querySelector(`input[type="radio"][name="id"][value="${variantId}"]`);
+    if (radioToCheck && !radioToCheck.checked) {
+      radioToCheck.checked = true;
+      radioToCheck.dispatchEvent(new Event('change', { bubbles: true }));
+    }
+    let idInput = form.querySelector('input[type="hidden"][name="id"]');
+    if (!idInput) {
+      idInput = document.createElement('input');
+      idInput.type = 'hidden';
+      idInput.name = 'id';
+      form.prepend(idInput);
+    }
+    idInput.value = String(variantId);
+
+    const quantity = resolveQuantity(form);
+    document.dispatchEvent(new CustomEvent('cart:add:loading:start', { detail: { variantId, quantity } }));
+
+    const sectionsCsv = getSectionsList();
+
+    try {
+      // Формируем URL с префиксом Markets и обязательным sections_url
+      const url = new URL(window.Shopify.routes.root + 'cart/add.js', location.origin);
+      url.searchParams.set('sections', sectionsCsv);
+      url.searchParams.set('sections_url', location.pathname);
+
+      const res = await fetch(url.toString(), {
+        method: 'POST',
+        credentials: 'same-origin',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        body: JSON.stringify({ items: [{ id: variantId, quantity }] })
+      });
+
+      // Бывают ответы не JSON (HTML/редирект). Пытаемся аккуратно распарсить.
+      let data = null;
+      let okJson = false;
+      try {
+        data = await res.clone().json();
+        okJson = true;
+      } catch (_) {
+        okJson = false;
+      }
+
+      // Если ответ не ок И это JSON с ошибкой — покажем ошибку и не редиректим.
+      if (!res.ok && okJson && data?.errors) {
+        console.error('ATC error:', data.errors);
+        // Мягкий фолбэк: откроем обычный /cart только если drawer недоступен.
+        safeOpenDrawer();
+        try {
+          const sections = await fetchSections(sectionsCsv);
+          renderDrawer(sections);
+        } catch (_) {}
+        return;
+      }
+
+      // Нормальный кейс: либо получили JSON с sections, либо не-JSON (но добавление прошло)
+      if (okJson && data?.sections) {
+        document.dispatchEvent(new CustomEvent('on:cart:add', {
+          bubbles: true,
+          detail: { variantId, quantity, sections: data.sections }
+        }));
+      } else {
+        // Нет секций в ответе (или не JSON) — добираем секции отдельно.
+        const sections = await fetchSections(sectionsCsv);
+        renderDrawer(sections);
+        document.dispatchEvent(new CustomEvent('on:cart:add', {
+          bubbles: true,
+          detail: { variantId, quantity, sections }
+        }));
+      }
+
+      // На всякий случай — открыть дроуэр.
+      safeOpenDrawer();
+    } catch (err) {
+      console.error('ATC network/error fallback:', err);
+      // Никаких принудительных редиректов. Пробуем мягко обновить и открыть дроуэр:
+      try {
+        const sections = await fetchSections(sectionsCsv);
+        renderDrawer(sections);
+        safeOpenDrawer();
+      } catch (_) {
+        // Если вообще всё плохо — только тогда фолбэк на /cart
+        location.href = window.Shopify?.routes?.cart_url || '/cart';
+      }
     }
   }, true);
 })();
 </script>
+
 
 
 
