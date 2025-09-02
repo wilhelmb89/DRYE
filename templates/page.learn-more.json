@@ -9,26 +9,56 @@
  */
 {
   "sections": {
-    "home_hero_new_3gDgq9": {
-      "type": "home-hero-new",
-      "name": "Homepage Hero(New)",
+    "home_hero_with_image_8FmxyC": {
+      "type": "home-hero-with-image",
+      "name": "Home Hero With Image",
       "settings": {
+        "background_image": "shopify://shop_images/kopia.jpg",
+        "invert": true,
+        "content_gap": 32,
+        "content_gap_mobile": 14,
         "title": "Independent Research on Glove Use and Skin Health",
-        "cover_image": "shopify://shop_images/2E9A8886ny2.jpg",
-        "stars": 5,
-        "review_text": "",
-        "review_text_font_size_desktop": 16,
-        "review_text_line_height_desktop": 24,
-        "review_text_font_size_tablet": 16,
-        "review_text_line_height_tablet": 24,
-        "review_text_font_size_mobile": 16,
-        "review_text_line_height_mobile": 24,
-        "reviews_link": "",
+        "title_font_size_desktop": 50,
+        "title_line_height_desktop": 60,
+        "title_font_size_tablet": 50,
+        "title_line_height_tablet": 60,
+        "title_font_size_mobile": 28,
+        "title_line_height_mobile": 32,
+        "show_divider": true,
+        "divider_color": "#ffffff",
+        "subtitle": "Peer-reviewed studies show that trapped sweat under gloves weakens the skin barrier, increases irritation, and triggers dermatitis flare-ups.",
+        "sub_title_font_size_desktop": 18,
+        "sub_title_line_height_desktop": 31,
+        "sub_title_font_size_tablet": 18,
+        "sub_title_line_height_tablet": 32,
+        "sub_title_font_size_mobile": 18,
+        "sub_title_line_height_mobile": 29,
+        "content": "",
+        "content_font_size_desktop": 16,
+        "content_line_height_desktop": 24,
+        "content_font_size_tablet": 16,
+        "content_line_height_tablet": 24,
+        "content_font_size_mobile": 16,
+        "content_line_height_mobile": 24,
         "button_text": "",
         "button_url": "",
-        "bg": "#ffffff",
+        "button_color": "#ffffff",
+        "button_text_color": "#000000",
+        "button_font_size": 16,
+        "button_line_height": 21,
+        "show_arrow": false,
         "check_review_text": "",
-        "review_url": ""
+        "review_url": "",
+        "check_review_text_color": "#ffffff",
+        "section_border_radius": 96,
+        "section_border_radius_tablet": 38,
+        "section_border_radius_mobile": 28,
+        "padding_y": 96,
+        "padding_x": 0,
+        "padding_y_tablet": 40,
+        "padding_x_tablet": 48,
+        "padding_y_mobile": 100,
+        "padding_x_mobile": 0
       }
     },
     "page_hero_new_GX4m8L": {
@@ -65,25 +95,11 @@
     "multirows_new_wVN7GV": {
       "type": "multirows-new",
       "blocks": {
-        "row_XrjMck": {
-          "type": "row",
-          "settings": {
-            "title": "",
-            "content": "<p>Independent, peer-reviewed studies show what happens when sweat stays trapped under gloves:<br/><br/>• The skin barrier weakens<br/>• Irritation increases<br/>• Conditions like dermatitis flare up<br/><br/>These studies are not affiliated with DRYE. We share them to highlight why solving moisture inside gloves matters – and why addressing Moisture-Associated Skin Damage (MASD) is critical for anyone wearing gloves for extended periods.</p>",
-            "button_text": "",
-            "button_url": "",
-            "controls": true,
-            "image": "shopify://shop_images/kopia.jpg",
-            "image_tablet": "shopify://shop_images/kopia.jpg",
-            "image_mobile": "shopify://shop_images/kopia.jpg",
-            "position": "row-reverse"
-          }
-        },
         "row_dLbqHN": {
           "type": "row",
           "settings": {
             "title": "Moisture-Associated Skin Damage (MASD)",
-            "content": "<p>Moisture-Associated Skin Damage (MASD) is now recognized as a key factor in glove-induced dermatitis. It occurs when sweat stays against the skin for prolonged periods, weakening the barrier and triggering irritation and flare-ups.</p>",
+            "content": "<p>These studies are independent of DRYE; we share them to underline the importance of addressing Moisture-Associated Skin Damage (MASD) in anyone wearing gloves for long periods.<br/><br/>Moisture-Associated Skin Damage (MASD) is now recognized as a key factor in glove-induced dermatitis. It occurs when sweat stays against the skin for prolonged periods, weakening the barrier and triggering irritation and flare-ups.</p>",
             "button_text": "",
             "button_url": "",
             "controls": true,
@@ -95,7 +111,6 @@
         }
       },
       "block_order": [
-        "row_XrjMck",
         "row_dLbqHN"
       ],
       "name": "Multirows(New)",
@@ -200,7 +215,7 @@
     }
   },
   "order": [
-    "home_hero_new_3gDgq9",
+    "home_hero_with_image_8FmxyC",
     "page_hero_new_GX4m8L",
     "multirows_new_wVN7GV",
     "faq_4g7Pag",
