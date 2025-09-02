@@ -16,16 +16,22 @@
       font-weight: 600;
     }
     .container {
-      max-width: 980px;
+  max-width: 980px;
 
-      p {
-        font-weight: 300;
+  p {
+    font-family: var(--font-body-family, "Inter", sans-serif) !important;
+    font-weight: 400 !important;
+    font-variation-settings: "wght" 400 !important;
+    font-synthesis-weight: none;
+    line-height: 28px;
+    letter-spacing: -0.2px;
 
-        a {
-          line-height: 27px;
-        }
-      }
+    a {
+      line-height: 27px;
     }
+  }
+}
+
   }
   #shopify-section-{{ section.id }} ul {
     list-style: disc;
