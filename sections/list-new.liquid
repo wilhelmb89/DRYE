@@ -84,21 +84,22 @@
       line-height: {{ section.settings.content_line_height_mobile }}px;
     }
 }
-/* Matcha Multirows exakt för lista + brödtext i denna sektion */
+/* Match Multirows text styling */
 #shopify-section-{{ section.id }} .list .list-item,
 #shopify-section-{{ section.id }} .content .text,
 #shopify-section-{{ section.id }} .list .list-item *:not(svg):not(path),
 #shopify-section-{{ section.id }} .content .text *:not(svg):not(path) {
-  font-family: var(--font-body-family, Inter, sans-serif) !important; /* Inter */
-  font-weight: 400 !important;                        /* Regular */
-  font-variation-settings: "wght" 400 !important;     /* variabel Inter -> 400 */
+  font-family: var(--font-body-family, Inter, sans-serif) !important;
+  font-weight: 400 !important;                        /* Inter Regular */
+  font-variation-settings: "wght" 400 !important;     /* variable Inter -> 400 */
   font-synthesis-weight: none;
-  font-size: 18px !important;                         /* samma som Multirows */
-  line-height: 28px !important;                       /* samma som Multirows */
-  letter-spacing: -0.04em;                            /* samma spacing */
-  opacity: 1 !important;                              /* ingen nedtoning */
-  color: #111 !important; /* rgb(17,17,17) */                         /* samma body-färg */
+  font-size: 18px !important;                         /* same as Multirows */
+  line-height: 28px !important;                       /* same as Multirows */
+  letter-spacing: -0.04em;                            /* same tracking */
+  opacity: 1 !important;                              /* no dimming */
+  color: #111111 !important;                          /* same text color as Multirows */
 }
+
 
 
 </style>
