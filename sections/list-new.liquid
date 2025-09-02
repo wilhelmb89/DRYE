@@ -7,15 +7,15 @@
       margin-block: {{ ss.mobile_m_top }}px {{ ss.mobile_m_bottom }}px;
     }
   }
-/* Samma brödtext som Multirows: Inter + lite luft */
 #shopify-section-{{ section.id }} .list .list-item,
 #shopify-section-{{ section.id }} .content .text,
 #shopify-section-{{ section.id }} p,
 #shopify-section-{{ section.id }} li {
-  font-family: var(--font-body-family), "Inter", sans-serif !important;
-  font-weight: var(--font-body-weight, 400);
-  letter-spacing: -0.2px;   /* gör texten “lättare/luftigare” */
+  font-family: var(--font-body-family, sans-serif) !important; /* Inter via theme.css */
+  font-weight: 400;           /* Regular */
+  letter-spacing: -0.2px;     /* samma “luftiga” känsla som Multirows */
 }
+
 
 /* behåll layouten för listpunkterna */
 #shopify-section-{{ section.id }} .list .list-item {
