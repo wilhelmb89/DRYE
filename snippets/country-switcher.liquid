@@ -1,0 +1,106 @@
+{%- liquid
+  assign current_country_name = localization.country.name
+  assign current_country_iso = localization.country.iso_code
+  assign current_country_currency = localization.country.currency.symbol
+
+  assign priority_countries_string = priority_countries | default: 'SE,GB,US,DE'
+  assign priority_countries = priority_countries_string | split: ','
+-%}
+
+<details
+  data-unfocus-close
+  class=""
+>
+  <summary
+    class="localization-summary"
+  >
+    <div class="country-flags country-flags--{{ current_country_iso }}"></div>
+    {{ current_country_iso }} ({{ current_country_currency }})
+    {%- render 'icon', type: 'caret-down' -%}
+  </summary>
+
+  <div
+    class="localization-popover"
+  >
+    {%- form 'localization', data-instant-submit: '' -%}
+      <fieldset
+        class="localization-listbox"
+      >
+        {%- for country_iso in priority_countries -%}
+          {%- assign country = localization.available_countries | find: 'iso_code', country_iso -%}
+          {%- if country -%}
+            {%- liquid
+              assign country_iso = country.iso_code
+              assign country_name = country.name | capitalize
+              assign country_currency = country.currency.symbol
+            -%}
+
+            <label
+              for="country-{{ country.iso_code }}"
+              type="submit"
+              class="localization-listbox-item"
+              name="locale_code"
+              role="option"
+              value="{{ country.iso_code }}"
+              {% if country.iso_code == localization.country.iso_code %}
+                aria-selected="true"
+              {% endif %}
+            >
+              <div class="country-flags country-flags--{{ country.iso_code }}"></div>
+
+              <input
+                class="sr-only"
+                name="country_code"
+                value="{{ country.iso_code }}"
+                type="radio"
+                id="country-{{ country.iso_code }}"
+                {%- if country.iso_code == current_country_iso -%}
+                  checked
+                {%- endif -%}
+              >
+
+              {{- country_iso }} ({{ country_currency }})
+            </label>
+          {%- endif -%}
+        {%- endfor -%}
+
+        {%- for country in localization.available_countries -%}
+          {%- unless priority_countries contains country.iso_code -%}
+            {%- liquid
+              assign country_iso = country.iso_code
+              assign country_name = country.name | capitalize
+              assign country_currency = country.currency.symbol
+            -%}
+
+            <label
+              for="country-{{ country.iso_code }}"
+              type="submit"
+              class="localization-listbox-item"
+              name="locale_code"
+              role="option"
+              value="{{ country.iso_code }}"
+              {% if country.iso_code == localization.country.iso_code %}
+                aria-selected="true"
+              {% endif %}
+            >
+              <div class="country-flags country-flags--{{ country.iso_code }}"></div>
+
+              <input
+                class="sr-only"
+                name="country_code"
+                value="{{ country.iso_code }}"
+                type="radio"
+                id="country-{{ country.iso_code }}"
+                {%- if country.iso_code == current_country_iso -%}
+                  checked
+                {%- endif -%}
+              >
+
+              {{- country_iso }} ({{ country_currency }})
+            </label>
+          {%- endunless -%}
+        {%- endfor -%}
+      </fieldset>
+    {%- endform -%}
+  </div>
+</details>
