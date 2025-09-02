@@ -7,69 +7,103 @@
   <head>
 
 <style>html.hide-during-redirect { visibility: hidden }</style>
+{%- comment -%}
+  MARKETS-SAFETY + GENERIC→ENTRY редирект с обязательным префиксом
+  ВАЖНО: вставить этот блок в <head> ПЕРЕД любыми скриптами, которые зависят от правильного префикса/локации.
+{%- endcomment -%}
 <script>
 (function () {
-  // --- KONFIGURATION ---
-  // Paths utan Shopify Markets-prefix
-  var genericPath  = 'products/products-moisture-wicking-glove-liners-for-sensitive-skin';
+  'use strict';
+
+  // --- КОНФИГ (без префиксов Markets) ---
+  var genericPath   = 'products/products-moisture-wicking-glove-liners-for-sensitive-skin';
   var householdPath = 'products/drye-liner-stops-sweat-from-getting-trapped';
   var mechanicPath  = 'products/drye-glove-liner-prevents-sweat-related-irritation';
 
-  // Map entry keys to destination paths
-  var entryMap = {
-    household: householdPath,
-    mechanic: mechanicPath
-  };
+  var entryMap = { household: householdPath, mechanic: mechanicPath };
 
-  // --- HJÄLPFUNKTIONER ---
-  function getMarketsPrefix(pathname) {
-    var match = pathname.match(/^\/[a-z]{2}-[a-z]{2}\//);
-    return match ? match[0] : '/';
+  // --- ДАННЫЕ С СЕРВЕРА (Liquid) ---
+  // Текущие язык/страна по Shopify
+  var LIQ_LANG = '{{ request.locale.iso_code | downcase }}';            // например: "sv", "en"
+  var LIQ_COUNTRY = '{{ localization.country.iso_code | downcase }}';   // например: "se", "no", "us"
+
+  // Собираем желаемый префикс для текущего рынка.
+  // Набор правил под твой сайт: "sv" → "/sv/", "en + no" → "/en-no/", иначе по умолчанию "/{lang}-{cc}/"
+  function desiredPrefix(lang, cc) {
+    if (!lang) return '/';
+
+    // Кастомные правила для Drye:
+    if (lang === 'sv') return '/sv/';
+    if (lang === 'en' && cc === 'no') return '/en-no/';
+
+    // Если есть только язык (без страны в твоём Markets) — делаем короткий префикс /{lang}/
+    if (cc && /^[a-z]{2}$/.test(cc)) return '/' + lang + '-' + cc + '/';
+    return '/' + lang + '/';
   }
 
+  // Текущий префикс из URL (если он уже есть)
+  function currentPrefix(pathname) {
+    // match /en-no/ или /sv/
+    var m = pathname.match(/^\/([a-z]{2}(?:-[a-z]{2})?)\//i);
+    return m ? '/' + m[1].toLowerCase() + '/' : '';
+  }
+
+  // Удаляем префикс Markets у относительных путей
   function normalizePath(pathname) {
     return pathname
-      .replace(/^\/[a-z]{2}-[a-z]{2}\//, '')  // Ta bort Shopify Markets-prefix
-      .replace(/^\/+|\/+$/g, '');             // Ta bort inledande/avslutande snedstreck
+      .replace(/^\/[a-z]{2}(?:-[a-z]{2})?\//i, '') // убираем /xx/ или /xx-xx/
+      .replace(/^\/+|\/+$/g, '');                  // убираем крайние слэши
   }
 
+  // Чтение/запись entryPage
   function getEntryPage() {
     try {
       return localStorage.getItem('entryPage') ||
-             (document.cookie.match(/(?:^|;\s*)entryPage=(household|mechanic)/) || [])[1];
-    } catch (e) {
-      return null;
-    }
+        (document.cookie.match(/(?:^|;\s*)entryPage=(household|mechanic)/) || [])[1];
+    } catch (e) { return null; }
   }
-
   function setEntryPage(source) {
     try {
       localStorage.setItem('entryPage', source);
-      document.cookie = 'entryPage=' + source + '; path=/; max-age=2592000'; // 30 dagar
+      document.cookie = 'entryPage=' + source + '; path=/; max-age=2592000'; // 30 дней
     } catch (e) {}
   }
 
-  // --- HUVUDLOGIK ---
+  // --- ОСНОВНАЯ ЛОГИКА ---
   var pathname = location.pathname;
-  var path = normalizePath(pathname);
-  var prefix = getMarketsPrefix(pathname);
+  var search   = location.search || '';
+  var hash     = location.hash   || '';
 
-  // Sätt entryPage om det är första gången (på household eller mechanic)
-  if (path === householdPath) {
-    setEntryPage('household');
-  } else if (path === mechanicPath) {
-    setEntryPage('mechanic');
+  var currPref = currentPrefix(pathname);               // что есть в URL сейчас
+  var wantPref = desiredPrefix(LIQ_LANG, LIQ_COUNTRY);  // что мы хотим видеть
+
+  var pathNoPref = normalizePath(pathname);
+
+  // 1) Если URL БЕЗ префикса — принудительно добавим корректный префикс (SEO-дружелюбно, 302)
+  // Исключаем админ/превью/файлы.
+  var isAdminish = /(^\/a\/|^\/admin|^\/apps\/|^\/cdn-cgi\/)/i.test(pathname);
+  if (!isAdminish && !currPref && wantPref && wantPref !== '/') {
+    // Сохраняем query/hash
+    var target = wantPref + pathNoPref + (search || '') + (hash || '');
+    document.documentElement.classList.add('hide-during-redirect');
+    location.replace(target);
+    return; // прекращаем выполнение, чтобы не дёрнуть нижележащий редирект
   }
 
-  var entry = getEntryPage();
+  // 2) Если пользователь попал на household или mechanic — зафиксируем entryPage
+  if (pathNoPref === householdPath) { setEntryPage('household'); }
+  else if (pathNoPref === mechanicPath) { setEntryPage('mechanic'); }
 
-  if (path === genericPath && entry && entryMap[entry]) {
-    // Användaren kom via household eller mechanic, men är nu på generic → omdirigera
+  // 3) Если пользователь на generic и у нас есть entryPage → редирект на конкретный путь С НУЖНЫМ ПРЕФИКСОМ
+  var entry = getEntryPage();
+  if (pathNoPref === genericPath && entry && entryMap[entry]) {
+    var dest = (currPref || wantPref || '/') + entryMap[entry];
     document.documentElement.classList.add('hide-during-redirect');
-    location.href = prefix + entryMap[entry];
+    location.replace(dest + (search || '') + (hash || ''));
   }
 })();
 </script>
+
 
 
 
