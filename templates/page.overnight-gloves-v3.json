@@ -9,6 +9,28 @@
  */
 {
   "sections": {
+    "home_hero_new_zYHxMK": {
+      "type": "home-hero-new",
+      "name": "Homepage Hero(New)",
+      "settings": {
+        "title": "Your gloves might be why your skin never recover",
+        "cover_image": "shopify://shop_images/5Y9A9293.jpg",
+        "stars": 5,
+        "review_text": "<p>Most gloves trap sweat. That’s what breaks down your skin, not the gloves themselves. DRYE solves this by moving sweat away before it causes damage, so your skin stays dry, calm, and intact — even in gloves.<br/></p>",
+        "review_text_font_size_desktop": 16,
+        "review_text_line_height_desktop": 24,
+        "review_text_font_size_tablet": 16,
+        "review_text_line_height_tablet": 24,
+        "review_text_font_size_mobile": 16,
+        "review_text_line_height_mobile": 24,
+        "reviews_link": "",
+        "button_text": "",
+        "button_url": "",
+        "bg": "#ffffff",
+        "check_review_text": "Check Reviews",
+        "review_url": ""
+      }
+    },
     "home_hero_with_image_THMMkd": {
       "type": "home-hero-with-image",
       "blocks": {
@@ -39,14 +61,14 @@
         "review_hFK3a6",
         "review_rLhEee"
       ],
+      "disabled": true,
       "settings": {
-        "background_image": "shopify://shop_images/IMG_7446_1.jpg",
-        "background_image_tablet": "shopify://shop_images/IMG_7446_1.jpg",
-        "background_image_mobile": "shopify://shop_images/IMG_7455_3_1.jpg",
+        "background_image": "shopify://shop_images/u9738261378_httpss.mj.runLViWZT0SgEE___Person_GenderAge_Young_34586d7e-f936-4117-8edb-7fc8980d2d73_0.png",
+        "background_image_mobile": "shopify://shop_images/u9738261378_httpss.mj.runK92ezQ9JZIA___Person_GenderAge_Young_641eab18-b8e0-44d6-9122-7b6420c5423c_2.png",
         "invert": true,
         "content_gap": 32,
         "content_gap_mobile": 14,
-        "title": "Overnight Gloves That Keep Sweat Away – Built for Eczema",
+        "title": "Your gloves might be why your skin never recover",
         "title_font_size_desktop": 50,
         "title_line_height_desktop": 60,
         "title_font_size_tablet": 50,
@@ -62,7 +84,7 @@
         "sub_title_line_height_tablet": 32,
         "sub_title_font_size_mobile": 18,
         "sub_title_line_height_mobile": 24,
-        "content": "<p>Most night gloves trap moisture against the skin. Over time, this damp environment breaks down the skin barrier—leading to irritation, dryness, and flare-ups, especially in sensitive hands. DRYE was built to prevent that.</p>",
+        "content": "<p>Most gloves trap sweat. That’s what breaks down your skin, not the gloves themselves. DRYE solves this by moving sweat away before it causes damage, so your skin stays dry, calm, and intact — even in gloves.<br/><br/></p>",
         "content_font_size_desktop": 16,
         "content_line_height_desktop": 24,
         "content_font_size_tablet": 16,
@@ -76,7 +98,7 @@
         "button_font_size": 16,
         "button_line_height": 21,
         "show_arrow": false,
-        "check_review_text": "Helped 100+ with irritated hands",
+        "check_review_text": "",
         "review_url": "",
         "check_review_text_color": "#ffffff",
         "section_border_radius": 96,
@@ -134,13 +156,15 @@
       ],
       "settings": {
         "cols_desk": 4,
-        "cols_mob": 2
+        "cols_mob": 2,
+        "scroll_speed": 40,
+        "scroll_speed_mobile": 30
       }
     },
     "list_new_7GaJqq": {
       "type": "list-new",
       "settings": {
-        "image": "shopify://shop_images/DRYE_liner_-_front_page.jpg",
+        "image": "shopify://shop_images/retouch_2025040920190095_1.jpg",
         "title": "",
         "title_font_size_desktop": 50,
         "title_line_height_desktop": 60,
@@ -271,9 +295,8 @@
           "type": "media",
           "settings": {
             "media_mode": "url",
-            "image": "shopify://shop_images/3D_rendering_-_thumbnail.png",
-            "video_url": "https://www.youtube.com/embed/rQtXsY9Za_c?si=izq0YZGzt72fQAHE",
-            "video_preview": "shopify://shop_images/3D_rendering_-_thumbnail.png",
+            "image": "shopify://shop_images/u9738261378_httpss.mj.rungzqQct1gxdU__Frame_Breakdown__Person_4d564039-b6f7-4310-a6f7-7812d1849a9b_3.png",
+            "video_url": "",
             "video_width": "1108",
             "video_height": "623",
             "play_icon": "shopify://shop_images/play.png",
@@ -318,9 +341,7 @@
             "content": "<p>→ Sweat forms on the skin. The inner layer pulls it away instantly.<br/>→ Moisture is guided outward—through engineered layers that wick and release.<br/>→ The outer layer lets it evaporate, keeping skin dry and irritation-free.</p>",
             "button_text": "",
             "button_url": "",
-            "image": "shopify://shop_images/Textil_front_page.gif",
-            "image_tablet": "shopify://shop_images/Textil_front_page.gif",
-            "image_mobile": "shopify://shop_images/Textil_front_page.gif",
+            "controls": true,
             "position": "row"
           }
         },
@@ -331,9 +352,7 @@
             "content": "<p>For those who sleep with gloves and struggle with moisture buildup, DRYE gloves are designed to provide dryness and comfort overnight, even with prolonged use.</p>",
             "button_text": "See product page",
             "button_url": "shopify://products/products-moisture-wicking-glove-liners-for-sensitive-skin",
-            "image": "shopify://shop_images/SHYw3r-G_1.jpg",
-            "image_tablet": "shopify://shop_images/SHYw3r-G_1.jpg",
-            "image_mobile": "shopify://shop_images/SHYw3r-G_1.jpg",
+            "controls": true,
             "position": "row-reverse"
           }
         },
@@ -344,6 +363,7 @@
             "content": "<p>DRYE gloves are engineered to wick moisture away from your skin while you sleep, maintaining dryness and comfort throughout the night—perfect for those with sensitive skin.</p>",
             "button_text": "The development story",
             "button_url": "shopify://pages/why-we-made-glove-liners-for-sweaty-sensitive-hands",
+            "controls": true,
             "image": "shopify://shop_images/2E9A8886ny_1_3d936b1c-4226-4fe0-8fc4-ad49eac6fc4e.jpg",
             "image_tablet": "shopify://shop_images/2E9A8886ny_1.jpg",
             "image_mobile": "shopify://shop_images/2E9A8886ny_1.jpg",
@@ -381,8 +401,6 @@
       "type": "before-after",
       "settings": {
         "title": "",
-        "image_before": "shopify://shop_images/Traditional_Glove_Liners_Fail_to_Keep_Moisture_Away.jpg",
-        "image_after": "shopify://shop_images/Born_from_Personal_Struggles_Now_Improving_Hand_Health_for_Billions..jpg",
         "image_border_radius": 40,
         "section_top_padding_desktop": 120,
         "section_bottom_padding_desktop": 40,
@@ -683,9 +701,6 @@
             "content": "<p>For many with eczema, psoriasis, or sensitive skin (myself included), we’ve tried everything. Creams, supplements, treatments, dietary changes – always searching for the next thing that \"might help us.\"<br/><br/>Based on feedback from hundreds of customers, our fabric has made a significant difference. Many report that they now need to moisturize their hands much less frequently, that cracks have decreased significantly, and that redness and eczema have improved – simply by allowing their skin to rest in our liner. This also applies to those who sleep with gloves.<br/><br/></p>",
             "button_text": "About us",
             "button_url": "shopify://pages/why-we-made-glove-liners-for-sweaty-sensitive-hands",
-            "image": "shopify://shop_images/Bild_DRYE_a730e397-3cba-405a-9f5f-e66ffb247940.jpg",
-            "image_tablet": "shopify://shop_images/Bild_DRYE.jpg",
-            "image_mobile": "shopify://shop_images/Bild_DRYE.jpg",
             "position": "row"
           }
         }
@@ -936,6 +951,7 @@
     }
   },
   "order": [
+    "home_hero_new_zYHxMK",
     "home_hero_with_image_THMMkd",
     "icons_aaQQAK",
     "list_new_7GaJqq",
