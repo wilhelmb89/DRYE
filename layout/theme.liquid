@@ -9,59 +9,34 @@
 <style>html.hide-during-redirect { visibility: hidden }</style>
 <script>
 (function () {
-  'use strict';
-
-  // --- КОНФИГ ---
-  // Относительные пути без префикса Market
-  var genericPath   = 'products/products-moisture-wicking-glove-liners-for-sensitive-skin';
+  // --- KONFIGURATION ---
+  // Paths utan Shopify Markets-prefix
+  var genericPath  = 'products/products-moisture-wicking-glove-liners-for-sensitive-skin';
   var householdPath = 'products/drye-liner-stops-sweat-from-getting-trapped';
   var mechanicPath  = 'products/drye-glove-liner-prevents-sweat-related-irritation';
 
+  // Map entry keys to destination paths
   var entryMap = {
     household: householdPath,
     mechanic: mechanicPath
-    // при необходимости можно добавить другие ключи сюда (например, 'eczema')
   };
 
-  // --- ПРЕФИКС ТЕКУЩЕГО MARKET ---
-  // Надёжный способ получить корень текущего маркета из Shopify (работает и без видимого префикса в URL).
-  var MARKET_PREFIX = (function () {
-    try {
-      // Liquid даёт точное значение текущего market root (например, "/sv/" или "/en-no/" или "/")
-      var root = {{ routes.root_url | json }};
-      if (typeof root === 'string' && root.length) return root;
-    } catch (e) {}
-    // Фолбэк: если по какой-то причине Liquid недоступен — пытаемся вытащить префикс из пути
-    var m = location.pathname.match(/^\/[a-z]{2}(?:-[a-z]{2})?\//i);
-    return m ? m[0] : '/';
-  })();
-
-  function trimSlashes(s) {
-    return String(s || '').replace(/^\/+|\/+$/g, '');
-  }
-
-  function withPrefix(relPath) {
-    var pref = MARKET_PREFIX === '/' ? '' : '/' + trimSlashes(MARKET_PREFIX);
-    var body = '/' + trimSlashes(relPath);
-    return (pref + body) || '/';
-  }
-
-  function stripAnyMarketPrefix(pathname) {
-    // Убираем возможный префикс вида /sv/ или /en-no/
-    return String(pathname || '').replace(/^\/[a-z]{2}(?:-[a-z]{2})?\//i, '/');
+  // --- HJÄLPFUNKTIONER ---
+  function getMarketsPrefix(pathname) {
+    var match = pathname.match(/^\/[a-z]{2}-[a-z]{2}\//);
+    return match ? match[0] : '/';
   }
 
   function normalizePath(pathname) {
-    // Превращаем абсолютный путь в «короткий» относительно корня магазина без market-префикса
-    var p = stripAnyMarketPrefix(pathname);
-    return trimSlashes(p);
+    return pathname
+      .replace(/^\/[a-z]{2}-[a-z]{2}\//, '')  // Ta bort Shopify Markets-prefix
+      .replace(/^\/+|\/+$/g, '');             // Ta bort inledande/avslutande snedstreck
   }
 
   function getEntryPage() {
     try {
       return localStorage.getItem('entryPage') ||
-             (document.cookie.match(/(?:^|;\s*)entryPage=(household|mechanic|eczema)/) || [])[1] ||
-             null;
+             (document.cookie.match(/(?:^|;\s*)entryPage=(household|mechanic)/) || [])[1];
     } catch (e) {
       return null;
     }
@@ -70,42 +45,31 @@
   function setEntryPage(source) {
     try {
       localStorage.setItem('entryPage', source);
-      document.cookie = 'entryPage=' + source + '; path=/; max-age=2592000'; // 30 дней
+      document.cookie = 'entryPage=' + source + '; path=/; max-age=2592000'; // 30 dagar
     } catch (e) {}
   }
 
-  // --- ГЛАВНАЯ ЛОГИКА ---
-  var pathNow   = location.pathname;
-  var shortPath = normalizePath(pathNow);        // без префикса Market
-  var entry     = getEntryPage();
+  // --- HUVUDLOGIK ---
+  var pathname = location.pathname;
+  var path = normalizePath(pathname);
+  var prefix = getMarketsPrefix(pathname);
 
-  // Если пользователь пришёл на специальные входные страницы — фиксируем источник
-  if (shortPath === trimSlashes(householdPath)) setEntryPage('household');
-  if (shortPath === trimSlashes(mechanicPath))  setEntryPage('mechanic');
-  // Если ты сохраняешь 'eczema' где-то ещё — добавь, если нужно:
-  // if (shortPath === 'products/drye-eczema-gloves-for-cracked-and-sensitive-skin') setEntryPage('eczema');
+  // Sätt entryPage om det är första gången (på household eller mechanic)
+  if (path === householdPath) {
+    setEntryPage('household');
+  } else if (path === mechanicPath) {
+    setEntryPage('mechanic');
+  }
 
-  // Если мы на generic-странице и у нас есть entry — редиректим на соответствующую
-  if (shortPath === trimSlashes(genericPath) && entry && entryMap[entry]) {
-    var targetRel = entryMap[entry];            // относительный путь без префикса
-    var targetAbs = withPrefix(targetRel);      // абсолютный путь с корректным MARKET_PREFIX
+  var entry = getEntryPage();
 
-    // Если уже на целевой странице — не редиректим
-    var currentAbsNormalized = '/' + trimSlashes(pathNow);
-    var targetAbsNormalized  = '/' + trimSlashes(targetAbs);
-    if (currentAbsNormalized !== targetAbsNormalized) {
-      // Сохраняем query/hash
-      var q  = location.search || '';
-      var h  = location.hash   || '';
-      // Скрываем до редиректа
-      document.documentElement.classList.add('hide-during-redirect');
-      // Без добавления новой записи в историю (чтобы «назад» не прыгал на generic)
-      location.replace(targetAbs + q + h);
-    }
+  if (path === genericPath && entry && entryMap[entry]) {
+    // Användaren kom via household eller mechanic, men är nu på generic → omdirigera
+    document.documentElement.classList.add('hide-during-redirect');
+    location.href = prefix + entryMap[entry];
   }
 })();
 </script>
-
 
 
 
