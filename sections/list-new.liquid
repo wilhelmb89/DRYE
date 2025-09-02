@@ -87,6 +87,19 @@
       font-size: {{ section.settings.content_font_size_mobile }}px;      
       line-height: {{ section.settings.content_line_height_mobile }}px;
     }
+/* Force Inter 400 för all brödtext i den här sektionen */
+#shopify-section-{{ section.id }}.list-image-section,
+#shopify-section-{{ section.id }} .list,
+#shopify-section-{{ section.id }} .list *,
+#shopify-section-{{ section.id }} .content .text,
+#shopify-section-{{ section.id }} .content .text * {
+  font-family: "Inter", var(--font-body-family), sans-serif !important;
+  font-weight: 400 !important;
+  letter-spacing: -0.2px !important;
+  opacity: .92; /* samma mjukhet som Multirows */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
 
 
 </style>
