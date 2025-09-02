@@ -145,40 +145,40 @@
     }
   }
 
-  /* --- Force heading font for this section --- */
-#shopify-section-{{ section.id }}{
-  /* Om temat använder variabler för headings fångar vi dem här */
-  --font-heading-family: "Clash Grotesk", sans-serif;
-  --font-heading-weight: 300;
-}
-
-/* Huvudrubriken i sektionen (Title) */
-#shopify-section-{{ section.id }} .multirows-title{
-  font-family: "Clash Grotesk", sans-serif !important;
-  font-weight: 300 !important;          /* Light */
-  letter-spacing: 0.5px;
-  line-height: 1.2;
-  /* gör att rubriken ”får plats i rutan” och vänsterjusteras */
-  max-width: 640px;
-  text-align: left;
-  margin: 10px 0 15px;
-}
-
-/* Rad-rubrikerna (h3 .row-title) */
-#shopify-section-{{ section.id }} .row-title{
+ #shopify-section-{{ section.id }} .multirows-title {
   font-family: "Clash Grotesk", sans-serif !important;
   font-weight: 300 !important;
-  letter-spacing: 0.3px;
+  letter-spacing: 0.5px;
+  margin: 10px 0 15px;
+  max-width: 640px;   /* ta bort om du vill ha full bredd */
+  text-align: left;   /* ändra till center om du vill centrera */
 }
 
-/* Mobilfinjustering – påverkar bara denna sektion */
+/* Desktop */
+@media (min-width: 1025px){
+  #shopify-section-{{ section.id }} .multirows-title {
+    font-size: {{ section.settings.sub_title_font_size_desktop }}px;
+    line-height: {{ section.settings.sub_title_line_height_desktop }}px;
+  }
+}
+
+/* Tablet */
+@media (min-width: 768px) and (max-width: 1024px){
+  #shopify-section-{{ section.id }} .multirows-title {
+    font-size: {{ section.settings.sub_title_font_size_tablet }}px;
+    line-height: {{ section.settings.sub_title_line_height_tablet }}px;
+  }
+}
+
+/* Mobil */
 @media (max-width: 767px){
-  #shopify-section-{{ section.id }} .multirows-title{
-    font-size: {{ section.settings.sub_title_font_size_mobile }}px;   /* du styr storlek i UI */
-    line-height: 1.25;
+  #shopify-section-{{ section.id }} .multirows-title {
+    font-size: {{ section.settings.sub_title_font_size_mobile }}px;
+    line-height: {{ section.settings.sub_title_line_height_mobile }}px;
     max-width: 90%;
   }
 }
+
 
 </style>
 
