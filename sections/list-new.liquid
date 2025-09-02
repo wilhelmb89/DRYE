@@ -12,9 +12,11 @@
 #shopify-section-{{ section.id }} p,
 #shopify-section-{{ section.id }} li {
   font-family: var(--font-body-family, sans-serif) !important; /* Inter via theme.css */
-  font-weight: 400;           /* Regular */
-  letter-spacing: -0.2px;     /* samma “luftiga” känsla som Multirows */
+  font-weight: 400 !important;      /* exakt Regular */
+  letter-spacing: -0.2px !important;/* samma tracking som Multirows */
+  opacity: .92;                     /* samma mjukhet som Multirows */
 }
+
 
 
 /* behåll layouten för listpunkterna */
