@@ -2,11 +2,13 @@
 
 <style>
   #shopify-section-{{ section.id }} {
-    margin-block: {{ ss.m_top }}px {{ ss.m_bottom }}px;
-    @media screen and (max-width: 767px) {
-      margin-block: {{ ss.mobile_m_top }}px {{ ss.mobile_m_bottom }}px;
-    }
+  margin-block: {{ ss.m_top }}px {{ ss.m_bottom }}px;
+}
+@media screen and (max-width: 767px) {
+  #shopify-section-{{ section.id }} {
+    margin-block: {{ ss.mobile_m_top }}px {{ ss.mobile_m_bottom }}px;
   }
+}
 
 
 
@@ -80,6 +82,22 @@
       line-height: {{ section.settings.content_line_height_mobile }}px;
     }
 
+@media screen and (max-width: 767px) {
+  #shopify-section-{{ section.id }} .container.small { gap: 8px; }
+  #shopify-section-{{ section.id }} .container .content { gap: 44px; }
+  #shopify-section-{{ section.id }} .title {
+    font-size: {{ section.settings.title_font_size_mobile }}px;
+    line-height: {{ section.settings.title_line_height_mobile }}px;
+  }
+  #shopify-section-{{ section.id }} .list .list-item {
+    font-size: {{ section.settings.list_item_font_size_mobile }}px;
+    line-height: {{ section.settings.list_item_line_height_mobile }}px;
+  }
+  #shopify-section-{{ section.id }} .content .text {
+    font-size: {{ section.settings.content_font_size_mobile }}px;
+    line-height: {{ section.settings.content_line_height_mobile }}px;
+  }
+}  /* <--- saknades */
 
 </style>
 
