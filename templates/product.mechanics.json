@@ -394,6 +394,62 @@
         "padding_right_mobile": 0
       }
     },
+    "multirows_new_RkhGE7": {
+      "type": "multirows-new",
+      "blocks": {
+        "row_prtKDh": {
+          "type": "row",
+          "settings": {
+            "title": "",
+            "content": "<p>Instead of letting sweat soak in and stay trapped, DRYE is built with SkinDRYE™ Technology – a dual-layer textile system:<br/><br/>→ <strong>Draws moisture in:</strong> The inner layer sits smooth against your skin and pulls sweat away instantly using capillary action.<br/><br/>→ <strong>Moves it outward: </strong>A smart fiber gradient transfers the moisture from the skin side to the outer surface.<br/><br/>→ <strong>Lets it evaporate: </strong>The outer layer disperses and evaporates it, keeping your hands drier, calmer, and protected from irritation.</p>",
+            "button_text": "",
+            "button_url": "",
+            "video": "shopify://files/videos/Textilvideo 20250819_1.mp4",
+            "controls": true,
+            "position": "row"
+          }
+        },
+        "row_NnN4rf": {
+          "type": "row",
+          "settings": {
+            "title": "Recognized Innovation",
+            "content": "<p>DRYE was awarded the SKAPA Prize in memory of Alfred Nobel (2020) for its textile technology — developed to prevent MASD from breaking down the skin in protective equipment, and to address widespread hand issues like contact dermatitis, cracked, dry, or sensitive skin.</p>",
+            "button_text": "",
+            "button_url": "",
+            "controls": true,
+            "image": "shopify://shop_images/Alfred_main.jpg",
+            "image_tablet": "shopify://shop_images/Alfred_main.jpg",
+            "image_mobile": "shopify://shop_images/Alfred_main.jpg",
+            "position": "row-reverse"
+          }
+        }
+      },
+      "block_order": [
+        "row_prtKDh",
+        "row_NnN4rf"
+      ],
+      "name": "Multirows(New)",
+      "settings": {
+        "special_title": false,
+        "overlap": false,
+        "title": "",
+        "invert": true,
+        "bg": "#ffffff",
+        "tx": "#111111",
+        "sub_title_font_size_desktop": 48,
+        "sub_title_line_height_desktop": 55,
+        "sub_title_font_size_tablet": 34,
+        "sub_title_line_height_tablet": 40,
+        "sub_title_font_size_mobile": 24,
+        "sub_title_line_height_mobile": 30,
+        "sub_body_font_size_desktop": 18,
+        "sub_body_line_height_desktop": 28,
+        "sub_body_font_size_tablet": 18,
+        "sub_body_line_height_tablet": 28,
+        "sub_body_font_size_mobile": 16,
+        "sub_body_line_height_mobile": 24
+      }
+    },
     "icons_Bt7DUV": {
       "type": "icons",
       "blocks": {
@@ -482,62 +538,6 @@
         "stamped_reviews_main_widget_B63yme"
       ],
       "settings": {}
-    },
-    "multirows_new_RkhGE7": {
-      "type": "multirows-new",
-      "blocks": {
-        "row_prtKDh": {
-          "type": "row",
-          "settings": {
-            "title": "",
-            "content": "<p>Instead of letting sweat soak in and stay trapped, DRYE is built with SkinDRYE™ Technology – a dual-layer textile system:<br/><br/>→ <strong>Draws moisture in:</strong> The inner layer sits smooth against your skin and pulls sweat away instantly using capillary action.<br/><br/>→ <strong>Moves it outward: </strong>A smart fiber gradient transfers the moisture from the skin side to the outer surface.<br/><br/>→ <strong>Lets it evaporate: </strong>The outer layer disperses and evaporates it, keeping your hands drier, calmer, and protected from irritation.</p>",
-            "button_text": "",
-            "button_url": "",
-            "video": "shopify://files/videos/Textilvideo 20250819_1.mp4",
-            "controls": true,
-            "position": "row"
-          }
-        },
-        "row_NnN4rf": {
-          "type": "row",
-          "settings": {
-            "title": "Recognized Innovation",
-            "content": "<p>DRYE was awarded the SKAPA Prize in memory of Alfred Nobel (2020) for its textile technology — developed to prevent MASD from breaking down the skin in protective equipment, and to address widespread hand issues like contact dermatitis, cracked, dry, or sensitive skin.</p>",
-            "button_text": "",
-            "button_url": "",
-            "controls": true,
-            "image": "shopify://shop_images/Alfred_main.jpg",
-            "image_tablet": "shopify://shop_images/Alfred_main.jpg",
-            "image_mobile": "shopify://shop_images/Alfred_main.jpg",
-            "position": "row-reverse"
-          }
-        }
-      },
-      "block_order": [
-        "row_prtKDh",
-        "row_NnN4rf"
-      ],
-      "name": "Multirows(New)",
-      "settings": {
-        "special_title": false,
-        "overlap": false,
-        "title": "",
-        "invert": true,
-        "bg": "#ffffff",
-        "tx": "#111111",
-        "sub_title_font_size_desktop": 48,
-        "sub_title_line_height_desktop": 55,
-        "sub_title_font_size_tablet": 34,
-        "sub_title_line_height_tablet": 40,
-        "sub_title_font_size_mobile": 24,
-        "sub_title_line_height_mobile": 30,
-        "sub_body_font_size_desktop": 18,
-        "sub_body_line_height_desktop": 28,
-        "sub_body_font_size_tablet": 18,
-        "sub_body_line_height_tablet": 28,
-        "sub_body_font_size_mobile": 16,
-        "sub_body_line_height_mobile": 24
-      }
     },
     "image_slider_4gd6Nt": {
       "type": "image-slider",
@@ -1097,8 +1097,8 @@
   "order": [
     "product_with_gallery_GRxyix",
     "icons_Bt7DUV",
-    "1746812889a5f81d00",
     "multirows_new_RkhGE7",
+    "1746812889a5f81d00",
     "image_slider_4gd6Nt",
     "rich_text_with_image_6awd6R",
     "table_with_mark_xkzqbz",
