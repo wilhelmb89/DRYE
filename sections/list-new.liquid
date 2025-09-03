@@ -101,6 +101,16 @@
 
 
 #shopify-section-{{ section.id }} .image { margin-bottom: 34px; }
+/* Mobil-override: 16/24 på list + brödtext */
+@media screen and (max-width: 767px) {
+  #shopify-section-{{ section.id }} .list .list-item,
+  #shopify-section-{{ section.id }} .content .text,
+  #shopify-section-{{ section.id }} .list .list-item *:not(svg):not(path),
+  #shopify-section-{{ section.id }} .content .text *:not(svg):not(path) {
+    font-size: 16px !important;
+    line-height: 24px !important;
+  }
+}
 
 
 </style>
