@@ -1,31 +1,5 @@
 {%- assign ss = section.settings -%}
 <style>
-
-  /* Bubblan med samma look som tidigare */
-#shopify-section-{{ section.id }} .before-after-slider .resizer-trigger {
-  position: absolute;
-  top: 50%;
-  left: calc(var(--pos) * 100%);
-  transform: translate(-50%, -50%);
-  width: 44px;
-  height: 44px;
-  border-radius: 50%;
-  background: #fff;
-  border: 1px solid rgba(0,0,0,.12);
-  box-shadow: 0 6px 18px rgba(0,0,0,.18), 0 1px 2px rgba(0,0,0,.12) inset;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: ew-resize;
-  z-index: 10;
-  pointer-events: auto;
-}
-#shopify-section-{{ section.id }} .before-after-slider .resizer-trigger svg {
-  width: 18px;
-  height: 18px;
-  opacity: .85;
-}
-
   /* Sektionens container-padding per device */
   @media screen and (min-width: 1025px) {
     #shopify-section-{{ section.id }} .container {
@@ -48,79 +22,34 @@
     display: grid;
     gap: 24px;
   }
+
   /* Desktop ≥1280px: tre kolumner */
   @media screen and (min-width: 1280px) {
     #shopify-section-{{ section.id }} .sliders {
       grid-template-columns: repeat(3, minmax(0, 1fr));
     }
   }
+
   /* Laptop 1025–1279px: två kolumner */
   @media screen and (min-width: 1025px) and (max-width: 1279px) {
     #shopify-section-{{ section.id }} .sliders {
       grid-template-columns: repeat(2, minmax(0, 1fr));
     }
   }
-  /* Tablet/mobil: en kolumn (default) */
 
-  /* --- Sliderkort (oförändrad form, men med variabel '--pos') --- */
+  /* Tablet och mobil: en kolumn (default) */
+
+  /* Sliderkort */
   #shopify-section-{{ section.id }} .before-after-slider {
     width: 100%;
     border-radius: {{ ss.image_border_radius }}px;
     overflow: hidden;
     position: relative;
-    --pos: .5; /* start i mitten */
   }
   #shopify-section-{{ section.id }} .before-after-slider img {
     width: 100%;
     height: auto;
     display: block;
-  }
-
-  /* --- Lager och klippning: efterbilden klipps vid --pos --- */
-  #shopify-section-{{ section.id }} .before-after-slider .before-image,
-  #shopify-section-{{ section.id }} .before-after-slider .after-image {
-    position: absolute;
-    inset: 0;
-  }
-  #shopify-section-{{ section.id }} .before-after-slider .after-image {
-    clip-path: inset(0 0 0 calc(var(--pos) * 100%));
-  }
-
-  /* --- Vertikal linje på delningspunkten (samma look) --- */
-  #shopify-section-{{ section.id }} .before-after-slider::before {
-    content: "";
-    position: absolute;
-    top: 0; bottom: 0;
-    left: calc(var(--pos) * 100%);
-    transform: translateX(-50%);
-    width: 2px;
-    background: rgba(255,255,255,.95);
-    box-shadow: 0 0 0 1px rgba(0,0,0,.06);
-    z-index: 4;
-    pointer-events: none;
-  }
-
-  /* --- Bubbla/handtag (behåller din ikon via render 'two-carets') --- */
-  #shopify-section-{{ section.id }} .before-after-slider .resizer {
-    position: absolute; inset: 0;
-    pointer-events: none; z-index: 5;
-  }
-  #shopify-section-{{ section.id }} .before-after-slider .resizer-trigger {
-    position: absolute;
-    top: 50%;
-    left: calc(var(--pos) * 100%);
-    transform: translate(-50%, -50%);
-    width: 44px; height: 44px;
-    border-radius: 9999px;
-    background: #fff;
-    border: 1px solid rgba(0,0,0,.12);
-    box-shadow: 0 6px 18px rgba(0,0,0,.18), 0 1px 2px rgba(0,0,0,.12) inset;
-    display: flex; align-items: center; justify-content: center;
-    cursor: ew-resize;
-    pointer-events: auto; /* viktigt: gör den klick/dragbar */
-  }
-  #shopify-section-{{ section.id }} .before-after-slider .resizer-trigger svg {
-    width: 18px; height: 18px; opacity: .85;
   }
 </style>
 
@@ -151,50 +80,6 @@
     </div>
   {%- endif -%}
 </div>
-
-<script>
-(function() {
-  const section = document.getElementById('shopify-section-{{ section.id }}');
-  if (!section || section.dataset.beforeAfterInit) return;
-  section.dataset.beforeAfterInit = '1';
-
-  const sliders = section.querySelectorAll('.before-after-slider');
-  sliders.forEach(initSlider);
-
-  function initSlider(slider){
-    const handle = slider.querySelector('.resizer-trigger');
-    if(!handle) return;
-
-    let active = false;
-
-    const setPos = (clientX) => {
-      const rect = slider.getBoundingClientRect();
-      let pct = (clientX - rect.left) / rect.width;
-      pct = Math.max(0.02, Math.min(0.98, pct));
-      slider.style.setProperty('--pos', pct);
-    };
-
-    const start = (e) => { active = true; e.preventDefault?.(); };
-    const move  = (e) => {
-      if(!active) return;
-      const t = e.touches ? e.touches[0] : e;
-      setPos(t.clientX);
-    };
-    const end   = () => { active = false; };
-
-    handle.addEventListener('mousedown', start);
-    handle.addEventListener('touchstart', start, {passive:false});
-    window.addEventListener('mousemove', move);
-    window.addEventListener('touchmove', move, {passive:false});
-    window.addEventListener('mouseup', end);
-    window.addEventListener('touchend', end);
-
-    // start i mitten
-    const r = slider.getBoundingClientRect();
-    setPos(r.left + r.width/2);
-  }
-})();
-</script>
 
 {% schema %}
 {
