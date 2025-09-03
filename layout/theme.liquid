@@ -165,52 +165,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         y.parentNode.insertBefore(t, y);
       })(window, document, 'clarity', 'script', 'r99kaui2gr');
     </script>
-
-    {% if request.path contains '/policies/' %}
-      <style>
-            .shopify-policy__body {
-              max-width: 960px !important;
-              margin-left: auto !important;
-              margin-right: auto !important;
-              padding-left: 64px !important;
-              padding-right: 64px !important;
-              box-sizing: border-box !important;
-              width: 100% !important;
-            }
-
-            @media screen and (max-width: 768px) {
-              .shopify-policy__body {
-                padding-left: 20px !important;
-                padding-right: 20px !important;
-              }
-            }
-        .shopify-policy__body ul {
-          list-style: disc !important;
-          padding-left: 20px !important;
-          margin-bottom: 1rem;
-          color: #1a1a1a !important;
-        }
-
-        .shopify-policy__body li,
-        .shopify-policy__body li * {
-          font-weight: 200 !important;
-          font-style: normal !important;
-          color: #1a1a1a !important;
-        }
-
-
-        <style>
-          .shopify-policy__body a,
-          .rte a,
-          .faq .rte a,
-          .accordion .rte a,
-          .accordion-content a {
-            color: #1a0dab !important;
-            text-decoration: underline !important;
-          }
-        </style>
-      </style>
-    {% endif %}
   </head>
   <body class="{{ page.template_suffix }}__page">
 
