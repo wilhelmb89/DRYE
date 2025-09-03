@@ -79,21 +79,21 @@
       max-width: 900px;
       margin-inline: auto;
       padding-inline: 64px;
-      padding-left: 220px;           /* ökar avståndet åt höger */
+      padding-left: 220px;     /* desktop spacing */
       box-sizing: border-box;
       width: 100%;
-      margin-top: 40px; /* Desktop */
+      margin-top: 40px;        /* Desktop margin */
     }
-    
 
     @media (max-width: 768px) {
       .shopify-policy__body {
         padding-inline: 20px;
-        margin-top: 20px; /* Mobile */
+        padding-left: 20px;    /* mobil ska inte ha stort vänster-gap */
+        margin-top: 20px;      /* mindre margin på mobil */
       }
     }
 
-    /* Brödtext */
+    /* Brödtext (default: desktop + tablet) */
     .shopify-policy__body,
     .shopify-policy__body :where(p,li,span,a,strong,em) {
       font-family: var(--font-body-family, Inter, sans-serif) !important;
@@ -101,17 +101,34 @@
       font-variation-settings: "wght" 400 !important;
       letter-spacing: -0.04em !important;
       color: rgb(17 17 17 / 65%) !important;
+      font-size: 18px !important;   /* body på desktop + tablet */
+      line-height: 1.6;
     }
 
-    /* Rubriker */
+    /* Rubriker (desktop + tablet) */
     .shopify-policy__body h1,
     .shopify-policy__body h2,
     .shopify-policy__body h3,
     .shopify-policy__body h4 {
       font-family: "Clash Grotesk", sans-serif !important;
-      font-weight: 300 !important; /* Light */
+      font-weight: 300 !important;
       color: #111 !important;
       letter-spacing: -0.01em;
+      font-size: 32px !important;  /* rubriker desktop + tablet */
+    }
+
+    /* Mobilanpassning */
+    @media (max-width: 767px) {
+      .shopify-policy__body h1,
+      .shopify-policy__body h2,
+      .shopify-policy__body h3,
+      .shopify-policy__body h4 {
+        font-size: 18px !important;  /* rubriker mobil */
+      }
+      .shopify-policy__body p,
+      .shopify-policy__body li {
+        font-size: 16px !important;  /* body mobil */
+      }
     }
 
     /* Länkar */
@@ -131,6 +148,7 @@
     }
   </style>
 {% endif %}
+
 
 
 
