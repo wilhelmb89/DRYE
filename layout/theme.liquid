@@ -71,6 +71,26 @@
 })();
 </script>
 
+{% if template.name == 'policy' %}
+  <style>
+    /* Brödtext på alla policysidor */
+    .shopify-policy__container .shopify-policy__body,
+    .shopify-policy__container .shopify-policy__body :where(p, li, span, a, strong, em) {
+      font-family: var(--font-body-family, Inter, sans-serif) !important;
+      font-weight: 400 !important;
+      font-variation-settings: "wght" 400 !important;
+      letter-spacing: -0.04em !important;
+      color: rgb(17 17 17 / 65%) !important;
+    }
+    /* Länkar ärver grå färg */
+    .shopify-policy__container .shopify-policy__body a {
+      color: inherit !important;
+      text-decoration: underline;
+    }
+    /* (valfritt) rubrik på policies */
+    /* .shopify-policy__container .shopify-policy__title h1 { font-family:"Clash Grotesk",var(--font-heading-family,Inter,sans-serif); font-weight:300; } */
+  </style>
+{% endif %}
 
 
 
