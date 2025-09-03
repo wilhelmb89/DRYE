@@ -468,7 +468,7 @@
         "row_prtKDh": {
           "type": "row",
           "settings": {
-            "title": "",
+            "title": "What if the real reason your hands won’t heal isn’t your gloves – but the sweat inside them?",
             "content": "<p>Moisture-Associated Skin Damage (MASD) is a proven trigger for flare-ups, cracks, and rawness. When moisture stays against your skin, the barrier can’t repair – no matter how many creams you try.</p>",
             "button_text": "",
             "button_url": "",
@@ -483,15 +483,18 @@
       "block_order": [
         "row_prtKDh"
       ],
-      "custom_css": [],
+      "disabled": true,
+      "custom_css": [
+        ".container {padding-top: 0 !important; padding-bottom: 0 !important;}"
+      ],
       "name": "Multirows(New)",
       "settings": {
         "special_title": true,
         "overlap": false,
-        "title": "What if the real reason your hands won’t heal isn’t your gloves – but the sweat inside them?",
+        "title": "",
         "invert": false,
-        "bg": "#ffffff",
-        "tx": "#111111",
+        "bg": "#111111",
+        "tx": "#ffffff",
         "sub_title_font_size_desktop": 48,
         "sub_title_line_height_desktop": 55,
         "sub_title_font_size_tablet": 34,
