@@ -1,5 +1,25 @@
 {%- assign ss = section.settings -%}
 <style>
+
+  /* Gör lagen ovanpå varandra + handtaget klickbart */
+#shopify-section-{{ section.id }} .before-after-slider { position: relative; --pos: .5; }
+#shopify-section-{{ section.id }} .before-after-slider .before-image,
+#shopify-section-{{ section.id }} .before-after-slider .after-image {
+  position: absolute; inset: 0; /* täcker kortet */
+}
+#shopify-section-{{ section.id }} .before-after-slider .after-image {
+  /* visa bara högra delen enligt --pos */
+  clip-path: inset(0 0 0 calc(var(--pos)*100%));
+}
+#shopify-section-{{ section.id }} .before-after-slider .resizer { 
+  position: absolute; inset: 0; pointer-events: none; 
+}
+#shopify-section-{{ section.id }} .before-after-slider .resizer-trigger {
+  position: absolute; top: 50%; left: calc(var(--pos)*100%);
+  transform: translate(-50%,-50%);
+  pointer-events: auto; cursor: ew-resize; z-index: 5;
+}
+
   /* Sektionens container-padding per device */
   @media screen and (min-width: 1025px) {
     #shopify-section-{{ section.id }} .container {
