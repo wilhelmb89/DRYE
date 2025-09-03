@@ -591,23 +591,7 @@ https://cdn1.stamped.io/files/widget.min.js
 <script id="convert-bundle-loader" src="https://bundle.5gtb.com/loader.js?g_cvt_id=43d6a6b5-1dcc-4430-aaf9-153ca1c9a0bb"></script>
 <!--Convert Bundle End-->
 
-{% if request.path contains '/policies/' %}
-  <style>
-    /* DRYE: enhetlig brödtext på alla policies */
-    .shopify-policy__container .shopify-policy__body,
-    .shopify-policy__container .shopify-policy__body :where(p, li, span, a, strong, em){
-      font-family: var(--font-body-family, Inter, sans-serif) !important;
-      font-weight: 400 !important;
-      font-variation-settings: "wght" 400 !important;
-      letter-spacing: -0.04em !important;
-      color: rgb(17 17 17 / 65%) !important;
-    }
-    .shopify-policy__container .shopify-policy__body a{
-      color: inherit !important;
-      text-decoration: underline;
-    }
-  </style>
-{% endif %}
+
 
   </body>
 </html>
