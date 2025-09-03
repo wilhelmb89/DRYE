@@ -680,11 +680,29 @@
     },
     "before_after_BHanzP": {
       "type": "before-after",
+      "blocks": {
+        "pair_NxtgKa": {
+          "type": "pair",
+          "settings": {
+            "image_before": "shopify://shop_images/PXL_20250222_150439970.MP_1.jpg",
+            "image_after": "shopify://shop_images/PXL_20250411_133548754.MP.jpg"
+          }
+        },
+        "pair_PdpEGY": {
+          "type": "pair",
+          "settings": {
+            "image_before": "shopify://shop_images/354150868_252190797564936_2384375854326694310_n.jpg",
+            "image_after": "shopify://shop_images/354132505_582885927326551_8106202714240206805_n.jpg"
+          }
+        }
+      },
+      "block_order": [
+        "pair_NxtgKa",
+        "pair_PdpEGY"
+      ],
       "name": "Before-After",
       "settings": {
         "title": "",
-        "image_before": "shopify://shop_images/PXL_20250222_150439970.MP_1.jpg",
-        "image_after": "shopify://shop_images/PXL_20250411_133548754.MP_1_1_1_a3ed185c-e42e-49ba-9c7f-cbcc4c39d220.jpg",
         "image_border_radius": 40,
         "section_top_padding_desktop": 120,
         "section_bottom_padding_desktop": 120,
@@ -699,8 +717,6 @@
       "name": "Before-After",
       "settings": {
         "title": "",
-        "image_before": "shopify://shop_images/354150868_252190797564936_2384375854326694310_n.jpg",
-        "image_after": "shopify://shop_images/354132505_582885927326551_8106202714240206805_n.jpg",
         "image_border_radius": 40,
         "section_top_padding_desktop": 120,
         "section_bottom_padding_desktop": 120,

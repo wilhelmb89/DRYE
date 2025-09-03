@@ -22,13 +22,24 @@
     display: grid;
     gap: 24px;
   }
-  @media screen and (min-width: 1025px) {
+
+  /* Desktop ≥1280px: tre kolumner */
+  @media screen and (min-width: 1280px) {
     #shopify-section-{{ section.id }} .sliders {
-      grid-template-columns: repeat(2, minmax(0, 1fr)); /* två bredvid varandra */
+      grid-template-columns: repeat(3, minmax(0, 1fr));
     }
   }
 
-  /* Sliderkort – gör dem responsiva, inte låsta till 768px */
+  /* Laptop 1025–1279px: två kolumner */
+  @media screen and (min-width: 1025px) and (max-width: 1279px) {
+    #shopify-section-{{ section.id }} .sliders {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  /* Tablet och mobil: en kolumn (default) */
+
+  /* Sliderkort */
   #shopify-section-{{ section.id }} .before-after-slider {
     width: 100%;
     border-radius: {{ ss.image_border_radius }}px;
@@ -53,10 +64,10 @@
         <div class="before-after-slider" {{ block.shopify_attributes }}>
           {%- if block.settings.image_before != blank and block.settings.image_after != blank -%}
             <div class="before-image">
-              {{ block.settings.image_before | image_url: width: 1400 | image_tag: loading: 'lazy' }}
+              {{ block.settings.image_before | image_url: width: 1000 | image_tag: loading: 'lazy' }}
             </div>
             <div class="after-image">
-              {{ block.settings.image_after  | image_url: width: 1400 | image_tag: loading: 'lazy' }}
+              {{ block.settings.image_after  | image_url: width: 1000 | image_tag: loading: 'lazy' }}
             </div>
             <div class="resizer">
               <div class="resizer-trigger">
@@ -95,7 +106,7 @@
     {
       "type": "pair",
       "name": "Before/After pair",
-      "limit": 2,
+      "limit": 3,
       "settings": [
         { "type": "image_picker", "id": "image_before", "label": "Image Before" },
         { "type": "image_picker", "id": "image_after",  "label": "Image After" }
@@ -103,7 +114,7 @@
     }
   ],
   "presets": [
-    { "name": "Before-After (up to 2 side-by-side)" }
+    { "name": "Before-After (up to 3 side-by-side)" }
   ]
 }
 {% endschema %}
