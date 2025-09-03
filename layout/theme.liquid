@@ -73,22 +73,27 @@
 
 {% if request.path contains '/policies/' %}
   <style id="policies-override">
-    .shopify-policy__body{
-      max-width:960px;margin-inline:auto;padding-inline:64px;box-sizing:border-box;width:100%
-    }
-    @media (max-width:768px){.shopify-policy__body{padding-inline:20px}}
-
+    /* Brödtext */
     .shopify-policy__body,
-    .shopify-policy__body :where(p,li,span,a,strong,em){
-      font-family:var(--font-body-family,Inter,sans-serif) !important;
-      font-weight:400 !important;
-      font-variation-settings:"wght" 400 !important;
-      letter-spacing:-0.04em !important;
-      color:rgb(17 17 17 / 65%) !important;
+    .shopify-policy__body :where(p, li, span, a, strong, em) {
+      font-family: var(--font-body-family, Inter, sans-serif) !important;
+      font-weight: 400 !important;
+      letter-spacing: -0.04em !important;
+      color: rgb(17 17 17 / 65%) !important;
     }
-    .shopify-policy__body a{color:inherit !important;text-decoration:underline}
-    .shopify-policy__body ul{list-style:disc;padding-left:20px;margin-bottom:1rem}
-    .shopify-policy__body li{margin-bottom:6px}
+
+    /* Rubriker */
+    .shopify-policy__body h1,
+    .shopify-policy__body h2,
+    .shopify-policy__body h3,
+    .shopify-policy__body h4,
+    .shopify-policy__body h5,
+    .shopify-policy__body h6 {
+      font-family: "Clash Grotesk Light", sans-serif !important;
+      font-weight: 300 !important;
+      letter-spacing: 0.5px !important;
+      color: #111 !important; /* samma som övriga rubriker */
+    }
   </style>
 {% endif %}
 
