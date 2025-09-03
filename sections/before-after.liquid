@@ -1,139 +1,58 @@
 {%- assign ss = section.settings -%}
 <style>
-#shopify-section-{{ section.id }} .before-after-slider .resizer-trigger{
-  position:absolute; 
-  top:50%; 
-  left:calc(var(--pos)*100%);
-  transform:translate(-50%,-50%);
-  width:44px;
-  height:44px;
-  border-radius:50%;
-  background:#fff;
-  border:1px solid rgba(0,0,0,.15);
-  box-shadow:0 4px 12px rgba(0,0,0,.2);
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  cursor:ew-resize;
-  z-index:10;
-}
+  /* ===== Layout (grid) ===== */
+  #shopify-section-{{ section.id }} .sliders { display:grid; gap:24px; }
+  @media (min-width:1280px){ #shopify-section-{{ section.id }} .sliders{ grid-template-columns:repeat(3,minmax(0,1fr)); } }
+  @media (min-width:1025px) and (max-width:1279px){ #shopify-section-{{ section.id }} .sliders{ grid-template-columns:repeat(2,minmax(0,1fr)); } }
 
-  /* --- VISUELL LINJE (divider) --- */
-#shopify-section-{{ section.id }} .before-after-slider::before{
-  content:"";
-  position:absolute; inset:0 auto 0 0;
-  left: calc(var(--pos)*100%);
-  transform: translateX(-50%);
-  width: 2px;
-  background: rgba(255,255,255,.95);
-  box-shadow: 0 0 0 1px rgba(0,0,0,.08) inset, 0 0 0 1px rgba(0,0,0,.06);
-  z-index:4;
-  pointer-events:none;
-}
+  /* Sektionens padding */
+  @media (min-width:1025px){ #shopify-section-{{ section.id }} .container{ margin-block: {{ ss.section_top_padding_desktop }}px {{ ss.section_bottom_padding_desktop }}px; } }
+  @media (min-width:768px) and (max-width:1024px){ #shopify-section-{{ section.id }} .container{ margin-block: {{ ss.section_top_padding_tablet }}px {{ ss.section_bottom_padding_tablet }}px; } }
+  @media (max-width:767px){ #shopify-section-{{ section.id }} .container{ margin-block: {{ ss.section_top_padding_mobile }}px {{ ss.section_bottom_padding_mobile }}px; } }
 
-/* --- BUBBLAN (handtaget) --- */
-#shopify-section-{{ section.id }} .before-after-slider .resizer { 
-  position:absolute; inset:0; pointer-events:none; z-index:5;
-}
-#shopify-section-{{ section.id }} .before-after-slider .resizer-trigger{
-  position:absolute; top:50%; left: calc(var(--pos)*100%);
-  transform: translate(-50%,-50%);
-  width: 44px; height: 44px; border-radius: 9999px;
-  background: #fff;
-  border: 1px solid rgba(0,0,0,.12);
-  box-shadow: 0 6px 18px rgba(0,0,0,.18), 0 1px 2px rgba(0,0,0,.12) inset;
-  display:flex; align-items:center; justify-content:center;
-  pointer-events:auto; cursor: ew-resize;
-}
-
-/* Gör ikonen tydlig mot vit bubbla */
-#shopify-section-{{ section.id }} .before-after-slider .resizer-trigger svg{
-  width: 18px; height: 18px;
-  opacity: .85;
-}
-
-/* Säkerställ lagerordning och maskning följer hörnradien */
-#shopify-section-{{ section.id }} .before-after-slider{
-  position: relative; overflow:hidden; border-radius: {{ ss.image_border_radius }}px; --pos: .5;
-}
-#shopify-section-{{ section.id }} .before-after-slider .before-image,
-#shopify-section-{{ section.id }} .before-after-slider .after-image{
-  position:absolute; inset:0;
-}
-#shopify-section-{{ section.id }} .before-after-slider .after-image{
-  clip-path: inset(0 0 0 calc(var(--pos)*100%));
-}
-
-  /* Gör lagen ovanpå varandra + handtaget klickbart */
-#shopify-section-{{ section.id }} .before-after-slider { position: relative; --pos: .5; }
-#shopify-section-{{ section.id }} .before-after-slider .before-image,
-#shopify-section-{{ section.id }} .before-after-slider .after-image {
-  position: absolute; inset: 0; /* täcker kortet */
-}
-#shopify-section-{{ section.id }} .before-after-slider .after-image {
-  /* visa bara högra delen enligt --pos */
-  clip-path: inset(0 0 0 calc(var(--pos)*100%));
-}
-#shopify-section-{{ section.id }} .before-after-slider .resizer { 
-  position: absolute; inset: 0; pointer-events: none; 
-}
-#shopify-section-{{ section.id }} .before-after-slider .resizer-trigger {
-  position: absolute; top: 50%; left: calc(var(--pos)*100%);
-  transform: translate(-50%,-50%);
-  pointer-events: auto; cursor: ew-resize; z-index: 5;
-}
-
-  /* Sektionens container-padding per device */
-  @media screen and (min-width: 1025px) {
-    #shopify-section-{{ section.id }} .container {
-      margin-block: {{ ss.section_top_padding_desktop }}px {{ ss.section_bottom_padding_desktop }}px;
-    }
-  }
-  @media (min-width: 768px) and (max-width: 1024px) {
-    #shopify-section-{{ section.id }} .container {
-      margin-block: {{ ss.section_top_padding_tablet }}px {{ ss.section_bottom_padding_tablet }}px;
-    }
-  }
-  @media screen and (max-width: 767px) {
-    #shopify-section-{{ section.id }} .container {
-      margin-block: {{ ss.section_top_padding_mobile }}px {{ ss.section_bottom_padding_mobile }}px;
-    }
-  }
-
-  /* Grid för flera sliders */
-  #shopify-section-{{ section.id }} .sliders {
-    display: grid;
-    gap: 24px;
-  }
-
-  /* Desktop ≥1280px: tre kolumner */
-  @media screen and (min-width: 1280px) {
-    #shopify-section-{{ section.id }} .sliders {
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-    }
-  }
-
-  /* Laptop 1025–1279px: två kolumner */
-  @media screen and (min-width: 1025px) and (max-width: 1279px) {
-    #shopify-section-{{ section.id }} .sliders {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-    }
-  }
-
-  /* Tablet och mobil: en kolumn (default) */
-
-  /* Sliderkort */
-  #shopify-section-{{ section.id }} .before-after-slider {
-    width: 100%;
+  /* ===== Sliderkort ===== */
+  #shopify-section-{{ section.id }} .before-after-slider{
+    position:relative;
+    width:100%;
+    overflow:hidden;
     border-radius: {{ ss.image_border_radius }}px;
-    overflow: hidden;
-    position: relative;
+    --pos:.5; /* start i mitten */
+    user-select:none;
   }
-  #shopify-section-{{ section.id }} .before-after-slider img {
-    width: 100%;
-    height: auto;
-    display: block;
+  #shopify-section-{{ section.id }} .before-after-slider img{
+    width:100%; height:auto; display:block;
+    -webkit-user-drag:none; user-drag:none; pointer-events:none;
   }
+
+  /* Viktigt: before = statisk → ger höjd */
+  #shopify-section-{{ section.id }} .before-after-slider .before-image{ position:relative; z-index:1; }
+  /* after = absolut ovanpå och klipps vid --pos */
+  #shopify-section-{{ section.id }} .before-after-slider .after-image{
+    position:absolute; inset:0; z-index:2;
+    clip-path: inset(0 0 0 calc(var(--pos)*100%));
+  }
+
+  /* Vertikal linje */
+  #shopify-section-{{ section.id }} .before-after-slider::before{
+    content:""; position:absolute; top:0; bottom:0; left:calc(var(--pos)*100%);
+    transform:translateX(-50%); width:2px; background:rgba(255,255,255,.95);
+    box-shadow:0 0 0 1px rgba(0,0,0,.06); z-index:3; pointer-events:none;
+  }
+
+  /* Overlay för handtag */
+  #shopify-section-{{ section.id }} .before-after-slider .resizer{
+    position:absolute; inset:0; z-index:4; pointer-events:none;
+  }
+  #shopify-section-{{ section.id }} .before-after-slider .resizer-trigger{
+    position:absolute; top:50%; left:calc(var(--pos)*100%);
+    transform:translate(-50%,-50%);
+    width:44px; height:44px; border-radius:50%;
+    background:#fff; border:1px solid rgba(0,0,0,.12);
+    box-shadow:0 6px 18px rgba(0,0,0,.18), 0 1px 2px rgba(0,0,0,.12) inset;
+    display:flex; align-items:center; justify-content:center;
+    cursor:ew-resize; pointer-events:auto; touch-action:none;
+  }
+  #shopify-section-{{ section.id }} .before-after-slider .resizer-trigger svg{ width:18px; height:18px; opacity:.85; }
 </style>
 
 <div class="container">
@@ -147,18 +66,15 @@
         <div class="before-after-slider" {{ block.shopify_attributes }}>
           {%- if block.settings.image_before != blank and block.settings.image_after != blank -%}
             <div class="before-image">
-              {{ block.settings.image_before | image_url: width: 1000 | image_tag: loading: 'lazy' }}
+              {{ block.settings.image_before | image_url: width: 1400 | image_tag: loading: 'lazy' }}
             </div>
             <div class="after-image">
-              {{ block.settings.image_after  | image_url: width: 1000 | image_tag: loading: 'lazy' }}
+              {{ block.settings.image_after  | image_url: width: 1400 | image_tag: loading: 'lazy' }}
             </div>
-            <div class="resizer-trigger">
-  <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-    <polyline points="15 18 9 12 15 6"></polyline>
-    <polyline points="9 6 15 12 9 18"></polyline>
-  </svg>
-</div>
-
+            <div class="resizer">
+              <div class="resizer-trigger">
+                {%- render 'icon', type: 'two-carets' -%}
+              </div>
             </div>
           {%- endif -%}
         </div>
@@ -166,49 +82,43 @@
     </div>
   {%- endif -%}
 </div>
+
 <script>
-(function() {
+(function(){
   const section = document.getElementById('shopify-section-{{ section.id }}');
-  if (!section || section.dataset.beforeAfterInit) return;
+  if(!section || section.dataset.beforeAfterInit) return;
   section.dataset.beforeAfterInit = '1';
 
-  const sliders = section.querySelectorAll('.before-after-slider');
-  sliders.forEach(initSlider);
-
-  function initSlider(slider){
-    const after = slider.querySelector('.after-image');
+  section.querySelectorAll('.before-after-slider').forEach((slider)=>{
     const handle = slider.querySelector('.resizer-trigger');
-    if(!after || !handle) return;
+    if(!handle) return;
 
-    let active = false;
-
-    const setPos = (clientX) => {
-      const rect = slider.getBoundingClientRect();
-      let pct = (clientX - rect.left) / rect.width;
-      pct = Math.max(0.02, Math.min(0.98, pct)); // clamp
-      slider.style.setProperty('--pos', pct);
-      // clip uppdateras av CSS via --pos
+    const setPos = (x)=>{
+      const r = slider.getBoundingClientRect();
+      let p = (x - r.left) / r.width;
+      p = Math.max(0.02, Math.min(0.98, p));
+      slider.style.setProperty('--pos', p);
     };
 
-    const start = (e) => { active = true; e.preventDefault?.(); };
-    const move  = (e) => {
-      if(!active) return;
-      const touch = e.touches && e.touches[0];
-      setPos((touch ? touch.clientX : e.clientX));
-    };
-    const end   = () => { active = false; };
+    handle.addEventListener('pointerdown',(e)=>{
+      e.preventDefault();
+      handle.setPointerCapture(e.pointerId);
+      const move = ev => setPos(ev.clientX);
+      const up = ev => {
+        handle.releasePointerCapture(ev.pointerId);
+        handle.removeEventListener('pointermove', move);
+        handle.removeEventListener('pointerup', up);
+        handle.removeEventListener('pointercancel', up);
+      };
+      handle.addEventListener('pointermove', move);
+      handle.addEventListener('pointerup', up);
+      handle.addEventListener('pointercancel', up);
+    });
 
-    handle.addEventListener('mousedown', start);
-    handle.addEventListener('touchstart', start, {passive:false});
-    window.addEventListener('mousemove', move);
-    window.addEventListener('touchmove', move, {passive:false});
-    window.addEventListener('mouseup', end);
-    window.addEventListener('touchend', end);
-
-    // init i mitten
+    // start i mitten
     const r = slider.getBoundingClientRect();
     setPos(r.left + r.width/2);
-  }
+  });
 })();
 </script>
 
@@ -219,12 +129,7 @@
   "class": "before-after",
   "settings": [
     { "type": "text", "id": "title", "label": "Title" },
-    {
-      "type": "range",
-      "id": "image_border_radius",
-      "label": "Image Border Radius",
-      "min": 0, "max": 100, "step": 1, "default": 40, "unit": "px"
-    },
+    { "type": "range", "id": "image_border_radius", "label": "Image Border Radius", "min": 0, "max": 100, "step": 1, "default": 40, "unit": "px" },
     { "type": "header", "content": "Section Padding Settings" },
     { "type": "range", "id": "section_top_padding_desktop", "label": "Top(Desktop)", "min": 0, "max": 160, "step": 4, "default": 120, "unit": "px" },
     { "type": "range", "id": "section_bottom_padding_desktop", "label": "Bottom(Desktop)", "min": 0, "max": 160, "step": 4, "default": 120, "unit": "px" },
@@ -244,8 +149,6 @@
       ]
     }
   ],
-  "presets": [
-    { "name": "Before-After (up to 3 side-by-side)" }
-  ]
+  "presets": [{ "name": "Before-After (up to 3 side-by-side)" }]
 }
 {% endschema %}
