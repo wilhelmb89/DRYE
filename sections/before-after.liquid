@@ -1,173 +1,120 @@
-{% comment %}
-  Section: Before/After (dragbar jämförelse)
-  – Fungerar även när den ligger inne i en Swiper-slide.
-  – Viktigt: behåll klassen `swiper-no-swiping` på .ba-wrap om du använder Swiper.
-{% endcomment %}
-
 {%- assign ss = section.settings -%}
-
 <style>
-  #shopify-section-{{ section.id }} {
-    margin-block: {{ ss.section_top }}px {{ ss.section_bottom }}px;
+  /* Sektionens container-padding per device */
+  @media screen and (min-width: 1025px) {
+    #shopify-section-{{ section.id }} .container {
+      margin-block: {{ ss.section_top_padding_desktop }}px {{ ss.section_bottom_padding_desktop }}px;
+    }
+  }
+  @media (min-width: 768px) and (max-width: 1024px) {
+    #shopify-section-{{ section.id }} .container {
+      margin-block: {{ ss.section_top_padding_tablet }}px {{ ss.section_bottom_padding_tablet }}px;
+    }
+  }
+  @media screen and (max-width: 767px) {
+    #shopify-section-{{ section.id }} .container {
+      margin-block: {{ ss.section_top_padding_mobile }}px {{ ss.section_bottom_padding_mobile }}px;
+    }
   }
 
-  #shopify-section-{{ section.id }} .ba-grid {
+  /* Grid för flera sliders */
+  #shopify-section-{{ section.id }} .sliders {
     display: grid;
-    grid-template-columns: repeat({{ ss.columns_desktop }}, 1fr);
-    gap: {{ ss.gap }}px;
+    gap: 24px;
   }
-  @media (max-width: 1024px) {
-    #shopify-section-{{ section.id }} .ba-grid {
-      grid-template-columns: repeat({{ ss.columns_tablet }}, 1fr);
-    }
-  }
-  @media (max-width: 767px) {
-    #shopify-section-{{ section.id }} .ba-grid {
-      grid-template-columns: 1fr;
+
+  /* Desktop ≥1280px: tre kolumner */
+  @media screen and (min-width: 1280px) {
+    #shopify-section-{{ section.id }} .sliders {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
     }
   }
 
-  /* Component */
-  #shopify-section-{{ section.id }} .ba-wrap {
-    position: relative;
-    border-radius: {{ ss.radius }}px;
+  /* Laptop 1025–1279px: två kolumner */
+  @media screen and (min-width: 1025px) and (max-width: 1279px) {
+    #shopify-section-{{ section.id }} .sliders {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  /* Tablet och mobil: en kolumn (default) */
+
+  /* Sliderkort */
+  #shopify-section-{{ section.id }} .before-after-slider {
+    width: 100%;
+    border-radius: {{ ss.image_border_radius }}px;
     overflow: hidden;
-    background: #000;
-    /* Nyckel: hindra gester från att bubbla upp till Swiper */
-    touch-action: none;
-    -webkit-user-select: none;
-    user-select: none;
-  }
-
-  #shopify-section-{{ section.id }} .ba {
     position: relative;
+  }
+  #shopify-section-{{ section.id }} .before-after-slider img {
     width: 100%;
     height: auto;
     display: block;
-    aspect-ratio: {{ ss.aspect_w }} / {{ ss.aspect_h }};
-    touch-action: none;
-  }
-
-  #shopify-section-{{ section.id }} .ba-layer {
-    position: absolute;
-    inset: 0;
-  }
-  #shopify-section-{{ section.id }} .ba-layer img {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    -webkit-user-drag: none;
-    pointer-events: none;
-  }
-
-  /* Vänstra bilden beskärs av handtagets position */
-  #shopify-section-{{ section.id }} .ba-left {
-    clip-path: inset(0 50% 0 0);
-  }
-
-  /* Handtaget (bubblan) */
-  #shopify-section-{{ section.id }} .ba-handle {
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 50%;
-    width: {{ ss.handle_width }}px;
-    transform: translateX(-50%);
-    cursor: ew-resize;
-    z-index: 5;
-    touch-action: none;
-  }
-
-  /* Vertikal linje */
-  #shopify-section-{{ section.id }} .ba-handle::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: calc(50% - 1px);
-    width: 2px;
-    background: rgba(255,255,255,0.8);
-  }
-
-  /* Cirkulär bubbla */
-  #shopify-section-{{ section.id }} .ba-knob {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: {{ ss.knob_size }}px;
-    height: {{ ss.knob_size }}px;
-    transform: translate(-50%, -50%);
-    background: #fff;
-    border-radius: 50%;
-    box-shadow: 0 6px 16px rgba(0,0,0,0.25);
-    display: grid;
-    place-items: center;
-    font-size: 0;
-  }
-  /* Pilsymboler i bubblan */
-  #shopify-section-{{ section.id }} .ba-knob::before,
-  #shopify-section-{{ section.id }} .ba-knob::after {
-    content: "";
-    display: inline-block;
-    width: 8px;
-    height: 8px;
-    border-top: 2px solid #111;
-    border-right: 2px solid #111;
-  }
-  #shopify-section-{{ section.id }} .ba-knob::before {
-    transform: rotate(225deg);
-    margin-right: 6px;
-  }
-  #shopify-section-{{ section.id }} .ba-knob::after {
-    transform: rotate(45deg);
-    margin-left: 6px;
-  }
-
-  /* Bildtexter (valfritt) */
-  #shopify-section-{{ section.id }} .ba-caption {
-    margin-top: 8px;
-    font-family: var(--font-body-family, Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif);
-    font-size: 14px;
-    line-height: 1.4;
-    color: rgba(17,17,17,0.7);
-    text-align: {{ ss.caption_align }};
   }
 </style>
 
 <div class="container">
-  <div class="ba-grid">
-    {%- for block in section.blocks -%}
-      {%- assign b = block.settings -%}
-      <div class="ba-item" {{ block.shopify_attributes }}>
-        <div 
-          class="ba-wrap swiper-no-swiping" 
-          data-swiper-no-swiping="true"
-        >
-          <div class="ba" data-initial="{{ b.initial_split | default: 50 }}">
-            <div class="ba-layer ba-right" aria-hidden="true">
-              {%- if b.after_image -%}
-                {{ b.after_image | image_url: width: 2000 | image_tag: loading: 'lazy', alt: b.after_alt }}
-              {%- endif -%}
+  {%- if ss.title != blank -%}
+    <div class="h2 title">{{ ss.title }}</div>
+  {%- endif -%}
+
+  {%- if section.blocks.size > 0 -%}
+    <div class="sliders">
+      {%- for block in section.blocks -%}
+        <div class="before-after-slider" {{ block.shopify_attributes }}>
+          {%- if block.settings.image_before != blank and block.settings.image_after != blank -%}
+            <div class="before-image">
+              {{ block.settings.image_before | image_url: width: 1000 | image_tag: loading: 'lazy' }}
             </div>
-            <div class="ba-layer ba-left">
-              {%- if b.before_image -%}
-                {{ b.before_image | image_url: width: 2000 | image_tag: loading: 'lazy', alt: b.before_alt }}
-              {%- endif -%}
+            <div class="after-image">
+              {{ block.settings.image_after  | image_url: width: 1000 | image_tag: loading: 'lazy' }}
             </div>
-            <div class="ba-handle" role="separator" aria-valuemin="0" aria-valuemax="100" aria-valuenow="{{ b.initial_split | default: 50 }}" aria-label="Före/efter-reglage">
-              <div class="ba-knob" aria-hidden="true"></div>
+            <div class="resizer">
+              <div class="resizer-trigger">
+                {%- render 'icon', type: 'two-carets' -%}
+              </div>
             </div>
-          </div>
+          {%- endif -%}
         </div>
-        {%- if b.caption != blank -%}
-          <div class="ba-caption">{{ b.caption }}</div>
-        {%- endif -%}
-      </div>
-    {%- endfor -%}
-  </div>
+      {%- endfor -%}
+    </div>
+  {%- endif -%}
 </div>
 
-<script>
-  (fun
+{% schema %}
+{
+  "name": "Before-After",
+  "tag": "section",
+  "class": "before-after",
+  "settings": [
+    { "type": "text", "id": "title", "label": "Title" },
+    {
+      "type": "range",
+      "id": "image_border_radius",
+      "label": "Image Border Radius",
+      "min": 0, "max": 100, "step": 1, "default": 40, "unit": "px"
+    },
+    { "type": "header", "content": "Section Padding Settings" },
+    { "type": "range", "id": "section_top_padding_desktop", "label": "Top(Desktop)", "min": 0, "max": 160, "step": 4, "default": 120, "unit": "px" },
+    { "type": "range", "id": "section_bottom_padding_desktop", "label": "Bottom(Desktop)", "min": 0, "max": 160, "step": 4, "default": 120, "unit": "px" },
+    { "type": "range", "id": "section_top_padding_tablet", "label": "Top(Tablet)", "min": 0, "max": 160, "step": 4, "default": 80, "unit": "px" },
+    { "type": "range", "id": "section_bottom_padding_tablet", "label": "Bottom(Tablet)", "min": 0, "max": 160, "step": 4, "default": 80, "unit": "px" },
+    { "type": "range", "id": "section_top_padding_mobile", "label": "Top(Mobile)", "min": 0, "max": 160, "step": 4, "default": 64, "unit": "px" },
+    { "type": "range", "id": "section_bottom_padding_mobile", "label": "Bottom(Mobile)", "min": 0, "max": 160, "step": 4, "default": 64, "unit": "px" }
+  ],
+  "blocks": [
+    {
+      "type": "pair",
+      "name": "Before/After pair",
+      "limit": 3,
+      "settings": [
+        { "type": "image_picker", "id": "image_before", "label": "Image Before" },
+        { "type": "image_picker", "id": "image_after",  "label": "Image After" }
+      ]
+    }
+  ],
+  "presets": [
+    { "name": "Before-After (up to 3 side-by-side)" }
+  ]
+}
+{% endschema %}
