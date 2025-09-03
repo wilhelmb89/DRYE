@@ -1,5 +1,50 @@
 {%- assign ss = section.settings -%}
 <style>
+/* --- VISUELL LINJE (divider) --- */
+#shopify-section-{{ section.id }} .before-after-slider::before{
+  content:"";
+  position:absolute; inset:0 auto 0 0;
+  left: calc(var(--pos)*100%);
+  transform: translateX(-50%);
+  width: 2px;
+  background: rgba(255,255,255,.95);
+  box-shadow: 0 0 0 1px rgba(0,0,0,.08) inset, 0 0 0 1px rgba(0,0,0,.06);
+  z-index:4;
+  pointer-events:none;
+}
+
+/* --- BUBBLAN (handtaget) --- */
+#shopify-section-{{ section.id }} .before-after-slider .resizer { 
+  position:absolute; inset:0; pointer-events:none; z-index:5;
+}
+#shopify-section-{{ section.id }} .before-after-slider .resizer-trigger{
+  position:absolute; top:50%; left: calc(var(--pos)*100%);
+  transform: translate(-50%,-50%);
+  width: 44px; height: 44px; border-radius: 9999px;
+  background: #fff;
+  border: 1px solid rgba(0,0,0,.12);
+  box-shadow: 0 6px 18px rgba(0,0,0,.18), 0 1px 2px rgba(0,0,0,.12) inset;
+  display:flex; align-items:center; justify-content:center;
+  pointer-events:auto; cursor: ew-resize;
+}
+
+/* Gör ikonen tydlig mot vit bubbla */
+#shopify-section-{{ section.id }} .before-after-slider .resizer-trigger svg{
+  width: 18px; height: 18px;
+  opacity: .85;
+}
+
+/* Säkerställ lagerordning och maskning följer hörnradien */
+#shopify-section-{{ section.id }} .before-after-slider{
+  position: relative; overflow:hidden; border-radius: {{ ss.image_border_radius }}px; --pos: .5;
+}
+#shopify-section-{{ section.id }} .before-after-slider .before-image,
+#shopify-section-{{ section.id }} .before-after-slider .after-image{
+  position:absolute; inset:0;
+}
+#shopify-section-{{ section.id }} .before-after-slider .after-image{
+  clip-path: inset(0 0 0 calc(var(--pos)*100%));
+}
 
   /* Gör lagen ovanpå varandra + handtaget klickbart */
 #shopify-section-{{ section.id }} .before-after-slider { position: relative; --pos: .5; }
