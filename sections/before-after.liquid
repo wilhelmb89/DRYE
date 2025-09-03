@@ -94,34 +94,41 @@
 <script>
 (function(){
   const section = document.getElementById('shopify-section-{{ section.id }}');
-  if(!section || section.dataset.beforeAfterInit) return;
+  if (!section || section.dataset.beforeAfterInit) return;
   section.dataset.beforeAfterInit = '1';
 
   section.querySelectorAll('.before-after-slider').forEach((slider)=>{
     const handle = slider.querySelector('.resizer-trigger');
-    if(!handle) return;
 
-    const setPos = (x)=>{
+    const setPos = (clientX)=>{
       const r = slider.getBoundingClientRect();
-      let p = (x - r.left) / r.width;
-      p = Math.max(0.02, Math.min(0.98, p));
+      let p = (clientX - r.left) / r.width;
+      p = Math.max(0.02, Math.min(0.98, p)); // clamp
       slider.style.setProperty('--pos', p);
     };
 
-    handle.addEventListener('pointerdown',(e)=>{
+    // Dra från BÅDE bubblan och var som helst i sliden
+    const onPointerDown = (e)=>{
       e.preventDefault();
-      handle.setPointerCapture(e.pointerId);
+      const capturer = handle || slider;    // om bubbla saknas, fånga på slidern
+      capturer.setPointerCapture(e.pointerId);
+      setPos(e.clientX);
+
       const move = ev => setPos(ev.clientX);
       const up = ev => {
-        handle.releasePointerCapture(ev.pointerId);
-        handle.removeEventListener('pointermove', move);
-        handle.removeEventListener('pointerup', up);
-        handle.removeEventListener('pointercancel', up);
+        capturer.releasePointerCapture(ev.pointerId);
+        capturer.removeEventListener('pointermove', move);
+        capturer.removeEventListener('pointerup', up);
+        capturer.removeEventListener('pointercancel', up);
       };
-      handle.addEventListener('pointermove', move);
-      handle.addEventListener('pointerup', up);
-      handle.addEventListener('pointercancel', up);
-    });
+      capturer.addEventListener('pointermove', move);
+      capturer.addEventListener('pointerup', up);
+      capturer.addEventListener('pointercancel', up);
+    };
+
+    // lyssna på båda
+    slider.addEventListener('pointerdown', onPointerDown);
+    if (handle) handle.addEventListener('pointerdown', onPointerDown);
 
     // start i mitten
     const r = slider.getBoundingClientRect();
@@ -129,6 +136,7 @@
   });
 })();
 </script>
+
 
 {% schema %}
 {
