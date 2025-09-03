@@ -1,5 +1,39 @@
 {%- assign ss = section.settings -%}
 <style>
+
+  /* vit linje i mitten */
+#shopify-section-{{ section.id }} .before-after-slider::before {
+  content: "";
+  position: absolute;
+  top: 0; bottom: 0;
+  left: calc(var(--pos) * 100%);
+  transform: translateX(-50%);
+  width: 2px;
+  background: rgba(255,255,255,.95);
+  box-shadow: 0 0 0 1px rgba(0,0,0,.08) inset, 0 0 0 1px rgba(0,0,0,.06);
+  z-index: 4;
+  pointer-events: none;
+}
+
+/* bubblan i mitten */
+#shopify-section-{{ section.id }} .before-after-slider .resizer-trigger {
+  position: absolute;
+  top: 50%;
+  left: calc(var(--pos) * 100%);
+  transform: translate(-50%, -50%);
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: #fff;
+  border: 1px solid rgba(0,0,0,.15);
+  box-shadow: 0 4px 12px rgba(0,0,0,.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: ew-resize;
+  z-index: 10;
+}
+
   /* ===== Grid-layoute ===== */
   #shopify-section-{{ section.id }} .sliders{display:grid;gap:24px}
   @media (min-width:1280px){#shopify-section-{{ section.id }} .sliders{grid-template-columns:repeat(3,minmax(0,1fr))}}
