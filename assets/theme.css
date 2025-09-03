@@ -5981,3 +5981,22 @@ body.template-policy .shopify-policy__container .shopify-policy__body a {
   object-fit: cover;
   border-radius: 9999px; /* om rund bild önskas */
 }
+#shopify-section-{{ section.id }} .slide-content ul,
+#shopify-section-{{ section.id }} .richtext ul {
+  list-style-type: disc !important;
+  list-style-position: outside !important;
+  margin-left: 1.25rem !important;
+  padding-left: 0 !important;
+}
+#shopify-section-{{ section.id }} .slide-content ol,
+#shopify-section-{{ section.id }} .richtext ol {
+  list-style-type: decimal !important;
+  list-style-position: outside !important;
+  margin-left: 1.25rem !important;
+  padding-left: 0 !important;
+}
+#shopify-section-{{ section.id }} .slide-content li,
+#shopify-section-{{ section.id }} .richtext li {
+  display: list-item !important;
+  margin-bottom: .25rem;
+}
