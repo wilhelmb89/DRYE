@@ -32,7 +32,7 @@
   -moz-tab-size:4;
   tab-size:4
 }
-/* FAQ brödtext override */
+/* FAQ brödtext – samma stil som övriga sajten */
 .__instant,
 .__instant p,
 .__instant li,
@@ -44,6 +44,17 @@
   color: rgb(17 17 17 / 65%) !important;
   font-size: 18px !important;
   line-height: 28px !important;
+}
+
+/* Mobiljustering om du vill ha mindre text på små skärmar */
+@media (max-width: 767px){
+  .__instant,
+  .__instant p,
+  .__instant li,
+  .__instant span {
+    font-size: 16px !important;
+    line-height: 24px !important;
+  }
 }
 
 .__instant.iMrOwg2LVgARYOLgD hr {
