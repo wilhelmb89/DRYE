@@ -51,48 +51,6 @@
     height: auto;
     display: block;
   }
-
-  /* Bubblan med samma look som tidigare */
-#shopify-section-{{ section.id }} .before-after-slider .resizer-trigger {
-  position: absolute;
-  top: 50%;
-  left: calc(var(--pos) * 100%);
-  transform: translate(-50%, -50%);
-  width: 44px;
-  height: 44px;
-  border-radius: 50%;
-  background: #fff;
-  border: 1px solid rgba(0,0,0,.12);
-  box-shadow: 0 6px 18px rgba(0,0,0,.18), 0 1px 2px rgba(0,0,0,.12) inset;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: ew-resize;
-  z-index: 10;
-  pointer-events: auto;
-}
-#shopify-section-{{ section.id }} .before-after-slider .resizer-trigger svg {
-  width: 18px;
-  height: 18px;
-  opacity: .85;
-}
-
-/* Förhindra att bilder fångar drag/scroll */
-#shopify-section-{{ section.id }} .before-after-slider,
-#shopify-section-{{ section.id }} .before-after-slider * {
-  user-select: none;
-}
-#shopify-section-{{ section.id }} .before-after-slider img {
-  -webkit-user-drag: none;
-  user-drag: none;
-  pointer-events: none; /* vi drar bara på bubblan */
-}
-/* Hindra touch-pan på handtaget */
-#shopify-section-{{ section.id }} .before-after-slider .resizer-trigger {
-  touch-action: none;
-}
-
-
 </style>
 
 <div class="container">
@@ -122,48 +80,6 @@
     </div>
   {%- endif -%}
 </div>
-<script>
-(function() {
-  const section = document.getElementById('shopify-section-{{ section.id }}');
-  if (!section || section.dataset.beforeAfterInit) return;
-  section.dataset.beforeAfterInit = '1';
-
-  const sliders = section.querySelectorAll('.before-after-slider');
-  sliders.forEach(initSlider);
-
-  function initSlider(slider){
-    const handle = slider.querySelector('.resizer-trigger');
-    if(!handle) return;
-
-    const setPos = (clientX) => {
-      const rect = slider.getBoundingClientRect();
-      let pct = (clientX - rect.left) / rect.width;
-      pct = Math.max(0.02, Math.min(0.98, pct)); // clamp
-      slider.style.setProperty('--pos', pct);
-    };
-
-    // Pointer Events = funkar för mus + touch + penna
-    handle.addEventListener('pointerdown', (e) => {
-      e.preventDefault();
-      handle.setPointerCapture(e.pointerId);
-      const move = (ev) => setPos(ev.clientX);
-      const up   = (ev) => {
-        handle.releasePointerCapture(ev.pointerId);
-        handle.removeEventListener('pointermove', move);
-        handle.removeEventListener('pointerup', up);
-        handle.removeEventListener('pointercancel', up);
-      };
-      handle.addEventListener('pointermove', move);
-      handle.addEventListener('pointerup', up);
-      handle.addEventListener('pointercancel', up);
-    });
-
-    // init i mitten
-    const r = slider.getBoundingClientRect();
-    setPos(r.left + r.width/2);
-  }
-})();
-</script>
 
 {% schema %}
 {
