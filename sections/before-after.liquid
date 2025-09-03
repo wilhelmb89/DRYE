@@ -80,9 +80,11 @@
               {{ block.settings.image_after  | image_url: width: 1400 | image_tag: loading: 'lazy' }}
             </div>
             <div class="resizer">
-              <div class="resizer-trigger">
-                {%- render 'icon', type: 'two-carets' -%}
-              </div>
+  <button class="resizer-trigger" type="button" aria-label="Drag to compare">
+    {%- render 'icon', type: 'two-carets' -%}
+  </button>
+</div>
+
             </div>
           {%- endif -%}
         </div>
