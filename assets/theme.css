@@ -164,53 +164,16 @@ table {
     font-style: normal;
     font-display: swap;
 }
-@font-face {
-    font-family: 'SpaceGrotesk';
-    src: url('./SpaceGrotesk-Bold.woff2') format('woff2'), url('./SpaceGrotesk-Bold.woff') format('woff');
-    font-weight: bold;
-    font-style: normal;
-    font-display: swap;
+
 }
 @font-face {
-    font-family: 'SpaceGrotesk';
-    src: url('./SpaceGrotesk-Medium.woff2') format('woff2'),
-        url('./SpaceGrotesk-Medium.woff') format('woff');
-    font-weight: 500;
-    font-style: normal;
-    font-display: swap;
-}
-@font-face {
-    font-family: 'SpaceGrotesk';
-    src: url('./SpaceGrotesk-Light.woff2') format('woff2'),
-        url('./SpaceGrotesk-Light.woff') format('woff');
-    font-weight: 300;
-    font-style: normal;
-    font-display: swap;
-}
-@font-face {
-    font-family: 'SpaceGrotesk';
-    src: url('./SpaceGrotesk-Regular.woff2') format('woff2'),
-        url('./SpaceGrotesk-Regular.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
-    font-display: swap;
-}
-@font-face {
-    font-family: 'SpaceGrotesk';
-    src: url('./SpaceGrotesk-SemiBold.woff2') format('woff2'),
-        url('./SpaceGrotesk-SemiBold.woff') format('woff');
-    font-weight: 600;
-    font-style: normal;
-    font-display: swap;
-}
-@font-face {
-    font-family: 'ClashGrotesk-Variable';
-    src: url('./ClashGrotesk-Variable.woff2') format('woff2'),
-        url('./ClashGrotesk-Variable.woff') format('woff'),
-        url('./ClashGrotesk-Variable.ttf') format('truetype');
-    font-weight: 200 700;
-    font-display: swap;
-    font-style: normal;
+  font-family: "Clash Grotesk";
+  src: url('{{ "ClashGrotesk-Variable.woff2" | asset_url }}') format('woff2'),
+       url('{{ "ClashGrotesk-Variable.woff"  | asset_url }}') format('woff'),
+       url('{{ "ClashGrotesk-Variable.ttf"   | asset_url }}') format('truetype');
+  font-weight: 200 700;  /* variable font täcker alla vikter */
+  font-style: normal;
+  font-display: swap;
 }
 
 a {
@@ -965,17 +928,16 @@ form label {
     }
 }
 .list-image-section .container .content .list-wrapper .list {
-    font-family:"Inter", sans-serif;
+    font-family: inherit;          /* låt temat styra */
     font-size: 18px;
-    font-weight: 400;
+    font-weight: 400;              /* välj EN vikt */
     line-height: 28px;
     letter-spacing: -0.04em;
     text-align: left;
     display: flex;
     flex-direction: column;
-    gap: 35px;
-    gap: 15px;
-    font-weight: 500;
+    gap: 15px;                     /* välj EN gap */
+    opacity: 0.65;                 /* samma mjukhet som Multirows */
 }
 @media screen and (max-width: 767px) {
     .list-image-section .container .content .list-wrapper .list {
@@ -991,6 +953,11 @@ form label {
     display: flex;
     gap: 15px;
     align-items: start;
+
+    font-family: inherit;      /* samma som Multirows */
+    font-weight: 400 !important; /* tvinga Regular */
+    line-height: 28px;         /* matcha brödtext */
+    opacity: 0.65;             /* samma mjukhet */
 }
 @media screen and (max-width: 767px) {
     .list-image-section .container .content .list-wrapper .list .list-item {
@@ -1003,10 +970,13 @@ form label {
     }
 }
 .list-image-section .container .content .text {
-    max-width: 500px;
+    font-family: inherit;
     font-size: 16px;
     line-height: 28px;
+    opacity: 0.65;    /* samma som Multirows */
+    max-width: 160px;
 }
+
 @media screen and (max-width: 767px) {
     .list-image-section .container .content .text {
         font-size: 1rem;
@@ -5906,4 +5876,108 @@ div#occ3-drawer {
   caret-color: #111 !important;
   background-color: transparent !important;
   box-shadow: none !important;
+}
+/* Multirows – rubrik */
+.multirows-title {
+  font-family: "Clash Grotesk", sans-serif !important;
+  font-weight: 300 !important;      /* Light */
+  letter-spacing: 0.5px;
+  margin-top: 10px;
+  margin-bottom: 15px;
+  line-height: 1.2;
+}
+
+/* Mobil (≤ 767px) */
+@media (max-width: 767px) {
+  .multirows-title {
+    font-size: 28px !important;
+  }
+}
+
+/* Desktop (≥ 768px) */
+@media (min-width: 768px) {
+  .multirows-title {
+    font-size: 48px !important;
+  }
+}
+h2 {
+  font-family: "Clash Grotesk", sans-serif !important;
+  font-weight: 300 !important;     /* Force Light */
+  font-size: 48px;                 /* Desktop size */
+  letter-spacing: 0.5px;
+  margin-top: 10px;
+  margin-bottom: 15px;
+  line-height: 1.2;
+}
+
+h1, h2, h3, h4, h5, h6,
+.h1, .h2, .h3, .h4, .h5, .h6,
+.heading, .title {
+  font-family: "Clash Grotesk", sans-serif !important;
+  font-weight: 300 !important;  /* Light */
+  letter-spacing: 0.5px;
+  line-height: 1.2;
+}
+@media (max-width: 767px) {
+  h1, h2, h3, h4, h5, h6 {
+    line-height: 1.25;
+    letter-spacing: 0.3px;
+  }
+}
+@font-face{
+  font-family:"Clash Grotesk";
+  src:url('{{ "ClashGrotesk-Variable.woff2" | asset_url }}') format('woff2');
+  font-weight:200 700;
+  font-style:normal;
+  font-display:swap;
+}
+/* Global brödtext */
+.list .list-item,
+.content .text {
+  font-family: "Inter", sans-serif !important;
+  font-weight: 300 !important;
+  letter-spacing: 0.3px;
+  line-height: 1.6;
+}
+/* --- DRYE: lock global font variables --- */
+:root{
+  /* Body text = Inter Regular 400 */
+  --font-body-family: "Inter", sans-serif !important;
+  --font-body-weight: 400 !important;
+
+  /* Headings = Clash Grotesk Light 300 */
+  --font-heading-family: "Clash Grotesk", sans-serif !important;
+  --font-heading-weight: 300 !important;
+}
+/* Normalisera List with Image så den matchar Multirows */
+.list-image-section .container .content .list-wrapper .list,
+.list-image-section .container .content .list-wrapper .list .list-item,
+.list-image-section .container .content .text,
+.list-image-section .container .content .text p {
+  font-family: var(--font-body-family, inherit) !important; /* samma font-arv som Multirows */
+  font-weight: 400 !important;                               /* Inter Regular, inte Medium */
+  opacity: 0.65 !important;                                  /* samma nedtoning */
+  line-height: 28px;                                         /* samma luftighet */
+}
+body.template-policy .shopify-policy__container .shopify-policy__body,
+body.template-policy .shopify-policy__container .shopify-policy__body :where(p, li, span, a, strong, em) {
+  font-family: var(--font-body-family, Inter, sans-serif) !important;
+  font-weight: 400 !important;
+  font-variation-settings: "wght" 400 !important;
+  letter-spacing: -0.04em !important;
+  color: rgb(17 17 17 / 65%) !important;
+}
+body.template-policy .shopify-policy__container .shopify-policy__body a {
+  color: inherit !important;
+  text-decoration: underline;
+}
+#shopify-section-{{ section.id }} .author .avatar {
+  width: 50px;
+  height: 50px;
+}
+#shopify-section-{{ section.id }} .author .avatar .avatar-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 9999px; /* om rund bild önskas */
 }
