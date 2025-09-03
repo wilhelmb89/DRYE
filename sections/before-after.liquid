@@ -1,5 +1,25 @@
 {%- assign ss = section.settings -%}
 <style>
+
+  /* Gör lagen ovanpå varandra + handtaget klickbart */
+#shopify-section-{{ section.id }} .before-after-slider { position: relative; --pos: .5; }
+#shopify-section-{{ section.id }} .before-after-slider .before-image,
+#shopify-section-{{ section.id }} .before-after-slider .after-image {
+  position: absolute; inset: 0; /* täcker kortet */
+}
+#shopify-section-{{ section.id }} .before-after-slider .after-image {
+  /* visa bara högra delen enligt --pos */
+  clip-path: inset(0 0 0 calc(var(--pos)*100%));
+}
+#shopify-section-{{ section.id }} .before-after-slider .resizer { 
+  position: absolute; inset: 0; pointer-events: none; 
+}
+#shopify-section-{{ section.id }} .before-after-slider .resizer-trigger {
+  position: absolute; top: 50%; left: calc(var(--pos)*100%);
+  transform: translate(-50%,-50%);
+  pointer-events: auto; cursor: ew-resize; z-index: 5;
+}
+
   /* Sektionens container-padding per device */
   @media screen and (min-width: 1025px) {
     #shopify-section-{{ section.id }} .container {
@@ -80,6 +100,51 @@
     </div>
   {%- endif -%}
 </div>
+<script>
+(function() {
+  const section = document.getElementById('shopify-section-{{ section.id }}');
+  if (!section || section.dataset.beforeAfterInit) return;
+  section.dataset.beforeAfterInit = '1';
+
+  const sliders = section.querySelectorAll('.before-after-slider');
+  sliders.forEach(initSlider);
+
+  function initSlider(slider){
+    const after = slider.querySelector('.after-image');
+    const handle = slider.querySelector('.resizer-trigger');
+    if(!after || !handle) return;
+
+    let active = false;
+
+    const setPos = (clientX) => {
+      const rect = slider.getBoundingClientRect();
+      let pct = (clientX - rect.left) / rect.width;
+      pct = Math.max(0.02, Math.min(0.98, pct)); // clamp
+      slider.style.setProperty('--pos', pct);
+      // clip uppdateras av CSS via --pos
+    };
+
+    const start = (e) => { active = true; e.preventDefault?.(); };
+    const move  = (e) => {
+      if(!active) return;
+      const touch = e.touches && e.touches[0];
+      setPos((touch ? touch.clientX : e.clientX));
+    };
+    const end   = () => { active = false; };
+
+    handle.addEventListener('mousedown', start);
+    handle.addEventListener('touchstart', start, {passive:false});
+    window.addEventListener('mousemove', move);
+    window.addEventListener('touchmove', move, {passive:false});
+    window.addEventListener('mouseup', end);
+    window.addEventListener('touchend', end);
+
+    // init i mitten
+    const r = slider.getBoundingClientRect();
+    setPos(r.left + r.width/2);
+  }
+})();
+</script>
 
 {% schema %}
 {
