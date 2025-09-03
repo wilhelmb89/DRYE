@@ -178,6 +178,24 @@
     max-width: 90%;
   }
 }
+/* Återställ listor i Multirows */
+#shopify-section-{{ section.id }}.multirows-section .content ul {
+  list-style: disc !important;
+  list-style-position: outside !important;
+  margin-left: 1.25rem !important;   /* skapa utrymme för bullets */
+  padding-left: 0 !important;
+}
+#shopify-section-{{ section.id }}.multirows-section .content ol {
+  list-style: decimal !important;
+  list-style-position: outside !important;
+  margin-left: 1.25rem !important;
+  padding-left: 0 !important;
+}
+#shopify-section-{{ section.id }}.multirows-section .content li {
+  display: list-item !important;
+  margin-bottom: .25rem;
+}
+
 
 
 </style>
