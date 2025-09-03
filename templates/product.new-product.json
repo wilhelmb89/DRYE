@@ -431,7 +431,7 @@
         "row_QFYJLc": {
           "type": "row",
           "settings": {
-            "title": "Why fixes don’t last:",
+            "title": "Why fixes don’t last",
             "content": "<ul><li>Creams rub off, sting, or thin the skin.</li><li>Baby powder turns into a wet, grainy mess.</li><li>Traditional liners feel okay at first but quickly turn wet.</li><li>Steroids calm symptoms short-term but can trigger rebound flares and TSW.</li><li>Glove flips and constant swaps waste time and never stop sweat.</li></ul>",
             "button_text": "",
             "button_url": "",
@@ -439,8 +439,38 @@
             "image": "shopify://shop_images/u9738261378_httpss.mj.runvRjgzB98KGs_Main_Subject_Young_Mecha_8c506662-67aa-41ef-941d-d1f76f07cced_0_1.png",
             "position": "row-reverse"
           }
-        },
-        "row_qWxAq6": {
+        }
+      },
+      "block_order": [
+        "row_pyUdFx",
+        "row_QFYJLc"
+      ],
+      "name": "Multirows(New)",
+      "settings": {
+        "special_title": false,
+        "overlap": false,
+        "title": "",
+        "invert": true,
+        "bg": "#ffffff",
+        "tx": "#111111",
+        "sub_title_font_size_desktop": 48,
+        "sub_title_line_height_desktop": 55,
+        "sub_title_font_size_tablet": 34,
+        "sub_title_line_height_tablet": 40,
+        "sub_title_font_size_mobile": 24,
+        "sub_title_line_height_mobile": 30,
+        "sub_body_font_size_desktop": 18,
+        "sub_body_line_height_desktop": 28,
+        "sub_body_font_size_tablet": 18,
+        "sub_body_line_height_tablet": 28,
+        "sub_body_font_size_mobile": 16,
+        "sub_body_line_height_mobile": 24
+      }
+    },
+    "multirows_new_zTefYA": {
+      "type": "multirows-new",
+      "blocks": {
+        "row_LYwDVm": {
           "type": "row",
           "settings": {
             "title": "",
@@ -451,11 +481,40 @@
             "controls": true,
             "position": "row"
           }
-        },
-        "row_RfgqjY": {
+        }
+      },
+      "block_order": [
+        "row_LYwDVm"
+      ],
+      "name": "Multirows(New)",
+      "settings": {
+        "special_title": false,
+        "overlap": false,
+        "title": "How this is different",
+        "invert": true,
+        "bg": "#000000",
+        "tx": "#FFFFFF",
+        "sub_title_font_size_desktop": 48,
+        "sub_title_line_height_desktop": 55,
+        "sub_title_font_size_tablet": 34,
+        "sub_title_line_height_tablet": 40,
+        "sub_title_font_size_mobile": 24,
+        "sub_title_line_height_mobile": 30,
+        "sub_body_font_size_desktop": 18,
+        "sub_body_line_height_desktop": 28,
+        "sub_body_font_size_tablet": 18,
+        "sub_body_line_height_tablet": 28,
+        "sub_body_font_size_mobile": 16,
+        "sub_body_line_height_mobile": 24
+      }
+    },
+    "multirows_new_j4rUDK": {
+      "type": "multirows-new",
+      "blocks": {
+        "row_ApJqAY": {
           "type": "row",
           "settings": {
-            "title": "Recognized Innovation",
+            "title": "",
             "content": "<p>DRYE was awarded the SKAPA Prize in memory of Alfred Nobel (2020) for its textile technology — developed to prevent MASD from breaking down the skin in protective equipment, and to address widespread hand issues like contact dermatitis, cracked, dry, or sensitive skin.</p>",
             "button_text": "",
             "button_url": "",
@@ -463,21 +522,18 @@
             "image": "shopify://shop_images/Alfred_main.jpg",
             "image_tablet": "shopify://shop_images/Alfred_main.jpg",
             "image_mobile": "shopify://shop_images/Alfred_main.jpg",
-            "position": "row-reverse"
+            "position": "row"
           }
         }
       },
       "block_order": [
-        "row_pyUdFx",
-        "row_QFYJLc",
-        "row_qWxAq6",
-        "row_RfgqjY"
+        "row_ApJqAY"
       ],
       "name": "Multirows(New)",
       "settings": {
         "special_title": false,
         "overlap": false,
-        "title": "",
+        "title": "Recognized Innovation",
         "invert": true,
         "bg": "#ffffff",
         "tx": "#111111",
@@ -1186,6 +1242,8 @@
   "order": [
     "product_with_gallery_GRxyix",
     "multirows_new_VzQtYE",
+    "multirows_new_zTefYA",
+    "multirows_new_j4rUDK",
     "1746812889a5f81d00",
     "image_slider_4gd6Nt",
     "icons_Bt7DUV",
