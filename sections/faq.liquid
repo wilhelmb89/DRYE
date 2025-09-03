@@ -1,4 +1,17 @@
 <style>
+
+  /* DRYE: FAQ brödtext override */
+#shopify-section-{{ section.id }} .content,
+#shopify-section-{{ section.id }} .content *:not(svg):not(path) {
+  font-family: var(--font-body-family, Inter, sans-serif) !important;
+  font-weight: 400 !important;
+  font-variation-settings: "wght" 400 !important;
+  letter-spacing: -0.04em !important;
+  color: rgb(17 17 17 / 65%) !important;
+  font-size: 18px !important;
+  line-height: 28px !important;
+}
+
   #shopify-section-{{ section.id }} {
     background: {{ section.settings.bg }};
     padding-block: {{ section.settings.p_top }}px {{ section.settings.p_bottom }}px;
