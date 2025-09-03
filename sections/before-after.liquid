@@ -153,7 +153,6 @@
 </div>
 
 <script>
-/* Initiera alla sliders i just denna sektion */
 (function() {
   const section = document.getElementById('shopify-section-{{ section.id }}');
   if (!section || section.dataset.beforeAfterInit) return;
@@ -171,15 +170,15 @@
     const setPos = (clientX) => {
       const rect = slider.getBoundingClientRect();
       let pct = (clientX - rect.left) / rect.width;
-      pct = Math.max(0.02, Math.min(0.98, pct)); // clamp så man kan greppa igen
+      pct = Math.max(0.02, Math.min(0.98, pct));
       slider.style.setProperty('--pos', pct);
     };
 
     const start = (e) => { active = true; e.preventDefault?.(); };
     const move  = (e) => {
       if(!active) return;
-      const t = e.touches ? e.touches[0] : null;
-      setPos((t ? t.clientX : e.clientX));
+      const t = e.touches ? e.touches[0] : e;
+      setPos(t.clientX);
     };
     const end   = () => { active = false; };
 
@@ -190,7 +189,7 @@
     window.addEventListener('mouseup', end);
     window.addEventListener('touchend', end);
 
-    // init mittposition
+    // start i mitten
     const r = slider.getBoundingClientRect();
     setPos(r.left + r.width/2);
   }
