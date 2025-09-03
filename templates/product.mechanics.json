@@ -712,8 +712,8 @@
       "settings": {
         "title": "",
         "image_border_radius": 40,
-        "section_top_padding_desktop": 120,
-        "section_bottom_padding_desktop": 120,
+        "section_top_padding_desktop": 68,
+        "section_bottom_padding_desktop": 36,
         "section_top_padding_tablet": 80,
         "section_bottom_padding_tablet": 80,
         "section_top_padding_mobile": 64,
@@ -1425,9 +1425,26 @@
     },
     "main_contact_BPHcyq": {
       "type": "main-contact",
+      "blocks": {
+        "person_MqADxd": {
+          "type": "person",
+          "settings": {
+            "photo": "shopify://shop_images/Screenshot_30-modified_dc8a2597-f40a-43a4-838b-cbd70c945927.png",
+            "name": "Wilhelm Bäckström",
+            "position": "Founder",
+            "phone_text": "+46 73 262 83 85",
+            "phone_url": "",
+            "email_text": "wilhelm.backstrom@drye.se",
+            "email_url": ""
+          }
+        }
+      },
+      "block_order": [
+        "person_MqADxd"
+      ],
       "name": "Main Contact",
       "settings": {
-        "title": "Questions?",
+        "title": "",
         "form_title": ""
       }
     }
