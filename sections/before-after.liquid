@@ -1,5 +1,13 @@
 {%- assign ss = section.settings -%}
 <style>
+
+  #shopify-section-{{ section.id }} .before-after-slider{
+  touch-action: none; /* tillåt horisontellt drag utan att sidan scrollar */
+}
+#shopify-section-{{ section.id }} .before-after-slider img{
+  pointer-events: none; -webkit-user-drag: none; user-drag: none;
+}
+
   /* ===== Layout (grid) ===== */
   #shopify-section-{{ section.id }} .sliders { display:grid; gap:24px; }
   @media (min-width:1280px){ #shopify-section-{{ section.id }} .sliders{ grid-template-columns:repeat(3,minmax(0,1fr)); } }
