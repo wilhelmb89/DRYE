@@ -14,7 +14,7 @@
       "name": "Homepage Hero(New)",
       "settings": {
         "title": "Your hands aren’t failing. The sweat locked inside your gloves is.",
-        "cover_image": "shopify://shop_images/u9738261378_httpss.mj.runK92ezQ9JZIA___Person_GenderAge_Young_641eab18-b8e0-44d6-9122-7b6420c5423c_2.png",
+        "cover_image": "shopify://shop_images/v5.png",
         "stars": 5,
         "review_text": "<p>Sweat trapped under gloves causes cracks, flare-ups, and raw skin. DRYE’s dual-layer textile moves it away so your hands can finally recover.</p>",
         "review_text_font_size_desktop": 16,
@@ -101,8 +101,8 @@
         "content_line_height_mobile": 19,
         "button_text": "",
         "button_url": "",
-        "m_top": 35,
-        "m_bottom": 15,
+        "m_top": 205,
+        "m_bottom": 225,
         "mobile_m_top": 120,
         "mobile_m_bottom": 120
       }
@@ -139,7 +139,7 @@
         "row_6rrQdd": {
           "type": "row",
           "settings": {
-            "title": "Long works,",
+            "title": "Long shifts",
             "content": "",
             "button_text": "",
             "button_url": "",
@@ -714,36 +714,61 @@
             "controls": true,
             "position": "row"
           }
-        },
-        "row_yTAxz7": {
-          "type": "row",
-          "settings": {
-            "title": "Recognized Innovation",
-            "content": "<p>DRYE was awarded the SKAPA Prize in memory of Alfred Nobel (2020) for its textile technology — developed to prevent MASD from breaking down the skin in protective equipment, and to address widespread hand issues like contact dermatitis, cracked, dry, or sensitive skin.</p>",
-            "button_text": "",
-            "button_url": "",
-            "controls": true,
-            "image": "shopify://shop_images/Alfred_main.jpg",
-            "image_tablet": "shopify://shop_images/Alfred_main.jpg",
-            "image_mobile": "shopify://shop_images/Alfred_main.jpg",
-            "position": "row-reverse"
-          }
         }
       },
       "block_order": [
-        "row_XYetHm",
-        "row_yTAxz7"
+        "row_XYetHm"
       ],
       "name": "Multirows(New)",
       "settings": {
         "special_title": false,
         "overlap": false,
-        "title": "",
+        "title": "A new solution to solve sweaty hands in gloves",
         "invert": true,
         "bg": "#ffffff",
         "tx": "#000000",
         "sub_title_font_size_desktop": 48,
         "sub_title_line_height_desktop": 55,
+        "sub_title_font_size_tablet": 34,
+        "sub_title_line_height_tablet": 40,
+        "sub_title_font_size_mobile": 24,
+        "sub_title_line_height_mobile": 30,
+        "sub_body_font_size_desktop": 18,
+        "sub_body_line_height_desktop": 28,
+        "sub_body_font_size_tablet": 18,
+        "sub_body_line_height_tablet": 28,
+        "sub_body_font_size_mobile": 16,
+        "sub_body_line_height_mobile": 24
+      }
+    },
+    "multirows_new_zwhADz": {
+      "type": "multirows-new",
+      "blocks": {
+        "row_QFqG8k": {
+          "type": "row",
+          "settings": {
+            "title": "",
+            "content": "<p>Instead of letting sweat soak in and stay trapped, DRYE is built with SkinDRYE™ Technology – a dual-layer textile system:<br/><br/>→ <strong>Draws moisture in:</strong> The inner layer sits smooth against your skin and pulls sweat away instantly using capillary action.<br/><br/>→ <strong>Moves it outward: </strong>A smart fiber gradient transfers the moisture from the skin side to the outer surface.<br/><br/>→ <strong>Lets it evaporate: </strong>The outer layer disperses and evaporates it, keeping your hands drier, calmer, and protected from irritation.</p>",
+            "button_text": "",
+            "button_url": "",
+            "controls": true,
+            "position": "row-reverse"
+          }
+        }
+      },
+      "block_order": [
+        "row_QFqG8k"
+      ],
+      "name": "Multirows(New)",
+      "settings": {
+        "special_title": false,
+        "overlap": false,
+        "title": "What is MASD and why should I care?",
+        "invert": true,
+        "bg": "#ffffff",
+        "tx": "#000000",
+        "sub_title_font_size_desktop": 48,
+        "sub_title_line_height_desktop": 100,
         "sub_title_font_size_tablet": 34,
         "sub_title_line_height_tablet": 40,
         "sub_title_font_size_mobile": 24,
@@ -1272,6 +1297,7 @@
     "product_with_gallery_GRxyix",
     "icons_Bt7DUV",
     "multirows_new_bQbFR7",
+    "multirows_new_zwhADz",
     "image_slider_FiCgr8",
     "1746812889a5f81d00",
     "table_with_mark_xkzqbz",
