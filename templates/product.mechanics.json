@@ -282,6 +282,53 @@
         "sub_body_line_height_mobile": 24
       }
     },
+    "hot_spot_7rpTdj": {
+      "type": "hot-spot",
+      "blocks": {
+        "spot_p7Bpk4": {
+          "type": "spot",
+          "settings": {
+            "vertical": 33,
+            "horizontal": 24,
+            "content": "<p>asdasdasd</p>"
+          }
+        },
+        "spot_CbNBki": {
+          "type": "spot",
+          "settings": {
+            "vertical": 31,
+            "horizontal": 61,
+            "content": "<p>asdasdasd</p>"
+          }
+        },
+        "spot_nDTH8W": {
+          "type": "spot",
+          "settings": {
+            "vertical": 68,
+            "horizontal": 62,
+            "content": "<p>sdasdasdasd</p>"
+          }
+        },
+        "spot_H7pWjg": {
+          "type": "spot",
+          "settings": {
+            "vertical": 66,
+            "horizontal": 31,
+            "content": "<p>asdasdasd</p>"
+          }
+        }
+      },
+      "block_order": [
+        "spot_p7Bpk4",
+        "spot_CbNBki",
+        "spot_nDTH8W",
+        "spot_H7pWjg"
+      ],
+      "name": "Hot Spot",
+      "settings": {
+        "image": "shopify://shop_images/Produktbild_hemsida_4_1.jpg"
+      }
+    },
     "icons_Bt7DUV": {
       "type": "icons",
       "blocks": {
@@ -348,53 +395,6 @@
         "cols_mob": 2,
         "scroll_speed": 25,
         "scroll_speed_mobile": 25
-      }
-    },
-    "hot_spot_7rpTdj": {
-      "type": "hot-spot",
-      "blocks": {
-        "spot_p7Bpk4": {
-          "type": "spot",
-          "settings": {
-            "vertical": 33,
-            "horizontal": 24,
-            "content": "<p>asdasdasd</p>"
-          }
-        },
-        "spot_CbNBki": {
-          "type": "spot",
-          "settings": {
-            "vertical": 31,
-            "horizontal": 61,
-            "content": "<p>asdasdasd</p>"
-          }
-        },
-        "spot_nDTH8W": {
-          "type": "spot",
-          "settings": {
-            "vertical": 68,
-            "horizontal": 62,
-            "content": "<p>sdasdasdasd</p>"
-          }
-        },
-        "spot_H7pWjg": {
-          "type": "spot",
-          "settings": {
-            "vertical": 66,
-            "horizontal": 31,
-            "content": "<p>asdasdasd</p>"
-          }
-        }
-      },
-      "block_order": [
-        "spot_p7Bpk4",
-        "spot_CbNBki",
-        "spot_nDTH8W",
-        "spot_H7pWjg"
-      ],
-      "name": "Hot Spot",
-      "settings": {
-        "image": "shopify://shop_images/Produktbild_hemsida_4_1.jpg"
       }
     },
     "table_with_mark_xkzqbz": {
@@ -1069,6 +1069,38 @@
         "padding_right_mobile": 0
       }
     },
+    "before_after_BHanzP": {
+      "type": "before-after",
+      "name": "Before-After",
+      "settings": {
+        "title": "",
+        "image_before": "shopify://shop_images/PXL_20250222_150439970.MP_1.jpg",
+        "image_after": "shopify://shop_images/PXL_20250411_133548754.MP_1_1_1_a3ed185c-e42e-49ba-9c7f-cbcc4c39d220.jpg",
+        "image_border_radius": 40,
+        "section_top_padding_desktop": 120,
+        "section_bottom_padding_desktop": 120,
+        "section_top_padding_tablet": 80,
+        "section_bottom_padding_tablet": 80,
+        "section_top_padding_mobile": 64,
+        "section_bottom_padding_mobile": 64
+      }
+    },
+    "before_after_cYbThq": {
+      "type": "before-after",
+      "name": "Before-After",
+      "settings": {
+        "title": "",
+        "image_before": "shopify://shop_images/354150868_252190797564936_2384375854326694310_n.jpg",
+        "image_after": "shopify://shop_images/354132505_582885927326551_8106202714240206805_n.jpg",
+        "image_border_radius": 40,
+        "section_top_padding_desktop": 120,
+        "section_bottom_padding_desktop": 120,
+        "section_top_padding_tablet": 80,
+        "section_bottom_padding_tablet": 80,
+        "section_top_padding_mobile": 64,
+        "section_bottom_padding_mobile": 64
+      }
+    },
     "image_slider_FiCgr8": {
       "type": "image-slider",
       "blocks": {
@@ -1304,22 +1336,6 @@
         "title": "Questions?",
         "form_title": ""
       }
-    },
-    "before_after_BHanzP": {
-      "type": "before-after",
-      "name": "Before-After",
-      "settings": {
-        "title": "",
-        "image_before": "shopify://shop_images/April-Weeek2-01_1_1.jpg",
-        "image_after": "shopify://shop_images/Annons_1_5_1.jpg",
-        "image_border_radius": 40,
-        "section_top_padding_desktop": 120,
-        "section_bottom_padding_desktop": 120,
-        "section_top_padding_tablet": 80,
-        "section_bottom_padding_tablet": 80,
-        "section_top_padding_mobile": 64,
-        "section_bottom_padding_mobile": 64
-      }
     }
   },
   "order": [
@@ -1328,16 +1344,17 @@
     "list_new_mVw4pi",
     "image_slider_4gd6Nt",
     "multirows_new_bQbFR7",
-    "icons_Bt7DUV",
     "hot_spot_7rpTdj",
+    "icons_Bt7DUV",
     "table_with_mark_xkzqbz",
     "product_with_gallery_GRxyix",
+    "before_after_BHanzP",
+    "before_after_cYbThq",
     "image_slider_FiCgr8",
     "1746812889a5f81d00",
     "columns_with_video_kRmqXB",
     "rich_color_text_pbmjNY",
     "1746812877af76f5ce",
-    "main_contact_BPHcyq",
-    "before_after_BHanzP"
+    "main_contact_BPHcyq"
   ]
 }
