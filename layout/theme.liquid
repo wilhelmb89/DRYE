@@ -7,31 +7,7 @@
   <head>
 <link rel="preload" href="{{ 'clash-grotesk-light.woff2' | asset_url }}" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="{{ 'inter-regular.woff2' | asset_url }}" as="font" type="font/woff2" crossorigin>
-{% if request.path contains '/policies/' %}
-  <style id="policies-override">
-    /* Brödtext */
-    .shopify-policy__body,
-    .shopify-policy__body :where(p, li, span, a, strong, em) {
-      font-family: var(--font-body-family, Inter, sans-serif) !important;
-      font-weight: 400 !important;
-      letter-spacing: -0.04em !important;
-      color: rgb(17 17 17 / 65%) !important;
-    }
 
-    /* Rubriker */
-    .shopify-policy__body h1,
-    .shopify-policy__body h2,
-    .shopify-policy__body h3,
-    .shopify-policy__body h4,
-    .shopify-policy__body h5,
-    .shopify-policy__body h6 {
-      font-family: "Clash Grotesk Light", sans-serif !important;
-      font-weight: 300 !important;
-      letter-spacing: 0.5px !important;
-      color: #111 !important; /* samma som övriga rubriker */
-    }
-  </style>
-{% endif %}
 <style>html.hide-during-redirect { visibility: hidden }</style>
 <script>
 (function () {
@@ -97,7 +73,31 @@
 })();
 </script>
 
+{% if request.path contains '/policies/' %}
+  <style id="policies-override">
+    /* Brödtext */
+    .shopify-policy__body,
+    .shopify-policy__body :where(p, li, span, a, strong, em) {
+      font-family: var(--font-body-family, Inter, sans-serif) !important;
+      font-weight: 400 !important;
+      letter-spacing: -0.04em !important;
+      color: rgb(17 17 17 / 65%) !important;
+    }
 
+    /* Rubriker */
+    .shopify-policy__body h1,
+    .shopify-policy__body h2,
+    .shopify-policy__body h3,
+    .shopify-policy__body h4,
+    .shopify-policy__body h5,
+    .shopify-policy__body h6 {
+      font-family: "Clash Grotesk Light", sans-serif !important;
+      font-weight: 300 !important;
+      letter-spacing: 0.5px !important;
+      color: #111 !important; /* samma som övriga rubriker */
+    }
+  </style>
+{% endif %}
 
 
 
