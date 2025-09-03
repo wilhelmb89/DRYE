@@ -1,125 +1,58 @@
 {%- assign ss = section.settings -%}
 <style>
+  /* ===== Grid-layoute ===== */
+  #shopify-section-{{ section.id }} .sliders{display:grid;gap:24px}
+  @media (min-width:1280px){#shopify-section-{{ section.id }} .sliders{grid-template-columns:repeat(3,minmax(0,1fr))}}
+  @media (min-width:1025px) and (max-width:1279px){#shopify-section-{{ section.id }} .sliders{grid-template-columns:repeat(2,minmax(0,1fr))}}
 
-  /* Vit, rund knapp med subtil ring + drop shadow (som i originalet) */
-#shopify-section-{{ section.id }} .before-after-slider .resizer-trigger{
-  position:absolute;
-  top:50%;
-  left:calc(var(--pos)*100%);
-  transform:translate(-50%,-50%);
-  width:46px;
-  height:46px;
-  border-radius:9999px;
-  background:#fff;
-  border:1px solid rgba(0,0,0,.12);
-  box-shadow:
-    0 8px 20px rgba(0,0,0,.18),   /* yttre skugga */
-    inset 0 1px 2px rgba(0,0,0,.08); /* lätt inre relief */
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  cursor:ew-resize;
-  z-index:10;
-  pointer-events:auto;
-  touch-action:none;
-  padding:0;
-  line-height:1;
-}
-
-/* tunn ljus ring precis innanför kanten */
-#shopify-section-{{ section.id }} .before-after-slider .resizer-trigger::after{
-  content:"";
-  position:absolute;
-  inset:5px; /* ringens tjocklek */
-  border-radius:inherit;
-  box-shadow: inset 0 0 0 1px rgba(0,0,0,.06); /* subtil ring */
-  pointer-events:none;
-}
-
-/* ikonens storlek/färg (två pilar) */
-#shopify-section-{{ section.id }} .before-after-slider .resizer-trigger svg{
-  width:18px;
-  height:18px;
-  stroke:#111;
-  opacity:.8;
-}
-
-/* hover/focus – lätt förstoring som i “native”-kontroller */
-#shopify-section-{{ section.id }} .before-after-slider .resizer-trigger:hover,
-#shopify-section-{{ section.id }} .before-after-slider .resizer-trigger:focus-visible{
-  box-shadow:
-    0 10px 24px rgba(0,0,0,.22),
-    inset 0 1px 2px rgba(0,0,0,.08);
-  transform:translate(-50%,-50%) scale(1.04);
-}
-
-/* mindre bubbla på smalare skärmar */
-@media (max-width: 767px){
-  #shopify-section-{{ section.id }} .before-after-slider .resizer-trigger{
-    width:40px; height:40px;
-  }
-}
-
-  #shopify-section-{{ section.id }} .before-after-slider{
-  touch-action: none; /* tillåt horisontellt drag utan att sidan scrollar */
-}
-#shopify-section-{{ section.id }} .before-after-slider img{
-  pointer-events: none; -webkit-user-drag: none; user-drag: none;
-}
-
-  /* ===== Layout (grid) ===== */
-  #shopify-section-{{ section.id }} .sliders { display:grid; gap:24px; }
-  @media (min-width:1280px){ #shopify-section-{{ section.id }} .sliders{ grid-template-columns:repeat(3,minmax(0,1fr)); } }
-  @media (min-width:1025px) and (max-width:1279px){ #shopify-section-{{ section.id }} .sliders{ grid-template-columns:repeat(2,minmax(0,1fr)); } }
-
-  /* Sektionens padding */
-  @media (min-width:1025px){ #shopify-section-{{ section.id }} .container{ margin-block: {{ ss.section_top_padding_desktop }}px {{ ss.section_bottom_padding_desktop }}px; } }
-  @media (min-width:768px) and (max-width:1024px){ #shopify-section-{{ section.id }} .container{ margin-block: {{ ss.section_top_padding_tablet }}px {{ ss.section_bottom_padding_tablet }}px; } }
-  @media (max-width:767px){ #shopify-section-{{ section.id }} .container{ margin-block: {{ ss.section_top_padding_mobile }}px {{ ss.section_bottom_padding_mobile }}px; } }
+  /* ===== Sektionens padding ===== */
+  @media (min-width:1025px){#shopify-section-{{ section.id }} .container{margin-block:{{ ss.section_top_padding_desktop }}px {{ ss.section_bottom_padding_desktop }}px}}
+  @media (min-width:768px) and (max-width:1024px){#shopify-section-{{ section.id }} .container{margin-block:{{ ss.section_top_padding_tablet }}px {{ ss.section_bottom_padding_tablet }}px}}
+  @media (max-width:767px){#shopify-section-{{ section.id }} .container{margin-block:{{ ss.section_top_padding_mobile }}px {{ ss.section_bottom_padding_mobile }}px}}
 
   /* ===== Sliderkort ===== */
   #shopify-section-{{ section.id }} .before-after-slider{
     position:relative;
     width:100%;
     overflow:hidden;
-    border-radius: {{ ss.image_border_radius }}px;
+    border-radius:{{ ss.image_border_radius }}px;
     --pos:.5; /* start i mitten */
     user-select:none;
+    touch-action:none; /* möjliggör drag utan scroll */
   }
   #shopify-section-{{ section.id }} .before-after-slider img{
-    width:100%; height:auto; display:block;
-    -webkit-user-drag:none; user-drag:none; pointer-events:none;
+    width:100%;height:auto;display:block;
+    -webkit-user-drag:none;user-drag:none;pointer-events:none;
   }
 
-  /* Viktigt: before = statisk → ger höjd */
-  #shopify-section-{{ section.id }} .before-after-slider .before-image{ position:relative; z-index:1; }
-  /* after = absolut ovanpå och klipps vid --pos */
+  /* before = statisk → ger höjd; after = absolut och klipps vid --pos */
+  #shopify-section-{{ section.id }} .before-after-slider .before-image{position:relative;z-index:1}
   #shopify-section-{{ section.id }} .before-after-slider .after-image{
-    position:absolute; inset:0; z-index:2;
-    clip-path: inset(0 0 0 calc(var(--pos)*100%));
+    position:absolute;inset:0;z-index:2;
+    clip-path:inset(0 0 0 calc(var(--pos)*100%));
   }
 
   /* Vertikal linje */
   #shopify-section-{{ section.id }} .before-after-slider::before{
-    content:""; position:absolute; top:0; bottom:0; left:calc(var(--pos)*100%);
-    transform:translateX(-50%); width:2px; background:rgba(255,255,255,.95);
-    box-shadow:0 0 0 1px rgba(0,0,0,.06); z-index:3; pointer-events:none;
+    content:"";position:absolute;top:0;bottom:0;left:calc(var(--pos)*100%);
+    transform:translateX(-50%);width:2px;background:rgba(255,255,255,.95);
+    box-shadow:0 0 0 1px rgba(0,0,0,.06);z-index:3;pointer-events:none;
   }
 
-  /* Overlay för handtag */
-  #shopify-section-{{ section.id }} .before-after-slider .resizer{
-    position:absolute; inset:0; z-index:4; pointer-events:none;
-  }
+  /* Overlay + bubbla (knopp) */
+  #shopify-section-{{ section.id }} .before-after-slider .resizer{position:absolute;inset:0;z-index:4;pointer-events:none}
   #shopify-section-{{ section.id }} .before-after-slider .resizer-trigger{
-    position:absolute; top:50%; left:calc(var(--pos)*100%);
-    transform:translate(-50%,-50%);
-    width:44px; height:44px; border-radius:50%;
-    background:#fff; border:1px solid rgba(0,0,0,.12);
-    box-shadow:0 6px 18px rgba(0,0,0,.18), 0 1px 2px rgba(0,0,0,.12) inset;
-    display:flex; align-items:center; justify-content:center;
-    cursor:ew-resize; pointer-events:auto; touch-action:none;
+    position:absolute;top:50%;left:calc(var(--pos)*100%);transform:translate(-50%,-50%);
+    width:46px;height:46px;border-radius:9999px;background:#fff;border:1px solid rgba(0,0,0,.12);
+    box-shadow:0 8px 20px rgba(0,0,0,.18), inset 0 1px 2px rgba(0,0,0,.08);
+    display:flex;align-items:center;justify-content:center;cursor:ew-resize;
+    pointer-events:auto;touch-action:none;padding:0;line-height:1;
   }
-  #shopify-section-{{ section.id }} .before-after-slider .resizer-trigger svg{ width:18px; height:18px; opacity:.85; }
+  #shopify-section-{{ section.id }} .before-after-slider .resizer-trigger::after{
+    content:"";position:absolute;inset:5px;border-radius:inherit;box-shadow:inset 0 0 0 1px rgba(0,0,0,.06)
+  }
+  #shopify-section-{{ section.id }} .before-after-slider .resizer-trigger svg{width:18px;height:18px;opacity:.8;stroke:#111}
+  @media (max-width:767px){#shopify-section-{{ section.id }} .before-after-slider .resizer-trigger{width:40px;height:40px}}
 </style>
 
 <div class="container">
@@ -139,11 +72,9 @@
               {{ block.settings.image_after  | image_url: width: 1400 | image_tag: loading: 'lazy' }}
             </div>
             <div class="resizer">
-  <button class="resizer-trigger" type="button" aria-label="Drag to compare">
-    {%- render 'icon', type: 'two-carets' -%}
-  </button>
-</div>
-
+              <button class="resizer-trigger" type="button" aria-label="Drag to compare">
+                {%- render 'icon', type: 'two-carets' -%}
+              </button>
             </div>
           {%- endif -%}
         </div>
@@ -155,28 +86,26 @@
 <script>
 (function(){
   const section = document.getElementById('shopify-section-{{ section.id }}');
-  if (!section || section.dataset.beforeAfterInit) return;
+  if(!section || section.dataset.beforeAfterInit) return;
   section.dataset.beforeAfterInit = '1';
 
   section.querySelectorAll('.before-after-slider').forEach((slider)=>{
     const handle = slider.querySelector('.resizer-trigger');
 
-    const setPos = (clientX)=>{
+    const setPos = (x)=>{
       const r = slider.getBoundingClientRect();
-      let p = (clientX - r.left) / r.width;
-      p = Math.max(0.02, Math.min(0.98, p)); // clamp
+      let p = (x - r.left) / r.width;
+      p = Math.max(0.02, Math.min(0.98, p));
       slider.style.setProperty('--pos', p);
     };
 
-    // Dra från BÅDE bubblan och var som helst i sliden
     const onPointerDown = (e)=>{
       e.preventDefault();
-      const capturer = handle || slider;    // om bubbla saknas, fånga på slidern
+      const capturer = slider;               // dra var som helst i slidern
       capturer.setPointerCapture(e.pointerId);
       setPos(e.clientX);
-
       const move = ev => setPos(ev.clientX);
-      const up = ev => {
+      const up = ev =>{
         capturer.releasePointerCapture(ev.pointerId);
         capturer.removeEventListener('pointermove', move);
         capturer.removeEventListener('pointerup', up);
@@ -187,17 +116,15 @@
       capturer.addEventListener('pointercancel', up);
     };
 
-    // lyssna på båda
+    // lyssna på hela slidern (inkl. bubblan)
     slider.addEventListener('pointerdown', onPointerDown);
-    if (handle) handle.addEventListener('pointerdown', onPointerDown);
 
-    // start i mitten
+    // init i mitten
     const r = slider.getBoundingClientRect();
     setPos(r.left + r.width/2);
   });
 })();
 </script>
-
 
 {% schema %}
 {
@@ -222,7 +149,7 @@
       "limit": 3,
       "settings": [
         { "type": "image_picker", "id": "image_before", "label": "Image Before" },
-        { "type": "image_picker", "id": "image_after",  "label": "Image After" }
+        { "type": "image_picker", "id": "image_after", "label": "Image After" }
       ]
     }
   ],
