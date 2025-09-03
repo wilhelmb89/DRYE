@@ -102,7 +102,7 @@
       justify-content: center;
     }
   }
-/* Hero brödtext – samma grå som Multirow */
+/* Hero brödtext – matcha Multirow, men låt storlek styras av slidern */
 #shopify-section-{{ section.id }} .review-text,
 #shopify-section-{{ section.id }} .review-text p,
 #shopify-section-{{ section.id }} .review-text *:not(svg):not(path) {
@@ -110,11 +110,14 @@
   font-weight: 400 !important;
   font-variation-settings: "wght" 400 !important;
   font-synthesis-weight: none;
-  font-size: 18px !important;
-  line-height: 28px !important;
   letter-spacing: -0.04em;
-  color: rgb(17 17 17 / 65%) !important; /* mjuk grå */
+  color: rgb(17 17 17 / 65%) !important;
+  /* ta bort tidigare:
+     font-size: 18px !important;
+     line-height: 28px !important;
+  */
 }
+
 
 /* Om brödtexten innehåller länkar – tvinga samma färg */
 #shopify-section-{{ section.id }} .review-text a {
