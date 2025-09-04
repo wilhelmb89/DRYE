@@ -13,7 +13,7 @@
       "type": "home-hero-new",
       "name": "Homepage Hero(New)",
       "settings": {
-        "title": "Your hands aren’t failing. The sweat locked inside your gloves is.",
+        "title": "Think your skin is failing? It’s not. Sweat is.",
         "cover_image": "shopify://shop_images/v5.png",
         "stars": 5,
         "review_text": "<p>Sweat trapped under gloves causes cracks, flare-ups, and raw skin. DRYE’s dual-layer textile moves it away so your hands can finally recover.</p>",
@@ -1206,6 +1206,27 @@
         "section_bottom_padding_mobile": 64
       }
     },
+    "1746812889a5f81d00": {
+      "type": "apps",
+      "blocks": {
+        "stamped_reviews_main_widget_B63yme": {
+          "type": "shopify://apps/stamped-reviews/blocks/main-widget/a103faaf-2125-4b0e-89fa-de5149736723",
+          "settings": {
+            "animation": false,
+            "tags_exclude": "",
+            "tags_include": "",
+            "search": "",
+            "linkify": false,
+            "use_metafields": false,
+            "sku_tagtype": "sku"
+          }
+        }
+      },
+      "block_order": [
+        "stamped_reviews_main_widget_B63yme"
+      ],
+      "settings": {}
+    },
     "before_after_cYbThq": {
       "type": "before-after",
       "name": "Before-After",
@@ -1555,27 +1576,6 @@
         "padding_left_mobile": 0,
         "padding_right_mobile": 0
       }
-    },
-    "1746812889a5f81d00": {
-      "type": "apps",
-      "blocks": {
-        "stamped_reviews_main_widget_B63yme": {
-          "type": "shopify://apps/stamped-reviews/blocks/main-widget/a103faaf-2125-4b0e-89fa-de5149736723",
-          "settings": {
-            "animation": false,
-            "tags_exclude": "",
-            "tags_include": "",
-            "search": "",
-            "linkify": false,
-            "use_metafields": false,
-            "sku_tagtype": "sku"
-          }
-        }
-      },
-      "block_order": [
-        "stamped_reviews_main_widget_B63yme"
-      ],
-      "settings": {}
     },
     "rich_color_text_pbmjNY": {
       "type": "rich-color-text",
