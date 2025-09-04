@@ -164,10 +164,17 @@
           <div class="page-card-body">
             <div class="page-card-icon-area">
               <img
-                class="page-card-icon"
-                src="{{ block.settings.icon | img_url: '30x' }}"
-                width="{{ section.settings.icon_size }}px"
-                height="auto"/>
+  class="page-card-icon"
+  src="{{ block.settings.icon | image_url: width: section.settings.icon_size }}"
+  srcset="
+    {{ block.settings.icon | image_url: width: section.settings.icon_size }} 1x,
+    {{ block.settings.icon | image_url: width: section.settings.icon_size | times: 2 }} 2x
+  "
+  width="{{ section.settings.icon_size }}"
+  height="{{ section.settings.icon_size }}"
+  loading="lazy"
+  decoding="async"
+  alt="">
             </div>
             <div class="page-card-text">{{ block.settings.text }}</div>
           </div>
