@@ -163,10 +163,7 @@
           </div>
           <div class="page-card-body">
             <div class="page-card-icon-area">
-              {% assign icon_1x = section.settings.icon_size %}
-{% assign icon_2x = section.settings.icon_size | times: 2 %}
-
-<img
+              <img
   class="page-card-icon"
   src="{{ block.settings.icon | image_url: width: icon_1x }}"
   srcset="{{ block.settings.icon | image_url: width: icon_1x }} 1x, {{ block.settings.icon | image_url: width: icon_2x }} 2x"
