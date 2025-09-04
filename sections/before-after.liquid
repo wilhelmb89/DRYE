@@ -231,8 +231,6 @@
   {%- endif -%}
 </div>
 <script>
-
-  
 (function(){
   const section = document.getElementById('shopify-section-{{ section.id }}');
   if (!section || section.dataset.beforeAfterInit) return;
@@ -242,35 +240,71 @@
     const setPos = (x)=>{
       const r = slider.getBoundingClientRect();
       let p = (x - r.left) / r.width;
-      p = Math.max(0.02, Math.min(0.98, p));        // clamp
+      p = Math.max(0.02, Math.min(0.98, p));   // clamp
       slider.style.setProperty('--pos', p);
     };
 
-    const onDown = (e)=>{
-      e.preventDefault();
-      slider.setPointerCapture(e.pointerId);
-      setPos(e.clientX);
-      const move = ev => setPos(ev.clientX);
-      const up = ev => {
-        slider.releasePointerCapture(ev.pointerId);
-        slider.removeEventListener('pointermove', move);
-        slider.removeEventListener('pointerup', up);
-        slider.removeEventListener('pointercancel', up);
+    let startX = 0, startY = 0, decided = false, dragging = false;
+
+    const onPointerDown = (e)=>{
+      // OBS: ingen preventDefault här
+      startX = e.clientX;
+      startY = e.clientY;
+      decided = false;
+      dragging = false;
+
+      const onMove = (ev)=>{
+        if (!decided) {
+          const dx = Math.abs(ev.clientX - startX);
+          const dy = Math.abs(ev.clientY - startY);
+          // Tröskel för att avgöra riktning
+          if (dx > 6 || dy > 6) {
+            decided = true;
+            if (dx > dy) {
+              // Horisontell avsikt → fånga och blockera scroll
+              dragging = true;
+              try { slider.setPointerCapture(ev.pointerId); } catch(_) {}
+              ev.preventDefault();
+            } else {
+              // Vertikal avsikt → släpp igenom scroll, städa och lämna
+              cleanup();
+              return;
+            }
+          } else {
+            return; // för liten rörelse, vänta
+          }
+        }
+        if (dragging) {
+          ev.preventDefault(); // blockera vertikal scroll medan vi drar
+          setPos(ev.clientX);
+        }
       };
-      slider.addEventListener('pointermove', move);
-      slider.addEventListener('pointerup', up);
-      slider.addEventListener('pointercancel', up);
+
+      const onUp = (ev)=>{
+        cleanup();
+      };
+
+      const cleanup = ()=>{
+        slider.removeEventListener('pointermove', onMove);
+        slider.removeEventListener('pointerup', onUp);
+        slider.removeEventListener('pointercancel', onUp);
+        try { slider.releasePointerCapture(event.pointerId); } catch(_) {}
+      };
+
+      slider.addEventListener('pointermove', onMove, { passive: false });
+      slider.addEventListener('pointerup', onUp);
+      slider.addEventListener('pointercancel', onUp);
     };
 
-    // dra var som helst (inkl. bubblan)
-    slider.addEventListener('pointerdown', onDown);
+    slider.addEventListener('pointerdown', onPointerDown);
 
-    // init mitt
+    // init: start i mitten
     const r = slider.getBoundingClientRect();
     setPos(r.left + r.width/2);
   });
 })();
 </script>
+
 
 {% schema %}
 {
