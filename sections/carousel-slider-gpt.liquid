@@ -1,0 +1,84 @@
+{% schema %}
+{
+  "name": "Review Carousel",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "review_1",
+      "label": "Review Image 1"
+    },
+    {
+      "type": "image_picker",
+      "id": "review_2",
+      "label": "Review Image 2"
+    },
+    {
+      "type": "image_picker",
+      "id": "review_3",
+      "label": "Review Image 3"
+    },
+    {
+      "type": "image_picker",
+      "id": "review_4",
+      "label": "Review Image 4"
+    },
+    {
+      "type": "image_picker",
+      "id": "review_5",
+      "label": "Review Image 5"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Review Carousel",
+      "category": "Custom"
+    }
+  ]
+}
+{% endschema %}
+
+<div class="review-carousel-wrapper">
+  <div class="review-carousel-track">
+    {% for i in (1..5) %}
+      {% assign image_id = "review_" | append: i %}
+      {% if section.settings[image_id] != blank %}
+        <div class="review-slide">
+          <img src="{{ section.settings[image_id] | image_url: width: 800 }}" alt="Review {{ i }}">
+        </div>
+      {% endif %}
+    {% endfor %}
+  </div>
+</div>
+
+<style>
+.review-carousel-wrapper {
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+  background: #fff;
+  padding: 20px 0;
+}
+
+.review-carousel-track {
+  display: flex;
+  gap: 20px;
+  animation: slide-left 25s linear infinite;
+}
+
+.review-slide {
+  flex: 0 0 auto;
+  width: 250px; /* adjust image size */
+}
+
+.review-slide img {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+}
+
+@keyframes slide-left {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+</style>
