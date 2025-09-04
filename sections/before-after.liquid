@@ -146,6 +146,12 @@
   {%- endif -%}
 </div>
 <script>
+
+  let p = (x - r.left) / r.width;
+p = Math.max(0.02, Math.min(0.98, p));
+p = Math.round(p * 1000) / 1000;   // ny rad: lätt avrundning
+slider.style.setProperty('--pos', p);
+
 (function(){
   const section = document.getElementById('shopify-section-{{ section.id }}');
   if (!section || section.dataset.beforeAfterInit) return;
