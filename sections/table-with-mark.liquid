@@ -49,7 +49,8 @@
     font-size: {{ section.settings.description_font_size }}px;
     font-weight: 300;
     line-height: {{ section.settings.description_line_height }}px;
-    letter-spacing: -.8px;
+    letter-spacing: normal !important;
+
   }
   .section-{{ section.id }} .page-card-body .page-card-icon {
     width: {{ section.settings.icon_size }}px;
