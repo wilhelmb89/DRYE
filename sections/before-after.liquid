@@ -181,6 +181,25 @@
   overflow: visible !important;
   z-index: 1 !important;
 }
+/* Fixa before-image även i mobil */
+@media (max-width: 767px) {
+  #shopify-section-{{ section.id }} .before-after-slider .before-image {
+    position: relative !important;
+    width: 100% !important;
+    height: auto !important;
+    left: 0 !important;
+    top: 0 !important;
+    overflow: visible !important;
+    z-index: 1 !important;
+  }
+
+  /* Säkerställ att img fyller containern */
+  #shopify-section-{{ section.id }} .before-after-slider img {
+    width: 100% !important;
+    height: auto !important;
+    object-fit: cover;
+  }
+}
 
 </style>
 
