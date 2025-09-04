@@ -168,6 +168,14 @@
 #shopify-section-{{ section.id }} .before-after-slider img{
   -webkit-user-drag:none; user-drag:none; pointer-events:none;
 }
+#shopify-section-{{ section.id }} .before-after-slider .resizer-trigger::before,
+#shopify-section-{{ section.id }} .before-after-slider .resizer-trigger::after{
+  content:""; position:absolute; top:50%; transform:translateY(-50%);
+  width:14px; height:28px; background:#fff; border:1px solid rgba(0,0,0,.12);
+  box-shadow:0 4px 10px rgba(0,0,0,.18); z-index: 25;
+}
+#shopify-section-{{ section.id }} .before-after-slider .resizer-trigger::before{ left:-14px;  border-radius:9999px 0 0 9999px; }
+#shopify-section-{{ section.id }} .before-after-slider .resizer-trigger::after { right:-14px; border-radius:0 9999px 9999px 0; }
 
 
 </style>
