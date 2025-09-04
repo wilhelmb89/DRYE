@@ -3836,7 +3836,7 @@ form label {
     font-weight: 700;
     font-family: 'inter';
     font-weight: 700;
-    letter-spacing: -0.42px;
+    letter-spacing: normal !important;
 }
 .main-blog .container .blog-wrapper .article-wrapper .content .read-more svg {
     fill: inherit;
@@ -3875,7 +3875,7 @@ form label {
     font-size: 3.125rem;
     font-weight: 700;
     line-height: 116.4px;
-    letter-spacing: normal 
+    letter-spacing: normal !important;
     text-align: left;
 }
 @media screen and (max-width: 767px) {
@@ -3883,7 +3883,7 @@ form label {
         font-size: 16px;
         font-weight: 700;
         line-height: 34px;
-        letter-spacing: normal 
+        letter-spacing: normal !important;
         text-align: left;
     }
 }
@@ -3944,7 +3944,7 @@ form label {
     font-size: 18px;
     font-weight: 400;
     line-height: 28px;
-    letter-spacing: normal;
+    letter-spacing: normal !important;
     text-align: left;
 }
 @media screen and (max-width: 767px) {
@@ -3960,7 +3960,7 @@ form label {
     font-size: 32px;
     font-weight: 500;
     line-height: 38px;
-    letter-spacing: normal;
+    letter-spacing: normal !important;
     text-align: left;
 }
 @media screen and (max-width: 767px) {
@@ -3987,7 +3987,7 @@ form label {
     font-size: 16px;
     font-weight: 300;
     line-height: 4.25rem;
-    letter-spacing: normal;
+    letter-spacing: normal !important;
     text-align: left;
 }
 @media screen and (max-width: 767px) {
@@ -4010,7 +4010,7 @@ form label {
     font-size: 16px;
     font-weight: 300;
     line-height: 25px;
-    letter-spacing: normal;
+    letter-spacing: normal !important;
     color: red;
     text-align: left;
 }
