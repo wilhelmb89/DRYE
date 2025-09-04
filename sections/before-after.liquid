@@ -115,56 +115,61 @@
 #shopify-section-{{ section.id }} .before-after-slider img{
   -webkit-user-drag:none; user-drag:none; pointer-events:none;
 }
-/* Neutralisera theme.css för den här sektionen */
-#shopify-section-{{ section.id }} .before-after-slider .before-image{
-  position: relative !important;
-  width: auto !important;
-  height: auto !important;
-  z-index: 1;
+/* --- Återställ tema-look för linje + bubbla (minimal override) --- */
+
+/* Stäng av vår pseudo-linje så vi ser tema-linjen i .resizer */
+#shopify-section-{{ section.id }} .before-after-slider::before{
+  display: none !important;
 }
 
-/* vi använder after + clip-path, inte before=50% */
-#shopify-section-{{ section.id }} .before-after-slider .after-image{
-  position: absolute; inset: 0; z-index: 2;
-  clip-path: inset(0 0 0 calc(var(--pos) * 100%));
-}
-
-/* TA BORT theme.css-linjen (.resizer) */
+/* Gör .resizer till den smala vita linjen, förankrad i --pos */
 #shopify-section-{{ section.id }} .before-after-slider .resizer{
   position: absolute !important;
-  inset: 0 !important;
-  left: auto !important;
-  width: auto !important;
-  height: auto !important;
-  background: transparent !important;
-  cursor: auto !important;
-  pointer-events: none;
-  overflow: visible;
+  top: 0 !important;
+  bottom: 0 !important;
+  left: calc(var(--pos) * 100%) !important;
+  transform: translateX(-50%) !important;
+  width: 4px !important;
+  background: #fff !important;
+  z-index: 10 !important;
+  pointer-events: none !important;   /* linjen fångar inte klick */
+  overflow: visible !important;
 }
 
-/* Vår enda linje ritas via ::before – behåll denna */
-#shopify-section-{{ section.id }} .before-after-slider::before{
-  content:""; position:absolute; top:0; bottom:0;
-  left: calc(var(--pos) * 100%); transform: translateX(-50%);
-  width:2px; background:#fff;
-  box-shadow: 0 0 0 1px rgba(0,0,0,.08) inset, 0 0 0 1px rgba(0,0,0,.06);
-  z-index:10; pointer-events:none;
-}
-
-/* Knoppen – nollställ theme.css marginalen */
+/* Centrera bubblan över linjen, tema-storlek och stil */
 #shopify-section-{{ section.id }} .before-after-slider .resizer-trigger{
-  position:absolute; top:50%; left: calc(var(--pos) * 100%);
-  transform: translate(-50%, -50%);
-  margin: 0 !important;                 /* <- viktig reset */
-  width:46px; height:46px; border-radius:9999px; background:#fff;
-  border:1px solid rgba(0,0,0,.12);
-  box-shadow: 0 8px 20px rgba(0,0,0,.18), inset 0 1px 2px rgba(0,0,0,.08);
-  display:flex; align-items:center; justify-content:center;
-  cursor: ew-resize; pointer-events:auto; line-height:1;
-  z-index:30; isolation:isolate;
+  position: absolute !important;
+  top: 50% !important;
+  left: 50% !important;
+  transform: translate(-50%, -50%) !important;
+  margin: 0 !important;              /* nollställ -39px från theme.css */
+  width: 80px !important;
+  height: 80px !important;
+  border-radius: 50% !important;
+  background: #fff !important;
+  border: 1px solid rgba(0,0,0,.12) !important;
+  box-shadow: 0 8px 20px rgba(0,0,0,.18), inset 0 1px 2px rgba(0,0,0,.08) !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  cursor: ew-resize !important;
+  pointer-events: auto !important;    /* bubblan är klickbar */
+  z-index: 30 !important;
 }
 #shopify-section-{{ section.id }} .before-after-slider .resizer-trigger svg{
-  width:18px; height:18px; opacity:.85; stroke:#111; display:block;
+  display: block !important;
+  width: 18px !important;
+  height: 18px !important;
+  opacity: .85 !important;
+  stroke: #111 !important;
+}
+
+/* Mobil: mindre bubbla som i temat */
+@media (max-width: 767px){
+  #shopify-section-{{ section.id }} .before-after-slider .resizer-trigger{
+    width: 40px !important;
+    height: 40px !important;
+  }
 }
 
 </style>
