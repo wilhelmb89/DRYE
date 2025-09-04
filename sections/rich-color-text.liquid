@@ -59,8 +59,12 @@
 .section-{{ section.id }} .rich-text__text * {
   font-family: Inter, sans-serif !important;
   font-weight: 400 !important;                 /* inte 300 (Inter Light) */
-  font-variation-set
-
+  font-variation-settings: "wght" 400 !important;
+  color: rgb(17 17 17 / 65%) !important;       /* din grå brödtext */
+  letter-spacing: -0.04em !important;
+  line-height: 28px !important;
+  opacity: 1 !important;                       /* nollar ev. arv */
+}
 
 {%- endstyle -%}
 
