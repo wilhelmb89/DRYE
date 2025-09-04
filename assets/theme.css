@@ -6024,3 +6024,13 @@ section.before-after-section h2.title,
 }
 
 
+/* 1) Nollställ allt inne i kontaktdelen */
+.main-contact .contacts-wrapper {
+  letter-spacing: normal !important;
+}
+
+/* 2) Om temat även sätter egna regler på rubriker/namn, säkra dessa också */
+.main-contact .contacts-wrapper .name,
+.main-contact .contacts-wrapper .info {
+  letter-spacing: normal !important;
+}
