@@ -90,7 +90,65 @@
 /* bilder ska inte sno drag */
 #shopify-section-{{ section.id }} .before-after-slider img{
   -webkit-user-drag:none; user-drag:none; pointer-events:none;
+}/* Ankare + startläge för varje slider */
+#shopify-section-{{ section.id }} .before-after-slider{
+  position:relative; overflow:hidden; --pos:.5;
 }
+
+/* After-lagret klipps av --pos (behåll som du har) */
+#shopify-section-{{ section.id }} .before-after-slider .before-image{ position:relative; z-index:1; }
+#shopify-section-{{ section.id }} .before-after-slider .after-image{ position:absolute; inset:0; z-index:2;
+  clip-path: inset(0 0 0 calc(var(--pos)*100%));
+}
+
+/* Vit linje i mitten */
+#shopify-section-{{ section.id }} .before-after-slider::before{
+  content:""; position:absolute; top:0; bottom:0;
+  left: calc(var(--pos)*100%); transform: translateX(-50%);
+  width:2px; background:rgba(255,255,255,.95);
+  box-shadow:0 0 0 1px rgba(0,0,0,.08) inset, 0 0 0 1px rgba(0,0,0,.06);
+  z-index:3; pointer-events:none;
+}
+
+/* Overlay får inte klippa knoppen/öron */
+#shopify-section-{{ section.id }} .before-after-slider .resizer{
+  position:absolute; inset:0; z-index:4; pointer-events:none; overflow:visible;
+}
+
+/* VITA BUBBLAN (knoppen) – detta är det du saknar */
+#shopify-section-{{ section.id }} .before-after-slider .resizer-trigger{
+  position:absolute; top:50%; left: calc(var(--pos)*100%); transform: translate(-50%, -50%);
+  width:46px; height:46px; border-radius:9999px; background:#fff;
+  border:1px solid rgba(0,0,0,.12);
+  box-shadow:0 8px 20px rgba(0,0,0,.18), inset 0 1px 2px rgba(0,0,0,.08);
+  display:flex; align-items:center; justify-content:center;
+  cursor:ew-resize; pointer-events:auto; padding:0; line-height:1;
+  appearance:none; -webkit-appearance:none;
+  z-index:20; isolation:isolate;   /* garanterar att bubblan ligger över allt */
+}
+#shopify-section-{{ section.id }} .before-after-slider .resizer-trigger svg{
+  width:18px; height:18px; opacity:.85; stroke:#111;
+}
+
+/* Halvcirklarna (“öronen”) på sidorna av bubblan */
+#shopify-section-{{ section.id }} .before-after-slider .resizer-trigger::before,
+#shopify-section-{{ section.id }} .before-after-slider .resizer-trigger::after{
+  content:""; position:absolute; top:50%; transform:translateY(-50%);
+  width:14px; height:28px; background:#fff; border:1px solid rgba(0,0,0,.12);
+  box-shadow:0 4px 10px rgba(0,0,0,.18); z-index:10;
+}
+#shopify-section-{{ section.id }} .before-after-slider .resizer-trigger::before{
+  left:-14px; border-radius:9999px 0 0 9999px;
+}
+#shopify-section-{{ section.id }} .before-after-slider .resizer-trigger::after{
+  right:-14px; border-radius:0 9999px 9999px 0;
+}
+
+/* Bilder ska inte fånga drag */
+#shopify-section-{{ section.id }} .before-after-slider img{
+  -webkit-user-drag:none; user-drag:none; pointer-events:none;
+}
+
 
 </style>
 
