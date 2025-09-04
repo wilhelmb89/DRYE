@@ -17,9 +17,9 @@
         "cover_image": "shopify://shop_images/v5.png",
         "stars": 5,
         "review_text": "<p>Sweat trapped under gloves causes cracks, flare-ups, and raw skin. DRYE’s dual-layer textile moves it away so your hands can finally recover.</p>",
-        "review_text_font_size_desktop": 16,
+        "review_text_font_size_desktop": 18,
         "review_text_line_height_desktop": 24,
-        "review_text_font_size_tablet": 16,
+        "review_text_font_size_tablet": 18,
         "review_text_line_height_tablet": 24,
         "review_text_font_size_mobile": 16,
         "review_text_line_height_mobile": 24,
@@ -42,7 +42,7 @@
             "button_text": "",
             "button_url": "",
             "controls": true,
-            "image": "shopify://shop_images/u9738261378_httpss.mj.runvRjgzB98KGs_Main_Subject_Young_Mecha_8c506662-67aa-41ef-941d-d1f76f07cced_0_1.png",
+            "image": "shopify://shop_images/u9738261378_httpss.mj.run4B5pqP8x_eg_This_close-up_image_show_a9960b3b-8f21-4bae-b297-e9ff9ec350b3_2_1.png",
             "position": "row-reverse"
           }
         },
@@ -68,7 +68,7 @@
             "button_text": "",
             "button_url": "",
             "controls": true,
-            "image": "shopify://shop_images/u9738261378_httpss.mj.runTTsEJsvFDz4_Main_Subject_Automotive__ae303664-f659-4ecc-be49-65d8c92e2f24_0.png",
+            "image": "shopify://shop_images/u9738261378_httpss.mj.runvRjgzB98KGs_Main_Subject_Young_Mecha_8c506662-67aa-41ef-941d-d1f76f07cced_0_1.png",
             "position": "row-reverse"
           }
         }
@@ -711,7 +711,7 @@
       "name": "Before-After",
       "settings": {
         "title": "",
-        "image_border_radius": 40,
+        "image_border_radius": 18,
         "section_top_padding_desktop": 68,
         "section_bottom_padding_desktop": 36,
         "section_top_padding_tablet": 80,
@@ -1447,6 +1447,74 @@
         "title": "",
         "form_title": ""
       }
+    },
+    "custom_reviews_carousel_qTXxbU": {
+      "type": "custom-reviews-carousel",
+      "blocks": {
+        "review_eqTgDP": {
+          "type": "review",
+          "settings": {
+            "image_1": "shopify://shop_images/Group_56_1.jpg",
+            "image_1_tag": "",
+            "image_2_tag": "",
+            "review_name": "",
+            "rating": 5,
+            "review_copy": "",
+            "review_tag_1": "",
+            "review_tag_2": "",
+            "review_tag_3": "",
+            "review_text": "",
+            "review_link": ""
+          }
+        },
+        "review_DGrUgg": {
+          "type": "review",
+          "settings": {
+            "image_1": "shopify://shop_images/Group_59_1.jpg",
+            "image_1_tag": "",
+            "image_2_tag": "",
+            "review_name": "Wilhelm, Sweden",
+            "rating": 5,
+            "review_copy": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+            "review_tag_1": "",
+            "review_tag_2": "",
+            "review_tag_3": "",
+            "review_text": "",
+            "review_link": ""
+          }
+        },
+        "review_A9JtVE": {
+          "type": "review",
+          "settings": {
+            "image_1": "shopify://shop_images/Group_75_1.jpg",
+            "image_1_tag": "",
+            "image_2_tag": "",
+            "review_name": "Wilhelm, Sweden",
+            "rating": 5,
+            "review_copy": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+            "review_tag_1": "",
+            "review_tag_2": "",
+            "review_tag_3": "",
+            "review_text": "",
+            "review_link": ""
+          }
+        }
+      },
+      "block_order": [
+        "review_eqTgDP",
+        "review_DGrUgg",
+        "review_A9JtVE"
+      ],
+      "name": "Custom Reviews Carousel",
+      "settings": {
+        "title": "",
+        "button_text": "",
+        "button_link": "",
+        "margin_top_desktop": true,
+        "margin_top_mobile": true,
+        "margin_bottom_desktop": true,
+        "margin_bottom_mobile": true
+      }
     }
   },
   "order": [
@@ -1467,6 +1535,7 @@
     "columns_with_video_kRmqXB",
     "rich_color_text_pbmjNY",
     "1746812877af76f5ce",
-    "main_contact_BPHcyq"
+    "main_contact_BPHcyq",
+    "custom_reviews_carousel_qTXxbU"
   ]
 }
