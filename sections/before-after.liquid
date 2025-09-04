@@ -200,6 +200,19 @@
     object-fit: cover;
   }
 }
+/* Begränsa sliden till horisontell gest, släpp igenom vertikal scroll */
+.before-after,
+.before-after * {
+  touch-action: pan-y;     /* tillåt vertikal pan; blockera bara horisontell här */
+}
+
+/* (valfritt) se till att bilderna inte fångar events i onödan */
+.before-after img {
+  pointer-events: none;
+}
+.before-after .handle {     /* själva draghandtaget */
+  pointer-events: auto;
+}
 
 </style>
 
