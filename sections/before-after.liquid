@@ -52,7 +52,7 @@
     display: block;
   }
 
- /* === DRAG | EN ENDA SANNING (ersätt dina dubletter) === */
+ /* === DRAG — EN ENDA SANNING === */
 
 /* startläge + ankare */
 #shopify-section-{{ section.id }} .before-after-slider{
@@ -63,72 +63,13 @@
 }
 
 /* lager: before ger höjd; after klipps av --pos */
-#shopify-section-{{ section.id }} .before-after-slider .before-image{
-  position: relative; z-index: 1;
-}
+#shopify-section-{{ section.id }} .before-after-slider .before-image{ position: relative; z-index: 1; }
 #shopify-section-{{ section.id }} .before-after-slider .after-image{
   position: absolute; inset: 0; z-index: 2;
   clip-path: inset(0 0 0 calc(var(--pos) * 100%));
 }
 
-/* vit mittlinje */
-#shopify-section-{{ section.id }} .before-after-slider::before{
-  content:""; position:absolute; top:0; bottom:0;
-  left: calc(var(--pos) * 100%); transform: translateX(-50%);
-  width:2px; background: rgba(255,255,255,.95);
-  box-shadow: 0 0 0 1px rgba(0,0,0,.08) inset, 0 0 0 1px rgba(0,0,0,.06);
-  z-index:3; pointer-events:none;
-}
-
-/* overlay + bubbla (och låt “öron” sticka ut) */
-#shopify-section-{{ section.id }} .before-after-slider .resizer{
-  position:absolute; inset:0; z-index:4; pointer-events:none; overflow:visible;
-}
-#shopify-section-{{ section.id }} .before-after-slider .resizer-trigger{
-  position:absolute; top:50%; left: calc(var(--pos) * 100%);
-  transform: translate(-50%, -50%);
-  width:44px; height:44px; border-radius:9999px; background:#fff;
-  border:1px solid rgba(0,0,0,.12);
-  box-shadow: 0 8px 20px rgba(0,0,0,.18), inset 0 1px 2px rgba(0,0,0,.08);
-  display:flex; align-items:center; justify-content:center;
-  cursor: ew-resize; pointer-events:auto; padding:0; line-height:1;
-  appearance:none; -webkit-appearance:none;
-  z-index:20; isolation:isolate;   /* garanterar att knoppen ligger över allt */
-}
-#shopify-section-{{ section.id }} .before-after-slider .resizer-trigger svg{
-  width:18px; height:18px; opacity:.85; stroke:#111;
-}
-
-/* valfritt: halvcirklar (“öron”) på sidorna av bubblan */
-#shopify-section-{{ section.id }} .before-after-slider .resizer-trigger::before,
-#shopify-section-{{ section.id }} .before-after-slider .resizer-trigger::after{
-  content:""; position:absolute; top:50%; transform:translateY(-50%);
-  width:14px; height:28px; background:#fff; border:1px solid rgba(0,0,0,.12);
-  box-shadow:0 4px 10px rgba(0,0,0,.18); z-index:10;
-}
-#shopify-section-{{ section.id }} .before-after-slider .resizer-trigger::before{
-  left:-14px;  border-radius:9999px 0 0 9999px;
-}
-#shopify-section-{{ section.id }} .before-after-slider .resizer-trigger::after{
-  right:-14px; border-radius:0 9999px 9999px 0;
-}
-
-/* bilder ska inte fånga drag */
-#shopify-section-{{ section.id }} .before-after-slider img{
-  -webkit-user-drag:none; user-drag:none; pointer-events:none;
-}
-/* --- Tvinga korrekt lagerordning och centrering --- */
-#shopify-section-{{ section.id }} .before-after-slider{
-  position:relative; overflow:hidden; --pos:.5;
-}
-
-#shopify-section-{{ section.id }} .before-after-slider .before-image{ position:relative; z-index:1; }
-#shopify-section-{{ section.id }} .before-after-slider .after-image{
-  position:absolute; inset:0; z-index:2;
-  clip-path: inset(0 0 0 calc(var(--pos) * 100%));
-}
-
-/* Linjen UNDER knoppen */
+/* vit mittlinje UNDER knoppen */
 #shopify-section-{{ section.id }} .before-after-slider::before{
   content:""; position:absolute; top:0; bottom:0;
   left: calc(var(--pos) * 100%); transform: translateX(-50%);
@@ -137,12 +78,14 @@
   z-index: 5; pointer-events:none;
 }
 
-/* Overlay får INTE klippa knoppen */
+/* overlay som inte blockerar pekhändelser */
 #shopify-section-{{ section.id }} .before-after-slider .resizer{
-  position:absolute; inset:0; z-index: 8; pointer-events:none; overflow:visible;
+  position: static;           /* viktigt: gör knoppen relativ .before-after-slider */
+  pointer-events: none;       /* blockera inte drag */
+  overflow: visible;
 }
 
-/* SJÄLVA KNOPPEN (ska ligga över allt och centrera på linjen) */
+/* KNOPPEN – överst, klickbar */
 #shopify-section-{{ section.id }} .before-after-slider .resizer-trigger{
   position:absolute; top:50%; left: calc(var(--pos) * 100%);
   transform: translate(-50%, -50%);
@@ -158,16 +101,7 @@
   width:18px; height:18px; opacity:.85; stroke:#111;
 }
 
-/* Tillfälligt: stäng av “öronen” för att verifiera centrerad knapp */
-#shopify-section-{{ section.id }} .before-after-slider .resizer-trigger::before,
-#shopify-section-{{ section.id }} .before-after-slider .resizer-trigger::after{
-  display:none !important;
-}
-
-/* Bilder ska inte fånga drag */
-#shopify-section-{{ section.id }} .before-after-slider img{
-  -webkit-user-drag:none; user-drag:none; pointer-events:none;
-}
+/* valfritt: “öron” – kan kommenteras bort om de stör */
 #shopify-section-{{ section.id }} .before-after-slider .resizer-trigger::before,
 #shopify-section-{{ section.id }} .before-after-slider .resizer-trigger::after{
   content:""; position:absolute; top:50%; transform:translateY(-50%);
@@ -176,25 +110,11 @@
 }
 #shopify-section-{{ section.id }} .before-after-slider .resizer-trigger::before{ left:-14px;  border-radius:9999px 0 0 9999px; }
 #shopify-section-{{ section.id }} .before-after-slider .resizer-trigger::after { right:-14px; border-radius:0 9999px 9999px 0; }
-/* Gör att knoppen positioneras mot SLIDERN (samma som linjen) */
-#shopify-section-{{ section.id }} .before-after-slider { position: relative; } /* redan satt, men låt stå */
 
-#shopify-section-{{ section.id }} .before-after-slider .resizer{
-  position: static;          /* INTE absolute – så barnet positioneras mot slidern */
-  inset: auto;               /* nollställ ev. tidigare värden */
-  pointer-events: none;
-  overflow: visible;
+/* bilder ska inte fånga drag */
+#shopify-section-{{ section.id }} .before-after-slider img{
+  -webkit-user-drag:none; user-drag:none; pointer-events:none;
 }
-
-#shopify-section-{{ section.id }} .before-after-slider .resizer-trigger{
-  position: absolute;        /* nu relativt .before-after-slider */
-  top: 50%;
-  left: calc(var(--pos) * 100%);
-  transform: translate(-50%, -50%);
-  z-index: 30;               /* över linjen/bilderna */
-  /* behåll din storlek, border, skugga osv som du redan har */
-}
-
 
 </style>
 
