@@ -52,7 +52,7 @@
     display: block;
   }
 
- /* === DRAG — EN ENDA SANNING (REN) === */
+ /* === DRAG — EN ENDA SANNING === */
 
 /* startläge + ankare */
 #shopify-section-{{ section.id }} .before-after-slider{
@@ -69,22 +69,23 @@
   clip-path: inset(0 0 0 calc(var(--pos) * 100%));
 }
 
-/* vit mittlinje UNDER knoppen – samma koordinatsystem som knoppen */
+/* vit mittlinje UNDER knoppen */
 #shopify-section-{{ section.id }} .before-after-slider::before{
   content:""; position:absolute; top:0; bottom:0;
   left: calc(var(--pos) * 100%); transform: translateX(-50%);
   width:2px; background: rgba(255,255,255,.95);
   box-shadow: 0 0 0 1px rgba(0,0,0,.08) inset, 0 0 0 1px rgba(0,0,0,.06);
-  z-index: 10; pointer-events:none;
+  z-index: 5; pointer-events:none;
 }
 
-/* overlay som delar EXAKT samma yta som slidern */
+/* overlay som inte blockerar pekhändelser */
 #shopify-section-{{ section.id }} .before-after-slider .resizer{
-  position: absolute; inset: 0;             /* <- ändra från static till absolute */
-  pointer-events: none; overflow: visible;
+  position: static;           /* viktigt: gör knoppen relativ .before-after-slider */
+  pointer-events: none;       /* blockera inte drag */
+  overflow: visible;
 }
 
-/* KNOPPEN – positioneras mot slidern (samma left som linjen) */
+/* KNOPPEN – överst, klickbar */
 #shopify-section-{{ section.id }} .before-after-slider .resizer-trigger{
   position:absolute; top:50%; left: calc(var(--pos) * 100%);
   transform: translate(-50%, -50%);
@@ -97,10 +98,10 @@
   z-index: 30; isolation:isolate;
 }
 #shopify-section-{{ section.id }} .before-after-slider .resizer-trigger svg{
-  width:18px; height:18px; opacity:.85; stroke:#111; display:block;
+  width:18px; height:18px; opacity:.85; stroke:#111;
 }
 
-/* valfritt: “öron” */
+/* valfritt: “öron” – kan kommenteras bort om de stör */
 #shopify-section-{{ section.id }} .before-after-slider .resizer-trigger::before,
 #shopify-section-{{ section.id }} .before-after-slider .resizer-trigger::after{
   content:""; position:absolute; top:50%; transform:translateY(-50%);
@@ -114,7 +115,6 @@
 #shopify-section-{{ section.id }} .before-after-slider img{
   -webkit-user-drag:none; user-drag:none; pointer-events:none;
 }
-
 
 </style>
 
