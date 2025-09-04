@@ -6007,16 +6007,10 @@ body.template-policy .shopify-policy__container .shopify-policy__body a {
   font-style: normal !important;
   letter-spacing: 0 !important;
 }
-
-/* Om temat sätter font på .before-after .title – ta höjd för det också */
-#shopify-section-template--25658381959433__before_after_BHanP2 .before-after .title {
-  font-family: "Clash Grotesk","ClashGrotesk",sans-serif !important;
-  font-weight: 300 !important;
-}/* Gäller alla Before & After-sektioner i temat */
-section.before-after-section .title,
-section.before-after-section h2.title,
-.before-after .title {
+.before-after .title,
+section.before-after-section h2.title {
   font-family: "Clash Grotesk","ClashGrotesk",sans-serif !important;
   font-weight: 300 !important;
 }
+
 
