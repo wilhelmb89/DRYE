@@ -201,6 +201,23 @@
   }
 }
 
+/* Se till att slidern och dess barn aldrig går över headern */
+#shopify-section-{{ section.id }} .before-after-slider {
+  position: relative;   /* redan satt – behåll */
+  z-index: 0;           /* ny stacking context på låg nivå */
+}
+
+/* Linjen under knoppen */
+#shopify-section-{{ section.id }} .before-after-slider .resizer {
+  z-index: 1 !important;
+}
+
+/* Själva knoppen – sänk från 30 och ta bort isolate */
+#shopify-section-{{ section.id }} .before-after-slider .resizer-trigger {
+  z-index: 2 !important;
+  isolation: auto !important; /* eller ta bort raden helt */
+}
+
 </style>
 
 <div class="container">
