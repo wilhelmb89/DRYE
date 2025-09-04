@@ -176,6 +176,24 @@
 }
 #shopify-section-{{ section.id }} .before-after-slider .resizer-trigger::before{ left:-14px;  border-radius:9999px 0 0 9999px; }
 #shopify-section-{{ section.id }} .before-after-slider .resizer-trigger::after { right:-14px; border-radius:0 9999px 9999px 0; }
+/* Gör att knoppen positioneras mot SLIDERN (samma som linjen) */
+#shopify-section-{{ section.id }} .before-after-slider { position: relative; } /* redan satt, men låt stå */
+
+#shopify-section-{{ section.id }} .before-after-slider .resizer{
+  position: static;          /* INTE absolute – så barnet positioneras mot slidern */
+  inset: auto;               /* nollställ ev. tidigare värden */
+  pointer-events: none;
+  overflow: visible;
+}
+
+#shopify-section-{{ section.id }} .before-after-slider .resizer-trigger{
+  position: absolute;        /* nu relativt .before-after-slider */
+  top: 50%;
+  left: calc(var(--pos) * 100%);
+  transform: translate(-50%, -50%);
+  z-index: 30;               /* över linjen/bilderna */
+  /* behåll din storlek, border, skugga osv som du redan har */
+}
 
 
 </style>
