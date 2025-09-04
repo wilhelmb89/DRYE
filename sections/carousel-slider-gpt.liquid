@@ -1,32 +1,83 @@
+<div class="review-carousel-wrapper">
+  <div class="review-carousel-track">
+    {% for i in (1..5) %}
+      {% assign image_id = 'review_' | append: i %}
+      {% if section.settings[image_id] != blank %}
+        <div class="review-slide">
+          <img
+            src="{{ section.settings[image_id] | image_url: width: 1000 }}"
+            alt="Review {{ i }}"
+            loading="lazy">
+          </img>
+        </div>
+      {% endif %}
+    {% endfor %}
+
+    {%- comment -%} Dubbelrendera för sömlös loop {%- endcomment -%}
+    {% for i in (1..5) %}
+      {% assign image_id = 'review_' | append: i %}
+      {% if section.settings[image_id] != blank %}
+        <div class="review-slide">
+          <img
+            src="{{ section.settings[image_id] | image_url: width: 1000 }}"
+            alt="Review {{ i }}"
+            loading="lazy">
+          </img>
+        </div>
+      {% endif %}
+    {% endfor %}
+  </div>
+</div>
+
+<style>
+#shopify-section-{{ section.id }} .review-carousel-wrapper {
+  overflow: hidden;
+  width: 100%;
+  padding: 16px 0;
+}
+
+#shopify-section-{{ section.id }} .review-carousel-track {
+  display: flex;
+  gap: 16px;
+  will-change: transform;
+  animation: review-marquee 30s linear infinite;
+}
+
+#shopify-section-{{ section.id }} .review-slide {
+  flex: 0 0 auto;
+  width: clamp(180px, 22vw, 320px); /* responsivt kort */
+}
+
+#shopify-section-{{ section.id }} .review-slide img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 12px;
+}
+
+@keyframes review-marquee {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); } /* -50% pga dubbleringen ovan */
+}
+
+/* Mörk bakgrundsvariant – matcha din mörka sektion vid behov */
+#shopify-section-{{ section.id }}.review-dark {
+  background: #0f0f10;
+}
+</style>
+
 {% schema %}
 {
   "name": "Review Carousel",
+  "enabled_on": {
+    "templates": ["product", "index", "page", "collection"]
+  },
   "settings": [
-    {
-      "type": "image_picker",
-      "id": "review_1",
-      "label": "Review Image 1"
-    },
-    {
-      "type": "image_picker",
-      "id": "review_2",
-      "label": "Review Image 2"
-    },
-    {
-      "type": "image_picker",
-      "id": "review_3",
-      "label": "Review Image 3"
-    },
-    {
-      "type": "image_picker",
-      "id": "review_4",
-      "label": "Review Image 4"
-    },
-    {
-      "type": "image_picker",
-      "id": "review_5",
-      "label": "Review Image 5"
-    }
+    { "type": "image_picker", "id": "review_1", "label": "Review Image 1" },
+    { "type": "image_picker", "id": "review_2", "label": "Review Image 2" },
+    { "type": "image_picker", "id": "review_3", "label": "Review Image 3" },
+    { "type": "image_picker", "id": "review_4", "label": "Review Image 4" },
+    { "type": "image_picker", "id": "review_5", "label": "Review Image 5" }
   ],
   "presets": [
     {
@@ -36,49 +87,3 @@
   ]
 }
 {% endschema %}
-
-<div class="review-carousel-wrapper">
-  <div class="review-carousel-track">
-    {% for i in (1..5) %}
-      {% assign image_id = "review_" | append: i %}
-      {% if section.settings[image_id] != blank %}
-        <div class="review-slide">
-          <img src="{{ section.settings[image_id] | image_url: width: 800 }}" alt="Review {{ i }}">
-        </div>
-      {% endif %}
-    {% endfor %}
-  </div>
-</div>
-
-<style>
-.review-carousel-wrapper {
-  overflow: hidden;
-  position: relative;
-  width: 100%;
-  background: #fff;
-  padding: 20px 0;
-}
-
-.review-carousel-track {
-  display: flex;
-  gap: 20px;
-  animation: slide-left 25s linear infinite;
-}
-
-.review-slide {
-  flex: 0 0 auto;
-  width: 250px; /* adjust image size */
-}
-
-.review-slide img {
-  width: 100%;
-  height: auto;
-  border-radius: 8px;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.15);
-}
-
-@keyframes slide-left {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
-}
-</style>
