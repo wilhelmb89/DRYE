@@ -54,22 +54,12 @@
     .section-{{ section.id }} .rich-text__blocks .rich-text__buttons a{
       max-width: 100%;
     }
- /* DRYE: Fixera rubriken i Rich Color Text-sektionen */
-.section-{{ section.id }} .rich-text__heading {
-  font-family: ClashGrotesk-Variable, "Clash Grotesk", sans-serif !important;
-  font-weight: 300 !important;
-  color: #111111 !important;    /* svart */
-  letter-spacing: -0.04em;      /* som övriga rubriker hos dig */
-  opacity: 1 !important;        /* nollar ev. arv av lägre opacity */
-}
+/* DRYE: brödtext – återställ till Inter */
 .section-{{ section.id }} .rich-text__text,
 .section-{{ section.id }} .rich-text__text * {
   font-family: Inter, sans-serif !important;
-  color: rgb(17 17 17 / 65%) !important;
-  letter-spacing: -0.04em !important;
-  line-height: 28px !important;
-  opacity: 1 !important;
-}
+  font-weight: 400 !important;                 /* inte 300 (Inter Light) */
+  font-variation-set
 
 
 {%- endstyle -%}
