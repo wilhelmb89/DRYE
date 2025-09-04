@@ -210,16 +210,10 @@
           {%- if block.settings.image_before != blank and block.settings.image_after != blank -%}
             <div class="before-image">
               {{ block.settings.image_before | image_url: width: 1000 | image_tag: loading: 'lazy' }}
+            </div>
             <div class="after-image">
-  {{ block.settings.image_after  | image_url: width: 1000 | image_tag: loading: 'lazy' }}
-</div>
-<div class="resizer">
-  <span class="ba-divider" aria-hidden="true"></span>
-  <div class="resizer-trigger">
-    {%- render 'icon', type: 'two-carets' -%}
-  </div>
-</div>
-
+              {{ block.settings.image_after  | image_url: width: 1000 | image_tag: loading: 'lazy' }}
+            </div>
             <div class="resizer">
               <div class="resizer-trigger">
                 {%- render 'icon', type: 'two-carets' -%}
