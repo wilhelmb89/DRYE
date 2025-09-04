@@ -1525,40 +1525,28 @@
             "text_font_size_mobile": 22,
             "text_ling_height_mobile": 24
           }
-        },
-        "button_PneaLi": {
-          "type": "button",
-          "settings": {
-            "button_label": "Contact us for bulk pricing",
-            "button_link": "shopify://pages/contact-glove-liner-support-and-orders",
-            "button_x_padding": 32,
-            "button_y_padding": 15
-          }
         }
       },
       "block_order": [
         "heading_wYbzAD",
-        "description_dCKPwg",
-        "button_PneaLi"
+        "description_dCKPwg"
       ],
-      "custom_css": [
-        "/* Tvinga Rich Color Text att använda samma body-font som övriga sidan */.rich-text,.rich-text__text,.rich-text__text p,.rich-text__text li {font-family: \"Inter\", sans-serif !important; font-weight: 300 !important; /* eller 500 om du vill ha lite mer tyngd */ color: #000 !important; /* matcha tabellens textfärg */}"
-      ],
+      "custom_css": [],
       "name": "Rich Color Text",
       "settings": {
         "background_color": "#ffffff",
-        "content_position": "center",
-        "content_alignment": "center",
+        "content_position": "left",
+        "content_alignment": "left",
         "full_width": false,
         "use_content_max_width": false,
         "content_max_width": 40,
         "content_gap": 32,
         "padding_top": 98,
-        "padding_bottom": 138,
+        "padding_bottom": 20,
         "padding_top_tablet": 80,
         "padding_bottom_tablet": 80,
         "padding_top_mobile": 90,
-        "padding_bottom_mobile": 90
+        "padding_bottom_mobile": 40
       }
     },
     "1746812877af76f5ce": {
@@ -1584,7 +1572,9 @@
       "block_order": [
         "person_MqADxd"
       ],
-      "disabled": true,
+      "custom_css": [
+        "{padding-top: 40px !important; padding-bottom: 200px !important; margin-top: 0 !important; margin-bottom: 0 !important;}"
+      ],
       "name": "Main Contact",
       "settings": {
         "title": "",
