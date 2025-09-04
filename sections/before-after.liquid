@@ -52,7 +52,46 @@
     display: block;
   }
 
-  
+  /* === Aktivera drag-funktionalitet (per slider) === */
+#shopify-section-{{ section.id }} .before-after-slider{
+  --pos: .5;                 /* start i mitten */
+  touch-action: none;        /* tillåt drag utan scroll */
+}
+
+/* before = ger höjd; after = ligger ovanpå och klipps vid --pos */
+#shopify-section-{{ section.id }} .before-after-slider .before-image{ position: relative; z-index: 1; }
+#shopify-section-{{ section.id }} .before-after-slider .after-image{
+  position: absolute; inset: 0; z-index: 2;
+  clip-path: inset(0 0 0 calc(var(--pos) * 100%));
+}
+
+/* vit linje i mitten */
+#shopify-section-{{ section.id }} .before-after-slider::before{
+  content:""; position:absolute; top:0; bottom:0;
+  left: calc(var(--pos) * 100%); transform: translateX(-50%);
+  width:2px; background: rgba(255,255,255,.95);
+  box-shadow: 0 0 0 1px rgba(0,0,0,.08) inset, 0 0 0 1px rgba(0,0,0,.06);
+  z-index:3; pointer-events:none;
+}
+
+/* overlay + bubblan (behåller din ikon) */
+#shopify-section-{{ section.id }} .before-after-slider .resizer{ position:absolute; inset:0; z-index:4; pointer-events:none; }
+#shopify-section-{{ section.id }} .before-after-slider .resizer-trigger{
+  position:absolute; top:50%; left: calc(var(--pos) * 100%);
+  transform: translate(-50%, -50%);
+  width:44px; height:44px; border-radius:9999px; background:#fff;
+  border:1px solid rgba(0,0,0,.12);
+  box-shadow: 0 8px 20px rgba(0,0,0,.18), inset 0 1px 2px rgba(0,0,0,.08);
+  display:flex; align-items:center; justify-content:center;
+  cursor: ew-resize; pointer-events:auto; touch-action:none; line-height:1; padding:0;
+}
+#shopify-section-{{ section.id }} .before-after-slider .resizer-trigger svg{ width:18px; height:18px; opacity:.85; }
+
+/* bilder ska inte sno drag */
+#shopify-section-{{ section.id }} .before-after-slider img{
+  -webkit-user-drag:none; user-drag:none; pointer-events:none;
+}
+
 </style>
 
 <div class="container">
