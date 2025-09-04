@@ -163,18 +163,19 @@
           </div>
           <div class="page-card-body">
             <div class="page-card-icon-area">
-              <img
+              {% assign icon_1x = section.settings.icon_size %}
+{% assign icon_2x = section.settings.icon_size | times: 2 %}
+
+<img
   class="page-card-icon"
-  src="{{ block.settings.icon | image_url: width: section.settings.icon_size }}"
-  srcset="
-    {{ block.settings.icon | image_url: width: section.settings.icon_size }} 1x,
-    {{ block.settings.icon | image_url: width: section.settings.icon_size | times: 2 }} 2x
-  "
-  width="{{ section.settings.icon_size }}"
-  height="{{ section.settings.icon_size }}"
+  src="{{ block.settings.icon | image_url: width: icon_1x }}"
+  srcset="{{ block.settings.icon | image_url: width: icon_1x }} 1x, {{ block.settings.icon | image_url: width: icon_2x }} 2x"
+  width="{{ icon_1x }}"
+  height="{{ icon_1x }}"
   loading="lazy"
   decoding="async"
-  alt="">
+  alt=""
+>
             </div>
             <div class="page-card-text">{{ block.settings.text }}</div>
           </div>
