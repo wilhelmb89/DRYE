@@ -91,6 +91,30 @@
 #shopify-section-{{ section.id }} .before-after-slider img{
   -webkit-user-drag:none; user-drag:none; pointer-events:none;
 }
+/* lägg till vita halvcirklar på varsin sida om bubblan */
+.before-after-slider .resizer-trigger::before,
+.before-after-slider .resizer-trigger::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  width: 12px;   /* bredd på halvcirkel */
+  height: 24px;  /* höjd på halvcirkel */
+  background: #fff;
+  border: 1px solid rgba(0,0,0,.12);
+  box-shadow: 0 2px 6px rgba(0,0,0,.15);
+  transform: translateY(-50%);
+  z-index: -1; /* lägg bakom själva bubblan */
+}
+
+.before-after-slider .resizer-trigger::before {
+  border-radius: 9999px 0 0 9999px;
+  left: -12px; /* placerar till vänster */
+}
+
+.before-after-slider .resizer-trigger::after {
+  border-radius: 0 9999px 9999px 0;
+  right: -12px; /* placerar till höger */
+}
 
 </style>
 
