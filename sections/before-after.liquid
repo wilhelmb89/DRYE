@@ -59,7 +59,7 @@
   position: relative;
   overflow: hidden;
   --pos: .5;               /* start i mitten */
-  touch-action: none;      /* tillåt drag utan scroll */
+  + touch-action: pan-y;     /* tillåt vertikal scroll; vi fångar bara horisontellt drag i JS */
 }
 
 /* lager: before ger höjd; after klipps av --pos */
@@ -199,19 +199,6 @@
     height: auto !important;
     object-fit: cover;
   }
-}
-/* Begränsa sliden till horisontell gest, släpp igenom vertikal scroll */
-.before-after,
-.before-after * {
-  touch-action: pan-y;     /* tillåt vertikal pan; blockera bara horisontell här */
-}
-
-/* (valfritt) se till att bilderna inte fångar events i onödan */
-.before-after img {
-  pointer-events: none;
-}
-.before-after .handle {     /* själva draghandtaget */
-  pointer-events: auto;
 }
 
 </style>
