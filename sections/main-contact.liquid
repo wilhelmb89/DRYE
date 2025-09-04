@@ -29,7 +29,16 @@
     font-size: 28px !important;
     line-height: 32px !important;
   }
+}/* Lägg detta LÄNGST NER i sektionens <style> eller i Theme settings > Custom CSS */
+#shopify-section-{{ section.id }} .main-contact .container .contacts-wrapper .persons-wrapper .person .info,
+#shopify-section-{{ section.id }} .main-contact .container .contacts-wrapper .persons-wrapper .person .info * {
+  letter-spacing: normal !important;
 }
+
+#shopify-section-{{ section.id }} .main-contact .container .contacts-wrapper .persons-wrapper .person .name {
+  letter-spacing: normal !important;
+}
+
 
 {% endstyle %}
 <div class="container">
