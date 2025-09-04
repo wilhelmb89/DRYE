@@ -38,35 +38,35 @@
           "type": "card",
           "settings": {
             "icon": "shopify://shop_images/u9738261378_httpss.mj.run4B5pqP8x_eg_This_close-up_image_show_a9960b3b-8f21-4bae-b297-e9ff9ec350b3_2_1.png",
-            "text": "<p>You wear gloves daily</p>"
+            "text": "<p><strong>Creams & ointments<br/><br/></strong>– You buy Eucerin, Aquaphor, Vaseline, O’Keefe’s… they rub off, sting, or make skin thinner.</p>"
           }
         },
         "card_ytL8yf": {
           "type": "card",
           "settings": {
             "icon": "shopify://shop_images/u9738261378_oreground__Subject_A_human_left_hand_is_wearing_a_d652bef4-18bd-47a1-bbc6-024236c2200b_3_1.png",
-            "text": "<p>Your skin goes dry </p>"
+            "text": "<p><strong>Baby powder & home tricks<br/><br/></strong>– You try powder, socks, even kitchen gloves at night. Powder clumps, socks turn soggy.<br/></p>"
           }
         },
         "card_ky7TAr": {
           "type": "card",
           "settings": {
             "icon": "shopify://shop_images/PXL_20250222_150439970.MP_1.jpg",
-            "text": "<p>You start trying creams, powders, treaatments, doctors and nothing works.</p>"
+            "text": "<p><strong>Cotton & silk liners<br/><br/></strong>– At first they feel okay… then they soak through like wet rags inside your gloves.<br/></p>"
           }
         },
         "card_tKATrR": {
           "type": "card",
           "settings": {
             "icon": "shopify://shop_images/Picture5.png",
-            "text": "<p>You go to reddit, threads, you try everyhing and liners, and nothing works.</p>"
+            "text": "<p><strong>Steroids & prescriptions</strong><br/><br/>– Cortisone or medicated creams calm things short-term, but flares rebound harder.</p>"
           }
         },
         "card_BfieeT": {
           "type": "card",
           "settings": {
             "icon": "shopify://shop_images/u9738261378_httpss.mj.run4B5pqP8x_eg_This_close-up_image_show_a9960b3b-8f21-4bae-b297-e9ff9ec350b3_2_1.png",
-            "text": "<p>You loose hope.</p>"
+            "text": "<p><strong>Glove flips & hacks</strong></p><p></p><p>– Double-gloving, constant swaps, Reddit “hacks”… still the same sweaty, raw skin.</p>"
           }
         }
       },
@@ -102,7 +102,7 @@
         "block_direction_mobile": "column",
         "block_spacing": 50,
         "icon_area_size": 64,
-        "icon_area_color": "#e5e5e5",
+        "icon_area_color": "#ffffff",
         "icon_size": 64,
         "padding_between_line_and_icon": 64,
         "padding_between_icon_and_text": 40,
@@ -345,9 +345,51 @@
             "controls": true,
             "position": "row"
           }
-        },
-        "row_8NF9FP": {
+        }
+      },
+      "block_order": [
+        "row_XYetHm"
+      ],
+      "name": "Multirows(New)",
+      "settings": {
+        "special_title": false,
+        "overlap": false,
+        "title": "",
+        "invert": true,
+        "bg": "#ffffff",
+        "tx": "#111111",
+        "sub_title_font_size_desktop": 48,
+        "sub_title_line_height_desktop": 55,
+        "sub_title_font_size_tablet": 34,
+        "sub_title_line_height_tablet": 40,
+        "sub_title_font_size_mobile": 24,
+        "sub_title_line_height_mobile": 30,
+        "sub_body_font_size_desktop": 18,
+        "sub_body_line_height_desktop": 28,
+        "sub_body_font_size_tablet": 18,
+        "sub_body_line_height_tablet": 28,
+        "sub_body_font_size_mobile": 16,
+        "sub_body_line_height_mobile": 24
+      }
+    },
+    "multirows_new_Qh4Efr": {
+      "type": "multirows-new",
+      "blocks": {
+        "row_KwyEUj": {
           "type": "row",
+          "settings": {
+            "title": "Backed by Science",
+            "content": "<p>We developed a textile designed to address moisture at its source. SkinDRYE™ Technology uses a dual-layer system:</p><p>• Inner layer: pulls sweat away from your skin instantly.<br/>• Outer layer: disperses and evaporates it before damage occurs.<br/><br/>By moving sweat outward, the textile reduces prolonged moisture exposure – a factor linked in research to Moisture-Associated Skin Damage (MASD), which is known to aggravate irritation, eczema flare-ups, and barrier breakdown. The effect: hands that feel drier and less friction – conditions shown to support the skin barrier during long glove use.</p>",
+            "button_text": "",
+            "button_url": "",
+            "video": "shopify://files/videos/video main page_41835ac6-fc50-477e-8d38-f035d97a846a.mp4",
+            "controls": true,
+            "position": "row-reverse"
+          }
+        },
+        "row_LRJLnN": {
+          "type": "row",
+          "disabled": true,
           "settings": {
             "title": "Backed by Science",
             "content": "<p>We developed a textile designed to address moisture at its source. SkinDRYE™ Technology uses a dual-layer system:</p><p>• Inner layer: pulls sweat away from your skin instantly.<br/>• Outer layer: disperses and evaporates it before damage occurs.<br/><br/>By moving sweat outward, the textile reduces prolonged moisture exposure – a factor linked in research to Moisture-Associated Skin Damage (MASD), which is known to aggravate irritation, eczema flare-ups, and barrier breakdown. The effect: hands that feel drier and less friction – conditions shown to support the skin barrier during long glove use.</p>",
@@ -361,8 +403,8 @@
         }
       },
       "block_order": [
-        "row_XYetHm",
-        "row_8NF9FP"
+        "row_KwyEUj",
+        "row_LRJLnN"
       ],
       "name": "Multirows(New)",
       "settings": {
@@ -370,8 +412,8 @@
         "overlap": false,
         "title": "",
         "invert": true,
-        "bg": "#ffffff",
-        "tx": "#111111",
+        "bg": "#111111",
+        "tx": "#ffffff",
         "sub_title_font_size_desktop": 48,
         "sub_title_line_height_desktop": 55,
         "sub_title_font_size_tablet": 34,
@@ -658,8 +700,8 @@
         "description_line_height": 24,
         "description_font_size_mobile": 16,
         "description_line_height_mobile": 24,
-        "section_top_padding": 60,
-        "section_bottom_padding": 30,
+        "section_top_padding": 90,
+        "section_bottom_padding": 106,
         "section_top_padding_tablet": 80,
         "section_bottom_padding_tablet": 0,
         "section_top_padding_mobile": 50,
@@ -708,6 +750,7 @@
         "spot_nDTH8W",
         "spot_H7pWjg"
       ],
+      "disabled": true,
       "name": "Hot Spot",
       "settings": {
         "image": "shopify://shop_images/drye_front-page_new_product_image.jpg"
@@ -854,7 +897,7 @@
       ],
       "name": "Before-After",
       "settings": {
-        "title": "Fast results, minimal sacrifice",
+        "title": "",
         "image_border_radius": 18,
         "section_top_padding_desktop": 68,
         "section_bottom_padding_desktop": 36,
@@ -862,6 +905,17 @@
         "section_bottom_padding_tablet": 80,
         "section_top_padding_mobile": 64,
         "section_bottom_padding_mobile": 64
+      }
+    },
+    "carousel_slider_gpt_mAAmV6": {
+      "type": "carousel-slider-gpt",
+      "custom_css": [],
+      "name": "Review Carousel",
+      "settings": {
+        "review_1": "shopify://shop_images/Group_56_1.jpg",
+        "review_2": "shopify://shop_images/Group_75_1.jpg",
+        "review_3": "shopify://shop_images/Group_59_1.jpg",
+        "review_4": "shopify://shop_images/Group_70_1.jpg"
       }
     },
     "list_new_yPYk8b": {
@@ -901,7 +955,7 @@
       "name": "List with Image(New)",
       "settings": {
         "image": "shopify://shop_images/drye_front-page_new_product_image.jpg",
-        "title": "",
+        "title": "DRYE Performance Liners",
         "title_font_size_desktop": 50,
         "title_line_height_desktop": 60,
         "title_font_size_small_desktop": 38,
@@ -927,7 +981,7 @@
         "content_line_height_mobile": 19,
         "button_text": "",
         "button_url": "",
-        "m_top": 220,
+        "m_top": 0,
         "m_bottom": 0,
         "mobile_m_top": 50,
         "mobile_m_bottom": 70
@@ -1472,17 +1526,6 @@
         "title": "",
         "form_title": ""
       }
-    },
-    "carousel_slider_gpt_mAAmV6": {
-      "type": "carousel-slider-gpt",
-      "custom_css": [],
-      "name": "Review Carousel",
-      "settings": {
-        "review_1": "shopify://shop_images/Group_56_1.jpg",
-        "review_2": "shopify://shop_images/Group_75_1.jpg",
-        "review_3": "shopify://shop_images/Group_59_1.jpg",
-        "review_4": "shopify://shop_images/Group_70_1.jpg"
-      }
     }
   },
   "order": [
@@ -1492,11 +1535,13 @@
     "list_new_mVw4pi",
     "image_slider_4gd6Nt",
     "multirows_new_bQbFR7",
+    "multirows_new_Qh4Efr",
     "table_with_mark_xkzqbz",
     "hot_spot_7rpTdj",
     "icons_Bt7DUV",
     "multirows_new_iYMkH7",
     "before_after_BHanzP",
+    "carousel_slider_gpt_mAAmV6",
     "list_new_yPYk8b",
     "before_after_cYbThq",
     "image_slider_FiCgr8",
@@ -1504,7 +1549,6 @@
     "1746812889a5f81d00",
     "rich_color_text_pbmjNY",
     "1746812877af76f5ce",
-    "main_contact_BPHcyq",
-    "carousel_slider_gpt_mAAmV6"
+    "main_contact_BPHcyq"
   ]
 }
