@@ -41,9 +41,6 @@
         "review_rLhEee"
       ],
       "settings": {
-        "background_image": "shopify://shop_images/Screenshot_1_401bebcf-26b6-4a0e-b6e5-db853e0bd7ce.png",
-        "background_image_tablet": "shopify://shop_images/Screenshot_1_401bebcf-26b6-4a0e-b6e5-db853e0bd7ce.png",
-        "background_image_mobile": "shopify://shop_images/Image_slide_gallery_2.png",
         "invert": true,
         "content_gap": 32,
         "content_gap_mobile": 14,
@@ -135,7 +132,9 @@
       ],
       "settings": {
         "cols_desk": 4,
-        "cols_mob": 2
+        "cols_mob": 2,
+        "scroll_speed": 40,
+        "scroll_speed_mobile": 30
       }
     },
     "list_new_7GaJqq": {
@@ -173,7 +172,6 @@
         "item_wizAi6"
       ],
       "settings": {
-        "image": "shopify://shop_images/DRYE_liner_-_front_page.jpg",
         "title": "",
         "title_font_size_desktop": 50,
         "title_line_height_desktop": 60,
@@ -211,39 +209,27 @@
       "blocks": {
         "card_4zBRRC": {
           "type": "card",
-          "settings": {
-            "preview_image": "shopify://shop_images/Image_slide_gallery_2.png"
-          }
+          "settings": {}
         },
         "card_V74HVL": {
           "type": "card",
-          "settings": {
-            "preview_image": "shopify://shop_images/image_slide_gallery_1_29e60b4d-4522-4ee5-9774-be2b75c18f4f.png"
-          }
+          "settings": {}
         },
         "card_qNJJeM": {
           "type": "card",
-          "settings": {
-            "preview_image": "shopify://shop_images/image_slide_gallery_3.png"
-          }
+          "settings": {}
         },
         "card_a6g4eA": {
           "type": "card",
-          "settings": {
-            "preview_image": "shopify://shop_images/Image_slide_gallery_4.png"
-          }
+          "settings": {}
         },
         "card_xJUxET": {
           "type": "card",
-          "settings": {
-            "preview_image": "shopify://shop_images/Image_slide_gallery_5.png"
-          }
+          "settings": {}
         },
         "card_ndkYxJ": {
           "type": "card",
-          "settings": {
-            "preview_image": "shopify://shop_images/Image_slide_gallery_6.png"
-          }
+          "settings": {}
         }
       },
       "block_order": [
@@ -284,8 +270,7 @@
           "settings": {
             "content": "<p>I've had eczema on my hands for a long time, and it's been tough to put on my hockey gloves. These glove liners have improved my experience by reducing friction against my skin. At first, it felt a bit weird, but now I've gotten so used to them that I actually don’t want to play without them anymore. They're just more comfortable.</p>",
             "author": "Linnea Petterson Dove",
-            "prof": "Hockey player, Frölunda HC",
-            "avatar": "shopify://shop_images/DRYE_Eczema_Gloves.jpg"
+            "prof": "Hockey player, Frölunda HC"
           }
         },
         "review_deGdHC": {
@@ -404,9 +389,7 @@
           "type": "media",
           "settings": {
             "media_mode": "url",
-            "image": "shopify://shop_images/3D_rendering_-_thumbnail.png",
             "video_url": "https://www.youtube.com/embed/rQtXsY9Za_c?si=izq0YZGzt72fQAHE",
-            "video_preview": "shopify://shop_images/3D_rendering_-_thumbnail.png",
             "video_width": "1108",
             "video_height": "623",
             "play_icon": "shopify://shop_images/play.png",
@@ -451,9 +434,7 @@
             "content": "<p>→ Sweat forms on the skin. The inner layer pulls it away instantly.<br/>→ Moisture is guided outward—through engineered layers that wick and release.<br/>→ The outer layer lets it evaporate, keeping skin dry and irritation-free.</p>",
             "button_text": "",
             "button_url": "",
-            "image": "shopify://shop_images/Textil_front_page.gif",
-            "image_tablet": "shopify://shop_images/Textil_front_page.gif",
-            "image_mobile": "shopify://shop_images/Textil_front_page.gif",
+            "controls": true,
             "position": "row"
           }
         },
@@ -464,9 +445,7 @@
             "content": "<p><strong>People with sensitive skin or diagnosed conditions</strong> — including eczema, psoriasis, and contact dermatitis.</p><p><strong>Those who wear gloves for hours at a time </strong>— in healthcare, food service, cleaning, construction, mining, or high-intensity sports.</p><p><strong>Anyone dealing </strong>with hand discomfort, sweating, or irritation caused by prolonged glove use.</p>",
             "button_text": "See product page",
             "button_url": "shopify://products/products-moisture-wicking-glove-liners-for-sensitive-skin",
-            "image": "shopify://shop_images/Hockey_drye.gif",
-            "image_tablet": "shopify://shop_images/Hockey_drye.gif",
-            "image_mobile": "shopify://shop_images/Hockey_drye.gif",
+            "controls": true,
             "position": "row-reverse"
           }
         },
@@ -477,6 +456,7 @@
             "content": "<p>Other gloves trap it in. Ours move it out — with a textile system built to beat sweat inside any glove. Tested with 100+ athletes, backed by skin experts.</p>",
             "button_text": "The development story",
             "button_url": "shopify://pages/why-we-made-glove-liners-for-sweaty-sensitive-hands",
+            "controls": true,
             "image": "shopify://shop_images/2E9A8886ny_1_3d936b1c-4226-4fe0-8fc4-ad49eac6fc4e.jpg",
             "image_tablet": "shopify://shop_images/2E9A8886ny_1.jpg",
             "image_mobile": "shopify://shop_images/2E9A8886ny_1.jpg",
@@ -520,9 +500,6 @@
             "content": "<p>For many with eczema, psoriasis, or sensitive skin (myself included), we’ve tried everything. Creams, supplements, treatments, dietary changes – always searching for the next thing that \"might help us.\"<br/><br/>Based on feedback from hundreds of customers, our fabric has made a significant difference. Many report that they now need to moisturize their hands much less frequently, that cracks have decreased significantly, and that redness and eczema have improved – simply by allowing their skin to rest in our liner. This also applies to those who sleep with gloves.<br/><br/></p>",
             "button_text": "About us",
             "button_url": "shopify://pages/why-we-made-glove-liners-for-sweaty-sensitive-hands",
-            "image": "shopify://shop_images/Bild_DRYE_a730e397-3cba-405a-9f5f-e66ffb247940.jpg",
-            "image_tablet": "shopify://shop_images/Bild_DRYE.jpg",
-            "image_mobile": "shopify://shop_images/Bild_DRYE.jpg",
             "position": "row"
           }
         }
@@ -668,7 +645,6 @@
         "profile_XxBKqi",
         "profile_Q7C97U"
       ],
-      "disabled": true,
       "settings": {
         "slider_review_count": 10,
         "show_dot": false,
