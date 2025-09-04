@@ -80,6 +80,45 @@
     </div>
   {%- endif -%}
 </div>
+<script>
+(function(){
+  const section = document.getElementById('shopify-section-{{ section.id }}');
+  if (!section || section.dataset.beforeAfterInit) return;
+  section.dataset.beforeAfterInit = '1';
+
+  section.querySelectorAll('.before-after-slider').forEach((slider)=>{
+    const setPos = (x)=>{
+      const r = slider.getBoundingClientRect();
+      let p = (x - r.left) / r.width;
+      p = Math.max(0.02, Math.min(0.98, p));        // clamp
+      slider.style.setProperty('--pos', p);
+    };
+
+    const onDown = (e)=>{
+      e.preventDefault();
+      slider.setPointerCapture(e.pointerId);
+      setPos(e.clientX);
+      const move = ev => setPos(ev.clientX);
+      const up = ev => {
+        slider.releasePointerCapture(ev.pointerId);
+        slider.removeEventListener('pointermove', move);
+        slider.removeEventListener('pointerup', up);
+        slider.removeEventListener('pointercancel', up);
+      };
+      slider.addEventListener('pointermove', move);
+      slider.addEventListener('pointerup', up);
+      slider.addEventListener('pointercancel', up);
+    };
+
+    // dra var som helst (inkl. bubblan)
+    slider.addEventListener('pointerdown', onDown);
+
+    // init mitt
+    const r = slider.getBoundingClientRect();
+    setPos(r.left + r.width/2);
+  });
+})();
+</script>
 
 {% schema %}
 {
