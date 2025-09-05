@@ -1,5 +1,18 @@
 {%- assign ss = section.settings -%}
 <style>
+
+  /* DRYE: Footer länkar – samma som brödtext */
+footer .menu a,
+footer .menu a * {
+  font-family: Inter, sans-serif !important;
+  font-weight: 400 !important;                 /* Regular istället för Light */
+  font-variation-settings: "wght" 400 !important;
+  color: rgba(255, 255, 255, 0.80) !important; /* behåll den grå/vita färgen */
+  letter-spacing: -0.04em !important;
+  line-height: 24px !important;
+  font-size: 16px !important;
+}
+
   .footer-section .container .menu-area .menu-wrapper .menu .title .title-accordion-icon {
     display: none;
   }
