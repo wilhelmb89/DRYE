@@ -1395,18 +1395,6 @@
             "caption4": ""
           }
         },
-        "tab_NWA7QA": {
-          "type": "tab",
-          "settings": {
-            "title": "Shipping, Customs & Delivery",
-            "content": "<p><strong>Shipping & Delivery</strong></p><p>Dispatch: 12–24 h (Mon–Fri)<br/>Typical delivery (business days):</p><ul><li>USA: 3–4 (UPS)</li><li>Canada: 3–5 (UPS)</li><li>UK & EU: 1–3</li><li>Australia/NZ: 4–6</li></ul><p>Tracking provided at checkout.</p><p><strong>Customs & Duties (USA only)</strong></p><p>From August 29, 2025, all US shipments may be subject to duties & sales tax.</p><p>Typical cost: USD 3–8 on a USD 36 order (+ USD 12 shipping).<br/><br/><strong>Note: </strong>UPS continues to deliver from Europe to the US without interruptions. </p>",
-            "use_additional_section": false,
-            "caption1": "",
-            "caption2": "",
-            "caption3": "",
-            "caption4": ""
-          }
-        },
         "shipping_fQdztH": {
           "type": "shipping",
           "settings": {
@@ -1481,7 +1469,6 @@
         "tab_fHA3xW",
         "tab_kQFmrq",
         "tab_yHgdG6",
-        "tab_NWA7QA",
         "shipping_fQdztH",
         "shipping_f8f7EN",
         "product_image_EjWgdM",
@@ -1555,6 +1542,64 @@
         "padding_bottom_mobile": 40,
         "padding_left_mobile": 0,
         "padding_right_mobile": 0
+      }
+    },
+    "multirows_new_tExFLY": {
+      "type": "multirows-new",
+      "blocks": {
+        "row_nDYqc9": {
+          "type": "row",
+          "settings": {
+            "title": "Shipping & Delivery",
+            "content": "<p>Dispatch: 12–24 h (Mon–Fri)<br/><br/>- Typical delivery (business days):<br/>- USA: 3–4 (UPS)<br/>- Canada: 3–5 (UPS)<br/><br/>Tracking provided at checkout.</p>",
+            "button_text": "",
+            "button_url": "",
+            "controls": true,
+            "image": "shopify://shop_images/ups-a-global-shipping-and-parcel-service-company-og.jpg",
+            "image_tablet": "shopify://shop_images/ups-a-global-shipping-and-parcel-service-company-og.jpg",
+            "image_mobile": "shopify://shop_images/ups-a-global-shipping-and-parcel-service-company-og.jpg",
+            "position": "row"
+          }
+        },
+        "row_D8aqb6": {
+          "type": "row",
+          "settings": {
+            "title": "Customs & Duties",
+            "content": "<p>From August 29, 2025, all US shipments may be subject to duties & sales tax.</p><p>Typical cost: USD 3–8 on a USD 36 order (+ USD 12 shipping).</p><p>Note: UPS continues to deliver from Europe to the US without interruptions. </p>",
+            "button_text": "",
+            "button_url": "",
+            "controls": true,
+            "image": "shopify://shop_images/1920x998.jpg",
+            "image_tablet": "shopify://shop_images/1920x998.jpg",
+            "image_mobile": "shopify://shop_images/1920x998.jpg",
+            "position": "row-reverse"
+          }
+        }
+      },
+      "block_order": [
+        "row_nDYqc9",
+        "row_D8aqb6"
+      ],
+      "name": "Multirows(New)",
+      "settings": {
+        "special_title": false,
+        "overlap": false,
+        "title": "",
+        "invert": true,
+        "bg": "#000000",
+        "tx": "#FFFFFF",
+        "sub_title_font_size_desktop": 48,
+        "sub_title_line_height_desktop": 55,
+        "sub_title_font_size_tablet": 34,
+        "sub_title_line_height_tablet": 40,
+        "sub_title_font_size_mobile": 24,
+        "sub_title_line_height_mobile": 30,
+        "sub_body_font_size_desktop": 18,
+        "sub_body_line_height_desktop": 28,
+        "sub_body_font_size_tablet": 18,
+        "sub_body_line_height_tablet": 28,
+        "sub_body_font_size_mobile": 16,
+        "sub_body_line_height_mobile": 24
       }
     },
     "rich_color_text_pbmjNY": {
@@ -1640,64 +1685,6 @@
       "settings": {
         "title": "",
         "form_title": ""
-      }
-    },
-    "multirows_new_tExFLY": {
-      "type": "multirows-new",
-      "blocks": {
-        "row_nDYqc9": {
-          "type": "row",
-          "settings": {
-            "title": "Shipping & Delivery",
-            "content": "<p>Dispatch: 12–24 h (Mon–Fri)<br/><br/>- Typical delivery (business days):<br/>- USA: 3–4 (UPS)<br/>- Canada: 3–5 (UPS)<br/><br/>Tracking provided at checkout.</p>",
-            "button_text": "",
-            "button_url": "",
-            "controls": true,
-            "image": "shopify://shop_images/ups-a-global-shipping-and-parcel-service-company-og.jpg",
-            "image_tablet": "shopify://shop_images/ups-a-global-shipping-and-parcel-service-company-og.jpg",
-            "image_mobile": "shopify://shop_images/ups-a-global-shipping-and-parcel-service-company-og.jpg",
-            "position": "row"
-          }
-        },
-        "row_D8aqb6": {
-          "type": "row",
-          "settings": {
-            "title": "Customs & Duties",
-            "content": "<p>From August 29, 2025, all US shipments may be subject to duties & sales tax.</p><p>Typical cost: USD 3–8 on a USD 36 order (+ USD 12 shipping).</p><p>Note: UPS continues to deliver from Europe to the US without interruptions. </p>",
-            "button_text": "",
-            "button_url": "",
-            "controls": true,
-            "image": "shopify://shop_images/1920x998.jpg",
-            "image_tablet": "shopify://shop_images/1920x998.jpg",
-            "image_mobile": "shopify://shop_images/1920x998.jpg",
-            "position": "row-reverse"
-          }
-        }
-      },
-      "block_order": [
-        "row_nDYqc9",
-        "row_D8aqb6"
-      ],
-      "name": "Multirows(New)",
-      "settings": {
-        "special_title": false,
-        "overlap": false,
-        "title": "",
-        "invert": true,
-        "bg": "#000000",
-        "tx": "#FFFFFF",
-        "sub_title_font_size_desktop": 48,
-        "sub_title_line_height_desktop": 55,
-        "sub_title_font_size_tablet": 34,
-        "sub_title_line_height_tablet": 40,
-        "sub_title_font_size_mobile": 24,
-        "sub_title_line_height_mobile": 30,
-        "sub_body_font_size_desktop": 18,
-        "sub_body_line_height_desktop": 28,
-        "sub_body_font_size_tablet": 18,
-        "sub_body_line_height_tablet": 28,
-        "sub_body_font_size_mobile": 16,
-        "sub_body_line_height_mobile": 24
       }
     }
   },
