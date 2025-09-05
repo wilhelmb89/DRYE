@@ -1,5 +1,15 @@
 {%- assign ss = section.settings -%}
 <style>
+/* Lägg detta direkt efter dina tidigare footer-overrides */
+footer #inverseHeader .email-content,
+footer #inverseHeader .email-content p,
+footer .email-content,
+footer .email-content p {
+  color: rgba(255, 255, 255, 0.65) !important; /* exakt samma som länkarna */
+  opacity: 1 !important;                       /* slå ut ev. global opacity */
+  mix-blend-mode: normal !important;           /* säkerhetsbälte */
+  filter: none !important;                      /* ifall temat leker med filter */
+}
 
  /* DRYE: Footer länkar – samma stil som brödtext, utan pilar */
 footer .menu a,
