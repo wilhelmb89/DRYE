@@ -1,4 +1,17 @@
 {% style %}
+
+/* DRYE: matcha brödtext-stilen med resten av sajten */
+#shopify-section-{{ section.id }} .page-card-text,
+#shopify-section-{{ section.id }} .page-card-text * {
+  font-family: Inter, sans-serif !important;
+  font-weight: 400 !important;                 /* Regular, inte Light */
+  font-variation-settings: "wght" 400 !important;
+  color: rgba(17, 17, 17, 0.65) !important;    /* samma grå som du använder */
+  letter-spacing: -0.04em !important;
+  line-height: 28px !important;
+  font-size: 18px !important;
+}
+
   .section-{{ section.id }} {
     background: {{ section.settings.background_color }};
     padding-top: {{ section.settings.section_top_padding }}px;
