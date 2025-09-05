@@ -698,7 +698,8 @@
         "pair_CcRcYf"
       ],
       "custom_css": [
-        "h2.title {font-family: \"Clash Grotesk\", \"ClashGrotesk\", sans-serif !important; font-weight: 300 !important; font-size: 48px; font-style: normal !important; letter-spacing: 0 !important;}"
+        "h2.title {font-family: \"Clash Grotesk\", \"ClashGrotesk\", sans-serif !important; font-weight: 300 !important; font-size: 40px; font-style: normal !important; letter-spacing: 0 !important;}",
+        "/* Mobile override */@media screen and (max-width: 767px) {h2.title {font-size: 28px !important; }}"
       ],
       "name": "Before-After",
       "settings": {
