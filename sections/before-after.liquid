@@ -1,25 +1,18 @@
 {%- assign ss = section.settings -%}
 <style>
 
-/* Desktop + tablet */
-@media (min-width: 768px) {
-  #shopify-section-{{ section.id }} h2.title {
-    font-family: "Clash Grotesk Light", sans-serif !important;
-    font-size: 50px !important;
-    line-height: 56px !important;
-    letter-spacing: -0.02em;
-  }
+/* Rubriken ska använda Clash Grotesk (variabeln), inte Inter */
+#shopify-section-{{ section.id }} h2.title,
+#shopify-section-{{ section.id }} .title {
+  font-family: ClashGrotesk-Variable, "Clash Grotesk", Inter, sans-serif !important;
+  font-weight: 300 !important;                    /* Light */
+  font-variation-settings: "wght" 300 !important; /* för VF */
+  font-style: normal !important;
+  letter-spacing: -0.02em;
+  line-height: 32px !important;   /* din tidigare */
+  font-size: 28px !important;     /* din tidigare */
 }
 
-/* Mobil */
-@media (max-width: 767px) {
-  #shopify-section-{{ section.id }} h2.title {
-    font-family: "Clash Grotesk Light", sans-serif !important;
-    font-size: 28px !important;
-    line-height: 32px !important;
-    letter-spacing: -0.02em;
-  }
-}
 
   /* Sektionens container-padding per device */
   @media screen and (min-width: 1025px) {
