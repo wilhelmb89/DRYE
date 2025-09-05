@@ -656,7 +656,7 @@
         "title_line_height_desktop": 55,
         "title_font_size_tablet": 42,
         "title_line_height_tablet": 50,
-        "title_font_size_mobile": 24,
+        "title_font_size_mobile": 28,
         "title_line_height_mobile": 30,
         "subtitle": "",
         "name_font_size_desktop": 18,
@@ -699,7 +699,7 @@
       ],
       "custom_css": [
         "h2.title {font-family: \"Clash Grotesk\", \"ClashGrotesk\", sans-serif !important; font-weight: 300 !important; font-size: 40px; font-style: normal !important; letter-spacing: 0 !important;}",
-        "/* Mobile override */@media screen and (max-width: 767px) {h2.title {font-size: 28px !important; }}"
+        " /* Mobile override */@media screen and (max-width: 767px) {h2.title {font-size: 28px !important; }}"
       ],
       "name": "Before-After",
       "settings": {
