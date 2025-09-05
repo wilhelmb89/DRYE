@@ -349,6 +349,95 @@
         "padding_right_mobile": 0
       }
     },
+    "card_with_line_nzUcxb": {
+      "type": "card-with-line",
+      "blocks": {
+        "card_4q6edz": {
+          "type": "card",
+          "settings": {
+            "icon": "shopify://shop_images/cream.png",
+            "text": ""
+          }
+        },
+        "card_dtiUbt": {
+          "type": "card",
+          "settings": {
+            "icon": "shopify://shop_images/baby-powder.png",
+            "text": ""
+          }
+        },
+        "card_QqcQtN": {
+          "type": "card",
+          "settings": {
+            "icon": "shopify://shop_images/gloves.png",
+            "text": ""
+          }
+        },
+        "card_wkHyBD": {
+          "type": "card",
+          "settings": {
+            "icon": "shopify://shop_images/ointment.png",
+            "text": ""
+          }
+        },
+        "card_8D9UiF": {
+          "type": "card",
+          "settings": {
+            "icon": "shopify://shop_images/eczema.png",
+            "text": ""
+          }
+        }
+      },
+      "block_order": [
+        "card_4q6edz",
+        "card_dtiUbt",
+        "card_QqcQtN",
+        "card_wkHyBD",
+        "card_8D9UiF"
+      ],
+      "name": "Card With Line",
+      "settings": {
+        "background_color": "#FFFFFF",
+        "title": "“Every fix ends the same.”",
+        "title_color": "#000000",
+        "title_alignment": "left",
+        "title_font_size": 48,
+        "title_line_height": 39,
+        "title_top_padding": 0,
+        "title_bottom_padding": 60,
+        "title_alignment_mobile": "left",
+        "title_font_size_mobile": 28,
+        "title_line_height_mobile": 38,
+        "title_top_padding_mobile": 0,
+        "title_bottom_padding_mobile": 60,
+        "line_height": 1,
+        "line_color": "#000000",
+        "dot_size": 5,
+        "dot_position": 8,
+        "dot_color": "#000000",
+        "block_count": 6,
+        "block_direction": "row",
+        "block_direction_mobile": "column",
+        "block_spacing": 40,
+        "icon_area_size": 30,
+        "icon_area_color": "#ffffff",
+        "icon_size": 64,
+        "padding_between_line_and_icon": 20,
+        "padding_between_icon_and_text": 18,
+        "padding_between_icon_and_text_mobile": 10,
+        "text_color": "#000000",
+        "text_font_size": 16,
+        "text_line_height": 24,
+        "text_font_size_mobile": 16,
+        "text_line_height_mobile": 24,
+        "section_top_padding": 80,
+        "section_bottom_padding": 120,
+        "section_top_padding_tablet": 80,
+        "section_bottom_padding_tablet": 80,
+        "section_top_padding_mobile": 54,
+        "section_bottom_padding_mobile": 120
+      }
+    },
     "icons_Bt7DUV": {
       "type": "icons",
       "blocks": {
@@ -428,6 +517,9 @@
             "button_text": "",
             "button_url": "",
             "controls": true,
+            "image": "shopify://shop_images/u9738261378_httpss.mj.run4B5pqP8x_eg_This_close-up_image_show_a9960b3b-8f21-4bae-b297-e9ff9ec350b3_2_1.png",
+            "image_tablet": "shopify://shop_images/u9738261378_httpss.mj.run4B5pqP8x_eg_This_close-up_image_show_a9960b3b-8f21-4bae-b297-e9ff9ec350b3_2_1.png",
+            "image_mobile": "shopify://shop_images/u9738261378_httpss.mj.run4B5pqP8x_eg_This_close-up_image_show_a9960b3b-8f21-4bae-b297-e9ff9ec350b3_2_1.png",
             "position": "row"
           }
         },
@@ -440,6 +532,8 @@
             "button_url": "",
             "controls": true,
             "image": "shopify://shop_images/u9738261378_httpss.mj.runvRjgzB98KGs_Main_Subject_Young_Mecha_8c506662-67aa-41ef-941d-d1f76f07cced_0_1.png",
+            "image_tablet": "shopify://shop_images/u9738261378_httpss.mj.runvRjgzB98KGs_Main_Subject_Young_Mecha_8c506662-67aa-41ef-941d-d1f76f07cced_0_1.png",
+            "image_mobile": "shopify://shop_images/u9738261378_httpss.mj.runvRjgzB98KGs_Main_Subject_Young_Mecha_8c506662-67aa-41ef-941d-d1f76f07cced_0_1.png",
             "position": "row-reverse"
           }
         }
@@ -454,8 +548,8 @@
         "overlap": false,
         "title": "",
         "invert": true,
-        "bg": "#ffffff",
-        "tx": "#111111",
+        "bg": "#111111",
+        "tx": "#ffffff",
         "sub_title_font_size_desktop": 48,
         "sub_title_line_height_desktop": 55,
         "sub_title_font_size_tablet": 34,
@@ -1292,6 +1386,7 @@
   },
   "order": [
     "product_with_gallery_GRxyix",
+    "card_with_line_nzUcxb",
     "icons_Bt7DUV",
     "multirows_new_VzQtYE",
     "multirows_new_zTefYA",
