@@ -1,13 +1,26 @@
 {%- assign ss = section.settings -%}
 <style>
 
-  @media (max-width: 767px) {
-  .section-{{ section.id }} h2.title {
+/* Desktop + tablet */
+@media (min-width: 768px) {
+  #shopify-section-{{ section.id }} h2.title {
+    font-family: "Clash Grotesk Light", sans-serif !important;
+    font-size: 50px !important;
+    line-height: 56px !important;
+    letter-spacing: -0.02em;
+  }
+}
+
+/* Mobil */
+@media (max-width: 767px) {
+  #shopify-section-{{ section.id }} h2.title {
+    font-family: "Clash Grotesk Light", sans-serif !important;
     font-size: 28px !important;
     line-height: 32px !important;
     letter-spacing: -0.02em;
   }
 }
+
   /* Sektionens container-padding per device */
   @media screen and (min-width: 1025px) {
     #shopify-section-{{ section.id }} .container {
