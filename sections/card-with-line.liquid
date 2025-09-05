@@ -11,6 +11,13 @@
   line-height: 28px !important;
   font-size: 18px !important;
 }
+/* Låt bold fortfarande vara bold */
+#shopify-section-{{ section.id }} .page-card-text strong,
+#shopify-section-{{ section.id }} .page-card-text b {
+  font-weight: 700 !important;
+  font-variation-settings: "wght" 700 !important;
+  color: #111 !important; /* kan vara samma grå, men ofta bättre att göra bold mörkare */
+}
 
   .section-{{ section.id }} {
     background: {{ section.settings.background_color }};
