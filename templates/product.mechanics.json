@@ -1544,7 +1544,7 @@
         "check_text": "",
         "bg": "#000000",
         "padding_top": 0,
-        "padding_bottom": 0,
+        "padding_bottom": 100,
         "padding_left": 0,
         "padding_right": 0,
         "padding_top_tablet": 0,
@@ -1641,6 +1641,64 @@
         "title": "",
         "form_title": ""
       }
+    },
+    "multirows_new_tExFLY": {
+      "type": "multirows-new",
+      "blocks": {
+        "row_nDYqc9": {
+          "type": "row",
+          "settings": {
+            "title": "Shipping & Delivery",
+            "content": "<p>Dispatch: 12–24 h (Mon–Fri)<br/><br/>- Typical delivery (business days):<br/>- USA: 3–4 (UPS)<br/>- Canada: 3–5 (UPS)<br/><br/>Tracking provided at checkout.</p>",
+            "button_text": "",
+            "button_url": "",
+            "controls": true,
+            "image": "shopify://shop_images/ups-a-global-shipping-and-parcel-service-company-og.jpg",
+            "image_tablet": "shopify://shop_images/ups-a-global-shipping-and-parcel-service-company-og.jpg",
+            "image_mobile": "shopify://shop_images/ups-a-global-shipping-and-parcel-service-company-og.jpg",
+            "position": "row"
+          }
+        },
+        "row_D8aqb6": {
+          "type": "row",
+          "settings": {
+            "title": "Customs & Duties",
+            "content": "<p>From August 29, 2025, all US shipments may be subject to duties & sales tax.</p><p>Typical cost: USD 3–8 on a USD 36 order (+ USD 12 shipping).</p><p>Note: UPS continues to deliver from Europe to the US without interruptions. </p>",
+            "button_text": "",
+            "button_url": "",
+            "controls": true,
+            "image": "shopify://shop_images/1920x998.jpg",
+            "image_tablet": "shopify://shop_images/1920x998.jpg",
+            "image_mobile": "shopify://shop_images/1920x998.jpg",
+            "position": "row-reverse"
+          }
+        }
+      },
+      "block_order": [
+        "row_nDYqc9",
+        "row_D8aqb6"
+      ],
+      "name": "Multirows(New)",
+      "settings": {
+        "special_title": false,
+        "overlap": false,
+        "title": "",
+        "invert": true,
+        "bg": "#000000",
+        "tx": "#FFFFFF",
+        "sub_title_font_size_desktop": 48,
+        "sub_title_line_height_desktop": 55,
+        "sub_title_font_size_tablet": 34,
+        "sub_title_line_height_tablet": 40,
+        "sub_title_font_size_mobile": 24,
+        "sub_title_line_height_mobile": 30,
+        "sub_body_font_size_desktop": 18,
+        "sub_body_line_height_desktop": 28,
+        "sub_body_font_size_tablet": 18,
+        "sub_body_line_height_tablet": 28,
+        "sub_body_font_size_mobile": 16,
+        "sub_body_line_height_mobile": 24
+      }
     }
   },
   "order": [
@@ -1663,6 +1721,7 @@
     "before_after_cYbThq",
     "columns_with_video_ytFpUY",
     "product_with_gallery_GRxyix",
+    "multirows_new_tExFLY",
     "rich_color_text_pbmjNY",
     "1746812877af76f5ce",
     "main_contact_BPHcyq"
