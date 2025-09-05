@@ -217,6 +217,13 @@
   z-index: 2 !important;
   isolation: auto !important; /* eller ta bort raden helt */
 }
+#shopify-section-{{ section.id }} .before-after-slider .resizer-trigger {
+  z-index: 10 !important;  /* över bilderna/linjen */
+}
+
+#shopify-section-{{ section.id }} .before-after-slider .resizer {
+  z-index: 9 !important;   /* under knoppen, över bilderna */
+}
 
 </style>
 
