@@ -399,7 +399,7 @@
         "row_XYetHm"
       ],
       "custom_css": [
-        "{padding-top: 40px !important; padding-bottom: 200px !important; margin-top: 0 !important; margin-bottom: 0 !important;}"
+        "{padding-top: 40px !important; padding-bottom: 00px !important; margin-top: 0px !important; margin-bottom: 90px !important;}"
       ],
       "name": "Multirows(New)",
       "settings": {
@@ -1162,6 +1162,72 @@
         "section_bottom_padding_mobile": 64
       }
     },
+    "columns_with_video_ytFpUY": {
+      "type": "columns-with-video",
+      "blocks": {
+        "card_tiiUzr": {
+          "type": "card",
+          "settings": {
+            "title": "",
+            "media_mode": "url",
+            "video_url": "",
+            "video_preview": "shopify://shop_images/Screenshot_32.png",
+            "video_width": "1108",
+            "video_height": "623",
+            "play_icon": "shopify://shop_images/play.png",
+            "icon_width": 80,
+            "icon_width_tablet": 70,
+            "icon_width_mobile": 70
+          }
+        },
+        "card_RtVHxy": {
+          "type": "card",
+          "settings": {
+            "title": "",
+            "media_mode": "url",
+            "video_url": "",
+            "video_preview": "shopify://shop_images/Screenshot_31.png",
+            "video_width": "1108",
+            "video_height": "623",
+            "play_icon": "shopify://shop_images/play.png",
+            "icon_width": 80,
+            "icon_width_tablet": 70,
+            "icon_width_mobile": 70
+          }
+        }
+      },
+      "block_order": [
+        "card_tiiUzr",
+        "card_RtVHxy"
+      ],
+      "name": "Column With Video",
+      "settings": {
+        "background_color": "#111111",
+        "title": "From Mining Workers to Professional Hockey Players: What Users Say (Swedish with English Subtitles)",
+        "title_color": "#ffffff",
+        "title_alignment": "center",
+        "title_font_size": 48,
+        "title_line_height": 55,
+        "title_top_padding": 0,
+        "title_bottom_padding": 60,
+        "title_alignment_mobile": "center",
+        "title_font_size_mobile": 28,
+        "title_line_height_mobile": 34,
+        "title_top_padding_mobile": 0,
+        "title_bottom_padding_mobile": 60,
+        "block_spacing": 20,
+        "block_spacing_mobile": 20,
+        "video_count": 3,
+        "block_direction": "row",
+        "block_direction_mobile": "column",
+        "section_top_padding": 120,
+        "section_bottom_padding": 120,
+        "section_top_padding_tablet": 80,
+        "section_bottom_padding_tablet": 80,
+        "section_top_padding_mobile": 46,
+        "section_bottom_padding_mobile": 78
+      }
+    },
     "product_with_gallery_GRxyix": {
       "type": "product-with-gallery",
       "blocks": {
@@ -1595,6 +1661,7 @@
     "multirows_new_iYMkH7",
     "1746812889a5f81d00",
     "before_after_cYbThq",
+    "columns_with_video_ytFpUY",
     "product_with_gallery_GRxyix",
     "rich_color_text_pbmjNY",
     "1746812877af76f5ce",
