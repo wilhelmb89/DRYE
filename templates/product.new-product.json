@@ -356,35 +356,35 @@
           "type": "card",
           "settings": {
             "icon": "shopify://shop_images/cream.png",
-            "text": ""
+            "text": "<p><strong>Creams & ointments</strong><br/>→ Rub off fast. Skin left unprotected.</p>"
           }
         },
         "card_dtiUbt": {
           "type": "card",
           "settings": {
             "icon": "shopify://shop_images/baby-powder.png",
-            "text": ""
+            "text": "<p><strong>Powders & home fixes</strong> → Clump, mess, no real relief.</p>"
           }
         },
         "card_QqcQtN": {
           "type": "card",
           "settings": {
             "icon": "shopify://shop_images/gloves.png",
-            "text": ""
+            "text": "<p><strong>Cotton liners </strong>→ Feel okay at first, then turn damp.</p>"
           }
         },
         "card_wkHyBD": {
           "type": "card",
           "settings": {
             "icon": "shopify://shop_images/ointment.png",
-            "text": ""
+            "text": "<p><strong>Steroids & prescriptions </strong>→ Calm for a while, flare again.</p>"
           }
         },
         "card_8D9UiF": {
           "type": "card",
           "settings": {
             "icon": "shopify://shop_images/eczema.png",
-            "text": ""
+            "text": "<p><strong>Glove tricks & hacks</strong> → Still end up with irritated hands.</p>"
           }
         }
       },
@@ -595,6 +595,62 @@
         "invert": true,
         "bg": "#ffffff",
         "tx": "#111111",
+        "sub_title_font_size_desktop": 48,
+        "sub_title_line_height_desktop": 55,
+        "sub_title_font_size_tablet": 34,
+        "sub_title_line_height_tablet": 40,
+        "sub_title_font_size_mobile": 24,
+        "sub_title_line_height_mobile": 30,
+        "sub_body_font_size_desktop": 18,
+        "sub_body_line_height_desktop": 28,
+        "sub_body_font_size_tablet": 18,
+        "sub_body_line_height_tablet": 28,
+        "sub_body_font_size_mobile": 16,
+        "sub_body_line_height_mobile": 24
+      }
+    },
+    "multirows_new_j4rUDK": {
+      "type": "multirows-new",
+      "blocks": {
+        "row_9cNGdC": {
+          "type": "row",
+          "settings": {
+            "title": "Backed by Science",
+            "content": "<p>We built a textile that does what no glove liner has done before: it moves sweat out before it damages your skin.<br/><br/>--&gt; Inner layer: pulls sweat off your skin instantly.<br/>--&gt; Outer layer: releases it before it can cause cracks, flare-ups, or irritation.<br/><br/>Proven in research on Moisture-Associated Skin Damage (MASD) — a major trigger for raw hands under gloves.</p>",
+            "button_text": "",
+            "button_url": "",
+            "video": "shopify://files/videos/video main page_41835ac6-fc50-477e-8d38-f035d97a846a.mp4",
+            "controls": true,
+            "position": "row-reverse"
+          }
+        },
+        "row_ApJqAY": {
+          "type": "row",
+          "settings": {
+            "title": "Recognized Innovation",
+            "content": "<p>DRYE was awarded the SKAPA Prize in memory of Alfred Nobel (2020) for its textile technology — developed to prevent MASD from breaking down the skin in protective equipment, and to address widespread hand issues like contact dermatitis, cracked, dry, or sensitive skin.</p>",
+            "button_text": "",
+            "button_url": "",
+            "controls": true,
+            "image": "shopify://shop_images/Alfred_main.jpg",
+            "image_tablet": "shopify://shop_images/Alfred_main.jpg",
+            "image_mobile": "shopify://shop_images/Alfred_main.jpg",
+            "position": "row"
+          }
+        }
+      },
+      "block_order": [
+        "row_9cNGdC",
+        "row_ApJqAY"
+      ],
+      "name": "Multirows(New)",
+      "settings": {
+        "special_title": false,
+        "overlap": false,
+        "title": "",
+        "invert": true,
+        "bg": "#111111",
+        "tx": "#ffffff",
         "sub_title_font_size_desktop": 48,
         "sub_title_line_height_desktop": 55,
         "sub_title_font_size_tablet": 34,
@@ -887,62 +943,6 @@
         "section_bottom_padding_tablet": 0,
         "section_top_padding_mobile": 76,
         "section_bottom_padding_mobile": 66
-      }
-    },
-    "multirows_new_j4rUDK": {
-      "type": "multirows-new",
-      "blocks": {
-        "row_9cNGdC": {
-          "type": "row",
-          "settings": {
-            "title": "Backed by Science",
-            "content": "<p>We built a textile that does what no glove liner has done before: it moves sweat out before it damages your skin.<br/><br/>--&gt; Inner layer: pulls sweat off your skin instantly.<br/>--&gt; Outer layer: releases it before it can cause cracks, flare-ups, or irritation.<br/><br/>Proven in research on Moisture-Associated Skin Damage (MASD) — a major trigger for raw hands under gloves.</p>",
-            "button_text": "",
-            "button_url": "",
-            "video": "shopify://files/videos/video main page_41835ac6-fc50-477e-8d38-f035d97a846a.mp4",
-            "controls": true,
-            "position": "row-reverse"
-          }
-        },
-        "row_ApJqAY": {
-          "type": "row",
-          "settings": {
-            "title": "Recognized Innovation",
-            "content": "<p>DRYE was awarded the SKAPA Prize in memory of Alfred Nobel (2020) for its textile technology — developed to prevent MASD from breaking down the skin in protective equipment, and to address widespread hand issues like contact dermatitis, cracked, dry, or sensitive skin.</p>",
-            "button_text": "",
-            "button_url": "",
-            "controls": true,
-            "image": "shopify://shop_images/Alfred_main.jpg",
-            "image_tablet": "shopify://shop_images/Alfred_main.jpg",
-            "image_mobile": "shopify://shop_images/Alfred_main.jpg",
-            "position": "row"
-          }
-        }
-      },
-      "block_order": [
-        "row_9cNGdC",
-        "row_ApJqAY"
-      ],
-      "name": "Multirows(New)",
-      "settings": {
-        "special_title": false,
-        "overlap": false,
-        "title": "",
-        "invert": true,
-        "bg": "#111111",
-        "tx": "#ffffff",
-        "sub_title_font_size_desktop": 48,
-        "sub_title_line_height_desktop": 55,
-        "sub_title_font_size_tablet": 34,
-        "sub_title_line_height_tablet": 40,
-        "sub_title_font_size_mobile": 24,
-        "sub_title_line_height_mobile": 30,
-        "sub_body_font_size_desktop": 18,
-        "sub_body_line_height_desktop": 28,
-        "sub_body_font_size_tablet": 18,
-        "sub_body_line_height_tablet": 28,
-        "sub_body_font_size_mobile": 16,
-        "sub_body_line_height_mobile": 24
       }
     },
     "icons_Bt7DUV": {
