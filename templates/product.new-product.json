@@ -630,7 +630,7 @@
         "m_top": 155,
         "m_bottom": 0,
         "mobile_m_top": 110,
-        "mobile_m_bottom": 120
+        "mobile_m_bottom": 70
       }
     },
     "multirows_new_zTefYA": {
@@ -1441,6 +1441,104 @@
     "1746812877af76f5ce": {
       "type": "apps",
       "settings": {}
+    },
+    "image_slider_c3fHaE": {
+      "type": "image-slider",
+      "blocks": {
+        "heading_AzX7pD": {
+          "type": "heading",
+          "settings": {
+            "heading": "500+ mechanics, athletes, and workers finally working shifts without cracked, sweaty hands.",
+            "heading_color": "#000000",
+            "heading_font_size": 48,
+            "heading_line_height": 55,
+            "heading_top_padding": 64,
+            "heading_bottom_padding": 70,
+            "heading_font_size_tablet": 48,
+            "heading_line_height_tablet": 60,
+            "heading_top_padding_tablet": 120,
+            "heading_bottom_padding_tablet": 120,
+            "heading_font_size_mobile": 28,
+            "heading_line_height_mobile": 32,
+            "heading_top_padding_mobile": 26,
+            "heading_bottom_padding_mobile": 24
+          }
+        },
+        "card_PYzNXd": {
+          "type": "card",
+          "settings": {
+            "preview_image": "shopify://shop_images/Screenshot_3_0b9d3add-51ef-4e6b-969d-ec151b037864.jpg"
+          }
+        },
+        "card_kfCRrz": {
+          "type": "card",
+          "settings": {
+            "preview_image": "shopify://shop_images/Screenshot_7_8149409e-03b7-45f3-beba-ec6967d4a6f6.jpg"
+          }
+        },
+        "card_dtBzrh": {
+          "type": "card",
+          "settings": {
+            "preview_image": "shopify://shop_images/Screenshot_4_3.jpg"
+          }
+        },
+        "card_kELqJL": {
+          "type": "card",
+          "settings": {
+            "preview_image": "shopify://shop_images/retouch_2025040920190095_1.jpg"
+          }
+        },
+        "card_UW6VmR": {
+          "type": "card",
+          "settings": {
+            "preview_image": "shopify://shop_images/Cahjnjjpture_378aa018-a25e-42be-83d2-665cc11fcefd.jpg"
+          }
+        },
+        "card_AARUdy": {
+          "type": "card",
+          "settings": {
+            "preview_image": "shopify://shop_images/Screenshot_10_1610ed25-3bb5-4f94-90f2-248fabcd305f.jpg"
+          }
+        },
+        "card_rfz7YU": {
+          "type": "card",
+          "settings": {
+            "preview_image": "shopify://shop_images/Screenshot_9_d3468de2-f3f9-4a1e-9346-1f6690098a4d.jpg"
+          }
+        }
+      },
+      "block_order": [
+        "heading_AzX7pD",
+        "card_PYzNXd",
+        "card_kfCRrz",
+        "card_dtBzrh",
+        "card_kELqJL",
+        "card_UW6VmR",
+        "card_AARUdy",
+        "card_rfz7YU"
+      ],
+      "name": "Image Slider",
+      "settings": {
+        "background_color": "#FFFFFF",
+        "content_position": "center",
+        "content_alignment": "center",
+        "max_fullwidth": true,
+        "border_radius": 96,
+        "border_radius_mobile": 40,
+        "image_radius": 12,
+        "slider_pagination_count": 5,
+        "slider_pagination_count_tablet": 3,
+        "slider_pagination_count_mobile": 1,
+        "show_pagination": false,
+        "slider_pagination_top": 48,
+        "slider_pagination_bottom": 0,
+        "padding_top": 40,
+        "padding_bottom": 40,
+        "padding_top_tablet": 80,
+        "padding_bottom_tablet": 80,
+        "padding_top_mobile": 40,
+        "padding_bottom_mobile": 40
+      }
     }
   },
   "order": [
@@ -1459,6 +1557,7 @@
     "columns_with_video_kRmqXB",
     "articles_new_F9UHqX",
     "faq_9EETYf",
-    "1746812877af76f5ce"
+    "1746812877af76f5ce",
+    "image_slider_c3fHaE"
   ]
 }
