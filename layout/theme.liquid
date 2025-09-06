@@ -160,6 +160,19 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     .shopify-policy__body ul { list-style: disc; padding-left: 20px; margin-bottom: 1rem; }
     .shopify-policy__body li { margin-bottom: 6px; }
   </style>
+{% if request.path contains '/policies/' %}
+  <style id="drye-policy-override">
+    /* Döda all tracking på policy-sidor med hög specificitet */
+    .shopify-policy__body:not(#x),
+    .shopify-policy__body:not(#x) *,
+    .shopify-policy__container:not(#x),
+    .shopify-policy__container:not(#x) * {
+      letter-spacing: 0 !important;
+    }
+  </style>
+{% endif %}
+
+  
 {% endif %}
 
 
