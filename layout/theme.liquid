@@ -83,107 +83,81 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     </script>
 
 {% if request.path contains '/policies/' %}
-  <style>
-    /* DRYE: neutralisera tracking + typografi för policy-sidor */
+  <style id="drye-policy-override">
+    /* --- DRYE: Policy pages typography --- */
 
-    /* 0) Hård reset av letter-spacing – stjärna behövs om tema sätter tracking på wrappers */
-    .shopify-policy__body,
-    .shopify-policy__body *,
-    .shopify-policy__container,
-    .shopify-policy__container * {
-      letter-spacing: normal !important;
-    }
-
-    /* 1) Layout */
+    /* Layout (justera vid behov) */
     .shopify-policy__body {
       max-width: 900px;
-      margin-inline: auto;
-      padding-inline: 64px;
-      padding-left: 220px; /* desktop spacing */
-      box-sizing: border-box;
       width: 100%;
-      margin-top: 40px;    /* desktop margin */
+      margin: 40px auto 0;
+      padding: 0 64px 0 220px; /* desktop left gutter */
+      box-sizing: border-box;
     }
-    @media (max-width: 768px) {
+    @media (max-width: 767px) {
       .shopify-policy__body {
-        padding-inline: 20px;
-        padding-left: 20px; /* inget vänstergap på mobil */
         margin-top: 20px;
+        padding: 0 20px;       /* no left gutter on mobile */
       }
     }
 
-    /* 2) Brödtext (undvik :where – 0 specifikitet) */
+    /* Bastext 16px – gäller även listor, länkar, spans */
     .shopify-policy__body,
     .shopify-policy__body p,
     .shopify-policy__body li,
-    .shopify-policy__body span,
     .shopify-policy__body a,
+    .shopify-policy__body span,
+    .shopify-policy__body em,
     .shopify-policy__body strong,
-    .shopify-policy__body em {
+    .shopify-policy__body b {
       font-family: var(--font-body-family, Inter, sans-serif) !important;
-      font-weight: 400 !important;
-      font-variation-settings: "wght" 400 !important;
+      font-size: 16px !important;
+      line-height: 24px !important;
+      font-weight: 400;
       letter-spacing: normal !important;
-      color: rgb(17 17 17 / 65%) !important;
-      font-size: 18px !important;   /* desktop + tablet */
-      line-height: 1.6;
+      color: rgba(17,17,17,.65) !important;
     }
 
-    /* 3) Rubriker */
+    /* Bold – samma storlek, bara vikt */
+    .shopify-policy__body strong,
+    .shopify-policy__body b {
+      font-size: inherit !important;
+      font-weight: 600 !important; /* eller 700 om du vill ha mer kontrast */
+      letter-spacing: inherit !important;
+      color: #111 !important;      /* valfritt: lite mörkare för läsbarhet */
+    }
+
+    /* Rubriker – Clash Grotesk Light */
     .shopify-policy__body h1,
     .shopify-policy__body h2,
     .shopify-policy__body h3,
     .shopify-policy__body h4 {
-      font-family: "Clash Grotesk", sans-serif !important;
+      font-family: "Clash Grotesk", ClashGrotesk-Variable, sans-serif !important;
       font-weight: 300 !important;
-      color: #111 !important;
       letter-spacing: normal !important;
-      font-size: 32px !important;   /* desktop + tablet */
+      color: #111 !important;
+      margin: 0 0 .5em 0;
+      line-height: 1.2;
     }
+    .shopify-policy__body h1 { font-size: 32px !important; }
+    .shopify-policy__body h2 { font-size: 28px !important; }
+    .shopify-policy__body h3 { font-size: 24px !important; }
+    .shopify-policy__body h4 { font-size: 20px !important; }
 
-    /* 4) Mobiltypografi */
     @media (max-width: 767px) {
-      .shopify-policy__body h1,
-      .shopify-policy__body h2,
-      .shopify-policy__body h3,
-      .shopify-policy__body h4 {
-        font-size: 28px !important;
-      }
-      .shopify-policy__body p,
-      .shopify-policy__body li {
-        font-size: 16px !important;
-      }
+      .shopify-policy__body h1 { font-size: 28px !important; }
+      .shopify-policy__body h2 { font-size: 24px !important; }
+      .shopify-policy__body h3 { font-size: 20px !important; }
+      .shopify-policy__body h4 { font-size: 18px !important; }
     }
 
-    /* 5) Länkar och listor */
+    /* Listor */
+    .shopify-policy__body ul { list-style: disc; padding-left: 20px; margin: 0 0 1rem 0; }
+    .shopify-policy__body li { margin: 0 0 6px 0; }
+
+    /* Länkar */
     .shopify-policy__body a { color: inherit !important; text-decoration: underline; }
-    .shopify-policy__body ul { list-style: disc; padding-left: 20px; margin-bottom: 1rem; }
-    .shopify-policy__body li { margin-bottom: 6px; }
   </style>
-{% if request.path contains '/policies/' %}
-  <style id="drye-policy-override">
-    /* Döda all tracking på policy-sidor med hög specificitet */
-    .shopify-policy__body:not(#x),
-    .shopify-policy__body:not(#x) *,
-    .shopify-policy__container:not(#x),
-    .shopify-policy__container:not(#x) * {
-      letter-spacing: 0 !important;
-    }
-  </style>
-
-  <style>
-  @media screen and (max-width: 767px) {
-    .page-width p,
-    .page-width li {
-      font-size: 16px !important;
-      line-height: 24px !important;
-    }
-  }
-</style>
-
-{% endif %}
-
-  
 {% endif %}
 
 
