@@ -8,18 +8,19 @@
 <link rel="preload" href="{{ 'clash-grotesk-light.woff2' | asset_url }}" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="{{ 'inter-regular.woff2' | asset_url }}" as="font" type="font/woff2" crossorigin>
 
-{% if request.path contains '/policies/' %}
-  <style>
-    /* DRYE: Reset letter-spacing for policy documents */
-    .shopify-policy__container,
-    .shopify-policy__container * {
-      letter-spacing: normal !important;
-    }
-  </style>
 
 
  
   <style>
+
+     /* DRYE: neutralisera tracking på policy-sidor */
+    .shopify-policy__body,
+    .shopify-policy__body *,
+    .shopify-policy__container,
+    .shopify-policy__container * {
+      letter-spacing: normal !important;
+    }
+
     .shopify-policy__body {
       max-width: 900px;
       margin-inline: auto;
@@ -92,7 +93,6 @@
       margin-bottom: 6px;
     }
   </style>
-{% endif %}
 
 
 
