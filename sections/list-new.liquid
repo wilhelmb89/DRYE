@@ -115,6 +115,22 @@
 .list__item svg {
   fill: #bda667 !important;
 }
+/* DRYE: fixera ikonstorlek + spacing i listan */
+#shopify-section-{{ section.id }} .list .list-item svg {
+  width: 20px;
+  height: 20px;
+  flex: 0 0 20px;
+  display: inline-block;
+  margin-right: 10px;
+}
+
+/* Färg – några SVG:er använder fill, andra stroke */
+#shopify-section-{{ section.id }} .list .list-item svg,
+#shopify-section-{{ section.id }} .list .list-item svg * {
+  fill: #bda667 !important;
+  stroke: #bda667 !important;
+  stroke-width: 1.2;
+}
 
 </style>
 
