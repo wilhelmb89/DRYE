@@ -499,13 +499,34 @@ https://cdn1.stamped.io/files/widget.min.js
   }
 
   // FETCH PATCH
+  // FETCH PATCH
   const _fetch = window.fetch;
   window.fetch = async function twFetch(input, init = {}){
     const url = typeof input==='string' ? input : (input?.url || '');
     let isATC = false;
-    try { isATC = /\/cart\/add(\.js|\.json)?(?:\?.*)?$/.test(new URL(url, location.origin).pathname); } catch {}
-    let reqClone = null;
+    try {
+      isATC = /\/cart\/add(\.js|\.json)?(?:\?.*)?$/.test(new URL(url, location.origin).pathname);
+    } catch {}
 
+    // --------- GA /g/collect hardening (фикс 404) ---------
+    // Если библиотека почему-то шлёт на относительный /g/collect,
+    // отправим это на официальный endpoint GA4.
+    let actualInput = input;
+    try {
+      const u = typeof input === 'string'
+        ? new URL(input, location.origin)
+        : (input?.url ? new URL(input.url, location.origin) : null);
+
+      if (u && u.origin === location.origin && /^\/g\/collect/i.test(u.pathname)) {
+        const target = `https://region1.google-analytics.com${u.pathname}${u.search}`;
+        actualInput = target;
+      }
+    } catch (e) {
+      // молча, это лишь подстраховка
+    }
+    // ------------------------------------------------------
+
+    let reqClone = null;
     if (isATC){
       const b = init?.body;
       if (b instanceof FormData){ reqClone = new FormData(); for (const [k,v] of b.entries()) reqClone.append(k,v); }
@@ -513,7 +534,7 @@ https://cdn1.stamped.io/files/widget.min.js
       else if (typeof b === 'string'){ reqClone = String(b); }
     }
 
-    const resp = await _fetch.apply(this, arguments);
+    const resp = await _fetch.apply(this, [actualInput, init]);
 
     if (isATC && resp && resp.ok){
       try{
