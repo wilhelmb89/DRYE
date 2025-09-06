@@ -88,13 +88,15 @@ const initLazyImages = initLazyMedia,
                 }
             }
             const sectionListener = this.sectionListeners[event];
-            sectionListener.sections[sectionId] || (sectionListener.sections[sectionId] = []), sectionListener.sections[sectionId].push(callback)
+            sectionListener.sections[sectionId] || (sectionListener.sections[sectionId] = []),
+            sectionListener.sections[sectionId].push(callback)
         }
         static async handleEvent(event, eventData) {
             var _a;
             const sectionIds = Object.keys(this.sectionListeners[event].sections),
-                url = new URL(window.location.href);
-            (null == (_a = null == eventData ? void 0 : eventData.detail) ? void 0 : _a.variant) && url.searchParams.set("variant", eventData.detail.variant.id), url.searchParams.set("sections", sectionIds.join(","));
+                  url = new URL(window.location.href);
+            (null == (_a = null == eventData ? void 0 : eventData.detail) ? void 0 : _a.variant) && url.searchParams.set("variant", eventData.detail.variant.id),
+            url.searchParams.set("sections", sectionIds.join(","));
             const sectionJSON = await this.fetchSectionHTML(url);
             sectionIds.forEach((sectionId => {
                 this.sectionListeners[event].sections[sectionId].forEach((callback => {
@@ -107,18 +109,41 @@ const initLazyImages = initLazyMedia,
         }
         static unregisterSectionListener(sectionId, event) {
             const sectionListener = this.sectionListeners[event];
-            delete sectionListener.sections[sectionId], 0 === Object.keys(sectionListener.sections).length && (document.removeEventListener(event, sectionListener.listener), delete this.sectionListeners[event])
+            delete sectionListener.sections[sectionId],
+            0 === Object.keys(sectionListener.sections).length && (
+                document.removeEventListener(event, sectionListener.listener),
+                delete this.sectionListeners[event]
+            )
         }
         connectedCallback() {
-            this.event = this.getAttribute("data-event"), this.id ? (this.section = this.closest(".shopify-section"), this.sectionId = this.section.id, this.shopifySectionId = this.sectionId.replace("shopify-section-", ""), "false" !== this.dataset.reloadSection && (this.container = this.section.querySelector("[data-section-type]"), this.container && (this.sectionType = this.container.getAttribute("data-section-type"))), _ReloadOnEvent.registerSectionListener(this.shopifySectionId, this.event, this.updateSection.bind(this))) : console.error("ReloadOnEvent: No id attribute found on element")
+            this.event = this.getAttribute("data-event");
+            if (!this.id) {
+                console.error("ReloadOnEvent: No id attribute found on element");
+                return;
+            }
+            this.section = this.closest(".shopify-section") || null;
+            this.sectionId = this.section ? this.section.id : null;
+            this.shopifySectionId = this.sectionId ? this.sectionId.replace("shopify-section-", "") : null;
+
+            if ("false" !== this.dataset.reloadSection && this.section) {
+                this.container = this.section.querySelector("[data-section-type]") || null;
+                if (this.container) this.sectionType = this.container.getAttribute("data-section-type");
+            }
+
+            if (this.shopifySectionId) {
+                _ReloadOnEvent.registerSectionListener(this.shopifySectionId, this.event, this.updateSection.bind(this));
+            }
         }
         disconnectedCallback() {
-            _ReloadOnEvent.unregisterSectionListener(this.sectionId, this.event)
+            if (this.sectionId && this.event) {
+                _ReloadOnEvent.unregisterSectionListener(this.sectionId, this.event)
+            }
         }
         updateSection(html) {
-            this.setNewHTML(html), this.container && this.reloadSection(), afterCallstack((() => {
-                initLazyImages()
-            }), 10), this.dispatchEvent(new CustomEvent("reload-on-event:loaded", {
+            this.setNewHTML(html),
+            this.container && this.reloadSection(),
+            afterCallstack((() => { initLazyImages() }), 10),
+            this.dispatchEvent(new CustomEvent("reload-on-event:loaded", {
                 bubbles: !0,
                 detail: {
                     sectionId: this.sectionId,
@@ -127,16 +152,52 @@ const initLazyImages = initLazyMedia,
             }))
         }
         reloadSection() {
-            window.Shopify.theme.sections.unload(this.container);
-            const newContainer = this.section.querySelector(`[data-section-type="${this.sectionType}"]`);
-            newContainer ? (this.container = newContainer, window.Shopify.theme.sections.load(this.sectionType, this.container)) : console.error(`ReloadOnEvent reload: Failed to find the new container element with type [${this.sectionType}] after updating innerHTML.`)
+            // Безопасный ре-иниц секции
+            const api = window.Shopify && window.Shopify.theme && window.Shopify.theme.sections;
+
+            // После замены innerHTML перепривязываем контейнер
+            if (this.section && this.sectionType) {
+                const newContainer = this.section.querySelector(`[data-section-type="${this.sectionType}"]`);
+                if (newContainer) this.container = newContainer;
+            }
+
+            const canUseApi = !!(api && typeof api.unload === "function" && typeof api.load === "function" && this.container);
+
+            if (canUseApi) {
+                try {
+                    api.unload(this.container);
+                    api.load(this.sectionType, this.container);
+                    return;
+                } catch (e) {
+                    console.warn("ReloadOnEvent: theme.sections reload failed, falling back", e);
+                }
+            }
+
+            // Фолбэк: триггерим редакторские события, чтобы другие скрипты могли отреагировать
+            try {
+                if (this.sectionId) {
+                    const evSelect = new CustomEvent("shopify:section:select", { bubbles: !0, detail: { sectionId: this.sectionId }});
+                    const evDeselect = new CustomEvent("shopify:section:deselect", { bubbles: !0, detail: { sectionId: this.sectionId }});
+                    document.dispatchEvent(evSelect);
+                    document.dispatchEvent(evDeselect);
+                }
+            } catch (e) {
+                // Тихо, это необязательно
+            }
         }
         async setNewHTML(html) {
             try {
-                if (!html) return void console.error("ReloadOnEvent setNewHTML: Fetched HTML is empty or null for section", this.shopifySectionId);
+                if (!html) {
+                    console.error("ReloadOnEvent setNewHTML: Fetched HTML is empty or null for section", this.shopifySectionId);
+                    return;
+                }
                 const parser = new DOMParser,
-                    fetchedSelf = parser.parseFromString(html, "text/html").getElementById(this.id);
-                fetchedSelf || console.error(`ReloadOnEvent: Could not find "self" (<reload-on-event id="${this.id}">) element within the fetched section HTML.`), this.innerHTML = fetchedSelf.innerHTML
+                      fetchedSelf = parser.parseFromString(html, "text/html").getElementById(this.id);
+                if (!fetchedSelf) {
+                    console.error(`ReloadOnEvent: Could not find "self" (<reload-on-event id="${this.id}">) element within the fetched section HTML.`);
+                    return;
+                }
+                this.innerHTML = fetchedSelf.innerHTML
             } catch (error) {
                 console.error("ReloadOnEvent setNewHTML: Error fetching or parsing HTML:", error)
             }
@@ -145,6 +206,7 @@ const initLazyImages = initLazyMedia,
 __publicField(_ReloadOnEvent, "sectionListeners", {});
 let ReloadOnEvent = _ReloadOnEvent;
 customElements.define("reload-on-event", ReloadOnEvent);
+
 const SELECTORS_VIDEO = "video",
     SELECTORS_SOURCES_TEMPLATE = "template[data-sources]",
     SELECTORS_RESPONSIVE_VIDEO_WRAPPER = ".responsive-video-wrapper",
@@ -396,18 +458,23 @@ customElements.define("quantity-input", QuantityInput), document.addEventListene
 })); 
 
 (function () {
+  function shopifyPath(path) {
+    // path: 'cart/add.js' | '/cart/add.js' | 'cart'
+    var root = (window.Shopify && window.Shopify.routes && window.Shopify.routes.root) ? window.Shopify.routes.root : '/';
+    root = root.replace(/\/+$/,'');                 // '/en-us/' -> '/en-us', '/' -> ''
+    path = String(path || '').replace(/^\/+/, '');  // '/cart/add.js' -> 'cart/add.js'
+    // '/cart/add.js'; '/en-us' → '/en-us/cart/add.js'
+    return '/' + (root ? (root.replace(/^\//,'') + '/') : '') + path;
+  }
+
   function getVariantIdFromCustomSelect(form) {
     const cs = form.querySelector('.custom-select');
     if (!cs) return NaN;
-
     const selectedTitle = cs.querySelector('.selected')?.textContent?.trim();
     if (!selectedTitle) return NaN;
-
     const opt = Array.from(cs.querySelectorAll('.custom-option')).find(o =>
-      o.dataset?.title?.trim() === selectedTitle ||
-      o.textContent?.trim() === selectedTitle
+      o.dataset?.title?.trim() === selectedTitle || o.textContent?.trim() === selectedTitle
     );
-
     const id = Number(opt?.dataset?.value || NaN);
     return Number.isInteger(id) ? id : NaN;
   }
@@ -472,11 +539,15 @@ customElements.define("quantity-input", QuantityInput), document.addEventListene
 
     try {
       const sections = (Array.isArray(window.CartDrawer?.sections) ? window.CartDrawer.sections.join(',') : 'cart-drawer,cart-icon-bubble');
-      const res = await fetch(window.Shopify.routes.root + '/cart/add.js', {
+
+      const url = shopifyPath('cart/add.js');
+
+      const res = await fetch(url, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
         body: JSON.stringify({ items: [{ id: variantId, quantity }], sections })
       });
+
       const data = await res.json();
       if (!res.ok) throw new Error(data?.errors || res.status);
 
@@ -486,7 +557,7 @@ customElements.define("quantity-input", QuantityInput), document.addEventListene
       }));
     } catch (err) {
       console.error('ATC error', err);
-      location.href = '/cart';
+      location.href = shopifyPath('cart');
     }
   }, true);
 })();
