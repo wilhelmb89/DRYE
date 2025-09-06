@@ -157,7 +157,28 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
     /* Länkar */
     .shopify-policy__body a { color: inherit !important; text-decoration: underline; }
+
+    /* DRYE – gör bold faktiskt bold på policy-sidor */
+.shopify-policy__body p strong,
+.shopify-policy__body p b,
+.shopify-policy__body li strong,
+.shopify-policy__body li b,
+.shopify-policy__body span strong,
+.shopify-policy__body span b {
+  font-weight: 600 !important;                 /* eller 700 om du vill */
+  font-variation-settings: "wght" 600 !important;
+  color: #111 !important;                      /* valfritt, gör bold tydligare */
+}
+
+/* fånga ev. inline-styles från editorn (bolder, 500 etc.) */
+.shopify-policy__body [style*="font-weight"] {
+  font-weight: 600 !important;
+  font-variation-settings: "wght" 600 !important;
+}
+
   </style>
+
+  
 {% endif %}
 
 
