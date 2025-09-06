@@ -153,9 +153,10 @@
           <div class="list">
             {%- for block in section.blocks -%}
               <div class="list-item">
-                {%- render 'icon', type: 'checkbox' -%}
-                {{ block.settings.title }}
-              </div>
+  {%- render 'icon', type: 'checkbox' -%}
+  {{ block.settings.title | raw }}
+</div>
+
             {%- endfor -%}
           </div>
         {%- endif -%}
