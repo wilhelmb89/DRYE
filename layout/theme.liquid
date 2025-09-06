@@ -101,22 +101,20 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       }
     }
 
-    /* Bastext 16px – gäller även listor, länkar, spans */
-    .shopify-policy__body,
-    .shopify-policy__body p,
-    .shopify-policy__body li,
-    .shopify-policy__body a,
-    .shopify-policy__body span,
-    .shopify-policy__body em,
-    .shopify-policy__body strong,
-    .shopify-policy__body b {
-      font-family: var(--font-body-family, Inter, sans-serif) !important;
-      font-size: 16px !important;
-      line-height: 24px !important;
-      font-weight: 400;
-      letter-spacing: normal !important;
-      color: rgba(17,17,17,.65) !important;
-    }
+ /* Bastext 16px – gäller även listor, länkar, spans, men INTE strong/b */
+.shopify-policy__body,
+.shopify-policy__body p,
+.shopify-policy__body li,
+.shopify-policy__body a,
+.shopify-policy__body span,
+.shopify-policy__body em {
+  font-family: var(--font-body-family, Inter, sans-serif) !important;
+  font-size: 16px !important;
+  line-height: 24px !important;
+  font-weight: 400 !important;
+  letter-spacing: normal !important;
+  color: rgba(17,17,17,.65) !important;
+}
 
     /* Bold – samma storlek, bara vikt */
     .shopify-policy__body strong,
