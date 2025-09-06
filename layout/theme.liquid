@@ -138,29 +138,6 @@
     {{ 'swiper-bundle.min.css' | asset_url | stylesheet_tag }}
     {%- render 'theme-head-assets' -%}
     {{ content_for_header }}
-
-    <!-- Safe runtime-preserving loader -->
-<script>
-  window.__safeLoadScript = function(url, onload){
-    var saved = {
-      reg: window.regeneratorRuntime,
-      gen: window.__generator,
-      aw : window.__awaiter
-    };
-    function restore(){
-      if (saved.reg !== undefined) window.regeneratorRuntime = saved.reg; else delete window.regeneratorRuntime;
-      if (saved.gen !== undefined) window.__generator = saved.gen; else delete window.__generator;
-      if (saved.aw  !== undefined) window.__awaiter   = saved.aw;  else delete window.__awaiter;
-    }
-    var s = document.createElement('script');
-    s.async = true;
-    s.src = url;
-    s.onload = function(){ try{ onload && onload(); }catch(e){} restore(); };
-    s.onerror = restore;
-    document.head.appendChild(s);
-    return s;
-  };
-</script>
 <!-- Google Tag Manager -->
 <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
 new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
