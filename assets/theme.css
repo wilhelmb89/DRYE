@@ -6050,3 +6050,11 @@ section.before-after-section h2.title,
 .main-contact .contacts-wrapper .info {
   letter-spacing: normal !important;
 }
+/* Final: policy-bold vinner alltid */
+body.template-policy .shopify-policy__container .shopify-policy__body strong,
+body.template-policy .shopify-policy__container .shopify-policy__body b {
+  font-size: inherit !important;
+  font-weight: 600 !important;
+  font-variation-settings: "wght" 600 !important;
+  color: #111 !important;
+}
