@@ -6058,3 +6058,12 @@ body.template-policy .shopify-policy__container .shopify-policy__body b {
   font-variation-settings: "wght" 600 !important;
   color: #111 !important;
 }
+/* DRYE – EOF hard stop for policy bold */
+body.template-policy .shopify-policy__body strong,
+body.template-policy .shopify-policy__body b {
+  font-size: inherit !important;
+  font-weight: 600 !important;                  /* 700 om du vill hårdare */
+  font-variation-settings: "wght" 600 !important;
+  letter-spacing: inherit !important;
+  color: #111 !important;
+}
