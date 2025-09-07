@@ -5782,20 +5782,37 @@ div#occ3-drawer {
 
 
 
-.rte p,
-.rte li,
-.rte ul,
-.rte ol,
-.rte strong,
-.rte em {
+/* tidigare:
+.rte p, .rte li, .rte ul, .rte ol, .rte strong, .rte em {
   font-family: 'Raptor Inter', sans-serif !important;
   font-size: 16px !important;
   color: #1a1a1a !important;
   line-height: 1.6 !important;
-.shopify-policy__container {
-  display: flex;
-  justify-content: center;
 }
+*/
+
+/* korrekt: enhetlig bodystil – men låt inte denna röra strong/b */
+.rte p,
+.rte li,
+.rte ul,
+.rte ol,
+.rte em {
+  font-family: var(--font-body-family, Inter, sans-serif) !important;
+  font-size: 16px !important;
+  line-height: 1.6 !important;
+  color: #1a1a1a !important;
+}
+
+/* bold separat: samma storlek, bara högre vikt */
+.rte strong,
+.rte b {
+  font-family: var(--font-body-family, Inter, sans-serif) !important;
+  font-size: inherit !important;
+  font-weight: 600 !important;                 /* 700 om du vill starkare */
+  font-variation-settings: "wght" 600 !important;
+  color: #111 !important;
+}
+
 
 
   
