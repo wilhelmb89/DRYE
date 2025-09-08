@@ -6060,3 +6060,22 @@ body.template-policy .shopify-policy__body b {
   letter-spacing: inherit !important;
   color: #111 !important;
 }
+/* DRYE: Sticky CTA – bara för glove liner */
+.sticky-cta{
+  position: fixed;
+  right: 16px;
+  bottom: 16px;
+  z-index: 9999;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 20px;
+  border-radius: 999px;
+  font-weight: 600;
+  background: #111;
+  color: #fff;
+  text-decoration: none;
+  box-shadow: 0 4px 16px rgba(0,0,0,.2);
+  transition: transform .15s ease, box-shadow .2s ease;
+}
+.sticky-cta:hover { transform: translateY(-1px); }
