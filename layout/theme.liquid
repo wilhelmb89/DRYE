@@ -572,6 +572,16 @@ https://cdn1.stamped.io/files/widget.min.js
     }
   </style>
 {% endif %}
+{% if template == 'product' and product.handle == 'drye-performance-glove-liners' %}
+  <a
+    id="sticky-cta"
+    class="sticky-cta"
+    href="{{ routes.cart_url }}?add={{ product.variants.first.id }}"
+    aria-label="Shop now"
+  >
+    Shop now
+  </a>
+{% endif %}
 
   </body>
 </html>
