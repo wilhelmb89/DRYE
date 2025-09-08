@@ -949,6 +949,10 @@
           <div class="size-title">{{ ss.size_title }}</div>
           <div id="sizeChart" class="link">{{ ss.size_text }}</div>
         </div>
+
+<a id="buy-section-{{ product.handle }}"></a>
+
+
         <fieldset>
           {%- for variant in product.variants -%}
             {%- if product.selected_or_first_available_variant.id == variant.id -%}
