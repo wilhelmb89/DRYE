@@ -557,47 +557,47 @@ https://cdn1.stamped.io/files/widget.min.js
 
 {%- if request.path contains '/products/drye-performance-glove-liners' -%}
   <a id="sticky-cta" class="sticky-cta"
-     href="{{ routes.cart_url }}?add={{ product.selected_or_first_available_variant.id }}"
+     href="/products/drye-performance-glove-liners#buy-section-drye-performance-glove-liners"
      aria-label="Buy now">Buy now</a>
 
-<style>
-  /* DRYE: Sticky CTA – rektangulär, Inter, weight 400 */
-  #sticky-cta.sticky-cta{
-    position: fixed;
-    right: 20px;
-    bottom: 20px;
-    z-index: 2147483647;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    padding: 14px 24px;
-    min-width: 140px;
-    border-radius: 4px;           /* rektangulär */
-    font-family: 'Inter', sans-serif;
-    font-weight: 400;             /* lättare vikt */
-    font-size: 15px;
-    background: #111;
-    color: #fff;
-    text-decoration: none;
-    box-shadow: 0 4px 12px rgba(0,0,0,.15);
-    transition: background .2s ease, transform .15s ease;
-    opacity: 1;
-  }
-  #sticky-cta.sticky-cta:hover{
-    background: #000;
-    transform: translateY(-1px);
-  }
-  @media (max-width: 768px){
+  <style>
+    /* DRYE: Sticky CTA – rektangulär, Inter, weight 400 */
     #sticky-cta.sticky-cta{
-      right: 12px;
-      bottom: 88px; /* höj för chat-bubbla */
-      padding: 12px 20px;
-      font-size: 14px;
+      position: fixed;
+      right: 20px;
+      bottom: 20px;
+      z-index: 2147483647;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 14px 24px;
+      min-width: 140px;
+      border-radius: 4px;
+      font-family: 'Inter', sans-serif;
+      font-weight: 400;
+      font-size: 15px;
+      background: #111;
+      color: #fff;
+      text-decoration: none;
+      box-shadow: 0 4px 12px rgba(0,0,0,.15);
+      transition: background .2s ease, transform .15s ease;
+      opacity: 1;
     }
-  }
-</style>
-
+    #sticky-cta.sticky-cta:hover{
+      background: #000;
+      transform: translateY(-1px);
+    }
+    @media (max-width: 768px){
+      #sticky-cta.sticky-cta{
+        right: 12px;
+        bottom: 88px;
+        padding: 12px 20px;
+        font-size: 14px;
+      }
+    }
+  </style>
 {%- endif -%}
+
 
 
   </body>
