@@ -555,46 +555,38 @@ https://cdn1.stamped.io/files/widget.min.js
 <script id="convert-bundle-loader" src="https://bundle.5gtb.com/loader.js?g_cvt_id=43d6a6b5-1dcc-4430-aaf9-153ca1c9a0bb"></script>
 <!--Convert Bundle End-->
 
-{% if request.path contains '/policies/' %}
+{%- if request.path contains '/products/drye-performance-glove-liners' -%}
+  <a id="sticky-cta" class="sticky-cta"
+     href="{{ routes.cart_url }}?add={{ product.selected_or_first_available_variant.id }}"
+     aria-label="Buy now">Buy now</a>
+
   <style>
-    /* DRYE: enhetlig brödtext på alla policies */
-    .shopify-policy__container .shopify-policy__body,
-    .shopify-policy__container .shopify-policy__body :where(p, li, span, a, strong, em){
-      font-family: var(--font-body-family, Inter, sans-serif) !important;
-      font-weight: 400 !important;
-      font-variation-settings: "wght" 400 !important;
-      letter-spacing: -0.04em !important;
-      color: rgb(17 17 17 / 65%) !important;
+    /* Inline-styles för att utesluta CSS-laddningsproblem */
+    #sticky-cta.sticky-cta{
+      position: fixed;
+      right: 20px;
+      bottom: 20px;
+      z-index: 2147483647; /* över allt, inkl. chat-widget */
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 12px 18px;
+      border-radius: 999px;
+      font-weight: 600;
+      background: #111;
+      color: #fff;
+      text-decoration: none;
+      box-shadow: 0 8px 24px rgba(0,0,0,.18);
+      transition: transform .15s ease, box-shadow .2s ease;
+      opacity: 1; /* tvinga synlig */
     }
-    .shopify-policy__container .shopify-policy__body a{
-      color: inherit !important;
-      text-decoration: underline;
+    #sticky-cta.sticky-cta:hover{ transform: translateY(-1px); }
+    @media (max-width: 768px){
+      #sticky-cta.sticky-cta{ right: 12px; bottom: 88px; } /* höj på mobil för chat-bubblan */
     }
   </style>
-{% endif %}
-{%- if request.page_type == 'product'
-  and product
-  and product.handle == 'drye-performance-glove-liners' -%}
-  <a
-    id="sticky-cta"
-    class="sticky-cta"
-    href="{{ routes.cart_url }}?add={{ product.selected_or_first_available_variant.id }}"
-    aria-label="Shop now"
-  >Shop now</a>
 {%- endif -%}
-  <!-- din övriga kod här -->
 
-  <script>
-  document.addEventListener("DOMContentLoaded",function(){
-    const btn = document.getElementById("sticky-cta");
-    if(!btn) return;
-    btn.style.opacity = "0";
-    window.addEventListener("scroll",()=>{
-      if(window.scrollY > 200){ btn.style.opacity="1"; }
-      else { btn.style.opacity="0"; }
-    });
-  });
-  </script>
 
   </body>
 </html>
