@@ -3,6 +3,8 @@
 {%- assign ss = section.settings -%}
 
 {% style %}
+
+
   .section-{{ section.id }}-padding {
     padding-top: {{ section.settings.padding_top | plus: 134 }}px;
     padding-bottom: {{ section.settings.padding_bottom }}px;
@@ -172,7 +174,7 @@
             }
           }
         }
-        <a id="buy-section-{{ product.handle }}"></a>
+        
         .accordion-header::before {
           content: "+";
           color: #000;
@@ -753,6 +755,7 @@
 {%- liquid
   assign description_image_blocks = section.blocks | where: 'type', 'description_image'
 -%}
+<a id="buy-section-{{ product.handle }}"></a>
 <div class="section-{{ section.id }} section-{{ section.id }}-padding product-main__content">
   <div class="container">
     <div class="content tablet mobile">
