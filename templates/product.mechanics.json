@@ -732,6 +732,18 @@
             "caption4": ""
           }
         },
+        "tab_7exJDq": {
+          "type": "tab",
+          "settings": {
+            "title": "Shipping & Delivery",
+            "content": "<p>Dispatch: 12–24 h (Mon–Fri) via UPS Express SaverDelivery:</p><ul><li>USA: 2–3 business days</li><li>Canada: 2–3 business days</li><li>Tracking: E-mailed once shipped</li></ul><p></p><p>From Aug 29, 2025, US orders may be subject to duties & state sales tax.</p><p>Typical example: USD 3–8 on a USD 36 order (+ USD 14 shipping).</p><p>UPS continues direct delivery from Europe to the US without interruption.</p>",
+            "use_additional_section": false,
+            "caption1": "",
+            "caption2": "",
+            "caption3": "",
+            "caption4": ""
+          }
+        },
         "shipping_fQdztH": {
           "type": "shipping",
           "settings": {
@@ -806,6 +818,7 @@
         "tab_fHA3xW",
         "tab_kQFmrq",
         "tab_yHgdG6",
+        "tab_7exJDq",
         "shipping_fQdztH",
         "shipping_f8f7EN",
         "product_image_EjWgdM",
@@ -1762,6 +1775,7 @@
       "blocks": {
         "row_nDYqc9": {
           "type": "row",
+          "disabled": true,
           "settings": {
             "title": "Shipping & Delivery",
             "content": "<p>Dispatch: 12–24 h (Mon–Fri) via UPS Express Saver<br/><br/><strong>Delivery:</strong></p><ul><li>USA: 2–3 business days</li><li>Canada: 2–3 business days<br/>Tracking: E-mailed once shipped</li></ul>",
@@ -1776,6 +1790,7 @@
         },
         "row_D8aqb6": {
           "type": "row",
+          "disabled": true,
           "settings": {
             "title": "Customs & Duties",
             "content": "<ul><li>From Aug 29, 2025, US orders may be subject to duties & state sales tax.</li><li>Typical example: USD 3–8 on a USD 36 order (+ USD 14 shipping).</li><li>UPS continues direct delivery from Europe to the US without interruption.</li></ul>",
@@ -1793,6 +1808,8 @@
         "row_nDYqc9",
         "row_D8aqb6"
       ],
+      "disabled": true,
+      "custom_css": [],
       "name": "Multirows(New)",
       "settings": {
         "special_title": false,
