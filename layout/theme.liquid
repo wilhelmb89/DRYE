@@ -572,16 +572,29 @@ https://cdn1.stamped.io/files/widget.min.js
     }
   </style>
 {% endif %}
-{% if template == 'product' and product.handle == 'drye-performance-glove-liners' %}
+{%- if request.page_type == 'product'
+  and product
+  and product.handle == 'drye-performance-glove-liners' -%}
   <a
     id="sticky-cta"
     class="sticky-cta"
-    href="{{ routes.cart_url }}?add={{ product.variants.first.id }}"
+    href="{{ routes.cart_url }}?add={{ product.selected_or_first_available_variant.id }}"
     aria-label="Shop now"
-  >
-    Shop now
-  </a>
-{% endif %}
+  >Shop now</a>
+{%- endif -%}
+  <!-- din övriga kod här -->
+
+  <script>
+  document.addEventListener("DOMContentLoaded",function(){
+    const btn = document.getElementById("sticky-cta");
+    if(!btn) return;
+    btn.style.opacity = "0";
+    window.addEventListener("scroll",()=>{
+      if(window.scrollY > 200){ btn.style.opacity="1"; }
+      else { btn.style.opacity="0"; }
+    });
+  });
+  </script>
 
   </body>
 </html>
