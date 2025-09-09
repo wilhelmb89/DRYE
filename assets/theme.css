@@ -6083,3 +6083,8 @@ body.template-policy .shopify-policy__body b {
 #buy-section-drye-performance-glove-liners {
   scroll-margin-top: 100px; /* justera efter höjden på din sticky header */
 }
+.rte i, .rte em,
+.product__description i, .product__description em {
+  font-style: italic !important;
+  font-synthesis: style !important;
+}
