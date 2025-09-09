@@ -714,6 +714,7 @@
         "card_wkHyBD",
         "card_8D9UiF"
       ],
+      "disabled": true,
       "name": "Card With Line",
       "settings": {
         "background_color": "#ffffff",
@@ -755,64 +756,6 @@
         "section_bottom_padding_tablet": 80,
         "section_top_padding_mobile": 54,
         "section_bottom_padding_mobile": 120
-      }
-    },
-    "multirows_new_VzQtYE": {
-      "type": "multirows-new",
-      "blocks": {
-        "row_pyUdFx": {
-          "type": "row",
-          "settings": {
-            "title": "It’s not always the latex. Or the cream. It’s the trapped sweat.",
-            "content": "<p>Most glove users think their irritation comes from allergies or the wrong product. Few realize it’s the moisture trapped inside gloves that breaks down the skin barrier — making healing almost impossible when you wear gloves every day.</p>",
-            "button_text": "",
-            "button_url": "",
-            "controls": true,
-            "image": "shopify://shop_images/u9738261378_httpss.mj.run4B5pqP8x_eg_This_close-up_image_show_a9960b3b-8f21-4bae-b297-e9ff9ec350b3_2_1.png",
-            "image_tablet": "shopify://shop_images/u9738261378_httpss.mj.run4B5pqP8x_eg_This_close-up_image_show_a9960b3b-8f21-4bae-b297-e9ff9ec350b3_2_1.png",
-            "image_mobile": "shopify://shop_images/u9738261378_httpss.mj.run4B5pqP8x_eg_This_close-up_image_show_a9960b3b-8f21-4bae-b297-e9ff9ec350b3_2_1.png",
-            "position": "row-reverse"
-          }
-        },
-        "row_QFYJLc": {
-          "type": "row",
-          "settings": {
-            "title": "Two things every glove user wants.",
-            "content": "<p>Every glove user wants two simple things: hands that stay dry, and skin that can heal. But when sweat stays trapped inside gloves, you get the opposite — damp hands, flare-ups, and cracks that never close.</p>",
-            "button_text": "",
-            "button_url": "",
-            "controls": true,
-            "image": "shopify://shop_images/u9738261378_httpss.mj.runvRjgzB98KGs_Main_Subject_Young_Mecha_8c506662-67aa-41ef-941d-d1f76f07cced_0_1.png",
-            "image_tablet": "shopify://shop_images/u9738261378_httpss.mj.runvRjgzB98KGs_Main_Subject_Young_Mecha_8c506662-67aa-41ef-941d-d1f76f07cced_0_1.png",
-            "image_mobile": "shopify://shop_images/u9738261378_httpss.mj.runvRjgzB98KGs_Main_Subject_Young_Mecha_8c506662-67aa-41ef-941d-d1f76f07cced_0_1.png",
-            "position": "row"
-          }
-        }
-      },
-      "block_order": [
-        "row_pyUdFx",
-        "row_QFYJLc"
-      ],
-      "name": "Multirows(New)",
-      "settings": {
-        "special_title": false,
-        "overlap": false,
-        "title": "",
-        "invert": true,
-        "bg": "#111111",
-        "tx": "#ffffff",
-        "sub_title_font_size_desktop": 48,
-        "sub_title_line_height_desktop": 55,
-        "sub_title_font_size_tablet": 34,
-        "sub_title_line_height_tablet": 40,
-        "sub_title_font_size_mobile": 24,
-        "sub_title_line_height_mobile": 30,
-        "sub_body_font_size_desktop": 18,
-        "sub_body_line_height_desktop": 28,
-        "sub_body_font_size_tablet": 18,
-        "sub_body_line_height_tablet": 28,
-        "sub_body_font_size_mobile": 16,
-        "sub_body_line_height_mobile": 24
       }
     },
     "reviews_new_tDwEeQ": {
@@ -919,6 +862,65 @@
         "name_line_height_tablet": 24,
         "name_font_size_mobile": 18,
         "name_line_height_mobile": 24
+      }
+    },
+    "multirows_new_VzQtYE": {
+      "type": "multirows-new",
+      "blocks": {
+        "row_pyUdFx": {
+          "type": "row",
+          "settings": {
+            "title": "It’s not always the latex. Or the cream. It’s the trapped sweat.",
+            "content": "<p>Most glove users think their irritation comes from allergies or the wrong product. Few realize it’s the moisture trapped inside gloves that breaks down the skin barrier — making healing almost impossible when you wear gloves every day.</p>",
+            "button_text": "",
+            "button_url": "",
+            "controls": true,
+            "image": "shopify://shop_images/u9738261378_httpss.mj.run4B5pqP8x_eg_This_close-up_image_show_a9960b3b-8f21-4bae-b297-e9ff9ec350b3_2_1.png",
+            "image_tablet": "shopify://shop_images/u9738261378_httpss.mj.run4B5pqP8x_eg_This_close-up_image_show_a9960b3b-8f21-4bae-b297-e9ff9ec350b3_2_1.png",
+            "image_mobile": "shopify://shop_images/u9738261378_httpss.mj.run4B5pqP8x_eg_This_close-up_image_show_a9960b3b-8f21-4bae-b297-e9ff9ec350b3_2_1.png",
+            "position": "row-reverse"
+          }
+        },
+        "row_QFYJLc": {
+          "type": "row",
+          "settings": {
+            "title": "Two things every glove user wants.",
+            "content": "<p>Every glove user wants two simple things: hands that stay dry, and skin that can heal. But when sweat stays trapped inside gloves, you get the opposite — damp hands, flare-ups, and cracks that never close.</p>",
+            "button_text": "",
+            "button_url": "",
+            "controls": true,
+            "image": "shopify://shop_images/u9738261378_httpss.mj.runvRjgzB98KGs_Main_Subject_Young_Mecha_8c506662-67aa-41ef-941d-d1f76f07cced_0_1.png",
+            "image_tablet": "shopify://shop_images/u9738261378_httpss.mj.runvRjgzB98KGs_Main_Subject_Young_Mecha_8c506662-67aa-41ef-941d-d1f76f07cced_0_1.png",
+            "image_mobile": "shopify://shop_images/u9738261378_httpss.mj.runvRjgzB98KGs_Main_Subject_Young_Mecha_8c506662-67aa-41ef-941d-d1f76f07cced_0_1.png",
+            "position": "row"
+          }
+        }
+      },
+      "block_order": [
+        "row_pyUdFx",
+        "row_QFYJLc"
+      ],
+      "disabled": true,
+      "name": "Multirows(New)",
+      "settings": {
+        "special_title": false,
+        "overlap": false,
+        "title": "",
+        "invert": true,
+        "bg": "#111111",
+        "tx": "#ffffff",
+        "sub_title_font_size_desktop": 48,
+        "sub_title_line_height_desktop": 55,
+        "sub_title_font_size_tablet": 34,
+        "sub_title_line_height_tablet": 40,
+        "sub_title_font_size_mobile": 24,
+        "sub_title_line_height_mobile": 30,
+        "sub_body_font_size_desktop": 18,
+        "sub_body_line_height_desktop": 28,
+        "sub_body_font_size_tablet": 18,
+        "sub_body_line_height_tablet": 28,
+        "sub_body_font_size_mobile": 16,
+        "sub_body_line_height_mobile": 24
       }
     },
     "multirows_new_j4rUDK": {
@@ -1687,8 +1689,8 @@
     "icons_Bt7DUV",
     "table_with_mark_grxHac",
     "card_with_line_nzUcxb",
-    "multirows_new_VzQtYE",
     "reviews_new_tDwEeQ",
+    "multirows_new_VzQtYE",
     "multirows_new_j4rUDK",
     "table_with_mark_xkzqbz",
     "image_slider_c3fHaE",
