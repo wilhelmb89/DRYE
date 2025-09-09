@@ -13,7 +13,7 @@
       "type": "home-hero-new",
       "name": "Homepage Hero(New)",
       "settings": {
-        "title": "Your gloves aren’t the problem. Sweat is",
+        "title": "The Problem Isn't Your Gloves... It's What's Happening Under the Gloves.",
         "cover_image": "shopify://shop_images/v5.png",
         "stars": 5,
         "review_text": "<p>Gloves trap sweat against your hands. That’s what cracks skin, not the glove. DRYE pulls it out so your hands actually get a break.</p>",
@@ -435,27 +435,6 @@
         "section_bottom_padding_mobile": 50
       }
     },
-    "1746812889a5f81d00": {
-      "type": "apps",
-      "blocks": {
-        "stamped_reviews_main_widget_B63yme": {
-          "type": "shopify://apps/stamped-reviews/blocks/main-widget/a103faaf-2125-4b0e-89fa-de5149736723",
-          "settings": {
-            "animation": false,
-            "tags_exclude": "",
-            "tags_include": "",
-            "search": "",
-            "linkify": false,
-            "use_metafields": false,
-            "sku_tagtype": "sku"
-          }
-        }
-      },
-      "block_order": [
-        "stamped_reviews_main_widget_B63yme"
-      ],
-      "settings": {}
-    },
     "icons_Bt7DUV": {
       "type": "icons",
       "blocks": {
@@ -593,6 +572,27 @@
         "mobile_m_top": 110,
         "mobile_m_bottom": 70
       }
+    },
+    "1746812889a5f81d00": {
+      "type": "apps",
+      "blocks": {
+        "stamped_reviews_main_widget_B63yme": {
+          "type": "shopify://apps/stamped-reviews/blocks/main-widget/a103faaf-2125-4b0e-89fa-de5149736723",
+          "settings": {
+            "animation": false,
+            "tags_exclude": "",
+            "tags_include": "",
+            "search": "",
+            "linkify": false,
+            "use_metafields": false,
+            "sku_tagtype": "sku"
+          }
+        }
+      },
+      "block_order": [
+        "stamped_reviews_main_widget_B63yme"
+      ],
+      "settings": {}
     },
     "image_slider_FiCgr8": {
       "type": "image-slider",
