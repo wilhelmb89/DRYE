@@ -507,7 +507,7 @@
             "caption": "",
             "description": "",
             "is_header": true,
-            "cell_height": 72,
+            "cell_height": 26,
             "content_alignment": "center",
             "use_vertical_write_mode": false
           }
@@ -518,7 +518,7 @@
             "caption": "Lifespan",
             "description": "",
             "is_header": true,
-            "cell_height": 72,
+            "cell_height": 26,
             "content_alignment": "center",
             "use_vertical_write_mode": true
           }
@@ -528,8 +528,8 @@
           "settings": {
             "caption": "Pairs per Year",
             "description": "",
-            "is_header": false,
-            "cell_height": 114,
+            "is_header": true,
+            "cell_height": 26,
             "content_alignment": "center",
             "use_vertical_write_mode": true
           }
@@ -539,8 +539,8 @@
           "settings": {
             "caption": "Yearly Cost",
             "description": "",
-            "is_header": false,
-            "cell_height": 114,
+            "is_header": true,
+            "cell_height": 26,
             "content_alignment": "center",
             "use_vertical_write_mode": true
           }
@@ -548,18 +548,18 @@
         "card_atMR4H": {
           "type": "card",
           "settings": {
-            "caption": "Cotton Liners",
+            "caption": "Skin Outcomes",
             "description": "",
-            "is_header": false,
-            "cell_height": 72,
-            "content_alignment": "left",
-            "use_vertical_write_mode": false
+            "is_header": true,
+            "cell_height": 26,
+            "content_alignment": "center",
+            "use_vertical_write_mode": true
           }
         },
         "card_FkCLjH": {
           "type": "card",
           "settings": {
-            "caption": "1–3 days",
+            "caption": "Cotton Liners",
             "description": "",
             "is_header": false,
             "cell_height": 114,
@@ -570,7 +570,7 @@
         "card_e4qahV": {
           "type": "card",
           "settings": {
-            "caption": "150–300+",
+            "caption": "1-3 days",
             "description": "",
             "is_header": true,
             "cell_height": 72,
@@ -581,7 +581,7 @@
         "card_fqKbzA": {
           "type": "card",
           "settings": {
-            "caption": "$100–300",
+            "caption": "150–300+",
             "description": "",
             "is_header": false,
             "cell_height": 72,
@@ -592,29 +592,29 @@
         "card_pFLU3i": {
           "type": "card",
           "settings": {
-            "caption": "DRYE Gloves",
-            "description": "Daily use: Cotton 1–3 days ($0.40–$2), DRYE 4–12 months ($40).",
+            "caption": "$100–300",
+            "description": "",
             "is_header": false,
             "cell_height": 72,
             "content_alignment": "left",
-            "use_vertical_write_mode": false
+            "use_vertical_write_mode": true
           }
         },
         "card_eWAUND": {
           "type": "card",
           "settings": {
-            "caption": "4–12 months",
+            "caption": "Stay damp → sweaty hands, irritation, flare-ups, nails break",
             "description": "",
             "is_header": false,
             "cell_height": 114,
-            "content_alignment": "center",
+            "content_alignment": "left",
             "use_vertical_write_mode": true
           }
         },
         "card_BbKyhF": {
           "type": "card",
           "settings": {
-            "caption": "1–4",
+            "caption": "DRYE Gloves",
             "description": "",
             "is_header": false,
             "cell_height": 114,
@@ -625,7 +625,40 @@
         "card_Uz3xhM": {
           "type": "card",
           "settings": {
+            "caption": "4-12 months",
+            "description": "",
+            "is_header": false,
+            "cell_height": 114,
+            "content_alignment": "center",
+            "use_vertical_write_mode": true
+          }
+        },
+        "card_PFiyqr": {
+          "type": "card",
+          "settings": {
+            "caption": "1-4",
+            "description": "",
+            "is_header": false,
+            "cell_height": 114,
+            "content_alignment": "center",
+            "use_vertical_write_mode": true
+          }
+        },
+        "card_gXVc7h": {
+          "type": "card",
+          "settings": {
             "caption": "$40–160",
+            "description": "",
+            "is_header": false,
+            "cell_height": 114,
+            "content_alignment": "center",
+            "use_vertical_write_mode": true
+          }
+        },
+        "card_a6hRe6": {
+          "type": "card",
+          "settings": {
+            "caption": "Days: noticeably drier hands  Weeks: fewer flare-ups, calmer skin  Months: nails intact, skin barrier restored",
             "description": "",
             "is_header": false,
             "cell_height": 114,
@@ -646,7 +679,10 @@
         "card_pFLU3i",
         "card_eWAUND",
         "card_BbKyhF",
-        "card_Uz3xhM"
+        "card_Uz3xhM",
+        "card_PFiyqr",
+        "card_gXVc7h",
+        "card_a6hRe6"
       ],
       "settings": {
         "background_color": "#ffffff",
@@ -664,24 +700,24 @@
         "line_color": "#e5e5e5",
         "line_height": 1,
         "rows_count": 3,
-        "columns_count": 4,
+        "columns_count": 5,
         "content_flex_gap": 12,
         "icon_size": 32,
         "icon_size_tablet": 4,
-        "icon_size_mobile": 4,
-        "cell_x_padding": 22,
-        "cell_y_padding": 6,
-        "header_cell_x_padding": 0,
-        "header_cell_y_padding": 6,
+        "icon_size_mobile": 20,
+        "cell_x_padding": 36,
+        "cell_y_padding": 38,
+        "header_cell_x_padding": 38,
+        "header_cell_y_padding": 10,
         "use_fit_content_tablet": true,
         "start_column_with_fixed_size_tablet": 4,
-        "cell_width_tablet": 70,
+        "cell_width_tablet": 10,
         "use_fit_content_mobile": true,
-        "start_column_with_fixed_size_mobile": 2,
-        "cell_width_mobile": 44,
-        "cell_height_mobile": 102,
-        "caption_font_size": 24,
-        "caption_line_height": 24,
+        "start_column_with_fixed_size_mobile": 0,
+        "cell_width_mobile": 30,
+        "cell_height_mobile": 96,
+        "caption_font_size": 20,
+        "caption_line_height": 27,
         "caption_font_size_mobile": 16,
         "caption_line_height_mobile": 0,
         "description_font_size": 14,
