@@ -12,6 +12,11 @@
     "product_with_gallery_GRxyix": {
       "type": "product-with-gallery",
       "blocks": {
+        "judge_me_reviews_preview_badge_a4i3Gw": {
+          "type": "shopify://apps/judge-me-reviews/blocks/preview_badge/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
+          "disabled": true,
+          "settings": {}
+        },
         "tab_bQhJVi": {
           "type": "tab",
           "settings": {
@@ -26,15 +31,6 @@
             "caption3": "Proven Wear Resistance",
             "icon4": "shopify://shop_images/hypoallergenic.png",
             "caption4": "Lower Environmental Load"
-          }
-        },
-        "stamped_reviews_star_rating_badge_pYLjae": {
-          "type": "shopify://apps/stamped-reviews/blocks/star-rating-badge/a103faaf-2125-4b0e-89fa-de5149736723",
-          "settings": {
-            "use_metafields": false,
-            "sku_tagtype": "sku",
-            "is_featured_product": false,
-            "featured_product_handle": ""
           }
         },
         "description_image_n4GKMn": {
@@ -250,8 +246,8 @@
         }
       },
       "block_order": [
+        "judge_me_reviews_preview_badge_a4i3Gw",
         "tab_bQhJVi",
-        "stamped_reviews_star_rating_badge_pYLjae",
         "description_image_n4GKMn",
         "tab_BnUVie",
         "tab_Ly7Pf8",
@@ -340,6 +336,22 @@
         "padding_left_mobile": 0,
         "padding_right_mobile": 0
       }
+    },
+    "1757528929d6825944": {
+      "type": "apps",
+      "blocks": {
+        "judge_me_reviews_review_widget_rM4ntf": {
+          "type": "shopify://apps/judge-me-reviews/blocks/review_widget/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
+          "settings": {
+            "review_data": "real_data",
+            "max_width": 1200
+          }
+        }
+      },
+      "block_order": [
+        "judge_me_reviews_review_widget_rM4ntf"
+      ],
+      "settings": {}
     },
     "icons_Bt7DUV": {
       "type": "icons",
@@ -1015,8 +1027,6 @@
         "mobile_m_bottom": 70
       }
     },
-
-    
     "1746812889a5f81d00": {
       "type": "apps",
       "blocks": {
@@ -1592,6 +1602,7 @@
   },
   "order": [
     "product_with_gallery_GRxyix",
+    "1757528929d6825944",
     "icons_Bt7DUV",
     "card_with_line_qEe4fi",
     "table_with_mark_PB8x8n",
