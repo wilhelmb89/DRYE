@@ -12,10 +12,6 @@
     "product_with_gallery_GRxyix": {
       "type": "product-with-gallery",
       "blocks": {
-        "judge_me_reviews_preview_badge_a4i3Gw": {
-          "type": "shopify://apps/judge-me-reviews/blocks/preview_badge/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
-          "settings": {}
-        },
         "tab_bQhJVi": {
           "type": "tab",
           "settings": {
@@ -31,6 +27,10 @@
             "icon4": "shopify://shop_images/hypoallergenic.png",
             "caption4": "Lower Environmental Load"
           }
+        },
+        "judge_me_reviews_preview_badge_GtHcQw": {
+          "type": "shopify://apps/judge-me-reviews/blocks/preview_badge/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
+          "settings": {}
         },
         "description_image_n4GKMn": {
           "type": "description_image",
@@ -245,8 +245,8 @@
         }
       },
       "block_order": [
-        "judge_me_reviews_preview_badge_a4i3Gw",
         "tab_bQhJVi",
+        "judge_me_reviews_preview_badge_GtHcQw",
         "description_image_n4GKMn",
         "tab_BnUVie",
         "tab_Ly7Pf8",
@@ -336,10 +336,10 @@
         "padding_right_mobile": 0
       }
     },
-    "1757528929d6825944": {
+    "175752378583561505": {
       "type": "apps",
       "blocks": {
-        "judge_me_reviews_review_widget_rM4ntf": {
+        "judge_me_reviews_review_widget_fBQebN": {
           "type": "shopify://apps/judge-me-reviews/blocks/review_widget/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
           "settings": {
             "review_data": "real_data",
@@ -348,7 +348,7 @@
         }
       },
       "block_order": [
-        "judge_me_reviews_review_widget_rM4ntf"
+        "judge_me_reviews_review_widget_fBQebN"
       ],
       "settings": {}
     },
@@ -469,7 +469,7 @@
       "name": "Card With Line",
       "settings": {
         "background_color": "#ffffff",
-        "title": "“Every fix ends the same.”",
+        "title": "Why common fixes don't last",
         "title_color": "#000000",
         "title_alignment": "left",
         "title_font_size": 48,
@@ -993,8 +993,8 @@
       "custom_css": [],
       "name": "List with Image(New)",
       "settings": {
-        "image": "shopify://shop_images/Screenshot_24_51c86098-b594-4bcd-877a-70c6086d12c0.png",
-        "title": "\"Within two weeks, my son’s hands were completely healed and back to normal.\" – Debby Fields",
+        "image": "shopify://shop_images/Produktbild_hemsida_4_1.jpg",
+        "title": "",
         "title_font_size_desktop": 34,
         "title_line_height_desktop": 60,
         "title_font_size_small_desktop": 38,
@@ -1020,32 +1020,11 @@
         "content_line_height_mobile": 19,
         "button_text": "Shop now",
         "button_url": "https://drye.se/products/drye-performance-glove-liners#buy-section-drye-performance-glove-liners",
-        "m_top": 155,
+        "m_top": 30,
         "m_bottom": 0,
-        "mobile_m_top": 110,
+        "mobile_m_top": 45,
         "mobile_m_bottom": 70
       }
-    },
-    "1746812889a5f81d00": {
-      "type": "apps",
-      "blocks": {
-        "stamped_reviews_main_widget_B63yme": {
-          "type": "shopify://apps/stamped-reviews/blocks/main-widget/a103faaf-2125-4b0e-89fa-de5149736723",
-          "settings": {
-            "animation": false,
-            "tags_exclude": "",
-            "tags_include": "",
-            "search": "",
-            "linkify": false,
-            "use_metafields": false,
-            "sku_tagtype": "sku"
-          }
-        }
-      },
-      "block_order": [
-        "stamped_reviews_main_widget_B63yme"
-      ],
-      "settings": {}
     },
     "image_slider_FiCgr8": {
       "type": "image-slider",
@@ -1053,7 +1032,7 @@
         "heading_QMVCqJ": {
           "type": "heading",
           "settings": {
-            "heading": "\"Within two weeks, my son’s hands were completely healed and back to normal.\" – Debby Fields",
+            "heading": "",
             "heading_color": "#000000",
             "heading_font_size": 32,
             "heading_line_height": 55,
@@ -1597,11 +1576,28 @@
         "title": "",
         "form_title": ""
       }
+    },
+    "175752144138c3bed1": {
+      "type": "apps",
+      "blocks": {
+        "judge_me_reviews_review_widget_488nAz": {
+          "type": "shopify://apps/judge-me-reviews/blocks/review_widget/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
+          "settings": {
+            "review_data": "sample_data",
+            "max_width": 1200
+          }
+        }
+      },
+      "block_order": [
+        "judge_me_reviews_review_widget_488nAz"
+      ],
+      "disabled": true,
+      "settings": {}
     }
   },
   "order": [
     "product_with_gallery_GRxyix",
-    "1757528929d6825944",
+    "175752378583561505",
     "icons_Bt7DUV",
     "card_with_line_qEe4fi",
     "table_with_mark_PB8x8n",
@@ -1609,7 +1605,6 @@
     "multirows_new_bQbFR7",
     "multirows_new_RkhGE7",
     "list_new_yPYk8b",
-    "1746812889a5f81d00",
     "image_slider_FiCgr8",
     "before_after_BHanzP",
     "multirows_new_Qh4Efr",
@@ -1617,6 +1612,7 @@
     "columns_with_video_ytFpUY",
     "rich_color_text_pbmjNY",
     "1746812877af76f5ce",
-    "main_contact_BPHcyq"
+    "main_contact_BPHcyq",
+    "175752144138c3bed1"
   ]
 }
