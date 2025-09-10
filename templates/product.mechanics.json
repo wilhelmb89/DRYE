@@ -12,6 +12,10 @@
     "product_with_gallery_GRxyix": {
       "type": "product-with-gallery",
       "blocks": {
+        "judge_me_reviews_preview_badge_GtHcQw": {
+          "type": "shopify://apps/judge-me-reviews/blocks/preview_badge/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
+          "settings": {}
+        },
         "tab_bQhJVi": {
           "type": "tab",
           "settings": {
@@ -27,10 +31,6 @@
             "icon4": "shopify://shop_images/hypoallergenic.png",
             "caption4": "Lower Environmental Load"
           }
-        },
-        "judge_me_reviews_preview_badge_GtHcQw": {
-          "type": "shopify://apps/judge-me-reviews/blocks/preview_badge/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
-          "settings": {}
         },
         "description_image_n4GKMn": {
           "type": "description_image",
@@ -245,8 +245,8 @@
         }
       },
       "block_order": [
-        "tab_bQhJVi",
         "judge_me_reviews_preview_badge_GtHcQw",
+        "tab_bQhJVi",
         "description_image_n4GKMn",
         "tab_BnUVie",
         "tab_Ly7Pf8",
