@@ -325,6 +325,22 @@ https://cdn1.stamped.io/files/widget.min.js
   // ====== HELPERS ======
   function safeJSON(v, def=null){ try{ return JSON.parse(v); }catch{ return def; } }
 
+  // [TW FIX] Cookie utils for handover
+  function setCookie(name, value, maxAgeSec) {
+    try {
+      document.cookie = `${name}=${encodeURIComponent(value)};path=/;max-age=${maxAgeSec}`;
+    } catch {}
+  }
+  function getCookie(name) {
+    try {
+      const m = document.cookie.match(new RegExp('(?:^|; )' + name.replace(/([$?*|{}\[\]\\\/\+^])/g,'\\$1') + '=([^;]*)'));
+      return m ? decodeURIComponent(m[1]) : null;
+    } catch { return null; }
+  }
+  function delCookie(name) {
+    try { document.cookie = `${name}=;path=/;max-age=0`; } catch {}
+  }
+
   // TriplePixel invoker: поддерживаем функцию ИЛИ объект с .track()
   function tpAvailable() {
     return (typeof window.TriplePixel === 'function') ||
