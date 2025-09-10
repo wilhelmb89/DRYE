@@ -265,23 +265,37 @@
 
   {%- if section.blocks.size > 0 -%}
     <div class="sliders">
-      {%- for block in section.blocks -%}
-        <div class="before-after-slider" {{ block.shopify_attributes }}>
-          {%- if block.settings.image_before != blank and block.settings.image_after != blank -%}
-            <div class="before-image">
-              {{ block.settings.image_before | image_url: width: 1000 | image_tag: loading: 'lazy' }}
-            </div>
-            <div class="after-image">
-              {{ block.settings.image_after  | image_url: width: 1000 | image_tag: loading: 'lazy' }}
-            </div>
-            <div class="resizer">
-              <div class="resizer-trigger">
-                {%- render 'icon', type: 'two-carets' -%}
-              </div>
-            </div>
-          {%- endif -%}
+  {%- for block in section.blocks -%}
+  <div class="ba-item" {{ block.shopify_attributes }}>
+    <div class="before-after-slider">
+      {%- if block.settings.image_before != blank and block.settings.image_after != blank -%}
+        <div class="before-image">
+          {{ block.settings.image_before | image_url: width: 1000 | image_tag: loading: 'lazy' }}
         </div>
-      {%- endfor -%}
+        <div class="after-image">
+          {{ block.settings.image_after  | image_url: width: 1000 | image_tag: loading: 'lazy' }}
+        </div>
+        <div class="resizer">
+          <div class="resizer-trigger">
+            {%- render 'icon', type: 'two-carets' -%}
+          </div>
+        </div>
+      {%- endif -%}
+    </div>
+
+    {%- if block.settings.caption_title or block.settings.caption_text -%}
+      <div class="ba-caption">
+        {%- if block.settings.caption_title != blank -%}
+          <h3 class="ba-caption__title">{{ block.settings.caption_title }}</h3>
+        {%- endif -%}
+        {%- if block.settings.caption_text != blank -%}
+          <div class="ba-caption__text rte">{{ block.settings.caption_text }}</div>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+  </div>
+{%- endfor -%}
+
     </div>
   {%- endif -%}
 </div>
