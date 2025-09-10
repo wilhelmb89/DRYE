@@ -442,50 +442,6 @@
       ],
       "settings": {}
     },
-    "multirows_new_zTefYA": {
-      "type": "multirows-new",
-      "blocks": {
-        "row_LYwDVm": {
-          "type": "row",
-          "settings": {
-            "title": "",
-            "content": "<p>Moisture-Associated Skin Damage (MASD) is what happens when sweat gets trapped under gloves. The skin barrier stays wet, irritation builds, and cracks can’t close. That’s why creams, powders, and liners that just soak it up never solve the problem.<br/><br/><strong>SkinDRYE™ is built to stop MASD at the source:</strong><br/>→ Draws moisture off the skin<br/>→ Moves it outward through a fiber gradient<br/>→ Lets it evaporate before it breaks your skin</p>",
-            "button_text": "",
-            "button_url": "",
-            "video": "shopify://files/videos/Textilvideo 20250819_1.mp4",
-            "controls": true,
-            "position": "row"
-          }
-        }
-      },
-      "block_order": [
-        "row_LYwDVm"
-      ],
-      "custom_css": [
-        "{padding-top: 90px !important; padding-bottom: 90px !important; margin-top: 0 !important; margin-bottom: 0 !important;}"
-      ],
-      "name": "Multirows(New)",
-      "settings": {
-        "special_title": false,
-        "overlap": false,
-        "title": "MASD: The hidden reason your hands never recover",
-        "invert": true,
-        "bg": "#ffffff",
-        "tx": "#111111",
-        "sub_title_font_size_desktop": 48,
-        "sub_title_line_height_desktop": 55,
-        "sub_title_font_size_tablet": 34,
-        "sub_title_line_height_tablet": 40,
-        "sub_title_font_size_mobile": 24,
-        "sub_title_line_height_mobile": 30,
-        "sub_body_font_size_desktop": 18,
-        "sub_body_line_height_desktop": 28,
-        "sub_body_font_size_tablet": 18,
-        "sub_body_line_height_tablet": 28,
-        "sub_body_font_size_mobile": 16,
-        "sub_body_line_height_mobile": 24
-      }
-    },
     "table_with_mark_grxHac": {
       "type": "table-with-mark",
       "blocks": {
@@ -683,6 +639,50 @@
         "section_bottom_padding_tablet": 0,
         "section_top_padding_mobile": 50,
         "section_bottom_padding_mobile": 50
+      }
+    },
+    "multirows_new_zTefYA": {
+      "type": "multirows-new",
+      "blocks": {
+        "row_LYwDVm": {
+          "type": "row",
+          "settings": {
+            "title": "",
+            "content": "<p>Moisture-Associated Skin Damage (MASD) is what happens when sweat gets trapped under gloves. The skin barrier stays wet, irritation builds, and cracks can’t close. That’s why creams, powders, and liners that just soak it up never solve the problem.<br/><br/><strong>SkinDRYE™ is built to stop MASD at the source:</strong><br/>→ Draws moisture off the skin<br/>→ Moves it outward through a fiber gradient<br/>→ Lets it evaporate before it breaks your skin</p>",
+            "button_text": "",
+            "button_url": "",
+            "video": "shopify://files/videos/Textilvideo 20250819_1.mp4",
+            "controls": true,
+            "position": "row"
+          }
+        }
+      },
+      "block_order": [
+        "row_LYwDVm"
+      ],
+      "custom_css": [
+        "{padding-top: 90px !important; padding-bottom: 90px !important; margin-top: 0 !important; margin-bottom: 0 !important;}"
+      ],
+      "name": "Multirows(New)",
+      "settings": {
+        "special_title": false,
+        "overlap": false,
+        "title": "MASD: The hidden reason your hands never recover",
+        "invert": true,
+        "bg": "#111111",
+        "tx": "#ffffff",
+        "sub_title_font_size_desktop": 48,
+        "sub_title_line_height_desktop": 55,
+        "sub_title_font_size_tablet": 34,
+        "sub_title_line_height_tablet": 40,
+        "sub_title_font_size_mobile": 24,
+        "sub_title_line_height_mobile": 30,
+        "sub_body_font_size_desktop": 18,
+        "sub_body_line_height_desktop": 28,
+        "sub_body_font_size_tablet": 18,
+        "sub_body_line_height_tablet": 28,
+        "sub_body_font_size_mobile": 16,
+        "sub_body_line_height_mobile": 24
       }
     },
     "card_with_line_nzUcxb": {
@@ -995,6 +995,49 @@
         "sub_body_font_size_mobile": 16,
         "sub_body_line_height_mobile": 24
       }
+    },
+    "17575326022e55c4d5": {
+      "type": "apps",
+      "blocks": {
+        "judge_me_reviews_testimonials_carousel_Kyr7i4": {
+          "type": "shopify://apps/judge-me-reviews/blocks/testimonials_carousel/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
+          "settings": {
+            "show_sample_reviews": false,
+            "reviews_selection": "product_reviews",
+            "products": [
+              "products-moisture-wicking-glove-liners-for-sensitive-skin",
+              "drye-liner-stops-sweat-from-getting-trapped",
+              "drye-performance-glove-liners"
+            ],
+            "star_rating": "all",
+            "max_reviews": 20,
+            "quote_marks_size": "small",
+            "product_name_text_size": "hidden",
+            "verified_badge_style": "icon",
+            "card_height": "extra_tall",
+            "text_size": "small",
+            "stars_size": "medium",
+            "arrows_position": "bottom",
+            "max_width": 1100,
+            "corner_styling": "soft",
+            "quote_marks_style": "serif",
+            "card_color": "#ffffff",
+            "stars_and_quote_marks_color": "#108474",
+            "text_color": "#000000",
+            "arrows_color": "#000000",
+            "show_border": false,
+            "border_color": "#108474",
+            "show_drop_shadow": false,
+            "transition_speed": 5,
+            "header_text": "",
+            "show_average_rating": true
+          }
+        }
+      },
+      "block_order": [
+        "judge_me_reviews_testimonials_carousel_Kyr7i4"
+      ],
+      "settings": {}
     },
     "table_with_mark_xkzqbz": {
       "type": "table-with-mark",
@@ -1374,49 +1417,6 @@
         "padding_bottom_mobile": 40
       }
     },
-    "17575326022e55c4d5": {
-      "type": "apps",
-      "blocks": {
-        "judge_me_reviews_testimonials_carousel_Kyr7i4": {
-          "type": "shopify://apps/judge-me-reviews/blocks/testimonials_carousel/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
-          "settings": {
-            "show_sample_reviews": false,
-            "reviews_selection": "product_reviews",
-            "products": [
-              "products-moisture-wicking-glove-liners-for-sensitive-skin",
-              "drye-liner-stops-sweat-from-getting-trapped",
-              "drye-performance-glove-liners"
-            ],
-            "star_rating": "all",
-            "max_reviews": 20,
-            "quote_marks_size": "small",
-            "product_name_text_size": "hidden",
-            "verified_badge_style": "icon",
-            "card_height": "extra_tall",
-            "text_size": "extra_small",
-            "stars_size": "medium",
-            "arrows_position": "bottom",
-            "max_width": 1100,
-            "corner_styling": "soft",
-            "quote_marks_style": "serif",
-            "card_color": "#ffffff",
-            "stars_and_quote_marks_color": "#108474",
-            "text_color": "#000000",
-            "arrows_color": "#000000",
-            "show_border": false,
-            "border_color": "#108474",
-            "show_drop_shadow": false,
-            "transition_speed": 5,
-            "header_text": "",
-            "show_average_rating": true
-          }
-        }
-      },
-      "block_order": [
-        "judge_me_reviews_testimonials_carousel_Kyr7i4"
-      ],
-      "settings": {}
-    },
     "before_after_GfwT4F": {
       "type": "before-after",
       "blocks": {
@@ -1625,15 +1625,15 @@
     "product_with_gallery_GRxyix",
     "icons_Bt7DUV",
     "1757532575b3bfeb1a",
-    "multirows_new_zTefYA",
     "table_with_mark_grxHac",
+    "multirows_new_zTefYA",
     "card_with_line_nzUcxb",
     "reviews_new_tDwEeQ",
     "multirows_new_VzQtYE",
     "multirows_new_j4rUDK",
+    "17575326022e55c4d5",
     "table_with_mark_xkzqbz",
     "image_slider_c3fHaE",
-    "17575326022e55c4d5",
     "before_after_GfwT4F",
     "columns_with_video_kRmqXB",
     "faq_9EETYf"
