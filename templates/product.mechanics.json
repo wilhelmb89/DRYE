@@ -28,8 +28,13 @@
             "caption4": "Lower Environmental Load"
           }
         },
+        "judge_me_reviews_preview_badge_GtHcQw": {
+          "type": "shopify://apps/judge-me-reviews/blocks/preview_badge/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
+          "settings": {}
+        },
         "stamped_reviews_star_rating_badge_pYLjae": {
           "type": "shopify://apps/stamped-reviews/blocks/star-rating-badge/a103faaf-2125-4b0e-89fa-de5149736723",
+          "disabled": true,
           "settings": {
             "use_metafields": false,
             "sku_tagtype": "sku",
@@ -251,6 +256,7 @@
       },
       "block_order": [
         "tab_bQhJVi",
+        "judge_me_reviews_preview_badge_GtHcQw",
         "stamped_reviews_star_rating_badge_pYLjae",
         "description_image_n4GKMn",
         "tab_BnUVie",
@@ -1015,24 +1021,19 @@
         "mobile_m_bottom": 70
       }
     },
-    "1746812889a5f81d00": {
+    "175752378583561505": {
       "type": "apps",
       "blocks": {
-        "stamped_reviews_main_widget_B63yme": {
-          "type": "shopify://apps/stamped-reviews/blocks/main-widget/a103faaf-2125-4b0e-89fa-de5149736723",
+        "judge_me_reviews_review_widget_fBQebN": {
+          "type": "shopify://apps/judge-me-reviews/blocks/review_widget/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
           "settings": {
-            "animation": false,
-            "tags_exclude": "",
-            "tags_include": "",
-            "search": "",
-            "linkify": false,
-            "use_metafields": false,
-            "sku_tagtype": "sku"
+            "review_data": "real_data",
+            "max_width": 850
           }
         }
       },
       "block_order": [
-        "stamped_reviews_main_widget_B63yme"
+        "judge_me_reviews_review_widget_fBQebN"
       ],
       "settings": {}
     },
@@ -1614,7 +1615,7 @@
     "multirows_new_bQbFR7",
     "multirows_new_RkhGE7",
     "list_new_yPYk8b",
-    "1746812889a5f81d00",
+    "175752378583561505",
     "image_slider_FiCgr8",
     "before_after_BHanzP",
     "multirows_new_Qh4Efr",
