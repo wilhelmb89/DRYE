@@ -307,11 +307,12 @@ https://cdn1.stamped.io/files/widget.min.js
   if (window.__TW_ATC_INTERCEPTOR__) return;
   window.__TW_ATC_INTERCEPTOR__ = true;
 
-  // CONFIG
-  const LOG             = true;
-  const DEDUP_WINDOW_MS = 5000;
-  const PIXEL_MAX_WAIT  = 20000;
-  const SHOW_DEBUG_UI   = /[?&]twdebug=1/i.test(location.search);
+  // ====== CONFIG ======
+  const LOG               = true;
+  const DEDUP_WINDOW_MS   = 5000;
+  const PIXEL_MAX_WAIT    = 60000; // было 20s — мало для мобилок/GTM
+  const FLUSH_INTERVAL_MS = 200;
+  const SHOW_DEBUG_UI     = /[?&]twdebug=1/i.test(location.search);
 
   const PFX='[TW ATC]';
   const log = {
@@ -321,9 +322,33 @@ https://cdn1.stamped.io/files/widget.min.js
     error: (...a)=>{ if(LOG) try{console.error(PFX,...a)}catch{} },
   };
 
-  // TriplePixel READY + QUEUE
-  const ready = () => typeof window.TriplePixel === 'function';
-  const queue = []; let waiter=null, waitStart=0;
+  // ====== HELPERS ======
+  function safeJSON(v, def=null){ try{ return JSON.parse(v); }catch{ return def; } }
+
+  // TriplePixel invoker: поддерживаем функцию ИЛИ объект с .track()
+  function tpAvailable() {
+    return (typeof window.TriplePixel === 'function') ||
+           (window.TriplePixel && typeof window.TriplePixel.track === 'function');
+  }
+  function tpInvoke(name, payload) {
+    try {
+      if (typeof window.TriplePixel === 'function') {
+        window.TriplePixel(name, payload);
+        return true;
+      }
+      if (window.TriplePixel && typeof window.TriplePixel.track === 'function') {
+        window.TriplePixel.track(name, payload);
+        return true;
+      }
+    } catch(e) {
+      log.error('TriplePixel invoke threw', e);
+    }
+    return false;
+  }
+
+  // Очередь + флаш
+  const queue = [];
+  let waiter = null, waitStart = 0, flushedOnce = false;
 
   function debugPanelInit(){
     if (!SHOW_DEBUG_UI || document.getElementById('tw-debug')) return;
@@ -345,34 +370,78 @@ https://cdn1.stamped.io/files/widget.min.js
     logBox.prepend(row);
   }
 
-  function flushQueue(){
-    if (!ready()) return;
+  function startWaiterIfNeeded() {
+    if (waiter) return;
+    waitStart = Date.now();
+    waiter = setInterval(() => {
+      if (tpAvailable()) {
+        flushQueue();
+        return;
+      }
+      if (Date.now() - waitStart > PIXEL_MAX_WAIT) {
+        log.warn('TriplePixel not ready; giving up queue flush (timeout)');
+        stopWaiter();
+        // Последняя попытка — прокинуть в dataLayer; GTM может поймать позже
+        drainToDataLayer();
+      }
+    }, FLUSH_INTERVAL_MS);
+  }
+  function stopWaiter(){
+    if (waiter) { clearInterval(waiter); waiter=null; }
+  }
+  function flushQueue(force=false){
+    if (!force && !tpAvailable()) return;
     while (queue.length){
       const { name, payload } = queue.shift();
-      try { window.TriplePixel(name, payload); debugPush({ dir:'→', name, payload, note:'flushed' }); log.info('Sent', name, payload); }
-      catch (e) { log.error('TriplePixel threw', e); }
+      const ok = tpInvoke(name, payload);
+      if (ok){
+        debugPush({ dir:'→', name, payload, note:'flushed' });
+        log.info('Sent', name, payload);
+      } else {
+        // Если не получилось — возвращаем в начало и прерываем,
+        // чтобы не крутить бесконечно
+        queue.unshift({ name, payload });
+        break;
+      }
     }
-    if (waiter){ clearInterval(waiter); waiter=null; }
+    if (queue.length === 0) { stopWaiter(); flushedOnce = true; }
   }
-
   function sendPixel(name, payload){
-    if (ready()){
-      try { window.TriplePixel(name, payload); debugPush({ dir:'→', name, payload }); log.info('Sent', name, payload); }
-      catch (e) { log.error('TriplePixel threw', e); }
-      return;
+    if (tpAvailable()){
+      if (tpInvoke(name, payload)) {
+        debugPush({ dir:'→', name, payload });
+        log.info('Sent', name, payload);
+        return;
+      }
     }
     queue.push({ name, payload });
     debugPush({ dir:'Q', name, payload, note:'queued' });
-    if (!waiter){
-      waitStart = Date.now();
-      waiter = setInterval(() => {
-        if (ready() || Date.now() - waitStart > PIXEL_MAX_WAIT){
-          if (!ready()) log.warn('TriplePixel not ready; giving up queue flush');
-          flushQueue();
-        }
-      }, 150);
+    startWaiterIfNeeded();
+  }
+
+  // Последняя страховка: прокинем очередь в dataLayer,
+  // чтобы уже загруженный позже GTM/Tag может это подхватить
+  function drainToDataLayer(){
+    if (!window.dataLayer) window.dataLayer = [];
+    while (queue.length){
+      const { name, payload } = queue.shift();
+      window.dataLayer.push({ event: 'tw_fallback_event', tw_name: name, tw_payload: payload, tw_ts: Date.now() });
+      debugPush({ dir:'DL', name, payload, note:'dataLayer fallback' });
+      log.info('Pushed to dataLayer fallback', name, payload);
     }
   }
+
+  // Хуки для «позднего» появления пикселя на мобилках:
+  // — когда страница вернулась на передний план
+  // — когда fires кастомное событие
+  window.addEventListener('visibilitychange', () => {
+    if (document.visibilityState === 'visible') {
+      if (queue.length) flushQueue(tpAvailable());
+    }
+  });
+  window.addEventListener('pageshow', () => { if (queue.length) flushQueue(tpAvailable()); });
+  window.addEventListener('focus', () => { if (queue.length) flushQueue(tpAvailable()); });
+  window.addEventListener('triplepixel:ready', () => flushQueue(true));
 
   // CART TOKEN (lazy)
   let CART_TOKEN=null;
@@ -421,15 +490,13 @@ https://cdn1.stamped.io/files/widget.min.js
         if (id) return [{ variantId:String(id), quantity:q }];
       }
       if (typeof body==='string'){
-        try{
-          const data=JSON.parse(body);
-          if (Array.isArray(data?.items)){
-            return data.items.map(it=>({ variantId:String(it.id||it.variant_id), quantity:parseInt(it.quantity||1,10)||1 })).filter(x=>x.variantId && x.variantId!=='NaN');
-          }
-          if (data && (data.id||data.variant_id)){
-            return [{ variantId:String(data.id||data.variant_id), quantity:parseInt(data.quantity||1,10)||1 }];
-          }
-        }catch{}
+        const data = safeJSON(body);
+        if (Array.isArray(data?.items)){
+          return data.items.map(it=>({ variantId:String(it.id||it.variant_id), quantity:parseInt(it.quantity||1,10)||1 })).filter(x=>x.variantId && x.variantId!=='NaN');
+        }
+        if (data && (data.id||data.variant_id)){
+          return [{ variantId:String(data.id||data.variant_id), quantity:parseInt(data.quantity||1,10)||1 }];
+        }
       }
     }catch(e){ log.warn('parseItemsFromBody error', e); }
     return [];
@@ -465,7 +532,14 @@ https://cdn1.stamped.io/files/widget.min.js
     if (isDup(productId, variantId, q)) { log.debug('dedup skip', { productId, variantId, q }); return; }
     const payload = { item:String(productId), v:String(variantId), q };
     const token = await getCartToken(); if (token) payload.token = token;
+
+    // Основная отправка
     sendPixel('AddToCart', payload);
+
+    // Дублирование в dataLayer как страховка (GTM подхватит если TW приедет позже)
+    if (window.dataLayer) {
+      window.dataLayer.push({ event: 'tw_atc', tw_payload: payload, tw_ts: Date.now() });
+    }
   }
 
   // FETCH PATCH
@@ -481,6 +555,7 @@ https://cdn1.stamped.io/files/widget.min.js
       if (b instanceof FormData){ reqClone = new FormData(); for (const [k,v] of b.entries()) reqClone.append(k,v); }
       else if (b instanceof URLSearchParams){ reqClone = new URLSearchParams(b.toString()); }
       else if (typeof b === 'string'){ reqClone = String(b); }
+      else if (typeof b === 'object' && b){ reqClone = JSON.stringify(b); }
     }
 
     const resp = await _fetch.apply(this, arguments);
@@ -493,7 +568,7 @@ https://cdn1.stamped.io/files/widget.min.js
         if (rows.length){
           for (const row of rows){ await emitATC(row.product_id, row.variant_id, row.quantity); }
         } else if (reqClone){
-          const items = parseItemsFromBody(reqClone);
+          const items = parseItemsFromBody(reqClone instanceof String ? String(reqClone) : reqClone);
           for (const it of items){
             const pid = await resolveProductId(it.variantId);
             if (pid) await emitATC(pid, it.variantId, it.quantity);
@@ -529,7 +604,7 @@ https://cdn1.stamped.io/files/widget.min.js
   }
   window.XMLHttpRequest = PatchedXHR;
 
-  // SUBMIT PREVIEW
+  // SUBMIT PREVIEW (для debug UI)
   document.addEventListener('submit', async (evt)=>{
     const form = evt.target?.closest("form[action*='/cart/add']");
     if (!form || !SHOW_DEBUG_UI) return;
@@ -543,9 +618,10 @@ https://cdn1.stamped.io/files/widget.min.js
     } catch(e){ log.warn('submit preview error', e); }
   }, true);
 
-  log.info('TW AddToCart interceptor installed');
+  log.info('TW AddToCart interceptor installed (mobile-safe)');
 })();
 </script>
+
 
 
 
