@@ -381,7 +381,6 @@ https://cdn1.stamped.io/files/widget.min.js
       if (Date.now() - waitStart > PIXEL_MAX_WAIT) {
         log.warn('TriplePixel not ready; giving up queue flush (timeout)');
         stopWaiter();
-        // Последняя попытка — прокинуть в dataLayer; GTM может поймать позже
         drainToDataLayer();
       }
     }, FLUSH_INTERVAL_MS);
@@ -398,8 +397,6 @@ https://cdn1.stamped.io/files/widget.min.js
         debugPush({ dir:'→', name, payload, note:'flushed' });
         log.info('Sent', name, payload);
       } else {
-        // Если не получилось — возвращаем в начало и прерываем,
-        // чтобы не крутить бесконечно
         queue.unshift({ name, payload });
         break;
       }
@@ -419,8 +416,6 @@ https://cdn1.stamped.io/files/widget.min.js
     startWaiterIfNeeded();
   }
 
-  // Последняя страховка: прокинем очередь в dataLayer,
-  // чтобы уже загруженный позже GTM/Tag может это подхватить
   function drainToDataLayer(){
     if (!window.dataLayer) window.dataLayer = [];
     while (queue.length){
@@ -431,9 +426,6 @@ https://cdn1.stamped.io/files/widget.min.js
     }
   }
 
-  // Хуки для «позднего» появления пикселя на мобилках:
-  // — когда страница вернулась на передний план
-  // — когда fires кастомное событие
   window.addEventListener('visibilitychange', () => {
     if (document.visibilityState === 'visible') {
       if (queue.length) flushQueue(tpAvailable());
@@ -454,12 +446,9 @@ async function getCartToken(){
     let raw = cart?.token || null;
     if (!raw) return (CART_TOKEN = null);
 
-    // приводи токен к «чистой» форме: без ?key=..., пробелов и т.п.
     raw = String(raw).split('?')[0].trim();
-    // иногда токен попадает в виде URL — на всякий
-    // выдернем только "хэш"-часть (без слэшей и домена)
-    raw = raw.replace(/^[a-z]+:\/\/[^/]+\/?/i, ''); // уберёт протокол+домен, если вдруг
-    raw = raw.replace(/[^a-z0-9_-]/gi, '');        // оставим только допустимые символы
+    raw = raw.replace(/^[a-z]+:\/\/[^/]+\/?/i, '');
+    raw = raw.replace(/[^a-z0-9_-]/gi, '');
     return (CART_TOKEN = (raw || null));
   } catch {
     return (CART_TOKEN = null);
@@ -541,19 +530,16 @@ async function getCartToken(){
   if (!productId || !variantId) return;
   const q = parseInt(quantity||1,10)||1;
 
-  // твоя дедупликация (оставь как у тебя)
   if (typeof isDup === 'function' && isDup(productId, variantId, q)) return;
 
   const payload = { item:String(productId), v:String(variantId), q };
   const token = await getCartToken();
-  if (token) payload.token = token;       // теперь ТОЛЬКО чистый токен
+  if (token) payload.token = token;
 
-  // отправка в Triple Whale (через твой sendPixel)
   if (typeof sendPixel === 'function') {
     sendPixel('AddToCart', payload);
   } else if (window.TriplePixel) {
     try {
-      // поддержка и функции, и .track()
       if (typeof window.TriplePixel === 'function') {
         window.TriplePixel('AddToCart', payload);
       } else if (typeof window.TriplePixel.track === 'function') {
@@ -562,7 +548,6 @@ async function getCartToken(){
     } catch(e){ /* no-op */ }
   }
 
-  // дублируем в dataLayer — GTM подхватит, если TW подгрузится позже
   window.dataLayer = window.dataLayer || [];
   window.dataLayer.push({
     event: 'tw_atc',
