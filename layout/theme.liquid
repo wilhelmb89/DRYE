@@ -444,16 +444,27 @@ https://cdn1.stamped.io/files/widget.min.js
   window.addEventListener('triplepixel:ready', () => flushQueue(true));
 
   // CART TOKEN (lazy)
-  let CART_TOKEN=null;
-  async function getCartToken(){
-    if (CART_TOKEN !== null) return CART_TOKEN;
-    try{
-      const r = await fetch('/cart.js', { credentials:'same-origin', cache:'no-store' });
-      if (!r.ok) return (CART_TOKEN = null);
-      const cart = await r.json();
-      return (CART_TOKEN = cart?.token || null);
-    } catch { return (CART_TOKEN = null); }
+  let CART_TOKEN = null;
+async function getCartToken(){
+  if (CART_TOKEN !== null) return CART_TOKEN;
+  try{
+    const r = await fetch('/cart.js', { credentials:'same-origin', cache:'no-store' });
+    if (!r.ok) return (CART_TOKEN = null);
+    const cart = await r.json();
+    let raw = cart?.token || null;
+    if (!raw) return (CART_TOKEN = null);
+
+    // приводи токен к «чистой» форме: без ?key=..., пробелов и т.п.
+    raw = String(raw).split('?')[0].trim();
+    // иногда токен попадает в виде URL — на всякий
+    // выдернем только "хэш"-часть (без слэшей и домена)
+    raw = raw.replace(/^[a-z]+:\/\/[^/]+\/?/i, ''); // уберёт протокол+домен, если вдруг
+    raw = raw.replace(/[^a-z0-9_-]/gi, '');        // оставим только допустимые символы
+    return (CART_TOKEN = (raw || null));
+  } catch {
+    return (CART_TOKEN = null);
   }
+}
 
   // DEDUP
   const fpTimes = new Map();
