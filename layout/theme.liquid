@@ -310,7 +310,7 @@ https://cdn1.stamped.io/files/widget.min.js
   // ====== CONFIG ======
   const LOG               = true;
   const DEDUP_WINDOW_MS   = 5000;
-  const PIXEL_MAX_WAIT    = 60000; // было 20s — мало для мобилок/GTM
+  const PIXEL_MAX_WAIT    = 60000;
   const FLUSH_INTERVAL_MS = 200;
   const SHOW_DEBUG_UI     = /[?&]twdebug=1/i.test(location.search);
 
@@ -327,7 +327,6 @@ https://cdn1.stamped.io/files/widget.min.js
 
   
 
-  // TriplePixel invoker: поддерживаем функцию ИЛИ объект с .track()
   function tpAvailable() {
     return (typeof window.TriplePixel === 'function') ||
            (window.TriplePixel && typeof window.TriplePixel.track === 'function');
@@ -348,7 +347,6 @@ https://cdn1.stamped.io/files/widget.min.js
     return false;
   }
 
-  // Очередь + флаш
   const queue = [];
   let waiter = null, waitStart = 0, flushedOnce = false;
 
@@ -516,9 +514,8 @@ async function getCartToken(){
         if (id) return [{ variantId:String(id), quantity:q }];
       }
 
-      // 3) Строка: сначала пробуем JSON, потом urlencoded
       if (typeof body==='string'){
-        // 3a) JSON
+        // JSON
         const data = safeJSON(body);
         if (data){
           if (Array.isArray(data?.items)){
@@ -534,7 +531,6 @@ async function getCartToken(){
         // 3b) URL-encoded: id=...&quantity=... или items[0][id]=...
         try{
           const usp = new URLSearchParams(body);
-          // Проверим, реально ли там были пары
           let hasAny=false; for (const _ of usp) { hasAny=true; break; }
           if (hasAny){
             const idxs = new Set();
@@ -558,7 +554,7 @@ async function getCartToken(){
         } catch(_) { /* ignore */ }
       }
 
-      // 4) Простой объект: {items:[{id,quantity}]} или {id,quantity}
+      // 4) {items:[{id,quantity}]} или {id,quantity}
       if (body && typeof body==='object'){
         if (Array.isArray(body.items)){
           return body.items
