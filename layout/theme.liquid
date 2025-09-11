@@ -515,9 +515,8 @@ https://cdn1.stamped.io/files/widget.min.js
     window.dataLayer.push({ event: 'tw_atc', tw_payload: payload, tw_ts: Date.now() });
   }
 
-  // ===== [TW FIX v2] Надёжный handover для НЕ-AJAX сабмитов с поддержкой MULTI-ITEM =====
+  // ===== [TW FIX v2] =====
 
-  // (A) На submit формы /cart/add сохраняем ВСЕ items из формы (items[*][id], id, и т.п.) в cookie
   document.addEventListener('submit', (evt) => {
     const form = evt.target?.closest("form[action*='/cart/add']");
     if (!form) return;
@@ -528,7 +527,6 @@ https://cdn1.stamped.io/files/widget.min.js
       items = parseItemsFromBody(fd);
     } catch {}
 
-    // fallback на одиночный id/quantity, если парсер ничего не нашёл
     if (!items.length) {
       const idInput = form.querySelector('input[name="id"], select[name="id"]');
       const radios  = form.querySelector('input[type="radio"][name="id"]:checked');
@@ -543,17 +541,15 @@ https://cdn1.stamped.io/files/widget.min.js
     }
   }, true);
 
-  // (B) На следующей загрузке страницы читаем cookie и шлём AddToCart по каждому варианту
   async function processPendingATC(){
     const rawV2 = getCookie('tw_atc_pending_v2');
-    const rawV1 = getCookie('tw_atc_pending'); // старый формат — для обратной совместимости
+    const rawV1 = getCookie('tw_atc_pending');
     let data = safeJSON(rawV2) || safeJSON(rawV1);
     if (!data) return;
 
     const ts = Number(data.ts || 0);
     if (!ts || Date.now() - ts > 5*60*1000) { delCookie('tw_atc_pending_v2'); delCookie('tw_atc_pending'); return; }
 
-    // унифицируем массив позиций
     const arr = Array.isArray(data.items) ? data.items
               : (data.v ? [{ variantId: String(data.v), quantity: Number(data.q||1)||1 }] : []);
 
@@ -566,13 +562,11 @@ https://cdn1.stamped.io/files/widget.min.js
     }
     delCookie('tw_atc_pending_v2'); delCookie('tw_atc_pending');
   }
-  // запускаем чуть пораньше на мобиле
   processPendingATC();
   window.addEventListener('pageshow', processPendingATC);
 
   // ===== END [TW FIX v2] =====
 
-  // FETCH PATCH — перехватываем /cart/add*.*
   const _fetch = window.fetch;
   window.fetch = async function twFetch(input, init = {}){
     const url = typeof input==='string' ? input : (input?.url || '');
@@ -609,7 +603,6 @@ https://cdn1.stamped.io/files/widget.min.js
     return resp;
   };
 
-  // XHR PATCH — перехватываем /cart/add при XMLHttpRequest
   const _XHR = window.XMLHttpRequest;
   function PatchedXHR(){
     const xhr = new _XHR(); let _url='', _method='GET', _body=null;
