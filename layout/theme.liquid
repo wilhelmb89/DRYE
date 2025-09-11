@@ -472,10 +472,16 @@ async function getCartToken(){
   // PARSERS
   function parseItemsFromBody(body){
     try{
+      // 1) FormData: items[0][id], items[0][quantity] ИЛИ плоские id/quantity
       if (typeof FormData!=='undefined' && body instanceof FormData){
-        const idxs = new Set([...body.keys()].map(k=>(k.match(/^items\[(\d+)\]\[id\]$/)||[])[1]).filter(Boolean));
+        const idxs = new Set(
+          [...body.keys()]
+            .map(k=> (k.match(/^items\[(\d+)\]\[id\]$/)||[])[1])
+            .filter(Boolean)
+        );
         if (idxs.size){
-          const out=[]; idxs.forEach(i=>{
+          const out=[];
+          idxs.forEach(i=>{
             const id = body.get(`items[${i}][id]`);
             const q  = parseInt(body.get(`items[${i}][quantity]`)||'1',10)||1;
             if (id) out.push({ variantId:String(id), quantity:q });
@@ -486,21 +492,86 @@ async function getCartToken(){
         const q  = parseInt(body.get('quantity')||body.get('qty')||'1',10)||1;
         if (id) return [{ variantId:String(id), quantity:q }];
       }
+
+      // 2) URLSearchParams: items[0][id] или плоские ключи
       if (typeof URLSearchParams!=='undefined' && body instanceof URLSearchParams){
+        // Сначала items[n][id]
+        const idxs = new Set();
+        for (const [k] of body.entries()){
+          const m = k.match(/^items\[(\d+)\]\[id\]$/);
+          if (m) idxs.add(m[1]);
+        }
+        if (idxs.size){
+          const out=[];
+          idxs.forEach(i=>{
+            const id = body.get(`items[${i}][id]`);
+            const q  = parseInt(body.get(`items[${i}][quantity]`)||'1',10)||1;
+            if (id) out.push({ variantId:String(id), quantity:q });
+          });
+          if (out.length) return out;
+        }
+        // Затем плоские id/quantity
         const id = body.get('id')||body.get('variant_id')||body.get('variantId');
         const q  = parseInt(body.get('quantity')||body.get('qty')||'1',10)||1;
         if (id) return [{ variantId:String(id), quantity:q }];
       }
+
+      // 3) Строка: сначала пробуем JSON, потом urlencoded
       if (typeof body==='string'){
+        // 3a) JSON
         const data = safeJSON(body);
-        if (Array.isArray(data?.items)){
-          return data.items.map(it=>({ variantId:String(it.id||it.variant_id), quantity:parseInt(it.quantity||1,10)||1 })).filter(x=>x.variantId && x.variantId!=='NaN');
+        if (data){
+          if (Array.isArray(data?.items)){
+            return data.items
+              .map(it=>({ variantId:String(it.id||it.variant_id), quantity:parseInt(it.quantity||1,10)||1 }))
+              .filter(x=>x.variantId && x.variantId!=='NaN');
+          }
+          if (data.id || data.variant_id){
+            return [{ variantId:String(data.id||data.variant_id), quantity:parseInt(data.quantity||1,10)||1 }];
+          }
         }
-        if (data && (data.id||data.variant_id)){
-          return [{ variantId:String(data.id||data.variant_id), quantity:parseInt(data.quantity||1,10)||1 }];
+
+        // 3b) URL-encoded: id=...&quantity=... или items[0][id]=...
+        try{
+          const usp = new URLSearchParams(body);
+          // Проверим, реально ли там были пары
+          let hasAny=false; for (const _ of usp) { hasAny=true; break; }
+          if (hasAny){
+            const idxs = new Set();
+            for (const [k] of usp.entries()){
+              const m = k.match(/^items\[(\d+)\]\[id\]$/);
+              if (m) idxs.add(m[1]);
+            }
+            if (idxs.size){
+              const out=[];
+              idxs.forEach(i=>{
+                const id = usp.get(`items[${i}][id]`);
+                const q  = parseInt(usp.get(`items[${i}][quantity]`)||'1',10)||1;
+                if (id) out.push({ variantId:String(id), quantity:q });
+              });
+              if (out.length) return out;
+            }
+            const id = usp.get('id')||usp.get('variant_id')||usp.get('variantId');
+            const q  = parseInt(usp.get('quantity')||usp.get('qty')||'1',10)||1;
+            if (id) return [{ variantId:String(id), quantity:q }];
+          }
+        } catch(_) { /* ignore */ }
+      }
+
+      // 4) Простой объект: {items:[{id,quantity}]} или {id,quantity}
+      if (body && typeof body==='object'){
+        if (Array.isArray(body.items)){
+          return body.items
+            .map(it=>({ variantId:String(it.id||it.variant_id), quantity:parseInt(it.quantity||1,10)||1 }))
+            .filter(x=>x.variantId && x.variantId!=='NaN');
+        }
+        if (body.id || body.variant_id){
+          return [{ variantId:String(body.id||body.variant_id), quantity:parseInt(body.quantity||1,10)||1 }];
         }
       }
-    }catch(e){ log.warn('parseItemsFromBody error', e); }
+    } catch(e){
+      log?.warn?.('parseItemsFromBody error', e);
+    }
     return [];
   }
 
