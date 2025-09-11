@@ -4,31 +4,24 @@
 
   {%- comment -%} Force mobile heading size for this section {%- endcomment -%}
 <style>
-@media (max-width: 767px){
-  #shopify-section-{{ section.id }} .list-image-section .container .title{
-    font-size: 22px !important;
-    line-height: 28px !important;
-  }
-}
+  /* Margins */
   #shopify-section-{{ section.id }} {
-  margin-block: {{ ss.m_top }}px {{ ss.m_bottom }}px;
-}
-@media screen and (max-width: 767px) {
-  #shopify-section-{{ section.id }} {
-    margin-block: {{ ss.mobile_m_top }}px {{ ss.mobile_m_bottom }}px;
+    margin-block: {{ ss.m_top }}px {{ ss.m_bottom }}px;
   }
-}
+  @media (max-width: 767px) {
+    #shopify-section-{{ section.id }} {
+      margin-block: {{ ss.mobile_m_top }}px {{ ss.mobile_m_bottom }}px;
+    }
+  }
 
+  /* Behåll layouten för listpunkterna */
+  #shopify-section-{{ section.id }} .list .list-item {
+    display: flex;
+    align-items: center;
+  }
 
-
-
-/* behåll layouten för listpunkterna */
-#shopify-section-{{ section.id }} .list .list-item {
-  display: flex;
-  align-items: center;
-}
-
-  @media screen and (min-width: 1441px) {
+  /* ≥1441px */
+  @media (min-width: 1441px) {
     #shopify-section-{{ section.id }} .title {
       font-size: {{ section.settings.title_font_size_desktop }}px;
       line-height: {{ section.settings.title_line_height_desktop }}px;
@@ -38,10 +31,12 @@
       line-height: {{ section.settings.list_item_line_height_desktop }}px;
     }
     #shopify-section-{{ section.id }} .content .text {
-      font-size: {{ section.settings.content_font_size_desktop }}px;      
+      font-size: {{ section.settings.content_font_size_desktop }}px;
       line-height: {{ section.settings.content_line_height_desktop }}px;
     }
   }
+
+  /* 1025–1440px */
   @media (min-width: 1025px) and (max-width: 1440px) {
     #shopify-section-{{ section.id }} .title {
       font-size: {{ section.settings.title_font_size_small_desktop }}px;
@@ -52,11 +47,12 @@
       line-height: {{ section.settings.list_item_line_height_desktop }}px;
     }
     #shopify-section-{{ section.id }} .content .text {
-      font-size: {{ section.settings.content_font_size_small_desktop }}px;      
+      font-size: {{ section.settings.content_font_size_small_desktop }}px;
       line-height: {{ section.settings.content_line_height_small_desktop }}px;
     }
-}
   }
+
+  /* 768–1024px */
   @media (min-width: 768px) and (max-width: 1024px) {
     #shopify-section-{{ section.id }} .title {
       font-size: {{ section.settings.title_font_size_tablet }}px;
@@ -68,80 +64,78 @@
       line-height: {{ section.settings.list_item_line_height_tablet }}px;
     }
     #shopify-section-{{ section.id }} .content .text {
-      font-size: {{ section.settings.content_font_size_tablet }}px;      
+      font-size: {{ section.settings.content_font_size_tablet }}px;
       line-height: {{ section.settings.content_line_height_tablet }}px;
     }
-}
   }
-  @media screen and (max-width: 767px) {
-    #shopify-section-{{ section.id }} .container.small {
-      gap: 8px;
-    }
-    #shopify-section-{{ section.id }} .container .content {
-      gap: 44px;
-    }
+
+  /* ≤767px – defaults från schema */
+  @media (max-width: 767px) {
+    #shopify-section-{{ section.id }} .container.small { gap: 8px; }
+    #shopify-section-{{ section.id }} .container .content { gap: 44px; }
     #shopify-section-{{ section.id }} .title {
       font-size: {{ section.settings.title_font_size_mobile }}px;
       line-height: {{ section.settings.title_line_height_mobile }}px;
     }
     #shopify-section-{{ section.id }} .list .list-item {
-      font-size: {{ section.settings.list_item_font_size_mobile }}px;      
+      font-size: {{ section.settings.list_item_font_size_mobile }}px;
       line-height: {{ section.settings.list_item_line_height_mobile }}px;
     }
     #shopify-section-{{ section.id }} .content .text {
-      font-size: {{ section.settings.content_font_size_mobile }}px;      
+      font-size: {{ section.settings.content_font_size_mobile }}px;
       line-height: {{ section.settings.content_line_height_mobile }}px;
     }
-}
-/* Match Multirows text styling */
-#shopify-section-{{ section.id }} .list .list-item,
-#shopify-section-{{ section.id }} .content .text,
-#shopify-section-{{ section.id }} .list .list-item *:not(svg):not(path),
-#shopify-section-{{ section.id }} .content .text *:not(svg):not(path) {
-  font-family: var(--font-body-family, Inter, sans-serif) !important;
-  font-weight: 400 !important;
-  font-variation-settings: "wght" 400 !important;
-  font-synthesis-weight: none;
-  font-size: 18px !important;
-  line-height: 28px !important;
-  letter-spacing: normal !important;
-  color: rgb(17 17 17 / 65%) !important; /* ger samma grå som Multirow */
-}
+  }
 
-
-#shopify-section-{{ section.id }} .image { margin-bottom: 34px; }
-/* Mobil-override: 16/24 på list + brödtext */
-@media screen and (max-width: 767px) {
+  /* Match Multirows text styling */
   #shopify-section-{{ section.id }} .list .list-item,
   #shopify-section-{{ section.id }} .content .text,
   #shopify-section-{{ section.id }} .list .list-item *:not(svg):not(path),
   #shopify-section-{{ section.id }} .content .text *:not(svg):not(path) {
-    font-size: 16px !important;
-    line-height: 24px !important;
+    font-family: var(--font-body-family, Inter, sans-serif) !important;
+    font-weight: 400 !important;
+    font-variation-settings: "wght" 400 !important;
+    font-synthesis-weight: none;
+    font-size: 18px !important;
+    line-height: 28px !important;
+    letter-spacing: normal !important;
+    color: rgb(17 17 17 / 65%) !important;
   }
-}
 
-.list__item svg {
-  fill: #bda667 !important;
-}
-/* DRYE: fixera ikonstorlek + spacing i listan */
-#shopify-section-{{ section.id }} .list .list-item svg {
-  width: 20px;
-  height: 20px;
-  flex: 0 0 20px;
-  display: inline-block;
-  margin-right: 10px;
-}
+  #shopify-section-{{ section.id }} .image { margin-bottom: 34px; }
 
-/* Färg – några SVG:er använder fill, andra stroke */
-#shopify-section-{{ section.id }} .list .list-item svg,
-#shopify-section-{{ section.id }} .list .list-item svg * {
-  fill: #bda667 !important;
-  stroke: #bda667 !important;
-  stroke-width: 1.2;
-}
+  /* Mobil-override: 16/24 på list + brödtext */
+  @media (max-width: 767px) {
+    #shopify-section-{{ section.id }} .list .list-item,
+    #shopify-section-{{ section.id }} .content .text,
+    #shopify-section-{{ section.id }} .list .list-item *:not(svg):not(path),
+    #shopify-section-{{ section.id }} .content .text *:not(svg):not(path) {
+      font-size: 16px !important;
+      line-height: 24px !important;
+    }
+  }
 
+  .list__item svg { fill: #bda667 !important; }
+  #shopify-section-{{ section.id }} .list .list-item svg {
+    width: 20px; height: 20px; flex: 0 0 20px;
+    display: inline-block; margin-right: 10px;
+  }
+  #shopify-section-{{ section.id }} .list .list-item svg,
+  #shopify-section-{{ section.id }} .list .list-item svg * {
+    fill: #bda667 !important;
+    stroke: #bda667 !important; stroke-width: 1.2;
+  }
+
+  /* ===== FORCE OVERRIDE – LÄGG SIST ===== */
+  @media (max-width: 767px){
+    #shopify-section-{{ section.id }} .list-image-section .container .title,
+    #shopify-section-{{ section.id }} h2.title{
+      font-size: 22px !important;
+      line-height: 28px !important;
+    }
+  }
 </style>
+
 
 
 <div class="container small my" id="masd">
