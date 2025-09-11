@@ -1,6 +1,15 @@
 {%- assign ss = section.settings -%}
 
 <style>
+
+  {%- comment -%} Force mobile heading size for this section {%- endcomment -%}
+<style>
+@media (max-width: 767px){
+  #shopify-section-{{ section.id }} .list-image-section .container .title{
+    font-size: 22px !important;
+    line-height: 28px !important;
+  }
+}
   #shopify-section-{{ section.id }} {
   margin-block: {{ ss.m_top }}px {{ ss.m_bottom }}px;
 }
@@ -130,14 +139,6 @@
   fill: #bda667 !important;
   stroke: #bda667 !important;
   stroke-width: 1.2;
-}
-{%- comment -%} Force mobile heading size for this section {%- endcomment -%}
-<style>
-@media (max-width: 767px){
-  #shopify-section-{{ section.id }} .list-image-section .container .title{
-    font-size: 22px !important;
-    line-height: 28px !important;
-  }
 }
 
 </style>
