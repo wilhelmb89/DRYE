@@ -303,9 +303,11 @@ https://cdn1.stamped.io/files/widget.min.js
 (() => {
   'use strict';
 
-  // --- SINGLETON GUARD
+  // --- SINGLETON GUARDS (чтобы не дублировать перехватчики при повторной вставке)
   if (window.__TW_ATC_INTERCEPTOR__) return;
   window.__TW_ATC_INTERCEPTOR__ = true;
+  if (!window.__TW_PATCHED_FETCH__) window.__TW_PATCHED_FETCH__ = false;
+  if (!window.__TW_PATCHED_XHR__)   window.__TW_PATCHED_XHR__   = false;
 
   // ====== CONFIG ======
   const LOG               = true;
@@ -323,7 +325,7 @@ https://cdn1.stamped.io/files/widget.min.js
   };
 
   // ====== HELPERS ======
-  function safeJSON(v, def=null){ try{ return JSON.parse(v); }catch{ return def; } }
+  const safeJSON = (v, def=null)=>{ try{ return JSON.parse(v); }catch{ return def; } };
 
   // Cookie utils
   function setCookie(name, value, maxAgeSec) {
@@ -344,8 +346,8 @@ https://cdn1.stamped.io/files/widget.min.js
   }
   function tpInvoke(name, payload) {
     try {
-      if (typeof window.TriplePixel === 'function') return (window.TriplePixel(name, payload), true);
-      if (window.TriplePixel && typeof window.TriplePixel.track === 'function') return (window.TriplePixel.track(name, payload), true);
+      if (typeof window.TriplePixel === 'function') { window.TriplePixel(name, payload); return true; }
+      if (window.TriplePixel && typeof window.TriplePixel.track === 'function') { window.TriplePixel.track(name, payload); return true; }
     } catch(e) { log.error('TriplePixel invoke threw', e); }
     return false;
   }
@@ -515,8 +517,7 @@ https://cdn1.stamped.io/files/widget.min.js
     window.dataLayer.push({ event: 'tw_atc', tw_payload: payload, tw_ts: Date.now() });
   }
 
-  // ===== [TW FIX v2] =====
-
+  // ===== COOKIE-FLOW: сохраняем выбранный вариант ещё до отправки формы (важно для iOS Safari навигаций)
   document.addEventListener('submit', (evt) => {
     const form = evt.target?.closest("form[action*='/cart/add']");
     if (!form) return;
@@ -565,67 +566,108 @@ https://cdn1.stamped.io/files/widget.min.js
   processPendingATC();
   window.addEventListener('pageshow', processPendingATC);
 
-  // ===== END [TW FIX v2] =====
+  // ===== FETCH PATCH (мобильнобезопасный)
+  if (!window.__TW_PATCHED_FETCH__ && window.fetch){
+    const _fetch = window.fetch;
+    window.fetch = async function twFetch(input, init = {}){
+      let urlStr = '';
+      try {
+        urlStr = typeof input==='string' ? input : (input?.url || '');
+      } catch {}
+      let isATC = false;
+      try {
+        const u = new URL(urlStr, location.origin);
+        isATC = /\/cart\/add(\.js|\.json)?(?:\?.*)?$/i.test(u.pathname);
+      } catch {
+        // fallback для нестандартных URL в iOS
+        isATC = /\/cart\/add(\.js|\.json)?(?:\?.*)?$/i.test(String(urlStr||''));
+      }
 
-  const _fetch = window.fetch;
-  window.fetch = async function twFetch(input, init = {}){
-    const url = typeof input==='string' ? input : (input?.url || '');
-    let isATC = false;
-    try { isATC = /\/cart\/add(\.js|\.json)?(?:\?.*)?$/i.test(new URL(url, location.origin).pathname); } catch {}
-    let reqClone = null;
+      let reqClone = null;
+      if (isATC){
+        const b = init?.body;
+        if (b instanceof FormData){ reqClone = new FormData(); for (const [k,v] of b.entries()) reqClone.append(k,v); }
+        else if (b instanceof URLSearchParams){ reqClone = new URLSearchParams(b.toString()); }
+        else if (typeof b === 'string'){ reqClone = String(b); }
+        else if (b && typeof b === 'object'){ try{ reqClone = JSON.stringify(b); }catch{ reqClone = null; } }
+      }
 
-    if (isATC){
-      const b = init?.body;
-      if (b instanceof FormData){ reqClone = new FormData(); for (const [k,v] of b.entries()) reqClone.append(k,v); }
-      else if (b instanceof URLSearchParams){ reqClone = new URLSearchParams(b.toString()); }
-      else if (typeof b === 'string'){ reqClone = String(b); }
-      else if (typeof b === 'object' && b){ reqClone = JSON.stringify(b); }
-    }
+      const resp = await _fetch.apply(this, arguments);
 
-    const resp = await _fetch.apply(this, arguments);
-
-    if (isATC && resp && resp.ok){
-      try{
-        const copy = resp.clone();
-        let parsed=null; try{ parsed = await copy.json(); }catch{}
-        const rows = parseItemsFromResponseJSON(parsed);
-        if (rows.length){
-          for (const row of rows){ await emitATC(row.product_id, row.variant_id, row.quantity); }
-        } else if (reqClone){
-          const items = parseItemsFromBody(reqClone instanceof String ? String(reqClone) : reqClone);
-          for (const it of items){
-            const pid = await resolveProductId(it.variantId);
-            if (pid) await emitATC(pid, it.variantId, it.quantity);
-          }
-        }
-      } catch(e){ log.warn('ATC fetch-hook error', e); }
-    }
-    return resp;
-  };
-
-  const _XHR = window.XMLHttpRequest;
-  function PatchedXHR(){
-    const xhr = new _XHR(); let _url='', _method='GET', _body=null;
-    const open = xhr.open; xhr.open = function(m,u){ _method=(m||'GET').toUpperCase(); _url=u; return open.apply(xhr, arguments); };
-    const send = xhr.send; xhr.send = function(b){
-      _body=b;
-      xhr.addEventListener('load', async ()=>{
+      if (isATC && resp && resp.ok){
         try{
-          const isATC = _method==='POST' && /\/cart\/add(\.js|\.json)?(?:\?.*)?$/i.test(new URL(_url, location.origin).pathname);
-          if (isATC && xhr.status>=200 && xhr.status<300){
-            const items = parseItemsFromBody(_body);
+          const copy = resp.clone();
+          let parsed=null; try{ parsed = await copy.json(); }catch{}
+          const rows = parseItemsFromResponseJSON(parsed);
+          if (rows.length){
+            for (const row of rows){ await emitATC(row.product_id, row.variant_id, row.quantity); }
+          } else if (reqClone){
+            const items = parseItemsFromBody(reqClone instanceof String ? String(reqClone) : reqClone);
             for (const it of items){
               const pid = await resolveProductId(it.variantId);
               if (pid) await emitATC(pid, it.variantId, it.quantity);
             }
           }
-        } catch(e){ log.warn('ATC xhr-hook error', e); }
-      });
-      return send.apply(xhr, arguments);
+        } catch(e){ log.warn('ATC fetch-hook error', e); }
+      }
+      return resp;
     };
-    return xhr;
+    window.__TW_PATCHED_FETCH__ = true;
   }
-  window.XMLHttpRequest = PatchedXHR;
+
+  // ===== XHR PATCH (с сохранением прототипа и статических констант)
+  if (!window.__TW_PATCHED_XHR__ && window.XMLHttpRequest){
+    const _XHR = window.XMLHttpRequest;
+    function PatchedXHR(){
+      const xhr = new _XHR();
+      let _url='', _method='GET', _body=null;
+
+      const open = xhr.open;
+      xhr.open = function(m,u){
+        _method=(m||'GET').toUpperCase();
+        _url=u;
+        return open.apply(xhr, arguments);
+      };
+
+      const send = xhr.send;
+      xhr.send = function(b){
+        _body=b;
+        xhr.addEventListener('load', async ()=>{
+          try{
+            let isATC = false;
+            try {
+              const u = new URL(_url, location.origin);
+              isATC = _method==='POST' && /\/cart\/add(\.js|\.json)?(?:\?.*)?$/i.test(u.pathname);
+            } catch {
+              isATC = _method==='POST' && /\/cart\/add(\.js|\.json)?(?:\?.*)?$/i.test(String(_url||''));
+            }
+            if (isATC && xhr.status>=200 && xhr.status<300){
+              const items = parseItemsFromBody(_body);
+              for (const it of items){
+                const pid = await resolveProductId(it.variantId);
+                if (pid) await emitATC(pid, it.variantId, it.quantity);
+              }
+            }
+          } catch(e){ log.warn('ATC xhr-hook error', e); }
+        });
+        return send.apply(xhr, arguments);
+      };
+
+      return xhr;
+    }
+
+    // Наследуем прототипные методы, чтобы сторонние скрипты не падали
+    PatchedXHR.prototype = _XHR.prototype;
+    try {
+      // Копируем статические константы readyState
+      ['UNSENT','OPENED','HEADERS_RECEIVED','LOADING','DONE'].forEach(k=>{
+        if (k in _XHR) PatchedXHR[k] = _XHR[k];
+      });
+    } catch {}
+
+    window.XMLHttpRequest = PatchedXHR;
+    window.__TW_PATCHED_XHR__ = true;
+  }
 
   // SUBMIT PREVIEW (debug)
   document.addEventListener('submit', async (evt)=>{
@@ -644,6 +686,7 @@ https://cdn1.stamped.io/files/widget.min.js
   log.info('TW AddToCart interceptor installed (mobile-safe, multi-item)');
 })();
 </script>
+
 
 
 
