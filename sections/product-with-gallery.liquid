@@ -1049,12 +1049,10 @@
 
       {%- for block in review_tabs -%}
         {% if forloop.index == 2 %}
-          {% comment %}
           <div class="review-section second-review-section" {{ block.shopify_attributes }}>
             <div class="reviews-title">{{ ss.review_title }}</div>
             {%- render block -%}
           </div>
-          {% endcomment %}
         {% endif %}
       {%- endfor -%}
 
