@@ -934,10 +934,9 @@
       {%- endif -%}
       {%- for block in review_tabs -%}
         {% if forloop.first %}
-          {% comment %}
+        
           <div class="review-section" {{ block.shopify_attributes }}>
             <div class="reviews-title">{{ ss.review_title }}</div>
-            {% endcomment %}
             {%- render block -%}
           </div>
         {% endif %}
