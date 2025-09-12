@@ -12,6 +12,15 @@
     "product_with_gallery_GRxyix": {
       "type": "product-with-gallery",
       "blocks": {
+        "judge_me_reviews_preview_badge_GtHcQw": {
+          "type": "shopify://apps/judge-me-reviews/blocks/preview_badge/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
+          "settings": {}
+        },
+        "judge_me_reviews_review_snippet_widget_dYGfcy": {
+          "type": "shopify://apps/judge-me-reviews/blocks/review_snippet_widget/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
+          "disabled": true,
+          "settings": {}
+        },
         "tab_bQhJVi": {
           "type": "tab",
           "settings": {
@@ -262,6 +271,8 @@
         }
       },
       "block_order": [
+        "judge_me_reviews_preview_badge_GtHcQw",
+        "judge_me_reviews_review_snippet_widget_dYGfcy",
         "tab_bQhJVi",
         "description_image_n4GKMn",
         "tab_BnUVie",
@@ -291,7 +302,7 @@
       ],
       "settings": {
         "background_color": "#ffffff",
-        "short_description": "Stops sweaty gloves from breaking down your skin. Built with SkinDRYE™ Technology.”",
+        "short_description": "Stops sweaty gloves from breaking down your skin. Built with SkinDRYE™ Technology.",
         "content_gap": 24,
         "content_gap_mobile": 14,
         "title_color": "#000000",
@@ -1012,7 +1023,7 @@
       "custom_css": [],
       "name": "List with Image(New)",
       "settings": {
-        "image": "shopify://shop_images/Screenshot_24_51c86098-b594-4bcd-877a-70c6086d12c0.png",
+        "image": "shopify://shop_images/drye_front-page_new_product_image.jpg",
         "title": "\"Incredibly good gloves for someone with dry skin. Big plus that these can handle industrial washing and still work perfectly afterward.\"— Jens S., Mine Worker",
         "title_font_size_desktop": 34,
         "title_line_height_desktop": 55,
