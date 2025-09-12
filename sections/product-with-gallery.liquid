@@ -1036,7 +1036,7 @@
           {% comment %} {{ form | payment_button }} {% endcomment %}
         </div>
       {%- endform -%}
-      
+
       {%- assign payment_methods = 'visa,master,paypal,american_express,shopify_pay' | split: ',' -%}
       {%- unless payment_methods == empty -%}
         <ul class="payment-icons">
@@ -1079,6 +1079,16 @@
           {% endfor %}
         </div>
       {%- endif -%}
+
+      {%- for block in review_tabs -%}
+        {% if forloop.index == 3 %}
+          <div class="review-section second-review-section" {{ block.shopify_attributes }}>
+            <div class="reviews-title">{{ ss.review_title }}</div>
+            {%- render block -%}
+          </div>
+        {% endif %}
+      {%- endfor -%}
+      
       {%- assign tabs = section.blocks | where: 'type', 'tab' -%}
       {%- if tabs -%}
         <div class="accordion product-accordion">
