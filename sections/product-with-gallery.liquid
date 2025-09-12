@@ -29,6 +29,7 @@
     stroke: none;
     max-height: none;
   }
+
   .section-{{ section.id }}-padding {
     padding-top: {{ section.settings.padding_top | plus: 134 }}px;
     padding-bottom: {{ section.settings.padding_bottom }}px;
@@ -198,7 +199,7 @@
             }
           }
         }
-
+        
         .accordion-header::before {
           content: "+";
           color: #000;
@@ -779,8 +780,6 @@
 {%- liquid
   assign description_image_blocks = section.blocks | where: 'type', 'description_image'
 -%}
-{%- assign review_tabs = section.blocks | where: 'type', '@app' -%}
-
 <a id="buy-section-{{ product.handle }}"></a>
 <div class="section-{{ section.id }} section-{{ section.id }}-padding product-main__content">
   <div class="container">
@@ -788,9 +787,15 @@
       <h1 class="title">
         {{ product.title }}
       </h1>
+  
       <h5 class="short-description">
         {{ section.settings.short_description }}
       </h5>
+          <!-- Start of Judge.me code -->
+      <div style='{{ jm_style }}' class='jdgm-widget jdgm-preview-badge jdgm-preview-badge-mobile' data-id='{{ product.id }}' data-auto-install='false'>
+        {{ product.metafields.judgeme.badge }}
+      </div>
+      <!-- End of Judge.me code -->
     </div>
     <div class="product-image-section">
       {%- assign product_thumbnails = section.blocks | where: 'type', 'product-image' -%}
@@ -846,7 +851,7 @@
                     width="100%"
                     height="auto"/>
                 {% endcomment %}
-                {% if product_thumbnail.settings.type == 'image' %}
+                {% if product_thumbnail.settings.type == "image"  %}
                   <img
                     class=""
                     data-preview-id="{{ forloop.index }}"
@@ -863,16 +868,7 @@
                     loading="lazy"
                   >
                 {% else %}
-                  <video
-                    data-preview-id="{{ forloop.index }}"
-                    src="{{ product_thumbnail.settings.video.sources[1].url }}"
-                    autoplay
-                    muted
-                    playsinline
-                    loop
-                    preload="none"
-                    class="preview-trigger"
-                  ></video>
+                  <video data-preview-id="{{ forloop.index }}" src="{{ product_thumbnail.settings.video.sources[1].url }}" autoplay muted playsinline loop preload="none" class="preview-trigger"></video>
                 {% endif %}
               </div>
             </swiper-slide>
@@ -888,34 +884,31 @@
       <div class="product-thumbnail-list">
         {%- if product_thumbnails -%}
           {% for product_thumbnail in product_thumbnails %}
-            <div
-              class="product-thumbnail-item {% if product_thumbnail.settings.image != blank %}product-thumbnail-item-desktop{% endif %} {% if product_thumbnail.settings.image_tablet != blank %}product-thumbnail-item-tablet{% endif %} {% if product_thumbnail.settings.image_mobile %}product-thumbnail-item-mobile{% endif %}"
-              data-preview-id="{{ forloop.index }}"
-            >
+            <div class="product-thumbnail-item {% if product_thumbnail.settings.image != blank %}product-thumbnail-item-desktop{% endif %} {% if product_thumbnail.settings.image_tablet != blank %}product-thumbnail-item-tablet{% endif %} {% if product_thumbnail.settings.image_mobile %}product-thumbnail-item-mobile{% endif %}" data-preview-id="{{ forloop.index }}">
               <img
-                class="desktop preview-trigger"
-                data-preview-id="{{ forloop.index }}"
-                src="{{ product_thumbnail.settings.image | img_url: '1024x', format: 'pjpg' }}"
-                width="100%"
-                height="auto"
-                loading="lazy"
-              >
-              <img
-                class="tablet preview-trigger"
-                data-preview-id="{{ forloop.index }}"
-                src="{{ product_thumbnail.settings.image_tablet | img_url: '1024x', format: 'pjpg' }}"
-                width="100%"
-                height="auto"
-                loading="lazy"
-              >
-              <img
-                class="mobile preview-trigger"
-                data-preview-id="{{ forloop.index }}"
-                src="{{ product_thumbnail.settings.image_mobile | img_url: '1024x', format: 'pjpg' }}"
-                width="100%"
-                height="auto"
-                loading="lazy"
-              >
+                  class="desktop preview-trigger"
+                  data-preview-id="{{ forloop.index }}"
+                  src="{{ product_thumbnail.settings.image | img_url: '1024x', format: 'pjpg' }}"
+                  width="100%"
+                  height="auto"
+                  loading="lazy"
+                >
+                <img
+                  class="tablet preview-trigger"
+                  data-preview-id="{{ forloop.index }}"
+                  src="{{ product_thumbnail.settings.image_tablet | img_url: '1024x', format: 'pjpg' }}"
+                  width="100%"
+                  height="auto"
+                  loading="lazy"
+                >
+                <img
+                  class="mobile preview-trigger"
+                  data-preview-id="{{ forloop.index }}"
+                  src="{{ product_thumbnail.settings.image_mobile | img_url: '1024x', format: 'pjpg' }}"
+                  width="100%"
+                  height="auto"
+                  loading="lazy"
+                >
             </div>
           {% endfor %}
         {%- endif -%}
@@ -925,6 +918,11 @@
       <h1 class="title desktop">
         {{ product.title }}
       </h1>
+      <!-- Start of Judge.me code -->
+      <div style='{{ jm_style }}' class='jdgm-widget jdgm-preview-badge jdgm-preview-badge-desktop' data-id='{{ product.id }}' data-auto-install='false'>
+        {{ product.metafields.judgeme.badge }}
+      </div>
+      <!-- End of Judge.me code -->
       <h5 class="short-description desktop">
         {{ section.settings.short_description }}
       </h5>
@@ -933,13 +931,14 @@
           {{ ss.free_shipping }}
         </div>
       {%- endif -%}
-      {%- for block in review_tabs -%}
-        {% if forloop.first %}
-          <div class="review-section" {{ block.shopify_attributes }}>
-            <div class="reviews-title">{{ ss.review_title }}</div>
-            {%- render block -%}
-          </div>
-        {% endif %}
+      {%- for block in section.blocks -%}
+        {%- case block.type -%}
+          {%- when '@app' -%}
+            <div class="review-section" {{ block.shopify_attributes }}>
+              <div class="reviews-title">{{ ss.review_title }}</div>
+              {%- render block -%}
+            </div>
+        {%- endcase -%}
       {%- endfor -%}
       {%- form 'product', product, is: 'product-form' -%}
         <input type="hidden" name="quantity" value="1">
@@ -991,6 +990,7 @@
           <div id="sizeChart" class="link">{{ ss.size_text }}</div>
         </div>
 
+
         <fieldset>
           {%- for variant in product.variants -%}
             {%- if product.selected_or_first_available_variant.id == variant.id -%}
@@ -1030,32 +1030,11 @@
         <div class="hr-line"></div>
         <div class="buttons">
           <button class="button atcButton" id="buy-section-{{ product.handle }}" type="submit">
-            {{ ss.add_text }}
-          </button>
+  {{ ss.add_text }}
+</button>
           {% comment %} {{ form | payment_button }} {% endcomment %}
         </div>
       {%- endform -%}
-
-      {%- assign payment_methods = 'visa,master,paypal,american_express,shopify_pay' | split: ',' -%}
-      {%- unless payment_methods == empty -%}
-        <ul class="payment-icons">
-          {%- for type in payment_methods -%}
-            <li class="icon--payment">
-              {{ type | payment_type_svg_tag: class: 'icon icon--full-color' }}
-            </li>
-          {%- endfor -%}
-        </ul>
-      {%- endunless -%}
-
-      {%- for block in review_tabs -%}
-        {% if forloop.index == 2 %}
-          <div class="review-section second-review-section" {{ block.shopify_attributes }}>
-            <div class="reviews-title">{{ ss.review_title }}</div>
-            {%- render block -%}
-          </div>
-        {% endif %}
-      {%- endfor -%}
-
       {%- assign shipping_tabs = section.blocks | where: 'type', 'shipping' -%}
       {%- if shipping_tabs -%}
         <div class="product-shipping-section">
@@ -1078,16 +1057,6 @@
           {% endfor %}
         </div>
       {%- endif -%}
-
-      {%- for block in review_tabs -%}
-        {% if forloop.index == 3 %}
-          <div class="review-section second-review-section" {{ block.shopify_attributes }}>
-            <div class="reviews-title">{{ ss.review_title }}</div>
-            {%- render block -%}
-          </div>
-        {% endif %}
-      {%- endfor -%}
-
       {%- assign tabs = section.blocks | where: 'type', 'tab' -%}
       {%- if tabs -%}
         <div class="accordion product-accordion">
@@ -1419,7 +1388,7 @@
       {% for product_thumbnail in product_thumbnails %}
         <swiper-slide>
           <div class="slider-image">
-            {% if product_thumbnail.settings.type == 'image' %}
+            {% if product_thumbnail.settings.type == "image"  %}
               <img
                 class=""
                 src="{{ product_thumbnail.settings.preview_image | img_url: '2000x', format: 'pjpg' }}"
@@ -1428,17 +1397,7 @@
                 loading="lazy"
               >
             {% else %}
-              <video
-                data-preview-id="{{ forloop.index }}"
-                src="{{ product_thumbnail.settings.video.sources[1].url }}"
-                autoplay
-                muted
-                playsinline
-                loop
-                preload="none"
-                class="preview-trigger"
-                controls
-              ></video>
+              <video data-preview-id="{{ forloop.index }}" src="{{ product_thumbnail.settings.video.sources[1].url }}" autoplay muted playsinline loop preload="none" class="preview-trigger" controls></video>
             {% endif %}
           </div>
         </swiper-slide>
@@ -2230,9 +2189,9 @@
           "label": "Tab title"
         },
         {
-          "type": "html",
-          "id": "content",
-          "label": "Tab content"
+  "type": "html",
+  "id": "content",
+  "label": "Tab content"
         },
         {
           "type": "header",
