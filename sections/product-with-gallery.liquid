@@ -780,6 +780,7 @@
 {%- liquid
   assign description_image_blocks = section.blocks | where: 'type', 'description_image'
 -%}
+{%- assign review_tabs = section.blocks | where: 'type', '@app' -%}
 <a id="buy-section-{{ product.handle }}"></a>
 <div class="section-{{ section.id }} section-{{ section.id }}-padding product-main__content">
   <div class="container">
