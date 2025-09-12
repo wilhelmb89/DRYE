@@ -451,6 +451,48 @@
       ],
       "settings": {}
     },
+    "before_after_GfwT4F": {
+      "type": "before-after",
+      "blocks": {
+        "pair_aj3jFU": {
+          "type": "pair",
+          "settings": {
+            "image_before": "shopify://shop_images/PXL_20250222_150439970.MP_1_1_1.jpg",
+            "image_after": "shopify://shop_images/PXL_20250411_133548754.MP_1_1_1_477b6763-9fb6-42a5-abf5-f511c75c4ec2.jpg"
+          }
+        },
+        "pair_ArC7MA": {
+          "type": "pair",
+          "settings": {
+            "image_before": "shopify://shop_images/eksem_78da7a3d-7cf1-468e-a157-c294a4002454.jpg",
+            "image_after": "shopify://shop_images/354132505_582885927326551_8106202714240206805_n.jpg"
+          }
+        },
+        "pair_gTnyee": {
+          "type": "pair",
+          "settings": {
+            "image_before": "shopify://shop_images/c875f5ab-ae50-4921-a2a5-56b7ebd0b2d5_1_1.jpg",
+            "image_after": "shopify://shop_images/Screenshot_2.png"
+          }
+        }
+      },
+      "block_order": [
+        "pair_aj3jFU",
+        "pair_ArC7MA",
+        "pair_gTnyee"
+      ],
+      "name": "Before-After (up to 3 side-by-side)",
+      "settings": {
+        "title": "",
+        "image_border_radius": 40,
+        "section_top_padding_desktop": 120,
+        "section_bottom_padding_desktop": 120,
+        "section_top_padding_tablet": 80,
+        "section_bottom_padding_tablet": 80,
+        "section_top_padding_mobile": 64,
+        "section_bottom_padding_mobile": 64
+      }
+    },
     "table_with_mark_grxHac": {
       "type": "table-with-mark",
       "blocks": {
@@ -740,7 +782,6 @@
         "card_wkHyBD",
         "card_8D9UiF"
       ],
-      "disabled": true,
       "name": "Card With Line",
       "settings": {
         "background_color": "#ffffff",
@@ -1426,48 +1467,6 @@
         "padding_bottom_mobile": 40
       }
     },
-    "before_after_GfwT4F": {
-      "type": "before-after",
-      "blocks": {
-        "pair_aj3jFU": {
-          "type": "pair",
-          "settings": {
-            "image_before": "shopify://shop_images/PXL_20250222_150439970.MP_1_1_1.jpg",
-            "image_after": "shopify://shop_images/PXL_20250411_133548754.MP_1_1_1_477b6763-9fb6-42a5-abf5-f511c75c4ec2.jpg"
-          }
-        },
-        "pair_ArC7MA": {
-          "type": "pair",
-          "settings": {
-            "image_before": "shopify://shop_images/eksem_78da7a3d-7cf1-468e-a157-c294a4002454.jpg",
-            "image_after": "shopify://shop_images/354132505_582885927326551_8106202714240206805_n.jpg"
-          }
-        },
-        "pair_gTnyee": {
-          "type": "pair",
-          "settings": {
-            "image_before": "shopify://shop_images/c875f5ab-ae50-4921-a2a5-56b7ebd0b2d5_1_1.jpg",
-            "image_after": "shopify://shop_images/Screenshot_2.png"
-          }
-        }
-      },
-      "block_order": [
-        "pair_aj3jFU",
-        "pair_ArC7MA",
-        "pair_gTnyee"
-      ],
-      "name": "Before-After (up to 3 side-by-side)",
-      "settings": {
-        "title": "",
-        "image_border_radius": 40,
-        "section_top_padding_desktop": 120,
-        "section_bottom_padding_desktop": 120,
-        "section_top_padding_tablet": 80,
-        "section_bottom_padding_tablet": 80,
-        "section_top_padding_mobile": 64,
-        "section_bottom_padding_mobile": 64
-      }
-    },
     "columns_with_video_kRmqXB": {
       "type": "columns-with-video",
       "blocks": {
@@ -1633,11 +1632,11 @@
   "order": [
     "product_with_gallery_GRxyix",
     "icons_Bt7DUV",
+    "card_with_line_nzUcxb",
     "1757532575b3bfeb1a",
     "before_after_GfwT4F",
     "table_with_mark_grxHac",
     "multirows_new_zTefYA",
-    "card_with_line_nzUcxb",
     "reviews_new_tDwEeQ",
     "multirows_new_VzQtYE",
     "multirows_new_j4rUDK",
