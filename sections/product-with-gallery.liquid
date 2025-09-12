@@ -1036,6 +1036,27 @@
           {% comment %} {{ form | payment_button }} {% endcomment %}
         </div>
       {%- endform -%}
+      
+      {%- assign payment_methods = 'visa,master,paypal,american_express,shopify_pay' | split: ',' -%}
+      {%- unless payment_methods == empty -%}
+        <ul class="payment-icons">
+          {%- for type in payment_methods -%}
+            <li class="icon--payment">
+              {{ type | payment_type_svg_tag: class: 'icon icon--full-color' }}
+            </li>
+          {%- endfor -%}
+        </ul>
+      {%- endunless -%}
+
+      {%- for block in review_tabs -%}
+        {% if forloop.index == 2 %}
+          <div class="review-section second-review-section" {{ block.shopify_attributes }}>
+            <div class="reviews-title">{{ ss.review_title }}</div>
+            {%- render block -%}
+          </div>
+        {% endif %}
+      {%- endfor -%}
+
       {%- assign shipping_tabs = section.blocks | where: 'type', 'shipping' -%}
       {%- if shipping_tabs -%}
         <div class="product-shipping-section">
