@@ -932,14 +932,13 @@
           {{ ss.free_shipping }}
         </div>
       {%- endif -%}
-      {%- for block in section.blocks -%}
-        {%- case block.type -%}
-          {%- when '@app' -%}
-            <div class="review-section" {{ block.shopify_attributes }}>
-              <div class="reviews-title">{{ ss.review_title }}</div>
-              {%- render block -%}
-            </div>
-        {%- endcase -%}
+      {%- for block in review_tabs -%}
+        {% if forloop.first %}
+          <div class="review-section" {{ block.shopify_attributes }}>
+            <div class="reviews-title">{{ ss.review_title }}</div>
+            {%- render block -%}
+          </div>
+        {% endif %}
       {%- endfor -%}
       {%- form 'product', product, is: 'product-form' -%}
         <input type="hidden" name="quantity" value="1">
@@ -1088,7 +1087,7 @@
           </div>
         {% endif %}
       {%- endfor -%}
-      
+
       {%- assign tabs = section.blocks | where: 'type', 'tab' -%}
       {%- if tabs -%}
         <div class="accordion product-accordion">
