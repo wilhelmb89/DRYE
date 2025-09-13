@@ -1467,6 +1467,84 @@
     "1746812877af76f5ce": {
       "type": "apps",
       "settings": {}
+    },
+    "columns_with_video_NjHpQy": {
+      "type": "columns-with-video",
+      "blocks": {
+        "card_7TFghV": {
+          "type": "card",
+          "settings": {
+            "title": "",
+            "media_mode": "url",
+            "video_url": "https://www.youtube.com/embed/byFSAZZSsl4?si=fadhR9IY_bAji809",
+            "video_width": "1108",
+            "video_height": "623",
+            "play_icon": "shopify://shop_images/play.png",
+            "icon_width": 80,
+            "icon_width_tablet": 70,
+            "icon_width_mobile": 70
+          }
+        },
+        "card_r9ByPD": {
+          "type": "card",
+          "settings": {
+            "title": "",
+            "media_mode": "url",
+            "video_url": "https://www.youtube.com/embed/m2ExQxZqynE?si=W1CCANiGTjnmIL7V",
+            "video_width": "1108",
+            "video_height": "623",
+            "play_icon": "shopify://shop_images/play.png",
+            "icon_width": 80,
+            "icon_width_tablet": 70,
+            "icon_width_mobile": 70
+          }
+        },
+        "card_p8MxEz": {
+          "type": "card",
+          "settings": {
+            "title": "",
+            "media_mode": "video",
+            "video_url": "",
+            "video_width": "1108",
+            "video_height": "623",
+            "icon_width": 80,
+            "icon_width_tablet": 70,
+            "icon_width_mobile": 70
+          }
+        }
+      },
+      "block_order": [
+        "card_7TFghV",
+        "card_r9ByPD",
+        "card_p8MxEz"
+      ],
+      "name": "Column With Video",
+      "settings": {
+        "background_color": "#FFFFFF",
+        "title": "From cracked hands in the mine to healed skin on the ice — what Drye users say",
+        "title_color": "#000000",
+        "title_alignment": "center",
+        "title_font_size": 48,
+        "title_line_height": 55,
+        "title_top_padding": 0,
+        "title_bottom_padding": 60,
+        "title_alignment_mobile": "left",
+        "title_font_size_mobile": 48,
+        "title_line_height_mobile": 55,
+        "title_top_padding_mobile": 0,
+        "title_bottom_padding_mobile": 60,
+        "block_spacing": 20,
+        "block_spacing_mobile": 20,
+        "video_count": 3,
+        "block_direction": "row",
+        "block_direction_mobile": "column",
+        "section_top_padding": 120,
+        "section_bottom_padding": 120,
+        "section_top_padding_tablet": 80,
+        "section_bottom_padding_tablet": 80,
+        "section_top_padding_mobile": 120,
+        "section_bottom_padding_mobile": 120
+      }
     }
   },
   "order": [
@@ -1483,6 +1561,7 @@
     "table_with_mark_xkzqbz",
     "before_after_PDU48n",
     "faq_9EETYf",
-    "1746812877af76f5ce"
+    "1746812877af76f5ce",
+    "columns_with_video_NjHpQy"
   ]
 }
