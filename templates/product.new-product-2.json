@@ -433,6 +433,25 @@
     "image_slider_4gd6Nt": {
       "type": "image-slider",
       "blocks": {
+        "heading_LTmEgA": {
+          "type": "heading",
+          "settings": {
+            "heading": "\"I used to have issues with cracked hands and eczema. These gloves have helped a lot. No more itching or sweating, and they fit well.\"— Adam H., Tesla EV Mechanic",
+            "heading_color": "#000000",
+            "heading_font_size": 50,
+            "heading_line_height": 60,
+            "heading_top_padding": 120,
+            "heading_bottom_padding": 120,
+            "heading_font_size_tablet": 50,
+            "heading_line_height_tablet": 60,
+            "heading_top_padding_tablet": 120,
+            "heading_bottom_padding_tablet": 120,
+            "heading_font_size_mobile": 22,
+            "heading_line_height_mobile": 24,
+            "heading_top_padding_mobile": 120,
+            "heading_bottom_padding_mobile": 120
+          }
+        },
         "card_xt6TWX": {
           "type": "card",
           "settings": {
@@ -483,6 +502,7 @@
         }
       },
       "block_order": [
+        "heading_LTmEgA",
         "card_xt6TWX",
         "card_bwGwH4",
         "card_b8H7Ft",
@@ -520,8 +540,8 @@
         "row_A4dPPg": {
           "type": "row",
           "settings": {
-            "title": "",
-            "content": "<p>Instead of letting sweat soak in and stay trapped, DRYE is built with SkinDRYE™ Technology – a dual-layer textile system:<br/><br/>→ <strong>Draws moisture in:</strong> The inner layer sits smooth against your skin and pulls sweat away instantly using capillary action.<br/><br/>→ <strong>Moves it outward: </strong>A smart fiber gradient transfers the moisture from the skin side to the outer surface.<br/><br/>→ <strong>Lets it evaporate: </strong>The outer layer disperses and evaporates it, keeping your hands drier, calmer, and protected from irritation.</p>",
+            "title": "MASD: The hidden reason your hands never recover",
+            "content": "<p>Moisture-Associated Skin Damage (MASD) is what happens when sweat gets trapped under gloves. The skin barrier stays wet, irritation builds, and cracks can’t close. That’s why creams, powders, and liners that just soak it up never solve the problem.<br/><br/><strong>SkinDRYE™ is built to stop MASD at the source:</strong><br/>→ Draws moisture off the skin<br/>→ Moves it outward through a fiber gradient<br/>→ Lets it evaporate before it breaks your skin</p>",
             "button_text": "",
             "button_url": "",
             "video": "shopify://files/videos/Textilvideo 20250819_1.mp4",
@@ -540,7 +560,7 @@
         "title": "",
         "invert": true,
         "bg": "#111111",
-        "tx": "#111111",
+        "tx": "#ffffff",
         "sub_title_font_size_desktop": 48,
         "sub_title_line_height_desktop": 55,
         "sub_title_font_size_tablet": 34,
@@ -748,6 +768,75 @@
         "name_line_height_tablet": 24,
         "name_font_size_mobile": 18,
         "name_line_height_mobile": 24
+      }
+    },
+    "list_new_cmYi3M": {
+      "type": "list-new",
+      "blocks": {
+        "item_7TGe3i": {
+          "type": "item",
+          "settings": {
+            "title": "Noticeable drier hands on the first wear"
+          }
+        },
+        "item_mJyEWk": {
+          "type": "item",
+          "settings": {
+            "title": "Can reduce flare-ups and irritation within days"
+          }
+        },
+        "item_8zAnJH": {
+          "type": "item",
+          "settings": {
+            "title": "Can strengthen nails within weeks"
+          }
+        },
+        "item_Kzidxw": {
+          "type": "item",
+          "settings": {
+            "title": "Keep your hands dry, even during long shifts"
+          }
+        }
+      },
+      "block_order": [
+        "item_7TGe3i",
+        "item_mJyEWk",
+        "item_8zAnJH",
+        "item_Kzidxw"
+      ],
+      "name": "List with Image(New)",
+      "settings": {
+        "image": "shopify://shop_images/Produktbild_hemsida_4_1.jpg",
+        "title": "\"Incredibly good gloves for someone with dry skin. Big plus that these can handle industrial washing and still work perfectly afterward.\"— Jens S., Mine Worker",
+        "title_font_size_desktop": 50,
+        "title_line_height_desktop": 60,
+        "title_font_size_small_desktop": 38,
+        "title_line_height_small_desktop": 50,
+        "title_font_size_tablet": 30,
+        "title_line_height_tablet": 39,
+        "title_font_size_mobile": 28,
+        "title_line_height_mobile": 32,
+        "list_item_font_size_desktop": 16,
+        "list_item_line_height_desktop": 28,
+        "list_item_font_size_tablet": 13,
+        "list_item_line_height_tablet": 24,
+        "list_item_font_size_mobile": 13,
+        "list_item_line_height_mobile": 24,
+        "content": "",
+        "content_font_size_desktop": 16,
+        "content_line_height_desktop": 24,
+        "content_font_size_small_desktop": 14,
+        "content_line_height_small_desktop": 24,
+        "content_font_size_tablet": 12,
+        "content_line_height_tablet": 18,
+        "content_font_size_mobile": 12,
+        "content_line_height_mobile": 19,
+        "button_text": "Shop now",
+        "button_url": "shopify://products/drye-performance-glove-liners",
+        "m_top": 120,
+        "m_bottom": 120,
+        "mobile_m_top": 120,
+        "mobile_m_bottom": 120
       }
     },
     "table_with_mark_xkzqbz": {
@@ -1138,75 +1227,6 @@
     "1746812877af76f5ce": {
       "type": "apps",
       "settings": {}
-    },
-    "list_new_cmYi3M": {
-      "type": "list-new",
-      "blocks": {
-        "item_7TGe3i": {
-          "type": "item",
-          "settings": {
-            "title": "Noticeable drier hands on the first wear"
-          }
-        },
-        "item_mJyEWk": {
-          "type": "item",
-          "settings": {
-            "title": "Can reduce flare-ups and irritation within days"
-          }
-        },
-        "item_8zAnJH": {
-          "type": "item",
-          "settings": {
-            "title": "Can strengthen nails within weeks"
-          }
-        },
-        "item_Kzidxw": {
-          "type": "item",
-          "settings": {
-            "title": "Keep your hands dry, even during long shifts"
-          }
-        }
-      },
-      "block_order": [
-        "item_7TGe3i",
-        "item_mJyEWk",
-        "item_8zAnJH",
-        "item_Kzidxw"
-      ],
-      "name": "List with Image(New)",
-      "settings": {
-        "image": "shopify://shop_images/Produktbild_hemsida_4_1.jpg",
-        "title": "\"Incredibly good gloves for someone with dry skin. Big plus that these can handle industrial washing and still work perfectly afterward.\"— Jens S., Mine Worker",
-        "title_font_size_desktop": 50,
-        "title_line_height_desktop": 60,
-        "title_font_size_small_desktop": 38,
-        "title_line_height_small_desktop": 50,
-        "title_font_size_tablet": 30,
-        "title_line_height_tablet": 39,
-        "title_font_size_mobile": 28,
-        "title_line_height_mobile": 32,
-        "list_item_font_size_desktop": 16,
-        "list_item_line_height_desktop": 28,
-        "list_item_font_size_tablet": 13,
-        "list_item_line_height_tablet": 24,
-        "list_item_font_size_mobile": 13,
-        "list_item_line_height_mobile": 24,
-        "content": "",
-        "content_font_size_desktop": 16,
-        "content_line_height_desktop": 24,
-        "content_font_size_small_desktop": 14,
-        "content_line_height_small_desktop": 24,
-        "content_font_size_tablet": 12,
-        "content_line_height_tablet": 18,
-        "content_font_size_mobile": 12,
-        "content_line_height_mobile": 19,
-        "button_text": "Shop now",
-        "button_url": "shopify://products/drye-performance-glove-liners",
-        "m_top": 120,
-        "m_bottom": 120,
-        "mobile_m_top": 120,
-        "mobile_m_bottom": 120
-      }
     }
   },
   "order": [
@@ -1218,9 +1238,9 @@
     "multirows_new_8H9TGW",
     "rich_text_with_image_6awd6R",
     "reviews_new_DCDLgN",
+    "list_new_cmYi3M",
     "table_with_mark_xkzqbz",
     "faq_9EETYf",
-    "1746812877af76f5ce",
-    "list_new_cmYi3M"
+    "1746812877af76f5ce"
   ]
 }
