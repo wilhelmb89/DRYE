@@ -807,7 +807,7 @@
       "name": "List with Image(New)",
       "settings": {
         "image": "shopify://shop_images/Produktbild_hemsida_4_1.jpg",
-        "title": "\"Incredibly good gloves for someone with dry skin. Big plus that these can handle industrial washing and still work perfectly afterward.\"— Jens S., Mine Worker",
+        "title": "\"My hands usually break from a hammer — not with these. I can finally do things like help my wife in the garden without my skin breaking. \"— Jon-Paul. E, UK",
         "title_font_size_desktop": 50,
         "title_line_height_desktop": 60,
         "title_font_size_small_desktop": 38,
@@ -1073,7 +1073,7 @@
       ],
       "settings": {
         "background_color": "#ffffff",
-        "title": "How glove materials handle moisture <br> — and why it matters for skin health",
+        "title": "How glove materials handle moisture  — and why it matters for skin health",
         "title_color": "#000000",
         "title_alignment": "center",
         "title_font_size": 48,
@@ -1117,6 +1117,48 @@
         "section_bottom_padding_tablet": 0,
         "section_top_padding_mobile": 50,
         "section_bottom_padding_mobile": 50
+      }
+    },
+    "before_after_PDU48n": {
+      "type": "before-after",
+      "blocks": {
+        "pair_M8YNrM": {
+          "type": "pair",
+          "settings": {
+            "image_before": "shopify://shop_images/PXL_20250222_150439970.MP_1_1_1.jpg",
+            "image_after": "shopify://shop_images/PXL_20250411_133548754.MP_1_1_1_477b6763-9fb6-42a5-abf5-f511c75c4ec2.jpg"
+          }
+        },
+        "pair_DTREnX": {
+          "type": "pair",
+          "settings": {
+            "image_before": "shopify://shop_images/eksem_78da7a3d-7cf1-468e-a157-c294a4002454.jpg",
+            "image_after": "shopify://shop_images/354132505_582885927326551_8106202714240206805_n.jpg"
+          }
+        },
+        "pair_9gzdxW": {
+          "type": "pair",
+          "settings": {
+            "image_before": "shopify://shop_images/c875f5ab-ae50-4921-a2a5-56b7ebd0b2d5_1_1.jpg",
+            "image_after": "shopify://shop_images/Screenshot_2.png"
+          }
+        }
+      },
+      "block_order": [
+        "pair_M8YNrM",
+        "pair_DTREnX",
+        "pair_9gzdxW"
+      ],
+      "name": "Before-After (up to 3 side-by-side)",
+      "settings": {
+        "title": "",
+        "image_border_radius": 40,
+        "section_top_padding_desktop": 120,
+        "section_bottom_padding_desktop": 120,
+        "section_top_padding_tablet": 80,
+        "section_bottom_padding_tablet": 80,
+        "section_top_padding_mobile": 64,
+        "section_bottom_padding_mobile": 64
       }
     },
     "faq_9EETYf": {
@@ -1240,6 +1282,7 @@
     "reviews_new_DCDLgN",
     "list_new_cmYi3M",
     "table_with_mark_xkzqbz",
+    "before_after_PDU48n",
     "faq_9EETYf",
     "1746812877af76f5ce"
   ]
