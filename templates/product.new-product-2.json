@@ -183,18 +183,18 @@
             "description": "Ships in 24h. Limited sizes moving fast. $14 shipping (Free on 3+ pairs)."
           }
         },
-        "product_image_B9Tr4A": {
-          "type": "product-image",
-          "settings": {
-            "type": "image",
-            "preview_image": "shopify://shop_images/Group_80_10_1.jpg"
-          }
-        },
         "product_image_i8cUn3": {
           "type": "product-image",
           "settings": {
             "type": "image",
             "preview_image": "shopify://shop_images/Group_80_11_1.jpg"
+          }
+        },
+        "product_image_B9Tr4A": {
+          "type": "product-image",
+          "settings": {
+            "type": "image",
+            "preview_image": "shopify://shop_images/Group_80_10_1.jpg"
           }
         },
         "product_image_mhYBeq": {
@@ -265,8 +265,8 @@
         "tab_NWA7QA",
         "shipping_f8f7EN",
         "shipping_fQdztH",
-        "product_image_B9Tr4A",
         "product_image_i8cUn3",
+        "product_image_B9Tr4A",
         "product_image_mhYBeq",
         "product_image_K8mL6B",
         "product_image_eNTpmq",
@@ -499,22 +499,6 @@
         "section_bottom_padding_mobile": 120
       }
     },
-    "1757541378522cbc1d": {
-      "type": "apps",
-      "blocks": {
-        "judge_me_reviews_review_widget_KzYd6W": {
-          "type": "shopify://apps/judge-me-reviews/blocks/review_widget/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
-          "settings": {
-            "review_data": "real_data",
-            "max_width": 1200
-          }
-        }
-      },
-      "block_order": [
-        "judge_me_reviews_review_widget_KzYd6W"
-      ],
-      "settings": {}
-    },
     "table_with_mark_dFDwmQ": {
       "type": "table-with-mark",
       "blocks": {
@@ -712,6 +696,22 @@
         "section_top_padding_mobile": 50,
         "section_bottom_padding_mobile": 50
       }
+    },
+    "1757541378522cbc1d": {
+      "type": "apps",
+      "blocks": {
+        "judge_me_reviews_review_widget_KzYd6W": {
+          "type": "shopify://apps/judge-me-reviews/blocks/review_widget/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
+          "settings": {
+            "review_data": "real_data",
+            "max_width": 1200
+          }
+        }
+      },
+      "block_order": [
+        "judge_me_reviews_review_widget_KzYd6W"
+      ],
+      "settings": {}
     },
     "reviews_new_DCDLgN": {
       "type": "reviews-new",
