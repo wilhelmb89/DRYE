@@ -410,6 +410,95 @@
         "scroll_speed_mobile": 25
       }
     },
+    "card_with_line_EHAcVW": {
+      "type": "card-with-line",
+      "blocks": {
+        "card_K4JFGT": {
+          "type": "card",
+          "settings": {
+            "icon": "shopify://shop_images/cream.png",
+            "text": "<p><strong>Creams & ointments </strong></p><p>→ Rub off fast. Skin still exposed.</p>"
+          }
+        },
+        "card_CJ4WmE": {
+          "type": "card",
+          "settings": {
+            "icon": "shopify://shop_images/baby-powder.png",
+            "text": "<p><strong>Powders & home fixes </strong></p><p>→ Clump, messy, little real relief.</p>"
+          }
+        },
+        "card_8QjNK7": {
+          "type": "card",
+          "settings": {
+            "icon": "shopify://shop_images/ointment.png",
+            "text": "<p><strong>Cotton liners </strong></p><p>→ Fine at first, then soaked.</p>"
+          }
+        },
+        "card_DimePd": {
+          "type": "card",
+          "settings": {
+            "icon": "shopify://shop_images/gloves.png",
+            "text": "<p><strong>Steroids & prescriptions </strong></p><p>→ Calm at first, flare returns.</p>"
+          }
+        },
+        "card_6MEyJd": {
+          "type": "card",
+          "settings": {
+            "icon": "shopify://shop_images/eczema.png",
+            "text": "<p><strong>Glove tricks & hacks</strong> </p><p>→ Irritated hands anyway.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "card_K4JFGT",
+        "card_CJ4WmE",
+        "card_8QjNK7",
+        "card_DimePd",
+        "card_6MEyJd"
+      ],
+      "name": "Card With Line",
+      "settings": {
+        "background_color": "#FFFFFF",
+        "title": "",
+        "title_color": "#000000",
+        "title_alignment": "left",
+        "title_font_size": 48,
+        "title_line_height": 39,
+        "title_top_padding": 0,
+        "title_bottom_padding": 60,
+        "title_alignment_mobile": "left",
+        "title_font_size_mobile": 28,
+        "title_line_height_mobile": 38,
+        "title_top_padding_mobile": 0,
+        "title_bottom_padding_mobile": 60,
+        "line_height": 1,
+        "line_color": "#000000",
+        "dot_size": 5,
+        "dot_position": 8,
+        "dot_color": "#000000",
+        "block_count": 6,
+        "block_direction": "row",
+        "block_direction_mobile": "column",
+        "block_spacing": 40,
+        "icon_area_size": 30,
+        "icon_area_color": "#ffffff",
+        "icon_size": 64,
+        "padding_between_line_and_icon": 20,
+        "padding_between_icon_and_text": 18,
+        "padding_between_icon_and_text_mobile": 10,
+        "text_color": "#000000",
+        "text_font_size": 16,
+        "text_line_height": 24,
+        "text_font_size_mobile": 16,
+        "text_line_height_mobile": 24,
+        "section_top_padding": 120,
+        "section_bottom_padding": 120,
+        "section_top_padding_tablet": 80,
+        "section_bottom_padding_tablet": 80,
+        "section_top_padding_mobile": 120,
+        "section_bottom_padding_mobile": 120
+      }
+    },
     "1757541378522cbc1d": {
       "type": "apps",
       "blocks": {
@@ -424,10 +513,6 @@
       "block_order": [
         "judge_me_reviews_review_widget_KzYd6W"
       ],
-      "settings": {}
-    },
-    "1746812889a5f81d00": {
-      "type": "apps",
       "settings": {}
     },
     "table_with_mark_dFDwmQ": {
@@ -1572,102 +1657,13 @@
     "1746812877af76f5ce": {
       "type": "apps",
       "settings": {}
-    },
-    "card_with_line_EHAcVW": {
-      "type": "card-with-line",
-      "blocks": {
-        "card_K4JFGT": {
-          "type": "card",
-          "settings": {
-            "icon": "shopify://shop_images/cream.png",
-            "text": "<p><strong>Creams & ointments </strong>→ Rub off fast. Skin still exposed.</p>"
-          }
-        },
-        "card_CJ4WmE": {
-          "type": "card",
-          "settings": {
-            "icon": "shopify://shop_images/baby-powder.png",
-            "text": "<p><strong>Powders & home fixes </strong>→ Clump, messy, little real relief.</p>"
-          }
-        },
-        "card_8QjNK7": {
-          "type": "card",
-          "settings": {
-            "icon": "shopify://shop_images/ointment.png",
-            "text": "<p><strong>Cotton liners </strong>→ Fine at first, then soaked.</p>"
-          }
-        },
-        "card_DimePd": {
-          "type": "card",
-          "settings": {
-            "icon": "shopify://shop_images/gloves.png",
-            "text": "<p><strong>Steroids & prescriptions </strong>→ Calm at first, flare returns.</p>"
-          }
-        },
-        "card_6MEyJd": {
-          "type": "card",
-          "settings": {
-            "icon": "shopify://shop_images/eczema.png",
-            "text": "<p><strong>Glove tricks & hacks</strong> → Irritated hands anyway.</p>"
-          }
-        }
-      },
-      "block_order": [
-        "card_K4JFGT",
-        "card_CJ4WmE",
-        "card_8QjNK7",
-        "card_DimePd",
-        "card_6MEyJd"
-      ],
-      "name": "Card With Line",
-      "settings": {
-        "background_color": "#FFFFFF",
-        "title": "",
-        "title_color": "#000000",
-        "title_alignment": "center",
-        "title_font_size": 48,
-        "title_line_height": 55,
-        "title_top_padding": 0,
-        "title_bottom_padding": 60,
-        "title_alignment_mobile": "left",
-        "title_font_size_mobile": 48,
-        "title_line_height_mobile": 55,
-        "title_top_padding_mobile": 0,
-        "title_bottom_padding_mobile": 60,
-        "line_height": 1,
-        "line_color": "#000000",
-        "dot_size": 10,
-        "dot_position": 22,
-        "dot_color": "#000000",
-        "block_count": 3,
-        "block_direction": "row",
-        "block_direction_mobile": "column",
-        "block_spacing": 50,
-        "icon_area_size": 64,
-        "icon_area_color": "#E5E5E5",
-        "icon_size": 30,
-        "padding_between_line_and_icon": 24,
-        "padding_between_icon_and_text": 40,
-        "padding_between_icon_and_text_mobile": 20,
-        "text_color": "#000000",
-        "text_font_size": 16,
-        "text_line_height": 24,
-        "text_font_size_mobile": 16,
-        "text_line_height_mobile": 24,
-        "section_top_padding": 120,
-        "section_bottom_padding": 120,
-        "section_top_padding_tablet": 80,
-        "section_bottom_padding_tablet": 80,
-        "section_top_padding_mobile": 120,
-        "section_bottom_padding_mobile": 120
-      }
     }
   },
   "order": [
     "product_with_gallery_GRxyix",
     "icons_Bt7DUV",
+    "card_with_line_EHAcVW",
     "1757541378522cbc1d",
-    "1746812889a5f81d00",
     "table_with_mark_dFDwmQ",
     "reviews_new_DCDLgN",
     "multirows_new_8H9TGW",
@@ -1679,7 +1675,6 @@
     "image_slider_4gd6Nt",
     "columns_with_video_NjHpQy",
     "faq_9EETYf",
-    "1746812877af76f5ce",
-    "card_with_line_EHAcVW"
+    "1746812877af76f5ce"
   ]
 }
