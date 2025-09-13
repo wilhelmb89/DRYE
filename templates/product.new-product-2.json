@@ -528,25 +528,10 @@
             "controls": true,
             "position": "row"
           }
-        },
-        "row_7GADfb": {
-          "type": "row",
-          "settings": {
-            "title": "Recognized Innovation",
-            "content": "<p>DRYE was awarded the SKAPA Prize in memory of Alfred Nobel (2020) for its textile technology — developed to prevent MASD from breaking down the skin in protective equipment, and to address widespread hand issues like contact dermatitis, cracked, dry, or sensitive skin.</p>",
-            "button_text": "",
-            "button_url": "",
-            "controls": true,
-            "image": "shopify://shop_images/Alfred_main.jpg",
-            "image_tablet": "shopify://shop_images/Alfred_main.jpg",
-            "image_mobile": "shopify://shop_images/Alfred_main.jpg",
-            "position": "row-reverse"
-          }
         }
       },
       "block_order": [
-        "row_A4dPPg",
-        "row_7GADfb"
+        "row_A4dPPg"
       ],
       "name": "Multirows(New)",
       "settings": {
@@ -554,7 +539,7 @@
         "overlap": false,
         "title": "",
         "invert": true,
-        "bg": "#ffffff",
+        "bg": "#111111",
         "tx": "#111111",
         "sub_title_font_size_desktop": 48,
         "sub_title_line_height_desktop": 55,
@@ -637,6 +622,106 @@
         "padding_bottom_mobile": 40,
         "padding_left_mobile": 0,
         "padding_right_mobile": 0
+      }
+    },
+    "reviews_new_DCDLgN": {
+      "type": "reviews-new",
+      "blocks": {
+        "review_fyYkBP": {
+          "type": "review",
+          "settings": {
+            "content": "<p>I’ve had eczema on my palms since birth and have used steroid creams for years. My skin usually breaks from the slightest activity. These gloves have helped with workouts, and DIY by keeping my hands cooler and drier. They’ve made a difference, I can finally do things like help my wife in the garden without my skin breaking.</p>",
+            "author": "Jon-Paul E.",
+            "prof": "DIY hobbyist",
+            "avatar": "shopify://shop_images/132398987_10158617809496488_9144586833322558088_n.jpg"
+          }
+        },
+        "review_HqJdNj": {
+          "type": "review",
+          "settings": {
+            "content": "<p>I have eczema and these gloves have been the best things I bought for my hands. I have to wear latex gloves all day for work. I wear the DRYE gloves then the latex gloves on top. Every hour, I would change my gloves and notice the sweat on my DRYE - but my hands remain dried. When my skin is dried and cracked, I would wear just the DRYE at home and my hands feel better. Thank you so much for making these! <br/></p>",
+            "author": "Phuong Ngo",
+            "prof": "Nail Technician",
+            "avatar": "shopify://shop_images/360_F_1029660575_DPdwknEa7hiEveRujsBmxXLfFxJM31UA.jpg"
+          }
+        },
+        "review_erqkFp": {
+          "type": "review",
+          "settings": {
+            "content": "",
+            "author": "",
+            "prof": ""
+          }
+        },
+        "review_fyYWAd": {
+          "type": "review",
+          "settings": {
+            "content": "",
+            "author": "",
+            "prof": ""
+          }
+        },
+        "review_XcgGzB": {
+          "type": "review",
+          "settings": {
+            "content": "",
+            "author": "",
+            "prof": ""
+          }
+        },
+        "review_C89db8": {
+          "type": "review",
+          "settings": {
+            "content": "",
+            "author": "",
+            "prof": ""
+          }
+        },
+        "review_h7XYR9": {
+          "type": "review",
+          "settings": {
+            "content": "",
+            "author": "",
+            "prof": ""
+          }
+        },
+        "review_KYfGNc": {
+          "type": "review",
+          "settings": {
+            "content": "",
+            "author": "",
+            "prof": ""
+          }
+        }
+      },
+      "block_order": [
+        "review_fyYkBP",
+        "review_HqJdNj",
+        "review_erqkFp",
+        "review_fyYWAd",
+        "review_XcgGzB",
+        "review_C89db8",
+        "review_h7XYR9",
+        "review_KYfGNc"
+      ],
+      "name": "Reviews(New)",
+      "settings": {
+        "background_color": "#111111",
+        "all_text_color": "#ffffff",
+        "title": "Reviews",
+        "title_font_size_desktop": 48,
+        "title_line_height_desktop": 55,
+        "title_font_size_tablet": 42,
+        "title_line_height_tablet": 50,
+        "title_font_size_mobile": 24,
+        "title_line_height_mobile": 30,
+        "subtitle": "",
+        "name_font_size_desktop": 18,
+        "name_line_height_desktop": 24,
+        "name_font_size_tablet": 18,
+        "name_line_height_tablet": 24,
+        "name_font_size_mobile": 18,
+        "name_line_height_mobile": 24
       }
     },
     "table_with_mark_xkzqbz": {
@@ -1037,6 +1122,7 @@
     "image_slider_4gd6Nt",
     "multirows_new_8H9TGW",
     "rich_text_with_image_6awd6R",
+    "reviews_new_DCDLgN",
     "table_with_mark_xkzqbz",
     "faq_9EETYf",
     "1746812877af76f5ce"
