@@ -6113,3 +6113,21 @@ body.template-policy .shopify-policy__body b {
   background-color: #fff !important;
   border-color: #fff !important;
 }
+/* Close: vit oavsett hur snippeten ritar krysset */
+#menuClose,
+#menuDrawer .close { color:#fff !important; }
+
+/* SVG-varianter */
+#menuClose svg,
+#menuClose svg * { fill:#fff !important; stroke:#fff !important; }
+
+/* Vanliga element i en "kryss"-SVG */
+#menuClose svg path,
+#menuClose svg line,
+#menuClose svg polyline,
+#menuClose svg rect,
+#menuClose svg circle { stroke:#fff !important; fill:#fff !important; }
+
+/* Pseudoelement-kryss (två linjer) */
+#menuClose::before,
+#menuClose::after { background:#fff !important; border-color:#fff !important; }
