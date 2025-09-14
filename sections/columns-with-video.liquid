@@ -260,10 +260,10 @@
         thumb.style.display = "none";
 
 if (player.tagName === "IFRAME") {
-  // Använd helst data-play-src (redan korrekt byggd i Liquid)
+  // Använd helst data-play-src (byggd i Liquid)
   let url = player.getAttribute("data-play-src");
   if (!url) {
-    // Fallback: bygg från data-video-source om data-play-src saknas
+    // Fallback om data-play-src saknas
     url = player.getAttribute("data-video-source") || "";
     if (url) {
       const hasQuery = url.indexOf("?") > -1;
