@@ -16,3 +16,19 @@
   };
 </script>
 <script src="https://cdn.jsdelivr.net/npm/sharer.js@latest/sharer.min.js" defer></script>
+
+{%- comment -%} Core vendor + theme bundles {%- endcomment -%}
+<script src="{{ 'vendor.js' | asset_url }}" defer></script>
+<script src="{{ 'main.bundle.js' | asset_url }}" defer></script>
+
+{%- comment -%} Använd minifierad theme om den finns {%- endcomment -%}
+{%- if assets['theme.min.js'] -%}
+  <script src="{{ 'theme.min.js' | asset_url }}" defer></script>
+{%- else -%}
+  <script src="{{ 'theme.js' | asset_url }}" defer></script>
+{%- endif -%}
+
+{%- comment -%} Ladda Swiper endast där den behövs {%- endcomment -%}
+{%- if request.page_type == 'product' or template.name == 'index' -%}
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js" defer></script>
+{%- endif -%}
