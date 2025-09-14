@@ -156,19 +156,21 @@
                   <source src="{{ video_url }}" type="video/mp4" width="{{ video_width }}px" height="{{ video_height }}px">
                 </video>
               {% else %}
-                <iframe 
-                  class="video-player"
-                  style="aspect-ratio: {{ aspect_ratio }}"
-                  src="{{ video_url }}"
-                  data-play-src="{{ autoplay_url }}"
-                  data-video-source="{{ video_url }}"
-                  width="100%"
-                  height="auto"
-                  frameborder="0"
-                  allow="autoplay; encrypted-media; picture-in-picture"
-                  allowfullscreen
-                >
-                </iframe>
+<iframe 
+  class="video-player"
+  style="aspect-ratio: {{ aspect_ratio }}"
+  src="about:blank"   <!-- tomt tills man klickar -->
+  data-play-src="{{ autoplay_url }}"
+  data-video-source="{{ video_url }}"
+  width="100%"
+  height="auto"
+  frameborder="0"
+  allow="autoplay; encrypted-media; picture-in-picture"
+  allowfullscreen
+  loading="lazy"
+>
+</iframe>
+
               {% endif %}
             </div>
           </div>
