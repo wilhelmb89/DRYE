@@ -1487,12 +1487,11 @@ style="aspect-ratio: {{ product_thumbnail.settings.image_mobile.width }} / {{ pr
                                                               <img
   class=""
   src="{{ ss.image | img_url: '600x', format: 'pjpg' }}"
-  srcset="
-    {{ ss.image | img_url: '600x',  format: 'pjpg' }} 600w,
-    {{ ss.image | img_url: '900x',  format: 'pjpg' }} 900w,
-    {{ ss.image | img_url: '1200x', format: 'pjpg' }} 1200w,
-    {{ ss.image | img_url: '2000x', format: 'pjpg' }} 2000w
-  "
+srcset="
+  {{ ss.image | img_url: '600x',  format: 'pjpg' }} 600w,
+  {{ ss.image | img_url: '900x',  format: 'pjpg' }} 900w,
+  {{ ss.image | img_url: '1200x', format: 'pjpg' }} 1200w
+"
   sizes="(max-width: 600px) 100vw, 75vw"
   width="{{ ss.image.width }}"
   height="{{ ss.image.height }}"
