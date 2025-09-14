@@ -99,14 +99,15 @@
 
 <script>
   document.addEventListener("DOMContentLoaded", function() {
-    // Target Shopify’s vendor.js, clarity.js, perf-kit och andra tunga scripts
-    document.querySelectorAll('script[src*="vendor"], script[src*="clarity"], script[src*="perf-kit"]').forEach(function(el) {
+    // Endast analytics/performance-script skjuts upp
+    document.querySelectorAll('script[src*="clarity"], script[src*="perf-kit"], script[src*="bundle.5gtb"]').forEach(function(el) {
       if (!el.hasAttribute("defer")) {
         el.setAttribute("defer", "defer");
       }
     });
   });
 </script>
+
 
    
   </head>
