@@ -1,3 +1,4 @@
+{%- comment -%} === Globala routes (behövs) === {%- endcomment -%}
 <script>
   {% liquid
     if routes.root_url == '/'
@@ -15,20 +16,42 @@
     predictive_search_url: '{{ routes.predictive_search_url }}',
   };
 </script>
-<script src="https://cdn.jsdelivr.net/npm/sharer.js@latest/sharer.min.js" defer></script>
 
-{%- comment -%} Core vendor + theme bundles {%- endcomment -%}
+{%- comment -%} === Core bundles (defer) === {%- endcomment -%}
 <script src="{{ 'vendor.js' | asset_url }}" defer></script>
 <script src="{{ 'main.bundle.js' | asset_url }}" defer></script>
-
-{%- comment -%} Använd minifierad theme om den finns {%- endcomment -%}
 {%- if assets['theme.min.js'] -%}
   <script src="{{ 'theme.min.js' | asset_url }}" defer></script>
 {%- else -%}
   <script src="{{ 'theme.js' | asset_url }}" defer></script>
 {%- endif -%}
 
-{%- comment -%} Ladda Swiper endast där den behövs {%- endcomment -%}
-{%- if request.page_type == 'product' or template.name == 'index' -%}
-  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js" defer></script>
+{%- comment -%} === Hjälpfunktioner för senladdning === {%- endcomment -%}
+<script>
+  window.loadScript = function (src) {
+    var s = document.createElement('script'); s.src = src; s.defer = true; document.body.appendChild(s);
+  };
+  window.onIdle = function (cb) {
+    if ('requestIdleCallback' in window) requestIdleCallback(cb, {timeout: 3000});
+    else setTimeout(cb, 3000);
+  };
+</script>
+
+{%- comment -%} === Swiper: ladda ENDAST om den faktiskt finns i DOM === {%- endcomment -%}
+<script>
+  (function () {
+    var hasSwiper = document.querySelector('.swiper, .swiper-container');
+    if (!hasSwiper) return;
+    // OBS: Ladda INTE detta om Swiper redan är inbakat i dina bundles.
+    loadScript('https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js');
+  })();
+</script>
+
+{%- comment -%} === Sharer: bara på sidor där delningsknappar finns (produkt/artikel) och gärna efter idle === {%- endcomment -%}
+{%- if request.page_type == 'product' or request.page_type == 'article' -%}
+<script>
+  onIdle(function () {
+    loadScript('https://cdn.jsdelivr.net/npm/sharer.js@latest/sharer.min.js');
+  });
+</script>
 {%- endif -%}
