@@ -854,42 +854,34 @@ swiper-container:not(:defined) { visibility: hidden; }
       <div class="product-slider">
         <swiper-container class="product-image-slider" init="false" data-gallery="main">
           <swiper-slide>
-{% assign first_thumb = product_thumbnails[0] %}
-<swiper-slide>
-  {% if ss.image != blank %}
-    <div class="slider-image">
-      <img
-        src="{{ ss.image | img_url: '600x', format: 'pjpg' }}"
-        srcset="
-          {{ ss.image | img_url: '600x', format: 'pjpg' }} 600w,
-          {{ ss.image | img_url: '900x', format: 'pjpg' }} 900w,
-          {{ ss.image | img_url: '1200x', format: 'pjpg' }} 1200w
-        "
-        sizes="(max-width: 600px) 100vw, 75vw"
-        alt="{{ product.title }}"
-        loading="eager"
-        fetchpriority="high"
-        decoding="async"
-      >
-    </div>
-  {% elsif first_thumb.settings.type == 'image' %}
-    <div class="slider-image">
-      <img
-        src="{{ first_thumb.settings.preview_image | img_url: '600x', format: 'pjpg' }}"
-        srcset="
-          {{ first_thumb.settings.preview_image | img_url: '600x', format: 'pjpg' }} 600w,
-          {{ first_thumb.settings.preview_image | img_url: '900x', format: 'pjpg' }} 900w,
-          {{ first_thumb.settings.preview_image | img_url: '1200x', format: 'pjpg' }} 1200w
-        "
-        sizes="(max-width: 600px) 100vw, 75vw"
-        alt="{{ product.title }}"
-        loading="eager"
-        fetchpriority="high"
-        decoding="async"
-      >
-    </div>
-</swiper-slide>
+            {% if ss.media_type == 'image' %}
+              {%- if ss.image != blank -%}
+                {% comment %}
+                  <img
+                  class="preview-trigger"
+                  data-preview-id="0"
+                  src="{{ ss.image | img_url: '600x', format: 'pjpg' }}"
+                  width="100%"
+                  height="auto"/>
+                {% endcomment %}
+                <img
+  class="preview-trigger"
+  data-preview-id="0"
+  src="{{ product_thumbnail.settings.preview_image | img_url: '600x', format: 'pjpg' }}"
+srcset="
+  {{ product_thumbnail.settings.preview_image | img_url: '300x', format: 'pjpg' }} 300w,
+  {{ product_thumbnail.settings.preview_image | img_url: '600x', format: 'pjpg' }} 600w,
+  {{ product_thumbnail.settings.preview_image | img_url: '1080x', format: 'pjpg' }} 1080w
+"
+sizes="(max-width: 600px) 100vw, (max-width: 1024px) 800px, 1080px"
+  width="{{ ss.image.width }}"
+  height="{{ ss.image.height }}"
+  style="aspect-ratio: {{ ss.image.width }} / {{ ss.image.height }}; object-fit: cover;"
+  loading="eager" fetchpriority="high" decoding="async"
+/>
 
+                >
+              {%- endif -%}
             {% else %}
               {% if ss.model != blank %}
                 <model-viewer
