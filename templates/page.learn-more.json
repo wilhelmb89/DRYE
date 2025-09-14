@@ -9,58 +9,26 @@
  */
 {
   "sections": {
-    "home_hero_with_image_8FmxyC": {
-      "type": "home-hero-with-image",
-      "name": "Home Hero With Image",
+    "home_hero_new_d4VhFT": {
+      "type": "home-hero-new",
+      "name": "Homepage Hero(New)",
       "settings": {
-        "background_image": "shopify://shop_images/Textile-Fashion-Center-3-scaled_1.webp",
-        "background_image_tablet": "shopify://shop_images/Textile-Fashion-Center-3-scaled_1.webp",
-        "background_image_mobile": "shopify://shop_images/Textile-Fashion-Center-3-scaled_1.webp",
-        "invert": true,
-        "content_gap": 32,
-        "content_gap_mobile": 14,
         "title": "Independent Research on Glove Use and Skin Health",
-        "title_font_size_desktop": 50,
-        "title_line_height_desktop": 60,
-        "title_font_size_tablet": 50,
-        "title_line_height_tablet": 60,
-        "title_font_size_mobile": 28,
-        "title_line_height_mobile": 32,
-        "show_divider": true,
-        "divider_color": "#ffffff",
-        "subtitle": "Peer-reviewed studies show that trapped sweat under gloves weakens the skin barrier, increases irritation, and triggers dermatitis flare-ups.",
-        "sub_title_font_size_desktop": 18,
-        "sub_title_line_height_desktop": 31,
-        "sub_title_font_size_tablet": 18,
-        "sub_title_line_height_tablet": 32,
-        "sub_title_font_size_mobile": 18,
-        "sub_title_line_height_mobile": 29,
-        "content": "",
-        "content_font_size_desktop": 16,
-        "content_line_height_desktop": 24,
-        "content_font_size_tablet": 16,
-        "content_line_height_tablet": 24,
-        "content_font_size_mobile": 16,
-        "content_line_height_mobile": 24,
+        "cover_image": "shopify://shop_images/2E9A8886ny2.webp",
+        "stars": 5,
+        "review_text": "<p>Peer-reviewed studies show that trapped sweat under gloves weakens the skin barrier, increases irritation, and triggers dermatitis flare-ups.</p>",
+        "review_text_font_size_desktop": 16,
+        "review_text_line_height_desktop": 24,
+        "review_text_font_size_tablet": 16,
+        "review_text_line_height_tablet": 24,
+        "review_text_font_size_mobile": 16,
+        "review_text_line_height_mobile": 24,
+        "reviews_link": "",
         "button_text": "",
         "button_url": "",
-        "button_color": "#ffffff",
-        "button_text_color": "#000000",
-        "button_font_size": 16,
-        "button_line_height": 21,
-        "show_arrow": false,
+        "bg": "#ffffff",
         "check_review_text": "",
-        "review_url": "",
-        "check_review_text_color": "#ffffff",
-        "section_border_radius": 96,
-        "section_border_radius_tablet": 38,
-        "section_border_radius_mobile": 28,
-        "padding_y": 96,
-        "padding_x": 0,
-        "padding_y_tablet": 40,
-        "padding_x_tablet": 48,
-        "padding_y_mobile": 100,
-        "padding_x_mobile": 0
+        "review_url": ""
       }
     },
     "multirows_new_wVN7GV": {
@@ -77,7 +45,7 @@
             "image": "shopify://shop_images/kopia.webp",
             "image_tablet": "shopify://shop_images/kopia.webp",
             "image_mobile": "shopify://shop_images/kopia.webp",
-            "position": "row"
+            "position": "row-reverse"
           }
         }
       },
@@ -186,7 +154,7 @@
     }
   },
   "order": [
-    "home_hero_with_image_8FmxyC",
+    "home_hero_new_d4VhFT",
     "multirows_new_wVN7GV",
     "faq_4g7Pag",
     "articles_new_nnzJaL"
