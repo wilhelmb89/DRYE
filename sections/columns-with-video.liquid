@@ -156,19 +156,46 @@
                   <source src="{{ video_url }}" type="video/mp4" width="{{ video_width }}px" height="{{ video_height }}px">
                 </video>
               {% else %}
-                <iframe 
-                  class="video-player"
-                  style="aspect-ratio: {{ aspect_ratio }}"
-                  src="{{ video_url }}"
-                  data-play-src="{{ autoplay_url }}"
-                  data-video-source="{{ video_url }}"
-                  width="100%"
-                  height="auto"
-                  frameborder="0"
-                  allow="autoplay; encrypted-media; picture-in-picture"
-                  allowfullscreen
-                >
-                </iframe>
+{%- liquid
+  assign is_yt = false
+  assign yt_id = ''
+  if video_url contains 'youtu.be/'
+    assign yt_id = video_url | split: 'youtu.be/' | last | split: '?' | first
+    assign is_yt = true
+  elsif video_url contains 'watch?v='
+    assign yt_id = video_url | split: 'v=' | last | split: '&' | first
+    assign is_yt = true
+  elsif video_url contains 'youtube.com/embed/'
+    assign yt_id = video_url | split: 'embed/' | last | split: '?' | first
+    assign is_yt = true
+  endif
+-%}
+
+{% if is_yt %}
+  {%- comment -%} Lättviktigt YouTube-fasadkort, ladda riktig spelare först vid klick {%- endcomment -%}
+  <div class="yt-lite" data-videoid="{{ yt_id }}" style="aspect-ratio: {{ aspect_ratio }};">
+    <img
+      src="https://i.ytimg.com/vi/{{ yt_id }}/hqdefault.jpg"
+      alt="{{ block.settings.title | escape }}"
+      loading="lazy"
+      width="100%" height="auto">
+    <button class="yt-play" aria-label="Play"></button>
+  </div>
+{% else %}
+  <iframe 
+    class="video-player"
+    style="aspect-ratio: {{ aspect_ratio }}"
+    src="{{ video_url }}"
+    data-play-src="{{ autoplay_url }}"
+    data-video-source="{{ video_url }}"
+    width="100%"
+    height="auto"
+    frameborder="0"
+    allow="autoplay; encrypted-media; picture-in-picture"
+    allowfullscreen
+  ></iframe>
+{% endif %}
+
               {% endif %}
             </div>
           </div>
