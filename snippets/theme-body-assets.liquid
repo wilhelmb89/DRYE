@@ -1,4 +1,4 @@
-{%- comment -%} === Globala routes (behövs) === {%- endcomment -%}
+{%- comment -%} === Globala routes (behövs av Shopify) === {%- endcomment -%}
 <script>
   {% liquid
     if routes.root_url == '/'
@@ -17,7 +17,7 @@
   };
 </script>
 
-{%- comment -%} === Core bundles (defer) === {%- endcomment -%}
+{%- comment -%} === Dina bundles (alltid defer) === {%- endcomment -%}
 <script src="{{ 'vendor.js' | asset_url }}" defer></script>
 <script src="{{ 'main.bundle.js' | asset_url }}" defer></script>
 {%- if assets['theme.min.js'] -%}
@@ -37,17 +37,16 @@
   };
 </script>
 
-{%- comment -%} === Swiper: ladda ENDAST om den faktiskt finns i DOM === {%- endcomment -%}
+{%- comment -%} === Swiper: ladda ENDAST om den finns på sidan === {%- endcomment -%}
 <script>
   (function () {
-    var hasSwiper = document.querySelector('.swiper, .swiper-container');
-    if (!hasSwiper) return;
-    // OBS: Ladda INTE detta om Swiper redan är inbakat i dina bundles.
+    if (!document.querySelector('.swiper, .swiper-container')) return;
+    // OBS: Använd detta CDN bara om Swiper INTE redan ingår i dina bundles.
     loadScript('https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js');
   })();
 </script>
 
-{%- comment -%} === Sharer: bara på sidor där delningsknappar finns (produkt/artikel) och gärna efter idle === {%- endcomment -%}
+{%- comment -%} === Sharer (delningsknappar): endast på produkt/artikel & efter idle === {%- endcomment -%}
 {%- if request.page_type == 'product' or request.page_type == 'article' -%}
 <script>
   onIdle(function () {
