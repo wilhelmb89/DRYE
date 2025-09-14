@@ -27,8 +27,15 @@
 .product-image-section .swiper-button-prev { left: 10px; }
 .product-image-section .swiper-button-next { right: 10px; }
 
+
 /* Om Swiper skulle “låsa” dem ändå */
 .swiper-button-lock { display: flex !important; }
+#menu-drawer,
+.menu-drawer,
+.menu-drawer__overlay {
+  position: fixed;
+  z-index: 1200 !important;
+}
             /* FOUC-skydd: dölj extra slides tills webkomponenten är definierad */
 swiper-container:not(:defined) > swiper-slide:not(:first-child) { display: none; }
 /* valfritt: undvik blink genom att dölja hela containern tills definierad */
