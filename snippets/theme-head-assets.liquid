@@ -1,11 +1,19 @@
-{%- comment -%} HEAD ASSETS — CSS only {%- endcomment -%}
+{%- comment -%} HEAD — ENDAST CSS/FONTER {%- endcomment -%}
 
-{%- comment -%} Preload lokala fonter (ta bort ev. Google Fonts i theme.liquid) {%- endcomment -%}
+<!-- Snabblänkar till CDN (liten men gratis boost) -->
+<link rel="preconnect" href="https://cdn.shopify.com" crossorigin>
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+
+<!-- Preloada dina lokala fonter -->
 <link rel="preload" as="font" href="{{ 'Inter-Regular.woff2' | asset_url }}" type="font/woff2" crossorigin>
 <link rel="preload" as="font" href="{{ 'Inter-Light.woff2'   | asset_url }}" type="font/woff2" crossorigin>
 <link rel="preload" as="font" href="{{ 'ClashGrotesk-Variable.woff2' | asset_url }}" type="font/woff2" crossorigin>
 
+<!-- Huvud-CSS -->
 {{ 'style.bundle.css' | asset_url | stylesheet_tag: preload: true }}
 
+<!-- Sekundär CSS som kan vänta -->
 <link rel="stylesheet" href="{{ 'country-flags.css' | asset_url }}" media="print" onload="this.media='all';this.onload=null">
+
+<!-- (valfritt) Swiper CSS om du använder sliders -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
