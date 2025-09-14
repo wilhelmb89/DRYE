@@ -6094,29 +6094,22 @@ body.template-policy .shopify-policy__body b {
     line-height:28px !important;
   }
 }
-/* Gör X-knappen vit i menydrawern */
-#menu-drawer .close,
-.menu-drawer .close { 
-  color: #fff !important; /* för tecken- eller currentColor-baserade ikoner */
+/* Gör X-knappen vit – korrekt selektor för din header */
+#menuClose,
+#menuDrawer .close { 
+  color: #fff !important;               /* för ikoner som följer currentColor */
 }
 
-/* Pseudoelement-variant (två korslagda linjer) */
-#menu-drawer .close::before,
-#menu-drawer .close::after,
-.menu-drawer .close::before,
-.menu-drawer .close::after {
-  background-color: #fff !important;  /* vanligast */
-  border-color: #fff !important;       /* om linjerna ritas med border */
-}
-
-/* SVG-variant */
-#menu-drawer .close svg,
-#menu-drawer .close svg *,
-.menu-drawer .close svg,
-.menu-drawer .close svg * {
+/* Om ikonen är SVG – tvinga vit fill/stroke */
+#menuClose svg,
+#menuClose svg * {
   fill: #fff !important;
   stroke: #fff !important;
 }
 
-/* Sista utvägen om ikonen är en inbäddad mörk PNG/SVG som inte tar färg */
-#menu-drawer .close { filter: invert(1) brightness(200%); }
+/* Om krysset ritas med ::before/::after */
+#menuClose::before,
+#menuClose::after {
+  background-color: #fff !important;
+  border-color: #fff !important;
+}
