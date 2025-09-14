@@ -6132,3 +6132,8 @@ body.template-policy .shopify-policy__body b {
 #menuClose::before,
 #menuClose::after { background:#fff !important; border-color:#fff !important; }
 
+/* Policy-sidor, mobil */
+@media (max-width: 749px){
+  /* Välj rätt slutvärde: nu har du ~60px → sätt 100px */
+  .shopify-policy__container { padding-top: 100px !important; }
+}
