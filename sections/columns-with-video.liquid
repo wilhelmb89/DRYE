@@ -183,43 +183,64 @@
 
 <script>
   document.addEventListener("DOMContentLoaded", function() {
-    document.querySelectorAll(".section-{{ section.id }} .video-container").forEach(container => {
-      const video = container.querySelector(".video-player");
-      const videoThumbnail = container.querySelector(".video-thumbnail-cover");
-      const playBtn = container.querySelector(".video-play-button");
-  
-      if (video && videoThumbnail && playBtn) {
-        playBtn.addEventListener("click", function() {
-          document.querySelectorAll(".section-{{ section.id }} .video-player").forEach(v => {
-            if (video.tagName === "IFRAME") {
-              var originalUrl = v.getAttribute("data-video-source");
-              if (originalUrl) {
-                v.setAttribute("src", originalUrl);
-              }
-            } else {
-              if (v !== video) {
-                v.pause();
-              }
-            }
-            v.parentElement.querySelector(".video-thumbnail-cover").style.display = "block";
-          });
+    const scope = document.querySelector(".section-{{ section.id }}");
+    if (!scope) return;
 
-          videoThumbnail.style.display = 'none';
-          if (video.tagName === "IFRAME") {
-            var autoplayUrl = video.getAttribute("data-play-src");
-            if (autoplayUrl) {
-              video.setAttribute("src", autoplayUrl);
-            }
-          } else {          
-            video.currentTime = 0;
-            video.loop = true;
-            video.play();
-          }
-        });
+    // Hjälpfunktion: återställ ett containerkort
+    function resetContainer(c) {
+      const p = c.querySelector(".video-player");
+      const thumb = c.querySelector(".video-thumbnail-cover");
+      if (!p || !thumb) return;
+
+      if (p.tagName === "IFRAME") {
+        // Töm iframe så inget YouTube skräp ligger och tuggar
+        p.setAttribute("src", "about:blank");
+      } else {
+        try { p.pause(); } catch(e){}
+        p.currentTime = 0;
+        p.removeAttribute('src'); // frigör ev. buffrad ström
+        p.load();
       }
+      thumb.style.display = "block";
+    }
+
+    scope.querySelectorAll(".video-container").forEach(container => {
+      const player = container.querySelector(".video-player");
+      const thumb = container.querySelector(".video-thumbnail-cover");
+      const playBtn = container.querySelector(".video-play-button");
+      if (!player || !thumb || !playBtn) return;
+
+      playBtn.addEventListener("click", function () {
+        // 1) Återställ ALLA andra kort
+        scope.querySelectorAll(".video-container").forEach(c => {
+          if (c !== container) resetContainer(c);
+        });
+
+        // 2) Starta den klickade
+        thumb.style.display = "none";
+
+        if (player.tagName === "IFRAME") {
+          // Bygg play-URL från data-play-src och säkra parametrar
+          let url = player.getAttribute("data-play-src") || player.getAttribute("data-video-source") || "";
+          if (url) {
+            const hasQuery = url.indexOf("?") > -1;
+            const tail = "autoplay=1&mute=1&playsinline=1&rel=0&modestbranding=1";
+            url = url + (hasQuery ? "&" : "?") + tail;
+            // Byt till privacy-domän om det är YouTube
+            url = url.replace("https://www.youtube.com/embed/", "https://www.youtube-nocookie.com/embed/");
+            player.setAttribute("src", url);
+          }
+        } else {
+          // Native video
+          try { player.currentTime = 0; } catch(e){}
+          player.loop = true;
+          player.play();
+        }
+      });
     });
   });
 </script>
+
 
 {% schema %}
 {
