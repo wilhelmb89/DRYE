@@ -31,25 +31,27 @@
   window.loadScript = window.loadScript || function (src) {
     var s = document.createElement('script'); s.src = src; s.defer = true; document.body.appendChild(s);
   };
+  window.loadCSS = window.loadCSS || function (href) {
+    var l = document.createElement('link'); l.rel = 'stylesheet'; l.href = href; document.head.appendChild(l);
+  };
   window.onIdle = window.onIdle || function (cb) {
     if ('requestIdleCallback' in window) requestIdleCallback(cb, {timeout: 3000});
     else setTimeout(cb, 3000);
   };
-  window.loadCSS = window.loadCSS || function (href) {
-    var l = document.createElement('link'); l.rel = 'stylesheet'; l.href = href; document.head.appendChild(l);
-  };
 </script>
 
-{%- comment -%} === Swiper: ladda ENDAST om den finns på sidan === {%- endcomment -%}
+{%- comment -%} === Swiper: ladda ENDAST när den finns i DOM (CSS + JS) === {%- endcomment -%}
 <script>
   (function () {
     if (!document.querySelector('.swiper, .swiper-container')) return;
-    if (window.Swiper) return; // undvik dubblett om Swiper redan finns i bundle
-    loadScript('https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js');
+    if (!window.Swiper) {
+      loadCSS('https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css');
+      loadScript('https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js');
+    }
   })();
 </script>
 
-{%- comment -%} === Sharer (delningsknappar): endast på produkt/artikel & efter idle === {%- endcomment -%}
+{%- comment -%} === Sharer: endast på produkt/artikel & när knappar finns === {%- endcomment -%}
 {%- if request.page_type == 'product' or request.page_type == 'article' -%}
 <script>
   onIdle(function () {
@@ -60,7 +62,7 @@
 </script>
 {%- endif -%}
 
-{%- comment -%} === 3:e-parts: ladda bara vid behov, sist i filen === {%- endcomment -%}
+{%- comment -%} === 3:e-parts: ladda bara vid behov (sist i filen) === {%- endcomment -%}
 <script>
   // Judge.me – ladda bara om widget finns
   onIdle(function(){
@@ -71,4 +73,10 @@
     }
   });
 
-  // Clarity – skjut på tills idle (byt XXXXXXXX till d
+  // Clarity – valfritt: byt XXXXXXXX mot din tagg eller ta bort helt om du inte använder
+  onIdle(function(){
+    if (!window.clarity && !(window.Shopify && Shopify.designMode)) {
+      // loadScript('https://www.clarity.ms/tag/XXXXXXXX');
+    }
+  });
+</script>
