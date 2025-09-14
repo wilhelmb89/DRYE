@@ -120,14 +120,37 @@
                 -%}
               {%- endif -%}                
             {% else %} {% comment %}url{% endcomment %}
-              {%- liquid
-                 assign video_preview = block.settings.video_preview | img_url: '1024x'
-                 assign video_url = block.settings.video_url
-                 assign video_width = 476
-                 assign video_height = 319              
-                 assign aspect_ratio = video_width | times: 1.0 | divided_by: video_height
-                 assign autoplay_url = video_url | append: "?autoplay=1&mute=1&controls=0"
-              -%}
+{%- liquid
+  assign video_preview = block.settings.video_preview | img_url: '1024x'
+  assign raw_url = block.settings.video_url
+
+  assign video_width = 476
+  assign video_height = 319
+  assign aspect_ratio = video_width | times: 1.0 | divided_by: video_height
+
+  assign is_yt = false
+  assign yt_id = ''
+
+  if raw_url contains 'youtu.be/'
+    assign yt_id = raw_url | split: 'youtu.be/' | last | split: '?' | first
+    assign is_yt = true
+  elsif raw_url contains 'watch?v='
+    assign yt_id = raw_url | split: 'v=' | last | split: '&' | first
+    assign is_yt = true
+  elsif raw_url contains 'youtube.com/embed/'
+    assign yt_id = raw_url | split: 'embed/' | last | split: '?' | first
+    assign is_yt = true
+  endif
+
+  if is_yt
+    assign video_url = 'https://www.youtube-nocookie.com/embed/' | append: yt_id
+    assign autoplay_url = video_url | append: '?autoplay=1&mute=1&playsinline=1&rel=0&modestbranding=1'
+  else
+    assign video_url = raw_url
+    assign autoplay_url = raw_url
+  endif
+-%}
+
             {% endif %}
 
             <div class="video-container">
