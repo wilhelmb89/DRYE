@@ -923,6 +923,7 @@
       ],
       "name": "List with Image(New)",
       "settings": {
+        "image": "shopify://shop_images/Produktbild_hemsida_4_1_828e0455-f069-4818-b25f-6a802464d0b0.webp",
         "title": "\"My hands usually break from a hammer — not with these. I can finally do things like help my wife in the garden without my skin breaking. \"— Jon-Paul. E, UK",
         "title_font_size_desktop": 48,
         "title_line_height_desktop": 60,
@@ -978,6 +979,9 @@
             "button_text": "",
             "button_url": "",
             "controls": true,
+            "image": "shopify://shop_images/Alfred_main.webp",
+            "image_tablet": "shopify://shop_images/Alfred_main.webp",
+            "image_mobile": "shopify://shop_images/Alfred_main.webp",
             "position": "row-reverse"
           }
         }
@@ -1293,15 +1297,24 @@
       "blocks": {
         "pair_M8YNrM": {
           "type": "pair",
-          "settings": {}
+          "settings": {
+            "image_before": "shopify://shop_images/PXL_20250222_150439970.MP_1_1_1_4e74d1e8-883b-45c2-9e59-c80fedc714da.webp",
+            "image_after": "shopify://shop_images/PXL_20250411_133548754.MP_1_1_1_3e35e999-2af8-4011-bbac-2f35cf972bac.webp"
+          }
         },
         "pair_DTREnX": {
           "type": "pair",
-          "settings": {}
+          "settings": {
+            "image_before": "shopify://shop_images/eksem_4cf5a7b9-4cdf-41fe-bab4-e091658fd1e2.webp",
+            "image_after": "shopify://shop_images/354132505_582885927326551_8106202714240206805_n.webp"
+          }
         },
         "pair_9gzdxW": {
           "type": "pair",
-          "settings": {}
+          "settings": {
+            "image_before": "shopify://shop_images/c875f5ab-ae50-4921-a2a5-56b7ebd0b2d5_1_1_400f5dee-72c8-4450-b63b-c3be56a579a2.webp",
+            "image_after": "shopify://shop_images/Screenshot_2_92753925-0107-485b-8eb8-a4812a6b1bcd.webp"
+          }
         }
       },
       "block_order": [
@@ -1384,31 +1397,45 @@
         },
         "card_xt6TWX": {
           "type": "card",
-          "settings": {}
+          "settings": {
+            "preview_image": "shopify://shop_images/Screenshot_9_d3468de2-f3f9-4a1e-9346-1f6690098a4d.webp"
+          }
         },
         "card_bwGwH4": {
           "type": "card",
-          "settings": {}
+          "settings": {
+            "preview_image": "shopify://shop_images/Screenshot_10_1610ed25-3bb5-4f94-90f2-248fabcd305f.webp"
+          }
         },
         "card_b8H7Ft": {
           "type": "card",
-          "settings": {}
+          "settings": {
+            "preview_image": "shopify://shop_images/Screenshot_7_8149409e-03b7-45f3-beba-ec6967d4a6f6.webp"
+          }
         },
         "card_zFYQCQ": {
           "type": "card",
-          "settings": {}
+          "settings": {
+            "preview_image": "shopify://shop_images/Screenshot_3_0b9d3add-51ef-4e6b-969d-ec151b037864.webp"
+          }
         },
         "card_zp6djA": {
           "type": "card",
-          "settings": {}
+          "settings": {
+            "preview_image": "shopify://shop_images/Screenshot_6_fddded39-d59a-44c5-b749-6f281892b694.webp"
+          }
         },
         "card_TAkbfh": {
           "type": "card",
-          "settings": {}
+          "settings": {
+            "preview_image": "shopify://shop_images/Cahjnjjpture_378aa018-a25e-42be-83d2-665cc11fcefd.webp"
+          }
         },
         "card_mgQQFJ": {
           "type": "card",
-          "settings": {}
+          "settings": {
+            "preview_image": "shopify://shop_images/retouch_2025040920190095_1.webp"
+          }
         },
         "card_DdtbrD": {
           "type": "card",
