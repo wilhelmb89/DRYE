@@ -1,0 +1,19 @@
+{%- comment -%} LITE YOUTUBE FACADE {%- endcomment -%}
+{%- assign yt_id = id | default: media.external_id -%}
+{%- assign yt_title = title | default: media.alt | default: 'Video' -%}
+
+<div class="yt-lite" data-id="{{ yt_id }}" aria-label="{{ yt_title }}">
+  <button class="yt-play" aria-label="Spela video">
+    <svg viewBox="0 0 68 48" width="68" height="48" aria-hidden="true">
+      <path d="M66.52 7.04a8 8 0 0 0-5.64-5.66C56.7 0 34 0 34 0S11.3 0 7.12 1.38a8 8 0 0 0-5.64 5.66A83.1 83.1 0 0 0 0 24a83.1 83.1 0 0 0 1.48 16.96 8 8 0 0 0 5.64 5.66C11.3 48 34 48 34 48s22.7 0 26.88-1.38a8 8 0 0 0 5.64-5.66A83.1 83.1 0 0 0 68 24a83.1 83.1 0 0 0-1.48-16.96z" fill="#212121" opacity=".5"/>
+      <path d="M45 24 27 14v20z" fill="#fff"/>
+    </svg>
+  </button>
+  <img
+    loading="lazy"
+    alt=""
+    src="https://i.ytimg.com/vi/{{ yt_id }}/hqdefault.jpg"
+    width="480" height="360"
+    fetchpriority="low"
+  />
+</div>
