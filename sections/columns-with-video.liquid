@@ -233,7 +233,7 @@
       if (!p || !thumb) return;
 
       if (p.tagName === "IFRAME") {
-        // Töm iframe så inget YouTube skräp ligger och tuggar
+        // Töm iframe så inget YouTube-skräp ligger och tuggar
         p.setAttribute("src", "about:blank");
       } else {
         try { p.pause(); } catch(e){}
@@ -259,29 +259,32 @@
         // 2) Starta den klickade
         thumb.style.display = "none";
 
-if (player.tagName === "IFRAME") {
-  // Använd helst data-play-src (byggd i Liquid)
-  let url = player.getAttribute("data-play-src");
-  if (!url) {
-    // Fallback om data-play-src saknas
-    url = player.getAttribute("data-video-source") || "";
-    if (url) {
-      const hasQuery = url.indexOf("?") > -1;
-      const tail = "autoplay=1&mute=1&playsinline=1&rel=0&modestbranding=1";
-      url = url + (hasQuery ? "&" : "?") + tail;
-    }
-  }
-  if (url) {
-    url = url.replace("https://www.youtube.com/embed/", "https://www.youtube-nocookie.com/embed/");
-    player.setAttribute("src", url);
-  }
-} else {
-  try { player.currentTime = 0; } catch(e){}
-  player.loop = true;
-  player.play();
-}
-
+        if (player.tagName === "IFRAME") {
+          // Använd helst data-play-src (byggd i Liquid)
+          let url = player.getAttribute("data-play-src");
+          if (!url) {
+            // Fallback om data-play-src saknas
+            url = player.getAttribute("data-video-source") || "";
+            if (url) {
+              const hasQuery = url.indexOf("?") > -1;
+              const tail = "autoplay=1&mute=1&playsinline=1&rel=0&modestbranding=1";
+              url = url + (hasQuery ? "&" : "?") + tail;
+            }
+          }
+          if (url) {
+            url = url.replace("https://www.youtube.com/embed/", "https://www.youtube-nocookie.com/embed/");
+            player.setAttribute("src", url);
+          }
+        } else {
+          try { player.currentTime = 0; } catch(e){}
+          player.loop = true;
+          player.play();
+        }
+      }); // <-- STÄNGER click-handlern
+    });   // <-- STÄNGER forEach över containers
+  });     // <-- STÄNGER DOMContentLoaded
 </script>
+
 
 
 {% schema %}
