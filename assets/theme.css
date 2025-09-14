@@ -1829,41 +1829,7 @@ form label {
     letter-spacing: -0.4px;
     margin-top: 30px;
 }
-.main-product .content .review-section {
-    margin-top: 20px;
-    display: flex;
-    letter-spacing: -0.48px;
-    flex-direction: column;
-    gap: 15px;
-}
-.main-product .content .review-section svg {
-    pointer-events: all;
-    margin-top: -3px;
-}
-.main-product .content .review-section .reviews-title {
-    font-family: 'inter';
-    font-weight: 700;
-}
-.main-product .content .review-section .yotpo-sr-bottom-line-score {
-    color: #111111 !important;
-}
-.main-product .content .review-section .yotpo-sr-bottom-line-score::before {
-    content: '';
-    display: block;
-    height: 11px;
-    border-left: 1px solid black;
-    padding-right: 8px;
-    margin-block: auto;
-}
-.main-product .content .review-section .yotpo-sr-bottom-line-right-panel {
-    border-bottom: 1px solid #111111;
-    cursor: pointer;
-}
-.main-product .content .review-section .yotpo-sr-bottom-line-right-panel:hover {
-    border: none;
-}
-.main-product .content .review-section .yotpo-sr-bottom-line-text {
-    letter-spacing: -0.48px;
+
 }
 .main-product .content .hr-line {
     height: 1px;
@@ -4302,17 +4268,7 @@ footer {
     background-color: #f3f2f1;
 }
 
-.reviews-section svg {
-  width: 30px;
-  height: auto;
-}
 
-.reviews-section .prof {
-  display: -webkit-box;
-  -webkit-line-clamp: 1;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-}
 
 
 @media screen and (max-width: 1440px) {
@@ -4320,9 +4276,7 @@ footer {
         width: 500px;
         height: 500px;
     }
-    .reviews-section {
-      padding: 80px 48px;
-    }
+
 }
 
 @media screen and (max-width: 1024px) {
@@ -4389,10 +4343,7 @@ footer {
     .before-after .container .before-after-slider {
         max-width: 100%;
     }
-    .reviews-section {
-      padding: 64px 28px;
-    }
-}
+
 
 
 
