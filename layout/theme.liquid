@@ -136,7 +136,9 @@
     <script src="https://bundle.dyn-rev.app/loader.js" async></script>
     <!-- Bundle End -->
 
-    <script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.js" defer id="masonry-script"></script>
+  {%- if template.suffix == 'gallery' -%}
+  <script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.js" defer></script>
+{%- endif -%}
 
     
 
