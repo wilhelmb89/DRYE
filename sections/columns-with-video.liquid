@@ -74,7 +74,6 @@
   .section-{{ section.id }} .video-container {
   position: relative;
   width: 100%;
-  aspect-ratio: {{ aspect_ratio }};
   overflow: hidden;
 }
 .section-{{ section.id }} .video-thumbnail-cover {
@@ -171,7 +170,7 @@
 
             {% endif %}
 
-            <div class="video-container">
+            <div class="video-container" style="aspect-ratio: {{ aspect_ratio }};">
               <div class="video-thumbnail-cover">
                 <div class="video-play-button">
                   <img src="{{ block.settings.play_icon | img_url: '80x', format: 'pjpg' }}" width="80px" height="80px">
