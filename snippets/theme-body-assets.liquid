@@ -28,12 +28,15 @@
 
 {%- comment -%} === Hjälpfunktioner för senladdning === {%- endcomment -%}
 <script>
-  window.loadScript = function (src) {
+  window.loadScript = window.loadScript || function (src) {
     var s = document.createElement('script'); s.src = src; s.defer = true; document.body.appendChild(s);
   };
-  window.onIdle = function (cb) {
+  window.onIdle = window.onIdle || function (cb) {
     if ('requestIdleCallback' in window) requestIdleCallback(cb, {timeout: 3000});
     else setTimeout(cb, 3000);
+  };
+  window.loadCSS = window.loadCSS || function (href) {
+    var l = document.createElement('link'); l.rel = 'stylesheet'; l.href = href; document.head.appendChild(l);
   };
 </script>
 
@@ -41,7 +44,7 @@
 <script>
   (function () {
     if (!document.querySelector('.swiper, .swiper-container')) return;
-    // OBS: Använd detta CDN bara om Swiper INTE redan ingår i dina bundles.
+    if (window.Swiper) return; // undvik dubblett om Swiper redan finns i bundle
     loadScript('https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js');
   })();
 </script>
@@ -50,7 +53,22 @@
 {%- if request.page_type == 'product' or request.page_type == 'article' -%}
 <script>
   onIdle(function () {
-    loadScript('https://cdn.jsdelivr.net/npm/sharer.js@latest/sharer.min.js');
+    if (document.querySelector('[data-sharer]')) {
+      loadScript('https://cdn.jsdelivr.net/npm/sharer.js@latest/sharer.min.js');
+    }
   });
 </script>
 {%- endif -%}
+
+{%- comment -%} === 3:e-parts: ladda bara vid behov, sist i filen === {%- endcomment -%}
+<script>
+  // Judge.me – ladda bara om widget finns
+  onIdle(function(){
+    if (document.querySelector('.jdgm-widget, .jdgm-carousel, .jdgm-rev-widg')) {
+      loadCSS('https://cdnwidget.judge.me/widget_v3/base.css');
+      loadCSS('https://cdnwidget.judge.me/widget_v3/main.css');
+      loadScript('https://cdnwidget.judge.me/widget_v3/main.js');
+    }
+  });
+
+  // Clarity – skjut på tills idle (byt XXXXXXXX till d
