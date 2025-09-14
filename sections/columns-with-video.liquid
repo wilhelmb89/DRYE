@@ -70,6 +70,24 @@
       flex-direction: row;
     }
   }
+
+  .section-{{ section.id }} .video-container {
+  position: relative;
+  width: 100%;
+  aspect-ratio: {{ aspect_ratio }};
+  overflow: hidden;
+}
+.section-{{ section.id }} .video-thumbnail-cover {
+  position: absolute;
+  inset: 0;
+}
+.section-{{ section.id }} .video-container .video-thumbnail {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
 {% endstyle %}
 
 <div class="section-{{ section.id }}">
@@ -226,23 +244,6 @@
       }
       thumb.style.display = "block";
     }
-.section-{{ section.id }} .video-container {
-  position: relative;
-  width: 100%;
-  aspect-ratio: {{ aspect_ratio }};
-  overflow: hidden;
-}
-.section-{{ section.id }} .video-thumbnail-cover {
-  position: absolute;
-  inset: 0;
-}
-.section-{{ section.id }} .video-container .video-thumbnail {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
 
     scope.querySelectorAll(".video-container").forEach(container => {
       const player = container.querySelector(".video-player");
