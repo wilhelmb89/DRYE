@@ -9,13 +9,6 @@
  */
 {
   "sections": {
-    "main_blog_HXgNPx": {
-      "type": "main-blog",
-      "disabled": true,
-      "settings": {
-        "subtitle": ""
-      }
-    },
     "main_blog_new_R7pYAG": {
       "type": "main-blog-new",
       "custom_css": [
@@ -45,28 +38,10 @@
     },
     "1747496175a5b0d70a": {
       "type": "apps",
-      "blocks": {
-        "stamped_reviews_main_widget_Mm6yPa": {
-          "type": "shopify://apps/stamped-reviews/blocks/main-widget/a103faaf-2125-4b0e-89fa-de5149736723",
-          "settings": {
-            "animation": true,
-            "tags_exclude": "",
-            "tags_include": "",
-            "search": "",
-            "linkify": true,
-            "use_metafields": false,
-            "sku_tagtype": "sku"
-          }
-        }
-      },
-      "block_order": [
-        "stamped_reviews_main_widget_Mm6yPa"
-      ],
       "settings": {}
     }
   },
   "order": [
-    "main_blog_HXgNPx",
     "main_blog_new_R7pYAG",
     "1747496175a5b0d70a"
   ]
