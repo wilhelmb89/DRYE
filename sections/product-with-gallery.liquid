@@ -1519,7 +1519,7 @@ srcset="
             {% if product_thumbnail.settings.type == 'image' %}
               <img
                 class=""
-                src="{{ product_thumbnail.settings.preview_image | img_url: '2000x', format: 'pjpg' }}"
+                src="{{ product_thumbnail.settings.preview_image | img_url: '1200x', format: 'pjpg' }}"
 width="{{ product_thumbnail.settings.preview_image.width }}"
 height="{{ product_thumbnail.settings.preview_image.height }}"
 style="aspect-ratio: {{ product_thumbnail.settings.preview_image.width }} / {{ product_thumbnail.settings.preview_image.height }};"
