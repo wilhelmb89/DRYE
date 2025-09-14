@@ -6094,3 +6094,29 @@ body.template-policy .shopify-policy__body b {
     line-height:28px !important;
   }
 }
+/* Gör X-knappen vit i menydrawern */
+#menu-drawer .close,
+.menu-drawer .close { 
+  color: #fff !important; /* för tecken- eller currentColor-baserade ikoner */
+}
+
+/* Pseudoelement-variant (två korslagda linjer) */
+#menu-drawer .close::before,
+#menu-drawer .close::after,
+.menu-drawer .close::before,
+.menu-drawer .close::after {
+  background-color: #fff !important;  /* vanligast */
+  border-color: #fff !important;       /* om linjerna ritas med border */
+}
+
+/* SVG-variant */
+#menu-drawer .close svg,
+#menu-drawer .close svg *,
+.menu-drawer .close svg,
+.menu-drawer .close svg * {
+  fill: #fff !important;
+  stroke: #fff !important;
+}
+
+/* Sista utvägen om ikonen är en inbäddad mörk PNG/SVG som inte tar färg */
+#menu-drawer .close { filter: invert(1) brightness(200%); }
