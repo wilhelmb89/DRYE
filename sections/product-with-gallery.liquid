@@ -3,6 +3,38 @@
 {%- assign ss = section.settings -%}
 
 {% style %}
+
+.product-image-section .product-slider { position: relative; }
+
+.product-image-section .swiper-button-prev,
+.product-image-section .swiper-button-next {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  width: 48px;
+  height: 48px;
+  z-index: 50;
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+/* Styr pil-ikonernas storlek inuti knapparna */
+.product-image-section .product-image-slider {
+  --swiper-navigation-size: 28px; /* prova 30–32px om du vill ha större */
+}
+
+.product-image-section .swiper-button-prev { left: 10px; }
+.product-image-section .swiper-button-next { right: 10px; }
+
+/* Om Swiper skulle “låsa” dem ändå */
+.swiper-button-lock { display: flex !important; }
+            /* FOUC-skydd: dölj extra slides tills webkomponenten är definierad */
+swiper-container:not(:defined) > swiper-slide:not(:first-child) { display: none; }
+/* valfritt: undvik blink genom att dölja hela containern tills definierad */
+swiper-container:not(:defined) { visibility: hidden; }
+.product-image-slider.swiper-initialized { visibility: visible; }
+
   .second-review-section .jdgm-all-reviews-rating{
     display: none !important;
   }
@@ -72,6 +104,7 @@
       flex-direction: column;
       gap: 32px;
       height: auto;
+      min-height: 520px;
     }
     .product-image-section .product-slider .product-slider-item {
       height: 100%;
@@ -347,7 +380,7 @@
               font-style: normal;
               font-weight: 400;
               line-height: 20px;
-              max-width: 10px;
+              max-width: none; /* eller ta bort raden helt */
             }
 
             .product-shipping-description {
@@ -618,6 +651,14 @@
         display: flex;
       }
       swiper-container swiper-slide img {
+        /* Gör varje slide lika bred som containern och centrera bilden */
+.section-{{ section.id }} .container swiper-container { width: 100%; }
+.section-{{ section.id }} .container swiper-container swiper-slide { width: 100% !important; }
+.section-{{ section.id }} .container swiper-container swiper-slide img { width: 100%; height: auto; }
+
+.section-{{ section.id }} .container swiper-container swiper-slide img { height: auto; }
+
+
         max-height: 100%;
         max-width: 100%;
       }
@@ -804,7 +845,7 @@
     <div class="product-image-section">
       {%- assign product_thumbnails = section.blocks | where: 'type', 'product-image' -%}
       <div class="product-slider">
-        <swiper-container class="product-image-slider" init="false">
+        <swiper-container class="product-image-slider" init="false" data-gallery="main">
           <swiper-slide>
             {% if ss.media_type == 'image' %}
               {%- if ss.image != blank -%}
@@ -817,19 +858,22 @@
                   height="auto"/>
                 {% endcomment %}
                 <img
-                  class="preview-trigger"
-                  data-preview-id="0"
-                  src="{{ ss.image | img_url: '600x', format: 'pjpg' }}"
-                  srcset="
-                    {{ ss.image | img_url: '300x', format: 'pjpg' }} 300w,
-                    {{ ss.image | img_url: '600x', format: 'pjpg' }} 600w,
-                    {{ ss.image | img_url: '900x', format: 'pjpg' }} 900w,
-                    {{ ss.image | img_url: '1200x', format: 'pjpg' }} 1200w
-                  "
-                  sizes="(max-width: 600px) 100vw,(max-width: 1024 px) 800 px, 1200px"
-                  width="100%"
-                  height="auto"
-                  loading="lazy"
+  class="preview-trigger"
+  data-preview-id="0"
+  src="{{ ss.image | img_url: '600x', format: 'pjpg' }}"
+  srcset="
+    {{ ss.image | img_url: '300x', format: 'pjpg' }} 300w,
+    {{ ss.image | img_url: '600x',  format: 'pjpg' }} 600w,
+    {{ ss.image | img_url: '900x',  format: 'pjpg' }} 900w,
+    {{ ss.image | img_url: '1200x', format: 'pjpg' }} 1200w
+  "
+  sizes="(max-width: 600px) 100vw, (max-width: 1024px) 800px, 1200px"
+  width="{{ ss.image.width }}"
+  height="{{ ss.image.height }}"
+  style="aspect-ratio: {{ ss.image.width }} / {{ ss.image.height }}; object-fit: cover;"
+  loading="eager" fetchpriority="high" decoding="async"
+/>
+
                 >
               {%- endif -%}
             {% else %}
@@ -857,7 +901,7 @@
                 {% endcomment %}
                 {% if product_thumbnail.settings.type == 'image' %}
                   <img
-                    class=""
+                    class="preview-trigger"
                     data-preview-id="{{ forloop.index }}"
                     src="{{ product_thumbnail.settings.preview_image | img_url: '600x', format: 'pjpg' }}"
                     srcset="
@@ -867,8 +911,10 @@
                       {{ product_thumbnail.settings.preview_image | img_url: '1200x', format: 'pjpg' }} 1200w
                     "
                     sizes="(max-width: 600px) 100vw, (max width: 1024px) 800 px, 1200px"
-                    width="100%"
-                    height="auto"
+width="{{ product_thumbnail.settings.preview_image.width }}"
+height="{{ product_thumbnail.settings.preview_image.height }}"
+style="aspect-ratio: {{ product_thumbnail.settings.preview_image.width }} / {{ product_thumbnail.settings.preview_image.height }}; object-fit: cover;"
+
                     loading="lazy"
                   >
                 {% else %}
@@ -887,8 +933,9 @@
             </swiper-slide>
           {% endfor %}
         </swiper-container>
-        <button class="swiper-button-prev"></button>
-        <button class="swiper-button-next"></button>
+<button class="swiper-button-prev"  data-gallery="main"></button>
+<button class="swiper-button-next"  data-gallery="main"></button>
+
         <div class="product-thumnail-pagination">
           <div class="product-thumnail-ticker"></div>
           <div class="product-thumnail-progress"></div>
@@ -905,25 +952,27 @@
                 class="desktop preview-trigger"
                 data-preview-id="{{ forloop.index }}"
                 src="{{ product_thumbnail.settings.image | img_url: '1024x', format: 'pjpg' }}"
-                width="100%"
-                height="auto"
-                loading="lazy"
+width="{{ product_thumbnail.settings.image.width }}"
+height="{{ product_thumbnail.settings.image.height }}"
+style="aspect-ratio: {{ product_thumbnail.settings.image.width }} / {{ product_thumbnail.settings.image.height }};"
+
               >
               <img
                 class="tablet preview-trigger"
                 data-preview-id="{{ forloop.index }}"
                 src="{{ product_thumbnail.settings.image_tablet | img_url: '1024x', format: 'pjpg' }}"
-                width="100%"
-                height="auto"
-                loading="lazy"
+width="{{ product_thumbnail.settings.image_tablet.width }}"
+height="{{ product_thumbnail.settings.image_tablet.height }}"
+style="aspect-ratio: {{ product_thumbnail.settings.image_tablet.width }} / {{ product_thumbnail.settings.image_tablet.height }};"
               >
               <img
                 class="mobile preview-trigger"
                 data-preview-id="{{ forloop.index }}"
                 src="{{ product_thumbnail.settings.image_mobile | img_url: '1024x', format: 'pjpg' }}"
-                width="100%"
-                height="auto"
-                loading="lazy"
+width="{{ product_thumbnail.settings.image_mobile.width }}"
+height="{{ product_thumbnail.settings.image_mobile.height }}"
+style="aspect-ratio: {{ product_thumbnail.settings.image_mobile.width }} / {{ product_thumbnail.settings.image_mobile.height }};"
+
               >
             </div>
           {% endfor %}
@@ -1246,6 +1295,7 @@
               >
               <span>{{ section.settings.caption4 }}</span>
             </div>
+
           {% endif %}
         </div>
       {% endif %}
@@ -1254,6 +1304,10 @@
 </div>
 
 {% style %}
+
+
+
+
   .image-preview-popup {
     position: fixed;
     top: 0;
@@ -1416,21 +1470,31 @@
 <!-- Popup Modal -->
 <div id="image-preview-popup" class="image-preview-popup hidden">
   <div class="popup-overlay"></div>
-  <div class="popup-content">
-    <button class="popup-close">&times;</button>
-    <swiper-container class="product-image-slider" init="false">
-      <swiper-slide>
-        {% if ss.media_type == 'image' %}
-          {%- if ss.image != blank -%}
-            <div class="slider-image">
-              <img
-                class=""
-                src="{{ ss.image | img_url: '2000x', format: 'pjpg' }}"
-                width="100%"
-                height="auto"
-                loading="lazy"
-              >
-            </div>
+    <div class="popup-content">
+        <button class="popup-close">&times;</button>
+            <swiper-container class="product-image-slider" init="false" data-gallery="popup">
+            
+                  <swiper-slide>
+                          {% if ss.media_type == 'image' %}
+                                    {%- if ss.image != blank -%}
+                                                <div class="slider-image">
+                                                              <img
+  class=""
+  src="{{ ss.image | img_url: '600x', format: 'pjpg' }}"
+  srcset="
+    {{ ss.image | img_url: '600x',  format: 'pjpg' }} 600w,
+    {{ ss.image | img_url: '900x',  format: 'pjpg' }} 900w,
+    {{ ss.image | img_url: '1200x', format: 'pjpg' }} 1200w,
+    {{ ss.image | img_url: '2000x', format: 'pjpg' }} 2000w
+  "
+  sizes="(max-width: 600px) 100vw, 75vw"
+  width="{{ ss.image.width }}"
+  height="{{ ss.image.height }}"
+  style="aspect-ratio: {{ ss.image.width }} / {{ ss.image.height }};"
+  loading="lazy" fetchpriority="low" decoding="async"
+/>
+</div>>
+                                                                                                              
           {%- endif -%}
         {% else %}
           {% if ss.model != blank %}
@@ -1451,9 +1515,10 @@
               <img
                 class=""
                 src="{{ product_thumbnail.settings.preview_image | img_url: '2000x', format: 'pjpg' }}"
-                width="100%"
-                height="auto"
-                loading="lazy"
+width="{{ product_thumbnail.settings.preview_image.width }}"
+height="{{ product_thumbnail.settings.preview_image.height }}"
+style="aspect-ratio: {{ product_thumbnail.settings.preview_image.width }} / {{ product_thumbnail.settings.preview_image.height }};"
+
               >
             {% else %}
               <video
@@ -1483,44 +1548,54 @@
     const sliders = document.querySelectorAll('.product-image-slider');
     const thumbnails = document.querySelectorAll('.product-thumbnail-item');
     const ticker = document.querySelector('.product-thumnail-ticker');
+    const mainSlider  = document.querySelector('.product-image-section .product-image-slider');
+    const popupSlider = document.querySelector('#image-preview-popup .product-image-slider[data-gallery="popup"]');
+
     if (sliders) {
       sliders.forEach((slider) => {
-        const prevArrow = slider.closest('div')?.querySelector('.swiper-button-prev');
-        const nextArrow = slider.closest('div')?.querySelector('.swiper-button-next');
-        const swiperParams = {
-          spaceBetween: 10,
-          centeredSlides: false,
-          loop: false,
-          slidesPerView: 'auto',
-          navigation: {
-            nextEl: nextArrow,
-            prevEl: prevArrow,
-          },
-          on: {
-            slideChange: function () {
-              const activeIndex = slider.swiper.activeIndex;
-              updateTicker(activeIndex);
-            },
-          },
+        const wrapper = slider.parentElement; // säkert både i huvudgalleri och popup
+const prevArrow = wrapper?.querySelector('.swiper-button-prev');
+const nextArrow = wrapper?.querySelector('.swiper-button-next');
+const swiperParams = {
+  spaceBetween: 10,
+  centeredSlides: false,
+  loop: false,
+  slidesPerView: 'auto',
+  watchOverflow: false, // <— lås inte pilarna
+  navigation: {
+    nextEl: nextArrow,
+    prevEl: prevArrow,
+  },
+         on: {
+  slideChange() {
+    updateTicker(this.activeIndex); // 'this' = Swiper-instansen
+  },
+},
+
         };
         Object.assign(slider, swiperParams);
         slider.initialize();
+
       });
     }
 
-    thumbnails.forEach((thumbnail, index) => {
-      thumbnail.addEventListener('click', function () {
-        const orderIndex = this.getAttribute('data-preview-id');
-        slider.swiper.slideTo(orderIndex);
-        updateTicker(orderIndex);
-      });
-    });
+    thumbnails.forEach((thumbnail) => {
+  thumbnail.addEventListener('click', function () {
+    const orderIndex = +this.getAttribute('data-preview-id') || 0; // <— numeriskt
+    mainSlider?.swiper?.slideTo(orderIndex);   // hoppa i huvudgalleri
+    popupSlider?.swiper?.slideTo(orderIndex);  // synka popup om öppen
+    updateTicker(orderIndex);
+  });
+});
 
-    function updateTicker(index) {
-      const totalSlides = thumbnails.length;
-      const percentage = (index * 100) / totalSlides;
-      ticker.style.left = `${percentage}%`;
-    }
+
+function updateTicker(index) {
+  if (!ticker) return;
+  const totalSlides = Math.max(thumbnails.length, 1);
+  const percentage  = (index * 100) / totalSlides;
+  ticker.style.left = `${percentage}%`;
+}
+
 
     /* popup */
     const previewTriggers = document.querySelectorAll('.preview-trigger');
@@ -1586,7 +1661,7 @@
 
     customOptions.forEach((option) => {
       option.addEventListener('click', function () {
-        const variantId = this.getAttribute('data-variant-id');
+        const variantId = this.getAttribute('data-value'); // matchar <span ... data-value="{{ variant.id }}">
         const title = this.getAttribute('data-title');
 
         customSelectTriggerSpan.classList.add('selected');
@@ -1610,8 +1685,8 @@
     const reviewLink = document.querySelector('.review-section');
     console.log('reviewLink = ', reviewLink);
     if (reviewLink) {
-      reviewLink.addEventListener('click', function () {
-        event.preventDefault();
+      reviewLink.addEventListener('click', function (e) {
+  e.preventDefault();
         const customReviewSection = document.querySelector('.custom-review-section');
         console.log('customReviewSection = ', customReviewSection);
         if (customReviewSection) {
