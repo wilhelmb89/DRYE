@@ -31,12 +31,6 @@
   <meta name="description" content="{{ page_description | escape }}">
 {% endif %}
 
-{%- render 'theme-meta' -%}
-    <script src="{{ 'swiper-bundle.min.js' | asset_url }}" defer="defer"></script>
-    {{ 'swiper-bundle.min.css' | asset_url | stylesheet_tag }}
-    {%- render 'theme-head-assets' -%}
-    {{ content_for_header }}
-
 
 
 <script type="text/javascript">
@@ -97,7 +91,11 @@
 
 
 
-
+{%- render 'theme-meta' -%}
+    <script src="{{ 'swiper-bundle.min.js' | asset_url }}" defer="defer"></script>
+    {{ 'swiper-bundle.min.css' | asset_url | stylesheet_tag }}
+    {%- render 'theme-head-assets' -%}
+    {{ content_for_header }}
    
   </head>
   <body class="{{ page.template_suffix }}__page">
