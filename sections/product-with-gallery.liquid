@@ -36,19 +36,11 @@
   position: fixed;
   z-index: 1200 !important;
 }
-/* Visa ENDAST första bilden i huvudgalleriet innan Swiper definieras */
-.product-image-slider:not([data-gallery="popup"]):not(:defined) > swiper-slide:not(:first-child) {
-  display: none;
-}
-
-/* Dölj popup-galleriet helt som default (ingen “läckande” bild) */
-.product-image-slider[data-gallery="popup"] { display: none; }
-
-/* När popupen öppnas (klass .open på containern), visa galleriet */
-.image-preview-popup.open .product-image-slider[data-gallery="popup"] { display: block; }
-
-/* Säkert skal: läck inte höjd innan init */
-.product-image-slider { display:block; overflow:hidden; }
+            /* FOUC-skydd: dölj extra slides tills webkomponenten är definierad */
+swiper-container:not(:defined) > swiper-slide:not(:first-child) { display: none; }
+/* valfritt: undvik blink genom att dölja hela containern tills definierad */
+swiper-container:not(:defined) { visibility: hidden; }
+.product-image-slider.swiper-initialized { visibility: visible; }
 
   .second-review-section .jdgm-all-reviews-rating{
     display: none !important;
