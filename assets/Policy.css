@@ -159,3 +159,9 @@ body.template-policy .rte li {
   display: list-item !important; /* tvinga att bli en "list item" */
   margin-bottom: 0.5rem;
 }
+/* Centrera och begränsa bredd på policy-sidor */
+body.template-policy .shopify-policy__container {
+  max-width: 800px;         /* välj bredd som matchar övriga sektioner */
+  margin: 0 auto;           /* centrera horisontellt */
+  padding: 2rem 1rem;       /* luft runtom */
+}
