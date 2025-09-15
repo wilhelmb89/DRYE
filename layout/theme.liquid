@@ -45,7 +45,24 @@
 
 .shopify-policy__container .rte li {
   margin-bottom: 0.5rem; /* luft mellan rader */
+}/* Återställ UL/OL på policies */
+body.template-policy .rte ul {
+  list-style: disc inside !important;
+  margin: 0 0 1rem 1.25rem !important;
+  padding: 0 !important;
 }
+
+body.template-policy .rte ol {
+  list-style: decimal inside !important;
+  margin: 0 0 1rem 1.25rem !important;
+  padding: 0 !important;
+}
+
+body.template-policy .rte li {
+  display: list-item !important; /* tvinga att bli en "list item" */
+  margin-bottom: 0.5rem;
+}
+
 </style>
 {%- endif -%}
 
