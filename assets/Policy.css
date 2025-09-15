@@ -65,3 +65,10 @@ body.template-policy .shopify-policy__container .shopify-policy__body a {
   color: inherit !important;
   text-decoration: underline;
 }
+
+
+/* Policy-sidor, mobil */
+@media (max-width: 749px){
+  /* Välj rätt slutvärde: nu har du ~60px → sätt 100px */
+  .shopify-policy__container { padding-top: 100px !important; }
+}
