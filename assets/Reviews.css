@@ -1,28 +1,7 @@
-/* === Reviews section only === */
-section[id*="__reviews_new"],
-section.shopify-section.reviews-section {
-  padding: 40px 0;         /* justera vid behov */
-  background: #fff;
-  min-height: auto;
-  height: auto;
-  margin: 0;
+.reviews-section {
+    padding-left: 0!important;
+    padding-right: 0!important;
 }
-
-section[id*="__reviews_new"] .swiper-wrapper {
-  height: auto;
-  padding: 0;
-  margin: 0 auto;
+.reviews-write-button {
+  display: none!important;
 }
-
-section[id*="__reviews_new"] .swiper-slide,
-section[id*="__reviews_new"] .review-slider__slide {
-  height: auto;
-}
-
-/* Mobiljustering (valfritt) */
-@media (max-width: 767px) {
-  section[id*="__reviews_new"] { padding: 32px 0; }
-}
-
-/* Om du vill dölja taggen */
-.person-review-tag { display: none; }
