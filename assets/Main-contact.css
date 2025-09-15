@@ -1,0 +1,231 @@
+
+.main-contact {
+    padding-block: 250px 200px;
+}
+@media screen and (max-width: 767px) {
+    .main-contact {
+        padding-block: 90px 90px;
+    }
+}
+.main-contact .container {
+    display: flex;
+    flex-direction: column;
+    gap: 100px;
+}
+@media screen and (max-width: 767px) {
+    .main-contact .container {
+        gap: 60px;
+    }
+}
+.main-contact .container .title {
+    font-size: 3.125rem;
+    font-weight: 700;
+    line-height: 116.4px;
+    letter-spacing: normal !important;
+    text-align: left;
+}
+@media screen and (max-width: 767px) {
+    .main-contact .container .title {
+        font-size: 16px;
+        font-weight: 700;
+        line-height: 34px;
+        letter-spacing: normal !important;
+        text-align: left;
+    }
+}
+.main-contact .container .contacts-wrapper {
+    display: flex;
+    gap: 40px;
+    justify-content: space-between;
+}
+@media screen and (max-width: 768px) {
+    .main-contact .container .contacts-wrapper {
+        flex-direction: column-reverse;
+        gap: 60px;
+    }
+}
+.main-contact .container .contacts-wrapper .persons-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 80px;
+}
+@media screen and (max-width: 767px) {
+    .main-contact .container .contacts-wrapper .persons-wrapper {
+        gap: 40px;
+        align-items: center;
+    }
+}
+.main-contact .container .contacts-wrapper .persons-wrapper .person {
+    display: flex;
+    gap: 30px;
+}
+@media screen and (max-width: 767px) {
+    .main-contact .container .contacts-wrapper .persons-wrapper .person {
+        gap: 20px;
+        align-items: center;
+        width: 100%;
+    }
+}
+.main-contact .container .contacts-wrapper .persons-wrapper .person .photo .image {
+    width: 114px;
+    background: #cecece;
+    border-radius: 23px 0 23px 0;
+    overflow: hidden;
+    aspect-ratio: 1/1;
+}
+@media screen and (max-width: 767px) {
+    .main-contact .container .contacts-wrapper .persons-wrapper .person .photo .image {
+        width: 120px;
+    }
+}
+.main-contact .container .contacts-wrapper .persons-wrapper .person .photo .image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.main-contact .container .contacts-wrapper .persons-wrapper .person .info {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 28px;
+    letter-spacing: normal !important;
+    text-align: left;
+}
+@media screen and (max-width: 767px) {
+    .main-contact .container .contacts-wrapper .persons-wrapper .person .info {
+        gap: 0;
+        font-size: 1rem;
+        font-weight: 400;
+        line-height: 24px;
+    }
+}
+.main-contact .container .contacts-wrapper .persons-wrapper .person .name {
+    font-family: 'inter';
+    font-size: 32px;
+    font-weight: 500;
+    line-height: 38px;
+    letter-spacing: normal !important;
+    text-align: left;
+}
+@media screen and (max-width: 767px) {
+    .main-contact .container .contacts-wrapper .persons-wrapper .person .name {
+        font-size: 20px;
+        line-height: 24px;
+        margin-bottom: 10px;
+    }
+}
+.main-contact .container .contacts-wrapper form {
+    max-width: 845px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 80px;
+}
+@media screen and (max-width: 767px) {
+    .main-contact .container .contacts-wrapper form {
+        gap: 40px;
+    }
+}
+.main-contact .container .contacts-wrapper form .form-title {
+    font-family: 'inter';
+    font-size: 16px;
+    font-weight: 300;
+    line-height: 4.25rem;
+    letter-spacing: normal !important;
+    text-align: left;
+}
+@media screen and (max-width: 767px) {
+    .main-contact .container .contacts-wrapper form .form-title {
+        font-size: 16px;
+        font-weight: 300;
+        line-height: 39px;
+    }
+}
+/* .message är bara en wrapper – låt den inte styra typografin */
+.main-contact .container .contacts-wrapper form .message {
+    margin-top: 12px;         /* behåll ev. spacing */
+    font: inherit;
+    color: inherit;
+}
+
+}
+.main-contact .container .contacts-wrapper form .alert-message {
+    font-family: 'inter';
+    font-size: 16px;
+    font-weight: 300;
+    line-height: 25px;
+    letter-spacing: normal !important;
+    color: red;
+    text-align: left;
+}
+.main-contact .container .contacts-wrapper form .form-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 34px;
+}
+@media screen and (max-width: 1024px) {
+    .main-contact .container .contacts-wrapper form .form-wrapper {
+        gap: 20px;
+    }
+}
+.main-contact .container .contacts-wrapper form .form-wrapper input,
+.main-contact .container .contacts-wrapper form .form-wrapper textarea {
+    width: 100%;
+}
+.main-contact .container .contacts-wrapper form .form-wrapper .two-cols {
+    display: flex;
+    gap: 30px;
+}
+@media screen and (max-width: 1024px) {
+    .main-contact .container .contacts-wrapper form .form-wrapper .two-cols {
+        flex-direction: column;
+        gap: 20px;
+    }
+}
+.main-contact .container .contacts-wrapper form .form-wrapper .two-cols > * {
+    flex: 1 0 auto;
+}
+.main-contact .container .contacts-wrapper form .form-wrapper textarea {
+    height: 11rem;
+
+    /* Tvinga normal typografi i textarean */
+.main-contact .container .contacts-wrapper form .form-wrapper textarea,
+.main-contact .container .contacts-wrapper form textarea {
+    font-family: 'Clash Grotesk', system-ui, sans-serif !important; /* välj din font */
+    font-size: 16px !important;
+    font-weight: 400 !important;
+    line-height: 1.5 !important;
+    color: #111 !important;
+    -webkit-text-fill-color: #111 !important; /* för Chrome/Safari/autofill */
+}
+/* Success/alert-meddelanden – neutral storlek, korrekt färg */
+.main-contact .container .contacts-wrapper form .success-message {
+    color: #111 !important;
+    font-size: 16px !important;
+    font-weight: 400 !important;
+    line-height: 1.4 !important;
+}
+.main-contact .container .contacts-wrapper form .alert-message {
+    color: #d32f2f !important; /* röd för fel */
+    font-size: 16px !important;
+    font-weight: 400 !important;
+    line-height: 1.4 !important;
+}
+
+}
+@media screen and (max-width: 1024px) {
+    .main-contact .container .contacts-wrapper form .form-wrapper textarea {
+        height: 20rem;
+    }
+}
+.main-contact .container .contacts-wrapper form .form-wrapper .button {
+    max-width: 180px;
+    justify-content: center;
+}
+@media screen and (max-width: 1024px) {
+    .main-contact .container .contacts-wrapper form .form-wrapper .button {
+        max-width: 100%;
+    }
+}
