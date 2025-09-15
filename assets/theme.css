@@ -1,14 +1,17 @@
-/* Döda Raptor Inter helt på policies */
-body.template-policy .shopify-policy__body,
-body.template-policy .shopify-policy__body * {
+/* Döda Raptor Inter på ALLA policy-element */
+body.template-policy,
+body.template-policy * {
   font-family: var(--font-primary, "Inter"), sans-serif !important;
 }
-body.template-policy .shopify-policy__body h1,
-body.template-policy .shopify-policy__body h2,
-body.template-policy .shopify-policy__body h3,
-body.template-policy .shopify-policy__body h4 {
+
+/* Rubriker separat */
+body.template-policy h1,
+body.template-policy h2,
+body.template-policy h3,
+body.template-policy h4 {
   font-family: var(--font-heading, "ClashGrotesk-Variable"), sans-serif !important;
 }
+
 
 
 <link rel="stylesheet" href="base.css">
