@@ -1,15 +1,4 @@
-<link rel="preload" as="style" href="{{ 'theme.css' | asset_url }}">
-<link rel="stylesheet" href="{{ 'theme.css' | asset_url }}" media="print" onload="this.media='all'">
-<link rel="preload" as="style" href="{{ 'style.bundle.css' | asset_url }}">
-<link rel="stylesheet" href="{{ 'style.bundle.css' | asset_url }}" media="print" onload="this.media='all'">
-<noscript>
-  <link rel="stylesheet" href="{{ 'theme.css' | asset_url }}">
-  <link rel="stylesheet" href="{{ 'style.bundle.css' | asset_url }}">
-</noscript>
 
-
-<script src="{{ 'vendor.js' | asset_url }}" defer></script>
-<script src="https://cdn.shopify.com/shopifycloud/perf-kit-2.0.7.min.js" defer></script>
 
 /* Döda Raptor Inter på ALLA policy-element */
 body.template-policy,
