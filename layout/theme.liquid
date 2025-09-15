@@ -7,23 +7,6 @@
   font-weight: 400 !important;
   line-height: 1.6 !important;
   color: #1D1F21A6 !important; /* samma färg som på startsidan */
-  .shopify-policy__container .rte ul,
-.shopify-policy__container .rte ol {
-  list-style: disc inside !important;
-  margin: 0 0 1rem 1.25rem !important; /* behåll bara indraget till vänster */
-  padding: 0 !important;
-}
-
-.shopify-policy__container .rte li {
-  margin: 0 !important; /* ingen extra luft mellan punkterna */
-}.shopify-policy__container .rte ul,
-.shopify-policy__container .rte ol {
-  list-style: disc inside !important;
-  margin: 0 !important;
-  padding: 0 !important;
-}
-
-
 }
 
 /* === Rubriker === */
@@ -39,21 +22,19 @@
 }
 
 /* === Listor === */
-.shopify-policy__container .rte ul {
-  list-style: disc inside !important;
-  margin: 0 0 1rem 1.25rem !important;
-  padding: 0 !important;
-}
-
+.shopify-policy__container .rte ul,
 .shopify-policy__container .rte ol {
-  list-style: decimal inside !important;
-  margin: 0 0 1rem 1.25rem !important;
+  list-style: disc inside !important;
+  margin-top: 0 !important;
+  margin-bottom: 0 !important; /* ingen extra luft under listorna */
+  margin-left: 1.25rem !important; /* lite indrag till vänster */
   padding: 0 !important;
 }
 
 .shopify-policy__container .rte li {
   display: list-item !important;
-  margin-bottom: 0.5rem;
+  margin: 0 !important; /* ingen extra luft mellan punkterna */
+  padding: 0 !important;
 }
 </style>
 {%- endif -%}
