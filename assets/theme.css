@@ -144,3 +144,8 @@
 .button:hover {
   background: #333333;
 }
+/* Döda Raptor Inter helt på policies */
+body.template-policy .shopify-policy__body,
+body.template-policy .shopify-policy__body * {
+  font-family: var(--font-primary, "Inter"), sans-serif !important;
+}
