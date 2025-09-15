@@ -56,8 +56,10 @@
 </head>
 
 
-
-
+{%- comment -%}
+  This file has been modified by the Yoast SEO for Shopify app.
+  You can learn more about this (and learn how to cleanly revert these changes) at https://yoa.st/removing-theme-changes.
+{%- endcomment -%}
 <!doctype html>
 <html lang="{{ request.locale.iso_code }}">
   <head>
@@ -112,6 +114,15 @@
         y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
     })(window, document, "clarity", "script", "r99kaui2gr");
 </script>
+
+
+
+{%- render 'theme-meta' -%}
+    <script src="{{ 'swiper-bundle.min.js' | asset_url }}" defer="defer"></script>
+    {{ 'swiper-bundle.min.css' | asset_url | stylesheet_tag }}
+    {%- render 'theme-head-assets' -%}
+{{ content_for_header }}
+
 <script>
   document.addEventListener("DOMContentLoaded", function() {
     // Endast analytics/performance-script skjuts upp
@@ -122,6 +133,7 @@
     });
   });
 </script>
+
 
    
   </head>
