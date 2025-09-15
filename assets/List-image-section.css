@@ -1,0 +1,164 @@
+
+
+.list-image-section .container {
+    display: flex;
+    flex-direction: column;
+}
+@media screen and (max-width: 767px) {
+    .list-image-section .container {
+        gap: 20px;
+    }
+}
+.list-image-section .container .title {
+    font-size: 1.75rem;
+    line-height: 2rem;
+    font-weight: 300;
+    text-align: center;
+    font-family: ClashGrotesk-Variable;
+    margin-bottom: 64px;
+}
+
+@media screen and (max-width: 767px) {
+    .list-image-section .container .title {
+        font-size: 1.75rem;
+        line-height: 2rem;
+        margin-bottom: 40px;
+    }
+}
+
+@media screen and (min-width: 768px) and (max-width: 1440px) {
+    .list-image-section .container .title {
+        font-size: 1.875rem;
+        line-height: 2.5rem;
+        max-width: 80%;
+        margin-inline: auto;
+        margin-bottom: 64px;
+    }
+}
+
+@media screen and (min-width: 1440px) {
+    .list-image-section .container .title {
+        font-size: 3.125rem;
+        line-height: 3.75rem;
+    }
+}
+
+.list-image-section .container .content {
+    display: flex;
+    gap: 42px;
+    align-items: center;
+    align-content: center;
+}
+@media screen and (max-width: 767px) {
+    .list-image-section .container .content {
+        flex-direction: column;
+        gap: 17px;
+    }
+}
+.list-image-section .container .content .image {
+    flex: 1 0 47%;
+    display: flex;
+    justify-content: center;
+}
+.list-image-section .container .content img {
+    width: 80%;
+    height: auto;
+}
+.list-image-section .container .content .list-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 35px;
+    font-size: 1rem;
+    line-height: 1.2;
+    align-self: center;
+}
+@media screen and (max-width: 767px) {
+    .list-image-section .container .content .list-wrapper {
+        gap: 20px;
+    }
+}
+@media screen and (max-width: 767px) {
+    .list-image-section .container .content .list-wrapper {
+        font-size: 1rem;
+        line-height: 1.4rem;
+    }
+}
+@media screen and (max-width: 767px) {
+    .list-image-section .container .content .list-wrapper {
+        align-self: start;
+    }
+}
+.list-image-section .container .content .list-wrapper .list {
+    font-family: inherit;          /* låt temat styra */
+    font-size: 18px;
+    font-weight: 400;              /* välj EN vikt */
+    line-height: 28px;
+    letter-spacing: -0.04em;
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;                     /* välj EN gap */
+    opacity: 0.65;                 /* samma mjukhet som Multirows */
+}
+@media screen and (max-width: 767px) {
+    .list-image-section .container .content .list-wrapper .list {
+        gap: 20px;
+    }
+}
+@media screen and (max-width: 767px) {
+    .list-image-section .container .content .list-wrapper .list {
+        gap: 10px;
+    }
+}
+.list-image-section .container .content .list-wrapper .list .list-item {
+    display: flex;
+    gap: 15px;
+    align-items: start;
+
+    font-family: inherit;      /* samma som Multirows */
+    font-weight: 400 !important; /* tvinga Regular */
+    line-height: 28px;         /* matcha brödtext */
+    opacity: 0.65;             /* samma mjukhet */
+}
+@media screen and (max-width: 767px) {
+    .list-image-section .container .content .list-wrapper .list .list-item {
+        font-size: 1rem;
+        line-height: 1.5;
+        align-items: start;
+    }
+    .list-image-section .container .content .list-wrapper .list .list-item svg {
+        flex-shrink: 0;
+    }
+}
+.list-image-section .container .content .text {
+    font-family: inherit;
+    font-size: 16px;
+    line-height: 28px;
+    opacity: 0.65;    /* samma som Multirows */
+    max-width: 160px;
+}
+
+@media screen and (max-width: 767px) {
+    .list-image-section .container .content .text {
+        font-size: 1rem;
+    }
+}
+.list-image-section .container .content .text,
+.list-image-section .container .content .button {
+    margin-left: 10px;
+}
+@media screen and (max-width: 767px) {
+    .list-image-section .container .content .text,
+    .list-image-section .container .content .button {
+        margin-left: 0px;
+    }
+}
+.list-image-section .container .content .button {
+    min-width: 276px;
+    justify-content: center;
+}
+@media screen and (max-width: 767px) {
+    .list-image-section .container .content .button {
+        width: 100%;
+        justify-content: center;
+    }
