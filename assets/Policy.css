@@ -65,3 +65,20 @@ body.template-policy a:hover {
   color: #ff6600 !important; /* justera om du vill matcha tema */
   text-decoration: none;
 }
+:root {
+  --font-primary: "Inter", sans-serif;
+  --font-heading: "ClashGrotesk-Variable", "Clash Grotesk", sans-serif;
+}
+
+/* Överstyr Shopify theme settings */
+body,
+p,
+li,
+a,
+span {
+  font-family: var(--font-primary) !important;
+}
+
+h1, h2, h3, h4, h5 {
+  font-family: var(--font-heading) !important;
+}
