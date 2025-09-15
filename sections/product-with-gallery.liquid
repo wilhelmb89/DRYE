@@ -144,9 +144,7 @@ swiper-container:not(:defined) { visibility: hidden; }
       grid-template-rows: repeat(2, 1fr);
       gap: 32px;
     }
-    .product-image-section model-viewer {
-      height: {{ section.settings.model_height }}px;
-      width: 100%;
+
     }
     .mobile,
     .tablet {
@@ -591,8 +589,7 @@ swiper-container:not(:defined) { visibility: hidden; }
         display: none;
         {% endunless %}
       }
-      .product-image-section model-viewer {
-        height: {{ section.settings.model_height_tablet }}px;
+
       }
       .product-image-section .product-main-image {
         display: flex;
@@ -683,8 +680,7 @@ swiper-container:not(:defined) { visibility: hidden; }
         display: none;
         {% endif %}
       }
-      .product-image-section model-viewer {
-        height: {{ section.settings.model_height_mobile }}px;
+
       }
       .product-image-section .product-main-image {
       }
@@ -883,16 +879,7 @@ swiper-container:not(:defined) { visibility: hidden; }
 
                 >
               {%- endif -%}
-            {% else %}
-              {% if ss.model != blank %}
-                <model-viewer
-                  src="{{ ss.model }}"
-                  ar
-                  auto-rotate
-                  camera-controls
-                >
-                </model-viewer>
-              {% endif %}
+           
             {% endif %}
           </swiper-slide>
           {% for product_thumbnail in product_thumbnails %}
