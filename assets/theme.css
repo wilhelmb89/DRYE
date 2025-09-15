@@ -1707,8 +1707,7 @@ form label {
     100% {
         background-position: 100% 0;
     }
-}
-.
+
 
 .main-product .container .hero-wrapper {
     grid-row-gap: 0;
@@ -4166,6 +4165,11 @@ svg {
     display: none!important;
 }
 
+.before-after .container .before-after-slider {
+    width: 600px;
+    height: 600px;
+    margin: 0 auto;
+}
 
 footer {
     background-color: #f3f2f1;
@@ -4174,7 +4178,10 @@ footer {
 
 
 
-
+@media screen and (max-width: 1440px) {
+    .before-after .container .before-after-slider {
+        width: 500px;
+        height: 500px;
     }
 
 }
@@ -4210,7 +4217,10 @@ footer {
     .rich-block__wrapper .rich-block {
         padding: 0 20px;
     }
-
+    .before-after .container .before-after-slider {
+        width: 400px;
+        height: 400px;
+    }
 }
 
 @media screen and (max-width: 768px) {
@@ -4237,8 +4247,13 @@ footer {
     .product-image-section {
         gap: 32px!important;
     }
-
-
+    .before-after .container .before-after-slider {
+        max-width: 100%;
+    }
+    .reviews-section {
+      padding: 64px 28px;
+    }
+}
 
 
 
@@ -4402,7 +4417,10 @@ img.quote-marks {
     object-fit: none!important;
 }
 
-
+.before-after .container .before-after-slider .resizer .resizer-trigger {
+    margin: 0 0 0 -24px;
+    width: 50px;
+    height: 50px;
 }
 
 /* David Gibson Milestone 3 changes */
@@ -5023,6 +5041,28 @@ body.template-policy .shopify-policy__container .shopify-policy__body a {
 #shopify-section-{{ section.id }} .richtext li {
   display: list-item !important;
   margin-bottom: .25rem;
+}
+/* Sektion-specifikt: byt till ditt riktiga ID från Inspect */
+#shopify-section-template--25658381959433__before_after_BHanP2 h2.title {
+  font-family: "Clash Grotesk","ClashGrotesk",sans-serif !important;
+  font-weight: 300 !important;
+  font-style: normal !important;
+  letter-spacing: 0 !important;
+}
+.before-after .title,
+section.before-after-section h2.title {
+  font-family: "Clash Grotesk","ClashGrotesk",sans-serif !important;
+  font-weight: 300 !important;
+}
+/* Slår .before-after .container .title i style.bundle */
+section.before-after-section .container .title,
+section.before-after-section h2.title,
+#shopify-section-template--25658381959433__before_after_BHanP2 .container .title,
+#shopify-section-template--25658381959433__before_after_BHanP2 h2.title {
+  font-family: "Clash Grotesk","ClashGrotesk",sans-serif !important;
+  font-weight: 300 !important;
+  font-style: normal !important;
+  letter-spacing: 0 !important;
 }
 
 
