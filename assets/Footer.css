@@ -1,0 +1,283 @@
+
+
+.footer-section {
+    padding-block: 120px;
+    background: black;
+    border-radius: 5vw 5vw 0 0;
+    color: white;
+    position: relative;
+    z-index: 5;
+}
+@media screen and (max-width: 767px) {
+    .footer-section {
+        padding-block: 50px 0px;
+    }
+}
+.footer-section .container .top {
+    display: flex;
+    gap: 60px;
+    align-items: center;
+}
+@media screen and (max-width: 1024px) {
+    .footer-section .container .top {
+        flex-direction: column;
+        gap: 35px;
+    }
+}
+.footer-section .container .top .images {
+    flex: 1 1 50%;
+    display: flex;
+    gap: 34px;
+    align-self: stretch;
+}
+.footer-section .container .top .images .image {
+    position: relative;
+    width: 100%;
+    align-self: stretch;
+}
+.footer-section .container .top .images .image img {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+}
+@media screen and (max-width: 1024px) {
+    .footer-section .container .top .images .image img {
+        position: static;
+    }
+}
+.footer-section .container .top .title {
+    flex: 1 1 50%;
+    padding-block: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 60px;
+}
+@media screen and (max-width: 767px) {
+    .footer-section .container .top .title {
+        padding-block: 0px;
+        gap: 20px;
+    }
+}
+.footer-section .container .top .title .footer-title {
+    font-family: 'inter';
+    font-size: 70px;
+    line-height: 1;
+    letter-spacing: -5.4px;
+    max-width: 640px;
+    font-weight: 500;
+}
+@media screen and (max-width: 767px) {
+    .footer-section .container .top .title .footer-title {
+        font-size: 40px;
+        letter-spacing: -2.4px;
+    }
+}
+@media screen and (max-width: 1400px) {
+    .footer-section .container .top .title .footer-title {
+        font-size: 58px;
+    }
+}
+@media screen and (max-width: 767px) {
+    .footer-section .container .top .title .footer-title {
+        font-size: 40px;
+        line-height: 45px;
+        letter-spacing: -2.8px;
+    }
+}
+@media screen and (max-width: 767px) {
+    .footer-section .container .top .title .button {
+        width: 100%;
+        justify-content: center;
+    }
+}
+.footer-section .container .menu-area {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0px;
+    justify-content: space-between;
+    font-size: 16px;
+    line-height: 22px;
+    letter-spacing: -0.5px;
+    color: rgba(255, 255, 255, 0.5);
+}
+@media screen and (max-width: 767px) {
+    .footer-section .container .menu-area {
+        margin-top: 70px;
+        flex-direction: column;
+        gap: 40px;
+    }
+}
+.footer-section .container .menu-area .title {
+    font-size: 20px;
+    line-height: 1;
+    color: white;
+    font-weight: 300;
+    font-family: 'inter';
+}
+.footer-section .container .menu-area .content {
+    opacity: 0.65;
+}
+.footer-section .container .menu-area .content p {
+    color: white;
+    line-height: 1.6;
+    letter-spacing: -0.42px;
+}
+.footer-section .container .menu-area .social-block {
+    max-width: 340px;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+@media screen and (max-width: 767px) {
+    .footer-section .container .menu-area .social-block {
+        gap: 20px;
+    }
+}
+.footer-section .container .menu-area .social-block .socials {
+    display: flex;
+    gap: 25px;
+}
+.footer-section .container .menu-area .social-block .socials a {
+    display: block;
+}
+.footer-section .container .menu-area .social-block .socials svg {
+    color: black;
+}
+@media screen and (max-width: 767px) {
+    .footer-section .container .menu-area .social-block .socials {
+        gap: 15px;
+    }
+    .footer-section .container .menu-area .social-block .socials a {
+        width: 36px;
+        height: auto;
+    }
+    .footer-section .container .menu-area .social-block .socials a svg {
+        width: 100%;
+    }
+}
+.footer-section .container .menu-area .menu-wrapper {
+    display: flex;
+    justify-content: space-between;
+    gap: 95px;
+}
+@media screen and (max-width: 767px) {
+    .footer-section .container .menu-area .menu-wrapper {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-auto-rows: 1fr auto;
+        gap: 40px;
+    }
+}
+.footer-section .container .menu-area .menu-wrapper .menu {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+@media screen and (max-width: 767px) {
+    .footer-section .container .menu-area .menu-wrapper .menu {
+        gap: 20px;
+    }
+}
+.footer-section .container .menu-area .menu-wrapper .menu .submenu {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.footer-section .container .menu-area .menu-wrapper .menu .submenu a {
+    color: inherit;
+    font-family:"Inter", sans-serif;
+    font-size: 1rem;
+    line-height: 28px;
+    font-weight: 300;
+}
+.footer-section .container .menu-area .email {
+    max-width: 400px;
+}
+@media screen and (max-width: 767px) {
+    .footer-section .container .menu-area .email {
+        padding-top: 10px;
+    }
+}
+.footer-section .container .menu-area .email .title {
+    margin-bottom: 30px;
+}
+.footer-section .container .menu-area .email .email-content {
+    margin-bottom: 15px;
+    opacity: 0.5;
+}
+.footer-section .container .menu-area .email .email-content p {
+    color: white;
+}
+.footer-section .container .menu-area .email form {
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    display: flex;
+    border-radius: 12px;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 10px 10px 10px 20px;
+}
+.footer-section .container .menu-area .email form input.email-input {
+    background: transparent;
+    color: white;
+    border: none;
+    padding: 0;
+    width: 100%;
+}
+.footer-section .container .menu-area .email form input.email-input::-webkit-input-placeholder {
+    /* Chrome/Opera/Safari */
+    color: white;
+}
+.footer-section .container .menu-area .email form input.email-input::-moz-placeholder {
+    /* Firefox 19+ */
+    color: white;
+}
+.footer-section .container .menu-area .email form input.email-input::-ms-input-placeholder {
+    /* IE 10+ */
+    color: white;
+}
+.footer-section .container .menu-area .email form input.email-input::-moz-placeholder {
+    /* Firefox 18- */
+    color: white;
+}
+.footer-section .container .menu-area .email form button {
+    display: block;
+    border: none;
+    font-weight: 600;
+    padding: 12px 16px;
+    background: white;
+    color: #111111;
+    cursor: pointer;
+}
+.footer-section .container .bottom {
+    margin-top: 90px;
+    padding-block: 20px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    font-size: 14px;
+    line-height: 22px;
+    letter-spacing: -0.5px;
+    color: rgba(255, 255, 255, 0.5);
+    display: flex;
+    justify-content: space-between;
+}
+@media screen and (max-width: 767px) {
+    .footer-section .container .bottom {
+        margin-top: 30px;
+        flex-direction: column-reverse;
+        gap: 10px;
+        align-items: center;
+    }
+}
+.footer-section .container .bottom .privacy {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+.footer-section .container .bottom .privacy .privacy-link {
+    color: inherit;
+}
+.footer-section .container .bottom .privacy .dot {
+    background: rgba(255, 255, 255, 0.5);
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
