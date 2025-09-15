@@ -97,3 +97,16 @@ em {
 h1, h2, h3, h4, h5 {
   font-family: var(--font-heading, "ClashGrotesk-Variable", "Clash Grotesk"), sans-serif !important;
 }
+/* Sätt specifikt på .rte inuti policy */
+body.template-policy .rte,
+body.template-policy .rte * {
+  font-family: var(--font-primary, "Inter"), sans-serif !important;
+}
+
+/* Rubriker – override */
+body.template-policy .rte h1,
+body.template-policy .rte h2,
+body.template-policy .rte h3,
+body.template-policy .rte h4 {
+  font-family: var(--font-heading, "ClashGrotesk-Variable"), sans-serif !important;
+}
