@@ -1,3 +1,21 @@
+:root {
+  --font-primary: "Inter", sans-serif;
+  --font-heading: "ClashGrotesk-Variable", sans-serif;
+
+  --font-size-base: 16px;
+  --font-size-sm: 14px;
+  --font-size-lg: 20px;
+  --font-size-xl: 28px;
+  --font-size-xxl: 40px;
+
+  --line-height-base: 1.5;
+  --line-height-tight: 1.2;
+  --line-height-loose: 1.8;
+
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+  --font-weight-bold: 700;
+}
 *,
 *:before,
 *:after {
