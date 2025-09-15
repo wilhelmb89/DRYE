@@ -1,74 +1,61 @@
+/* ===========================
+   POLICY PAGES
+   =========================== */
 
 .shopify-policy__container {
-    max-width: 1470px !important;
-    width: 100% !important;
-    padding-inline: 2rem !important;
-    margin-inline: auto;
-    padding-block: 160px;
+  max-width: 1470px !important;
+  width: 100% !important;
+  margin-inline: auto;
+  padding-block: 160px;
+  padding-inline: 2rem !important;
 }
 @media screen and (max-width: 768px) {
-    .shopify-policy__container {
-        padding-block: 80px;
-        padding-inline: 20px !important;
-    }
-}
-.shopify-policy__container h1 {
-    font-family: 'inter';
-    font-size: 32px;
-    font-weight: 500;
-    line-height: 38px;
-    letter-spacing: normal;
-    margin-bottom: 30px;
-    opacity: 1;
-}
-.shopify-policy__container h2 {
-    font-family: 'inter';
-    font-size: 1.5rem;
-    margin-bottom: 16px;
-    font-weight: 600;
-}
-.shopify-policy__container p {
-  color: #6b6b69;
-  font-family: "Inter", sans-serif;
-  font-size: 16px;
-  font-weight: 400;
-  line-height: 24px;
-  letter-spacing: normal;
-  text-align: left;
+  .shopify-policy__container {
+    padding-block: 100px 80px;  /* extra top padding så header inte krockar */
+    padding-inline: 20px !important;
+  }
 }
 
-  
-.shopify-policy__body {
-  max-width: 460px;
-  padding-left: 64px;
-  padding-right: 64px;
-  box-sizing: border-box;
-  width: 100%;
-  
-}/* Bas: p, li, span, a, em = 400 */
-body.template-policy .shopify-policy__container .shopify-policy__body :where(p, li, span, a, em) {
-  font-family: var(--font-body-family, Inter, sans-serif) !important;
+/* Rubriker – håll ihop med basregler */
+.shopify-policy__container h1 {
+  font-size: 32px;
+  font-weight: 500;
+  line-height: 38px;
+  margin-bottom: 30px;
+}
+.shopify-policy__container h2 {
+  font-size: 1.5rem;
+  margin-bottom: 16px;
+  font-weight: 600;
+}
+
+/* Brödtext */
+.shopify-policy__container p {
+  font-size: 16px;
+  line-height: 28px;
+  color: rgb(17 17 17 / 65%);
+}
+
+/* Body text normaliserad */
+body.template-policy .shopify-policy__body :where(p, li, span, a, em) {
+  font: inherit !important;
   font-weight: 400 !important;
-  font-variation-settings: "wght" 400 !important;
   letter-spacing: normal !important;
   color: rgb(17 17 17 / 65%) !important;
 }
 
-/* Bold separat */
-body.template-policy .shopify-policy__container .shopify-policy__body :where(strong, b) {
-  font-weight: 600 !important;                 /* 700 om du vill mer kontrast */
-  font-variation-settings: "wght" 600 !important;
-  color: #111 !important;                      /* gör bold mörkare */
+/* Bold */
+body.template-policy .shopify-policy__body :where(strong, b) {
+  font-weight: 600 !important;
+  color: #111 !important;
 }
 
-body.template-policy .shopify-policy__container .shopify-policy__body a {
+/* Länkar */
+body.template-policy .shopify-policy__body a {
   color: inherit !important;
   text-decoration: underline;
 }
-
-
-/* Policy-sidor, mobil */
-@media (max-width: 749px){
-  /* Välj rätt slutvärde: nu har du ~60px → sätt 100px */
-  .shopify-policy__container { padding-top: 100px !important; }
+body.template-policy .shopify-policy__body a:hover {
+  color: #ff6600 !important; /* valfri hover */
+  text-decoration: none;
 }
