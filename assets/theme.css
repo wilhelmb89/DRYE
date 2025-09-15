@@ -2795,37 +2795,7 @@ svg {
 }
 /* David Gibson Responsive Changes 07/04/25 */
 
-.product-slider {
-    width: 100%;
-    position: relative;
-    gap: 0!important;
-}
 
-.product-slider swiper-container {
-    width: 100%;
-}
-
-.product-slider swiper-container swiper-slide {
-    align-self: center;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding-top: 100% !important;
-    position: relative;
-    width: 100%;
-}
-.product-slider swiper-container swiper-slide img,
-.product-slider swiper-container swiper-slide video {
-    object-fit: contain !important;
-    height: 100%;
-    width: 100%;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translateX(-50%) translateY(-50%);
-    padding: 0rem;
-    border-radius: 12px;
-}
 
 .product-thumbnail-list {
   margin-top: 2rem;
@@ -2839,27 +2809,6 @@ svg {
     height: 100%;
 }
 
-.product-slider .swiper-button-prev, .product-slider .swiper-button-next {
-    background: rgba(0, 0, 0, 0.3);
-    border: 0;
-    color: #FFF;
-    width: 48px;
-    height: 48px;
-    border-radius: 50px;
-    z-index: 5;
-    cursor: pointer;
-    transition: background 0.1s ease;
-    border-radius:12px
-}
-
-.product-slider .swiper-button-prev:hover, .product-slider .swiper-button-next:hover {
-    background: #000000;
-}
-
-.product-slider .swiper-button-prev:after, .product-slider .swiper-button-next:after {
-    font-size: 24px;
-    font-weight: 700;
-}
 
 .image-preview-popup .swiper-button-prev, .image-preview-popup .swiper-button-next {
     cursor: pointer;
@@ -2877,10 +2826,6 @@ svg {
     gap: 50px!important;
 }
 
-.product-image-section .product-slider .product-thumnail-pagination {
-    display: block!important;
-    margin-top: -6%;
-}
 
 .person-review-tag {
     display: none!important;
@@ -2906,11 +2851,7 @@ svg {
 
 }
 
-@media screen and (max-width: 1024px) {
-    .product-slider swiper-container swiper-slide img {
-        width: 100%;
-        padding: 0;
-    }
+
 
     .product-image-section .product-thumbnail-list {
         gap: 20px!important;
@@ -2928,12 +2869,7 @@ svg {
         font-size: 32px !important;
         line-height: 42px !important;
     }
-    .product-image-section .product-slider .product-thumnail-pagination {
-        margin-top: 0;
-    }
-    .product-slider {
-        gap: 50px!important;
-    }
+
     .rich-block__wrapper .rich-block {
         padding: 0 20px;
     }
@@ -2942,34 +2878,6 @@ svg {
         height: 400px;
     }
 }
-
-@media screen and (max-width: 768px) {
-    .product-slider {
-        gap: 32px!important;
-    }
-    .product-main__content {
-        padding-top: 130px!important;
-    }
-    .product-main__meta {
-        width: 100%!important;
-        min-width: 100%!important;
-    }
-    .product-slider .swiper-button-prev, .product-slider .swiper-button-next {
-        top: 45%;
-    }
-    .product-image-section .product-slider {
-        min-height: unset!important;
-    }
-    .product-image-section .product-thumbnail-list {
-        gap: 10px!important;
-    }
-
-    .product-image-section {
-        gap: 32px!important;
-    }
-    .before-after .container .before-after-slider {
-        max-width: 100%;
-    }
 
     }
 }
