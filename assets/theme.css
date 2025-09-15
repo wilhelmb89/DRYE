@@ -172,3 +172,15 @@ body.template-policy h4 {
   min-height: auto !important;
   background-color: #fff !important; /* byt till vit bakgrund om du vill matcha resten */
 }
+/* ===== Reviews section fixes ===== */
+section[id*="__reviews_new"],
+section.shopify-section.reviews-section {
+  background: #fff !important;
+  padding: 40px 0 !important;   /* justera efter smak */
+  margin: 0 !important;
+}
+
+section[id*="__reviews_new"] .swiper-wrapper {
+  height: auto !important;
+  padding: 0 !important;
+}
