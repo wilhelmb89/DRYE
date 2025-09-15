@@ -119,3 +119,26 @@ body.template-policy .rte h3,
 body.template-policy .rte h4 {
   font-family: var(--font-heading, "ClashGrotesk-Variable"), sans-serif !important;
 }
+/* Tvinga bort Raptor Inter från alla policy-rte */
+body.template-policy .shopify-policy__container .rte,
+body.template-policy .shopify-policy__container .rte p,
+body.template-policy .shopify-policy__container .rte li,
+body.template-policy .shopify-policy__container .rte strong,
+body.template-policy .shopify-policy__container .rte em,
+body.template-policy .shopify-policy__container .rte span,
+body.template-policy .shopify-policy__container .rte a {
+  font-family: var(--font-primary, "Inter"), sans-serif !important;
+  font-weight: 400 !important;
+  line-height: 1.6 !important;
+  color: #111 !important;
+}
+
+/* Rubriker i policies */
+body.template-policy .shopify-policy__container .rte h1,
+body.template-policy .shopify-policy__container .rte h2,
+body.template-policy .shopify-policy__container .rte h3,
+body.template-policy .shopify-policy__container .rte h4 {
+  font-family: var(--font-heading, "ClashGrotesk-Variable", "Clash Grotesk"), sans-serif !important;
+  font-weight: 500 !important;
+  letter-spacing: -0.01em;
+}
