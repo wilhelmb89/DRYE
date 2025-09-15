@@ -144,11 +144,9 @@ swiper-container:not(:defined) { visibility: hidden; }
       grid-template-rows: repeat(2, 1fr);
       gap: 32px;
     }
-<div class="product-image-section" id="section-{{ section.id }}"
-     style="--pdp-h: {{ section.settings.model_height }}px;
-            --pdp-h-t: {{ section.settings.model_height_tablet }}px;
-            --pdp-h-m: {{ section.settings.model_height_mobile }}px;">
-
+   .product-image-section model-viewer {
+      height: {{ section.settings.model_height }}px;
+      width: 100%;
     }
     .mobile,
     .tablet {
