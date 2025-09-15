@@ -27,6 +27,28 @@
   font-family: inherit !important;
   font-weight: 400 !important;
 }
+
+{%- if request.path contains '/policies/' -%}
+<style id="policy-list-fix">
+/* Återställ bullets på policies */
+.shopify-policy__container .rte ul {
+  list-style: disc inside !important;
+  margin: 0 0 1rem 1.25rem !important; /* lite indrag */
+  padding: 0 !important;
+}
+
+.shopify-policy__container .rte ol {
+  list-style: decimal inside !important;
+  margin: 0 0 1rem 1.25rem !important;
+  padding: 0 !important;
+}
+
+.shopify-policy__container .rte li {
+  margin-bottom: 0.5rem; /* luft mellan rader */
+}
+</style>
+{%- endif -%}
+
 </style>
 {%- endif -%}
 
