@@ -3158,17 +3158,7 @@ h1, h2, h3, h4, h5, h6,
   /* Headings = Clash Grotesk Light 300 */
   --font-heading-family: "Clash Grotesk", sans-serif !important;
   --font-heading-weight: 300 !important;
-}
-/* Normalisera List with Image så den matchar Multirows */
-.list-image-section .container .content .list-wrapper .list,
-.list-image-section .container .content .list-wrapper .list .list-item,
-.list-image-section .container .content .text,
-.list-image-section .container .content .text p {
-  font-family: var(--font-body-family, inherit) !important; /* samma font-arv som Multirows */
-  font-weight: 400 !important;                               /* Inter Regular, inte Medium */
-  opacity: 0.65 !important;                                  /* samma nedtoning */
-  line-height: 28px;                                         /* samma luftighet */
-}
+
 
 #shopify-section-{{ section.id }} .author .avatar {
   width: 50px;
