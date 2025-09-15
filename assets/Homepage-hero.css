@@ -163,4 +163,8 @@
         font-weight: 600;
     }section:not(.main-article).section-article-hero .container {
   max-width: 980px!important;
-}
+}}
+/* Svart text i hero-sektion */
+.shopify-section.page-hero .container h1,
+.shopify-section.page-hero .container p {
+  color: #000 !important;
