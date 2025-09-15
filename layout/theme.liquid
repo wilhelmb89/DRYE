@@ -65,55 +65,7 @@
 
    
   </head>
-  {%- if request.path contains '/policies/' -%}
-<style id="policy-font-reset-inline">
-  /* Bas: tvinga body-typografi */
-  body.template-policy,
-  body.template-policy .shopify-policy__container,
-  body.template-policy .shopify-policy__container *,
-  body.template-policy .shopify-policy__body,
-  body.template-policy .shopify-policy__body * {
-    font-family: "Inter", var(--font-primary, Inter), system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif !important;
-    font-variation-settings: "wght" 400 !important;
-    font-weight: 400 !important;
-    font-style: normal !important;
-    color: rgb(17 17 17 / 65%) !important;
-  }
-
-  /* Rubriker ska använda Clash Grotesk (samma som resten av sajten) */
-  body.template-policy .shopify-policy__container h1,
-  body.template-policy .shopify-policy__container h2,
-  body.template-policy .shopify-policy__container h3,
-  body.template-policy .shopify-policy__container h4,
-  body.template-policy .shopify-policy__body h1,
-  body.template-policy .shopify-policy__body h2,
-  body.template-policy .shopify-policy__body h3,
-  body.template-policy .shopify-policy__body h4 {
-    font-family: "ClashGrotesk-Variable", "Clash Grotesk", sans-serif !important;
-    font-variation-settings: "wght" 500 !important;
-    font-weight: 500 !important;
-    color: #111 !important;
-  }
-
-  /* Fet text */
-  body.template-policy .shopify-policy__container strong,
-  body.template-policy .shopify-policy__body strong,
-  body.template-policy .shopify-policy__container b,
-  body.template-policy .shopify-policy__body b {
-    font-weight: 600 !important;
-    font-variation-settings: "wght" 600 !important;
-    color: #111 !important;
-  }
-
-  /* Täck vanliga rich-text selectors som ibland används i bundles */
-  body.template-policy .rte,
-  body.template-policy .rte * {
-    font-family: "Inter", var(--font-primary, Inter) !important;
-    font-weight: 400 !important;
-  }
-</style>
-{%- endif -%}
-<body class="{{ page.template_suffix }}__page">
+  <body class="{{ page.template_suffix }}__page">
 
 
     
