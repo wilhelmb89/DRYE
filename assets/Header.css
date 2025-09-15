@@ -269,3 +269,7 @@
         justify-content: end;
     }.header__icon.header__icon--cart:hover {
     text-decoration: none;
+
+    .accordion-item.active .accordion-header {
+    padding-bottom: 12px!important;
+}
