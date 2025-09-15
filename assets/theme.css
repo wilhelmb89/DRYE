@@ -771,18 +771,6 @@ form label {
         background-position: 100% 0;
     }
 
-
-.main-product .container .hero-wrapper {
-    grid-row-gap: 0;
-    grid-template-areas: 'title image' 'content image';
-}
-@media screen and (max-width: 1024px) {
-    .main-product .container .hero-wrapper {
-        gap: 35px;
-        padding-top: 140px;
-        grid-template-columns: 1fr;
-        grid-template-rows: auto;
-        grid-template-areas: 'title' 'image' 'content';
     }
 }
 .main-product .content {
@@ -2784,11 +2772,7 @@ svg {
     opacity: 1;
 }
 
-@media screen and (min-width: 768px) and (max-width: 1440px) {
-    .hero-section .container .hero-wrapper {
-        grid-row-gap: 32px;
-    }
-}
+
 
 @media screen and (max-width: 768px) {
     h1:not(.article__title) {
@@ -2804,11 +2788,6 @@ svg {
     }
 }
 
-@media screen and (min-width: 768px) and (max-width: 1024px) {
-    .hero-section .container .hero-wrapper .image {
-        min-height: 450px;
-    }
-}
 
 
 .cart-wrapper .below-qty {
