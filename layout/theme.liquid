@@ -18,22 +18,13 @@
   font-weight: 500 !important;
   letter-spacing: -0.01em !important;
   line-height: 1.2 !important;
-  color: #111 !important; /* gör rubrikerna mörkare, bättre kontrast */
-
-/* === Listor === */
-.shopify-policy__container .rte ul,
-.shopify-policy__container .rte ol,
-.shopify-policy__container .rte li {
-  font-family: inherit !important;
-  font-weight: 400 !important;
+  color: #111 !important; /* mörkare rubriker */
 }
 
-{%- if request.path contains '/policies/' -%}
-<style id="policy-list-fix">
-/* Återställ bullets på policies */
+/* === Listor === */
 .shopify-policy__container .rte ul {
   list-style: disc inside !important;
-  margin: 0 0 1rem 1.25rem !important; /* lite indrag */
+  margin: 0 0 1rem 1.25rem !important;
   padding: 0 !important;
 }
 
@@ -44,28 +35,9 @@
 }
 
 .shopify-policy__container .rte li {
-  margin-bottom: 0.5rem; /* luft mellan rader */
-}/* Återställ UL/OL på policies */
-body.template-policy .rte ul {
-  list-style: disc inside !important;
-  margin: 0 0 1rem 1.25rem !important;
-  padding: 0 !important;
-}
-
-body.template-policy .rte ol {
-  list-style: decimal inside !important;
-  margin: 0 0 1rem 1.25rem !important;
-  padding: 0 !important;
-}
-
-body.template-policy .rte li {
-  display: list-item !important; /* tvinga att bli en "list item" */
+  display: list-item !important;
   margin-bottom: 0.5rem;
 }
-
-</style>
-{%- endif -%}
-
 </style>
 {%- endif -%}
 
