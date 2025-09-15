@@ -107,6 +107,16 @@ body.template-policy .shopify-policy__container {
   });
 </script>
 
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    // Endast analytics/performance-script skjuts upp
+    document.querySelectorAll('script[src*="clarity"], script[src*="perf-kit"], script[src*="bundle.5gtb"]').forEach(function(el) {
+      if (!el.hasAttribute("defer")) {
+        el.setAttribute("defer", "defer");
+      }
+    });
+  });
+</script>
 
    
   </head>
