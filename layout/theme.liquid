@@ -1,13 +1,17 @@
 {%- if request.path contains '/policies/' -%}
 <style id="policy-font-overrides">
 /* === Bas / brödtext === */
-.shopify-policy__container .rte,
-.shopify-policy__container .rte * {
-  font-family: var(--font-primary, "Inter"), sans-serif !important;
-  font-weight: 400 !important;
-  line-height: 1.6 !important;
-  color: #1D1F21A6 !important; /* samma färg som på startsidan */
+.shopify-policy__container .rte ul,
+.shopify-policy__container .rte ol {
+  list-style: disc inside !important;
+  margin: 0 0 1rem 1.25rem !important; /* behåll bara indraget till vänster */
+  padding: 0 !important;
 }
+
+.shopify-policy__container .rte li {
+  margin: 0 !important; /* ingen extra luft mellan punkterna */
+}
+
 
 /* === Rubriker === */
 .shopify-policy__container .rte h1,
