@@ -160,3 +160,15 @@ body.template-policy h4 {
 .button:hover {
   background: #333333;
 }
+/* Begränsa höjden på review-sektionen */
+.review-slider__slide,
+.swiper-wrapper {
+  height: auto !important;
+  padding: 0 !important; /* ta bort onödigt extra */
+}
+
+/* Se till att hela sektionen krymper runt sitt innehåll */
+.shopify-section.reviews_new_FbpjCh {
+  min-height: auto !important;
+  background-color: #fff !important; /* byt till vit bakgrund om du vill matcha resten */
+}
