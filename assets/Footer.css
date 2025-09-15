@@ -284,3 +284,146 @@
 
     footer {
     background-color: #f3f2f1;
+
+    
+
+
+/* David Gibson Responsive Changes 08/04/25 */
+/* Footer styling amends */
+
+.footer-section .container .menu-area .menu-wrapper {
+    gap: 40px!important;
+    justify-content: space-evenly;
+    flex-grow: 1;
+}
+
+.footer-section .container .menu-area {
+    gap: 50px;
+    flex-wrap: nowrap!important;
+}
+
+.footer-menu__left {
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: 50px;
+}
+
+.footer-menu__right {
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-start;
+    gap: 80px;
+    flex-wrap: wrap;
+}
+
+.footer-section .container .menu-area .email .email-content {
+    margin-bottom: 23px;
+}
+
+.footer-section .container .bottom {
+    margin-top: 60px;
+}
+
+.footer-section .container .menu-area .email form {
+    border-radius: 0;
+}
+
+@media screen and (max-width: 1441px) {
+    .footer-section .container .menu-area .menu-wrapper {
+        justify-content: flex-end!important;
+        gap: 100px!important;
+    }
+}
+@media screen and (max-width: 1024px) {
+    .footer-menu__left {
+        width: 100%;
+    }
+    .footer-menu__left .social-block-logo img {
+        width: auto;
+        height: 62px;
+    }
+    .footer-section .container .menu-area .menu-wrapper {
+        justify-content: flex-start!important;
+        gap: 50px!important;
+    }
+
+    .footer-menu__right {
+        gap: 40px;
+        flex-wrap: nowrap;
+    }
+    .footer-section .container .bottom {
+        margin-top: 34px;
+    }
+    .footer-section {
+        padding: 48px 0 24px;
+    }
+    .footer-section .container .menu-area .email .email-box {
+        flex-direction: column!important;
+    }
+    .footer-section .container .menu-area {
+        flex-wrap: wrap!important;
+    }
+    /* .footer-section .container .menu-area .email {
+        max-width: 400px!important;
+    } */
+    .footer-section .container .menu-area .email .email-box {
+        flex-direction: row;
+    }
+    .footer-section .container .menu-area .email {
+        width: 65%!important;
+    }
+}
+
+@media screen and (max-width: 820px) {
+    .footer-menu__right {
+        flex-wrap: wrap;
+    }
+    .footer-section .container .menu-area .menu-wrapper {
+        justify-content: flex-start !important;
+        gap: 100px !important;
+    }
+    .footer-section .container .menu-area .email {
+        width: 100%!important;
+    }
+    .footer-section .container .menu-area .email .email-box {
+        flex-direction: row!important;
+    }
+}
+
+@media screen and (max-width: 767px) {
+    .footer-section .container .menu-area .menu-wrapper {
+        width: 100%;
+    }
+    .footer-section .container .menu-area {
+        margin: 0;
+    }
+    .footer-menu__left .social-block-logo img {
+        width: auto;
+        height: 52px;
+    }
+    .footer-section .container .menu-area .social-block .social-block-logo {
+        gap: 15px!important;
+    }
+    .footer-section .container .menu-area {
+        gap: 40px;
+    }
+    .footer-section .container .menu-area .email .title {
+        margin-bottom: 16px;
+    }
+    .footer-section .container .bottom {
+        border: none;
+        margin: 0;
+        padding: 32px 0 0;
+        align-items: flex-start;
+    }
+    .footer-menu__right {
+        align-items: flex-start;
+    }
+    .footer-section .container .menu-area .email {
+        max-width: 100%;
+        width: 100%;
+    }
+    .footer-section .container .menu-area .menu-wrapper {
+        gap: 24px!important;
+    }
