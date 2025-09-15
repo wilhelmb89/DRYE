@@ -3457,16 +3457,6 @@ div#occ3-drawer {
 
 
 
-  
-.shopify-policy__body {
-  max-width: 460px;
-  padding-left: 64px;
-  padding-right: 64px;
-  box-sizing: border-box;
-  width: 100%;
-  
-}
-
 .shopify-payment-button__button {
   display: none !important;
 }
@@ -3618,26 +3608,7 @@ h1, h2, h3, h4, h5, h6,
   opacity: 0.65 !important;                                  /* samma nedtoning */
   line-height: 28px;                                         /* samma luftighet */
 }
-/* Bas: p, li, span, a, em = 400 */
-body.template-policy .shopify-policy__container .shopify-policy__body :where(p, li, span, a, em) {
-  font-family: var(--font-body-family, Inter, sans-serif) !important;
-  font-weight: 400 !important;
-  font-variation-settings: "wght" 400 !important;
-  letter-spacing: normal !important;
-  color: rgb(17 17 17 / 65%) !important;
-}
 
-/* Bold separat */
-body.template-policy .shopify-policy__container .shopify-policy__body :where(strong, b) {
-  font-weight: 600 !important;                 /* 700 om du vill mer kontrast */
-  font-variation-settings: "wght" 600 !important;
-  color: #111 !important;                      /* gör bold mörkare */
-}
-
-body.template-policy .shopify-policy__container .shopify-policy__body a {
-  color: inherit !important;
-  text-decoration: underline;
-}
 #shopify-section-{{ section.id }} .author .avatar {
   width: 50px;
   height: 50px;
