@@ -145,4 +145,22 @@
 
 .product-thumbnail-item, .preview-trigger {
     cursor: pointer;
+}/* Begränsa höjden på review-sektionen */
+.shopify-section.reviews_new_FbpjCh {
+  padding: 40px 0 !important;  /* lagom spacing */
+  min-height: auto !important; /* ingen fast höjd */
+  height: auto !important;     /* låt innehållet styra */
+  background: #fff !important; /* byt bakgrund till vit */
+}
+
+/* Nollställ swiper-wrapper så den inte skjuter ut sektionen */
+.reviews_new_FbpjCh .swiper-wrapper {
+  padding: 0 !important;
+  margin: 0 auto !important;
+  height: auto !important;
+}
+
+/* Se till att slides inte försöker fylla 100% av containern */
+.reviews_new_FbpjCh .review-slider__slide {
+  height: auto !important;
 }
