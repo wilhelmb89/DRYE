@@ -1,8 +1,37 @@
+/* ================================
+   Basvariabler
+================================ */
+:root {
+  --font-primary: "Inter", sans-serif;
+  --font-heading: "ClashGrotesk-Variable", sans-serif;
+
+  --font-size-base: 16px;
+  --font-size-sm: 14px;
+  --font-size-lg: 20px;
+  --font-size-xl: 28px;
+  --font-size-xxl: 40px;
+  --font-size-hero: 70px; /* special för hero */
+  --font-size-subtitle: 36px;
+
+  --line-height-base: 1.5;
+  --line-height-tight: 1.2;
+  --line-height-loose: 1.8;
+
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+  --font-weight-bold: 700;
+}
+
+/* ================================
+   Grundtypografi
+================================ */
 body {
   font-family: var(--font-primary);
   font-size: var(--font-size-base);
   line-height: var(--line-height-base);
   font-weight: var(--font-weight-regular);
+  color: #111; /* justeras efter design */
+  background: #fff;
 }
 
 h1, h2, h3, h4, h5, h6,
@@ -10,4 +39,5 @@ h1, h2, h3, h4, h5, h6,
   font-family: var(--font-heading);
   font-weight: var(--font-weight-medium);
   line-height: var(--line-height-tight);
+  margin: 0;
 }
