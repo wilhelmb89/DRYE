@@ -1493,16 +1493,7 @@ srcset="
 </div>>
                                                                                                               
           {%- endif -%}
-        {% else %}
-          {% if ss.model != blank %}
-            <model-viewer
-              src="{{ ss.model }}"
-              ar
-              auto-rotate
-              camera-controls
-            >
-            </model-viewer>
-          {% endif %}
+        
         {% endif %}
       </swiper-slide>
       {% for product_thumbnail in product_thumbnails %}
