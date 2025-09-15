@@ -2810,43 +2810,7 @@ section:not(.main-article).section-article-hero .container {
     max-width: 1066px;
 }
 
-.shopify-policy__container {
-    max-width: 1470px !important;
-    width: 100% !important;
-    padding-inline: 2rem !important;
-    margin-inline: auto;
-    padding-block: 160px;
-}
-@media screen and (max-width: 768px) {
-    .shopify-policy__container {
-        padding-block: 80px;
-        padding-inline: 20px !important;
-    }
-}
-.shopify-policy__container h1 {
-    font-family: 'inter';
-    font-size: 32px;
-    font-weight: 500;
-    line-height: 38px;
-    letter-spacing: normal;
-    margin-bottom: 30px;
-    opacity: 1;
-}
-.shopify-policy__container h2 {
-    font-family: 'inter';
-    font-size: 1.5rem;
-    margin-bottom: 16px;
-    font-weight: 600;
-}
-.shopify-policy__container p {
-  color: #6b6b69;
-  font-family: "Inter", sans-serif;
-  font-size: 16px;
-  font-weight: 400;
-  line-height: 24px;
-  letter-spacing: normal;
-  text-align: left;
-}
+
 
 .icon {
     max-height: 24px;
