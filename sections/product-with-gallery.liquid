@@ -144,38 +144,9 @@ swiper-container:not(:defined) { visibility: hidden; }
       grid-template-rows: repeat(2, 1fr);
       gap: 32px;
     }
-/* Bas: låt själva containern bära höjden */
-.product-image-section .product-image-slider,
-.product-image-section .product-main-image {
-  width: 100%;
-  min-height: {{ section.settings.model_height | default: 560 }}px; /* desktop */
-}
-
-/* Tablet */
-@media (min-width: 768px) and (max-width: 1024px){
-  .product-image-section .product-image-slider,
-  .product-image-section .product-main-image {
-    min-height: {{ section.settings.model_height_tablet | default: 440 }}px;
-  }
-}
-
-/* Mobil */
-@media (max-width: 767px){
-  .product-image-section .product-image-slider,
-  .product-image-section .product-main-image {
-    min-height: {{ section.settings.model_height_mobile | default: 360 }}px;
-  }
-}
-
-/* Bilden fyller ytan korrekt */
-.product-image-section .product-image-slider img,
-.product-image-section .product-main-image img {
-  display: block;
-  width: 100%;
-  height: auto;
-  object-fit: cover;
-}
-
+   .product-image-section model-viewer {
+          height: {{ section.settings.model_height }}px;
+                width: 100%;
    }
     }
     .mobile,
