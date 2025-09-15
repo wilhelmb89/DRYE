@@ -92,15 +92,6 @@ body.template-policy .shopify-policy__container {
     <script src="{{ 'swiper-bundle.min.js' | asset_url }}" defer="defer"></script>
     {{ 'swiper-bundle.min.css' | asset_url | stylesheet_tag }}
     {%- render 'theme-head-assets' -%}
-
-    {{ 'swiper-bundle.min.css' | asset_url | stylesheet_tag }}
-{%- render 'theme-head-assets' -%}
-
-{%- comment -%} Ladda review-stilar bara när sektionen finns {%- endcomment -%}
-{%- if content_for_layout contains 'reviews-section' -%}
-  <link href="{{ 'reviews.css' | asset_url }}" rel="stylesheet">
-{%- endif -%}
-
 {{ content_for_header }}
 
 {{ 'policy.css' | asset_url | stylesheet_tag }}
@@ -115,8 +106,6 @@ body.template-policy .shopify-policy__container {
     });
   });
 </script>
-{# Om du använder <swiper-container> #}
-<script src="{{ 'swiper-element-bundle.min.js' | asset_url }}" defer></script>
 
 
    
