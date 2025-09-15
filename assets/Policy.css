@@ -82,3 +82,16 @@ span {
 h1, h2, h3, h4, h5 {
   font-family: var(--font-heading) !important;
 }
+/* Override Shopify bundle fonts */
+body,
+p,
+li,
+span,
+a,
+em {
+  font-family: var(--font-primary, "Inter"), sans-serif !important;
+}
+
+h1, h2, h3, h4, h5 {
+  font-family: var(--font-heading, "ClashGrotesk-Variable", "Clash Grotesk"), sans-serif !important;
+}
