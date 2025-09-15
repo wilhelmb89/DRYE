@@ -2635,6 +2635,24 @@ svg {
 }
 
 
+/* David Gibson Milestone 2 amends 10/04/25 */
+.list-image-section .container .content img {
+    width: 61%;
+}
+.list-image-section .container .content {
+    gap: 0;
+}
+.list-image-section .container .content .image {
+    flex: 1 0 50%;
+}
+
+img.quote-marks {
+    border-radius: 0!important;
+    width: 30px!important;
+    height: auto!important;
+    object-fit: none!important;
+}
+
 
 }
 
