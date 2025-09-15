@@ -1,4 +1,21 @@
-/* Säkerställ att policy-sidorna får samma typografi som resten av siten */
+/* ===========================
+   POLICY PAGES
+   =========================== */
+.shopify-policy__container {
+  max-width: 1470px !important;
+  width: 100% !important;
+  margin-inline: auto;
+  padding-block: 160px;
+  padding-inline: 2rem !important;
+}
+@media screen and (max-width: 768px) {
+  .shopify-policy__container {
+    padding-block: 100px 80px; /* extra top padding så header inte krockar */
+    padding-inline: 20px !important;
+  }
+}
+
+/* Baslayout för policy-sidor */
 body.template-policy {
   font-family: var(--font-primary, "Inter"), sans-serif !important;
   font-weight: 400;
@@ -6,19 +23,45 @@ body.template-policy {
   color: #111;
 }
 
+/* Rubriker */
 body.template-policy h1,
 body.template-policy h2,
 body.template-policy h3 {
   font-family: var(--font-heading, "ClashGrotesk-Variable"), sans-serif !important;
   font-weight: 500;
+  letter-spacing: normal;
+}
+.shopify-policy__container h1 {
+  font-size: 32px;
+  line-height: 38px;
+  margin-bottom: 30px;
+}
+.shopify-policy__container h2 {
+  font-size: 1.5rem;
+  margin-bottom: 16px;
 }
 
-body.template-policy p,
-body.template-policy li,
-body.template-policy a,
-body.template-policy span {
+/* Brödtext */
+body.template-policy :where(p, li, span, a, em) {
   font-family: var(--font-primary, "Inter"), sans-serif !important;
   font-weight: 400 !important;
-  color: rgb(17 17 17 / 65%) !important;
   line-height: 28px;
+  letter-spacing: normal !important;
+  color: rgb(17 17 17 / 65%) !important;
+}
+
+/* Bold */
+body.template-policy :where(strong, b) {
+  font-weight: 600 !important;
+  color: #111 !important;
+}
+
+/* Länkar */
+body.template-policy a {
+  color: inherit !important;
+  text-decoration: underline;
+}
+body.template-policy a:hover {
+  color: #ff6600 !important; /* justera om du vill matcha tema */
+  text-decoration: none;
 }
