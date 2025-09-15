@@ -142,3 +142,20 @@ body.template-policy .shopify-policy__container .rte h4 {
   font-weight: 500 !important;
   letter-spacing: -0.01em;
 }
+/* Återställ UL/OL på policies */
+body.template-policy .rte ul {
+  list-style: disc inside !important;
+  margin: 0 0 1rem 1.25rem !important;
+  padding: 0 !important;
+}
+
+body.template-policy .rte ol {
+  list-style: decimal inside !important;
+  margin: 0 0 1rem 1.25rem !important;
+  padding: 0 !important;
+}
+
+body.template-policy .rte li {
+  display: list-item !important; /* tvinga att bli en "list item" */
+  margin-bottom: 0.5rem;
+}
