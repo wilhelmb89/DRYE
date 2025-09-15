@@ -1,0 +1,21 @@
+/* Multirows – rubrik */
+.multirows-title {
+  font-family: "Clash Grotesk", sans-serif !important;
+  font-weight: 300 !important;      /* Light */
+  letter-spacing: 0.5px;
+  margin-top: 10px;
+  margin-bottom: 15px;
+  line-height: 1.2;
+}
+
+/* Mobil (≤ 767px) */
+@media (max-width: 767px) {
+  .multirows-title {
+    font-size: 28px !important;
+  }
+}
+
+/* Desktop (≥ 768px) */
+@media (min-width: 768px) {
+  .multirows-title {
+    font-size: 48px !important;
