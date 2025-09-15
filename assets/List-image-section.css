@@ -162,3 +162,17 @@
         justify-content: center;
     }
 }
+
+
+
+
+/* David Gibson Milestone 2 amends 10/04/25 */
+.list-image-section .container .content img {
+    width: 61%;
+}
+.list-image-section .container .content {
+    gap: 0;
+}
+.list-image-section .container .content .image {
+    flex: 1 0 50%;
+}
