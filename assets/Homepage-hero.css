@@ -108,3 +108,157 @@
     width: auto;
     height: 100%;
     object-fit: cover;
+
+    
+.hero-section {
+    padding-top: 98px;
+    overflow: hidden;
+    border-radius: 0 0 5vw 5vw;
+}
+@media screen and (max-width: 1024px) {
+    .hero-section {
+        padding-top: 20px;
+    }
+}
+@media screen and (max-width: 767px) {
+    .hero-section {
+        border-radius: 0 0 30px 30px;
+    }
+}
+.hero-section .container {
+    position: relative;
+    z-index: 1;
+}
+.hero-section .container .hero-wrapper {
+    padding-block: 80px;
+    display: grid;
+    grid-template-columns: 45% 55%;
+    grid-template-rows: auto;
+    grid-column-gap: 0px;
+    grid-row-gap: 160px;
+    grid-template-areas: 'title image' 'review image';
+}
+@media screen and (max-width: 768px) {
+    .header-section header .container {
+        padding-block: 10px;
+    }
+}
+@media screen and (max-width: 767px) {
+    .hero-section .container .hero-wrapper {
+        padding-block: 100px;
+    }
+}
+@media screen and (max-width: 1024px) {
+    .hero-section .container .hero-wrapper {
+        gap: 35px;
+        grid-template-columns: 1fr;
+        grid-template-rows: auto;
+        grid-template-areas: 'title' 'image' 'review';
+    }
+}
+.hero-section .container .hero-wrapper .title {
+    grid-area: title;
+    max-width: 569px;
+    font-size: 3.125rem;
+    font-weight: 300;
+    line-height: 3.75rem;
+    font-family: ClashGrotesk-Variable;
+}
+.hero-section .container .hero-wrapper .title small {
+    font-size: 36px !important;
+    font-weight: 700 !important;
+    letter-spacing: 0em !important;
+    line-height: 0.87 !important;
+}
+@media screen and (max-width: 767px) {
+    .hero-section .container .hero-wrapper .title {
+        font-size: 28px;
+        line-height: 1.1;
+        letter-spacing: 1px;
+        max-width: 330px;
+        margin-left: 0px;
+    }
+    .hero-section .container .hero-wrapper .title small {
+        font-size: 36px !important;
+        line-height: 0.53 !important;
+    }
+}
+.hero-section .container .hero-wrapper .review {
+    display: flex;
+    flex-direction: column;
+    gap: 35px;
+    font-size: 1rem;
+    line-height: 1.2;
+    grid-area: review;
+    max-width: 364px;
+    line-height: 24px;
+}
+@media screen and (min-width: 768px) and (max-width: 1440px) {
+    .hero-section .container .hero-wrapper .review {
+        gap: none;
+        max-width: 100%;
+    }
+    .hero-section .container .hero-wrapper {
+        grid-row-gap: 32px !important;
+    }
+
+    .hero-section .container .hero-wrapper .review {
+        font-size: 1rem;
+        line-height: 1.4rem;
+    }
+
+    .hero-section .container .hero-wrapper .review p {
+        line-height: 1.45;
+    }
+}
+
+.hero-section .container .hero-wrapper .review .top-bar {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: -13px;
+}
+.hero-section .container .hero-wrapper .review .top-bar .vr-line {
+    width: 1px;
+    height: calc(100% - 6px);
+    background: #111111;
+}
+.hero-section .container .hero-wrapper .review .top-bar .stars {
+    position: relative;
+    height: 16px;
+}
+.hero-section .container .hero-wrapper .review .top-bar .stars .top-layer {
+    position: relative;
+    z-index: 2;
+}
+.hero-section .container .hero-wrapper .review .top-bar .stars .background-layer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+}
+.hero-section .container .hero-wrapper .review .top-bar .stars .background-layer path {
+    fill: transparent;
+}
+.hero-section .container .hero-wrapper .review .top-bar .see-all {
+    text-decoration: underline;
+}
+.hero-section .container .hero-wrapper .review .top-bar .see-all:hover {
+    text-decoration: none;
+}
+.hero-section .container .hero-wrapper .review .button {
+    padding-inline: 40px;
+}
+@media screen and (max-width: 767px) {
+    .hero-section .container .hero-wrapper .review .button {
+        width: 100%;
+        justify-content: center;
+    }
+}
+.hero-section .container .hero-wrapper .image {
+    grid-area: image;
+}
+.hero-section .container .hero-wrapper .image img {
+    width: 100%;
+    height: auto;
+}
