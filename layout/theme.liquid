@@ -4,6 +4,43 @@
 {%- endcomment -%}
 <!doctype html>
 <html lang="{{ request.locale.iso_code }}">
+ {%- comment -%}
+  Policy font override: laddas inline sist i head så det slår igenom
+{%- endcomment -%}
+
+{%- if request.path contains '/policies/' -%}
+<style id="policy-font-overrides">
+/* Mycket specifika regler som slår mot .rte inom policy-container */
+.shopify-policy__container .rte,
+.shopify-policy__container .rte * {
+  font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif !important;
+  font-weight: 400 !important;
+  line-height: 1.6 !important;
+  color: rgb(17 17 17 / 85%) !important;
+}
+
+/* Rubriker i policy - använd Clash (site heading) */
+.shopify-policy__container .rte h1,
+.shopify-policy__container .rte h2,
+.shopify-policy__container .rte h3,
+.shopify-policy__container .rte h4 {
+  font-family: "ClashGrotesk-Variable", "Clash Grotesk", Inter, sans-serif !important;
+  font-weight: 500 !important;
+  letter-spacing: -0.01em !important;
+  line-height: 1.2 !important;
+}
+
+/* Lista + markörer */
+.shopify-policy__container .rte ul,
+.shopify-policy__container .rte ol,
+.shopify-policy__container .rte li {
+  font-family: inherit !important;
+  font-weight: 400 !important;
+}
+</style>
+{%- endif -%}
+
+ 
   <head>
 <link rel="preload" href="{{ 'clash-grotesk-light.woff2' | asset_url }}" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="{{ 'inter-regular.woff2' | asset_url }}" as="font" type="font/woff2" crossorigin>
