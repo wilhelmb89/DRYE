@@ -41,7 +41,6 @@
     })(window, document, "clarity", "script", "r99kaui2gr");
 </script>
 
-{{ 'policy.css' | asset_url | stylesheet_tag }}
 
 
 {%- render 'theme-meta' -%}
@@ -50,6 +49,7 @@
     {%- render 'theme-head-assets' -%}
 {{ content_for_header }}
 
+{{ 'policy.css' | asset_url | stylesheet_tag }}
 <script>
   document.addEventListener("DOMContentLoaded", function() {
     // Endast analytics/performance-script skjuts upp
