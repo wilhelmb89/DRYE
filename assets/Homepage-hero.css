@@ -262,3 +262,152 @@
     width: 100%;
     height: auto;
 }
+
+
+
+.page-hero {
+    min-height: 1080px;
+    height: 100%;
+    position: relative;
+    display: flex;
+    align-self: center;
+}
+@media screen and (max-width: 1150px) {
+    .page-hero {
+        min-height: 680px;
+    }
+}
+@media screen and (max-width: 767px) {
+    .page-hero {
+        height: 100%;
+        display: block;
+    }
+}
+.page-hero .video-overlay {
+    position: absolute;
+    background: linear-gradient(
+        180deg,
+        rgba(2, 0, 0, 0.5) 0%,
+        rgba(0, 0, 0, 0.2) 25%,
+        rgba(0, 0, 0, 0.2) 50%,
+        rgba(0, 0, 0, 0.8) 100%
+    );
+    z-index: 2;
+    inset: 0;
+}
+.page-hero video {
+    position: absolute;
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.page-hero .container {
+    padding-block: 220px;
+    position: relative;
+    z-index: 3;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    justify-content: center;
+}
+@media screen and (max-width: 767px) {
+    .page-hero .container {
+        flex-direction: column;
+        gap: 150px;
+        padding-inline: 45px;
+        align-items: start;
+        padding-block: 90px 70px;
+    }
+}
+.page-hero .container .title {
+    color: #fff;
+    font-family: ClashGrotesk-Variable;
+    font-size: 3.125rem;
+    font-weight: 300;
+    line-height: 2;
+    letter-spacing: 0px;
+    max-width: 830px;
+    line-height: 3.75rem;
+    margin-bottom: 64px;
+}
+@media screen and (max-width: 1150px) {
+    .page-hero .container .title {
+        font-size: 22x;
+        letter-spacing: 0px;
+        line-height: 15px;
+    }
+}
+@media screen and (max-width: 1024px) {
+    .page-hero .container .title {
+        font-size: 22px;
+        letter-spacing: 0px;
+        line-height: 25px;
+    }
+}
+@media screen and (max-width: 767px) {
+    .page-hero .container .title {
+        font-size: 28px;
+        letter-spacing: 0px;
+        line-height: 35px;
+    }
+}
+.page-hero .container .content {
+    max-width: 500px;
+    display: flex;
+    flex-direction: column;
+    gap: 35px;
+}
+@media screen and (max-width: 1024px) {
+    .page-hero .container .content {
+        gap: 10px;
+    }
+}
+@media screen and (max-width: 767px) {
+    .page-hero .container .content {
+        max-width: 280px;
+    }
+}
+.page-hero .container .content .subtitle {
+    font-family: 'inter';
+    font-size: 28px;
+    line-height: 38px;
+    font-weight: 700;
+    letter-spacing: 0px;
+    color: white;
+}
+@media screen and (max-width: 1024px) {
+    .page-hero .container .content .subtitle {
+        font-size: 1.5rem;
+        letter-spacing: -1.28px;
+        line-height: 30px;
+    }
+}
+@media screen and (max-width: 767px) {
+    .page-hero .container .content .subtitle {
+        font-size: 20px;
+        line-height: 30px;
+        letter-spacing: 0px;
+    }
+}
+.page-hero .container .content .pros {
+    letter-spacing: -0.48px;
+    color: white;
+    line-height: 1.5;
+    max-width: 360px;
+}
+.page-hero .container .content .link {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    color: inherit;
+    position: relative;
+    transition: 0.3s;
+    font-weight: 700;
+    color: white;
+}
+.page-hero .container .content .link svg {
+    fill: inherit;
+}
+.page-hero .container .content .link:hover {
+    gap: 20px;
