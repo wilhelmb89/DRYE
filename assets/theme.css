@@ -3664,23 +3664,6 @@ section.before-after-section h2.title,
 
 
 }
-/* Final: policy-bold vinner alltid */
-body.template-policy .shopify-policy__container .shopify-policy__body strong,
-body.template-policy .shopify-policy__container .shopify-policy__body b {
-  font-size: inherit !important;
-  font-weight: 600 !important;
-  font-variation-settings: "wght" 600 !important;
-  color: #111 !important;
-}
-/* DRYE – EOF hard stop for policy bold */
-body.template-policy .shopify-policy__body strong,
-body.template-policy .shopify-policy__body b {
-  font-size: inherit !important;
-  font-weight: 600 !important;                  /* 700 om du vill hårdare */
-  font-variation-settings: "wght" 600 !important;
-  letter-spacing: inherit !important;
-  color: #111 !important;
-}
 /* DRYE: Sticky CTA */
 .sticky-cta{
   position: fixed;
