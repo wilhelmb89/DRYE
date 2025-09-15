@@ -42,6 +42,18 @@
       line-height: {{ section.settings.name_line_height_mobile }}px;
     }
   }
+
+  /* Override bara för Reviews(New) */
+#shopify-section-{{ section.id }} .swiper-wrapper {
+  padding: 0 !important;        /* ta bort 80px padding */
+  align-items: stretch !important;
+}
+
+#shopify-section-{{ section.id }} swiper-slide {
+  min-height: auto !important;  /* säkerställ att slides krymper till innehållet */
+  height: auto !important;
+}
+
 </style>
 <div class="reviews-content container p-0" id="inverseHeader" data-inversed="false">
   <div class="top">
