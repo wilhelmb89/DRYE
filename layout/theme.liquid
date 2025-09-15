@@ -46,13 +46,13 @@ body.template-policy .shopify-policy__container {
 </style>
 {%- endif -%}
 
-
-
- 
+{%- comment -%}
+  This file has been modified by the Yoast SEO for Shopify app.
+  You can learn more about this (and learn how to cleanly revert these changes) at https://yoa.st/removing-theme-changes.
+{%- endcomment -%}
+<!doctype html>
+<html lang="{{ request.locale.iso_code }}">
   <head>
-
-
-
 <link rel="preload" href="{{ 'clash-grotesk-light.woff2' | asset_url }}" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="{{ 'inter-regular.woff2' | asset_url }}" as="font" type="font/woff2" crossorigin>
 
@@ -60,6 +60,22 @@ body.template-policy .shopify-policy__container {
 
 
     <meta name="facebook-domain-verification" content="wfm34x1wbceob0aooivridsrxzce09">
+
+{%- comment -%} Ladda sektion-CSS endast på relevanta mallar {%- endcomment -%}
+
+{%- if template contains 'product' -%}
+  <link href="{{ 'reviews.css' | asset_url }}" rel="stylesheet">
+  <link href="{{ 'before-after.css' | asset_url }}" rel="stylesheet">
+{%- endif -%}
+
+{%- if template contains 'article' or template contains 'blog' or template contains 'collection' -%}
+  <link href="{{ 'blog.css' | asset_url }}" rel="stylesheet">
+{%- endif -%}
+
+{%- if content_for_layout contains 'faq-section' -%}
+  <link href="{{ 'faq.css' | asset_url }}" rel="stylesheet">
+{%- endif -%}
+
 
 
    
@@ -96,8 +112,6 @@ body.template-policy .shopify-policy__container {
     {{ 'swiper-bundle.min.css' | asset_url | stylesheet_tag }}
     {%- render 'theme-head-assets' -%}
 {{ content_for_header }}
-
-{{ 'policy.css' | asset_url | stylesheet_tag }}
 
 <script>
   document.addEventListener("DOMContentLoaded", function() {
