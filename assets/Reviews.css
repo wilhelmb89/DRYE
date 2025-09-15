@@ -164,3 +164,13 @@
 .reviews_new_FbpjCh .review-slider__slide {
   height: auto !important;
 }
+
+.review-slider__slide,
+.swiper-wrapper {
+  height: auto !important;
+  padding: 0 !important;
+}
+
+.shopify-section.reviews_new_FbpjCh {
+  min-height: auto !important;
+}
