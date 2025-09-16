@@ -1015,30 +1015,41 @@ style="aspect-ratio: {{ product_thumbnail.settings.image_mobile.width }} / {{ pr
         <div class="price-social-section">
           <div class="price">{{ product.price | money_with_currency }}</div>
           {%- if ss.share_text -%}
-            <div class="share-block active" style="order:1;display:flex;gap:8px;">
-  <button type="button" class="share-button"
-          data-sharer="twitter" aria-label="Share on Twitter"
-          data-title="{{ product.title }}" data-url="{{ product.url | shop_url }}">
-    <img src="https://cdn.shopify.com/s/files/1/0686/9581/8505/files/twitter-svgrepo-com.svg?v=1757967743"
-         width="19" height="19" alt="Twitter" loading="lazy" decoding="async">
-  </button>
-
-  <button type="button" class="share-button"
-          data-sharer="facebook" aria-label="Share on Facebook"
-          data-title="{{ product.title }}" data-url="{{ product.url | shop_url }}">
-    <img src="https://cdn.shopify.com/s/files/1/0686/9581/8505/files/facebook-svgrepo-com.svg?v=1757967743"
-         width="19" height="19" alt="Facebook" loading="lazy" decoding="async">
-  </button>
-
-  <button type="button" class="share-button"
-          data-sharer="pinterest" aria-label="Share on Pinterest"
-          data-title="{{ product.title }}" data-image="{{ product.featured_image | image_url }}"
-          data-url="{{ product.url | shop_url }}">
-    <img src="https://cdn.shopify.com/s/files/1/0686/9581/8505/files/instagram-svgrepo-com.svg?v=1757967743"
-         width="19" height="19" alt="Instagram" loading="lazy" decoding="async">
-  </button>
-</div>
-
+            <div class="share-section">
+              <div class="share-button" style="order: 2">
+                {{ ss.share_text }}
+                {%- render 'icon', type: 'share' -%}
+              </div>
+              <div class="share-block" style="order: 1">
+                {%- assign url = request.origin | append: request.path -%}
+                <button
+                  class="share-button"
+                  data-sharer="twitter"
+                  data-title="{{ product.title }}"
+                  data-hashtags="gloves"
+                  data-url="{{ url }}"
+                >
+                  {%- render 'icon', type: 'twitter' -%}
+                </button>
+                <button
+                  class="share-button"
+                  data-sharer="facebook"
+                  data-title="{{ product.title }}"
+                  data-hashtags="gloves"
+                  data-url="{{ url }}"
+                >
+                  {%- render 'icon', type: 'facebook' -%}
+                </button>
+                <button
+                  class="share-button"
+                  data-sharer="pinterest"
+                  data-image="{{ product.featured_image.src }}"
+                  data-title="{{ product.title }}"
+                  data-url="{{ url }}"
+                >
+                  {%- render 'icon', type: 'pinterest' -%}
+                </button>
+              </div>
             </div>
           {%- endif -%}
         </div>
