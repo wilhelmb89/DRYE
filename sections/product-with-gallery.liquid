@@ -1451,7 +1451,13 @@ style="aspect-ratio: {{ product_thumbnail.settings.image_mobile.width }} / {{ pr
       right: 12px;
       font-size: 30px;
     }
-  }
+  }.share-section .share-button{
+  width:38px;height:38px;display:inline-flex;align-items:center;justify-content:center;
+  background:#fff;border:1px solid #E5E7EB;border-radius:50%;
+}
+.share-section .share-button img{display:block;width:19px;height:19px}
+.share-section .share-block{display:flex !important;gap:8px}
+
 {% endstyle %}
 
 <!-- Popup Modal -->
