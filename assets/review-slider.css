@@ -149,4 +149,25 @@
 
 .scroll-disabled {
   overflow-y: hidden;
+  
+}/* head ska kunna hålla title + trustpilot */
+.reviews-new .head{
+  display:flex;
+  align-items:flex-start;
+  justify-content:space-between;
+  gap:16px;
+}
+
+/* matcha gamla: ingen pill, ingen padding, ingen vit box */
+.reviews-new .tp-legacy{
+  display:inline-flex;
+  align-items:center;
+  text-decoration:none;
+}
+
+/* samma klassnamn som gamla */
+.reviews-new .reviews-image{
+  display:block;
+  height: auto;
+  width: 160px; /* justera om din gamla hade annan bredd */
 }
