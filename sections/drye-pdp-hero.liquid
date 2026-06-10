@@ -195,6 +195,13 @@ assign review_count = section.settings.review_count_fallback
     </div>
   </div>
   <div class="hero-info">
+    <div class="stars-row">
+      <span class="stars" aria-hidden="true">★★★★★</span>
+      <span class="stars-lbl">
+        {{ review_rating }}/5 · <a href="{{ review_anchor }}">{{ review_count }} reviews</a>
+      </span>
+    </div>
+
     <div class="h-eye">{{ section.settings.eyebrow }}</div>
 
     <h1 class="h-title">
@@ -204,13 +211,6 @@ assign review_count = section.settings.review_count_fallback
 
     <div class="h-sub">
       {{ section.settings.subtext }}
-    </div>
-
-    <div class="stars-row">
-      <span class="stars" aria-hidden="true">★★★★★</span>
-      <span class="stars-lbl">
-        {{ review_rating }}/5 · <a href="{{ review_anchor }}">{{ review_count }} reviews</a>
-      </span>
     </div>
 
     <div class="price-row" data-price-row>
@@ -376,12 +376,13 @@ assign review_count = section.settings.review_count_fallback
   </div>
 </div>
 
-<ul class="bullets">
-
       <ul class="bullets">
         {% if section.settings.bullet_1 != blank %}<li>{{ section.settings.bullet_1 }}</li>{% endif %}
         {% if section.settings.bullet_2 != blank %}<li>{{ section.settings.bullet_2 }}</li>{% endif %}
         {% if section.settings.bullet_3 != blank %}<li>{{ section.settings.bullet_3 }}</li>{% endif %}
+        {% if section.settings.bullet_4 != blank %}<li>{{ section.settings.bullet_4 }}</li>{% endif %}
+        {% if section.settings.bullet_5 != blank %}<li>{{ section.settings.bullet_5 }}</li>{% endif %}
+        {% if section.settings.bullet_6 != blank %}<li>{{ section.settings.bullet_6 }}</li>{% endif %}
       </ul>
 
       {% assign selected_variant_preorder = false %}
@@ -1128,6 +1129,9 @@ wteTimelines.forEach((timeline) => {
     { "type": "text", "id": "bullet_1", "label": "Bullet 1", "default": "Keeps hands dry inside sealed gloves — full shift, no reapplying" },
     { "type": "text", "id": "bullet_2", "label": "Bullet 2", "default": "Works under nitrile, latex, and vinyl — no lost grip or dexterity" },
     { "type": "text", "id": "bullet_3", "label": "Bullet 3", "default": "Lasts 4–12 months — machine washable, no chemicals to wear off" },
+    { "type": "text", "id": "bullet_4", "label": "Bullet 4", "default": "0.4mm thin — nothing to adjust or feel" },
+    { "type": "text", "id": "bullet_5", "label": "Bullet 5", "default": "Washable and reusable for 6–12 months" },
+    { "type": "text", "id": "bullet_6", "label": "Bullet 6", "default": "No coatings, no chemicals, no membranes" },
 
     { "type": "text", "id": "trust_text_1", "label": "Trust text 1", "default": "Secure, encrypted checkout" },
     { "type": "text", "id": "trust_text_2", "label": "Trust text 2", "default": "30-day money-back guarantee" },

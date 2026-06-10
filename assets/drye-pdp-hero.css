@@ -443,13 +443,13 @@
 }
 
 .hero .h-title {
-  font-family: "Clash Grotesk", sans-serif;
-  font-size: clamp(24px, 6vw, 38px);
-  font-weight: 600;
-  letter-spacing: -0.025em;
+  font-family: var(--font-display);
+  font-size: clamp(24px, 6.4vw, 34px);
+  font-weight: var(--fw-semibold);
+  letter-spacing: var(--ls-tight-display);
   color: var(--deep);
-  line-height: 1.1;
-  margin-bottom: 14px;
+  line-height: 1.06;
+  margin-bottom: var(--space-12);
 }
 
 .hero .h-sub {
@@ -476,15 +476,16 @@
 }
 
 .hero .stars {
-  color: #f59e0b;
+  color: var(--emerald);
   font-size: 13px;
   letter-spacing: 1px;
   line-height: 1;
 }
 
 .hero .stars-lbl {
-  font-size: 12px;
-  color: var(--muted);
+  font-size: var(--fs-caption);
+  color: var(--emerald);
+  font-weight: var(--fw-semibold);
 }
 
 .hero .stars-lbl a {
@@ -497,16 +498,18 @@
   display: flex;
   align-items: baseline;
   gap: 10px;
-  margin-bottom: 18px;
+  margin-bottom: var(--space-16);
+  padding-top: var(--space-12);
+  border-top: var(--border-base);
   flex-wrap: wrap;
 }
 
 .hero .price {
-  font-family: "Clash Grotesk", sans-serif;
-  font-size: 26px;
-  font-weight: 600;
+  font-family: var(--font-display);
+  font-size: 22px;
+  font-weight: var(--fw-semibold);
   color: var(--deep);
-  letter-spacing: -0.02em;
+  letter-spacing: var(--ls-tight-h2);
 }
 
 .hero .price-note {
@@ -550,7 +553,9 @@
 }
 
 .hero .buy-block {
-  margin-bottom: 12px;
+  margin-bottom: var(--space-12);
+  padding-top: var(--space-12);
+  border-top: var(--border-base);
 }
 
 .hero .sz-dd {
@@ -560,13 +565,14 @@
 
 .hero .sz-dd-trigger {
   width: 100%;
-  height: 46px;
+  height: 44px;
   padding: 0 14px;
-  font-family: "DM Sans", sans-serif;
-  font-size: 13px;
+  font-family: var(--font-body);
+  font-size: var(--fs-body-sm);
   color: var(--body);
-  border: 1px solid var(--border);
-  background: #fff;
+  border: var(--border-base);
+  border-radius: 8px;
+  background: var(--bg);
   appearance: none;
   -webkit-appearance: none;
   cursor: pointer;
@@ -659,12 +665,15 @@
 }
 
 .hero .sz-dd-trigger.open {
-  border-color: #1e3a4c;
+  border-color: var(--deep);
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
 }
 
 .hero .sz-dd-list.open {
-  border: 1px solid #1e3a4c;
+  border: 1px solid var(--deep);
   border-top: 0;
+  border-radius: 0 0 8px 8px;
 }
 
 .hero .sz-dd-opt {
@@ -746,9 +755,11 @@
   display: flex;
   align-items: stretch;
   width: 144px;
-  height: 46px;
-  border: 1px solid var(--border);
-  background: #fff;
+  height: 44px;
+  border: var(--border-base);
+  border-radius: 8px;
+  overflow: hidden;
+  background: var(--bg);
   box-sizing: border-box;
 }
 
@@ -804,8 +815,11 @@
   list-style: none;
   display: flex;
   flex-direction: column;
-  gap: 8px;
-  margin-bottom: 14px;
+  gap: var(--space-8);
+  margin: 0 0 var(--space-14);
+  padding: var(--space-12) 0;
+  border-top: var(--border-base);
+  border-bottom: var(--border-base);
 }
 
 .hero .bullets li {
@@ -819,27 +833,30 @@
 }
 
 .hero .bullets li::before {
-  content: "→";
-  color: var(--sage);
-  font-size: 11px;
-  margin-top: 3px;
+  content: "✓";
+  color: var(--emerald);
+  font-weight: var(--fw-semibold);
+  font-size: 12px;
+  margin-top: 2px;
   flex-shrink: 0;
 }
 
 .hero .atc-btn-full {
   width: 100%;
+  min-height: 50px;
   background: var(--emerald);
   border: none;
+  border-radius: 8px;
   cursor: pointer;
-  font-family: "DM Sans", sans-serif;
-  font-size: 12px;
-  font-weight: 600;
-  letter-spacing: 0.08em;
+  font-family: var(--font-body);
+  font-size: var(--fs-body-sm);
+  font-weight: var(--fw-semibold);
+  letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: white;
+  color: var(--white-100);
   padding: 16px;
   transition: background 0.15s;
-  margin-bottom: 6px;
+  margin-bottom: var(--space-6);
 }
 
 .hero .atc-btn-full {
@@ -1425,13 +1442,14 @@
   flex: 1;
   background: var(--emerald);
   border: none;
+  border-radius: 8px;
   cursor: pointer;
-  font-family: "DM Sans", sans-serif;
+  font-family: var(--font-body);
   font-size: 11px;
-  font-weight: 600;
-  letter-spacing: 0.08em;
+  font-weight: var(--fw-semibold);
+  letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: white;
+  color: var(--white-100);
   padding: 13px 8px;
 }
 
