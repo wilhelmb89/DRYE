@@ -1,0 +1,125 @@
+{{ 'drye-research-hero.css' | asset_url | stylesheet_tag }}
+
+<section class="dryeNEW-section research-hero">
+  <div class="dryeNEW-container">
+    <div class="breadcrumb dryeNEW-reveal dryeNEW-rd1">
+      <a href="{{ section.settings.breadcrumb_link | default: '#' }}">
+        {{ section.settings.breadcrumb_label }}
+      </a>
+      <span>›</span>
+      <strong>{{ section.settings.breadcrumb_current }}</strong>
+    </div>
+
+    <span class="dryeNEW-micro dryeNEW-reveal dryeNEW-rd1">
+      {{ section.settings.micro_label }}
+    </span>
+
+    <h1 class="research-hero__title dryeNEW-reveal dryeNEW-rd2">
+      {{ section.settings.heading_line_1 }}
+      <em>{{ section.settings.heading_line_2 }}</em>
+    </h1>
+
+    <p class="research-hero-sub dryeNEW-reveal dryeNEW-rd3">
+      {{ section.settings.subtext_before_strong }}
+      <strong>{{ section.settings.subtext_strong }}</strong>
+      {{ section.settings.subtext_after_strong }}
+    </p>
+
+    {% if section.blocks.size > 0 %}
+      <div class="hero-claim-bar dryeNEW-reveal">
+        {% for block in section.blocks %}
+          <span class="hero-claim-pill" {{ block.shopify_attributes }}>
+            {{ block.settings.label }}
+          </span>
+        {% endfor %}
+      </div>
+    {% endif %}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "DRYE Research Hero",
+  "settings": [
+    {
+      "type": "url",
+      "id": "breadcrumb_link",
+      "label": "Breadcrumb link"
+    },
+    {
+      "type": "text",
+      "id": "breadcrumb_label",
+      "label": "Breadcrumb label",
+      "default": "Home"
+    },
+    {
+      "type": "text",
+      "id": "breadcrumb_current",
+      "label": "Current breadcrumb label",
+      "default": "Research"
+    },
+    {
+      "type": "text",
+      "id": "micro_label",
+      "label": "Micro label",
+      "default": "Evidence — Not Marketing"
+    },
+    {
+      "type": "text",
+      "id": "heading_line_1",
+      "label": "Heading line 1",
+      "default": "This is what"
+    },
+    {
+      "type": "text",
+      "id": "heading_line_2",
+      "label": "Heading line 2",
+      "default": "seven years of testing looks like."
+    },
+    {
+      "type": "text",
+      "id": "subtext_before_strong",
+      "label": "Subtext before bold text",
+      "default": "Field studies. Lab validation."
+    },
+    {
+      "type": "text",
+      "id": "subtext_strong",
+      "label": "Bold subtext",
+      "default": "Real users in real conditions."
+    },
+    {
+      "type": "text",
+      "id": "subtext_after_strong",
+      "label": "Subtext after bold text",
+      "default": "Every number on this page has a source. Every source is named."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "claim",
+      "name": "Claim pill",
+      "settings": [
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Label",
+          "default": "Uppsala University"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "DRYE Research Hero",
+      "blocks": [
+        { "type": "claim", "settings": { "label": "Uppsala University" } },
+        { "type": "claim", "settings": { "label": "RISE" } },
+        { "type": "claim", "settings": { "label": "Swedish School of Textiles" } },
+        { "type": "claim", "settings": { "label": "Acta Dermato-Venereologica" } },
+        { "type": "claim", "settings": { "label": "SKAPA Prize 2020" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

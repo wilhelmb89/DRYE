@@ -1,0 +1,315 @@
+/* ========================================================================== 
+   DRYE — Section: Why the dry layer matters
+   File: assets/drye-dry-layer-matters.css
+   Depends on DRYE base.css tokens/classes.
+   ========================================================================== */
+
+.dryeDryLayer {
+  background: var(--bg);
+  border-bottom: var(--border-base);
+  overflow: hidden;
+}
+
+.dryeDryLayer__layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--grid-gap-32);
+}
+
+.dryeDryLayer__intro {
+  max-width: 720px;
+}
+
+.dryeDryLayer__eyebrow {
+  color: var(--sage);
+}
+
+.dryeDryLayer__heading {
+  color: var(--deep);
+  margin-bottom: var(--space-14);
+  max-width: 760px;
+  overflow-wrap: anywhere;
+}
+
+.dryeDryLayer__heading .dryeNEW-em {
+  display: block;
+  color: var(--accent);
+}
+
+.dryeDryLayer__body {
+  color: var(--muted);
+  max-width: 620px;
+  overflow-wrap: anywhere;
+}
+
+.dryeDryLayer__body p + p,
+.dryeDryLayer__stepText p + p,
+.dryeDryLayer__note p + p {
+  margin-top: var(--space-12);
+}
+
+/* ==========================================================================
+   Gallery
+   ========================================================================== */
+
+.dryeDryLayer__mediaWrap {
+  position: relative;
+  min-width: 0;
+}
+
+.dryeDryLayer__mediaWrap::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: calc(var(--page-pad) * -1);
+  bottom: 0;
+  width: var(--space-48);
+  pointer-events: none;
+  background: linear-gradient(90deg, rgba(255,255,255,0), var(--bg));
+}
+
+.dryeDryLayer__mediaRail {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: minmax(168px, 58vw);
+  gap: var(--grid-gap-10);
+  overflow-x: auto;
+  overflow-y: hidden;
+  overscroll-behavior-x: contain;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+  padding-bottom: var(--space-2);
+}
+
+.dryeDryLayer__mediaRail::-webkit-scrollbar {
+  display: none;
+}
+
+.dryeDryLayer__tile {
+  position: relative;
+  aspect-ratio: 2 / 3;
+  overflow: hidden;
+  border: var(--border-base);
+  background: var(--bg-soft);
+  scroll-snap-align: start;
+  isolation: isolate;
+}
+
+/* Low-key bottom glow only */
+.dryeDryLayer__tile::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 18%;
+  z-index: 1;
+  pointer-events: none;
+  background: linear-gradient(
+    to top,
+    rgba(15, 34, 48, 0.76) 0%,
+    rgba(30, 58, 76, 0.34) 52%,
+    rgba(30, 58, 76, 0) 100%
+  );
+}
+
+.dryeDryLayer__image,
+.dryeDryLayer__placeholder {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.dryeDryLayer__placeholder {
+  background: linear-gradient(135deg, var(--bg-soft), var(--border));
+}
+
+.dryeDryLayer__tileLabel {
+  position: absolute;
+  left: var(--space-14);
+  right: var(--space-14);
+  bottom: var(--space-12);
+  z-index: 2;
+  color: var(--white-100);
+  margin-bottom: 0;
+  text-shadow: 0 1px 10px rgba(15, 34, 48, 0.42);
+}
+
+/* ==========================================================================
+   Gallery arrows
+   ========================================================================== */
+
+.dryeDryLayer__arrow {
+  position: absolute;
+  top: 50%;
+  z-index: 5;
+
+  width: 44px;
+  height: 44px;
+
+  display: none;
+  align-items: center;
+  justify-content: center;
+
+  background: var(--bg);
+  border: var(--border-base);
+  color: var(--deep);
+
+  cursor: pointer;
+  transform: translateY(-50%);
+
+  transition:
+    border-color var(--dur-base) var(--ease-standard),
+    transform var(--dur-base) var(--ease-standard),
+    opacity var(--dur-base) var(--ease-standard);
+}
+
+.dryeDryLayer__arrow:hover {
+  border-color: var(--sage-020);
+  transform: translateY(-50%) scale(1.03);
+}
+
+.dryeDryLayer__arrow.is-disabled {
+  opacity: 0.35;
+  pointer-events: none;
+}
+
+.dryeDryLayer__arrow--prev {
+  left: calc(var(--space-20) * -1);
+}
+
+.dryeDryLayer__arrow--next {
+  right: calc(var(--space-20) * -1);
+}
+
+/* ==========================================================================
+   Steps
+   ========================================================================== */
+
+.dryeDryLayer__steps {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 1px;
+  margin-top: var(--space-36);
+  background: var(--border);
+  border: var(--border-base);
+}
+
+.dryeDryLayer__step {
+  background: var(--bg);
+  padding: var(--card-pad);
+  min-width: 0;
+}
+
+.dryeDryLayer__stepKicker {
+  color: var(--sage);
+  margin-bottom: var(--space-14);
+}
+
+.dryeDryLayer__stepHeader {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: var(--grid-gap-14);
+  align-items: start;
+  margin-bottom: var(--space-12);
+}
+
+.dryeDryLayer__stepNumber {
+  color: var(--caption);
+}
+
+.dryeDryLayer__stepTitle {
+  color: var(--deep);
+  overflow-wrap: anywhere;
+}
+
+.dryeDryLayer__stepText {
+  color: var(--muted);
+  overflow-wrap: anywhere;
+}
+
+.dryeDryLayer__note {
+  margin-top: var(--space-24);
+  padding-top: var(--space-18);
+  border-top: var(--border-base);
+  color: var(--muted);
+  overflow-wrap: anywhere;
+}
+
+.dryeDryLayer__note strong,
+.dryeDryLayer__body strong,
+.dryeDryLayer__stepText strong {
+  color: var(--deep);
+  font-weight: var(--fw-medium);
+}
+
+/* ==========================================================================
+   Desktop
+   ========================================================================== */
+
+@media (min-width: 768px) {
+  .dryeDryLayer__layout {
+    gap: var(--grid-gap-40);
+  }
+
+  .dryeDryLayer__mediaWrap::after {
+    display: none;
+  }
+
+  .dryeDryLayer__mediaRail {
+    grid-auto-flow: column;
+    grid-auto-columns: calc((100% - (var(--grid-gap-16) * 2)) / 3);
+    grid-template-columns: none;
+    gap: var(--grid-gap-16);
+    overflow-x: auto;
+    overflow-y: hidden;
+    scroll-snap-type: x mandatory;
+    padding-bottom: var(--space-4);
+  }
+
+  .dryeDryLayer__steps {
+    grid-template-columns: var(--grid-3-col-desktop);
+    margin-top: var(--space-48);
+  }
+
+  .dryeDryLayer__step {
+    min-height: 100%;
+  }
+
+  .dryeDryLayer__note {
+    max-width: 620px;
+  }
+}
+
+@media (min-width: 960px) {
+  .dryeDryLayer__arrow {
+    display: flex;
+  }
+}
+
+/* ==========================================================================
+   Mobile
+   ========================================================================== */
+
+@media (max-width: 767px) {
+  .dryeDryLayer__intro,
+  .dryeDryLayer__heading,
+  .dryeDryLayer__body {
+    max-width: 100%;
+  }
+
+  .dryeDryLayer__mediaRail {
+    margin-right: calc(var(--page-pad) * -1);
+    padding-right: var(--page-pad);
+  }
+
+  .dryeDryLayer__steps {
+    margin-top: var(--space-32);
+  }
+}
+
+@media (max-width: 959px) {
+  .dryeDryLayer__arrow {
+    display: none;
+  }
+}

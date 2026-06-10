@@ -1,0 +1,143 @@
+{{ 'drye-hiw-hero.css' | asset_url | stylesheet_tag }}
+
+<section
+  class="drye-hiw-hero"
+  id="drye-hiw-hero-{{ section.id }}"
+  data-section-id="{{ section.id }}"
+  data-section-type="drye-hiw-hero"
+>
+  <div class="drye-hiw-hero__inner dryeNEW-container">
+
+    {% if section.settings.show_breadcrumb %}
+      <nav class="drye-hiw-hero__breadcrumb drye-hiw-hero__reveal drye-hiw-hero__rd1" aria-label="Breadcrumb">
+        {% if section.settings.breadcrumb_home_label != blank %}
+          <a href="{{ section.settings.breadcrumb_home_url | default: '/' }}">
+            {{ section.settings.breadcrumb_home_label }}
+          </a>
+        {% endif %}
+
+        <span class="drye-hiw-hero__breadcrumb-sep">/</span>
+
+        {% if section.settings.breadcrumb_current_label != blank %}
+          <span class="drye-hiw-hero__breadcrumb-current">
+            {{ section.settings.breadcrumb_current_label }}
+          </span>
+        {% endif %}
+      </nav>
+    {% endif %}
+
+    {% if section.settings.eyebrow != blank %}
+      <span class="drye-hiw-hero__micro drye-hiw-hero__reveal drye-hiw-hero__rd1">
+        {{ section.settings.eyebrow }}
+      </span>
+    {% endif %}
+
+    {% if section.settings.heading_before != blank or section.settings.heading_em != blank %}
+      <h1 class="drye-hiw-hero__heading drye-hiw-hero__reveal drye-hiw-hero__rd2">
+        {% if section.settings.heading_before != blank %}
+          {{ section.settings.heading_before }}
+        {% endif %}
+        {% if section.settings.heading_em != blank %}
+          <em>{{ section.settings.heading_em }}</em>
+        {% endif %}
+      </h1>
+    {% endif %}
+
+    {% if section.settings.subtext != blank %}
+      <div class="drye-hiw-hero__sub drye-hiw-hero__reveal drye-hiw-hero__rd3">
+        {{ section.settings.subtext }}
+      </div>
+    {% endif %}
+
+  </div>
+</section>
+
+<script>
+  (function () {
+    var root = document.getElementById('drye-hiw-hero-{{ section.id }}');
+    if (!root) return;
+
+    var items = root.querySelectorAll('.drye-hiw-hero__reveal');
+    if (!items.length) return;
+
+    if (!('IntersectionObserver' in window)) {
+      items.forEach(function (el) { el.classList.add('is-visible'); });
+      return;
+    }
+
+    var observer = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.08 });
+
+    items.forEach(function(el) {
+      observer.observe(el);
+    });
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "DRYE HIW Hero",
+  "tag": "section",
+  "class": "section-drye-hiw-hero",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "show_breadcrumb",
+      "label": "Show breadcrumb",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "breadcrumb_home_label",
+      "label": "Breadcrumb home label",
+      "default": "Home"
+    },
+    {
+      "type": "url",
+      "id": "breadcrumb_home_url",
+      "label": "Breadcrumb home URL"
+    },
+    {
+      "type": "text",
+      "id": "breadcrumb_current_label",
+      "label": "Breadcrumb current label",
+      "default": "How it works"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "The physics behind DRYE"
+    },
+    {
+      "type": "text",
+      "id": "heading_before",
+      "label": "Heading before italic",
+      "default": "The problem isn't that nothing works. "
+    },
+    {
+      "type": "text",
+      "id": "heading_em",
+      "label": "Italic heading text",
+      "default": "It's that nothing works under compression."
+    },
+    {
+      "type": "richtext",
+      "id": "subtext",
+      "label": "Subtext",
+      "default": "<p>Every liner you've tried — cotton, silk, synthetic wicking — was engineered assuming airflow. Inside a sealed glove, that assumption fails. <strong>DRYE is the first material built for the only environment that actually matters.</strong></p>"
+    }
+  ],
+  "presets": [
+    {
+      "name": "DRYE HIW Hero"
+    }
+  ]
+}
+{% endschema %}

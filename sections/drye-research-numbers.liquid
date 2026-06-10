@@ -1,0 +1,158 @@
+{{ 'drye-research-numbers.css' | asset_url | stylesheet_tag }}
+
+<section
+  class="dryeNEW-section numbers-section"
+  id="drye-research-numbers-{{ section.id }}"
+  data-section-id="{{ section.id }}"
+>
+  <div class="dryeNEW-container">
+    <div class="numbers-intro">
+      {% if section.settings.micro_label != blank %}
+        <span class="dryeNEW-micro numbers-intro__micro dryeNEW-reveal">
+          {{ section.settings.micro_label }}
+        </span>
+      {% endif %}
+
+      {% if section.settings.heading != blank %}
+        <h2 class="dryeNEW-h2 numbers-intro__heading dryeNEW-reveal dryeNEW-rd1">
+          {{ section.settings.heading }}
+        </h2>
+      {% endif %}
+
+      {% if section.settings.intro_text != blank %}
+        <div class="dryeNEW-body--sm numbers-intro__text dryeNEW-reveal dryeNEW-rd2">
+          <p>{{ section.settings.intro_text }}</p>
+        </div>
+      {% endif %}
+    </div>
+
+    {% if section.blocks.size > 0 %}
+      <div class="numbers-grid">
+        {% for block in section.blocks %}
+          <div
+            class="number-card dryeNEW-reveal {% case forloop.index %}{% when 1 %}dryeNEW-rd1{% when 2 %}dryeNEW-rd2{% when 3 %}dryeNEW-rd3{% else %}{% endcase %}"
+            {{ block.shopify_attributes }}
+          >
+            <div class="number-stat dryeNEW-stat-number">
+              {{ block.settings.stat_main }}{% if block.settings.stat_suffix != blank %}<span>{{ block.settings.stat_suffix }}</span>{% endif %}
+            </div>
+
+            {% if block.settings.description != blank %}
+              <div class="number-desc dryeNEW-body--caption">
+                <p>{{ block.settings.description }}</p>
+              </div>
+            {% endif %}
+
+            {% if block.settings.source != blank %}
+              <div class="number-source dryeNEW-micro">
+                {{ block.settings.source }}
+              </div>
+            {% endif %}
+          </div>
+        {% endfor %}
+      </div>
+    {% endif %}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "DRYE Research Numbers",
+  "settings": [
+    {
+      "type": "text",
+      "id": "micro_label",
+      "label": "Micro label",
+      "default": "Field Data"
+    },
+    {
+      "type": "textarea",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Numbers from actual use — not lab simulations."
+    },
+    {
+      "type": "textarea",
+      "id": "intro_text",
+      "label": "Intro text",
+      "default": "Three independent field studies. Different environments, different populations, same pattern."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "number_card",
+      "name": "Number card",
+      "limit": 4,
+      "settings": [
+        {
+          "type": "text",
+          "id": "stat_main",
+          "label": "Stat main",
+          "default": "7"
+        },
+        {
+          "type": "text",
+          "id": "stat_suffix",
+          "label": "Stat suffix",
+          "default": "/9"
+        },
+        {
+          "type": "textarea",
+          "id": "description",
+          "label": "Description",
+          "default": "Automotive mechanics reported reduced sweat retention after 8 weeks of continuous use under EV insulation gloves."
+        },
+        {
+          "type": "text",
+          "id": "source",
+          "label": "Source",
+          "default": "Automotive Field Study — Textilhögskolan Borås, 2023"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "DRYE Research Numbers",
+      "blocks": [
+        {
+          "type": "number_card",
+          "settings": {
+            "stat_main": "7",
+            "stat_suffix": "/9",
+            "description": "Automotive mechanics reported reduced sweat retention after 8 weeks of continuous use under EV insulation gloves.",
+            "source": "Automotive Field Study — Textilhögskolan Borås, 2023"
+          }
+        },
+        {
+          "type": "number_card",
+          "settings": {
+            "stat_main": "3",
+            "stat_suffix": "/3",
+            "description": "Participants with a confirmed dermatological diagnosis reported fewer flare-ups over the 8-week study period.",
+            "source": "Automotive Field Study — Textilhögskolan Borås, 2023"
+          }
+        },
+        {
+          "type": "number_card",
+          "settings": {
+            "stat_main": "10",
+            "stat_suffix": "/10",
+            "description": "Ukrainian infantry soldiers reported reduced skin damage during field conditions. All 10 said they would use DRYE in active combat.",
+            "source": "Military Field Test — Ukraine, 2025"
+          }
+        },
+        {
+          "type": "number_card",
+          "settings": {
+            "stat_main": "1.72",
+            "stat_suffix": "×",
+            "description": "Increase in S. aureus density inside occlusive gloves after 4 hours — the exact environment DRYE is engineered to change.",
+            "source": "Acta Dermato-Venereologica — Peer-Reviewed, 2021"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

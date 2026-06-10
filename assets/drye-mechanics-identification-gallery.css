@@ -1,0 +1,274 @@
+/* ==========================================================================
+   DRYE Mechanics — Field Use Gallery
+   ========================================================================== */
+
+.mech-gallery {
+  background: var(--bg);
+  border-bottom: var(--border-base);
+}
+
+.mech-gallery__intro {
+  max-width: 700px;
+  margin-bottom: var(--space-40);
+}
+
+.mech-gallery__eyebrow {
+  color: var(--sage);
+}
+
+.mech-gallery__heading {
+  max-width: 760px;
+  margin-bottom: var(--space-12);
+  color: var(--deep);
+}
+
+.mech-gallery__heading .dryeNEW-em {
+  display: block;
+  margin-top: var(--space-2);
+  color: var(--sage);
+}
+
+.mech-gallery__sub {
+  max-width: 560px;
+  color: var(--muted);
+}
+
+.mech-gallery__strip-wrap {
+  position: relative;
+  padding-bottom: var(--space-56);
+}
+
+.mech-gallery__strip {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: 82vw;
+  gap: var(--space-2);
+  overflow-x: auto;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  scrollbar-width: none;
+  background: var(--border);
+  border-top: var(--border-base);
+  border-bottom: var(--border-base);
+}
+
+.mech-gallery__strip::-webkit-scrollbar {
+  display: none;
+}
+
+.mech-gallery__panel {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  margin: 0;
+  background: var(--bg);
+  scroll-snap-align: start;
+}
+
+.mech-gallery__img {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  background: var(--bg-soft);
+}
+
+.mech-gallery__img-el,
+.mech-gallery__img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: saturate(0.92) brightness(0.98) contrast(1);
+}
+
+.mech-gallery__img-placeholder {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    180deg,
+    var(--bg-soft) 0%,
+    var(--border) 100%
+  );
+}
+
+.mech-gallery__img-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(10, 22, 33, 0.02) 0%,
+    rgba(10, 22, 33, 0.08) 58%,
+    rgba(10, 22, 33, 0.32) 100%
+  );
+}
+
+.mech-gallery__img-lbl {
+  position: absolute;
+  top: var(--space-14);
+  left: var(--space-14);
+  padding: var(--space-5) var(--space-9);
+  color: var(--white-100);
+  background: rgba(10, 22, 33, 0.32);
+  backdrop-filter: blur(4px);
+  white-space: nowrap;
+  text-transform: uppercase;
+  letter-spacing: var(--ls-micro);
+  font-size: var(--fs-micro-2);
+  font-weight: var(--fw-semibold);
+  line-height: 1.2;
+}
+
+.mech-gallery__quote {
+  min-height: 128px;
+  padding: var(--space-14) var(--space-14) var(--space-18);
+  border-left: var(--border-base);
+}
+
+.mech-gallery__quote-text {
+  max-width: 92%;
+  margin-bottom: var(--space-8);
+  color: var(--deep);
+  font-family: var(--font-editorial);
+  font-style: italic;
+  line-height: var(--lh-body-tight);
+}
+
+.mech-gallery__quote-src {
+  color: var(--caption);
+}
+
+.mech-gallery__swipe-hint {
+  position: absolute;
+  right: var(--page-pad);
+  bottom: var(--space-18);
+  display: flex;
+  align-items: center;
+  gap: var(--space-6);
+  margin-bottom: 0;
+  color: var(--caption);
+  pointer-events: none;
+  opacity: 1;
+  transform: translateX(0);
+  transition:
+    opacity var(--dur-sticky) var(--ease-standard),
+    transform var(--dur-sticky) var(--ease-standard);
+}
+
+.mech-gallery__swipe-hint::after {
+  content: '→';
+  animation: mech-gallery-swipe 1.8s ease-in-out infinite;
+}
+
+.mech-gallery__swipe-hint.is-hidden {
+  opacity: 0;
+  transform: translateX(var(--space-6));
+}
+
+@keyframes mech-gallery-swipe {
+  0%,
+  100% {
+    transform: translateX(0);
+    opacity: 0.6;
+  }
+
+  50% {
+    transform: translateX(var(--space-4));
+    opacity: 1;
+  }
+}
+
+.mech-gallery__fade {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: var(--space-56);
+  width: 56px;
+  pointer-events: none;
+  background: linear-gradient(
+    270deg,
+    var(--bg) 0%,
+    rgba(255, 255, 255, 0) 100%
+  );
+}
+
+.mech-gallery__nav {
+  display: none;
+}
+
+.mech-gallery__nav-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  background: var(--bg);
+  border: var(--border-base);
+  color: var(--deep);
+  cursor: pointer;
+  transition:
+    opacity var(--dur-fast) var(--ease-standard),
+    border-color var(--dur-fast) var(--ease-standard),
+    transform var(--dur-fast) var(--ease-standard);
+}
+
+.mech-gallery__nav-btn:hover {
+  border-color: var(--sage-020);
+  transform: translateY(-1px);
+}
+
+.mech-gallery__nav-btn.is-disabled {
+  opacity: 0.35;
+  pointer-events: none;
+}
+
+@media (min-width: 600px) {
+  .mech-gallery__strip {
+    grid-auto-columns: minmax(300px, 42vw);
+  }
+}
+
+@media (min-width: 960px) {
+  .mech-gallery__strip-wrap {
+    padding-bottom: 0;
+  }
+
+  .mech-gallery__strip {
+    grid-auto-columns: calc((100% - (var(--space-2) * 2)) / 3);
+    overflow-x: auto;
+    border-left: var(--border-base);
+    border-right: var(--border-base);
+  }
+
+  .mech-gallery__swipe-hint {
+    display: none;
+  }
+
+  .mech-gallery__fade {
+    display: block;
+    bottom: 0;
+  }
+
+  .mech-gallery__nav {
+    position: absolute;
+    top: -56px;
+    right: 0;
+    display: flex;
+    gap: var(--space-8);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mech-gallery__strip,
+  .mech-gallery__nav-btn,
+  .mech-gallery__swipe-hint {
+    scroll-behavior: auto;
+    transition: none;
+    animation: none;
+  }
+
+  .mech-gallery__swipe-hint::after {
+    animation: none;
+  }
+}

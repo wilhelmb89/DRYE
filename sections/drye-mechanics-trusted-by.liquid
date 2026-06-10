@@ -1,0 +1,75 @@
+{{ 'drye-mechanics-trusted-by.css' | asset_url | stylesheet_tag }}
+
+<section class="dryeNEW-section mech-trusted" data-section-id="{{ section.id }}">
+  <div class="dryeNEW-container">
+    <div class="mech-trusted__in">
+      {% if section.settings.label != blank %}
+        <span class="mech-trusted__lbl">{{ section.settings.label }}</span>
+      {% endif %}
+
+      {% assign visible_blocks = 0 %}
+      {% for block in section.blocks %}
+        {% if block.settings.name != blank %}
+          {% assign visible_blocks = visible_blocks | plus: 1 %}
+        {% endif %}
+      {% endfor %}
+
+      {% assign rendered_blocks = 0 %}
+      {% for block in section.blocks %}
+        {% if block.settings.name != blank %}
+          {% assign rendered_blocks = rendered_blocks | plus: 1 %}
+          <span class="mech-trusted__item" {{ block.shopify_attributes }}>
+            {{ block.settings.name }}
+          </span>
+
+          {% if rendered_blocks < visible_blocks %}
+            <span class="mech-trusted__sep" aria-hidden="true"></span>
+          {% endif %}
+        {% endif %}
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "DRYE Mechanics Trusted by",
+  "tag": "section",
+  "class": "shopify-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "label",
+      "label": "Label",
+      "default": "Tested with technicians at"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "company",
+      "name": "Company",
+      "settings": [
+        {
+          "type": "text",
+          "id": "name",
+          "label": "Company name",
+          "default": "Tesla Norge"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "DRYE Mechanics Trusted by",
+      "blocks": [
+        { "type": "company", "settings": { "name": "Tesla Norge" } },
+        { "type": "company", "settings": { "name": "Scania CV AB" } },
+        { "type": "company", "settings": { "name": "Min Bil" } },
+        { "type": "company", "settings": { "name": "STS Trailerservice" } },
+        { "type": "company", "settings": { "name": "Borås School of Textiles" } }
+      ]
+    }
+  ],
+  "max_blocks": 10
+}
+{% endschema %}

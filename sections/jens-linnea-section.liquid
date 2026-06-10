@@ -1,0 +1,238 @@
+{{ 'jens-linnea-section.css' | asset_url | stylesheet_tag }}
+
+<section
+  class="dryeNEW-section jens-linnea"
+  id="jens-linnea-{{ section.id }}"
+  data-section-id="{{ section.id }}"
+  data-drye-section
+  data-section-index="14"
+  data-section-name="case_studies"
+>
+  <div class="dryeNEW-container">
+    <div class="jens-linnea__header dryeNEW-reveal">
+      {% if section.settings.micro_text != blank %}
+        <span class="dryeNEW-micro jens-linnea__eyebrow">
+          {{ section.settings.micro_text }}
+        </span>
+      {% endif %}
+
+      {% if section.settings.heading != blank %}
+        <h2 class="dryeNEW-h2 jens-linnea__heading">
+          {{ section.settings.heading }}
+        </h2>
+      {% endif %}
+
+      {% if section.settings.subheading != blank %}
+        <div class="dryeNEW-body jens-linnea__subheading">
+          <p>{{ section.settings.subheading }}</p>
+        </div>
+      {% endif %}
+    </div>
+
+    <div class="jens-linnea__swipe-wrap">
+      <div class="jens-linnea__grid">
+        {% for block in section.blocks %}
+          <article
+            class="jens-linnea__story dryeNEW-reveal {% if forloop.index == 1 %}dryeNEW-rd1{% elsif forloop.index == 2 %}dryeNEW-rd2{% endif %}"
+            {{ block.shopify_attributes }}
+          >
+            <div class="jens-linnea__image-wrap">
+              {% if block.settings.image != blank %}
+                {{
+                  block.settings.image
+                  | image_url: width: 1200
+                  | image_tag:
+                    class: 'jens-linnea__image',
+                    alt: block.settings.image_alt,
+                    loading: 'lazy'
+                }}
+              {% endif %}
+            </div>
+
+            {% if block.settings.pill_text != blank %}
+              <span class="dryeNEW-micro jens-linnea__pill">
+                {{ block.settings.pill_text }}
+              </span>
+            {% endif %}
+
+            {% if block.settings.before_label != blank %}
+              <span class="dryeNEW-micro jens-linnea__label jens-linnea__label--before">
+                {{ block.settings.before_label }}
+              </span>
+            {% endif %}
+
+            {% if block.settings.before_text != blank %}
+              <div class="dryeNEW-body--sm jens-linnea__before-text">
+                <p>{{ block.settings.before_text }}</p>
+              </div>
+            {% endif %}
+
+            {% if block.settings.after_label != blank %}
+              <span class="dryeNEW-micro jens-linnea__label jens-linnea__label--after">
+                {{ block.settings.after_label }}
+              </span>
+            {% endif %}
+
+            {% if block.settings.after_text != blank %}
+              <div class="dryeNEW-body--lg dryeNEW-editorial jens-linnea__after-text">
+                <p>{{ block.settings.after_text }}</p>
+              </div>
+            {% endif %}
+
+            <div class="dryeNEW-body--caption jens-linnea__attr">
+              {% if block.settings.name != blank %}
+                <span class="jens-linnea__attr-name">{{ block.settings.name }}</span>
+              {% endif %}
+
+              {% if block.settings.name != blank and block.settings.role != blank %}
+                <span class="jens-linnea__attr-sep">·</span>
+              {% endif %}
+
+              {% if block.settings.role != blank %}
+                <span class="jens-linnea__attr-role">{{ block.settings.role }}</span>
+              {% endif %}
+            </div>
+
+            {% if block.settings.read_more_text != blank %}
+              <a href="{{ block.settings.read_more_url }}" class="dryeNEW-link jens-linnea__read-more">
+                {{ block.settings.read_more_text }}
+              </a>
+            {% endif %}
+          </article>
+        {% endfor %}
+      </div>
+
+      {% if section.blocks.size > 1 %}
+        <div class="jens-linnea__swipe-hint" aria-hidden="true">
+          {{ section.settings.swipe_label }}
+        </div>
+
+        <div class="jens-linnea__dots" aria-hidden="true">
+          {% for block in section.blocks %}
+            <span class="jens-linnea__dot {% if forloop.first %}is-active{% endif %}"></span>
+          {% endfor %}
+        </div>
+      {% endif %}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Jens + Linnea",
+  "tag": "section",
+  "class": "shopify-section--jens-linnea",
+  "settings": [
+    {
+      "type": "text",
+      "id": "micro_text",
+      "label": "Micro text",
+      "default": "Real users"
+    },
+    {
+      "type": "html",
+      "id": "heading",
+      "label": "Heading",
+      "default": "This is what changes."
+    },
+    {
+      "type": "textarea",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "Neither found the answer in a new material. What changed was the environment inside the glove."
+    },
+    {
+      "type": "text",
+      "id": "swipe_label",
+      "label": "Swipe pill label",
+      "default": "Swipe"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "story",
+      "name": "Story",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "text",
+          "id": "image_alt",
+          "label": "Image alt text",
+          "default": "Story image"
+        },
+        {
+          "type": "text",
+          "id": "pill_text",
+          "label": "Pill text",
+          "default": "2 years later"
+        },
+        {
+          "type": "text",
+          "id": "before_label",
+          "label": "Before label",
+          "default": "Before"
+        },
+        {
+          "type": "textarea",
+          "id": "before_text",
+          "label": "Before text",
+          "default": "\"Some creams did nothing. My hands got worse every shift. Open wounds. I dealt with the damage for months.\""
+        },
+        {
+          "type": "text",
+          "id": "after_label",
+          "label": "After label",
+          "default": "After"
+        },
+        {
+          "type": "textarea",
+          "id": "after_text",
+          "label": "After text",
+          "default": "\"My hands are honestly normal now. Without a doubt, those liners gave my hands a real chance.\""
+        },
+        {
+          "type": "text",
+          "id": "name",
+          "label": "Name",
+          "default": "Jens Stålnacke"
+        },
+        {
+          "type": "text",
+          "id": "role",
+          "label": "Role",
+          "default": "Mine worker, LKAB Kiruna"
+        },
+        {
+          "type": "url",
+          "id": "read_more_url",
+          "label": "Read more URL"
+        },
+        {
+          "type": "text",
+          "id": "read_more_text",
+          "label": "Read more text",
+          "default": "Read Jens' case →"
+        }
+      ]
+    }
+  ],
+  "max_blocks": 2,
+  "presets": [
+    {
+      "name": "Jens + Linnea",
+      "blocks": [
+        {
+          "type": "story"
+        },
+        {
+          "type": "story"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

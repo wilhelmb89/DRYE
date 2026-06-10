@@ -1,0 +1,894 @@
+{{ 'drye-reviews-mars.css' | asset_url | stylesheet_tag }}
+
+<section
+  class="dryeNEW-section drye-reviews-mars"
+  data-section-id="{{ section.id }}"
+  data-drye-reviews-mars
+>
+  <div class="dryeNEW-container">
+
+    <header class="drye-reviews-mars__header">
+      {% if section.settings.eyebrow != blank %}
+        <span class="dryeNEW-micro drye-reviews-mars__eyebrow">
+          {{ section.settings.eyebrow }}
+        </span>
+      {% endif %}
+
+      {% if section.settings.heading != blank %}
+        <h2 class="dryeNEW-h2 drye-reviews-mars__heading">
+          {{ section.settings.heading }}
+        </h2>
+      {% endif %}
+
+      {% if section.settings.subtext != blank %}
+        <div class="dryeNEW-body drye-reviews-mars__sub">
+          {{ section.settings.subtext }}
+        </div>
+      {% endif %}
+    </header>
+
+    <div class="drye-reviews-mars__summary" aria-label="Review summary">
+      <div class="drye-reviews-mars__score">
+        <div class="dryeNEW-h1 drye-reviews-mars__score-number">
+          {{ section.settings.average_rating }}
+        </div>
+
+        <div class="dryeNEW-body-sm drye-reviews-mars__score-stars" aria-hidden="true">
+          ★★★★★
+        </div>
+
+        <div class="dryeNEW-caption drye-reviews-mars__score-count">
+          {{ section.settings.review_count }} reviews
+        </div>
+      </div>
+
+      <div class="drye-reviews-mars__bars">
+        {% assign total_reviews = section.settings.review_count | plus: 0 %}
+        {% if total_reviews <= 0 %}
+          {% assign total_reviews = 1 %}
+        {% endif %}
+
+        {% assign count_5 = section.settings.rating_5_count | plus: 0 %}
+        {% assign count_4 = section.settings.rating_4_count | plus: 0 %}
+        {% assign count_3 = section.settings.rating_3_count | plus: 0 %}
+        {% assign count_2 = section.settings.rating_2_count | plus: 0 %}
+        {% assign count_1 = section.settings.rating_1_count | plus: 0 %}
+
+        {% assign width_5 = count_5 | times: 100 | divided_by: total_reviews %}
+        {% assign width_4 = count_4 | times: 100 | divided_by: total_reviews %}
+        {% assign width_3 = count_3 | times: 100 | divided_by: total_reviews %}
+        {% assign width_2 = count_2 | times: 100 | divided_by: total_reviews %}
+        {% assign width_1 = count_1 | times: 100 | divided_by: total_reviews %}
+
+        {% render 'drye-review-rating-bar', rating: 5, count: count_5, width: width_5 %}
+        {% render 'drye-review-rating-bar', rating: 4, count: count_4, width: width_4 %}
+        {% render 'drye-review-rating-bar', rating: 3, count: count_3, width: width_3 %}
+        {% render 'drye-review-rating-bar', rating: 2, count: count_2, width: width_2 %}
+        {% render 'drye-review-rating-bar', rating: 1, count: count_1, width: width_1 %}
+      </div>
+    </div>
+
+    {% assign has_proof_gallery = false %}
+
+    {% if section.settings.proof_image_1 != blank or section.settings.proof_image_2 != blank or section.settings.proof_image_3 != blank or section.settings.proof_image_4 != blank or section.settings.proof_image_5 != blank %}
+      {% assign has_proof_gallery = true %}
+    {% endif %}
+
+    {% if has_proof_gallery %}
+      <div class="drye-reviews-mars__proof-strip" aria-label="Customer proof photos">
+        {% if section.settings.proof_image_1 != blank %}
+          <div class="drye-reviews-mars__proof-item">
+            {{ section.settings.proof_image_1 | image_url: width: 220 | image_tag: loading: 'lazy', alt: section.settings.proof_image_1_alt }}
+          </div>
+        {% endif %}
+
+        {% if section.settings.proof_image_2 != blank %}
+          <div class="drye-reviews-mars__proof-item">
+            {{ section.settings.proof_image_2 | image_url: width: 220 | image_tag: loading: 'lazy', alt: section.settings.proof_image_2_alt }}
+          </div>
+        {% endif %}
+
+        {% if section.settings.proof_image_3 != blank %}
+          <div class="drye-reviews-mars__proof-item">
+            {{ section.settings.proof_image_3 | image_url: width: 220 | image_tag: loading: 'lazy', alt: section.settings.proof_image_3_alt }}
+          </div>
+        {% endif %}
+
+        {% if section.settings.proof_image_4 != blank %}
+          <div class="drye-reviews-mars__proof-item">
+            {{ section.settings.proof_image_4 | image_url: width: 220 | image_tag: loading: 'lazy', alt: section.settings.proof_image_4_alt }}
+          </div>
+        {% endif %}
+
+        {% if section.settings.proof_image_5 != blank %}
+          <div class="drye-reviews-mars__proof-item">
+            {{ section.settings.proof_image_5 | image_url: width: 220 | image_tag: loading: 'lazy', alt: section.settings.proof_image_5_alt }}
+          </div>
+        {% endif %}
+      </div>
+    {% endif %}
+
+    <div class="drye-reviews-mars__actions">
+      <button
+        type="button"
+        class="dryeNEW-micro drye-reviews-mars__action"
+        data-drye-review-open
+      >
+        ✎ Write a review
+      </button>
+
+      <button
+        type="button"
+        class="dryeNEW-micro drye-reviews-mars__action"
+        data-drye-question-open
+      >
+        ⓘ Questions
+      </button>
+    </div>
+
+    <div class="drye-reviews-mars__tabs" role="tablist" aria-label="Review categories">
+      <button
+        type="button"
+        class="dryeNEW-micro drye-reviews-mars__tab is-active"
+        data-drye-review-tab="trades"
+      >
+        Trades & Industrial
+      </button>
+
+      <button
+        type="button"
+        class="dryeNEW-micro drye-reviews-mars__tab"
+        data-drye-review-tab="sports"
+      >
+        Sports
+      </button>
+
+      <button
+        type="button"
+        class="dryeNEW-micro drye-reviews-mars__tab"
+        data-drye-review-tab="consumer"
+      >
+        Consumer
+      </button>
+    </div>
+
+    <div class="drye-reviews-mars__filters" aria-label="Review filters">
+      <button
+        type="button"
+        class="dryeNEW-micro drye-reviews-mars__filter is-active"
+        data-drye-review-filter="all"
+      >
+        All
+      </button>
+
+      <button
+        type="button"
+        class="dryeNEW-micro drye-reviews-mars__filter"
+        data-drye-review-filter="automotive"
+      >
+        Automotive
+      </button>
+
+      <button
+        type="button"
+        class="dryeNEW-micro drye-reviews-mars__filter"
+        data-drye-review-filter="industry"
+      >
+        Industry
+      </button>
+
+      <button
+        type="button"
+        class="dryeNEW-micro drye-reviews-mars__filter"
+        data-drye-review-filter="construction"
+      >
+        Construction
+      </button>
+
+      <button
+        type="button"
+        class="dryeNEW-micro drye-reviews-mars__filter"
+        data-drye-review-filter="healthcare"
+      >
+        Healthcare
+      </button>
+    </div>
+
+    <div class="drye-reviews-mars__list" data-drye-review-list>
+      {% for block in section.blocks %}
+        {% if block.type == 'review' %}
+          {% liquid
+            assign review_tab = block.settings.tab | default: 'trades'
+            assign review_category = block.settings.category | default: 'automotive'
+            assign review_rating = block.settings.rating | plus: 0
+            assign stars_full = ''
+
+            for i in (1..5)
+              if i <= review_rating
+                assign stars_full = stars_full | append: '★'
+              else
+                assign stars_full = stars_full | append: '☆'
+              endif
+            endfor
+          %}
+
+          <article
+            class="drye-reviews-mars__review"
+            data-drye-review-item
+            data-tab="{{ review_tab }}"
+            data-category="{{ review_category }}"
+            {{ block.shopify_attributes }}
+          >
+            <div class="drye-reviews-mars__review-left">
+              <div class="dryeNEW-h4 drye-reviews-mars__avatar" aria-hidden="true">
+                {{ block.settings.initials | default: block.settings.name | slice: 0, 2 | upcase }}
+              </div>
+
+              <div class="drye-reviews-mars__person">
+                {% if block.settings.name != blank %}
+                  <div class="dryeNEW-body-sm drye-reviews-mars__name">
+                    {{ block.settings.name }}
+                  </div>
+                {% endif %}
+
+                {% if block.settings.verified %}
+                  <div class="dryeNEW-caption drye-reviews-mars__verified">
+                    <svg class="drye-reviews-mars__verified-icon" viewBox="0 0 8 10" fill="none" aria-hidden="true">
+                      <path d="M3.94 9.65C2.83 9.35 1.85 8.7 1.14 7.79.43 6.89.03 5.78 0 4.63V1.21L3.94 0l3.94 1.21v3.42c-.03 1.15-.43 2.26-1.14 3.16-.71.91-1.69 1.56-2.8 1.86z" fill="currentColor"/>
+                      <path d="M3.3 5.27L2.16 4.22l-.57.53 1.14 1.05.57.53.57-.53 2.28-2.1-.57-.52-2.28 2.1z" fill="#fff"/>
+                    </svg>
+                    Verified
+                  </div>
+                {% endif %}
+              </div>
+            </div>
+
+            <div class="drye-reviews-mars__review-right">
+              <div class="drye-reviews-mars__review-top">
+                <div class="dryeNEW-body-sm drye-reviews-mars__stars" aria-label="{{ review_rating }} out of 5 stars">
+                  {{ stars_full }}
+                </div>
+
+                {% if block.settings.date != blank %}
+                  <time class="dryeNEW-caption drye-reviews-mars__date">
+                    {{ block.settings.date }}
+                  </time>
+                {% endif %}
+              </div>
+
+              {% if block.settings.role != blank or block.settings.location != blank %}
+                <div class="dryeNEW-caption drye-reviews-mars__role">
+                  {{ block.settings.role }}{% if block.settings.role != blank and block.settings.location != blank %} · {% endif %}{{ block.settings.location }}
+                </div>
+              {% endif %}
+
+              {% if block.settings.title != blank %}
+                <h3 class="dryeNEW-h4 drye-reviews-mars__title">
+                  {{ block.settings.title }}
+                </h3>
+              {% endif %}
+
+              {% if block.settings.body != blank %}
+                <div class="dryeNEW-body drye-reviews-mars__body">
+                  {{ block.settings.body }}
+                </div>
+              {% endif %}
+
+              <div class="drye-reviews-mars__bottom">
+                {% if block.settings.would_recommend %}
+                  <div class="dryeNEW-caption drye-reviews-mars__recommend">
+                    ❤ Would recommend
+                  </div>
+                {% endif %}
+
+                <div class="dryeNEW-caption drye-reviews-mars__helpful">
+                  Helpful
+                  <button type="button" class="drye-reviews-mars__vote">▲ {{ block.settings.helpful_up }}</button>
+                  <button type="button" class="drye-reviews-mars__vote">▼ {{ block.settings.helpful_down }}</button>
+                </div>
+              </div>
+            </div>
+          </article>
+        {% endif %}
+      {% endfor %}
+    </div>
+
+    {% if section.settings.load_more_label != blank %}
+      <div class="drye-reviews-mars__load">
+        <a href="{{ section.settings.load_more_link | default: '#' }}" class="dryeNEW-link">
+          {{ section.settings.load_more_label }}
+        </a>
+      </div>
+    {% endif %}
+  </div>
+
+  <div class="drye-reviews-mars__modal" data-drye-review-modal aria-hidden="true">
+    <div class="drye-reviews-mars__modal-backdrop" data-drye-review-close></div>
+
+    <div class="drye-reviews-mars__modal-panel" role="dialog" aria-modal="true" aria-label="Write a review">
+      <div class="drye-reviews-mars__modal-head">
+        <div>
+          <span class="dryeNEW-micro drye-reviews-mars__eyebrow">
+            Review DRYE
+          </span>
+
+          <h3 class="dryeNEW-h2 drye-reviews-mars__modal-title">
+            Write a review.
+          </h3>
+        </div>
+
+        <button type="button" class="drye-reviews-mars__close" data-drye-review-close aria-label="Close">
+          ×
+        </button>
+      </div>
+
+      <form
+        class="drye-reviews-mars__form"
+        data-drye-review-form
+        {% if section.settings.form_endpoint != blank %}
+          action="{{ section.settings.form_endpoint }}"
+          method="post"
+        {% endif %}
+      >
+        <div class="drye-reviews-mars__form-grid">
+          <div class="drye-reviews-mars__field">
+            <label class="dryeNEW-body-sm drye-reviews-mars__label" for="drye-review-name-{{ section.id }}">
+              Name
+            </label>
+
+            <input class="drye-reviews-mars__input" id="drye-review-name-{{ section.id }}" name="name" type="text" required>
+          </div>
+
+          <div class="drye-reviews-mars__field">
+            <label class="dryeNEW-body-sm drye-reviews-mars__label" for="drye-review-email-{{ section.id }}">
+              Email
+            </label>
+
+            <input class="drye-reviews-mars__input" id="drye-review-email-{{ section.id }}" name="email" type="email" required>
+          </div>
+        </div>
+
+        <div class="drye-reviews-mars__form-grid">
+          <div class="drye-reviews-mars__field">
+            <label class="dryeNEW-body-sm drye-reviews-mars__label" for="drye-review-rating-{{ section.id }}">
+              Rating
+            </label>
+
+            <select class="drye-reviews-mars__select" id="drye-review-rating-{{ section.id }}" name="rating" required>
+              <option value="">Choose rating</option>
+              <option value="5">5 stars</option>
+              <option value="4">4 stars</option>
+              <option value="3">3 stars</option>
+              <option value="2">2 stars</option>
+              <option value="1">1 star</option>
+            </select>
+          </div>
+
+          <div class="drye-reviews-mars__field">
+            <label class="dryeNEW-body-sm drye-reviews-mars__label" for="drye-review-use-case-{{ section.id }}">
+              What best describes how you use DRYE?
+            </label>
+
+            <select class="drye-reviews-mars__select" id="drye-review-use-case-{{ section.id }}" name="use_case" required>
+              <option value="">Choose use case</option>
+              <option value="automotive">Automotive / mechanic</option>
+              <option value="industrial">Industrial / trades</option>
+              <option value="sports">Sports / hockey</option>
+              <option value="consumer">Consumer / everyday</option>
+              <option value="healthcare">Healthcare / gloves</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="drye-reviews-mars__form-grid">
+          <div class="drye-reviews-mars__field">
+            <label class="dryeNEW-body-sm drye-reviews-mars__label" for="drye-review-glove-{{ section.id }}">
+              What glove do you wear DRYE under?
+            </label>
+
+            <select class="drye-reviews-mars__select" id="drye-review-glove-{{ section.id }}" name="glove_type">
+              <option value="">Choose glove type</option>
+              <option value="nitrile">Nitrile</option>
+              <option value="latex">Latex</option>
+              <option value="rubber">Rubber</option>
+              <option value="hv">HV / electric safety glove</option>
+              <option value="hockey">Hockey glove</option>
+              <option value="winter">Winter glove</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
+
+          <div class="drye-reviews-mars__field">
+            <label class="dryeNEW-body-sm drye-reviews-mars__label" for="drye-review-title-{{ section.id }}">
+              Review title
+            </label>
+
+            <input class="drye-reviews-mars__input" id="drye-review-title-{{ section.id }}" name="title" type="text" required>
+          </div>
+        </div>
+
+        <div class="drye-reviews-mars__field">
+          <label class="dryeNEW-body-sm drye-reviews-mars__label" for="drye-review-body-{{ section.id }}">
+            How was your overall experience?
+          </label>
+
+          <textarea class="drye-reviews-mars__textarea" id="drye-review-body-{{ section.id }}" name="body" required></textarea>
+        </div>
+
+        <div class="dryeNEW-caption drye-reviews-mars__form-note">
+          This first version is a design-ready form. It will only submit once a form endpoint is added in section settings.
+        </div>
+
+        <div class="drye-reviews-mars__form-actions">
+          <button type="button" class="dryeNEW-micro drye-reviews-mars__secondary" data-drye-review-close>
+            Cancel
+          </button>
+
+          <button type="submit" class="dryeNEW-micro drye-reviews-mars__submit">
+            Submit review
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<script>
+  (() => {
+    const root = document.querySelector('[data-section-id="{{ section.id }}"][data-drye-reviews-mars]');
+    if (!root) return;
+
+    const tabs = root.querySelectorAll('[data-drye-review-tab]');
+    const filters = root.querySelectorAll('[data-drye-review-filter]');
+    const items = root.querySelectorAll('[data-drye-review-item]');
+    const modal = root.querySelector('[data-drye-review-modal]');
+    const openButtons = root.querySelectorAll('[data-drye-review-open]');
+    const closeButtons = root.querySelectorAll('[data-drye-review-close]');
+    const form = root.querySelector('[data-drye-review-form]');
+
+    let activeTab = 'trades';
+    let activeFilter = 'all';
+
+    function applyFilters() {
+      items.forEach((item) => {
+        const itemTab = item.getAttribute('data-tab');
+        const itemCategory = item.getAttribute('data-category');
+        const tabMatches = itemTab === activeTab;
+        const filterMatches = activeFilter === 'all' || itemCategory === activeFilter;
+
+        item.classList.toggle('is-hidden', !(tabMatches && filterMatches));
+      });
+    }
+
+    tabs.forEach((tab) => {
+      tab.addEventListener('click', () => {
+        activeTab = tab.getAttribute('data-drye-review-tab');
+
+        tabs.forEach((t) => t.classList.remove('is-active'));
+        tab.classList.add('is-active');
+
+        activeFilter = 'all';
+        filters.forEach((filter) => {
+          filter.classList.toggle('is-active', filter.getAttribute('data-drye-review-filter') === 'all');
+        });
+
+        applyFilters();
+      });
+    });
+
+    filters.forEach((filter) => {
+      filter.addEventListener('click', () => {
+        activeFilter = filter.getAttribute('data-drye-review-filter');
+
+        filters.forEach((f) => f.classList.remove('is-active'));
+        filter.classList.add('is-active');
+
+        applyFilters();
+      });
+    });
+
+    function openModal() {
+      if (!modal) return;
+      modal.classList.add('is-open');
+      modal.setAttribute('aria-hidden', 'false');
+      document.documentElement.style.overflow = 'hidden';
+    }
+
+    function closeModal() {
+      if (!modal) return;
+      modal.classList.remove('is-open');
+      modal.setAttribute('aria-hidden', 'true');
+      document.documentElement.style.overflow = '';
+    }
+
+    openButtons.forEach((button) => {
+      button.addEventListener('click', openModal);
+    });
+
+    closeButtons.forEach((button) => {
+      button.addEventListener('click', closeModal);
+    });
+
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape') closeModal();
+    });
+
+    if (form) {
+      form.addEventListener('submit', (event) => {
+        const hasEndpoint = form.getAttribute('action');
+
+        if (!hasEndpoint) {
+          event.preventDefault();
+          alert('Review form design is ready. Add a form endpoint in the section settings before collecting submissions.');
+        }
+      });
+    }
+
+    applyFilters();
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "DRYE Reviews Mars",
+  "tag": "section",
+  "class": "shopify-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "35 verified reviews"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Real environments. Real shifts."
+    },
+    {
+      "type": "textarea",
+      "id": "subtext",
+      "label": "Subtext",
+      "default": "From automotive workshops to ice rinks. The glove environment is the same."
+    },
+    {
+      "type": "text",
+      "id": "average_rating",
+      "label": "Average rating",
+      "default": "4.89"
+    },
+    {
+      "type": "number",
+      "id": "review_count",
+      "label": "Review count",
+      "default": 35
+    },
+    {
+      "type": "number",
+      "id": "rating_5_count",
+      "label": "5 star count",
+      "default": 32
+    },
+    {
+      "type": "number",
+      "id": "rating_4_count",
+      "label": "4 star count",
+      "default": 2
+    },
+    {
+      "type": "number",
+      "id": "rating_3_count",
+      "label": "3 star count",
+      "default": 1
+    },
+    {
+      "type": "number",
+      "id": "rating_2_count",
+      "label": "2 star count",
+      "default": 0
+    },
+    {
+      "type": "number",
+      "id": "rating_1_count",
+      "label": "1 star count",
+      "default": 0
+    },
+    {
+      "type": "header",
+      "content": "Proof photo strip"
+    },
+    {
+      "type": "image_picker",
+      "id": "proof_image_1",
+      "label": "Proof image 1"
+    },
+    {
+      "type": "text",
+      "id": "proof_image_1_alt",
+      "label": "Proof image 1 alt",
+      "default": "Customer proof photo"
+    },
+    {
+      "type": "image_picker",
+      "id": "proof_image_2",
+      "label": "Proof image 2"
+    },
+    {
+      "type": "text",
+      "id": "proof_image_2_alt",
+      "label": "Proof image 2 alt",
+      "default": "Customer proof photo"
+    },
+    {
+      "type": "image_picker",
+      "id": "proof_image_3",
+      "label": "Proof image 3"
+    },
+    {
+      "type": "text",
+      "id": "proof_image_3_alt",
+      "label": "Proof image 3 alt",
+      "default": "Customer proof photo"
+    },
+    {
+      "type": "image_picker",
+      "id": "proof_image_4",
+      "label": "Proof image 4"
+    },
+    {
+      "type": "text",
+      "id": "proof_image_4_alt",
+      "label": "Proof image 4 alt",
+      "default": "Customer proof photo"
+    },
+    {
+      "type": "image_picker",
+      "id": "proof_image_5",
+      "label": "Proof image 5"
+    },
+    {
+      "type": "text",
+      "id": "proof_image_5_alt",
+      "label": "Proof image 5 alt",
+      "default": "Customer proof photo"
+    },
+    {
+      "type": "text",
+      "id": "load_more_label",
+      "label": "Load more label",
+      "default": "Load more reviews →"
+    },
+    {
+      "type": "url",
+      "id": "load_more_link",
+      "label": "Load more link"
+    },
+    {
+      "type": "url",
+      "id": "form_endpoint",
+      "label": "Review form endpoint",
+      "info": "Leave blank for design-only mode. Later this can point to Make, a Shopify app proxy, or a custom endpoint."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "review",
+      "name": "Review",
+      "settings": [
+        {
+          "type": "select",
+          "id": "tab",
+          "label": "Tab",
+          "default": "trades",
+          "options": [
+            {
+              "value": "trades",
+              "label": "Trades & Industrial"
+            },
+            {
+              "value": "sports",
+              "label": "Sports"
+            },
+            {
+              "value": "consumer",
+              "label": "Consumer"
+            }
+          ]
+        },
+        {
+          "type": "select",
+          "id": "category",
+          "label": "Category",
+          "default": "automotive",
+          "options": [
+            {
+              "value": "automotive",
+              "label": "Automotive"
+            },
+            {
+              "value": "industry",
+              "label": "Industry"
+            },
+            {
+              "value": "construction",
+              "label": "Construction"
+            },
+            {
+              "value": "healthcare",
+              "label": "Healthcare"
+            },
+            {
+              "value": "sports",
+              "label": "Sports"
+            },
+            {
+              "value": "consumer",
+              "label": "Consumer"
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "id": "name",
+          "label": "Name",
+          "default": "Brian Jee"
+        },
+        {
+          "type": "text",
+          "id": "initials",
+          "label": "Initials",
+          "default": "BJ"
+        },
+        {
+          "type": "checkbox",
+          "id": "verified",
+          "label": "Verified",
+          "default": true
+        },
+        {
+          "type": "range",
+          "id": "rating",
+          "label": "Rating",
+          "min": 1,
+          "max": 5,
+          "step": 1,
+          "default": 5
+        },
+        {
+          "type": "text",
+          "id": "date",
+          "label": "Date",
+          "default": "01 Oct 2025"
+        },
+        {
+          "type": "text",
+          "id": "role",
+          "label": "Role",
+          "default": "Automotive repair"
+        },
+        {
+          "type": "text",
+          "id": "location",
+          "label": "Location",
+          "default": "San Francisco, CA"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Review title",
+          "default": "Your liners have been fantastic."
+        },
+        {
+          "type": "textarea",
+          "id": "body",
+          "label": "Review body",
+          "default": "I've been using them in automotive repair, home construction, and moving heavy materials. No more rashes on my hands. Nitrile gloves go on and off easily without sweaty skin. When I get oil on the liners, I just wipe them off with electrical contact cleaner — works perfectly."
+        },
+        {
+          "type": "checkbox",
+          "id": "would_recommend",
+          "label": "Would recommend",
+          "default": true
+        },
+        {
+          "type": "number",
+          "id": "helpful_up",
+          "label": "Helpful up",
+          "default": 3
+        },
+        {
+          "type": "number",
+          "id": "helpful_down",
+          "label": "Helpful down",
+          "default": 0
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "DRYE Reviews Mars",
+      "blocks": [
+        {
+          "type": "review",
+          "settings": {
+            "tab": "trades",
+            "category": "automotive",
+            "name": "Brian Jee",
+            "initials": "BJ",
+            "verified": true,
+            "rating": 5,
+            "date": "01 Oct 2025",
+            "role": "Automotive repair",
+            "location": "San Francisco, CA",
+            "title": "Your liners have been fantastic.",
+            "body": "I've been using them in automotive repair, home construction, and moving heavy materials. No more rashes on my hands. Nitrile gloves go on and off easily without sweaty skin. When I get oil on the liners, I just wipe them off with electrical contact cleaner — works perfectly.",
+            "would_recommend": true,
+            "helpful_up": 3,
+            "helpful_down": 0
+          }
+        },
+        {
+          "type": "review",
+          "settings": {
+            "tab": "trades",
+            "category": "automotive",
+            "name": "Chad Wuollet",
+            "initials": "CW",
+            "verified": true,
+            "rating": 5,
+            "date": "15 Oct 2025",
+            "role": "Automotive painter",
+            "location": "Phoenix, AZ",
+            "title": "Worked well and as advertised.",
+            "body": "I'm an automotive painter in Phoenix and was having terrible sweat issues wearing nitrile gloves during the summer months. The liners have been a huge help — I'm no longer dripping sweat on my paint jobs and my hands feel better.",
+            "would_recommend": true,
+            "helpful_up": 2,
+            "helpful_down": 0
+          }
+        },
+        {
+          "type": "review",
+          "settings": {
+            "tab": "trades",
+            "category": "industry",
+            "name": "Jens Stålnacke",
+            "initials": "JS",
+            "verified": true,
+            "rating": 5,
+            "date": "08 Sep 2025",
+            "role": "Mining worker",
+            "location": "Kiruna, Sweden",
+            "title": "Cotton gloves get disgusting. These don't.",
+            "body": "Real skin problems started in 2017 — pain, open scars and wounds. Nothing worked for years. Instead of cotton gloves that get disgusting and worn out, your liners actually make a difference. I've got my own hands to prove it.",
+            "would_recommend": true,
+            "helpful_up": 4,
+            "helpful_down": 0
+          }
+        },
+        {
+          "type": "review",
+          "settings": {
+            "tab": "trades",
+            "category": "automotive",
+            "name": "Shoujun Shi",
+            "initials": "SS",
+            "verified": true,
+            "rating": 4,
+            "date": "03 Oct 2025",
+            "role": "Car detailing",
+            "location": "Panorama City, CA",
+            "title": "Good dexterity and keeps hands dry.",
+            "body": "Slim thickness gives great dexterity. They do a great job keeping sweat off my hands — even when slightly wet, they still work. I just wash and reuse them again.",
+            "would_recommend": true,
+            "helpful_up": 0,
+            "helpful_down": 0
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

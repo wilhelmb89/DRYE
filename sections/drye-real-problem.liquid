@@ -1,0 +1,253 @@
+{{ 'drye-real-problem.css' | asset_url | stylesheet_tag }}
+
+<style>
+  #shopify-section-{{ section.id }} .sec {
+    background: {{ section.settings.bg_color }};
+    padding-top: {{ section.settings.padding_top_mobile }}px;
+    padding-bottom: {{ section.settings.padding_bottom_mobile }}px;
+  }
+
+  @media(min-width:768px){
+    #shopify-section-{{ section.id }} .sec {
+      padding-top: {{ section.settings.padding_top_desktop }}px;
+      padding-bottom: {{ section.settings.padding_bottom_desktop }}px;
+    }
+  }
+</style>
+
+<section class="sec">
+  <div class="sec-in">
+    <div class="micro rev d1">{{ section.settings.eyebrow }}</div>
+    <h2 class="sec-h rev d2">{{ section.settings.heading }}</h2>
+    <p class="sec-sub rev d3">{{ section.settings.subheading }}</p>
+
+    <div class="fail-grid">
+      {% for block in section.blocks %}
+        {% case block.type %}
+          {% when 'fail_card' %}
+            <div class="fail-card rev d{{ forloop.index }}" {{ block.shopify_attributes }}>
+              <div class="fail-lbl">{{ block.settings.label }}</div>
+              <div class="fail-name">{{ block.settings.title }}</div>
+              <div class="fail-why">{{ block.settings.body }}</div>
+            </div>
+        {% endcase %}
+      {% endfor %}
+    </div>
+  <div class="fail-swipe-hint" aria-hidden="true">
+  <span>Swipe</span>
+  <svg class="fail-swipe-icon" width="18" height="18" viewBox="0 0 24 24" fill="none">
+    <path d="M8 5l8 7-8 7" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="miter"/>
+  </svg>
+</div>
+    <div class="physics-box rev d5">
+      <div class="physics-q">{{ section.settings.quote }}</div>
+      <div class="physics-src">{{ section.settings.quote_source }}</div>
+    </div>
+  </div>
+
+
+</section>
+
+
+<script>
+  (function () {
+    const section = document.getElementById('shopify-section-{{ section.id }}');
+    if (!section) return;
+
+    const reveals = section.querySelectorAll('.rev');
+
+    if (reveals.length) {
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('in');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.07 });
+
+      reveals.forEach((el) => observer.observe(el));
+    }
+
+    if (window.innerWidth >= 768) return;
+
+    const scroller = section.querySelector('.fail-grid');
+    const hint = section.querySelector('.fail-swipe-hint');
+
+    if (!scroller || !hint) return;
+
+    const hideHint = function () {
+      hint.classList.add('is-hidden');
+      scroller.removeEventListener('scroll', onScroll);
+      scroller.removeEventListener('touchstart', hideHint);
+      scroller.removeEventListener('pointerdown', hideHint);
+    };
+
+    const onScroll = function () {
+      if (scroller.scrollLeft > 12) {
+        hideHint();
+      }
+    };
+
+    scroller.addEventListener('scroll', onScroll, { passive: true });
+    scroller.addEventListener('touchstart', hideHint, { passive: true });
+    scroller.addEventListener('pointerdown', hideHint, { passive: true });
+  })();
+</script>
+
+<div id="reviews"></div>
+
+{% schema %}
+{
+  "name": "DRYE Real Problem",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "The real problem"
+    },
+{
+  "type": "image_picker",
+  "id": "bg_image",
+  "label": "Bakgrundsbild"
+},
+{
+  "type": "color",
+  "id": "bg_color",
+  "label": "Bakgrundsfärg",
+  "default": "#F9FAFB"
+},
+{
+  "type": "range",
+  "id": "padding_top_mobile",
+  "label": "Top spacing mobil",
+  "min": 0,
+  "max": 200,
+  "step": 4,
+  "unit": "px",
+  "default": 56
+},
+{
+  "type": "range",
+  "id": "padding_bottom_mobile",
+  "label": "Bottom spacing mobil",
+  "min": 0,
+  "max": 200,
+  "step": 4,
+  "unit": "px",
+  "default": 56
+},
+{
+  "type": "range",
+  "id": "padding_top_desktop",
+  "label": "Top spacing desktop",
+  "min": 0,
+  "max": 260,
+  "step": 4,
+  "unit": "px",
+  "default": 72
+},
+{
+  "type": "range",
+  "id": "padding_bottom_desktop",
+  "label": "Bottom spacing desktop",
+  "min": 0,
+  "max": 260,
+  "step": 4,
+  "unit": "px",
+  "default": 72
+},
+    {
+      "type": "textarea",
+      "id": "heading",
+      "label": "Heading",
+      "default": "It's not that you haven't found the right cream. It's that absorption always stops."
+    },
+    {
+      "type": "textarea",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "Every liner, glove change, and barrier cream works on the same principle: absorb or repel. Both hit a physical ceiling. That ceiling is why your hands look the same at the end of every shift."
+    },
+    {
+      "type": "textarea",
+      "id": "quote",
+      "label": "Quote",
+      "default": "\"Occlusive gloves increase S. aureus on the skin surface by 1.72× within four hours — independent of glove material.\""
+    },
+    {
+      "type": "text",
+      "id": "quote_source",
+      "label": "Quote source",
+      "default": "Acta Dermato-Venereologica, 2021 · Peer-reviewed · This is the environment DRYE addresses"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "fail_card",
+      "name": "Failure card",
+      "settings": [
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Label",
+          "default": "Absorption limit"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Cotton liners"
+        },
+        {
+          "type": "textarea",
+          "id": "body",
+          "label": "Body",
+          "default": "Absorb moisture until saturated — then hold it against skin for hours. Wet cloth in a sealed space. Maceration guaranteed."
+        }
+      ]
+    }
+  ],
+  "max_blocks": 4,
+  "presets": [
+    {
+      "name": "DRYE Real Problem",
+      "blocks": [
+        {
+          "type": "fail_card",
+          "settings": {
+            "label": "Absorption limit",
+            "title": "Cotton liners",
+            "body": "Absorb moisture until saturated — then hold it against skin for hours. Wet cloth in a sealed space. Maceration guaranteed."
+          }
+        },
+        {
+          "type": "fail_card",
+          "settings": {
+            "label": "No transport",
+            "title": "Barrier creams",
+            "body": "Lock moisture out initially. Sweat still forms. After 20 minutes the seal works against you — trapping humidity in."
+          }
+        },
+        {
+          "type": "fail_card",
+          "settings": {
+            "label": "Symptom only",
+            "title": "Steroid creams",
+            "body": "Reduce inflammation. Don't change the wet environment causing it. Return to the same gloves — same result."
+          }
+        },
+        {
+          "type": "fail_card",
+          "settings": {
+            "label": "No exit route",
+            "title": "Changing gloves",
+            "body": "Buys minutes. Sealed gloves trap moisture regardless of glove material. The problem is structural — not the brand."
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

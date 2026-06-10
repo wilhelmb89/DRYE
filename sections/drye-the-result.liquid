@@ -1,0 +1,129 @@
+{{ 'drye-the-result.css' | asset_url | stylesheet_tag }}
+
+<section class="dryeNEW-section the-result">
+  <div class="dryeNEW-container dryeNEW-container--flush">
+    <span class="dryeNEW-micro dryeNEW-reveal">
+      {{ section.settings.micro_label }}
+    </span>
+
+    <h2 class="the-result__title dryeNEW-reveal dryeNEW-rd1">
+      {{ section.settings.heading_line_1 }}<br>
+      <em class="dryeNEW-editorial">{{ section.settings.heading_line_2 }}</em>
+    </h2>
+
+    <p class="the-result__lead dryeNEW-reveal dryeNEW-rd2">
+      {{ section.settings.lead_text }}
+    </p>
+
+    <div class="result-stats dryeNEW-reveal dryeNEW-rd3">
+      {% for block in section.blocks %}
+        <div class="rstat" {{ block.shopify_attributes }}>
+          <div class="rstat-num">
+            {{ block.settings.value }}<span class="unit">{{ block.settings.unit }}</span>
+          </div>
+          <p class="rstat-desc">
+            {{ block.settings.description }}
+          </p>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "DRYE The Result",
+  "max_blocks": 4,
+  "settings": [
+    {
+      "type": "text",
+      "id": "micro_label",
+      "label": "Micro label",
+      "default": "What this means for your shift"
+    },
+    {
+      "type": "text",
+      "id": "heading_line_1",
+      "label": "Heading line 1",
+      "default": "Same after 8 hours"
+    },
+    {
+      "type": "text",
+      "id": "heading_line_2",
+      "label": "Heading line 2",
+      "default": "as after 8 minutes."
+    },
+    {
+      "type": "textarea",
+      "id": "lead_text",
+      "label": "Lead text",
+      "default": "That's not a marketing claim. It's the logical consequence of a liner with no saturation point. If moisture never accumulates, the microclimate never forms. If the microclimate never forms, your skin doesn't degrade."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "stat",
+      "name": "Stat",
+      "settings": [
+        {
+          "type": "text",
+          "id": "value",
+          "label": "Value",
+          "default": "8h"
+        },
+        {
+          "type": "text",
+          "id": "unit",
+          "label": "Unit",
+          "default": "+"
+        },
+        {
+          "type": "textarea",
+          "id": "description",
+          "label": "Description",
+          "default": "Tested under nitrile in active healthcare shifts"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "DRYE The Result",
+      "blocks": [
+        {
+          "type": "stat",
+          "settings": {
+            "value": "8h",
+            "unit": "+",
+            "description": "Tested under nitrile in active healthcare shifts"
+          }
+        },
+        {
+          "type": "stat",
+          "settings": {
+            "value": "0.4",
+            "unit": "mm",
+            "description": "Total thickness. No dexterity compromise. Works inside any glove."
+          }
+        },
+        {
+          "type": "stat",
+          "settings": {
+            "value": "4–12",
+            "unit": "mo",
+            "description": "Lifespan with regular use. Machine washable."
+          }
+        },
+        {
+          "type": "stat",
+          "settings": {
+            "value": "30",
+            "unit": "day",
+            "description": "Full refund if the physics don't change your shift"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

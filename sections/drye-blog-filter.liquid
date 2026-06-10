@@ -1,0 +1,79 @@
+
+  {{ 'section-drye-blog-filter.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'drye-blog-filter.js' | asset_url }}" defer></script>
+
+<section class="drye-blog-filter-section">
+  <div class="filter-bar">
+    <div class="filter-in">
+      <button class="filter-btn active" data-cat="all" type="button" aria-pressed="true">
+        {{ section.settings.label_all }}
+      </button>
+      <button class="filter-btn" data-cat="science" type="button" aria-pressed="false">
+        {{ section.settings.label_science }}
+      </button>
+      <button class="filter-btn" data-cat="field" type="button" aria-pressed="false">
+        {{ section.settings.label_field }}
+      </button>
+      <button class="filter-btn" data-cat="stories" type="button" aria-pressed="false">
+        {{ section.settings.label_stories }}
+      </button>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "DRYE Blog Filter",
+  "tag": "section",
+  "class": "section-drye-blog-filter",
+  "settings": [
+    {
+      "type": "text",
+      "id": "label_all",
+      "label": "All label",
+      "default": "All"
+    },
+    {
+      "type": "text",
+      "id": "label_science",
+      "label": "Science label",
+      "default": "Science"
+    },
+    {
+      "type": "text",
+      "id": "label_field",
+      "label": "Field Reports label",
+      "default": "Field Reports"
+    },
+    {
+      "type": "text",
+      "id": "label_stories",
+      "label": "User Stories label",
+      "default": "User Stories"
+    },
+    {
+      "type": "text",
+      "id": "tag_science",
+      "label": "Shopify tag for Science",
+      "default": "Science"
+    },
+    {
+      "type": "text",
+      "id": "tag_field",
+      "label": "Shopify tag for Field Reports",
+      "default": "Field Report"
+    },
+    {
+      "type": "text",
+      "id": "tag_stories",
+      "label": "Shopify tag for User Stories",
+      "default": "User Story"
+    }
+  ],
+  "presets": [
+    {
+      "name": "DRYE Blog Filter"
+    }
+  ]
+}
+{% endschema %}

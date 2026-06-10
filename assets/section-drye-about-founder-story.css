@@ -1,0 +1,109 @@
+.drye-about-founder-story {
+  background: var(--bg);
+}
+
+.drye-about-founder-story__grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--space-48);
+}
+
+.drye-about-founder-story__image-wrap {
+  position: relative;
+  min-width: 0;
+}
+
+.drye-about-founder-story__image-frame {
+  max-width: 400px;
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+  background: linear-gradient(140deg, #0d1f2b 0%, #1e3a4c 60%, #3d5a5e 100%);
+}
+
+.drye-about-founder-story__image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+}
+
+.drye-about-founder-story__image-placeholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-body);
+  font-size: 11px;
+  font-weight: var(--fw-semibold);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.24);
+}
+
+.drye-about-founder-story__tag {
+  position: absolute;
+  left: 0;
+  bottom: -1px;
+  max-width: 260px;
+  padding: var(--space-14) var(--space-18);
+  background: var(--bg-ink);
+  border-top: 2px solid var(--emerald);
+}
+
+.drye-about-founder-story__tag-name {
+  margin-bottom: var(--space-2);
+  color: var(--white-100);
+}
+
+.drye-about-founder-story__tag-role {
+  color: var(--white-035);
+}
+
+.drye-about-founder-story__content {
+  min-width: 0;
+}
+
+.drye-about-founder-story__eyebrow {
+  color: inherit;
+}
+
+.drye-about-founder-story__heading {
+  margin: var(--space-12) 0 var(--space-20);
+  color: var(--deep);
+}
+
+.drye-about-founder-story__body {
+  color: var(--body);
+}
+
+.drye-about-founder-story__body p {
+  margin: 0 0 var(--space-18);
+}
+
+.drye-about-founder-story__body p:last-child {
+  margin-bottom: 0;
+}
+
+.drye-about-founder-story__body strong {
+  font-weight: var(--fw-semibold);
+  color: var(--deep);
+}
+
+.drye-about-founder-story__cta {
+  margin-top: var(--space-24);
+  color: var(--sage);
+}
+
+.drye-about-founder-story__cta:hover {
+  color: var(--deep);
+}
+
+@media (min-width: 768px) {
+  .drye-about-founder-story__grid {
+    grid-template-columns: var(--grid-2-col-desktop);
+    gap: var(--grid-gap-64);
+    align-items: center;
+  }
+}

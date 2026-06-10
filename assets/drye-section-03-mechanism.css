@@ -1,0 +1,300 @@
+/* ==========================================================================
+   DRYE SECTION 03 — MECHANISM + PROOF BAR
+   Scoped to Shopify section wrapper to avoid bleed
+   Source of truth: uploaded HTML prototype
+   ========================================================================== */
+
+.shopify-section--drye-mechanism .mech-sec {
+  background: var(--bg-ink, #0F2230);
+}
+
+.shopify-section--drye-mechanism .sec-in {
+  width: 100%;
+  max-width: var(--max-width, 1100px);
+  margin: 0 auto;
+  padding: 72px 20px 60px;
+}
+
+.shopify-section--drye-mechanism .micro {
+  display: block;
+  margin-bottom: 10px;
+  font-family: var(--font-body, "DM Sans", sans-serif);
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  line-height: 1.2;
+  text-transform: uppercase;
+}
+
+.shopify-section--drye-mechanism .micro-w {
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.shopify-section--drye-mechanism .mech-h {
+  max-width: 640px;
+  margin: 0 0 10px;
+  font-family: var(--font-display, "Clash Grotesk", sans-serif);
+  font-size: clamp(22px, 5vw, 32px);
+  font-weight: 600;
+  letter-spacing: -0.022em;
+  line-height: 1.15;
+  color: #FFFFFF;
+}
+
+.shopify-section--drye-mechanism .mech-sub {
+  max-width: 480px;
+  margin: 0 0 36px;
+  font-family: var(--font-body, "DM Sans", sans-serif);
+  font-size: 14px;
+  line-height: 1.7;
+  color: rgba(255, 255, 255, 0.45);
+}
+
+.shopify-section--drye-mechanism .mech-cols {
+  display: grid;
+  gap: 16px;
+}
+
+.shopify-section--drye-mechanism .mech-col {
+  padding: 24px 20px;
+}
+
+.shopify-section--drye-mechanism .mech-col.old {
+  border: 1px solid rgba(239, 68, 68, 0.2);
+  background: rgba(239, 68, 68, 0.03);
+}
+
+.shopify-section--drye-mechanism .mech-col.new {
+  border: 1px solid rgba(13, 148, 136, 0.25);
+  background: rgba(13, 148, 136, 0.04);
+}
+
+.shopify-section--drye-mechanism .mc-lbl {
+  margin-bottom: 12px;
+  font-family: var(--font-body, "DM Sans", sans-serif);
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
+.shopify-section--drye-mechanism .mech-col.old .mc-lbl {
+  color: var(--red, #EF4444);
+}
+
+.shopify-section--drye-mechanism .mech-col.new .mc-lbl {
+  color: var(--emerald, #0D9488);
+}
+
+.shopify-section--drye-mechanism .mc-title {
+  margin: 0 0 14px;
+  font-family: var(--font-display, "Clash Grotesk", sans-serif);
+  font-size: 17px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  line-height: 1.2;
+  color: #FFFFFF;
+}
+
+.shopify-section--drye-mechanism .mc-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+}
+
+.shopify-section--drye-mechanism .mc-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-family: var(--font-body, "DM Sans", sans-serif);
+  font-size: 13px;
+  line-height: 1.55;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.shopify-section--drye-mechanism .mc-list.ol li::before {
+  content: "✕";
+  margin-top: 3px;
+  flex-shrink: 0;
+  font-size: 10px;
+  color: rgba(239, 68, 68, 0.55);
+}
+
+.shopify-section--drye-mechanism .mc-list.nw li::before {
+  content: "→";
+  margin-top: 3px;
+  flex-shrink: 0;
+  font-size: 10px;
+  color: var(--emerald, #0D9488);
+}
+
+.shopify-section--drye-mechanism .diag-wrap {
+  margin-top: 32px;
+  padding: 24px 20px;
+  text-align: center;
+  border: 1px solid rgba(95, 138, 139, 0.2);
+}
+
+.shopify-section--drye-mechanism .diag-title {
+  margin-bottom: 18px;
+  font-family: var(--font-body, "DM Sans", sans-serif);
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--sage, #5F8A8B);
+}
+
+.shopify-section--drye-mechanism .diag-stack {
+  max-width: 420px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.shopify-section--drye-mechanism .dl {
+  padding: 12px 16px;
+  font-family: var(--font-body, "DM Sans", sans-serif);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  text-align: center;
+}
+
+.shopify-section--drye-mechanism .dl.outer {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  color: rgba(255, 255, 255, 0.3);
+}
+
+.shopify-section--drye-mechanism .dl.rel {
+  background: rgba(61, 90, 94, 0.45);
+  border: 1px solid rgba(95, 138, 139, 0.3);
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.shopify-section--drye-mechanism .dl.grad {
+  background: rgba(30, 58, 76, 0.65);
+  border: 1px solid rgba(95, 138, 139, 0.4);
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.shopify-section--drye-mechanism .dl.skin {
+  background: transparent;
+  border: 1px dashed rgba(255, 255, 255, 0.1);
+  color: rgba(255, 255, 255, 0.25);
+  font-size: 9px;
+}
+
+.shopify-section--drye-mechanism .diag-arr {
+  display: flex;
+  justify-content: center;
+  gap: 24px;
+  padding: 3px 0;
+  font-size: 15px;
+  letter-spacing: 4px;
+  color: var(--sage, #5F8A8B);
+}
+
+.shopify-section--drye-mechanism .mech-arr-down {
+  transform: scaleY(-1);
+}
+
+.shopify-section--drye-mechanism .diag-note {
+  margin-top: 12px;
+  font-family: var(--font-body, "DM Sans", sans-serif);
+  font-size: 10px;
+  color: rgba(255, 255, 255, 0.25);
+}
+
+/* PROOF BAR */
+
+.shopify-section--drye-mechanism .proof-bar {
+  background: var(--bg-ink, #0F2230);
+  padding: 40px 20px;
+}
+
+.shopify-section--drye-mechanism .proof-in {
+  max-width: var(--max-width, 1100px);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.shopify-section--drye-mechanism .p-num {
+  margin-bottom: 4px;
+  font-family: var(--font-display, "Clash Grotesk", sans-serif);
+  font-size: clamp(28px, 6vw, 42px);
+  font-weight: 600;
+  letter-spacing: -0.03em;
+  line-height: 1;
+  color: #FFFFFF;
+}
+
+.shopify-section--drye-mechanism .p-num span {
+  color: var(--sage, #5F8A8B);
+}
+
+.shopify-section--drye-mechanism .p-lbl {
+  font-family: var(--font-body, "DM Sans", sans-serif);
+  font-size: 11px;
+  line-height: 1.5;
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.shopify-section--drye-mechanism .p-src {
+  margin-top: 4px;
+  font-family: var(--font-body, "DM Sans", sans-serif);
+  font-size: 9px;
+  color: rgba(255, 255, 255, 0.2);
+}
+
+@media (min-width: 768px) {
+  .shopify-section--drye-mechanism .sec-in {
+    padding: 72px 40px 60px;
+  }
+
+  .shopify-section--drye-mechanism .mech-cols {
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+  }
+
+  .shopify-section--drye-mechanism .proof-in {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+@media (max-width: 767px) {
+  .shopify-section--drye-mechanism .diag-wrap {
+    padding: 20px 14px;
+  }
+
+  .shopify-section--drye-mechanism .diag-arr {
+    font-size: 12px;
+    letter-spacing: 2px;
+  }
+
+  .shopify-section--drye-mechanism .dl {
+    padding: 10px 12px;
+    font-size: 9px;
+  }
+
+  .shopify-section--drye-mechanism .proof-bar {
+    padding: 32px 20px;
+  }
+
+  .shopify-section--drye-mechanism .proof-in {
+    grid-template-columns: 1fr 1fr;
+    gap: 24px 16px;
+  }
+
+  .shopify-section--drye-mechanism .p-num {
+    font-size: clamp(26px, 7vw, 36px);
+  }
+}

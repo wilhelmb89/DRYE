@@ -1,0 +1,129 @@
+{{ 'section-identification.css' | asset_url | stylesheet_tag }}
+
+<section class="identification">
+  <div class="inner">
+    <span class="micro reveal">{{ section.settings.micro }}</span>
+    <h2 class="reveal rd1">{{ section.settings.heading_line_1 }}<br><em>{{ section.settings.heading_line_2 }}</em></h2>
+    <p class="lead reveal rd2">
+      {{ section.settings.lead }}
+    </p>
+
+    <div class="profession-pills reveal rd3">
+      {% for block in section.blocks %}
+        <div class="prof-pill" {{ block.shopify_attributes }}>
+          <div class="prof-icon">{{ block.settings.icon }}</div>
+          <div class="prof-label">{{ block.settings.title }}</div>
+          <div class="prof-desc">{{ block.settings.description }}</div>
+        </div>
+      {% endfor %}
+    </div>
+
+    <p class="id-note reveal rd4">
+      {{ section.settings.note }}
+    </p>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "DRYE — Identification",
+  "settings": [
+    {
+      "type": "text",
+      "id": "micro",
+      "label": "Micro label",
+      "default": "Who this is for"
+    },
+    {
+      "type": "text",
+      "id": "heading_line_1",
+      "label": "Heading line 1",
+      "default": "You wear gloves for hours."
+    },
+    {
+      "type": "text",
+      "id": "heading_line_2",
+      "label": "Heading line 2",
+      "default": "Your skin pays for it."
+    },
+    {
+      "type": "textarea",
+      "id": "lead",
+      "label": "Lead",
+      "default": "Not because you're doing anything wrong. Not because you haven't found the right liner yet. You work in an environment that no standard liner was ever designed for."
+    },
+    {
+      "type": "textarea",
+      "id": "note",
+      "label": "Note",
+      "default": "The glove is the constant. The damage is the constant. The only variable is what happens to the environment between your skin and that glove."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "profession",
+      "name": "Profession",
+      "settings": [
+        {
+          "type": "text",
+          "id": "icon",
+          "label": "Icon",
+          "default": "⊕"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Healthcare"
+        },
+        {
+          "type": "textarea",
+          "id": "description",
+          "label": "Description",
+          "default": "Nurses · Surgeons · Lab technicians. Nitrile all shift. No breaks. No airflow."
+        }
+      ]
+    }
+  ],
+  "max_blocks": 4,
+  "presets": [
+    {
+      "name": "DRYE — Identification",
+      "blocks": [
+        {
+          "type": "profession",
+          "settings": {
+            "icon": "⊕",
+            "title": "Healthcare",
+            "description": "Nurses · Surgeons · Lab technicians. Nitrile all shift. No breaks. No airflow."
+          }
+        },
+        {
+          "type": "profession",
+          "settings": {
+            "icon": "⊕",
+            "title": "Automotive",
+            "description": "Mechanics · Body shop. Chemical-resistant gloves. Hours under the hood."
+          }
+        },
+        {
+          "type": "profession",
+          "settings": {
+            "icon": "⊕",
+            "title": "Cleaning",
+            "description": "Industrial cleaning. Double-gloving. Constant moisture. No recovery time."
+          }
+        },
+        {
+          "type": "profession",
+          "settings": {
+            "icon": "⊕",
+            "title": "Food & Pharma",
+            "description": "Production lines. Mandatory PPE. Sealed environments. Full shifts."
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

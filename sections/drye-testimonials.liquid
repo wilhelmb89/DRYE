@@ -1,0 +1,359 @@
+{{ 'drye-testimonials-grid.css' | asset_url | stylesheet_tag }}
+
+<section
+  class="dryeNEW-section drye-testi"
+  id="reviews-{{ section.id }}"
+  data-section-id="{{ section.id }}"
+>
+  <div class="dryeNEW-container">
+    <div class="drye-testi__intro dryeNEW-reveal">
+      {% if section.settings.eyebrow != blank %}
+        <div class="dryeNEW-micro drye-testi__eyebrow">
+          {{ section.settings.eyebrow }}
+        </div>
+      {% endif %}
+
+      {% if section.settings.heading != blank %}
+        <h2 class="dryeNEW-h2 drye-testi__heading">
+          {{ section.settings.heading }}
+        </h2>
+      {% endif %}
+    </div>
+
+    <div class="drye-testi__slider dryeNEW-reveal dryeNEW-rd2">
+      <div class="drye-testi__viewport" data-testi-viewport>
+        <div class="drye-testi__track" data-testi-track>
+          {% for block in section.blocks %}
+            {% if block.type == 'review' %}
+              <div class="drye-testi__slide" {{ block.shopify_attributes }}>
+                <article class="drye-testi__card{% if block.settings.featured %} is-featured{% endif %}">
+                  {% if block.settings.profile != blank %}
+                    <div class="dryeNEW-micro drye-testi__profile">
+                      {{ block.settings.profile }}
+                    </div>
+                  {% endif %}
+
+                  {% if block.settings.stars != blank %}
+                    <div class="dryeNEW-body--caption drye-testi__stars">
+                      {{ block.settings.stars }}
+                    </div>
+                  {% endif %}
+
+                  {% if block.settings.quote != blank %}
+                    <div class="dryeNEW-body drye-testi__text">
+                      {{ block.settings.quote }}
+                    </div>
+                  {% endif %}
+
+                  {% if block.settings.attribution != blank %}
+                    <div class="dryeNEW-body--caption drye-testi__attr">
+                      {{ block.settings.attribution }}
+                    </div>
+                  {% endif %}
+                </article>
+              </div>
+            {% endif %}
+          {% endfor %}
+        </div>
+      </div>
+
+      <button
+        class="drye-testi__arrow drye-testi__arrow--prev"
+        type="button"
+        aria-label="Previous reviews"
+        data-testi-prev
+      >
+        <span aria-hidden="true">‹</span>
+      </button>
+
+      <button
+        class="drye-testi__arrow drye-testi__arrow--next"
+        type="button"
+        aria-label="Next reviews"
+        data-testi-next
+      >
+        <span aria-hidden="true">›</span>
+      </button>
+
+      <div class="dryeNEW-micro drye-testi__swipe-hint" aria-hidden="true" data-testi-swipe-hint>
+        <span>Swipe</span>
+        <svg class="drye-testi__swipe-icon" width="18" height="18" viewBox="0 0 24 24" fill="none">
+          <path d="M8 5l8 7-8 7" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="miter"/>
+        </svg>
+      </div>
+
+      <div class="drye-testi__dots" data-testi-dots aria-label="Review pagination">
+        {% for block in section.blocks %}
+          {% if block.type == 'review' %}
+            <button
+              type="button"
+              class="drye-testi__dot{% if forloop.first %} is-active{% endif %}"
+              aria-label="Go to review {{ forloop.index }}"
+              data-testi-dot
+            ></button>
+          {% endif %}
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  (function () {
+    var root = document.getElementById('reviews-{{ section.id }}');
+    if (!root) return;
+
+    var viewport = root.querySelector('[data-testi-viewport]');
+    var track = root.querySelector('[data-testi-track]');
+    var hint = root.querySelector('[data-testi-swipe-hint]');
+    var dots = Array.prototype.slice.call(root.querySelectorAll('[data-testi-dot]'));
+    var slides = Array.prototype.slice.call(root.querySelectorAll('.drye-testi__slide'));
+    var prevBtn = root.querySelector('[data-testi-prev]');
+    var nextBtn = root.querySelector('[data-testi-next]');
+
+    if (!viewport || !track || !slides.length) return;
+
+    var desktopIndex = 0;
+
+    function isDesktop() {
+      return window.innerWidth >= 768;
+    }
+
+    function isMobile() {
+      return window.innerWidth < 768;
+    }
+
+    function getDesktopMaxIndex() {
+      return Math.max(0, slides.length - 3);
+    }
+
+    function getDesktopStep() {
+      if (!slides.length) return 0;
+      var first = slides[0];
+      var second = slides[1];
+      if (!second) return first.offsetWidth;
+      return second.offsetLeft - first.offsetLeft;
+    }
+
+    function updateDesktop() {
+      if (!isDesktop()) {
+        track.style.transform = 'translateX(0)';
+        if (prevBtn) prevBtn.disabled = false;
+        if (nextBtn) nextBtn.disabled = false;
+        return;
+      }
+
+      var maxIndex = getDesktopMaxIndex();
+      if (desktopIndex > maxIndex) desktopIndex = maxIndex;
+      if (desktopIndex < 0) desktopIndex = 0;
+
+      var moveX = getDesktopStep() * desktopIndex;
+      track.style.transform = 'translateX(' + (-moveX) + 'px)';
+
+      if (prevBtn) prevBtn.disabled = desktopIndex === 0;
+      if (nextBtn) nextBtn.disabled = desktopIndex === maxIndex;
+    }
+
+    function updateDots() {
+      if (!isMobile()) {
+        dots.forEach(function (dot) { dot.classList.remove('is-active'); });
+        return;
+      }
+
+      var viewportLeft = viewport.scrollLeft;
+      var closestIndex = 0;
+      var smallestDiff = Infinity;
+
+      slides.forEach(function (slide, index) {
+        var diff = Math.abs(slide.offsetLeft - viewportLeft);
+        if (diff < smallestDiff) {
+          smallestDiff = diff;
+          closestIndex = index;
+        }
+      });
+
+      dots.forEach(function (dot, index) {
+        dot.classList.toggle('is-active', index === closestIndex);
+      });
+    }
+
+    function hideHint() {
+      if (!hint) return;
+      hint.classList.add('is-hidden');
+    }
+
+    dots.forEach(function (dot, index) {
+      dot.addEventListener('click', function () {
+        if (!isMobile()) return;
+
+        var target = slides[index];
+        if (!target) return;
+
+        viewport.scrollTo({
+          left: target.offsetLeft,
+          behavior: 'smooth'
+        });
+      });
+    });
+
+    if (prevBtn) {
+      prevBtn.addEventListener('click', function () {
+        if (!isDesktop()) return;
+        desktopIndex -= 1;
+        updateDesktop();
+      });
+    }
+
+    if (nextBtn) {
+      nextBtn.addEventListener('click', function () {
+        if (!isDesktop()) return;
+        desktopIndex += 1;
+        updateDesktop();
+      });
+    }
+
+    viewport.addEventListener('scroll', function () {
+      updateDots();
+      if (viewport.scrollLeft > 12) hideHint();
+    }, { passive: true });
+
+    viewport.addEventListener('touchstart', hideHint, { passive: true });
+    viewport.addEventListener('pointerdown', hideHint, { passive: true });
+
+    window.addEventListener('resize', function () {
+      updateDesktop();
+      updateDots();
+    });
+
+    updateDesktop();
+    updateDots();
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "DRYE Testimonials Grid",
+  "tag": "section",
+  "class": "shopify-section--drye-testi",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "27 verified reviews · 4.85 / 5"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "People who'd tried everything else."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "review",
+      "name": "Review",
+      "settings": [
+        {
+          "type": "checkbox",
+          "id": "featured",
+          "label": "Featured card",
+          "default": false
+        },
+        {
+          "type": "text",
+          "id": "profile",
+          "label": "Profile label",
+          "default": "Healthcare · latex gloves daily"
+        },
+        {
+          "type": "text",
+          "id": "stars",
+          "label": "Stars",
+          "default": "★★★★★"
+        },
+        {
+          "type": "textarea",
+          "id": "quote",
+          "label": "Quote",
+          "default": "\"Healthcare worker wearing latex gloves all day. 8 months, 7 pairs in rotation. My hands stay consistently better — no more end-of-shift breakdown.\""
+        },
+        {
+          "type": "text",
+          "id": "attribution",
+          "label": "Attribution",
+          "default": "— Phuong Ngo · Lutz, FL"
+        }
+      ]
+    }
+  ],
+  "max_blocks": 12,
+  "presets": [
+    {
+      "name": "DRYE Testimonials Grid",
+      "blocks": [
+        {
+          "type": "review",
+          "settings": {
+            "featured": true,
+            "profile": "Parent · travel hockey",
+            "stars": "★★★★★",
+            "quote": "\"My 10-year-old plays on a travel hockey team and struggled with severe eczema, made worse by his hockey gloves. He was embarrassed at school. After trying countless products with no success — completely healed.\"",
+            "attribution": "— Allison M. Goldberg · Norfolk, VA"
+          }
+        },
+        {
+          "type": "review",
+          "settings": {
+            "featured": false,
+            "profile": "Healthcare · latex gloves daily",
+            "stars": "★★★★★",
+            "quote": "\"Healthcare worker wearing latex gloves all day. 8 months, 7 pairs in rotation. My hands stay consistently better — no more end-of-shift breakdown.\"",
+            "attribution": "— Phuong Ngo · Lutz, FL"
+          }
+        },
+        {
+          "type": "review",
+          "settings": {
+            "featured": false,
+            "profile": "Automotive + construction",
+            "stars": "★★★★★",
+            "quote": "\"No more eczema. Nitrile gloves go on easier, grip is better, not ripping my skin off at the end of the day. The vibration dampening was a bonus I didn't expect.\"",
+            "attribution": "— Brian Jee · Automotive + construction"
+          }
+        },
+        {
+          "type": "review",
+          "settings": {
+            "featured": false,
+            "profile": "Hockey parent · 6× per week",
+            "stars": "★★★★★",
+            "quote": "\"Severe eczema, hockey six times a week. She destroyed the first pair getting them on wrong and ordered replacements immediately. No slipping compared to cotton.\"",
+            "attribution": "— Eric · Hockey parent"
+          }
+        },
+        {
+          "type": "review",
+          "settings": {
+            "featured": false,
+            "profile": "Eczema since birth · gardening",
+            "stars": "★★★★★",
+            "quote": "\"Eczema since birth. Steroid creams for years. Can now garden and grip tools without wrecking my hands for days afterward.\"",
+            "attribution": "— Jon-Paul E. · Newcastle"
+          }
+        },
+        {
+          "type": "review",
+          "settings": {
+            "featured": false,
+            "profile": "Dishes + laundry · sensitive skin",
+            "stars": "★★★★★",
+            "quote": "\"I use DRYE inside plastic gloves for dishes and laundry. Moisture gets pulled away instead of sitting against my skin. My hands actually feel better in winter now.\"",
+            "attribution": "— Jennifer Sunahara · Laval, CA"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

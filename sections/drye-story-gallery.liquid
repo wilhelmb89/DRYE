@@ -1,0 +1,406 @@
+{{ 'drye-story-gallery.css' | asset_url | stylesheet_tag }}
+
+<section
+  id="story-gallery-{{ section.id }}"
+  class="dryeNEW-section story-gallery"
+  data-section-id="{{ section.id }}"
+>
+  <div class="dryeNEW-container">
+    <div class="story-gallery__intro">
+      {%- if section.settings.eyebrow != blank -%}
+        <span class="dryeNEW-micro story-gallery__eyebrow">
+          {{ section.settings.eyebrow }}
+        </span>
+      {%- endif -%}
+
+      {%- if section.settings.heading_line_1 != blank or section.settings.heading_emphasis != blank -%}
+        <h2 class="dryeNEW-h2 story-gallery__heading">
+          {{ section.settings.heading_line_1 }}
+          {%- if section.settings.heading_emphasis != blank -%}
+            <em class="dryeNEW-em">{{ section.settings.heading_emphasis }}</em>
+          {%- endif -%}
+        </h2>
+      {%- endif -%}
+
+      {%- if section.settings.subheading != blank -%}
+        <div class="dryeNEW-body--caption story-gallery__subheading">
+          {{ section.settings.subheading }}
+        </div>
+      {%- endif -%}
+
+      {%- if section.settings.body != blank -%}
+        <div class="dryeNEW-body story-gallery__sub">
+          {{ section.settings.body }}
+        </div>
+      {%- endif -%}
+    </div>
+
+    <div class="story-gallery__strip-wrap">
+      <button
+        type="button"
+        class="story-gallery__nav-btn story-gallery__nav-btn--prev is-disabled"
+        data-gallery-prev
+        aria-label="Previous"
+      >
+        ←
+      </button>
+
+      <button
+        type="button"
+        class="story-gallery__nav-btn story-gallery__nav-btn--next"
+        data-gallery-next
+        aria-label="Next"
+      >
+        →
+      </button>
+
+      <div class="story-gallery__strip" data-story-strip>
+        {%- for block in section.blocks -%}
+          <figure class="story-gallery__card" {{ block.shopify_attributes }}>
+            <div class="story-gallery__media">
+              {%- if block.settings.image != blank -%}
+                {{
+                  block.settings.image
+                  | image_url: width: 1600
+                  | image_tag:
+                    class: 'story-gallery__img',
+                    loading: 'lazy',
+                    widths: '480, 720, 960, 1200, 1600',
+                    sizes: '(min-width: 960px) 62vw, (min-width: 600px) 55vw, 85vw',
+                    alt: block.settings.image_alt | default: block.settings.caption | default: 'DRYE story image'
+                }}
+              {%- else -%}
+                <div class="story-gallery__img story-gallery__img--placeholder"></div>
+              {%- endif -%}
+            </div>
+
+            {%- if block.settings.caption != blank -%}
+              <figcaption class="dryeNEW-body--sm story-gallery__caption">
+                {{ block.settings.caption }}
+              </figcaption>
+            {%- endif -%}
+          </figure>
+        {%- endfor -%}
+      </div>
+
+      <div
+        class="story-gallery__swipe-hint"
+        data-story-swipe-hint
+        aria-hidden="true"
+      >
+        {{ section.settings.swipe_label }}
+      </div>
+
+      <div
+        class="story-gallery__fade"
+        data-story-fade
+        aria-hidden="true"
+      ></div>
+    </div>
+
+    <div
+      class="story-gallery__dots"
+      data-story-dots
+      aria-hidden="true"
+    ></div>
+
+    <div class="story-gallery__cta-wrap">
+      {%- if section.settings.cta_url != blank -%}
+        <a href="{{ section.settings.cta_url }}" class="story-gallery__cta">
+          {{ section.settings.cta_label }}
+        </a>
+      {%- else -%}
+        <button type="button" class="story-gallery__cta">
+          {{ section.settings.cta_label }}
+        </button>
+      {%- endif -%}
+
+      {%- if section.settings.cta_note != blank -%}
+        <div class="dryeNEW-body--caption story-gallery__cta-note">
+          {{ section.settings.cta_note }}
+        </div>
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+<script>
+  (() => {
+    const section = document.getElementById('story-gallery-{{ section.id }}');
+    if (!section) return;
+
+    const strip = section.querySelector('[data-story-strip]');
+    if (!strip) return;
+
+    const hint = section.querySelector('[data-story-swipe-hint]');
+    const fade = section.querySelector('[data-story-fade]');
+    const dotsWrap = section.querySelector('[data-story-dots]');
+    const prevBtn = section.querySelector('[data-gallery-prev]');
+    const nextBtn = section.querySelector('[data-gallery-next]');
+    const desktopMq = window.matchMedia('(min-width: 960px)');
+    const cards = Array.from(strip.querySelectorAll('.story-gallery__card'));
+
+    let hasInteracted = false;
+    let dots = [];
+
+    const buildDots = () => {
+      if (!dotsWrap) return;
+
+      dotsWrap.innerHTML = '';
+      dots = [];
+
+      if (cards.length <= 1) {
+        dotsWrap.hidden = true;
+        return;
+      }
+
+      dotsWrap.hidden = false;
+
+      cards.forEach((_, index) => {
+        const dot = document.createElement('span');
+        dot.className = 'story-gallery__dot';
+
+        if (index === 0) {
+          dot.classList.add('is-active');
+        }
+
+        dotsWrap.appendChild(dot);
+        dots.push(dot);
+      });
+    };
+
+    const getScrollAmount = () => {
+      const firstCard = strip.querySelector('.story-gallery__card');
+      if (!firstCard) return strip.clientWidth * 0.8;
+
+      const styles = window.getComputedStyle(strip);
+      const gap = parseFloat(styles.columnGap || styles.gap) || 0;
+
+      return firstCard.getBoundingClientRect().width + gap;
+    };
+
+    const getActiveIndex = () => {
+      const step = getScrollAmount();
+      if (step <= 0) return 0;
+
+      return Math.min(cards.length - 1, Math.round(strip.scrollLeft / step));
+    };
+
+    const hasScrollableContent = () => {
+      return strip.scrollWidth - strip.clientWidth > 8;
+    };
+
+    const updateDots = () => {
+      if (!dots.length) return;
+
+      const active = getActiveIndex();
+
+      dots.forEach((dot, index) => {
+        dot.classList.toggle('is-active', index === active);
+      });
+    };
+
+    const updateButtons = () => {
+      if (!prevBtn || !nextBtn) return;
+
+      if (!hasScrollableContent()) {
+        prevBtn.classList.add('is-disabled');
+        nextBtn.classList.add('is-disabled');
+        return;
+      }
+
+      const maxScroll = strip.scrollWidth - strip.clientWidth;
+      const current = strip.scrollLeft;
+
+      prevBtn.classList.toggle('is-disabled', current <= 8);
+      nextBtn.classList.toggle('is-disabled', current >= maxScroll - 8);
+    };
+
+    const updateFade = () => {
+      if (!fade) return;
+
+      if (!hasScrollableContent()) {
+        fade.classList.add('is-hidden');
+        return;
+      }
+
+      const maxScroll = strip.scrollWidth - strip.clientWidth;
+      const atEnd = strip.scrollLeft >= maxScroll - 8;
+
+      fade.classList.toggle('is-hidden', atEnd);
+    };
+
+    const updateHint = () => {
+      if (!hint) return;
+
+      if (desktopMq.matches || !hasScrollableContent()) {
+        hint.classList.add('is-hidden');
+        return;
+      }
+
+      if (strip.scrollLeft > 16 || hasInteracted) {
+        hint.classList.add('is-hidden');
+      } else {
+        hint.classList.remove('is-hidden');
+      }
+    };
+
+    const fadeDots = () => {
+      if (dotsWrap && !dotsWrap.hidden) {
+        dotsWrap.classList.add('is-faded');
+      }
+    };
+
+    const hideHintOnInteraction = () => {
+      if (desktopMq.matches || hasInteracted) return;
+
+      hasInteracted = true;
+
+      if (hint) {
+        hint.classList.add('is-hidden');
+      }
+
+      fadeDots();
+    };
+
+    const scrollByAmount = (direction) => {
+      strip.scrollBy({
+        left: getScrollAmount() * direction,
+        behavior: 'smooth'
+      });
+    };
+
+    const updateAll = () => {
+      updateHint();
+      updateButtons();
+      updateFade();
+      updateDots();
+    };
+
+    if (prevBtn) {
+      prevBtn.addEventListener('click', () => scrollByAmount(-1));
+    }
+
+    if (nextBtn) {
+      nextBtn.addEventListener('click', () => scrollByAmount(1));
+    }
+
+    strip.addEventListener('scroll', updateAll, { passive: true });
+    strip.addEventListener('touchstart', hideHintOnInteraction, { passive: true });
+    strip.addEventListener('pointerdown', hideHintOnInteraction, { passive: true });
+    window.addEventListener('resize', updateAll);
+
+    if (desktopMq.addEventListener) {
+      desktopMq.addEventListener('change', updateAll);
+    } else if (desktopMq.addListener) {
+      desktopMq.addListener(updateAll);
+    }
+
+    buildDots();
+    updateAll();
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "DRYE Story Gallery",
+  "tag": "section",
+  "class": "shopify-section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Intro"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "From first wear to months of shifts"
+    },
+    {
+      "type": "text",
+      "id": "heading_line_1",
+      "label": "Heading line 1",
+      "default": "See what"
+    },
+    {
+      "type": "text",
+      "id": "heading_emphasis",
+      "label": "Heading emphasis (italic)",
+      "default": "actually changes."
+    },
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "0.4mm thin. No chemicals. No coatings. Fits inside any work glove."
+    },
+    {
+      "type": "textarea",
+      "id": "body",
+      "label": "Body",
+      "default": "Real hands. Real shifts. Real sealed gloves — from the first pull-on to months of wear."
+    },
+    {
+      "type": "header",
+      "content": "Swipe pill (mobile only)"
+    },
+    {
+      "type": "text",
+      "id": "swipe_label",
+      "label": "Swipe pill label",
+      "default": "Swipe"
+    },
+    {
+      "type": "header",
+      "content": "Call to action"
+    },
+    {
+      "type": "text",
+      "id": "cta_label",
+      "label": "CTA label",
+      "default": "SEE THE FULL STORY ON THE PRODUCT PAGE"
+    },
+    {
+      "type": "url",
+      "id": "cta_url",
+      "label": "CTA URL"
+    },
+    {
+      "type": "text",
+      "id": "cta_note",
+      "label": "CTA note (optional)",
+      "default": "30-day refund · Ships within 24 hours"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "slide",
+      "name": "Slide",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "text",
+          "id": "image_alt",
+          "label": "Image alt text"
+        },
+        {
+          "type": "text",
+          "id": "caption",
+          "label": "Caption (optional)"
+        }
+      ]
+    }
+  ],
+  "max_blocks": 20,
+  "presets": [
+    {
+      "name": "DRYE Story Gallery"
+    }
+  ]
+}
+{% endschema %}

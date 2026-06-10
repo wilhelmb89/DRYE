@@ -1,0 +1,115 @@
+.shopify-section--drye-s6 .drye-s6 {
+  background: var(--bg);
+}
+
+.shopify-section--drye-s6 .drye-s6__faq-wrap {
+  max-width: 680px;
+}
+
+/* ❌ removed color override here */
+
+.shopify-section--drye-s6 .drye-s6__heading {
+  margin-bottom: var(--space-24);
+  color: var(--deep);
+}
+
+.shopify-section--drye-s6 .drye-s6__faq-list {
+  display: flex;
+  flex-direction: column;
+  border-top: var(--border-base);
+}
+
+.shopify-section--drye-s6 .drye-s6__faq-item {
+  border-bottom: var(--border-base);
+}
+
+.shopify-section--drye-s6 .drye-s6__faq-q {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--space-12);
+  padding: var(--space-16) 0;
+  text-align: left;
+  background: transparent;
+  border: 0;
+  color: inherit;
+}
+
+.shopify-section--drye-s6 .drye-s6__faq-qt {
+  color: var(--deep);
+}
+
+.shopify-section--drye-s6 .drye-s6__faq-ic {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.shopify-section--drye-s6 .drye-s6__faq-ic::before,
+.shopify-section--drye-s6 .drye-s6__faq-ic::after {
+  content: "";
+  position: absolute;
+  background: var(--sage);
+  transition:
+    transform var(--dur-base) var(--ease-standard),
+    opacity var(--dur-base) var(--ease-standard);
+}
+
+.shopify-section--drye-s6 .drye-s6__faq-ic::before {
+  width: 10px;
+  height: 1px;
+}
+
+.shopify-section--drye-s6 .drye-s6__faq-ic::after {
+  width: 1px;
+  height: 10px;
+}
+
+.shopify-section--drye-s6 .drye-s6__faq-item.open .drye-s6__faq-ic::after {
+  opacity: 0;
+  transform: rotate(90deg);
+}
+
+.shopify-section--drye-s6 .drye-s6__faq-a {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease;
+}
+
+.shopify-section--drye-s6 .drye-s6__faq-item.open .drye-s6__faq-a {
+  max-height: 500px;
+}
+
+.shopify-section--drye-s6 .drye-s6__faq-a-inner {
+  padding: 0 0 var(--space-16);
+  color: var(--muted);
+}
+
+.shopify-section--drye-s6 .drye-s6__inst-wrap {
+  margin-top: var(--space-56);
+  padding-top: var(--space-28);
+  border-top: var(--border-base);
+}
+
+.shopify-section--drye-s6 .drye-s6__inst-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-10);
+}
+
+.shopify-section--drye-s6 .drye-s6__inst-pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6px 12px;
+  border: var(--border-base);
+  background: var(--bg);
+  text-transform: uppercase;
+  white-space: nowrap;
+  color: var(--deep);
+}

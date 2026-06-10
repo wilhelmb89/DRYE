@@ -9,40 +9,96 @@
  */
 {
   "sections": {
-    "main_blog_new_R7pYAG": {
-      "type": "main-blog-new",
-      "custom_css": [
-        ".main-blog {padding-bottom: 45px;}"
-      ],
+    "drye_blog_hero_J77NQM": {
+      "type": "drye-blog-hero",
+      "name": "DRYE Blog Hero",
       "settings": {
-        "subtitle": "",
-        "title_font_size_desktop": 50,
-        "title_line_height_desktop": 55,
-        "title_font_size_tablet": 42,
-        "title_line_height_tablet": 50,
-        "title_font_size_mobile": 28,
-        "title_line_height_mobile": 30,
-        "article_title_font_size_desktop": 24,
-        "article_title_line_height_desktop": 32,
-        "article_title_font_size_tablet": 24,
-        "article_title_line_height_tablet": 32,
-        "article_title_font_size_mobile": 22,
-        "article_title_line_height_mobile": 30,
-        "date_font_size_desktop": 16,
-        "date_line_height_desktop": 20,
-        "date_font_size_tablet": 16,
-        "date_line_height_tablet": 20,
-        "date_font_size_mobile": 16,
-        "date_line_height_mobile": 20
+        "eyebrow": "Evidence",
+        "heading": "",
+        "heading_emphasis": "",
+        "description": "Field studies, peer-reviewed science, and documented results from real conditions."
       }
     },
-    "1747496175a5b0d70a": {
-      "type": "apps",
-      "settings": {}
+    "drye_blog_filter_gpLCNC": {
+      "type": "drye-blog-filter",
+      "name": "DRYE Blog Filter",
+      "settings": {
+        "label_all": "All",
+        "label_science": "Science",
+        "label_field": "Field Reports",
+        "label_stories": "User Stories",
+        "tag_science": "Science",
+        "tag_field": "Field Report",
+        "tag_stories": "User Story"
+      }
+    },
+    "drye_blog_featured_post_d9WpTC": {
+      "type": "drye-blog-featured-post",
+      "name": "DRYE Blog Featured Post",
+      "settings": {
+        "featured_article": "insights/field-report-ukraine-tactical-glove-test",
+        "image_badge": "Field Report",
+        "image_title_line_1": "10 infantry soldiers.",
+        "image_title_line_2": "Active combat conditions.",
+        "image_title_line_3": "Structured questionnaire.",
+        "label": "Featured",
+        "heading": "10 infantry soldiers tested DRYE in active combat. Here is what they reported.",
+        "excerpt": "National Guard of Ukraine, 2nd Corps. 10 soldiers, structured questionnaire, signed by the Corps Chaplain. 9/10 reported improved weapon precision. 10/10 said they would use DRYE in combat. This is the unedited data.",
+        "meta_date": "March 2025",
+        "meta_type": "Field Study",
+        "meta_read_time": "6 min read",
+        "link_text": "Read the report"
+      }
+    },
+    "drye_blog_grid_CJ7AME": {
+      "type": "drye-blog-grid",
+      "name": "DRYE Blog Grid",
+      "settings": {
+        "heading": "Research and Science",
+        "max_posts": 12,
+        "exclude_first_post": true
+      }
+    },
+    "drye_blog_science_callout_yrt94N": {
+      "type": "drye-blog-science-callout",
+      "name": "DRYE Blog Science Callout",
+      "settings": {
+        "label": "",
+        "heading_line_1": "The problem is documented.",
+        "heading_line_2": "The mechanism is validated.",
+        "body": "DRYE didn't identify the moisture-damage problem — the science already had. Uppsala University, RISE, the Swedish School of Textiles, and Skåne University Hospital validated the mechanism. We built the first material that addresses it structurally.",
+        "stat_1_value": "1.72",
+        "stat_1_suffix": "×",
+        "stat_1_label": "S. aureus increase inside occlusive gloves after 4 hours — Acta Dermato-Venereologica, 2021",
+        "stat_2_value": "1000",
+        "stat_2_suffix": "×",
+        "stat_2_label": "More bacteria transferred from damp hands vs dry — University of Bradford, Journal of Applied Microbiology",
+        "stat_3_value": "7",
+        "stat_3_suffix": "yr",
+        "stat_3_label": "R&D across 4 institutions before first commercial pair shipped"
+      }
+    },
+    "drye_blog_cta_strip_KiBnji": {
+      "type": "drye-blog-cta-strip",
+      "name": "DRYE Blog CTA Strip",
+      "settings": {
+        "eyebrow": "You've read the evidence.",
+        "heading": "Now try it.",
+        "heading_emphasis": "30 days. Full refund if it doesn't work.",
+        "subtext": "Full refund if it doesn't work. No forms. No questions.",
+        "primary_label": "Order DRYE Liners →",
+        "primary_url": "shopify://products/drye-moisture-routing-glove-liners",
+        "secondary_label": "See the Research",
+        "secondary_url": "shopify://pages/research"
+      }
     }
   },
   "order": [
-    "main_blog_new_R7pYAG",
-    "1747496175a5b0d70a"
+    "drye_blog_hero_J77NQM",
+    "drye_blog_filter_gpLCNC",
+    "drye_blog_featured_post_d9WpTC",
+    "drye_blog_grid_CJ7AME",
+    "drye_blog_science_callout_yrt94N",
+    "drye_blog_cta_strip_KiBnji"
   ]
 }

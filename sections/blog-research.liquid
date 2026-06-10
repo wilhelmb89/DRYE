@@ -1,0 +1,77 @@
+{{ 'blog-research.css' | asset_url | stylesheet_tag }}
+
+<div class="research-refs">
+  <span class="research-refs-h">
+    {{ section.settings.heading | default: 'Related research' }}
+  </span>
+
+  {% for block in section.blocks %}
+  <div class="ref-item">
+
+    <div class="ref-body">
+      <div class="ref-title">
+        {{ block.settings.title }}
+      </div>
+
+      <div class="ref-desc">
+        {{ block.settings.description }}
+      </div>
+    </div>
+
+    <a href="{{ block.settings.link }}" class="ref-link">
+      {{ block.settings.link_text | default: "Read more →" }}
+    </a>
+
+  </div>
+  {% endfor %}
+
+</div>
+
+{% schema %}
+{
+  "name": "Blog Research References",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Related research"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "reference",
+      "name": "Research reference",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title"
+        },
+        {
+          "type": "text",
+          "id": "description",
+          "label": "Description"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Link"
+        },
+        {
+          "type": "text",
+          "id": "link_text",
+          "label": "Link text",
+          "default": "Read more →"
+        }
+      ]
+    }
+  ],
+  "max_blocks": 10,
+  "presets": [
+    {
+      "name": "Research References"
+    }
+  ]
+}
+{% endschema %}

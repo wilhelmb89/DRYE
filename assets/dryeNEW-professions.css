@@ -1,0 +1,235 @@
+.dryeNEW-professions {
+  padding-top: var(--dryeNEW-professions-pt-mobile);
+  padding-bottom: var(--dryeNEW-professions-pb-mobile);
+  background: var(--bg);
+  border-bottom: var(--border-base);
+}
+
+.dryeNEW-professions__grid {
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.dryeNEW-professions__heading {
+  margin: 0 0 var(--space-24);
+  font-family: var(--font-display);
+  font-size: clamp(22px, 6vw, 30px);
+  font-weight: var(--fw-semibold);
+  color: var(--deep);
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+}
+
+.dryeNEW-professions__heading-em {
+  font-family: var(--font-editorial);
+  font-style: italic;
+  font-weight: var(--fw-regular);
+  color: var(--accent);
+}
+
+.dryeNEW-professions__tabs-wrap {
+  margin-top: 0;
+}
+
+.dryeNEW-professions__tabs {
+  display: flex;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  gap: var(--grid-gap-1);
+  background: var(--border);
+  margin-bottom: 0;
+}
+
+.dryeNEW-professions__tabs::-webkit-scrollbar {
+  display: none;
+}
+
+.dryeNEW-professions__tab {
+  flex: 0 0 auto;
+  padding: var(--space-12) var(--space-18);
+  background: var(--bg);
+  border: none;
+  font-family: var(--font-body);
+  font-size: 10px;
+  font-weight: var(--fw-semibold);
+  letter-spacing: 0.1em;
+  line-height: 1.2;
+  text-transform: uppercase;
+  color: var(--muted);
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.dryeNEW-professions__tab.is-active {
+  background: var(--deep);
+  color: var(--white-100);
+}
+
+.dryeNEW-professions__panel {
+  display: none;
+}
+
+.dryeNEW-professions__panel.is-active {
+  display: block;
+}
+
+.dryeNEW-professions__panel-inner {
+  display: flex;
+  flex-direction: column;
+  border: var(--border-base);
+  border-top: none;
+}
+
+.dryeNEW-professions__panel-left {
+  padding: var(--space-28) var(--space-20);
+  border-bottom: var(--border-base);
+}
+
+.dryeNEW-professions__pain-label {
+  display: flex;
+  align-items: center;
+  gap: var(--space-8);
+  margin-bottom: var(--space-10);
+  font-family: var(--font-body);
+  font-size: 9px;
+  font-weight: var(--fw-semibold);
+  letter-spacing: 0.18em;
+  line-height: 1.2;
+  text-transform: uppercase;
+  color: var(--red);
+}
+
+.dryeNEW-professions__pain-label::before {
+  content: "";
+  width: 10px;
+  height: 1px;
+  background: currentColor;
+  flex: 0 0 auto;
+}
+
+.dryeNEW-professions__panel-title {
+  margin: 0 0 var(--space-16);
+  font-family: var(--font-display);
+  font-size: 17px;
+  font-weight: var(--fw-semibold);
+  color: var(--deep);
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+}
+
+.dryeNEW-professions__pain-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.dryeNEW-professions__pain-list li {
+  display: flex;
+  gap: var(--space-10);
+  padding: var(--space-9) 0;
+  border-top: var(--border-base);
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: var(--fw-regular);
+  line-height: 1.55;
+  color: var(--muted);
+}
+
+.dryeNEW-professions__pain-list li::before {
+  content: "—";
+  color: var(--caption);
+  flex: 0 0 auto;
+}
+
+.dryeNEW-professions__panel-right {
+  padding: var(--space-28) var(--space-20);
+  background: var(--bg-tint);
+}
+
+.dryeNEW-professions__quote-label {
+  display: block;
+  margin-bottom: 14px;
+  font-family: var(--font-body);
+  font-size: 9px;
+  font-weight: var(--fw-semibold);
+  letter-spacing: 0.18em;
+  line-height: 1.2;
+  text-transform: uppercase;
+  color: var(--emerald);
+}
+
+.dryeNEW-professions__quote {
+  margin: 0 0 14px;
+  padding-left: 14px;
+  border-left: 2px solid var(--emerald);
+  font-family: var(--font-body);
+  font-size: 15px;
+  font-weight: var(--fw-regular);
+  line-height: 1.8;
+  color: var(--body);
+}
+
+.dryeNEW-professions__quote strong {
+  color: var(--deep);
+  font-weight: var(--fw-medium);
+}
+
+.dryeNEW-professions__quote-src {
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: 11px;
+  font-weight: var(--fw-regular);
+  line-height: 1.5;
+  color: var(--muted);
+}
+
+.dryeNEW-professions__quote-src strong {
+  color: var(--body);
+  font-weight: var(--fw-semibold);
+}
+
+@media (min-width: 768px) {
+  .dryeNEW-professions {
+    padding-top: var(--dryeNEW-professions-pt-desktop);
+    padding-bottom: var(--dryeNEW-professions-pb-desktop);
+  }
+
+  .dryeNEW-professions__heading {
+    font-size: clamp(24px, 3.5vw, 40px);
+    margin-bottom: var(--space-40);
+  }
+
+  .dryeNEW-professions__tab {
+    flex: 1 1 0;
+    min-width: 130px;
+    font-weight: var(--fw-medium);
+  }
+
+  .dryeNEW-professions__panel-inner {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  }
+
+  .dryeNEW-professions__panel-left {
+    padding: var(--space-36) var(--space-32);
+    border-bottom: none;
+    border-right: var(--border-base);
+  }
+
+  .dryeNEW-professions__pain-label {
+    margin-bottom: var(--space-12);
+  }
+
+  .dryeNEW-professions__pain-label::before {
+    width: 12px;
+  }
+
+  .dryeNEW-professions__panel-title {
+    font-size: 19px;
+    margin-bottom: var(--space-20);
+  }
+
+  .dryeNEW-professions__panel-right {
+    padding: var(--space-36) var(--space-32);
+  }
+}

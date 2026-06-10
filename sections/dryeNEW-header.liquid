@@ -1,0 +1,224 @@
+{{ 'dryeNEW-header.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'dryeNEW-header.js' | asset_url }}" defer></script>
+
+{%- liquid
+  assign overlay_id = 'dryeNEW-header-overlay-' | append: section.id
+-%}
+
+{% unless page.handle == 'mechanics' or page.handle == 'mechanics-v3' or page.handle == 'fishing' %}
+<div class="dryeNEW-header-shell" data-section-id="{{ section.id }}" data-section-type="dryeNEW-header" data-drye-header>
+
+  <nav class="dryeNEW-header" aria-label="{{ section.settings.nav_aria_label }}">
+    <div class="dryeNEW-header__inner">
+
+      <!-- Mobile: hamburger left -->
+      <button
+        class="dryeNEW-header__hamburger"
+        type="button"
+        aria-label="{{ section.settings.open_menu_label | escape }}"
+        aria-expanded="false"
+aria-controls="{{ overlay_id }}"
+data-drye-header-open
+      >
+        <span class="dryeNEW-header__ham-line"></span>
+        <span class="dryeNEW-header__ham-line"></span>
+        <span class="dryeNEW-header__ham-line"></span>
+      </button>
+
+      <!-- Logo: centered mobile, left desktop -->
+      <a
+        class="dryeNEW-header__brand"
+        href="{{ section.settings.logo_link | default: routes.root_url }}"
+        aria-label="{{ section.settings.logo_alt | escape | default: shop.name }}"
+      >
+        {%- if section.settings.logo != blank -%}
+          {{
+            section.settings.logo
+            | image_url: width: 320
+            | image_tag:
+              class: 'dryeNEW-header__logo-image',
+              alt: section.settings.logo_alt | default: shop.name,
+              loading: 'eager',
+              widths: '120,180,240,320'
+          }}
+        {%- else -%}
+          <span class="dryeNEW-header__logo-text">{{ section.settings.logo_fallback_text }}</span>
+        {%- endif -%}
+      </a>
+
+      <!-- Desktop: nav links + CTA -->
+      <div class="dryeNEW-header__nav-links">
+        {%- for block in section.blocks -%}
+          {%- if block.type == 'nav_link' -%}
+            <a
+              class="dryeNEW-header__nav-link"
+              href="{{ block.settings.link | default: '#' }}"
+              {{ block.shopify_attributes }}
+            >{{ block.settings.label }}</a>
+          {%- endif -%}
+        {%- endfor -%}
+
+        {%- if section.settings.cta_label != blank -%}
+          <a class="dryeNEW-header__cta" href="{{ section.settings.cta_link | default: '#' }}">
+            {{ section.settings.cta_label }}
+          </a>
+        {%- endif -%}
+      </div>
+
+      <!-- Mobile: cart icon right -->
+      <button
+        class="dryeNEW-header__cart-icon"
+        type="button"
+        aria-label="Add to cart"
+        data-cart-open
+      >
+        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          <line x1="3" y1="6" x2="21" y2="6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+          <path d="M16 10a4 4 0 01-8 0" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
+
+    </div>
+  </nav>
+
+  <!-- Mobile overlay -->
+  <div
+    class="dryeNEW-header__mob-overlay"
+    id="{{ overlay_id }}"
+    role="dialog"
+    aria-modal="true"
+    aria-label="{{ section.settings.mobile_dialog_label | escape }}"
+    hidden
+    data-drye-header-overlay
+  >
+    <div class="dryeNEW-header__mob-header">
+      <a href="{{ section.settings.logo_link | default: routes.root_url }}" class="dryeNEW-header__mob-logo" aria-label="{{ section.settings.logo_alt | default: shop.name }}">
+        {%- if section.settings.logo != blank -%}
+          {{
+            section.settings.logo
+            | image_url: width: 240
+            | image_tag:
+              class: 'dryeNEW-header__mob-logo-image',
+              alt: section.settings.logo_alt | default: shop.name,
+              loading: 'eager'
+          }}
+        {%- else -%}
+          {{ section.settings.logo_fallback_text | default: 'DRYE' }}
+        {%- endif -%}
+      </a>
+      <button class="dryeNEW-header__mob-close" type="button" aria-label="{{ section.settings.close_menu_label | escape }}" data-drye-header-close>✕</button>
+    </div>
+
+    {%- if section.settings.show_account_link or section.settings.show_cart_link -%}
+    <div class="dryeNEW-header__mob-icon-row">
+      {%- if section.settings.show_account_link -%}
+        <a href="{{ section.settings.account_link | default: routes.account_url }}" class="dryeNEW-header__mob-icon-item">
+          <svg fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.5 20.25a8.25 8.25 0 0115 0"/>
+          </svg>
+          <span class="dryeNEW-header__mob-icon-label">{{ section.settings.account_label }}</span>
+        </a>
+      {%- endif -%}
+      {%- if section.settings.show_cart_link -%}
+        <a href="{{ section.settings.cart_link | default: routes.cart_url }}" class="dryeNEW-header__mob-icon-item">
+          <svg fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M15.75 10.5V6a3.75 3.75 0 10-7.5 0v4.5m11.356-1.993l1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 01-1.12-1.243l1.264-12A1.125 1.125 0 015.513 7.5h12.974c.576 0 1.059.435 1.119 1.007z"/>
+          </svg>
+          <span class="dryeNEW-header__mob-icon-label">{{ section.settings.cart_label }}</span>
+        </a>
+      {%- endif -%}
+    </div>
+    {%- endif -%}
+
+    <nav class="dryeNEW-header__mob-nav" aria-label="{{ section.settings.mobile_nav_label | escape }}">
+      {%- assign nav_index = 0 -%}
+      {%- for block in section.blocks -%}
+        {%- if block.type == 'nav_link' -%}
+          {%- assign nav_index = nav_index | plus: 1 -%}
+          <a href="{{ block.settings.link | default: '#' }}" class="dryeNEW-header__mob-nav-item" data-drye-header-nav-item {{ block.shopify_attributes }}>
+            <div class="dryeNEW-header__mob-nav-left">
+              <span class="dryeNEW-header__mob-nav-num">{{ nav_index | prepend: '0' | slice: -2, 2 }}</span>
+              <span class="dryeNEW-header__mob-nav-label">{{ block.settings.mobile_label | default: block.settings.label }}</span>
+            </div>
+            <span class="dryeNEW-header__mob-nav-arrow">→</span>
+          </a>
+        {%- endif -%}
+      {%- endfor -%}
+    </nav>
+
+    <div class="dryeNEW-header__mob-footer">
+      <div class="dryeNEW-header__mob-footer-links">
+        {%- for block in section.blocks -%}
+          {%- if block.type == 'footer_link' -%}
+            <a href="{{ block.settings.link | default: '#' }}" class="dryeNEW-header__mob-footer-link" {{ block.shopify_attributes }}>{{ block.settings.label }}</a>
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+      {%- if section.settings.mobile_footer_badge != blank -%}
+        <span class="dryeNEW-header__mob-footer-badge">{{ section.settings.mobile_footer_badge }}</span>
+      {%- endif -%}
+    </div>
+  </div>
+
+</div>
+{% endunless %}
+
+{% schema %}
+{
+  "name": "DRYE NEW Header",
+  "settings": [
+    { "type": "image_picker", "id": "logo", "label": "Logo image" },
+    { "type": "text", "id": "logo_alt", "label": "Logo alt text", "default": "DRYE" },
+    { "type": "url", "id": "logo_link", "label": "Logo link" },
+    { "type": "text", "id": "logo_fallback_text", "label": "Fallback logo text", "default": "DRYE" },
+    { "type": "text", "id": "nav_aria_label", "label": "Nav aria label", "default": "Primary" },
+    { "type": "text", "id": "mobile_nav_label", "label": "Mobile nav aria label", "default": "Mobile navigation" },
+    { "type": "text", "id": "mobile_dialog_label", "label": "Mobile dialog aria label", "default": "Navigation" },
+    { "type": "text", "id": "open_menu_label", "label": "Open menu label", "default": "Open menu" },
+    { "type": "text", "id": "close_menu_label", "label": "Close menu label", "default": "Close menu" },
+    { "type": "text", "id": "cta_label", "label": "CTA label", "default": "Order DRYE" },
+    { "type": "url", "id": "cta_link", "label": "CTA link" },
+    { "type": "checkbox", "id": "show_account_link", "label": "Show account in mobile menu", "default": false },
+    { "type": "url", "id": "account_link", "label": "Account link" },
+    { "type": "text", "id": "account_label", "label": "Account label", "default": "Account" },
+    { "type": "checkbox", "id": "show_cart_link", "label": "Show cart in mobile menu", "default": false },
+    { "type": "url", "id": "cart_link", "label": "Cart link" },
+    { "type": "text", "id": "cart_label", "label": "Cart label", "default": "Cart" },
+    { "type": "text", "id": "mobile_footer_badge", "label": "Mobile footer badge", "default": "Patent pending" }
+  ],
+  "blocks": [
+    {
+      "type": "nav_link",
+      "name": "Nav link",
+      "settings": [
+        { "type": "text", "id": "label", "label": "Desktop label", "default": "Problem" },
+        { "type": "text", "id": "mobile_label", "label": "Mobile label", "default": "Problem" },
+        { "type": "url", "id": "link", "label": "Link" }
+      ]
+    },
+    {
+      "type": "footer_link",
+      "name": "Mobile footer link",
+      "settings": [
+        { "type": "text", "id": "label", "label": "Label", "default": "Shipping" },
+        { "type": "url", "id": "link", "label": "Link" }
+      ]
+    }
+  ],
+  "max_blocks": 12,
+  "presets": [
+    {
+      "name": "DRYE NEW Header",
+      "blocks": [
+        { "type": "nav_link", "settings": { "label": "Problem", "mobile_label": "Problem" } },
+        { "type": "nav_link", "settings": { "label": "How it works", "mobile_label": "How it works" } },
+        { "type": "nav_link", "settings": { "label": "Research", "mobile_label": "Research" } },
+        { "type": "footer_link", "settings": { "label": "Shipping" } },
+        { "type": "footer_link", "settings": { "label": "Returns" } },
+        { "type": "footer_link", "settings": { "label": "B2B" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

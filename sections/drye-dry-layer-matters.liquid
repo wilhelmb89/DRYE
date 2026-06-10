@@ -1,0 +1,372 @@
+{% comment %}
+  DRYE — Section: Why the dry layer matters
+  Files:
+  - sections/drye-dry-layer-matters.liquid
+  - assets/drye-dry-layer-matters.css
+
+  Requires DRYE base.css:
+  - dryeNEW-section
+  - dryeNEW-container
+  - dryeNEW-h2 / dryeNEW-h3 / dryeNEW-body / dryeNEW-body--sm / dryeNEW-micro
+  - dryeNEW-em
+  - dryeNEW-reveal / dryeNEW-rd1 / dryeNEW-rd2 / dryeNEW-rd3
+{% endcomment %}
+
+{{ 'drye-dry-layer-matters.css' | asset_url | stylesheet_tag }}
+
+<section
+  id="dry-layer"
+  class="dryeNEW-section dryeDryLayer"
+  data-section-id="{{ section.id }}"
+  data-section-type="drye-dry-layer-matters"
+>
+  <div class="dryeNEW-container">
+    <div class="dryeDryLayer__layout">
+      <div class="dryeDryLayer__intro dryeNEW-reveal">
+        {% if section.settings.eyebrow != blank %}
+          <span class="dryeNEW-micro dryeDryLayer__eyebrow">
+            {{ section.settings.eyebrow | escape }}
+          </span>
+        {% endif %}
+
+        {% if section.settings.heading != blank or section.settings.heading_italic != blank %}
+          <h2 class="dryeNEW-h2 dryeDryLayer__heading">
+            {% if section.settings.heading != blank %}
+              {{ section.settings.heading }}
+            {% endif %}
+
+            {% if section.settings.heading_italic != blank %}
+              <em class="dryeNEW-em">{{ section.settings.heading_italic }}</em>
+            {% endif %}
+          </h2>
+        {% endif %}
+
+        {% if section.settings.body != blank %}
+          <div class="dryeNEW-body dryeDryLayer__body">
+            {{ section.settings.body }}
+          </div>
+        {% endif %}
+      </div>
+
+      {% assign image_blocks = section.blocks | where: 'type', 'image_tile' %}
+      {% if image_blocks.size > 0 %}
+        <div
+          class="dryeDryLayer__mediaWrap dryeNEW-reveal dryeNEW-rd1"
+          data-drye-dry-layer-gallery
+        >
+          <button
+            type="button"
+            class="dryeDryLayer__arrow dryeDryLayer__arrow--prev is-disabled"
+            data-drye-dry-layer-prev
+            aria-label="Previous image"
+          >
+            ←
+          </button>
+
+          <button
+            type="button"
+            class="dryeDryLayer__arrow dryeDryLayer__arrow--next"
+            data-drye-dry-layer-next
+            aria-label="Next image"
+          >
+            →
+          </button>
+
+          <div
+            class="dryeDryLayer__mediaRail"
+            data-drye-dry-layer-rail
+            aria-label="{{ section.settings.image_rail_label | escape }}"
+          >
+            {% for block in image_blocks %}
+              <figure class="dryeDryLayer__tile" {{ block.shopify_attributes }}>
+                {% if block.settings.image != blank %}
+                  {{
+                    block.settings.image
+                    | image_url: width: 1200
+                    | image_tag:
+                      class: 'dryeDryLayer__image',
+                      loading: 'lazy',
+                      widths: '360, 480, 640, 760, 960, 1200',
+                      sizes: '(min-width: 960px) 32vw, (min-width: 768px) 33vw, 58vw',
+                      alt: block.settings.alt
+                  }}
+                {% else %}
+                  <div class="dryeDryLayer__placeholder" aria-hidden="true"></div>
+                {% endif %}
+
+                {% if block.settings.label != blank %}
+                  <figcaption class="dryeNEW-micro dryeDryLayer__tileLabel">
+                    {{ block.settings.label | escape }}
+                  </figcaption>
+                {% endif %}
+              </figure>
+            {% endfor %}
+          </div>
+        </div>
+      {% endif %}
+    </div>
+
+    {% assign step_blocks = section.blocks | where: 'type', 'step' %}
+    {% if step_blocks.size > 0 %}
+      <div class="dryeDryLayer__steps dryeNEW-reveal dryeNEW-rd2">
+        {% for block in step_blocks %}
+          <article class="dryeDryLayer__step" {{ block.shopify_attributes }}>
+            {% if block.settings.kicker != blank %}
+              <span class="dryeNEW-micro dryeDryLayer__stepKicker">
+                {{ block.settings.kicker | escape }}
+              </span>
+            {% endif %}
+
+            <div class="dryeDryLayer__stepHeader">
+              {% if block.settings.number != blank %}
+                <span class="dryeNEW-stat-number dryeDryLayer__stepNumber">
+                  {{ block.settings.number | escape }}
+                </span>
+              {% endif %}
+
+              {% if block.settings.title != blank %}
+                <h3 class="dryeNEW-h3 dryeDryLayer__stepTitle">
+                  {{ block.settings.title }}
+                </h3>
+              {% endif %}
+            </div>
+
+            {% if block.settings.text != blank %}
+              <div class="dryeNEW-body--sm dryeDryLayer__stepText">
+                {{ block.settings.text }}
+              </div>
+            {% endif %}
+          </article>
+        {% endfor %}
+      </div>
+    {% endif %}
+
+    {% if section.settings.note != blank %}
+      <div class="dryeDryLayer__note dryeNEW-body--sm dryeNEW-reveal dryeNEW-rd3">
+        {{ section.settings.note }}
+      </div>
+    {% endif %}
+  </div>
+</section>
+
+<script>
+  (() => {
+    const section = document.querySelector('[data-section-id="{{ section.id }}"]');
+    if (!section) return;
+
+    const rail = section.querySelector('[data-drye-dry-layer-rail]');
+    const prev = section.querySelector('[data-drye-dry-layer-prev]');
+    const next = section.querySelector('[data-drye-dry-layer-next]');
+
+    if (!rail || !prev || !next) return;
+
+    const getScrollAmount = () => {
+      const firstTile = rail.querySelector('.dryeDryLayer__tile');
+      if (!firstTile) return rail.clientWidth * 0.8;
+
+      const styles = window.getComputedStyle(rail);
+      const gap = parseFloat(styles.columnGap || styles.gap) || 0;
+
+      return firstTile.getBoundingClientRect().width + gap;
+    };
+
+    const updateButtons = () => {
+      const maxScroll = rail.scrollWidth - rail.clientWidth;
+      const current = rail.scrollLeft;
+
+      prev.classList.toggle('is-disabled', current <= 8);
+      next.classList.toggle('is-disabled', current >= maxScroll - 8);
+    };
+
+    prev.addEventListener('click', () => {
+      rail.scrollBy({
+        left: getScrollAmount() * -1,
+        behavior: 'smooth'
+      });
+    });
+
+    next.addEventListener('click', () => {
+      rail.scrollBy({
+        left: getScrollAmount(),
+        behavior: 'smooth'
+      });
+    });
+
+    rail.addEventListener('scroll', updateButtons, { passive: true });
+    window.addEventListener('resize', updateButtons);
+
+    updateButtons();
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "DRYE dry layer matters",
+  "tag": "section",
+  "class": "shopify-section--drye-dry-layer-matters",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "WHY THE DRY LAYER MATTERS"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Your glove still protects you."
+    },
+    {
+      "type": "inline_richtext",
+      "id": "heading_italic",
+      "label": "Heading italic echo",
+      "default": "DRYE changes what touches your skin."
+    },
+    {
+      "type": "richtext",
+      "id": "body",
+      "label": "Body",
+      "default": "<p>A soft, dry layer sits between your hand and the glove — so you are not working with sweaty nitrile, latex, rubber or vinyl directly against your skin.</p>"
+    },
+    {
+      "type": "text",
+      "id": "image_rail_label",
+      "label": "Image rail accessibility label",
+      "default": "Dry layer use cases"
+    },
+    {
+      "type": "richtext",
+      "id": "note",
+      "label": "Bottom note",
+      "default": "<p>Built for sealed gloves — not open air.</p>"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "image_tile",
+      "name": "2:3 image tile",
+      "limit": 8,
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "text",
+          "id": "alt",
+          "label": "Alt text",
+          "default": "DRYE liner under a sealed glove"
+        },
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Label",
+          "default": "Dry layer"
+        }
+      ]
+    },
+    {
+      "type": "step",
+      "name": "Logic card",
+      "limit": 3,
+      "settings": [
+        {
+          "type": "text",
+          "id": "kicker",
+          "label": "Kicker",
+          "default": "STEP"
+        },
+        {
+          "type": "text",
+          "id": "number",
+          "label": "Number",
+          "default": "01"
+        },
+        {
+          "type": "inline_richtext",
+          "id": "title",
+          "label": "Title",
+          "default": "Glove-on-skin"
+        },
+        {
+          "type": "richtext",
+          "id": "text",
+          "label": "Text",
+          "default": "<p>Sweat builds up inside sealed gloves. Nitrile, latex and rubber have nowhere to breathe.</p>"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "DRYE dry layer matters",
+      "blocks": [
+        {
+          "type": "image_tile",
+          "settings": {
+            "label": "Skin-to-glove contact",
+            "alt": "A sealed glove worn directly against skin"
+          }
+        },
+        {
+          "type": "image_tile",
+          "settings": {
+            "label": "Wet-skin drag",
+            "alt": "A glove being pulled over a DRYE liner"
+          }
+        },
+        {
+          "type": "image_tile",
+          "settings": {
+            "label": "Sealed gloves",
+            "alt": "A DRYE liner worn under a sealed glove"
+          }
+        },
+        {
+          "type": "image_tile",
+          "settings": {
+            "label": "Cleaner hands",
+            "alt": "Hands after removing sealed gloves with a liner"
+          }
+        },
+        {
+          "type": "image_tile",
+          "settings": {
+            "label": "Dry layer",
+            "alt": "Close-up of DRYE liner as a dry layer"
+          }
+        },
+        {
+          "type": "step",
+          "settings": {
+            "kicker": "BEFORE",
+            "number": "01",
+            "title": "Glove-on-skin",
+            "text": "<p>Sweat builds up inside sealed gloves. Nitrile, latex and rubber have nowhere to breathe.</p>"
+          }
+        },
+        {
+          "type": "step",
+          "settings": {
+            "kicker": "DURING",
+            "number": "02",
+            "title": "Wet-skin drag",
+            "text": "<p>Gloves start sticking, pulling and fighting your hand every time you take them off.</p>"
+          }
+        },
+        {
+          "type": "step",
+          "settings": {
+            "kicker": "AFTER",
+            "number": "03",
+            "title": "Add the dry layer",
+            "text": "<p>DRYE sits between skin and glove — softer contact, drier hands, cleaner glove changes.</p>"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

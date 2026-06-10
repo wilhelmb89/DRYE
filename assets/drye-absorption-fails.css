@@ -1,0 +1,127 @@
+.absorption-fails {
+  background: var(--bg);
+  border-bottom: var(--border-base);
+}
+
+.absorption-fails-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--space-32);
+  margin-bottom: var(--space-48);
+}
+
+.absorption-fails__heading {
+  margin: 0 0 var(--space-14);
+  max-width: 640px;
+  color: var(--deep);
+}
+
+.absorption-fails__heading em {
+  font-family: var(--font-editorial);
+  font-style: italic;
+  font-weight: var(--fw-regular);
+  color: var(--accent);
+}
+
+.absorption-fails__lead {
+  max-width: 540px;
+  color: var(--muted);
+}
+
+.absorption-fails__lead p {
+  margin: 0;
+}
+
+.absorption-fails__lead strong {
+  color: var(--body);
+  font-weight: var(--fw-medium);
+}
+
+.absorption-fails-quote-wrap {
+  display: flex;
+  align-items: flex-start;
+}
+
+.absorption-fails__quote {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  color: var(--deep);
+  font-size: clamp(18px, 4vw, 27px);
+  line-height: 1.35;
+  letter-spacing: -0.01em;
+}
+
+.absorption-fails__quote:not(:empty) {
+  padding: var(--space-20) 0;
+  border-top: var(--border-base);
+}
+
+.absorption-fails__quote p {
+  margin: 0;
+}
+
+.box-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 0;
+  border-top: var(--border-base);
+}
+
+.box-item {
+  padding: var(--space-18) var(--space-16);
+  border-bottom: var(--border-base);
+}
+
+.box-tag {
+  margin-bottom: var(--space-8);
+  color: var(--caption);
+}
+
+.box-head {
+  margin-bottom: var(--space-6);
+  color: var(--deep);
+}
+
+.box-body {
+  max-width: 300px;
+  color: var(--muted);
+}
+
+.box-body p {
+  margin: 0;
+}
+
+@media (min-width: 768px) {
+  .absorption-fails-grid {
+    grid-template-columns: minmax(0, 1.03fr) minmax(0, 0.97fr);
+    column-gap: 72px;
+    align-items: start;
+    margin-bottom: 54px;
+  }
+
+  .absorption-fails-quote-wrap {
+    padding-top: 0;
+  }
+
+  .absorption-fails__quote:not(:empty) {
+    padding: 22px 0 24px;
+    max-width: 100%;
+  }
+
+  .box-row {
+    grid-template-columns: var(--grid-3-col-desktop);
+    border-top: var(--border-base);
+  }
+
+  .box-item {
+    min-height: 110px;
+    padding: var(--space-16);
+    border-bottom: 0;
+    border-right: var(--border-base);
+  }
+
+  .box-item:last-child {
+    border-right: 0;
+  }
+}

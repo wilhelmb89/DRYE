@@ -1,0 +1,192 @@
+{{ 'section-drye-article-body.css' | asset_url | stylesheet_tag }}
+
+
+
+<div class="article-layout">
+  <article class="article-body">
+    {% if article.excerpt != blank %}
+      <p class="article-lead">
+        {{ article.excerpt | strip_html }}
+      </p>
+    {% endif %}
+
+    {{ article.content }}
+
+    {% if article.tags.size > 0 %}
+      <div class="article-tags">
+        {% for tag in article.tags %}
+          <a href="{{ blog.url }}/tagged/{{ tag | handle }}" class="tag">{{ tag }}</a>
+        {% endfor %}
+      </div>
+    {% endif %}
+  </article>
+
+  <aside class="article-sidebar">
+    <div class="sidebar-product">
+      <div class="sidebar-product-top">
+        <p class="sp-claim">{{ section.settings.sidebar_claim }}</p>
+
+        <div class="sp-img">
+          {% if section.settings.sidebar_image != blank %}
+            {{
+              section.settings.sidebar_image
+              | image_url: width: 300
+              | image_tag:
+                loading: 'lazy',
+                widths: '120, 180, 240, 300',
+                sizes: '90px',
+                alt: section.settings.sidebar_claim
+            }}
+          {% else %}
+            ⬡
+          {% endif %}
+        </div>
+
+        <p class="sp-subline">{{ section.settings.sidebar_subline }}</p>
+      </div>
+
+      {% if section.settings.sidebar_cta_label != blank %}
+        <a href="{{ section.settings.sidebar_cta_link }}" class="sidebar-product-cta">
+          {{ section.settings.sidebar_cta_label }}
+        </a>
+      {% endif %}
+    </div>
+
+    <div class="sidebar-toc">
+      <span class="sidebar-toc-h">{{ section.settings.toc_heading }}</span>
+      <ul class="toc-list" id="toc-list"></ul>
+    </div>
+  </aside>
+</div>
+
+<script>
+  (function () {
+    var articleBody = document.querySelector('.article-body');
+    var tocList = document.getElementById('toc-list');
+
+    if (!articleBody || !tocList) return;
+
+    var headings = articleBody.querySelectorAll('h2');
+
+    headings.forEach(function (heading, index) {
+      if (!heading.id) {
+        heading.id = 'section-' + (index + 1);
+      }
+
+      var li = document.createElement('li');
+      var a = document.createElement('a');
+
+      a.href = '#' + heading.id;
+      a.textContent = heading.textContent;
+
+      li.appendChild(a);
+      tocList.appendChild(li);
+    });
+
+    var tocLinks = tocList.querySelectorAll('a');
+
+    window.addEventListener('scroll', function () {
+      var current = '';
+
+      headings.forEach(function (heading) {
+        if (window.scrollY >= heading.offsetTop - 100) {
+          current = heading.id;
+        }
+      });
+
+      tocLinks.forEach(function (link) {
+        if (link.getAttribute('href') === '#' + current) {
+          link.style.color = 'var(--deep)';
+          link.style.fontWeight = '600';
+        } else {
+          link.style.color = '';
+          link.style.fontWeight = '';
+        }
+      });
+    });
+  })();
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": {{ article.title | json }},
+  "image": [
+    {{ article.image | image_url: width: 1200 | prepend: "https:" | json }}
+  ],
+  "description": {{ article.excerpt | default: article.content | strip_html | truncate: 160 | json }},
+  "datePublished": "{{ article.published_at | date: "%Y-%m-%d" }}",
+  "dateModified": "{{ article.updated_at | date: "%Y-%m-%d" }}",
+  "author": {
+    "@type": "Organization",
+    "name": "DRYE"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "DRYE",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://www.dryeliner.com/cdn/shop/files/DRYE-04.svg"
+    }
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": {{ canonical_url | json }}
+  }
+}
+</script>
+
+{% schema %}
+{
+  "name": "DRYE Article Body",
+  "tag": "section",
+  "class": "section-drye-article-body",
+  "settings": [
+    {
+      "type": "textarea",
+      "id": "hero_caption",
+      "label": "Hero image caption",
+      "default": "National Guard of Ukraine, 2nd Corps (\"Khartiya\"). 10 soldiers, structured questionnaire, signed personally by the Chaplain of 2nd Corps. 2025."
+    },
+    {
+      "type": "text",
+      "id": "sidebar_claim",
+      "label": "Sidebar claim",
+      "default": "Structural moisture transport. No saturation point."
+    },
+    {
+      "type": "image_picker",
+      "id": "sidebar_image",
+      "label": "Sidebar image"
+    },
+    {
+      "type": "text",
+      "id": "sidebar_subline",
+      "label": "Sidebar subline",
+      "default": "0.4mm · Machine washable · Patent pending"
+    },
+    {
+      "type": "text",
+      "id": "sidebar_cta_label",
+      "label": "Sidebar CTA label",
+      "default": "See how it works →"
+    },
+    {
+      "type": "url",
+      "id": "sidebar_cta_link",
+      "label": "Sidebar CTA link"
+    },
+    {
+      "type": "text",
+      "id": "toc_heading",
+      "label": "TOC heading",
+      "default": "In this report"
+    }
+  ],
+  "presets": [
+    {
+      "name": "DRYE Article Body"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,286 @@
+/* ==========================================================================
+   DRYE — Problem Beat 1
+   Purpose: show common failed fixes inside sealed glove environments.
+   Mobile-first. Desktop/tablet breakpoint: 768px.
+   ========================================================================== */
+
+.dryeNEW-problem-beat-1 {
+  background: var(--bg-ink);
+}
+
+/* ==========================================================================
+   Header
+   ========================================================================== */
+
+.dryeNEW-problem-beat-1__intro {
+  margin-bottom: var(--space-36);
+}
+
+.dryeNEW-problem-beat-1__eyebrow {
+  color: var(--sage);
+}
+
+.dryeNEW-problem-beat-1__heading {
+  max-width: none;
+  margin-bottom: var(--space-10);
+  color: var(--white-100);
+}
+
+.dryeNEW-problem-beat-1__heading em {
+  font-family: var(--font-editorial);
+  font-style: italic;
+  font-weight: var(--fw-regular);
+  letter-spacing: normal;
+  color: var(--white-075);
+}
+
+.dryeNEW-problem-beat-1__lead {
+  max-width: none;
+  color: var(--white-060);
+}
+
+.dryeNEW-problem-beat-1__lead p {
+  margin: 0;
+}
+
+.dryeNEW-problem-beat-1__lead strong {
+  color: var(--white-080);
+}
+
+/* ==========================================================================
+   Cards — mobile carousel
+   ========================================================================== */
+
+.dryeNEW-problem-beat-1__cards-wrap {
+  position: relative;
+}
+
+.dryeNEW-problem-beat-1__cards {
+  display: flex;
+  gap: 0;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  background: var(--white-006);
+}
+
+.dryeNEW-problem-beat-1__cards::-webkit-scrollbar {
+  display: none;
+}
+
+.dryeNEW-problem-beat-1__card {
+  flex: 0 0 86%;
+  min-width: 86%;
+  min-height: 100%;
+  padding: var(--space-20);
+  background: var(--bg-ink);
+  border-right: var(--border-white-006);
+  scroll-snap-align: start;
+}
+
+.dryeNEW-problem-beat-1__card:last-child {
+  border-right: 0;
+}
+
+.dryeNEW-problem-beat-1__card-title {
+  margin-bottom: var(--space-8);
+  font-size: 15px;
+  line-height: 1.25;
+  color: var(--white-060);
+}
+
+.dryeNEW-problem-beat-1__strike {
+  text-decoration-line: line-through;
+  text-decoration-thickness: 1.5px;
+  text-decoration-color: var(--red);
+  text-decoration-skip-ink: none;
+}
+
+.dryeNEW-problem-beat-1__card-body {
+  font-size: 15px;
+  line-height: 1.55;
+  color: var(--white-055);
+}
+
+.dryeNEW-problem-beat-1__card-body p {
+  margin: 0;
+}
+
+.dryeNEW-problem-beat-1__card-body strong {
+  color: var(--white-080);
+  font-weight: var(--fw-semibold);
+}
+
+.dryeNEW-problem-beat-1__card-body em {
+  font-family: var(--font-editorial);
+  font-style: italic;
+  font-weight: var(--fw-regular);
+}
+
+/* ==========================================================================
+   Swipe hint — mobile only
+   ========================================================================== */
+
+.dryeNEW-problem-beat-1__swipe-hint {
+  display: none;
+}
+
+@media (max-width: 767px) {
+  .dryeNEW-problem-beat-1__cards::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 32px;
+    height: 100%;
+    pointer-events: none;
+    background: linear-gradient(
+      to right,
+      rgba(15, 34, 48, 0),
+      rgba(15, 34, 48, 0.96)
+    );
+  }
+
+  .dryeNEW-problem-beat-1__swipe-hint {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-6);
+    margin-top: var(--space-12);
+    text-transform: uppercase;
+    color: var(--white-045);
+    opacity: 1;
+    transition:
+      opacity var(--dur-base) var(--ease-standard),
+      transform var(--dur-base) var(--ease-standard),
+      visibility var(--dur-base) var(--ease-standard);
+    animation: dryeNEW-problem-beat-1-swipe-fade 2.4s ease infinite;
+  }
+
+  .dryeNEW-problem-beat-1__swipe-icon {
+    flex: 0 0 auto;
+    animation: dryeNEW-problem-beat-1-swipe-arrow 1.4s ease infinite;
+  }
+
+  .dryeNEW-problem-beat-1__swipe-hint.is-hidden {
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-4px);
+    pointer-events: none;
+    animation: none;
+  }
+}
+
+/* ==========================================================================
+   Desktop / tablet
+   ========================================================================== */
+
+@media (min-width: 768px) {
+  .dryeNEW-problem-beat-1 {
+    position: relative;
+  }
+
+  .dryeNEW-problem-beat-1::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      var(--sage-030),
+      transparent
+    );
+    pointer-events: none;
+  }
+
+  .dryeNEW-problem-beat-1__intro {
+    margin-bottom: var(--space-40);
+  }
+
+  .dryeNEW-problem-beat-1__heading {
+    max-width: 480px;
+  }
+
+  .dryeNEW-problem-beat-1__lead {
+    max-width: 440px;
+  }
+
+  .dryeNEW-problem-beat-1__lead strong {
+    color: var(--white-075);
+  }
+
+  .dryeNEW-problem-beat-1__cards {
+    display: grid;
+    grid-template-columns: var(--grid-3-col-desktop);
+    gap: var(--space-1);
+    margin-bottom: var(--space-1);
+    overflow: visible;
+    scroll-snap-type: none;
+    background: var(--white-006);
+  }
+
+  .dryeNEW-problem-beat-1__card {
+    min-width: 0;
+    flex: initial;
+    padding: var(--space-32) var(--space-28);
+    border-right: 0;
+  }
+
+  .dryeNEW-problem-beat-1__card-title {
+    margin-bottom: var(--space-12);
+    font-size: 19px;
+    line-height: 1.18;
+    color: var(--white-075);
+  }
+
+  .dryeNEW-problem-beat-1__card-body {
+    font-size: 17px;
+    line-height: 1.55;
+    color: var(--white-065, var(--white-060));
+  }
+
+  .dryeNEW-problem-beat-1__card-body strong {
+    color: var(--white-080);
+    font-weight: var(--fw-semibold);
+  }
+
+  .dryeNEW-problem-beat-1__swipe-hint {
+    display: none !important;
+  }
+}
+
+/* ==========================================================================
+   Animations
+   ========================================================================== */
+
+@keyframes dryeNEW-problem-beat-1-swipe-arrow {
+  0% {
+    transform: translateX(0);
+    opacity: 0.55;
+  }
+
+  50% {
+    transform: translateX(6px);
+    opacity: 1;
+  }
+
+  100% {
+    transform: translateX(0);
+    opacity: 0.55;
+  }
+}
+
+@keyframes dryeNEW-problem-beat-1-swipe-fade {
+  0%,
+  100% {
+    opacity: 0.55;
+  }
+
+  50% {
+    opacity: 0.9;
+  }
+}

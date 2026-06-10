@@ -1,0 +1,134 @@
+{{ 'drye-faq.css' | asset_url | stylesheet_tag }}
+{{ 'drye-faq.js' | asset_url | script_tag }}
+
+<section
+  class="dryeNEW-section drye-faq"
+  data-section-id="{{ section.id }}"
+  data-section-type="drye-faq"
+>
+  <div class="dryeNEW-container">
+    <div class="drye-faq__intro">
+      {% if section.settings.micro_label != blank %}
+        <span class="dryeNEW-micro drye-faq__eyebrow">
+          {{ section.settings.micro_label }}
+        </span>
+      {% endif %}
+
+      {% if section.settings.heading != blank %}
+        <h2 class="drye-faq__heading">
+          {{ section.settings.heading }}
+        </h2>
+      {% endif %}
+    </div>
+
+    <div class="drye-faq__list">
+      {% for block in section.blocks %}
+        <div class="drye-faq__item" {{ block.shopify_attributes }}>
+          <button
+            class="drye-faq__question"
+            type="button"
+            aria-expanded="false"
+            aria-controls="drye-faq-answer-{{ section.id }}-{{ block.id }}"
+          >
+            <span class="drye-faq__question-text">
+              {{ block.settings.question }}
+            </span>
+            <span class="drye-faq__icon" aria-hidden="true"></span>
+          </button>
+
+          <div
+            class="drye-faq__answer"
+            id="drye-faq-answer-{{ section.id }}-{{ block.id }}"
+          >
+            <div class="drye-faq__answer-inner">
+              {{ block.settings.answer }}
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "DRYE FAQ",
+  "max_blocks": 8,
+  "settings": [
+    {
+      "type": "text",
+      "id": "micro_label",
+      "label": "Micro label",
+      "default": "Common questions"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "If you're still not sure."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "item",
+      "name": "FAQ item",
+      "settings": [
+        {
+          "type": "text",
+          "id": "question",
+          "label": "Question",
+          "default": "Does it work under nitrile gloves specifically?"
+        },
+        {
+          "type": "richtext",
+          "id": "answer",
+          "label": "Answer",
+          "default": "<p>Yes. DRYE was developed and tested primarily for use under nitrile — the most common glove in healthcare, automotive, and lab environments. At 0.4mm, it fits inside any standard nitrile glove without affecting the fit or tactile feel. <strong>Dexterity is unchanged.</strong></p>"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "DRYE FAQ",
+      "blocks": [
+        {
+          "type": "item",
+          "settings": {
+            "question": "Does it work under nitrile gloves specifically?",
+            "answer": "<p>Yes. DRYE was developed and tested primarily for use under nitrile — the most common glove in healthcare, automotive, and lab environments. At 0.4mm, it fits inside any standard nitrile glove without affecting the fit or tactile feel. <strong>Dexterity is unchanged.</strong></p>"
+          }
+        },
+        {
+          "type": "item",
+          "settings": {
+            "question": "How thin is 0.4mm — really?",
+            "answer": "<p>Four sheets of standard printer paper. A standard nitrile glove is already 0.1–0.15mm thick — you can't feel that either. DRYE adds the equivalent of a thin second skin. <strong>In independent testing, zero participants reported reduced dexterity.</strong></p>"
+          }
+        },
+        {
+          "type": "item",
+          "settings": {
+            "question": "How long does it last? Does it degrade?",
+            "answer": "<p>With regular use and machine washing, DRYE lasts 4–12 months. The routing structure is built into the physical composition of the textile — it doesn't rely on a chemical treatment that can wash out. <strong>The mechanism doesn't degrade with washing.</strong></p>"
+          }
+        },
+        {
+          "type": "item",
+          "settings": {
+            "question": "Can I wash it? How?",
+            "answer": "<p>Machine washable. Cold or warm cycle, no fabric softener. <strong>Do not tumble dry</strong> — air dry flat. Fabric softener coats fibres and can partially block the capillary transport channels. One pair per person, washed after each shift.</p>"
+          }
+        },
+        {
+          "type": "item",
+          "settings": {
+            "question": "What if it doesn't work for me?",
+            "answer": "<p>Full refund within 30 days. No questions. The claim is that the physics works — if it doesn't change your shift, <strong>you pay nothing.</strong> That's not generosity. It's confidence in the mechanism.</p>"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

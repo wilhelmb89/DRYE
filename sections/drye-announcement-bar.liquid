@@ -1,0 +1,302 @@
+{% comment %}
+  DRYE — Announcement Bar
+  Fixed under DRYE header
+  Product page only
+{% endcomment %}
+
+{% if section.settings.enabled and request.page_type == 'product' %}
+  <section
+    id="shopify-section-{{ section.id }}"
+    class="dryeNEW-annbar-section"
+    data-section-id="{{ section.id }}"
+    role="region"
+    aria-label="Announcement"
+    style="
+      --ann-height: {{ section.settings.height }}px;
+      --ann-speed: {{ section.settings.speed }}s;
+      --ann-bg: {{ section.settings.bg_color }};
+      --ann-text: {{ section.settings.text_color }};
+      --ann-icon-height: {{ section.settings.icon_height }}px;
+    "
+  >
+    <div class="dryeNEW-annbar-spacer" aria-hidden="true"></div>
+
+    <div class="dryeNEW-annbar">
+      <div class="dryeNEW-shell">
+        <div class="dryeNEW-annbar__viewport">
+<div class="dryeNEW-annbar__track" aria-hidden="true">
+  {% for group in (1..2) %}
+    <div class="dryeNEW-annbar__group">
+      {% for i in (1..3) %}
+        <div class="dryeNEW-annbar__item">
+          {% if section.settings.left_icon != blank %}
+            {{
+              section.settings.left_icon
+              | image_url: width: 200
+              | image_tag:
+                class: 'dryeNEW-annbar__icon',
+                loading: 'eager',
+                decoding: 'async',
+                alt: ''
+            }}
+          {% endif %}
+
+          {% if section.settings.link_url != blank %}
+            <a href="{{ section.settings.link_url }}" class="dryeNEW-annbar__link dryeNEW-body--sm">
+              {{ section.settings.text }}
+            </a>
+          {% else %}
+            <span class="dryeNEW-annbar__text dryeNEW-body--sm">
+              {{ section.settings.text }}
+            </span>
+          {% endif %}
+
+          {% if section.settings.right_icon != blank %}
+            {{
+              section.settings.right_icon
+              | image_url: width: 200
+              | image_tag:
+                class: 'dryeNEW-annbar__icon',
+                loading: 'eager',
+                decoding: 'async',
+                alt: ''
+            }}
+          {% endif %}
+        </div>
+      {% endfor %}
+    </div>
+  {% endfor %}
+</div>
+
+          <div class="dryeNEW-visually-hidden">
+            {% if section.settings.link_url != blank %}
+              <a href="{{ section.settings.link_url }}">{{ section.settings.text }}</a>
+            {% else %}
+              {{ section.settings.text }}
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    </div>
+
+    {%- style -%}
+      #shopify-section-{{ section.id }} {
+        position: relative;
+        z-index: 998;
+      }
+
+      #shopify-section-{{ section.id }} .dryeNEW-annbar-spacer {
+        height: var(--ann-height);
+      }
+
+      #shopify-section-{{ section.id }} .dryeNEW-annbar {
+        position: fixed;
+        top: var(--nav-height);
+        left: 0;
+        width: 100%;
+        z-index: 998;
+        min-height: var(--ann-height);
+        display: flex;
+        align-items: center;
+        overflow: hidden;
+        background: var(--ann-bg);
+        color: var(--ann-text);
+        border-bottom: var(--border-base);
+      }
+
+      #shopify-section-{{ section.id }} .dryeNEW-annbar__viewport {
+        position: relative;
+        width: 100%;
+        overflow: hidden;
+      }
+
+      /* Desktop spacing — generous breathing room */
+#shopify-section-{{ section.id }} .dryeNEW-annbar__track {
+  display: flex;
+  width: max-content;
+  align-items: center;
+  animation: dryeAnnbarMarquee-{{ section.id }} var(--ann-speed) linear infinite;
+  will-change: transform;
+}
+
+#shopify-section-{{ section.id }} .dryeNEW-annbar__group {
+  display: flex;
+  align-items: center;
+  gap: 80px;
+  flex: 0 0 auto;
+  padding-right: 80px;
+}
+
+#shopify-section-{{ section.id }} .dryeNEW-annbar__item {
+  display: inline-flex;
+  align-items: center;
+  gap: 20px;
+  white-space: nowrap;
+  flex: 0 0 auto;
+}
+
+      #shopify-section-{{ section.id }} .dryeNEW-annbar__text,
+      #shopify-section-{{ section.id }} .dryeNEW-annbar__link {
+        color: inherit;
+      }
+
+      #shopify-section-{{ section.id }} .dryeNEW-annbar__link {
+        text-decoration: none;
+        border-bottom: 1px solid currentColor;
+        padding-bottom: 2px;
+      }
+
+      #shopify-section-{{ section.id }} .dryeNEW-annbar__link:hover {
+        opacity: 0.85;
+      }
+
+      /* ICON BASE — respects PNG transparency, no color manipulation */
+      #shopify-section-{{ section.id }} .dryeNEW-annbar__icon {
+        height: var(--ann-icon-height);
+        width: auto;
+        display: block;
+        flex: 0 0 auto;
+        object-fit: contain;
+      }
+
+      {% if section.settings.force_white_icons %}
+        /* Forces icons to render as white silhouette — use for dark-colored source files */
+        #shopify-section-{{ section.id }} .dryeNEW-annbar__icon {
+          filter: brightness(0) invert(1);
+        }
+      {% endif %}
+
+      @keyframes dryeAnnbarMarquee-{{ section.id }} {
+        from {
+          transform: translate3d(0, 0, 0);
+        }
+        to {
+          transform: translate3d(-50%, 0, 0);
+        }
+      }
+
+      /* Mobile spacing — proportionally tighter but still breathing */
+@media (max-width: 767px) {
+  #shopify-section-{{ section.id }} .dryeNEW-annbar__group {
+    gap: 56px;
+    padding-right: 56px;
+  }
+
+  #shopify-section-{{ section.id }} .dryeNEW-annbar__item {
+    gap: 14px;
+  }
+
+  #shopify-section-{{ section.id }} .dryeNEW-annbar__icon {
+    height: calc(var(--ann-icon-height) - 4px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #shopify-section-{{ section.id }} .dryeNEW-annbar__track {
+    animation-duration: calc(var(--ann-speed) * 2);
+  }
+}
+    {%- endstyle -%}
+  </section>
+{% endif %}
+
+{% schema %}
+{
+  "name": "DRYE Announcement Bar",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "enabled",
+      "label": "Enable",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "text",
+      "label": "Announcement text",
+      "default": "Free shipping on 3+ pairs"
+    },
+    {
+      "type": "url",
+      "id": "link_url",
+      "label": "Optional link"
+    },
+    {
+      "type": "header",
+      "content": "Icons"
+    },
+    {
+      "type": "paragraph",
+      "content": "Upload white/light PNG with transparent background for the default rendering. If your source file is dark and you need it to appear white, enable the option below."
+    },
+    {
+      "type": "image_picker",
+      "id": "left_icon",
+      "label": "Left icon"
+    },
+    {
+      "type": "image_picker",
+      "id": "right_icon",
+      "label": "Right icon"
+    },
+    {
+      "type": "range",
+      "id": "icon_height",
+      "label": "Icon height",
+      "min": 16,
+      "max": 40,
+      "step": 2,
+      "default": 22,
+      "unit": "px"
+    },
+    {
+      "type": "checkbox",
+      "id": "force_white_icons",
+      "label": "Force icons to white",
+      "info": "Enable only if your PNG source is dark-colored and you want it to render as white silhouette",
+      "default": false
+    },
+    {
+      "type": "header",
+      "content": "Bar styling"
+    },
+    {
+      "type": "range",
+      "id": "height",
+      "label": "Bar height",
+      "min": 32,
+      "max": 56,
+      "step": 2,
+      "default": 40,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "speed",
+      "label": "Scroll duration",
+      "min": 10,
+      "max": 40,
+      "step": 2,
+      "default": 22,
+      "unit": "s"
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background color",
+      "default": "#0F2230"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text color",
+      "default": "#FFFFFF"
+    }
+  ],
+  "presets": [
+    {
+      "name": "DRYE Announcement Bar"
+    }
+  ]
+}
+{% endschema %}

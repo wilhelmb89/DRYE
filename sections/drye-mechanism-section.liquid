@@ -1,0 +1,210 @@
+{%- comment -%}
+  DRYE Mechanism — Shopify section
+  Uses base.css tokens/helpers.
+{%- endcomment -%}
+
+{{ 'drye-mechanism-section.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'drye-mechanism-section.js' | asset_url }}" defer></script>
+
+<section
+  class="dryeNEW-section dryeMechanism"
+  id="shopify-section-{{ section.id }}"
+  style="
+    --mech-mt-mobile: {{ section.settings.margin_top_mobile }}px;
+    --mech-mb-mobile: {{ section.settings.margin_bottom_mobile }}px;
+    --mech-mt-desktop: {{ section.settings.margin_top_desktop }}px;
+    --mech-mb-desktop: {{ section.settings.margin_bottom_desktop }}px;
+  "
+>
+  <div class="dryeNEW-container dryeMechanism__header">
+    <p class="dryeMechanism__kicker dryeNEW-micro">
+      {{ section.settings.kicker }}
+    </p>
+
+    <h2 class="dryeMechanism__heading dryeNEW-h2">
+      {{ section.settings.heading_prefix }}
+      <span class="dryeNEW-editorial">{{ section.settings.heading_emphasis }}</span>
+    </h2>
+
+    <p class="dryeMechanism__sub dryeNEW-body--sm">
+      {{ section.settings.subheading }}
+    </p>
+  </div>
+
+  <div class="dryeMechanism__stage dryeNEW-full-bleed">
+    <div class="dryeNEW-full-bleed__inner">
+      <div class="dryeMechanism__split">
+
+        <article class="dryeMechanism__panel dryeMechanism__panel--bad">
+          <div class="dryeMechanism__panelHead">
+            <div class="dryeMechanism__panelEyebrow">
+              <span class="dryeMechanism__panelLine"></span>
+              <span>{{ section.settings.left_label }}</span>
+            </div>
+            <h3 class="dryeMechanism__panelTitle">{{ section.settings.left_title }}</h3>
+            <p class="dryeMechanism__panelSub">{{ section.settings.left_sub }}</p>
+          </div>
+
+          <div class="dryeMechanism__stack">
+            <div class="dryeMechanism__pressureRow" aria-hidden="true">
+              <span class="dryeMechanism__pressureArrow"></span>
+              <span class="dryeMechanism__pressureArrow"></span>
+              <span class="dryeMechanism__pressureArrow"></span>
+              <span class="dryeMechanism__pressureText">{{ section.settings.pressure_label }}</span>
+            </div>
+
+            <div class="dryeMechanism__barrier">{{ section.settings.barrier_label }}</div>
+
+            <div class="dryeMechanism__blocked red-bleed">
+              <span>✕ {{ section.settings.left_block_1 }}</span>
+              <span>✕ {{ section.settings.left_block_2 }}</span>
+            </div>
+
+            <div class="dryeMechanism__textile">{{ section.settings.left_textile_label }}</div>
+
+            <div class="dryeMechanism__arrowZone">
+              <span class="droplet droplet-left" style="left:22%;animation-delay:0s;"></span>
+              <span class="droplet droplet-left" style="left:30%;animation-delay:1.2s;"></span>
+              <span class="droplet droplet-left" style="left:48%;animation-delay:0.6s;"></span>
+              <span class="droplet droplet-left" style="left:55%;animation-delay:2s;"></span>
+              <span class="droplet droplet-left" style="left:72%;animation-delay:0.3s;"></span>
+              <span class="droplet droplet-left" style="left:40%;animation-delay:3.1s;"></span>
+
+              <div class="dryeMechanism__flow dryeMechanism__flow--bad dryeMechanism__flow--one">
+                <div class="dryeMechanism__brokenArrow"></div>
+                <span>{{ section.settings.flow_label_1 }}</span>
+              </div>
+              <div class="dryeMechanism__flow dryeMechanism__flow--bad dryeMechanism__flow--two">
+                <div class="dryeMechanism__brokenArrow"></div>
+                <span>{{ section.settings.flow_label_2 }}</span>
+              </div>
+              <div class="dryeMechanism__flow dryeMechanism__flow--bad dryeMechanism__flow--three">
+                <div class="dryeMechanism__brokenArrow dryeMechanism__brokenArrow--red"></div>
+                <span>{{ section.settings.flow_label_3 }}</span>
+              </div>
+
+              <div class="dryeMechanism__collapseLabel">
+                <p>{{ section.settings.left_fail_title_1 }}</p>
+                <p>{{ section.settings.left_fail_title_2 }}</p>
+                <small>{{ section.settings.left_fail_sub }}</small>
+              </div>
+            </div>
+
+            <div class="dryeMechanism__moisture moisture-pool">
+              <div class="ripple ripple-1"></div>
+              <div class="ripple ripple-2"></div>
+              <div class="ripple ripple-3"></div>
+              <div class="moisture-shimmer"></div>
+            </div>
+
+            <div class="dryeMechanism__skin">{{ section.settings.skin_label }}</div>
+          </div>
+        </article>
+
+        <article class="dryeMechanism__divider" aria-hidden="true"></article>
+
+        <article class="dryeMechanism__panel dryeMechanism__panel--good">
+          <div class="dryeMechanism__panelHead">
+            <div class="dryeMechanism__panelEyebrow dryeMechanism__panelEyebrow--good">
+              <span class="dryeMechanism__panelLine"></span>
+              <span>{{ section.settings.right_label }}</span>
+            </div>
+            <h3 class="dryeMechanism__panelTitle dryeMechanism__panelTitle--good">{{ section.settings.right_title }}</h3>
+            <p class="dryeMechanism__panelSub">{{ section.settings.right_sub }}</p>
+          </div>
+
+          <div class="dryeMechanism__stack">
+            <div class="dryeMechanism__pressureRow" aria-hidden="true">
+              <span class="dryeMechanism__pressureArrow"></span>
+              <span class="dryeMechanism__pressureArrow"></span>
+              <span class="dryeMechanism__pressureArrow"></span>
+              <span class="dryeMechanism__pressureText">{{ section.settings.pressure_label }}</span>
+            </div>
+
+            <div class="dryeMechanism__lyocell">{{ section.settings.right_layer_1 }}</div>
+            <div class="dryeMechanism__transportBand blue-glow">{{ section.settings.right_layer_2 }}</div>
+            <div class="dryeMechanism__barrier">{{ section.settings.barrier_label }}</div>
+            <div class="dryeMechanism__textile dryeMechanism__textile--good">{{ section.settings.right_textile_label }}</div>
+
+            <div class="dryeMechanism__arrowZone dryeMechanism__arrowZone--good">
+              <span class="droplet droplet-right" style="left:22%;animation-delay:0s;"></span>
+              <span class="droplet droplet-right" style="left:30%;animation-delay:1s;"></span>
+              <span class="droplet droplet-right" style="left:48%;animation-delay:0.5s;"></span>
+              <span class="droplet droplet-right" style="left:56%;animation-delay:2.1s;"></span>
+              <span class="droplet droplet-right" style="left:72%;animation-delay:0.2s;"></span>
+              <span class="droplet droplet-right" style="left:40%;animation-delay:3.1s;"></span>
+
+              <div class="dryeMechanism__flow dryeMechanism__flow--good dryeMechanism__flow--one">
+                <div class="dryeMechanism__solidArrow"></div>
+                <span>{{ section.settings.flow_label_1 }}</span>
+              </div>
+              <div class="dryeMechanism__flow dryeMechanism__flow--good dryeMechanism__flow--two">
+                <div class="dryeMechanism__solidArrow"></div>
+                <span>{{ section.settings.flow_label_2 }}</span>
+              </div>
+              <div class="dryeMechanism__flow dryeMechanism__flow--good dryeMechanism__flow--three">
+                <div class="dryeMechanism__solidArrow"></div>
+                <span>{{ section.settings.flow_label_3 }}</span>
+              </div>
+
+              <div class="dryeMechanism__successLabel">
+                <p>{{ section.settings.right_success_title_1 }}</p>
+                <p>{{ section.settings.right_success_title_2 }}</p>
+                <small>{{ section.settings.right_success_sub }}</small>
+              </div>
+            </div>
+
+            <div class="dryeMechanism__skin">{{ section.settings.skin_label }}</div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "DRYE Mechanism",
+  "settings": [
+    { "type": "range", "id": "margin_top_desktop", "label": "Desktop margin top", "min": 0, "max": 200, "step": 4, "unit": "px", "default": 24 },
+    { "type": "range", "id": "margin_bottom_desktop", "label": "Desktop margin bottom", "min": 0, "max": 200, "step": 4, "unit": "px", "default": 24 },
+    { "type": "range", "id": "margin_top_mobile", "label": "Mobile margin top", "min": 0, "max": 140, "step": 4, "unit": "px", "default": 16 },
+    { "type": "range", "id": "margin_bottom_mobile", "label": "Mobile margin bottom", "min": 0, "max": 140, "step": 4, "unit": "px", "default": 16 },
+
+    { "type": "text", "id": "kicker", "label": "Kicker", "default": "MECHANISM" },
+    { "type": "text", "id": "heading_prefix", "label": "Heading prefix", "default": "Works without air." },
+    { "type": "text", "id": "heading_emphasis", "label": "Heading emphasis", "default": "Works under pressure." },
+    { "type": "text", "id": "subheading", "label": "Subheading", "default": "No coatings · No chemicals · No membranes" },
+
+    { "type": "text", "id": "left_label", "label": "Left label", "default": "Conventional textile" },
+    { "type": "text", "id": "left_title", "label": "Left title", "default": "Open system logic" },
+    { "type": "text", "id": "left_sub", "label": "Left sub", "default": "Requires airflow and evaporation" },
+    { "type": "text", "id": "left_block_1", "label": "Left block 1", "default": "no evaporation" },
+    { "type": "text", "id": "left_block_2", "label": "Left block 2", "default": "no airflow" },
+    { "type": "text", "id": "left_textile_label", "label": "Left textile label", "default": "Conventional wicking textile" },
+    { "type": "text", "id": "left_fail_title_1", "label": "Left fail title 1", "default": "Textile collapses" },
+    { "type": "text", "id": "left_fail_title_2", "label": "Left fail title 2", "default": "Transport stops" },
+    { "type": "text", "id": "left_fail_sub", "label": "Left fail sub", "default": "Under saturation" },
+
+    { "type": "text", "id": "right_label", "label": "Right label", "default": "DRYE transport layer" },
+    { "type": "text", "id": "right_title", "label": "Right title", "default": "Closed system transport" },
+    { "type": "text", "id": "right_sub", "label": "Right sub", "default": "Works without airflow" },
+    { "type": "text", "id": "right_layer_1", "label": "Right layer 1", "default": "Lyocell spread layer" },
+    { "type": "text", "id": "right_layer_2", "label": "Right layer 2", "default": "Evacuated transport channel" },
+    { "type": "text", "id": "right_textile_label", "label": "Right textile label", "default": "DRYE capillary textile" },
+    { "type": "text", "id": "right_success_title_1", "label": "Right success title 1", "default": "Moisture moves" },
+    { "type": "text", "id": "right_success_title_2", "label": "Right success title 2", "default": "Heat exits" },
+    { "type": "text", "id": "right_success_sub", "label": "Right success sub", "default": "Without air" },
+
+    { "type": "text", "id": "pressure_label", "label": "Pressure label", "default": "Pressure" },
+    { "type": "text", "id": "barrier_label", "label": "Barrier label", "default": "Sealed protective equipment barrier" },
+    { "type": "text", "id": "flow_label_1", "label": "Flow label 1", "default": "Sweat" },
+    { "type": "text", "id": "flow_label_2", "label": "Flow label 2", "default": "TEWL" },
+    { "type": "text", "id": "flow_label_3", "label": "Flow label 3", "default": "Heat" },
+    { "type": "text", "id": "skin_label", "label": "Skin label", "default": "Skin surface" }
+  ],
+  "presets": [
+    { "name": "DRYE Mechanism" }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,123 @@
+.drye-about-skapa {
+  position: relative;
+  overflow: hidden;
+  background: var(--bg-ink);
+}
+
+.drye-about-skapa__bg {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: linear-gradient(
+    105deg,
+    var(--ink-092) 0%,
+    var(--ink-075) 50%,
+    rgba(30, 58, 76, 0.6) 100%
+  );
+}
+
+.drye-about-skapa__img-bg {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 50%;
+  opacity: 0.18;
+  background: linear-gradient(140deg, var(--deep) 0%, #8b7355 100%);
+}
+
+.drye-about-skapa .dryeNEW-container {
+  position: relative;
+  z-index: 2;
+}
+
+.drye-about-skapa__grid {
+  align-items: center;
+  gap: var(--space-40);
+}
+
+.drye-about-skapa__left,
+.drye-about-skapa__right {
+  min-width: 0;
+}
+
+.drye-about-skapa__left {
+  max-width: 680px;
+}
+
+.drye-about-skapa__award {
+  display: inline-flex;
+  align-items: center;
+  margin-bottom: var(--space-24);
+  padding: var(--space-8) var(--space-14);
+  background: var(--white-003);
+  border: var(--border-white-010);
+}
+
+.drye-about-skapa__award-label {
+  margin-bottom: 0;
+  color: var(--sage);
+}
+
+.drye-about-skapa__heading {
+  margin-bottom: var(--space-16);
+  color: var(--white-100);
+}
+
+.drye-about-skapa__body {
+  margin-bottom: var(--space-28);
+  color: var(--white-045);
+}
+
+.drye-about-skapa__body p + p {
+  margin-top: var(--space-16);
+}
+
+.drye-about-skapa__body strong {
+  color: var(--white-070);
+}
+
+.drye-about-skapa__link {
+  color: var(--white-100);
+  border-bottom: var(--border-white-015);
+}
+
+.drye-about-skapa__link:hover {
+  color: var(--white-100);
+  border-bottom-color: var(--white-100);
+}
+
+.drye-about-skapa__quote {
+  padding: var(--space-20) var(--space-24);
+  background: var(--white-003);
+  border-left: 3px solid var(--sage);
+}
+
+.drye-about-skapa__quote-text {
+  margin: 0 0 var(--space-12);
+  font-size: clamp(14px, 2vw, 17px);
+  line-height: 1.7;
+  color: var(--white-075);
+}
+
+.drye-about-skapa__quote-attr {
+  margin-bottom: 0;
+  color: var(--white-030);
+}
+
+@media (min-width: 768px) {
+  .drye-about-skapa__grid {
+    gap: var(--grid-gap-64);
+  }
+}
+.drye-about-skapa__link,
+.drye-about-skapa__link:visited {
+  color: var(--white-100);
+  border-bottom: var(--border-white-015);
+}
+
+.drye-about-skapa__link:hover {
+  color: var(--white-100);
+  border-bottom-color: var(--white-100);
+  opacity: 0.9;
+}

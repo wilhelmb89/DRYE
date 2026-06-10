@@ -1,0 +1,77 @@
+
+  {{ 'section-drye-blog-hero.css' | asset_url | stylesheet_tag }}
+
+<section
+  class="dryeNEW-section blog-hero"
+  id="drye-blog-hero-{{ section.id }}"
+  data-section-id="{{ section.id }}"
+>
+  <div class="dryeNEW-container">
+    <div class="blog-hero-top">
+      <div>
+        {% if section.settings.eyebrow != blank %}
+          <span class="dryeNEW-micro blog-hero-eye dryeNEW-reveal">
+            {{ section.settings.eyebrow }}
+          </span>
+        {% endif %}
+
+        {% if section.settings.heading != blank or section.settings.heading_emphasis != blank %}
+          <h1 class="dryeNEW-h2 blog-hero-h dryeNEW-reveal dryeNEW-rd1">
+            {% if section.settings.heading != blank %}
+              {{ section.settings.heading }}
+            {% endif %}
+
+            {% if section.settings.heading_emphasis != blank %}
+              <em>{{ section.settings.heading_emphasis }}</em>
+            {% endif %}
+          </h1>
+        {% endif %}
+      </div>
+
+      {% if section.settings.description != blank %}
+        <div class="dryeNEW-body--sm blog-hero-desc dryeNEW-reveal dryeNEW-rd2">
+          <p>{{ section.settings.description }}</p>
+        </div>
+      {% endif %}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "DRYE Blog Hero",
+  "tag": "section",
+  "class": "section-drye-blog-hero",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "Field Reports & Science"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Evidence, not opinion."
+    },
+    {
+      "type": "text",
+      "id": "heading_emphasis",
+      "label": "Heading emphasis",
+      "default": "What the data actually shows."
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Description",
+      "default": "Field studies, peer-reviewed science, and documented results from people who use DRYE in real conditions."
+    }
+  ],
+  "presets": [
+    {
+      "name": "DRYE Blog Hero"
+    }
+  ]
+}
+{% endschema %}

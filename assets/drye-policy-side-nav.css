@@ -1,0 +1,36 @@
+.drye-policy-side-nav {
+  display: none;
+}
+
+@media (min-width: 768px) {
+  .drye-policy-side-nav {
+    display: block;
+  }
+
+  .drye-policy-side-nav__nav {
+    position: sticky;
+    top: 118px;
+    display: grid;
+    gap: 10px;
+  }
+
+  .drye-policy-side-nav__link {
+    display: block;
+    padding: 0;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    line-height: 1.4;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.28);
+    transition: color 0.15s ease;
+  }
+
+  .drye-policy-side-nav__link:hover {
+    color: rgba(255, 255, 255, 0.58);
+  }
+
+  .drye-policy-side-nav__link.is-active {
+    color: #fff;
+  }
+}

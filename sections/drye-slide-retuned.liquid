@@ -1,0 +1,279 @@
+{{ 'drye-slide-2-contained-v2.css' | asset_url | stylesheet_tag }}
+
+<section
+  class="dryeNEW-section dryeNEW-slide2-contained-fixed"
+  id="shopify-section-{{ section.id }}"
+  style="
+    --slide2-mt-mobile: {{ section.settings.margin_top_mobile }}px;
+    --slide2-mb-mobile: {{ section.settings.margin_bottom_mobile }}px;
+    --slide2-mt-desktop: {{ section.settings.margin_top_desktop }}px;
+    --slide2-mb-desktop: {{ section.settings.margin_bottom_desktop }}px;
+  "
+>
+  <div class="dryeNEW-container">
+    <div class="dryeNEW-slide2-contained-fixed__header">
+      {%- if section.settings.kicker != blank -%}
+        <p class="dryeNEW-slide2-contained-fixed__kicker dryeNEW-micro">
+          {{ section.settings.kicker }}
+        </p>
+      {%- endif -%}
+
+      {%- if section.settings.heading != blank -%}
+        <div class="dryeNEW-slide2-contained-fixed__heading dryeNEW-h2">
+          {{ section.settings.heading }}
+        </div>
+      {%- endif -%}
+
+      {%- if section.settings.show_rule -%}
+        <div class="dryeNEW-slide2-contained-fixed__rule" aria-hidden="true"></div>
+      {%- endif -%}
+
+      {%- if section.settings.subheading != blank -%}
+        <div class="dryeNEW-slide2-contained-fixed__subheading dryeNEW-body">
+          {{ section.settings.subheading }}
+        </div>
+      {%- endif -%}
+    </div>
+
+    <div class="dryeNEW-slide2-contained-fixed__split">
+      <div class="dryeNEW-slide2-contained-fixed__divider" aria-hidden="true"></div>
+
+      <article class="dryeNEW-slide2-contained-fixed__panel">
+        <div class="dryeNEW-slide2-contained-fixed__panel-bg">
+          {%- if section.settings.left_image != blank -%}
+            {{
+              section.settings.left_image
+              | image_url: width: 1600
+              | image_tag:
+                class: 'dryeNEW-slide2-contained-fixed__image',
+                loading: 'lazy',
+                widths: '480, 768, 1200, 1600',
+                sizes: '(min-width: 768px) 50vw, 100vw',
+                alt: section.settings.left_eyebrow | escape
+            }}
+          {%- endif -%}
+        </div>
+
+        <div class="dryeNEW-slide2-contained-fixed__overlay"></div>
+
+        <div class="dryeNEW-slide2-contained-fixed__panel-inner">
+          {%- if section.settings.left_eyebrow != blank -%}
+            <p class="dryeNEW-micro dryeNEW-slide2-contained-fixed__eyebrow">
+              {{ section.settings.left_eyebrow }}
+            </p>
+          {%- endif -%}
+
+          {%- if section.settings.left_title != blank -%}
+            <div class="dryeNEW-slide2-contained-fixed__title dryeNEW-h3">
+              {{ section.settings.left_title }}
+            </div>
+          {%- endif -%}
+
+          <div class="dryeNEW-slide2-contained-fixed__points">
+            {%- if section.settings.left_point_1 != blank -%}
+              <div class="dryeNEW-slide2-contained-fixed__point dryeNEW-body--lg">{{ section.settings.left_point_1 }}</div>
+            {%- endif -%}
+            {%- if section.settings.left_point_2 != blank -%}
+              <div class="dryeNEW-slide2-contained-fixed__point dryeNEW-body--lg">{{ section.settings.left_point_2 }}</div>
+            {%- endif -%}
+            {%- if section.settings.left_point_3 != blank -%}
+              <div class="dryeNEW-slide2-contained-fixed__point dryeNEW-body--lg">{{ section.settings.left_point_3 }}</div>
+            {%- endif -%}
+          </div>
+        </div>
+      </article>
+
+      <article class="dryeNEW-slide2-contained-fixed__panel">
+        <div class="dryeNEW-slide2-contained-fixed__panel-bg">
+          {%- if section.settings.right_image != blank -%}
+            {{
+              section.settings.right_image
+              | image_url: width: 1600
+              | image_tag:
+                class: 'dryeNEW-slide2-contained-fixed__image',
+                loading: 'lazy',
+                widths: '480, 768, 1200, 1600',
+                sizes: '(min-width: 768px) 50vw, 100vw',
+                alt: section.settings.right_eyebrow | escape
+            }}
+          {%- endif -%}
+        </div>
+
+        <div class="dryeNEW-slide2-contained-fixed__overlay"></div>
+
+        <div class="dryeNEW-slide2-contained-fixed__panel-inner">
+          {%- if section.settings.right_eyebrow != blank -%}
+            <p class="dryeNEW-micro dryeNEW-slide2-contained-fixed__eyebrow">
+              {{ section.settings.right_eyebrow }}
+            </p>
+          {%- endif -%}
+
+          {%- if section.settings.right_title != blank -%}
+            <div class="dryeNEW-slide2-contained-fixed__title dryeNEW-h3">
+              {{ section.settings.right_title }}
+            </div>
+          {%- endif -%}
+
+          <div class="dryeNEW-slide2-contained-fixed__points">
+            {%- if section.settings.right_point_1 != blank -%}
+              <div class="dryeNEW-slide2-contained-fixed__point dryeNEW-body--lg">{{ section.settings.right_point_1 }}</div>
+            {%- endif -%}
+            {%- if section.settings.right_point_2 != blank -%}
+              <div class="dryeNEW-slide2-contained-fixed__point dryeNEW-body--lg">{{ section.settings.right_point_2 }}</div>
+            {%- endif -%}
+            {%- if section.settings.right_point_3 != blank -%}
+              <div class="dryeNEW-slide2-contained-fixed__point dryeNEW-body--lg">{{ section.settings.right_point_3 }}</div>
+            {%- endif -%}
+          </div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "DRYE Slide 2 Contained",
+  "settings": [
+    {
+      "type": "range",
+      "id": "margin_top_desktop",
+      "label": "Desktop margin top",
+      "min": 0,
+      "max": 200,
+      "step": 4,
+      "unit": "px",
+      "default": 24
+    },
+    {
+      "type": "range",
+      "id": "margin_bottom_desktop",
+      "label": "Desktop margin bottom",
+      "min": 0,
+      "max": 200,
+      "step": 4,
+      "unit": "px",
+      "default": 24
+    },
+    {
+      "type": "range",
+      "id": "margin_top_mobile",
+      "label": "Mobile margin top",
+      "min": 0,
+      "max": 140,
+      "step": 4,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "margin_bottom_mobile",
+      "label": "Mobile margin bottom",
+      "min": 0,
+      "max": 140,
+      "step": 4,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "image_picker",
+      "id": "left_image",
+      "label": "Left image"
+    },
+    {
+      "type": "image_picker",
+      "id": "right_image",
+      "label": "Right image"
+    },
+    {
+      "type": "text",
+      "id": "kicker",
+      "label": "Kicker",
+      "default": "SOLUTION"
+    },
+    {
+      "type": "richtext",
+      "id": "heading",
+      "label": "Heading",
+      "default": "<p>Moisture management is a physics problem — <em>not a material problem</em></p>"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_rule",
+      "label": "Show rule under heading",
+      "default": true
+    },
+    {
+      "type": "richtext",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "<p>Designed for open environments — not closed systems.</p>"
+    },
+    {
+      "type": "text",
+      "id": "left_eyebrow",
+      "label": "Left eyebrow",
+      "default": "OPEN SYSTEMS"
+    },
+    {
+      "type": "richtext",
+      "id": "left_title",
+      "label": "Left title",
+      "default": "<p>Dependent on evaporation</p>"
+    },
+    {
+      "type": "richtext",
+      "id": "left_point_1",
+      "label": "Left point 1",
+      "default": "<p>Requires airflow</p>"
+    },
+    {
+      "type": "richtext",
+      "id": "left_point_2",
+      "label": "Left point 2",
+      "default": "<p>Only works in open systems</p>"
+    },
+    {
+      "type": "richtext",
+      "id": "left_point_3",
+      "label": "Left point 3",
+      "default": "<p>Breaks under pressure</p>"
+    },
+    {
+      "type": "text",
+      "id": "right_eyebrow",
+      "label": "Right eyebrow",
+      "default": "CLOSED SYSTEMS"
+    },
+    {
+      "type": "richtext",
+      "id": "right_title",
+      "label": "Right title",
+      "default": "<p>No airflow.<br>No evaporation.</p>"
+    },
+    {
+      "type": "richtext",
+      "id": "right_point_1",
+      "label": "Right point 1",
+      "default": "<p>Moisture has nowhere to go</p>"
+    },
+    {
+      "type": "richtext",
+      "id": "right_point_2",
+      "label": "Right point 2",
+      "default": "<p>Accumulates under pressure</p>"
+    },
+    {
+      "type": "richtext",
+      "id": "right_point_3",
+      "label": "Right point 3",
+      "default": "<p>System failure</p>"
+    }
+  ],
+  "presets": [
+    {
+      "name": "DRYE Slide 2 Contained"
+    }
+  ]
+}
+{% endschema %}

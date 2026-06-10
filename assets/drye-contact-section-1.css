@@ -1,0 +1,96 @@
+/* ─── HERO ────────────────────────────────────────────────── */
+.contact-hero{
+  background:var(--bg-ink);
+  padding:96px var(--pp, var(--page-pad)) 56px;
+}
+
+@media(min-width:768px){
+  .contact-hero{
+    padding:96px 40px 64px;
+  }
+}
+
+.contact-hero-in{
+  max-width:var(--mw, var(--max-width));
+  margin:0 auto;
+}
+
+.contact-hero-h{
+  font-family:'Clash Grotesk',sans-serif;
+  font-size:clamp(28px,6vw,52px);
+  font-weight:600;
+  letter-spacing:-.025em;
+  color:white;
+  line-height:1.06;
+  margin-bottom:14px;
+  margin-top:10px;
+  max-width:640px;
+}
+
+.contact-hero-h em{
+  font-family:'Playfair Display',serif;
+  font-style:italic;
+  font-weight:400;
+  color:var(--sage);
+  font-size:.8em;
+  display:block;
+  margin-top:8px;
+}
+
+.contact-hero-sub{
+  font-size:15px;
+  color:rgba(255,255,255,.38);
+  line-height:1.75;
+  max-width:480px;
+}
+
+/* ─── TRACK TABS ──────────────────────────────────────────── */
+.track-bar{
+  background:var(--bg-ink);
+  border-bottom:1px solid rgba(255,255,255,.07);
+}
+
+.track-in{
+  max-width:var(--mw, var(--max-width));
+  margin:0 auto;
+  padding:0 var(--pp, var(--page-pad));
+  display:flex;
+  gap:0;
+  overflow-x:auto;
+  scrollbar-width:none;
+}
+
+.track-in::-webkit-scrollbar{
+  display:none;
+}
+
+@media(min-width:768px){
+  .track-in{
+    padding:0 40px;
+  }
+}
+
+.track-btn{
+  font-size:9px;
+  font-weight:600;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  color:rgba(255,255,255,.3);
+  padding:14px 18px;
+  background:none;
+  border:none;
+  cursor:pointer;
+  white-space:nowrap;
+  border-bottom:2px solid transparent;
+  margin-bottom:-1px;
+  transition:color .15s,border-color .15s;
+}
+
+.track-btn:hover{
+  color:rgba(255,255,255,.65);
+}
+
+.track-btn.active{
+  color:white;
+  border-bottom-color:var(--emerald);
+}

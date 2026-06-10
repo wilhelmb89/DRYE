@@ -1,0 +1,247 @@
+{{ 'drye-mechanics-five-gloves.css' | asset_url | stylesheet_tag }}
+
+<section class="dryeNEW-section mech-gloves" id="mech-gloves-{{ section.id }}" data-section-id="{{ section.id }}">
+  <div class="dryeNEW-container">
+    <div class="mech-gloves__intro">
+      {% if section.settings.eyebrow != blank %}
+        <span class="dryeNEW-micro">{{ section.settings.eyebrow }}</span>
+      {% endif %}
+
+      {% if section.settings.heading_line_1 != blank or section.settings.heading_emphasis != blank %}
+        <h2 class="dryeNEW-h2 mech-gloves__heading">
+          {% if section.settings.heading_line_1 != blank %}
+            {{ section.settings.heading_line_1 }}
+          {% endif %}
+          {% if section.settings.heading_emphasis != blank %}
+            <em class="dryeNEW-em">{{ section.settings.heading_emphasis }}</em>
+          {% endif %}
+        </h2>
+      {% endif %}
+
+      {% if section.settings.body != blank %}
+        <div class="dryeNEW-body mech-gloves__sub">
+          {{ section.settings.body }}
+        </div>
+      {% endif %}
+    </div>
+
+    <div class="mech-gloves__strip-wrap">
+      <div class="mech-gloves__strip" data-gloves-strip>
+        {% for block in section.blocks %}
+          <article class="mech-gloves__card" {{ block.shopify_attributes }}>
+            <div class="mech-gloves__img">
+              {% if block.settings.image != blank %}
+                {% assign mech_glove_alt = block.settings.image_alt | escape %}
+                {{
+                  block.settings.image
+                  | image_url: width: 1200
+                  | image_tag: class: 'mech-gloves__img-el', loading: 'lazy', alt: mech_glove_alt
+                }}
+              {% else %}
+                <div class="mech-gloves__img-placeholder"></div>
+              {% endif %}
+            </div>
+
+            {% if block.settings.label != blank %}
+              <div class="mech-gloves__lbl">
+                {{ block.settings.label }}
+              </div>
+            {% endif %}
+
+            {% if block.settings.name != blank %}
+              <h3 class="dryeNEW-h3 mech-gloves__name">
+                {{ block.settings.name }}
+              </h3>
+            {% endif %}
+
+            {% if block.settings.body != blank %}
+              <div class="dryeNEW-body--sm mech-gloves__body">
+                {{ block.settings.body }}
+              </div>
+            {% endif %}
+          </article>
+        {% endfor %}
+      </div>
+
+      <div class="mech-gloves__swipe-hint" data-gloves-swipe-hint aria-hidden="true">
+        {{ section.settings.swipe_label }}
+      </div>
+
+      <div class="mech-gloves__fade" aria-hidden="true"></div>
+    </div>
+  </div>
+</section>
+
+<script>
+  (() => {
+    const section = document.getElementById('mech-gloves-{{ section.id }}');
+    if (!section) return;
+
+    const strip = section.querySelector('[data-gloves-strip]');
+    const hint = section.querySelector('[data-gloves-swipe-hint]');
+
+    if (!strip || !hint) return;
+
+    const desktopMq = window.matchMedia('(min-width: 960px)');
+    let hasInteracted = false;
+
+    const updateHint = () => {
+      if (desktopMq.matches) {
+        hint.classList.add('is-hidden');
+        return;
+      }
+
+      const maxScroll = strip.scrollWidth - strip.clientWidth;
+      const hasScrollableContent = maxScroll > 8;
+
+      if (!hasScrollableContent) {
+        hint.classList.add('is-hidden');
+        return;
+      }
+
+      if (strip.scrollLeft > 16 || hasInteracted) {
+        hint.classList.add('is-hidden');
+      } else {
+        hint.classList.remove('is-hidden');
+      }
+    };
+
+    const hideHintOnInteraction = () => {
+      if (desktopMq.matches) return;
+      hasInteracted = true;
+      hint.classList.add('is-hidden');
+    };
+
+    strip.addEventListener('scroll', updateHint, { passive: true });
+    strip.addEventListener('touchstart', hideHintOnInteraction, { passive: true });
+    strip.addEventListener('pointerdown', hideHintOnInteraction, { passive: true });
+    window.addEventListener('resize', updateHint);
+
+    updateHint();
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "DRYE Mechanics 5 Gloves",
+  "tag": "section",
+  "class": "shopify-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "The gloves you can't take off"
+    },
+    {
+      "type": "text",
+      "id": "heading_line_1",
+      "label": "Heading line 1",
+      "default": "Different brands. Same"
+    },
+    {
+      "type": "text",
+      "id": "heading_emphasis",
+      "label": "Heading emphasis",
+      "default": "physics underneath."
+    },
+    {
+      "type": "textarea",
+      "id": "body",
+      "label": "Body",
+      "default": "Every glove you wear does the same thing inside. Seals the hand. Traps the moisture. The label on the outside doesn't change what happens underneath."
+    },
+    {
+      "type": "text",
+      "id": "swipe_label",
+      "label": "Swipe hint label",
+      "default": "Swipe"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "glove",
+      "name": "Glove card",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "text",
+          "id": "image_alt",
+          "label": "Image alt text",
+          "default": "Work glove"
+        },
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Top label",
+          "default": "Most common"
+        },
+        {
+          "type": "text",
+          "id": "name",
+          "label": "Glove name",
+          "default": "Nitrile"
+        },
+        {
+          "type": "richtext",
+          "id": "body",
+          "label": "Body",
+          "default": "<p>Thickest disposable most shops stock. <strong>Saturates with sweat within 20 minutes in warm weather.</strong> Tears easily when removed over damp skin.</p>"
+        }
+      ]
+    }
+  ],
+  "max_blocks": 8,
+  "presets": [
+    {
+      "name": "DRYE Mechanics 5 Gloves",
+      "blocks": [
+        {
+          "type": "glove",
+          "settings": {
+            "label": "Most common",
+            "name": "Nitrile",
+            "body": "<p>Thickest disposable most shops stock. <strong>Saturates with sweat within 20 minutes in warm weather.</strong> Tears easily when removed over damp skin.</p>"
+          }
+        },
+        {
+          "type": "glove",
+          "settings": {
+            "label": "Thin & cheap",
+            "name": "Latex",
+            "body": "<p>Cheaper, thinner, more prone to allergies. Seals just as completely. <strong>The material isn't the problem — the seal is.</strong></p>"
+          }
+        },
+        {
+          "type": "glove",
+          "settings": {
+            "label": "EV & battery work",
+            "name": "HV Class 0",
+            "body": "<p>Mandatory for battery and high-voltage work. Thicker, zero permeability. <strong>Worst sweat retention of any glove you wear.</strong></p>"
+          }
+        },
+        {
+          "type": "glove",
+          "settings": {
+            "label": "Chemicals & fluids",
+            "name": "Rubber",
+            "body": "<p>Chemical-resistant, completely sealed. <strong>Skin soaks in sweat and chemical vapour trapped against it.</strong> Longest wear, most damage.</p>"
+          }
+        },
+        {
+          "type": "glove",
+          "settings": {
+            "label": "Heavy mechanical",
+            "name": "Leather",
+            "body": "<p>Better airflow than rubber, but holds sweat in the lining. <strong>Absorbs once, stays wet all day.</strong> Same humid environment against skin.</p>"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

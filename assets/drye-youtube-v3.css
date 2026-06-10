@@ -1,0 +1,250 @@
+/* ==========================================================================
+   DRYE – YouTube Hero (v3) — follows base.css layout system
+   - Full bleed shell
+   - Content aligns to base.css container width
+   - Optional bg image / video
+   - Heading width follows same content width logic as rest of site
+   ========================================================================== */
+
+[id^="shopify-section-"].section-drye-youtube-hero{
+  width: 100vw;
+  max-width: 100vw;
+  margin-left: calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+
+.section-drye-youtube-hero .page-width,
+.section-drye-youtube-hero .container,
+.section-drye-youtube-hero .wrapper{
+  max-width: none !important;
+  width: 100% !important;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+
+/* Root */
+.section-drye-youtube-hero .drye-hero{
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  background: #111;
+  min-height: var(--drye-hero-minh-m, 640px);
+}
+
+@media (min-width: 990px){
+  .section-drye-youtube-hero .drye-hero{
+    min-height: calc(100vw / 3.45);
+  }
+}
+
+@media (max-width: 989px){
+  .section-drye-youtube-hero .drye-hero{
+    min-height: calc(100vw / 0.8);
+  }
+}
+
+/* Media layer */
+.section-drye-youtube-hero .drye-hero__media{
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  z-index: 0;
+}
+
+
+
+.section-drye-youtube-hero .drye-hero__bgimg--desktop{ display: none; }
+.section-drye-youtube-hero .drye-hero__bgimg--mobile{ display: block; }
+
+@media (min-width: 990px){
+  .section-drye-youtube-hero .drye-hero__bgimg--desktop{ display: block; }
+  .section-drye-youtube-hero .drye-hero__bgimg--mobile{ display: none; }
+}
+
+/* Video */
+.section-drye-youtube-hero .drye-hero__video{
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.section-drye-youtube-hero .drye-hero__video--desktop{ display: none; }
+.section-drye-youtube-hero .drye-hero__video--mobile{ display: block; }
+
+@media (min-width: 990px){
+  .section-drye-youtube-hero .drye-hero__video--desktop{ display: block; }
+  .section-drye-youtube-hero .drye-hero__video--mobile{ display: none; }
+}
+
+.section-drye-youtube-hero .drye-hero__video--desktop{
+  --container-ratio: 3.45;
+  --video-ratio: 1.7777778;
+}
+
+.section-drye-youtube-hero .drye-hero__video--mobile{
+  --container-ratio: 0.8;
+  --video-ratio: 0.5625;
+}
+
+.section-drye-youtube-hero .drye-hero__iframe{
+  position: absolute !important;
+  top: 50% !important;
+  left: 50% !important;
+  transform: translate(-50%, -50%) !important;
+  transform-origin: center;
+  border: 0 !important;
+  width: calc(100% * max(1, var(--container-ratio) / var(--video-ratio))) !important;
+  height: calc(100% * max(1, var(--video-ratio) / var(--container-ratio))) !important;
+  max-width: none !important;
+  max-height: none !important;
+  pointer-events: none;
+}
+.section-drye-youtube-hero .drye-hero__bgimg{
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.section-drye-youtube-hero .drye-hero__bgimg-el,
+.section-drye-youtube-hero .drye-hero__poster-el{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.section-drye-youtube-hero .drye-hero__poster{
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  opacity: 0;
+  pointer-events: none;
+}
+/* Overlay */
+.section-drye-youtube-hero .drye-hero__overlay{
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  background: var(--drye-hero-overlay, rgba(0,0,0,.45));
+  opacity: var(--drye-hero-overlay-opacity, 1);
+  pointer-events: none;
+}
+
+
+/* Content */
+.section-drye-youtube-hero .drye-hero__content{
+  position: relative;
+  z-index: 3;
+  min-height: inherit;
+  display: flex;
+  align-items: center;
+}
+
+/* Use base container width logic */
+.section-drye-youtube-hero .drye-hero__grid{
+  width: 100%;
+  max-width: var(--page-width, 1280px);
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: var(--section-padding-x-mobile, 16px);
+  padding-right: var(--section-padding-x-mobile, 16px);
+  padding-top: var(--drye-hero-pad-top-m, 92px);
+  padding-bottom: var(--drye-hero-pad-bot-m, 84px);
+}
+
+@media (min-width: 991px){
+  .section-drye-youtube-hero .drye-hero__grid{
+    padding-left: var(--section-padding-x, 24px);
+    padding-right: var(--section-padding-x, 24px);
+    padding-top: var(--drye-hero-pad-top-d, 124px);
+    padding-bottom: var(--drye-hero-pad-bot-d, 108px);
+  }
+}
+
+/* Inner content width should follow same content width logic */
+.section-drye-youtube-hero .drye-hero__inner{
+  max-width: var(--content-width, 720px);
+}
+
+/* Typography: base.css owns font family / weight / color */
+.section-drye-youtube-hero .drye-hero__heading{
+  margin: 0 0 18px;
+  white-space: pre-line;
+  font-size: var(--drye-hero-h-m, 40px);
+  max-width: 100%;
+}
+
+@media (min-width: 990px){
+  .section-drye-youtube-hero .drye-hero__heading{
+    font-size: var(--drye-hero-h-d, 56px);
+  }
+}
+
+.section-drye-youtube-hero .drye-hero__body{
+  margin-top: 14px;
+  max-width: 100%;
+  font-size: var(--drye-hero-p-m, 14px);
+}
+
+@media (min-width: 990px){
+  .section-drye-youtube-hero .drye-hero__body{
+    font-size: var(--drye-hero-p-d, 16px);
+  }
+}
+
+.section-drye-youtube-hero .drye-hero__body.rte p{
+  margin: 0;
+}
+
+.section-drye-youtube-hero .drye-hero__body.rte p + p{
+  margin-top: 10px;
+}
+
+.section-drye-youtube-hero .drye-hero__content p{
+  color: hsl(0 0% 72%) !important;
+}
+
+/* CTA */
+.section-drye-youtube-hero .drye-hero__ctas{
+  margin-top: 40px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: center;
+}
+
+.section-drye-youtube-hero .drye-hero__cta{
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 40px;
+  padding: 10px 16px;
+  font-size: 14px;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.section-drye-youtube-hero .drye-hero__cta--primary{
+  background: var(--c-link);
+  color: #fff;
+  border: 1px solid var(--c-link);
+}
+
+.section-drye-youtube-hero .drye-hero__cta--primary:hover{
+  background: var(--c-link-hover);
+  border-color: var(--c-link-hover);
+  color: #fff;
+}
+
+.section-drye-youtube-hero .drye-hero__cta--secondary{
+  background: transparent;
+  border: 1px solid rgba(255,255,255,0.72);
+  color: inherit;
+}
+
+.section-drye-youtube-hero .drye-section--dark .drye-hero__cta--secondary{ color: #fff; }
+.section-drye-youtube-hero .drye-section--light .drye-hero__cta--secondary{ color: #111; }

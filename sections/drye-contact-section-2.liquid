@@ -1,0 +1,491 @@
+{{ 'drye-contact-section-2.css' | asset_url | stylesheet_tag }}
+
+<section class="contact-layout">
+
+  <div class="contact-left">
+
+    <div class="track-cards dryeNEW-reveal">
+      {% for block in section.blocks %}
+        {% if block.type == 'track_card' %}
+          <div
+            class="track-card{% if block.settings.is_active %} active{% endif %}"
+            data-track="{{ block.settings.track_key }}"
+            {{ block.shopify_attributes }}
+          >
+            <span class="tc-label">{{ block.settings.label }}</span>
+            <div class="tc-title">{{ block.settings.title }}</div>
+            <p class="tc-body">{{ block.settings.body }}</p>
+          </div>
+        {% endif %}
+      {% endfor %}
+    </div>
+
+    <div class="team-section dryeNEW-reveal dryeNEW-rd2">
+      <span class="team-label">{{ section.settings.team_label }}</span>
+
+      <div class="team-list">
+        {% for block in section.blocks %}
+          {% if block.type == 'team_member' %}
+            <div class="team-member" {{ block.shopify_attributes }}>
+              <div class="team-avatar">
+                {% if block.settings.image != blank %}
+                  {{
+                    block.settings.image
+                    | image_url: width: 200
+                    | image_tag:
+                      alt: block.settings.name,
+                      loading: 'lazy'
+                  }}
+                {% endif %}
+              </div>
+
+              <div class="team-info">
+                <div class="team-name">{{ block.settings.name }}</div>
+                <div class="team-role">{{ block.settings.role }}</div>
+
+                <div class="team-links">
+                  {% if block.settings.linkedin_url != blank %}
+                    <a href="{{ block.settings.linkedin_url }}" class="team-link">
+                      {{ block.settings.linkedin_label }}
+                    </a>
+                  {% endif %}
+
+                  {% if block.settings.email != blank %}
+                    <a href="mailto:{{ block.settings.email }}" class="team-link">
+                      {{ block.settings.email }}
+                    </a>
+                  {% endif %}
+                </div>
+              </div>
+            </div>
+          {% endif %}
+        {% endfor %}
+      </div>
+    </div>
+
+  </div>
+
+  <div class="contact-right dryeNEW-reveal dryeNEW-rd2">
+
+    {% for block in section.blocks %}
+      {% if block.type == 'form_panel' %}
+        <div
+          class="form-panel{% if block.settings.is_active %} active{% endif %}"
+          id="panel-{{ block.settings.track_key }}"
+          data-track="{{ block.settings.track_key }}"
+          {{ block.shopify_attributes }}
+        >
+          <div class="form-header">
+            <span class="dryeNEW-micro">{{ block.settings.eyebrow }}</span>
+            <h2 class="form-title">{{ block.settings.title }}</h2>
+            <p class="form-desc">{{ block.settings.description }}</p>
+          </div>
+
+          {% form 'contact', class: 'contact-form' %}
+            <input type="hidden" name="contact[contact_track]" value="{{ block.settings.track_key }}">
+            <input type="hidden" name="contact[form_context]" value="{{ block.settings.title }}">
+
+            <div class="field-row two">
+              <div class="field">
+                <label class="field-label" for="ContactFormName-{{ block.id }}">
+                  {{ block.settings.name_label }} <span>*</span>
+                </label>
+                <input
+                  id="ContactFormName-{{ block.id }}"
+                  type="text"
+                  name="contact[name]"
+                  placeholder="{{ block.settings.name_placeholder }}"
+                  required
+                >
+              </div>
+
+              <div class="field">
+                <label class="field-label" for="ContactFormEmail-{{ block.id }}">
+                  {{ block.settings.email_label }} <span>*</span>
+                </label>
+                <input
+                  id="ContactFormEmail-{{ block.id }}"
+                  type="email"
+                  name="contact[email]"
+                  placeholder="{{ block.settings.email_placeholder }}"
+                  required
+                >
+              </div>
+            </div>
+
+            {% if block.settings.show_optional_field %}
+              <div class="field-row">
+                <div class="field">
+                  <label class="field-label" for="ContactFormOptional-{{ block.id }}">
+                    {{ block.settings.optional_label }}
+                  </label>
+                  <input
+                    id="ContactFormOptional-{{ block.id }}"
+                    type="text"
+                    name="contact[{{ block.settings.optional_field_key | handle }}]"
+                    placeholder="{{ block.settings.optional_placeholder }}"
+                  >
+                </div>
+              </div>
+            {% endif %}
+
+            <div class="field-row">
+              <div class="field">
+                <label class="field-label" for="ContactFormMessage-{{ block.id }}">
+                  {{ block.settings.message_label }} <span>*</span>
+                </label>
+                <textarea
+                  id="ContactFormMessage-{{ block.id }}"
+                  name="contact[body]"
+                  placeholder="{{ block.settings.message_placeholder }}"
+                  required
+                ></textarea>
+              </div>
+            </div>
+
+            <div class="form-footer">
+              <button class="btn-submit" type="submit">
+                {{ block.settings.button_label }}
+              </button>
+
+              <span class="form-guarantee">
+                {{ block.settings.guarantee }}
+              </span>
+            </div>
+
+            {% if form.posted_successfully? %}
+              <div class="form-success show">
+                <span class="success-icon">✓</span>
+                <div class="success-h">{{ block.settings.success_heading }}</div>
+                <p class="success-body">{{ block.settings.success_body }}</p>
+              </div>
+            {% endif %}
+
+            {% if form.errors %}
+              <div class="form-errors">
+                {{ form.errors | default_errors }}
+              </div>
+            {% endif %}
+          {% endform %}
+        </div>
+      {% endif %}
+    {% endfor %}
+
+  </div>
+
+</section>
+
+{% schema %}
+{
+  "name": "DRYE Contact Section 2",
+  "tag": "section",
+  "class": "shopify-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "team_label",
+      "label": "Team label",
+      "default": "Who you're writing to"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "track_card",
+      "name": "Track card",
+      "settings": [
+        {
+          "type": "text",
+          "id": "track_key",
+          "label": "Track key",
+          "default": "customer"
+        },
+        {
+          "type": "checkbox",
+          "id": "is_active",
+          "label": "Active by default",
+          "default": true
+        },
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Label",
+          "default": "Customer support"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Order question or product issue"
+        },
+        {
+          "type": "textarea",
+          "id": "body",
+          "label": "Body",
+          "default": "Sizing, shipping, returns, or something not working as expected. We respond within 24 hours on business days."
+        }
+      ]
+    },
+    {
+      "type": "team_member",
+      "name": "Team member",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "text",
+          "id": "name",
+          "label": "Name",
+          "default": "Wilhelm Bäckström"
+        },
+        {
+          "type": "text",
+          "id": "role",
+          "label": "Role",
+          "default": "Founder"
+        },
+        {
+          "type": "url",
+          "id": "linkedin_url",
+          "label": "LinkedIn URL"
+        },
+        {
+          "type": "text",
+          "id": "linkedin_label",
+          "label": "LinkedIn label",
+          "default": "LinkedIn"
+        },
+        {
+          "type": "text",
+          "id": "email",
+          "label": "Email",
+          "default": "wilhelm@drye.se"
+        }
+      ]
+    },
+    {
+      "type": "form_panel",
+      "name": "Form panel",
+      "settings": [
+        {
+          "type": "text",
+          "id": "track_key",
+          "label": "Track key",
+          "default": "customer"
+        },
+        {
+          "type": "checkbox",
+          "id": "is_active",
+          "label": "Active by default",
+          "default": true
+        },
+        {
+          "type": "text",
+          "id": "eyebrow",
+          "label": "Eyebrow",
+          "default": "Customer / Order"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Order question or product issue"
+        },
+        {
+          "type": "textarea",
+          "id": "description",
+          "label": "Description",
+          "default": "We respond within 24 hours on business days. Include your order number if you have one."
+        },
+        {
+          "type": "text",
+          "id": "name_label",
+          "label": "Name label",
+          "default": "Name"
+        },
+        {
+          "type": "text",
+          "id": "name_placeholder",
+          "label": "Name placeholder",
+          "default": "Your name"
+        },
+        {
+          "type": "text",
+          "id": "email_label",
+          "label": "Email label",
+          "default": "Email"
+        },
+        {
+          "type": "text",
+          "id": "email_placeholder",
+          "label": "Email placeholder",
+          "default": "you@email.com"
+        },
+        {
+          "type": "checkbox",
+          "id": "show_optional_field",
+          "label": "Show optional field",
+          "default": true
+        },
+        {
+          "type": "text",
+          "id": "optional_label",
+          "label": "Optional field label",
+          "default": "Order number"
+        },
+        {
+          "type": "text",
+          "id": "optional_placeholder",
+          "label": "Optional field placeholder",
+          "default": "Optional — helps us find your order faster"
+        },
+        {
+          "type": "text",
+          "id": "optional_field_key",
+          "label": "Optional field key",
+          "default": "order_number"
+        },
+        {
+          "type": "text",
+          "id": "message_label",
+          "label": "Message label",
+          "default": "Message"
+        },
+        {
+          "type": "textarea",
+          "id": "message_placeholder",
+          "label": "Message placeholder",
+          "default": "Describe your question or issue"
+        },
+        {
+          "type": "text",
+          "id": "button_label",
+          "label": "Button label",
+          "default": "Send message"
+        },
+        {
+          "type": "textarea",
+          "id": "guarantee",
+          "label": "Guarantee text",
+          "default": "We don't use ticketing systems.\nA person reads this."
+        },
+        {
+          "type": "text",
+          "id": "success_heading",
+          "label": "Success heading",
+          "default": "Message received."
+        },
+        {
+          "type": "textarea",
+          "id": "success_body",
+          "label": "Success body",
+          "default": "We'll respond within 24 hours on business days.\nCheck your inbox — reply comes from a real address."
+        }
+      ]
+    }
+  ],
+  "max_blocks": 12,
+  "presets": [
+    {
+      "name": "DRYE Contact Section 2",
+      "blocks": [
+        {
+          "type": "track_card",
+          "settings": {
+            "track_key": "customer",
+            "is_active": true,
+            "label": "Customer support",
+            "title": "Order question or product issue",
+            "body": "Sizing, shipping, returns, or something not working as expected. We respond within 24 hours on business days."
+          }
+        },
+        {
+          "type": "track_card",
+          "settings": {
+            "track_key": "b2b",
+            "is_active": false,
+            "label": "B2B / Procurement",
+            "title": "Bulk orders, OEM, institutional buyers",
+            "body": "Healthcare, automotive, defence, or industrial procurement. Routed directly to Wilhelm for a conversation — not a form confirmation."
+          }
+        },
+        {
+          "type": "track_card",
+          "settings": {
+            "track_key": "results",
+            "is_active": false,
+            "label": "Share your results",
+            "title": "Documented outcomes from professionals",
+            "body": "Occupational health, dermatology, or field use with measurable outcomes. Referenced from the before/after section of the product page."
+          }
+        },
+        {
+          "type": "team_member",
+          "settings": {
+            "name": "Wilhelm Bäckström",
+            "role": "Founder",
+            "linkedin_label": "LinkedIn",
+            "email": "wilhelm@drye.se"
+          }
+        },
+        {
+          "type": "team_member",
+          "settings": {
+            "name": "Andrew Brathwaite",
+            "role": "Co-Founder",
+            "linkedin_label": "LinkedIn",
+            "email": "andrew@drye.se"
+          }
+        },
+        {
+          "type": "form_panel",
+          "settings": {
+            "track_key": "customer",
+            "is_active": true,
+            "eyebrow": "Customer / Order",
+            "title": "Order question or product issue",
+            "description": "We respond within 24 hours on business days. Include your order number if you have one.",
+            "optional_label": "Order number",
+            "optional_placeholder": "Optional — helps us find your order faster",
+            "optional_field_key": "order_number",
+            "message_placeholder": "Describe your question or issue",
+            "button_label": "Send message"
+          }
+        },
+        {
+          "type": "form_panel",
+          "settings": {
+            "track_key": "b2b",
+            "is_active": false,
+            "eyebrow": "B2B / Procurement",
+            "title": "Bulk orders & institutional buyers",
+            "description": "This goes directly to Wilhelm. Not a CRM. Expect a reply within one business day.",
+            "optional_label": "Company / Organization",
+            "optional_placeholder": "Your company, institution, or team",
+            "optional_field_key": "company_organization",
+            "message_placeholder": "Tell us about volume, region, or procurement requirements",
+            "button_label": "Send inquiry"
+          }
+        },
+        {
+          "type": "form_panel",
+          "settings": {
+            "track_key": "results",
+            "is_active": false,
+            "eyebrow": "Share Results",
+            "title": "Documented outcomes from professionals",
+            "description": "If you've documented outcomes in the field, we'd love to review them.",
+            "optional_label": "Organization / Role",
+            "optional_placeholder": "Clinic, team, company, or title",
+            "optional_field_key": "organization_role",
+            "message_placeholder": "Describe the results, setting, and what you observed",
+            "button_label": "Share results"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

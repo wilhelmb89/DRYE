@@ -1,0 +1,395 @@
+{% comment %}
+  ─────────────────────────────────────────────────────────
+  DRYE — Occlusion Bridge / Mechanism Comparison Section
+  Companion CSS: assets/section-occlusion-bridge.css
+  ─────────────────────────────────────────────────────────
+{% endcomment %}
+
+{{ 'section-occlusion-bridge.css' | asset_url | stylesheet_tag }}
+
+<section class="dryeNEW-section occlusion-cmp" data-section-id="{{ section.id }}" data-drye-section data-section-index="11" data-section-name="mechanism">
+  <div class="dryeNEW-container">
+
+    <div class="occlusion-cmp__intro">
+      {%- if section.settings.eyebrow != blank -%}
+        <span class="dryeNEW-micro occlusion-cmp__eyebrow dryeNEW-reveal">
+          {{ section.settings.eyebrow }}
+        </span>
+      {%- endif -%}
+
+      {%- if section.settings.heading != blank or section.settings.heading_echo != blank -%}
+        <h2 class="dryeNEW-h2 occlusion-cmp__heading dryeNEW-reveal dryeNEW-rd1">
+          {%- if section.settings.heading != blank -%}
+            {{ section.settings.heading }}
+          {%- endif -%}
+          {%- if section.settings.heading_echo != blank -%}
+            <br>
+            <em class="dryeNEW-em">{{ section.settings.heading_echo }}</em>
+          {%- endif -%}
+        </h2>
+      {%- endif -%}
+
+      {%- if section.settings.lead != blank -%}
+        <p class="dryeNEW-body occlusion-cmp__lead dryeNEW-reveal dryeNEW-rd2">
+          {{ section.settings.lead }}
+        </p>
+      {%- endif -%}
+    </div>
+
+    <div class="dryeNEW-grid dryeNEW-grid--2 occlusion-cmp__diagrams">
+
+      <article class="occlusion-cmp__card occlusion-cmp__card--occluded dryeNEW-reveal dryeNEW-rd1"
+        id="{{ section.id }}-without">
+
+        {%- if section.settings.left_label != blank -%}
+          <span class="dryeNEW-micro occlusion-cmp__card-label occlusion-cmp__card-label--occluded">
+            {{ section.settings.left_label }}
+          </span>
+        {%- endif -%}
+
+        {%- if section.settings.left_title != blank -%}
+          <h3 class="dryeNEW-h3 occlusion-cmp__card-title">
+            {{ section.settings.left_title }}
+          </h3>
+        {%- endif -%}
+
+        <div class="cmp-diagram" aria-hidden="true">
+          <div class="cmp-diagram__glove">
+            <span class="dryeNEW-micro cmp-diagram__micro cmp-diagram__glove-text">
+              {{ section.settings.glove_text | default: 'Sealed glove' }}
+            </span>
+          </div>
+
+          <div class="cmp-diagram__pool">
+            <span class="cmp-diagram__vapor cmp-diagram__vapor--1 cmp-diagram__vapor--a"></span>
+            <span class="cmp-diagram__vapor cmp-diagram__vapor--2 cmp-diagram__vapor--b"></span>
+            <span class="cmp-diagram__vapor cmp-diagram__vapor--3 cmp-diagram__vapor--c"></span>
+            <span class="cmp-diagram__vapor cmp-diagram__vapor--1 cmp-diagram__vapor--d"></span>
+            <span class="cmp-diagram__vapor cmp-diagram__vapor--2 cmp-diagram__vapor--e"></span>
+            <span class="cmp-diagram__vapor cmp-diagram__vapor--3 cmp-diagram__vapor--f"></span>
+            <span class="cmp-diagram__vapor cmp-diagram__vapor--1 cmp-diagram__vapor--g"></span>
+          </div>
+
+          <div class="cmp-arrows cmp-arrows--occluded">
+            {%- for i in (1..3) -%}
+              <div class="cmp-arrow cmp-arrow--in cmp-arrow--{{ i }}">
+                <svg viewBox="0 0 16 130" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                  <line x1="8" y1="0" x2="8" y2="120" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="3,4"/>
+                  <path d="M 3 116 L 8 128 L 13 116" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </div>
+            {%- endfor -%}
+          </div>
+
+          <div class="cmp-droplets">
+            <div class="cmp-droplet cmp-droplet--fall cmp-droplet--1"></div>
+            <div class="cmp-droplet cmp-droplet--fall cmp-droplet--2"></div>
+            <div class="cmp-droplet cmp-droplet--fall cmp-droplet--3"></div>
+            <div class="cmp-droplet cmp-droplet--fall cmp-droplet--4"></div>
+            <div class="cmp-droplet cmp-droplet--fall cmp-droplet--5"></div>
+          </div>
+
+          <div class="cmp-diagram__skin cmp-diagram__skin--swollen">
+            <div class="cmp-diagram__skin-layers">
+              <div class="cmp-diagram__skin-layer cmp-diagram__skin-layer--top">
+                <div class="cmp-diagram__swelling-glow"></div>
+                <span class="dryeNEW-micro cmp-diagram__micro cmp-diagram__skin-text">
+                  {{ section.settings.left_text_top | default: 'Sweat traps against skin' }}
+                </span>
+              </div>
+              <div class="cmp-diagram__skin-layer cmp-diagram__skin-layer--mid">
+                <span class="dryeNEW-micro cmp-diagram__micro cmp-diagram__skin-text">
+                  {{ section.settings.left_text_mid | default: 'Skin softens and swells 3×' }}
+                </span>
+              </div>
+              <div class="cmp-diagram__skin-layer cmp-diagram__skin-layer--deep">
+                <span class="dryeNEW-micro cmp-diagram__micro cmp-diagram__skin-text cmp-diagram__skin-text--climax">
+                  {{ section.settings.left_text_climax | default: 'Chemicals get through 3.6× faster' }}
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {%- if section.settings.left_desc != blank -%}
+          <p class="dryeNEW-body--sm occlusion-cmp__card-desc">
+            {{ section.settings.left_desc }}
+          </p>
+        {%- endif -%}
+      </article>
+
+      <article class="occlusion-cmp__card occlusion-cmp__card--drye"
+        id="{{ section.id }}-with">
+
+        {%- if section.settings.right_label != blank -%}
+          <span class="dryeNEW-micro occlusion-cmp__card-label occlusion-cmp__card-label--drye">
+            {{ section.settings.right_label }}
+          </span>
+        {%- endif -%}
+
+        {%- if section.settings.right_title != blank -%}
+          <h3 class="dryeNEW-h3 occlusion-cmp__card-title">
+            {{ section.settings.right_title }}
+          </h3>
+        {%- endif -%}
+
+        <div class="cmp-diagram" aria-hidden="true">
+          <div class="cmp-diagram__glove">
+            <span class="dryeNEW-micro cmp-diagram__micro cmp-diagram__glove-text">
+              {{ section.settings.glove_text | default: 'Sealed glove' }}
+            </span>
+          </div>
+
+          <div class="cmp-diagram__drye">
+            <div class="cmp-diagram__lyocell">
+              <span class="dryeNEW-micro cmp-diagram__micro cmp-diagram__layer-text">
+                {{ section.settings.lyocell_label | default: 'Lyocell · pulls outward' }}
+              </span>
+            </div>
+            <div class="cmp-diagram__pp">
+              <span class="dryeNEW-micro cmp-diagram__micro cmp-diagram__layer-text">
+                {{ section.settings.pp_label | default: 'Polypropylene · repels skin side' }}
+              </span>
+              <span class="dryeNEW-micro cmp-diagram__micro cmp-diagram__layer-text cmp-diagram__layer-text--end">
+                {{ section.settings.thickness_label | default: 'DRYE 0.4mm' }}
+              </span>
+            </div>
+          </div>
+
+          <div class="cmp-arrows cmp-arrows--drye">
+            {%- for i in (1..3) -%}
+              <div class="cmp-arrow cmp-arrow--out cmp-arrow--{{ i }}">
+                <svg viewBox="0 0 16 130" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                  <line x1="8" y1="14" x2="8" y2="130" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="3,4"/>
+                  <path d="M 3 18 L 8 4 L 13 18" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </div>
+            {%- endfor -%}
+          </div>
+
+          <div class="cmp-droplets">
+            <div class="cmp-droplet cmp-droplet--rise cmp-droplet--1"></div>
+            <div class="cmp-droplet cmp-droplet--rise cmp-droplet--2"></div>
+            <div class="cmp-droplet cmp-droplet--rise cmp-droplet--3"></div>
+            <div class="cmp-droplet cmp-droplet--rise cmp-droplet--4"></div>
+            <div class="cmp-droplet cmp-droplet--rise cmp-droplet--5"></div>
+            <div class="cmp-droplet cmp-droplet--rise cmp-droplet--6"></div>
+          </div>
+
+          <div class="cmp-diagram__skin">
+            <div class="cmp-diagram__skin-layers">
+              <div class="cmp-diagram__skin-layer cmp-diagram__skin-layer--top">
+                <span class="dryeNEW-micro cmp-diagram__micro cmp-diagram__skin-text">
+                  {{ section.settings.right_text_top | default: 'Skin stays dry' }}
+                </span>
+              </div>
+              <div class="cmp-diagram__skin-layer cmp-diagram__skin-layer--mid">
+                <span class="dryeNEW-micro cmp-diagram__micro cmp-diagram__skin-text">
+                  {{ section.settings.right_text_mid | default: 'Skin barrier intact' }}
+                </span>
+              </div>
+              <div class="cmp-diagram__skin-layer cmp-diagram__skin-layer--deep">
+                <span class="dryeNEW-micro cmp-diagram__micro cmp-diagram__skin-text cmp-diagram__skin-text--climax">
+                  {{ section.settings.right_text_climax | default: 'Chemicals stay out' }}
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {%- if section.settings.right_desc != blank -%}
+          <p class="dryeNEW-body--sm occlusion-cmp__card-desc">
+            {{ section.settings.right_desc }}
+          </p>
+        {%- endif -%}
+      </article>
+
+    </div>
+
+    <div class="occlusion-cmp__cta-bar">
+      <button
+        class="occlusion-cmp__reveal-btn"
+        onclick="dryeReveal('{{ section.id }}')"
+        aria-expanded="false">
+        {{ section.settings.reveal_cta | default: 'See what changes with DRYE →' }}
+      </button>
+      <button
+        class="occlusion-cmp__takeback-btn"
+        onclick="dryeUnreveal('{{ section.id }}')"
+        aria-expanded="false">
+        {{ section.settings.takeback_cta | default: '← Take me back' }}
+      </button>
+    </div>
+
+  </div>
+
+  <script>
+    function dryeReveal(sectionId) {
+      var section = document.querySelector('[data-section-id="' + sectionId + '"]');
+      if (section) section.classList.add('occlusion-cmp--revealed');
+    }
+    function dryeUnreveal(sectionId) {
+      var section = document.querySelector('[data-section-id="' + sectionId + '"]');
+      if (section) section.classList.remove('occlusion-cmp--revealed');
+    }
+  </script>
+
+</section>
+
+{% schema %}
+{
+  "name": "Occlusion Bridge",
+  "tag": "section",
+  "class": "shopify-section--occlusion-bridge",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Intro"
+    },
+    {
+  "type": "text",
+  "id": "reveal_cta",
+  "label": "Reveal CTA text",
+  "default": "See what changes with DRYE →"
+},
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "The mechanism"
+    },
+    {
+      "type": "textarea",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Every shift, your skin gets more permeable."
+    },
+    {
+      "type": "text",
+      "id": "heading_echo",
+      "label": "Heading echo",
+      "default": "DRYE moves the moisture out."
+    },
+    {
+      "type": "textarea",
+      "id": "lead",
+      "label": "Lead paragraph",
+      "default": "The sealed glove doesn't change. What changes is what sits between the glove and your skin — and that decides whether moisture is trapped or routed."
+    },
+    {
+      "type": "header",
+      "content": "Shared diagram labels"
+    },
+    {
+      "type": "text",
+      "id": "glove_text",
+      "label": "Glove bar text",
+      "default": "Sealed glove"
+    },
+    {
+      "type": "text",
+      "id": "lyocell_label",
+      "label": "Lyocell layer label",
+      "default": "Lyocell · pulls outward"
+    },
+    {
+      "type": "text",
+      "id": "pp_label",
+      "label": "Polypropylene layer label",
+      "default": "Polypropylene · repels skin side"
+    },
+    {
+      "type": "text",
+      "id": "thickness_label",
+      "label": "DRYE thickness label",
+      "default": "DRYE 0.4mm"
+    },
+    {
+      "type": "header",
+      "content": "Without DRYE (left card)"
+    },
+    {
+      "type": "text",
+      "id": "left_label",
+      "label": "Eyebrow",
+      "default": "Without DRYE"
+    },
+    {
+      "type": "text",
+      "id": "left_title",
+      "label": "Card title",
+      "default": "Sweat traps against skin"
+    },
+    {
+      "type": "text",
+      "id": "left_text_top",
+      "label": "Top skin layer text",
+      "default": "Sweat traps against skin"
+    },
+    {
+      "type": "text",
+      "id": "left_text_mid",
+      "label": "Mid skin layer text",
+      "default": "Skin softens and swells 3×"
+    },
+    {
+      "type": "text",
+      "id": "left_text_climax",
+      "label": "Deep skin layer text (climax)",
+      "default": "Chemicals get through 3.6× faster"
+    },
+    {
+      "type": "textarea",
+      "id": "left_desc",
+      "label": "Description below diagram",
+      "default": "The sealed glove blocks evaporation. Sweat pools against skin. The gradient reverses — moisture pushes inward instead of out."
+    },
+    {
+      "type": "header",
+      "content": "With DRYE (right card)"
+    },
+    {
+      "type": "text",
+      "id": "right_label",
+      "label": "Eyebrow",
+      "default": "With DRYE"
+    },
+    {
+      "type": "text",
+      "id": "right_title",
+      "label": "Card title",
+      "default": "Sweat routes outward"
+    },
+    {
+      "type": "text",
+      "id": "right_text_top",
+      "label": "Top skin layer text",
+      "default": "Skin stays dry"
+    },
+    {
+      "type": "text",
+      "id": "right_text_mid",
+      "label": "Mid skin layer text",
+      "default": "Skin barrier intact"
+    },
+    {
+      "type": "text",
+      "id": "right_text_climax",
+      "label": "Deep skin layer text (climax)",
+      "default": "Chemicals stay out"
+    },
+    {
+      "type": "textarea",
+      "id": "right_desc",
+      "label": "Description below diagram",
+      "default": "The skin side is hydrophobic — sweat can't bond to it. The outer side pulls moisture toward it. Sweat routes from skin to outside, continuously."
+    }
+  ],
+  "presets": [
+    {
+      "name": "Occlusion Bridge",
+      "category": "DRYE"
+    }
+  ]
+}
+{% endschema %}

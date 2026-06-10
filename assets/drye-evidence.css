@@ -1,0 +1,381 @@
+/* ==========================================================================
+   DRYE Evidence Section — drye-evidence.css
+
+   Relies on tokens from base.css. Does NOT duplicate them.
+   Uses existing tokens only — no new tokens required.
+
+   Upload to: assets/drye-evidence.css
+   ========================================================================== */
+
+/* ─── INTRO ─────────────────────────────── */
+.evidence__intro {
+  max-width: 680px;
+  margin-bottom: var(--space-40);
+}
+
+.evidence__heading {
+  color: var(--deep);
+  margin-bottom: var(--space-16);
+}
+
+.evidence__heading .dryeNEW-italic,
+.evidence__heading .dryeNEW-em {
+  color: var(--accent);
+}
+
+.evidence__lede {
+  color: var(--muted);
+}
+
+/* ─── RAIL ──────────────────────────────── */
+.evidence__rail-wrap {
+  position: relative;
+  margin-inline: calc(var(--page-pad) * -1);
+}
+
+.evidence__rail {
+  display: flex;
+  gap: var(--grid-gap-16);
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-padding-inline-start: var(--page-pad);
+  padding: 0 var(--page-pad);
+  padding-bottom: var(--space-8);
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.evidence__rail::-webkit-scrollbar { display: none; }
+
+.evidence__fade {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: var(--space-8);
+  width: 60px;
+  background: linear-gradient(90deg, rgba(255, 255, 255, 0) 0%, var(--bg) 100%);
+  pointer-events: none;
+  opacity: 1;
+  transition: opacity var(--dur-base) var(--ease-standard);
+  z-index: 2;
+}
+
+.evidence__fade.is-hidden { opacity: 0; }
+
+.evidence__swipe-hint {
+  position: absolute;
+  bottom: -28px;
+  right: var(--page-pad);
+  display: flex;
+  align-items: center;
+  gap: var(--space-6);
+  font-family: var(--font-body);
+  font-size: var(--fs-micro-3);
+  font-weight: var(--fw-medium);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--caption);
+  pointer-events: none;
+  opacity: 1;
+  transition: opacity var(--dur-base) var(--ease-standard);
+  z-index: 3;
+}
+
+.evidence__swipe-hint::after {
+  content: '';
+  display: inline-block;
+  width: 18px;
+  height: 1px;
+  background: var(--caption);
+  animation: evidenceSwipeNudge 1.8s ease-in-out infinite;
+}
+
+.evidence__swipe-hint.is-hidden { opacity: 0; }
+
+@keyframes evidenceSwipeNudge {
+  0%, 100% { transform: translateX(0); opacity: 0.6; }
+  50% { transform: translateX(6px); opacity: 1; }
+}
+
+/* ─── CARD ──────────────────────────────── */
+.evidence__card {
+  flex: 0 0 280px;
+  scroll-snap-align: start;
+  background: var(--bg);
+  border: var(--border-base);
+  padding: var(--space-28) var(--space-24) var(--space-22) var(--space-24);
+  display: flex;
+  flex-direction: column;
+  min-height: 280px;
+  position: relative;
+  transition: border-color var(--dur-base) var(--ease-standard);
+}
+
+.evidence__card:hover {
+  border-color: var(--sage);
+}
+
+.evidence__card-label {
+  color: var(--sage);
+  margin-bottom: var(--space-24);
+}
+
+.evidence__stat {
+  font-family: var(--font-display);
+  font-weight: var(--fw-semibold);
+  font-size: 56px;
+  line-height: 0.95;
+  letter-spacing: var(--ls-tight-display);
+  color: var(--deep);
+  margin-bottom: var(--space-14);
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: var(--space-4);
+}
+
+.evidence__stat--qualitative {
+  font-size: 28px;
+  letter-spacing: var(--ls-tight-h2);
+  line-height: var(--lh-heading-tight);
+}
+
+.evidence__stat-prefix {
+  font-size: 32px;
+  font-weight: var(--fw-medium);
+  color: var(--accent);
+}
+
+.evidence__stat-suffix {
+  font-size: 16px;
+  font-weight: var(--fw-medium);
+  color: var(--accent);
+  letter-spacing: 0;
+}
+
+.evidence__stat--qualitative .evidence__stat-suffix {
+  font-size: 14px;
+}
+
+.evidence__card-body {
+  color: var(--muted);
+  margin-bottom: auto;
+  padding-bottom: var(--space-20);
+}
+
+.evidence__card-body strong {
+  font-weight: var(--fw-semibold);
+  color: var(--deep);
+}
+
+.evidence__card-source {
+  border-top: var(--border-base);
+  padding-top: var(--space-14);
+  font-family: var(--font-body);
+  font-size: var(--fs-micro-3);
+  font-weight: var(--fw-medium);
+  color: var(--accent);
+  letter-spacing: 0.02em;
+  line-height: 1.4;
+}
+
+/* ─── MECHANISM BRIDGE CARD ─────────────── */
+.evidence__card--bridge {
+  background: var(--bg-ink);
+  border-color: var(--bg-ink);
+  color: #FFFFFF;
+}
+
+.evidence__card--bridge:hover {
+  border-color: var(--bg-ink);
+}
+
+.evidence__card--bridge .evidence__card-label {
+  color: rgba(95, 138, 139, 0.9);
+}
+
+.evidence__card--bridge .evidence__bridge-paradigm {
+  font-family: var(--font-editorial);
+  font-style: italic;
+  font-weight: var(--fw-regular);
+  font-size: 20px;
+  line-height: 1.3;
+  color: rgba(255, 255, 255, 0.88);
+  margin-bottom: var(--space-20);
+  letter-spacing: -0.01em;
+}
+
+.evidence__card--bridge .evidence__bridge-mechanism {
+  font-family: var(--font-body);
+  font-size: var(--fs-body-sm);
+  line-height: var(--lh-body-mid);
+  color: rgba(255, 255, 255, 0.7);
+  margin-bottom: auto;
+  padding-bottom: var(--space-20);
+}
+
+.evidence__card--bridge .evidence__bridge-name {
+  font-family: var(--font-display);
+  font-weight: var(--fw-semibold);
+  color: #FFFFFF;
+  letter-spacing: -0.01em;
+}
+
+.evidence__card--bridge .evidence__card-source {
+  border-top-color: rgba(255, 255, 255, 0.15);
+  padding-top: var(--space-14);
+  display: flex;
+  align-items: center;
+  gap: var(--space-8);
+  color: var(--emerald);
+  font-weight: var(--fw-semibold);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  font-size: var(--fs-micro-3);
+}
+
+.evidence__card--bridge .evidence__card-source::after {
+  content: '→';
+  font-size: 14px;
+  font-weight: var(--fw-medium);
+  transition: transform var(--dur-base) var(--ease-standard);
+}
+
+.evidence__card--bridge:hover .evidence__card-source::after {
+  transform: translateX(4px);
+}
+
+/* ─── NAV ───────────────────────────────── */
+.evidence__nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-24);
+  margin-top: var(--space-32);
+}
+
+.evidence__progress {
+  display: flex;
+  gap: var(--space-6);
+  flex: 1;
+  max-width: 320px;
+}
+
+.evidence__dot {
+  flex: 1;
+  height: 2px;
+  background: var(--border);
+  transition: background var(--dur-base) var(--ease-standard);
+  padding: 0;
+  border: none;
+  cursor: pointer;
+}
+
+.evidence__dot.is-active {
+  background: var(--deep);
+}
+
+.evidence__arrows {
+  display: flex;
+  gap: var(--space-8);
+}
+
+.evidence__arrow {
+  width: 40px;
+  height: 40px;
+  border: var(--border-base);
+  background: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--deep);
+  cursor: pointer;
+  transition:
+    border-color var(--dur-base) var(--ease-standard),
+    opacity var(--dur-base) var(--ease-standard);
+}
+
+.evidence__arrow:hover {
+  border-color: var(--deep);
+}
+
+.evidence__arrow:disabled,
+.evidence__arrow.is-disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+.evidence__arrow:disabled:hover,
+.evidence__arrow.is-disabled:hover {
+  border-color: var(--border);
+}
+
+.evidence__arrow svg {
+  width: 14px;
+  height: 14px;
+}
+
+/* ─── DESKTOP ───────────────────────────── */
+@media (min-width: 768px) {
+  .evidence__intro {
+    margin-bottom: var(--space-48);
+  }
+
+  .evidence__card {
+    flex: 0 0 320px;
+    padding: var(--space-32) var(--space-28) var(--space-24) var(--space-28);
+    min-height: 300px;
+  }
+
+  .evidence__stat {
+    font-size: 64px;
+  }
+
+  .evidence__stat--qualitative {
+    font-size: 32px;
+  }
+
+  .evidence__card--bridge .evidence__bridge-paradigm {
+    font-size: 22px;
+  }
+
+  .evidence__swipe-hint { display: none; }
+
+  .evidence__fade { width: 100px; }
+}
+
+@media (max-width: 767px) {
+  .evidence__arrows { display: none; }
+  .evidence__progress { max-width: 100%; }
+  .evidence__nav { margin-top: var(--space-40); }
+}
+/* ─── MOBILE PADDING FIX ─── */
+@media (max-width: 767px) {
+  /* 1. Krymp sektionspadding — overridar base.css token lokalt */
+  .evidence {
+    --section-pad-y: var(--space-48);
+  }
+
+  /* 2. Tighta intro */
+  .evidence__intro {
+    margin-bottom: var(--space-24);
+  }
+
+  /* 3. Låt korten andas mindre tomt */
+  .evidence__card {
+    min-height: 0;
+    padding: var(--space-22) var(--space-20) var(--space-18) var(--space-20);
+  }
+
+  /* 4. Mindre stat på mobil — kortet blir mer balanserat */
+  .evidence__stat {
+    font-size: 44px;
+    margin-bottom: var(--space-10);
+  }
+
+  /* 5. Nav närmare — ersätter den tidigare 40px-överskruvningen */
+  .evidence__nav {
+    margin-top: var(--space-20);
+  }
+}

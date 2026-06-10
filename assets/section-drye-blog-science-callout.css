@@ -1,0 +1,86 @@
+/* DRYE Blog Science Callout */
+
+.science-callout {
+  background: var(--bg-ink);
+  padding: 56px var(--page-pad);
+}
+
+@media (min-width: 768px) {
+  .science-callout {
+    padding: 72px 40px;
+  }
+}
+
+.science-in {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  display: grid;
+  gap: 48px;
+}
+
+@media (min-width: 768px) {
+  .science-in {
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+  }
+}
+
+.sci-label {
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--sage);
+  margin-bottom: 14px;
+  display: block;
+}
+
+.sci-h {
+  font-family: "Clash Grotesk", sans-serif;
+  font-size: clamp(20px, 3.5vw, 28px);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  color: white;
+  line-height: 1.2;
+  margin-bottom: 12px;
+}
+
+.sci-body {
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.38);
+  line-height: 1.75;
+}
+
+.sci-stats {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.sci-stat {
+  border-left: 2px solid rgba(95, 138, 139, 0.3);
+  padding: 16px 20px;
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.sci-stat-num {
+  font-family: "Clash Grotesk", sans-serif;
+  font-size: 28px;
+  font-weight: 600;
+  letter-spacing: -0.03em;
+  color: white;
+  margin-bottom: 4px;
+}
+
+.sci-stat-num em {
+  color: var(--sage);
+  font-style: normal;
+  font-size: 0.75em;
+}
+
+.sci-stat-lbl {
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.3);
+  line-height: 1.5;
+}

@@ -1,0 +1,44 @@
+{{ 'section-drye-article-hero-image.css' | asset_url | stylesheet_tag }}
+
+<div class="hero-img-wrap">
+  <div class="hero-img">
+    {% if article.image %}
+      {{
+        article.image
+        | image_url: width: 1800
+        | image_tag:
+          loading: 'eager',
+          widths: '600, 900, 1200, 1600, 1800',
+          sizes: '(min-width: 1100px) 1100px, 100vw',
+          alt: article.image.alt | default: article.title
+      }}
+    {% else %}
+      <div class="hero-img-placeholder">[ FIELD PHOTO — UKRAINE ]</div>
+    {% endif %}
+  </div>
+
+  {% if section.settings.hero_caption != blank %}
+    <p class="hero-img-caption">{{ section.settings.hero_caption }}</p>
+  {% endif %}
+</div>
+
+{% schema %}
+{
+  "name": "DRYE Article Hero Image",
+  "tag": "section",
+  "class": "section-drye-article-hero-image",
+  "settings": [
+    {
+      "type": "textarea",
+      "id": "hero_caption",
+      "label": "Hero image caption",
+      "default": "National Guard of Ukraine, 2nd Corps (\"Khartiya\"). 10 soldiers, structured questionnaire, signed personally by the Chaplain of 2nd Corps. 2025."
+    }
+  ],
+  "presets": [
+    {
+      "name": "DRYE Article Hero Image"
+    }
+  ]
+}
+{% endschema %}

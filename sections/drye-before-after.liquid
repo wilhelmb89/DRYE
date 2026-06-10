@@ -1,0 +1,231 @@
+{{ 'drye-before-after.css' | asset_url | stylesheet_tag }}
+
+<section
+  class="dryeNEW-section drye-ba-section"
+  id="drye-before-after-{{ section.id }}"
+  data-section-id="{{ section.id }}"
+>
+  <div class="dryeNEW-container">
+    {% if section.settings.micro_label != blank %}
+      <span class="dryeNEW-micro drye-ba-micro">
+        {{ section.settings.micro_label }}
+      </span>
+    {% endif %}
+
+    {% if section.settings.heading_line_1 != blank or section.settings.heading_line_2 != blank %}
+      <h2 class="dryeNEW-h2 drye-ba-heading">
+        {{ section.settings.heading_line_1 }}
+        {% if section.settings.heading_line_2 != blank %}<br>{% endif %}
+        {{ section.settings.heading_line_2 }}
+      </h2>
+    {% endif %}
+
+    {% if section.settings.intro != blank %}
+      <div class="dryeNEW-body drye-ba-intro">
+        <p>{{ section.settings.intro }}</p>
+      </div>
+    {% endif %}
+
+    <div class="drye-ba-grid">
+      {% for block in section.blocks %}
+        <article class="drye-ba-card" {{ block.shopify_attributes }}>
+          <div class="drye-ba-images">
+            <div class="drye-ba-image-wrap">
+              {% if block.settings.before_image != blank %}
+                {{
+                  block.settings.before_image
+                  | image_url: width: 900
+                  | image_tag:
+                    loading: 'lazy',
+                    class: 'drye-ba-image',
+                    alt: block.settings.before_alt | escape
+                }}
+              {% else %}
+                <div class="drye-ba-placeholder drye-ba-placeholder--before">
+                  <span>{{ section.settings.before_label }}</span>
+                </div>
+              {% endif %}
+              <div class="dryeNEW-micro drye-ba-image-label">{{ section.settings.before_label }}</div>
+            </div>
+
+            <div class="drye-ba-image-wrap">
+              {% if block.settings.after_image != blank %}
+                {{
+                  block.settings.after_image
+                  | image_url: width: 900
+                  | image_tag:
+                    loading: 'lazy',
+                    class: 'drye-ba-image',
+                    alt: block.settings.after_alt | escape
+                }}
+              {% else %}
+                <div class="drye-ba-placeholder drye-ba-placeholder--after">
+                  <span>{{ section.settings.after_label }}</span>
+                </div>
+              {% endif %}
+              <div class="dryeNEW-micro drye-ba-image-label">{{ section.settings.after_label }}</div>
+            </div>
+
+            <div class="drye-ba-divider" aria-hidden="true"></div>
+          </div>
+
+          <div class="drye-ba-body">
+            {% if block.settings.timeline != blank %}
+              <div class="dryeNEW-micro drye-ba-timeline">{{ block.settings.timeline }}</div>
+            {% endif %}
+
+            {% if block.settings.quote != blank %}
+              <div class="dryeNEW-body drye-ba-quote">
+                <p>{{ block.settings.quote }}</p>
+              </div>
+            {% endif %}
+
+            {% if block.settings.attribution != blank %}
+              <div class="dryeNEW-body--caption drye-ba-attribution">
+                <p>{{ block.settings.attribution }}</p>
+              </div>
+            {% endif %}
+          </div>
+        </article>
+      {% endfor %}
+    </div>
+
+    {% if section.settings.note != blank %}
+      <div class="dryeNEW-body--caption drye-ba-note">
+        <p>{{ section.settings.note }}</p>
+      </div>
+    {% endif %}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "DRYE Before / After",
+  "tag": "section",
+  "class": "shopify-section-drye-before-after",
+  "settings": [
+    {
+      "type": "text",
+      "id": "micro_label",
+      "label": "Micro label",
+      "default": "Real Users — Real Results"
+    },
+    {
+      "type": "text",
+      "id": "heading_line_1",
+      "label": "Heading line 1",
+      "default": "Before and after."
+    },
+    {
+      "type": "text",
+      "id": "heading_line_2",
+      "label": "Heading line 2",
+      "default": "No filters. No staging."
+    },
+    {
+      "type": "textarea",
+      "id": "intro",
+      "label": "Intro text",
+      "default": "These are unsolicited photos sent directly to us by users. We didn't ask for them. They sent them because the results were that visible."
+    },
+    {
+      "type": "text",
+      "id": "before_label",
+      "label": "Before label",
+      "default": "Before"
+    },
+    {
+      "type": "text",
+      "id": "after_label",
+      "label": "After label",
+      "default": "After"
+    },
+    {
+      "type": "text",
+      "id": "note",
+      "label": "Bottom note",
+      "default": "Note: Placeholder images shown — replace with actual user-submitted photos."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "case",
+      "name": "Before / after card",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "before_image",
+          "label": "Before image"
+        },
+        {
+          "type": "text",
+          "id": "before_alt",
+          "label": "Before image alt text",
+          "default": "Before image"
+        },
+        {
+          "type": "image_picker",
+          "id": "after_image",
+          "label": "After image"
+        },
+        {
+          "type": "text",
+          "id": "after_alt",
+          "label": "After image alt text",
+          "default": "After image"
+        },
+        {
+          "type": "text",
+          "id": "timeline",
+          "label": "Timeline",
+          "default": "After 5 months"
+        },
+        {
+          "type": "textarea",
+          "id": "quote",
+          "label": "Quote",
+          "default": "\"I had problems for years, and it just kept getting worse. I still moisturize sometimes — but my hands are honestly just normal now.\""
+        },
+        {
+          "type": "text",
+          "id": "attribution",
+          "label": "Attribution",
+          "default": "— Jens Stålnacke, Mine Worker, Luleå"
+        }
+      ]
+    }
+  ],
+  "max_blocks": 3,
+  "presets": [
+    {
+      "name": "DRYE Before / After",
+      "blocks": [
+        {
+          "type": "case",
+          "settings": {
+            "timeline": "After 5 months",
+            "quote": "\"I had problems for years, and it just kept getting worse. I still moisturize sometimes — but my hands are honestly just normal now.\"",
+            "attribution": "— Jens Stålnacke, Mine Worker, Luleå"
+          }
+        },
+        {
+          "type": "case",
+          "settings": {
+            "timeline": "After one season",
+            "quote": "\"I had cracks all over my knuckles, redness and eczema. My hands stay drier, my grip is better — and my skin holds up much better.\"",
+            "attribution": "— Linnea Pettersson Dove, Professional Hockey Player, Gothenburg"
+          }
+        },
+        {
+          "type": "case",
+          "settings": {
+            "timeline": "After first use",
+            "quote": "\"The irritation always came back. Since switching to the liners, my hands feel calmer after every game.\"",
+            "attribution": "— Chris P., Fort Worth, Texas"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

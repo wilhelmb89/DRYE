@@ -1,0 +1,131 @@
+{{ 'section-drye-blog-science-callout.css' | asset_url | stylesheet_tag }}
+
+<div class="science-callout">
+  <div class="science-in">
+    <div>
+      <span class="sci-label rev">{{ section.settings.label }}</span>
+      <h2 class="sci-h rev rd1">
+        {{ section.settings.heading_line_1 }}<br>{{ section.settings.heading_line_2 }}
+      </h2>
+      <p class="sci-body rev rd2">
+        {{ section.settings.body }}
+      </p>
+    </div>
+
+    <div class="sci-stats">
+      <div class="sci-stat rev rd2">
+        <div class="sci-stat-num">
+          {{ section.settings.stat_1_value }}<em>{{ section.settings.stat_1_suffix }}</em>
+        </div>
+        <div class="sci-stat-lbl">{{ section.settings.stat_1_label }}</div>
+      </div>
+
+      <div class="sci-stat rev rd3">
+        <div class="sci-stat-num">
+          {{ section.settings.stat_2_value }}<em>{{ section.settings.stat_2_suffix }}</em>
+        </div>
+        <div class="sci-stat-lbl">{{ section.settings.stat_2_label }}</div>
+      </div>
+
+      <div class="sci-stat rev rd4">
+        <div class="sci-stat-num">
+          {{ section.settings.stat_3_value }}<em>{{ section.settings.stat_3_suffix }}</em>
+        </div>
+        <div class="sci-stat-lbl">{{ section.settings.stat_3_label }}</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "DRYE Blog Science Callout",
+  "tag": "section",
+  "class": "section-drye-blog-science-callout",
+  "settings": [
+    {
+      "type": "text",
+      "id": "label",
+      "label": "Label",
+      "default": "Why this matters"
+    },
+    {
+      "type": "text",
+      "id": "heading_line_1",
+      "label": "Heading line 1",
+      "default": "The problem is documented."
+    },
+    {
+      "type": "text",
+      "id": "heading_line_2",
+      "label": "Heading line 2",
+      "default": "We built the solution."
+    },
+    {
+      "type": "textarea",
+      "id": "body",
+      "label": "Body",
+      "default": "DRYE didn't identify the moisture-damage problem — the science already had. Uppsala University, RISE, the Swedish School of Textiles, and Skåne University Hospital validated the mechanism. We built the first material that addresses it structurally."
+    },
+    {
+      "type": "text",
+      "id": "stat_1_value",
+      "label": "Stat 1 value",
+      "default": "1.72"
+    },
+    {
+      "type": "text",
+      "id": "stat_1_suffix",
+      "label": "Stat 1 suffix",
+      "default": "×"
+    },
+    {
+      "type": "text",
+      "id": "stat_1_label",
+      "label": "Stat 1 label",
+      "default": "S. aureus increase inside occlusive gloves after 4 hours — Acta Dermato-Venereologica, 2021"
+    },
+    {
+      "type": "text",
+      "id": "stat_2_value",
+      "label": "Stat 2 value",
+      "default": "1000"
+    },
+    {
+      "type": "text",
+      "id": "stat_2_suffix",
+      "label": "Stat 2 suffix",
+      "default": "×"
+    },
+    {
+      "type": "text",
+      "id": "stat_2_label",
+      "label": "Stat 2 label",
+      "default": "More bacteria transferred from damp hands vs dry — University of Bradford, Journal of Applied Microbiology"
+    },
+    {
+      "type": "text",
+      "id": "stat_3_value",
+      "label": "Stat 3 value",
+      "default": "7"
+    },
+    {
+      "type": "text",
+      "id": "stat_3_suffix",
+      "label": "Stat 3 suffix",
+      "default": "yr"
+    },
+    {
+      "type": "text",
+      "id": "stat_3_label",
+      "label": "Stat 3 label",
+      "default": "R&D across 4 institutions before first commercial pair shipped"
+    }
+  ],
+  "presets": [
+    {
+      "name": "DRYE Blog Science Callout"
+    }
+  ]
+}
+{% endschema %}

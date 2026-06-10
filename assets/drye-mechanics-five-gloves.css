@@ -1,0 +1,195 @@
+/* ==========================================================================
+   DRYE Mechanics — Five Gloves
+   Based on section 4 in drye-mechanics HTML
+   Depends on base.css
+   ========================================================================== */
+
+.mech-gloves__intro {
+  margin-bottom: var(--space-40);
+  max-width: 640px;
+}
+
+.mech-gloves__heading {
+  margin-bottom: var(--space-14);
+  color: var(--deep);
+}
+
+.mech-gloves__heading .dryeNEW-em,
+.mech-gloves__heading em {
+  margin-left: 0.2em;
+}
+
+.mech-gloves__sub {
+  max-width: 520px;
+  color: var(--muted);
+}
+
+.mech-gloves__strip-wrap {
+  position: relative;
+  padding-bottom: var(--space-56);
+}
+
+.mech-gloves__strip {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: 75vw;
+  gap: var(--space-2);
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+  background: var(--border);
+  border-top: var(--border-base);
+  border-bottom: var(--border-base);
+}
+
+.mech-gloves__strip::-webkit-scrollbar {
+  display: none;
+}
+
+.mech-gloves__card {
+  display: flex;
+  flex-direction: column;
+  padding-bottom: var(--space-24);
+  background: var(--bg);
+  border-left: var(--border-width-strong) solid var(--red);
+  scroll-snap-align: start;
+}
+
+.mech-gloves__img {
+  overflow: hidden;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  margin-bottom: var(--space-18);
+  background: var(--deep);
+}
+
+.mech-gloves__img-el,
+.mech-gloves__img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: saturate(0.7) brightness(0.92);
+}
+
+.mech-gloves__img-placeholder {
+  width: 100%;
+  height: 100%;
+  background:
+    linear-gradient(
+      180deg,
+      var(--deep) 0%,
+      var(--accent) 100%
+    );
+}
+
+.mech-gloves__lbl {
+  margin: 0 var(--space-20) var(--space-8);
+  color: var(--sage);
+  text-transform: uppercase;
+  letter-spacing: var(--ls-micro);
+  font-size: var(--fs-micro-2);
+  font-weight: var(--fw-semibold);
+  line-height: 1.2;
+}
+
+.mech-gloves__name {
+  margin: 0 var(--space-20) var(--space-10);
+  color: var(--deep);
+}
+
+.mech-gloves__body {
+  margin: 0 var(--space-20);
+  color: var(--muted);
+}
+
+.mech-gloves__body p {
+  margin: 0;
+}
+
+.mech-gloves__body strong {
+  color: var(--body);
+  font-weight: var(--fw-medium);
+}
+
+.mech-gloves__swipe-hint {
+  position: absolute;
+  right: var(--page-pad);
+  bottom: var(--space-20);
+  display: flex;
+  align-items: center;
+  gap: var(--space-6);
+  color: var(--caption);
+  pointer-events: none;
+  opacity: 1;
+  transform: translateX(0);
+  transition:
+    opacity var(--dur-sticky) var(--ease-standard),
+    transform var(--dur-sticky) var(--ease-standard);
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  font-size: var(--fs-micro-3);
+  font-weight: var(--fw-semibold);
+  line-height: 1.2;
+}
+
+.mech-gloves__swipe-hint::after {
+  content: '→';
+  animation: mech-gloves-swipe 1.8s ease-in-out infinite;
+}
+
+.mech-gloves__swipe-hint.is-hidden {
+  opacity: 0;
+  transform: translateX(6px);
+}
+
+@keyframes mech-gloves-swipe {
+  0%, 100% {
+    transform: translateX(0);
+    opacity: 0.6;
+  }
+  50% {
+    transform: translateX(4px);
+    opacity: 1;
+  }
+}
+
+.mech-gloves__fade {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: var(--space-56);
+  width: 56px;
+  pointer-events: none;
+  background: linear-gradient(
+    270deg,
+    var(--bg) 0%,
+    rgba(255, 255, 255, 0) 100%
+  );
+}
+
+@media (min-width: 600px) {
+  .mech-gloves__strip {
+    grid-auto-columns: minmax(280px, 1fr);
+  }
+}
+
+@media (min-width: 960px) {
+  .mech-gloves__strip {
+    grid-auto-flow: row;
+    grid-auto-columns: 1fr;
+    grid-template-columns: var(--grid-5-col-desktop);
+    overflow-x: visible;
+    border-left: var(--border-base);
+    border-right: var(--border-base);
+  }
+
+  .mech-gloves__swipe-hint,
+  .mech-gloves__fade {
+    display: none;
+  }
+
+  .mech-gloves__card {
+    padding-bottom: var(--space-28);
+  }
+}

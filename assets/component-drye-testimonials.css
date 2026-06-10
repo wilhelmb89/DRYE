@@ -1,0 +1,91 @@
+/* ==========================================================================
+   DRYE Testimonials
+   Depends on global base.css
+   ========================================================================== */
+
+.testimonials {
+  background: var(--bg-tint);
+  border-bottom: var(--border-base);
+}
+
+.testimonials .dryeNEW-h2 {
+  margin-bottom: var(--space-28);
+  color: var(--deep);
+}
+
+.testimonials .dryeNEW-h2 em {
+  font-family: var(--font-editorial);
+  font-style: italic;
+  font-weight: var(--fw-regular);
+  letter-spacing: normal;
+  color: var(--accent);
+}
+
+.testi-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  background: var(--border);
+}
+
+.testi-card {
+  background: var(--bg);
+  padding: var(--space-24) var(--space-20);
+}
+
+.testi-quote {
+  margin-bottom: var(--space-16);
+  font-family: var(--font-editorial);
+  font-style: italic;
+  font-weight: var(--fw-regular);
+  font-size: var(--fs-body-sm);
+  line-height: var(--lh-body);
+  color: var(--body);
+}
+
+.testi-meta {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-8);
+  margin-bottom: var(--space-6);
+}
+
+.testi-name {
+  font-family: var(--font-display);
+  font-size: var(--fs-caption);
+  font-weight: var(--fw-semibold);
+  letter-spacing: -0.01em;
+  line-height: 1.3;
+  color: var(--deep);
+}
+
+.testi-role {
+  font-family: var(--font-body);
+  font-size: 11px;
+  font-weight: var(--fw-regular);
+  line-height: 1.4;
+  color: var(--sage);
+}
+
+.testi-detail {
+  margin-top: var(--space-10);
+  padding-top: var(--space-10);
+  border-top: var(--border-base);
+  font-family: var(--font-body);
+  font-size: var(--fs-micro-3);
+  font-weight: var(--fw-regular);
+  line-height: 1.5;
+  letter-spacing: 0.04em;
+  color: var(--caption);
+}
+
+@media (min-width: 768px) {
+  .testi-grid {
+    flex-direction: row;
+  }
+
+  .testi-card {
+    flex: 1;
+    padding: var(--space-28) var(--space-24);
+  }
+}

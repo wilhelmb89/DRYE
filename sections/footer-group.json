@@ -8,50 +8,62 @@
  * ------------------------------------------------------------
  */
 {
-  "name": "Footer",
+  "name": "footer-group",
   "type": "footer",
   "sections": {
-    "footer_K8FzgC": {
-      "type": "footer",
-      "blocks": {
-        "share_HE3Wnj": {
-          "type": "share",
-          "settings": {
-            "logo": "shopify://shop_images/DRYE-06_22b5a737-c871-4a28-9d48-4d1efa36d0ae.webp",
-            "content": "<p>Engineered in Sweden. Designed for daily use in demanding environments.<br/></p>"
-          }
-        },
-        "menu_CNWPem": {
-          "type": "menu",
-          "settings": {
-            "menu": "footer-menu"
-          }
-        },
-        "email_kNMn4t": {
-          "type": "email",
-          "settings": {
-            "title": "Stay updated",
-            "content": "<p>No newsletters, no promotions. Just relevant information when available.</p>",
-            "placeholder": "Enter email address",
-            "button_text": "Subscribe"
-          }
-        }
-      },
-      "block_order": [
-        "share_HE3Wnj",
-        "menu_CNWPem",
-        "email_kNMn4t"
-      ],
+    "drye_new_footer_LdQyQ9": {
+      "type": "dryeNEW-footer",
+      "name": "DRYE NEW Footer",
       "settings": {
-        "title": "",
-        "button_text": "",
-        "button_url": "shopify://products/drye-moisture-routing-glove-liners",
-        "copy": "© 2025 DRYE, All rights reserved.",
-        "privacy": "privacy-menu"
+        "logo": "shopify://shop_images/DRYE-06.png",
+        "logo_link": "",
+        "brand_text": "Asymmetric layering. Structural transport. Engineered in Sweden.",
+        "col_1_heading": "Product",
+        "col_1_link_1_label": "DRYE Glove Liner",
+        "col_1_link_1_url": "shopify://products/drye-moisture-routing-glove-liners",
+        "col_1_link_2_label": "How it works",
+        "col_1_link_2_url": "shopify://pages/how-it-works",
+        "col_1_link_3_label": "",
+        "col_1_link_3_url": "",
+        "col_1_link_4_label": "Enterprise & B2B",
+        "col_1_link_4_url": "shopify://pages/contact-drye",
+        "col_1_link_5_label": "",
+        "col_1_link_5_url": "",
+        "col_2_heading": "Evidence",
+        "col_2_link_1_label": "User stories",
+        "col_2_link_1_url": "shopify://blogs/insights",
+        "col_2_link_2_label": "Research journey",
+        "col_2_link_2_url": "shopify://pages/research",
+        "col_2_link_3_label": "About DRYE",
+        "col_2_link_3_url": "shopify://pages/why-drye",
+        "col_2_link_4_label": "Contact",
+        "col_2_link_4_url": "shopify://pages/contact-drye",
+        "col_2_link_5_label": "",
+        "col_2_link_5_url": "",
+        "col_3_heading": "Policies",
+        "col_3_link_1_label": "Privacy Policy",
+        "col_3_link_1_url": "https://www.dryeliner.com/pages/policy",
+        "col_3_link_2_label": "Terms of Service",
+        "col_3_link_2_url": "https://www.dryeliner.com/pages/policy",
+        "col_3_link_3_label": "Shipping Policy",
+        "col_3_link_3_url": "https://www.dryeliner.com/pages/policy",
+        "col_3_link_4_label": "Refund Policy",
+        "col_3_link_4_url": "https://www.dryeliner.com/pages/policy",
+        "col_3_link_5_label": "",
+        "col_3_link_5_url": "",
+        "newsletter_heading": "Stay updated",
+        "newsletter_text": "No newsletters, no promotions. Just relevant information when available.",
+        "newsletter_placeholder": "Enter email address",
+        "newsletter_button_label": "Subscribe",
+        "bottom_text": "© 2026 DRYE AB. Patent pending. All rights reserved.",
+        "bottom_link_1_label": "Privacy Policy",
+        "bottom_link_1_url": "https://www.dryeliner.com/pages/policy",
+        "bottom_link_2_label": "Terms of Service",
+        "bottom_link_2_url": "https://www.dryeliner.com/pages/policy"
       }
     }
   },
   "order": [
-    "footer_K8FzgC"
+    "drye_new_footer_LdQyQ9"
   ]
 }

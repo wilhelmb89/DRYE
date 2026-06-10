@@ -1,0 +1,831 @@
+{{ 'drye-reviews-mars.css' | asset_url | stylesheet_tag }}
+
+<section
+  id="reviews"
+  class="dryeNEW-section drye-reviews-mars drye-reviews-mars--api"
+  data-section-id="{{ section.id }}"
+  data-drye-reviews-mars-api
+  data-api-endpoint="{{ section.settings.api_endpoint | escape }}"
+>
+  <div class="dryeNEW-container">
+
+    <header class="drye-reviews-mars__header">
+      {% if section.settings.eyebrow != blank %}
+        <span class="dryeNEW-micro drye-reviews-mars__eyebrow">
+          {{ section.settings.eyebrow }}
+        </span>
+      {% endif %}
+
+      {% if section.settings.heading != blank %}
+        <h2 class="dryeNEW-h2 drye-reviews-mars__heading">
+          {{ section.settings.heading }}
+        </h2>
+      {% endif %}
+
+      {% if section.settings.subtext != blank %}
+        <div class="dryeNEW-body drye-reviews-mars__sub">
+          {{ section.settings.subtext }}
+        </div>
+      {% endif %}
+    </header>
+
+    <div class="drye-reviews-mars__summary" aria-label="Review summary">
+      <div class="drye-reviews-mars__score">
+        <div class="dryeNEW-h1 drye-reviews-mars__score-number" data-drye-api-average>
+          —
+        </div>
+
+        <div class="dryeNEW-body-sm drye-reviews-mars__score-stars" aria-hidden="true" data-drye-api-stars>
+          ★★★★★
+        </div>
+
+        <div class="dryeNEW-caption drye-reviews-mars__score-count" data-drye-api-count>
+          Loading reviews…
+        </div>
+      </div>
+
+      <div class="drye-reviews-mars__bars" data-drye-api-bars>
+        <div class="dryeNEW-caption drye-reviews-mars__loading">
+          Loading rating breakdown…
+        </div>
+      </div>
+    </div>
+
+    <div class="drye-reviews-mars__proof-strip is-hidden" aria-label="Customer proof photos" data-drye-api-proof-strip></div>
+
+    <div class="drye-reviews-mars__actions">
+      <button
+        type="button"
+        class="dryeNEW-micro drye-reviews-mars__action"
+        data-drye-review-open
+      >
+        ✎ Write a review
+      </button>
+
+      <button
+        type="button"
+        class="dryeNEW-micro drye-reviews-mars__action"
+        data-drye-question-open
+      >
+        ⓘ Questions
+      </button>
+    </div>
+
+    <div class="drye-reviews-mars__tabs" role="tablist" aria-label="Review categories">
+      <button
+        type="button"
+        class="dryeNEW-micro drye-reviews-mars__tab is-active"
+        data-drye-review-tab="trades"
+      >
+        Trades & Industrial
+      </button>
+
+      <button
+        type="button"
+        class="dryeNEW-micro drye-reviews-mars__tab"
+        data-drye-review-tab="sports"
+      >
+        Sports
+      </button>
+
+      <button
+        type="button"
+        class="dryeNEW-micro drye-reviews-mars__tab"
+        data-drye-review-tab="consumer"
+      >
+        Consumer
+      </button>
+
+      <button
+        type="button"
+        class="dryeNEW-micro drye-reviews-mars__tab"
+        data-drye-review-tab="field_reports"
+      >
+        Field Reports
+      </button>
+    </div>
+
+    <div class="drye-reviews-mars__filters" data-drye-filters-container aria-label="Review filters"></div>
+
+    <div class="drye-reviews-mars__list" data-drye-review-list>
+      <div class="dryeNEW-body drye-reviews-mars__loading" data-drye-api-loading>
+        Loading reviews…
+      </div>
+    </div>
+
+    <div class="drye-reviews-mars__load">
+      <button type="button" class="dryeNEW-link drye-reviews-mars__load-button is-hidden" data-drye-load-more>
+        {{ section.settings.load_more_label }}
+      </button>
+    </div>
+  </div>
+
+  <div class="drye-reviews-mars__modal" data-drye-review-modal aria-hidden="true">
+    <div class="drye-reviews-mars__modal-backdrop" data-drye-review-close></div>
+
+    <div class="drye-reviews-mars__modal-panel" role="dialog" aria-modal="true" aria-label="Write a review">
+      <div class="drye-reviews-mars__modal-head">
+        <div>
+          <span class="dryeNEW-micro drye-reviews-mars__eyebrow">
+            Review DRYE
+          </span>
+
+          <h3 class="dryeNEW-h2 drye-reviews-mars__modal-title">
+            Write a review.
+          </h3>
+        </div>
+
+        <button type="button" class="drye-reviews-mars__close" data-drye-review-close aria-label="Close">
+          ×
+        </button>
+      </div>
+
+      <form
+        class="drye-reviews-mars__form"
+        data-drye-review-form
+        {% if section.settings.form_endpoint != blank %}
+          action="{{ section.settings.form_endpoint }}"
+          method="post"
+        {% endif %}
+      >
+        <div class="drye-reviews-mars__form-grid">
+          <div class="drye-reviews-mars__field">
+            <label class="dryeNEW-body-sm drye-reviews-mars__label" for="drye-review-name-{{ section.id }}">
+              Name
+            </label>
+            <input class="drye-reviews-mars__input" id="drye-review-name-{{ section.id }}" name="name" type="text" required>
+          </div>
+
+          <div class="drye-reviews-mars__field">
+            <label class="dryeNEW-body-sm drye-reviews-mars__label" for="drye-review-email-{{ section.id }}">
+              Email
+            </label>
+            <input class="drye-reviews-mars__input" id="drye-review-email-{{ section.id }}" name="email" type="email" required>
+          </div>
+        </div>
+
+        <div class="drye-reviews-mars__form-grid">
+          <div class="drye-reviews-mars__field">
+            <label class="dryeNEW-body-sm drye-reviews-mars__label" for="drye-review-rating-{{ section.id }}">
+              Rating
+            </label>
+            <select class="drye-reviews-mars__select" id="drye-review-rating-{{ section.id }}" name="rating" required>
+              <option value="">Choose rating</option>
+              <option value="5">5 stars</option>
+              <option value="4">4 stars</option>
+              <option value="3">3 stars</option>
+              <option value="2">2 stars</option>
+              <option value="1">1 star</option>
+            </select>
+          </div>
+
+          <div class="drye-reviews-mars__field">
+            <label class="dryeNEW-body-sm drye-reviews-mars__label" for="drye-review-use-case-{{ section.id }}">
+              What best describes how you use DRYE?
+            </label>
+            <select class="drye-reviews-mars__select" id="drye-review-use-case-{{ section.id }}" name="use_case" required>
+              <option value="">Choose use case</option>
+              <option value="automotive">Automotive / mechanic</option>
+              <option value="industrial">Industrial / trades</option>
+              <option value="sports">Sports / hockey</option>
+              <option value="consumer">Consumer / everyday</option>
+              <option value="healthcare">Healthcare / gloves</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="drye-reviews-mars__form-grid">
+          <div class="drye-reviews-mars__field">
+            <label class="dryeNEW-body-sm drye-reviews-mars__label" for="drye-review-glove-{{ section.id }}">
+              What glove do you wear DRYE under?
+            </label>
+            <select class="drye-reviews-mars__select" id="drye-review-glove-{{ section.id }}" name="glove_type">
+              <option value="">Choose glove type</option>
+              <option value="nitrile">Nitrile</option>
+              <option value="latex">Latex</option>
+              <option value="rubber">Rubber</option>
+              <option value="hv">HV / electric safety glove</option>
+              <option value="hockey">Hockey glove</option>
+              <option value="winter">Winter glove</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
+
+          <div class="drye-reviews-mars__field">
+            <label class="dryeNEW-body-sm drye-reviews-mars__label" for="drye-review-title-{{ section.id }}">
+              Review title
+            </label>
+            <input class="drye-reviews-mars__input" id="drye-review-title-{{ section.id }}" name="title" type="text" required>
+          </div>
+        </div>
+
+        <div class="drye-reviews-mars__field">
+          <label class="dryeNEW-body-sm drye-reviews-mars__label" for="drye-review-body-{{ section.id }}">
+            How was your overall experience?
+          </label>
+          <textarea class="drye-reviews-mars__textarea" id="drye-review-body-{{ section.id }}" name="body" required></textarea>
+        </div>
+
+        <div class="dryeNEW-caption drye-reviews-mars__form-note">
+          Customer reviews are collected through Judge.me. Field reports are documented separately by DRYE.
+        </div>
+
+        <div class="drye-reviews-mars__form-actions">
+          <button type="button" class="dryeNEW-micro drye-reviews-mars__secondary" data-drye-review-close>
+            Cancel
+          </button>
+
+          <button type="submit" class="dryeNEW-micro drye-reviews-mars__submit">
+            Submit review
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<script>
+  (() => {
+    const root = document.querySelector('[data-section-id="{{ section.id }}"][data-drye-reviews-mars-api]');
+    if (!root) return;
+
+    const endpoint = root.getAttribute('data-api-endpoint');
+
+    const list = root.querySelector('[data-drye-review-list]');
+    const proofStrip = root.querySelector('[data-drye-api-proof-strip]');
+    const averageEl = root.querySelector('[data-drye-api-average]');
+    const starsEl = root.querySelector('[data-drye-api-stars]');
+    const countEl = root.querySelector('[data-drye-api-count]');
+    const barsEl = root.querySelector('[data-drye-api-bars]');
+    const loadingEl = root.querySelector('[data-drye-api-loading]');
+    const tabs = root.querySelectorAll('[data-drye-review-tab]');
+    const filtersContainer = root.querySelector('[data-drye-filters-container]');
+    const modal = root.querySelector('[data-drye-review-modal]');
+    const openButtons = root.querySelectorAll('[data-drye-review-open]');
+    const closeButtons = root.querySelectorAll('[data-drye-review-close]');
+    const form = root.querySelector('[data-drye-review-form]');
+    const loadMoreButton = root.querySelector('[data-drye-load-more]');
+
+    let allReviews = [];
+    let visibleReviews = [];
+    let activeTab = 'trades';
+    let activeFilter = 'all';
+    let visibleLimit = Number({{ section.settings.initial_visible_count | default: 8 | json }}) || 8;
+
+    // Filter buttons shown per tab. Edit FILTERS_PER_TAB to add/remove categories.
+    // 'all' is always first. If a tab has only ['all'], the filter strip hides itself.
+    const FILTERS_PER_TAB = {
+      trades: ['all', 'automotive', 'industry', 'construction', 'healthcare'],
+      sports: ['all', 'hockey', 'skiing', 'fencing', 'soccer'],
+      consumer: ['all'],
+      field_reports: ['all', 'automotive', 'tactical'],
+    };
+
+    const FILTER_LABELS = {
+      all: 'All',
+      automotive: 'Automotive',
+      industry: 'Industry',
+      construction: 'Construction',
+      healthcare: 'Healthcare',
+      hockey: 'Hockey',
+      skiing: 'Skiing',
+      fencing: 'Fencing',
+      soccer: 'Soccer',
+      tactical: 'Tactical',
+    };
+
+    function escapeHtml(value) {
+      return String(value || '')
+        .replaceAll('&', '&amp;')
+        .replaceAll('<', '&lt;')
+        .replaceAll('>', '&gt;')
+        .replaceAll('"', '&quot;')
+        .replaceAll("'", '&#039;');
+    }
+
+    function stars(rating) {
+      const safeRating = Math.max(1, Math.min(5, Math.round(Number(rating || 5))));
+      let output = '';
+
+      for (let i = 1; i <= 5; i += 1) {
+        output += i <= safeRating ? '★' : '☆';
+      }
+
+      return output;
+    }
+
+    function calculateSummary(reviews) {
+      const rateableReviews = reviews.filter((review) => {
+        return !review.hide_rating && review.proof_type === 'review' && review.rating;
+      });
+
+      const counts = { 1: 0, 2: 0, 3: 0, 4: 0, 5: 0 };
+      let total = 0;
+
+      rateableReviews.forEach((review) => {
+        const rating = Math.max(1, Math.min(5, Math.round(Number(review.rating || 5))));
+        counts[rating] += 1;
+        total += rating;
+      });
+
+      const ratingCount = rateableReviews.length || 0;
+      const totalCount = reviews.length || 0;
+      const average = ratingCount ? (total / ratingCount).toFixed(2) : '—';
+
+      return { counts, ratingCount, totalCount, average };
+    }
+
+    function renderBars(summary) {
+      if (!barsEl) return;
+
+      const total = summary.ratingCount || 1;
+
+      barsEl.innerHTML = [5, 4, 3, 2, 1].map((rating) => {
+        const count = summary.counts[rating] || 0;
+        const width = Math.round((count / total) * 100);
+
+        return `
+          <div class="drye-reviews-mars__bar-row">
+            <div class="dryeNEW-caption drye-reviews-mars__bar-label">${rating}</div>
+            <div class="drye-reviews-mars__bar-track" aria-hidden="true">
+              <div class="drye-reviews-mars__bar-fill" style="width: ${width}%;"></div>
+            </div>
+            <div class="dryeNEW-caption drye-reviews-mars__bar-count">${count}</div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    function renderProofStrip(photos) {
+      if (!proofStrip) return;
+
+      const safePhotos = Array.isArray(photos) ? photos.filter((photo) => photo && photo.thumb_url) : [];
+
+      if (!safePhotos.length) {
+        proofStrip.classList.add('is-hidden');
+        proofStrip.innerHTML = '';
+        return;
+      }
+
+      proofStrip.classList.remove('is-hidden');
+      proofStrip.innerHTML = safePhotos.slice(0, 12).map((photo) => {
+        return `
+          <button
+            type="button"
+            class="drye-reviews-mars__proof-item"
+            data-drye-photo-review-id="${escapeHtml(photo.review_id)}"
+            aria-label="Open review photo: ${escapeHtml(photo.title)}"
+          >
+            <img
+              src="${escapeHtml(photo.thumb_url)}"
+              alt="${escapeHtml(photo.alt || 'Customer proof photo')}"
+              loading="lazy"
+            >
+          </button>
+        `;
+      }).join('');
+
+      proofStrip.querySelectorAll('[data-drye-photo-review-id]').forEach((button) => {
+        button.addEventListener('click', () => {
+          const reviewId = button.getAttribute('data-drye-photo-review-id');
+          const target = root.querySelector(`[data-review-id="${CSS.escape(reviewId)}"]`);
+
+          if (target) {
+            target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          }
+        });
+      });
+    }
+
+    const REVIEW_PREVIEW_WORDS = 52;
+
+    function getReviewPreview(text, limit = REVIEW_PREVIEW_WORDS) {
+      const cleanText = String(text || '').trim();
+      const words = cleanText.split(/\s+/).filter(Boolean);
+
+      if (words.length <= limit) {
+        return {
+          preview: cleanText,
+          full: cleanText,
+          isTruncated: false,
+        };
+      }
+
+      return {
+        preview: words.slice(0, limit).join(' ') + '…',
+        full: cleanText,
+        isTruncated: true,
+      };
+    }
+
+    function renderReview(review) {
+      const media = Array.isArray(review.media) ? review.media : [];
+      const mediaHtml = media.length
+        ? `
+          <div class="drye-reviews-mars__review-media">
+            ${media.slice(0, 4).map((item) => `
+              <a class="drye-reviews-mars__review-media-item" href="${escapeHtml(item.url)}" target="_blank" rel="noopener">
+                <img src="${escapeHtml(item.thumb_url || item.url)}" alt="${escapeHtml(item.alt || 'Customer proof photo')}" loading="lazy">
+              </a>
+            `).join('')}
+          </div>
+        `
+        : '';
+
+      const roleLine = [review.role, review.location].filter(Boolean).join(' · ');
+      const bodyPreview = getReviewPreview(review.body);
+
+      const isEvidenceCard = Boolean(review.hide_rating) || review.proof_type !== 'review';
+      const displayLabel = review.display_label || review.source_label || (isEvidenceCard ? 'FIELD REPORT' : 'Verified');
+      const sourceLabel = review.source_label || '';
+      const hasLink = review.link_url && review.link_label;
+
+      return `
+        <article
+          class="drye-reviews-mars__review ${isEvidenceCard ? 'drye-reviews-mars__review--evidence' : ''}"
+          data-drye-review-item
+          data-review-id="${escapeHtml(review.id)}"
+          data-tab="${escapeHtml(review.tab || 'trades')}"
+          data-category="${escapeHtml(review.category || 'industry')}"
+        >
+          <div class="drye-reviews-mars__review-left">
+            <div class="dryeNEW-h4 drye-reviews-mars__avatar" aria-hidden="true">
+              ${escapeHtml(review.initials || 'A')}
+            </div>
+
+            <div class="drye-reviews-mars__person">
+              <div class="dryeNEW-body-sm drye-reviews-mars__name">
+                ${escapeHtml(review.name || 'Verified customer')}
+              </div>
+
+              ${isEvidenceCard ? `
+                <div class="dryeNEW-caption drye-reviews-mars__source-label">
+                  ${escapeHtml(sourceLabel || displayLabel)}
+                </div>
+              ` : review.verified ? `
+                <div class="dryeNEW-caption drye-reviews-mars__verified">
+                  <svg class="drye-reviews-mars__verified-icon" viewBox="0 0 8 10" fill="none" aria-hidden="true">
+                    <path d="M3.94 9.65C2.83 9.35 1.85 8.7 1.14 7.79.43 6.89.03 5.78 0 4.63V1.21L3.94 0l3.94 1.21v3.42c-.03 1.15-.43 2.26-1.14 3.16-.71.91-1.69 1.56-2.8 1.86z" fill="currentColor"/>
+                    <path d="M3.3 5.27L2.16 4.22l-.57.53 1.14 1.05.57.53.57-.53 2.28-2.1-.57-.52-2.28 2.1z" fill="#fff"/>
+                  </svg>
+                  Verified
+                </div>
+              ` : ''}
+            </div>
+          </div>
+
+          <div class="drye-reviews-mars__review-right">
+            <div class="drye-reviews-mars__review-top">
+              ${isEvidenceCard ? `
+                <div class="dryeNEW-micro drye-reviews-mars__evidence-label">
+                  ${escapeHtml(displayLabel)}
+                </div>
+              ` : `
+                <div class="dryeNEW-body-sm drye-reviews-mars__stars" aria-label="${escapeHtml(review.rating)} out of 5 stars">
+                  ${stars(review.rating)}
+                </div>
+              `}
+
+              ${review.date_label ? `
+                <time class="dryeNEW-caption drye-reviews-mars__date">
+                  ${escapeHtml(review.date_label)}
+                </time>
+              ` : ''}
+            </div>
+
+            ${roleLine ? `
+              <div class="dryeNEW-caption drye-reviews-mars__role">
+                ${escapeHtml(roleLine)}
+              </div>
+            ` : ''}
+
+            ${review.title ? `
+              <h3 class="dryeNEW-h4 drye-reviews-mars__title">
+                ${escapeHtml(review.title)}
+              </h3>
+            ` : ''}
+
+            ${review.body ? `
+              <div
+                class="dryeNEW-body drye-reviews-mars__body"
+                data-review-body
+                data-preview="${escapeHtml(bodyPreview.preview)}"
+                data-full="${escapeHtml(bodyPreview.full)}"
+                data-expanded="false"
+              >
+                ${escapeHtml(bodyPreview.preview)}
+              </div>
+
+              ${bodyPreview.isTruncated ? `
+                <button
+                  type="button"
+                  class="dryeNEW-link drye-reviews-mars__read-more"
+                  data-review-read-more
+                  aria-expanded="false"
+                >
+                  Read more
+                </button>
+              ` : ''}
+            ` : ''}
+
+            ${mediaHtml}
+
+            ${hasLink ? `
+              <div class="drye-reviews-mars__bottom">
+                <a
+                  class="dryeNEW-link drye-reviews-mars__proof-link"
+                  href="${escapeHtml(review.link_url)}"
+                  target="_blank"
+                  rel="noopener"
+                >
+                  ${escapeHtml(review.link_label)}
+                </a>
+              </div>
+            ` : ''}
+          </div>
+        </article>
+      `;
+    }
+
+    function filterReviews() {
+      return allReviews.filter((review) => {
+        const tabMatches = review.tab === activeTab;
+        const filterMatches = activeFilter === 'all' || review.category === activeFilter;
+        return tabMatches && filterMatches;
+      });
+    }
+
+    function renderList() {
+      if (!list) return;
+
+      visibleReviews = filterReviews();
+      const toShow = visibleReviews.slice(0, visibleLimit);
+
+      if (!toShow.length) {
+        list.innerHTML = `
+          <div class="dryeNEW-body drye-reviews-mars__empty">
+            No reviews match this filter yet.
+          </div>
+        `;
+      } else {
+        list.innerHTML = toShow.map(renderReview).join('');
+      }
+
+      if (loadMoreButton) {
+        loadMoreButton.classList.toggle('is-hidden', visibleReviews.length <= visibleLimit);
+      }
+      bindReadMoreButtons();
+    }
+
+    function renderFilters() {
+      if (!filtersContainer) return;
+
+      const list = FILTERS_PER_TAB[activeTab] || ['all'];
+
+      // Hide entire strip if only "All" is available — single filter is pointless.
+      if (list.length <= 1) {
+        filtersContainer.classList.add('is-hidden');
+        filtersContainer.innerHTML = '';
+        return;
+      }
+
+      filtersContainer.classList.remove('is-hidden');
+      filtersContainer.innerHTML = list.map((key) => {
+        const isActive = key === activeFilter;
+        const label = FILTER_LABELS[key] || key;
+        return `
+          <button
+            type="button"
+            class="dryeNEW-micro drye-reviews-mars__filter ${isActive ? 'is-active' : ''}"
+            data-drye-review-filter="${escapeHtml(key)}"
+          >${escapeHtml(label)}</button>
+        `;
+      }).join('');
+    }
+
+    function setActiveTab(tabValue) {
+      activeTab = tabValue;
+      activeFilter = 'all';
+      visibleLimit = Number({{ section.settings.initial_visible_count | default: 8 | json }}) || 8;
+
+      tabs.forEach((tab) => {
+        tab.classList.toggle('is-active', tab.getAttribute('data-drye-review-tab') === activeTab);
+      });
+
+      renderFilters();
+      renderList();
+    }
+
+    function setActiveFilter(filterValue) {
+      activeFilter = filterValue;
+      visibleLimit = Number({{ section.settings.initial_visible_count | default: 8 | json }}) || 8;
+      renderFilters();
+      renderList();
+    }
+
+    function bindReadMoreButtons() {
+      root.querySelectorAll('[data-review-read-more]').forEach((button) => {
+        button.addEventListener('click', () => {
+          const body = button.previousElementSibling;
+          if (!body) return;
+
+          const isExpanded = body.getAttribute('data-expanded') === 'true';
+          const preview = body.getAttribute('data-preview') || '';
+          const full = body.getAttribute('data-full') || '';
+
+          body.textContent = isExpanded ? preview : full;
+          body.setAttribute('data-expanded', isExpanded ? 'false' : 'true');
+
+          button.textContent = isExpanded ? 'Read more' : 'Show less';
+          button.setAttribute('aria-expanded', isExpanded ? 'false' : 'true');
+        });
+      });
+    }
+
+    async function loadReviews() {
+      if (!endpoint) {
+        if (list) {
+          list.innerHTML = `
+            <div class="dryeNEW-body drye-reviews-mars__empty">
+              Add your Worker endpoint in section settings.
+            </div>
+          `;
+        }
+        return;
+      }
+
+      try {
+        const response = await fetch(endpoint, {
+          method: 'GET',
+          headers: { 'Accept': 'application/json' },
+        });
+
+        if (!response.ok) {
+          throw new Error(`Reviews request failed: ${response.status}`);
+        }
+
+        const data = await response.json();
+        allReviews = Array.isArray(data.reviews) ? data.reviews : [];
+
+        const summary = calculateSummary(allReviews);
+
+        if (averageEl) averageEl.textContent = summary.average;
+
+        if (starsEl) {
+          const avgNumber = Number(summary.average);
+          starsEl.textContent = Number.isFinite(avgNumber) ? stars(avgNumber) : '★★★★★';
+        }
+
+        if (countEl) {
+          const fieldReportCount = summary.totalCount - summary.ratingCount;
+          countEl.textContent = `${summary.ratingCount} customer reviews · ${fieldReportCount} field reports`;
+        }
+
+        renderBars(summary);
+        renderProofStrip(data.photos || []);
+        renderList();
+
+      } catch (error) {
+        console.error('[DRYE Reviews Mars API]', error);
+
+        if (list) {
+          list.innerHTML = `
+            <div class="dryeNEW-body drye-reviews-mars__empty">
+              Reviews could not be loaded right now.
+            </div>
+          `;
+        }
+
+        if (countEl) countEl.textContent = 'Reviews unavailable';
+        if (barsEl) barsEl.innerHTML = '';
+      }
+    }
+
+    tabs.forEach((tab) => {
+      tab.addEventListener('click', () => {
+        setActiveTab(tab.getAttribute('data-drye-review-tab'));
+      });
+    });
+
+    if (filtersContainer) {
+      filtersContainer.addEventListener('click', (event) => {
+        const button = event.target.closest('[data-drye-review-filter]');
+        if (!button) return;
+        setActiveFilter(button.getAttribute('data-drye-review-filter'));
+      });
+    }
+
+    // Initial render of filter buttons for the default tab.
+    renderFilters();
+
+    if (loadMoreButton) {
+      loadMoreButton.addEventListener('click', () => {
+        visibleLimit += Number({{ section.settings.load_more_count | default: 8 | json }}) || 8;
+        renderList();
+      });
+    }
+
+    function openModal() {
+      if (!modal) return;
+      modal.classList.add('is-open');
+      modal.setAttribute('aria-hidden', 'false');
+      document.documentElement.style.overflow = 'hidden';
+    }
+
+    function closeModal() {
+      if (!modal) return;
+      modal.classList.remove('is-open');
+      modal.setAttribute('aria-hidden', 'true');
+      document.documentElement.style.overflow = '';
+    }
+
+    openButtons.forEach((button) => {
+      button.addEventListener('click', openModal);
+    });
+
+    closeButtons.forEach((button) => {
+      button.addEventListener('click', closeModal);
+    });
+
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape') closeModal();
+    });
+
+    if (form) {
+      form.addEventListener('submit', (event) => {
+        const hasEndpoint = form.getAttribute('action');
+
+        if (!hasEndpoint) {
+          event.preventDefault();
+          alert('Add a review form endpoint in the section settings before collecting submissions.');
+        }
+      });
+    }
+
+    loadReviews();
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "DRYE Reviews Mars API",
+  "tag": "section",
+  "class": "shopify-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "api_endpoint",
+      "label": "Reviews API endpoint",
+      "default": "https://drye-judgeme-reviews.wilhelm-backstrom.workers.dev/reviews?per_page=100"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "Verified customer reviews"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Real environments. Real shifts."
+    },
+    {
+      "type": "textarea",
+      "id": "subtext",
+      "label": "Subtext",
+      "default": "Customer reviews from Judge.me, plus documented field reports from work, sport and tactical glove use."
+    },
+    {
+      "type": "number",
+      "id": "initial_visible_count",
+      "label": "Initial visible reviews",
+      "default": 8
+    },
+    {
+      "type": "number",
+      "id": "load_more_count",
+      "label": "Load more count",
+      "default": 8
+    },
+    {
+      "type": "text",
+      "id": "load_more_label",
+      "label": "Load more label",
+      "default": "Load more reviews →"
+    },
+    {
+      "type": "url",
+      "id": "form_endpoint",
+      "label": "Review form endpoint",
+      "info": "Optional. Later this can point to Make, a Shopify app proxy, or a custom endpoint."
+    }
+  ],
+  "presets": [
+    {
+      "name": "DRYE Reviews Mars API"
+    }
+  ]
+}
+{% endschema %}

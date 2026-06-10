@@ -1,0 +1,177 @@
+{{ 'drye-letters.css' | asset_url | stylesheet_tag }}
+
+<section
+  class="dryeNEW-section letters-section"
+  id="drye-letters-{{ section.id }}"
+  data-section-id="{{ section.id }}"
+>
+  <div class="dryeNEW-container">
+    {% if section.settings.eyebrow != blank %}
+      <span class="dryeNEW-micro letters-section__eyebrow">
+        {{ section.settings.eyebrow }}
+      </span>
+    {% endif %}
+
+    {% if section.settings.heading != blank %}
+      <h2 class="dryeNEW-h2 letters-section__heading dryeNEW-reveal dryeNEW-rd1">
+        {{ section.settings.heading }}
+      </h2>
+    {% endif %}
+
+    <div class="letters-grid">
+      {% for block in section.blocks %}
+        <div
+          class="letter-card{% if block.settings.featured %} featured{% endif %} dryeNEW-reveal{% case forloop.index %}{% when 1 %} dryeNEW-rd1{% when 2 %} dryeNEW-rd2{% when 3 %} dryeNEW-rd3{% endcase %}"
+          {{ block.shopify_attributes }}
+        >
+          {% if block.settings.tag != blank %}
+            <div class="dryeNEW-micro letter-tag">{{ block.settings.tag }}</div>
+          {% endif %}
+
+          {% if block.settings.quote != blank %}
+            <div class="dryeNEW-body--sm letter-text">
+              {{ block.settings.quote }}
+            </div>
+          {% endif %}
+
+          {% if block.settings.name != blank or block.settings.meta != blank %}
+            <div class="letter-sig">
+              {% if block.settings.name != blank %}
+                <div class="dryeNEW-body--caption letter-sig__name">{{ block.settings.name }}</div>
+              {% endif %}
+              {% if block.settings.meta != blank %}
+                <div class="dryeNEW-body--caption letter-sig__meta">{{ block.settings.meta }}</div>
+              {% endif %}
+            </div>
+          {% endif %}
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "DRYE Letters",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "Unsolicited — Sent Directly to the Founder"
+    },
+    {
+      "type": "html",
+      "id": "heading",
+      "label": "Heading",
+      "default": "People don't usually write letters<br>about glove liners."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "letter",
+      "name": "Letter card",
+      "settings": [
+        {
+          "type": "checkbox",
+          "id": "featured",
+          "label": "Featured card",
+          "default": false
+        },
+        {
+          "type": "text",
+          "id": "tag",
+          "label": "Tag",
+          "default": "Hockey Parent → Founder"
+        },
+        {
+          "type": "richtext",
+          "id": "quote",
+          "label": "Quote",
+          "default": "<p>Just wanted to send you a quick note to say thank you. My son has been struggling with severe dry hands because of his hockey gloves for the past few years. <strong>No cream or prescription has helped.</strong> He's worn your gloves for <strong>3 ice times, and his hands are completely cleared up.</strong> Absolute game changer. Thank you.</p>"
+        },
+        {
+          "type": "text",
+          "id": "name",
+          "label": "Name",
+          "default": "Adam"
+        },
+        {
+          "type": "text",
+          "id": "meta",
+          "label": "Meta",
+          "default": "Hockey parent, USA"
+        }
+      ]
+    }
+  ],
+  "max_blocks": 6,
+  "presets": [
+    {
+      "name": "DRYE Letters",
+      "blocks": [
+        {
+          "type": "letter",
+          "settings": {
+            "featured": true,
+            "tag": "Hockey Parent → Founder",
+            "quote": "<p>Just wanted to send you a quick note to say thank you. My son has been struggling with severe dry hands because of his hockey gloves for the past few years. <strong>No cream or prescription has helped.</strong> He's worn your gloves for <strong>3 ice times, and his hands are completely cleared up.</strong> Absolute game changer. Thank you.</p>",
+            "name": "Adam",
+            "meta": "Hockey parent, USA"
+          }
+        },
+        {
+          "type": "letter",
+          "settings": {
+            "featured": false,
+            "tag": "Hockey Parent → Founder — Second Order",
+            "quote": "<p>My daughter has severe eczema and plays ice hockey 6 times a week. She destroyed the first pair — <strong>hence the order.</strong> She appreciates that the gloves fit tight and don't introduce slip — which was a problem with cotton gloves.</p>",
+            "name": "Eric",
+            "meta": "Hockey parent, Canada"
+          }
+        },
+        {
+          "type": "letter",
+          "settings": {
+            "featured": false,
+            "tag": "Healthcare Worker — Latex Gloves Daily",
+            "quote": "<p>I wear latex gloves all day for work. Every hour I'd change my gloves and notice the sweat on my DRYE — <strong>but my hands remain dried.</strong> I have seven pairs to rotate.</p>",
+            "name": "Phuong Ngo",
+            "meta": "Lutz, Florida — 8 months continuous use"
+          }
+        },
+        {
+          "type": "letter",
+          "settings": {
+            "featured": false,
+            "tag": "Automotive & Construction",
+            "quote": "<p>I've been using them in automotive repair, home construction, and moving heavy materials — work that needs real grip and precision. <strong>No more eczema or rashes on my hands.</strong> Nitrile gloves don't tear anymore because they go on and off easily without sweaty skin.</p>",
+            "name": "Brian Jee",
+            "meta": "USA"
+          }
+        },
+        {
+          "type": "letter",
+          "settings": {
+            "featured": false,
+            "tag": "Parent — Work Gloves",
+            "quote": "<p>My son's hands were bright pink and raw with all of the skin peeling off from wearing work gloves. <strong>Within a few days, his hands were drastically improved. Within two weeks, they are completely healed and back to normal.</strong> I cannot believe the difference.</p>",
+            "name": "Deborah Fields",
+            "meta": "Cincinnati, Ohio"
+          }
+        },
+        {
+          "type": "letter",
+          "settings": {
+            "featured": false,
+            "tag": "Lifelong Eczema — UK",
+            "quote": "<p>I've had eczema on my palms since birth and have used steroid creams for years. <strong>I can finally do things like help my wife in the garden without my skin breaking.</strong></p>",
+            "name": "Jon-Paul E.",
+            "meta": "Newcastle upon Tyne, UK"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

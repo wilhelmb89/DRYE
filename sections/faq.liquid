@@ -1,183 +1,183 @@
-<style>
+{% comment %}
+  DRYE – FAQ section (layout only, Base controls colors/fonts)
+{% endcomment %}
 
-/* DRYE: FAQ brödtext override */
-#shopify-section-{{ section.id }} .content,
-#shopify-section-{{ section.id }} .content *:not(svg):not(path) {
-  font-family: var(--font-body-family, Inter, sans-serif) !important;
-  font-weight: 400 !important;
-  font-variation-settings: "wght" 400 !important;
-  letter-spacing: -0.04em !important;
-  color: rgb(17 17 17 / 65%) !important;
-  font-size: 18px !important;
-  line-height: 28px !important;
-}
+{{ 'faq-section.css' | asset_url | stylesheet_tag }}
 
-/* Mobile override (≤767px) */
-@media screen and (max-width: 767px) {
-  #shopify-section-{{ section.id }} .content,
-  #shopify-section-{{ section.id }} .content *:not(svg):not(path) {
-    font-size: 16px !important;
-    line-height: 24px !important;
-  }
-}
+{%- assign ss = section.settings -%}
 
-
-  #shopify-section-{{ section.id }} {
-    background: {{ section.settings.bg }};
-    padding-block: {{ section.settings.p_top }}px {{ section.settings.p_bottom }}px;
-    @media screen and (max-width: 767px) {
-      padding-block: {{ section.settings.p_m_top }}px {{ section.settings.p_m_bottom }}px;
-    }
-  }
-</style>
-
-<div class="container">
-  {%- if section.settings.title != blank -%}
-    <h2 class="title">{{ section.settings.title }}</h2>
-  {%- endif -%}
-  {%- if section.blocks.size > 0 -%}
-    <div class="accordion">
+<section
+  class="drye-faq-section drye-section
+    {% if ss.color_scheme == 'dark' %}
+      drye-section--dark
+    {% else %}
+      drye-section--light
+    {% endif %}"
+  style="
+    --faq-pad-top: {{ ss.pad_top }}px;
+    --faq-pad-bottom: {{ ss.pad_bottom }}px;
+    --faq-pad-top-mobile: {{ ss.pad_top_mobile }}px;
+    --faq-pad-bottom-mobile: {{ ss.pad_bottom_mobile }}px;
+  "
+>
+  <div class="drye-faq-inner page-width">
+    <div class="drye-faq-accordion">
       {%- for block in section.blocks -%}
-        {%- assign bs = block.settings -%}
-        <div class="tab">
-          
-          <input type="checkbox" name="accordion-{{ forloop.index }}" id="cb{{ forloop.index }}-{{ block.id }}" {% if forloop.index == 1 %} checked {% endif %}>
-          <label for="cb{{ forloop.index }}-{{ block.id }}">
-            {{ bs.title }}
-            <div class="plus">
-              {%- render 'icon', type: 'plus' -%}
+        {%- assign input_id = 'faq-' | append: section.id | append: '-' | append: block.id -%}
+
+        <div class="drye-faq-item" {{ block.shopify_attributes }}>
+          <input
+            class="drye-faq-item-input"
+            type="checkbox"
+            id="{{ input_id }}"
+            {% if ss.open_first and forloop.first %}checked{% endif %}
+          >
+
+          <label class="drye-faq-item-label" for="{{ input_id }}">
+            <h4 class="q">{{ block.settings.title }}</h4>
+
+            <div class="drye-faq-plus" aria-hidden="true">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                <line
+                  class="vertical-line"
+                  x1="12"
+                  y1="5"
+                  x2="12"
+                  y2="19"
+                  stroke-width="1.5"
+                  stroke-linecap="round"
+                />
+                <line
+                  class="horizontal-line"
+                  x1="5"
+                  y1="12"
+                  x2="19"
+                  y2="12"
+                  stroke-width="1.5"
+                  stroke-linecap="round"
+                />
+              </svg>
             </div>
           </label>
-          <div class="content-wrapper">
-            <div class="tab_content" style="flex-direction: {{ bs.pos }}">
-              {%- if bs.image != blank -%}
-                <div class="image">
-                  {{ bs.image | image_url: width: '1000' | image_tag: loading: 'lazy' }}
-                </div>
-              {%- endif -%}
-              {%- if bs.content != blank -%}
-                <div class="content">{{ bs.content }}</div>
-              {%- endif -%}
+
+          <div class="drye-faq-content-wrapper">
+            <div class="drye-faq-content">
+              <div class="drye-faq-body">
+                {{ block.settings.body }}
+              </div>
             </div>
           </div>
         </div>
       {%- endfor -%}
     </div>
-  {%- endif -%}
-</div>
+  </div>
+</section>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {%- for block in section.blocks -%}
+      {
+        "@type": "Question",
+        "name": {{ block.settings.title | json }},
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": {{ block.settings.body | strip_html | json }}
+        }
+      }{% unless forloop.last %},{% endunless %}
+    {%- endfor -%}
+  ]
+}
+</script>
 
 {% schema %}
-  {
-    "name": "FAQs",
-    "tag": "section",
-    "class": "faq-section",
-    "settings": [
-      {
-        "type": "text",
-        "id": "title",
-        "label": "Title"
-      },
-      {
-        "type": "color",
-        "id": "bg",
-        "label": "Background",
-        "default": "#F3F2F1"
-      },
-      {
-        "type": "header",
-        "content": "Desktop spacing"
-      },
-      {
-        "type": "range",
-        "id": "p_top",
-        "min": 0,
-        "max": 300,
-        "step": 5,
-        "unit": "px",
-        "label": "Padding top",
-        "default": 160
-      },
-      {
-        "type": "range",
-        "id": "p_bottom",
-        "min": 0,
-        "max": 300,
-        "step": 5,
-        "unit": "px",
-        "label": "Padding bottom",
-        "default": 300
-      },
-      {
-        "type": "header",
-        "content": "Mobile spacing"
-      },
-      {
-        "type": "range",
-        "id": "p_m_top",
-        "min": 0,
-        "max": 300,
-        "step": 5,
-        "unit": "px",
-        "label": "Padding top",
-        "default": 35
-      },
-      {
-        "type": "range",
-        "id": "p_m_bottom",
-        "min": 0,
-        "max": 300,
-        "step": 5,
-        "unit": "px",
-        "label": "Padding bottom",
-        "default": 110
-      }
-    ],
-    "blocks": [
-      {
-        "name": "FAQ item",
-        "type": "item",
-        "settings": [
-          {
-            "type": "text",
-            "id": "title",
-            "label": "Title"
-          },
-          {
-            "type": "richtext",
-            "id": "content",
-            "label": "Content"
-          },
-          {
-            "type": "image_picker",
-            "id": "image",
-            "label": "Image",
-            "info": "Image height related to text amount and rendered as cover. On mobiles image aspect-ration is 1/1"
-          },
-          {
-            "type": "select",
-            "id": "pos",
-            "label": "Image position",
-            "options": [
-              {
-                "value": "row",
-                "label": "Left"
-              },
-              {
-                "value": "row-reverse",
-                "label": "Right"
-              }
-            ],
-            "default": "row"
-          }
-        ]
-      }
-    ],
-    "presets": [
-      {
-        "name": "FAQs",
-        "settings": {
+{
+  "name": "FAQ",
+  "tag": "section",
+  "class": "drye-faq-section",
+  "settings": [
+    {
+      "type": "select",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "light",
+      "options": [
+        { "value": "light", "label": "Light (white background)" },
+        { "value": "dark", "label": "Dark (black background)" }
+      ]
+    },
+    {
+      "type": "checkbox",
+      "id": "open_first",
+      "label": "Open first item by default",
+      "default": true
+    },
+
+    {
+      "type": "range",
+      "id": "pad_top",
+      "label": "Padding top (desktop)",
+      "min": 0,
+      "max": 240,
+      "step": 4,
+      "default": 160,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "pad_bottom",
+      "label": "Padding bottom (desktop)",
+      "min": 0,
+      "max": 400,
+      "step": 4,
+      "default": 300,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "pad_top_mobile",
+      "label": "Padding top (mobile)",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "default": 36,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "pad_bottom_mobile",
+      "label": "Padding bottom (mobile)",
+      "min": 0,
+      "max": 200,
+      "step": 4,
+      "default": 112,
+      "unit": "px"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "item",
+      "name": "FAQ item",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Question / Title",
+          "default": "Sample question title"
+        },
+        {
+          "type": "richtext",
+          "id": "body",
+          "label": "Answer / Body",
+          "default": "<p>Answer text here.</p>"
         }
-      }
-    ]
-  }
+      ]
+    }
+  ],
+  "max_blocks": 20,
+  "presets": [
+    { "name": "FAQ" }
+  ]
+}
 {% endschema %}

@@ -1,0 +1,307 @@
+.dryeNEW-identification {
+  background: var(--bg);
+  border-bottom: var(--border-base);
+}
+
+.dryeNEW-identification__intro {
+  max-width: 680px;
+  margin-bottom: var(--space-32);
+}
+
+.dryeNEW-identification__eyebrow {
+  color: var(--caption);
+}
+
+.dryeNEW-identification__heading {
+  margin-bottom: var(--space-10);
+  color: var(--deep);
+}
+
+.dryeNEW-identification__heading em {
+  font-family: var(--font-editorial);
+  font-style: italic;
+  font-weight: var(--fw-regular);
+  color: var(--accent);
+}
+
+.dryeNEW-identification__body {
+  color: var(--muted);
+}
+
+.dryeNEW-identification__body p {
+  margin: 0;
+}
+
+.dryeNEW-identification__strip-wrap {
+  position: relative;
+  margin-bottom: var(--space-24);
+}
+
+.dryeNEW-identification__strip {
+  display: flex;
+  gap: var(--space-3);
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+
+.dryeNEW-identification__strip::-webkit-scrollbar {
+  display: none;
+}
+
+.dryeNEW-identification__profession {
+  flex: 0 0 calc(33vw - 16px);
+  max-width: 140px;
+  min-width: 0;
+}
+
+.dryeNEW-identification__profession-image-wrap {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  background: var(--deep);
+}
+
+.dryeNEW-identification__profession-image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: saturate(0.7);
+}
+
+.dryeNEW-identification__profession-label {
+  display: block;
+  margin: var(--space-8) 0 0;
+  padding-bottom: var(--space-20);
+  text-align: center;
+  font-family: var(--font-body);
+  font-size: var(--fs-micro-1);
+  font-weight: var(--fw-semibold);
+  letter-spacing: var(--ls-micro);
+  line-height: 1.2;
+  text-transform: uppercase;
+  color: var(--caption);
+}
+
+.dryeNEW-identification__swipe-hint {
+  display: none;
+}
+
+.dryeNEW-identification__occlusion {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  background: var(--border);
+}
+
+.dryeNEW-identification__step {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-16);
+  padding: var(--space-20);
+  background: var(--bg);
+}
+
+.dryeNEW-identification__step-number {
+  flex: 0 0 auto;
+  min-width: 20px;
+  padding-top: 2px;
+  font-family: var(--font-body);
+  font-size: var(--fs-micro-2);
+  font-weight: var(--fw-semibold);
+  letter-spacing: 0.1em;
+  color: var(--caption);
+}
+
+.dryeNEW-identification__step-title {
+  margin-bottom: var(--space-5);
+  color: var(--deep);
+}
+
+.dryeNEW-identification__step-body {
+  color: var(--muted);
+}
+
+.dryeNEW-identification__step-body p {
+  margin: 0;
+}
+
+.dryeNEW-identification__step-body strong {
+  font-weight: var(--fw-medium);
+  color: var(--body);
+}
+
+@media (max-width: 767px) {
+  .dryeNEW-identification__strip-wrap::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 32px;
+    height: calc(100% - var(--space-20));
+    pointer-events: none;
+    background: linear-gradient(
+      to right,
+      rgba(255, 255, 255, 0),
+      rgba(255, 255, 255, 0.96)
+    );
+  }
+
+  .dryeNEW-identification__swipe-hint {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-6);
+    margin-top: var(--space-12);
+    margin-left: var(--page-pad);
+    font-family: var(--font-body);
+    font-size: var(--fs-micro-3);
+    font-weight: var(--fw-semibold);
+    letter-spacing: 0.14em;
+    line-height: 1.2;
+    text-transform: uppercase;
+    color: var(--caption);
+    opacity: 1;
+    transition:
+      opacity var(--dur-base) var(--ease-standard),
+      transform var(--dur-base) var(--ease-standard),
+      visibility var(--dur-base) var(--ease-standard);
+    animation: dryeNEW-identification-swipe-fade 2.4s ease infinite;
+  }
+
+  .dryeNEW-identification__swipe-icon {
+    flex: 0 0 auto;
+    animation: dryeNEW-identification-swipe-arrow 1.4s ease infinite;
+  }
+
+  .dryeNEW-identification__swipe-hint.is-hidden {
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-4px);
+    pointer-events: none;
+    animation: none;
+  }
+}
+
+@media (min-width: 768px) {
+  .dryeNEW-identification__intro {
+    max-width: 720px;
+    margin-bottom: var(--space-40);
+  }
+
+  .dryeNEW-identification__strip {
+    display: grid;
+    grid-template-columns: var(--grid-5-col-desktop);
+    gap: var(--space-2);
+    overflow: visible;
+  }
+
+  .dryeNEW-identification__profession {
+    max-width: none;
+  }
+
+  .dryeNEW-identification__profession-image-wrap {
+    aspect-ratio: 4 / 3;
+  }
+
+  .dryeNEW-identification__profession-image {
+    filter: saturate(0.65) brightness(0.9);
+    transition: filter var(--dur-base) var(--ease-standard);
+  }
+
+  .dryeNEW-identification__profession:hover .dryeNEW-identification__profession-image {
+    filter: saturate(1) brightness(0.9);
+  }
+
+  .dryeNEW-identification__profession-label {
+    padding-bottom: var(--space-4);
+  }
+
+  .dryeNEW-identification__swipe-hint {
+    display: none !important;
+  }
+
+  .dryeNEW-identification__strip-wrap {
+    margin-bottom: var(--space-48);
+  }
+
+  .dryeNEW-identification__occlusion {
+    display: grid;
+    grid-template-columns: var(--grid-3-col-desktop);
+    gap: var(--space-1);
+  }
+
+  .dryeNEW-identification__step {
+    display: block;
+    padding: var(--space-28) var(--space-24);
+  }
+
+  .dryeNEW-identification__step-number {
+    display: block;
+    min-width: 0;
+    margin-bottom: var(--space-12);
+    padding-top: 0;
+    font-size: var(--fs-micro-3);
+  }
+
+  .dryeNEW-identification__step-title {
+    margin-bottom: var(--space-8);
+  }
+}
+
+@keyframes dryeNEW-identification-swipe-arrow {
+  0% {
+    transform: translateX(0);
+    opacity: 0.55;
+  }
+  50% {
+    transform: translateX(6px);
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 0.55;
+  }
+}
+
+@keyframes dryeNEW-identification-swipe-fade {
+  0%, 100% {
+    opacity: 0.55;
+  }
+  50% {
+    opacity: 0.9;
+  }
+}
+.dryeNEW-identification__profession-copy {
+  padding: var(--space-12) 0 var(--space-20);
+}
+
+.dryeNEW-identification__profession-label {
+  margin: 0 0 var(--space-6);
+  padding-bottom: 0;
+}
+
+.dryeNEW-identification__profession-body {
+  color: var(--muted);
+  text-align: center;
+  max-width: 92%;
+  margin: 0 auto;
+}
+
+.dryeNEW-identification__profession-body p {
+  margin: 0;
+}
+
+@media (min-width: 768px) {
+  .dryeNEW-identification__profession-copy {
+    padding: var(--space-12) var(--space-8) var(--space-4);
+  }
+
+  .dryeNEW-identification__profession-label {
+    padding-bottom: 0;
+  }
+
+  .dryeNEW-identification__profession-body {
+    max-width: 100%;
+  }
+}

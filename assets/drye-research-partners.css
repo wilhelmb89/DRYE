@@ -1,0 +1,127 @@
+.drye-rp-section {
+  background: var(--bg);
+}
+
+.drye-rp-micro,
+.drye-rp-callout-micro {
+  color: var(--sage);
+}
+
+.drye-rp-micro {
+  margin-bottom: var(--space-12);
+}
+
+.drye-rp-heading {
+  margin: 0;
+  color: var(--deep);
+}
+
+.drye-rp-intro {
+  max-width: 980px;
+  margin-top: var(--space-16);
+  color: var(--body);
+}
+
+.drye-rp-intro p {
+  margin: 0;
+}
+
+.drye-rp-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--space-12);
+  margin-top: var(--space-36);
+}
+
+.drye-rp-card {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-14);
+  padding: var(--space-20);
+  border: var(--border-base);
+  background: var(--bg);
+}
+
+.drye-rp-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  flex: 0 0 36px;
+  border: var(--border-base);
+  background: rgba(30, 58, 76, 0.03);
+  color: var(--deep);
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: var(--fw-regular);
+  line-height: 1;
+}
+
+.drye-rp-card-content {
+  min-width: 0;
+}
+
+.drye-rp-card-name {
+  margin: 0 0 var(--space-4);
+  color: var(--deep);
+}
+
+.drye-rp-card-role {
+  color: var(--muted);
+}
+
+.drye-rp-card-role p {
+  margin: 0;
+}
+
+.drye-rp-callout {
+  margin-top: var(--space-32);
+  border: var(--border-base);
+  background: rgba(30, 58, 76, 0.03);
+}
+
+.drye-rp-callout-inner {
+  padding: var(--space-24) var(--space-20);
+}
+
+.drye-rp-callout-micro {
+  margin-bottom: var(--space-12);
+}
+
+.drye-rp-callout-text {
+  color: var(--deep);
+}
+
+.drye-rp-callout-text p {
+  margin: 0;
+}
+
+.drye-rp-callout-text strong {
+  font-weight: var(--fw-semibold);
+}
+
+@media (min-width: 768px) {
+  .drye-rp-intro {
+    margin-top: var(--space-14);
+  }
+
+  .drye-rp-grid {
+    grid-template-columns: var(--grid-2-col-desktop);
+    gap: var(--space-12);
+    margin-top: var(--space-36);
+  }
+
+  .drye-rp-card {
+    min-height: 98px;
+    padding: var(--space-20);
+  }
+
+  .drye-rp-callout {
+    margin-top: var(--space-32);
+  }
+
+  .drye-rp-callout-inner {
+    padding: 26px var(--space-24);
+  }
+}

@@ -1,0 +1,60 @@
+/* assets/drye-about-blocks.css
+   DRYE — About blocks
+   Layout only. Typography via base.css
+*/
+
+.drye-about{
+  padding-block: clamp(64px, 8vw, 120px);
+}
+
+.drye-about__inner{
+  max-width: var(--drye-about-page-w, 1100px);
+  margin-inline: auto;
+  padding-inline: var(--drye-about-pad-x-m, 16px);
+  display: grid;
+  gap: clamp(48px, 6vw, 80px);
+}
+
+@media (min-width: 990px){
+  .drye-about__inner{
+    padding-inline: var(--drye-about-pad-x-d, 32px);
+  }
+}
+
+
+/* Keep content readable */
+.drye-about__block{
+  max-width: var(--drye-about-block-w, none);
+  margin-inline: auto;
+  width: 100%;
+}
+
+
+/* Divider */
+.drye-about__block.has-divider{
+  padding-bottom: clamp(32px, 5vw, 56px);
+  border-bottom: 1px solid rgba(0,0,0,.12);
+}
+
+/* RTE spacing */
+.drye-about__block .rte p + p{
+  margin-top: 12px;
+}
+
+/* Heading spacing + size controls */
+.drye-about__heading{
+  margin: 0 0 12px 0;
+  font-size: var(--dab-h-m, 28px);
+}
+
+@media (min-width: 990px){
+  .drye-about__heading{
+    font-size: var(--dab-h-d, 34px);
+  }
+}
+
+/* CTA spacing – styling from base/theme */
+.drye-about__block .button{
+  margin-top: 18px;
+  display: inline-flex;
+}

@@ -1,0 +1,52 @@
+/* ─── BOTTOM STRIP ────────────────────────────────────────── */
+.contact-bottom{
+  background: var(--bg-ink);
+  padding: 48px var(--page-pad);
+}
+
+@media (min-width: 768px){
+  .contact-bottom{
+    padding: 56px 40px;
+  }
+}
+
+.contact-bottom-in{
+  max-width: var(--max-width);
+  margin: 0 auto;
+  display: grid;
+  gap: 32px;
+}
+
+@media (min-width: 768px){
+  .contact-bottom-in{
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 48px;
+  }
+}
+
+.cb-item{}
+
+.cb-label{
+  display: block;
+  margin-bottom: 10px;
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--sage);
+}
+
+.cb-value{
+  margin-bottom: 4px;
+  font-family: "Clash Grotesk", sans-serif;
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: -.01em;
+  color: var(--white-100);
+}
+
+.cb-note{
+  font-size: 12px;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.3);
+}

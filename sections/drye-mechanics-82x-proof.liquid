@@ -1,0 +1,231 @@
+{{ 'drye-mechanics-82x-proof.css' | asset_url | stylesheet_tag }}
+
+<section class="dryeNEW-section mech-82x-proof" data-section-id="{{ section.id }}" data-drye-section data-section-index="10" data-section-name="82x_proof" data-mechanism-section>
+  <div class="dryeNEW-container mech-82x-proof__container">
+
+    <div class="mech-82x-proof__intro">
+      {% if section.settings.eyebrow != blank %}
+        <span class="dryeNEW-micro mech-82x-proof__eyebrow">
+          {{ section.settings.eyebrow }}
+        </span>
+      {% endif %}
+
+      {% if section.settings.heading_line_1 != blank or section.settings.heading_emphasis != blank %}
+        <h2 class="dryeNEW-h2 mech-82x-proof__heading">
+          {% if section.settings.heading_line_1 != blank %}
+            <span>{{ section.settings.heading_line_1 }}</span>
+          {% endif %}
+
+          {% if section.settings.heading_emphasis != blank %}
+            <em class="dryeNEW-em">{{ section.settings.heading_emphasis }}</em>
+          {% endif %}
+        </h2>
+      {% endif %}
+
+      {% if section.settings.subheading != blank %}
+        <div class="dryeNEW-body mech-82x-proof__subheading">
+          {{ section.settings.subheading }}
+        </div>
+      {% endif %}
+    </div>
+
+    <div class="mech-82x-proof__visual">
+      <div class="mech-82x-proof__samples">
+
+        <div class="mech-82x-proof__sample">
+          <div class="mech-82x-proof__sample-img">
+            {% if section.settings.left_image != blank %}
+              {% assign mech_82x_left_alt = section.settings.left_image_alt | escape %}
+              {{
+                section.settings.left_image
+                | image_url: width: 900
+                | image_tag:
+                  class: 'mech-82x-proof__image',
+                  loading: 'lazy',
+                  alt: mech_82x_left_alt
+              }}
+            {% else %}
+              <div class="mech-82x-proof__img-placeholder"></div>
+            {% endif %}
+          </div>
+
+          {% if section.settings.left_label != blank %}
+            <div class="dryeNEW-micro mech-82x-proof__sample-lbl">
+              {{ section.settings.left_label }}
+            </div>
+          {% endif %}
+
+          {% if section.settings.left_value != blank %}
+            <div class="mech-82x-proof__sample-value">
+              {{ section.settings.left_value }}
+            </div>
+          {% endif %}
+
+          {% if section.settings.left_unit != blank %}
+            <div class="dryeNEW-body--caption mech-82x-proof__sample-unit">
+              {{ section.settings.left_unit }}
+            </div>
+          {% endif %}
+        </div>
+
+        {% if section.settings.vs_label != blank %}
+          <div class="mech-82x-proof__vs">
+            {{ section.settings.vs_label }}
+          </div>
+        {% endif %}
+
+        <div class="mech-82x-proof__sample">
+          <div class="mech-82x-proof__sample-img">
+            {% if section.settings.right_image != blank %}
+              {% assign mech_82x_right_alt = section.settings.right_image_alt | escape %}
+              {{
+                section.settings.right_image
+                | image_url: width: 900
+                | image_tag:
+                  class: 'mech-82x-proof__image',
+                  loading: 'lazy',
+                  alt: mech_82x_right_alt
+              }}
+            {% else %}
+              <div class="mech-82x-proof__img-placeholder"></div>
+            {% endif %}
+          </div>
+
+          {% if section.settings.right_label != blank %}
+            <div class="dryeNEW-micro mech-82x-proof__sample-lbl">
+              {{ section.settings.right_label }}
+            </div>
+          {% endif %}
+
+          {% if section.settings.right_value != blank %}
+            <div class="mech-82x-proof__sample-value">
+              {{ section.settings.right_value }}
+            </div>
+          {% endif %}
+
+          {% if section.settings.right_unit != blank %}
+            <div class="dryeNEW-body--caption mech-82x-proof__sample-unit">
+              {{ section.settings.right_unit }}
+            </div>
+          {% endif %}
+        </div>
+
+      </div>
+
+      {% if section.settings.citation != blank %}
+        <div class="dryeNEW-body--caption mech-82x-proof__cite">
+          {{ section.settings.citation }}
+        </div>
+      {% endif %}
+    </div>
+
+  </div>
+</section>
+{% schema %}
+{
+  "name": "DRYE Mechanics 82x Proof",
+  "tag": "section",
+  "class": "shopify-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "Independent verification · 2026"
+    },
+    {
+      "type": "text",
+      "id": "heading_line_1",
+      "label": "Heading line 1",
+      "default": "Same family of knit. Different construction."
+    },
+    {
+      "type": "text",
+      "id": "heading_emphasis",
+      "label": "Heading emphasis",
+      "default": "82× further moisture transport."
+    },
+    {
+      "type": "textarea",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "The innovation is not just the fibre blend. It is how the knit is built to move moisture away from the skin side."
+    },
+    {
+      "type": "image_picker",
+      "id": "left_image",
+      "label": "Left sample image"
+    },
+    {
+      "type": "text",
+      "id": "left_image_alt",
+      "label": "Left image alt text",
+      "default": "DRYE asymmetric knit sample showing large wicking area."
+    },
+    {
+      "type": "text",
+      "id": "left_label",
+      "label": "Left label",
+      "default": "DRYE · asymmetric layering"
+    },
+    {
+      "type": "text",
+      "id": "left_value",
+      "label": "Left value",
+      "default": "8,111"
+    },
+    {
+      "type": "text",
+      "id": "left_unit",
+      "label": "Left unit",
+      "default": "mm² wicking area"
+    },
+    {
+      "type": "text",
+      "id": "vs_label",
+      "label": "VS label",
+      "default": "vs"
+    },
+    {
+      "type": "image_picker",
+      "id": "right_image",
+      "label": "Right sample image"
+    },
+    {
+      "type": "text",
+      "id": "right_image_alt",
+      "label": "Right image alt text",
+      "default": "Conventional symmetric knit sample showing minimal wicking area."
+    },
+    {
+      "type": "text",
+      "id": "right_label",
+      "label": "Right label",
+      "default": "Conventional · symmetric layering"
+    },
+    {
+      "type": "text",
+      "id": "right_value",
+      "label": "Right value",
+      "default": "99"
+    },
+    {
+      "type": "text",
+      "id": "right_unit",
+      "label": "Right unit",
+      "default": "mm² wicking area"
+    },
+    {
+      "type": "text",
+      "id": "citation",
+      "label": "Citation",
+      "default": "Wickview AATCC 195 · Swedish School of Textiles · Borås, Sweden · 2026"
+    }
+  ],
+  "presets": [
+    {
+      "name": "DRYE Mechanics 82x Proof"
+    }
+  ]
+}
+{% endschema %}

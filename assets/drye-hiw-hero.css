@@ -1,0 +1,173 @@
+/* ==========================================================================
+   DRYE — HIW Hero
+   Adjusted to align with Research Hero measurements
+   ========================================================================== */
+
+.drye-hiw-hero {
+  position: relative;
+  overflow: hidden;
+  background: var(--bg-ink);
+  padding: 96px 0 64px;
+}
+
+.drye-hiw-hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    ellipse at 20% 50%,
+    rgba(61, 90, 94, 0.15) 0%,
+    transparent 60%
+  );
+  pointer-events: none;
+}
+
+.drye-hiw-hero::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(95, 138, 139, 0.3),
+    transparent
+  );
+  pointer-events: none;
+}
+
+.drye-hiw-hero .dryeNEW-container {
+  position: relative;
+  z-index: 1;
+}
+
+.drye-hiw-hero__inner {
+  width: 100%;
+}
+
+/* Breadcrumb */
+
+.drye-hiw-hero__breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 32px;
+}
+
+.drye-hiw-hero__breadcrumb a {
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.35);
+  text-decoration: none;
+}
+
+.drye-hiw-hero__breadcrumb-sep {
+  font-size: 10px;
+  color: rgba(255, 255, 255, 0.2);
+}
+
+.drye-hiw-hero__breadcrumb-current {
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--sage);
+}
+
+/* Micro */
+
+.drye-hiw-hero__micro {
+  display: block;
+  margin-bottom: 10px;
+  font-family: var(--font-body);
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--sage);
+}
+
+/* Heading */
+
+.drye-hiw-hero__heading {
+  max-width: 760px;
+  margin: 0 0 8px;
+  font-family: var(--font-display);
+  font-size: clamp(32px, 9vw, 64px);
+  font-weight: 600;
+  letter-spacing: -0.03em;
+  line-height: 1;
+  color: var(--white-100);
+}
+
+.drye-hiw-hero__heading em {
+  font-family: var(--font-editorial);
+  font-style: italic;
+  font-weight: 400;
+  letter-spacing: normal;
+  color: rgba(255, 255, 255, 0.45);
+}
+
+/* Sub */
+
+.drye-hiw-hero__sub {
+  max-width: 600px;
+  margin-top: 20px;
+  font-family: var(--font-body);
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 1.75;
+  color: rgba(255, 255, 255, 0.45);
+}
+
+.drye-hiw-hero__sub p {
+  margin: 0;
+}
+
+.drye-hiw-hero__sub strong {
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.75);
+}
+
+/* Reveal */
+
+.drye-hiw-hero__reveal {
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.drye-hiw-hero__reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.drye-hiw-hero__rd1 {
+  transition-delay: 0.06s;
+}
+
+.drye-hiw-hero__rd2 {
+  transition-delay: 0.13s;
+}
+
+.drye-hiw-hero__rd3 {
+  transition-delay: 0.20s;
+}
+
+/* Mobile */
+
+@media (max-width: 767px) {
+  .drye-hiw-hero__sub {
+    font-size: 14px;
+  }
+}
+
+@media (min-width: 768px) {
+  .drye-hiw-hero {
+    padding: 112px 0 72px;
+  }
+}

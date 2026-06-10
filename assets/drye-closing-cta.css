@@ -1,0 +1,109 @@
+/* ==========================================================================
+   DRYE — Closing CTA
+   Source-aligned to HTML prototype
+   ========================================================================== */
+
+.cta-sec {
+  background: var(--bg-ink);
+  padding: 56px var(--page-pad);
+  text-align: center;
+}
+
+.cta-in {
+  max-width: 520px;
+  margin: 0 auto;
+}
+
+.cta-sec .micro {
+  text-align: center;
+}
+
+.micro-w {
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.cta-h {
+  font-family: "Clash Grotesk", sans-serif;
+  font-size: clamp(24px, 6vw, 40px);
+  font-weight: 600;
+  letter-spacing: -0.03em;
+  color: white;
+  line-height: 1.1;
+  margin-bottom: 12px;
+}
+
+.cta-h em {
+  font-family: "Playfair Display", serif;
+  font-style: italic;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.3);
+  font-size: 0.8em;
+  display: block;
+  margin-top: 6px;
+}
+
+.cta-sub {
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.4);
+  line-height: 1.7;
+  max-width: 380px;
+  margin: 0 auto 26px;
+}
+
+.cta-btns {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.btn-main {
+  width: 100%;
+  max-width: 300px;
+  background: var(--emerald);
+  border: none;
+  cursor: pointer;
+  font-family: "DM Sans", sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: white;
+  padding: 16px 32px;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-ghost {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 11px;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.35);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+  padding-bottom: 2px;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.cta-fine {
+  margin-top: 18px;
+  font-size: 10px;
+  color: rgba(255, 255, 255, 0.2);
+  letter-spacing: 0.05em;
+}
+
+@media (max-width: 767px) {
+  .cta-sec {
+    padding: 48px var(--page-pad);
+  }
+
+  .btn-main {
+    max-width: 100%;
+  }
+}

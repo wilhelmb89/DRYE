@@ -1,97 +1,646 @@
-/* =========================
-   base.css
-   Globala stilar & typografi
-   ========================= */
+/* ==========================================================================
+   DRYE — base.css
+   Global foundation only
+   Mobile-first
+   Desktop/tablet breakpoint: 768px
+   ========================================================================== */
 
-/* Reset och box-sizing */
+/* ==========================================================================
+   1. ROOT TOKENS
+   ========================================================================== */
+
+
+:root {
+  /* Brand colours */
+  --deep: #1E3A4C;
+  --accent: #3D5A5E;
+  --sage: #5F8A8B;
+  --emerald: #0D9488;
+  --green: #10B981;
+  --red: #EF4444;
+
+  /* Text colours */
+  --body: #374151;
+  --muted: #4B5563;
+  --caption: #9CA3AF;
+
+  /* Structure colours */
+  --border: #E5E7EB;
+  --bg: #FFFFFF;
+  --bg-soft: #F8FAFC;
+  --bg-ink: #0F2230;
+  --bg-tint: rgba(30, 58, 76, 0.025);
+
+  /* Reusable alpha colours */
+  --white-100: rgba(255, 255, 255, 1);
+  --white-080: rgba(255, 255, 255, 0.8);
+  --white-075: rgba(255, 255, 255, 0.75);
+  --white-070: rgba(255, 255, 255, 0.7);
+  --white-060: rgba(255, 255, 255, 0.6);
+  --white-055: rgba(255, 255, 255, 0.55);
+  --white-050: rgba(255, 255, 255, 0.5);
+  --white-045: rgba(255, 255, 255, 0.45);
+  --white-040: rgba(255, 255, 255, 0.4);
+  --white-035: rgba(255, 255, 255, 0.35);
+  --white-030: rgba(255, 255, 255, 0.3);
+  --white-020: rgba(255, 255, 255, 0.2);
+  --white-015: rgba(255, 255, 255, 0.15);
+  --white-010: rgba(255, 255, 255, 0.1);
+  --white-008: rgba(255, 255, 255, 0.08);
+  --white-007: rgba(255, 255, 255, 0.07);
+  --white-006: rgba(255, 255, 255, 0.06);
+  --white-005: rgba(255, 255, 255, 0.05);
+  --white-003: rgba(255, 255, 255, 0.03);
+
+  --ink-092: rgba(10, 22, 33, 0.92);
+  --ink-075: rgba(10, 22, 33, 0.75);
+  --ink-065: rgba(10, 22, 33, 0.65);
+  --ink-030: rgba(10, 22, 33, 0.3);
+
+  --deep-030: rgba(30, 58, 76, 0.3);
+  --sage-030: rgba(95, 138, 139, 0.3);
+  --sage-020: rgba(95, 138, 139, 0.2);
+
+  /* Typography */
+  --font-display: "Clash Grotesk", sans-serif;
+  --font-editorial: "Playfair Display", Georgia, serif;
+  --font-body: "DM Sans", sans-serif;
+
+  --fw-regular: 400;
+  --fw-medium: 500;
+  --fw-semibold: 600;
+
+  /* Global type scale */
+  --fs-hero-h1: clamp(34px, 9vw, 52px);
+  --fs-section-h2: clamp(22px, 6vw, 32px);
+  --fs-sub-h3: 17px;
+  --fs-h4: 14px;
+
+  --fs-body: 15px;
+  --fs-body-lg: 16px;
+  --fs-body-sm: 14px;
+  --fs-caption: 13px;
+
+  --fs-micro-1: 8px;
+  --fs-micro-2: 9px;
+  --fs-micro-3: 10px;
+
+  --fs-stat-sm: 22px;
+  --fs-stat-lg: 28px;
+
+  --ls-tight-display: -0.03em;
+  --ls-tight-h2: -0.03em;
+  --ls-tight-h3: -0.02em;
+  --ls-micro: 0.18em;
+
+  --lh-display: 1;
+  --lh-heading: 1.1;
+  --lh-heading-tight: 1.2;
+  --lh-body-tight: 1.55;
+  --lh-body-mid: 1.6;
+  --lh-body: 1.75;
+
+  /* Layout */
+  --page-pad: 20px;
+  --max-width: 1100px;
+
+  /* ONE POINT OF CONTACT */
+  --section-pad-y: 88px;
+  --section-pad-x: 20px;
+  --stack-gap: 16px;
+
+  /* Card spacing */
+  --card-pad-y: 20px;
+  --card-pad-x: 16px;
+  --card-pad: var(--card-pad-y) var(--card-pad-x);
+
+  /* Space scale */
+  --space-0: 0;
+  --space-1: 1px;
+  --space-2: 2px;
+  --space-3: 3px;
+  --space-4: 4px;
+  --space-5: 5px;
+  --space-6: 6px;
+  --space-7: 7px;
+  --space-8: 8px;
+  --space-9: 9px;
+  --space-10: 10px;
+  --space-11: 11px;
+  --space-12: 12px;
+  --space-13: 13px;
+  --space-14: 14px;
+  --space-16: 16px;
+  --space-18: 18px;
+  --space-20: 20px;
+  --space-22: 22px;
+  --space-24: 24px;
+  --space-28: 28px;
+  --space-32: 32px;
+  --space-36: 36px;
+  --space-40: 40px;
+  --space-48: 48px;
+  --space-52: 52px;
+  --space-56: 56px;
+  --space-64: 64px;
+  --space-80: 80px;
+
+  /* Grid gaps */
+  --grid-gap-8: 8px;
+  --grid-gap-10: 10px;
+  --grid-gap-12: 12px;
+  --grid-gap-14: 14px;
+  --grid-gap-16: 16px;
+  --grid-gap-20: 20px;
+  --grid-gap-24: 24px;
+  --grid-gap-28: 28px;
+  --grid-gap-32: 32px;
+  --grid-gap-40: 40px;
+  --grid-gap-48: 48px;
+  --grid-gap-56: 56px;
+  --grid-gap-64: 64px;
+
+  /* Borders */
+  --border-width: 1px;
+  --border-width-strong: 2px;
+  --border-base: var(--border-width) solid var(--border);
+  --border-white-015: var(--border-width) solid var(--white-015);
+  --border-white-010: var(--border-width) solid var(--white-010);
+  --border-white-007: var(--border-width) solid var(--white-007);
+  --border-white-006: var(--border-width) solid var(--white-006);
+  --border-white-005: var(--border-width) solid var(--white-005);
+  --border-sage-020: var(--border-width) solid var(--sage-020);
+  --border-emerald-strong: var(--border-width-strong) solid var(--emerald);
+
+  /* Radius / shadow */
+  --radius-none: 0;
+  --shadow-none: none;
+
+  /* Motion */
+  --ease-standard: ease;
+  --dur-fast: 0.15s;
+  --dur-base: 0.2s;
+  --dur-reveal: 0.5s;
+  --dur-sticky: 0.3s;
+
+  --reveal-distance: 12px;
+  --reveal-delay-1: 0.05s;
+  --reveal-delay-2: 0.12s;
+  --reveal-delay-3: 0.2s;
+
+  /* Z-index */
+  --z-nav: 100;
+  --z-sticky: 90;
+  --z-base: 1;
+
+  /* Shared component tokens */
+  --nav-height: 52px;
+  --sticky-cta-height: 60px;
+
+  --hero-overlay: linear-gradient(
+    175deg,
+    var(--ink-030) 0%,
+    var(--ink-065) 50%,
+    var(--ink-092) 100%
+  );
+
+  --grid-2-col-desktop: repeat(2, minmax(0, 1fr));
+  --grid-3-col-desktop: repeat(3, minmax(0, 1fr));
+  --grid-4-col-desktop: repeat(4, minmax(0, 1fr));
+  --grid-5-col-desktop: repeat(5, minmax(0, 1fr));
+}
+
+/* ==========================================================================
+   2. FONTS + DESKTOP/TABLET TOKEN OVERRIDES
+   ========================================================================== */
+
+
+@media (min-width: 768px) {
+  :root {
+    --page-pad: 40px;
+    --section-pad-x: 40px;
+    --section-pad-y: 88px;
+
+    --card-pad-y: 28px;
+    --card-pad-x: 24px;
+
+    --fs-hero-h1: clamp(36px, 5.5vw, 68px);
+    --fs-section-h2: clamp(22px, 3.1vw, 32px);
+    --fs-sub-h3: 18px;
+    --fs-h4: 17px;
+    --fs-body: 16px;
+
+    --nav-height: 58px;
+  }
+}
+
+  /* ==========================================================================
+   CTA — Text Link (Tertiary)
+   ========================================================================== */
+
+.dryeNEW-link {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-8);
+
+  font-family: var(--font-body);
+  font-size: var(--fs-caption);
+  font-weight: var(--fw-medium);
+  line-height: 1.4;
+
+  color: var(--deep);
+  text-decoration: none;
+
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 3px;
+
+  transition:
+    border-color var(--dur-fast) var(--ease-standard),
+    color var(--dur-fast) var(--ease-standard),
+    opacity var(--dur-fast) var(--ease-standard);
+
+  width: fit-content;
+}
+
+.dryeNEW-link:hover {
+  border-bottom-color: var(--deep);
+  opacity: 0.9;
+}
+
+
+
+
+/* ==========================================================================
+   3. RESET
+   ========================================================================== */
+
 *,
 *::before,
 *::after {
   box-sizing: border-box;
-  margin: 0;
-  padding: 0;
 }
 
-/* Body och HTML */
-html, body {
-  height: 100%;
-  width: 100%;
-  font-family: 'Inter', sans-serif;
+html {
   font-size: 16px;
-  line-height: 1.5;
-  color: #111111;
-  background-color: #ffffff;
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
 }
 
-/* Typografi - rubriker */
-h1, h2, h3, h4, h5, h6 {
-  font-family: 'ClashGrotesk-Variable', sans-serif;
-  font-weight: 700;
-  line-height: 1.2;
-  margin-bottom: 1rem;
-  color: inherit;
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+figure,
+ol,
+ul,
+dl,
+dd {
+  margin: 0;
 }
 
-h1 { font-size: 3rem; }
-h2 { font-size: 2.25rem; }
-h3 { font-size: 1.75rem; }
-h4 { font-size: 1.5rem; }
-h5 { font-size: 1.25rem; }
-h6 { font-size: 1rem; }
-
-/* Brödtext */
-p {
-  margin-bottom: 1rem;
-  font-size: 1rem;
-  line-height: 1.6;
-  font-weight: 400;
+ol,
+ul {
+  padding: 0;
+  list-style: none;
 }
 
-/* Länkar */
-a {
-  color: inherit;
-  text-decoration: none;
-  transition: color 0.3s ease;
-}
-
-a:hover {
-  text-decoration: underline;
-}
-
-/* Listor */
-ul, ol {
-  margin-left: 1.5rem;
-  margin-bottom: 1rem;
-  line-height: 1.5;
-}
-
-li {
-  margin-bottom: 0.5rem;
-}
-
-/* Bilder */
-img {
+img,
+picture,
+video,
+canvas,
+svg {
+  display: block;
   max-width: 100%;
   height: auto;
+}
+
+iframe {
   display: block;
+  max-width: 100%;
   border: 0;
 }
 
-/* Knapp-reset */
+img {
+  border-style: none;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
+  color: inherit;
+}
+
 button {
-  font-family: inherit;
-  font-size: inherit;
-  line-height: inherit;
+  appearance: none;
+  background: transparent;
   border: none;
-  background: none;
+  border-radius: 0;
+  box-shadow: none;
   cursor: pointer;
 }
 
-/* Starkare text */
-strong {
-  font-weight: 700;
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
 }
 
-em {
+[hidden] {
+  display: none !important;
+}
+
+/* ==========================================================================
+   4. DOCUMENT DEFAULTS
+   ========================================================================== */
+
+html,
+body {
+  width: 100%;
+  overflow-x: clip;
+}
+
+body {
+  min-width: 320px;
+  background: var(--bg);
+  color: var(--body);
+  font-family: var(--font-body);
+  font-size: var(--fs-body);
+  font-weight: var(--fw-regular);
+  line-height: var(--lh-body);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  border-radius: var(--radius-none);
+  box-shadow: var(--shadow-none);
+}
+
+/* Bara behåll denna om sticky CTA faktiskt är global på mobil.
+   Annars: ta bort hela blocket. */
+@media (max-width: 767px) {
+  body.has-sticky-cta {
+    padding-bottom: var(--sticky-cta-height);
+  }
+}
+
+/* ==========================================================================
+   5. SHOPIFY PAGE LAYOUT HELPERS
+   ========================================================================== */
+
+.shopify-section {
+  position: relative;
+  width: 100%;
+}
+
+.dryeNEW-section {
+  position: relative;
+  width: 100%;
+  padding-top: var(--section-pad-y);
+  padding-bottom: var(--section-pad-y);
+}
+
+/* Standard container:
+   samma side padding globalt + max width 1100 */
+.dryeNEW-container {
+  width: 100%;
+  max-width: calc(var(--max-width) + (var(--page-pad) * 2));
+  margin-inline: auto;
+  padding-inline: var(--page-pad);
+}
+
+/* För sektioner som INTE ska ha max width men ändå exakt samma side padding */
+.dryeNEW-shell {
+  width: 100%;
+  padding-inline: var(--page-pad);
+}
+
+/* För innehåll som ska vara full bleed men fortfarande kunna ha en inre padded wrapper */
+.dryeNEW-full-bleed {
+  width: 100vw;
+  max-width: 100vw;
+  margin-left: calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
+}
+
+.dryeNEW-full-bleed__inner {
+  width: 100%;
+  padding-inline: var(--page-pad);
+}
+
+.dryeNEW-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.dryeNEW-stack > * + * {
+  margin-top: var(--stack-gap);
+}
+
+/* ==========================================================================
+   6. TYPOGRAPHY HELPERS
+   ========================================================================== */
+
+.dryeNEW-h1,
+.dryeNEW-h2,
+.dryeNEW-h3,
+.dryeNEW-h4 {
+  margin: 0;
+  color: inherit;
+}
+
+.dryeNEW-h1 {
+  font-family: var(--font-display);
+  font-size: var(--fs-hero-h1);
+  font-weight: var(--fw-semibold);
+  letter-spacing: var(--ls-tight-display);
+  line-height: var(--lh-display);
+}
+
+.dryeNEW-h2 {
+  font-family: var(--font-display);
+  font-size: var(--fs-section-h2);
+  font-weight: var(--fw-semibold);
+  letter-spacing: var(--ls-tight-h2);
+  line-height: var(--lh-heading);
+}
+
+.dryeNEW-h3 {
+  font-family: var(--font-display);
+  font-size: var(--fs-sub-h3);
+  font-weight: var(--fw-semibold);
+  letter-spacing: var(--ls-tight-h3);
+  line-height: var(--lh-heading-tight);
+}
+
+.dryeNEW-h4 {
+  font-family: var(--font-display);
+  font-size: var(--fs-h4);
+  font-weight: var(--fw-medium);
+  letter-spacing: -0.02em;
+  line-height: var(--lh-heading);
+}
+
+.dryeNEW-body {
+  font-family: var(--font-body);
+  font-size: var(--fs-body);
+  font-weight: var(--fw-regular);
+  line-height: var(--lh-body);
+}
+
+.dryeNEW-body--lg {
+  font-family: var(--font-body);
+  font-size: var(--fs-body-lg);
+  font-weight: var(--fw-regular);
+  line-height: var(--lh-body-mid);
+}
+
+.dryeNEW-body--sm {
+  font-family: var(--font-body);
+  font-size: var(--fs-body-sm);
+  font-weight: var(--fw-regular);
+  line-height: var(--lh-body-mid);
+}
+
+.dryeNEW-body--caption {
+  font-family: var(--font-body);
+  font-size: var(--fs-caption);
+  font-weight: var(--fw-regular);
+  line-height: 1.6;
+}
+
+.dryeNEW-editorial,
+.dryeNEW-em,
+.dryeNEW-italic {
+  font-family: var(--font-editorial);
   font-style: italic;
+  font-weight: var(--fw-regular);
+  letter-spacing: normal;
+}
+
+.dryeNEW-micro {
+  display: block;
+  margin-bottom: var(--space-10);
+  font-family: var(--font-body);
+  font-size: var(--fs-micro-2);
+  font-weight: var(--fw-semibold);
+  letter-spacing: var(--ls-micro);
+  line-height: 1.2;
+  text-transform: uppercase;
+  color: var(--caption);
+}
+
+.dryeNEW-stat-number {
+  font-family: var(--font-display);
+  font-size: var(--fs-stat-sm);
+  font-weight: var(--fw-semibold);
+  letter-spacing: var(--ls-tight-display);
+  line-height: 1;
+}
+
+@media (min-width: 768px) {
+  .dryeNEW-stat-number {
+    font-size: var(--fs-stat-lg);
+  }
+}
+
+/* ==========================================================================
+   7. COMMON COMPONENT HELPERS
+   ========================================================================== */
+
+.dryeNEW-link {
+  transition:
+    color var(--dur-fast) var(--ease-standard),
+    background-color var(--dur-base) var(--ease-standard),
+    border-color var(--dur-base) var(--ease-standard),
+    opacity var(--dur-base) var(--ease-standard);
+}
+
+.dryeNEW-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-8);
+  border-radius: var(--radius-none);
+  box-shadow: var(--shadow-none);
+  transition:
+    color var(--dur-fast) var(--ease-standard),
+    background-color var(--dur-base) var(--ease-standard),
+    border-color var(--dur-base) var(--ease-standard),
+    opacity var(--dur-base) var(--ease-standard),
+    transform var(--dur-base) var(--ease-standard);
+}
+
+.dryeNEW-card {
+  border-radius: var(--radius-none);
+  box-shadow: var(--shadow-none);
+}
+
+.dryeNEW-visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* ==========================================================================
+   8. ANIMATION UTILITIES
+   ========================================================================== */
+
+.dryeNEW-reveal {
+  opacity: 1;
+  transform: translateY(0);
+  transition:
+    opacity var(--dur-reveal) var(--ease-standard),
+    transform var(--dur-reveal) var(--ease-standard);
+}
+
+.js .dryeNEW-reveal {
+  opacity: 0;
+  transform: translateY(var(--reveal-distance));
+}
+
+.js .dryeNEW-reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.dryeNEW-rd1 { transition-delay: var(--reveal-delay-1); }
+.dryeNEW-rd2 { transition-delay: var(--reveal-delay-2); }
+.dryeNEW-rd3 { transition-delay: var(--reveal-delay-3); }
+
+/* ==========================================================================
+   9. RESPONSIVE GRID HELPERS
+   ========================================================================== */
+
+@media (min-width: 768px) {
+  .dryeNEW-grid--2 {
+    grid-template-columns: var(--grid-2-col-desktop);
+  }
+
+  .dryeNEW-grid--3 {
+    grid-template-columns: var(--grid-3-col-desktop);
+  }
+
+  .dryeNEW-grid--4 {
+    grid-template-columns: var(--grid-4-col-desktop);
+  }
+
+  .dryeNEW-grid--5 {
+    grid-template-columns: var(--grid-5-col-desktop);
+  }
 }

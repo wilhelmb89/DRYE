@@ -1,0 +1,354 @@
+{{ 'drye-mechanics-mechanism.css' | asset_url | stylesheet_tag }}
+
+<section
+  class="dryeNEW-section mech-mechanism"
+  id="mechanics-mechanism"
+  data-section-id="{{ section.id }}"
+  data-drye-section
+  data-section-index="9"
+  data-section-name="mechanism"
+  data-mechanism-section
+>
+<div class="dryeNEW-container">
+
+    <div class="mech-mechanism__intro">
+      {% if section.settings.eyebrow != blank %}
+        <span class="dryeNEW-micro">{{ section.settings.eyebrow }}</span>
+      {% endif %}
+
+      {% if section.settings.heading_line_1 != blank or section.settings.heading_emphasis != blank %}
+        <h2 class="dryeNEW-h2 mech-mechanism__heading">
+          {% if section.settings.heading_line_1 != blank %}
+            {{ section.settings.heading_line_1 }}
+          {% endif %}
+          {% if section.settings.heading_emphasis != blank %}
+            <em class="dryeNEW-em">{{ section.settings.heading_emphasis }}</em>
+          {% endif %}
+        </h2>
+      {% endif %}
+
+      {% if section.settings.body != blank %}
+        <div class="dryeNEW-body mech-mechanism__sub">
+          {{ section.settings.body }}
+        </div>
+      {% endif %}
+    </div>
+
+    <div class="mech-mechanism__cols">
+      <div class="mech-mechanism__col mech-mechanism__col--old">
+        {% if section.settings.old_label != blank %}
+          <div class="mech-mechanism__col-lbl">{{ section.settings.old_label }}</div>
+        {% endif %}
+
+        {% if section.settings.old_title != blank %}
+          <h3 class="dryeNEW-h3 mech-mechanism__col-title">{{ section.settings.old_title }}</h3>
+        {% endif %}
+
+        {% if section.settings.old_desc != blank %}
+          <div class="dryeNEW-body--sm mech-mechanism__col-desc">
+            {{ section.settings.old_desc }}
+          </div>
+        {% endif %}
+
+        <ul class="mech-mechanism__steps" role="list">
+          {% for block in section.blocks %}
+            {% if block.type == 'old_step' %}
+              <li class="mech-mechanism__step" {{ block.shopify_attributes }}>
+                <span class="mech-mechanism__step-icon">{{ block.settings.icon }}</span>
+                <div class="dryeNEW-body--sm mech-mechanism__step-text">
+                  {{ block.settings.text }}
+                </div>
+              </li>
+            {% endif %}
+          {% endfor %}
+        </ul>
+      </div>
+
+      <div class="mech-mechanism__col mech-mechanism__col--drye">
+        {% if section.settings.drye_label != blank %}
+          <div class="mech-mechanism__col-lbl">{{ section.settings.drye_label }}</div>
+        {% endif %}
+
+        {% if section.settings.drye_title != blank %}
+          <h3 class="dryeNEW-h3 mech-mechanism__col-title">{{ section.settings.drye_title }}</h3>
+        {% endif %}
+
+        {% if section.settings.drye_desc != blank %}
+          <div class="dryeNEW-body--sm mech-mechanism__col-desc">
+            {{ section.settings.drye_desc }}
+          </div>
+        {% endif %}
+
+        <ul class="mech-mechanism__steps" role="list">
+          {% for block in section.blocks %}
+            {% if block.type == 'drye_step' %}
+              <li class="mech-mechanism__step" {{ block.shopify_attributes }}>
+                <span class="mech-mechanism__step-icon">{{ block.settings.icon }}</span>
+                <div class="dryeNEW-body--sm mech-mechanism__step-text">
+                  {{ block.settings.text }}
+                </div>
+              </li>
+            {% endif %}
+          {% endfor %}
+        </ul>
+      </div>
+    </div>
+
+    <div class="mech-mechanism__props">
+      {% for block in section.blocks %}
+        {% if block.type == 'property' %}
+          <div class="mech-mechanism__prop" {{ block.shopify_attributes }}>
+            {% if block.settings.label != blank %}
+              <div class="mech-mechanism__prop-lbl">{{ block.settings.label }}</div>
+            {% endif %}
+
+            {% if block.settings.title != blank %}
+              <h4 class="dryeNEW-h4 mech-mechanism__prop-title">{{ block.settings.title }}</h4>
+            {% endif %}
+
+            {% if block.settings.body != blank %}
+              <div class="dryeNEW-body--sm mech-mechanism__prop-body">
+                {{ block.settings.body }}
+              </div>
+            {% endif %}
+          </div>
+        {% endif %}
+      {% endfor %}
+    </div>
+
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "DRYE Mechanics Mechanism",
+  "tag": "section",
+  "class": "shopify-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "The mechanism"
+    },
+    {
+      "type": "text",
+      "id": "heading_line_1",
+      "label": "Heading line 1",
+      "default": "Moisture doesn't need to be absorbed."
+    },
+    {
+      "type": "text",
+      "id": "heading_emphasis",
+      "label": "Heading emphasis",
+      "default": "It needs a route out."
+    },
+    {
+      "type": "textarea",
+      "id": "body",
+      "label": "Intro body",
+      "default": "Every fabric you've ever worn under gloves — cotton, merino, polyester — works by absorbing moisture and releasing it into the air. That's fine outside. Inside a sealed glove, there is no air. DRYE doesn't absorb on the skin side at all."
+    },
+    {
+      "type": "text",
+      "id": "old_label",
+      "label": "Left column label",
+      "default": "Every liner before DRYE"
+    },
+    {
+      "type": "text",
+      "id": "old_title",
+      "label": "Left column title",
+      "default": "Absorb and hold"
+    },
+    {
+      "type": "richtext",
+      "id": "old_desc",
+      "label": "Left column description",
+      "default": "<p>Cotton, silk, merino, polyester wicking. All fill with moisture until saturated — then <strong>hold it against your skin</strong> for the rest of the shift.</p>"
+    },
+    {
+      "type": "text",
+      "id": "drye_label",
+      "label": "Right column label",
+      "default": "DRYE dual-layer"
+    },
+    {
+      "type": "text",
+      "id": "drye_title",
+      "label": "Right column title",
+      "default": "Route continuously"
+    },
+    {
+      "type": "richtext",
+      "id": "drye_desc",
+      "label": "Right column description",
+      "default": "<p>Hydrophobic polypropylene against skin — <strong>cannot hold moisture.</strong> Hydrophilic Lyocell outside. A structural gradient drives transport outward, driven harder under compression.</p>"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "old_step",
+      "name": "Left step",
+      "settings": [
+        {
+          "type": "text",
+          "id": "icon",
+          "label": "Icon",
+          "default": "✕"
+        },
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "Text",
+          "default": "Sweat enters the fabric and stays"
+        }
+      ]
+    },
+    {
+      "type": "drye_step",
+      "name": "Right step",
+      "settings": [
+        {
+          "type": "text",
+          "id": "icon",
+          "label": "Icon",
+          "default": "→"
+        },
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "Text",
+          "default": "Inner layer repels moisture away from skin"
+        }
+      ]
+    },
+    {
+      "type": "property",
+      "name": "Property",
+      "settings": [
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Property label",
+          "default": "Property 01"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Property title",
+          "default": "Works under compression"
+        },
+        {
+          "type": "textarea",
+          "id": "body",
+          "label": "Property body",
+          "default": "The gradient functions regardless of external pressure. Compression makes the transport faster, not weaker."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "DRYE Mechanics Mechanism",
+      "blocks": [
+        {
+          "type": "old_step",
+          "settings": {
+            "icon": "✕",
+            "text": "Sweat enters the fabric and stays"
+          }
+        },
+        {
+          "type": "old_step",
+          "settings": {
+            "icon": "✕",
+            "text": "At saturation, moisture presses against skin"
+          }
+        },
+        {
+          "type": "old_step",
+          "settings": {
+            "icon": "✕",
+            "text": "Sealed glove traps heat and humidity"
+          }
+        },
+        {
+          "type": "old_step",
+          "settings": {
+            "icon": "✕",
+            "text": "pH rises, barrier breaks, bacteria multiply"
+          }
+        },
+        {
+          "type": "old_step",
+          "settings": {
+            "icon": "✕",
+            "text": "Same damage on shift 1 as shift 8"
+          }
+        },
+        {
+          "type": "drye_step",
+          "settings": {
+            "icon": "→",
+            "text": "Inner layer repels moisture away from skin"
+          }
+        },
+        {
+          "type": "drye_step",
+          "settings": {
+            "icon": "→",
+            "text": "Structural gradient pulls it continuously outward"
+          }
+        },
+        {
+          "type": "drye_step",
+          "settings": {
+            "icon": "→",
+            "text": "No saturation point — transport doesn't stop"
+          }
+        },
+        {
+          "type": "drye_step",
+          "settings": {
+            "icon": "→",
+            "text": "Skin stays dry under compression"
+          }
+        },
+        {
+          "type": "drye_step",
+          "settings": {
+            "icon": "→",
+            "text": "Barrier stays intact — even after 8 hours"
+          }
+        },
+        {
+          "type": "property",
+          "settings": {
+            "label": "Property 01",
+            "title": "Works under compression",
+            "body": "The gradient functions regardless of external pressure. Compression makes the transport faster, not weaker."
+          }
+        },
+        {
+          "type": "property",
+          "settings": {
+            "label": "Property 02",
+            "title": "No saturation point",
+            "body": "Transport is continuous. There is no maximum capacity after which function stops. Cotton has one. DRYE does not."
+          }
+        },
+        {
+          "type": "property",
+          "settings": {
+            "label": "Property 03",
+            "title": "Stays dry on the skin side",
+            "body": "The inner surface does not work like a towel. It is engineered to avoid moisture retention directly against the hand."
+          }
+        }
+      ]
+    }
+  ],
+  "max_blocks": 20
+}
+{% endschema %}

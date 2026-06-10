@@ -1,0 +1,108 @@
+{{ 'dryeNEW-belief.css' | asset_url | stylesheet_tag }}
+
+<section class="dryeNEW-reframe" id="{{ section.settings.section_id | default: 'belief' }}">
+  <div class="dryeNEW-container">
+    <div class="dryeNEW-reframe__inner">
+      <p class="dryeNEW-reframe__quote">
+        It's not sensitive skin.<br>
+        It's not the wrong material.<br>
+        It's what a sealed glove does to <em>any</em> skin — every time.
+      </p>
+
+      <p class="dryeNEW-reframe__subline">
+        {{ section.settings.subline }}
+      </p>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "DRYE NEW Belief",
+  "settings": [
+    {
+      "type": "text",
+      "id": "section_id",
+      "label": "Section ID",
+      "default": "belief"
+    },
+    {
+      "type": "textarea",
+      "id": "quote",
+      "label": "Quote",
+      "default": "It's not sensitive skin.\nIt's not the wrong material.\nIt's what a sealed glove does to any skin —\nevery time."
+    },
+    {
+      "type": "text",
+      "id": "subline",
+      "label": "Subline",
+      "default": "THE MECHANISM IS THE SAME FOR A SURGEON, A MECHANIC, AND A HOCKEY PLAYER"
+    },
+    {
+      "type": "range",
+      "id": "padding_top_mobile",
+      "min": 0,
+      "max": 200,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding top mobile",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_mobile",
+      "min": 0,
+      "max": 200,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding bottom mobile",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "padding_top_desktop",
+      "min": 0,
+      "max": 240,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding top desktop",
+      "default": 60
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_desktop",
+      "min": 0,
+      "max": 240,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding bottom desktop",
+      "default": 60
+    },
+    {
+      "type": "range",
+      "id": "quote_max_width",
+      "min": 400,
+      "max": 1000,
+      "step": 10,
+      "unit": "px",
+      "label": "Quote max width",
+      "default": 760
+    },
+    {
+      "type": "range",
+      "id": "subline_margin_top",
+      "min": 0,
+      "max": 80,
+      "step": 2,
+      "unit": "px",
+      "label": "Subline margin top",
+      "default": 16
+    }
+  ],
+  "presets": [
+    {
+      "name": "DRYE NEW Belief"
+    }
+  ]
+}
+{% endschema %}

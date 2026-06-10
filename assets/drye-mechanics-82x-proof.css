@@ -1,0 +1,207 @@
+/* ==========================================================================
+   DRYE Mechanics — 82x Proof
+   Compact construction comparison
+
+   Role in page:
+   Level 1: Saturation point
+   Level 2: Absorb vs route
+   Level 3: Symmetric vs asymmetric construction
+
+   Depends on base.css for:
+   - .dryeNEW-section
+   - .dryeNEW-container
+   - .dryeNEW-h2
+   - .dryeNEW-body
+   - .dryeNEW-body--caption
+   - .dryeNEW-micro
+   - .dryeNEW-em
+   - spacing, colour, typography, border tokens
+   ========================================================================== */
+
+.mech-82x-proof {
+  position: relative;
+  overflow: hidden;
+  color: var(--white-100);
+  background: var(--bg-ink);
+  --section-pad-y: var(--space-64);
+}
+
+.mech-82x-proof::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  height: var(--space-1);
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(13, 148, 136, 0.4) 50%,
+    transparent 100%
+  );
+}
+
+.mech-82x-proof__container {
+  max-width: 960px;
+  text-align: center;
+}
+
+.mech-82x-proof__intro {
+  max-width: 720px;
+  margin: 0 auto var(--space-28);
+}
+
+.mech-82x-proof__eyebrow {
+  margin-bottom: var(--space-12);
+  color: var(--sage);
+  letter-spacing: 0.22em;
+}
+
+.mech-82x-proof__heading {
+  margin: 0;
+  color: var(--white-100);
+}
+
+.mech-82x-proof__heading span {
+  display: block;
+}
+
+.mech-82x-proof__heading .dryeNEW-em,
+.mech-82x-proof__heading em {
+  display: block;
+  margin-top: var(--space-6);
+  color: var(--sage);
+  font-size: 0.72em;
+}
+
+.mech-82x-proof__subheading {
+  max-width: 600px;
+  margin: var(--space-16) auto 0;
+  color: var(--white-060);
+}
+
+.mech-82x-proof__visual {
+  padding: var(--space-20);
+  background: var(--white-003);
+  border: var(--border-white-010);
+}
+
+/* ==========================================================================
+   Samples — side-by-side on ALL breakpoints; images fill column on desktop
+   ========================================================================== */
+
+.mech-82x-proof__samples {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+  gap: var(--space-10);
+  align-items: center;
+}
+
+.mech-82x-proof__sample {
+  display: grid;
+  justify-items: center;
+  gap: var(--space-8);
+  min-width: 0;
+  width: 100%;
+}
+
+/* Mobile cap — keeps both visible on narrow screens */
+.mech-82x-proof__sample-img {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  max-width: 140px;
+  aspect-ratio: 1 / 1;
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.mech-82x-proof__image,
+.mech-82x-proof__sample-img img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.mech-82x-proof__img-placeholder {
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.mech-82x-proof__sample-lbl {
+  margin: var(--space-4) 0 0;
+  color: var(--sage);
+  letter-spacing: 0.18em;
+}
+
+.mech-82x-proof__sample-value {
+  color: var(--white-100);
+  font-family: var(--font-display);
+  font-size: clamp(24px, 5vw, 44px);
+  font-weight: var(--fw-semibold);
+  line-height: 1;
+  letter-spacing: -0.03em;
+}
+
+.mech-82x-proof__sample-unit {
+  color: var(--white-040);
+}
+
+.mech-82x-proof__vs {
+  color: var(--white-030);
+  font-family: var(--font-display);
+  font-size: var(--fs-caption);
+  font-weight: var(--fw-semibold);
+  line-height: 1;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
+.mech-82x-proof__cite {
+  max-width: 680px;
+  margin: var(--space-20) auto 0;
+  color: var(--white-030);
+  letter-spacing: 0.08em;
+}
+
+/* ==========================================================================
+   Tablet — bigger images, modest gap
+   ========================================================================== */
+
+@media (min-width: 640px) {
+  .mech-82x-proof__samples {
+    gap: var(--space-16);
+  }
+
+  .mech-82x-proof__sample-img {
+    max-width: 280px;
+  }
+}
+
+/* ==========================================================================
+   Desktop — images fill the column, tight gap for clear comparison
+   ========================================================================== */
+
+@media (min-width: 768px) {
+  .mech-82x-proof {
+    --section-pad-y: var(--space-48);
+  }
+
+  .mech-82x-proof__visual {
+    padding: var(--space-32) var(--space-40);
+  }
+
+  .mech-82x-proof__samples {
+    gap: var(--space-12);
+  }
+
+  /* Cap removed — image now fills the 1fr column (~410px on 960px container) */
+  .mech-82x-proof__sample-img {
+    max-width: none;
+  }
+
+  .mech-82x-proof__cite {
+    margin-top: var(--space-24);
+  }
+}

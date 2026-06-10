@@ -1,0 +1,60 @@
+/* ==========================================================================
+   DRYE Mechanics — Trusted by
+   Matches section 2 in drye-mechanics HTML
+   Depends on base.css
+   ========================================================================== */
+
+.mech-trusted {
+  padding-top: var(--space-20);
+  padding-bottom: var(--space-20);
+  border-bottom: var(--border-base);
+  background: var(--bg);
+}
+
+.mech-trusted__in {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-8) var(--space-14);
+  text-align: center;
+}
+
+.mech-trusted__lbl {
+  display: inline-block;
+  margin-right: var(--space-4);
+  color: var(--caption);
+  text-transform: uppercase;
+  letter-spacing: var(--ls-micro);
+  font-size: var(--fs-micro-2);
+  font-weight: var(--fw-semibold);
+  line-height: 1.2;
+  white-space: nowrap;
+}
+
+.mech-trusted__item {
+  display: inline-block;
+  font-family: var(--font-display);
+  font-size: var(--fs-caption);
+  font-weight: var(--fw-medium);
+  letter-spacing: -0.005em;
+  line-height: 1.2;
+  color: var(--muted);
+  white-space: nowrap;
+}
+
+.mech-trusted__sep {
+  display: inline-block;
+  width: 3px;
+  height: 3px;
+  border-radius: 50%;
+  background: var(--sage);
+  opacity: 0.55;
+  flex: 0 0 auto;
+}
+
+@media (min-width: 768px) {
+  .mech-trusted__in {
+    gap: var(--space-8) var(--space-14);
+  }
+}

@@ -1,0 +1,205 @@
+.field-section {
+  background: var(--bg);
+  border-top: 1px solid var(--border);
+  padding: 56px 0;
+}
+
+.field-section .micro {
+  display: block;
+  margin-bottom: 10px;
+  font-family: var(--font-body);
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  line-height: 1.2;
+  text-transform: uppercase;
+  color: var(--sage);
+}
+
+.field-section h2 {
+  margin: 0 0 8px;
+  font-family: var(--font-display);
+  font-size: clamp(22px, 6vw, 32px);
+  font-weight: 600;
+  letter-spacing: -0.025em;
+  line-height: 1.2;
+  color: var(--deep);
+}
+
+.field-section-intro {
+  margin: 0 0 36px;
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.7;
+  color: var(--muted);
+}
+
+/* New styles for horizontal scroll */
+.dryeNEW-container {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  padding-bottom: 20px; /* To ensure swipe area is clear */
+}
+
+.field-grid {
+  display: flex;
+  gap: 20px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  flex-wrap: nowrap; /* Prevent items from wrapping */
+}
+
+.field-card {
+  scroll-snap-align: start;
+  flex: 0 0 auto;
+  width: 300px; /* Fixed width for swipeable cards */
+  background: var(--bg);
+  border: 1px solid var(--border);
+  padding: 24px 20px;
+}
+
+/* Swipe indicator */
+.swipe-indicator {
+  width: 50px;
+  height: 5px;
+  background-color: #ccc;
+  border-radius: 50px;
+  margin: 10px auto;
+  position: relative;
+}
+
+.swipe-indicator:before {
+  content: '';
+  position: absolute;
+  top: -6px;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-left: 8px solid transparent;
+  border-right: 8px solid transparent;
+  border-top: 10px solid #ccc;
+  transform: translateX(-50%);
+}
+
+/* Scroll bar styling */
+.dryeNEW-container::-webkit-scrollbar {
+  display: none;
+}
+
+.dryeNEW-container {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Field Card styling */
+.field-card-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.field-card-title {
+  font-family: var(--font-display);
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  line-height: 1.35;
+  color: var(--deep);
+}
+
+.field-card-badge {
+  flex-shrink: 0;
+  padding: 4px 8px;
+  border: 1px solid var(--border);
+  font-family: var(--font-body);
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  line-height: 1;
+  text-transform: uppercase;
+  color: var(--sage);
+  white-space: nowrap;
+}
+
+.field-results {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 16px;
+}
+
+.field-result-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 13px;
+  flex-wrap: wrap;
+}
+
+.field-result-label {
+  width: 100%;
+  font-family: var(--font-body);
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 1.45;
+  color: var(--muted);
+}
+
+.field-result-bar-wrap {
+  flex: 1;
+  min-width: 60px;
+  height: 3px;
+  background: var(--border);
+}
+
+.field-result-bar {
+  height: 100%;
+  width: 0%;
+  background: var(--deep);
+  transition: width 1.2s ease;
+}
+
+.field-result-pct {
+  min-width: 36px;
+  text-align: right;
+  font-family: var(--font-display);
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1;
+  color: var(--deep);
+}
+
+.field-card-note {
+  padding-top: 12px;
+  border-top: 1px solid var(--border);
+  font-family: var(--font-body);
+  font-size: 11px;
+  font-weight: 400;
+  line-height: 1.6;
+  color: var(--caption);
+}
+
+/* Media Queries */
+@media (min-width: 600px) {
+  .field-result-label {
+    width: auto;
+    flex: 2;
+  }
+
+  .field-result-row {
+    flex-wrap: nowrap;
+  }
+}
+
+@media (min-width: 768px) {
+  .field-grid {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+
+  .field-card {
+    padding: 28px 24px;
+  }
+}

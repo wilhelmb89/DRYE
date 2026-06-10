@@ -1,0 +1,136 @@
+{{ 'section-drye-about-hero.css' | asset_url | stylesheet_tag }}
+
+<section
+  class="dryeNEW-section drye-about-hero"
+  id="drye-about-hero-{{ section.id }}"
+  data-section-id="{{ section.id }}"
+>
+  <div class="dryeNEW-container">
+    <div class="drye-about-hero__grid">
+      <div class="drye-about-hero__left">
+        {% if section.settings.eyebrow != blank %}
+          <span class="dryeNEW-micro drye-about-hero__eyebrow dryeNEW-reveal">
+            {{ section.settings.eyebrow }}
+          </span>
+        {% endif %}
+
+        <h1 class="dryeNEW-h2 drye-about-hero__heading dryeNEW-reveal dryeNEW-rd1">
+          {{ section.settings.heading_line_1 }}
+          {% if section.settings.heading_line_2 != blank %}
+            <em>{{ section.settings.heading_line_2 }}</em>
+          {% endif %}
+        </h1>
+
+        {% if section.settings.opening != blank %}
+          <div class="dryeNEW-body drye-about-hero__opening dryeNEW-reveal dryeNEW-rd2">
+            <p>{{ section.settings.opening }}</p>
+          </div>
+        {% endif %}
+      </div>
+
+      <div class="drye-about-hero__right dryeNEW-reveal dryeNEW-rd3">
+        <div class="drye-about-hero__quote-card">
+          <span class="drye-about-hero__quote-mark" aria-hidden="true">"</span>
+
+          {% if section.settings.quote_text != blank %}
+            <div class="dryeNEW-editorial drye-about-hero__quote-text">
+              <p>{{ section.settings.quote_text }}</p>
+            </div>
+          {% endif %}
+
+          <div class="drye-about-hero__author">
+            <div class="drye-about-hero__avatar">
+              {% if section.settings.avatar != blank %}
+                {{
+                  section.settings.avatar
+                  | image_url: width: 200
+                  | image_tag:
+                    alt: section.settings.quote_name,
+                    loading: 'lazy',
+                    widths: '72,100,144,200',
+                    sizes: '36px'
+                }}
+              {% endif %}
+            </div>
+
+            <div class="drye-about-hero__author-meta">
+              {% if section.settings.quote_name != blank %}
+                <div class="dryeNEW-body--caption drye-about-hero__author-name">
+                  {{ section.settings.quote_name }}
+                </div>
+              {% endif %}
+
+              {% if section.settings.quote_role != blank %}
+                <div class="dryeNEW-body--caption drye-about-hero__author-role">
+                  {{ section.settings.quote_role }}
+                </div>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "DRYE About Hero",
+  "tag": "section",
+  "class": "section-drye-about-hero",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "Why DRYE exists"
+    },
+    {
+      "type": "text",
+      "id": "heading_line_1",
+      "label": "Heading line 1",
+      "default": "Built because nothing else"
+    },
+    {
+      "type": "text",
+      "id": "heading_line_2",
+      "label": "Heading line 2 (italic)",
+      "default": "addressed the actual problem."
+    },
+    {
+      "type": "textarea",
+      "id": "opening",
+      "label": "Opening text",
+      "default": "Hands don't deteriorate in open air. They deteriorate inside sealed gloves — under moisture, heat, pressure, and friction. Every solution we knew of treated the damage after it happened. We built one that changes the environment before it does."
+    },
+    {
+      "type": "textarea",
+      "id": "quote_text",
+      "label": "Quote text",
+      "default": "I've lived with atopic eczema most of my life. That's why I built something that changes the environment — not treats the damage."
+    },
+    {
+      "type": "image_picker",
+      "id": "avatar",
+      "label": "Avatar"
+    },
+    {
+      "type": "text",
+      "id": "quote_name",
+      "label": "Quote name",
+      "default": "Wilhelm Bäckström"
+    },
+    {
+      "type": "text",
+      "id": "quote_role",
+      "label": "Quote role",
+      "default": "Founder, DRYE"
+    }
+  ],
+  "presets": [
+    {
+      "name": "DRYE About Hero"
+    }
+  ]
+}
+{% endschema %}

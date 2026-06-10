@@ -1,0 +1,43 @@
+/* ==========================================================================
+   DRYE Mechanics — P.S.
+   Based on section 12 in drye-mechanics HTML
+   Depends on base.css
+   ========================================================================== */
+
+.mech-ps {
+  text-align: center;
+}
+
+.mech-ps__container {
+  max-width: 600px;
+}
+
+.mech-ps__lbl {
+  margin-bottom: var(--space-18);
+  color: var(--deep);
+  font-family: var(--font-display);
+  font-size: var(--fs-body-sm);
+  font-weight: var(--fw-semibold);
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+}
+
+.mech-ps__body {
+  color: var(--muted);
+  font-family: var(--font-editorial);
+  font-size: var(--fs-body-lg);
+  font-style: italic;
+  font-weight: var(--fw-regular);
+  line-height: var(--lh-body);
+}
+
+.mech-ps__body p {
+  margin: 0;
+}
+
+.mech-ps__body strong {
+  color: var(--deep);
+  font-family: var(--font-body);
+  font-style: normal;
+  font-weight: var(--fw-medium);
+}

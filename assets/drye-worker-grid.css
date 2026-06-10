@@ -1,0 +1,285 @@
+/* ==========================================================================
+   DRYE — Worker Grid
+   Isolated from mech-gallery
+   Depends on base.css
+   ========================================================================== */
+
+.drye-worker-grid__intro {
+  margin-bottom: var(--space-40);
+  max-width: 760px;
+}
+
+.drye-worker-grid__heading {
+  margin-bottom: var(--space-14);
+  color: var(--deep);
+}
+
+.drye-worker-grid__sub {
+  max-width: 540px;
+  color: var(--muted);
+}
+
+.drye-worker-grid__wrap {
+  position: relative;
+  padding-bottom: var(--space-56);
+}
+
+.drye-worker-grid__strip {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: calc((100% - var(--space-2)) / 2);
+  gap: var(--space-2);
+  overflow-x: auto;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+  background: var(--border);
+  border-top: var(--border-base);
+  border-bottom: var(--border-base);
+  scroll-behavior: smooth;
+}
+
+.drye-worker-grid__strip::-webkit-scrollbar {
+  display: none;
+}
+
+.drye-worker-grid__panel {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  scroll-snap-align: start;
+  background: var(--bg);
+}
+
+.drye-worker-grid__img {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  background: #203543;
+}
+
+.drye-worker-grid__img-el,
+.drye-worker-grid__img img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: saturate(0.78) brightness(0.9) contrast(1.02);
+}
+
+.drye-worker-grid__img-placeholder {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    180deg,
+    rgba(30, 58, 76, 0.22) 0%,
+    rgba(30, 58, 76, 0.34) 100%
+  );
+}
+
+.drye-worker-grid__img-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(10, 22, 33, 0.08) 0%,
+    rgba(10, 22, 33, 0.16) 52%,
+    rgba(10, 22, 33, 0.52) 100%
+  );
+}
+
+.drye-worker-grid__img-lbl {
+  position: absolute;
+  top: var(--space-16);
+  left: var(--space-16);
+  padding: var(--space-6) var(--space-10);
+  color: var(--white-100);
+  background: rgba(10, 22, 33, 0.28);
+  backdrop-filter: blur(4px);
+  white-space: nowrap;
+  text-transform: uppercase;
+  letter-spacing: var(--ls-micro);
+  font-size: var(--fs-micro-2);
+  font-weight: var(--fw-semibold);
+  line-height: 1.2;
+}
+
+.drye-worker-grid__img-role {
+  position: absolute;
+  right: var(--space-16);
+  bottom: var(--space-16);
+  left: var(--space-16);
+  color: var(--white-100);
+  font-family: var(--font-display);
+  font-size: var(--fs-body);
+  font-weight: var(--fw-semibold);
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+  text-shadow: 0 1px 2px rgba(10, 22, 33, 0.22);
+}
+
+.drye-worker-grid__quote {
+  flex: 1;
+  padding: var(--space-20) var(--space-20) var(--space-24);
+  border-left: var(--border-width-strong) solid var(--red);
+}
+
+.drye-worker-grid__quote-text {
+  margin-bottom: var(--space-10);
+  color: var(--deep);
+  font-family: var(--font-editorial);
+  font-style: italic;
+  line-height: var(--lh-body-tight);
+}
+
+.drye-worker-grid__quote-src {
+  color: var(--caption);
+  font-size: var(--fs-micro-3);
+  font-weight: var(--fw-medium);
+  line-height: 1.4;
+  letter-spacing: 0.02em;
+}
+
+.drye-worker-grid__swipe-hint {
+  position: absolute;
+  right: var(--page-pad);
+  bottom: var(--space-18);
+  display: flex;
+  align-items: center;
+  gap: var(--space-6);
+  color: var(--caption);
+  pointer-events: none;
+  opacity: 1;
+  transform: translateX(0);
+  transition:
+    opacity var(--dur-sticky) var(--ease-standard),
+    transform var(--dur-sticky) var(--ease-standard);
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  font-size: var(--fs-micro-3);
+  font-weight: var(--fw-semibold);
+  line-height: 1.2;
+}
+
+.drye-worker-grid__swipe-hint::after {
+  content: '→';
+  animation: drye-worker-grid-swipe 1.8s ease-in-out infinite;
+}
+
+.drye-worker-grid__swipe-hint.is-hidden {
+  opacity: 0;
+  transform: translateX(6px);
+}
+
+@keyframes drye-worker-grid-swipe {
+  0%, 100% {
+    transform: translateX(0);
+    opacity: 0.6;
+  }
+
+  50% {
+    transform: translateX(4px);
+    opacity: 1;
+  }
+}
+
+.drye-worker-grid__fade {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: var(--space-56);
+  width: 56px;
+  pointer-events: none;
+  background: linear-gradient(
+    270deg,
+    var(--bg) 0%,
+    rgba(255, 255, 255, 0) 100%
+  );
+}
+
+.drye-worker-grid__nav {
+  display: none;
+}
+
+.drye-worker-grid__nav-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  background: rgba(255, 255, 255, 0.92);
+  border: var(--border-base);
+  color: var(--deep);
+  cursor: pointer;
+  transition:
+    opacity var(--dur-fast) var(--ease-standard),
+    background-color var(--dur-fast) var(--ease-standard),
+    border-color var(--dur-fast) var(--ease-standard);
+}
+
+.drye-worker-grid__nav-btn:hover {
+  background: var(--bg);
+}
+
+.drye-worker-grid__nav-btn.is-disabled {
+  opacity: 0.35;
+  pointer-events: none;
+}
+
+@media (min-width: 600px) {
+  .drye-worker-grid__strip {
+    grid-auto-columns: 240px;
+  }
+}
+
+@media (min-width: 960px) {
+  .drye-worker-grid__wrap {
+    padding-bottom: 0;
+  }
+
+  .drye-worker-grid__strip {
+    grid-auto-columns: 240px;
+    overflow-x: auto;
+    border-left: var(--border-base);
+    border-right: var(--border-base);
+  }
+
+  .drye-worker-grid__swipe-hint {
+    display: none;
+  }
+
+  .drye-worker-grid__fade {
+    display: block;
+    bottom: 0;
+  }
+
+  .drye-worker-grid__nav {
+    position: absolute;
+    top: -56px;
+    right: 0;
+    z-index: 3;
+    display: flex;
+    gap: var(--space-8);
+  }
+}
+
+@media (min-width: 1200px) {
+  .drye-worker-grid__strip {
+    grid-auto-columns: 250px;
+  }
+}
+@media (max-width: 767px) {
+  .drye-worker-grid {
+    --section-pad-y: var(--space-48);
+  }
+
+  .drye-worker-grid__intro {
+    margin-bottom: var(--space-24);
+  }
+
+  .drye-worker-grid__wrap {
+    padding-bottom: var(--space-32);
+  }
+}

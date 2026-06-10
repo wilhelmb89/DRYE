@@ -1,0 +1,122 @@
+.drye-system {
+  background: var(--bg-tint);
+  border-bottom: var(--border-base);
+}
+
+.drye-system__header {
+  margin-bottom: var(--space-36);
+}
+
+.drye-system__heading {
+  margin: 0;
+  color: var(--deep);
+}
+
+.drye-system__heading em {
+  font-family: var(--font-editorial);
+  font-style: italic;
+  font-weight: var(--fw-regular);
+  color: var(--accent);
+}
+
+.drye-system__lead {
+  margin-top: var(--space-14);
+  max-width: 760px;
+  color: var(--muted);
+}
+
+.drye-system__lead p {
+  margin: 0;
+}
+
+.drye-system__diagram-shell {
+  margin-top: var(--space-36);
+  margin-bottom: var(--space-36);
+}
+
+.drye-system__diagram-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--grid-gap-16);
+  align-items: center;
+}
+
+.drye-system__diagram-card {
+  width: 100%;
+}
+
+.drye-system__diagram-svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  font-family: var(--font-body);
+}
+
+.drye-system__diagram-vs {
+  display: none;
+  align-self: center;
+  justify-self: center;
+  color: var(--muted);
+}
+
+.drye-system__properties {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  border-top: var(--border-base);
+}
+
+.drye-system__prop {
+  padding: var(--space-28) 0;
+  border-bottom: var(--border-base);
+}
+
+.drye-system__prop:last-child {
+  border-bottom: 0;
+}
+
+.drye-system__prop-tag {
+  color: inherit;
+}
+
+.drye-system__prop-heading {
+  margin: 0 0 var(--space-10);
+  color: var(--deep);
+}
+
+.drye-system__prop-body {
+  color: var(--muted);
+}
+
+.drye-system__prop-body p {
+  margin: 0;
+}
+
+@media (min-width: 768px) {
+  .drye-system__diagram-grid {
+    grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+    gap: var(--grid-gap-20);
+  }
+
+  .drye-system__diagram-vs {
+    display: block;
+  }
+
+  .drye-system__properties {
+    grid-template-columns: var(--grid-3-col-desktop);
+  }
+
+  .drye-system__prop {
+    padding: var(--space-20) var(--space-28) var(--space-20) 0;
+    border-bottom: 0;
+    border-right: var(--border-base);
+  }
+
+  .drye-system__prop:not(:first-child) {
+    padding-left: var(--space-28);
+  }
+
+  .drye-system__prop:last-child {
+    padding-right: 0;
+    border-right: 0;
+  }
+}

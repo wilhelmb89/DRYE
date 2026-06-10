@@ -1,0 +1,263 @@
+{{ 'three-worlds.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'three-worlds.js' | asset_url }}" defer></script>
+
+<section class="dryeNEW-section worlds-section" data-section-id="{{ section.id }}">
+  <div class="dryeNEW-container">
+    <div class="worlds-header dryeNEW-reveal">
+      {% if section.settings.micro_text != blank %}
+        <span class="dryeNEW-micro">
+          {{ section.settings.micro_text }}
+        </span>
+      {% endif %}
+
+      {% if section.settings.heading != blank %}
+        <h2 class="dryeNEW-h2 worlds-heading">
+          {{ section.settings.heading }}
+        </h2>
+      {% endif %}
+
+      {% if section.settings.body_text != blank %}
+        <div class="dryeNEW-body worlds-body-text">
+          {{ section.settings.body_text }}
+        </div>
+      {% endif %}
+    </div>
+  </div>
+
+  <div class="worlds-scroll-wrap">
+    <div class="dryeNEW-container">
+      <div class="worlds-scroll" id="worldsScroll-{{ section.id }}">
+        {% for block in section.blocks %}
+          <a
+            class="world-card dryeNEW-reveal {% if forloop.index == 1 %}dryeNEW-rd1{% elsif forloop.index == 2 %}dryeNEW-rd2{% elsif forloop.index == 3 %}dryeNEW-rd3{% endif %}"
+            href="{{ block.settings.link_url | default: '#' }}"
+            {{ block.shopify_attributes }}
+          >
+            <div class="world-photo">
+              {% if block.settings.image != blank %}
+                {{
+                  block.settings.image
+                  | image_url: width: 1600
+                  | image_tag:
+                    alt: block.settings.image_alt,
+                    loading: 'lazy',
+                    widths: '480, 720, 960, 1200, 1600',
+                    sizes: '(min-width: 768px) 33vw, 80vw',
+                    style: 'object-position: ' | append: block.settings.image_position
+                }}
+              {% endif %}
+
+              <div class="world-label">
+                {% if block.settings.tag != blank %}
+                  <span class="dryeNEW-micro world-tag">
+                    <img
+                      src="{{ 'refresh-cycle.svg' | asset_url }}"
+                      alt=""
+                      aria-hidden="true"
+                      class="world-tag-icon"
+                    >
+                    <span>{{ block.settings.tag }}</span>
+                  </span>
+                {% endif %}
+
+                <div class="world-quote-block">
+                  {% if block.settings.overlay_quote != blank %}
+                    <span class="world-name">{{ block.settings.overlay_quote }}</span>
+                  {% endif %}
+
+                  {% if block.settings.overlay_attr != blank %}
+                    <span class="dryeNEW-body--caption world-overlay-attr">{{ block.settings.overlay_attr }}</span>
+                  {% endif %}
+                </div>
+              </div>
+            </div>
+
+            <div class="world-body">
+              <div class="world-stat">
+                <div class="world-stat-num">
+                  {{ block.settings.stat_number }}<em>{{ block.settings.stat_suffix }}</em>
+                </div>
+
+                <div class="dryeNEW-body--sm world-stat-text">
+                  {{ block.settings.stat_text }}
+                </div>
+              </div>
+
+              {% if block.settings.quote != blank %}
+                <p class="dryeNEW-body world-quote">{{ block.settings.quote }}</p>
+              {% endif %}
+
+              {% if block.settings.link_text != blank %}
+                <span class="dryeNEW-link world-link">{{ block.settings.link_text }}</span>
+              {% endif %}
+            </div>
+          </a>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+
+  <div class="scroll-dots" id="scrollDots-{{ section.id }}">
+    {% for block in section.blocks %}
+      <div class="scroll-dot{% if forloop.first %} active{% endif %}"></div>
+    {% endfor %}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Three Worlds",
+  "settings": [
+    {
+      "type": "text",
+      "id": "micro_text",
+      "label": "Micro text",
+      "default": "Same problem. Different gloves."
+    },
+    {
+      "type": "html",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Hundreds of thousands of people describe the same thing.<br><em>Almost none of them know why.</em>"
+    },
+    {
+      "type": "html",
+      "id": "body_text",
+      "label": "Body text",
+      "default": "The conversation is split across three worlds — trades, sports, and skin conditions. <strong>The mechanism is identical in all three. The cause is almost never understood.</strong>"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "world_card",
+      "name": "World card",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "text",
+          "id": "image_alt",
+          "label": "Image alt",
+          "default": "World image"
+        },
+        {
+          "type": "text",
+          "id": "image_position",
+          "label": "Image object-position",
+          "default": "center 15%",
+          "info": "Example: center 15%, center 10%, center 5%"
+        },
+        {
+          "type": "text",
+          "id": "tag",
+          "label": "Tag",
+          "default": "Trades & Industrial"
+        },
+        {
+          "type": "textarea",
+          "id": "overlay_quote",
+          "label": "Overlay quote",
+          "default": "I hate working with gloves but I have no choice."
+        },
+        {
+          "type": "text",
+          "id": "overlay_attr",
+          "label": "Overlay attribution",
+          "default": "Jens Stålnacke · Mine worker, LKAB Kiruna"
+        },
+        {
+          "type": "text",
+          "id": "stat_number",
+          "label": "Stat number",
+          "default": "80"
+        },
+        {
+          "type": "text",
+          "id": "stat_suffix",
+          "label": "Stat suffix",
+          "default": "%"
+        },
+        {
+          "type": "html",
+          "id": "stat_text",
+          "label": "Stat text",
+          "default": "of occupational hand dermatitis is not a latex allergy. <strong>It's the sealed environment.</strong>"
+        },
+        {
+          "type": "textarea",
+          "id": "quote",
+          "label": "Quote",
+          "default": "\"I'd never even heard of a glove liner before. Honestly, my hands are back to normal. These liners gave my hands a chance.\""
+        },
+        {
+          "type": "text",
+          "id": "link_text",
+          "label": "Link text",
+          "default": "Read Jens' case →"
+        },
+        {
+          "type": "url",
+          "id": "link_url",
+          "label": "Link URL"
+        }
+      ]
+    }
+  ],
+  "max_blocks": 3,
+  "presets": [
+    {
+      "name": "Three Worlds",
+      "blocks": [
+        {
+          "type": "world_card",
+          "settings": {
+            "image_alt": "Industrial worker, LKAB Kiruna",
+            "image_position": "center 15%",
+            "tag": "Trades & Industrial",
+            "overlay_quote": "I hate working with gloves but I have no choice.",
+            "overlay_attr": "Jens Stålnacke · Mine worker, LKAB Kiruna",
+            "stat_number": "80",
+            "stat_suffix": "%",
+            "stat_text": "of occupational hand dermatitis is not a latex allergy. <strong>It's the sealed environment.</strong>",
+            "quote": "\"I'd never even heard of a glove liner before. Honestly, my hands are back to normal. These liners gave my hands a chance.\"",
+            "link_text": "Read Jens' case →"
+          }
+        },
+        {
+          "type": "world_card",
+          "settings": {
+            "image_alt": "Linnea Pettersson Dove, Frölunda HC",
+            "image_position": "center 10%",
+            "tag": "Sports & Hockey",
+            "overlay_quote": "By the end of a game my gloves are soaked. It's just part of it.",
+            "overlay_attr": "Linnea Pettersson Dove · Hockey player, Frölunda HC",
+            "stat_number": "1.72",
+            "stat_suffix": "×",
+            "stat_text": "higher bacterial load inside an occluded glove after 4 hours. <strong>The liner conversation in hockey is just starting.</strong>",
+            "quote": "\"Everyone on the team uses a hair dryer between periods — except me, I use liners now. Played one practice without them. Not doing that again.\"",
+            "link_text": "Read Linnea's case →"
+          }
+        },
+        {
+          "type": "world_card",
+          "settings": {
+            "image_alt": "Hand eczema from glove use",
+            "image_position": "center 5%",
+            "tag": "Skin & Eczema",
+            "overlay_quote": "Nothing has helped so far. Everything stings.",
+            "overlay_attr": "Deborah Fields · Hockey parent, Cincinnati USA",
+            "stat_number": "75",
+            "stat_suffix": "%",
+            "stat_text": "of healthcare workers report glove-related skin damage. <strong>Cotton liners absorb — then hold moisture against skin.</strong>",
+            "quote": "\"I'd never thought to put something between the glove and his skin. Two weeks later, his hands were completely clear. I couldn't believe it.\"",
+            "link_text": "Read the case →"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

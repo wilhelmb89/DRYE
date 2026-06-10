@@ -1,0 +1,364 @@
+{{ 'dryeNEW-hero.css' | asset_url | stylesheet_tag }}
+
+{%- assign credibility_blocks = section.blocks | where: 'type', 'credibility_item' -%}
+{%- assign stat_blocks = section.blocks | where: 'type', 'stat_item' -%}
+
+<section
+  class="dryeNEW-hero"
+  data-section-id="{{ section.id }}"
+  data-section-type="dryeNEW-hero"
+  data-drye-section
+  data-section-index="1"
+  data-section-name="hero"
+>
+  <div class="dryeNEW-hero__media">
+    {%- if section.settings.poster_image_desktop != blank -%}
+      {{
+        section.settings.poster_image_desktop
+        | image_url: width: 2200
+        | image_tag:
+          class: 'dryeNEW-hero__poster dryeNEW-hero__poster--desktop',
+          alt: '',
+          loading: 'eager',
+          fetchpriority: 'high',
+          widths: '768, 1200, 1600, 2200'
+      }}
+    {%- endif -%}
+
+    {%- if section.settings.poster_image_mobile != blank -%}
+      {{
+        section.settings.poster_image_mobile
+        | image_url: width: 1200
+        | image_tag:
+          class: 'dryeNEW-hero__poster dryeNEW-hero__poster--mobile',
+          alt: '',
+          loading: 'eager',
+          widths: '480, 768, 960, 1200'
+      }}
+    {%- endif -%}
+
+    <div class="dryeNEW-hero__overlay"></div>
+  </div>
+
+  <div class="dryeNEW-hero__content-wrap">
+    {%- if credibility_blocks.size > 0 -%}
+      <div class="dryeNEW-cred-bar">
+        {%- for block in credibility_blocks -%}
+          <div class="dryeNEW-cred-item" {{ block.shopify_attributes }}>
+            <div class="dryeNEW-cred-dot"></div>
+            <span>{{ block.settings.text }}</span>
+          </div>
+
+          {%- unless forloop.last -%}
+            <div class="dryeNEW-cred-divider"></div>
+          {%- endunless -%}
+        {%- endfor -%}
+      </div>
+    {%- endif -%}
+
+    {%- if section.settings.heading_line_1 != blank or section.settings.heading_line_2 != blank or section.settings.heading_echo != blank -%}
+      <h1 class="dryeNEW-hero__heading">
+        {%- if section.settings.heading_line_1 != blank -%}
+          <span class="dryeNEW-hero__heading-line">{{ section.settings.heading_line_1 }}</span>
+        {%- endif -%}
+        {%- if section.settings.heading_line_2 != blank -%}
+          <span class="dryeNEW-hero__heading-line">{{ section.settings.heading_line_2 }}</span>
+        {%- endif -%}
+        {%- if section.settings.heading_echo != blank -%}
+          <span class="dryeNEW-hero__heading-echo">{{ section.settings.heading_echo }}</span>
+        {%- endif -%}
+      </h1>
+    {%- endif -%}
+
+    {%- if section.settings.subheading_line_1 != blank or section.settings.subheading_line_2 != blank or section.settings.subheading_emphasis != blank -%}
+      <p class="dryeNEW-hero__sub">
+        {%- if section.settings.subheading_line_1 != blank -%}
+          <span class="dryeNEW-hero__sub-line">{{ section.settings.subheading_line_1 }}</span>
+        {%- endif -%}
+        {%- if section.settings.subheading_line_2 != blank or section.settings.subheading_emphasis != blank -%}
+          <span class="dryeNEW-hero__sub-line">
+            {{ section.settings.subheading_line_2 }}
+            {%- if section.settings.subheading_emphasis != blank -%}
+              <strong> {{ section.settings.subheading_emphasis }}</strong>
+            {%- endif -%}
+          </span>
+        {%- endif -%}
+      </p>
+    {%- endif -%}
+
+    <div class="dryeNEW-dual-cta">
+      {%- if section.settings.path_1_text_line_1 != blank or section.settings.path_1_text_line_2 != blank -%}
+        <a
+          href="{{ section.settings.path_1_link | default: '#problem' }}"
+          data-scroll-target="{{ section.settings.path_1_link | default: '#problem' }}"
+          class="dryeNEW-cta-path dryeNEW-cta-path--passive"
+        >
+          {%- if section.settings.path_1_label != blank -%}
+            <span class="dryeNEW-cta-path__label">{{ section.settings.path_1_label }}</span>
+          {%- endif -%}
+          <span class="dryeNEW-cta-path__text">
+            {%- if section.settings.path_1_text_line_1 != blank -%}
+              <span class="dryeNEW-cta-path__text-line">{{ section.settings.path_1_text_line_1 }}</span>
+            {%- endif -%}
+            {%- if section.settings.path_1_text_line_2 != blank -%}
+              <span class="dryeNEW-cta-path__text-line">{{ section.settings.path_1_text_line_2 }}</span>
+            {%- endif -%}
+          </span>
+        </a>
+      {%- endif -%}
+
+      {%- if section.settings.path_2_text_line_1 != blank or section.settings.path_2_text_line_2 != blank -%}
+        <a
+          href="{{ section.settings.path_2_link | default: '#mechanism' }}"
+          data-scroll-target="{{ section.settings.path_2_link | default: '#mechanism' }}"
+          class="dryeNEW-cta-path dryeNEW-cta-path--primary"
+        >
+          {%- if section.settings.path_2_label != blank -%}
+            <span class="dryeNEW-cta-path__label">{{ section.settings.path_2_label }}</span>
+          {%- endif -%}
+          <span class="dryeNEW-cta-path__text">
+            {%- if section.settings.path_2_text_line_1 != blank -%}
+              <span class="dryeNEW-cta-path__text-line">{{ section.settings.path_2_text_line_1 }}</span>
+            {%- endif -%}
+            {%- if section.settings.path_2_text_line_2 != blank -%}
+              <span class="dryeNEW-cta-path__text-line">{{ section.settings.path_2_text_line_2 }}</span>
+            {%- endif -%}
+          </span>
+        </a>
+      {%- endif -%}
+    </div>
+  </div>
+
+  {%- if stat_blocks.size > 0 -%}
+    <div class="dryeNEW-hero__stats-shell">
+      <div
+        class="dryeNEW-hero__stats-inner"
+        style="--drye-stat-count: {{ stat_blocks.size }};"
+      >
+        {%- for block in stat_blocks -%}
+          <div class="dryeNEW-hstat" {{ block.shopify_attributes }}>
+            <div class="dryeNEW-hstat__num">{{ block.settings.value }}</div>
+            <div class="dryeNEW-hstat__label">
+              {{ block.settings.label_line_1 }}
+              {%- if block.settings.label_line_2 != blank -%}
+                <br>{{ block.settings.label_line_2 }}
+              {%- endif -%}
+            </div>
+          </div>
+        {%- endfor -%}
+      </div>
+    </div>
+  {%- endif -%}
+</section>
+
+<script>
+  (function () {
+    var section = document.querySelector('[data-section-id="{{ section.id }}"]');
+    if (!section) return;
+
+    var scrollLinks = section.querySelectorAll('[data-scroll-target]');
+
+    function getHeaderOffset() {
+      return window.innerWidth < 768 ? 104 : 72;
+    }
+
+    scrollLinks.forEach(function (link) {
+      link.addEventListener('click', function (event) {
+        var selector = link.getAttribute('data-scroll-target');
+        if (!selector || selector.charAt(0) !== '#') return;
+
+        var target = document.querySelector(selector);
+        if (!target) return;
+
+        event.preventDefault();
+
+        var top = target.getBoundingClientRect().top + window.pageYOffset - getHeaderOffset();
+
+        window.scrollTo({
+          top: top,
+          behavior: 'smooth'
+        });
+
+        if (window.history && window.history.replaceState) {
+          window.history.replaceState(null, '', window.location.pathname + window.location.search);
+        }
+      });
+    });
+  })();
+</script>
+
+<script
+  src="https://cdnjs.cloudflare.com/ajax/libs/hls.js/1.4.12/hls.min.js"
+  defer
+></script>
+
+{% schema %}
+{
+  "name": "DRYE NEW Hero",
+  "settings": [
+    {
+      "type": "text",
+      "id": "section_id",
+      "label": "Section ID",
+      "default": "hero"
+    },
+    {
+      "type": "image_picker",
+      "id": "poster_image_desktop",
+      "label": "Poster image — desktop"
+    },
+    {
+      "type": "image_picker",
+      "id": "poster_image_mobile",
+      "label": "Poster image — mobile"
+    },
+    {
+      "type": "text",
+      "id": "video_hls_url_desktop",
+      "label": "Cloudflare HLS video URL — desktop"
+    },
+    {
+      "type": "text",
+      "id": "video_hls_url_mobile",
+      "label": "Cloudflare HLS video URL — mobile"
+    },
+{
+  "type": "inline_richtext",
+  "id": "heading_line_1",
+  "label": "Heading line 1",
+  "default": "Every day you"
+},
+    {
+      "type": "text",
+      "id": "heading_line_2",
+      "label": "Heading line 2",
+      "default": "put gloves on."
+    },
+    {
+      "type": "text",
+      "id": "heading_echo",
+      "label": "Heading echo",
+      "default": "Every day your hands pay for it."
+    },
+    {
+      "type": "text",
+      "id": "subheading_line_1",
+      "label": "Subheading line 1",
+      "default": "It's not the brand. It's not the material."
+    },
+    {
+      "type": "text",
+      "id": "subheading_line_2",
+      "label": "Subheading line 2",
+      "default": "It's not how much you sweat."
+    },
+    {
+      "type": "text",
+      "id": "subheading_emphasis",
+      "label": "Subheading emphasis",
+      "default": "It's physics."
+    },
+    {
+      "type": "text",
+      "id": "path_1_label",
+      "label": "Path 1 label",
+      "default": "If you're not sure why"
+    },
+    {
+      "type": "text",
+      "id": "path_1_text_line_1",
+      "label": "Path 1 line 1",
+      "default": "I've noticed my hands"
+    },
+    {
+      "type": "text",
+      "id": "path_1_text_line_2",
+      "label": "Path 1 line 2",
+      "default": "getting worse →"
+    },
+    {
+      "type": "url",
+      "id": "path_1_link",
+      "label": "Path 1 link"
+    },
+    {
+      "type": "text",
+      "id": "path_2_label",
+      "label": "Path 2 label",
+      "default": "If you already know"
+    },
+    {
+      "type": "text",
+      "id": "path_2_text_line_1",
+      "label": "Path 2 line 1",
+      "default": "I know it's the gloves."
+    },
+    {
+      "type": "text",
+      "id": "path_2_text_line_2",
+      "label": "Path 2 line 2",
+      "default": "Nothing fixes it →"
+    },
+    {
+      "type": "url",
+      "id": "path_2_link",
+      "label": "Path 2 link"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "credibility_item",
+      "name": "Credibility item",
+      "settings": [
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Text",
+          "default": "Uppsala University"
+        }
+      ]
+    },
+    {
+      "type": "stat_item",
+      "name": "Stat item",
+      "settings": [
+        {
+          "type": "text",
+          "id": "value",
+          "label": "Value",
+          "default": "8h+"
+        },
+        {
+          "type": "text",
+          "id": "label_line_1",
+          "label": "Label line 1",
+          "default": "Tested under nitrile"
+        },
+        {
+          "type": "text",
+          "id": "label_line_2",
+          "label": "Label line 2",
+          "default": "by healthcare workers"
+        }
+      ]
+    }
+  ],
+  "max_blocks": 8,
+  "presets": [
+    {
+      "name": "DRYE NEW Hero",
+      "blocks": [
+        { "type": "credibility_item", "settings": { "text": "SKAPA Prize — Nobel memory, 2020" } },
+        { "type": "credibility_item", "settings": { "text": "Swedish School of Textiles" } },
+        { "type": "credibility_item", "settings": { "text": "Uppsala University" } },
+        { "type": "credibility_item", "settings": { "text": "Patent pending" } },
+
+        { "type": "stat_item", "settings": { "value": "8h+", "label_line_1": "Tested under nitrile", "label_line_2": "by healthcare workers" } },
+        { "type": "stat_item", "settings": { "value": "7 yr", "label_line_1": "R&D before", "label_line_2": "first unit shipped" } },
+        { "type": "stat_item", "settings": { "value": "30", "label_line_1": "Day full refund", "label_line_2": "if it doesn't work" } },
+        { "type": "stat_item", "settings": { "value": "0.4mm", "label_line_1": "Thin enough that", "label_line_2": "dexterity is unchanged" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

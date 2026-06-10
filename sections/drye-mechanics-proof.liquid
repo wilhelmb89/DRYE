@@ -1,0 +1,225 @@
+{{ 'drye-mechanics-proof.css' | asset_url | stylesheet_tag }}
+
+<section class="dryeNEW-section mech-proof" data-section-id="{{ section.id }}">
+  <div class="dryeNEW-container mech-proof__container">
+
+    {% if section.settings.eyebrow != blank %}
+      <div class="dryeNEW-micro mech-proof__eyebrow">
+        {{ section.settings.eyebrow }}
+      </div>
+    {% endif %}
+
+    {% if section.settings.heading_line_1 != blank or section.settings.heading_emphasis != blank %}
+      <h2 class="dryeNEW-h2 mech-proof__heading">
+        {% if section.settings.heading_line_1 != blank %}
+          {{ section.settings.heading_line_1 }}
+        {% endif %}
+        {% if section.settings.heading_emphasis != blank %}
+          <em class="dryeNEW-em">{{ section.settings.heading_emphasis }}</em>
+        {% endif %}
+      </h2>
+    {% endif %}
+
+    <div class="mech-proof__grid">
+      {% for block in section.blocks %}
+        {% if block.type == 'stat' %}
+          <div class="mech-proof__stat" {{ block.shopify_attributes }}>
+            {% if block.settings.number != blank %}
+              <div class="mech-proof__stat-num">
+                {{ block.settings.number }}
+                {% if block.settings.number_suffix != blank %}
+                  <span>{{ block.settings.number_suffix }}</span>
+                {% endif %}
+              </div>
+            {% endif %}
+
+            {% if block.settings.label != blank %}
+              <div class="dryeNEW-body--sm mech-proof__stat-lbl">
+                {{ block.settings.label }}
+              </div>
+            {% endif %}
+          </div>
+        {% endif %}
+      {% endfor %}
+    </div>
+
+    {% if section.settings.body != blank %}
+      <div class="dryeNEW-body mech-proof__body">
+        {{ section.settings.body }}
+      </div>
+    {% endif %}
+
+    {% if section.settings.citation_text != blank %}
+      <div class="dryeNEW-body--caption mech-proof__cite">
+        {% if section.settings.citation_url != blank %}
+          <a href="{{ section.settings.citation_url }}">{{ section.settings.citation_text }}</a>
+        {% else %}
+          {{ section.settings.citation_text }}
+        {% endif %}
+      </div>
+    {% endif %}
+
+    <div class="mech-proof__support">
+      {% if section.settings.support_eyebrow != blank %}
+        <div class="dryeNEW-micro mech-proof__support-eye">
+          {{ section.settings.support_eyebrow }}
+        </div>
+      {% endif %}
+
+      {% if section.settings.support_number != blank %}
+        <div class="mech-proof__big-num">
+          {{ section.settings.support_number }}
+          {% if section.settings.support_number_suffix != blank %}
+            <span>{{ section.settings.support_number_suffix }}</span>
+          {% endif %}
+        </div>
+      {% endif %}
+
+      {% if section.settings.support_label != blank %}
+        <div class="dryeNEW-body--caption mech-proof__big-lbl">
+          {{ section.settings.support_label }}
+        </div>
+      {% endif %}
+
+      {% if section.settings.support_body != blank %}
+        <div class="dryeNEW-body mech-proof__support-body">
+          {{ section.settings.support_body }}
+        </div>
+      {% endif %}
+    </div>
+
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "DRYE Mechanics Proof",
+  "tag": "section",
+  "class": "shopify-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "Field proof"
+    },
+    {
+      "type": "text",
+      "id": "heading_line_1",
+      "label": "Heading line 1",
+      "default": "What happens when skin"
+    },
+    {
+      "type": "text",
+      "id": "heading_emphasis",
+      "label": "Heading emphasis",
+      "default": "stays dry under gloves."
+    },
+    {
+      "type": "richtext",
+      "id": "body",
+      "label": "Body",
+      "default": "<p>A Gothenburg study showed that occluded skin becomes significantly more permeable after prolonged moisture exposure. That matters in glove work. Once the barrier softens, friction, chemicals and heat hit harder.</p>"
+    },
+    {
+      "type": "text",
+      "id": "citation_text",
+      "label": "Citation text",
+      "default": "View study source"
+    },
+    {
+      "type": "url",
+      "id": "citation_url",
+      "label": "Citation URL"
+    },
+    {
+      "type": "text",
+      "id": "support_eyebrow",
+      "label": "Support eyebrow",
+      "default": "Why this matters"
+    },
+    {
+      "type": "text",
+      "id": "support_number",
+      "label": "Support number",
+      "default": "82"
+    },
+    {
+      "type": "text",
+      "id": "support_number_suffix",
+      "label": "Support number suffix",
+      "default": "×"
+    },
+    {
+      "type": "text",
+      "id": "support_label",
+      "label": "Support label",
+      "default": "higher moisture transfer than cotton"
+    },
+    {
+      "type": "richtext",
+      "id": "support_body",
+      "label": "Support body",
+      "default": "<p><strong>That is the point.</strong> Not another glove. Not another cream. A textile system engineered to move moisture away before the barrier starts to fail.</p>"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "stat",
+      "name": "Stat",
+      "settings": [
+        {
+          "type": "text",
+          "id": "number",
+          "label": "Number",
+          "default": "3"
+        },
+        {
+          "type": "text",
+          "id": "number_suffix",
+          "label": "Number suffix",
+          "default": "h"
+        },
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Label",
+          "default": "occlusion can already compromise the barrier"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "DRYE Mechanics Proof",
+      "blocks": [
+        {
+          "type": "stat",
+          "settings": {
+            "number": "3",
+            "number_suffix": "h",
+            "label": "occlusion can already compromise the barrier"
+          }
+        },
+        {
+          "type": "stat",
+          "settings": {
+            "number": "24",
+            "number_suffix": "h",
+            "label": "wet conditions amplify the damage further"
+          }
+        },
+        {
+          "type": "stat",
+          "settings": {
+            "number": "1",
+            "number_suffix": "shift",
+            "label": "is enough to feel the difference on damaged skin"
+          }
+        }
+      ]
+    }
+  ],
+  "max_blocks": 3
+}
+{% endschema %}

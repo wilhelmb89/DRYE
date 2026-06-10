@@ -1,0 +1,46 @@
+{{ 'drye-mechanics-ps.css' | asset_url | stylesheet_tag }}
+
+<section class="dryeNEW-section mech-ps" data-section-id="{{ section.id }}">
+  <div class="dryeNEW-container mech-ps__container">
+
+    {% if section.settings.label != blank %}
+      <div class="mech-ps__lbl">
+        {{ section.settings.label }}
+      </div>
+    {% endif %}
+
+    {% if section.settings.body != blank %}
+      <div class="mech-ps__body">
+        {{ section.settings.body }}
+      </div>
+    {% endif %}
+
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "DRYE Mechanics PS",
+  "tag": "section",
+  "class": "shopify-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "label",
+      "label": "Label",
+      "default": "P.S."
+    },
+    {
+      "type": "richtext",
+      "id": "body",
+      "label": "Body",
+      "default": "<p>Most liners don’t fail because they’re bad. <strong>They fail because they absorb — and then stay wet.</strong></p>"
+    }
+  ],
+  "presets": [
+    {
+      "name": "DRYE Mechanics PS"
+    }
+  ]
+}
+{% endschema %}

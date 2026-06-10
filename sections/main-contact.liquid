@@ -1,192 +1,151 @@
 {%- assign ss = section.settings -%}
-{% style %}
-  #shopify-section-{{ section.id }} .container .title,
-  #shopify-section-{{ section.id }} .container .form-title {
-    font-weight: 300;
-    line-height: 2.75rem;
-    letter-spacing: normal !important;
-    font-family: ClashGrotesk-Variable;
-  }
-  @media screen and (min-width: 1441px) {
-    #shopify-section-{{ section.id }} .container {
-        max-width: 1470px;
-        padding-inline: 0;
-    }
-  }
-  @media only screen and (max-width: 1024px) {
-    #shopify-section-{{ section.id }} .container {
-        padding-inline: 3rem;
-    }
-  }
-  @media only screen and (max-width: 767px) {
-    #shopify-section-{{ section.id }} .container {
-        padding-inline: 1.25rem;
-    }
-  }
-  /* Minska formrubrik på mobil */
-@media screen and (max-width: 767px) {
-  #shopify-section-{{ section.id }} .form-title {
-    font-size: 28px !important;
-    line-height: 32px !important;
-  }
-}/* Lägg detta LÄNGST NER i sektionens <style> eller i Theme settings > Custom CSS */
-#shopify-section-{{ section.id }} .main-contact .container .contacts-wrapper .persons-wrapper .person .info,
-#shopify-section-{{ section.id }} .main-contact .container .contacts-wrapper .persons-wrapper .person .info * {
-  letter-spacing: normal !important;
-}
+{{ 'main-contact.css' | asset_url | stylesheet_tag }}
 
-#shopify-section-{{ section.id }} .main-contact .container .contacts-wrapper .persons-wrapper .person .name {
-  letter-spacing: normal !important;
-}
-/* DRYE: force no tracking on contact card */
-#shopify-section-{{ section.id }} .main-contact .container .contacts-wrapper .persons-wrapper .person .info,
-#shopify-section-{{ section.id }} .main-contact .container .contacts-wrapper .persons-wrapper .person .info *,
-#shopify-section-{{ section.id }} .main-contact .container .contacts-wrapper .persons-wrapper .person .name {
-  letter-spacing: 0 !important;
-}
+<section id="shopify-section-{{ section.id }}" class="shopify-section main-contact">
+  <div class="container">
+    {%- if ss.title != blank -%}
+      <h1 class="title">{{ ss.title }}</h1>
+    {%- endif -%}
 
+    <div class="contacts-wrapper">
+      {%- if section.blocks.size > 0 -%}
+        <div class="persons-wrapper">
+          {%- for block in section.blocks -%}
+            {%- assign bs = block.settings -%}
+            <div class="person" {{ block.shopify_attributes }}>
+              <div class="photo">
+                <div class="image">
+                  {%- if bs.photo != blank -%}
+                    {{ bs.photo | image_url: width: 120 | image_tag: loading: 'lazy', widths: '120', alt: bs.name }}
+                  {%- endif -%}
+                </div>
+              </div>
 
-{% endstyle %}
-<div class="container">
-  {%- if ss.title != blank -%}
-    <h1 class="title">{{ ss.title }}</h1>
-  {%- endif -%}
-  <div class="contacts-wrapper">
-    {%- if section.blocks.size > 0 -%}
-      <div class="persons-wrapper">
-        {%- for block in section.blocks -%}
-          {%- assign bs = block.settings -%}
-          <div class="person">
-            <div class="photo">
-              <div class="image">
-                {%- if bs.photo != blank -%}
-                  {{ bs.photo | image_url: width: '120' | image_tag }}
+              <div class="info">
+                {%- if bs.name != blank -%}
+                  <h3 class="name">{{ bs.name }}</h3>
                 {%- endif -%}
+
+                {%- if bs.position != blank -%}
+                  <div class="position">{{ bs.position }}</div>
+                {%- endif -%}
+
+                {%- if bs.phone_text != blank -%}
+                  {%- assign tel_clean = bs.phone_text
+                    | strip | replace: ' ', '' | replace: '(', '' | replace: ')', '' | replace: '-', '' -%}
+                  {%- assign tel_href = bs.phone_url -%}
+                  {%- if tel_href == blank -%}{%- assign tel_href = 'tel:' | append: tel_clean -%}{%- endif -%}
+                  <a href="{{ tel_href }}">{{ bs.phone_text }}</a>
+                {%- endif -%}
+
+                {%- if bs.email_text != blank -%}
+                  {%- assign mail_href = bs.email_url -%}
+                  {%- if mail_href == blank -%}{%- assign mail_href = 'mailto:' | append: bs.email_text | strip -%}{%- endif -%}
+                  <a href="{{ mail_href }}">{{ bs.email_text }}</a>
+                {%- endif -%}
+
+                <div class="contact-actions">
+                  {%- if bs.linkedin_url != blank -%}
+                    <a class="icon-btn" href="{{ bs.linkedin_url }}" target="_blank" rel="noopener" aria-label="LinkedIn">
+                      <svg viewBox="0 0 24 24" aria-hidden="true">
+                        <path fill="currentColor" d="M4.98 3.5A2.48 2.48 0 1 1 0 3.5a2.48 2.48 0 0 1 4.98 0zM0 8h5v16H0V8zm7.5 0h4.8v2.2h.07C13.04 9 14.67 7.73 17.1 7.73 21.4 7.73 24 10 24 14.23V24h-5v-8.6c0-2.05-.04-4.69-2.86-4.69-2.86 0-3.3 2.23-3.3 4.54V24h-5V8z"/>
+                      </svg>
+                    </a>
+                  {%- endif -%}
+
+                  {%- if bs.facebook_url != blank -%}
+                    <a class="icon-btn" href="{{ bs.facebook_url }}" target="_blank" rel="noopener" aria-label="Facebook">
+                      <svg viewBox="0 0 24 24" aria-hidden="true">
+                        <path fill="currentColor" d="M22 12a10 10 0 1 0-11.6 9.9v-7H7.7V12h2.7V9.8c0-2.7 1.6-4.2 4-4.2 1.2 0 2.5.2 2.5.2v2.7h-1.4c-1.4 0-1.8.9-1.8 1.8V12h3l-.5 2.9h-2.5v7A10 10 0 0 0 22 12z"/>
+                      </svg>
+                    </a>
+                  {%- endif -%}
+
+                  {%- assign icon_mail_href = bs.email_url -%}
+                  {%- if icon_mail_href == blank and bs.email_text != blank -%}
+                    {%- assign icon_mail_href = 'mailto:' | append: bs.email_text | strip -%}
+                  {%- endif -%}
+                  {%- if icon_mail_href != blank -%}
+                    <a class="icon-btn" href="{{ icon_mail_href }}" aria-label="Email">
+                      <svg viewBox="0 0 24 24" aria-hidden="true">
+                        <path fill="currentColor" d="M20 4H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2zm0 4-8 5-8-5V6l8 5 8-5v2z"/>
+                      </svg>
+                    </a>
+                  {%- endif -%}
+                </div>
               </div>
             </div>
-            <div class="info">
-              {%- if bs.name != blank -%}
-                <div class="name">
-                  {{ bs.name }}
-                </div>
-              {%- endif -%}
-              {%- if bs.position != blank -%}
-                <div class="position">{{ bs.position }}</div>
-              {%- endif -%}
-              {%- if bs.phone_text != blank -%}
-                <a href="{{ bs.phone_url }}">{{ bs.phone_text }}</a>
-              {%- endif -%}
-              {%- if bs.email_text != blank -%}
-                <a href="{{ bs.email_url }}">{{ bs.email_text }}</a>
-              {%- endif -%}
+          {%- endfor -%}
+        </div>
+      {%- endif -%}
+
+      {% form 'contact' %}
+        {%- if ss.form_title != blank -%}
+          <div class="form-title">{{ ss.form_title }}</div>
+        {%- endif -%}
+
+        {%- if form.posted_successfully? -%}
+          <div class="success-message">{{ 'contact.success' | t }}</div>
+        {%- endif -%}
+        {%- if form.errors -%}
+          <div class="alert-message">{{ 'contact.wrong' | t }}</div>
+        {%- endif -%}
+
+        <div class="form-wrapper">
+          <div class="two-cols">
+            <div class="send-name">
+              <input type="text" name="contact[name]" id="name" placeholder="{{ 'contact.name' | t }}" />
+            </div>
+            <div class="email">
+              <input type="email" name="contact[email]" id="email" placeholder="{{ 'contact.email' | t }}" />
             </div>
           </div>
-        {%- endfor -%}
-      </div>
-    {%- endif -%}
-    {% form 'contact' %}
-      {%- if ss.form_title != blank -%}
-        <div class="form-title">{{ ss.form_title }}</div>
-      {%- endif -%}
-      {%- if form.posted_successfully? -%}
-        <div class="success-message">
-          {{ 'contact.success' | t }}
-        </div>
-      {%- endif -%}
-      {%- if form.errors -%}
-        <div class="alert-message">
-          {{ 'contact.wrong' | t }}
-        </div>
-      {%- endif -%}
-      <div class="form-wrapper">
-        <div class="two-cols">
-          <div class="send-name">
-            <input type="text" name="contact[name]" id="name" placeholder="{{ 'contact.name' | t }}" />
+
+          <div class="phone">
+            <input type="tel" name="contact[phone]" id="phone" placeholder="{{ 'contact.phone' | t }}" />
           </div>
-          <div class="email">
-            <input type="email" name="contact[email]" id="email" placeholder="{{ 'contact.email' | t }}" />
+
+          <div class="message-field">
+            <textarea name="contact[body]" id="message" placeholder="{{ 'contact.comment' | t }}"></textarea>
+          </div>
+
+          <div class="submit">
+            <button type="submit" class="button button--primary">
+              {{ 'contact.send' | t }}
+            </button>
           </div>
         </div>
-        <div class="phone">
-          <input type="tel" name="contact[phone]" id="phone" placeholder="{{ 'contact.phone' | t }}" />
-        </div>
-        <div class="message-field">
-          <textarea name="contact[body]" id="message" placeholder="{{ 'contact.comment' | t }}"></textarea>
-        </div>
-        <div class="submit">
-          <input type="submit" class="button" value="{{ 'contact.send' | t }}" />
-        </div>
-      </div>
-    {% endform %}
+      {% endform %}
+    </div>
   </div>
-</div>
+</section>
 
 {% schema %}
-  {
-    "name": "Main Contact",
-    "tag": "section",
-    "class": "main-contact",
-    "settings": [
-      {
-        "type": "text",
-        "id": "title",
-        "label": "Title"
-      },
-      {
-        "type": "text",
-        "id": "form_title",
-        "label": "Form title"
-      }
-    ],
-    "blocks": [
-      {
-        "name": "Person",
-        "type": "person",
-        "settings": [
-          {
-            "type": "image_picker",
-            "id": "photo",
-            "label": "Photo"
-          },
-          {
-            "type": "text",
-            "id": "name",
-            "label": "Name"
-          },
-          {
-            "type": "text",
-            "id": "position",
-            "label": "Position"
-          },
-          {
-            "type": "text",
-            "id": "phone_text",
-            "label": "Phone text"
-          },
-          {
-            "type": "url",
-            "id": "phone_url",
-            "label": "Phone url"
-          },
-          {
-            "type": "text",
-            "id": "email_text",
-            "label": "Email text"
-          },
-          {
-            "type": "url",
-            "id": "email_url",
-            "label": "Email url"
-          }
-        ]
-      }
-    ],
-    "presets": [
-      {
-        "name": "Main Contact",
-        "settings": {
-        }
-      }
-    ]
-  }
+{
+  "name": "Main Contact (clean)",
+  "tag": "section",
+  "class": "main-contact",
+  "settings": [
+    { "type": "text", "id": "title", "label": "Title" },
+    { "type": "text", "id": "form_title", "label": "Form title", "default": "Submit your details and someone from our team will be in touch shortly." }
+  ],
+  "blocks": [
+    {
+      "name": "Person",
+      "type": "person",
+      "settings": [
+        { "type": "image_picker", "id": "photo", "label": "Photo" },
+        { "type": "text", "id": "name", "label": "Name" },
+        { "type": "text", "id": "position", "label": "Position" },
+        { "type": "text", "id": "phone_text", "label": "Phone text" },
+        { "type": "url",  "id": "phone_url",  "label": "Phone url (optional, overrides tel:)" },
+        { "type": "text", "id": "email_text", "label": "Email text" },
+        { "type": "url",  "id": "email_url",  "label": "Email url (optional, overrides mailto:)" },
+        { "type": "url",  "id": "linkedin_url", "label": "LinkedIn profile url" },
+        { "type": "url",  "id": "facebook_url", "label": "Facebook url" }
+      ]
+    }
+  ],
+  "presets": [{ "name": "Main Contact (clean)" }]
+}
 {% endschema %}

@@ -1,0 +1,82 @@
+{{ 'drye-contact-section-3.css' | asset_url | stylesheet_tag }}
+
+<section class="contact-bottom">
+  <div class="contact-bottom-in">
+    {% for block in section.blocks %}
+      {% if block.type == 'info_item' %}
+        <div class="cb-item dryeNEW-reveal{% if forloop.index == 2 %} dryeNEW-rd1{% elsif forloop.index == 3 %} dryeNEW-rd2{% endif %}" {{ block.shopify_attributes }}>
+          <span class="cb-label">{{ block.settings.label }}</span>
+          <div class="cb-value">{{ block.settings.value }}</div>
+          <p class="cb-note">{{ block.settings.note }}</p>
+        </div>
+      {% endif %}
+    {% endfor %}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "DRYE Contact Section 3",
+  "tag": "section",
+  "class": "shopify-section",
+  "settings": [],
+  "blocks": [
+    {
+      "type": "info_item",
+      "name": "Info item",
+      "settings": [
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Label",
+          "default": "Response time"
+        },
+        {
+          "type": "text",
+          "id": "value",
+          "label": "Value",
+          "default": "Within 24 hours"
+        },
+        {
+          "type": "textarea",
+          "id": "note",
+          "label": "Note",
+          "default": "Business days. Customer support and B2B both. No autoresponders."
+        }
+      ]
+    }
+  ],
+  "max_blocks": 3,
+  "presets": [
+    {
+      "name": "DRYE Contact Section 3",
+      "blocks": [
+        {
+          "type": "info_item",
+          "settings": {
+            "label": "Response time",
+            "value": "Within 24 hours",
+            "note": "Business days. Customer support and B2B both. No autoresponders."
+          }
+        },
+        {
+          "type": "info_item",
+          "settings": {
+            "label": "Returns",
+            "value": "30-day full refund",
+            "note": "If the physics don't work for you — we return every dollar. No forms beyond this page."
+          }
+        },
+        {
+          "type": "info_item",
+          "settings": {
+            "label": "Headquarters",
+            "value": "Gothenburg, Sweden",
+            "note": "Ships from Sweden. USA, Canada, UK, and Europe. Delivery 3–7 business days."
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

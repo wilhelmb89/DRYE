@@ -1,0 +1,96 @@
+{{ 'drye-mechanics-glove-intro.css' | asset_url | stylesheet_tag }}
+
+<section class="dryeNEW-section mech-glove-intro" data-section-id="{{ section.id }}">
+  <div class="dryeNEW-container">
+    <div class="mech-glove-intro__grid">
+
+      <div class="mech-glove-intro__media">
+        {% if section.settings.image != blank %}
+          {% assign mech_glove_intro_alt = section.settings.image_alt | escape %}
+          {{
+            section.settings.image
+            | image_url: width: 1400
+            | image_tag: class: 'mech-glove-intro__image', loading: 'lazy', alt: mech_glove_intro_alt
+          }}
+        {% else %}
+          <div class="mech-glove-intro__media-placeholder"></div>
+        {% endif %}
+      </div>
+
+      <div class="mech-glove-intro__text">
+        {% if section.settings.eyebrow != blank %}
+          <span class="dryeNEW-micro">{{ section.settings.eyebrow }}</span>
+        {% endif %}
+
+        {% if section.settings.heading != blank %}
+          <h2 class="dryeNEW-h2 mech-glove-intro__heading">
+            {{ section.settings.heading }}
+          </h2>
+        {% endif %}
+
+        {% if section.settings.subheading != blank %}
+          <div class="mech-glove-intro__subheading">
+            {{ section.settings.subheading }}
+          </div>
+        {% endif %}
+
+        {% if section.settings.body != blank %}
+          <div class="dryeNEW-body mech-glove-intro__body">
+            {{ section.settings.body }}
+          </div>
+        {% endif %}
+      </div>
+
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "DRYE Mechanics Glove",
+  "tag": "section",
+  "class": "shopify-section",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image"
+    },
+    {
+      "type": "text",
+      "id": "image_alt",
+      "label": "Image alt text",
+      "default": "Macro photograph of DRYE's dual-layer textile showing moisture transport through the fabric structure."
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "Pressure-driven moisture transport"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "A liner built for sealed gloves — not open air."
+    },
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "0.4mm thin. No chemicals. No coatings. Fits inside any work glove."
+    },
+    {
+      "type": "richtext",
+      "id": "body",
+      "label": "Body",
+      "default": "<p>Every fabric you've ever worn under gloves — cotton, merino, polyester, silk — works by <strong>absorbing moisture and releasing it into the air</strong>. That's fine outside. Inside a sealed glove, there is no air. The fabric saturates. The moisture has nowhere to go.</p><p>DRYE doesn't absorb on the skin side. The inner layer is hydrophobic polypropylene — it <strong>cannot</strong> hold moisture. The outer layer is hydrophilic Lyocell, which pulls moisture continuously outward through the thickness of the fabric.</p><p>The transport is driven by the structure itself. <strong>The harder you work, the more your glove compresses the fabric, the faster it moves.</strong> No saturation point. No stopping point. It's the only textile mechanism that gets stronger under pressure instead of collapsing.</p>"
+    }
+  ],
+  "presets": [
+    {
+      "name": "DRYE Mechanics Glove"
+    }
+  ]
+}
+{% endschema %}

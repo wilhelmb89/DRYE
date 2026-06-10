@@ -1,0 +1,188 @@
+/* ==========================================================================
+   DRYE Mechanics — Mechanism
+   Based on section 5 in drye-mechanics HTML
+   Depends on base.css
+   ========================================================================== */
+
+.mech-mechanism {
+  background: var(--bg-tint);
+}
+
+.mech-mechanism__intro {
+  max-width: 720px;
+  margin: 0 auto var(--space-48);
+  text-align: center;
+}
+
+.mech-mechanism__heading {
+  margin-bottom: var(--space-14);
+  color: var(--deep);
+}
+
+.mech-mechanism__heading .dryeNEW-em,
+.mech-mechanism__heading em {
+  display: block;
+}
+
+.mech-mechanism__sub {
+  max-width: 620px;
+  margin: 0 auto;
+  color: var(--muted);
+}
+
+.mech-mechanism__cols {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--grid-gap-24);
+  margin-bottom: var(--space-48);
+}
+
+.mech-mechanism__col {
+  padding: var(--space-28) var(--space-24);
+  background: var(--bg);
+  border: var(--border-base);
+}
+
+.mech-mechanism__col--old {
+  border-left: var(--border-width-strong) solid var(--red);
+}
+
+.mech-mechanism__col--drye {
+  color: var(--white-080);
+  background: var(--deep);
+  border-top: var(--border-base);
+  border-right: var(--border-base);
+  border-bottom: var(--border-base);
+  border-left: var(--border-width-strong) solid var(--emerald);
+}
+
+.mech-mechanism__col-lbl {
+  margin-bottom: var(--space-10);
+  color: var(--sage);
+  text-transform: uppercase;
+  letter-spacing: var(--ls-micro);
+  font-size: var(--fs-micro-2);
+  font-weight: var(--fw-semibold);
+  line-height: 1.2;
+}
+
+.mech-mechanism__col--drye .mech-mechanism__col-lbl {
+  color: var(--white-055);
+}
+
+.mech-mechanism__col-title {
+  margin-bottom: var(--space-14);
+  color: var(--deep);
+}
+
+.mech-mechanism__col--drye .mech-mechanism__col-title {
+  color: var(--white-100);
+}
+
+.mech-mechanism__col-desc {
+  margin-bottom: var(--space-20);
+  padding-bottom: var(--space-20);
+  color: var(--muted);
+  border-bottom: var(--border-base);
+}
+
+.mech-mechanism__col-desc p {
+  margin: 0;
+}
+
+.mech-mechanism__col-desc strong {
+  color: var(--deep);
+  font-weight: var(--fw-semibold);
+}
+
+.mech-mechanism__col--drye .mech-mechanism__col-desc {
+  color: var(--white-070);
+  border-bottom: var(--border-white-010);
+}
+
+.mech-mechanism__col--drye .mech-mechanism__col-desc strong {
+  color: var(--white-100);
+}
+
+.mech-mechanism__steps {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-12);
+}
+
+.mech-mechanism__step {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-12);
+}
+
+.mech-mechanism__step-icon {
+  flex: 0 0 auto;
+  width: var(--space-16);
+  color: var(--red);
+  font-size: var(--fs-body-sm);
+  font-weight: var(--fw-semibold);
+  line-height: var(--lh-body);
+}
+
+.mech-mechanism__col--drye .mech-mechanism__step-icon {
+  color: var(--emerald);
+}
+
+.mech-mechanism__step-text {
+  color: var(--muted);
+}
+
+.mech-mechanism__step-text p {
+  margin: 0;
+}
+
+.mech-mechanism__col--drye .mech-mechanism__step-text {
+  color: var(--white-070);
+}
+
+.mech-mechanism__props {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--grid-gap-16);
+  padding-top: var(--space-40);
+  border-top: var(--border-base);
+}
+
+.mech-mechanism__prop-lbl {
+  margin-bottom: var(--space-8);
+  color: var(--sage);
+  text-transform: uppercase;
+  letter-spacing: var(--ls-micro);
+  font-size: var(--fs-micro-2);
+  font-weight: var(--fw-semibold);
+  line-height: 1.2;
+}
+
+.mech-mechanism__prop-title {
+  margin-bottom: var(--space-8);
+  color: var(--deep);
+}
+
+.mech-mechanism__prop-body {
+  color: var(--muted);
+}
+
+.mech-mechanism__prop-body p {
+  margin: 0;
+}
+
+@media (min-width: 768px) {
+  .mech-mechanism__cols {
+    grid-template-columns: var(--grid-2-col-desktop);
+  }
+
+  .mech-mechanism__col {
+    padding: var(--space-40) var(--space-32);
+  }
+
+  .mech-mechanism__props {
+    grid-template-columns: var(--grid-3-col-desktop);
+    gap: var(--grid-gap-32);
+  }
+}

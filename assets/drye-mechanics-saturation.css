@@ -1,0 +1,247 @@
+/* ==========================================================================
+   DRYE — mech-saturation
+   Sektionsspecifik CSS.
+   Endast: margin/spacing, color, layout och komponentbeteende.
+   All heading/body typography kommer från base.css via dryeNEW-* klasser.
+   Page width och side padding kommer från .dryeNEW-container.
+   Section top/bottom padding kommer från .dryeNEW-section.
+   ========================================================================== */
+
+.mech-saturation {
+  background: var(--bg-ink);
+  color: var(--white-075);
+  border-top: var(--border-white-010);
+  border-bottom: var(--border-white-010);
+}
+
+/* ==========================================================================
+   Intro
+   ========================================================================== */
+
+.mech-saturation__intro {
+  text-align: center;
+  max-width: 760px;
+  margin: 0 auto var(--space-64);
+}
+
+.mech-saturation__eyebrow {
+  color: var(--sage);
+  margin-bottom: var(--space-16);
+}
+
+.mech-saturation__heading {
+  color: var(--white-100);
+  margin-bottom: var(--space-8);
+}
+
+.mech-saturation__heading {
+  color: var(--white-100);
+  margin-bottom: var(--space-24);
+}
+
+.mech-saturation__heading-echo {
+  display: block;
+  margin-top: var(--space-8);
+  color: var(--sage);
+}
+
+.mech-saturation__subheading {
+  color: var(--white-070);
+  max-width: 640px;
+  margin: 0 auto;
+}
+/* ==========================================================================
+   Chart
+   ========================================================================== */
+
+.mech-saturation__chart {
+  max-width: 920px;
+  margin: 0 auto var(--space-56);
+  border-top: var(--border-white-010);
+  border-bottom: var(--border-white-010);
+}
+
+.mech-saturation__chart-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: var(--space-20);
+  padding: var(--space-12) 0;
+  border-bottom: var(--border-white-010);
+}
+
+.mech-saturation__col-label {
+  display: inline-block;
+  margin: 0;
+  color: var(--white-040);
+}
+
+.mech-saturation__col-label--right {
+  text-align: right;
+}
+
+.mech-saturation__row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--space-12);
+  padding: var(--space-20) 0;
+  border-bottom: var(--border-white-010);
+}
+
+.mech-saturation__row:last-child {
+  border-bottom: 0;
+}
+
+.mech-saturation__row--drye {
+  position: relative;
+  border-top: var(--border-sage-020);
+  border-bottom: var(--border-sage-020);
+  background: linear-gradient(90deg, var(--white-010) 0%, transparent 70%);
+  margin-inline: calc(-1 * var(--space-12));
+  padding-inline: var(--space-12);
+}
+
+.mech-saturation__row-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: var(--space-16);
+}
+
+.mech-saturation__fiber-name {
+  color: var(--white-100);
+  display: inline-flex;
+  align-items: baseline;
+  gap: var(--space-10);
+  flex-wrap: wrap;
+}
+
+.mech-saturation__fiber-note {
+  color: var(--white-040);
+  margin: 0;
+}
+
+.mech-saturation__row--drye .mech-saturation__fiber-note {
+  color: var(--white-060);
+}
+
+.mech-saturation__chip {
+  display: inline-block;
+  margin: 0;
+  padding: var(--space-3) var(--space-8);
+  border: var(--border-width) solid var(--emerald);
+  color: var(--emerald);
+  white-space: nowrap;
+  transform: translateY(-1px);
+}
+
+.mech-saturation__value {
+  color: var(--white-100);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+  text-align: right;
+}
+
+.mech-saturation__row--drye .mech-saturation__value {
+  color: var(--emerald);
+}
+
+.mech-saturation__bar {
+  position: relative;
+  width: 100%;
+  height: var(--space-4);
+  background: var(--white-010);
+  overflow: hidden;
+}
+
+.mech-saturation__bar-fill {
+  display: block;
+  height: 100%;
+  width: var(--bar, 0%);
+  background: linear-gradient(90deg, var(--white-020) 0%, var(--white-040) 100%);
+}
+
+.mech-saturation__row--drye .mech-saturation__bar {
+  height: var(--space-5);
+}
+
+.mech-saturation__row--drye .mech-saturation__bar-fill {
+  background: linear-gradient(90deg, var(--emerald) 0%, var(--sage) 100%);
+  min-width: var(--space-2);
+}
+
+/* ==========================================================================
+   Close
+   ========================================================================== */
+
+.mech-saturation__close {
+  max-width: 700px;
+  margin: 0 auto;
+  color: var(--white-075);
+}
+
+.mech-saturation__close-heading {
+  color: var(--white-100);
+  margin-bottom: var(--space-16);
+}
+
+.mech-saturation__close-body {
+  color: var(--white-075);
+}
+
+.mech-saturation__close-body > * + * {
+  margin-top: var(--space-12);
+}
+
+.mech-saturation__close-body p {
+  margin: 0;
+}
+
+.mech-saturation__close-body strong {
+  color: var(--white-100);
+}
+
+.mech-saturation__close-body em {
+  color: var(--sage);
+}
+
+.mech-saturation__close-statement {
+  margin: var(--space-24) 0 0;
+  padding-top: var(--space-20);
+  border-top: var(--border-sage-020);
+  color: var(--white-100);
+}
+
+.mech-saturation__cite {
+  margin: var(--space-32) 0 0;
+  color: var(--white-040);
+  max-width: 720px;
+}
+
+/* ==========================================================================
+   Desktop
+   ========================================================================== */
+
+@media (min-width: 768px) {
+  .mech-saturation__intro {
+    margin-bottom: var(--space-64);
+  }
+
+  .mech-saturation__chart {
+    margin-bottom: var(--space-56);
+  }
+
+  .mech-saturation__chart-head {
+    padding: var(--space-16) 0;
+  }
+
+  .mech-saturation__row {
+    padding: var(--space-24) 0;
+    gap: var(--space-16);
+  }
+
+  .mech-saturation__row--drye {
+    margin-inline: calc(-1 * var(--space-20));
+    padding-inline: var(--space-20);
+  }
+}

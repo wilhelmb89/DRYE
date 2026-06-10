@@ -1,0 +1,385 @@
+{{ 'dryeNEW-professions.css' | asset_url | stylesheet_tag }}
+
+<section
+  class="dryeNEW-section dryeNEW-professions"
+  id="{{ section.settings.section_id | default: 'professions' }}"
+  data-section-id="{{ section.id }}"
+  style="
+    --dryeNEW-professions-pt-mobile: {{ section.settings.padding_top_mobile }}px;
+    --dryeNEW-professions-pb-mobile: {{ section.settings.padding_bottom_mobile }}px;
+    --dryeNEW-professions-pt-desktop: {{ section.settings.padding_top_desktop }}px;
+    --dryeNEW-professions-pb-desktop: {{ section.settings.padding_bottom_desktop }}px;
+  "
+>
+  <div class="dryeNEW-container">
+    <div class="dryeNEW-grid dryeNEW-professions__grid">
+
+      {% if section.settings.heading_main != blank or section.settings.heading_em != blank %}
+        <h2 class="dryeNEW-professions__heading">
+          {{ section.settings.heading_main | newline_to_br }}
+          {% if section.settings.heading_em != blank %}
+            <em class="dryeNEW-professions__heading-em">{{ section.settings.heading_em | newline_to_br }}</em>
+          {% endif %}
+        </h2>
+      {% endif %}
+
+      <div class="dryeNEW-professions__tabs-wrap">
+        <div class="dryeNEW-professions__tabs" role="tablist" aria-label="{{ section.settings.tabs_aria_label }}">
+          {% for block in section.blocks %}
+            {% if block.type == 'profession_panel' %}
+              <button
+                class="dryeNEW-professions__tab{% if forloop.first %} is-active{% endif %}"
+                type="button"
+                role="tab"
+                id="dryeNEW-professions-tab-{{ section.id }}-{{ block.id }}"
+                aria-controls="dryeNEW-professions-panel-{{ section.id }}-{{ block.id }}"
+                aria-selected="{% if forloop.first %}true{% else %}false{% endif %}"
+                data-tab-target="dryeNEW-professions-panel-{{ section.id }}-{{ block.id }}"
+                {{ block.shopify_attributes }}
+              >
+                {{ block.settings.tab_label }}
+              </button>
+            {% endif %}
+          {% endfor %}
+        </div>
+
+        <div class="dryeNEW-professions__panels">
+          {% for block in section.blocks %}
+            {% if block.type == 'profession_panel' %}
+              <div
+                class="dryeNEW-professions__panel{% if forloop.first %} is-active{% endif %}"
+                id="dryeNEW-professions-panel-{{ section.id }}-{{ block.id }}"
+                role="tabpanel"
+                aria-labelledby="dryeNEW-professions-tab-{{ section.id }}-{{ block.id }}"
+                {% unless forloop.first %}hidden{% endunless %}
+              >
+                <div class="dryeNEW-professions__panel-inner">
+                  <div class="dryeNEW-professions__panel-left">
+                    {% if block.settings.pain_label != blank %}
+                      <div class="dryeNEW-professions__pain-label">
+                        {{ block.settings.pain_label }}
+                      </div>
+                    {% endif %}
+
+                    {% if block.settings.panel_title != blank %}
+                      <h3 class="dryeNEW-professions__panel-title">
+                        {{ block.settings.panel_title | newline_to_br }}
+                      </h3>
+                    {% endif %}
+
+                    <ul class="dryeNEW-professions__pain-list">
+                      {% if block.settings.pain_1 != blank %}<li>{{ block.settings.pain_1 }}</li>{% endif %}
+                      {% if block.settings.pain_2 != blank %}<li>{{ block.settings.pain_2 }}</li>{% endif %}
+                      {% if block.settings.pain_3 != blank %}<li>{{ block.settings.pain_3 }}</li>{% endif %}
+                      {% if block.settings.pain_4 != blank %}<li>{{ block.settings.pain_4 }}</li>{% endif %}
+                      {% if block.settings.pain_5 != blank %}<li>{{ block.settings.pain_5 }}</li>{% endif %}
+                    </ul>
+                  </div>
+
+                  <div class="dryeNEW-professions__panel-right">
+                    {% if block.settings.quote_label != blank %}
+                      <div class="dryeNEW-professions__quote-label">
+                        {{ block.settings.quote_label }}
+                      </div>
+                    {% endif %}
+
+                    {% if block.settings.quote != blank %}
+                      <blockquote class="dryeNEW-professions__quote">
+                        {{ block.settings.quote }}
+                      </blockquote>
+                    {% endif %}
+
+                    {% if block.settings.quote_source_strong != blank or block.settings.quote_source_tail != blank %}
+                      <p class="dryeNEW-professions__quote-src">
+                        {% if block.settings.quote_source_strong != blank %}
+                          <strong>{{ block.settings.quote_source_strong }}</strong>
+                        {% endif %}
+                        {% if block.settings.quote_source_tail != blank %}
+                          — {{ block.settings.quote_source_tail }}
+                        {% endif %}
+                      </p>
+                    {% endif %}
+                  </div>
+                </div>
+              </div>
+            {% endif %}
+          {% endfor %}
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<script>
+  (() => {
+    const section = document.querySelector('[data-section-id="{{ section.id }}"]');
+    if (!section) return;
+
+    const tabs = Array.from(section.querySelectorAll('.dryeNEW-professions__tab'));
+    const panels = Array.from(section.querySelectorAll('.dryeNEW-professions__panel'));
+
+    const activateTab = (tab) => {
+      const targetId = tab.getAttribute('data-tab-target');
+
+      tabs.forEach((btn) => {
+        const isActive = btn === tab;
+        btn.classList.toggle('is-active', isActive);
+        btn.setAttribute('aria-selected', isActive ? 'true' : 'false');
+      });
+
+      panels.forEach((panel) => {
+        const isActive = panel.id === targetId;
+        panel.classList.toggle('is-active', isActive);
+        panel.hidden = !isActive;
+      });
+    };
+
+    tabs.forEach((tab) => {
+      tab.addEventListener('click', () => activateTab(tab));
+
+      tab.addEventListener('keydown', (event) => {
+        const currentIndex = tabs.indexOf(tab);
+        let nextIndex = currentIndex;
+
+        if (event.key === 'ArrowRight') nextIndex = (currentIndex + 1) % tabs.length;
+        if (event.key === 'ArrowLeft') nextIndex = (currentIndex - 1 + tabs.length) % tabs.length;
+
+        if (nextIndex !== currentIndex) {
+          event.preventDefault();
+          tabs[nextIndex].focus();
+          activateTab(tabs[nextIndex]);
+        }
+      });
+    });
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "DRYE NEW Professions",
+  "tag": "section",
+  "class": "section-dryeNEW-professions",
+  "settings": [
+    {
+      "type": "text",
+      "id": "section_id",
+      "label": "Section ID",
+      "default": "professions"
+    },
+    {
+      "type": "textarea",
+      "id": "heading_main",
+      "label": "Heading main",
+      "default": "Who it's for"
+    },
+    {
+      "type": "textarea",
+      "id": "heading_em",
+      "label": "Heading emphasized",
+      "default": "Built for hands that work for a living."
+    },
+    {
+      "type": "text",
+      "id": "tabs_aria_label",
+      "label": "Tabs aria label",
+      "default": "Profession examples"
+    },
+    {
+      "type": "range",
+      "id": "padding_top_mobile",
+      "min": 0,
+      "max": 200,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding top mobile",
+      "default": 52
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_mobile",
+      "min": 0,
+      "max": 200,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding bottom mobile",
+      "default": 52
+    },
+    {
+      "type": "range",
+      "id": "padding_top_desktop",
+      "min": 0,
+      "max": 240,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding top desktop",
+      "default": 88
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_desktop",
+      "min": 0,
+      "max": 240,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding bottom desktop",
+      "default": 88
+    }
+  ],
+  "blocks": [
+    {
+      "type": "profession_panel",
+      "name": "Profession panel",
+      "settings": [
+        {
+          "type": "text",
+          "id": "tab_label",
+          "label": "Tab label",
+          "default": "Healthcare"
+        },
+        {
+          "type": "text",
+          "id": "pain_label",
+          "label": "Left label",
+          "default": "Profession-specific problem"
+        },
+        {
+          "type": "textarea",
+          "id": "panel_title",
+          "label": "Left title",
+          "default": "8 hours in nitrile.\nYour hands pay for it."
+        },
+        {
+          "type": "text",
+          "id": "pain_1",
+          "label": "Pain point 1",
+          "default": "Humid environment inside glove triggers dyshidrotic eczema"
+        },
+        {
+          "type": "text",
+          "id": "pain_2",
+          "label": "Pain point 2",
+          "default": "Frequent glove changes (every 10 min per guidance) create additional friction damage"
+        },
+        {
+          "type": "text",
+          "id": "pain_3",
+          "label": "Pain point 3",
+          "default": "Hand sanitiser 40–60 times per shift degrades the skin barrier"
+        },
+        {
+          "type": "text",
+          "id": "pain_4",
+          "label": "Pain point 4",
+          "default": "Infection control requirements make thick cotton liners impossible"
+        },
+        {
+          "type": "text",
+          "id": "pain_5",
+          "label": "Pain point 5",
+          "default": "Swollen, red hands after every shift — chronic pain that doesn't fully resolve"
+        },
+        {
+          "type": "text",
+          "id": "quote_label",
+          "label": "Quote label",
+          "default": "REAL VOICE"
+        },
+        {
+          "type": "textarea",
+          "id": "quote",
+          "label": "Quote",
+          "default": "\"I had to leave nursing after 3 years. My hands had open wounds after every shift. Occupational health's advice was to not wear a single pair of gloves for more than 10 minutes at a time. In practice, that was impossible.\""
+        },
+        {
+          "type": "text",
+          "id": "quote_source_strong",
+          "label": "Quote source strong",
+          "default": "Registered Nurse, UK"
+        },
+        {
+          "type": "text",
+          "id": "quote_source_tail",
+          "label": "Quote source tail",
+          "default": "Reddit r/Eczema"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "DRYE NEW Professions",
+      "blocks": [
+        {
+          "type": "profession_panel",
+          "settings": {
+            "tab_label": "Healthcare",
+            "pain_label": "Profession-specific problem",
+            "panel_title": "8 hours in nitrile.\nYour hands pay for it.",
+            "pain_1": "Humid environment inside glove triggers dyshidrotic eczema",
+            "pain_2": "Frequent glove changes (every 10 min per guidance) create additional friction damage",
+            "pain_3": "Hand sanitiser 40–60 times per shift degrades the skin barrier",
+            "pain_4": "Infection control requirements make thick cotton liners impossible",
+            "pain_5": "Swollen, red hands after every shift — chronic pain that doesn't fully resolve",
+            "quote_label": "REAL VOICE",
+            "quote": "\"I had to leave nursing after 3 years. <strong>My hands had open wounds after every shift.</strong> Occupational health's advice was to not wear a single pair of gloves for more than 10 minutes at a time. In practice, that was impossible.\"",
+            "quote_source_strong": "Registered Nurse, UK",
+            "quote_source_tail": "Reddit r/Eczema"
+          }
+        },
+        {
+          "type": "profession_panel",
+          "settings": {
+            "tab_label": "Mechanics",
+            "pain_label": "Profession-specific problem",
+            "panel_title": "Sweat + oil + nitrile.\nThe skin breaks down chemically.",
+            "pain_1": "Motor oil is a known carcinogen — permeates nitrile under moisture exposure",
+            "pain_2": "Sweaty hands eliminate feel for torque and fastener tension",
+            "pain_3": "Gloves tear against sharp edges — constant replacement",
+            "pain_4": "Summer: gloves fill with sweat within 20 minutes",
+            "pain_5": "\"Real mechanics don't wear gloves\" — cultural resistance to protection",
+            "quote_label": "REAL VOICE",
+            "quote": "\"Oil is a chemical. <strong>It permeates straight into your bloodstream.</strong> Mechanics have significantly elevated rates of bladder and liver cancer. Wear gloves. But my hands are sweating pools within 20 minutes.\"",
+            "quote_source_strong": "Automotive mechanic, USA",
+            "quote_source_tail": "TikTok"
+          }
+        },
+        {
+          "type": "profession_panel",
+          "settings": {
+            "tab_label": "Cleaning",
+            "pain_label": "Profession-specific problem",
+            "panel_title": "Chemicals, hot water,\nall day.",
+            "pain_1": "Detergents, disinfectants and occlusion strip the skin barrier repeatedly",
+            "pain_2": "Sweat accumulates inside gloves during repetitive work",
+            "pain_3": "Frequent glove-on glove-off cycles increase friction and irritation",
+            "pain_4": "Wet work is one of the clearest occupational dermatitis drivers",
+            "pain_5": "Hands stay inflamed even when creams are used correctly",
+            "quote_label": "REAL VOICE",
+            "quote": "\"Cleaning for work ruined my hands. <strong>Gloves protected me from the chemicals but trapped the sweat that kept my skin raw.</strong>\"",
+            "quote_source_strong": "Cleaner, UK",
+            "quote_source_tail": "Reddit r/eczema"
+          }
+        },
+        {
+          "type": "profession_panel",
+          "settings": {
+            "tab_label": "Lab",
+            "pain_label": "Profession-specific problem",
+            "panel_title": "Precision work.\nZero room for bulky liners.",
+            "pain_1": "Double-gloving and fine motor tasks amplify sweat buildup",
+            "pain_2": "Long sterile sequences limit glove changes",
+            "pain_3": "Dexterity requirements rule out thick absorbent inserts",
+            "pain_4": "Skin irritation compounds with repeated hand hygiene",
+            "pain_5": "Hands must stay functional, not just covered",
+            "quote_label": "REAL VOICE",
+            "quote": "\"You can't compromise dexterity in lab work. <strong>The problem is that by the end of a long glove session your skin is already paying for it.</strong>\"",
+            "quote_source_strong": "Lab worker",
+            "quote_source_tail": "Occupational context"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

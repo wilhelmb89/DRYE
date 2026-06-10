@@ -1,0 +1,95 @@
+<script>
+(function() {
+  var sections = document.querySelectorAll('[data-drye-section]');
+  if (!sections.length) return;
+
+  var pagePath = window.location.pathname;
+  var storageKey = 'drye_max_section_' + pagePath;
+  var firedSections = {};
+  var pendingTimers = {};
+
+  function getCurrentMax() {
+    try {
+      var stored = sessionStorage.getItem(storageKey);
+      if (!stored) return { idx: 0, name: '' };
+      return JSON.parse(stored);
+    } catch (e) {
+      return { idx: 0, name: '' };
+    }
+  }
+
+  function setCurrentMax(idx, name) {
+    try {
+      sessionStorage.setItem(storageKey, JSON.stringify({ idx: idx, name: name }));
+    } catch (e) {}
+  }
+
+  function pushSectionView(idx, name) {
+    if (firedSections[idx]) return;
+    firedSections[idx] = true;
+
+    window.dataLayer = window.dataLayer || [];
+    window.dataLayer.push({
+      event: 'section_view',
+      section_index: idx,
+      section_name: name,
+      page_path: pagePath
+    });
+
+    var current = getCurrentMax();
+    if (idx > current.idx) {
+      setCurrentMax(idx, name);
+      window.dataLayer.push({
+        event: 'section_progress',
+        section_index: idx,
+        section_name: name,
+        max_section_index: idx,
+        max_section_name: name,
+        page_path: pagePath
+      });
+    }
+  }
+
+  var observer = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      var el = entry.target;
+      var idx = parseInt(el.getAttribute('data-section-index'), 10);
+      var name = el.getAttribute('data-section-name') || '';
+
+      if (!idx) return;
+
+      if (entry.isIntersecting && entry.intersectionRatio >= 0.25) {
+        if (!pendingTimers[idx]) {
+          pendingTimers[idx] = setTimeout(function() {
+            pushSectionView(idx, name);
+            delete pendingTimers[idx];
+          }, 800);
+        }
+      } else {
+        if (pendingTimers[idx]) {
+          clearTimeout(pendingTimers[idx]);
+          delete pendingTimers[idx];
+        }
+      }
+    });
+  }, { threshold: [0.25] });
+
+  sections.forEach(function(s) {
+    observer.observe(s);
+  });
+
+  sections.forEach(function(s) {
+    var rect = s.getBoundingClientRect();
+    var inViewport = rect.top < window.innerHeight && rect.bottom > 0;
+    if (inViewport) {
+      var idx = parseInt(s.getAttribute('data-section-index'), 10);
+      var name = s.getAttribute('data-section-name') || '';
+      if (idx) {
+        setTimeout(function() {
+          pushSectionView(idx, name);
+        }, 500);
+      }
+    }
+  });
+})();
+</script>

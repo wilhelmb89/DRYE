@@ -1,0 +1,75 @@
+{{ 'dryeNEW-sticky-bar.css' | asset_url | stylesheet_tag }}
+
+<div class="sticky-cta" id="stickyCta">
+  <div class="sticky-cta-text">
+    {% if section.settings.product_name != blank %}
+      <strong>{{ section.settings.product_name }}</strong>
+    {% endif %}
+    {{ section.settings.subtext }}
+  </div>
+
+  {% if section.settings.cta_label != blank %}
+    {% if section.settings.open_cart_drawer %}
+      <a
+        class="sticky-cta-btn"
+        href="#"
+        aria-label="{{ section.settings.cta_label }}"
+        data-cart-open
+      >
+        {{ section.settings.cta_label }}
+      </a>
+    {% else %}
+      <a
+        class="sticky-cta-btn"
+        href="{{ section.settings.cta_url | default: '#' }}"
+        aria-label="{{ section.settings.cta_label }}"
+      >
+        {{ section.settings.cta_label }}
+      </a>
+    {% endif %}
+  {% endif %}
+</div>
+
+{% schema %}
+{
+  "name": "DRYE NEW Sticky Bar",
+  "tag": "section",
+  "class": "section-dryeNEW-sticky-bar",
+  "settings": [
+    {
+      "type": "text",
+      "id": "product_name",
+      "label": "Product name",
+      "default": "DRYE Glove Liner"
+    },
+    {
+      "type": "text",
+      "id": "subtext",
+      "label": "Subtext",
+      "default": "30-day free trial"
+    },
+    {
+      "type": "text",
+      "id": "cta_label",
+      "label": "CTA label",
+      "default": "Try it free →"
+    },
+    {
+      "type": "checkbox",
+      "id": "open_cart_drawer",
+      "label": "Open cart drawer on click",
+      "default": true
+    },
+    {
+      "type": "url",
+      "id": "cta_url",
+      "label": "CTA URL"
+    }
+  ],
+  "presets": [
+    {
+      "name": "DRYE NEW Sticky Bar"
+    }
+  ]
+}
+{% endschema %}

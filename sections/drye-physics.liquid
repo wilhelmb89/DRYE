@@ -1,0 +1,349 @@
+{{ 'component-drye-physics.css' | asset_url | stylesheet_tag }}
+
+<section class="dryeNEW-section the-physics" id="drye-physics-{{ section.id }}">
+  <div class="dryeNEW-container inner">
+    <span class="dryeNEW-micro reveal dryeNEW-reveal">
+      {{ section.settings.eyebrow }}
+    </span>
+
+    <h2 class="dryeNEW-h2--problem reveal rd1 dryeNEW-reveal dryeNEW-rd1">
+      {{ section.settings.heading_line_1 }}<br><em class="dryeNEW-editorial">{{ section.settings.heading_line_2 }}</em>
+    </h2>
+
+    <p class="lead reveal rd2 dryeNEW-reveal dryeNEW-rd2">
+      {{ section.settings.lead | strip_html }}
+    </p>
+
+    <div class="layer-diagram reveal rd2 dryeNEW-reveal dryeNEW-rd2">
+      <div class="diagram-label-row">
+        <span>{{ section.settings.label_skin }}</span>
+        <span>{{ section.settings.label_liner }}</span>
+        <span>{{ section.settings.label_glove }}</span>
+      </div>
+
+      <div class="diagram-layers">
+        <div class="diagram-layer layer-inner">
+          <div class="layer-info">
+            <div class="layer-name">{{ section.settings.inner_layer_name }}</div>
+            <div class="layer-property">{{ section.settings.inner_layer_property }}</div>
+          </div>
+          <div class="layer-visual"></div>
+          <div class="layer-desc">{{ section.settings.inner_layer_desc }}</div>
+        </div>
+
+        <div class="diagram-layer layer-transport">
+          <div class="layer-info">
+            <div class="layer-name">{{ section.settings.transport_layer_name }}</div>
+            <div class="layer-property">{{ section.settings.transport_layer_property }}</div>
+          </div>
+          <div class="layer-visual">
+            <div class="transport-arrow"><span></span></div>
+            <div class="transport-arrow"><span></span></div>
+            <div class="transport-arrow"><span></span></div>
+          </div>
+          <div class="layer-desc">{{ section.settings.transport_layer_desc }}</div>
+        </div>
+
+        <div class="diagram-layer layer-outer">
+          <div class="layer-info">
+            <div class="layer-name">{{ section.settings.outer_layer_name }}</div>
+            <div class="layer-property">{{ section.settings.outer_layer_property }}</div>
+          </div>
+          <div class="layer-visual"></div>
+          <div class="layer-desc">{{ section.settings.outer_layer_desc }}</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="mech-cols reveal rd3 dryeNEW-reveal dryeNEW-rd3">
+      <div class="mech-col left">
+        <div class="mech-tag">{{ section.settings.left_tag }}</div>
+        <h3>{{ section.settings.left_title }}</h3>
+        <p class="desc">{{ section.settings.left_desc | strip_html }}</p>
+
+        <ul class="mech-steps">
+          {% assign left_index = 0 %}
+          {% for block in section.blocks %}
+            {% if block.type == 'left_step' %}
+              {% assign left_index = left_index | plus: 1 %}
+              <li class="mech-step" {{ block.shopify_attributes }}>
+                <span class="step-n">{{ left_index | prepend: '0' | slice: -2, 2 }}</span>
+                <div class="step-content">
+                  <strong>{{ block.settings.title }}</strong>{{ block.settings.text }}
+                </div>
+              </li>
+            {% endif %}
+          {% endfor %}
+        </ul>
+      </div>
+
+      <div class="mech-col right">
+        <div class="mech-tag">{{ section.settings.right_tag }}</div>
+        <h3>{{ section.settings.right_title }}</h3>
+        <p class="desc">{{ section.settings.right_desc | strip_html }}</p>
+
+        <ul class="mech-steps">
+          {% assign right_index = 0 %}
+          {% for block in section.blocks %}
+            {% if block.type == 'right_step' %}
+              {% assign right_index = right_index | plus: 1 %}
+              <li class="mech-step" {{ block.shopify_attributes }}>
+                <span class="step-n">{{ right_index | prepend: '0' | slice: -2, 2 }}</span>
+                <div class="step-content">
+                  <strong>{{ block.settings.title }}</strong>{{ block.settings.text }}
+                </div>
+              </li>
+            {% endif %}
+          {% endfor %}
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "DRYE Physics",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "HOW DRYE IS DIFFERENT"
+    },
+    {
+      "type": "text",
+      "id": "heading_line_1",
+      "label": "Heading line 1",
+      "default": "A different physical"
+    },
+    {
+      "type": "text",
+      "id": "heading_line_2",
+      "label": "Heading line 2",
+      "default": "principle entirely."
+    },
+    {
+      "type": "richtext",
+      "id": "lead",
+      "label": "Lead",
+      "default": "<p>Instead of absorbing moisture and reaching a saturation point, DRYE uses a structural gradient to move moisture continuously through the textile — from skin surface toward the outer glove. No accumulation. No saturation point.</p>"
+    },
+
+    {
+      "type": "text",
+      "id": "label_skin",
+      "label": "Diagram label 1",
+      "default": "Skin"
+    },
+    {
+      "type": "text",
+      "id": "label_liner",
+      "label": "Diagram label 2",
+      "default": "DRYE liner"
+    },
+    {
+      "type": "text",
+      "id": "label_glove",
+      "label": "Diagram label 3",
+      "default": "Glove"
+    },
+
+    {
+      "type": "text",
+      "id": "inner_layer_name",
+      "label": "Inner layer name",
+      "default": "Inner layer"
+    },
+    {
+      "type": "text",
+      "id": "inner_layer_property",
+      "label": "Inner layer property",
+      "default": "Hydrophobic"
+    },
+    {
+      "type": "textarea",
+      "id": "inner_layer_desc",
+      "label": "Inner layer description",
+      "default": "Repels moisture away from skin contact surface. Your skin never stays wet."
+    },
+
+    {
+      "type": "text",
+      "id": "transport_layer_name",
+      "label": "Transport layer name",
+      "default": "Transport"
+    },
+    {
+      "type": "text",
+      "id": "transport_layer_property",
+      "label": "Transport layer property",
+      "default": "Capillary"
+    },
+    {
+      "type": "textarea",
+      "id": "transport_layer_desc",
+      "label": "Transport layer description",
+      "default": "Structural gradient drives passive, continuous transport outward. No pump. No saturation."
+    },
+
+    {
+      "type": "text",
+      "id": "outer_layer_name",
+      "label": "Outer layer name",
+      "default": "Outer layer"
+    },
+    {
+      "type": "text",
+      "id": "outer_layer_property",
+      "label": "Outer layer property",
+      "default": "Hygroscopic"
+    },
+    {
+      "type": "textarea",
+      "id": "outer_layer_desc",
+      "label": "Outer layer description",
+      "default": "Captures and buffers moisture externally, against the glove — not against your skin."
+    },
+
+    {
+      "type": "text",
+      "id": "left_tag",
+      "label": "Left tag",
+      "default": "Conventional liner"
+    },
+    {
+      "type": "text",
+      "id": "left_title",
+      "label": "Left title",
+      "default": "The absorber model"
+    },
+    {
+      "type": "textarea",
+      "id": "left_desc",
+      "label": "Left description",
+      "default": "Works until it doesn't. Saturation is structural — not a flaw you can engineer around."
+    },
+
+    {
+      "type": "text",
+      "id": "right_tag",
+      "label": "Right tag",
+      "default": "DRYE liner"
+    },
+    {
+      "type": "text",
+      "id": "right_title",
+      "label": "Right title",
+      "default": "The routing model"
+    },
+    {
+      "type": "textarea",
+      "id": "right_desc",
+      "label": "Right description",
+      "default": "No saturation point. Moisture moves continuously — away from skin, toward the outer glove surface."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "left_step",
+      "name": "Left step",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Moisture enters liner"
+        },
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Text",
+          "default": "Fibres absorb until capacity is reached"
+        }
+      ]
+    },
+    {
+      "type": "right_step",
+      "name": "Right step",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Moisture enters inner layer"
+        },
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Text",
+          "default": "Structural gradient directs transport outward immediately"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "DRYE Physics",
+      "blocks": [
+        {
+          "type": "left_step",
+          "settings": {
+            "title": "Moisture enters liner",
+            "text": "Fibres absorb until capacity is reached"
+          }
+        },
+        {
+          "type": "left_step",
+          "settings": {
+            "title": "Liner saturates",
+            "text": "No more absorption. Moisture accumulates against skin."
+          }
+        },
+        {
+          "type": "left_step",
+          "settings": {
+            "title": "Occlusion begins",
+            "text": "Wet material on skin. Barrier function degrades."
+          }
+        },
+        {
+          "type": "left_step",
+          "settings": {
+            "title": "Damage accumulates",
+            "text": "Invisible during shift. Visible after."
+          }
+        },
+        {
+          "type": "right_step",
+          "settings": {
+            "title": "Moisture enters inner layer",
+            "text": "Structural gradient directs transport outward immediately"
+          }
+        },
+        {
+          "type": "right_step",
+          "settings": {
+            "title": "Continuous passive transport",
+            "text": "No saturation point. No accumulation. No ceiling."
+          }
+        },
+        {
+          "type": "right_step",
+          "settings": {
+            "title": "Skin stays dry",
+            "text": "The microclimate never forms."
+          }
+        },
+        {
+          "type": "right_step",
+          "settings": {
+            "title": "Barrier function maintained",
+            "text": "Same after 8 hours as after 8 minutes."
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

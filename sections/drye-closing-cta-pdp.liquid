@@ -1,0 +1,121 @@
+{{ 'drye-closing-cta.css' | asset_url | stylesheet_tag }}
+
+<section class="cta-sec">
+  <div class="cta-in">
+    <div class="micro micro-w rev d1">
+      {{ section.settings.eyebrow }}
+    </div>
+
+    <h2 class="cta-h rev d2">
+      {{ section.settings.heading_line_1 }}
+      <em>{{ section.settings.heading_emphasis }}</em>
+    </h2>
+
+    <p class="cta-sub rev d3">
+      {{ section.settings.subtext }}
+    </p>
+
+    <div class="cta-btns rev d4">
+      {% if section.settings.primary_opens_cart %}
+        <button type="button" class="btn-main" data-cart-open>
+          {{ section.settings.primary_label }}
+        </button>
+      {% elsif section.settings.primary_url != blank %}
+        <a href="{{ section.settings.primary_url }}" class="btn-main">
+          {{ section.settings.primary_label }}
+        </a>
+      {% else %}
+        <button type="button" class="btn-main">
+          {{ section.settings.primary_label }}
+        </button>
+      {% endif %}
+
+      {% if section.settings.secondary_url != blank %}
+        <a href="{{ section.settings.secondary_url }}" class="btn-ghost">
+          {{ section.settings.secondary_label }}
+        </a>
+      {% else %}
+        <button type="button" class="btn-ghost">
+          {{ section.settings.secondary_label }}
+        </button>
+      {% endif %}
+    </div>
+
+    {% if section.settings.fine_print != blank %}
+      <div class="cta-fine rev d5">
+        {{ section.settings.fine_print }}
+      </div>
+    {% endif %}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "DRYE Closing CTA",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "30-day full refund"
+    },
+    {
+      "type": "text",
+      "id": "heading_line_1",
+      "label": "Heading line 1",
+      "default": "You've tried everything that absorbs."
+    },
+    {
+      "type": "text",
+      "id": "heading_emphasis",
+      "label": "Heading emphasis",
+      "default": "Try the one that routes."
+    },
+    {
+      "type": "textarea",
+      "id": "subtext",
+      "label": "Subtext",
+      "default": "If the physics don't change your shift — full refund. No forms. No conditions."
+    },
+    {
+      "type": "text",
+      "id": "primary_label",
+      "label": "Primary button label",
+      "default": "ADD TO CART — 450 SEK"
+    },
+    {
+      "type": "checkbox",
+      "id": "primary_opens_cart",
+      "label": "Open cart drawer",
+      "default": true
+    },
+    {
+      "type": "url",
+      "id": "primary_url",
+      "label": "Primary button URL"
+    },
+    {
+      "type": "text",
+      "id": "secondary_label",
+      "label": "Secondary button label",
+      "default": "READ THE RESEARCH FIRST →"
+    },
+    {
+      "type": "url",
+      "id": "secondary_url",
+      "label": "Secondary button URL"
+    },
+    {
+      "type": "text",
+      "id": "fine_print",
+      "label": "Fine print",
+      "default": "Secure checkout · Ships 24h · 4.85/5 on 27 reviews"
+    }
+  ],
+  "presets": [
+    {
+      "name": "DRYE Closing CTA"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,274 @@
+.policy-content {
+  min-width: 0;
+}
+
+.policy-panel {
+  display: none;
+}
+
+.policy-panel.active {
+  display: block;
+}
+
+.policy-section {
+  padding: 0 0 56px;
+  margin-bottom: 56px;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.policy-section:last-child {
+  margin-bottom: 0;
+}
+
+.ps-label {
+  display: block;
+  margin-bottom: 10px;
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  line-height: 1.2;
+  text-transform: uppercase;
+  color: var(--sage);
+}
+
+.ps-h {
+  margin: 0 0 18px;
+  font-family: var(--font-display);
+  font-size: clamp(28px, 3vw, 40px);
+  font-weight: 600;
+  letter-spacing: -0.03em;
+  line-height: 1.02;
+  color: var(--deep);
+}
+
+.ps-body {
+  max-width: 760px;
+}
+
+.ps-body p {
+  margin: 0 0 16px;
+  font-size: 15px;
+  line-height: 1.8;
+  color: var(--body);
+}
+
+.ps-body p:last-child {
+  margin-bottom: 0;
+}
+
+.ps-body a,
+.policy-updated a,
+.callout a,
+.step-title a {
+  color: var(--emerald);
+  text-decoration: none;
+}
+
+.policy-list {
+  margin: 16px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.policy-list li {
+  position: relative;
+  margin: 0 0 12px;
+  padding-left: 20px;
+  font-size: 15px;
+  line-height: 1.8;
+  color: var(--body);
+}
+
+.policy-list li::before {
+  content: "→";
+  position: absolute;
+  left: 0;
+  top: 0;
+  color: var(--sage);
+}
+
+.policy-stat-row {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0;
+  margin-top: 24px;
+  border-top: 1px solid #e5e7eb;
+  border-left: 1px solid #e5e7eb;
+}
+
+.policy-stat {
+  min-height: 86px;
+  padding: 20px 16px;
+  border-right: 1px solid #e5e7eb;
+  border-bottom: 1px solid #e5e7eb;
+  background: #fff;
+}
+
+.policy-stat-num {
+  margin-bottom: 6px;
+  font-family: var(--font-display);
+  font-size: clamp(24px, 5vw, 34px);
+  font-weight: 600;
+  letter-spacing: -0.03em;
+  line-height: 1;
+  color: var(--deep);
+}
+
+.policy-stat-num em {
+  font-family: var(--font-editorial);
+  font-style: italic;
+  font-weight: 400;
+  font-size: 0.7em;
+  color: var(--sage);
+}
+
+.policy-stat-lbl {
+  font-size: 12px;
+  line-height: 1.5;
+  color: var(--muted);
+}
+
+.delivery-table {
+  width: 100%;
+  margin-top: 18px;
+  border-collapse: collapse;
+}
+
+.delivery-table th,
+.delivery-table td {
+  padding: 16px 14px;
+  border-bottom: 1px solid #e5e7eb;
+  text-align: left;
+  vertical-align: top;
+}
+
+.delivery-table th {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--caption);
+}
+
+.delivery-table td {
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--body);
+}
+
+.duties-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 12px;
+}
+
+.duty-box {
+  padding: 18px;
+  border: 1px solid #e5e7eb;
+  background: #fff;
+}
+
+.duty-box-label {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--sage);
+}
+
+.duty-box-title {
+  margin-bottom: 8px;
+  font-family: var(--font-display);
+  font-size: 18px;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+  color: var(--deep);
+}
+
+.duty-box-body {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.75;
+  color: var(--body);
+}
+
+.callout {
+  margin-top: 16px;
+  padding: 16px 18px;
+  border-left: 3px solid var(--sage);
+  background: #f8fafc;
+}
+
+.callout p {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.75;
+  color: var(--body);
+}
+
+.callout-warn {
+  border-left-color: #ef4444;
+  background: #fcf7f7;
+}
+
+.step-list {
+  display: grid;
+  gap: 0;
+}
+
+.step {
+  display: grid;
+  grid-template-columns: 48px minmax(0, 1fr);
+  gap: 14px;
+  padding: 18px 0;
+  border-top: 1px solid #e5e7eb;
+}
+
+.step:first-child {
+  border-top: 0;
+}
+
+.step-num {
+  font-family: var(--font-display);
+  font-size: 24px;
+  font-weight: 600;
+  letter-spacing: -0.03em;
+  line-height: 1;
+  color: var(--deep);
+}
+
+.step-title {
+  margin-bottom: 4px;
+  font-family: var(--font-display);
+  font-size: 17px;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+  color: var(--deep);
+}
+
+.step-desc {
+  font-size: 14px;
+  line-height: 1.75;
+  color: var(--body);
+}
+
+.policy-updated {
+  margin-top: 18px;
+  font-size: 13px;
+  line-height: 1.7;
+  color: var(--muted);
+}
+
+@media (min-width: 768px) {
+  .policy-stat-row {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  .duties-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}

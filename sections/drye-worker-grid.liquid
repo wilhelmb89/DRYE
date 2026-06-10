@@ -1,0 +1,285 @@
+{{ 'drye-worker-grid.css' | asset_url | stylesheet_tag }}
+
+<section class="dryeNEW-section drye-worker-grid" id="worker-grid-{{ section.id }}" data-section-id="{{ section.id }}" data-drye-section data-section-index="2" data-section-name="worker_grid">
+  <div class="dryeNEW-container">
+    <div class="drye-worker-grid__intro">
+      {% if section.settings.eyebrow != blank %}
+        <span class="dryeNEW-micro drye-worker-grid__eyebrow">
+          {{ section.settings.eyebrow }}
+        </span>
+      {% endif %}
+
+      {% if section.settings.heading != blank %}
+        <h2 class="dryeNEW-h2 drye-worker-grid__heading">
+          {{ section.settings.heading }}
+        </h2>
+      {% endif %}
+
+      {% if section.settings.body != blank %}
+        <div class="dryeNEW-body drye-worker-grid__sub">
+          {{ section.settings.body }}
+        </div>
+      {% endif %}
+    </div>
+
+    <div class="drye-worker-grid__wrap">
+      <div class="drye-worker-grid__nav" aria-label="Gallery navigation">
+        <button
+          type="button"
+          class="drye-worker-grid__nav-btn drye-worker-grid__nav-btn--prev is-disabled"
+          data-worker-grid-prev
+          aria-label="Previous panels"
+        >
+          ←
+        </button>
+
+        <button
+          type="button"
+          class="drye-worker-grid__nav-btn drye-worker-grid__nav-btn--next"
+          data-worker-grid-next
+          aria-label="Next panels"
+        >
+          →
+        </button>
+      </div>
+
+      <div class="drye-worker-grid__strip" data-worker-grid-strip>
+        {% for block in section.blocks %}
+          <article class="drye-worker-grid__panel" {{ block.shopify_attributes }}>
+            <div class="drye-worker-grid__img">
+              {% if block.settings.image != blank %}
+                {% assign image_alt = block.settings.image_alt | escape %}
+                {{
+                  block.settings.image
+                  | image_url: width: 900
+                  | image_tag: class: 'drye-worker-grid__img-el', loading: 'lazy', alt: image_alt
+                }}
+              {% else %}
+                <div class="drye-worker-grid__img-placeholder"></div>
+              {% endif %}
+
+              <div class="drye-worker-grid__img-overlay" aria-hidden="true"></div>
+
+              {% if block.settings.label != blank %}
+                <div class="drye-worker-grid__img-lbl">
+                  {{ block.settings.label }}
+                </div>
+              {% endif %}
+
+              {% if block.settings.role != blank %}
+                <div class="drye-worker-grid__img-role">
+                  {{ block.settings.role }}
+                </div>
+              {% endif %}
+            </div>
+
+            <div class="drye-worker-grid__quote">
+              {% if block.settings.quote != blank %}
+                <p class="dryeNEW-body drye-worker-grid__quote-text">
+                  {{ block.settings.quote }}
+                </p>
+              {% endif %}
+
+              {% if block.settings.source != blank %}
+                <p class="drye-worker-grid__quote-src">
+                  {{ block.settings.source }}
+                </p>
+              {% endif %}
+            </div>
+          </article>
+        {% endfor %}
+      </div>
+
+      <div class="drye-worker-grid__swipe-hint" data-worker-grid-swipe-hint aria-hidden="true">
+        {{ section.settings.swipe_label }}
+      </div>
+
+      <div class="drye-worker-grid__fade" aria-hidden="true"></div>
+    </div>
+  </div>
+</section>
+
+<script>
+  (() => {
+    const section = document.getElementById('worker-grid-{{ section.id }}');
+    if (!section) return;
+
+    const strip = section.querySelector('[data-worker-grid-strip]');
+    const hint = section.querySelector('[data-worker-grid-swipe-hint]');
+    const prevBtn = section.querySelector('[data-worker-grid-prev]');
+    const nextBtn = section.querySelector('[data-worker-grid-next]');
+
+    if (!strip) return;
+
+    const desktopMq = window.matchMedia('(min-width: 960px)');
+    let hasInteracted = false;
+
+    const getScrollAmount = () => {
+      const firstPanel = strip.querySelector('.drye-worker-grid__panel');
+      if (!firstPanel) return strip.clientWidth * 0.8;
+
+      const styles = window.getComputedStyle(strip);
+      const gapValue = styles.columnGap && styles.columnGap !== 'normal'
+        ? styles.columnGap
+        : styles.gap;
+
+      const gap = parseFloat(gapValue) || 0;
+
+      return firstPanel.getBoundingClientRect().width + gap;
+    };
+
+    const updateButtons = () => {
+      if (!prevBtn || !nextBtn) return;
+
+      const maxScroll = strip.scrollWidth - strip.clientWidth;
+      const current = strip.scrollLeft;
+      const isScrollable = maxScroll > 8;
+
+      prevBtn.classList.toggle('is-disabled', !isScrollable || current <= 8);
+      nextBtn.classList.toggle('is-disabled', !isScrollable || current >= maxScroll - 8);
+    };
+
+    const updateHint = () => {
+      if (!hint) return;
+
+      if (desktopMq.matches) {
+        hint.classList.add('is-hidden');
+        return;
+      }
+
+      const maxScroll = strip.scrollWidth - strip.clientWidth;
+
+      if (maxScroll <= 8 || strip.scrollLeft > 16 || hasInteracted) {
+        hint.classList.add('is-hidden');
+      } else {
+        hint.classList.remove('is-hidden');
+      }
+    };
+
+    const hideHintOnInteraction = () => {
+      if (desktopMq.matches || !hint || hasInteracted) return;
+
+      hasInteracted = true;
+      hint.classList.add('is-hidden');
+    };
+
+    const scrollByAmount = (direction) => {
+      strip.scrollBy({
+        left: getScrollAmount() * direction,
+        behavior: 'smooth'
+      });
+    };
+
+    if (prevBtn) {
+      prevBtn.addEventListener('click', () => scrollByAmount(-1));
+    }
+
+    if (nextBtn) {
+      nextBtn.addEventListener('click', () => scrollByAmount(1));
+    }
+
+    strip.addEventListener('scroll', () => {
+      updateHint();
+      updateButtons();
+    }, { passive: true });
+
+    strip.addEventListener('touchstart', hideHintOnInteraction, { passive: true });
+    strip.addEventListener('pointerdown', hideHintOnInteraction, { passive: true });
+
+    window.addEventListener('resize', () => {
+      updateHint();
+      updateButtons();
+    });
+
+    window.addEventListener('load', () => {
+      updateHint();
+      updateButtons();
+    });
+
+    updateHint();
+    updateButtons();
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "DRYE Worker Grid",
+  "tag": "section",
+  "class": "shopify-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "Different shops. Same shift."
+    },
+    {
+      "type": "html",
+      "id": "heading",
+      "label": "Heading",
+      "default": "One of these <br><em class=\"dryeNEW-em\">is your Tuesday afternoon.</em>"
+    },
+    {
+      "type": "textarea",
+      "id": "body",
+      "label": "Body",
+      "default": "Five mechanics. Five glove types. Same thing happening inside every one of them."
+    },
+    {
+      "type": "text",
+      "id": "swipe_label",
+      "label": "Swipe hint label",
+      "default": "Swipe"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "panel",
+      "name": "Panel",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "text",
+          "id": "image_alt",
+          "label": "Image alt text",
+          "default": "Mechanic at work"
+        },
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Top label",
+          "default": "Nitrile · Summer"
+        },
+        {
+          "type": "text",
+          "id": "role",
+          "label": "Bottom role",
+          "default": "Auto repair, ~20 min in"
+        },
+        {
+          "type": "textarea",
+          "id": "quote",
+          "label": "Quote",
+          "default": "\"By 20 minutes my hands are sweating pools inside these gloves.\""
+        },
+        {
+          "type": "text",
+          "id": "source",
+          "label": "Source",
+          "default": "Automotive mechanic · TikTok #mechanic"
+        }
+      ]
+    }
+  ],
+  "max_blocks": 12,
+  "presets": [
+    {
+      "name": "DRYE Worker Grid"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,83 @@
+/* ==========================================================================
+   DRYE Mechanics — CTA
+   Based on section 11 in drye-mechanics HTML
+   Depends on base.css
+   ========================================================================== */
+
+.mech-cta {
+  text-align: center;
+  background: var(--bg-ink);
+}
+
+.mech-cta__container {
+  max-width: 560px;
+}
+
+.mech-cta__eyebrow {
+  margin-bottom: var(--space-24);
+  color: var(--sage);
+  letter-spacing: 0.22em;
+}
+
+.mech-cta__heading {
+  margin-bottom: var(--space-14);
+  color: var(--white-100);
+}
+
+.mech-cta__heading .dryeNEW-em,
+.mech-cta__heading em {
+  display: block;
+}
+
+.mech-cta__sub {
+  margin-bottom: var(--space-36);
+  color: var(--white-050);
+}
+
+.mech-cta__sub p {
+  margin: 0;
+}
+
+.mech-cta__btn {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-8);
+  margin-bottom: var(--space-16);
+  padding: var(--space-16) var(--space-32);
+  color: var(--white-100);
+  background: var(--emerald);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: var(--fs-caption);
+  font-weight: var(--fw-semibold);
+  line-height: 1.2;
+  transition: background var(--dur-fast) var(--ease-standard);
+}
+
+.mech-cta__btn:hover {
+  background: #0b837b;
+}
+
+.mech-cta__meta {
+  margin-bottom: var(--space-28);
+  color: var(--white-030);
+  letter-spacing: 0.05em;
+}
+
+.mech-cta__secondary {
+  display: inline-block;
+  padding-bottom: 2px;
+  color: var(--white-055);
+  border-bottom: var(--border-white-015);
+  font-size: var(--fs-caption);
+  font-weight: var(--fw-medium);
+  line-height: 1.4;
+  transition:
+    color var(--dur-fast) var(--ease-standard),
+    border-color var(--dur-fast) var(--ease-standard);
+}
+
+.mech-cta__secondary:hover {
+  color: var(--white-100);
+  border-bottom-color: var(--white-050);
+}

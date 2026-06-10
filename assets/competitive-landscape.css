@@ -1,0 +1,159 @@
+/* ==========================================================================
+   DRYE — Competitive Landscape (fixed)
+   - Max width is variable-driven (not hardcoded)
+   - Spacing between heading/subtitle/table is adjustable
+   ========================================================================== */
+
+.cl-section{
+  margin-top: var(--cl-mt, 0px);
+  margin-bottom: var(--cl-mb, 0px);
+  padding: var(--cl-pad-y-m, 40px) 0;
+  border-bottom: 1px solid var(--c-border);
+}
+
+@media (min-width: 990px){
+  .cl-section{ padding: var(--cl-pad-y-d, 64px) 0; }
+}
+
+.cl-container{
+  max-width: var(--cl-maxw, 1200px);
+  margin: 0 auto;
+  padding-inline: var(--cl-pad-x-m, 24px);
+  box-sizing: border-box;
+}
+
+@media (min-width: 990px){
+  .cl-container{ padding-inline: var(--cl-pad-x-d, 24px); }
+}
+
+/* Heading & subtitle spacing */
+.cl-heading{
+  font-size: var(--cl-h2-m, revert);
+  margin: 0 0 var(--cl-gap-h-sub, 12px) 0;
+  color: var(--c-heading);
+}
+
+@media (min-width: 768px){
+  .cl-heading{ font-size: var(--cl-h2-d, revert); }
+}
+
+.cl-subtitle{
+  font-size: 14px;
+  margin: 0 0 var(--cl-gap-sub-table, 32px) 0;
+  line-height: 1.5;
+  color: var(--c-text);
+}
+
+/* Card wrapper */
+.cl-card{
+  background: var(--c-site-bg);
+  border: 1px solid var(--c-border);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+/* Table scroll wrapper */
+.cl-table-wrap{
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Table */
+.cl-table{
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.cl-table thead tr{
+  border-bottom: 2px solid var(--c-border);
+}
+
+.cl-table th{
+  text-align: left;
+  padding: 14px 16px;
+  font-weight: 600;
+  font-size: 13px;
+  white-space: nowrap;
+  color: var(--c-heading);
+}
+
+.cl-table tbody tr{
+  border-bottom: 1px solid var(--c-border);
+  transition: background-color 0.15s ease;
+}
+.cl-table tbody tr:last-child{ border-bottom: none; }
+
+.cl-table td{
+  padding: 14px 16px;
+  vertical-align: middle;
+  color: var(--c-text);
+}
+
+.cl-row-highlight{
+  background: color-mix(in srgb, var(--c-link) 6%, transparent);
+}
+
+.cl-solution{
+  font-weight: 600;
+  color: var(--c-heading);
+  white-space: nowrap;
+}
+
+.cl-solution-highlight{ color: var(--c-link); }
+
+.cl-cell{
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.cl-cell-text{
+  color: var(--c-text);
+  font-size: 13px;
+}
+
+.cl-icon{
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  font-size: 12px;
+  font-weight: 700;
+  flex-shrink: 0;
+  line-height: 1;
+}
+
+.cl-icon-yes{ background: #dcfce7; color: #16a34a; }
+.cl-icon-partial{ background: #fef9c3; color: #ca8a04; }
+.cl-icon-no{ background: #fee2e2; color: #dc2626; }
+.cl-icon-na{ background: #f3f4f6; color: #6b6b6b; }
+
+.cl-footnote{
+  margin-top: 24px;
+  padding: 24px;
+  background: var(--c-site-bg);
+  border: 1px solid var(--c-border);
+  border-radius: 8px;
+}
+
+.cl-footnote p{
+  font-size: 14px;
+  color: var(--c-text);
+  line-height: 1.6;
+  margin: 0;
+}
+
+.cl-footnote strong{
+  color: var(--c-heading);
+  font-weight: 600;
+}
+
+/* Small screens: keep padding sane */
+@media (max-width: 640px){
+  .cl-table th,
+  .cl-table td{ padding: 12px 12px; }
+}

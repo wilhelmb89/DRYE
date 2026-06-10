@@ -1,0 +1,162 @@
+{{ 'dryeNEW-proof.css' | asset_url | stylesheet_tag }}
+
+<section
+  class="dryeNEW-section dryeNEW-proof"
+  id="{{ section.settings.section_id | default: 'proof' }}"
+  data-section-id="{{ section.id }}"
+  data-section-type="dryeNEW-proof"
+>
+  <div class="dryeNEW-container">
+    <div class="dryeNEW-proof__inner">
+      <div class="dryeNEW-proof__layout">
+        <div class="dryeNEW-proof__left">
+          {%- if section.settings.eyebrow != blank -%}
+            <span class="dryeNEW-micro dryeNEW-proof__eyebrow">
+              {{ section.settings.eyebrow }}
+            </span>
+          {%- endif -%}
+
+          {%- if section.settings.heading_line_1 != blank or section.settings.heading_line_2 != blank -%}
+            <h2 class="dryeNEW-h2 dryeNEW-proof__heading">
+              {{ section.settings.heading_line_1 }}<br>
+              {{ section.settings.heading_line_2 }}
+            </h2>
+          {%- endif -%}
+
+          {%- if section.settings.body != blank -%}
+            <p class="dryeNEW-proof__body">
+              {{ section.settings.body }}
+            </p>
+          {%- endif -%}
+        </div>
+
+        <div class="dryeNEW-proof__right">
+          <div class="dryeNEW-proof__grid">
+            {%- for block in section.blocks -%}
+              {%- if block.type == 'proof_card' -%}
+                <article class="dryeNEW-proof__card" {{ block.shopify_attributes }}>
+                  <div class="dryeNEW-proof__num">
+                    {{ block.settings.number }}
+                    {%- if block.settings.unit != blank -%}
+                      <span class="dryeNEW-proof__unit">{{ block.settings.unit }}</span>
+                    {%- endif -%}
+                  </div>
+
+                  {%- if block.settings.description != blank -%}
+                    <div class="dryeNEW-proof__desc">
+                      {{ block.settings.description }}
+                    </div>
+                  {%- endif -%}
+                </article>
+              {%- endif -%}
+            {%- endfor -%}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "DRYE NEW Proof",
+  "settings": [
+    {
+      "type": "text",
+      "id": "section_id",
+      "label": "Section ID",
+      "default": "proof"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "Validation"
+    },
+    {
+      "type": "text",
+      "id": "heading_line_1",
+      "label": "Heading line 1",
+      "default": "This isn't"
+    },
+    {
+      "type": "text",
+      "id": "heading_line_2",
+      "label": "Heading line 2",
+      "default": "theory."
+    },
+    {
+      "type": "textarea",
+      "id": "body",
+      "label": "Body",
+      "default": "Developed at the Swedish School of Textiles. Validated by RISE and Uppsala University. Awarded the SKAPA Prize in memory of Alfred Nobel."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "proof_card",
+      "name": "Proof card",
+      "settings": [
+        {
+          "type": "text",
+          "id": "number",
+          "label": "Number",
+          "default": "1.72"
+        },
+        {
+          "type": "text",
+          "id": "unit",
+          "label": "Unit",
+          "default": "×"
+        },
+        {
+          "type": "textarea",
+          "id": "description",
+          "label": "Description",
+          "default": "Bacterial growth under occluded skin vs bare skin"
+        }
+      ]
+    }
+  ],
+  "max_blocks": 4,
+  "presets": [
+    {
+      "name": "DRYE NEW Proof",
+      "blocks": [
+        {
+          "type": "proof_card",
+          "settings": {
+            "number": "1.72",
+            "unit": "×",
+            "description": "Bacterial growth under occluded skin vs bare skin"
+          }
+        },
+        {
+          "type": "proof_card",
+          "settings": {
+            "number": "75",
+            "unit": "%",
+            "description": "Healthcare workers reporting glove-related skin damage"
+          }
+        },
+        {
+          "type": "proof_card",
+          "settings": {
+            "number": "7",
+            "unit": "yr",
+            "description": "R&D before product launch. Not a fast product."
+          }
+        },
+        {
+          "type": "proof_card",
+          "settings": {
+            "number": "0",
+            "unit": "%",
+            "description": "Dexterity compromise vs. control group in testing"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

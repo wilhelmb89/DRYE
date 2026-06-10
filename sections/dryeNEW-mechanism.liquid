@@ -1,0 +1,340 @@
+{{ 'dryeNEW-mechanism.css' | asset_url | stylesheet_tag }}
+
+<section
+  class="dryeNEW-section dryeNEW-mechanism"
+  id="{{ section.settings.section_id | default: 'mechanism' }}"
+  style="
+    --dryeNEW-mechanism-pt-mobile: {{ section.settings.padding_top_mobile }}px;
+    --dryeNEW-mechanism-pb-mobile: {{ section.settings.padding_bottom_mobile }}px;
+    --dryeNEW-mechanism-pt-desktop: {{ section.settings.padding_top_desktop }}px;
+    --dryeNEW-mechanism-pb-desktop: {{ section.settings.padding_bottom_desktop }}px;
+  "
+>
+  <div class="dryeNEW-container">
+    <div class="dryeNEW-grid dryeNEW-mechanism__grid">
+
+      <span class="dryeNEW-micro dryeNEW-mechanism__eyebrow">
+        {{ section.settings.eyebrow }}
+      </span>
+
+      <h2 class="dryeNEW-mechanism__heading">
+        {{ section.settings.heading_main | newline_to_br }}
+        <em class="dryeNEW-mechanism__heading-em">{{ section.settings.heading_em }}</em>
+      </h2>
+
+      <div class="dryeNEW-mechanism__bridge">
+        <p class="dryeNEW-mechanism__bridge-text">
+          {{ section.settings.bridge_paragraph_1 }}
+        </p>
+
+        <p class="dryeNEW-mechanism__bridge-text">
+          {{ section.settings.bridge_paragraph_2 }}
+        </p>
+      </div>
+
+      <div class="dryeNEW-mechanism__compare">
+        <div class="dryeNEW-mechanism__panel dryeNEW-mechanism__panel--left">
+          <div class="dryeNEW-mechanism__tag">
+            {{ section.settings.left_tag }}
+          </div>
+
+          <h3 class="dryeNEW-mechanism__panel-title">
+            {{ section.settings.left_title }}
+          </h3>
+
+          <p class="dryeNEW-mechanism__panel-desc">
+            {{ section.settings.left_description }}
+          </p>
+
+          <div class="dryeNEW-mechanism__steps">
+            {% for block in section.blocks %}
+              {% if block.type == 'left_step' %}
+                <div class="dryeNEW-mechanism__step" {{ block.shopify_attributes }}>
+                  <div class="dryeNEW-mechanism__step-num">
+                    {{ block.settings.number }}
+                  </div>
+                  <div class="dryeNEW-mechanism__step-content">
+                    <strong>{{ block.settings.title }}</strong>
+                    <span>{{ block.settings.body }}</span>
+                  </div>
+                </div>
+              {% endif %}
+            {% endfor %}
+          </div>
+        </div>
+
+        <div class="dryeNEW-mechanism__panel dryeNEW-mechanism__panel--right">
+          <div class="dryeNEW-mechanism__tag">
+            {{ section.settings.right_tag }}
+          </div>
+
+          <h3 class="dryeNEW-mechanism__panel-title">
+            {{ section.settings.right_title }}
+          </h3>
+
+          <p class="dryeNEW-mechanism__panel-desc">
+            {{ section.settings.right_description }}
+          </p>
+
+          <div class="dryeNEW-mechanism__steps">
+            {% for block in section.blocks %}
+              {% if block.type == 'right_step' %}
+                <div class="dryeNEW-mechanism__step" {{ block.shopify_attributes }}>
+                  <div class="dryeNEW-mechanism__step-num">
+                    {{ block.settings.number }}
+                  </div>
+                  <div class="dryeNEW-mechanism__step-content">
+                    <strong>{{ block.settings.title }}</strong>
+                    <span>{{ block.settings.body }}</span>
+                  </div>
+                </div>
+              {% endif %}
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "DRYE NEW Mechanism",
+  "settings": [
+    {
+      "type": "text",
+      "id": "section_id",
+      "label": "Section ID",
+      "default": "mechanism"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "How DRYE works"
+    },
+    {
+      "type": "textarea",
+      "id": "heading_main",
+      "label": "Heading main",
+      "default": "Not absorption."
+    },
+    {
+      "type": "text",
+      "id": "heading_em",
+      "label": "Heading emphasized",
+      "default": "Routing."
+    },
+    {
+      "type": "textarea",
+      "id": "bridge_paragraph_1",
+      "label": "Bridge paragraph 1",
+      "default": "Every absorbent material has a saturation point. When it's reached, the liner doesn't just stop working — it reverses. The material that was protecting your skin starts holding moisture against it."
+    },
+    {
+      "type": "textarea",
+      "id": "bridge_paragraph_2",
+      "label": "Bridge paragraph 2",
+      "default": "This isn't a flaw you can engineer around. Saturation is a structural property of any absorbent material. Every liner on the market hits this point. DRYE doesn't — because it doesn't absorb."
+    },
+    {
+      "type": "text",
+      "id": "left_tag",
+      "label": "Left tag",
+      "default": "Conventional approach"
+    },
+    {
+      "type": "text",
+      "id": "left_title",
+      "label": "Left title",
+      "default": "The absorber model"
+    },
+    {
+      "type": "textarea",
+      "id": "left_description",
+      "label": "Left description",
+      "default": "Works until it doesn't. Saturation is a structural inevitability — not a product flaw you can engineer around."
+    },
+    {
+      "type": "text",
+      "id": "right_tag",
+      "label": "Right tag",
+      "default": "DRYE approach"
+    },
+    {
+      "type": "text",
+      "id": "right_title",
+      "label": "Right title",
+      "default": "The routing model"
+    },
+    {
+      "type": "textarea",
+      "id": "right_description",
+      "label": "Right description",
+      "default": "No saturation point. Moisture moves continuously through the structure — away from skin, toward the outer glove surface."
+    },
+    {
+      "type": "range",
+      "id": "padding_top_mobile",
+      "min": 0,
+      "max": 200,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding top mobile",
+      "default": 52
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_mobile",
+      "min": 0,
+      "max": 200,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding bottom mobile",
+      "default": 52
+    },
+    {
+      "type": "range",
+      "id": "padding_top_desktop",
+      "min": 0,
+      "max": 240,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding top desktop",
+      "default": 88
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_desktop",
+      "min": 0,
+      "max": 240,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding bottom desktop",
+      "default": 88
+    }
+  ],
+  "blocks": [
+    {
+      "type": "left_step",
+      "name": "Left step",
+      "settings": [
+        {
+          "type": "text",
+          "id": "number",
+          "label": "Number",
+          "default": "01"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Moisture enters the liner"
+        },
+        {
+          "type": "text",
+          "id": "body",
+          "label": "Body",
+          "default": "Fibres absorb until capacity is reached"
+        }
+      ]
+    },
+    {
+      "type": "right_step",
+      "name": "Right step",
+      "settings": [
+        {
+          "type": "text",
+          "id": "number",
+          "label": "Number",
+          "default": "01"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Moisture enters inner layer"
+        },
+        {
+          "type": "text",
+          "id": "body",
+          "label": "Body",
+          "default": "Structural gradient directs transport outward"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "DRYE NEW Mechanism",
+      "blocks": [
+        {
+          "type": "left_step",
+          "settings": {
+            "number": "01",
+            "title": "Moisture enters the liner",
+            "body": "Fibres absorb until capacity is reached"
+          }
+        },
+        {
+          "type": "left_step",
+          "settings": {
+            "number": "02",
+            "title": "Liner reaches saturation",
+            "body": "No more absorption. Moisture accumulates."
+          }
+        },
+        {
+          "type": "left_step",
+          "settings": {
+            "number": "03",
+            "title": "Wet material on skin",
+            "body": "Occlusion begins. Barrier function degrades."
+          }
+        },
+        {
+          "type": "left_step",
+          "settings": {
+            "number": "04",
+            "title": "Damage accumulates",
+            "body": "Invisible during the shift. Visible after."
+          }
+        },
+        {
+          "type": "right_step",
+          "settings": {
+            "number": "01",
+            "title": "Moisture enters inner layer",
+            "body": "Structural gradient directs transport outward"
+          }
+        },
+        {
+          "type": "right_step",
+          "settings": {
+            "number": "02",
+            "title": "Continuous passive transport",
+            "body": "No saturation point. No accumulation."
+          }
+        },
+        {
+          "type": "right_step",
+          "settings": {
+            "number": "03",
+            "title": "Skin stays dry",
+            "body": "The microclimate doesn't form."
+          }
+        },
+        {
+          "type": "right_step",
+          "settings": {
+            "number": "04",
+            "title": "Barrier function maintained",
+            "body": "Same after 8 hours as after 8 minutes."
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

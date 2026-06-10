@@ -1,0 +1,136 @@
+{{ 'section-drye-about-founder-story.css' | asset_url | stylesheet_tag }}
+
+<section
+  class="dryeNEW-section drye-about-founder-story"
+  id="drye-about-founder-story-{{ section.id }}"
+  data-section-id="{{ section.id }}"
+>
+  <div class="dryeNEW-container">
+    <div class="drye-about-founder-story__grid">
+      <div class="drye-about-founder-story__image-wrap dryeNEW-reveal">
+        <div class="drye-about-founder-story__image-frame">
+          {% if section.settings.image != blank %}
+            {{
+              section.settings.image
+              | image_url: width: 1200
+              | image_tag:
+                alt: section.settings.image_alt,
+                class: 'drye-about-founder-story__image',
+                loading: 'lazy',
+                widths: '400,600,800,1000,1200',
+                sizes: '(min-width: 768px) 400px, 100vw'
+            }}
+          {% else %}
+            <div class="drye-about-founder-story__image-placeholder">[ FOUNDER PHOTO ]</div>
+          {% endif %}
+        </div>
+
+        <div class="drye-about-founder-story__tag">
+          {% if section.settings.tag_name != blank %}
+            <div class="dryeNEW-h4 drye-about-founder-story__tag-name">
+              {{ section.settings.tag_name }}
+            </div>
+          {% endif %}
+
+          {% if section.settings.tag_role != blank %}
+            <div class="dryeNEW-body--caption drye-about-founder-story__tag-role">
+              {{ section.settings.tag_role }}
+            </div>
+          {% endif %}
+        </div>
+      </div>
+
+      <div class="drye-about-founder-story__content">
+        {% if section.settings.eyebrow != blank %}
+          <span class="dryeNEW-micro drye-about-founder-story__eyebrow dryeNEW-reveal">
+            {{ section.settings.eyebrow }}
+          </span>
+        {% endif %}
+
+        <h2 class="dryeNEW-h2 drye-about-founder-story__heading dryeNEW-reveal dryeNEW-rd1">
+          {{ section.settings.heading }}
+        </h2>
+
+        <div class="dryeNEW-body drye-about-founder-story__body dryeNEW-reveal dryeNEW-rd2">
+          {{ section.settings.body }}
+        </div>
+
+        {% if section.settings.cta_text != blank %}
+          <a
+            href="{{ section.settings.cta_url }}"
+            class="dryeNEW-link drye-about-founder-story__cta dryeNEW-reveal dryeNEW-rd3"
+          >
+            {{ section.settings.cta_text }}
+          </a>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "DRYE About Founder Story",
+  "tag": "section",
+  "class": "section-drye-about-founder-story",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Founder image"
+    },
+    {
+      "type": "text",
+      "id": "image_alt",
+      "label": "Image alt",
+      "default": "Wilhelm and Andrew"
+    },
+    {
+      "type": "text",
+      "id": "tag_name",
+      "label": "Image tag name",
+      "default": "Wilhelm Bäckström & Andrew Brathwaite"
+    },
+    {
+      "type": "text",
+      "id": "tag_role",
+      "label": "Image tag role",
+      "default": "Gothenburg, Sweden — 2019"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "Why we built this"
+    },
+    {
+      "type": "html",
+      "id": "heading",
+      "label": "Heading",
+      "default": "The result wasn't a product.<br>It was a testable system."
+    },
+    {
+      "type": "richtext",
+      "id": "body",
+      "label": "Body",
+      "default": "<p>DRYE started as an attempt to change the environment inside a glove — not to treat the skin damage that environment caused. That framing matters, because it determined everything about how the product was built and validated.</p><p>The premise was simple: <strong>if you remove the moisture, you remove the trigger.</strong> Cotton liners, barrier creams, and steroid treatments all accept the environment as fixed and attempt to manage its consequences. We didn't accept the premise.</p><p>Seven years of R&amp;D with four external institutions produced a material system that transports moisture through fibre geometry with no chemical inputs. When we shipped the first commercial pair, the mechanism had already been verified by Uppsala University, RISE, the Swedish School of Textiles in Borås, and Skåne University Hospital.</p><p>We discarded it if it didn't work. It worked.</p>"
+    },
+    {
+      "type": "text",
+      "id": "cta_text",
+      "label": "CTA text",
+      "default": "Read the full story →"
+    },
+    {
+      "type": "url",
+      "id": "cta_url",
+      "label": "CTA URL"
+    }
+  ],
+  "presets": [
+    {
+      "name": "DRYE About Founder Story"
+    }
+  ]
+}
+{% endschema %}

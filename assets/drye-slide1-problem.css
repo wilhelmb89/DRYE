@@ -1,0 +1,209 @@
+.dryeProblemV4 {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  background: var(--bg-ink);
+  color: var(--white-100);
+  margin-top: var(--problem-mt-mobile, 0);
+  margin-bottom: var(--problem-mb-mobile, 0);
+  min-height: 64vh;
+}
+
+.dryeProblemV4__media,
+.dryeProblemV4__overlay,
+.dryeProblemV4__strips {
+  position: absolute;
+  inset: 0;
+}
+
+.dryeProblemV4__strips {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+}
+
+.dryeProblemV4__strip {
+  position: relative;
+  overflow: hidden;
+}
+
+.dryeProblemV4__strip::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(255, 255, 255, 0.07);
+}
+
+.dryeProblemV4__img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: var(--img-x-mobile, 50%) var(--img-y-mobile, 50%);
+}
+
+.dryeProblemV4__overlay {
+  background:
+    linear-gradient(
+      180deg,
+      rgba(15, 34, 48, 0.18) 0%,
+      rgba(15, 34, 48, 0.30) 34%,
+      rgba(15, 34, 48, 0.62) 100%
+    );
+}
+
+.dryeProblemV4__inner {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  min-height: 64vh;
+  flex-direction: column;
+  justify-content: space-between;
+  padding-top: clamp(120px, 18vh, 220px);
+  padding-bottom: var(--space-24);
+}
+
+.dryeProblemV4__content {
+  max-width: 720px;
+}
+
+.dryeProblemV4__kicker {
+  color: var(--white-035);
+}
+
+.dryeProblemV4__heading {
+  margin-top: var(--space-12);
+  color: var(--white-100);
+}
+
+.dryeProblemV4__em {
+  display: inline-block;
+  margin-top: var(--space-10);
+  margin-left: calc(var(--space-16) * -1);
+  padding: 0 var(--space-16) var(--space-4) var(--space-16);
+  background: rgba(15, 34, 48, 0.55);
+  color: var(--white-100);
+  font-size: var(--fs-hero-h1);
+  line-height: 1;
+}
+
+.dryeProblemV4__rule {
+  width: 60px;
+  height: 3px;
+  margin-top: var(--space-24);
+  margin-bottom: var(--space-16);
+  background: var(--deep);
+}
+
+.dryeProblemV4__sub,
+.dryeProblemV4__sub p {
+  margin: 0;
+  max-width: 640px;
+  color: var(--white-100);
+  font-size: 16px;
+  font-weight: var(--fw-medium);
+  line-height: 1.55;
+}
+
+.dryeProblemV4__quotes {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 8px;
+  margin-top: var(--space-24);
+}
+
+.dryeProblemV4__quote {
+  position: relative;
+  display: flex;
+  align-items: center;
+  background: rgba(15, 34, 48, 0.47);
+  padding: 12px 20px 11px;
+}
+
+.dryeProblemV4__quote::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: linear-gradient(
+    90deg,
+    #C0392B,
+    #E74C3C,
+    rgba(231, 76, 60, 0.3)
+  );
+}
+
+.dryeProblemV4__quote p {
+  margin: 0;
+  color: var(--white-100);
+  font-family: var(--font-editorial);
+  font-style: italic;
+  font-size: 16px;
+  line-height: 1.3;
+}
+
+@media (max-width: 767px) {
+  .dryeProblemV4__strips {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .dryeProblemV4__strip:nth-child(4),
+  .dryeProblemV4__strip:nth-child(5) {
+    display: none;
+  }
+}
+
+@media (min-width: 768px) {
+  .dryeProblemV4 {
+    margin-top: var(--problem-mt-desktop, 0);
+    margin-bottom: var(--problem-mb-desktop, 0);
+    min-height: 66vh;
+  }
+
+  .dryeProblemV4__img {
+    object-position: var(--img-x-desktop, 50%) var(--img-y-desktop, 50%);
+  }
+
+  .dryeProblemV4__inner {
+    min-height: 66vh;
+    padding-top: clamp(140px, 16vh, 240px);
+    padding-bottom: var(--space-28);
+  }
+
+  .dryeProblemV4__sub,
+  .dryeProblemV4__sub p {
+    max-width: 720px;
+    font-size: 18px;
+    line-height: 1.6;
+  }
+
+  .dryeProblemV4__quotes {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+  }
+}
+
+@media (min-width: 1100px) {
+  .dryeProblemV4 {
+    min-height: 70vh;
+  }
+
+  .dryeProblemV4__inner {
+    min-height: 70vh;
+    padding-top: clamp(160px, 17vh, 260px);
+    padding-bottom: var(--space-32);
+  }
+
+  .dryeProblemV4__quotes {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 14px;
+  }
+
+  .dryeProblemV4__quote {
+    padding: 11px 16px 10px;
+  }
+
+  .dryeProblemV4__quote p {
+    white-space: nowrap;
+  }
+}faq

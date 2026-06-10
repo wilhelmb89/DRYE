@@ -1,0 +1,500 @@
+{{ 'section-drye-stretch.css' | asset_url | stylesheet_tag }}
+
+<section
+  class="dryeNEW-section drye-stretch"
+  id="drye-stretch-{{ section.id }}"
+  data-drye-stretch
+  data-drye-section
+  data-section-id="{{ section.id }}"
+  data-section-index="18"
+  data-section-name="timeline"
+>
+  <div class="dryeNEW-container">
+
+<div class="drye-stretch__layout">
+
+<header class="drye-stretch__intro">
+  {% if section.settings.eyebrow != blank %}
+    <span class="dryeNEW-micro dryeNEW-reveal">
+      {{ section.settings.eyebrow }}
+    </span>
+  {% endif %}
+
+  {% if section.settings.heading != blank or section.settings.heading_italic != blank %}
+    <h2 class="dryeNEW-h2 drye-stretch__heading dryeNEW-reveal dryeNEW-rd1">
+      {% if section.settings.heading != blank %}
+        {{ section.settings.heading }}
+      {% endif %}
+
+      {% if section.settings.heading_italic != blank %}
+        <em class="dryeNEW-em">{{ section.settings.heading_italic }}</em>
+      {% endif %}
+    </h2>
+  {% endif %}
+
+  {% if section.settings.lead != blank %}
+    <div class="dryeNEW-body drye-stretch__lead dryeNEW-reveal dryeNEW-rd2">
+      {{ section.settings.lead }}
+    </div>
+  {% endif %}
+</header>
+
+
+  <div class="drye-stretch__timeline-col">
+    <ol class="drye-stretch__timeline">
+      {% assign timeline_blocks = section.blocks | where: 'type', 'timeline_stop' %}
+
+{% for block in timeline_blocks %}
+  <li
+class="drye-stretch__stop {% if forloop.first %}drye-stretch__stop--guided{% endif %} {% if block.settings.inverted %}drye-stretch__stop--final{% endif %} dryeNEW-reveal"    {{ block.shopify_attributes }}
+  >
+    <button
+      class="drye-stretch__trigger"
+      type="button"
+      aria-expanded="false"
+      aria-controls="drye-stretch-panel-{{ section.id }}-{{ block.id }}"
+    >
+      <span class="drye-stretch__clock" aria-hidden="true">
+        <svg viewBox="0 0 60 60" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="30" cy="30" r="26" stroke-width="1.5"/>
+          <line x1="30" y1="7" x2="30" y2="12" stroke-width="1.5"/>
+          <line x1="53" y1="30" x2="48" y2="30" stroke-width="1.5"/>
+          <line x1="30" y1="53" x2="30" y2="48" stroke-width="1.5"/>
+          <line x1="7" y1="30" x2="12" y2="30" stroke-width="1.5"/>
+          <line x1="30" y1="30" x2="30" y2="11" stroke-width="1.5" transform="rotate(0, 30, 30)"/>
+          <line x1="30" y1="30" x2="30" y2="16" stroke-width="2.5" transform="rotate({{ block.settings.clock_angle }}, 30, 30)"/>
+          <circle cx="30" cy="30" r="2.5" fill="currentColor" stroke="none"/>
+        </svg>
+      </span>
+
+      <span class="drye-stretch__heading-block">
+        {% if block.settings.time != blank %}
+          <span class="dryeNEW-stat-number drye-stretch__time">
+            {{ block.settings.time }}
+          </span>
+        {% endif %}
+
+        {% if block.settings.title != blank %}
+          <span class="dryeNEW-body--sm drye-stretch__title">
+            {{ block.settings.title }}
+          </span>
+        {% endif %}
+      </span>
+
+      <span class="drye-stretch__click-cue" aria-hidden="true">
+        <span class="dryeNEW-body--lg drye-stretch__click-cue-label">
+          {% if forloop.last %}
+            Finish shift
+          {% else %}
+            Next stop
+          {% endif %}
+        </span>
+      </span>
+
+      <span class="drye-stretch__toggle" aria-hidden="true"></span>
+    </button>
+
+    <div class="drye-stretch__body" id="drye-stretch-panel-{{ section.id }}-{{ block.id }}">
+      <div class="drye-stretch__body-inner">
+        <div class="drye-stretch__body-content">
+          <ul class="drye-stretch__beat-list">
+            {% if block.settings.bullet_1 != blank %}
+              <li class="dryeNEW-body">{{ block.settings.bullet_1 }}</li>
+            {% endif %}
+
+            {% if block.settings.bullet_2 != blank %}
+              <li class="dryeNEW-body">{{ block.settings.bullet_2 }}</li>
+            {% endif %}
+
+            {% if block.settings.bullet_3 != blank %}
+              <li class="dryeNEW-body">{{ block.settings.bullet_3 }}</li>
+            {% endif %}
+          </ul>
+
+          <div class="drye-stretch__proof">
+            {% if block.settings.proof_label != blank %}
+              <span class="dryeNEW-micro drye-stretch__proof-label">
+                {{ block.settings.proof_label }}
+              </span>
+            {% endif %}
+
+            {% if block.settings.proof_value != blank %}
+              <span class="dryeNEW-stat-number drye-stretch__proof-value">
+                {{ block.settings.proof_value }}
+              </span>
+            {% endif %}
+
+            {% if block.settings.proof_sub != blank %}
+              <span class="dryeNEW-body--caption drye-stretch__proof-sub">
+                {{ block.settings.proof_sub }}
+              </span>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </li>
+{% endfor %}
+    </ol>
+  </div>
+
+</div>
+
+    {% assign compound_blocks = section.blocks | where: 'type', 'compound_column' %}
+
+    {% if compound_blocks.size > 0 %}
+      <div class="drye-stretch__compound dryeNEW-reveal">
+        {% for block in compound_blocks %}
+          <div class="drye-stretch__compound-cell" {{ block.shopify_attributes }}>
+            {% if block.settings.label != blank %}
+              <span class="dryeNEW-micro drye-stretch__compound-label">
+                {{ block.settings.label }}
+              </span>
+            {% endif %}
+
+            {% if block.settings.value != blank %}
+              <span class="dryeNEW-stat-number drye-stretch__compound-value">
+                {{ block.settings.value }}
+              </span>
+            {% endif %}
+
+            {% if block.settings.desc != blank %}
+              <span class="dryeNEW-body--caption drye-stretch__compound-desc">
+                {{ block.settings.desc }}
+              </span>
+            {% endif %}
+          </div>
+        {% endfor %}
+      </div>
+    {% endif %}
+
+    {% if section.settings.cta_label != blank %}
+      <div class="drye-stretch__cta-wrap dryeNEW-reveal">
+        {% if section.settings.cta_url != blank %}
+          <a href="{{ section.settings.cta_url }}" class="drye-stretch__cta">
+            {{ section.settings.cta_label }}
+          </a>
+        {% else %}
+          <button type="button" class="drye-stretch__cta">
+            {{ section.settings.cta_label }}
+          </button>
+        {% endif %}
+
+        {% if section.settings.cta_note != blank %}
+          <div class="dryeNEW-body--caption drye-stretch__cta-note">
+            {{ section.settings.cta_note }}
+          </div>
+        {% endif %}
+      </div>
+    {% endif %}
+
+  </div>
+</section>
+
+<script>
+  (() => {
+    const section = document.getElementById('drye-stretch-{{ section.id }}');
+    if (!section) return;
+
+    const stops = Array.from(section.querySelectorAll('.drye-stretch__stop'));
+
+    const setGuidedStop = () => {
+      const openIndex = stops.findIndex((item) => item.classList.contains('is-open'));
+
+      stops.forEach((item, index) => {
+        item.classList.toggle('is-guided', index === openIndex + 1);
+      });
+    };
+
+    stops.forEach((stop) => {
+      const trigger = stop.querySelector('.drye-stretch__trigger');
+      if (!trigger) return;
+
+      trigger.addEventListener('click', () => {
+        const isOpen = stop.classList.contains('is-open');
+
+        stops.forEach((item) => {
+          item.classList.remove('is-open');
+
+          const itemTrigger = item.querySelector('.drye-stretch__trigger');
+          if (itemTrigger) {
+            itemTrigger.setAttribute('aria-expanded', 'false');
+          }
+        });
+
+        if (!isOpen) {
+          stop.classList.add('is-open');
+          trigger.setAttribute('aria-expanded', 'true');
+        }
+
+        setGuidedStop();
+      });
+    });
+
+    setGuidedStop();
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "DRYE stretch timeline",
+  "tag": "section",
+  "class": "section-drye-stretch",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "One shift. Six stops."
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "You won't decide it works."
+    },
+    {
+      "type": "text",
+      "id": "heading_italic",
+      "label": "Heading italic",
+      "default": "You'll realize it already did."
+    },
+    {
+      "type": "textarea",
+      "id": "lead",
+      "label": "Subheading / lead text",
+      "default": "One layer. 0.4mm. Works under any glove, through any task. Here's what changes — by the clock."
+    },
+    {
+      "type": "header",
+      "content": "CTA"
+    },
+    {
+      "type": "text",
+      "id": "cta_label",
+      "label": "CTA label",
+      "default": "SEE THE LINER"
+    },
+    {
+      "type": "url",
+      "id": "cta_url",
+      "label": "CTA URL"
+    },
+    {
+      "type": "text",
+      "id": "cta_note",
+      "label": "CTA note",
+      "default": "30-day refund · Ships within 24 hours"
+    }
+  ],
+  "blocks": [    {
+      "type": "timeline_stop",
+      "name": "Timeline stop",
+      "settings": [
+        {
+          "type": "text",
+          "id": "time",
+          "label": "Time",
+          "default": "07:00"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Row title",
+          "default": "You put it on. That's it."
+        },
+        {
+          "type": "range",
+          "id": "clock_angle",
+          "label": "Clock hand angle",
+          "min": 0,
+          "max": 360,
+          "step": 5,
+          "default": 210
+        },
+        {
+          "type": "checkbox",
+          "id": "inverted",
+          "label": "Dark final style",
+          "default": false
+        },
+        {
+          "type": "textarea",
+          "id": "bullet_1",
+          "label": "Bullet 1",
+          "default": "0.4mm. You won't notice it's there."
+        },
+        {
+          "type": "textarea",
+          "id": "bullet_2",
+          "label": "Bullet 2",
+          "default": "Works under nitrile, latex, rubber, HV gloves."
+        },
+        {
+          "type": "textarea",
+          "id": "bullet_3",
+          "label": "Bullet 3",
+          "default": "Nothing to adjust. Nothing to think about."
+        },
+        {
+          "type": "text",
+          "id": "proof_label",
+          "label": "Proof label",
+          "default": "Thickness"
+        },
+        {
+          "type": "text",
+          "id": "proof_value",
+          "label": "Proof value",
+          "default": "0.4mm"
+        },
+        {
+          "type": "textarea",
+          "id": "proof_sub",
+          "label": "Proof subtext",
+          "default": "Under any sealed glove"
+        }
+      ]
+    },
+    {
+      "type": "compound_column",
+      "name": "Compound column",
+      "settings": [
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Label",
+          "default": "Week 1"
+        },
+        {
+          "type": "text",
+          "id": "value",
+          "label": "Value",
+          "default": "3 → 2"
+        },
+        {
+          "type": "textarea",
+          "id": "desc",
+          "label": "Description",
+          "default": "Boxes of nitrile per week. You notice it around Thursday."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "DRYE stretch timeline",
+      "blocks": [        {
+          "type": "timeline_stop",
+          "settings": {
+            "time": "07:00",
+            "title": "You put it on. That's it.",
+            "clock_angle": 210,
+            "bullet_1": "0.4mm. You won't notice it's there.",
+            "bullet_2": "Works under nitrile, latex, rubber, HV gloves.",
+            "bullet_3": "Nothing to adjust. Nothing to think about.",
+            "proof_label": "Thickness",
+            "proof_value": "0.4mm",
+            "proof_sub": "Under any sealed glove"
+          }
+        },
+        {
+          "type": "timeline_stop",
+          "settings": {
+            "time": "11:00",
+            "title": "Three jobs in. Hands still dry.",
+            "clock_angle": 330,
+            "bullet_1": "You haven't thought about your gloves once.",
+            "bullet_2": "No mid-shift drying. No flips. No towel on the dash.",
+            "bullet_3": "The liner routes moisture out. Continuously. No saturation point.",
+            "proof_label": "Uptime",
+            "proof_value": "8h+",
+            "proof_sub": "No saturation point"
+          }
+        },
+        {
+          "type": "timeline_stop",
+          "settings": {
+            "time": "13:00",
+            "title": "Glove off. Glove back on. It slides.",
+            "clock_angle": 30,
+            "bullet_1": "Every context switch. Every task change.",
+            "bullet_2": "HV gloves, nitrile, back to nitrile — liner stays on through all of it.",
+            "bullet_3": "No wash between tasks. Straight to the computer. Straight back under the hood.",
+            "proof_label": "Dexterity",
+            "proof_value": "9/9",
+            "proof_sub": "Mechanics. Zero compromise."
+          }
+        },
+        {
+          "type": "timeline_stop",
+          "settings": {
+            "time": "15:00",
+            "title": "Nitrile still intact. Not one rip.",
+            "clock_angle": 90,
+            "bullet_1": "Dry skin under the glove means no friction on the way on or off.",
+            "bullet_2": "Nitrile lasts the shift. Not just the morning.",
+            "bullet_3": "You're burning through fewer boxes. You'll realize it around Thursday.",
+            "proof_label": "Glove waste",
+            "proof_value": "3 → 2",
+            "proof_sub": "Boxes of nitrile per week"
+          }
+        },
+        {
+          "type": "timeline_stop",
+          "settings": {
+            "time": "16:00",
+            "title": "Nitrile rips anyway. Oil hits the liner first.",
+            "clock_angle": 120,
+            "bullet_1": "Oil stays on the surface. Doesn't bond the way it does against skin.",
+            "bullet_2": "Wipe it off with electrical contact cleaner, dry paper towel.",
+            "bullet_3": "Back in rotation. Under a minute.",
+            "proof_label": "Back in rotation",
+            "proof_value": "< 1 min",
+            "proof_sub": "Contact cleaner. Paper towel. Done."
+          }
+        },
+        {
+          "type": "timeline_stop",
+          "settings": {
+            "time": "17:00",
+            "title": "Hands come out clean. Your partner notices before you do.",
+            "clock_angle": 150,
+            "inverted": true,
+            "bullet_1": "End of shift. No scrubbing. No cream.",
+            "bullet_2": "Not fixed. Just not broken anymore.",
+            "bullet_3": "Every shift after this one compounds. The liner doesn't saturate. It doesn't stop. One pair, rest of the year.",
+            "proof_label": "Compound",
+            "proof_value": "1 : 600",
+            "proof_sub": "One pair vs cotton liners per year"
+          }
+        },
+        {
+          "type": "compound_column",
+          "settings": {
+            "label": "Week 1",
+            "value": "3 → 2",
+            "desc": "Boxes of nitrile per week. You notice it around Thursday."
+          }
+        },
+        {
+          "type": "compound_column",
+          "settings": {
+            "label": "Month 6",
+            "value": "$0",
+            "desc": "Spent on O'Keeffe's. You stopped. Didn't notice when."
+          }
+        },
+        {
+          "type": "compound_column",
+          "settings": {
+            "label": "Year 1",
+            "value": "1 : 600",
+            "desc": "One pair vs disposable cotton liners per year."
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

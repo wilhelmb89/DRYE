@@ -1,0 +1,244 @@
+{{ 'dryeNEW-not-faultv2.css' | asset_url | stylesheet_tag }}
+
+<section
+  class="dryeNEW-section dryeNEW-not-fault"
+  id="{{ section.settings.section_id | default: 'not-fault' }}"
+  style="
+    --dryeNEW-not-fault-pt-mobile: {{ section.settings.padding_top_mobile }}px;
+    --dryeNEW-not-fault-pb-mobile: {{ section.settings.padding_bottom_mobile }}px;
+    --dryeNEW-not-fault-pt-desktop: {{ section.settings.padding_top_desktop }}px;
+    --dryeNEW-not-fault-pb-desktop: {{ section.settings.padding_bottom_desktop }}px;
+    --dryeNEW-not-fault-gap-desktop: {{ section.settings.desktop_gap }}px;
+  "
+>
+  <div class="dryeNEW-container">
+    <div class="dryeNEW-grid dryeNEW-not-fault__layout">
+
+      <div class="dryeNEW-not-fault__main">
+        <h2 class="dryeNEW-not-fault__heading">
+          {{ section.settings.heading_main | newline_to_br }}
+          <em class="dryeNEW-not-fault__heading-em">{{ section.settings.heading_em | newline_to_br }}</em>
+        </h2>
+
+        <p class="dryeNEW-not-fault__body">
+          {{ section.settings.body_1 }}
+        </p>
+
+        <p class="dryeNEW-not-fault__body">
+          {{ section.settings.body_2 }}
+        </p>
+      </div>
+
+      <div class="dryeNEW-not-fault__side">
+        <div class="dryeNEW-not-fault__notice-steps">
+          {% assign notice_index = 0 %}
+          {% for block in section.blocks %}
+            {% if block.type == 'notice_step' %}
+              {% assign notice_index = notice_index | plus: 1 %}
+              <div class="dryeNEW-not-fault__notice-step" {{ block.shopify_attributes }}>
+                <div class="dryeNEW-not-fault__notice-num">
+                  {{ notice_index | prepend: '0' | slice: -2, 2 }}
+                </div>
+                <div class="dryeNEW-not-fault__notice-copy">
+                  <div class="dryeNEW-not-fault__notice-label">
+                    {{ block.settings.label }}
+                  </div>
+                  <p class="dryeNEW-not-fault__notice-desc">
+                    {{ block.settings.description }}
+                  </p>
+                </div>
+              </div>
+            {% endif %}
+          {% endfor %}
+        </div>
+
+        {% for block in section.blocks %}
+          {% if block.type == 'validation_callout' %}
+            <div class="dryeNEW-not-fault__validation-callout" {{ block.shopify_attributes }}>
+              <div class="dryeNEW-not-fault__val-icon">
+                {{ block.settings.icon }}
+              </div>
+              <div class="dryeNEW-not-fault__val-copy">
+                <div class="dryeNEW-not-fault__val-label">
+                  {{ block.settings.label }}
+                </div>
+                <p class="dryeNEW-not-fault__val-text">
+                  {{ block.settings.description }}
+                </p>
+              </div>
+            </div>
+          {% endif %}
+        {% endfor %}
+      </div>
+
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "DRYE NEW Not Fault",
+  "settings": [
+    {
+      "type": "text",
+      "id": "section_id",
+      "label": "Section ID",
+      "default": "not-fault"
+    },
+    {
+      "type": "textarea",
+      "id": "heading_main",
+      "label": "Heading main",
+      "default": "You haven't failed to find the right material."
+    },
+    {
+      "type": "textarea",
+      "id": "heading_em",
+      "label": "Heading emphasized",
+      "default": "The right material doesn't exist."
+    },
+    {
+      "type": "textarea",
+      "id": "body_1",
+      "label": "Body 1",
+      "default": "Every conventional liner is built on the same principle: absorb moisture. But absorption has a saturation point. Once reached, the material stops working — and starts holding moisture against your skin instead."
+    },
+    {
+      "type": "textarea",
+      "id": "body_2",
+      "label": "Body 2",
+      "default": "That's not a product flaw. That's the physics of any material with a saturation threshold."
+    },
+    {
+      "type": "range",
+      "id": "padding_top_mobile",
+      "min": 0,
+      "max": 200,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding top mobile",
+      "default": 52
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_mobile",
+      "min": 0,
+      "max": 200,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding bottom mobile",
+      "default": 52
+    },
+    {
+      "type": "range",
+      "id": "padding_top_desktop",
+      "min": 0,
+      "max": 240,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding top desktop",
+      "default": 88
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_desktop",
+      "min": 0,
+      "max": 240,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding bottom desktop",
+      "default": 88
+    },
+    {
+      "type": "range",
+      "id": "desktop_gap",
+      "min": 24,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "label": "Desktop column gap",
+      "default": 80
+    }
+  ],
+  "blocks": [
+    {
+      "type": "notice_step",
+      "name": "Notice step",
+      "settings": [
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Label",
+          "default": "You notice your hands after shifts"
+        },
+        {
+          "type": "textarea",
+          "id": "description",
+          "label": "Description",
+          "default": "Not before. Not during. The damage accumulates invisibly while the glove is on."
+        }
+      ]
+    },
+    {
+      "type": "validation_callout",
+      "name": "Validation callout",
+      "settings": [
+        {
+          "type": "text",
+          "id": "icon",
+          "label": "Icon",
+          "default": "→"
+        },
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Label",
+          "default": "This isn't theory"
+        },
+        {
+          "type": "textarea",
+          "id": "description",
+          "label": "Description",
+          "default": "1.72× bacterial growth under occluded skin vs bare skin. Up to 75% of healthcare workers report glove-related skin damage. Barrier deterioration within hours."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "DRYE NEW Not Fault",
+      "blocks": [
+        {
+          "type": "notice_step",
+          "settings": {
+            "label": "You notice your hands after shifts",
+            "description": "Not before. Not during. The damage accumulates invisibly while the glove is on."
+          }
+        },
+        {
+          "type": "notice_step",
+          "settings": {
+            "label": "Weekends help. Mondays undo it.",
+            "description": "Recovery is real. But the cause returns the moment gloves go back on."
+          }
+        },
+        {
+          "type": "notice_step",
+          "settings": {
+            "label": "Nothing you apply helps",
+            "description": "Creams, powder-free gloves, switching brands. The cycle continues regardless."
+          }
+        },
+        {
+          "type": "validation_callout",
+          "settings": {
+            "icon": "→",
+            "label": "This isn't theory",
+            "description": "1.72× bacterial growth under occluded skin vs bare skin. Up to 75% of healthcare workers report glove-related skin damage. Barrier deterioration within hours."
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

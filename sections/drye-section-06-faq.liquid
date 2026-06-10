@@ -1,0 +1,193 @@
+{{ 'drye-section-06-faq.css' | asset_url | stylesheet_tag }}
+
+{% assign has_institutions = false %}
+{% for block in section.blocks %}
+  {% if block.type == 'institution' and block.settings.label != blank %}
+    {% assign has_institutions = true %}
+    {% break %}
+  {% endif %}
+{% endfor %}
+
+<section
+  class="dryeNEW-section drye-s6"
+  data-section-id="{{ section.id }}"
+  data-section-type="drye-section-06-faq"
+  data-drye-section
+  data-section-index="18"
+  data-section-name="faq"
+>
+  <div class="dryeNEW-container">
+    <div class="drye-s6__faq-wrap">
+      {% if section.settings.eyebrow != blank %}
+        <div class="dryeNEW-micro drye-s6__micro">
+          {{ section.settings.eyebrow }}
+        </div>
+      {% endif %}
+
+      {% if section.settings.heading != blank %}
+        <h2 class="dryeNEW-h2 drye-s6__heading">
+          {{ section.settings.heading }}
+        </h2>
+      {% endif %}
+
+      <div class="drye-s6__faq-list">
+        {% for block in section.blocks %}
+          {% if block.type == 'faq_item' %}
+            {% if block.settings.question != blank or block.settings.answer != blank %}
+              <div class="drye-s6__faq-item" {{ block.shopify_attributes }}>
+                <button
+                  class="drye-s6__faq-q"
+                  type="button"
+                  aria-expanded="false"
+                  aria-controls="drye-faq-answer-{{ section.id }}-{{ block.id }}"
+                >
+                  <span class="dryeNEW-body drye-s6__faq-qt">
+                    {{ block.settings.question }}
+                  </span>
+                  <span class="drye-s6__faq-ic" aria-hidden="true"></span>
+                </button>
+
+                <div
+                  class="drye-s6__faq-a"
+                  id="drye-faq-answer-{{ section.id }}-{{ block.id }}"
+                >
+                  <div class="dryeNEW-body drye-s6__faq-a-inner">
+                    {{ block.settings.answer | escape | newline_to_br }}
+                  </div>
+                </div>
+              </div>
+            {% endif %}
+          {% endif %}
+        {% endfor %}
+      </div>
+    </div>
+
+    {% if has_institutions %}
+      <div class="drye-s6__inst-wrap">
+        <div class="drye-s6__inst-row">
+          {% for block in section.blocks %}
+            {% if block.type == 'institution' and block.settings.label != blank %}
+              <div
+                class="dryeNEW-micro drye-s6__inst-pill"
+                {{ block.shopify_attributes }}
+              >
+                {{ block.settings.label }}
+              </div>
+            {% endif %}
+          {% endfor %}
+        </div>
+      </div>
+    {% endif %}
+  </div>
+</section>
+
+<script>
+  (function() {
+    var sectionRoot = document.querySelector('[data-section-id="{{ section.id }}"]');
+    if (!sectionRoot) return;
+
+    var questions = sectionRoot.querySelectorAll('.drye-s6__faq-q');
+
+    questions.forEach(function(q) {
+      q.addEventListener('click', function() {
+        var item = q.closest('.drye-s6__faq-item');
+        if (!item) return;
+
+        var wasOpen = item.classList.contains('open');
+
+        sectionRoot.querySelectorAll('.drye-s6__faq-item').forEach(function(otherItem) {
+          otherItem.classList.remove('open');
+
+          var otherButton = otherItem.querySelector('.drye-s6__faq-q');
+          if (otherButton) {
+            otherButton.setAttribute('aria-expanded', 'false');
+          }
+        });
+
+        if (!wasOpen) {
+          item.classList.add('open');
+          q.setAttribute('aria-expanded', 'true');
+        }
+      });
+    });
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "DRYE Section 06 — FAQ",
+  "tag": "section",
+  "class": "shopify-section--drye-s6",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "Questions"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Answers for the skeptical."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "faq_item",
+      "name": "FAQ item",
+      "settings": [
+        {
+          "type": "text",
+          "id": "question",
+          "label": "Question"
+        },
+        {
+          "type": "textarea",
+          "id": "answer",
+          "label": "Answer"
+        }
+      ]
+    },
+    {
+      "type": "institution",
+      "name": "Institution pill",
+      "settings": [
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Label"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "DRYE Section 06 — FAQ",
+      "blocks": [
+        {
+          "type": "faq_item",
+          "settings": {
+            "question": "Do they work with nitrile, latex, and vinyl gloves?",
+            "answer": "Yes — this is the primary use case. 0.4mm thin, designed to layer inside sealed gloves without affecting fit. Works with nitrile, latex, vinyl, rubber, hockey gloves, ski gloves, and work gloves."
+          }
+        },
+        {
+          "type": "faq_item",
+          "settings": {
+            "question": "What's actually different from a cotton liner?",
+            "answer": "Cotton absorbs moisture and holds it. Once saturated, it becomes a wet layer between skin and glove — which accelerates breakdown. DRYE routes moisture through the fiber via a structural gradient. No absorption, no saturation point, nothing that can wash out."
+          }
+        },
+        {
+          "type": "faq_item",
+          "settings": {
+            "question": "Will they make my gloves tighter or affect grip?",
+            "answer": "At 0.4mm, the liner adds less bulk than a standard glove lining. In the automotive field study, 9/9 workers reported zero dexterity compromise. Grip is typically maintained or improved — dry skin has better tactile contact with glove material."
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

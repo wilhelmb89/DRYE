@@ -1,0 +1,184 @@
+{{ 'drye-research-video-full.css' | asset_url | stylesheet_tag }}
+
+<section
+  class="dryeNEW-section drye-research-video-full"
+  id="drye-research-video-full-{{ section.id }}"
+  data-section-id="{{ section.id }}"
+  data-drye-section
+  data-section-index="7"
+  data-section-name="research_video"
+>
+  <div class="dryeNEW-full-bleed">
+    <div class="drye-research-video-full__media">
+      <video
+        class="drye-research-video-full__video drye-research-video-full__video--desktop"
+        muted
+        loop
+        playsinline
+        autoplay
+        preload="none"
+        poster="{{ section.settings.poster_image_desktop | image_url: width: 2200 }}"
+        data-video-src="{{ section.settings.video_src_desktop }}"
+        aria-label="{{ section.settings.video_caption | escape }}"
+      ></video>
+
+      <video
+        class="drye-research-video-full__video drye-research-video-full__video--mobile"
+        muted
+        loop
+        playsinline
+        autoplay
+        preload="none"
+        poster="{{ section.settings.poster_image_mobile | image_url: width: 1200 }}"
+        data-video-src="{{ section.settings.video_src_mobile }}"
+        aria-label="{{ section.settings.video_caption | escape }}"
+      ></video>
+
+      <div class="drye-research-video-full__overlay">
+        <div class="dryeNEW-full-bleed__inner">
+          <div class="drye-research-video-full__copy">
+            {% if section.settings.video_label != blank %}
+              <span class="dryeNEW-micro drye-research-video-full__label">
+                {{ section.settings.video_label }}
+              </span>
+            {% endif %}
+
+            {% if section.settings.video_caption != blank %}
+              <h2 class="dryeNEW-h2 drye-research-video-full__caption">
+                {{ section.settings.video_caption }}
+              </h2>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  (function () {
+    var root = document.getElementById('drye-research-video-full-{{ section.id }}');
+    if (!root) return;
+
+    var desktopVideo = root.querySelector('.drye-research-video-full__video--desktop');
+    var mobileVideo = root.querySelector('.drye-research-video-full__video--mobile');
+
+    function isDesktop() {
+      return window.innerWidth >= 768;
+    }
+
+    function getActiveVideo() {
+      return isDesktop() ? desktopVideo : mobileVideo;
+    }
+
+    function unloadVideo(video) {
+      if (!video) return;
+      if (video.getAttribute('src')) {
+        video.pause();
+        video.removeAttribute('src');
+        video.load();
+      }
+    }
+
+    function loadVideo(video) {
+      if (!video) return;
+
+      var src = video.getAttribute('data-video-src');
+      if (!src) return;
+      if (video.getAttribute('src') === src) return;
+
+      video.setAttribute('src', src);
+      video.load();
+
+      var playPromise = video.play();
+      if (playPromise && typeof playPromise.catch === 'function') {
+        playPromise.catch(function () {});
+      }
+    }
+
+    function updateVideoForViewport() {
+      var activeVideo = getActiveVideo();
+      var inactiveVideo = activeVideo === desktopVideo ? mobileVideo : desktopVideo;
+
+      unloadVideo(inactiveVideo);
+      loadVideo(activeVideo);
+    }
+
+    if (!('IntersectionObserver' in window)) {
+      updateVideoForViewport();
+      window.addEventListener('resize', updateVideoForViewport);
+      return;
+    }
+
+    var hasLoaded = false;
+
+    var observer = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (!entry.isIntersecting) return;
+
+        hasLoaded = true;
+        updateVideoForViewport();
+        observer.unobserve(root);
+      });
+    }, {
+      threshold: 0.15,
+      rootMargin: '300px 0px'
+    });
+
+    observer.observe(root);
+
+    window.addEventListener('resize', function () {
+      if (!hasLoaded) return;
+      updateVideoForViewport();
+    });
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "DRYE Research Video Full",
+  "tag": "section",
+  "class": "shopify-section--drye-research-video-full",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "poster_image_desktop",
+      "label": "Poster image — desktop"
+    },
+    {
+      "type": "image_picker",
+      "id": "poster_image_mobile",
+      "label": "Poster image — mobile"
+    },
+    {
+      "type": "text",
+      "id": "video_src_desktop",
+      "label": "Desktop video src",
+      "info": "Use a direct video file URL, preferably MP4."
+    },
+    {
+      "type": "text",
+      "id": "video_src_mobile",
+      "label": "Mobile video src",
+      "info": "Use a direct video file URL, preferably MP4."
+    },
+    {
+      "type": "text",
+      "id": "video_label",
+      "label": "Video label",
+      "default": "Lab testing — Swedish School of Textiles, Borås"
+    },
+    {
+      "type": "text",
+      "id": "video_caption",
+      "label": "Video caption",
+      "default": "DRYE doesn't compete in an existing category. It creates a new one."
+    }
+  ],
+  "presets": [
+    {
+      "name": "DRYE Research Video Full"
+    }
+  ]
+}
+{% endschema %}

@@ -9,7 +9,7 @@
  */
 {
   "current": {
-    "favicon": "shopify://shop_images/Namnlos_design_21__prev_ui.png",
+    "favicon": "shopify://shop_images/Favicon.png",
     "heading_font": "sans-serif",
     "pinterest": "",
     "facebook": "https://www.facebook.com/dryesweden/",
@@ -20,6 +20,185 @@
     "yotpo_reviews_api_key": "SAfL56iSfyjZmoBz0xz5wYjuABSr2xzgu2IWTMSH",
     "checkout_logo_position": "right",
     "checkout_input_background_color_mode": "white",
+    "groups": {
+      "popups-group": {
+        "type": "custom-popups-group",
+        "sections": {
+          "menu_drawer": {
+            "type": "menu-drawer",
+            "settings": {}
+          },
+          "cart_drawer": {
+            "type": "cart-drawer",
+            "settings": {
+              "show_free_shipping_bar": true,
+              "use_product_count": true,
+              "free_shipping_product_count": 3,
+              "free_shipping_product": "",
+              "show_as_money": true,
+              "free_shipping_threshold": 850,
+              "show_variant": true
+            }
+          },
+          "drawer_size_Xcyt3f": {
+            "type": "drawer-size",
+            "settings": {
+              "title": "Size Chart"
+            }
+          }
+        },
+        "order": [
+          "menu_drawer",
+          "cart_drawer",
+          "drawer_size_Xcyt3f"
+        ]
+      }
+    },
+    "sections": {
+      "drye-cart-drawer": {
+        "type": "drye-cart-drawer",
+        "settings": {
+          "cart_title": "Your cart",
+          "upsell_title": "Save 12% on 3+ pairs",
+          "upsell_text": "Add one more pair — discount applies automatically",
+          "upsell_button": "+ Add pair",
+          "upsell_variant_id": "0",
+          "trust_label_1": "30-day full refund",
+          "trust_label_2": "Ships in 24 hours",
+          "trust_label_3": "Machine washable",
+          "subtotal_label": "Subtotal",
+          "subtotal_note": "Shipping & taxes calculated at checkout",
+          "checkout_label": "Check out →",
+          "continue_label": "Continue shopping"
+        }
+      },
+      "drye-size-guide-drawer": {
+        "type": "drye-size-guide-drawer",
+        "blocks": {
+          "size_row_5": {
+            "type": "size_row",
+            "settings": {
+              "size": "5",
+              "label": "XXS",
+              "length_min_mm": 158,
+              "length_max_mm": 167,
+              "circ_min_mm": 178,
+              "circ_max_mm": 187
+            }
+          },
+          "size_row_6": {
+            "type": "size_row",
+            "settings": {
+              "size": "6",
+              "label": "XS",
+              "length_min_mm": 167,
+              "length_max_mm": 176,
+              "circ_min_mm": 187,
+              "circ_max_mm": 196
+            }
+          },
+          "size_row_7": {
+            "type": "size_row",
+            "settings": {
+              "size": "7",
+              "label": "S",
+              "length_min_mm": 176,
+              "length_max_mm": 185,
+              "circ_min_mm": 196,
+              "circ_max_mm": 205
+            }
+          },
+          "size_row_8": {
+            "type": "size_row",
+            "settings": {
+              "size": "8",
+              "label": "M",
+              "length_min_mm": 185,
+              "length_max_mm": 194,
+              "circ_min_mm": 205,
+              "circ_max_mm": 214
+            }
+          },
+          "size_row_9": {
+            "type": "size_row",
+            "settings": {
+              "size": "9",
+              "label": "L",
+              "length_min_mm": 194,
+              "length_max_mm": 203,
+              "circ_min_mm": 214,
+              "circ_max_mm": 223
+            }
+          },
+          "size_row_10": {
+            "type": "size_row",
+            "settings": {
+              "size": "10",
+              "label": "XL",
+              "length_min_mm": 203,
+              "length_max_mm": 212,
+              "circ_min_mm": 223,
+              "circ_max_mm": 232
+            }
+          },
+          "size_row_11": {
+            "type": "size_row",
+            "settings": {
+              "size": "11",
+              "label": "XXL",
+              "length_min_mm": 212,
+              "length_max_mm": 219,
+              "circ_min_mm": 232,
+              "circ_max_mm": 241
+            }
+          },
+          "size_row_12": {
+            "type": "size_row",
+            "settings": {
+              "size": "12",
+              "label": "XXXL",
+              "length_min_mm": 221,
+              "length_max_mm": 230,
+              "circ_min_mm": 241,
+              "circ_max_mm": 250
+            }
+          }
+        },
+        "block_order": [
+          "size_row_5",
+          "size_row_6",
+          "size_row_7",
+          "size_row_8",
+          "size_row_9",
+          "size_row_10",
+          "size_row_11",
+          "size_row_12"
+        ],
+        "settings": {
+          "trigger_label": "Size Guide →",
+          "hand_image": "shopify://shop_images/Size-image.png",
+          "hand_image_alt": "How to measure your hand",
+          "drawer_aria_label": "Size Guide",
+          "heading": "Size Guide",
+          "close_label": "Close",
+          "diagram_label": "How to measure",
+          "length_label": "Length",
+          "length_desc": "Wrist crease to tip of middle finger",
+          "circ_label": "Circumference",
+          "circ_desc": "Around the hand, just below the knuckles",
+          "unit_mm_label": "mm",
+          "unit_in_label": "inches",
+          "table_heading_size": "Size",
+          "table_heading_length": "Length",
+          "table_heading_circ": "Circumference",
+          "tip_html": "<p><strong>Between sizes?</strong> The liner is thin and stretchable. Hand circumference is typically the best guide for a comfortable fit — size up if unsure.</p>",
+          "footer_label": "Still unsure? We'll help —",
+          "email": "info@drye.se",
+          "cta_label": "Shop DRYE Liners →",
+          "cta_link": "shopify://products/drye-moisture-routing-glove-liners"
+        }
+      }
+    },
     "content_for_index": [],
     "blocks": {
       "6146500278089136509": {
@@ -27,49 +206,37 @@
         "disabled": false,
         "settings": {}
       },
-      "17676059084223943535": {
-        "type": "shopify://apps/triplewhale/blocks/triple_pixel_snippet/483d496b-3f1a-4609-aea7-8eee3b6b7a2a",
+      "7079518687644006178": {
+        "type": "shopify://apps/checkout-blocks/blocks/app-embed/b0024ca5-9de8-4bf0-a92f-cd0783877ae2",
         "disabled": false,
+        "settings": {
+          "utm_id": true,
+          "utm_source": true,
+          "utm_medium": true,
+          "utm_campaign": true,
+          "utm_term": true,
+          "ref": true
+        }
+      },
+      "12120936241911852800": {
+        "type": "shopify://apps/judge-me-reviews/blocks/reviews_tab/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
+        "disabled": true,
+        "settings": {
+          "position": "right"
+        }
+      },
+      "6251270934270006384": {
+        "type": "shopify://apps/stape-conversion-tracking/blocks/gtm/7e13c847-7971-409d-8fe0-29ec14d5f048",
+        "disabled": false,
+        "settings": {}
+      },
+      "5043070786800498925": {
+        "type": "shopify://apps/sw-back-in-stock/blocks/bis-switch/b190bced-3b7b-47da-a05f-6ea4821c3a77",
+        "disabled": true,
         "settings": {}
       },
       "14060646107696862457": {
         "type": "shopify://apps/judge-me-reviews/blocks/judgeme_core/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
-        "disabled": false,
-        "settings": {}
-      },
-      "1877152918344802950": {
-        "type": "shopify://apps/intelligems-a-b-testing/blocks/intelligems-script/fa83b64c-0c77-4c0c-b4b2-b94b42f5ef19",
-        "disabled": false,
-        "settings": {}
-      },
-      "5858961087409699889": {
-        "type": "shopify://apps/orbe-geolocation/blocks/app-embed-footer-selector/7cb09287-cd2b-4646-837c-f1f9b6ea703e",
-        "disabled": false,
-        "settings": {
-          "footer_ui_type": "selector",
-          "block_position": "",
-          "option_language": true,
-          "style_corners": "square",
-          "style_dropdown": "outlined",
-          "option_classic_flag_style": "square",
-          "option_classic_currency_type": "none",
-          "search_country": true,
-          "block_background": "#fff",
-          "style_colors_background": "#fff",
-          "style_colors_border": "#000",
-          "style_colors_text": "#000",
-          "option_modal_continent": false,
-          "option_flag_style": "square",
-          "option_currency_type": "iso",
-          "option_modal_language": true,
-          "title": "Select Your Region",
-          "language_title": "Preferred Language",
-          "helper_text": "Changing language will not affect your selected region",
-          "block_alignement": "center"
-        }
-      },
-      "2567389343055140935": {
-        "type": "shopify://apps/microsoft-clarity/blocks/clarity_js/31c3d126-8116-4b4a-8ba1-baeda7c4aeea",
         "disabled": false,
         "settings": {}
       }
@@ -79,10 +246,5 @@
     "Default": {
       "heading_font": "assistant_n4"
     }
-  },
-  "platform_customizations": {
-    "custom_css": [
-      "#occ3-drawer {z-index: 99999999999 !important;}"
-    ]
   }
 }

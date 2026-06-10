@@ -1,0 +1,227 @@
+.drye-problem-mechanism {
+  padding-top: var(--pt-desktop, 64px);
+  padding-bottom: var(--pb-desktop, 64px);
+}
+
+/* BELIEF BAND */
+.drye-problem-mechanism__belief-band {
+  background: var(--c-heading);
+}
+
+.drye-problem-mechanism__belief-quote {
+  padding: 40px 0 44px;
+  text-align: center;
+}
+
+.drye-problem-mechanism__bq-text {
+  width: 960px;
+  max-width: 100%;
+  margin: 0 auto 16px;
+  font-family: var(--font-editorial);
+  font-size: 32px;
+  font-style: italic;
+  font-weight: 400;
+  line-height: 1.35;
+  letter-spacing: 0;
+  color: #ffffff;
+}
+
+.drye-problem-mechanism__bq-sub {
+  margin: 0;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 10px;
+  font-weight: 400;
+  line-height: 1.2;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.35);
+}
+
+/* SECTION BODY */
+.drye-problem-mechanism__shell {
+  display: flex;
+  flex-direction: column;
+  border-bottom: 1px solid var(--c-border, #d8d6d1);
+}
+
+.drye-problem-mechanism__intro-wrap {
+  width: 100%;
+}
+
+@media (min-width: 991px) {
+  .drye-problem-mechanism__intro-wrap {
+    max-width: 860px;
+  }
+}
+
+.drye-problem-mechanism__intro {
+  padding: 54px 0 42px;
+}
+
+.drye-problem-mechanism__pre {
+  margin: 0 0 16px;
+}
+
+.drye-problem-mechanism__heading {
+  margin: 0 0 24px;
+  color: var(--c-heading);
+  max-width: var(--content-width);
+}
+
+.drye-problem-mechanism__copy {
+  max-width: var(--content-width);
+  padding-left: 22px;
+  border-left: 3px solid rgba(27, 43, 75, 0.65);
+}
+
+.drye-problem-mechanism__body {
+  margin: 0 0 12px;
+  color: var(--c-text);
+}
+
+.drye-problem-mechanism__body:last-child {
+  margin-bottom: 0;
+}
+
+.drye-problem-mechanism__body p,
+.drye-problem-mechanism__card-body p,
+.drye-problem-mechanism__note-body p {
+  margin: 0;
+}
+
+.drye-problem-mechanism__body--strong {
+  color: var(--c-heading);
+}
+
+/* GRID */
+.drye-problem-mechanism__grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  border-top: 1px solid var(--c-border, #d8d6d1);
+}
+
+.drye-problem-mechanism__card {
+  position: relative;
+  padding: 28px 34px 34px;
+  border-right: 1px solid var(--c-border, #d8d6d1);
+  background: transparent;
+}
+
+.drye-problem-mechanism__card:last-child {
+  border-right: none;
+}
+
+.drye-problem-mechanism__card-tag {
+  margin: 0 0 10px;
+  color: rgba(27, 43, 75, 0.55);
+  font-family: var(--font-body);
+  font-size: 11px;
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  line-height: 1.2;
+}
+
+.drye-problem-mechanism__card-heading {
+  margin: 0 0 10px;
+  color: var(--c-heading);
+}
+
+.drye-problem-mechanism__card-body {
+  color: var(--c-text);
+}
+
+/* NOTES */
+.drye-problem-mechanism__notes {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  border-top: 1px solid var(--c-border, #d8d6d1);
+}
+
+.drye-problem-mechanism__note {
+  padding: 16px 28px 10px;
+  border-right: 1px solid var(--c-border, #d8d6d1);
+}
+
+.drye-problem-mechanism__note:last-child {
+  border-right: none;
+}
+
+.drye-problem-mechanism__note-heading {
+  margin: 0 0 8px;
+}
+
+.drye-problem-mechanism__note-body {
+  color: var(--c-text);
+}
+
+/* MOBILE */
+@media (max-width: 990px) {
+  .drye-problem-mechanism {
+    padding-top: var(--pt-mobile, 40px);
+    padding-bottom: var(--pb-mobile, 40px);
+  }
+
+  .drye-problem-mechanism__belief-quote {
+    padding: 28px 0 22px;
+  }
+
+  .drye-problem-mechanism__bq-text {
+    width: 100%;
+    max-width: 100%;
+    font-size: 18px;
+    line-height: 1.4;
+    margin: 0 auto 12px;
+  }
+
+  .drye-problem-mechanism__bq-sub {
+    font-size: 9px;
+    line-height: 1.25;
+    letter-spacing: 0.1em;
+    padding: 0;
+  }
+
+  .drye-problem-mechanism__intro {
+    padding: 36px 0 28px;
+  }
+
+  .drye-problem-mechanism__heading {
+    max-width: 100%;
+    margin-bottom: 20px;
+  }
+
+  .drye-problem-mechanism__copy {
+    max-width: 100%;
+    padding-left: 16px;
+  }
+
+  .drye-problem-mechanism__grid,
+  .drye-problem-mechanism__notes {
+    grid-template-columns: 1fr;
+  }
+
+  .drye-problem-mechanism__card,
+  .drye-problem-mechanism__note {
+    border-right: none;
+    border-bottom: 1px solid var(--c-border, #d8d6d1);
+  }
+
+  .drye-problem-mechanism__card:last-child,
+  .drye-problem-mechanism__note:last-child {
+    border-bottom: none;
+  }
+
+  .drye-problem-mechanism__card {
+    padding-top: 24px;
+    padding-bottom: 24px;
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  .drye-problem-mechanism__note {
+    padding-top: 18px;
+    padding-bottom: 14px;
+    padding-left: 0;
+    padding-right: 0;
+  }
+}

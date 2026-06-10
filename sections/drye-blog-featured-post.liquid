@@ -1,0 +1,218 @@
+
+  {{ 'section-drye-blog-featured-post.css' | asset_url | stylesheet_tag }}
+
+{% liquid
+  assign featured_article = section.settings.featured_article
+  assign fallback_blog = blogs['news-2']
+
+  if featured_article == blank and fallback_blog != blank and fallback_blog.articles_count > 0
+    assign featured_article = fallback_blog.articles.first
+  endif
+
+  if featured_article != blank
+    assign tags_down = featured_article.tags | join: ',' | downcase
+    assign badge_label = 'Science'
+    if tags_down contains 'field'
+      assign badge_label = 'Field Report'
+    elsif tags_down contains 'story'
+      assign badge_label = 'User Story'
+    endif
+
+    assign word_count = featured_article.content | strip_html | split: ' ' | size
+    assign read_time = word_count | plus: 199 | divided_by: 200
+    if read_time < 1
+      assign read_time = 1
+    endif
+
+    assign excerpt_text = featured_article.excerpt_or_content | strip_html | truncatewords: 28
+  endif
+%}
+
+<div class="featured-wrap">
+  <div class="featured-in">
+    {% if featured_article != blank %}
+      <article class="featured-post rev">
+        <a href="{{ featured_article.url }}" class="featured-post__link" aria-label="{{ featured_article.title | escape }}">
+          <div class="fp-img">
+            {% if featured_article.image != blank %}
+              {{
+                featured_article.image
+                | image_url: width: 1600
+                | image_tag:
+                  class: 'fp-img-tag',
+                  loading: 'lazy',
+                  widths: '600, 900, 1200, 1600',
+                  sizes: '(min-width: 900px) 55vw, 100vw',
+                  alt: featured_article.title
+              }}
+            {% endif %}
+
+            <div class="fp-img-overlay">
+              <span class="fp-cat-badge">
+                {% if section.settings.image_badge != blank %}
+                  {{ section.settings.image_badge }}
+                {% else %}
+                  {{ badge_label }}
+                {% endif %}
+              </span>
+
+              <p class="fp-img-title">
+                {% if section.settings.image_title_line_1 != blank %}
+                  {{ section.settings.image_title_line_1 }}<br>
+                  {{ section.settings.image_title_line_2 }}<br>
+                  {{ section.settings.image_title_line_3 }}
+                {% else %}
+                  {{ featured_article.title }}
+                {% endif %}
+              </p>
+            </div>
+          </div>
+
+          <div class="fp-body">
+            <div class="fp-label"><span>{{ section.settings.label | default: 'Featured' }}</span></div>
+
+            <h2 class="fp-h">
+              {% if section.settings.heading != blank %}
+                {{ section.settings.heading }}
+              {% else %}
+                {{ featured_article.title }}
+              {% endif %}
+            </h2>
+
+            <p class="fp-excerpt">
+              {% if section.settings.excerpt != blank %}
+                {{ section.settings.excerpt }}
+              {% else %}
+                {{ excerpt_text }}
+              {% endif %}
+            </p>
+
+            <p class="fp-meta">
+              {% if section.settings.meta_date != blank %}
+                {{ section.settings.meta_date }}
+              {% else %}
+                {{ featured_article.published_at | date: "%B %Y" }}
+              {% endif %}
+              <span>·</span>
+              {% if section.settings.meta_type != blank %}
+                {{ section.settings.meta_type }}
+              {% else %}
+                {{ badge_label }}
+              {% endif %}
+              <span>·</span>
+              {% if section.settings.meta_read_time != blank %}
+                {{ section.settings.meta_read_time }}
+              {% else %}
+                {{ read_time }} min read
+              {% endif %}
+            </p>
+
+            <span class="fp-link">
+              {{ section.settings.link_text | default: 'Read the report' }}
+            </span>
+          </div>
+        </a>
+      </article>
+    {% else %}
+      <article class="featured-post rev">
+        <div class="fp-img">
+          <div class="fp-img-overlay">
+            <span class="fp-cat-badge">Featured</span>
+            <p class="fp-img-title">Select a featured article.</p>
+          </div>
+        </div>
+
+        <div class="fp-body">
+          <div class="fp-label"><span>Featured</span></div>
+          <h2 class="fp-h">No featured article selected</h2>
+          <p class="fp-excerpt">Choose an article in the section settings.</p>
+        </div>
+      </article>
+    {% endif %}
+  </div>
+</div>
+{% schema %}
+{
+  "name": "DRYE Blog Featured Post",
+  "tag": "section",
+  "class": "section-drye-blog-featured-post",
+  "settings": [
+    {
+      "type": "article",
+      "id": "featured_article",
+      "label": "Featured article"
+    },
+{
+  "type": "text",
+  "id": "image_badge",
+  "label": "Image badge override",
+  "default": "Field Report"
+},
+    {
+      "type": "text",
+      "id": "image_title_line_1",
+      "label": "Image title line 1 override",
+      "default": "Field Report"
+    },
+    {
+      "type": "text",
+      "id": "image_title_line_2",
+      "label": "Image title line 2 override",
+      "default": "Field Report"
+    },
+    {
+      "type": "text",
+      "id": "image_title_line_3",
+      "label": "Image title line 3 override",
+      "default": "Field Report"
+    },
+    {
+      "type": "text",
+      "id": "label",
+      "label": "Top label",
+      "default": "Featured"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading override",
+      "default": "Field Report"
+    },
+    {
+      "type": "textarea",
+      "id": "excerpt",
+      "label": "Excerpt override",
+      "default": "Field Report"
+    },
+    {
+      "type": "text",
+      "id": "meta_date",
+      "label": "Meta date override",
+      "default": "Field Report"
+    },
+    {
+      "type": "text",
+      "id": "meta_type",
+      "label": "Meta type override",
+      "default": "Field Report"
+    },
+    {
+      "type": "text",
+      "id": "meta_read_time",
+      "label": "Meta read time override",
+      "default": "Field Report"
+    },
+    {
+      "type": "text",
+      "id": "link_text",
+      "label": "Link text",
+      "default": "Read the report"
+    }
+  ],
+  "presets": [
+    {
+      "name": "DRYE Blog Featured Post"
+    }
+  ]
+}
+{% endschema %}

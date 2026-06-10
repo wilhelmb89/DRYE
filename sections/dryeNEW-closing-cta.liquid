@@ -1,0 +1,184 @@
+{{ 'dryeNEW-closing-cta.css' | asset_url | stylesheet_tag }}
+
+<section
+  class="dryeNEW-section dryeNEW-closing-cta"
+  id="{{ section.settings.section_id | default: 'shop' }}"
+  data-drye-section
+  data-section-index="20"
+  data-section-name="closing_cta"
+  style="
+    --dryeNEW-closing-cta-pt-mobile: {{ section.settings.padding_top_mobile }}px;
+    --dryeNEW-closing-cta-pb-mobile: {{ section.settings.padding_bottom_mobile }}px;
+    --dryeNEW-closing-cta-pt-desktop: {{ section.settings.padding_top_desktop }}px;
+    --dryeNEW-closing-cta-pb-desktop: {{ section.settings.padding_bottom_desktop }}px;
+  "
+>
+  <div class="dryeNEW-container dryeNEW-closing-cta__container">
+    {%- if section.settings.micro != blank -%}
+      <span class="dryeNEW-micro dryeNEW-closing-cta__micro">
+        {{ section.settings.micro }}
+      </span>
+    {%- endif -%}
+
+    {% if section.settings.heading_main != blank or section.settings.heading_em != blank %}
+      <h2 class="dryeNEW-closing-cta__heading">
+        {% if section.settings.heading_main != blank %}
+          <span class="dryeNEW-closing-cta__heading-main">
+            {{ section.settings.heading_main | newline_to_br }}
+          </span>
+        {% endif %}
+
+        {% if section.settings.heading_em != blank %}
+          <em class="dryeNEW-closing-cta__heading-em">
+            {{ section.settings.heading_em | newline_to_br }}
+          </em>
+        {% endif %}
+      </h2>
+    {% endif %}
+
+    {% if section.settings.body != blank %}
+      <div class="dryeNEW-closing-cta__body">
+        {{ section.settings.body }}
+      </div>
+    {% endif %}
+
+    <div class="dryeNEW-closing-cta__actions">
+      {% if section.settings.primary_label != blank %}
+        <a
+          class="dryeNEW-closing-cta__btn dryeNEW-closing-cta__btn--primary"
+          href="{{ section.settings.primary_url | default: '#' }}"
+        >
+          {{ section.settings.primary_label }}
+        </a>
+      {% endif %}
+
+      {% if section.settings.secondary_label != blank %}
+        <a
+          class="dryeNEW-closing-cta__btn dryeNEW-closing-cta__btn--secondary"
+          href="{{ section.settings.secondary_url | default: '#mechanism' }}"
+        >
+          {{ section.settings.secondary_label }}
+        </a>
+      {% endif %}
+    </div>
+
+    {% if section.settings.meta != blank %}
+      <p class="dryeNEW-closing-cta__meta">
+        {{ section.settings.meta }}
+      </p>
+    {% endif %}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "DRYE NEW Closing CTA",
+  "tag": "section",
+  "class": "section-dryeNEW-closing-cta",
+  "settings": [
+    {
+      "type": "text",
+      "id": "section_id",
+      "label": "Section ID",
+      "default": "shop"
+    },
+    {
+      "type": "text",
+      "id": "micro",
+      "label": "Micro label",
+      "default": "30-day free trial"
+    },
+    {
+      "type": "textarea",
+      "id": "heading_main",
+      "label": "Heading main",
+      "default": "See if it"
+    },
+    {
+      "type": "textarea",
+      "id": "heading_em",
+      "label": "Heading emphasized",
+      "default": "changes anything for you."
+    },
+    {
+      "type": "richtext",
+      "id": "body",
+      "label": "Body",
+      "default": "<p>Try them. 30 days. Full refund if they don't work.<br>Works under any sealed glove. Machine wash. Lasts 4–12 months.</p>"
+    },
+    {
+      "type": "text",
+      "id": "primary_label",
+      "label": "Primary button label",
+      "default": "Try DRYE — 30 days free →"
+    },
+    {
+      "type": "url",
+      "id": "primary_url",
+      "label": "Primary button URL"
+    },
+    {
+      "type": "text",
+      "id": "secondary_label",
+      "label": "Secondary button label",
+      "default": "Read the research →"
+    },
+    {
+      "type": "url",
+      "id": "secondary_url",
+      "label": "Secondary button URL"
+    },
+    {
+      "type": "text",
+      "id": "meta",
+      "label": "Meta line",
+      "default": "Free shipping on orders over $49 · No subscription · Cancel anytime"
+    },
+    {
+      "type": "range",
+      "id": "padding_top_mobile",
+      "min": 0,
+      "max": 200,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding top mobile",
+      "default": 56
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_mobile",
+      "min": 0,
+      "max": 200,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding bottom mobile",
+      "default": 56
+    },
+    {
+      "type": "range",
+      "id": "padding_top_desktop",
+      "min": 0,
+      "max": 240,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding top desktop",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_desktop",
+      "min": 0,
+      "max": 240,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding bottom desktop",
+      "default": 80
+    }
+  ],
+  "presets": [
+    {
+      "name": "DRYE NEW Closing CTA"
+    }
+  ]
+}
+{% endschema %}

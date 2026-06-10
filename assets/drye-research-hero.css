@@ -1,0 +1,122 @@
+.research-hero {
+  background: var(--bg-ink);
+  position: relative;
+  overflow: hidden;
+}
+
+.research-hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    ellipse at 20% 50%,
+    rgba(61, 90, 94, 0.15) 0%,
+    transparent 60%
+  );
+  pointer-events: none;
+}
+
+.research-hero .dryeNEW-container {
+  position: relative;
+  z-index: 1;
+}
+
+.breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: var(--space-8);
+  margin-bottom: var(--space-32);
+}
+
+.breadcrumb a {
+  font-size: var(--fs-micro-3);
+  font-weight: var(--fw-medium);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--white-035);
+  text-decoration: none;
+}
+
+.breadcrumb span {
+  font-size: var(--fs-micro-3);
+  color: var(--white-020);
+}
+
+.breadcrumb strong {
+  font-size: var(--fs-micro-3);
+  font-weight: var(--fw-medium);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--sage);
+}
+
+.micro {
+  display: block;
+  margin-bottom: var(--space-10);
+  font-family: var(--font-body);
+  font-size: var(--fs-micro-2);
+  font-weight: var(--fw-semibold);
+  letter-spacing: var(--ls-micro);
+  text-transform: uppercase;
+  color: var(--sage);
+}
+
+.research-hero__title {
+  margin: 0 0 var(--space-8);
+  max-width: 700px;
+  font-family: var(--font-display);
+  font-size: clamp(28px, 6vw, 48px);
+  font-weight: var(--fw-semibold);
+  letter-spacing: var(--ls-tight-display);
+  line-height: 1.05;
+  color: var(--white-100);
+}
+
+.research-hero__title em {
+  display: block;
+  margin-top: var(--space-4);
+  font-family: var(--font-editorial);
+  font-style: italic;
+  font-weight: var(--fw-regular);
+  color: var(--white-030);
+}
+
+.research-hero-sub {
+  margin-top: var(--space-20);
+  max-width: 480px;
+  font-family: var(--font-body);
+  font-size: var(--fs-body);
+  font-weight: var(--fw-regular);
+  line-height: var(--lh-body);
+  color: var(--white-045);
+}
+
+.research-hero-sub strong {
+  color: var(--white-075);
+  font-weight: var(--fw-medium);
+}
+
+.hero-claim-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-12);
+  margin-top: var(--space-40);
+}
+
+.hero-claim-pill {
+  display: inline-flex;
+  align-items: center;
+  padding: var(--space-6) var(--space-12);
+  font-size: var(--fs-micro-3);
+  font-weight: var(--fw-semibold);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--sage);
+  border: var(--border-sage-020);
+}
+
+@media (min-width: 768px) {
+  .research-hero__title {
+    max-width: 760px;
+  }
+}

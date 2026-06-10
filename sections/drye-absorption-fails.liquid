@@ -1,0 +1,163 @@
+{{ 'drye-absorption-fails.css' | asset_url | stylesheet_tag }}
+
+<section class="dryeNEW-section absorption-fails">
+  <div class="dryeNEW-container">
+    <div class="absorption-fails-grid">
+      <div class="absorption-fails-main">
+        {% if section.settings.micro_label != blank %}
+          <span class="dryeNEW-micro absorption-fails__micro dryeNEW-reveal">
+            {{ section.settings.micro_label }}
+          </span>
+        {% endif %}
+
+        <h2 class="dryeNEW-h2 absorption-fails__heading dryeNEW-reveal dryeNEW-rd1">
+          {{ section.settings.heading_line_1 }}<br>
+          <em>{{ section.settings.heading_line_2 }}</em>
+        </h2>
+
+        <div class="dryeNEW-body absorption-fails__lead dryeNEW-reveal dryeNEW-rd2">
+          <p>
+            {{ section.settings.lead_text }}
+            {% if section.settings.lead_strong != blank %}
+              <strong>{{ section.settings.lead_strong }}</strong>
+            {% endif %}
+          </p>
+        </div>
+      </div>
+
+      {% if section.settings.quote_text != blank %}
+        <div class="absorption-fails-quote-wrap">
+          <div class="absorption-fails__quote dryeNEW-editorial dryeNEW-reveal dryeNEW-rd3">
+            <p>{{ section.settings.quote_text }}</p>
+          </div>
+        </div>
+      {% endif %}
+    </div>
+
+    <div class="box-row dryeNEW-reveal dryeNEW-rd2">
+      {% for block in section.blocks %}
+        <div class="box-item" {{ block.shopify_attributes }}>
+          {% if block.settings.tag != blank %}
+            <div class="dryeNEW-micro box-tag">
+              {{ block.settings.tag }}
+            </div>
+          {% endif %}
+
+          {% if block.settings.heading != blank %}
+            <div class="dryeNEW-h4 box-head">
+              {{ block.settings.heading }}
+            </div>
+          {% endif %}
+
+          {% if block.settings.body != blank %}
+            <div class="dryeNEW-body--sm box-body">
+              <p>{{ block.settings.body }}</p>
+            </div>
+          {% endif %}
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "DRYE Absorption Fails",
+  "max_blocks": 3,
+  "settings": [
+    {
+      "type": "text",
+      "id": "micro_label",
+      "label": "Micro label",
+      "default": "Why everything else fails"
+    },
+    {
+      "type": "text",
+      "id": "heading_line_1",
+      "label": "Heading line 1",
+      "default": "Every absorbent material"
+    },
+    {
+      "type": "text",
+      "id": "heading_line_2",
+      "label": "Heading line 2",
+      "default": "has a saturation point."
+    },
+    {
+      "type": "textarea",
+      "id": "lead_text",
+      "label": "Lead text",
+      "default": "Cotton liners. Silk liners. Technical moisture-wicking fabric. They all operate on the same principle: absorb the moisture and move it away from your skin."
+    },
+    {
+      "type": "textarea",
+      "id": "lead_strong",
+      "label": "Lead strong text",
+      "default": "The problem is what happens when they run out of capacity."
+    },
+    {
+      "type": "textarea",
+      "id": "quote_text",
+      "label": "Quote",
+      "default": "\"It's not that you found the wrong absorbent material. Every absorbent material behaves this way. Saturation is a structural certainty, not a product flaw.\""
+    }
+  ],
+  "blocks": [
+    {
+      "type": "reason",
+      "name": "Reason box",
+      "settings": [
+        {
+          "type": "text",
+          "id": "tag",
+          "label": "Tag",
+          "default": "Cotton / Silk / Bamboo"
+        },
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Heading",
+          "default": "Absorbs → saturates"
+        },
+        {
+          "type": "textarea",
+          "id": "body",
+          "label": "Body",
+          "default": "Fiber fills with moisture under compression. Holds it against the skin. No mechanism to release it."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "DRYE Absorption Fails",
+      "blocks": [
+        {
+          "type": "reason",
+          "settings": {
+            "tag": "Cotton / Silk / Bamboo",
+            "heading": "Absorbs → saturates",
+            "body": "Fiber fills with moisture under compression. Holds it against the skin. No mechanism to release it."
+          }
+        },
+        {
+          "type": "reason",
+          "settings": {
+            "tag": "Synthetic Wicking",
+            "heading": "Wicks → collapses",
+            "body": "Wicking relies on capillary action and airflow. Under compression, both are eliminated."
+          }
+        },
+        {
+          "type": "reason",
+          "settings": {
+            "tag": "Membranes / Coatings",
+            "heading": "Breathes → blocks",
+            "body": "Breathable membranes require a vapour pressure differential. Inside a sealed glove, none exists."
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

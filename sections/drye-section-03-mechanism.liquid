@@ -1,0 +1,324 @@
+{{ 'drye-section-03-mechanism.css' | asset_url | stylesheet_tag }}
+
+<section class="sec mech-sec">
+  <div class="sec-in">
+    <div class="micro micro-w">
+      {{ section.settings.eyebrow }}
+    </div>
+
+    <h2 class="mech-h">
+      {{ section.settings.heading }}
+    </h2>
+
+    <p class="mech-sub">
+      {{ section.settings.subheading }}
+    </p>
+
+    <div class="mech-cols">
+      <div class="mech-col old">
+        <div class="mc-lbl">{{ section.settings.old_label }}</div>
+        <div class="mc-title">{{ section.settings.old_title }}</div>
+        <ul class="mc-list ol">
+          {% for block in section.blocks %}
+            {% if block.type == 'old_point' %}
+              <li {{ block.shopify_attributes }}>{{ block.settings.text }}</li>
+            {% endif %}
+          {% endfor %}
+        </ul>
+      </div>
+
+      <div class="mech-col new">
+        <div class="mc-lbl">{{ section.settings.new_label }}</div>
+        <div class="mc-title">{{ section.settings.new_title }}</div>
+        <ul class="mc-list nw">
+          {% for block in section.blocks %}
+            {% if block.type == 'new_point' %}
+              <li {{ block.shopify_attributes }}>{{ block.settings.text }}</li>
+            {% endif %}
+          {% endfor %}
+        </ul>
+      </div>
+    </div>
+
+    <div class="diag-wrap">
+      <div class="diag-title">{{ section.settings.diagram_title }}</div>
+
+      <div class="diag-stack">
+        <div class="dl outer">{{ section.settings.diagram_outer }}</div>
+        <div class="diag-arr">↑ ↑ ↑</div>
+        <div class="dl rel">{{ section.settings.diagram_release }}</div>
+        <div class="dl grad">{{ section.settings.diagram_gradient }}</div>
+        <div class="diag-arr mech-arr-down">↑ ↑ ↑</div>
+        <div class="dl skin">{{ section.settings.diagram_skin }}</div>
+      </div>
+
+      <div class="diag-note">{{ section.settings.diagram_note }}</div>
+    </div>
+  </div>
+</section>
+
+<div class="proof-bar">
+  <div class="proof-in">
+    {% for block in section.blocks %}
+      {% if block.type == 'proof_stat' %}
+        <div {{ block.shopify_attributes }}>
+          <div class="p-num">
+            {{ block.settings.value_main }}<span>{{ block.settings.value_suffix }}</span>
+          </div>
+          <div class="p-lbl">{{ block.settings.label }}</div>
+          <div class="p-src">{{ block.settings.source }}</div>
+        </div>
+      {% endif %}
+    {% endfor %}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "DRYE 03 — Mechanism",
+  "tag": "section",
+  "class": "shopify-section--drye-mechanism",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "The mechanism"
+    },
+    {
+      "type": "textarea",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Moisture doesn't need to be absorbed. It needs a route out."
+    },
+    {
+      "type": "textarea",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "DRYE is a structural textile — not a coating, membrane, or treatment. The architecture of the fiber creates a one-directional gradient. Moisture moves out continuously. No saturation point."
+    },
+    {
+      "type": "text",
+      "id": "old_label",
+      "label": "Old column label",
+      "default": "Every liner before DRYE"
+    },
+    {
+      "type": "text",
+      "id": "old_title",
+      "label": "Old column title",
+      "default": "Absorb and hold"
+    },
+    {
+      "type": "text",
+      "id": "new_label",
+      "label": "New column label",
+      "default": "DRYE"
+    },
+    {
+      "type": "text",
+      "id": "new_title",
+      "label": "New column title",
+      "default": "Route continuously"
+    },
+    {
+      "type": "text",
+      "id": "diagram_title",
+      "label": "Diagram title",
+      "default": "Cross-section — what happens inside your glove"
+    },
+    {
+      "type": "text",
+      "id": "diagram_outer",
+      "label": "Diagram outer glove",
+      "default": "Outer glove (nitrile / latex / vinyl)"
+    },
+    {
+      "type": "text",
+      "id": "diagram_release",
+      "label": "Diagram release layer",
+      "default": "DRYE™ Release Layer — moisture exits fiber"
+    },
+    {
+      "type": "text",
+      "id": "diagram_gradient",
+      "label": "Diagram active gradient",
+      "default": "DRYE™ Active Gradient — directional transport"
+    },
+    {
+      "type": "text",
+      "id": "diagram_skin",
+      "label": "Diagram skin surface",
+      "default": "Skin surface — stays dry"
+    },
+    {
+      "type": "text",
+      "id": "diagram_note",
+      "label": "Diagram note",
+      "default": "No chemicals · No coatings · No saturation point · Patent pending"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "old_point",
+      "name": "Old column point",
+      "limit": 5,
+      "settings": [
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Text"
+        }
+      ]
+    },
+    {
+      "type": "new_point",
+      "name": "New column point",
+      "limit": 5,
+      "settings": [
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Text"
+        }
+      ]
+    },
+    {
+      "type": "proof_stat",
+      "name": "Proof stat",
+      "limit": 4,
+      "settings": [
+        {
+          "type": "text",
+          "id": "value_main",
+          "label": "Main value",
+          "default": "7"
+        },
+        {
+          "type": "text",
+          "id": "value_suffix",
+          "label": "Value suffix",
+          "default": "/9"
+        },
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Label",
+          "default": "Reduced sweat retention in field study"
+        },
+        {
+          "type": "text",
+          "id": "source",
+          "label": "Source",
+          "default": "Automotive · Textilhögskolan Borås, 2023"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "DRYE 03 — Mechanism",
+      "blocks": [
+        {
+          "type": "old_point",
+          "settings": {
+            "text": "Sweat enters the fabric and stays"
+          }
+        },
+        {
+          "type": "old_point",
+          "settings": {
+            "text": "At saturation: moisture presses against skin"
+          }
+        },
+        {
+          "type": "old_point",
+          "settings": {
+            "text": "Sealed glove traps heat and humidity"
+          }
+        },
+        {
+          "type": "old_point",
+          "settings": {
+            "text": "pH rises, barrier breaks, bacteria multiply"
+          }
+        },
+        {
+          "type": "old_point",
+          "settings": {
+            "text": "Same damage on shift 1 as shift 8"
+          }
+        },
+
+        {
+          "type": "new_point",
+          "settings": {
+            "text": "Structural gradient pulls moisture away from skin"
+          }
+        },
+        {
+          "type": "new_point",
+          "settings": {
+            "text": "No saturation — transport continues all shift"
+          }
+        },
+        {
+          "type": "new_point",
+          "settings": {
+            "text": "Skin surface stays dry under compression"
+          }
+        },
+        {
+          "type": "new_point",
+          "settings": {
+            "text": "Barrier stays intact. Bacteria have no wet surface"
+          }
+        },
+        {
+          "type": "new_point",
+          "settings": {
+            "text": "Validated by Uppsala University + Textilhögskolan Borås"
+          }
+        },
+
+        {
+          "type": "proof_stat",
+          "settings": {
+            "value_main": "7",
+            "value_suffix": "/9",
+            "label": "Reduced sweat retention in field study",
+            "source": "Automotive · Textilhögskolan Borås, 2023"
+          }
+        },
+        {
+          "type": "proof_stat",
+          "settings": {
+            "value_main": "3",
+            "value_suffix": "/3",
+            "label": "Diagnosed dermatitis cases improved",
+            "source": "Same study · clinically observed"
+          }
+        },
+        {
+          "type": "proof_stat",
+          "settings": {
+            "value_main": "10",
+            "value_suffix": "/10",
+            "label": "Would use in active combat",
+            "source": "Ukraine infantry · National Guard, 2025"
+          }
+        },
+        {
+          "type": "proof_stat",
+          "settings": {
+            "value_main": "7",
+            "value_suffix": "yr",
+            "label": "R&D before market release",
+            "source": "Uppsala Uni · Swedish School of Textiles · RISE"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

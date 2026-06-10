@@ -9,102 +9,361 @@
  */
 {
   "sections": {
-    "home_hero_new_qyDg7D": {
-      "type": "home-hero-new",
-      "custom_css": [],
-      "name": "Homepage Hero(New)",
+    "drye_about_hero_8pRjDq": {
+      "type": "drye-about-hero",
+      "name": "DRYE About Hero",
       "settings": {
-        "title": "SkinDRYE™ Technology – Engineered in Sweden",
-        "cover_image": "shopify://shop_images/kopia.webp",
-        "stars": 5,
-        "review_text": "<p>What began as frustration and skin problems from sweaty, irritated hands has grown into a seven-year collaboration with leading universities, dermatologists, and industry partners – resulting in a textile developed to solve the overlooked problem of moisture inside gloves.</p>",
-        "review_text_font_size_desktop": 18,
-        "review_text_line_height_desktop": 24,
-        "review_text_font_size_tablet": 16,
-        "review_text_line_height_tablet": 24,
-        "review_text_font_size_mobile": 16,
-        "review_text_line_height_mobile": 24,
-        "reviews_link": "",
-        "button_text": "",
-        "button_url": "",
-        "bg": "#ffffff",
-        "check_review_text": "",
-        "review_url": ""
+        "eyebrow": "Why DRYE exists",
+        "heading_line_1": "Built because nothing else",
+        "heading_line_2": "addressed the actual problem.",
+        "opening": "Hands don't deteriorate in open air. They deteriorate inside sealed gloves — under moisture, heat, pressure, and friction. Every solution we knew of treated the damage after it happened. We built one that changes the environment before it does.",
+        "quote_text": "I've lived with atopic eczema most of my life. That's why I built something that changes the environment — not treats the damage.",
+        "avatar": "shopify://shop_images/Firefly_1.webp",
+        "quote_name": "Wilhelm Bäckström",
+        "quote_role": "Founder, DRYE"
       }
     },
-    "multirows_new_zY9rg7": {
-      "type": "multirows-new",
+    "drye_about_origin_strip_BRNcxX": {
+      "type": "drye-about-origin-strip",
       "blocks": {
-        "row_tejm9X": {
-          "type": "row",
+        "stat_FANyMn": {
+          "type": "stat",
           "settings": {
-            "title": "Developed to Solve Moisture-Related Skin Damage",
-            "content": "<p>We developed a textile designed to address moisture at its source. SkinDRYE™ Technology uses a dual-layer system:<br/>•<strong> Inner layer:</strong> pulls sweat away from your skin instantly.<br/>• <strong>Outer layer:</strong> disperses and evaporates it before damage occurs.<br/><br/>By moving sweat outward, the textile reduces prolonged moisture exposure – a factor linked in research to Moisture-Associated Skin Damage (MASD), which is known to aggravate irritation, eczema flare-ups, and barrier breakdown. The effect: hands that feel drier and less friction – conditions shown to support the skin barrier during long glove use.</p>",
-            "button_text": "",
-            "button_url": "",
-            "video": "shopify://files/videos/Text Sept v4.mp4",
-            "controls": true,
-            "position": "row-reverse"
+            "number": "7",
+            "suffix": "yr",
+            "title": "Years of R&D",
+            "body": "Across 4 external institutions before the first commercial pair shipped"
           }
         },
-        "row_RCFQLx": {
-          "type": "row",
+        "stat_6HRYkT": {
+          "type": "stat",
           "settings": {
-            "title": "Engineered for Demanding Use",
-            "content": "<p>Built to be lightweight, durable, and adaptable across glove types. Unlike liners that just soak up sweat, DRYE actively directs it away from your skin, reducing irritation and odor during long shifts. Optimized fiber orientation and knit density <em>designed with a focus on sensitive skin needs.</em></p>",
-            "button_text": "",
-            "button_url": "",
-            "controls": true,
-            "image": "shopify://shop_images/2E9A8886ny2.webp",
-            "position": "row"
+            "number": "4",
+            "suffix": "",
+            "title": "Institutions",
+            "body": "Uppsala University, RISE, Swedish School of Textiles"
           }
         },
-        "row_6bc7Uc": {
-          "type": "row",
+        "stat_cCGiKb": {
+          "type": "stat",
           "settings": {
-            "title": "Backed by Research",
-            "content": "<p>Developed since 2018 in collaboration with:<br/><br/>• Uppsala University<br/>• RISE Research Institutes of Sweden<br/>• The Swedish School of Textiles in Borås<br/>• Dermatology teams at Skåne University Hospital<br/>• Supported by UIC, Borås INK, AFRY, and others<br/><br/>Recognized with the SKAPA Prize in memory of Alfred Nobel (2020) for addressing an often-overlooked challenge in glove-related skin health: Moisture-Associated Skin Damage (MASD).</p>",
-            "button_text": "",
-            "button_url": "",
-            "controls": true,
-            "image": "shopify://shop_images/organoclick4_1.webp",
-            "image_tablet": "shopify://shop_images/organoclick4_1.webp",
-            "image_mobile": "shopify://shop_images/organoclick4_1.webp",
-            "position": "row-reverse"
+            "number": "0",
+            "suffix": "yr",
+            "title": "Chemical inputs",
+            "body": "No DWR coatings. No wicking agents. No membranes. The mechanism is structural."
           }
         }
       },
       "block_order": [
-        "row_tejm9X",
-        "row_RCFQLx",
-        "row_6bc7Uc"
+        "stat_FANyMn",
+        "stat_6HRYkT",
+        "stat_cCGiKb"
       ],
-      "custom_css": [],
-      "name": "Multirows(New)",
+      "name": "DRYE About Origin Strip",
+      "settings": {}
+    },
+    "drye_about_why_jEiCRb": {
+      "type": "drye-about-why",
+      "blocks": {
+        "fail_point_zrnTDA": {
+          "type": "fail_point",
+          "settings": {
+            "title": "Cotton liners",
+            "body": "Absorb until saturation — then hold a wet layer against the skin for the rest of the shift."
+          }
+        },
+        "fail_point_9yAUF4": {
+          "type": "fail_point",
+          "settings": {
+            "title": "Barrier creams",
+            "body": "Effective until sweat forms. Inside a sealed glove, that happens within the first hour."
+          }
+        },
+        "fail_point_pRmkzf": {
+          "type": "fail_point",
+          "settings": {
+            "title": "DWR coatings",
+            "body": "Degrade with washing and treat the symptom — not the environment that causes it."
+          }
+        },
+        "fail_point_KDUKte": {
+          "type": "fail_point",
+          "settings": {
+            "title": "Steroid creams",
+            "body": "Treat the damage after it's done. The moisture environment that caused it stays unchanged."
+          }
+        },
+        "drye_point_DabF8C": {
+          "type": "drye_point",
+          "settings": {
+            "title": "No absorption ceiling",
+            "body": "DRYE routes moisture through fibre geometry — capillary action and structural gradient. No saturation point because there is no saturation mechanism."
+          }
+        },
+        "drye_point_CGng9T": {
+          "type": "drye_point",
+          "settings": {
+            "title": "Continuous transport",
+            "body": "The mechanism is active for the full duration of wear — and doesn't degrade after washing."
+          }
+        },
+        "drye_point_9PktM8": {
+          "type": "drye_point",
+          "settings": {
+            "title": "No chemical inputs",
+            "body": "Entirely structural. No coatings, no treatments, nothing that degrades or transfers to skin."
+          }
+        },
+        "drye_point_ce3Mmx": {
+          "type": "drye_point",
+          "settings": {
+            "title": "0.4mm — no dexterity compromise",
+            "body": "Fits inside any standard glove. Verified across automotive and military field testing."
+          }
+        }
+      },
+      "block_order": [
+        "fail_point_zrnTDA",
+        "fail_point_9yAUF4",
+        "fail_point_pRmkzf",
+        "fail_point_KDUKte",
+        "drye_point_DabF8C",
+        "drye_point_CGng9T",
+        "drye_point_9PktM8",
+        "drye_point_ce3Mmx"
+      ],
+      "name": "DRYE About Why",
       "settings": {
-        "special_title": false,
-        "overlap": false,
-        "title": "",
-        "invert": true,
-        "bg": "#ffffff",
-        "tx": "#000000",
-        "sub_title_font_size_desktop": 48,
-        "sub_title_line_height_desktop": 55,
-        "sub_title_font_size_tablet": 34,
-        "sub_title_line_height_tablet": 40,
-        "sub_title_font_size_mobile": 24,
-        "sub_title_line_height_mobile": 30,
-        "sub_body_font_size_desktop": 18,
-        "sub_body_line_height_desktop": 28,
-        "sub_body_font_size_tablet": 16,
-        "sub_body_line_height_tablet": 28,
-        "sub_body_font_size_mobile": 16,
-        "sub_body_line_height_mobile": 24
+        "eyebrow": "The structural argument",
+        "heading": "Every conventional solution absorbs moisture. Absorption has a ceiling. It saturates.",
+        "subtext": "That is not a product flaw. That is a physics constraint. Once a material is saturated, it holds moisture against the skin — permanently, for the rest of the shift. No cotton liner, barrier cream, or DWR coating can change that.",
+        "fail_label": "Why absorption fails",
+        "drye_label": "How routing works differently"
+      }
+    },
+    "drye_about_founder_story_yhLDQL": {
+      "type": "drye-about-founder-story",
+      "name": "DRYE About Founder Story",
+      "settings": {
+        "image": "shopify://shop_images/URZ03767_2_-min_fb60d491-6691-423b-a449-6ba709c25859.jpg",
+        "image_alt": "Wilhelm and Andrew",
+        "tag_name": "Wilhelm Bäckström,",
+        "tag_role": "Stockholm, Sweden — 2019",
+        "eyebrow": "Not another liner.",
+        "heading": "A tested system for moving moisture out of closed protective gear.",
+        "body": "<p>DRYE started with one problem: the environment inside closed protective gear.</p><p><em>Not the cream. Not the skin treatment. The trapped sweat, heat, and friction that builds up during a shift.</em></p><p>After seven years of R&D with external textile and medical input, we built a textile that moves moisture away from the skin instead of soaking it up and holding it there.</p><p><strong>Engineered with one of the world’s leading textile institutions. Validated by pro hockey players, mining workers, and people who wear gloves for real work.</strong></p><p></p>",
+        "cta_text": "",
+        "cta_url": ""
+      }
+    },
+    "drye_about_validation_timeline_pTJqXQ": {
+      "type": "drye-about-validation-timeline",
+      "blocks": {
+        "timeline_item_fNUbDk": {
+          "type": "timeline_item",
+          "settings": {
+            "status": "done",
+            "year": "2019–2020",
+            "title": "Concept prototyping",
+            "institution": "Skåne University Hospital — DermatologyInitial material concept validated.",
+            "description": "Capillary routing confirmed as structurally viable."
+          }
+        },
+        "timeline_item_3PrEWB": {
+          "type": "timeline_item",
+          "settings": {
+            "status": "done",
+            "year": "2021",
+            "title": "Material selection study",
+            "institution": "Uppsala University — Material science",
+            "description": "Systematic evaluation of fibre candidates for textile architecture. Fibre geometry confirmed as primary transport driver — not chemical treatment."
+          }
+        },
+        "timeline_item_fXRxDd": {
+          "type": "timeline_item",
+          "settings": {
+            "status": "done",
+            "year": "2022",
+            "title": "Textile architecture verified",
+            "institution": "Swedish School of Textiles, Borås",
+            "description": "Three field studies published. Structural design finalised — 0.4mm dual-layer gradient confirmed manufacturable at scale."
+          }
+        },
+        "timeline_item_bCxxe3": {
+          "type": "timeline_item",
+          "settings": {
+            "status": "done",
+            "year": "2023",
+            "title": "Enterprise validation — Swedish industry",
+            "institution": "Boliden · LKAB · Scania · ISS · Hedin Bil · Tesla · Bilia",
+            "description": "Tested across Fortune 500 operations in mining, manufacturing, automotive and facilities management."
+          }
+        },
+        "timeline_item_icBHb3": {
+          "type": "timeline_item",
+          "settings": {
+            "status": "done",
+            "year": "2024",
+            "title": "Field study — electric vehicle sector",
+            "institution": "Automotive field study, Borås — October 2023 · Pro user cohort",
+            "description": "7/9 reduced sweat retention. 3/3 with pre-existing dermatitis reported measurable skin improvement. First D2C sales."
+          }
+        },
+        "timeline_item_nryYLV": {
+          "type": "timeline_item",
+          "settings": {
+            "status": "done",
+            "year": "2025",
+            "title": "Military field test & new IP findings",
+            "institution": "National Guard of Ukraine, 2nd Corps · Swedish School of Textiles, Borås",
+            "description": "10/10 would use in combat. 9/10 reported improved weapon precision. Advanced instrumentation confirms previously undocumented properties of the DRYE gradient."
+          }
+        },
+        "timeline_item_bfKfPe": {
+          "type": "timeline_item",
+          "settings": {
+            "status": "active",
+            "year": "2026",
+            "title": "",
+            "institution": "",
+            "description": ""
+          }
+        },
+        "partner_DtA9wr": {
+          "type": "partner",
+          "settings": {
+            "name": "Uppsala University"
+          }
+        },
+        "partner_HJ3tGa": {
+          "type": "partner",
+          "settings": {
+            "name": "RISE"
+          }
+        },
+        "partner_HGeXHN": {
+          "type": "partner",
+          "settings": {
+            "name": "Swedish School of Textiles"
+          }
+        },
+        "partner_RdTQX7": {
+          "type": "partner",
+          "settings": {
+            "name": "Skåne University Hospital"
+          }
+        },
+        "partner_qibV3E": {
+          "type": "partner",
+          "settings": {
+            "name": "Vinnova"
+          }
+        },
+        "partner_QqXWQF": {
+          "type": "partner",
+          "settings": {
+            "name": "Uppsala Innovation Center"
+          }
+        }
+      },
+      "block_order": [
+        "timeline_item_fNUbDk",
+        "timeline_item_3PrEWB",
+        "timeline_item_fXRxDd",
+        "timeline_item_bCxxe3",
+        "timeline_item_icBHb3",
+        "timeline_item_nryYLV",
+        "timeline_item_bfKfPe",
+        "partner_DtA9wr",
+        "partner_HJ3tGa",
+        "partner_HGeXHN",
+        "partner_RdTQX7",
+        "partner_qibV3E",
+        "partner_QqXWQF"
+      ],
+      "name": "DRYE About Validation Timeline",
+      "settings": {
+        "eyebrow": "Seven years. Four institutions.",
+        "heading": "We didn't ship until it was verified externally.",
+        "subtext": "Every milestone in the timeline below required external validation — not internal sign-off. The product was not commercially available until the mechanism had been confirmed independently.",
+        "partners_label": "Partners"
+      }
+    },
+    "drye_about_skapa_APyfGX": {
+      "type": "drye-about-skapa",
+      "name": "DRYE About SKAPA",
+      "settings": {
+        "award_label": "SKAPA Prize — 2020",
+        "heading": "Sweden's most recognised innovation award. In memory of Alfred Nobel.",
+        "body": "<p>DRYE received the SKAPA Prize for its textile technology — developed to prevent moisture damage to the skin in protective equipment. The award is given in memory of Alfred Nobel, <strong>for innovations with genuine societal and commercial significance.</strong></p>",
+        "link_label": "See the research",
+        "link_url": "shopify://pages/research",
+        "quote_text": "\"In a smart and practical way, DRYE has developed a concrete solution to a common everyday problem affecting many individuals. Through the textile's gradient, hands stay clean and dry without risk of drying out or eczema.\"",
+        "quote_attr": "SKAPA Foundation — Innovation in Memory of Alfred Nobel"
+      }
+    },
+    "drye_about_team_HaNURz": {
+      "type": "drye-about-team",
+      "blocks": {
+        "person_zPC68K": {
+          "type": "person",
+          "settings": {
+            "image": "shopify://shop_images/Bild_DRYE_1_1.webp",
+            "placeholder_label": "[ WILHELM PHOTO ]",
+            "name": "Wilhelm Bäckström",
+            "role": "Founder",
+            "bio": "Has lived with atopic eczema. The personal frustration with reactive solutions — creams, steroids, short-term relief — became the founding premise: change the environment, not the treatment protocol.",
+            "linkedin_label": "LinkedIn",
+            "linkedin_url": "",
+            "email": "wilhelm.backstrom@drye.se"
+          }
+        },
+        "person_ArCbtU": {
+          "type": "person",
+          "settings": {
+            "placeholder_label": "[ ANDREW PHOTO ]",
+            "name": "Andrew Brathwaite",
+            "role": "Co-Founder — EV Engineer",
+            "bio": "EV engineer by trade — Tesla, CAKE, Fisker. Spent years working in environments where sealed gloves and sweat are an occupational constant. Understood the problem from a different angle than Wilhelm, and brought the engineering rigour to take the validated mechanism from institution to product.",
+            "linkedin_label": "LinkedIn",
+            "linkedin_url": "",
+            "email": "andrew.brathwaite@drye.se"
+          }
+        }
+      },
+      "block_order": [
+        "person_zPC68K",
+        "person_ArCbtU"
+      ],
+      "name": "DRYE About Team",
+      "settings": {
+        "eyebrow": "The people behind it",
+        "heading": "One founder lived with the skin damage. The other spent years causing it."
+      }
+    },
+    "drye_about_cta_XT4b43": {
+      "type": "drye-about-cta",
+      "name": "DRYE About CTA",
+      "settings": {
+        "eyebrow": "",
+        "heading_line_1": "",
+        "heading_line_2": "",
+        "subtext": "30 days. Full refund if it doesn't work.",
+        "primary_label": "TAKE ME TO THE PRODUCT →",
+        "primary_url": "shopify://products/drye-moisture-routing-glove-liners",
+        "secondary_label": "See the Research",
+        "secondary_url": "shopify://pages/research"
       }
     }
   },
   "order": [
-    "home_hero_new_qyDg7D",
-    "multirows_new_zY9rg7"
+    "drye_about_hero_8pRjDq",
+    "drye_about_origin_strip_BRNcxX",
+    "drye_about_why_jEiCRb",
+    "drye_about_founder_story_yhLDQL",
+    "drye_about_validation_timeline_pTJqXQ",
+    "drye_about_skapa_APyfGX",
+    "drye_about_team_HaNURz",
+    "drye_about_cta_XT4b43"
   ]
 }

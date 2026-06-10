@@ -1,0 +1,363 @@
+/* ─── MAIN LAYOUT ─────────────────────────────────────────── */
+.contact-layout{
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 56px var(--page-pad) 80px;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 48px;
+}
+
+@media (min-width: 900px){
+  .contact-layout{
+    padding: 72px 40px 96px;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: start;
+  }
+}
+
+/* ─── LEFT: TRACKS ────────────────────────────────────────── */
+.contact-left{}
+
+/* Track cards */
+.track-cards{
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  margin-bottom: 48px;
+}
+
+.track-card{
+  border: 1px solid var(--border);
+  padding: 22px 20px;
+  cursor: pointer;
+  transition: border-color .15s, background .15s;
+  position: relative;
+}
+
+.track-card::before{
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background: var(--border);
+  transition: background .15s;
+}
+
+.track-card:hover{
+  background: var(--bg-tint);
+  border-color: var(--accent);
+}
+
+.track-card:hover::before{
+  background: var(--sage);
+}
+
+.track-card.active{
+  background: var(--bg-tint);
+  border-color: var(--deep);
+}
+
+.track-card.active::before{
+  background: var(--deep);
+}
+
+.tc-label{
+  font-size: 8px;
+  font-weight: 600;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--sage);
+  margin-bottom: 8px;
+  display: block;
+}
+
+.tc-title{
+  font-family: "Clash Grotesk", sans-serif;
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: -.01em;
+  color: var(--deep);
+  margin-bottom: 6px;
+}
+
+.tc-body{
+  font-size: 12px;
+  color: var(--muted);
+  line-height: 1.65;
+}
+
+/* ─── TEAM ────────────────────────────────────────────────── */
+.team-section{
+  border-top: 1px solid var(--border);
+  padding-top: 32px;
+}
+
+.team-label{
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--sage);
+  margin-bottom: 20px;
+  display: block;
+}
+
+.team-list{
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.team-member{
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.team-avatar{
+  width: 52px;
+  height: 52px;
+  flex-shrink: 0;
+  background: linear-gradient(140deg, #1e3a4c, #3d5a5e);
+  overflow: hidden;
+  position: relative;
+}
+
+.team-avatar img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+}
+
+.team-name{
+  font-family: "Clash Grotesk", sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: -.01em;
+  color: var(--deep);
+  margin-bottom: 2px;
+}
+
+.team-role{
+  font-size: 11px;
+  color: var(--caption);
+  margin-bottom: 6px;
+}
+
+.team-links{
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.team-link{
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  color: var(--sage);
+  text-decoration: none;
+  border-bottom: 1px solid rgba(95, 138, 139, .3);
+  padding-bottom: 1px;
+  transition: color .15s, border-color .15s;
+}
+
+.team-link:hover{
+  color: var(--deep);
+  border-color: var(--deep);
+}
+
+/* ─── RIGHT: FORM ─────────────────────────────────────────── */
+.contact-right{}
+
+.form-header{
+  margin-bottom: 28px;
+}
+
+.form-title{
+  font-family: "Clash Grotesk", sans-serif;
+  font-size: clamp(17px, 2.5vw, 22px);
+  font-weight: 600;
+  letter-spacing: -.018em;
+  color: var(--deep);
+  margin-bottom: 8px;
+  margin-top: 10px;
+}
+
+.form-desc{
+  font-size: 13px;
+  color: var(--muted);
+  line-height: 1.7;
+}
+
+/* Form panels */
+.form-panel{
+  display: none;
+}
+
+.form-panel.active{
+  display: block;
+}
+
+/* Fields */
+.field-row{
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+@media (min-width: 480px){
+  .field-row.two{
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.field{
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.field-label{
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--deep);
+}
+
+.field-label span{
+  color: var(--sage);
+}
+
+.field input,
+.field textarea,
+.field select{
+  width: 100%;
+  font-family: "DM Sans", sans-serif;
+  font-size: 14px;
+  color: var(--body);
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 0;
+  padding: 14px 14px;
+  outline: none;
+  transition: border-color .15s, background-color .15s;
+}
+
+.field textarea{
+  min-height: 148px;
+  resize: vertical;
+}
+
+.field input::placeholder,
+.field textarea::placeholder,
+.field select::placeholder{
+  color: var(--caption);
+}
+
+.field input:focus,
+.field textarea:focus,
+.field select:focus{
+  border-color: var(--deep);
+  background: var(--bg-soft);
+}
+
+.form-footer{
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 14px;
+  margin-top: 18px;
+}
+
+@media (min-width: 640px){
+  .form-footer{
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+}
+
+.btn-submit{
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 46px;
+  padding: 0 18px;
+  background: var(--deep);
+  color: var(--white-100);
+  font-family: "Clash Grotesk", sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+  border: 1px solid var(--deep);
+  cursor: pointer;
+  transition: background-color .15s, border-color .15s, opacity .15s;
+}
+
+.btn-submit:hover{
+  background: var(--accent);
+  border-color: var(--accent);
+}
+
+.form-guarantee{
+  font-size: 11px;
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+.form-errors{
+  margin-top: 16px;
+  font-size: 13px;
+  color: var(--red);
+  line-height: 1.6;
+}
+
+.form-errors ul{
+  margin: 0;
+  padding-left: 18px;
+  list-style: disc;
+}
+
+/* Success state */
+.form-success{
+  display: none;
+  padding: 32px 24px;
+  border: 1px solid rgba(13, 148, 136, .25);
+  background: rgba(13, 148, 136, .04);
+  text-align: center;
+  margin-top: 18px;
+}
+
+.form-success.show{
+  display: block;
+}
+
+.success-icon{
+  font-size: 24px;
+  margin-bottom: 14px;
+  display: block;
+}
+
+.success-h{
+  font-family: "Clash Grotesk", sans-serif;
+  font-size: 18px;
+  font-weight: 600;
+  letter-spacing: -.015em;
+  color: var(--deep);
+  margin-bottom: 8px;
+}
+
+.success-body{
+  font-size: 13px;
+  color: var(--muted);
+  line-height: 1.7;
+}

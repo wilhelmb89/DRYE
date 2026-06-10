@@ -1,0 +1,122 @@
+{{ 'drye-policy-layout.css' | asset_url | stylesheet_tag }}
+{{ 'drye-policy-content.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'drye-policy.js' | asset_url }}" defer></script>
+
+<section class="drye-policy-layout">
+  <div class="drye-policy-layout__inner">
+
+    {% for block in section.blocks %}
+      {% case block.type %}
+
+        {% when 'side_nav' %}
+        <aside class="drye-policy-side-nav" aria-label="Policy sections" {{ block.shopify_attributes }}>
+          <nav class="drye-policy-side-nav__nav">
+
+            <div class="drye-policy-side-nav__group" data-policy-group="shipping">
+              <div class="drye-policy-side-nav__label">Shipping</div>
+              <a class="drye-policy-side-nav__link is-active" href="#what-to-expect">What to expect</a>
+              <a class="drye-policy-side-nav__link" href="#delivery-times">Delivery times</a>
+              <a class="drye-policy-side-nav__link" href="#shipping-costs">Shipping costs</a>
+              <a class="drye-policy-side-nav__link" href="#customs">Customs & duties</a>
+              <a class="drye-policy-side-nav__link" href="#tracking">Tracking</a>
+              <a class="drye-policy-side-nav__link" href="#delivery-issues">Delivery issues</a>
+            </div>
+
+            <div class="drye-policy-side-nav__group" data-policy-group="returns" hidden>
+              <div class="drye-policy-side-nav__label">Returns</div>
+              <a class="drye-policy-side-nav__link" href="#guarantee">30-day guarantee</a>
+              <a class="drye-policy-side-nav__link" href="#eligibility">Eligibility</a>
+              <a class="drye-policy-side-nav__link" href="#how-to-return">How to return</a>
+              <a class="drye-policy-side-nav__link" href="#refunds">Refunds</a>
+              <a class="drye-policy-side-nav__link" href="#what-can-be-returned">What can be returned</a>
+            </div>
+
+            <div class="drye-policy-side-nav__group" data-policy-group="privacy" hidden>
+              <div class="drye-policy-side-nav__label">Privacy Policy</div>
+              <a class="drye-policy-side-nav__link" href="#privacy-overview">Overview</a>
+            </div>
+
+            <div class="drye-policy-side-nav__group" data-policy-group="terms" hidden>
+              <div class="drye-policy-side-nav__label">Terms of Service</div>
+              <a class="drye-policy-side-nav__link" href="#terms-overview">Overview</a>
+            </div>
+
+          </nav>
+        </aside>
+
+        {% when 'content' %}
+        <div class="policy-content" {{ block.shopify_attributes }}>
+
+          <div class="policy-panel active" id="panel-shipping">
+            {{ block.settings.shipping_html }}
+          </div>
+
+          <div class="policy-panel" id="panel-returns">
+            {{ block.settings.returns_html }}
+          </div>
+
+          <div class="policy-panel" id="panel-privacy">
+            {{ block.settings.privacy_html }}
+          </div>
+
+          <div class="policy-panel" id="panel-terms">
+            {{ block.settings.terms_html }}
+          </div>
+
+        </div>
+
+      {% endcase %}
+    {% endfor %}
+
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "DRYE Policy Layout",
+  "tag": "section",
+  "class": "shopify-section--drye-policy-layout",
+  "max_blocks": 2,
+  "blocks": [
+    {
+      "type": "side_nav",
+      "name": "Side nav"
+    },
+    {
+      "type": "content",
+      "name": "Content",
+      "settings": [
+        {
+          "type": "html",
+          "id": "shipping_html",
+          "label": "Shipping HTML"
+        },
+        {
+          "type": "html",
+          "id": "returns_html",
+          "label": "Returns HTML"
+        },
+        {
+          "type": "html",
+          "id": "privacy_html",
+          "label": "Privacy Policy HTML"
+        },
+        {
+          "type": "html",
+          "id": "terms_html",
+          "label": "Terms of Service HTML"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "DRYE Policy Layout",
+      "blocks": [
+        { "type": "side_nav" },
+        { "type": "content" }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,45 @@
+{{ 'drye-policy-tab-bar.css' | asset_url | stylesheet_tag }}
+
+<div class="drye-policy-tab-bar">
+  <div class="drye-policy-tab-bar__inner">
+
+    <button
+      class="drye-policy-tab-bar__button is-active"
+      data-tab="shipping">
+      Shipping
+    </button>
+
+    <button
+      class="drye-policy-tab-bar__button"
+      data-tab="returns">
+      Returns
+    </button>
+
+    <button
+      class="drye-policy-tab-bar__button"
+      data-tab="privacy">
+      Privacy
+    </button>
+
+    <button
+      class="drye-policy-tab-bar__button"
+      data-tab="terms">
+      Terms
+    </button>
+
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "DRYE Policy Tab Bar",
+  "tag": "section",
+  "class": "shopify-section--drye-policy-tab-bar",
+  "settings": [],
+  "presets": [
+    {
+      "name": "DRYE Policy Tab Bar"
+    }
+  ]
+}
+{% endschema %}

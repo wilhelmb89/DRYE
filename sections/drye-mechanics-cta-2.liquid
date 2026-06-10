@@ -1,0 +1,115 @@
+{{ 'drye-mechanics-cta-2.css' | asset_url | stylesheet_tag }}
+
+<section class="dryeNEW-section mech-cta" data-section-id="{{ section.id }}" data-drye-section data-section-index="17" data-section-name="final_cta">    
+  <div class="dryeNEW-container mech-cta__container">
+
+    {% if section.settings.eyebrow != blank %}
+      <span class="dryeNEW-micro mech-cta__eyebrow">
+        {{ section.settings.eyebrow }}
+      </span>
+    {% endif %}
+
+    {% if section.settings.heading_line_1 != blank or section.settings.heading_emphasis != blank %}
+      <h2 class="dryeNEW-h2 mech-cta__heading">
+        {% if section.settings.heading_line_1 != blank %}
+          {{ section.settings.heading_line_1 }}
+        {% endif %}
+        {% if section.settings.heading_emphasis != blank %}
+          <em class="dryeNEW-em">{{ section.settings.heading_emphasis }}</em>
+        {% endif %}
+      </h2>
+    {% endif %}
+
+    {% if section.settings.body != blank %}
+      <div class="dryeNEW-body mech-cta__sub">
+        {{ section.settings.body }}
+      </div>
+    {% endif %}
+
+    {% if section.settings.button_label != blank and section.settings.button_link != blank %}
+      <a href="{{ section.settings.button_link }}" class="mech-cta__btn">
+        {{ section.settings.button_label }}
+      </a>
+    {% endif %}
+
+    {% if section.settings.meta != blank %}
+      <div class="dryeNEW-body--caption mech-cta__meta">
+        {{ section.settings.meta }}
+      </div>
+    {% endif %}
+
+    {% if section.settings.secondary_label != blank and section.settings.secondary_link != blank %}
+      <a href="{{ section.settings.secondary_link }}" class="mech-cta__secondary">
+        {{ section.settings.secondary_label }}
+      </a>
+    {% endif %}
+
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "DRYE Mechanics CTA-2",
+  "tag": "section",
+  "class": "shopify-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "30-day full refund"
+    },
+    {
+      "type": "text",
+      "id": "heading_line_1",
+      "label": "Heading line 1",
+      "default": "Try it for one shift."
+    },
+    {
+      "type": "text",
+      "id": "heading_emphasis",
+      "label": "Heading emphasis",
+      "default": "Keep it or send it back."
+    },
+    {
+      "type": "richtext",
+      "id": "body",
+      "label": "Body",
+      "default": "<p>Full refund within 30 days. No forms. No conditions. We can offer this because of how it works — not as a concession.</p>"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button label",
+      "default": "Reserve a pair →"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button link"
+    },
+    {
+      "type": "text",
+      "id": "meta",
+      "label": "Meta line",
+      "default": "Secure checkout · Ships within 24 hours · 4.88/5 on 34 reviews"
+    },
+    {
+      "type": "text",
+      "id": "secondary_label",
+      "label": "Secondary link label",
+      "default": "Read the full Gothenburg field report →"
+    },
+    {
+      "type": "url",
+      "id": "secondary_link",
+      "label": "Secondary link"
+    }
+  ],
+  "presets": [
+    {
+      "name": "DRYE Mechanics CTA-2"
+    }
+  ]
+}
+{% endschema %}

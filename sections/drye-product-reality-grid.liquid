@@ -1,0 +1,519 @@
+{% comment %}
+  DRYE — Product Reality Grid
+  Source prototype: drye-product-reality-grid-prototype.html
+  Build-rule notes:
+  - Uses dryeNEW-section + dryeNEW-container for global spacing/page width.
+  - Uses DRYE base typography classes in markup.
+  - Section CSS only controls component layout, spacing, color, media treatment, and lightbox behavior.
+{% endcomment %}
+
+{{ 'drye-product-reality-grid.css' | asset_url | stylesheet_tag }}
+
+{%- liquid
+  assign section_dom_id = 'drye-product-grid-' | append: section.id
+-%}
+
+<section
+  class="dryeNEW-section drye-product-grid"
+  id="{{ section_dom_id }}"
+  data-drye-product-grid
+  data-drye-section
+  data-section-index="5"
+  data-section-name="field_gallery"
+>
+  <div class="dryeNEW-container">
+
+    <div class="drye-product-grid__intro">
+      {%- if section.settings.eyebrow != blank -%}
+        <span class="dryeNEW-micro drye-product-grid__eyebrow">
+          {{ section.settings.eyebrow | escape }}
+        </span>
+      {%- endif -%}
+
+      {%- if section.settings.heading_line_1 != blank or section.settings.heading_emphasis != blank or section.settings.heading_line_2 != blank -%}
+        <h2 class="dryeNEW-h2 drye-product-grid__heading">
+          {%- if section.settings.heading_line_1 != blank -%}
+            <span class="drye-product-grid__heading-line">
+              {{ section.settings.heading_line_1 | escape }}
+            </span>
+          {%- endif -%}
+
+          {%- if section.settings.heading_emphasis != blank or section.settings.heading_line_2 != blank -%}
+            <span class="drye-product-grid__heading-line">
+              {%- if section.settings.heading_emphasis != blank -%}
+                <em class="dryeNEW-em">{{ section.settings.heading_emphasis | escape }}</em>
+              {%- endif -%}
+              {%- if section.settings.heading_line_2 != blank -%}
+                {%- if section.settings.heading_emphasis != blank -%} {% endif -%}
+                {{ section.settings.heading_line_2 | escape }}
+              {%- endif -%}
+            </span>
+          {%- endif -%}
+        </h2>
+      {%- endif -%}
+
+      {%- if section.settings.body != blank -%}
+        <p class="dryeNEW-body drye-product-grid__sub">
+          {{ section.settings.body | escape }}
+        </p>
+      {%- endif -%}
+    </div>
+
+    {%- if section.blocks.size > 0 -%}
+      <div class="drye-product-grid__grid" role="list">
+        {%- for block in section.blocks -%}
+          {%- liquid
+            assign fallback_image_url = block.settings.fallback_image_url | strip
+            assign has_image = false
+
+            if block.settings.image != blank or fallback_image_url != blank
+              assign has_image = true
+            endif
+
+            assign image_alt = block.settings.image_alt | default: block.settings.caption | default: block.settings.image.alt | default: 'DRYE product image'
+          -%}
+
+          {%- if has_image -%}
+            <button
+              class="drye-product-grid__item"
+              type="button"
+              data-pg-item
+              data-index="{{ forloop.index0 }}"
+              role="listitem"
+              aria-label="{{ 'View larger: ' | append: image_alt | escape }}"
+              {{ block.shopify_attributes }}
+            >
+              <span class="drye-product-grid__media">
+                {%- if block.settings.image != blank -%}
+<img
+  class="drye-product-grid__img"
+  src="{{ block.settings.image | image_url: width: 900 }}"
+  srcset="
+    {{ block.settings.image | image_url: width: 360 }} 360w,
+    {{ block.settings.image | image_url: width: 540 }} 540w,
+    {{ block.settings.image | image_url: width: 720 }} 720w,
+    {{ block.settings.image | image_url: width: 900 }} 900w,
+    {{ block.settings.image | image_url: width: 1200 }} 1200w,
+    {{ block.settings.image | image_url: width: 1800 }} 1800w
+  "
+  sizes="(min-width: 768px) 33vw, 50vw"
+  data-full-src="{{ block.settings.image | image_url: width: 1800 }}"
+  alt="{{ image_alt | escape }}"
+  loading="lazy"
+  width="{{ block.settings.image.width }}"
+  height="{{ block.settings.image.height }}"
+>
+                {%- else -%}
+                  <img
+                    class="drye-product-grid__img"
+                    src="{{ fallback_image_url | escape }}"
+                    alt="{{ image_alt | escape }}"
+                    loading="lazy"
+                    width="1200"
+                    height="900"
+                  >
+                {%- endif -%}
+
+                {%- if forloop.first -%}
+                  <span class="drye-product-grid__zoom-cue" data-pg-zoom-cue aria-hidden="true">
+                    <span class="dryeNEW-body--sm drye-product-grid__zoom-cue-text">
+                      <span class="drye-product-grid__zoom-cue-text--mobile">Tap to zoom</span>
+                      <span class="drye-product-grid__zoom-cue-text--desktop">Click to zoom</span>
+                    </span>
+                  </span>
+                {%- endif -%}
+
+                {%- if block.settings.caption != blank -%}
+                  <span class="dryeNEW-body--caption drye-product-grid__caption" data-pg-caption>
+                    {{ block.settings.caption | escape }}
+                  </span>
+                {%- endif -%}
+              </span>
+            </button>
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+    {%- endif -%}
+
+    {%- if section.settings.show_next_link and section.settings.next_label != blank and section.settings.next_url != blank -%}
+      <div class="drye-product-grid__next-wrap">
+        <a class="dryeNEW-link drye-product-grid__next" href="{{ section.settings.next_url | escape }}">
+          {{ section.settings.next_label | escape }}
+        </a>
+      </div>
+    {%- endif -%}
+
+  </div>
+
+  <div
+    class="drye-product-grid__lightbox"
+    data-pg-lightbox
+    hidden
+    aria-modal="true"
+    role="dialog"
+    aria-label="{{ section.settings.lightbox_label | escape }}"
+  >
+    <div class="drye-product-grid__lightbox-backdrop" data-pg-backdrop></div>
+
+    <div class="drye-product-grid__lightbox-inner">
+      <button
+        class="drye-product-grid__lightbox-btn drye-product-grid__lightbox-close"
+        type="button"
+        data-pg-close
+        aria-label="{{ section.settings.close_label | escape }}"
+      >
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M6 6 L18 18 M18 6 L6 18"></path>
+        </svg>
+      </button>
+
+      <button
+        class="drye-product-grid__lightbox-btn drye-product-grid__lightbox-prev"
+        type="button"
+        data-pg-prev
+        aria-label="{{ section.settings.prev_label | escape }}"
+      >
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M15 6 L9 12 L15 18"></path>
+        </svg>
+      </button>
+
+      <button
+        class="drye-product-grid__lightbox-btn drye-product-grid__lightbox-next"
+        type="button"
+        data-pg-next
+        aria-label="{{ section.settings.next_image_label | escape }}"
+      >
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M9 6 L15 12 L9 18"></path>
+        </svg>
+      </button>
+
+      <div class="drye-product-grid__lightbox-stage">
+        <img class="drye-product-grid__lightbox-img" data-pg-lightbox-img src="" alt="">
+      </div>
+
+      <div class="drye-product-grid__lightbox-meta">
+        <span class="dryeNEW-micro drye-product-grid__lightbox-counter" data-pg-lightbox-counter>
+          1 / {{ section.blocks.size }}
+        </span>
+        <p class="dryeNEW-body--sm drye-product-grid__lightbox-caption" data-pg-lightbox-caption></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<script>
+  (() => {
+    const initProductGrid = (section) => {
+      if (!section || section.dataset.pgInitialized === 'true') return;
+      section.dataset.pgInitialized = 'true';
+
+      const items = Array.from(section.querySelectorAll('[data-pg-item]'));
+      const lightbox = section.querySelector('[data-pg-lightbox]');
+      const zoomCue = section.querySelector('[data-pg-zoom-cue]');
+      if (!items.length || !lightbox) return;
+
+      const lightboxImg = lightbox.querySelector('[data-pg-lightbox-img]');
+      const lightboxCaption = lightbox.querySelector('[data-pg-lightbox-caption]');
+      const lightboxCounter = lightbox.querySelector('[data-pg-lightbox-counter]');
+      const btnClose = lightbox.querySelector('[data-pg-close]');
+      const btnPrev = lightbox.querySelector('[data-pg-prev]');
+      const btnNext = lightbox.querySelector('[data-pg-next]');
+      const backdrop = lightbox.querySelector('[data-pg-backdrop]');
+
+      if (!lightboxImg || !lightboxCaption || !lightboxCounter || !btnClose || !btnPrev || !btnNext || !backdrop) return;
+
+      const slides = items.map((item) => {
+        const img = item.querySelector('img');
+        const cap = item.querySelector('[data-pg-caption]');
+
+        return {
+          src: img ? img.src.replace(/width=\d+/, 'width=1800') : '',
+          alt: img ? img.alt : '',
+          caption: cap ? cap.textContent.trim() : ''
+        };
+      }).filter((slide) => slide.src);
+
+      if (!slides.length) return;
+
+      let currentIndex = 0;
+      let lastFocused = null;
+      let touchStartX = null;
+
+      const renderSlide = (i) => {
+        const slide = slides[i];
+        lightboxImg.src = slide.src;
+        lightboxImg.alt = slide.alt;
+        lightboxCaption.textContent = slide.caption;
+        lightboxCounter.textContent = `${i + 1} / ${slides.length}`;
+      };
+
+      const dismissZoomCue = () => {
+        if (zoomCue) {
+          zoomCue.classList.add('is-dismissed');
+        }
+      };
+
+      const openLightbox = (i) => {
+        dismissZoomCue();
+        lastFocused = document.activeElement;
+        currentIndex = i;
+        renderSlide(currentIndex);
+        lightbox.hidden = false;
+        document.body.classList.add('drye-pg-no-scroll');
+
+        requestAnimationFrame(() => {
+          btnClose.focus();
+        });
+      };
+
+      const closeLightbox = () => {
+        lightbox.hidden = true;
+        document.body.classList.remove('drye-pg-no-scroll');
+
+        if (lastFocused && typeof lastFocused.focus === 'function') {
+          lastFocused.focus();
+        }
+      };
+
+      const next = () => {
+        currentIndex = (currentIndex + 1) % slides.length;
+        renderSlide(currentIndex);
+      };
+
+      const prev = () => {
+        currentIndex = (currentIndex - 1 + slides.length) % slides.length;
+        renderSlide(currentIndex);
+      };
+
+      items.forEach((item, i) => {
+        item.addEventListener('click', () => openLightbox(i));
+      });
+
+      btnClose.addEventListener('click', closeLightbox);
+      btnNext.addEventListener('click', next);
+      btnPrev.addEventListener('click', prev);
+      backdrop.addEventListener('click', closeLightbox);
+
+      document.addEventListener('keydown', (event) => {
+        if (lightbox.hidden) return;
+
+        if (event.key === 'Escape') {
+          event.preventDefault();
+          closeLightbox();
+        } else if (event.key === 'ArrowRight') {
+          event.preventDefault();
+          next();
+        } else if (event.key === 'ArrowLeft') {
+          event.preventDefault();
+          prev();
+        }
+      });
+
+      lightbox.addEventListener('touchstart', (event) => {
+        if (lightbox.hidden) return;
+        touchStartX = event.changedTouches[0].clientX;
+      }, { passive: true });
+
+      lightbox.addEventListener('touchend', (event) => {
+        if (lightbox.hidden || touchStartX === null) return;
+
+        const dx = event.changedTouches[0].clientX - touchStartX;
+
+        if (Math.abs(dx) > 40) {
+          if (dx < 0) {
+            next();
+          } else {
+            prev();
+          }
+        }
+
+        touchStartX = null;
+      }, { passive: true });
+    };
+
+    initProductGrid(document.getElementById({{ section_dom_id | json }}));
+
+    document.addEventListener('shopify:section:load', (event) => {
+      if (event.target && event.target.matches('[data-drye-product-grid]')) {
+        initProductGrid(event.target);
+      }
+    });
+
+    document.addEventListener('shopify:section:unload', (event) => {
+      if (event.target && event.target.matches('[data-drye-product-grid]')) {
+        document.body.classList.remove('drye-pg-no-scroll');
+      }
+    });
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "DRYE product grid",
+  "tag": "div",
+  "class": "shopify-section--drye-product-grid",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "The dry layer"
+    },
+    {
+      "type": "text",
+      "id": "heading_line_1",
+      "label": "Heading line 1",
+      "default": "Same nitrile outside."
+    },
+    {
+      "type": "text",
+      "id": "heading_emphasis",
+      "label": "Heading emphasized text",
+      "default": "Dry layer"
+    },
+    {
+      "type": "text",
+      "id": "heading_line_2",
+      "label": "Heading line 2",
+      "default": "against your skin."
+    },
+    {
+      "type": "textarea",
+      "id": "body",
+      "label": "Body",
+      "default": "DRYE is 0.4mm thin and worn under the gloves you already use. Nitrile, latex, rubber, HV gloves — the outer glove stays the same."
+    },
+    {
+      "type": "checkbox",
+      "id": "show_next_link",
+      "label": "Show next link",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "next_label",
+      "label": "Next link label",
+      "default": "Next: why the wet layer matters →"
+    },
+    {
+      "type": "text",
+      "id": "next_url",
+      "label": "Next link URL or anchor",
+      "default": "#chemical-bridge"
+    },
+    {
+      "type": "text",
+      "id": "lightbox_label",
+      "label": "Lightbox aria label",
+      "default": "Product image viewer"
+    },
+    {
+      "type": "text",
+      "id": "close_label",
+      "label": "Close button aria label",
+      "default": "Close image viewer"
+    },
+    {
+      "type": "text",
+      "id": "prev_label",
+      "label": "Previous button aria label",
+      "default": "Previous image"
+    },
+    {
+      "type": "text",
+      "id": "next_image_label",
+      "label": "Next button aria label",
+      "default": "Next image"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "image_card",
+      "name": "Image card",
+      "limit": 6,
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "text",
+          "id": "fallback_image_url",
+          "label": "Fallback image URL",
+          "info": "Used only when no Shopify image is selected."
+        },
+        {
+          "type": "text",
+          "id": "image_alt",
+          "label": "Alt text"
+        },
+        {
+          "type": "text",
+          "id": "caption",
+          "label": "Overlay caption",
+          "default": "The layer against your skin."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "DRYE product reality grid",
+      "blocks": [
+        {
+          "type": "image_card",
+          "settings": {
+            "fallback_image_url": "https://images.unsplash.com/photo-1583912086096-8c60d75a53f9?w=1200&q=80",
+            "image_alt": "DRYE liner worn on hand before nitrile glove",
+            "caption": "The layer against your skin."
+          }
+        },
+        {
+          "type": "image_card",
+          "settings": {
+            "fallback_image_url": "https://images.unsplash.com/photo-1584634731339-252c581abfc5?w=1200&q=80",
+            "image_alt": "Nitrile glove pulled over DRYE liner",
+            "caption": "Your nitrile goes over it."
+          }
+        },
+        {
+          "type": "image_card",
+          "settings": {
+            "fallback_image_url": "https://images.unsplash.com/photo-1605618826115-fb9e775cf795?w=1200&q=80",
+            "image_alt": "Full nitrile glove worn over DRYE liner",
+            "caption": "Thin enough for sealed gloves."
+          }
+        },
+        {
+          "type": "image_card",
+          "settings": {
+            "fallback_image_url": "https://images.unsplash.com/photo-1581092580497-e0d23cbdf1dc?w=1200&q=80",
+            "image_alt": "Hand wearing DRYE liner showing thin profile",
+            "caption": "No bulky second-glove feel."
+          }
+        },
+        {
+          "type": "image_card",
+          "settings": {
+            "fallback_image_url": "https://images.unsplash.com/photo-1581093588401-fbb62a02f120?w=1200&q=80",
+            "image_alt": "Removing nitrile glove over DRYE liner",
+            "caption": "Slides off the layer, not wet skin."
+          }
+        },
+        {
+          "type": "image_card",
+          "settings": {
+            "fallback_image_url": "https://images.unsplash.com/photo-1599058917212-d750089bc07e?w=1200&q=80",
+            "image_alt": "Pair of DRYE liners product closeup",
+            "caption": "Washable. Reusable. Built for shifts."
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

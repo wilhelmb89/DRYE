@@ -1,0 +1,255 @@
+{{ 'component-drye-system-section.css' | asset_url | stylesheet_tag }}
+
+<div id="system"></div>
+
+<section
+  class="dryeNEW-section drye-system"
+  id="drye-system-{{ section.id }}"
+  data-section-id="{{ section.id }}"
+>
+  <div class="dryeNEW-container">
+    <div class="drye-system__header dryeNEW-reveal">
+      {% if section.settings.eyebrow != blank %}
+        <span class="dryeNEW-micro drye-system__eyebrow">
+          {{ section.settings.eyebrow }}
+        </span>
+      {% endif %}
+
+      <h2 class="dryeNEW-h2 drye-system__heading">
+        {% if section.settings.heading_before != blank %}
+          {{ section.settings.heading_before }}
+        {% endif %}
+        {% if section.settings.heading_em != blank %}
+          <em>{{ section.settings.heading_em }}</em>
+        {% endif %}
+      </h2>
+
+      {% if section.settings.body != blank %}
+        <div class="dryeNEW-body drye-system__lead">
+          <p>{{ section.settings.body }}</p>
+        </div>
+      {% endif %}
+    </div>
+
+    <div class="drye-system__diagram-shell dryeNEW-reveal dryeNEW-rd1">
+      <div class="drye-system__diagram-grid">
+        <div class="drye-system__diagram-card drye-system__diagram-card--left">
+          <svg class="drye-system__diagram-svg" viewBox="0 0 510 470" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <text x="255" y="18" text-anchor="middle" font-size="9" font-weight="600" letter-spacing="4" fill="#9CA3AF">TRADITIONAL LINER</text>
+
+            <text x="255" y="52" text-anchor="middle" font-size="10" letter-spacing="4" fill="#9CA3AF">SEALED EQUIPMENT</text>
+            <line x1="0" y1="62" x2="510" y2="62" stroke="#D1D5DB" stroke-width="1"/>
+
+            <line x1="135" y1="70" x2="135" y2="90" stroke="#9CA3AF" stroke-width="1.5"/>
+            <polygon points="135,94 130,84 140,84" fill="#9CA3AF"/>
+            <line x1="255" y1="70" x2="255" y2="90" stroke="#9CA3AF" stroke-width="1.5"/>
+            <polygon points="255,94 250,84 260,84" fill="#9CA3AF"/>
+            <line x1="375" y1="70" x2="375" y2="90" stroke="#9CA3AF" stroke-width="1.5"/>
+            <polygon points="375,94 370,84 380,84" fill="#9CA3AF"/>
+
+            <rect x="0" y="100" width="510" height="82" rx="3" fill="#4B5563"/>
+            <text x="255" y="139" text-anchor="middle" font-size="12" font-weight="400" letter-spacing="2.5" fill="#ffffff">CONVENTIONAL TEXTILE</text>
+            <text x="255" y="161" text-anchor="middle" font-size="10" fill="rgba(255,255,255,0.5)" letter-spacing="1.5">cotton / synthetic / wicking</text>
+
+            <path d="M50,196 q25,-3 50,0 q25,3 50,0 q25,-3 50,0 q25,3 50,0 q25,-3 50,0 q25,3 50,0 q25,-3 50,0" fill="none" stroke="#9CA3AF" stroke-width="1.2" opacity="0.5"/>
+            <line x1="135" y1="190" x2="135" y2="214" stroke="#9CA3AF" stroke-width="1.5"/>
+            <polygon points="135,218 130,208 140,208" fill="#9CA3AF"/>
+            <line x1="255" y1="190" x2="255" y2="214" stroke="#9CA3AF" stroke-width="1.5"/>
+            <polygon points="255,218 250,208 260,208" fill="#9CA3AF"/>
+            <line x1="375" y1="190" x2="375" y2="214" stroke="#9CA3AF" stroke-width="1.5"/>
+            <polygon points="375,218 370,208 380,208" fill="#9CA3AF"/>
+
+            <rect x="0" y="222" width="510" height="82" rx="3" fill="#374151"/>
+            <text x="255" y="261" text-anchor="middle" font-size="12" font-weight="400" letter-spacing="2.5" fill="#ffffff">SATURATED FIBER</text>
+            <text x="255" y="283" text-anchor="middle" font-size="10" fill="rgba(255,255,255,0.4)" letter-spacing="1.5">collapsed under pressure</text>
+
+            <line x1="135" y1="312" x2="135" y2="334" stroke="#9CA3AF" stroke-width="1.5" opacity="0.3"/>
+            <polygon points="135,338 130,328 140,328" fill="#9CA3AF" opacity="0.3"/>
+            <line x1="255" y1="312" x2="255" y2="334" stroke="#9CA3AF" stroke-width="1.5" opacity="0.3"/>
+            <polygon points="255,338 250,328 260,328" fill="#9CA3AF" opacity="0.3"/>
+            <line x1="375" y1="312" x2="375" y2="334" stroke="#9CA3AF" stroke-width="1.5" opacity="0.3"/>
+            <polygon points="375,338 370,328 380,328" fill="#9CA3AF" opacity="0.3"/>
+
+            <path d="M0,344 q42,-4 85,0 q43,4 85,0 q42,-4 85,0 q43,4 85,0 q42,-4 85,0 q43,4 85,0" fill="none" stroke="#9CA3AF" stroke-width="2" opacity="0.4"/>
+
+            <line x1="0" y1="356" x2="510" y2="356" stroke="#FCA5A5" stroke-width="1"/>
+            <text x="255" y="376" text-anchor="middle" font-size="10" letter-spacing="4" fill="#9CA3AF">SKIN SURFACE</text>
+
+            <text x="255" y="424" text-anchor="middle" font-size="13" font-weight="500" fill="#374151">Absorption under pressure = saturation</text>
+            <text x="255" y="446" text-anchor="middle" font-size="10" font-weight="300" fill="#9CA3AF" letter-spacing="0.5">Fiber collapses · Moisture trapped · Skin stays wet</text>
+          </svg>
+        </div>
+
+        <div class="drye-system__diagram-vs" aria-hidden="true">VS</div>
+
+        <div class="drye-system__diagram-card drye-system__diagram-card--right">
+          <svg class="drye-system__diagram-svg" viewBox="0 0 510 470" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <text x="255" y="18" text-anchor="middle" font-size="9" font-weight="600" letter-spacing="4" fill="#0D9488">ASYMMETRIC LAYERING</text>
+
+            <text x="255" y="52" text-anchor="middle" font-size="10" letter-spacing="4" fill="#9CA3AF">SEALED EQUIPMENT</text>
+            <line x1="0" y1="62" x2="510" y2="62" stroke="#D1D5DB" stroke-width="1"/>
+
+            <line x1="135" y1="70" x2="135" y2="90" stroke="#5F8A8B" stroke-width="1.5"/>
+            <polygon points="135,94 130,84 140,84" fill="#5F8A8B"/>
+            <line x1="255" y1="70" x2="255" y2="90" stroke="#5F8A8B" stroke-width="1.5"/>
+            <polygon points="255,94 250,84 260,84" fill="#5F8A8B"/>
+            <line x1="375" y1="70" x2="375" y2="90" stroke="#5F8A8B" stroke-width="1.5"/>
+            <polygon points="375,94 370,84 380,84" fill="#5F8A8B"/>
+
+            <rect x="0" y="100" width="510" height="82" rx="3" fill="#3D5A5E"/>
+            <text x="255" y="139" text-anchor="middle" font-size="12" font-weight="400" letter-spacing="2.5" fill="#ffffff">LYOCELL · OUTER SIDE</text>
+            <text x="255" y="161" text-anchor="middle" font-size="10" fill="rgba(255,255,255,0.55)" letter-spacing="1.5">hydrophilic · pulls moisture outward</text>
+
+            <path d="M40,196 q30,-3 60,0 q30,3 60,0 q30,-3 60,0 q30,3 60,0 q30,-3 60,0 q30,3 60,0" fill="none" stroke="#0D9488" stroke-width="1.2" opacity="0.5"/>
+            <line x1="135" y1="214" x2="135" y2="190" stroke="#0D9488" stroke-width="1.5"/>
+            <polygon points="135,186 130,196 140,196" fill="#0D9488"/>
+            <line x1="255" y1="214" x2="255" y2="190" stroke="#0D9488" stroke-width="1.5"/>
+            <polygon points="255,186 250,196 260,196" fill="#0D9488"/>
+            <line x1="375" y1="214" x2="375" y2="190" stroke="#0D9488" stroke-width="1.5"/>
+            <polygon points="375,186 370,196 380,196" fill="#0D9488"/>
+
+            <rect x="0" y="222" width="510" height="82" rx="3" fill="#1E3A4C"/>
+            <text x="255" y="261" text-anchor="middle" font-size="12" font-weight="400" letter-spacing="2.5" fill="#ffffff">POLYPROPYLENE · SKIN SIDE</text>
+            <text x="255" y="283" text-anchor="middle" font-size="10" fill="rgba(255,255,255,0.45)" letter-spacing="1.5">hydrophobic · does not absorb · cannot saturate</text>
+
+            <line x1="135" y1="334" x2="135" y2="312" stroke="#0D9488" stroke-width="1.5"/>
+            <polygon points="135,308 130,318 140,318" fill="#0D9488"/>
+            <line x1="255" y1="334" x2="255" y2="312" stroke="#0D9488" stroke-width="1.5"/>
+            <polygon points="255,308 250,318 260,318" fill="#0D9488"/>
+            <line x1="375" y1="334" x2="375" y2="312" stroke="#0D9488" stroke-width="1.5"/>
+            <polygon points="375,308 370,318 380,318" fill="#0D9488"/>
+
+            <path d="M0,344 q42,-2 85,0 q43,2 85,0 q42,-2 85,0 q43,2 85,0 q42,-2 85,0 q43,2 85,0" fill="none" stroke="#0D9488" stroke-width="1.5" opacity="0.3"/>
+
+            <line x1="0" y1="356" x2="510" y2="356" stroke="#D1D5DB" stroke-width="1"/>
+            <text x="255" y="376" text-anchor="middle" font-size="10" letter-spacing="4" fill="#9CA3AF">SKIN SURFACE</text>
+
+            <text x="255" y="424" text-anchor="middle" font-size="13" font-weight="500" fill="#1E3A4C">Asymmetric layering = moisture has one direction</text>
+            <text x="255" y="446" text-anchor="middle" font-size="10" font-weight="300" fill="#9CA3AF" letter-spacing="0.5">Routes continuously · No saturation point · No chemicals</text>
+          </svg>
+        </div>
+      </div>
+    </div>
+
+    <div class="drye-system__properties">
+      {% for block in section.blocks %}
+        {% if block.type == 'property' %}
+          <article
+            class="drye-system__prop dryeNEW-reveal {% cycle 'dryeNEW-rd1', 'dryeNEW-rd2', 'dryeNEW-rd3' %}"
+            {{ block.shopify_attributes }}
+          >
+            {% if block.settings.tag != blank %}
+              <span class="dryeNEW-micro drye-system__prop-tag">
+                {{ block.settings.tag }}
+              </span>
+            {% endif %}
+
+            {% if block.settings.heading != blank %}
+              <h4 class="dryeNEW-h4 drye-system__prop-heading">
+                {{ block.settings.heading }}
+              </h4>
+            {% endif %}
+
+            {% if block.settings.body != blank %}
+              <div class="dryeNEW-body drye-system__prop-body">
+                <p>{{ block.settings.body }}</p>
+              </div>
+            {% endif %}
+          </article>
+        {% endif %}
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "DRYE System Section",
+  "tag": "section",
+  "class": "shopify-section--drye-system",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "Asymmetric layering"
+    },
+    {
+      "type": "text",
+      "id": "heading_before",
+      "label": "Heading before italic",
+      "default": "Two fibers. One knit. "
+    },
+    {
+      "type": "text",
+      "id": "heading_em",
+      "label": "Italic heading text",
+      "default": "One direction."
+    },
+    {
+      "type": "textarea",
+      "id": "body",
+      "label": "Body text",
+      "default": "Every fabric you've ever worn under gloves — cotton, merino, polyester — works by absorbing moisture and releasing it into the air. Inside a sealed glove, there is no air. DRYE is built differently: hydrophobic polypropylene on the skin side, hydrophilic Lyocell on the outside. The asymmetry itself routes moisture outward. Structurally. Continuously. No saturation point."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "property",
+      "name": "Property",
+      "limit": 3,
+      "settings": [
+        {
+          "type": "text",
+          "id": "tag",
+          "label": "Tag",
+          "default": "Property 01"
+        },
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Heading",
+          "default": "Works under compression"
+        },
+        {
+          "type": "textarea",
+          "id": "body",
+          "label": "Body",
+          "default": "The asymmetry functions regardless of external pressure. Compression does not collapse routing — it drives it."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "DRYE System Section",
+      "blocks": [
+        {
+          "type": "property",
+          "settings": {
+            "tag": "Property 01",
+            "heading": "Works under compression",
+            "body": "The asymmetry functions regardless of external pressure. Compression does not collapse routing — it drives it."
+          }
+        },
+        {
+          "type": "property",
+          "settings": {
+            "tag": "Property 02",
+            "heading": "No saturation point",
+            "body": "The skin side does not absorb. Polypropylene cannot hold moisture, which means it cannot fill up. Routing is continuous."
+          }
+        },
+        {
+          "type": "property",
+          "settings": {
+            "tag": "Property 03",
+            "heading": "No chemical dependency",
+            "body": "Function comes from fiber placement, not coating. Wash cycles do not degrade the mechanism. The structure is the performance."
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

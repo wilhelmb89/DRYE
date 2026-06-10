@@ -1,0 +1,726 @@
+/* ==========================================================================
+   DRYE Reviews Mars — scoped section CSS
+   ========================================================================== */
+
+.drye-reviews-mars {
+  background: var(--bg);
+  border-top: var(--border-base);
+  border-bottom: var(--border-base);
+}
+
+.drye-reviews-mars__header {
+  max-width: 760px;
+  margin-bottom: var(--space-24);
+}
+
+.drye-reviews-mars__eyebrow {
+  color: var(--sage);
+}
+
+.drye-reviews-mars__heading {
+  color: var(--deep);
+  margin-bottom: var(--space-8);
+}
+
+.drye-reviews-mars__sub {
+  color: var(--muted);
+}
+
+.drye-reviews-mars__summary {
+  display: grid;
+  grid-template-columns: minmax(0, 150px) minmax(0, 1fr);
+  gap: var(--grid-gap-32);
+  padding-bottom: var(--space-24);
+  margin-bottom: var(--space-24);
+  border-bottom: var(--border-base);
+}
+
+.drye-reviews-mars__score-number {
+  color: var(--deep);
+  margin-bottom: var(--space-8);
+}
+
+.drye-reviews-mars__score-stars {
+  color: var(--sage);
+  margin-bottom: var(--space-4);
+}
+
+.drye-reviews-mars__score-count {
+  color: var(--caption);
+}
+
+.drye-reviews-mars__bars {
+  display: grid;
+  gap: var(--space-6);
+  align-self: center;
+}
+
+.drye-reviews-mars__bar-row {
+  display: grid;
+  grid-template-columns: 18px minmax(0, 1fr) 32px;
+  align-items: center;
+  gap: var(--space-10);
+}
+
+.drye-reviews-mars__bar-label {
+  color: var(--muted);
+  text-align: right;
+}
+
+.drye-reviews-mars__bar-track {
+  height: 6px;
+  background: var(--border);
+  overflow: hidden;
+}
+
+.drye-reviews-mars__bar-fill {
+  height: 100%;
+  background: var(--sage);
+}
+
+.drye-reviews-mars__bar-count {
+  color: var(--caption);
+}
+
+.drye-reviews-mars__actions {
+  display: grid;
+  grid-template-columns: var(--grid-2-col-desktop);
+  gap: var(--space-1);
+  background: var(--border);
+  margin-bottom: var(--space-24);
+}
+
+.drye-reviews-mars__action {
+  min-height: 54px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-8);
+  background: var(--bg);
+  color: var(--muted);
+  transition:
+    color var(--dur-fast) var(--ease-standard),
+    background var(--dur-fast) var(--ease-standard);
+}
+
+.drye-reviews-mars__action:hover {
+  color: var(--deep);
+  background: var(--bg-tint);
+}
+
+.drye-reviews-mars__tabs {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: var(--space-1);
+  background: var(--border);
+  margin-bottom: var(--space-16);
+}
+
+.drye-reviews-mars__tab {
+  min-height: 48px;
+  background: var(--bg);
+  color: var(--caption);
+  transition:
+    color var(--dur-fast) var(--ease-standard),
+    background var(--dur-fast) var(--ease-standard);
+}
+
+.drye-reviews-mars__tab:hover {
+  color: var(--deep);
+}
+
+.drye-reviews-mars__tab.is-active {
+  background: var(--deep);
+  color: var(--white-100);
+}
+
+.drye-reviews-mars__filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-6);
+  margin-bottom: var(--space-4);
+}
+
+.drye-reviews-mars__filter {
+  min-height: 32px;
+  padding-inline: var(--space-14);
+  border: var(--border-base);
+  color: var(--caption);
+  background: var(--bg);
+  transition:
+    color var(--dur-fast) var(--ease-standard),
+    background var(--dur-fast) var(--ease-standard),
+    border-color var(--dur-fast) var(--ease-standard);
+}
+
+.drye-reviews-mars__filter:hover {
+  color: var(--deep);
+  border-color: var(--deep);
+}
+
+.drye-reviews-mars__filter.is-active {
+  color: var(--white-100);
+  background: var(--deep);
+  border-color: var(--deep);
+}
+
+.drye-reviews-mars__list {
+  border-top: var(--border-base);
+}
+
+.drye-reviews-mars__review {
+  display: grid;
+  grid-template-columns: 170px minmax(0, 1fr);
+  gap: var(--grid-gap-24);
+  padding: var(--space-24) 0;
+  border-bottom: var(--border-base);
+}
+
+.drye-reviews-mars__review.is-hidden {
+  display: none;
+}
+
+.drye-reviews-mars__review-left {
+  display: flex;
+  gap: var(--space-10);
+  align-items: flex-start;
+}
+
+.drye-reviews-mars__avatar {
+  width: 44px;
+  height: 44px;
+  flex: 0 0 auto;
+  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--white-100);
+  background: var(--deep);
+}
+
+.drye-reviews-mars__person {
+  min-width: 0;
+  padding-top: var(--space-2);
+}
+
+.drye-reviews-mars__name {
+  color: var(--deep);
+  margin-bottom: var(--space-4);
+}
+
+.drye-reviews-mars__verified {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-4);
+  color: var(--sage);
+}
+
+.drye-reviews-mars__verified-icon {
+  width: 12px;
+  height: 12px;
+  flex: 0 0 auto;
+}
+
+.drye-reviews-mars__review-top {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-12);
+  row-gap: var(--space-4);
+  margin-bottom: var(--space-8);
+}
+
+.drye-reviews-mars__stars {
+  color: var(--sage);
+}
+
+.drye-reviews-mars__date {
+  color: var(--caption);
+  white-space: nowrap;
+}
+
+.drye-reviews-mars__role {
+  color: var(--caption);
+  margin-bottom: var(--space-10);
+}
+
+.drye-reviews-mars__title {
+  color: var(--deep);
+  margin-bottom: var(--space-6);
+}
+
+.drye-reviews-mars__body {
+  color: var(--muted);
+  margin-bottom: var(--space-14);
+}
+
+.drye-reviews-mars__bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-12);
+}
+
+.drye-reviews-mars__recommend {
+  color: var(--muted);
+}
+
+.drye-reviews-mars__helpful {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-6);
+  color: var(--caption);
+}
+
+.drye-reviews-mars__vote {
+  padding: var(--space-3) var(--space-8);
+  border: var(--border-base);
+  color: var(--caption);
+  transition:
+    color var(--dur-fast) var(--ease-standard),
+    border-color var(--dur-fast) var(--ease-standard);
+}
+
+.drye-reviews-mars__vote:hover {
+  color: var(--deep);
+  border-color: var(--deep);
+}
+
+.drye-reviews-mars__load {
+  margin-top: var(--space-20);
+}
+
+.drye-reviews-mars__modal {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: none;
+}
+
+.drye-reviews-mars__modal.is-open {
+  display: block;
+}
+
+.drye-reviews-mars__modal-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(10, 22, 33, 0.55);
+}
+
+.drye-reviews-mars__modal-panel {
+  position: relative;
+  width: min(760px, calc(100vw - 32px));
+  max-height: calc(100vh - 32px);
+  overflow: auto;
+  margin: var(--space-16) auto;
+  background: var(--bg);
+  border: var(--border-base);
+  padding: var(--space-24);
+}
+
+.drye-reviews-mars__modal-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--space-16);
+  margin-bottom: var(--space-24);
+}
+
+.drye-reviews-mars__modal-title {
+  color: var(--deep);
+}
+
+.drye-reviews-mars__close {
+  width: 34px;
+  height: 34px;
+  border: var(--border-base);
+  color: var(--muted);
+}
+
+.drye-reviews-mars__form {
+  display: grid;
+  gap: var(--space-16);
+}
+
+.drye-reviews-mars__field {
+  display: grid;
+  gap: var(--space-6);
+}
+
+.drye-reviews-mars__label {
+  color: var(--deep);
+}
+
+.drye-reviews-mars__input,
+.drye-reviews-mars__textarea,
+.drye-reviews-mars__select {
+  width: 100%;
+  border: var(--border-base);
+  background: var(--bg);
+  color: var(--body);
+  padding: var(--space-12) var(--space-14);
+}
+
+.drye-reviews-mars__textarea {
+  min-height: 150px;
+  resize: vertical;
+}
+
+.drye-reviews-mars__form-grid {
+  display: grid;
+  grid-template-columns: var(--grid-2-col-desktop);
+  gap: var(--grid-gap-16);
+}
+
+.drye-reviews-mars__form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: var(--space-10);
+  margin-top: var(--space-8);
+}
+
+.drye-reviews-mars__submit,
+.drye-reviews-mars__secondary {
+  min-height: 46px;
+  padding-inline: var(--space-20);
+  border: var(--border-base);
+}
+
+.drye-reviews-mars__submit {
+  color: var(--white-100);
+  background: var(--deep);
+  border-color: var(--deep);
+}
+
+.drye-reviews-mars__secondary {
+  color: var(--deep);
+  background: var(--bg);
+}
+
+.drye-reviews-mars__form-note {
+  color: var(--caption);
+}
+
+@media (max-width: 767px) {
+  .drye-reviews-mars__summary {
+    grid-template-columns: 1fr;
+    gap: var(--grid-gap-20);
+  }
+
+  .drye-reviews-mars__actions {
+    grid-template-columns: 1fr;
+  }
+
+  .drye-reviews-mars__tabs {
+    grid-template-columns: 1fr;
+  }
+
+  .drye-reviews-mars__review {
+    grid-template-columns: 1fr;
+    gap: var(--grid-gap-12);
+  }
+
+  .drye-reviews-mars__review-left {
+    align-items: center;
+  }
+
+  .drye-reviews-mars__review-top {
+    align-items: flex-start;
+  }
+
+  .drye-reviews-mars__bottom {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .drye-reviews-mars__form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .drye-reviews-mars__modal-panel {
+    padding: var(--space-20);
+  }
+}
+
+/* ==========================================================================
+   DRYE Reviews Mars — mobile compression pass
+   Goal: reduce scroll fatigue above first review
+   ========================================================================== */
+
+.drye-reviews-mars__proof-strip {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  padding: 0 0 16px;
+  margin: -4px 0 16px;
+  border-bottom: var(--border-base);
+  scrollbar-width: none;
+}
+
+.drye-reviews-mars__proof-strip::-webkit-scrollbar {
+  display: none;
+}
+
+.drye-reviews-mars__proof-item {
+  flex: 0 0 76px;
+  width: 76px;
+  height: 76px;
+  background: var(--bg-tint);
+  overflow: hidden;
+}
+
+.drye-reviews-mars__proof-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Mobile only: make the pre-review area compact */
+@media (max-width: 767px) {
+  .drye-reviews-mars {
+    border-top: var(--border-base);
+    border-bottom: var(--border-base);
+  }
+
+  .drye-reviews-mars .dryeNEW-container {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+
+  .drye-reviews-mars__header {
+    margin-bottom: 16px;
+  }
+
+  .drye-reviews-mars__eyebrow {
+    margin-bottom: 6px;
+  }
+
+  .drye-reviews-mars__heading {
+    margin-bottom: 8px;
+    font-size: 25px;
+    line-height: 1.08;
+    letter-spacing: -0.04em;
+  }
+
+  .drye-reviews-mars__sub {
+    font-size: 15px;
+    line-height: 1.5;
+  }
+
+  .drye-reviews-mars__summary {
+    grid-template-columns: 108px minmax(0, 1fr);
+    gap: 14px;
+    align-items: center;
+    padding-bottom: 16px;
+    margin-bottom: 16px;
+  }
+
+  .drye-reviews-mars__score-number {
+    font-size: 46px;
+    line-height: 0.95;
+    margin-bottom: 6px;
+  }
+
+  .drye-reviews-mars__score-stars {
+    font-size: 13px;
+    line-height: 1;
+    margin-bottom: 6px;
+  }
+
+  .drye-reviews-mars__score-count {
+    font-size: 13px;
+  }
+
+  .drye-reviews-mars__bars {
+    gap: 7px;
+  }
+
+  .drye-reviews-mars__bar-row {
+    grid-template-columns: 14px minmax(0, 1fr) 24px;
+    gap: 7px;
+  }
+
+  .drye-reviews-mars__bar-track {
+    height: 5px;
+  }
+
+  .drye-reviews-mars__proof-strip {
+    padding-bottom: 14px;
+    margin-bottom: 14px;
+  }
+
+  .drye-reviews-mars__actions {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    margin-bottom: 14px;
+  }
+
+  .drye-reviews-mars__action {
+    min-height: 42px;
+    font-size: 10px;
+    letter-spacing: 0.14em;
+  }
+
+  .drye-reviews-mars__tabs {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 1px;
+    margin-bottom: 10px;
+    background: var(--border);
+    overflow: visible;
+  }
+
+  .drye-reviews-mars__tab {
+    min-width: 0;
+    min-height: 42px;
+    padding-inline: 4px;
+    font-size: 9px;
+    letter-spacing: 0.08em;
+    white-space: normal;
+    line-height: 1.2;
+  }
+
+  .drye-reviews-mars__filters {
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    gap: 6px;
+    margin-bottom: 10px;
+    padding-bottom: 2px;
+    scrollbar-width: none;
+  }
+
+  .drye-reviews-mars__filters::-webkit-scrollbar {
+    display: none;
+  }
+
+  .drye-reviews-mars__filter {
+    flex: 0 0 auto;
+    min-height: 32px;
+    padding-inline: 12px;
+    font-size: 10px;
+    letter-spacing: 0.12em;
+  }
+
+  .drye-reviews-mars__list {
+    margin-top: 0;
+  }
+
+  .drye-reviews-mars__review {
+    padding: 22px 0;
+  }
+}
+
+.drye-reviews-mars .is-hidden {
+  display: none !important;
+}
+
+.drye-reviews-mars__loading,
+.drye-reviews-mars__empty {
+  padding: var(--space-24) 0;
+  color: var(--muted);
+}
+
+.drye-reviews-mars__load-button {
+  background: transparent;
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+}
+
+.drye-reviews-mars__proof-item {
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+}
+
+.drye-reviews-mars__review-media {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 14px 0 16px;
+}
+
+.drye-reviews-mars__review-media-item {
+  display: block;
+  width: 72px;
+  height: 72px;
+  overflow: hidden;
+  background: var(--bg-tint);
+}
+
+.drye-reviews-mars__review-media-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.drye-reviews-mars__body {
+  margin-bottom: 4px;
+}
+
+.drye-reviews-mars__read-more {
+  display: inline-block;
+  margin-top: 0;
+  margin-bottom: var(--space-14);
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--deep);
+  cursor: pointer;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+.drye-reviews-mars__read-more:hover {
+  opacity: 0.72;
+}
+
+/* ==========================================================================
+   DRYE Reviews Mars — field reports / B2B evidence cards
+   ========================================================================== */
+
+.drye-reviews-mars__review--evidence .drye-reviews-mars__avatar {
+  background: var(--sage);
+}
+
+.drye-reviews-mars__evidence-label {
+  display: inline-flex;
+  align-items: center;
+  min-height: 24px;
+  padding: 0 9px;
+  border: var(--border-base);
+  color: var(--deep);
+  background: var(--bg-tint);
+  letter-spacing: 0.12em;
+}
+
+.drye-reviews-mars__source-label {
+  color: var(--caption);
+  line-height: 1.35;
+  margin-top: var(--space-2);
+}
+
+.drye-reviews-mars__proof-link {
+  display: inline-block;
+  color: var(--deep);
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+.drye-reviews-mars__proof-link:hover {
+  opacity: 0.72;
+}
+
+.drye-reviews-mars__bottom {
+  margin-top: var(--space-10);
+}
+
+@media (max-width: 767px) {
+  .drye-reviews-mars__evidence-label {
+    font-size: 9px;
+    letter-spacing: 0.1em;
+  }
+}

@@ -1,0 +1,191 @@
+/* DRYE Blog Featured Post */
+
+.featured-wrap {
+  background: var(--bg-ink);
+  padding: 0 var(--page-pad) 56px;
+}
+
+@media (min-width: 768px) {
+  .featured-wrap {
+    padding: 0 40px 72px;
+  }
+}
+
+.featured-in {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding-top: 40px;
+}
+
+.featured-post {
+  display: grid;
+  grid-template-columns: 1fr;
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  background: rgba(255, 255, 255, 0.02);
+  overflow: hidden;
+}
+
+@media (min-width: 768px) {
+  .featured-post {
+    grid-template-columns: 1fr 1fr;
+    min-height: 400px;
+  }
+}
+
+.featured-post__link {
+  display: contents;
+  color: inherit;
+  text-decoration: none;
+}
+
+.fp-img {
+  position: relative;
+  overflow: hidden;
+  min-height: 240px;
+  background: linear-gradient(140deg, #0a1820 0%, #1e3a4c 55%, #3d5a5e 100%);
+  display: flex;
+  align-items: flex-end;
+  isolation: isolate;
+}
+
+@media (min-width: 768px) {
+  .fp-img {
+    min-height: auto;
+  }
+}
+
+.fp-img-tag {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.fp-img::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background:
+    linear-gradient(to top, rgba(10, 24, 32, 0.96) 0%, rgba(10, 24, 32, 0.18) 55%, rgba(10, 24, 32, 0.04) 100%);
+  pointer-events: none;
+}
+
+.fp-img-overlay {
+  position: relative;
+  z-index: 2;
+  padding: 24px;
+  width: 100%;
+}
+
+.fp-cat-badge {
+  font-size: 8px;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--emerald);
+  border: 1px solid rgba(13, 148, 136, 0.4);
+  padding: 4px 10px;
+  display: inline-block;
+  margin-bottom: 10px;
+  background: rgba(10, 24, 32, 0.28);
+  backdrop-filter: blur(2px);
+}
+
+.fp-img-title {
+  font-family: "Clash Grotesk", sans-serif;
+  font-size: clamp(15px, 2.5vw, 19px);
+  font-weight: 600;
+  letter-spacing: -0.015em;
+  color: #fff;
+  line-height: 1.25;
+  max-width: 320px;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.35);
+}
+
+.fp-body {
+  padding: 28px 24px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+@media (min-width: 768px) {
+  .fp-body {
+    padding: 44px 40px;
+  }
+}
+
+.fp-label {
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.2);
+  margin-bottom: 18px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.fp-label span {
+  color: var(--sage);
+}
+
+.fp-label::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.fp-h {
+  font-family: "Clash Grotesk", sans-serif;
+  font-size: clamp(19px, 3vw, 27px);
+  font-weight: 600;
+  letter-spacing: -0.022em;
+  color: #fff;
+  line-height: 1.15;
+  margin-bottom: 14px;
+}
+
+.fp-excerpt {
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.42);
+  line-height: 1.75;
+  margin-bottom: 22px;
+}
+
+.fp-meta {
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.2);
+  margin-bottom: 22px;
+}
+
+.fp-meta span {
+  color: rgba(255, 255, 255, 0.1);
+  margin: 0 8px;
+}
+
+.fp-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--emerald);
+  transition: gap 0.2s;
+}
+
+.featured-post__link:hover .fp-link {
+  gap: 16px;
+}
+
+.fp-link::after {
+  content: "→";
+}

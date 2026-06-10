@@ -1,0 +1,255 @@
+{% comment %}
+  DRYE – YouTube Hero (v3)
+  - Uses base.css width tokens
+  - Uses real <img> tags for hero background images
+  - Auto mode prefers image if uploaded, else video
+{% endcomment %}
+
+{{ 'drye-youtube-v3.css' | asset_url | stylesheet_tag }}
+
+{%- style -%}
+#shopify-section-{{ section.id }}{
+  --drye-hero-minh-d: {{ section.settings.min_height_desktop }}px;
+  --drye-hero-minh-m: {{ section.settings.min_height_mobile }}px;
+
+  --drye-hero-overlay: {{ section.settings.overlay_color }};
+  --drye-hero-overlay-opacity: {{ section.settings.overlay_opacity | divided_by: 100.0 }};
+
+  --drye-hero-h-m: {{ section.settings.heading_size_mobile }}px;
+  --drye-hero-h-d: {{ section.settings.heading_size_desktop }}px;
+
+  --drye-hero-p-m: {{ section.settings.body_size_mobile }}px;
+  --drye-hero-p-d: {{ section.settings.body_size_desktop }}px;
+
+  /* Force base.css layout system */
+  --drye-hero-page-w: var(--page-width);
+  --drye-hero-pad-x-d: var(--section-padding-x);
+  --drye-hero-pad-x-m: var(--section-padding-x-mobile);
+  --drye-hero-maxw: var(--content-width);
+
+  --drye-hero-pad-top-d: {{ section.settings.pad_top_desktop }}px;
+  --drye-hero-pad-bot-d: {{ section.settings.pad_bottom_desktop }}px;
+  --drye-hero-pad-top-m: {{ section.settings.pad_top_mobile }}px;
+  --drye-hero-pad-bot-m: {{ section.settings.pad_bottom_mobile }}px;
+}
+{%- endstyle -%}
+
+{%- liquid
+  assign cs = section.settings.color_scheme | default: 'dark'
+  assign media_mode = section.settings.media_mode | default: 'auto'
+
+  assign video_id_desktop = section.settings.youtube_video_id_desktop | strip
+  assign video_id_mobile  = section.settings.youtube_video_id_mobile  | strip
+
+  assign img_d = section.settings.bg_image_desktop
+  assign img_m = section.settings.bg_image_mobile
+
+  assign has_video = false
+  if video_id_desktop != blank or video_id_mobile != blank
+    assign has_video = true
+  endif
+
+  assign has_image = false
+  if img_d != blank or img_m != blank
+    assign has_image = true
+  endif
+
+  assign use_video = false
+  assign use_image = false
+
+  if media_mode == 'video'
+    if has_video
+      assign use_video = true
+    elsif has_image
+      assign use_image = true
+    endif
+
+  elsif media_mode == 'image'
+    if has_image
+      assign use_image = true
+    elsif has_video
+      assign use_video = true
+    endif
+
+  else
+    if has_image
+      assign use_image = true
+    elsif has_video
+      assign use_video = true
+    endif
+  endif
+-%}
+
+<section
+  class="drye-hero drye-section {% if cs == 'dark' %}drye-section--dark{% else %}drye-section--light{% endif %}"
+  aria-label="{{ section.settings.aria_label | escape }}"
+  data-media-mode="{{ media_mode }}"
+  data-use-image="{{ use_image }}"
+  data-use-video="{{ use_video }}"
+>
+  <div class="drye-hero__media" aria-hidden="true">
+
+    {%- if use_image and has_image -%}
+      <div class="drye-hero__bgimg drye-hero__bgimg--desktop">
+        {% if img_d != blank %}
+          {{ img_d | image_url: width: 2400 | image_tag: loading: 'eager', class: 'drye-hero__bgimg-el', alt: '' }}
+        {% elsif img_m != blank %}
+          {{ img_m | image_url: width: 2400 | image_tag: loading: 'eager', class: 'drye-hero__bgimg-el', alt: '' }}
+        {% endif %}
+      </div>
+
+      <div class="drye-hero__bgimg drye-hero__bgimg--mobile">
+        {% if img_m != blank %}
+          {{ img_m | image_url: width: 1600 | image_tag: loading: 'eager', class: 'drye-hero__bgimg-el', alt: '' }}
+        {% elsif img_d != blank %}
+          {{ img_d | image_url: width: 1600 | image_tag: loading: 'eager', class: 'drye-hero__bgimg-el', alt: '' }}
+        {% endif %}
+      </div>
+    {%- endif -%}
+
+    {%- if use_video and has_video -%}
+      {%- if video_id_desktop != blank -%}
+        <div class="drye-hero__video drye-hero__video--desktop">
+          <iframe
+            class="drye-hero__iframe drye-hero__iframe--desktop"
+            src="https://www.youtube.com/embed/{{ video_id_desktop }}?autoplay=1&mute=1&controls=0&rel=0&playsinline=1&loop=1&playlist={{ video_id_desktop }}&modestbranding=1&iv_load_policy=3&disablekb=1&fs=0"
+            title=""
+            frameborder="0"
+            allow="autoplay; encrypted-media; picture-in-picture"
+            tabindex="-1"
+          ></iframe>
+        </div>
+      {%- endif -%}
+
+      {%- if video_id_mobile != blank -%}
+        <div class="drye-hero__video drye-hero__video--mobile">
+          <iframe
+            class="drye-hero__iframe drye-hero__iframe--mobile"
+            src="https://www.youtube.com/embed/{{ video_id_mobile }}?autoplay=1&mute=1&controls=0&rel=0&playsinline=1&loop=1&playlist={{ video_id_mobile }}&modestbranding=1&iv_load_policy=3&disablekb=1&fs=0"
+            title=""
+            frameborder="0"
+            allow="autoplay; encrypted-media; picture-in-picture"
+            tabindex="-1"
+          ></iframe>
+        </div>
+      {%- endif -%}
+    {%- endif -%}
+
+    <div class="drye-hero__overlay"></div>
+
+    {%- if section.settings.poster_image != blank -%}
+      <div class="drye-hero__poster">
+        {{ section.settings.poster_image | image_url: width: 2400 | image_tag: loading: 'lazy', class: 'drye-hero__poster-el', alt: '' }}
+      </div>
+    {%- endif -%}
+  </div>
+
+  <div class="drye-hero__content">
+    <div class="drye-hero__grid">
+      <div class="drye-hero__inner">
+
+        {%- if section.settings.heading != blank -%}
+          <h1 class="drye-hero__heading">{{ section.settings.heading }}</h1>
+        {%- endif -%}
+
+        {%- if section.settings.body != blank -%}
+          <div class="drye-hero__body rte">
+            {{ section.settings.body }}
+
+            {%- if section.settings.cta_1_label != blank or section.settings.cta_2_label != blank -%}
+              <div class="drye-hero__ctas">
+                {%- if section.settings.cta_1_label != blank -%}
+                  <a class="drye-hero__cta drye-hero__cta--primary" href="{{ section.settings.cta_1_url | default: '#' }}">
+                    {{ section.settings.cta_1_label }}
+                  </a>
+                {%- endif -%}
+
+                {%- if section.settings.cta_2_label != blank -%}
+                  <a class="drye-hero__cta drye-hero__cta--secondary" href="{{ section.settings.cta_2_url | default: '#' }}">
+                    {{ section.settings.cta_2_label }}
+                  </a>
+                {%- endif -%}
+              </div>
+            {%- endif -%}
+          </div>
+        {%- endif -%}
+
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "DRYE – YouTube Hero v3",
+  "tag": "section",
+  "class": "section-drye-youtube-hero",
+  "settings": [
+    { "type": "text", "id": "aria_label", "label": "ARIA label", "default": "Hero" },
+
+    {
+      "type": "select",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "dark",
+      "options": [
+        { "value": "dark", "label": "Dark" },
+        { "value": "light", "label": "Light" }
+      ]
+    },
+
+    {
+      "type": "select",
+      "id": "media_mode",
+      "label": "Media mode",
+      "default": "auto",
+      "options": [
+        { "value": "auto", "label": "Auto (prefer image if uploaded, else video)" },
+        { "value": "video", "label": "Video (force)" },
+        { "value": "image", "label": "Image (force)" }
+      ]
+    },
+
+    { "type": "checkbox", "id": "show_image_under_video", "label": "Show image under video (optional)", "default": false },
+
+    { "type": "text", "id": "youtube_video_id_desktop", "label": "YouTube video ID (desktop)", "default": "AHQt6mCH91A" },
+    { "type": "text", "id": "youtube_video_id_mobile", "label": "YouTube video ID (mobile / shorts)", "default": "lP2XfQlJfzU" },
+
+    { "type": "image_picker", "id": "bg_image_desktop", "label": "Background image (desktop)" },
+    { "type": "image_picker", "id": "bg_image_mobile", "label": "Background image (mobile)" },
+
+    { "type": "image_picker", "id": "poster_image", "label": "Poster image (fallback / reduced motion)" },
+
+    { "type": "color", "id": "overlay_color", "label": "Overlay color", "default": "#262626" },
+    { "type": "range", "id": "overlay_opacity", "label": "Overlay opacity (%)", "min": 0, "max": 100, "step": 1, "default": 45 },
+
+    { "type": "range", "id": "heading_size_desktop", "label": "Heading size desktop (px)", "min": 28, "max": 72, "step": 1, "default": 56 },
+    { "type": "range", "id": "heading_size_mobile", "label": "Heading size mobile (px)", "min": 22, "max": 54, "step": 1, "default": 40 },
+    { "type": "range", "id": "body_size_desktop", "label": "Body size desktop (px)", "min": 12, "max": 22, "step": 1, "default": 16 },
+    { "type": "range", "id": "body_size_mobile", "label": "Body size mobile (px)", "min": 12, "max": 20, "step": 1, "default": 14 },
+
+    { "type": "range", "id": "min_height_desktop", "label": "Min height desktop (px)", "min": 420, "max": 900, "step": 10, "default": 620 },
+    { "type": "range", "id": "min_height_mobile", "label": "Min height mobile (px)", "min": 380, "max": 820, "step": 10, "default": 640 },
+
+    { "type": "range", "id": "page_width", "label": "Page width (legacy – not used)", "min": 1080, "max": 1440, "step": 20, "default": 1400 },
+    { "type": "range", "id": "pad_x_desktop", "label": "Horizontal padding desktop (legacy – not used)", "min": 16, "max": 120, "step": 4, "default": 64 },
+    { "type": "range", "id": "pad_x_mobile", "label": "Horizontal padding mobile (legacy – not used)", "min": 12, "max": 40, "step": 2, "default": 32 },
+
+    { "type": "range", "id": "pad_top_desktop", "label": "Top padding desktop (px)", "min": 80, "max": 220, "step": 4, "default": 124 },
+    { "type": "range", "id": "pad_bottom_desktop", "label": "Bottom padding desktop (px)", "min": 60, "max": 220, "step": 4, "default": 108 },
+    { "type": "range", "id": "pad_top_mobile", "label": "Top padding mobile (px)", "min": 60, "max": 180, "step": 4, "default": 92 },
+    { "type": "range", "id": "pad_bottom_mobile", "label": "Bottom padding mobile (px)", "min": 52, "max": 180, "step": 4, "default": 84 },
+
+    { "type": "range", "id": "content_max_width", "label": "Content max width (legacy – not used)", "min": 420, "max": 900, "step": 10, "default": 720 },
+
+    { "type": "text", "id": "cta_1_label", "label": "CTA 1 label", "default": "Explore Applications" },
+    { "type": "url", "id": "cta_1_url", "label": "CTA 1 link" },
+    { "type": "text", "id": "cta_2_label", "label": "CTA 2 label", "default": "Partner with us" },
+    { "type": "url", "id": "cta_2_url", "label": "CTA 2 link" },
+
+    { "type": "textarea", "id": "heading", "label": "Heading", "default": "Solving moisture damage\nin sealed protective\nequipment" },
+    { "type": "richtext", "id": "body", "label": "Body", "default": "<p>DRYE is a structural textile platform that prevents skin breakdown where sealed equipment meets skin. No membranes. No coatings. No chemicals. Patent pending.</p>" }
+  ],
+  "presets": [{ "name": "DRYE – YouTube Hero v3" }]
+}
+{% endschema %}

@@ -1,0 +1,63 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "hero": {
+      "type": "drye-article-hero",
+      "settings": {
+        "meta_location": "· Kiruna, Sweden",
+        "meta_study": "User Story · Industrial",
+        "meta_read_time": "4 min read"
+      }
+    },
+    "drye_article_hero_image_MeeXFY": {
+      "type": "drye-article-hero-image",
+      "name": "DRYE Article Hero Image",
+      "settings": {
+        "hero_caption": "Kiruna, Sweden. Jens Stålnacke — began using DRYE liners July 2022. Interviewed September 2024."
+      }
+    },
+    "drye_article_body_LBYtze": {
+      "type": "drye-article-body",
+      "custom_css": [
+        ".article-video {margin: 32px 0;}",
+        ".article-video-embed {position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;}",
+        ".article-video-embed iframe {position: absolute; top: 0; left: 0; width: 100%; height: 100%;}",
+        ".sp-img {width: 120px; height: 120px; background: transparent; margin: 0 auto 4px; display: flex; align-items: center; justify-content: center; opacity: 1;}"
+      ],
+      "name": "DRYE Article Body",
+      "settings": {
+        "hero_caption": "",
+        "sidebar_claim": "DRYE Asymmetric Liner. No chemicals. No coatings. No membranes.",
+        "sidebar_image": "shopify://shop_images/Image_DRYE_Glove_Liner-removebg-preview.png",
+        "sidebar_subline": "0.4mm · Machine washable · Patent pending",
+        "sidebar_cta_label": "See how it works →",
+        "sidebar_cta_link": "shopify://pages/how-it-works",
+        "toc_heading": "In this report"
+      }
+    },
+    "drye_article_related_gXmptV": {
+      "type": "drye-article-related",
+      "name": "DRYE Article Related",
+      "settings": {
+        "heading": "Also worth reading",
+        "posts_limit": 3,
+        "link_label": "Read article",
+        "placeholder_symbol": "⬡"
+      }
+    }
+  },
+  "order": [
+    "hero",
+    "drye_article_hero_image_MeeXFY",
+    "drye_article_body_LBYtze",
+    "drye_article_related_gXmptV"
+  ]
+}

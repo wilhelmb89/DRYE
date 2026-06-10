@@ -1,0 +1,193 @@
+{{ 'drye-validation.css' | asset_url | stylesheet_tag }}
+
+<section class="validation" data-drye-section data-section-index="15" data-section-name="study_validation">
+  <div class="dryeNEW-container">
+    <span class="micro reveal">
+      {{ section.settings.micro_label }}
+    </span>
+
+    <h2 class="reveal rd1">
+      {{ section.settings.heading_line_1 }}<br><em>{{ section.settings.heading_line_2 }}</em>
+    </h2>
+
+    <p class="lead reveal rd2">
+      {{ section.settings.lead_text }}
+    </p>
+
+    <div class="institutions reveal rd2">
+      {% for block in section.blocks %}
+        {% if block.type == 'institution' %}
+          <div class="institution" {{ block.shopify_attributes }}>
+            <div class="inst-mark">
+              <span>{{ block.settings.mark }}</span>
+            </div>
+            <div>
+              <div class="inst-name">{{ block.settings.name }}</div>
+              <div class="inst-role">{{ block.settings.role }}</div>
+            </div>
+          </div>
+        {% endif %}
+      {% endfor %}
+    </div>
+
+    <div class="proof-grid-dark reveal rd3">
+      {% for block in section.blocks %}
+        {% if block.type == 'proof' %}
+          <div class="proof-card-dark" {{ block.shopify_attributes }}>
+            <div class="proof-num-dark">
+              {{ block.settings.number }}<span class="unit">{{ block.settings.unit }}</span>
+            </div>
+            <p class="proof-desc-dark">{{ block.settings.description }}</p>
+          </div>
+        {% endif %}
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "DRYE Validation",
+  "settings": [
+    {
+      "type": "text",
+      "id": "micro_label",
+      "label": "Micro label",
+      "default": "External validation"
+    },
+    {
+      "type": "text",
+      "id": "heading_line_1",
+      "label": "Heading line 1",
+      "default": "Tested in real working"
+    },
+    {
+      "type": "text",
+      "id": "heading_line_2",
+      "label": "Heading line 2",
+      "default": "conditions. Not a marketing lab."
+    },
+    {
+      "type": "textarea",
+      "id": "lead_text",
+      "label": "Lead text",
+      "default": "Seven years of R&D across three independent research institutions. The claims on this page are not based on the manufacturer's internal testing."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "institution",
+      "name": "Institution",
+      "limit": 3,
+      "settings": [
+        {
+          "type": "text",
+          "id": "mark",
+          "label": "Initial",
+          "default": "R"
+        },
+        {
+          "type": "text",
+          "id": "name",
+          "label": "Institution name",
+          "default": "RISE Research Institutes of Sweden"
+        },
+        {
+          "type": "text",
+          "id": "role",
+          "label": "Institution role",
+          "default": "Independent materials & textile validation"
+        }
+      ]
+    },
+    {
+      "type": "proof",
+      "name": "Proof stat",
+      "limit": 4,
+      "settings": [
+        {
+          "type": "text",
+          "id": "number",
+          "label": "Number",
+          "default": "1.72"
+        },
+        {
+          "type": "text",
+          "id": "unit",
+          "label": "Unit",
+          "default": "×"
+        },
+        {
+          "type": "textarea",
+          "id": "description",
+          "label": "Description",
+          "default": "Bacterial growth with conventional liners vs. DRYE under identical conditions"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "DRYE Validation",
+      "blocks": [
+        {
+          "type": "institution",
+          "settings": {
+            "mark": "R",
+            "name": "RISE Research Institutes of Sweden",
+            "role": "Independent materials & textile validation"
+          }
+        },
+        {
+          "type": "institution",
+          "settings": {
+            "mark": "U",
+            "name": "Uppsala University",
+            "role": "Clinical conditions & dermatological impact"
+          }
+        },
+        {
+          "type": "institution",
+          "settings": {
+            "mark": "S",
+            "name": "Swedish School of Textiles",
+            "role": "Textile engineering & structural analysis"
+          }
+        },
+        {
+          "type": "proof",
+          "settings": {
+            "number": "1.72",
+            "unit": "×",
+            "description": "Bacterial growth with conventional liners vs. DRYE under identical conditions"
+          }
+        },
+        {
+          "type": "proof",
+          "settings": {
+            "number": "75",
+            "unit": "%",
+            "description": "Of healthcare workers report hand dermatitis linked to glove use"
+          }
+        },
+        {
+          "type": "proof",
+          "settings": {
+            "number": "7",
+            "unit": "yr",
+            "description": "R&D before first unit shipped. Three institutions. Real shift conditions."
+          }
+        },
+        {
+          "type": "proof",
+          "settings": {
+            "number": "0",
+            "unit": "%",
+            "description": "Dexterity compromise. 0.4mm. Fits inside any glove without changing feel."
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

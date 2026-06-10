@@ -1,0 +1,142 @@
+/* ==========================================================================
+   DRYE Mechanics — Tesla Technicians
+   Based on section 7 in drye-mechanics HTML
+   Depends on base.css
+   ========================================================================== */
+
+.mech-tesla__intro {
+  max-width: 680px;
+  margin-bottom: var(--space-40);
+}
+
+.mech-tesla__heading {
+  margin-bottom: var(--space-18);
+  color: var(--deep);
+}
+
+.mech-tesla__sub {
+  color: var(--muted);
+}
+
+.mech-tesla__sub p {
+  margin: 0;
+}
+
+.mech-tesla__sub strong {
+  color: var(--deep);
+  font-weight: var(--fw-semibold);
+}
+
+.mech-tesla__rating {
+  display: inline-flex;
+  align-items: baseline;
+  gap: var(--space-10);
+  margin-bottom: var(--space-40);
+  padding: var(--space-12) var(--space-20);
+  background: var(--bg-tint);
+  border: var(--border-base);
+}
+
+.mech-tesla__rating-num {
+  color: var(--deep);
+  font-family: var(--font-display);
+  font-size: var(--fs-stat-sm);
+  font-weight: var(--fw-semibold);
+  letter-spacing: -0.02em;
+  line-height: 1;
+}
+
+.mech-tesla__rating-num small {
+  color: var(--muted);
+  font-family: var(--font-body);
+  font-size: var(--fs-caption);
+  font-weight: var(--fw-regular);
+}
+
+.mech-tesla__rating-lbl {
+  color: var(--muted);
+}
+
+.mech-tesla__rating-lbl strong {
+  display: block;
+  color: var(--deep);
+  font-weight: var(--fw-semibold);
+}
+
+.mech-tesla__grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--border-width);
+  background: var(--border);
+  border: var(--border-base);
+}
+
+.mech-tesla__card {
+  padding: var(--space-28) var(--space-24);
+  background: var(--bg);
+  border-left: var(--border-width-strong) solid var(--emerald);
+}
+
+.mech-tesla__card-q {
+  margin-bottom: var(--space-18);
+  color: var(--deep);
+  font-family: var(--font-editorial);
+  font-size: var(--fs-body-lg);
+  font-style: italic;
+  font-weight: var(--fw-regular);
+  line-height: var(--lh-body-mid);
+}
+
+.mech-tesla__card-attr {
+  padding-top: var(--space-14);
+  color: var(--muted);
+  border-top: var(--border-base);
+}
+
+.mech-tesla__card-attr p {
+  margin: 0;
+}
+
+.mech-tesla__card-attr strong {
+  display: block;
+  margin-bottom: var(--space-2);
+  color: var(--deep);
+  font-weight: var(--fw-semibold);
+}
+
+.mech-tesla__context {
+  margin-top: var(--space-36);
+  padding: var(--space-24);
+  background: var(--bg-tint);
+  border-left: var(--border-width-strong) solid var(--deep);
+}
+
+.mech-tesla__context-lbl {
+  margin-bottom: var(--space-10);
+  color: var(--sage);
+}
+
+.mech-tesla__context-body {
+  color: var(--body);
+}
+
+.mech-tesla__context-body p {
+  margin: 0;
+}
+
+.mech-tesla__context-body strong {
+  color: var(--deep);
+  font-weight: var(--fw-semibold);
+}
+
+@media (min-width: 640px) {
+  .mech-tesla__grid {
+    grid-template-columns: var(--grid-2-col-desktop);
+  }
+}
+
+@media (min-width: 768px) {
+  .mech-tesla__card {
+    padding: var(--space-32) var(--space-28);
+  }
+}

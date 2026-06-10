@@ -1,0 +1,53 @@
+.drye-policy-tab-bar {
+  position: sticky;
+  top: 52px;
+  z-index: 100;
+  background: var(--bg-ink);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+}
+
+.drye-policy-tab-bar__inner {
+  display: flex;
+  overflow-x: auto;
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 var(--page-pad);
+  scrollbar-width: none;
+}
+
+.drye-policy-tab-bar__inner::-webkit-scrollbar {
+  display: none;
+}
+
+@media (min-width: 768px) {
+  .drye-policy-tab-bar__inner {
+    padding: 0 40px;
+  }
+}
+
+.drye-policy-tab-bar__button {
+  white-space: nowrap;
+  margin-bottom: -1px;
+  padding: 14px 18px;
+  border: 0;
+  border-bottom: 2px solid transparent;
+  background: none;
+  cursor: pointer;
+
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.3);
+
+  transition: color 0.15s ease, border-color 0.15s ease;
+}
+
+.drye-policy-tab-bar__button:hover {
+  color: rgba(255, 255, 255, 0.65);
+}
+
+.drye-policy-tab-bar__button.is-active {
+  color: #fff;
+  border-bottom-color: var(--emerald);
+}

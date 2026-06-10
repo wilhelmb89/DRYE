@@ -1,0 +1,112 @@
+{%- assign ss = section.settings -%}
+
+<!-- DRYE_CART_PAGE_V2 -->
+
+<div class="cart-page container">
+
+  {% if ss.title != blank %}
+    <h1 class="cart-title">{{ ss.title }}</h1>
+  {% endif %}
+
+  {% if cart.empty? %}
+
+    <div class="cart-empty">
+      {{ ss.empty_text }}
+    </div>
+
+  {% else %}
+
+    <form action="{{ routes.cart_url }}" method="post" novalidate>
+
+      <div class="cart-items">
+
+        {% for item in cart.items %}
+          <div class="cart-row">
+
+            <div class="cart-image">
+              {% if item.image %}
+                {{ item.image | image_url: width: 160 | image_tag }}
+              {% endif %}
+            </div>
+
+            <div class="cart-info">
+
+              <div class="cart-product">
+                <a href="{{ item.url }}">{{ item.product.title }}</a>
+              </div>
+
+              {% unless item.product.has_only_default_variant %}
+                <div class="cart-variant">
+                  {% for opt in item.options_with_values %}
+                    <span>{{ opt.value }}</span>{% unless forloop.last %} / {% endunless %}
+                  {% endfor %}
+                </div>
+              {% endunless %}
+
+              <div class="cart-qty-price">
+
+                <div class="cart-qty">
+                  <input
+                    type="number"
+                    name="updates[]"
+                    value="{{ item.quantity }}"
+                    min="0"
+                  >
+                </div>
+
+                <div class="cart-line-price">
+                  {{ item.final_line_price | money_without_trailing_zeros }}
+                </div>
+
+              </div>
+
+            </div>
+
+          </div>
+        {% endfor %}
+
+      </div>
+
+      <div class="cart-footer">
+
+        <div class="cart-subtotal">
+          <span>Subtotal</span>
+          <span>{{ cart.total_price | money_without_trailing_zeros }}</span>
+        </div>
+
+        <div class="cart-note">
+          Shipping & taxes calculated at checkout
+        </div>
+
+        <button type="submit" name="checkout" class="button">
+          Check out
+        </button>
+
+      </div>
+
+    </form>
+
+  {% endif %}
+
+</div>
+
+
+{% schema %}
+{
+  "name": "Main Cart NEW",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Cart title",
+      "default": "Your cart"
+    },
+    {
+      "type": "richtext",
+      "id": "empty_text",
+      "label": "Empty text",
+      "default": "<p>Your cart is empty.</p>"
+    }
+  ]
+}
+{% endschema %}

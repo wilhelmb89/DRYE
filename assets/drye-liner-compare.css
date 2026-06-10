@@ -1,0 +1,132 @@
+/* assets/drye-liner-compare.css
+   DRYE Liner Compare — fixed + responsive
+   - Max width affects the whole layout
+   - 2-column grid on desktop, 1-column on mobile
+   - Heading + panel title/subtitle sizes via CSS vars
+*/
+
+.drye-liner-compare-section{
+  border-radius: 48px;
+  overflow: hidden;
+  padding: var(--dlc-pad-y-mobile, 48px) 0;
+}
+
+.drye-liner-compare-section.drye-section--light{ background: var(--c-site-bg); color: var(--c-text); }
+.drye-liner-compare-section.drye-section--dark { background: var(--c-dark-bg); color: var(--c-text); }
+
+@media (min-width: 990px){
+  .drye-liner-compare-section{
+    padding: var(--dlc-pad-y-desktop, 72px) 0;
+  }
+}
+
+/* Inner wrapper (max width slider actually applies here) */
+.drye-liner-compare-inner{
+  max-width: var(--dlc-maxw, 1400px);
+  margin: 0 auto;
+  text-align: center;
+  padding-inline: var(--dlc-pad-x-m, 24px);
+  box-sizing: border-box;
+}
+
+@media (min-width: 990px){
+  .drye-liner-compare-inner{
+    padding-inline: var(--dlc-pad-x-d, 32px);
+  }
+}
+
+/* Heading sizes */
+.drye-liner-compare-heading{
+  margin: 0 auto 8px;
+  max-width: 22ch;
+  font-size: var(--dlc-heading-m, 32px);
+  line-height: 1.1;
+  color: var(--c-heading);
+}
+
+@media (min-width: 990px){
+  .drye-liner-compare-heading{
+    font-size: var(--dlc-heading-d, 40px);
+  }
+}
+
+.drye-liner-compare-subheading{
+  margin: 0 auto 36px;
+  max-width: 70ch;
+  line-height: 1.5;
+  color: var(--c-text);
+}
+
+/* Panels: grid (this is what stops the “wrap” problem on desktop) */
+.drye-liner-compare-grid{
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--dlc-gap, 24px);
+  text-align: left;
+}
+
+@media (min-width: 990px){
+  .drye-liner-compare-grid{
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    align-items: start;
+  }
+}
+
+/* Panel card (no static max-width!) */
+.drye-liner-compare-panel{
+  width: 100%;
+  border-radius: var(--dlc-radius, 16px);
+  padding: 20px 20px 24px;
+
+  background: transparent;
+  border: 1px solid var(--c-border);
+  box-sizing: border-box;
+}
+
+.drye-liner-compare-panel-title{
+  margin: 0 0 6px;
+  font-size: var(--dlc-panel-title-m, 20px);
+  line-height: 1.2;
+  color: var(--c-heading);
+}
+
+@media (min-width: 990px){
+  .drye-liner-compare-panel-title{
+    font-size: var(--dlc-panel-title-d, 22px);
+  }
+}
+
+/* The “two extra headings” under left/right title */
+.drye-liner-compare-panel-subtitle{
+  margin: 0 0 12px;
+  font-size: var(--dlc-panel-sub-m, 16px);
+  line-height: 1.35;
+  color: var(--c-text);
+  opacity: .85;
+}
+
+@media (min-width: 990px){
+  .drye-liner-compare-panel-subtitle{
+    font-size: var(--dlc-panel-sub-d, 16px);
+  }
+}
+
+.drye-liner-compare-panel-text{
+  margin: 0 0 16px;
+  line-height: 1.5;
+  color: var(--c-text);
+}
+
+/* Media */
+.drye-liner-compare-media{
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.drye-liner-compare-image,
+.drye-liner-compare-video{
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}

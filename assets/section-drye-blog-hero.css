@@ -1,0 +1,63 @@
+.blog-hero {
+  background: var(--bg-ink);
+  padding-top: 52px;
+}
+
+.blog-hero-top {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  padding-top: var(--space-56);
+  padding-bottom: var(--space-40);
+  border-bottom: var(--border-white-007);
+}
+
+/* Eyebrow */
+.blog-hero-eye {
+  margin-bottom: var(--space-14);
+  color: var(--sage);
+}
+
+/* Heading */
+.blog-hero-h {
+  margin-top: var(--space-10);
+  margin-bottom: var(--space-14);
+  max-width: 760px;
+  color: var(--white-100); /* vit */
+}
+
+.blog-hero-h em {
+  display: block;
+  margin-top: var(--space-8);
+  font-family: var(--font-editorial);
+  font-style: italic;
+  font-weight: var(--fw-regular);
+  font-size: 0.85em;
+  color: var(--sage);
+}
+
+/* Description */
+.blog-hero-desc {
+  max-width: 300px;
+  margin-top: var(--space-20);
+  padding-bottom: var(--space-4);
+  color: var(--white-040); /* ljus grå */
+}
+
+.blog-hero-desc p {
+  margin: 0;
+}
+
+/* Desktop */
+@media (min-width: 768px) {
+  .blog-hero-top {
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: flex-end;
+    gap: var(--grid-gap-64);
+    padding-top: var(--space-64);
+  }
+
+  .blog-hero-desc {
+    margin-top: 0;
+    text-align: right;
+  }
+}

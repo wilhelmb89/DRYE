@@ -1,0 +1,814 @@
+/* ═══════════════════════════════════════════════════════════
+   DRYE — Occlusion Bridge Section
+   Local CSS only:
+   • no global page padding
+   • no section top/bottom padding
+   • no local heading/body typography
+   • typography comes from dryeNEW base classes in Liquid
+═══════════════════════════════════════════════════════════ */
+
+/* ───────────────────────────────────────────────────────────
+   1. SECTION / DIAGRAM VARIABLES
+─────────────────────────────────────────────────────────── */
+.occlusion-cmp {
+  --d-height: 300px;
+  --d-glove-h: 28px;
+  --d-lyocell-h: 22px;
+  --d-pp-h: 22px;
+  --d-drye-h: calc(var(--d-lyocell-h) + var(--d-pp-h));
+
+  --d-skin-top-h: 30px;
+  --d-skin-top-h-swollen: 30px;
+  --d-skin-mid-h: 60px;
+  --d-skin-deep-h: 50px;
+  --d-skin-total: calc(var(--d-skin-top-h) + var(--d-skin-mid-h) + var(--d-skin-deep-h));
+
+  --d-rise-end: calc(var(--d-height) - var(--d-glove-h) - 4px);
+  --d-rise-mid: calc(var(--d-height) - var(--d-glove-h) - var(--d-drye-h) - 5px);
+  --d-rise-start: 30px;
+
+  --d-fall-peak: calc(var(--d-height) - var(--d-glove-h) - 56px);
+  --d-fall-end: -10px;
+  --d-fall-start: 50px;
+}
+
+@media (min-width: 768px) {
+  .occlusion-cmp {
+    --d-height: 340px;
+  }
+}
+
+/* ───────────────────────────────────────────────────────────
+   2. INTRO
+─────────────────────────────────────────────────────────── */
+.occlusion-cmp__intro {
+  max-width: 640px;
+  margin-bottom: var(--space-48);
+}
+
+.occlusion-cmp__eyebrow {
+  color: var(--caption);
+}
+
+.occlusion-cmp__heading {
+  color: var(--deep);
+  margin-bottom: var(--space-12);
+}
+
+.occlusion-cmp__heading .dryeNEW-em {
+  color: var(--accent);
+}
+
+.occlusion-cmp__lead {
+  color: var(--muted);
+  max-width: 560px;
+}
+
+/* ───────────────────────────────────────────────────────────
+   3. CARD CONTAINERS
+─────────────────────────────────────────────────────────── */
+.occlusion-cmp__diagrams {
+  gap: var(--grid-gap-20);
+}
+
+.occlusion-cmp__card {
+  border: var(--border-base);
+  background: var(--bg);
+  padding: var(--card-pad-y) var(--card-pad-x);
+}
+
+.occlusion-cmp__card--occluded {
+  background: var(--bg-soft);
+}
+
+.occlusion-cmp__card--drye {
+  background: var(--bg);
+  border-color: var(--sage);
+}
+
+.occlusion-cmp__card-label {
+  margin-bottom: var(--space-4);
+}
+
+.occlusion-cmp__card-label--occluded {
+  color: var(--red);
+}
+
+.occlusion-cmp__card-label--drye {
+  color: var(--emerald);
+}
+
+.occlusion-cmp__card-title {
+  color: var(--deep);
+  margin-bottom: var(--space-24);
+}
+
+.occlusion-cmp__card-desc {
+  color: var(--muted);
+}
+
+.occlusion-cmp__card-desc strong {
+  color: var(--deep);
+}
+
+.occlusion-cmp__card--occluded .occlusion-cmp__card-desc strong {
+  color: var(--red);
+}
+
+.occlusion-cmp__card--drye .occlusion-cmp__card-desc strong {
+  color: var(--emerald);
+}
+
+@media (min-width: 768px) {
+  .occlusion-cmp__diagrams {
+    gap: var(--grid-gap-24);
+  }
+}
+
+/* ───────────────────────────────────────────────────────────
+   4. DIAGRAM CONTAINER
+─────────────────────────────────────────────────────────── */
+.cmp-diagram {
+  position: relative;
+  width: 100%;
+  height: var(--d-height);
+  margin-bottom: var(--space-20);
+  overflow: hidden;
+}
+
+.cmp-diagram__micro {
+  margin-bottom: 0;
+}
+
+/* Z-index stack:
+   1: skin
+   2: vapor cloud
+   3: arrows
+   5: DRYE layers
+   6: animated droplets
+   8: glove
+*/
+
+/* ───────────────────────────────────────────────────────────
+   5. GLOVE
+─────────────────────────────────────────────────────────── */
+.cmp-diagram__glove {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: var(--d-glove-h);
+  background: var(--deep);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 8;
+}
+
+.cmp-diagram__glove-text {
+  color: var(--white-080);
+}
+
+/* ───────────────────────────────────────────────────────────
+   6. DRYE LINER
+─────────────────────────────────────────────────────────── */
+.cmp-diagram__drye {
+  position: absolute;
+  top: var(--d-glove-h);
+  left: 0;
+  right: 0;
+  z-index: 5;
+}
+
+.cmp-diagram__lyocell,
+.cmp-diagram__pp {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-inline: var(--space-12);
+}
+
+.cmp-diagram__lyocell {
+  height: var(--d-lyocell-h);
+  background: linear-gradient(180deg, #DDE9E9 0%, #E8F0F0 100%);
+  border-bottom: 1px dashed var(--sage-030);
+}
+
+.cmp-diagram__pp {
+  height: var(--d-pp-h);
+  background: linear-gradient(180deg, #EAEFEF 0%, #F0F4F4 100%);
+}
+
+.cmp-diagram__layer-text {
+  position: relative;
+  z-index: 2;
+}
+
+.cmp-diagram__lyocell .cmp-diagram__layer-text {
+  color: var(--sage);
+}
+
+.cmp-diagram__pp .cmp-diagram__layer-text {
+  color: var(--deep);
+}
+
+.cmp-diagram__lyocell::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(45deg, rgba(95, 138, 139, 0.18) 25%, transparent 25%),
+    linear-gradient(-45deg, rgba(95, 138, 139, 0.18) 25%, transparent 25%);
+  background-size: 6px 6px;
+  pointer-events: none;
+}
+
+.cmp-diagram__pp::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(circle, rgba(30, 58, 76, 0.2) 0.6px, transparent 0.6px);
+  background-size: 5px 5px;
+  pointer-events: none;
+}
+
+/* ───────────────────────────────────────────────────────────
+   7. STATIC ARROWS
+─────────────────────────────────────────────────────────── */
+.cmp-arrows {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  pointer-events: none;
+}
+
+.cmp-arrows--occluded {
+  color: #7F1D1D;
+}
+
+.cmp-arrows--drye {
+  color: var(--emerald);
+}
+
+.cmp-arrow {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 16px;
+}
+
+.cmp-arrow svg {
+  width: 16px;
+  height: 130px;
+  display: block;
+}
+
+.cmp-arrow--in {
+  bottom: var(--d-skin-total);
+}
+
+.cmp-arrow--out {
+  top: 70px;
+}
+
+.cmp-arrow--1 {
+  left: calc(20% - 8px);
+}
+
+.cmp-arrow--2 {
+  left: calc(45% - 8px);
+}
+
+.cmp-arrow--3 {
+  left: calc(70% - 8px);
+}
+
+/* ───────────────────────────────────────────────────────────
+   8. ANIMATED DROPLETS
+─────────────────────────────────────────────────────────── */
+.cmp-droplets {
+  position: absolute;
+  inset: 0;
+  z-index: 6;
+  pointer-events: none;
+}
+
+.cmp-droplet {
+  position: absolute;
+  width: 6px;
+  height: 8px;
+  border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+}
+
+.cmp-droplet--1 {
+  left: calc(20% - 3px);
+  animation-delay: 0s;
+}
+
+.cmp-droplet--2 {
+  left: calc(45% - 3px);
+  animation-delay: 1s;
+}
+
+.cmp-droplet--3 {
+  left: calc(70% - 3px);
+  animation-delay: 2s;
+}
+
+.cmp-droplet--4 {
+  left: calc(32% - 3px);
+  animation-delay: 0.5s;
+}
+
+.cmp-droplet--5 {
+  left: calc(57% - 3px);
+  animation-delay: 1.5s;
+}
+
+.cmp-droplet--6 {
+  left: calc(82% - 3px);
+  animation-delay: 2.5s;
+}
+
+@keyframes drye-dropStallAndFall {
+  0% {
+    bottom: var(--d-fall-start);
+    opacity: 0;
+    transform: scale(1);
+    background: rgba(100, 180, 255, 0.7);
+  }
+
+  10% {
+    opacity: 0.85;
+  }
+
+  35% {
+    bottom: var(--d-fall-peak);
+    opacity: 0.85;
+    transform: scale(1);
+    background: rgba(100, 180, 255, 0.7);
+  }
+
+  42% {
+    bottom: calc(var(--d-fall-peak) + 8px);
+    opacity: 0.5;
+    transform: scale(1);
+    background: rgba(100, 180, 255, 0.4);
+  }
+
+  55% {
+    bottom: calc(var(--d-fall-peak) - 30px);
+    opacity: 0.6;
+    transform: scale(1);
+    background: rgba(180, 120, 100, 0.55);
+  }
+
+  78% {
+    bottom: 40px;
+    opacity: 0.75;
+    transform: scale(1);
+    background: rgba(255, 80, 80, 0.7);
+  }
+
+  88% {
+    bottom: 15px;
+    opacity: 0.6;
+    transform: scale(1.4, 0.8);
+    background: rgba(255, 60, 60, 0.5);
+  }
+
+  95% {
+    bottom: 0;
+    opacity: 0.3;
+    transform: scale(2.4, 0.45);
+    background: rgba(255, 60, 60, 0.25);
+  }
+
+  100% {
+    bottom: var(--d-fall-end);
+    opacity: 0;
+    transform: scale(3.5, 0.3);
+    background: rgba(255, 60, 60, 0.1);
+  }
+}
+
+.cmp-droplet--fall {
+  background: rgba(100, 180, 255, 0.7);
+  animation-name: drye-dropStallAndFall;
+  animation-duration: 8s;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+}
+
+@keyframes drye-dropRiseThroughDRYE {
+  0% {
+    bottom: var(--d-rise-start);
+    opacity: 0;
+    transform: scale(1);
+    background: rgba(100, 180, 255, 0.7);
+  }
+
+  8% {
+    opacity: 0.9;
+  }
+
+  75% {
+    bottom: var(--d-rise-mid);
+    opacity: 0.9;
+    transform: scale(1);
+    background: rgba(100, 180, 255, 0.7);
+  }
+
+  88% {
+    bottom: calc(var(--d-rise-mid) + 15px);
+    opacity: 0.55;
+    transform: scale(1.5, 0.7);
+    background: rgba(80, 140, 220, 0.4);
+  }
+
+  96% {
+    bottom: var(--d-rise-end);
+    opacity: 0.2;
+    transform: scale(2.6, 0.4);
+    background: rgba(80, 140, 220, 0.2);
+  }
+
+  100% {
+    bottom: var(--d-rise-end);
+    opacity: 0;
+    transform: scale(3.5, 0.3);
+  }
+}
+
+.cmp-droplet--rise {
+  background: rgba(100, 180, 255, 0.7);
+  animation-name: drye-dropRiseThroughDRYE;
+  animation-duration: 4.5s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+
+/* ───────────────────────────────────────────────────────────
+   9. TRAPPED VAPOR / MICROCLIMATE
+─────────────────────────────────────────────────────────── */
+.cmp-diagram__pool {
+  position: absolute;
+  top: var(--d-glove-h);
+  left: 0;
+  right: 0;
+  height: 60px;
+  z-index: 2;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.cmp-diagram__vapor {
+  position: absolute;
+  border-radius: 50%;
+  background: radial-gradient(
+    ellipse at center,
+    rgba(150, 200, 230, 0.55) 0%,
+    rgba(150, 200, 230, 0.25) 40%,
+    rgba(150, 200, 230, 0) 75%
+  );
+  filter: blur(3px);
+}
+
+.cmp-diagram__vapor--a {
+  left: 4%;
+  top: 8px;
+  width: 60px;
+  height: 30px;
+}
+
+.cmp-diagram__vapor--b {
+  left: 18%;
+  top: 14px;
+  width: 52px;
+  height: 24px;
+}
+
+.cmp-diagram__vapor--c {
+  left: 32%;
+  top: 6px;
+  width: 68px;
+  height: 32px;
+}
+
+.cmp-diagram__vapor--d {
+  left: 48%;
+  top: 12px;
+  width: 56px;
+  height: 26px;
+  animation-delay: 1s;
+}
+
+.cmp-diagram__vapor--e {
+  left: 62%;
+  top: 8px;
+  width: 64px;
+  height: 30px;
+  animation-delay: 0.6s;
+}
+
+.cmp-diagram__vapor--f {
+  left: 76%;
+  top: 14px;
+  width: 52px;
+  height: 24px;
+  animation-delay: 1.4s;
+}
+
+.cmp-diagram__vapor--g {
+  left: 88%;
+  top: 10px;
+  width: 48px;
+  height: 22px;
+  animation-delay: 2s;
+}
+
+@keyframes drye-vaporDrift1 {
+  0%, 100% {
+    transform: translateX(0) scale(1);
+    opacity: 0.7;
+  }
+
+  50% {
+    transform: translateX(8px) scale(1.08);
+    opacity: 0.9;
+  }
+}
+
+@keyframes drye-vaporDrift2 {
+  0%, 100% {
+    transform: translateX(0) scale(1);
+    opacity: 0.85;
+  }
+
+  50% {
+    transform: translateX(-6px) scale(1.05);
+    opacity: 0.65;
+  }
+}
+
+@keyframes drye-vaporDrift3 {
+  0%, 100% {
+    transform: translateX(0) scale(1);
+    opacity: 0.6;
+  }
+
+  50% {
+    transform: translateX(5px) scale(1.12);
+    opacity: 0.85;
+  }
+}
+
+.cmp-diagram__vapor--1 {
+  animation-name: drye-vaporDrift1;
+  animation-duration: 5s;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+}
+
+.cmp-diagram__vapor--2 {
+  animation-name: drye-vaporDrift2;
+  animation-duration: 6.5s;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+}
+
+.cmp-diagram__vapor--3 {
+  animation-name: drye-vaporDrift3;
+  animation-duration: 5.8s;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+}
+
+/* ───────────────────────────────────────────────────────────
+   10. SKIN BLOCK
+─────────────────────────────────────────────────────────── */
+.cmp-diagram__skin {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 1;
+}
+
+.cmp-diagram__skin-layers {
+  position: relative;
+  width: 100%;
+}
+
+.cmp-diagram__skin-layer {
+  height: var(--d-skin-top-h);
+  position: relative;
+  display: flex;
+  align-items: center;
+  padding-inline: var(--space-12);
+}
+
+.cmp-diagram__skin-layer--top {
+  background: linear-gradient(180deg, #F4D7DB 0%, #F1E2E0 100%);
+}
+
+.cmp-diagram__skin-layer--mid {
+  background: linear-gradient(180deg, #F8E0E3 0%, #F2C8CC 100%);
+  height: var(--d-skin-mid-h);
+}
+
+.cmp-diagram__skin-layer--deep {
+  background: #F5EBD8;
+  height: var(--d-skin-deep-h);
+}
+
+.cmp-diagram__skin-layer--mid::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    radial-gradient(ellipse 8px 4px at 8px 8px, rgba(217, 160, 166, 0.4) 0%, transparent 70%),
+    radial-gradient(ellipse 8px 4px at 24px 16px, rgba(217, 160, 166, 0.4) 0%, transparent 70%),
+    radial-gradient(ellipse 8px 4px at 40px 8px, rgba(217, 160, 166, 0.4) 0%, transparent 70%),
+    radial-gradient(ellipse 8px 4px at 16px 24px, rgba(217, 160, 166, 0.4) 0%, transparent 70%);
+  background-size: 32px 32px;
+  pointer-events: none;
+}
+
+.cmp-diagram__skin--swollen .cmp-diagram__skin-layer--top {
+  height: var(--d-skin-top-h-swollen);
+  background: linear-gradient(180deg, #E8B4B8 0%, #E0A8AD 100%);
+}
+
+.cmp-diagram__skin--swollen .cmp-diagram__skin-layer--mid {
+  background: linear-gradient(180deg, #F2C5C9 0%, #E8B4B8 100%);
+}
+
+@keyframes drye-swellingPulse {
+  0%, 100% {
+    opacity: 0.55;
+  }
+
+  50% {
+    opacity: 1;
+  }
+}
+
+.cmp-diagram__swelling-glow {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    ellipse at center,
+    rgba(239, 68, 68, 0.5) 0%,
+    rgba(239, 68, 68, 0.15) 60%,
+    transparent 95%
+  );
+  animation-name: drye-swellingPulse;
+  animation-duration: 2.5s;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* ───────────────────────────────────────────────────────────
+   11. SKIN LAYER TEXT
+─────────────────────────────────────────────────────────── */
+.cmp-diagram__skin-text {
+  position: relative;
+  z-index: 2;
+}
+
+.cmp-diagram__skin--swollen .cmp-diagram__skin-text {
+  color: #7F1D1D;
+}
+
+.cmp-diagram__skin:not(.cmp-diagram__skin--swollen) .cmp-diagram__skin-text {
+  color: var(--emerald);
+}
+/* ───────────────────────────────────────────────────────────
+   12. CTA BAR
+─────────────────────────────────────────────────────────── */
+.occlusion-cmp__cta-bar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-16);
+  margin-top: var(--space-32);
+  flex-wrap: wrap;
+}
+
+/* Primär: solid emerald */
+.occlusion-cmp__reveal-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-8);
+  padding: var(--space-12) var(--space-24);
+  background: var(--emerald);
+  border: var(--border-width-strong) solid var(--emerald);
+  color: var(--white-100);
+  font-family: var(--font-body);
+  font-size: var(--fs-body);
+  font-weight: var(--fw-semibold);
+  cursor: pointer;
+  transition:
+    background var(--dur-base) var(--ease-standard),
+    border-color var(--dur-base) var(--ease-standard);
+}
+
+.occlusion-cmp__reveal-btn:hover {
+  background: var(--accent);
+  border-color: var(--accent);
+}
+
+/* Sekundär: solid muted */
+.occlusion-cmp__takeback-btn {
+  display: none;
+  min-width: 280px;
+justify-content: center;
+  align-items: center;
+  gap: var(--space-8);
+  padding: var(--space-12) var(--space-24);
+  background: var(--border);
+  border: var(--border-width-strong) solid var(--border);
+  color: var(--deep);
+  font-family: var(--font-body);
+  font-size: var(--fs-body);
+  font-weight: var(--fw-semibold);
+  cursor: pointer;
+  transition:
+    background var(--dur-base) var(--ease-standard),
+    border-color var(--dur-base) var(--ease-standard);
+}
+
+.occlusion-cmp__takeback-btn:hover {
+  background: var(--muted);
+  border-color: var(--muted);
+  color: var(--white-100);
+}
+
+/* Revealed state */
+.occlusion-cmp--revealed .occlusion-cmp__reveal-btn {
+  display: none;
+}
+
+.occlusion-cmp--revealed .occlusion-cmp__takeback-btn {
+  display: inline-flex;
+}
+
+/* ───────────────────────────────────────────────────────────
+   13. DESKTOP REVEAL TRANSITIONS
+─────────────────────────────────────────────────────────── */
+@media (min-width: 768px) {
+  .occlusion-cmp__card--drye {
+    opacity: 0;
+    pointer-events: none;
+    transform: translateX(16px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+
+  .occlusion-cmp__card--occluded {
+    transition: opacity 0.6s ease;
+  }
+
+  .occlusion-cmp--revealed .occlusion-cmp__card--drye {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateX(0);
+  }
+
+  .occlusion-cmp--revealed .occlusion-cmp__card--occluded {
+    opacity: 0.2;
+  }
+}
+
+/* ───────────────────────────────────────────────────────────
+   14. MOBIL: kort staplade
+─────────────────────────────────────────────────────────── */
+@media (max-width: 767px) {
+  .occlusion-cmp__card--drye {
+    display: none;
+    opacity: 1;
+    transform: none;
+    transition: none;
+    pointer-events: auto;
+  }
+
+  .occlusion-cmp--revealed .occlusion-cmp__card--drye {
+    display: block;
+  }
+
+  .occlusion-cmp--revealed .occlusion-cmp__card--occluded {
+    display: none;
+  }
+}
+@media (max-width: 767px) {
+  .occlusion-cmp {
+    --section-pad-y: var(--space-48);
+  }
+  .occlusion-cmp__intro {
+    margin-bottom: var(--space-32);
+  }
+}

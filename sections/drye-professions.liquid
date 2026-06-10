@@ -1,0 +1,421 @@
+{{ 'section-professions.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'section-professions.js' | asset_url }}" defer="defer"></script>
+
+<section
+  class="dryeNEW-section drye-prof"
+  data-professions-section
+  data-section-id="{{ section.id }}"
+>
+  <div class="dryeNEW-container">
+    {% if section.settings.micro != blank %}
+      <span class="dryeNEW-micro drye-prof__micro dryeNEW-reveal">
+        {{ section.settings.micro }}
+      </span>
+    {% endif %}
+
+    <h2 class="dryeNEW-h2 drye-prof__title dryeNEW-reveal dryeNEW-rd1">
+      {{ section.settings.heading_line_1 }}<br>
+      <em>{{ section.settings.heading_line_2 }}</em>
+    </h2>
+
+    {% if section.settings.lead != blank %}
+      <div class="dryeNEW-body drye-prof__lead dryeNEW-reveal dryeNEW-rd2">
+        <p>{{ section.settings.lead }}</p>
+      </div>
+    {% endif %}
+
+    <div
+      class="drye-prof__tabs dryeNEW-reveal dryeNEW-rd2"
+      role="tablist"
+      aria-label="Profession tabs"
+    >
+      {% for block in section.blocks %}
+        {% assign panel_id = 'tab-' | append: section.id | append: '-' | append: block.settings.tab_id %}
+        <button
+          type="button"
+          class="drye-prof__tab{% if forloop.first %} is-active{% endif %}"
+          data-prof-tab
+          data-target="{{ panel_id }}"
+          role="tab"
+          aria-selected="{% if forloop.first %}true{% else %}false{% endif %}"
+          aria-controls="{{ panel_id }}"
+          id="button-{{ panel_id }}"
+          {{ block.shopify_attributes }}
+        >
+          <span class="dryeNEW-micro drye-prof__tab-text">
+            {{ block.settings.tab_label }}
+          </span>
+        </button>
+      {% endfor %}
+    </div>
+
+    {% for block in section.blocks %}
+      {% assign panel_id = 'tab-' | append: section.id | append: '-' | append: block.settings.tab_id %}
+      <div
+        class="drye-prof__panel{% if forloop.first %} is-active{% endif %}"
+        id="{{ panel_id }}"
+        role="tabpanel"
+        aria-labelledby="button-{{ panel_id }}"
+        {% unless forloop.first %}hidden{% endunless %}
+      >
+        <div class="drye-prof__grid">
+          <div class="drye-prof__left">
+            {% if block.settings.context_label != blank %}
+              <div class="dryeNEW-micro drye-prof__context">
+                {{ block.settings.context_label }}
+              </div>
+            {% endif %}
+
+            {% if block.settings.heading != blank %}
+              <h3 class="dryeNEW-h3 drye-prof__panel-title">
+                {{ block.settings.heading }}
+              </h3>
+            {% endif %}
+
+            {% if block.settings.body != blank %}
+              <div class="dryeNEW-body drye-prof__body">
+                <p>{{ block.settings.body }}</p>
+              </div>
+            {% endif %}
+
+            <ul class="drye-prof__facts">
+              {% if block.settings.fact_1_strong != blank or block.settings.fact_1_text != blank %}
+                <li class="dryeNEW-body--caption">
+                  <strong>{{ block.settings.fact_1_strong }}</strong>{{ block.settings.fact_1_text }}
+                </li>
+              {% endif %}
+              {% if block.settings.fact_2_strong != blank or block.settings.fact_2_text != blank %}
+                <li class="dryeNEW-body--caption">
+                  <strong>{{ block.settings.fact_2_strong }}</strong>{{ block.settings.fact_2_text }}
+                </li>
+              {% endif %}
+              {% if block.settings.fact_3_strong != blank or block.settings.fact_3_text != blank %}
+                <li class="dryeNEW-body--caption">
+                  <strong>{{ block.settings.fact_3_strong }}</strong>{{ block.settings.fact_3_text }}
+                </li>
+              {% endif %}
+            </ul>
+          </div>
+
+          <div class="drye-prof__right">
+            <div class="drye-prof__scenario">
+              {% if block.settings.scenario_label != blank %}
+                <div class="dryeNEW-micro drye-prof__scenario-label">
+                  {{ block.settings.scenario_label }}
+                </div>
+              {% endif %}
+
+              <div class="drye-prof__steps">
+                {% if block.settings.step_1_label != blank or block.settings.step_1_text != blank %}
+                  <div class="drye-prof__step">
+                    <span class="dryeNEW-micro drye-prof__step-label">{{ block.settings.step_1_label }}</span>
+                    <div class="dryeNEW-body--caption drye-prof__step-text">
+                      <p>{{ block.settings.step_1_text }}</p>
+                    </div>
+                  </div>
+                {% endif %}
+
+                {% if block.settings.step_2_label != blank or block.settings.step_2_text != blank %}
+                  <div class="drye-prof__step">
+                    <span class="dryeNEW-micro drye-prof__step-label">{{ block.settings.step_2_label }}</span>
+                    <div class="dryeNEW-body--caption drye-prof__step-text">
+                      <p>{{ block.settings.step_2_text }}</p>
+                    </div>
+                  </div>
+                {% endif %}
+
+                {% if block.settings.step_3_label != blank or block.settings.step_3_text != blank %}
+                  <div class="drye-prof__step">
+                    <span class="dryeNEW-micro drye-prof__step-label">{{ block.settings.step_3_label }}</span>
+                    <div class="dryeNEW-body--caption drye-prof__step-text">
+                      <p>{{ block.settings.step_3_text }}</p>
+                    </div>
+                  </div>
+                {% endif %}
+
+                {% if block.settings.step_drye_label != blank or block.settings.step_drye_text != blank %}
+                  <div class="drye-prof__step drye-prof__step--drye">
+                    <span class="dryeNEW-micro drye-prof__step-label">{{ block.settings.step_drye_label }}</span>
+                    <div class="dryeNEW-body--caption drye-prof__step-text">
+                      <p>{{ block.settings.step_drye_text }}</p>
+                    </div>
+                  </div>
+                {% endif %}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "DRYE — Professions",
+  "settings": [
+    {
+      "type": "text",
+      "id": "micro",
+      "label": "Micro label",
+      "default": "Built for your shift"
+    },
+    {
+      "type": "text",
+      "id": "heading_line_1",
+      "label": "Heading line 1",
+      "default": "Your job. Your gloves."
+    },
+    {
+      "type": "text",
+      "id": "heading_line_2",
+      "label": "Heading line 2",
+      "default": "Your exact situation."
+    },
+    {
+      "type": "text",
+      "id": "lead",
+      "label": "Lead",
+      "default": "Same physics. Different context. Select yours."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "profession",
+      "name": "Profession tab",
+      "settings": [
+        {
+          "type": "text",
+          "id": "tab_id",
+          "label": "Tab ID",
+          "default": "healthcare"
+        },
+        {
+          "type": "text",
+          "id": "tab_label",
+          "label": "Tab label",
+          "default": "Healthcare"
+        },
+        {
+          "type": "text",
+          "id": "context_label",
+          "label": "Context label",
+          "default": "Nurses · Surgeons · Lab & Pharmacy"
+        },
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Panel heading",
+          "default": "Nitrile for 8–12 hours. Mandatory. No exceptions."
+        },
+        {
+          "type": "textarea",
+          "id": "body",
+          "label": "Body",
+          "default": "You wash your hands between every patient. You double-glove in sterile environments. You already do everything right. The problem isn't hygiene — it's physics. A sealed nitrile glove creates a microclimate no amount of hand washing prevents."
+        },
+
+        {
+          "type": "text",
+          "id": "fact_1_strong",
+          "label": "Fact 1 bold part",
+          "default": "75%"
+        },
+        {
+          "type": "text",
+          "id": "fact_1_text",
+          "label": "Fact 1 rest",
+          "default": " of healthcare workers develop occupational hand dermatitis"
+        },
+        {
+          "type": "text",
+          "id": "fact_2_strong",
+          "label": "Fact 2 bold part",
+          "default": "Handwashing"
+        },
+        {
+          "type": "text",
+          "id": "fact_2_text",
+          "label": "Fact 2 rest",
+          "default": " compounds skin damage already weakened by occlusion"
+        },
+        {
+          "type": "text",
+          "id": "fact_3_strong",
+          "label": "Fact 3 bold part",
+          "default": "0.4mm"
+        },
+        {
+          "type": "text",
+          "id": "fact_3_text",
+          "label": "Fact 3 rest",
+          "default": " — fits inside any nitrile glove. Dexterity unchanged."
+        },
+
+        {
+          "type": "text",
+          "id": "scenario_label",
+          "label": "Scenario label",
+          "default": "A typical shift"
+        },
+        {
+          "type": "text",
+          "id": "step_1_label",
+          "label": "Step 1 label",
+          "default": "6:00"
+        },
+        {
+          "type": "textarea",
+          "id": "step_1_text",
+          "label": "Step 1 text",
+          "default": "Gloves on. First patient. Hands already compromised from last shift."
+        },
+        {
+          "type": "text",
+          "id": "step_2_label",
+          "label": "Step 2 label",
+          "default": "7:30"
+        },
+        {
+          "type": "textarea",
+          "id": "step_2_text",
+          "label": "Step 2 text",
+          "default": "Liner saturated. Moisture held against skin for the rest of the day."
+        },
+        {
+          "type": "text",
+          "id": "step_3_label",
+          "label": "Step 3 label",
+          "default": "14:00"
+        },
+        {
+          "type": "textarea",
+          "id": "step_3_text",
+          "label": "Step 3 text",
+          "default": "Shift ends. Skin is macerated. Barrier function degraded."
+        },
+        {
+          "type": "text",
+          "id": "step_drye_label",
+          "label": "DRYE step label",
+          "default": "With DRYE"
+        },
+        {
+          "type": "textarea",
+          "id": "step_drye_text",
+          "label": "DRYE step text",
+          "default": "Moisture routes continuously. No saturation point. Skin condition after 8h = skin condition after 8 min."
+        }
+      ]
+    }
+  ],
+  "max_blocks": 4,
+  "presets": [
+    {
+      "name": "DRYE — Professions",
+      "blocks": [
+        {
+          "type": "profession",
+          "settings": {
+            "tab_id": "healthcare",
+            "tab_label": "Healthcare",
+            "context_label": "Nurses · Surgeons · Lab & Pharmacy",
+            "heading": "Nitrile for 8–12 hours. Mandatory. No exceptions.",
+            "body": "You wash your hands between every patient. You double-glove in sterile environments. You already do everything right. The problem isn't hygiene — it's physics. A sealed nitrile glove creates a microclimate no amount of hand washing prevents.",
+            "fact_1_strong": "75%",
+            "fact_1_text": " of healthcare workers develop occupational hand dermatitis",
+            "fact_2_strong": "Handwashing",
+            "fact_2_text": " compounds skin damage already weakened by occlusion",
+            "fact_3_strong": "0.4mm",
+            "fact_3_text": " — fits inside any nitrile glove. Dexterity unchanged.",
+            "scenario_label": "A typical shift",
+            "step_1_label": "6:00",
+            "step_1_text": "Gloves on. First patient. Hands already compromised from last shift.",
+            "step_2_label": "7:30",
+            "step_2_text": "Liner saturated. Moisture held against skin for the rest of the day.",
+            "step_3_label": "14:00",
+            "step_3_text": "Shift ends. Skin is macerated. Barrier function degraded.",
+            "step_drye_label": "With DRYE",
+            "step_drye_text": "Moisture routes continuously. No saturation point. Skin condition after 8h = skin condition after 8 min."
+          }
+        },
+        {
+          "type": "profession",
+          "settings": {
+            "tab_id": "automotive",
+            "tab_label": "Automotive",
+            "context_label": "Mechanics · Body Shop · Detailing",
+            "heading": "Chemical-resistant gloves. All day. Under the hood.",
+            "body": "Thicker gloves. Higher compression. Longer contact time. The physics are the same as healthcare — but the glove is thicker and the shift is longer. By hour three, you're working with a wet cloth pressed to your skin.",
+            "fact_1_strong": "Chemical exposure",
+            "fact_1_text": " compounds skin damage from occlusion",
+            "fact_2_strong": "Heavier gloves",
+            "fact_2_text": " = more compression = faster saturation",
+            "fact_3_strong": "4–12 months",
+            "fact_3_text": " per liner pair with regular machine washing",
+            "scenario_label": "What changes with DRYE",
+            "step_1_label": "Before",
+            "step_1_text": "Cracking knuckles by end of week. Bleeding by Friday. Creams at night but back in gloves by Monday.",
+            "step_2_label": "",
+            "step_2_text": "",
+            "step_3_label": "",
+            "step_3_text": "",
+            "step_drye_label": "With DRYE",
+            "step_drye_text": "Moisture never accumulates. Skin barrier stays intact. The hands that start Monday are the hands that finish Friday."
+          }
+        },
+        {
+          "type": "profession",
+          "settings": {
+            "tab_id": "cleaning",
+            "tab_label": "Cleaning",
+            "context_label": "Industrial Cleaning · Housekeeping · Janitorial",
+            "heading": "Constant moisture. Double-gloving. No recovery time between shifts.",
+            "body": "You're already working in a wet environment. Inside and outside the glove. Double-gloving means double compression. Your liner saturates faster than any other profession. And your shift never really ends.",
+            "fact_1_strong": "Double-gloving",
+            "fact_1_text": " doubles compression on liner fibres",
+            "fact_2_strong": "Chemical cleaners",
+            "fact_2_text": " on the outside, saturated liner on the inside",
+            "fact_3_strong": "No minimum recovery",
+            "fact_3_text": " time required — liner routes continuously",
+            "scenario_label": "What changes with DRYE",
+            "step_1_label": "Before",
+            "step_1_text": "Hands raw by Tuesday. Constant moisturiser. Gloves feel like a punishment.",
+            "step_2_label": "",
+            "step_2_text": "",
+            "step_3_label": "",
+            "step_3_text": "",
+            "step_drye_label": "With DRYE",
+            "step_drye_text": "The moisture that was compounding into damage is continuously routed outward. The glove stops being the enemy."
+          }
+        },
+        {
+          "type": "profession",
+          "settings": {
+            "tab_id": "sanitation",
+            "tab_label": "Sanitation",
+            "context_label": "Waste Management · Sewage · Industrial Sanitation",
+            "heading": "Heaviest gloves. Longest contact time. No option to remove them.",
+            "body": "Sanitation work demands the thickest, most sealed gloves in any industry. Maximum compression. Maximum occlusion. The microclimate forms faster here than anywhere else — and there is no break in the shift where you can let your hands recover.",
+            "fact_1_strong": "Thick rubber gloves",
+            "fact_1_text": " = highest compression of any profession",
+            "fact_2_strong": "No removal",
+            "fact_2_text": " permitted during active work for safety reasons",
+            "fact_3_strong": "Chemical exposure",
+            "fact_3_text": " both inside and outside the glove",
+            "scenario_label": "What changes with DRYE",
+            "step_1_label": "Before",
+            "step_1_text": "Hands macerated within the first hour. Raw skin by end of shift. No liner survives the compression.",
+            "step_2_label": "",
+            "step_2_text": "",
+            "step_3_label": "",
+            "step_3_text": "",
+            "step_drye_label": "With DRYE",
+            "step_drye_text": "Moisture routed continuously regardless of compression level. The routing mechanism doesn't rely on fibre loft — it's structural."
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

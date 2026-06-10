@@ -1,0 +1,131 @@
+.drye-about-validation {
+  background: var(--bg-tint);
+  border-top: var(--border-base);
+}
+
+.drye-about-validation__header {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-20);
+  margin-bottom: var(--space-52);
+  padding-bottom: var(--space-40);
+  border-bottom: var(--border-base);
+}
+
+.drye-about-validation__eyebrow {
+  color: inherit;
+}
+
+.drye-about-validation__heading {
+  margin: 0;
+  color: var(--deep);
+}
+
+.drye-about-validation__sub {
+  color: var(--muted);
+}
+
+.drye-about-validation__sub p {
+  margin: 0;
+}
+
+.drye-about-validation__timeline {
+  position: relative;
+  padding-left: 24px;
+}
+
+.drye-about-validation__timeline::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 6px;
+  bottom: 6px;
+  width: 1px;
+  background: var(--border);
+}
+
+.drye-about-validation__item {
+  position: relative;
+  padding: 0 0 var(--space-36) 28px;
+}
+
+.drye-about-validation__item:last-child {
+  padding-bottom: 0;
+}
+
+.drye-about-validation__dot {
+  position: absolute;
+  left: -8px;
+  top: 4px;
+  width: 17px;
+  height: 17px;
+  border: 2px solid var(--border);
+  background: var(--bg);
+  transition: border-color var(--dur-base) var(--ease-standard), background var(--dur-base) var(--ease-standard);
+}
+
+.drye-about-validation__item--done .drye-about-validation__dot {
+  border-color: var(--deep);
+  background: var(--deep);
+}
+
+.drye-about-validation__item--active .drye-about-validation__dot {
+  border-color: var(--emerald);
+  background: var(--emerald);
+}
+
+.drye-about-validation__year {
+  margin-bottom: var(--space-3);
+  color: var(--deep);
+}
+
+.drye-about-validation__title {
+  margin-bottom: var(--space-3);
+  color: var(--body);
+  font-weight: var(--fw-semibold);
+}
+
+.drye-about-validation__institution {
+  color: var(--sage);
+  font-weight: var(--fw-medium);
+}
+
+.drye-about-validation__desc {
+  margin-top: var(--space-5);
+  color: var(--muted);
+}
+
+.drye-about-validation__desc p {
+  margin: 0;
+}
+
+.drye-about-validation__partners {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-8);
+  margin-top: var(--space-40);
+  padding-top: var(--space-32);
+  border-top: var(--border-base);
+}
+
+.drye-about-validation__partners-label {
+  margin-right: var(--space-4);
+  color: var(--caption);
+}
+
+.drye-about-validation__partner-pill {
+  display: inline-block;
+  padding: 5px 12px;
+  border: var(--border-base);
+  color: var(--muted);
+  background: transparent;
+}
+
+@media (min-width: 768px) {
+  .drye-about-validation__header {
+    grid-template-columns: var(--grid-2-col-desktop);
+    gap: var(--grid-gap-64);
+    align-items: end;
+  }
+}

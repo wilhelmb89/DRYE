@@ -1,0 +1,35 @@
+{{ 'drye-policy-side-nav.css' | asset_url | stylesheet_tag }}
+
+<aside class="drye-policy-side-nav" aria-label="Policy sections">
+  <nav class="drye-policy-side-nav__nav">
+    <a
+      class="drye-policy-side-nav__link is-active"
+      href="#shipping"
+      data-policy-nav-link="shipping"
+    >
+      Shipping
+    </a>
+
+    <a
+      class="drye-policy-side-nav__link"
+      href="#returns"
+      data-policy-nav-link="returns"
+    >
+      Returns
+    </a>
+  </nav>
+</aside>
+
+{% schema %}
+{
+  "name": "DRYE Policy Side Nav",
+  "tag": "div",
+  "class": "shopify-section--drye-policy-side-nav",
+  "settings": [],
+  "presets": [
+    {
+      "name": "DRYE Policy Side Nav"
+    }
+  ]
+}
+{% endschema %}

@@ -1,167 +1,108 @@
-/* ===========================
-   POLICY PAGES
-   =========================== */
+/* =========================
+   Policy pages only
+   ========================= */
 
-   /* Döda ALL font override i policy */
-body.template-policy .shopify-policy__container,
-body.template-policy .shopify-policy__container * {
-  font-family: var(--font-primary, "Inter") !important;
-  font-style: normal !important;
-  font-weight: 400 !important;
+/* Container */
+.page-type-policy .shopify-policy__container {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 120px 20px;
 }
 
-.shopify-policy__container {
-  max-width: 1470px !important;
-  width: 100% !important;
-  margin-inline: auto;
-  padding-block: 160px;
-  padding-inline: 2rem !important;
-}
-@media screen and (max-width: 768px) {
-  .shopify-policy__container {
-    padding-block: 100px 80px; /* extra top padding så header inte krockar */
-    padding-inline: 20px !important;
-  }
+/* Dölj Shopify-titeln (Shipping policy / Terms of service etc.) */
+.page-type-policy .shopify-policy__title {
+  display: none;
 }
 
-/* Baslayout för policy-sidor */
-body.template-policy {
-  font-family: var(--font-primary, "Inter"), sans-serif !important;
-  font-weight: 400;
+/* Text wrapper */
+.page-type-policy .shopify-policy__body .rte {
+  font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+  color: #111A1A;
+  max-width: 72ch;
+  margin: 0 auto;
+}
+
+/* Brödtext (PARAGRAFER) */
+.page-type-policy .shopify-policy__body .rte p {
+  font-size: 16px;
   line-height: 1.6;
-  color: #111;
-}
-
-/* Rubriker */
-body.template-policy h1,
-body.template-policy h2,
-body.template-policy h3 {
-  font-family: var(--font-heading, "ClashGrotesk-Variable"), sans-serif !important;
-  font-weight: 500;
-  letter-spacing: normal;
-}
-.shopify-policy__container h1 {
-  font-size: 32px;
-  line-height: 38px;
-  margin-bottom: 30px;
-}
-.shopify-policy__container h2 {
-  font-size: 1.5rem;
-  margin-bottom: 16px;
-}
-
-/* Brödtext */
-body.template-policy :where(p, li, span, a, em) {
-  font-family: var(--font-primary, "Inter"), sans-serif !important;
-  font-weight: 400 !important;
-  line-height: 28px;
-  letter-spacing: normal !important;
-  color: rgb(17 17 17 / 65%) !important;
-}
-
-/* Bold */
-body.template-policy :where(strong, b) {
-  font-weight: 600 !important;
-  color: #111 !important;
+  margin: 0 0 12px;
 }
 
 /* Länkar */
-body.template-policy a {
-  color: inherit !important;
+.page-type-policy .shopify-policy__body .rte a {
+  color: inherit;
   text-decoration: underline;
 }
-body.template-policy a:hover {
-  color: #ff6600 !important; /* justera om du vill matcha tema */
+.page-type-policy .shopify-policy__body .rte a:hover {
   text-decoration: none;
 }
-:root {
-  --font-primary: "Inter", sans-serif;
-  --font-heading: "ClashGrotesk-Variable", "Clash Grotesk", sans-serif;
-}
 
-}
-
-/* Överstyr Shopify theme settings */
-body,
-p,
-li,
-a,
-span {
-  font-family: var(--font-primary) !important;
-}
-
-h1, h2, h3, h4, h5 {
-  font-family: var(--font-heading) !important;
-}
-/* Override Shopify bundle fonts */
-body,
-p,
-li,
-span,
-a,
-em {
-  font-family: var(--font-primary, "Inter"), sans-serif !important;
-}
-
-h1, h2, h3, h4, h5 {
-  font-family: var(--font-heading, "ClashGrotesk-Variable", "Clash Grotesk"), sans-serif !important;
-}
-/* Sätt specifikt på .rte inuti policy */
-body.template-policy .rte,
-body.template-policy .rte * {
-  font-family: var(--font-primary, "Inter"), sans-serif !important;
-}
-
-/* Rubriker – override */
-body.template-policy .rte h1,
-body.template-policy .rte h2,
-body.template-policy .rte h3,
-body.template-policy .rte h4 {
-  font-family: var(--font-heading, "ClashGrotesk-Variable"), sans-serif !important;
-}
-/* Tvinga bort Raptor Inter från alla policy-rte */
-body.template-policy .shopify-policy__container .rte,
-body.template-policy .shopify-policy__container .rte p,
-body.template-policy .shopify-policy__container .rte li,
-body.template-policy .shopify-policy__container .rte strong,
-body.template-policy .shopify-policy__container .rte em,
-body.template-policy .shopify-policy__container .rte span,
-body.template-policy .shopify-policy__container .rte a {
-  font-family: var(--font-primary, "Inter"), sans-serif !important;
-  font-weight: 400 !important;
-  line-height: 1.6 !important;
-  color: #111 !important;
-}
-
-/* Rubriker i policies */
-body.template-policy .shopify-policy__container .rte h1,
-body.template-policy .shopify-policy__container .rte h2,
-body.template-policy .shopify-policy__container .rte h3,
-body.template-policy .shopify-policy__container .rte h4 {
-  font-family: var(--font-heading, "ClashGrotesk-Variable", "Clash Grotesk"), sans-serif !important;
-  font-weight: 500 !important;
+/* Rubriker – Inter, inte Clash */
+.page-type-policy .shopify-policy__body .rte h1,
+.page-type-policy .shopify-policy__body .rte h2,
+.page-type-policy .shopify-policy__body .rte h3,
+.page-type-policy .shopify-policy__body .rte h4,
+.page-type-policy .shopify-policy__body .rte h5 {
+  font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+  font-weight: 700;
+  line-height: 1.25;
   letter-spacing: -0.01em;
-}
-/* Återställ UL/OL på policies */
-body.template-policy .rte ul {
-  list-style: disc inside !important;
-  margin: 0 0 1rem 1.25rem !important;
-  padding: 0 !important;
+  margin: 28px 0 10px;
+  color: #111A1A;
 }
 
-body.template-policy .rte ol {
-  list-style: decimal inside !important;
-  margin: 0 0 1rem 1.25rem !important;
-  padding: 0 !important;
+/* Rubrikstorlekar */
+.page-type-policy .shopify-policy__body .rte h1,
+.page-type-policy .shopify-policy__body .rte h2 {
+  font-size: 28px;
+}
+.page-type-policy .shopify-policy__body .rte h3 {
+  font-size: 22px;
+}
+.page-type-policy .shopify-policy__body .rte h4,
+.page-type-policy .shopify-policy__body .rte h5 {
+  font-size: 18px;
 }
 
-body.template-policy .rte li {
-  display: list-item !important; /* tvinga att bli en "list item" */
-  margin-bottom: 0.5rem;
+/* =========================
+   Lists (tight + clean)
+   ========================= */
+
+/* Själva listblocket */
+.page-type-policy .shopify-policy__body .rte ul,
+.page-type-policy .shopify-policy__body .rte ol {
+  margin: 6px 0 14px;     /* tightare än innan */
+  padding-left: 1.05rem;  /* lite mindre indrag */
 }
-/* Centrera och begränsa bredd på policy-sidor */
-body.template-policy .shopify-policy__container {
-  max-width: 800px;         /* välj bredd som matchar övriga sektioner */
-  margin: 0 auto;           /* centrera horisontellt */
-  padding: 2rem 1rem;       /* luft runtom */
+
+/* Varje punkt (det är här spacing sitter) */
+.page-type-policy .shopify-policy__body .rte li {
+  font-size: 16px;
+  line-height: 1.45;      /* tajtare */
+  margin: 0;              /* dödar ALLA default-margins */
+  padding: 0;
+}
+
+/* Mellan punkter */
+.page-type-policy .shopify-policy__body .rte li + li {
+  margin-top: 3px;        /* 2–4px = clean */
+}
+
+/* Om listan ligger direkt efter en mening */
+.page-type-policy .shopify-policy__body .rte p + ul,
+.page-type-policy .shopify-policy__body .rte p + ol {
+  margin-top: 4px;
+}
+
+/* Mobile */
+@media (max-width: 767px) {
+  .page-type-policy .shopify-policy__container {
+    padding: 80px 18px 90px;
+  }
+
+  .page-type-policy .shopify-policy__body .rte h1,
+  .page-type-policy .shopify-policy__body .rte h2 {
+    font-size: 26px;
+  }
 }

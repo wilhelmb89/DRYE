@@ -1,0 +1,192 @@
+{{ 'drye-mechanics-hero-v1.css' | asset_url | stylesheet_tag }}
+
+<section
+  class="mech-hero-v1"
+  id="{{ section.settings.section_id | default: 'mechanics-hero-v1' }}"
+  data-section-id="{{ section.id }}"
+  data-drye-section
+  data-section-index="1"
+  data-section-name="hero"
+>
+  <div class="mech-hero-v1__media" aria-hidden="true">
+    {% if section.settings.image_desktop != blank %}
+      {{
+        section.settings.image_desktop
+        | image_url: width: 2400
+        | image_tag:
+          class: 'mech-hero-v1__img mech-hero-v1__img--desktop',
+          loading: 'eager',
+          fetchpriority: 'high',
+          alt: ''
+      }}
+    {% endif %}
+
+    {% if section.settings.image_mobile != blank %}
+      {{
+        section.settings.image_mobile
+        | image_url: width: 1400
+        | image_tag:
+          class: 'mech-hero-v1__img mech-hero-v1__img--mobile',
+          loading: 'eager',
+          fetchpriority: 'high',
+          alt: ''
+      }}
+    {% endif %}
+  </div>
+
+  <div class="mech-hero-v1__overlay"></div>
+
+  <div class="mech-hero-v1__inner dryeNEW-container">
+    <div class="mech-hero-v1__content">
+      {% if section.settings.eyebrow != blank %}
+        <p class="mech-hero-v1__eyebrow dryeNEW-micro">{{ section.settings.eyebrow }}</p>
+      {% endif %}
+
+      {% if section.settings.heading_line_1 != blank %}
+        <h1 class="mech-hero-v1__heading dryeNEW-h1">
+          {{ section.settings.heading_line_1 }}
+        </h1>
+      {% endif %}
+
+      {% if section.settings.heading_emphasis != blank %}
+        <div class="mech-hero-v1__em dryeNEW-editorial">
+          {{ section.settings.heading_emphasis }}
+        </div>
+      {% endif %}
+
+      {% if section.settings.show_rule %}
+        <div class="mech-hero-v1__rule" aria-hidden="true"></div>
+      {% endif %}
+
+      {% if section.settings.subheading != blank %}
+        <div class="mech-hero-v1__sub dryeNEW-body--lg">
+          {{ section.settings.subheading }}
+        </div>
+      {% endif %}
+
+      <div class="mech-hero-v1__quotes">
+        {% if section.settings.quote_1 != blank %}
+          <div class="mech-hero-v1__quote"><p>{{ section.settings.quote_1 }}</p></div>
+        {% endif %}
+
+        {% if section.settings.quote_2 != blank %}
+          <div class="mech-hero-v1__quote"><p>{{ section.settings.quote_2 }}</p></div>
+        {% endif %}
+
+        {% if section.settings.quote_3 != blank %}
+          <div class="mech-hero-v1__quote"><p>{{ section.settings.quote_3 }}</p></div>
+        {% endif %}
+
+        {% if section.settings.quote_4 != blank %}
+          <div class="mech-hero-v1__quote"><p>{{ section.settings.quote_4 }}</p></div>
+        {% endif %}
+      </div>
+
+      {% if section.settings.scroll_text != blank %}
+        <a
+          href="{{ section.settings.scroll_target | default: '#' }}"
+          class="mech-hero-v1__scroll"
+        >
+          {{ section.settings.scroll_text }}
+        </a>
+      {% endif %}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "DRYE Mechanics Hero V1",
+  "tag": "section",
+  "class": "shopify-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "section_id",
+      "label": "Section ID",
+      "default": "mechanics-hero-v1"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_desktop",
+      "label": "Desktop image"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_mobile",
+      "label": "Mobile image"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "For mechanics"
+    },
+    {
+      "type": "text",
+      "id": "heading_line_1",
+      "label": "Heading line 1",
+      "default": "You already know"
+    },
+    {
+      "type": "text",
+      "id": "heading_emphasis",
+      "label": "Heading emphasis",
+      "default": "how the shift ends."
+    },
+    {
+      "type": "checkbox",
+      "id": "show_rule",
+      "label": "Show rule",
+      "default": true
+    },
+    {
+      "type": "richtext",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "<p>Hands that sting when you shower. Skin that cracks by Thursday. The same gloves waiting Monday morning. It's not just part of the job.</p>"
+    },
+    {
+      "type": "text",
+      "id": "scroll_text",
+      "label": "Scroll text",
+      "default": "Keep reading"
+    },
+    {
+      "type": "text",
+      "id": "scroll_target",
+      "label": "Scroll target (anchor like #gallery)",
+      "default": "#gallery"
+    },
+    {
+      "type": "text",
+      "id": "quote_1",
+      "label": "Quote 1",
+      "default": "\"I can't get my gloves on\""
+    },
+    {
+      "type": "text",
+      "id": "quote_2",
+      "label": "Quote 2",
+      "default": "\"my hands literally drip sweat\""
+    },
+    {
+      "type": "text",
+      "id": "quote_3",
+      "label": "Quote 3",
+      "default": "\"I can't finish my shift\""
+    },
+    {
+      "type": "text",
+      "id": "quote_4",
+      "label": "Quote 4",
+      "default": "\"my skin cracks and bleeds\""
+    }
+  ],
+  "presets": [
+    {
+      "name": "DRYE Mechanics Hero V1"
+    }
+  ]
+}
+{% endschema %}

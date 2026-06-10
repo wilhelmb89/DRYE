@@ -1,0 +1,130 @@
+.drye-about-hero {
+  background: var(--bg-ink);
+  overflow: hidden;
+}
+
+/* Layout */
+.drye-about-hero__grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--space-40);
+}
+
+.drye-about-hero__left,
+.drye-about-hero__right {
+  min-width: 0;
+}
+
+/* Eyebrow */
+.drye-about-hero__eyebrow {
+  color: var(--white-035);
+}
+
+/* Heading (nu styrs av base h2) */
+.drye-about-hero__heading {
+  margin: 0 0 var(--space-20);
+  color: var(--white-100);
+  max-width: 720px;
+}
+
+.drye-about-hero__heading em {
+  display: block;
+  margin-top: var(--space-8);
+  font-family: var(--font-editorial);
+  font-style: italic;
+  font-weight: var(--fw-regular);
+  font-size: 0.85em;
+  color: var(--sage);
+}
+
+/* Opening text */
+.drye-about-hero__opening {
+  max-width: 480px;
+  padding-bottom: var(--space-40);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.drye-about-hero__opening p {
+  margin: 0;
+}
+
+/* ===== QUOTE CARD (FIXAD) ===== */
+.drye-about-hero__quote-card {
+  position: relative;
+  padding: 28px 24px 32px;
+  background: rgba(255, 255, 255, 0.04); /* ← viktigt */
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-bottom: none;
+}
+
+/* Quote mark */
+.drye-about-hero__quote-mark {
+  display: block;
+  margin-bottom: 12px;
+  font-family: var(--font-editorial);
+  font-size: 56px;
+  line-height: 0.6;
+  color: var(--sage);
+  opacity: 0.4;
+}
+
+/* Quote text */
+.drye-about-hero__quote-text {
+  margin-bottom: 20px;
+  font-size: clamp(15px, 2vw, 18px);
+  line-height: 1.65;
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.drye-about-hero__quote-text p {
+  margin: 0;
+}
+
+/* Author */
+.drye-about-hero__author {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+/* Avatar */
+.drye-about-hero__avatar {
+  width: 36px;
+  height: 36px;
+  flex-shrink: 0;
+  overflow: hidden;
+  background: linear-gradient(135deg, var(--accent), var(--sage));
+}
+
+.drye-about-hero__avatar img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+}
+
+/* Author text */
+.drye-about-hero__author-name {
+  color: var(--white-100);
+  font-weight: var(--fw-semibold);
+}
+
+.drye-about-hero__author-role {
+  color: rgba(255, 255, 255, 0.3);
+}
+
+/* Desktop */
+@media (min-width: 768px) {
+  .drye-about-hero__grid {
+    grid-template-columns: var(--grid-2-col-desktop);
+    gap: var(--grid-gap-64);
+    align-items: end;
+  }
+
+  .drye-about-hero__opening {
+    padding-bottom: 0;
+    border-bottom: none;
+  }
+}

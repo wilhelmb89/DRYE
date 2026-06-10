@@ -1,0 +1,282 @@
+{{ 'drye-functional-benefits.css' | asset_url | stylesheet_tag }}
+
+<section class="func-sec" data-drye-section data-section-index="6" data-section-name="functional_benefits">  <div class="func-in">
+
+    <span class="func-eyebrow">{{ section.settings.eyebrow }}</span>
+    <h2 class="func-h">{{ section.settings.heading }}</h2>
+    <p class="func-sub">{{ section.settings.subheading }}</p>
+
+    <div class="func-grid">
+
+      <!-- 1 -->
+      <div class="func-card">
+        <div class="func-icon">
+          <img
+            src="{{ section.settings.card_1_icon | asset_url }}"
+            alt="{{ section.settings.card_1_title | escape }}"
+            loading="lazy"
+            width="28"
+            height="28"
+          >
+        </div>
+        <div class="func-name">{{ section.settings.card_1_title }}</div>
+        <p class="func-desc">{{ section.settings.card_1_desc }}</p>
+      </div>
+
+      <!-- 2 -->
+      <div class="func-card">
+        <div class="func-icon">
+          <img
+            src="{{ section.settings.card_2_icon | asset_url }}"
+            alt="{{ section.settings.card_2_title | escape }}"
+            loading="lazy"
+            width="28"
+            height="28"
+          >
+        </div>
+        <div class="func-name">{{ section.settings.card_2_title }}</div>
+        <p class="func-desc">{{ section.settings.card_2_desc }}</p>
+      </div>
+
+      <!-- 3 -->
+      <div class="func-card">
+        <div class="func-icon">
+          <img
+            src="{{ section.settings.card_3_icon | asset_url }}"
+            alt="{{ section.settings.card_3_title | escape }}"
+            loading="lazy"
+            width="28"
+            height="28"
+          >
+        </div>
+        <div class="func-name">{{ section.settings.card_3_title }}</div>
+        <p class="func-desc">{{ section.settings.card_3_desc }}</p>
+      </div>
+
+      <!-- 4 -->
+      <div class="func-card">
+        <div class="func-icon">
+          <img
+            src="{{ section.settings.card_4_icon | asset_url }}"
+            alt="{{ section.settings.card_4_title | escape }}"
+            loading="lazy"
+            width="28"
+            height="28"
+          >
+        </div>
+        <div class="func-name">{{ section.settings.card_4_title }}</div>
+        <p class="func-desc">{{ section.settings.card_4_desc }}</p>
+      </div>
+
+      <!-- 5 -->
+      <div class="func-card">
+        <div class="func-icon">
+          <img
+            src="{{ section.settings.card_5_icon | asset_url }}"
+            alt="{{ section.settings.card_5_title | escape }}"
+            loading="lazy"
+            width="28"
+            height="28"
+          >
+        </div>
+        <div class="func-name">{{ section.settings.card_5_title }}</div>
+        <p class="func-desc">{{ section.settings.card_5_desc }}</p>
+      </div>
+
+      <!-- 6 -->
+      <div class="func-card">
+        <div class="func-icon">
+          <img
+            src="{{ section.settings.card_6_icon | asset_url }}"
+            alt="{{ section.settings.card_6_title | escape }}"
+            loading="lazy"
+            width="28"
+            height="28"
+          >
+        </div>
+        <div class="func-name">{{ section.settings.card_6_title }}</div>
+        <p class="func-desc">{{ section.settings.card_6_desc }}</p>
+      </div>
+
+    </div>
+
+    <p class="func-note">{{ section.settings.note }}</p>
+
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "DRYE Functional Benefits",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "Engineering"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Functional Benefits"
+    },
+    {
+      "type": "textarea",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "Every design decision in DRYE serves one purpose: keeping your skin dry, comfortable and protected throughout the entire day."
+    },
+
+    {
+      "type": "header",
+      "content": "Card 1"
+    },
+    {
+      "type": "text",
+      "id": "card_1_icon",
+      "label": "Card 1 icon asset filename",
+      "default": "moisture-wicking (1).svg"
+    },
+    {
+      "type": "text",
+      "id": "card_1_title",
+      "label": "Card 1 title",
+      "default": "Maintains dry skin contact"
+    },
+    {
+      "type": "textarea",
+      "id": "card_1_desc",
+      "label": "Card 1 description",
+      "default": "Structural moisture transport moves perspiration away from the skin surface during extended wear."
+    },
+
+    {
+      "type": "header",
+      "content": "Card 2"
+    },
+    {
+      "type": "text",
+      "id": "card_2_icon",
+      "label": "Card 2 icon asset filename",
+      "default": "shield.svg"
+    },
+    {
+      "type": "text",
+      "id": "card_2_title",
+      "label": "Card 2 title",
+      "default": "Reduces friction and irritation"
+    },
+    {
+      "type": "textarea",
+      "id": "card_2_desc",
+      "label": "Card 2 description",
+      "default": "Dry skin is less susceptible to maceration, blistering, and contact discomfort."
+    },
+
+    {
+      "type": "header",
+      "content": "Card 3"
+    },
+    {
+      "type": "text",
+      "id": "card_3_icon",
+      "label": "Card 3 icon asset filename",
+      "default": "performance-arrow.svg"
+    },
+    {
+      "type": "text",
+      "id": "card_3_title",
+      "label": "Card 3 title",
+      "default": "Lifecycle performance"
+    },
+    {
+      "type": "textarea",
+      "id": "card_3_desc",
+      "label": "Card 3 description",
+      "default": "No chemical treatments to wash out. Moisture management sustained across the full product lifecycle."
+    },
+
+    {
+      "type": "header",
+      "content": "Card 4"
+    },
+    {
+      "type": "text",
+      "id": "card_4_icon",
+      "label": "Card 4 icon asset filename",
+      "default": "layers-fabric.svg"
+    },
+    {
+      "type": "text",
+      "id": "card_4_title",
+      "label": "Card 4 title",
+      "default": "Designed for layering"
+    },
+    {
+      "type": "textarea",
+      "id": "card_4_desc",
+      "label": "Card 4 description",
+      "default": "Thin-profile construction layers under work, cycling, ski, and tactical gloves without adding bulk."
+    },
+
+    {
+      "type": "header",
+      "content": "Card 5"
+    },
+    {
+      "type": "text",
+      "id": "card_5_icon",
+      "label": "Card 5 icon asset filename",
+      "default": "wave-breathability.svg"
+    },
+    {
+      "type": "text",
+      "id": "card_5_title",
+      "label": "Card 5 title",
+      "default": "Thermal regulation support"
+    },
+    {
+      "type": "textarea",
+      "id": "card_5_desc",
+      "label": "Card 5 description",
+      "default": "Dry skin maintains more consistent temperature in both cold and warm environments."
+    },
+
+    {
+      "type": "header",
+      "content": "Card 6"
+    },
+    {
+      "type": "text",
+      "id": "card_6_icon",
+      "label": "Card 6 icon asset filename",
+      "default": "clock-timer.svg"
+    },
+    {
+      "type": "text",
+      "id": "card_6_title",
+      "label": "Card 6 title",
+      "default": "Improved grip interface"
+    },
+    {
+      "type": "textarea",
+      "id": "card_6_desc",
+      "label": "Card 6 description",
+      "default": "Dry contact between hand and outer glove improves tactile sensitivity and grip retention."
+    },
+
+    {
+      "type": "textarea",
+      "id": "note",
+      "label": "Bottom note",
+      "default": "Performance properties are structural — built into the fabric architecture rather than applied as a coating or finish."
+    }
+  ],
+  "presets": [
+    {
+      "name": "DRYE Functional Benefits"
+    }
+  ]
+}
+{% endschema %}

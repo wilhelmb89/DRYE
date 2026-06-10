@@ -1,0 +1,311 @@
+{{ 'drye-research-study-breakdown.css' | asset_url | stylesheet_tag }}
+
+<section class="dryeNEW-section field-section" data-drye-section data-section-index="16" data-section-name="study_breakdown">
+  <div class="dryeNEW-container">
+    <span class="micro dryeNEW-reveal">
+      {{ section.settings.micro_label }}
+    </span>
+
+    <h2 class="dryeNEW-reveal dryeNEW-rd1">
+      {{ section.settings.heading }}
+    </h2>
+
+    <p class="field-section-intro dryeNEW-reveal dryeNEW-rd2">
+      {{ section.settings.intro_text }}
+    </p>
+
+    {% if section.blocks.size > 0 %}
+      <div class="field-grid">
+        {% for block in section.blocks %}
+          <div class="field-card dryeNEW-reveal {% case forloop.index %}{% when 1 %}dryeNEW-rd1{% when 2 %}dryeNEW-rd2{% when 3 %}dryeNEW-rd3{% endcase %}" {{ block.shopify_attributes }}>
+            <div class="field-card-header">
+              <div class="field-card-title">
+                {{ block.settings.title_line_1 }}<br>{{ block.settings.title_line_2 }}
+              </div>
+
+              {% if block.settings.badge != blank %}
+                <div class="field-card-badge">
+                  {{ block.settings.badge }}
+                </div>
+              {% endif %}
+            </div>
+
+            <div class="field-results">
+              {% for i in (1..4) %}
+                {% liquid
+                  assign label_key = 'result_label_' | append: i
+                  assign value_key = 'result_value_' | append: i
+                  assign width_key = 'result_width_' | append: i
+
+                  assign result_label = block.settings[label_key]
+                  assign result_value = block.settings[value_key]
+                  assign result_width = block.settings[width_key] | plus: 0 | at_least: 0 | at_most: 100
+                %}
+
+                {% if result_label != blank %}
+                  <div class="field-result-row">
+                    <div class="field-result-label">{{ result_label }}</div>
+                    <div class="field-result-bar-wrap">
+                      <div
+                        class="field-result-bar"
+                        data-width="{{ result_width }}"
+                        style="width:0%;"
+                      ></div>
+                    </div>
+                    <div class="field-result-pct">{{ result_value }}</div>
+                  </div>
+                {% endif %}
+              {% endfor %}
+            </div>
+
+            {% if block.settings.note != blank %}
+              <div class="field-card-note">
+                {{ block.settings.note }}
+              </div>
+            {% endif %}
+          </div>
+        {% endfor %}
+      </div>
+    {% endif %}
+  </div>
+</section>
+
+<script>
+  (() => {
+    const bars = document.querySelectorAll('.field-result-bar');
+    if (!bars.length) return;
+
+    const observer = new IntersectionObserver((entries, obs) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+
+        const card = entry.target;
+        card.querySelectorAll('.field-result-bar').forEach((bar) => {
+          const width = bar.getAttribute('data-width') || '0';
+          requestAnimationFrame(() => {
+            bar.style.width = width + '%';
+          });
+        });
+
+        obs.unobserve(card);
+      });
+    }, { threshold: 0.25 });
+
+    document.querySelectorAll('.field-card').forEach((card) => {
+      observer.observe(card);
+    });
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "DRYE Study Breakdown",
+  "settings": [
+    {
+      "type": "text",
+      "id": "micro_label",
+      "label": "Micro label",
+      "default": "Study Breakdown"
+    },
+    {
+      "type": "textarea",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Three environments. Consistent results."
+    },
+    {
+      "type": "textarea",
+      "id": "intro_text",
+      "label": "Intro text",
+      "default": "Each study was conducted independently in a real working environment — not a controlled lab with artificial conditions."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "study_card",
+      "name": "Study card",
+      "limit": 3,
+      "settings": [
+        {
+          "type": "text",
+          "id": "title_line_1",
+          "label": "Title line 1",
+          "default": "Automotive Mechanics"
+        },
+        {
+          "type": "text",
+          "id": "title_line_2",
+          "label": "Title line 2",
+          "default": "Gothenburg, Sweden"
+        },
+        {
+          "type": "text",
+          "id": "badge",
+          "label": "Badge",
+          "default": "8 Weeks"
+        },
+        {
+          "type": "text",
+          "id": "result_label_1",
+          "label": "Result label 1",
+          "default": "Reduced sweat retention"
+        },
+        {
+          "type": "text",
+          "id": "result_value_1",
+          "label": "Result value 1",
+          "default": "7/9"
+        },
+        {
+          "type": "range",
+          "id": "result_width_1",
+          "label": "Result width 1",
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "default": 78
+        },
+        {
+          "type": "text",
+          "id": "result_label_2",
+          "label": "Result label 2",
+          "default": "Fewer dermatitis flare-ups"
+        },
+        {
+          "type": "text",
+          "id": "result_value_2",
+          "label": "Result value 2",
+          "default": "3/3"
+        },
+        {
+          "type": "range",
+          "id": "result_width_2",
+          "label": "Result width 2",
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "default": 100
+        },
+        {
+          "type": "text",
+          "id": "result_label_3",
+          "label": "Result label 3",
+          "default": "Continued use voluntarily"
+        },
+        {
+          "type": "text",
+          "id": "result_value_3",
+          "label": "Result value 3",
+          "default": "9/9"
+        },
+        {
+          "type": "range",
+          "id": "result_width_3",
+          "label": "Result width 3",
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "default": 100
+        },
+        {
+          "type": "text",
+          "id": "result_label_4",
+          "label": "Result label 4",
+          "default": "Zero adverse reactions"
+        },
+        {
+          "type": "text",
+          "id": "result_value_4",
+          "label": "Result value 4",
+          "default": "9/9"
+        },
+        {
+          "type": "range",
+          "id": "result_width_4",
+          "label": "Result width 4",
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "default": 100
+        },
+        {
+          "type": "textarea",
+          "id": "note",
+          "label": "Note",
+          "default": "Observational study, June–Aug 2023. 9 participants, Gothenburg. Published: Textilhögskolan Borås, Oct 2023."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "DRYE Study Breakdown",
+      "blocks": [
+        {
+          "type": "study_card",
+          "settings": {
+            "title_line_1": "Automotive Mechanics",
+            "title_line_2": "Gothenburg, Sweden",
+            "badge": "8 Weeks",
+            "result_label_1": "Reduced sweat retention",
+            "result_value_1": "7/9",
+            "result_width_1": 78,
+            "result_label_2": "Fewer dermatitis flare-ups",
+            "result_value_2": "3/3",
+            "result_width_2": 100,
+            "result_label_3": "Continued use voluntarily",
+            "result_value_3": "9/9",
+            "result_width_3": 100,
+            "result_label_4": "Zero adverse reactions",
+            "result_value_4": "9/9",
+            "result_width_4": 100,
+            "note": "Observational study, June–Aug 2023. 9 participants, Gothenburg. Published: Textilhögskolan Borås, Oct 2023."
+          }
+        },
+        {
+          "type": "study_card",
+          "settings": {
+            "title_line_1": "Infantry Soldiers",
+            "title_line_2": "Ukraine, Active Field Use",
+            "badge": "Combat Conditions",
+            "result_label_1": "Improved thermal comfort",
+            "result_value_1": "9/10",
+            "result_width_1": 90,
+            "result_label_2": "Reduced skin damage",
+            "result_value_2": "10/10",
+            "result_width_2": 100,
+            "result_label_3": "Weapon precision: unaffected",
+            "result_value_3": "9/10",
+            "result_width_3": 90,
+            "result_label_4": "Would use in combat",
+            "result_value_4": "10/10",
+            "result_width_4": 100,
+            "note": "Structured questionnaire, 10 infantry soldiers. National Guard of Ukraine, 2nd Corps. Active field conditions, 2025."
+          }
+        },
+        {
+          "type": "study_card",
+          "settings": {
+            "title_line_1": "Professional Users",
+            "title_line_2": "Healthcare, Industrial, Sport",
+            "badge": "Ongoing",
+            "result_label_1": "Reported skin improvement",
+            "result_value_1": "98%",
+            "result_width_1": 98,
+            "result_label_2": "No dexterity interference",
+            "result_value_2": "100%",
+            "result_width_2": 100,
+            "result_label_3": "Continued use after trial",
+            "result_value_3": "100%",
+            "result_width_3": 100,
+            "result_label_4": "",
+            "result_value_4": "",
+            "result_width_4": 0,
+            "note": "Internal testing across professional environments. Tesla, VW, Porsche workshops. Hospital teams. Elite hockey. Cleaning professionals."
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

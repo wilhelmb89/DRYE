@@ -1,0 +1,319 @@
+{{ 'drye-mechanics-saturation.css' | asset_url | stylesheet_tag }}
+
+<section
+  class="dryeNEW-section mech-saturation"
+  id="{{ section.settings.section_id | default: 'mechanics-saturation' }}"
+  data-section-id="{{ section.id }}"
+  data-drye-section
+  data-section-index="8"
+  data-section-name="invention-saturation"
+  data-mechanism-section
+>
+  <div class="dryeNEW-container">
+
+<header class="mech-saturation__intro dryeNEW-reveal">
+  {% if section.settings.eyebrow != blank %}
+    <span class="dryeNEW-micro mech-saturation__eyebrow">
+      {{ section.settings.eyebrow }}
+    </span>
+  {% endif %}
+
+{% if section.settings.heading_line_1 != blank or section.settings.heading_echo != blank %}
+  <h2 class="dryeNEW-h2 mech-saturation__heading">
+    {% if section.settings.heading_line_1 != blank %}
+      {{ section.settings.heading_line_1 }}
+    {% endif %}
+
+    {% if section.settings.heading_echo != blank %}
+      <em class="dryeNEW-em mech-saturation__heading-echo">
+        {{ section.settings.heading_echo }}
+      </em>
+    {% endif %}
+  </h2>
+{% endif %}
+
+  {% if section.settings.subheading != blank %}
+    <p class="dryeNEW-body--lg mech-saturation__subheading">
+      {{ section.settings.subheading }}
+    </p>
+  {% endif %}
+</header>
+
+    <div
+      class="mech-saturation__chart dryeNEW-reveal dryeNEW-rd1"
+      role="table"
+      aria-label="Liner material comparison"
+    >
+      <div class="mech-saturation__chart-head" role="row">
+        <span class="dryeNEW-micro mech-saturation__col-label" role="columnheader">
+          Material
+        </span>
+
+        <span class="dryeNEW-micro mech-saturation__col-label mech-saturation__col-label--right" role="columnheader">
+          Moisture regain
+        </span>
+      </div>
+
+      {% for block in section.blocks %}
+        {% if block.type == 'fiber_row' %}
+          {%- assign is_drye = block.settings.is_highlighted -%}
+          {%- assign bar_percent = block.settings.bar_percent | default: 0 -%}
+
+          <div
+            class="mech-saturation__row{% if is_drye %} mech-saturation__row--drye{% endif %}"
+            role="row"
+            {{ block.shopify_attributes }}
+          >
+            <div class="mech-saturation__row-text">
+              <div class="mech-saturation__row-head">
+                {% if block.settings.fiber_name != blank %}
+                  <span class="dryeNEW-h3 mech-saturation__fiber-name" role="cell">
+                    {{ block.settings.fiber_name }}
+
+                    {% if is_drye and section.settings.drye_chip != blank %}
+                      <span class="dryeNEW-micro mech-saturation__chip">
+                        {{ section.settings.drye_chip }}
+                      </span>
+                    {% endif %}
+                  </span>
+                {% endif %}
+
+                {% if block.settings.value != blank %}
+                  <span class="dryeNEW-stat-number mech-saturation__value" role="cell">
+                    {{ block.settings.value }}
+                  </span>
+                {% endif %}
+              </div>
+
+              {% if block.settings.fiber_note != blank %}
+                <p class="dryeNEW-body--caption dryeNEW-editorial mech-saturation__fiber-note">
+                  {{ block.settings.fiber_note }}
+                </p>
+              {% endif %}
+            </div>
+
+            <div class="mech-saturation__bar" aria-hidden="true">
+              <span class="mech-saturation__bar-fill" style="--bar: {{ bar_percent }}%;"></span>
+            </div>
+          </div>
+        {% endif %}
+      {% endfor %}
+    </div>
+
+    {% if section.settings.close_heading != blank or section.settings.close_body != blank or section.settings.close_statement != blank or section.settings.cite != blank %}
+      <div class="mech-saturation__close dryeNEW-reveal dryeNEW-rd2">
+        {% if section.settings.close_heading != blank %}
+          <h3 class="dryeNEW-h3 mech-saturation__close-heading">
+            {{ section.settings.close_heading }}
+          </h3>
+        {% endif %}
+
+        {% if section.settings.close_body != blank %}
+          <div class="dryeNEW-body mech-saturation__close-body">
+            {{ section.settings.close_body }}
+          </div>
+        {% endif %}
+
+        {% if section.settings.close_statement != blank %}
+          <p class="dryeNEW-body mech-saturation__close-statement">
+            <strong>{{ section.settings.close_statement }}</strong>
+          </p>
+        {% endif %}
+
+        {% if section.settings.cite != blank %}
+          <p class="dryeNEW-body--caption mech-saturation__cite">
+            {{ section.settings.cite }}
+          </p>
+        {% endif %}
+      </div>
+    {% endif %}
+
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "DRYE Saturation Point",
+  "tag": "section",
+  "class": "shopify-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "section_id",
+      "label": "Section ID (anchor)",
+      "default": "mechanics-saturation"
+    },
+{
+  "type": "header",
+  "content": "Intro"
+},
+{
+  "type": "text",
+  "id": "eyebrow",
+  "label": "Eyebrow",
+  "default": "The invention"
+},
+{
+  "type": "text",
+  "id": "heading_line_1",
+  "label": "Heading",
+  "default": "Every other liner has a saturation point."
+},
+{
+  "type": "text",
+  "id": "heading_echo",
+  "label": "Heading echo line",
+  "default": "Ours physically can’t."
+},
+{
+  "type": "textarea",
+  "id": "subheading",
+  "label": "Subheading",
+  "default": "Every fibre your hand has ever met inside a glove fills up with sweat — until it can’t hold any more. From that moment on, the sweat stops moving. It sits against your skin for the rest of the shift."
+},
+    {
+      "type": "text",
+      "id": "drye_chip",
+      "label": "DRYE row chip",
+      "default": "Skin-side dry"
+    },
+    {
+      "type": "header",
+      "content": "Close"
+    },
+    {
+      "type": "text",
+      "id": "close_heading",
+      "label": "Closing heading",
+      "default": "The others soak. DRYE doesn’t."
+    },
+    {
+      "type": "richtext",
+      "id": "close_body",
+      "label": "Closing body",
+      "default": "<p>Cotton, wool, bamboo and silk absorb sweat into the fibre itself. Once they’re full, the water has nowhere left to go. It sits against your skin until the glove comes off.</p><p>DRYE is built different. Polypropylene on the skin side cannot hold water the same way. Lyocell on the outside pulls moisture across the fabric. Two fibres, one direction: away from your hand.</p>"
+    },
+    {
+      "type": "text",
+      "id": "close_statement",
+      "label": "Closing statement",
+      "default": "The skin side stays dry. The shift ends before the fabric does."
+    },
+    {
+      "type": "textarea",
+      "id": "cite",
+      "label": "Citation",
+      "default": "Moisture regain references: Kadolph 2014 · ASTM D2654 · GB/T 9995. Transport mechanism independently validated in DRYE textile testing."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "fiber_row",
+      "name": "Fiber row",
+      "settings": [
+        {
+          "type": "text",
+          "id": "fiber_name",
+          "label": "Fiber name",
+          "default": "Cotton"
+        },
+        {
+          "type": "text",
+          "id": "fiber_note",
+          "label": "Behavioural note",
+          "default": "Absorbs fast. Turns wet quickly."
+        },
+        {
+          "type": "text",
+          "id": "value",
+          "label": "Regain value display",
+          "default": "7–8%"
+        },
+        {
+          "type": "range",
+          "id": "bar_percent",
+          "label": "Bar fill",
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "default": 42,
+          "info": "Relative scale. 100 is the longest bar."
+        },
+        {
+          "type": "checkbox",
+          "id": "is_highlighted",
+          "label": "Highlight as DRYE row",
+          "default": false
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "DRYE Saturation Point",
+      "blocks": [
+        {
+          "type": "fiber_row",
+          "settings": {
+            "fiber_name": "Merino wool",
+            "fiber_note": "Absorbs. Stays heavy.",
+            "value": "15–18%",
+            "bar_percent": 90,
+            "is_highlighted": false
+          }
+        },
+        {
+          "type": "fiber_row",
+          "settings": {
+            "fiber_name": "Bamboo viscose",
+            "fiber_note": "Absorbs. Marketed as softer.",
+            "value": "13%",
+            "bar_percent": 72,
+            "is_highlighted": false
+          }
+        },
+        {
+          "type": "fiber_row",
+          "settings": {
+            "fiber_name": "Silk",
+            "fiber_note": "Absorbs less. Still holds moisture.",
+            "value": "11%",
+            "bar_percent": 60,
+            "is_highlighted": false
+          }
+        },
+        {
+          "type": "fiber_row",
+          "settings": {
+            "fiber_name": "Cotton",
+            "fiber_note": "Absorbs fast. Turns wet quickly.",
+            "value": "7–8%",
+            "bar_percent": 42,
+            "is_highlighted": false
+          }
+        },
+        {
+          "type": "fiber_row",
+          "settings": {
+            "fiber_name": "Polyester",
+            "fiber_note": "Low regain. Does not create the dry layer.",
+            "value": "0.4%",
+            "bar_percent": 4,
+            "is_highlighted": false
+          }
+        },
+        {
+          "type": "fiber_row",
+          "settings": {
+            "fiber_name": "DRYE Asymmetric Layering",
+            "fiber_note": "Doesn’t absorb. Routes outward.",
+            "value": "<0.1%",
+            "bar_percent": 1,
+            "is_highlighted": true
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

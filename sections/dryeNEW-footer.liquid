@@ -1,0 +1,406 @@
+{{ 'dryeNEW-footer.css' | asset_url | stylesheet_tag }}
+
+<footer>
+  <div class="container">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <a
+          href="{{ section.settings.logo_link | default: routes.root_url }}"
+          class="logo"
+          aria-label="{{ shop.name }}"
+        >
+          {% if section.settings.logo != blank %}
+            {{
+              section.settings.logo
+              | image_url: width: 400
+              | image_tag:
+                alt: shop.name,
+                loading: 'lazy',
+                widths: '200,300,400'
+            }}
+          {% else %}
+            <span>{{ shop.name }}</span>
+          {% endif %}
+        </a>
+
+        {% if section.settings.brand_text != blank %}
+          <p>{{ section.settings.brand_text | newline_to_br }}</p>
+        {% endif %}
+      </div>
+
+      <div class="footer-col">
+        {% if section.settings.col_1_heading != blank %}
+          <h4>{{ section.settings.col_1_heading }}</h4>
+        {% endif %}
+
+        <ul>
+          {% if section.settings.col_1_link_1_label != blank %}
+            <li><a href="{{ section.settings.col_1_link_1_url | default: '#' }}">{{ section.settings.col_1_link_1_label }}</a></li>
+          {% endif %}
+          {% if section.settings.col_1_link_2_label != blank %}
+            <li><a href="{{ section.settings.col_1_link_2_url | default: '#' }}">{{ section.settings.col_1_link_2_label }}</a></li>
+          {% endif %}
+          {% if section.settings.col_1_link_3_label != blank %}
+            <li><a href="{{ section.settings.col_1_link_3_url | default: '#' }}">{{ section.settings.col_1_link_3_label }}</a></li>
+          {% endif %}
+          {% if section.settings.col_1_link_4_label != blank %}
+            <li><a href="{{ section.settings.col_1_link_4_url | default: '#' }}">{{ section.settings.col_1_link_4_label }}</a></li>
+          {% endif %}
+          {% if section.settings.col_1_link_5_label != blank %}
+            <li><a href="{{ section.settings.col_1_link_5_url | default: '#' }}">{{ section.settings.col_1_link_5_label }}</a></li>
+          {% endif %}
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        {% if section.settings.col_2_heading != blank %}
+          <h4>{{ section.settings.col_2_heading }}</h4>
+        {% endif %}
+
+        <ul>
+          {% if section.settings.col_2_link_1_label != blank %}
+            <li><a href="{{ section.settings.col_2_link_1_url | default: '#' }}">{{ section.settings.col_2_link_1_label }}</a></li>
+          {% endif %}
+          {% if section.settings.col_2_link_2_label != blank %}
+            <li><a href="{{ section.settings.col_2_link_2_url | default: '#' }}">{{ section.settings.col_2_link_2_label }}</a></li>
+          {% endif %}
+          {% if section.settings.col_2_link_3_label != blank %}
+            <li><a href="{{ section.settings.col_2_link_3_url | default: '#' }}">{{ section.settings.col_2_link_3_label }}</a></li>
+          {% endif %}
+          {% if section.settings.col_2_link_4_label != blank %}
+            <li><a href="{{ section.settings.col_2_link_4_url | default: '#' }}">{{ section.settings.col_2_link_4_label }}</a></li>
+          {% endif %}
+          {% if section.settings.col_2_link_5_label != blank %}
+            <li><a href="{{ section.settings.col_2_link_5_url | default: '#' }}">{{ section.settings.col_2_link_5_label }}</a></li>
+          {% endif %}
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        {% if section.settings.col_3_heading != blank %}
+          <h4>{{ section.settings.col_3_heading }}</h4>
+        {% endif %}
+
+        <ul>
+          {% if section.settings.col_3_link_1_label != blank %}
+            <li><a href="{{ section.settings.col_3_link_1_url | default: '#' }}">{{ section.settings.col_3_link_1_label }}</a></li>
+          {% endif %}
+          {% if section.settings.col_3_link_2_label != blank %}
+            <li><a href="{{ section.settings.col_3_link_2_url | default: '#' }}">{{ section.settings.col_3_link_2_label }}</a></li>
+          {% endif %}
+          {% if section.settings.col_3_link_3_label != blank %}
+            <li><a href="{{ section.settings.col_3_link_3_url | default: '#' }}">{{ section.settings.col_3_link_3_label }}</a></li>
+          {% endif %}
+          {% if section.settings.col_3_link_4_label != blank %}
+            <li><a href="{{ section.settings.col_3_link_4_url | default: '#' }}">{{ section.settings.col_3_link_4_label }}</a></li>
+          {% endif %}
+          {% if section.settings.col_3_link_5_label != blank %}
+            <li><a href="{{ section.settings.col_3_link_5_url | default: '#' }}">{{ section.settings.col_3_link_5_label }}</a></li>
+          {% endif %}
+        </ul>
+      </div>
+
+      <div class="footer-newsletter">
+        {% if section.settings.newsletter_heading != blank %}
+          <h4>{{ section.settings.newsletter_heading }}</h4>
+        {% endif %}
+
+        {% if section.settings.newsletter_text != blank %}
+          <p>{{ section.settings.newsletter_text }}</p>
+        {% endif %}
+
+        <div class="footer-email-form">
+          <input
+            type="email"
+            placeholder="{{ section.settings.newsletter_placeholder }}"
+            autocomplete="email"
+          >
+          <button type="submit">{{ section.settings.newsletter_button_label }}</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      {% if section.settings.bottom_text != blank %}
+        <p>{{ section.settings.bottom_text }}</p>
+      {% endif %}
+
+      <div class="footer-bottom-links">
+        {% if section.settings.bottom_link_1_label != blank %}
+          <a href="{{ section.settings.bottom_link_1_url | default: '#' }}">{{ section.settings.bottom_link_1_label }}</a>
+        {% endif %}
+        {% if section.settings.bottom_link_2_label != blank %}
+          <a href="{{ section.settings.bottom_link_2_url | default: '#' }}">{{ section.settings.bottom_link_2_label }}</a>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</footer>
+
+{% schema %}
+{
+  "name": "DRYE NEW Footer",
+  "tag": "section",
+  "class": "section-dryeNEW-footer",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "logo",
+      "label": "Logo"
+    },
+    {
+      "type": "url",
+      "id": "logo_link",
+      "label": "Logo link"
+    },
+    {
+      "type": "textarea",
+      "id": "brand_text",
+      "label": "Brand text",
+      "default": "Engineered in Sweden.\nDesigned for daily use\nin demanding environments."
+    },
+
+    {
+      "type": "text",
+      "id": "col_1_heading",
+      "label": "Column 1 heading",
+      "default": "Shop"
+    },
+    {
+      "type": "text",
+      "id": "col_1_link_1_label",
+      "label": "Column 1 link 1 label",
+      "default": "Shop"
+    },
+    {
+      "type": "url",
+      "id": "col_1_link_1_url",
+      "label": "Column 1 link 1 URL"
+    },
+    {
+      "type": "text",
+      "id": "col_1_link_2_label",
+      "label": "Column 1 link 2 label",
+      "default": "Shipping Policy"
+    },
+    {
+      "type": "url",
+      "id": "col_1_link_2_url",
+      "label": "Column 1 link 2 URL"
+    },
+    {
+      "type": "text",
+      "id": "col_1_link_3_label",
+      "label": "Column 1 link 3 label",
+      "default": "Return Policy"
+    },
+    {
+      "type": "url",
+      "id": "col_1_link_3_url",
+      "label": "Column 1 link 3 URL"
+    },
+    {
+      "type": "text",
+      "id": "col_1_link_4_label",
+      "label": "Column 1 link 4 label"
+    },
+    {
+      "type": "url",
+      "id": "col_1_link_4_url",
+      "label": "Column 1 link 4 URL"
+    },
+    {
+      "type": "text",
+      "id": "col_1_link_5_label",
+      "label": "Column 1 link 5 label"
+    },
+    {
+      "type": "url",
+      "id": "col_1_link_5_url",
+      "label": "Column 1 link 5 URL"
+    },
+
+    {
+      "type": "text",
+      "id": "col_2_heading",
+      "label": "Column 2 heading",
+      "default": "Support"
+    },
+    {
+      "type": "text",
+      "id": "col_2_link_1_label",
+      "label": "Column 2 link 1 label",
+      "default": "Problem"
+    },
+    {
+      "type": "url",
+      "id": "col_2_link_1_url",
+      "label": "Column 2 link 1 URL"
+    },
+    {
+      "type": "text",
+      "id": "col_2_link_2_label",
+      "label": "Column 2 link 2 label",
+      "default": "How it works"
+    },
+    {
+      "type": "url",
+      "id": "col_2_link_2_url",
+      "label": "Column 2 link 2 URL"
+    },
+    {
+      "type": "text",
+      "id": "col_2_link_3_label",
+      "label": "Column 2 link 3 label",
+      "default": "Shop"
+    },
+    {
+      "type": "url",
+      "id": "col_2_link_3_url",
+      "label": "Column 2 link 3 URL"
+    },
+    {
+      "type": "text",
+      "id": "col_2_link_4_label",
+      "label": "Column 2 link 4 label",
+      "default": "User stories"
+    },
+    {
+      "type": "url",
+      "id": "col_2_link_4_url",
+      "label": "Column 2 link 4 URL"
+    },
+    {
+      "type": "text",
+      "id": "col_2_link_5_label",
+      "label": "Column 2 link 5 label",
+      "default": "Contact"
+    },
+    {
+      "type": "url",
+      "id": "col_2_link_5_url",
+      "label": "Column 2 link 5 URL"
+    },
+
+    {
+      "type": "text",
+      "id": "col_3_heading",
+      "label": "Column 3 heading",
+      "default": "Policies"
+    },
+    {
+      "type": "text",
+      "id": "col_3_link_1_label",
+      "label": "Column 3 link 1 label",
+      "default": "Privacy Policy"
+    },
+    {
+      "type": "url",
+      "id": "col_3_link_1_url",
+      "label": "Column 3 link 1 URL"
+    },
+    {
+      "type": "text",
+      "id": "col_3_link_2_label",
+      "label": "Column 3 link 2 label",
+      "default": "Terms of Service"
+    },
+    {
+      "type": "url",
+      "id": "col_3_link_2_url",
+      "label": "Column 3 link 2 URL"
+    },
+    {
+      "type": "text",
+      "id": "col_3_link_3_label",
+      "label": "Column 3 link 3 label",
+      "default": "Shipping Policy"
+    },
+    {
+      "type": "url",
+      "id": "col_3_link_3_url",
+      "label": "Column 3 link 3 URL"
+    },
+    {
+      "type": "text",
+      "id": "col_3_link_4_label",
+      "label": "Column 3 link 4 label",
+      "default": "Refund Policy"
+    },
+    {
+      "type": "url",
+      "id": "col_3_link_4_url",
+      "label": "Column 3 link 4 URL"
+    },
+    {
+      "type": "text",
+      "id": "col_3_link_5_label",
+      "label": "Column 3 link 5 label"
+    },
+    {
+      "type": "url",
+      "id": "col_3_link_5_url",
+      "label": "Column 3 link 5 URL"
+    },
+
+    {
+      "type": "text",
+      "id": "newsletter_heading",
+      "label": "Newsletter heading",
+      "default": "Stay updated"
+    },
+    {
+      "type": "textarea",
+      "id": "newsletter_text",
+      "label": "Newsletter text",
+      "default": "No newsletters, no promotions. Just relevant information when available."
+    },
+    {
+      "type": "text",
+      "id": "newsletter_placeholder",
+      "label": "Newsletter placeholder",
+      "default": "Enter email address"
+    },
+    {
+      "type": "text",
+      "id": "newsletter_button_label",
+      "label": "Newsletter button label",
+      "default": "Subscribe"
+    },
+
+    {
+      "type": "text",
+      "id": "bottom_text",
+      "label": "Bottom text",
+      "default": "© 2025 DRYE, All rights reserved."
+    },
+    {
+      "type": "text",
+      "id": "bottom_link_1_label",
+      "label": "Bottom link 1 label",
+      "default": "Privacy Policy"
+    },
+    {
+      "type": "url",
+      "id": "bottom_link_1_url",
+      "label": "Bottom link 1 URL"
+    },
+    {
+      "type": "text",
+      "id": "bottom_link_2_label",
+      "label": "Bottom link 2 label",
+      "default": "Terms of Service"
+    },
+    {
+      "type": "url",
+      "id": "bottom_link_2_url",
+      "label": "Bottom link 2 URL"
+    }
+  ],
+  "presets": [
+    {
+      "name": "DRYE NEW Footer"
+    }
+  ]
+}
+{% endschema %}

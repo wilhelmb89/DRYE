@@ -1,0 +1,28 @@
+{{ 'drye-policy-bottom-cta.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'drye-policy.js' | asset_url }}" defer></script>
+
+<section class="drye-policy-bottom-cta">
+  <div class="drye-policy-bottom-cta__inner">
+    <span class="drye-policy-bottom-cta__label">Questions?</span>
+    <h2 class="drye-policy-bottom-cta__heading">We keep it simple.</h2>
+    <p class="drye-policy-bottom-cta__body">
+      If anything is unclear, email us at
+      <a href="mailto:info@drye.se">info@drye.se</a>
+      and we’ll help you directly.
+    </p>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "DRYE Policy Bottom CTA",
+  "tag": "section",
+  "class": "shopify-section--drye-policy-bottom-cta",
+  "settings": [],
+  "presets": [
+    {
+      "name": "DRYE Policy Bottom CTA"
+    }
+  ]
+}
+{% endschema %}

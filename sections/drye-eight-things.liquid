@@ -1,0 +1,310 @@
+{{ 'section-drye-eight-things.css' | asset_url | stylesheet_tag }}
+
+<section class="dryeNEW-section eight-things" data-section-id="{{ section.id }}">
+  <div class="dryeNEW-container">
+    <div class="eight-things__intro">
+      {% if section.settings.eyebrow != blank %}
+        <span class="dryeNEW-micro eight-things__eyebrow dryeNEW-reveal dryeNEW-rd1">
+          {{ section.settings.eyebrow }}
+        </span>
+      {% endif %}
+
+      {% if section.settings.heading != blank %}
+        <h2 class="dryeNEW-h2 eight-things__heading dryeNEW-reveal dryeNEW-rd2">
+          {{ section.settings.heading }}
+          {% if section.settings.heading_emphasis != blank %}
+            <em class="dryeNEW-em eight-things__heading-emphasis">
+              {{ section.settings.heading_emphasis }}
+            </em>
+          {% endif %}
+        </h2>
+      {% endif %}
+
+      {% if section.settings.body != blank %}
+        <div class="dryeNEW-body eight-things__sub dryeNEW-reveal dryeNEW-rd3">
+          {{ section.settings.body }}
+        </div>
+      {% endif %}
+    </div>
+
+    <div class="eight-things__strip-wrap">
+      <div
+        class="eight-things__swipe-hint"
+        data-eight-swipe-hint
+        aria-hidden="true"
+      >
+        Swipe
+      </div>
+
+      <div class="eight-things__grid" data-eight-strip>
+        {% for block in section.blocks %}
+          <article
+            class="eight-things__card dryeNEW-reveal {% cycle 'dryeNEW-rd1', 'dryeNEW-rd2', 'dryeNEW-rd3', 'dryeNEW-rd2' %}"
+            {{ block.shopify_attributes }}
+          >
+            {% if block.settings.label != blank %}
+              <span class="dryeNEW-micro eight-things__label">
+                {{ block.settings.label }}
+              </span>
+            {% endif %}
+
+            {% if block.settings.headline != blank %}
+              <h3 class="dryeNEW-h3 eight-things__name">
+                {{ block.settings.headline }}
+              </h3>
+            {% endif %}
+
+            {% if block.settings.body != blank %}
+              <div class="dryeNEW-body eight-things__why">
+                {{ block.settings.body }}
+              </div>
+            {% endif %}
+          </article>
+        {% endfor %}
+      </div>
+
+      <div
+        class="eight-things__fade"
+        data-eight-fade
+        aria-hidden="true"
+      ></div>
+    </div>
+
+    {% if section.settings.foot_quote != blank or section.settings.cta_label != blank %}
+      <div class="eight-things__foot dryeNEW-reveal dryeNEW-rd3">
+        {% if section.settings.foot_quote != blank %}
+          <div class="eight-things__foot-q">
+            {{ section.settings.foot_quote }}
+          </div>
+        {% endif %}
+
+        {% if section.settings.cta_label != blank and section.settings.cta_link != blank %}
+          <a href="{{ section.settings.cta_link }}" class="eight-things__foot-cta">
+            {{ section.settings.cta_label }}
+          </a>
+        {% endif %}
+      </div>
+    {% endif %}
+  </div>
+</section>
+
+<script>
+  (() => {
+    const section = document.querySelector('[data-section-id="{{ section.id }}"]');
+    if (!section) return;
+
+    const strip = section.querySelector('[data-eight-strip]');
+    const hint = section.querySelector('[data-eight-swipe-hint]');
+    const fade = section.querySelector('[data-eight-fade]');
+    const desktopMq = window.matchMedia('(min-width: 768px)');
+
+    if (!strip) return;
+
+    let hasInteracted = false;
+
+    const hasScrollableContent = () => {
+      return strip.scrollWidth - strip.clientWidth > 8;
+    };
+
+    const updateHint = () => {
+      if (!hint) return;
+
+      if (desktopMq.matches || !hasScrollableContent()) {
+        hint.classList.add('is-hidden');
+        return;
+      }
+
+      if (strip.scrollLeft > 16 || hasInteracted) {
+        hint.classList.add('is-hidden');
+      } else {
+        hint.classList.remove('is-hidden');
+      }
+    };
+
+    const updateFade = () => {
+      if (!fade) return;
+
+      if (desktopMq.matches || !hasScrollableContent()) {
+        fade.classList.add('is-hidden');
+        return;
+      }
+
+      const maxScroll = strip.scrollWidth - strip.clientWidth;
+      const atEnd = strip.scrollLeft >= maxScroll - 8;
+
+      fade.classList.toggle('is-hidden', atEnd);
+    };
+
+    const hideHintOnInteraction = () => {
+      if (desktopMq.matches || hasInteracted) return;
+
+      hasInteracted = true;
+      if (hint) hint.classList.add('is-hidden');
+    };
+
+    const updateAll = () => {
+      updateHint();
+      updateFade();
+    };
+
+    strip.addEventListener('scroll', updateAll, { passive: true });
+    strip.addEventListener('touchstart', hideHintOnInteraction, { passive: true });
+    strip.addEventListener('pointerdown', hideHintOnInteraction, { passive: true });
+    window.addEventListener('resize', updateAll);
+
+    updateAll();
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "DRYE Eight Things",
+  "tag": "section",
+  "class": "shopify-section-drye-eight-things",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "What it actually changes"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "One liner."
+    },
+    {
+      "type": "text",
+      "id": "heading_emphasis",
+      "label": "Heading emphasis",
+      "default": "Eight things off your shift."
+    },
+    {
+      "type": "textarea",
+      "id": "body",
+      "label": "Body",
+      "default": "Same product. One mechanism. Here's what stops happening from the first wear — across nitrile, latex, rubber, and HV gloves."
+    },
+    {
+      "type": "header",
+      "content": "Footer"
+    },
+    {
+      "type": "textarea",
+      "id": "foot_quote",
+      "label": "Footer quote",
+      "default": "\"Eight hours in. Your skin is dry. Nitriles don't tear. Oil wipes off.\" — Brian Jee, automotive repair"
+    },
+    {
+      "type": "text",
+      "id": "cta_label",
+      "label": "CTA label",
+      "default": "See pricing"
+    },
+{
+  "type": "url",
+  "id": "cta_link",
+  "label": "CTA link"
+}
+  ],
+  "blocks": [
+    {
+      "type": "card",
+      "name": "Card",
+      "settings": [
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Label",
+          "default": "Sweat"
+        },
+        {
+          "type": "text",
+          "id": "headline",
+          "label": "Headline",
+          "default": "Skin stays dry, full shift"
+        },
+        {
+          "type": "textarea",
+          "id": "body",
+          "label": "Body",
+          "default": "No saturation point. Summer or winter. Nitrile, latex, rubber, or HV class 0 — moisture routes out continuously instead of pooling against your skin."
+        }
+      ]
+    }
+  ],
+  "max_blocks": 8,
+  "presets": [
+    {
+      "name": "DRYE Eight Things",
+      "blocks": [
+        {
+          "type": "card",
+          "settings": {
+            "label": "Sweat",
+            "headline": "Skin stays dry, full shift",
+            "body": "No saturation point. Summer or winter. Nitrile, latex, rubber, or HV class 0 — moisture routes out continuously instead of pooling against your skin."
+          }
+        },
+        {
+          "type": "card",
+          "settings": {
+            "label": "Oil",
+            "headline": "Stays on the surface",
+            "body": "Oil doesn't soak in. Wipes off with electrical contact cleaner and a paper towel. Liner back in rotation in under a minute."
+          }
+        },
+        {
+          "type": "card",
+          "settings": {
+            "label": "Grip",
+            "headline": "You still feel the bolt",
+            "body": "0.4mm thin. In the Gothenburg field study, 9/9 mechanics reported no dexterity loss. Dry skin reads tools better than wet skin does."
+          }
+        },
+        {
+          "type": "card",
+          "settings": {
+            "label": "Tearing",
+            "headline": "Nitriles stop ripping",
+            "body": "Gloves go on dry, come off dry. No more peeling them off over soaked skin twice an hour. The friction that tears them — gone."
+          }
+        },
+        {
+          "type": "card",
+          "settings": {
+            "label": "Skin damage",
+            "headline": "No saturation, no breakdown",
+            "body": "The thing softening your skin under the glove — humidity at 90%, sustained for hours — doesn't happen. The damage that compounds shift after shift, doesn't compound."
+          }
+        },
+        {
+          "type": "card",
+          "settings": {
+            "label": "Air-time",
+            "headline": "No more drying breaks",
+            "body": "No pulling gloves off between jobs to air your hands out. One pair on, one pair done. The shift moves at the pace it should move at."
+          }
+        },
+        {
+          "type": "card",
+          "settings": {
+            "label": "Cream cycle",
+            "headline": "The tube becomes optional",
+            "body": "When the cause is gone, the symptom doesn't return. The Working Hands on the nightstand stops being daily. Most users notice within two weeks."
+          }
+        },
+        {
+          "type": "card",
+          "settings": {
+            "label": "Smell",
+            "headline": "No bacterial growth",
+            "body": "Bacteria need moisture to multiply. Skin side stays dry — the environment that breeds smell never forms. Machine washable between uses, no residue."
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,189 @@
+{%- comment -%}
+  DRYE Problem Slide
+  - Cloudflare image URLs
+  - Per-image focal point X + Y
+  - Mobile + desktop controls
+{%- endcomment -%}
+
+{{ 'drye-slide1-problem.css' | asset_url | stylesheet_tag }}
+
+<section
+  class="dryeNEW-section dryeProblemV4"
+  id="shopify-section-{{ section.id }}"
+  style="
+    --problem-mt-mobile: {{ section.settings.margin_top_mobile }}px;
+    --problem-mb-mobile: {{ section.settings.margin_bottom_mobile }}px;
+    --problem-mt-desktop: {{ section.settings.margin_top_desktop }}px;
+    --problem-mb-desktop: {{ section.settings.margin_bottom_desktop }}px;
+  "
+>
+  <div class="dryeProblemV4__media" aria-hidden="true">
+    <div class="dryeProblemV4__strips">
+      <div
+        class="dryeProblemV4__strip"
+        style="
+          --img-x-mobile: {{ section.settings.image_1_x_mobile }}%;
+          --img-y-mobile: {{ section.settings.image_1_y_mobile }}%;
+          --img-x-desktop: {{ section.settings.image_1_x_desktop }}%;
+          --img-y-desktop: {{ section.settings.image_1_y_desktop }}%;
+        "
+      >
+{% if section.settings.image_1_url != blank %}
+  <img
+    src="{{ section.settings.image_1_url | escape }}"
+    class="dryeProblemV4__img"
+    loading="eager"
+    fetchpriority="high"
+    decoding="async"
+    alt=""
+  >
+{% endif %}
+      </div>
+
+      <div
+        class="dryeProblemV4__strip"
+        style="
+          --img-x-mobile: {{ section.settings.image_2_x_mobile }}%;
+          --img-y-mobile: {{ section.settings.image_2_y_mobile }}%;
+          --img-x-desktop: {{ section.settings.image_2_x_desktop }}%;
+          --img-y-desktop: {{ section.settings.image_2_y_desktop }}%;
+        "
+      >
+        {% if section.settings.image_2_url != blank %}
+          <img src="{{ section.settings.image_2_url | escape }}" class="dryeProblemV4__img" loading="lazy" alt="">
+        {% endif %}
+      </div>
+
+      <div
+        class="dryeProblemV4__strip"
+        style="
+          --img-x-mobile: {{ section.settings.image_3_x_mobile }}%;
+          --img-y-mobile: {{ section.settings.image_3_y_mobile }}%;
+          --img-x-desktop: {{ section.settings.image_3_x_desktop }}%;
+          --img-y-desktop: {{ section.settings.image_3_y_desktop }}%;
+        "
+      >
+        {% if section.settings.image_3_url != blank %}
+          <img src="{{ section.settings.image_3_url | escape }}" class="dryeProblemV4__img" loading="lazy" alt="">
+        {% endif %}
+      </div>
+
+      <div
+        class="dryeProblemV4__strip"
+        style="
+          --img-x-mobile: {{ section.settings.image_4_x_mobile }}%;
+          --img-y-mobile: {{ section.settings.image_4_y_mobile }}%;
+          --img-x-desktop: {{ section.settings.image_4_x_desktop }}%;
+          --img-y-desktop: {{ section.settings.image_4_y_desktop }}%;
+        "
+      >
+        {% if section.settings.image_4_url != blank %}
+          <img src="{{ section.settings.image_4_url | escape }}" class="dryeProblemV4__img" loading="lazy" alt="">
+        {% endif %}
+      </div>
+
+      <div
+        class="dryeProblemV4__strip"
+        style="
+          --img-x-mobile: {{ section.settings.image_5_x_mobile }}%;
+          --img-y-mobile: {{ section.settings.image_5_y_mobile }}%;
+          --img-x-desktop: {{ section.settings.image_5_x_desktop }}%;
+          --img-y-desktop: {{ section.settings.image_5_y_desktop }}%;
+        "
+      >
+        {% if section.settings.image_5_url != blank %}
+          <img src="{{ section.settings.image_5_url | escape }}" class="dryeProblemV4__img" loading="lazy" alt="">
+        {% endif %}
+      </div>
+    </div>
+
+    <div class="dryeProblemV4__overlay"></div>
+  </div>
+
+  <div class="dryeProblemV4__inner dryeNEW-container">
+    <div class="dryeProblemV4__content">
+      {% if section.settings.kicker != blank %}
+        <p class="dryeProblemV4__kicker dryeNEW-micro">{{ section.settings.kicker }}</p>
+      {% endif %}
+
+      {% if section.settings.heading_line_1 != blank %}
+        <h1 class="dryeProblemV4__heading dryeNEW-h1">{{ section.settings.heading_line_1 }}</h1>
+      {% endif %}
+
+      {% if section.settings.heading_line_2 != blank %}
+        <div class="dryeProblemV4__em dryeNEW-editorial">{{ section.settings.heading_line_2 }}</div>
+      {% endif %}
+
+      {% if section.settings.show_rule %}
+        <div class="dryeProblemV4__rule" aria-hidden="true"></div>
+      {% endif %}
+
+      {% if section.settings.subheading != blank %}
+        <div class="dryeProblemV4__sub dryeNEW-body--lg">{{ section.settings.subheading }}</div>
+      {% endif %}
+    </div>
+
+    <div class="dryeProblemV4__quotes">
+      {% if section.settings.quote_1 != blank %}<div class="dryeProblemV4__quote"><p>{{ section.settings.quote_1 }}</p></div>{% endif %}
+      {% if section.settings.quote_2 != blank %}<div class="dryeProblemV4__quote"><p>{{ section.settings.quote_2 }}</p></div>{% endif %}
+      {% if section.settings.quote_3 != blank %}<div class="dryeProblemV4__quote"><p>{{ section.settings.quote_3 }}</p></div>{% endif %}
+      {% if section.settings.quote_4 != blank %}<div class="dryeProblemV4__quote"><p>{{ section.settings.quote_4 }}</p></div>{% endif %}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "DRYE Problem Slide",
+  "settings": [
+    { "type": "range", "id": "margin_top_desktop", "label": "Desktop margin top", "min": 0, "max": 200, "step": 4, "unit": "px", "default": 0 },
+    { "type": "range", "id": "margin_bottom_desktop", "label": "Desktop margin bottom", "min": 0, "max": 200, "step": 4, "unit": "px", "default": 0 },
+    { "type": "range", "id": "margin_top_mobile", "label": "Mobile margin top", "min": 0, "max": 140, "step": 4, "unit": "px", "default": 0 },
+    { "type": "range", "id": "margin_bottom_mobile", "label": "Mobile margin bottom", "min": 0, "max": 140, "step": 4, "unit": "px", "default": 0 },
+
+    { "type": "text", "id": "image_1_url", "label": "Image 1 URL" },
+    { "type": "range", "id": "image_1_x_mobile", "label": "Image 1 mobile focus X", "min": 0, "max": 100, "step": 1, "unit": "%", "default": 50 },
+    { "type": "range", "id": "image_1_y_mobile", "label": "Image 1 mobile focus Y", "min": 0, "max": 100, "step": 1, "unit": "%", "default": 50 },
+    { "type": "range", "id": "image_1_x_desktop", "label": "Image 1 desktop focus X", "min": 0, "max": 100, "step": 1, "unit": "%", "default": 50 },
+    { "type": "range", "id": "image_1_y_desktop", "label": "Image 1 desktop focus Y", "min": 0, "max": 100, "step": 1, "unit": "%", "default": 50 },
+
+    { "type": "text", "id": "image_2_url", "label": "Image 2 URL" },
+    { "type": "range", "id": "image_2_x_mobile", "label": "Image 2 mobile focus X", "min": 0, "max": 100, "step": 1, "unit": "%", "default": 50 },
+    { "type": "range", "id": "image_2_y_mobile", "label": "Image 2 mobile focus Y", "min": 0, "max": 100, "step": 1, "unit": "%", "default": 50 },
+    { "type": "range", "id": "image_2_x_desktop", "label": "Image 2 desktop focus X", "min": 0, "max": 100, "step": 1, "unit": "%", "default": 50 },
+    { "type": "range", "id": "image_2_y_desktop", "label": "Image 2 desktop focus Y", "min": 0, "max": 100, "step": 1, "unit": "%", "default": 50 },
+
+    { "type": "text", "id": "image_3_url", "label": "Image 3 URL" },
+    { "type": "range", "id": "image_3_x_mobile", "label": "Image 3 mobile focus X", "min": 0, "max": 100, "step": 1, "unit": "%", "default": 50 },
+    { "type": "range", "id": "image_3_y_mobile", "label": "Image 3 mobile focus Y", "min": 0, "max": 100, "step": 1, "unit": "%", "default": 50 },
+    { "type": "range", "id": "image_3_x_desktop", "label": "Image 3 desktop focus X", "min": 0, "max": 100, "step": 1, "unit": "%", "default": 50 },
+    { "type": "range", "id": "image_3_y_desktop", "label": "Image 3 desktop focus Y", "min": 0, "max": 100, "step": 1, "unit": "%", "default": 50 },
+
+    { "type": "text", "id": "image_4_url", "label": "Image 4 URL" },
+    { "type": "range", "id": "image_4_x_mobile", "label": "Image 4 mobile focus X", "min": 0, "max": 100, "step": 1, "unit": "%", "default": 50 },
+    { "type": "range", "id": "image_4_y_mobile", "label": "Image 4 mobile focus Y", "min": 0, "max": 100, "step": 1, "unit": "%", "default": 50 },
+    { "type": "range", "id": "image_4_x_desktop", "label": "Image 4 desktop focus X", "min": 0, "max": 100, "step": 1, "unit": "%", "default": 50 },
+    { "type": "range", "id": "image_4_y_desktop", "label": "Image 4 desktop focus Y", "min": 0, "max": 100, "step": 1, "unit": "%", "default": 50 },
+
+    { "type": "text", "id": "image_5_url", "label": "Image 5 URL" },
+    { "type": "range", "id": "image_5_x_mobile", "label": "Image 5 mobile focus X", "min": 0, "max": 100, "step": 1, "unit": "%", "default": 50 },
+    { "type": "range", "id": "image_5_y_mobile", "label": "Image 5 mobile focus Y", "min": 0, "max": 100, "step": 1, "unit": "%", "default": 50 },
+    { "type": "range", "id": "image_5_x_desktop", "label": "Image 5 desktop focus X", "min": 0, "max": 100, "step": 1, "unit": "%", "default": 50 },
+    { "type": "range", "id": "image_5_y_desktop", "label": "Image 5 desktop focus Y", "min": 0, "max": 100, "step": 1, "unit": "%", "default": 50 },
+
+    { "type": "text", "id": "kicker", "label": "Kicker", "default": "PROBLEM" },
+    { "type": "text", "id": "heading_line_1", "label": "Heading line 1", "default": "Gloves don't fail." },
+    { "type": "text", "id": "heading_line_2", "label": "Heading line 2", "default": "Moisture does." },
+    { "type": "checkbox", "id": "show_rule", "label": "Show rule", "default": true },
+    { "type": "richtext", "id": "subheading", "label": "Subheading", "default": "<p>Moisture builds within minutes in sealed equipment. It stays. Skin breaks down.</p>" },
+
+    { "type": "text", "id": "quote_1", "label": "Quote 1", "default": "\"I can't get my gloves on\"" },
+    { "type": "text", "id": "quote_2", "label": "Quote 2", "default": "\"my hands literally drip sweat\"" },
+    { "type": "text", "id": "quote_3", "label": "Quote 3", "default": "\"I can't finish my shift\"" },
+    { "type": "text", "id": "quote_4", "label": "Quote 4", "default": "\"my skin cracks and bleeds\"" }
+  ],
+  "presets": [
+    { "name": "DRYE Problem Slide" }
+  ]
+}
+{% endschema %}

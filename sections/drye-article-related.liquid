@@ -1,0 +1,92 @@
+{{ 'section-drye-article-related.css' | asset_url | stylesheet_tag }}
+
+<section class="related-sec">
+  <div class="related-in">
+    <h2 class="related-h">{{ section.settings.heading }}</h2>
+
+    <div class="related-grid">
+      {% assign related_count = 0 %}
+
+      {% for related_article in blog.articles %}
+        {% if related_article.id != article.id and related_count < section.settings.posts_limit %}
+          <article class="related-card">
+            <a href="{{ related_article.url }}">
+              <div class="rc-img">
+                {% if related_article.image %}
+                  {{
+                    related_article.image
+                    | image_url: width: 900
+                    | image_tag:
+                      loading: 'lazy',
+                      widths: '320, 480, 640, 900',
+                      sizes: '(min-width: 900px) 33vw, (min-width: 600px) 50vw, 100vw',
+                      alt: related_article.title,
+                      class: 'rc-img-inner rc-img-media'
+                  }}
+                {% else %}
+                  <div class="rc-img-inner">{{ section.settings.placeholder_symbol }}</div>
+                {% endif %}
+              </div>
+
+              <div class="rc-body">
+                {% if related_article.tags.size > 0 %}
+                  <span class="rc-cat">
+                    <span class="rc-dot"></span>{{ related_article.tags.first }}
+                  </span>
+                {% endif %}
+
+                <h3 class="rc-h">{{ related_article.title }}</h3>
+
+                <span class="rc-link">{{ section.settings.link_label }}</span>
+              </div>
+            </a>
+          </article>
+
+          {% assign related_count = related_count | plus: 1 %}
+        {% endif %}
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "DRYE Article Related",
+  "tag": "section",
+  "class": "section-drye-article-related",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Also worth reading"
+    },
+    {
+      "type": "range",
+      "id": "posts_limit",
+      "label": "Number of posts",
+      "min": 1,
+      "max": 6,
+      "step": 1,
+      "default": 3
+    },
+    {
+      "type": "text",
+      "id": "link_label",
+      "label": "Link label",
+      "default": "Read article"
+    },
+    {
+      "type": "text",
+      "id": "placeholder_symbol",
+      "label": "Placeholder symbol",
+      "default": "⬡"
+    }
+  ],
+  "presets": [
+    {
+      "name": "DRYE Article Related"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,117 @@
+/* assets/drye-vault-grid.css
+   DRYE — Vault Grid (no animation, no images)
+   Layout only. Typography from base.css.
+*/
+
+.drye-vg{
+  padding-block: var(--drye-vg-pad-y-m, 80px);
+}
+
+@media (min-width: 990px){
+  .drye-vg{
+    padding-block: var(--drye-vg-pad-y-d, 80px);
+  }
+}
+
+
+.drye-vg__inner{
+  max-width: var(--drye-vg-page-w, 1280px);
+  margin-inline: auto;
+  padding-inline: var(--drye-vg-pad-x, 24px);
+  display: grid;
+  gap: var(--drye-vg-gap-y, 56px);
+}
+
+.drye-vg__top{
+  max-width: var(--drye-vg-top-w, 720px);
+}
+
+/* Heading size controls */
+.drye-vg__heading{
+  font-size: var(--dvg-h-m, 32px);
+  margin: 0 0 10px 0;
+}
+
+@media (min-width: 990px){
+  .drye-vg__heading{
+    font-size: var(--dvg-h-d, 40px);
+  }
+}
+
+.drye-vg__grid{
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--drye-vg-card-gap, 24px);
+}
+
+.drye-vg__card{
+  border: 1px solid rgba(0,0,0,.10);
+  border-radius: var(--drye-vg-radius, 16px);
+  padding: var(--drye-vg-card-pad, 22px);
+  background: transparent;
+  display: grid;
+  gap: 14px;
+}
+
+/* Header row in card: title + tag */
+.drye-vg__cardhead{
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+/* Card title size controls */
+.drye-vg__cardtitle{
+  margin: 0;
+  font-size: var(--dvg-card-h-m, 20px);
+}
+
+@media (min-width: 990px){
+  .drye-vg__cardtitle{
+    font-size: var(--dvg-card-h-d, 22px);
+  }
+}
+
+/* Tag style (subtle, relies on inherited font) */
+.drye-vg__tag{
+  opacity: .7;
+  white-space: nowrap;
+}
+
+/* Link row */
+.drye-vg__link{
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+}
+
+/* Simple arrow icon (no animation) */
+.drye-vg__arrow{
+  width: 34px;
+  height: 34px;
+  border-radius: 999px;
+  border: 1px solid rgba(0,0,0,.14);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+}
+
+.drye-vg__arrow svg{
+  width: 16px;
+  height: 16px;
+  display: block;
+}
+
+
+@media (max-width: 989px){
+  .drye-vg__grid{
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+  .drye-vg__card{
+    padding: 18px;
+  }
+}

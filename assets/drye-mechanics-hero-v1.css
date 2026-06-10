@@ -1,0 +1,262 @@
+/* ==========================================================================
+   DRYE Mechanics — Hero V1
+   Isolated version. No collision with .mech-hero / herov2.
+   ========================================================================== */
+
+.mech-hero-v1 {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  background: var(--bg-ink);
+  color: var(--white-100);
+  min-height: 64vh;
+  padding-top: var(--nav-height);
+}
+
+.mech-hero-v1__media,
+.mech-hero-v1__overlay {
+  position: absolute;
+  inset: 0;
+}
+
+.mech-hero-v1__media {
+  z-index: 0;
+}
+
+.mech-hero-v1__img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: saturate(0.55) brightness(0.7) contrast(1.05);
+}
+
+.mech-hero-v1__img--desktop {
+  display: block;
+  object-position: center 40%;
+}
+
+.mech-hero-v1__img--mobile {
+  display: none;
+  object-position: center 38%;
+}
+
+.mech-hero-v1__overlay {
+  z-index: 1;
+  background: linear-gradient(
+    180deg,
+    rgba(15, 34, 48, 0.16) 0%,
+    rgba(15, 34, 48, 0.28) 34%,
+    rgba(15, 34, 48, 0.60) 100%
+  );
+}
+
+.mech-hero-v1__inner {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  min-height: 64vh;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding-top: clamp(120px, 18vh, 220px);
+  padding-bottom: var(--space-24);
+}
+
+.mech-hero-v1__content {
+  max-width: 860px;
+}
+
+.mech-hero-v1__eyebrow {
+  margin-bottom: 0;
+  color: var(--white-035);
+}
+
+.mech-hero-v1__heading {
+  max-width: 11ch;
+  margin-top: var(--space-12);
+  color: var(--white-100);
+}
+
+.mech-hero-v1__em {
+  display: inline-block;
+  margin-top: var(--space-10);
+  margin-left: calc(var(--space-16) * -1);
+  padding: 0 var(--space-16) var(--space-4) var(--space-16);
+  background: rgba(15, 34, 48, 0.55);
+  color: var(--white-100);
+  font-size: var(--fs-hero-h1);
+  line-height: 1;
+}
+
+.mech-hero-v1__rule {
+  width: 60px;
+  height: 3px;
+  margin-top: var(--space-24);
+  margin-bottom: var(--space-16);
+  background: var(--deep);
+}
+
+.mech-hero-v1__sub,
+.mech-hero-v1__sub p {
+  margin: 0;
+  max-width: 640px;
+  color: var(--white-100);
+  font-size: 16px;
+  font-weight: var(--fw-medium);
+  line-height: 1.55;
+}
+
+.mech-hero-v1__quotes {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 8px;
+  margin-top: var(--space-24);
+}
+
+.mech-hero-v1__quote {
+  position: relative;
+  display: flex;
+  align-items: center;
+  background: rgba(15, 34, 48, 0.47);
+  padding: 12px 20px 11px;
+}
+
+.mech-hero-v1__quote::before {
+  content: "";
+  position: absolute;
+  inset: 0 auto auto 0;
+  width: 100%;
+  height: 3px;
+  background: linear-gradient(
+    90deg,
+    #C0392B,
+    #E74C3C,
+    rgba(231, 76, 60, 0.3)
+  );
+}
+
+.mech-hero-v1__quote p {
+  margin: 0;
+  color: var(--white-100);
+  font-family: var(--font-editorial);
+  font-style: italic;
+  font-size: 16px;
+  line-height: 1.3;
+}
+
+.mech-hero-v1__scroll {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-10);
+  width: fit-content;
+  margin-top: var(--space-24);
+  color: var(--white-040);
+  font-size: var(--fs-micro-3);
+  font-weight: var(--fw-semibold);
+  line-height: 1.2;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  text-decoration: none;
+}
+
+.mech-hero-v1__scroll::after {
+  content: '↓';
+  font-size: var(--fs-h4);
+  animation: mech-hero-v1-bounce 2s ease-in-out infinite;
+}
+
+@keyframes mech-hero-v1-bounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(4px);
+  }
+}
+
+@media (max-width: 767px) {
+  .mech-hero-v1__img--desktop {
+    display: none;
+  }
+
+  .mech-hero-v1__img--mobile {
+    display: block;
+  }
+
+  .mech-hero-v1__heading {
+    max-width: 10ch;
+  }
+}
+
+@media (min-width: 768px) {
+  .mech-hero-v1 {
+    min-height: 66vh;
+  }
+
+  .mech-hero-v1__inner {
+    min-height: 66vh;
+    justify-content: center;
+    padding-top: 132px;
+    padding-bottom: 40px;
+  }
+
+  .mech-hero-v1__content {
+    max-width: 900px;
+  }
+
+  .mech-hero-v1__sub,
+  .mech-hero-v1__sub p {
+    max-width: 720px;
+    font-size: 18px;
+    line-height: 1.6;
+  }
+
+  .mech-hero-v1__quotes {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+    max-width: 1040px;
+    margin-top: var(--space-22);
+  }
+
+  .mech-hero-v1__scroll {
+    margin-top: var(--space-20);
+  }
+}
+
+@media (min-width: 1100px) {
+  .mech-hero-v1 {
+    min-height: 70vh;
+  }
+
+  .mech-hero-v1__inner {
+    min-height: 70vh;
+    justify-content: center;
+    padding-top: 144px;
+    padding-bottom: 36px;
+  }
+
+  .mech-hero-v1__content {
+    max-width: 980px;
+  }
+
+  .mech-hero-v1__quotes {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 14px;
+    max-width: 1120px;
+    margin-top: var(--space-20);
+  }
+
+  .mech-hero-v1__quote {
+    padding: 11px 16px 10px;
+  }
+
+  .mech-hero-v1__quote p {
+    white-space: nowrap;
+  }
+
+  .mech-hero-v1__scroll {
+    margin-top: var(--space-18);
+  }
+}

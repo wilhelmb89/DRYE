@@ -1,0 +1,409 @@
+{%- comment -%}
+  DRYE — Evidence Section (FINAL)
+
+  Structure:
+    - CSS lives in assets/drye-evidence.css (linked at top of section)
+    - Relies on tokens from base.css
+    - HTML + schema defined below
+
+  Upload this file to: sections/drye-evidence.liquid
+  Upload the stylesheet to: assets/drye-evidence.css
+{%- endcomment -%}
+
+<link rel="stylesheet" href="{{ 'drye-evidence.css' | asset_url }}" media="all">
+
+<section class="dryeNEW-section evidence" id="evidence-{{ section.id }}" data-section-id="{{ section.id }}" data-drye-section data-section-index="3" data-section-name="evidence">  
+  <div class="dryeNEW-container">
+
+    <div class="evidence__intro">
+      {% if section.settings.eyebrow != blank %}
+        <span class="dryeNEW-micro">{{ section.settings.eyebrow }}</span>
+      {% endif %}
+
+      {% if section.settings.heading != blank %}
+        <h2 class="dryeNEW-h2 evidence__heading">{{ section.settings.heading }}</h2>
+      {% endif %}
+
+      {% if section.settings.body != blank %}
+        <p class="dryeNEW-body evidence__lede">{{ section.settings.body }}</p>
+      {% endif %}
+    </div>
+
+    <div class="evidence__rail-wrap">
+      <div class="evidence__rail" data-evidence-rail>
+
+        {% for block in section.blocks %}
+          {% if block.type == 'bridge' %}
+            <article class="evidence__card evidence__card--bridge" {{ block.shopify_attributes }}>
+              {% if block.settings.label != blank %}
+                <span class="dryeNEW-micro evidence__card-label">{{ block.settings.label }}</span>
+              {% endif %}
+              {% if block.settings.paradigm != blank %}
+                <p class="evidence__bridge-paradigm">{{ block.settings.paradigm }}</p>
+              {% endif %}
+              {% if block.settings.mechanism != blank %}
+                <p class="evidence__bridge-mechanism">{{ block.settings.mechanism }}</p>
+              {% endif %}
+              {% if block.settings.cta_label != blank and block.settings.cta_link != blank %}
+                <a href="{{ block.settings.cta_link }}" class="evidence__card-source">{{ block.settings.cta_label }}</a>
+              {% endif %}
+            </article>
+          {% else %}
+            <article class="evidence__card" {{ block.shopify_attributes }}>
+              {% if block.settings.label != blank %}
+                <span class="dryeNEW-micro evidence__card-label">{{ block.settings.label }}</span>
+              {% endif %}
+
+              {% if block.settings.stat != blank %}
+                <div class="evidence__stat {% if block.settings.stat_qualitative %}evidence__stat--qualitative{% endif %}">
+                  {% if block.settings.stat_prefix != blank %}
+                    <span class="evidence__stat-prefix">{{ block.settings.stat_prefix }}</span>
+                  {% endif %}
+                  {{ block.settings.stat }}
+                  {% if block.settings.stat_suffix != blank %}
+                    <span class="evidence__stat-suffix">{{ block.settings.stat_suffix }}</span>
+                  {% endif %}
+                </div>
+              {% endif %}
+
+              {% if block.settings.body != blank %}
+                <p class="dryeNEW-body--sm evidence__card-body">{{ block.settings.body }}</p>
+              {% endif %}
+
+              {% if block.settings.source != blank %}
+                <div class="evidence__card-source">{{ block.settings.source }}</div>
+              {% endif %}
+            </article>
+          {% endif %}
+        {% endfor %}
+
+      </div>
+
+      <div class="evidence__fade" aria-hidden="true"></div>
+      <div class="evidence__swipe-hint" data-evidence-hint aria-hidden="true">{{ section.settings.swipe_label }}</div>
+    </div>
+
+    <div class="evidence__nav">
+      <div class="evidence__progress">
+        {% for block in section.blocks %}
+          <button
+            class="evidence__dot{% if forloop.first %} is-active{% endif %}"
+            type="button"
+            data-index="{{ forloop.index0 }}"
+            aria-label="Card {{ forloop.index }}"
+          ></button>
+        {% endfor %}
+      </div>
+      <div class="evidence__arrows">
+        <button class="evidence__arrow is-disabled" type="button" data-evidence-prev aria-label="Previous" disabled>
+          <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+            <path d="M9 2L3 7l6 5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+        <button class="evidence__arrow" type="button" data-evidence-next aria-label="Next">
+          <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+            <path d="M5 2l6 5-6 5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<script>
+(function() {
+  var section = document.getElementById('evidence-{{ section.id }}');
+  if (!section) return;
+
+  var rail = section.querySelector('[data-evidence-rail]');
+  if (!rail) return;
+
+  var wrap = rail.parentElement;
+  var prevBtn = section.querySelector('[data-evidence-prev]');
+  var nextBtn = section.querySelector('[data-evidence-next]');
+  var dots = section.querySelectorAll('.evidence__dot');
+  var cards = rail.querySelectorAll('.evidence__card');
+  var fade = wrap.querySelector('.evidence__fade');
+  var hint = wrap.querySelector('[data-evidence-hint]');
+
+  var desktopMq = window.matchMedia('(min-width: 768px)');
+  var hasInteracted = false;
+
+  function getCardWidth() {
+    if (!cards.length) return 0;
+    var styles = getComputedStyle(rail);
+    var gap = parseFloat(styles.gap) || 16;
+    return cards[0].offsetWidth + gap;
+  }
+
+  function getCurrentIndex() {
+    var cw = getCardWidth();
+    if (!cw) return 0;
+    return Math.round(rail.scrollLeft / cw);
+  }
+
+  function updateDots() {
+    var i = getCurrentIndex();
+    dots.forEach(function(dot, idx) {
+      dot.classList.toggle('is-active', idx === i);
+    });
+  }
+
+  function updateArrows() {
+    if (!prevBtn || !nextBtn) return;
+    var maxScroll = rail.scrollWidth - rail.clientWidth;
+    var current = rail.scrollLeft;
+    prevBtn.disabled = current <= 8;
+    nextBtn.disabled = current >= maxScroll - 8;
+    prevBtn.classList.toggle('is-disabled', current <= 8);
+    nextBtn.classList.toggle('is-disabled', current >= maxScroll - 8);
+  }
+
+  function updateFade() {
+    if (!fade) return;
+    var maxScroll = rail.scrollWidth - rail.clientWidth;
+    fade.classList.toggle('is-hidden', rail.scrollLeft >= maxScroll - 40);
+  }
+
+  function updateHint() {
+    if (!hint) return;
+    if (desktopMq.matches) {
+      hint.classList.add('is-hidden');
+      return;
+    }
+    var maxScroll = rail.scrollWidth - rail.clientWidth;
+    if (maxScroll <= 8 || rail.scrollLeft > 16 || hasInteracted) {
+      hint.classList.add('is-hidden');
+    } else {
+      hint.classList.remove('is-hidden');
+    }
+  }
+
+  function update() {
+    updateDots();
+    updateArrows();
+    updateFade();
+    updateHint();
+  }
+
+  function hideHintOnInteraction() {
+    if (desktopMq.matches || hasInteracted) return;
+    hasInteracted = true;
+    if (hint) hint.classList.add('is-hidden');
+  }
+
+  function scrollToIndex(i) {
+    rail.scrollTo({ left: i * getCardWidth(), behavior: 'smooth' });
+  }
+
+  function scrollByDirection(direction) {
+    rail.scrollBy({ left: getCardWidth() * direction, behavior: 'smooth' });
+  }
+
+  if (prevBtn) prevBtn.addEventListener('click', function() { scrollByDirection(-1); });
+  if (nextBtn) nextBtn.addEventListener('click', function() { scrollByDirection(1); });
+
+  dots.forEach(function(dot, i) {
+    dot.addEventListener('click', function() { scrollToIndex(i); });
+  });
+
+  var scrollTimer;
+  rail.addEventListener('scroll', function() {
+    clearTimeout(scrollTimer);
+    scrollTimer = setTimeout(update, 60);
+  }, { passive: true });
+
+  rail.addEventListener('touchstart', hideHintOnInteraction, { passive: true });
+  rail.addEventListener('pointerdown', hideHintOnInteraction, { passive: true });
+
+  window.addEventListener('resize', update);
+  update();
+})();
+</script>
+
+{% schema %}
+{
+  "name": "DRYE Evidence",
+  "tag": "section",
+  "class": "shopify-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "The evidence"
+    },
+    {
+      "type": "html",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Why every foreman and mechanic <em class=\"dryeNEW-em\">should care</em>"
+    },
+    {
+      "type": "textarea",
+      "id": "body",
+      "label": "Lede body",
+      "default": "What happens inside a sealed glove — from the first half hour to a career cut short. Peer-reviewed data on why the environment, not the treatment, is the problem."
+    },
+    {
+      "type": "text",
+      "id": "swipe_label",
+      "label": "Swipe hint label",
+      "default": "Swipe"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "card",
+      "name": "Evidence card",
+      "settings": [
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Category label",
+          "default": "Exposure threshold"
+        },
+        {
+          "type": "text",
+          "id": "stat_prefix",
+          "label": "Stat prefix",
+          "info": "Optional — e.g. >"
+        },
+        {
+          "type": "text",
+          "id": "stat",
+          "label": "Stat (main)",
+          "default": "27"
+        },
+        {
+          "type": "text",
+          "id": "stat_suffix",
+          "label": "Stat suffix",
+          "default": "min"
+        },
+        {
+          "type": "checkbox",
+          "id": "stat_qualitative",
+          "label": "Qualitative stat (smaller size)",
+          "default": false
+        },
+        {
+          "type": "textarea",
+          "id": "body",
+          "label": "Body (1–2 sentences)",
+          "default": "<strong>After 27 minutes:</strong> skin damage risk doubles in women, 55 minutes in men. Most shifts run 3–6 hours — 8× the threshold."
+        },
+        {
+          "type": "text",
+          "id": "source",
+          "label": "Source",
+          "default": "Lund 2020, Scand J Work Environ Health"
+        }
+      ]
+    },
+    {
+      "type": "bridge",
+      "name": "Mechanism(always last)",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Category label",
+          "default": "The mechanism"
+        },
+        {
+          "type": "textarea",
+          "id": "paradigm",
+          "label": "Paradigm statement (italic Playfair)",
+          "default": "Every glove, liner, barrier cream and powder fails on the physics."
+        },
+        {
+          "type": "html",
+          "id": "mechanism",
+          "label": "Mechanism copy",
+          "default": "DRYE routes sweat from skin to outer fabric. One-directional gradient. We call it <span class=\"evidence__bridge-name\">Asymmetric Layering</span>."
+        },
+        {
+          "type": "text",
+          "id": "cta_label",
+          "label": "CTA label",
+          "default": "See how it works"
+        },
+        {
+          "type": "url",
+          "id": "cta_link",
+          "label": "CTA link"
+        }
+      ]
+    }
+  ],
+  "max_blocks": 8,
+  "presets": [
+    {
+      "name": "DRYE Evidence",
+      "blocks": [
+        {
+          "type": "card",
+          "settings": {
+            "label": "Exposure threshold",
+            "stat": "27",
+            "stat_suffix": "min",
+            "body": "<strong>After 27 minutes:</strong> skin damage risk doubles in women, 55 minutes in men. Most shifts run 3–6 hours — 8× the threshold.",
+            "source": "Lund 2020, Scand J Work Environ Health"
+          }
+        },
+        {
+          "type": "card",
+          "settings": {
+            "label": "Maceration",
+            "stat": "3",
+            "stat_suffix": "× swelling",
+            "body": "<strong>After 4 hours:</strong> your outer skin barrier swells 3× thicker. Oil, solvents and chemicals soak in deeper — into skin that can't fight back.",
+            "source": "Bouwstra 2003, J Invest Dermatol"
+          }
+        },
+        {
+          "type": "card",
+          "settings": {
+            "label": "Bacterial load",
+            "stat": "52",
+            "stat_suffix": "×",
+            "body": "<strong>After 4 hours in a sealed glove:</strong> staph bacteria multiply 52×. Same bacteria that drives infection and slow healing — thriving on your hands.",
+            "source": "Nørreslet 2021, Acta Derm Venereol"
+          }
+        },
+        {
+          "type": "card",
+          "settings": {
+            "label": "Who it hits",
+            "stat": "60",
+            "stat_suffix": "%",
+            "body": "<strong>Across 691 mechanics:</strong> 60% showed hand damage when sent to dermatologists. Not from accidents — from the tools and gloves you wear every shift.",
+            "source": "NACDG 2017"
+          }
+        },
+        {
+          "type": "card",
+          "settings": {
+            "label": "Workforce cost",
+            "stat": "57",
+            "stat_suffix": "% sick leave",
+            "body": "<strong>In chronic cases:</strong> 57% take sick leave. 1 in 4 change or leave their trade. €8,799 per case, per year.",
+            "source": "Armstrong 2022, Diepgen"
+          }
+        },
+        {
+          "type": "bridge",
+          "settings": {
+            "label": "The mechanism",
+            "paradigm": "Every glove, liner, barrier cream and powder fails on the physics.",
+            "cta_label": "See how it works"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

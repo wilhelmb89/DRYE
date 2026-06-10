@@ -1,11 +1,7 @@
-{%- comment -%} HEAD — ENDAST CSS/FONTER {%- endcomment -%}
-<link rel="preconnect" href="https://cdn.shopify.com" crossorigin>
-<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
-
-<link rel="preload" as="font" href="{{ 'Inter-Regular.woff2' | asset_url }}" type="font/woff2" crossorigin>
-<link rel="preload" as="font" href="{{ 'Inter-Light.woff2'   | asset_url }}" type="font/woff2" crossorigin>
-<link rel="preload" as="font" href="{{ 'ClashGrotesk-Variable.woff2' | asset_url }}" type="font/woff2" crossorigin>
-
-{{ 'style.bundle.css' | asset_url | stylesheet_tag: preload: true }}
-
-<link rel="stylesheet" href="{{ 'country-flags.css' | asset_url }}" media="print" onload="this.media='all';this.onload=null">
+{%- comment -%}
+Minimal head assets – legacy bundles avstängda.
+Sektioner laddar sin egen CSS vid behov.
+{%- endcomment -%}
+{%- if request.design_mode -%}
+  {# valfritt: lägg editor-specifik css här om du har #}
+{%- endif -%}

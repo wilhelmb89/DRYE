@@ -1,0 +1,240 @@
+{% comment %}
+  DRYE — Section: Asymmetric Layering Sticky Progress Nav
+  Files:
+  - sections/drye-mechanism-nav.liquid
+  - assets/drye-mechanism-nav.css
+
+  Requires DRYE base.css tokens:
+  - --deep, --emerald, --caption, --border
+  - --font-display, --font-body
+  - --fw-bold, --fw-semibold
+
+  REQUIRES THE THREE MECHANISM SECTIONS TO HAVE:
+    id="drye-mechanism-step-N"
+    data-mechanism-section
+    data-mechanism-step="N"   (N = 1, 2, or 3)
+
+  See README at the bottom of this file.
+{% endcomment %}
+
+{{ 'drye-mechanism-nav.css' | asset_url | stylesheet_tag }}
+
+<nav
+  class="drye-mechanism-nav"
+  data-section-id="{{ section.id }}"
+  data-section-type="drye-mechanism-nav"
+  data-drye-mechanism-nav
+  aria-label="{{ section.settings.aria_label | escape }}"
+>
+  <div class="drye-mechanism-nav__track" data-drye-mechanism-track data-step="1">
+    <div class="drye-mechanism-nav__fill" aria-hidden="true"></div>
+
+    <div class="drye-mechanism-nav__steps" role="tablist">
+      <button
+        type="button"
+        class="drye-mechanism-nav__step is-active"
+        data-drye-mechanism-step
+        data-step-num="1"
+        role="tab"
+        aria-label="Go to step 1: {{ section.settings.step_1_label | escape }}"
+      >
+        <span class="drye-mechanism-nav__step-num">01</span>
+        <span class="drye-mechanism-nav__step-label">{{ section.settings.step_1_label | escape }}</span>
+      </button>
+
+      <button
+        type="button"
+        class="drye-mechanism-nav__step is-pending"
+        data-drye-mechanism-step
+        data-step-num="2"
+        role="tab"
+        aria-label="Go to step 2: {{ section.settings.step_2_label | escape }}"
+      >
+        <span class="drye-mechanism-nav__step-num">02</span>
+        <span class="drye-mechanism-nav__step-label">{{ section.settings.step_2_label | escape }}</span>
+      </button>
+
+      <button
+        type="button"
+        class="drye-mechanism-nav__step is-pending"
+        data-drye-mechanism-step
+        data-step-num="3"
+        role="tab"
+        aria-label="Go to step 3: {{ section.settings.step_3_label | escape }}"
+      >
+        <span class="drye-mechanism-nav__step-num">03</span>
+        <span class="drye-mechanism-nav__step-label">{{ section.settings.step_3_label | escape }}</span>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<script>
+  (() => {
+    const init = () => {
+      const sectionEl = document.querySelector('[data-section-id="{{ section.id }}"]');
+      if (!sectionEl) return;
+
+      const nav = sectionEl;
+      const track = sectionEl.querySelector('[data-drye-mechanism-track]');
+      const steps = Array.from(sectionEl.querySelectorAll('[data-drye-mechanism-step]'));
+      const mechanismSections = Array.from(document.querySelectorAll('[data-mechanism-section]'));
+
+      if (!track || !steps.length || mechanismSections.length === 0) return;
+
+      // Map step number -> section element (for click-to-scroll)
+ // Sortera efter DOM-ordning, mappa till lokala steg 1/2/3
+const orderedSections = mechanismSections
+  .slice()
+  .sort((a, b) => (a.compareDocumentPosition(b) & Node.DOCUMENT_POSITION_FOLLOWING) ? -1 : 1);
+
+const sectionByStep = {};
+const localStepBySection = new Map();
+orderedSections.forEach((s, i) => {
+  const localStep = i + 1; // 1, 2, 3
+  sectionByStep[localStep] = s;
+  localStepBySection.set(s, localStep);
+});
+
+      // VISIBILITY — nav shows when any mechanism section overlaps viewport
+      const visibleSet = new Set();
+      const visibilityObs = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) visibleSet.add(entry.target);
+          else visibleSet.delete(entry.target);
+        });
+        nav.classList.toggle('is-visible', visibleSet.size > 0);
+      }, { threshold: 0.02 });
+
+      mechanismSections.forEach((s) => visibilityObs.observe(s));
+
+      // ACTIVE STATE — which section is dominant in upper 35% of viewport
+      const activeObs = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+const step = localStepBySection.get(entry.target);
+if (step) setActive(step);
+          }
+        });
+      }, {
+        rootMargin: '0px 0px -65% 0px',
+        threshold: 0
+      });
+
+      mechanismSections.forEach((s) => activeObs.observe(s));
+
+      function setActive(step) {
+        track.dataset.step = String(step);
+        steps.forEach((btn) => {
+          const num = parseInt(btn.dataset.stepNum, 10);
+          btn.classList.remove('is-active', 'is-passed', 'is-pending');
+          if (num === step) btn.classList.add('is-active');
+          else if (num < step) btn.classList.add('is-passed');
+          else btn.classList.add('is-pending');
+        });
+      }
+
+      // CLICK — smooth scroll + immediate state update
+      steps.forEach((btn) => {
+        btn.addEventListener('click', () => {
+          const stepNum = parseInt(btn.dataset.stepNum, 10);
+          const target = sectionByStep[stepNum];
+          if (!target) return;
+          setActive(stepNum);
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        });
+      });
+    };
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', init);
+    } else {
+      init();
+    }
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "DRYE Mechanism Nav",
+  "tag": "section",
+  "class": "shopify-section--drye-mechanism-nav",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Step labels"
+    },
+    {
+      "type": "paragraph",
+      "content": "Each step label appears next to its number on the bottom nav (visible from 480px and up). The three labels correspond to the three mechanism sections on the page, in order."
+    },
+    {
+      "type": "text",
+      "id": "step_1_label",
+      "label": "Step 1 label",
+      "default": "Saturation"
+    },
+    {
+      "type": "text",
+      "id": "step_2_label",
+      "label": "Step 2 label",
+      "default": "Routing"
+    },
+    {
+      "type": "text",
+      "id": "step_3_label",
+      "label": "Step 3 label",
+      "default": "Verification"
+    },
+    {
+      "type": "header",
+      "content": "Accessibility"
+    },
+    {
+      "type": "text",
+      "id": "aria_label",
+      "label": "ARIA label for the nav",
+      "default": "Asymmetric Layering — the invention"
+    }
+  ],
+  "presets": [
+    {
+      "name": "DRYE Mechanism Nav"
+    }
+  ]
+}
+{% endschema %}
+
+{% comment %}
+  ============================================================================
+  README — How to wire up the three mechanism sections
+  ============================================================================
+
+  The nav itself does nothing until you tag your three existing mechanism
+  sections so the nav can find them in the DOM.
+
+  On each of the three mechanism sections (Saturation, Routing, Verification),
+  find the outer <section> wrapper and add THREE attributes:
+
+  BEFORE:
+    <section class="dryeNEW-section dryeSaturation"
+             data-section-id="{{ section.id }}">
+
+  AFTER:
+    <section class="dryeNEW-section dryeSaturation"
+             id="drye-mechanism-step-1"
+             data-mechanism-section
+             data-mechanism-step="1"
+             data-section-id="{{ section.id }}">
+
+  - id="drye-mechanism-step-N"  → enables deep-linking (#drye-mechanism-step-2)
+  - data-mechanism-section      → presence-only flag, the nav uses this to query
+  - data-mechanism-step="N"     → step number, must be 1, 2, or 3
+
+  Repeat for the routing section (N=2) and the verification section (N=3).
+
+  Then in the theme editor, add the "DRYE Mechanism Nav" section to your
+  product/landing page. Order in section list does not matter — the nav is
+  position:fixed.
+  ============================================================================
+{% endcomment %}

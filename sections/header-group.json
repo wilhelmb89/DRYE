@@ -11,23 +11,132 @@
   "name": "Header",
   "type": "header",
   "sections": {
-    "header_qfAkpw": {
-      "type": "header",
-      "custom_css": [],
+    "drye_new_header_gjmpwp": {
+      "type": "dryeNEW-header",
+      "blocks": {
+        "nav_link_9mK6hG": {
+          "type": "nav_link",
+          "settings": {
+            "label": "",
+            "mobile_label": "Shop",
+            "link": "shopify://products/drye-moisture-routing-glove-liners"
+          }
+        },
+        "nav_link_PURyhT": {
+          "type": "nav_link",
+          "settings": {
+            "label": "How it works",
+            "mobile_label": "How it works",
+            "link": "shopify://pages/how-it-works"
+          }
+        },
+        "nav_link_9RYA9A": {
+          "type": "nav_link",
+          "settings": {
+            "label": "About us",
+            "mobile_label": "About us",
+            "link": "shopify://pages/why-drye"
+          }
+        },
+        "nav_link_cbqYCE": {
+          "type": "nav_link",
+          "settings": {
+            "label": "research",
+            "mobile_label": "Research",
+            "link": "shopify://pages/research"
+          }
+        },
+        "nav_link_fnKc8i": {
+          "type": "nav_link",
+          "settings": {
+            "label": "field reports",
+            "mobile_label": "Field Reports",
+            "link": "shopify://blogs/insights"
+          }
+        },
+        "nav_link_3bp4jL": {
+          "type": "nav_link",
+          "settings": {
+            "label": "",
+            "mobile_label": "Contact us",
+            "link": "shopify://pages/contact-drye"
+          }
+        },
+        "footer_link_m8PmLj": {
+          "type": "footer_link",
+          "settings": {
+            "label": "Shipping",
+            "link": "shopify://pages/policy"
+          }
+        },
+        "footer_link_iepHkn": {
+          "type": "footer_link",
+          "settings": {
+            "label": "Returns",
+            "link": "shopify://pages/policy"
+          }
+        },
+        "footer_link_wGkjzF": {
+          "type": "footer_link",
+          "settings": {
+            "label": "B2B",
+            "link": "shopify://pages/contact-drye"
+          }
+        }
+      },
+      "block_order": [
+        "nav_link_9mK6hG",
+        "nav_link_PURyhT",
+        "nav_link_9RYA9A",
+        "nav_link_cbqYCE",
+        "nav_link_fnKc8i",
+        "nav_link_3bp4jL",
+        "footer_link_m8PmLj",
+        "footer_link_iepHkn",
+        "footer_link_wGkjzF"
+      ],
+      "name": "DRYE NEW Header",
       "settings": {
-        "hide_account": false,
-        "logo": "{{ shop.brand.logo }}",
-        "menu": "main-menu",
-        "button_text": "",
-        "button_url": "shopify://products/drye-moisture-routing-glove-liners",
-        "announce": "Free shipping worldwide. 30-day money-back guarantee.",
-        "announce_sv": "",
-        "ann_bg": "#111111",
-        "ann_tx": "#ffffff"
+        "logo": "shopify://shop_images/DRYE-04.svg",
+        "logo_alt": "DRYE",
+        "logo_link": "/",
+        "logo_fallback_text": "DRYE",
+        "nav_aria_label": "Primary",
+        "mobile_nav_label": "Mobile navigation",
+        "mobile_dialog_label": "Navigation",
+        "open_menu_label": "Open menu",
+        "close_menu_label": "Close menu",
+        "cta_label": "See the liner",
+        "cta_link": "shopify://products/drye-moisture-routing-glove-liners",
+        "show_account_link": true,
+        "account_link": "https://account.drye.se/",
+        "account_label": "Account",
+        "show_cart_link": false,
+        "cart_link": "/cart",
+        "cart_label": "",
+        "mobile_footer_badge": "Patent pending"
+      }
+    },
+    "drye_announcement_bar_JtqhNN": {
+      "type": "drye-announcement-bar",
+      "name": "DRYE Announcement Bar",
+      "settings": {
+        "enabled": true,
+        "text": "Free shipping on 3+ pairs",
+        "link_url": "",
+        "left_icon": "shopify://shop_images/Pi7_transport.png",
+        "right_icon": "shopify://shop_images/Pi7_transport.png",
+        "icon_height": 30,
+        "force_white_icons": false,
+        "height": 40,
+        "speed": 40,
+        "bg_color": "#0f2230",
+        "text_color": "#ffffff"
       }
     }
   },
   "order": [
-    "header_qfAkpw"
+    "drye_new_header_gjmpwp",
+    "drye_announcement_bar_JtqhNN"
   ]
 }

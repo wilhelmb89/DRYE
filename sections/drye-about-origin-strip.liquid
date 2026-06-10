@@ -1,0 +1,107 @@
+{{ 'section-drye-about-origin-strip.css' | asset_url | stylesheet_tag }}
+
+<section
+  class="dryeNEW-section drye-about-origin-strip"
+  id="drye-about-origin-strip-{{ section.id }}"
+  data-section-id="{{ section.id }}"
+>
+  <div class="dryeNEW-container">
+    <div class="drye-about-origin-strip__grid">
+      {% for block in section.blocks %}
+        <div
+          class="drye-about-origin-strip__item dryeNEW-reveal{% if forloop.index == 2 %} dryeNEW-rd1{% elsif forloop.index == 3 %} dryeNEW-rd2{% endif %}"
+          {{ block.shopify_attributes }}
+        >
+          <div class="drye-about-origin-strip__num dryeNEW-stat-number">
+            {{ block.settings.number }}
+            {% if block.settings.suffix != blank %}
+              <span class="drye-about-origin-strip__num-suffix">{{ block.settings.suffix }}</span>
+            {% endif %}
+          </div>
+
+          <div class="drye-about-origin-strip__label dryeNEW-body--caption">
+            {% if block.settings.title != blank %}
+              <strong class="drye-about-origin-strip__title">{{ block.settings.title }}</strong>
+            {% endif %}
+            {{ block.settings.body }}
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "DRYE About Origin Strip",
+  "tag": "section",
+  "class": "section-drye-about-origin-strip",
+  "max_blocks": 3,
+  "blocks": [
+    {
+      "type": "stat",
+      "name": "Stat item",
+      "settings": [
+        {
+          "type": "text",
+          "id": "number",
+          "label": "Number",
+          "default": "7"
+        },
+        {
+          "type": "text",
+          "id": "suffix",
+          "label": "Suffix",
+          "default": "yr"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Years of R&D"
+        },
+        {
+          "type": "textarea",
+          "id": "body",
+          "label": "Body",
+          "default": "Across 4 external institutions before the first commercial pair shipped"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "DRYE About Origin Strip",
+      "blocks": [
+        {
+          "type": "stat",
+          "settings": {
+            "number": "7",
+            "suffix": "yr",
+            "title": "Years of R&D",
+            "body": "Across 4 external institutions before the first commercial pair shipped"
+          }
+        },
+        {
+          "type": "stat",
+          "settings": {
+            "number": "4",
+            "suffix": "",
+            "title": "Institutions",
+            "body": "Uppsala University, RISE, Swedish School of Textiles, Skåne University Hospital"
+          }
+        },
+        {
+          "type": "stat",
+          "settings": {
+            "number": "0",
+            "suffix": "",
+            "title": "Chemical inputs",
+            "body": "No DWR coatings. No wicking agents. No antimicrobial finishes. The mechanism is structural."
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

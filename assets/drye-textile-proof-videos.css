@@ -1,0 +1,240 @@
+/* ==========================================================================
+   DRYE — Textile Proof Videos
+   Layout, color, spacing, borders, video framing, swipe-rail scroll behavior.
+   Typography is owned by base.css via dryeNEW-* classes.
+   No local page-width system. The mobile rail uses negative margins +
+   matching padding to bleed edge-to-edge while leaving .dryeNEW-container
+   untouched — this is local scroll behavior, not a container replacement.
+   ========================================================================== */
+
+.dryeTextileProof {
+  background: var(--bg);
+  border-top: var(--border-base);
+  border-bottom: var(--border-base);
+}
+
+/* ──────── Intro ──────── */
+
+.dryeTextileProof__intro {
+  max-width: 720px;
+  margin-bottom: var(--space-32);
+}
+
+.dryeTextileProof__eyebrow {
+  color: var(--sage);
+}
+
+.dryeTextileProof__heading {
+  color: var(--deep);
+  margin-bottom: var(--space-16);
+}
+
+/* Italic echo on a new line under the main heading.
+   display:block is layout, not typography. */
+.dryeTextileProof__headingItalic {
+  display: block;
+  color: var(--accent);
+  margin-top: var(--space-8);
+}
+
+.dryeTextileProof__lede {
+  color: var(--muted);
+  max-width: 62ch;
+}
+
+.dryeTextileProof__lede p {
+  margin: 0;
+}
+
+.dryeTextileProof__lede p + p {
+  margin-top: var(--space-12);
+}
+
+/* ──────── Swipe rail wrapper (mobile fade hint) ──────── */
+
+.dryeTextileProof__railWrap {
+  position: relative;
+}
+
+/* Subtle right-edge fade hinting more cards to swipe to. Mobile only. */
+.dryeTextileProof__railWrap::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: var(--space-32);
+  background: linear-gradient(to right, rgba(255, 255, 255, 0), var(--bg));
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* ──────── Grid — mobile-first horizontal swipe rail ──────── */
+
+.dryeTextileProof__grid {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: 82vw;
+  gap: var(--grid-gap-16);
+
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-snap-type: x mandatory;
+  scroll-padding-inline: var(--page-pad);
+  -webkit-overflow-scrolling: touch;
+
+  /* Bleed to viewport edges so cards can scroll edge-to-edge.
+     .dryeNEW-container stays untouched; this is only the rail's scroll area. */
+  margin-inline: calc(-1 * var(--page-pad));
+  padding-inline: var(--page-pad);
+
+  /* Vertical breathing room for snap shadow and reveal lift */
+  padding-block: var(--space-4) var(--space-4);
+
+  /* Hide scrollbar */
+  scrollbar-width: none;
+}
+.dryeTextileProof__grid::-webkit-scrollbar { display: none; }
+
+/* ──────── Card ──────── */
+
+.dryeTextileProof__card {
+  display: flex;
+  flex-direction: column;
+  background: var(--bg);
+  border: var(--border-base);
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+}
+
+/* Video frame — mobile: capped height. Desktop: 9:16. */
+.dryeTextileProof__videoFrame {
+  position: relative;
+  width: 100%;
+  height: min(64vh, 560px);
+  background: var(--bg-soft);
+  overflow: hidden;
+  border-bottom: var(--border-base);
+}
+
+.dryeTextileProof__poster,
+.dryeTextileProof__player,
+.dryeTextileProof__posterPlaceholder {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  border: 0;
+}
+
+/* Empty-state placeholder (no poster, no UID yet) */
+.dryeTextileProof__posterPlaceholder {
+  background:
+    repeating-linear-gradient(
+      45deg,
+      var(--bg-soft) 0,
+      var(--bg-soft) 12px,
+      var(--bg) 12px,
+      var(--bg) 13px
+    );
+}
+
+/* Iframe stacks on top of the poster once injected — covers it naturally. */
+.dryeTextileProof__player {
+  z-index: 1;
+}
+
+/* Card text */
+.dryeTextileProof__cardText {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  padding: var(--space-20);
+}
+
+.dryeTextileProof__cardLabel {
+  color: var(--sage);
+}
+
+.dryeTextileProof__cardTitle {
+  color: var(--deep);
+  margin-bottom: var(--space-10);
+}
+
+.dryeTextileProof__cardBody {
+  color: var(--muted);
+}
+
+.dryeTextileProof__cardBody p {
+  margin: 0;
+}
+
+.dryeTextileProof__cardBody p + p {
+  margin-top: var(--space-10);
+}
+
+/* ──────── Footer ──────── */
+
+.dryeTextileProof__footer {
+  margin-top: var(--space-32);
+  padding-top: var(--space-24);
+  border-top: var(--border-base);
+  color: var(--caption);
+  max-width: 760px;
+}
+
+.dryeTextileProof__footer p {
+  margin: 0;
+}
+
+.dryeTextileProof__footer p + p {
+  margin-top: var(--space-8);
+}
+
+/* ──────── Desktop ──────── */
+
+@media (min-width: 768px) {
+  .dryeTextileProof__intro {
+    margin-bottom: var(--space-56);
+  }
+
+  /* Kill the swipe rail. Restore 3-up grid. */
+  .dryeTextileProof__railWrap::after {
+    display: none;
+  }
+
+  .dryeTextileProof__grid {
+    display: grid;
+    grid-auto-flow: row;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-auto-columns: auto;
+    gap: var(--grid-gap-32);
+
+    overflow: visible;
+    scroll-snap-type: none;
+    scroll-padding-inline: 0;
+    margin-inline: 0;
+    padding-inline: 0;
+    padding-block: 0;
+  }
+
+  .dryeTextileProof__card {
+    scroll-snap-align: none;
+  }
+
+  /* Restore true 9:16 ratio on desktop */
+  .dryeTextileProof__videoFrame {
+    aspect-ratio: 9 / 16;
+    height: auto;
+  }
+
+  .dryeTextileProof__cardText {
+    padding: var(--space-28) var(--space-24);
+  }
+
+  .dryeTextileProof__footer {
+    margin-top: var(--space-40);
+  }
+}

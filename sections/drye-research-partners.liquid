@@ -1,0 +1,180 @@
+{{ 'drye-research-partners.css' | asset_url | stylesheet_tag }}
+
+<section
+  class="dryeNEW-section drye-rp-section"
+  id="drye-research-partners-{{ section.id }}"
+  data-section-id="{{ section.id }}"
+>
+  <div class="dryeNEW-container">
+    {% if section.settings.micro_text != blank %}
+      <span class="dryeNEW-micro drye-rp-micro">
+        {{ section.settings.micro_text }}
+      </span>
+    {% endif %}
+
+    {% if section.settings.heading != blank %}
+      <h2 class="dryeNEW-h2 drye-rp-heading">
+        {{ section.settings.heading }}
+      </h2>
+    {% endif %}
+
+    {% if section.settings.intro_text != blank %}
+      <div class="dryeNEW-body drye-rp-intro">
+        <p>{{ section.settings.intro_text }}</p>
+      </div>
+    {% endif %}
+
+    <div class="drye-rp-grid">
+      {% for block in section.blocks %}
+        {% if block.type == 'partner' %}
+          <article class="drye-rp-card" {{ block.shopify_attributes }}>
+            <div class="drye-rp-icon" aria-hidden="true">
+              {{ block.settings.icon }}
+            </div>
+
+            <div class="drye-rp-card-content">
+              {% if block.settings.name != blank %}
+                <h3 class="dryeNEW-h4 drye-rp-card-name">{{ block.settings.name }}</h3>
+              {% endif %}
+
+              {% if block.settings.description != blank %}
+                <div class="dryeNEW-body--caption drye-rp-card-role">
+                  <p>{{ block.settings.description }}</p>
+                </div>
+              {% endif %}
+            </div>
+          </article>
+        {% endif %}
+      {% endfor %}
+    </div>
+
+    <div class="drye-rp-callout">
+      <div class="drye-rp-callout-inner">
+        {% if section.settings.callout_micro != blank %}
+          <span class="dryeNEW-micro drye-rp-callout-micro">
+            {{ section.settings.callout_micro }}
+          </span>
+        {% endif %}
+
+        {% if section.settings.callout_text != blank %}
+          <div class="dryeNEW-body drye-rp-callout-text">
+            <p>{{ section.settings.callout_text }}</p>
+          </div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "DRYE Research Partners",
+  "tag": "section",
+  "class": "shopify-section-drye-research-partners",
+  "settings": [
+    {
+      "type": "text",
+      "id": "micro_text",
+      "label": "Micro text",
+      "default": "Research Partners"
+    },
+    {
+      "type": "html",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Built with institutions,<br>not just inspired by them."
+    },
+    {
+      "type": "textarea",
+      "id": "intro_text",
+      "label": "Intro text",
+      "default": "Seven years of development. Not an overnight product. The research relationships are active, not historical."
+    },
+    {
+      "type": "text",
+      "id": "callout_micro",
+      "label": "Callout eyebrow",
+      "default": "SKAPA Prize 2020 — In Memory of Alfred Nobel"
+    },
+    {
+      "type": "textarea",
+      "id": "callout_text",
+      "label": "Callout text",
+      "default": "Sweden's most prestigious innovation award — given for the textile technology developed to prevent moisture damage to the skin in protective equipment. The same award category that has recognized innovations adopted by global industry."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "partner",
+      "name": "Research partner",
+      "settings": [
+        {
+          "type": "text",
+          "id": "icon",
+          "label": "Icon character",
+          "default": "R"
+        },
+        {
+          "type": "text",
+          "id": "name",
+          "label": "Institution name",
+          "default": "RISE — Research Institutes of Sweden"
+        },
+        {
+          "type": "textarea",
+          "id": "description",
+          "label": "Description",
+          "default": "Applied textile testing. Product development support. Sweden's largest independent research institute."
+        }
+      ]
+    }
+  ],
+  "max_blocks": 4,
+  "presets": [
+    {
+      "name": "DRYE Research Partners",
+      "settings": {
+        "micro_text": "Research Partners",
+        "heading": "Built with institutions,<br>not just inspired by them.",
+        "intro_text": "Seven years of development. Not an overnight product. The research relationships are active, not historical.",
+        "callout_micro": "SKAPA Prize 2020 — In Memory of Alfred Nobel",
+        "callout_text": "Sweden's most prestigious innovation award — given for the textile technology developed to prevent moisture damage to the skin in protective equipment. The same award category that has recognized innovations adopted by global industry."
+      },
+      "blocks": [
+        {
+          "type": "partner",
+          "settings": {
+            "icon": "↑",
+            "name": "Uppsala University",
+            "description": "Material science validation. Moisture transport mechanism testing. Fiber gradient architecture."
+          }
+        },
+        {
+          "type": "partner",
+          "settings": {
+            "icon": "R",
+            "name": "RISE — Research Institutes of Sweden",
+            "description": "Applied textile testing. Product development support. Sweden's largest independent research institute."
+          }
+        },
+        {
+          "type": "partner",
+          "settings": {
+            "icon": "T",
+            "name": "Swedish School of Textiles, Borås",
+            "description": "Field studies in automotive and industrial environments. Material selection research. Three published student studies."
+          }
+        },
+        {
+          "type": "partner",
+          "settings": {
+            "icon": "+",
+            "name": "Skåne University Hospital",
+            "description": "Dermatology input on Moisture-Associated Skin Damage (MASD). Clinical use context."
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

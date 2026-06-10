@@ -1,0 +1,288 @@
+{{ 'drye-documented-results.css' | asset_url | stylesheet_tag }}
+
+<section class="dryeNEW-section documented-results" data-drye-section data-section-index="13" data-section-name="documented_results">
+  <div class="dryeNEW-container">
+    <div class="documented-results__header dryeNEW-reveal dryeNEW-rd1">
+      {% if section.settings.eyebrow != blank %}
+        <span class="dryeNEW-micro documented-results__eyebrow">
+          {{ section.settings.eyebrow }}
+        </span>
+      {% endif %}
+
+      {% if section.settings.heading != blank %}
+        <h2 class="dryeNEW-h2 documented-results__heading">
+          {{ section.settings.heading }}
+        </h2>
+      {% endif %}
+
+      {% if section.settings.subheading != blank %}
+        <div class="dryeNEW-body documented-results__subheading">
+          <p>{{ section.settings.subheading }}</p>
+        </div>
+      {% endif %}
+    </div>
+
+    <div class="documented-results__swipe-wrap">
+      <div class="documented-results__grid">
+        {% for block in section.blocks %}
+          {% case block.type %}
+            {% when 'result_card' %}
+              <article
+                class="documented-results__card dryeNEW-reveal {% if forloop.index == 1 %}dryeNEW-rd1{% elsif forloop.index == 2 %}dryeNEW-rd2{% else %}dryeNEW-rd3{% endif %}"
+                {{ block.shopify_attributes }}
+              >
+                <div class="documented-results__imgs">
+                  <div class="documented-results__img">
+                    {% if block.settings.before_image != blank %}
+                      {{
+                        block.settings.before_image
+                        | image_url: width: 900
+                        | image_tag:
+                          class: 'documented-results__photo',
+                          loading: 'lazy',
+                          alt: block.settings.before_label
+                      }}
+                    {% else %}
+                      <div
+                        class="documented-results__placeholder"
+                        style="background: {{ block.settings.before_fallback_color }};"
+                      ></div>
+                    {% endif %}
+
+                    <div class="documented-results__img-label">
+                      {{ block.settings.before_label }}
+                    </div>
+                  </div>
+
+                  <div class="documented-results__img">
+                    {% if block.settings.after_image != blank %}
+                      {{
+                        block.settings.after_image
+                        | image_url: width: 900
+                        | image_tag:
+                          class: 'documented-results__photo',
+                          loading: 'lazy',
+                          alt: block.settings.after_label
+                      }}
+                    {% else %}
+                      <div
+                        class="documented-results__placeholder"
+                        style="background: {{ block.settings.after_fallback_color }};"
+                      ></div>
+                    {% endif %}
+
+                    <div class="documented-results__img-label">
+                      {{ block.settings.after_label }}
+                    </div>
+                  </div>
+                </div>
+
+                {% if block.settings.time_label != blank %}
+                  <div class="dryeNEW-micro documented-results__time">
+                    {{ block.settings.time_label }}
+                  </div>
+                {% endif %}
+
+                {% if block.settings.quote != blank %}
+                  <div class="dryeNEW-body documented-results__quote">
+                    <p>{{ block.settings.quote }}</p>
+                  </div>
+                {% endif %}
+
+                {% if block.settings.attribution != blank %}
+                  <div class="dryeNEW-body--caption documented-results__attr">
+                    {{ block.settings.attribution }}
+                  </div>
+                {% endif %}
+              </article>
+
+            {% when 'cta_card' %}
+              <article
+                class="documented-results__card documented-results__cta dryeNEW-reveal dryeNEW-rd3"
+                {{ block.shopify_attributes }}
+              >
+                <div class="documented-results__cta-inner">
+                  {% if block.settings.eyebrow != blank %}
+                    <span class="dryeNEW-micro documented-results__cta-eye">
+                      {{ block.settings.eyebrow }}
+                    </span>
+                  {% endif %}
+
+                  {% if block.settings.heading != blank %}
+                    <h3 class="dryeNEW-h3 documented-results__cta-heading">
+                      {{ block.settings.heading }}
+                    </h3>
+                  {% endif %}
+
+                  {% if block.settings.body != blank %}
+                    <div class="dryeNEW-body documented-results__cta-body">
+                      <p>{{ block.settings.body }}</p>
+                    </div>
+                  {% endif %}
+
+                  {% if block.settings.link_text != blank %}
+                    <a href="{{ block.settings.link_url }}" class="dryeNEW-link documented-results__cta-btn">
+                      {{ block.settings.link_text }}
+                    </a>
+                  {% endif %}
+                </div>
+              </article>
+          {% endcase %}
+        {% endfor %}
+      </div>
+
+      {% if section.blocks.size > 1 %}
+        <div class="documented-results__swipe-hint" aria-hidden="true">
+          Swipe
+        </div>
+
+        <div class="documented-results__dots" aria-hidden="true">
+          {% for block in section.blocks %}
+            <span class="documented-results__dot {% if forloop.first %}is-active{% endif %}"></span>
+          {% endfor %}
+        </div>
+      {% endif %}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "DRYE Documented Results",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "Documented results"
+    },
+    {
+      "type": "textarea",
+      "id": "heading",
+      "label": "Heading",
+      "default": "New Swedish textile science for dry hands and long-term recovery."
+    },
+    {
+      "type": "textarea",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "Not selected cases. The full range of what users report — from immediate relief to complete recovery over months."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "result_card",
+      "name": "Result card",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "before_image",
+          "label": "Before image"
+        },
+        {
+          "type": "image_picker",
+          "id": "after_image",
+          "label": "After image"
+        },
+        {
+          "type": "text",
+          "id": "before_label",
+          "label": "Before label",
+          "default": "Before"
+        },
+        {
+          "type": "text",
+          "id": "after_label",
+          "label": "After label",
+          "default": "After"
+        },
+        {
+          "type": "color",
+          "id": "before_fallback_color",
+          "label": "Before fallback color",
+          "default": "#7a4040"
+        },
+        {
+          "type": "color",
+          "id": "after_fallback_color",
+          "label": "After fallback color",
+          "default": "#c09a70"
+        },
+        {
+          "type": "text",
+          "id": "time_label",
+          "label": "Time label",
+          "default": "After first use"
+        },
+        {
+          "type": "textarea",
+          "id": "quote",
+          "label": "Quote",
+          "default": "\"The irritation always came back. Since switching to the liners, my hands feel calmer after every game.\""
+        },
+        {
+          "type": "text",
+          "id": "attribution",
+          "label": "Attribution",
+          "default": "— Chris P."
+        }
+      ]
+    },
+    {
+      "type": "cta_card",
+      "name": "CTA card",
+      "settings": [
+        {
+          "type": "text",
+          "id": "eyebrow",
+          "label": "Eyebrow",
+          "default": "For professionals"
+        },
+        {
+          "type": "textarea",
+          "id": "heading",
+          "label": "Heading",
+          "default": "Do your workers have documented results with DRYE?"
+        },
+        {
+          "type": "textarea",
+          "id": "body",
+          "label": "Body",
+          "default": "If you work in healthcare, industry, or defence — and have tracked outcomes — we want to hear from you. Help us reach more people in your field."
+        },
+        {
+          "type": "text",
+          "id": "link_text",
+          "label": "Link text",
+          "default": "Share your results →"
+        },
+        {
+          "type": "url",
+          "id": "link_url",
+          "label": "Link URL"
+        }
+      ]
+    }
+  ],
+  "max_blocks": 4,
+  "presets": [
+    {
+      "name": "DRYE Documented Results",
+      "blocks": [
+        {
+          "type": "result_card"
+        },
+        {
+          "type": "result_card"
+        },
+        {
+          "type": "result_card"
+        },
+        {
+          "type": "cta_card"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

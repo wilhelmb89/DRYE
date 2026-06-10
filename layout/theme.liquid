@@ -1,662 +1,156 @@
-{%- if request.path contains '/policies/' -%}
-<style id="policy-font-overrides">
-/* === Bas / brödtext === */
-.shopify-policy__container .rte,
-.shopify-policy__container .rte * {
-  font-family: var(--font-primary, "Inter"), sans-serif !important;
-  font-weight: 400 !important;
-  line-height: 1.6 !important;
-  color: #1D1F21A6 !important; /* samma färg som på startsidan */
-}
-
-/* === Rubriker === */
-.shopify-policy__container .rte h1,
-.shopify-policy__container .rte h2,
-.shopify-policy__container .rte h3,
-.shopify-policy__container .rte h4 {
-  font-family: var(--font-heading, "ClashGrotesk-Variable"), sans-serif !important;
-  font-weight: 500 !important;
-  letter-spacing: -0.01em !important;
-  line-height: 1.6 !important;
-  color: #111 !important; /* mörkare rubriker */
-}
-
-/* === Listor === */
-.shopify-policy__container .rte ul,
-.shopify-policy__container .rte ol {
-  list-style: disc inside !important;
-  margin-top: 0 !important;
-  margin-bottom: 0 !important; /* ingen extra luft under listorna */
-  margin-left: 1.25rem !important; /* lite indrag till vänster */
-  padding: 0 !important;
-}
-
-.shopify-policy__container .rte li {
-  display: list-item !important;
-  margin: 0 !important;
-  padding: 0 !important;
-}
-
-/* === Centrera container === */
-body.template-policy .shopify-policy__container {
-  max-width: 800px;
-  margin: 0 auto;
-  padding: 2rem 1rem;
-}
-</style>
-{%- endif -%}
-
-{%- comment -%}
-  This file has been modified by the Yoast SEO for Shopify app.
-  You can learn more about this (and learn how to cleanly revert these changes) at https://yoa.st/removing-theme-changes.
-{%- endcomment -%}
 <!doctype html>
-<html lang="{{ request.locale.iso_code }}">
+<html lang="{{ request.locale.iso_code }}" data-cart-currency="{{ localization.country.currency.iso_code }}">
   <head>
-<link rel="preload" href="{{ 'clash-grotesk-light.woff2' | asset_url }}" as="font" type="font/woff2" crossorigin>
-<link rel="preload" href="{{ 'inter-regular.woff2' | asset_url }}" as="font" type="font/woff2" crossorigin>
+
+    <!-- Google Tag Manager -->
+    <script>
+      (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+      new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+      j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+      'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+      })(window,document,'script','dataLayer','GTM-PZMXP9C');
+    </script>
+    <!-- End Google Tag Manager -->
+
+    <meta name="google-site-verification" content="zUtBnN4CAagvEN8QHMyArQawp1pfW4AVCX7CtNNZrO4">
+
+    <!-- Meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+
+    <title>{{ page_title }}</title>
+
+    {% if page_description %}
+      <meta name="description" content="{{ page_description | escape }}">
+    {% endif %}
+
+    {% assign seo_canonical = canonical_url
+      | remove: '/en-us'
+      | remove: '/en-ca'
+      | remove: '/en-gb'
+      | remove: '/en-au'
+      | remove: '/en-dk'
+      | remove: '/en-no'
+    %}
+    <link rel="canonical" href="{{ seo_canonical }}">
+
+    {%- if settings.favicon != blank -%}
+      <link rel="icon" type="image/png" href="{{ settings.favicon | image_url: width: 96, height: 96 }}">
+      <link rel="apple-touch-icon" href="{{ settings.favicon | image_url: width: 180, height: 180 }}">
+    {%- endif -%}
+
+    {{ content_for_header }}
 
 
 
+    <!-- Self-hosted fonts -->
+    <link rel="preload" href="https://cdn.shopify.com/s/files/1/0686/9581/8505/files/ClashGrotesk-Semibold.woff2?v=1777485035" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="https://cdn.shopify.com/s/files/1/0686/9581/8505/files/dm-sans-v17-latin-regular.woff2?v=1777484823" as="font" type="font/woff2" crossorigin>
 
-    <meta name="facebook-domain-verification" content="wfm34x1wbceob0aooivridsrxzce09">
-
-{%- comment -%} Ladda sektion-CSS endast på relevanta mallar {%- endcomment -%}
-
-{%- if template contains 'product' -%}
-  <link href="{{ 'reviews.css' | asset_url }}" rel="stylesheet">
-  <link href="{{ 'before-after.css' | asset_url }}" rel="stylesheet">
-{%- endif -%}
-
-{%- if template contains 'article' or template contains 'blog' or template contains 'collection' -%}
-  <link href="{{ 'blog.css' | asset_url }}" rel="stylesheet">
-{%- endif -%}
-
-{%- if content_for_layout contains 'faq-section' -%}
-  <link href="{{ 'faq.css' | asset_url }}" rel="stylesheet">
-{%- endif -%}
-
-
-
-   
-<meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="theme-color" content="">
-{%- if settings.favicon != blank -%}
-  <link rel="icon" type="image/png" href="{{ settings.favicon | image_url: width: 128, height: 128 }}">
-{%- endif -%}
-
-<link rel="canonical" href="{{ canonical_url }}">
-
-<title>{{ page_title }}</title>
-
-{% if page_description %}
-  <meta name="description" content="{{ page_description | escape }}">
-{% endif %}
-
-
-
-<script type="text/javascript">
-    (function(c,l,a,r,i,t,y){
-        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
-        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
-        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
-    })(window, document, "clarity", "script", "r99kaui2gr");
-</script>
-
-
-
-{%- render 'theme-meta' -%}
-    <script src="{{ 'swiper-bundle.min.js' | asset_url }}" defer="defer"></script>
-    {{ 'swiper-bundle.min.css' | asset_url | stylesheet_tag }}
-    {%- render 'theme-head-assets' -%}
-{{ content_for_header }}
-
-<script>
-  document.addEventListener("DOMContentLoaded", function() {
-    // Endast analytics/performance-script skjuts upp
-    document.querySelectorAll('script[src*="clarity"], script[src*="perf-kit"], script[src*="bundle.5gtb"]').forEach(function(el) {
-      if (!el.hasAttribute("defer")) {
-        el.setAttribute("defer", "defer");
+    <style>
+      @font-face {
+        font-family: 'DM Sans';
+        src: url('https://cdn.shopify.com/s/files/1/0686/9581/8505/files/dm-sans-v17-latin-regular.woff2?v=1777484823') format('woff2');
+        font-weight: 400;
+        font-style: normal;
+        font-display: swap;
       }
-    });
-  });
-</script>
 
+      @font-face {
+        font-family: 'DM Sans';
+        src: url('https://cdn.shopify.com/s/files/1/0686/9581/8505/files/dm-sans-v17-latin-600.woff2?v=1777484823') format('woff2');
+        font-weight: 600;
+        font-style: normal;
+        font-display: swap;
+      }
 
-   
+      @font-face {
+        font-family: 'Clash Grotesk';
+        src: url('https://cdn.shopify.com/s/files/1/0686/9581/8505/files/ClashGrotesk-Medium.woff2?v=1777485035') format('woff2');
+        font-weight: 500;
+        font-style: normal;
+        font-display: swap;
+      }
+
+      @font-face {
+        font-family: 'Clash Grotesk';
+        src: url('https://cdn.shopify.com/s/files/1/0686/9581/8505/files/ClashGrotesk-Semibold.woff2?v=1777485035') format('woff2');
+        font-weight: 600;
+        font-style: normal;
+        font-display: swap;
+      }
+
+      @font-face {
+        font-family: 'Playfair Display';
+        src: url('https://cdn.shopify.com/s/files/1/0686/9581/8505/files/playfair-display-v40-latin-regular.woff2?v=1777485122') format('woff2');
+        font-weight: 400;
+        font-style: normal;
+        font-display: swap;
+      }
+
+      @font-face {
+        font-family: 'Playfair Display';
+        src: url('https://cdn.shopify.com/s/files/1/0686/9581/8505/files/playfair-display-v40-latin-italic.woff2?v=1777485121') format('woff2');
+        font-weight: 400;
+        font-style: italic;
+        font-display: swap;
+      }
+    </style>
+
+    <!-- Global CSS -->
+    {{ 'base.css' | asset_url | stylesheet_tag }}
+    {{ 'components-buttons.css' | asset_url | stylesheet_tag }}
+    {{ 'header-new.css' | asset_url | stylesheet_tag }}
+
+    {% if request.design_mode %}
+      {{ 'editor-guard.css' | asset_url | stylesheet_tag }}
+    {% endif %}
+
+    <!-- Microsoft Clarity -->
+    <script type="text/javascript">
+      (function(c,l,a,r,i,t,y){
+        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+        t=l.createElement(r);
+        t.async=1;
+        t.src="https://www.clarity.ms/tag/" + i;
+        y=l.getElementsByTagName(r)[0];
+        y.parentNode.insertBefore(t,y);
+      })(window, document, "clarity", "script", "r99kaui2gr");
+    </script>
+
+    {% if template.name == 'blog' and current_tags %}
+      <meta name="robots" content="noindex, follow">
+    {% endif %}
   </head>
-  <body class="{{ page.template_suffix }}__page">
 
+  <body class="template-{{ template.name }} page-type-{{ request.page_type }}{% if page.template_suffix != blank %} {{ page.template_suffix }}__page{% endif %}">
+    <!-- Google Tag Manager (noscript) -->
+    <noscript>
+      <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PZMXP9C"
+        height="0" width="0" style="display:none;visibility:hidden"></iframe>
+    </noscript>
+    <!-- End Google Tag Manager (noscript) -->
 
-    
-    <div id="si-overlay" class="overlay"></div>
+    <!-- Header -->
     {%- sections 'header-group' -%}
-    <main>
-      {{ content_for_layout }}
-    </main>
+
+    <!-- Main content -->
+    {{ content_for_layout }}
+
+    <!-- Footer -->
     <footer>
       {%- sections 'footer-group' -%}
     </footer>
 
-    {%- sections 'popups-group' -%}
-    {%- render 'theme-body-assets' -%}
+    <!-- Body assets / variables -->
     {%- render 'theme-variables-script' -%}
 
-    <script>
-      document.addEventListener('DOMContentLoaded', function () {
-        document.querySelectorAll('.submenu-toggle').forEach(function (toggleBtn) {
-          toggleBtn.addEventListener('click', function (e) {
-            e.preventDefault();
-            const parent = this.closest('.mobile-menu-item');
-            parent.classList.toggle('active');
-
-            // Toggle +/– symbol
-            this.textContent = parent.classList.contains('active') ? '–' : '+';
-          });
-        });
-      });
-    </script>
-
- 
-
-    <!-- Bundle Start -->
-    <script src="https://bundle.dyn-rev.app/loader.js" async></script>
-    <!-- Bundle End -->
-
-  {%- if template.suffix == 'gallery' -%}
-  <script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.js" defer></script>
-{%- endif -%}
-
-    
-
-
-
-<script>
-(function () {
-  function getVariantIdFromCustomSelect(form) {
-    const cs = form.querySelector('.custom-select');
-    if (!cs) return NaN;
-
-    const selectedTitle = cs.querySelector('.selected')?.textContent?.trim();
-    if (!selectedTitle) return NaN;
-
-    const opt = Array.from(cs.querySelectorAll('.custom-option')).find(o =>
-      (o.dataset?.title?.trim() || o.textContent?.trim()) === selectedTitle
-    );
-    return Number(opt?.dataset?.value || NaN);
-  }
-
-  function resolveVariantId(form) {
-    const fromCS = getVariantIdFromCustomSelect(form);
-    if (Number.isInteger(fromCS)) return fromCS;
-
-    const radioId = Number(form.querySelector('input[type="radio"][name="id"]:checked')?.value || NaN);
-    if (Number.isInteger(radioId)) return radioId;
-
-    const selId = Number(form.querySelector('select[name="id"]')?.value || NaN);
-    if (Number.isInteger(selId)) return selId;
-
-    const vr = form.querySelector('variant-radios, variant-selects') ||
-               document.querySelector('variant-radios, variant-selects');
-    const ceVar = Number(vr?.currentVariant?.id || NaN);
-    if (Number.isInteger(ceVar)) return ceVar;
-
-    const urlVar = Number(new URL(location.href).searchParams.get('variant') || NaN);
-    if (Number.isInteger(urlVar)) return urlVar;
-
-    const hiddenId = Number(form.querySelector('input[type="hidden"][name="id"]')?.value || NaN);
-    if (Number.isInteger(hiddenId)) return hiddenId;
-
-    return NaN;
-  }
-
-  document.addEventListener('submit', function (evt) {
-    const form = evt.target?.closest("form[action*='/cart/add']");
-    if (!form) return;
-
-    const variantId = resolveVariantId(form);
-    if (!Number.isInteger(variantId)) return;
-
-    let hid = form.querySelector('input[type="hidden"][name="id"]');
-    if (!hid) {
-      hid = document.createElement('input');
-      hid.type = 'hidden';
-      hid.name = 'id';
-    }
-    hid.value = String(variantId);
-    if (form.firstChild !== hid) form.insertBefore(hid, form.firstChild);
-
-    const radio = form.querySelector(`input[type="radio"][name="id"][value="${variantId}"]`);
-    if (radio && !radio.checked) {
-      radio.checked = true;
-      radio.dispatchEvent(new Event('change', { bubbles: true }));
-    }
-  }, true);
-})();
-</script>
-
-
-
-<script>
-(() => {
-  'use strict';
-
-  // --- SINGLETON GUARD
-  if (window.__TW_ATC_INTERCEPTOR__) return;
-  window.__TW_ATC_INTERCEPTOR__ = true;
-
-  // ====== CONFIG ======
-  const LOG               = true;
-  const DEDUP_WINDOW_MS   = 5000;
-  const PIXEL_MAX_WAIT    = 60000;
-  const FLUSH_INTERVAL_MS = 200;
-  const SHOW_DEBUG_UI     = /[?&]twdebug=1/i.test(location.search);
-
-  const PFX='[TW ATC]';
-  const log = {
-    debug: (...a)=>{ if(LOG) try{console.debug(PFX,...a)}catch{} },
-    info:  (...a)=>{ if(LOG) try{console.info (PFX,...a)}catch{} },
-    warn:  (...a)=>{ if(LOG) try{console.warn (PFX,...a)}catch{} },
-    error: (...a)=>{ if(LOG) try{console.error(PFX,...a)}catch{} },
-  };
-
-  // ====== HELPERS ======
-  function safeJSON(v, def=null){ try{ return JSON.parse(v); }catch{ return def; } }
-
-  
-
-  function tpAvailable() {
-    return (typeof window.TriplePixel === 'function') ||
-           (window.TriplePixel && typeof window.TriplePixel.track === 'function');
-  }
-  function tpInvoke(name, payload) {
-    try {
-      if (typeof window.TriplePixel === 'function') {
-        window.TriplePixel(name, payload);
-        return true;
-      }
-      if (window.TriplePixel && typeof window.TriplePixel.track === 'function') {
-        window.TriplePixel.track(name, payload);
-        return true;
-      }
-    } catch(e) {
-      log.error('TriplePixel invoke threw', e);
-    }
-    return false;
-  }
-
-  const queue = [];
-  let waiter = null, waitStart = 0, flushedOnce = false;
-
-  function debugPanelInit(){
-    if (!SHOW_DEBUG_UI || document.getElementById('tw-debug')) return;
-    const box = document.createElement('div');
-    box.id = 'tw-debug';
-    box.style.cssText = 'position:fixed;z-index:2147483647;bottom:10px;right:10px;width:360px;max-height:50vh;overflow:auto;background:#0b1020;color:#e5f0ff;font:12px/1.4 ui-monospace,Menlo,Consolas;border:1px solid #2e3a6a;border-radius:8px;box-shadow:0 8px 20px rgba(0,0,0,.35)';
-    box.innerHTML = '<div style="padding:8px 10px;border-bottom:1px solid #2e3a6a;display:flex;align-items:center;justify-content:space-between"><strong>TW Debug</strong><button style="background:#18224a;color:#fff;border:0;border-radius:4px;padding:4px 8px;cursor:pointer">clear</button></div><div data-log style="padding:8px 10px"></div>';
-    box.querySelector('button').onclick = ()=> box.querySelector('[data-log]').innerHTML='';
-    document.body.appendChild(box);
-  }
-  function debugPush(entry){
-    if (!SHOW_DEBUG_UI) return;
-    debugPanelInit();
-    const logBox = document.querySelector('#tw-debug [data-log]');
-    const time = new Date().toISOString().split('T')[1].replace('Z','');
-    const row = document.createElement('div');
-    row.style.marginBottom = '8px';
-    row.innerHTML = `<div><span style="opacity:.7">${time}</span> <strong>${entry.dir}</strong> <code>${entry.name}</code> ${entry.note?'<em style="opacity:.7">('+entry.note+')</em>':''}</div><pre style="white-space:pre-wrap;margin:4px 0 0">${JSON.stringify(entry.payload, null, 2)}</pre>`;
-    logBox.prepend(row);
-  }
-
-  function startWaiterIfNeeded() {
-    if (waiter) return;
-    waitStart = Date.now();
-    waiter = setInterval(() => {
-      if (tpAvailable()) {
-        flushQueue();
-        return;
-      }
-      if (Date.now() - waitStart > PIXEL_MAX_WAIT) {
-        log.warn('TriplePixel not ready; giving up queue flush (timeout)');
-        stopWaiter();
-        drainToDataLayer();
-      }
-    }, FLUSH_INTERVAL_MS);
-  }
-  function stopWaiter(){
-    if (waiter) { clearInterval(waiter); waiter=null; }
-  }
-  function flushQueue(force=false){
-    if (!force && !tpAvailable()) return;
-    while (queue.length){
-      const { name, payload } = queue.shift();
-      const ok = tpInvoke(name, payload);
-      if (ok){
-        debugPush({ dir:'→', name, payload, note:'flushed' });
-        log.info('Sent', name, payload);
-      } else {
-        queue.unshift({ name, payload });
-        break;
-      }
-    }
-    if (queue.length === 0) { stopWaiter(); flushedOnce = true; }
-  }
-  function sendPixel(name, payload){
-    if (tpAvailable()){
-      if (tpInvoke(name, payload)) {
-        debugPush({ dir:'→', name, payload });
-        log.info('Sent', name, payload);
-        return;
-      }
-    }
-    queue.push({ name, payload });
-    debugPush({ dir:'Q', name, payload, note:'queued' });
-    startWaiterIfNeeded();
-  }
-
-  function drainToDataLayer(){
-    if (!window.dataLayer) window.dataLayer = [];
-    while (queue.length){
-      const { name, payload } = queue.shift();
-      window.dataLayer.push({ event: 'tw_fallback_event', tw_name: name, tw_payload: payload, tw_ts: Date.now() });
-      debugPush({ dir:'DL', name, payload, note:'dataLayer fallback' });
-      log.info('Pushed to dataLayer fallback', name, payload);
-    }
-  }
-
-  window.addEventListener('visibilitychange', () => {
-    if (document.visibilityState === 'visible') {
-      if (queue.length) flushQueue(tpAvailable());
-    }
-  });
-  window.addEventListener('pageshow', () => { if (queue.length) flushQueue(tpAvailable()); });
-  window.addEventListener('focus', () => { if (queue.length) flushQueue(tpAvailable()); });
-  window.addEventListener('triplepixel:ready', () => flushQueue(true));
-
-  // CART TOKEN (lazy)
-  let CART_TOKEN = null;
-async function getCartToken(){
-  if (CART_TOKEN !== null) return CART_TOKEN;
-  try{
-    const r = await fetch('/cart.js', { credentials:'same-origin', cache:'no-store' });
-    if (!r.ok) return (CART_TOKEN = null);
-    const cart = await r.json();
-    let raw = cart?.token || null;
-    if (!raw) return (CART_TOKEN = null);
-
-    raw = String(raw).split('?')[0].trim();
-    raw = raw.replace(/^[a-z]+:\/\/[^/]+\/?/i, '');
-    raw = raw.replace(/[^a-z0-9_-]/gi, '');
-    return (CART_TOKEN = (raw || null));
-  } catch {
-    return (CART_TOKEN = null);
-  }
-}
-
-  // DEDUP
-  const fpTimes = new Map();
-  const fpKey = (p,v,q)=> `${p||'p'}::${v||'v'}::${q||1}`;
-  function isDup(p,v,q){
-    const now = Date.now(), key = fpKey(p,v,q);
-    const last = fpTimes.get(key) || 0;
-    if (now - last < DEDUP_WINDOW_MS) return true;
-    fpTimes.set(key, now);
-    for (const [k,t] of fpTimes) if (now - t > DEDUP_WINDOW_MS*4) fpTimes.delete(k);
-    return false;
-  }
-
-  // PARSERS
-  function parseItemsFromBody(body){
-    try{
-      // 1) FormData: items[0][id], items[0][quantity] ИЛИ плоские id/quantity
-      if (typeof FormData!=='undefined' && body instanceof FormData){
-        const idxs = new Set(
-          [...body.keys()]
-            .map(k=> (k.match(/^items\[(\d+)\]\[id\]$/)||[])[1])
-            .filter(Boolean)
-        );
-        if (idxs.size){
-          const out=[];
-          idxs.forEach(i=>{
-            const id = body.get(`items[${i}][id]`);
-            const q  = parseInt(body.get(`items[${i}][quantity]`)||'1',10)||1;
-            if (id) out.push({ variantId:String(id), quantity:q });
-          });
-          if (out.length) return out;
-        }
-        const id = body.get('id')||body.get('variant_id')||body.get('variantId');
-        const q  = parseInt(body.get('quantity')||body.get('qty')||'1',10)||1;
-        if (id) return [{ variantId:String(id), quantity:q }];
-      }
-
-      // 2) URLSearchParams: items[0][id] или плоские ключи
-      if (typeof URLSearchParams!=='undefined' && body instanceof URLSearchParams){
-        // Сначала items[n][id]
-        const idxs = new Set();
-        for (const [k] of body.entries()){
-          const m = k.match(/^items\[(\d+)\]\[id\]$/);
-          if (m) idxs.add(m[1]);
-        }
-        if (idxs.size){
-          const out=[];
-          idxs.forEach(i=>{
-            const id = body.get(`items[${i}][id]`);
-            const q  = parseInt(body.get(`items[${i}][quantity]`)||'1',10)||1;
-            if (id) out.push({ variantId:String(id), quantity:q });
-          });
-          if (out.length) return out;
-        }
-        // Затем плоские id/quantity
-        const id = body.get('id')||body.get('variant_id')||body.get('variantId');
-        const q  = parseInt(body.get('quantity')||body.get('qty')||'1',10)||1;
-        if (id) return [{ variantId:String(id), quantity:q }];
-      }
-
-      if (typeof body==='string'){
-        // JSON
-        const data = safeJSON(body);
-        if (data){
-          if (Array.isArray(data?.items)){
-            return data.items
-              .map(it=>({ variantId:String(it.id||it.variant_id), quantity:parseInt(it.quantity||1,10)||1 }))
-              .filter(x=>x.variantId && x.variantId!=='NaN');
-          }
-          if (data.id || data.variant_id){
-            return [{ variantId:String(data.id||data.variant_id), quantity:parseInt(data.quantity||1,10)||1 }];
-          }
-        }
-
-        // 3b) URL-encoded: id=...&quantity=... или items[0][id]=...
-        try{
-          const usp = new URLSearchParams(body);
-          let hasAny=false; for (const _ of usp) { hasAny=true; break; }
-          if (hasAny){
-            const idxs = new Set();
-            for (const [k] of usp.entries()){
-              const m = k.match(/^items\[(\d+)\]\[id\]$/);
-              if (m) idxs.add(m[1]);
-            }
-            if (idxs.size){
-              const out=[];
-              idxs.forEach(i=>{
-                const id = usp.get(`items[${i}][id]`);
-                const q  = parseInt(usp.get(`items[${i}][quantity]`)||'1',10)||1;
-                if (id) out.push({ variantId:String(id), quantity:q });
-              });
-              if (out.length) return out;
-            }
-            const id = usp.get('id')||usp.get('variant_id')||usp.get('variantId');
-            const q  = parseInt(usp.get('quantity')||usp.get('qty')||'1',10)||1;
-            if (id) return [{ variantId:String(id), quantity:q }];
-          }
-        } catch(_) { /* ignore */ }
-      }
-
-      // 4) {items:[{id,quantity}]} или {id,quantity}
-      if (body && typeof body==='object'){
-        if (Array.isArray(body.items)){
-          return body.items
-            .map(it=>({ variantId:String(it.id||it.variant_id), quantity:parseInt(it.quantity||1,10)||1 }))
-            .filter(x=>x.variantId && x.variantId!=='NaN');
-        }
-        if (body.id || body.variant_id){
-          return [{ variantId:String(body.id||body.variant_id), quantity:parseInt(body.quantity||1,10)||1 }];
-        }
-      }
-    } catch(e){
-      log?.warn?.('parseItemsFromBody error', e);
-    }
-    return [];
-  }
-
-  function parseItemsFromResponseJSON(json){
-    const rows=[];
-    if (json && typeof json==='object'){
-      if (json.id && (json.product_id || json.variant_id)) rows.push({ product_id: json.product_id || null, variant_id: json.variant_id || json.id, quantity: parseInt(json.quantity||1,10)||1 });
-      if (Array.isArray(json.items)) json.items.forEach(li=> rows.push({ product_id: li.product_id || null, variant_id: li.variant_id || li.id, quantity: parseInt(li.quantity||1,10)||1 }));
-      if (json.item){ const li=json.item; rows.push({ product_id: li.product_id || null, variant_id: li.variant_id || li.id, quantity: parseInt(li.quantity||1,10)||1 }); }
-    }
-    const out=[], seen=new Set();
-    for (const r of rows){
-      const k = `${r.product_id||''}/${r.variant_id||''}/${r.quantity}`;
-      if (!seen.has(k)){ out.push(r); seen.add(k); }
-    }
-    return out;
-  }
-
-  async function resolveProductId(variantId){
-    try{
-      const r = await fetch(`/variants/${variantId}.json`, { credentials:'same-origin', cache:'no-store' });
-      if (!r.ok) return null;
-      const data = await r.json();
-      return data?.product?.id || data?.variant?.product_id || null;
-    } catch { return null; }
-  }
-
-  async function emitATC(productId, variantId, quantity){
-  if (!productId || !variantId) return;
-  const q = parseInt(quantity||1,10)||1;
-
-  if (typeof isDup === 'function' && isDup(productId, variantId, q)) return;
-
-  const payload = { item:String(productId), v:String(variantId), q };
-  const token = await getCartToken();
-  if (token) payload.token = token;
-
-  if (typeof sendPixel === 'function') {
-    sendPixel('AddToCart', payload);
-  } else if (window.TriplePixel) {
-    try {
-      if (typeof window.TriplePixel === 'function') {
-        window.TriplePixel('AddToCart', payload);
-      } else if (typeof window.TriplePixel.track === 'function') {
-        window.TriplePixel.track('AddToCart', payload);
-      }
-    } catch(e){ /* no-op */ }
-  }
-
-  window.dataLayer = window.dataLayer || [];
-  window.dataLayer.push({
-    event: 'tw_atc',
-    tw_payload: payload,
-    tw_ts: Date.now()
-  });
-}
-
-  // FETCH PATCH
-  const _fetch = window.fetch;
-  window.fetch = async function twFetch(input, init = {}){
-    const url = typeof input==='string' ? input : (input?.url || '');
-    let isATC = false;
-    try { isATC = /\/cart\/add(\.js|\.json)?(?:\?.*)?$/.test(new URL(url, location.origin).pathname); } catch {}
-    let reqClone = null;
-
-    if (isATC){
-      const b = init?.body;
-      if (b instanceof FormData){ reqClone = new FormData(); for (const [k,v] of b.entries()) reqClone.append(k,v); }
-      else if (b instanceof URLSearchParams){ reqClone = new URLSearchParams(b.toString()); }
-      else if (typeof b === 'string'){ reqClone = String(b); }
-      else if (typeof b === 'object' && b){ reqClone = JSON.stringify(b); }
-    }
-
-    const resp = await _fetch.apply(this, arguments);
-
-    if (isATC && resp && resp.ok){
-      try{
-        const copy = resp.clone();
-        let parsed=null; try{ parsed = await copy.json(); }catch{}
-        const rows = parseItemsFromResponseJSON(parsed);
-        if (rows.length){
-          for (const row of rows){ await emitATC(row.product_id, row.variant_id, row.quantity); }
-        } else if (reqClone){
-          const items = parseItemsFromBody(reqClone instanceof String ? String(reqClone) : reqClone);
-          for (const it of items){
-            const pid = await resolveProductId(it.variantId);
-            if (pid) await emitATC(pid, it.variantId, it.quantity);
-          }
-        }
-      } catch(e){ log.warn('ATC fetch-hook error', e); }
-    }
-    return resp;
-  };
-
-  // XHR PATCH
-  const _XHR = window.XMLHttpRequest;
-  function PatchedXHR(){
-    const xhr = new _XHR(); let _url='', _method='GET', _body=null;
-    const open = xhr.open; xhr.open = function(m,u){ _method=(m||'GET').toUpperCase(); _url=u; return open.apply(xhr, arguments); };
-    const send = xhr.send; xhr.send = function(b){
-      _body=b;
-      xhr.addEventListener('load', async ()=>{
-        try{
-          const isATC = _method==='POST' && /\/cart\/add(\.js|\.json)?(?:\?.*)?$/.test(new URL(_url, location.origin).pathname);
-          if (isATC && xhr.status>=200 && xhr.status<300){
-            const items = parseItemsFromBody(_body);
-            for (const it of items){
-              const pid = await resolveProductId(it.variantId);
-              if (pid) await emitATC(pid, it.variantId, it.quantity);
-            }
-          }
-        } catch(e){ log.warn('ATC xhr-hook error', e); }
-      });
-      return send.apply(xhr, arguments);
-    };
-    return xhr;
-  }
-  window.XMLHttpRequest = PatchedXHR;
-
-  // SUBMIT PREVIEW (для debug UI)
-  document.addEventListener('submit', async (evt)=>{
-    const form = evt.target?.closest("form[action*='/cart/add']");
-    if (!form || !SHOW_DEBUG_UI) return;
-    try{
-      const fd = new FormData(form);
-      const items = parseItemsFromBody(fd);
-      for (const it of items){
-        const pid = await resolveProductId(it.variantId);
-        if (pid) debugPush({ dir:'~', name:'ATC candidate', payload:{ item: pid, v: it.variantId, q: it.quantity } });
-      }
-    } catch(e){ log.warn('submit preview error', e); }
-  }, true);
-
-  log.info('TW AddToCart interceptor installed (mobile-safe)');
-})();
-</script>
-
-
-
-
-
-
-
-<!--Convert Bundle Start-->
-<script id="convert-bundle-loader" src="https://bundle.5gtb.com/loader.js?g_cvt_id=43d6a6b5-1dcc-4430-aaf9-153ca1c9a0bb"></script>
-<!--Convert Bundle End-->
-
-
-
-
+    <!-- Drawers / body-end sections -->
+    {% section 'drye-cart-drawer' %}
+    {% section 'drye-size-guide-drawer' %}
+
+    <!-- DRYE section tracker (drop-off measurement) -->
+    {% render 'drye-section-tracker' %}
   </body>
 </html>

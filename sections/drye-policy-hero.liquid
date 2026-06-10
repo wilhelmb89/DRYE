@@ -1,0 +1,57 @@
+{{ 'drye-policy-hero.css' | asset_url | stylesheet_tag }}
+
+<header class="drye-policy-hero">
+  <div class="drye-policy-hero__inner">
+    <span class="drye-policy-hero__micro" style="color:rgba(255,255,255,.25);">
+      {{ section.settings.eyebrow }}
+    </span>
+
+    <h1 class="drye-policy-hero__heading">
+      {{ section.settings.heading }}
+      <em>{{ section.settings.heading_emphasis }}</em>
+    </h1>
+
+    <p class="drye-policy-hero__subheading">
+      {{ section.settings.subheading }}
+    </p>
+  </div>
+</header>
+
+{% schema %}
+{
+  "name": "DRYE Policy Hero",
+  "tag": "section",
+  "class": "shopify-section--drye-policy-hero",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "Policies"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Shipping & Returns"
+    },
+    {
+      "type": "text",
+      "id": "heading_emphasis",
+      "label": "Heading emphasis",
+      "default": "Clear terms. No surprises."
+    },
+    {
+      "type": "textarea",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "Everything you need to know about how we ship, what it costs, and how to return if it doesn't work for you."
+    }
+  ],
+  "presets": [
+    {
+      "name": "DRYE Policy Hero"
+    }
+  ]
+}
+{% endschema %}

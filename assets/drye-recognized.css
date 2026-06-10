@@ -1,0 +1,115 @@
+/* ==========================================
+   DRYE – Recognized Innovation (brand-consistent)
+   Uses BASE.CSS tokens:
+   --c-site-bg, --c-dark-bg, --c-text, --c-heading, --c-link, --c-link-hover
+   ========================================== */
+
+.drye-recognized-section{
+  padding-block: var(--rec-pad-top, 48px) var(--rec-pad-bottom, 80px);
+
+  border-top-left-radius:  var(--rec-radius-tl, 0px);
+  border-top-right-radius: var(--rec-radius-tr, 0px);
+  border-bottom-left-radius:  var(--rec-radius-bl, 0px);
+  border-bottom-right-radius: var(--rec-radius-br, 0px);
+
+  overflow: hidden;
+
+  /* IMPORTANT:
+     Do NOT set background here.
+     Let .drye-section--light / .drye-section--dark from base.css control it. */
+}
+
+/* Optional safety: ensure scheme class actually changes surface */
+.drye-recognized-section.drye-section--light{ background: var(--c-site-bg); }
+.drye-recognized-section.drye-section--dark { background: var(--c-dark-bg); }
+
+/* Inner wrapper */
+.drye-recognized-inner{
+  max-width: var(--rec-page-w, 1400px);
+  margin-inline: auto;
+  padding-inline: 24px;
+
+  display: flex;
+  align-items: center;
+  gap: 64px;
+}
+
+/* Desktop layout */
+@media (min-width: 750px){
+  .drye-recognized-media{ flex: 0 0 40%; }
+  .drye-recognized-content{ flex: 1 1 0; }
+  .drye-recognized-inner--reverse{ flex-direction: row-reverse; }
+}
+
+/* Media wrapper */
+.drye-recognized-image-wrapper{
+  width: 100%;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+/* Images */
+.drye-recognized-image{
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 12px;
+}
+
+/* Videos (hosted + embedded) */
+.drye-recognized-image-wrapper video,
+.drye-recognized-image-wrapper iframe{
+  width: 100%;
+  display: block;
+  border-radius: 12px;
+  aspect-ratio: 16 / 9;
+  height: auto;
+}
+
+/* Typography — force brand tokens (fixes your “grey heading” issue) */
+.drye-recognized-heading{
+  margin: 0 0 16px;
+  font-size: var(--rec-h-size, 32px);
+  line-height: 1.15;
+  color: var(--c-heading); /* black heading */
+}
+
+.drye-recognized-text{
+  margin: 0 0 24px;
+  line-height: 1.6;
+  color: var(--c-text);
+}
+
+/* CTA — use brand tokens instead of hardcoding */
+.drye-recognized-link{
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+
+  color: var(--c-link);
+  text-decoration: none;
+  border-bottom: 1px solid currentColor;
+  padding-bottom: 2px;
+  font-weight: 500;
+}
+
+.drye-recognized-link:hover{
+  color: var(--c-link-hover);
+}
+
+/* Mobile */
+@media (max-width: 749px){
+  .drye-recognized-inner{
+    flex-direction: column;
+    gap: 32px;
+  }
+
+  .drye-recognized-media,
+  .drye-recognized-content{
+    width: 100%;
+  }
+
+  .drye-recognized-heading{
+    font-size: var(--rec-h-size-m, 24px);
+  }
+}

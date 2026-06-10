@@ -1,81 +1,74 @@
-/* =========================
-   Contact Section
-   ========================= */
-.main-contact {
-  padding-block: 250px 200px;
+/* ==========================================
+   Main Contact (clean)
+   Goal:
+   - Base/theme controls typography + form/input + buttons
+   - This file controls layout, spacing, and photo geometry only
+   ========================================== */
+
+.main-contact{
+  padding-block: 54px 200px;
 }
 
-@media (max-width: 767px) {
-  .main-contact {
-    padding-block: 90px;
-  }
+@media (max-width: 767px){
+  .main-contact{ padding-block: 20px; }
 }
 
-/* Container */
-.main-contact .container {
-  display: flex;
-  flex-direction: column;
-  gap: 100px;
+.main-contact .container{
+  max-width: 1470px;
+  margin: 0 auto;
+  padding-inline: 0;
 }
 
-@media (max-width: 767px) {
-  .main-contact .container {
-    gap: 60px;
-  }
-}
-
-/* Title */
-.main-contact .title {
-  font-family: var(--font-heading);
-  font-size: 3.125rem;
-  font-weight: 700;
-  line-height: 116px;
+/* Only spacing/alignment — base.css controls fonts */
+.main-contact .title{
+  margin: 0 0 32px;
   text-align: left;
-  letter-spacing: normal;
 }
 
-@media (max-width: 767px) {
-  .main-contact .title {
-    font-size: 16px;
-    line-height: 34px;
+/* Grid */
+.contacts-wrapper{
+  display: grid;
+  grid-template-columns: 415px 845px;
+  column-gap: 48px;
+  align-items: flex-start;
+}
+
+@media (max-width: 1024px){
+  .contacts-wrapper{
+    grid-template-columns: 1fr;
+    row-gap: 60px;
+    padding-inline: 3rem;
   }
 }
 
-/* Contact layout */
-.contacts-wrapper {
-  display: flex;
-  justify-content: space-between;
-  gap: 40px;
-}
-
-@media (max-width: 768px) {
-  .contacts-wrapper {
-    flex-direction: column-reverse;
-    gap: 60px;
+@media (max-width: 767px){
+  .contacts-wrapper{
+    padding-inline: 1.25rem;
+    row-gap: 40px;
   }
 }
 
-/* Persons */
-.persons-wrapper {
+/* Persons column */
+.persons-wrapper{
   display: flex;
   flex-direction: column;
   gap: 80px;
 }
 
-@media (max-width: 767px) {
-  .persons-wrapper {
+@media (max-width: 767px){
+  .persons-wrapper{
     gap: 40px;
     align-items: center;
   }
 }
 
-.person {
+.person{
   display: flex;
   gap: 30px;
 }
 
-@media (max-width: 767px) {
-  .person {
+@media (max-width: 767px){
+  .person{
     gap: 20px;
     align-items: center;
     width: 100%;
@@ -83,169 +76,257 @@
 }
 
 /* Photo */
-.person .photo .image {
+.person .photo .image{
   width: 114px;
-  aspect-ratio: 1/1;
+  aspect-ratio: 1 / 1;
   border-radius: 23px 0 23px 0;
   overflow: hidden;
   background: #cecece;
 }
 
-@media (max-width: 767px) {
-  .person .photo .image {
-    width: 120px;
-  }
+@media (max-width: 767px){
+  .person .photo .image{ width: 120px; }
 }
 
-.person .photo img {
+.person .photo img{
   width: 100%;
   height: 100%;
   object-fit: cover;
 }
 
-/* Info */
-.person .info {
+/* Info layout only */
+.person .info{
   display: flex;
   flex-direction: column;
   gap: 8px;
-  font-family: var(--font-primary);
-  font-size: 18px;
-  font-weight: 400;
-  line-height: 28px;
 }
 
-@media (max-width: 767px) {
-  .person .info {
-    font-size: 1rem;
-    line-height: 24px;
-    gap: 0;
-  }
+@media (max-width: 767px){
+  .person .info{ gap: 4px; }
 }
 
-.person .name {
-  font-family: var(--font-primary);
-  font-size: 32px;
-  font-weight: 500;
-  line-height: 38px;
+/* Name: now rendered as H3 => inherits heading typography from base.css */
+.person .name{
+  margin: 0;
 }
 
-@media (max-width: 767px) {
-  .person .name {
-    font-size: 20px;
-    line-height: 24px;
-    margin-bottom: 10px;
-  }
+@media (max-width: 767px){
+  .person .name{ margin-bottom: 8px; }
 }
 
-/* Contact form */
-.contacts-wrapper form {
+/* Position spacing only */
+.person .position{
+  margin-top: 0;
+}
+
+/* Links: keep theme colors, only underline on hover */
+.person .info a{
+  color: inherit;
+  text-decoration: none;
+}
+.person .info a:hover{ text-decoration: underline; }
+
+/* Icons row */
+.contact-actions{
+  display: flex;
+  gap: 10px;
+  margin-top: 6px;
+}
+
+.icon-btn{
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  padding: 0;
+  border: 0;
+  color: inherit;
+  line-height: 1;
+}
+
+.icon-btn svg,
+.icon-btn img{
+  width: 20px;
+  height: 20px;
+  display: block;
+  fill: currentColor;
+}
+
+.icon-btn:hover{ opacity: .7; }
+
+/* Form layout only */
+.contacts-wrapper form{
   max-width: 845px;
   width: 100%;
   display: flex;
   flex-direction: column;
-  gap: 80px;
+  gap: 40px;
 }
 
-@media (max-width: 767px) {
-  .contacts-wrapper form {
-    gap: 40px;
-  }
-}
+.form-title{ margin: 0 0 24px; }
 
-.form-title {
-  font-family: var(--font-primary);
-  font-size: 16px;
-  font-weight: 300;
-  line-height: 4.25rem;
-}
-
-@media (max-width: 767px) {
-  .form-title {
-    line-height: 39px;
-  }
-}
-
-/* Messages */
-.message {
-  margin-top: 12px;
-  font: inherit;
-  color: inherit;
-}
-
-.success-message,
-.alert-message {
-  font-family: var(--font-primary);
-  font-size: 16px;
-  font-weight: 400;
-  line-height: 1.4;
-}
-
-.success-message {
-  color: #111;
-}
-
-.alert-message {
-  color: #d32f2f;
-}
-
-/* Form fields */
-.form-wrapper {
+.form-wrapper{
   display: flex;
   flex-direction: column;
-  gap: 34px;
+  gap: 24px;
 }
 
-@media (max-width: 1024px) {
-  .form-wrapper {
-    gap: 20px;
-  }
-}
-
-.form-wrapper input,
-.form-wrapper textarea {
-  width: 100%;
-  font-family: var(--font-primary);
-  font-size: 16px;
-  font-weight: 400;
-  line-height: 1.5;
-  color: #111;
-}
-
-textarea {
-  height: 11rem;
-}
-
-@media (max-width: 1024px) {
-  textarea {
-    height: 20rem;
-  }
-}
-
-/* Two columns */
-.form-wrapper .two-cols {
+.form-wrapper .two-cols{
   display: flex;
   gap: 30px;
 }
 
-@media (max-width: 1024px) {
-  .form-wrapper .two-cols {
+@media (max-width: 1024px){
+  .form-wrapper .two-cols{
     flex-direction: column;
     gap: 20px;
   }
 }
 
-.form-wrapper .two-cols > * {
-  flex: 1;
+.form-wrapper .two-cols > *{ flex: 1; }
+
+/* Let base.css/theme handle input visuals; only sizing */
+.form-wrapper input,
+.form-wrapper textarea{
+  width: 100%;
+  box-sizing: border-box;
 }
 
-/* Button */
-.form-wrapper .button {
+.form-wrapper input{ min-height: 66px; }
+.form-wrapper textarea{ min-height: 176px; }
+
+/* Button placement only */
+.form-wrapper .submit{ margin-top: 4px; }
+
+.form-wrapper .button{
   max-width: 180px;
+  align-self: flex-start;
   justify-content: center;
 }
 
-@media (max-width: 1024px) {
-  .form-wrapper .button {
+@media (max-width: 1024px){
+  .form-wrapper .button{
     max-width: 100%;
+    width: 100%;
   }
+}
+/* Restore inner inset for the form column (desktop) */
+@media (min-width: 1025px){
+  .main-contact .contacts-wrapper form{
+    padding-inline: 32px; /* 24–48px */
+  }
+}
+/* Make all contact icons visually equal */
+.main-contact .icon-btn svg{
+  width: 22px;
+  height: 22px;
+}
+
+/* Boost only mail icon slightly (optical fix) */
+.main-contact .icon-btn[aria-label="Email"] svg{
+  transform: scale(1.15);
+  transform-origin: center;
+}
+/* ==========================================
+   Main Contact (clean) — tweaks
+   1) Icons = same accent as Send button
+   2) More left inset on form fields (desktop + mobile)
+   3) Slight corner radius on inputs/textarea
+   ========================================== */
+
+/* Accent: försöker läsa theme-token för primary button.
+   Fallback = din nuvarande “Send”-känsla (ändra om needed). */
+.main-contact{
+  --mc-accent: var(--color-button, #2E6F78);
+  --mc-field-radius: 12px;
+  --mc-form-inset-d: 56px; /* desktop */
+  --mc-form-inset-m: 18px; /* mobile */
+}
+
+/* 1) Icons färg */
+.main-contact .contact-actions .icon-btn{
+  color: var(--mc-accent);
+}
+
+/* Om du använder uppladdade IMG-ikoner (png/jpg) går de inte att färgsätta via currentColor.
+   Detta försök funkar OK på ENFÄRGADE svarta ikoner men är inte perfekt. */
+.main-contact .contact-actions .icon-btn img{
+  filter: brightness(0) saturate(100%);
+  opacity: .95;
+}
+
+/* 2) Flytta hela formkolumnen lite åt höger (mer luft från vänsterkant) */
+.main-contact .contacts-wrapper form{
+  padding-inline: var(--mc-form-inset-m);
+}
+
+@media (min-width: 1025px){
+  .main-contact .contacts-wrapper form{
+    padding-inline: var(--mc-form-inset-d);
+  }
+}
+
+/* 3) Corner radius på fälten (och klipper ev. inner-bakgrunder korrekt) */
+.main-contact .form-wrapper input,
+.main-contact .form-wrapper textarea{
+  border-radius: var(--mc-field-radius);
+  overflow: hidden;
+}
+
+/* Optional: gör även knappen visuellt “kopplad” till accent (om theme inte redan gör det) */
+/* .main-contact .button.button--primary{ background: var(--mc-accent); } */
+/* Inputs: ge riktig inner-padding så text/placeholder inte slickar kanten */
+.main-contact .form-wrapper input,
+.main-contact .form-wrapper textarea{
+  padding-inline: 18px;   /* vänster/höger */
+  padding-block: 16px;    /* upp/ner */
+}
+
+/* Textarea brukar behöva lite mer top-padding optiskt */
+.main-contact .form-wrapper textarea{
+  padding-top: 18px;
+}
+/* Håll ikonerna på samma rad och samma optiska storlek */
+.main-contact .contact-actions{
+  align-items: center;
+}
+
+.main-contact .icon-btn{
+  line-height: 0; /* tar bort baseline-glapp */
+}
+
+.main-contact .icon-btn svg{
+  width: 20px;
+  height: 20px;
+  display: block;
+}
+
+/* Optisk justering: LinkedIn känns ofta större pga form. Skala ned lite. */
+.main-contact .icon-btn[aria-label="LinkedIn"] svg{
+  transform: scale(0.92);
+  transform-origin: center;
+}
+/* Icons: samma storlek + samma baseline */
+.main-contact .contact-actions{
+  align-items: center;
+}
+
+.main-contact .icon-btn{
+  line-height: 0;            /* tar bort baseline-glapp */
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Force same box for all inline svgs */
+.main-contact .icon-btn svg{
+  width: 20px;
+  height: 20px;
+  display: block;
+}
+
+/* Optisk trim: LinkedIn ser större ut pga form -> skala ned lite */
+.main-contact .icon-btn[aria-label="LinkedIn"] svg{
+  transform: scale(0.92);
+  transform-origin: center;
 }

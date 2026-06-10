@@ -1,0 +1,22 @@
+{% comment %} Show a curated subset of payment types {% endcomment %}
+{% assign allowed = 'american_express,google_pay,master,paypal,visa,shopify_pay' | split: ',' %}
+
+<ul class="payment-icons">
+  {% assign shown = 0 %}
+  {% for t in shop.enabled_payment_types %}
+    {% if allowed contains t %}
+      <li class="icon--payment">{{ t | payment_type_svg_tag }}</li>
+      {% assign shown = shown | plus: 1 %}
+    {% endif %}
+  {% endfor %}
+
+  {%- comment -%} Fallback för editor/preview {%- endcomment -%}
+  {% if shown == 0 %}
+    <li class="icon--payment">{{ 'american_express' | payment_type_svg_tag }}</li>
+    <li class="icon--payment">{{ 'google_pay'       | payment_type_svg_tag }}</li>
+    <li class="icon--payment">{{ 'master'           | payment_type_svg_tag }}</li>
+    <li class="icon--payment">{{ 'paypal'           | payment_type_svg_tag }}</li>
+    <li class="icon--payment">{{ 'visa'             | payment_type_svg_tag }}</li>
+    <li class="icon--payment">{{ 'shopify_pay'      | payment_type_svg_tag }}</li>
+  {% endif %}
+</ul>

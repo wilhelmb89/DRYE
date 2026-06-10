@@ -1,0 +1,62 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "hero": {
+      "type": "drye-article-hero",
+      "settings": {
+        "meta_location": "Dermatology · Occupational",
+        "meta_study": "Science · Literature review",
+        "meta_read_time": "6 min read"
+      }
+    },
+    "drye_article_hero_image_YJwnJh": {
+      "type": "drye-article-hero-image",
+      "name": "DRYE Article Hero Image",
+      "settings": {
+        "hero_caption": "CDC, NIOSH, and AAD-referenced guidance for healthcare and industrial glove use."
+      }
+    },
+    "drye_article_body_6LWmyT": {
+      "type": "drye-article-body",
+      "custom_css": [
+        ".sp-img {width: 120px; height: 120px; background: transparent; margin: 0 auto 4px; display: flex; align-items: center; justify-content: center; opacity: 1;}",
+        ".article-body a {color: var(--emerald, #0D9488); text-decoration: underline;}",
+        ".article-body a:hover {opacity: 0.8;}"
+      ],
+      "name": "DRYE Article Body",
+      "settings": {
+        "hero_caption": "",
+        "sidebar_claim": "Structural moisture transport. No saturation point.",
+        "sidebar_image": "shopify://shop_images/Image_DRYE_Glove_Liner-removebg-preview.png",
+        "sidebar_subline": "0.4mm · Machine washable · Patent pending",
+        "sidebar_cta_label": "See the liner →",
+        "sidebar_cta_link": "shopify://products/drye-moisture-routing-glove-liners",
+        "toc_heading": "In this report"
+      }
+    },
+    "drye_article_related_mGATLH": {
+      "type": "drye-article-related",
+      "name": "DRYE Article Related",
+      "settings": {
+        "heading": "Also worth reading",
+        "posts_limit": 3,
+        "link_label": "Read article",
+        "placeholder_symbol": "⬡"
+      }
+    }
+  },
+  "order": [
+    "hero",
+    "drye_article_hero_image_YJwnJh",
+    "drye_article_body_6LWmyT",
+    "drye_article_related_mGATLH"
+  ]
+}

@@ -1,0 +1,55 @@
+.research-refs{margin:32px 0;}
+
+.research-refs-h{
+  font-size:9px;
+  font-weight:600;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+  color:var(--sage);
+  margin-bottom:16px;
+  display:block;
+}
+
+.ref-item{
+  display:flex;
+  justify-content:space-between;
+  align-items:baseline;
+  padding:14px 0;
+  border-bottom:1px solid var(--border);
+  gap:16px;
+}
+
+.ref-item:first-of-type{
+  border-top:1px solid var(--border);
+}
+
+.ref-body{}
+
+.ref-title{
+  font-size:13px;
+  font-weight:500;
+  color:var(--deep);
+  margin-bottom:3px;
+}
+
+.ref-desc{
+  font-size:12px;
+  color:var(--muted);
+  line-height:1.5;
+}
+
+.ref-link{
+  font-size:10px;
+  font-weight:600;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  color:var(--sage);
+  text-decoration:none;
+  white-space:nowrap;
+  transition:color .15s;
+  flex-shrink:0;
+}
+
+.ref-link:hover{
+  color:var(--deep);
+}

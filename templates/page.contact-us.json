@@ -1,0 +1,239 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "drye_contact_section_1_ygM8eG": {
+      "type": "drye-contact-section-1",
+      "blocks": {
+        "track_BXBcc8": {
+          "type": "track",
+          "settings": {
+            "label": "Customer / Order",
+            "track_key": "customer",
+            "is_active": true
+          }
+        },
+        "track_eyNTpa": {
+          "type": "track",
+          "settings": {
+            "label": "B2B / Procurement",
+            "track_key": "b2b",
+            "is_active": false
+          }
+        },
+        "track_JEtjmr": {
+          "type": "track",
+          "settings": {
+            "label": "Share Results",
+            "track_key": "results",
+            "is_active": false
+          }
+        }
+      },
+      "block_order": [
+        "track_BXBcc8",
+        "track_eyNTpa",
+        "track_JEtjmr"
+      ],
+      "name": "DRYE Contact Section 1",
+      "settings": {
+        "eyebrow": "Get in touch",
+        "heading": "Talk to us directly.",
+        "heading_emphasis": "",
+        "subheading": ""
+      }
+    },
+    "drye_contact_section_2_9bLbwd": {
+      "type": "drye-contact-section-2",
+      "blocks": {
+        "track_card_jyDY4x": {
+          "type": "track_card",
+          "settings": {
+            "track_key": "customer",
+            "is_active": true,
+            "label": "Customer support",
+            "title": "Order question or product issue",
+            "body": "Sizing, shipping, returns, or something not working as expected. We respond within 24 hours on business days."
+          }
+        },
+        "track_card_pE4V9m": {
+          "type": "track_card",
+          "disabled": true,
+          "settings": {
+            "track_key": "b2b",
+            "is_active": false,
+            "label": "B2B / Procurement",
+            "title": "Bulk orders, OEM, institutional buyers",
+            "body": "Healthcare, automotive, defence, or industrial procurement. Routed directly to Wilhelm for a conversation — not a form confirmation."
+          }
+        },
+        "track_card_THPh7k": {
+          "type": "track_card",
+          "settings": {
+            "track_key": "results",
+            "is_active": false,
+            "label": "Share your results",
+            "title": "Documented outcomes from professionals",
+            "body": "Occupational health, dermatology, or field use with measurable outcomes. Referenced from the before/after section of the product page."
+          }
+        },
+        "team_member_fR8E4b": {
+          "type": "team_member",
+          "settings": {
+            "image": "shopify://shop_images/Firefly_1.webp",
+            "name": "Wilhelm Bäckström",
+            "role": "Founder",
+            "linkedin_url": "https://www.linkedin.com/in/wilhelm-b%C3%A4ckstr%C3%B6m-32b40a48/",
+            "linkedin_label": "LinkedIn",
+            "email": "wilhelm.backstrom@drye.se"
+          }
+        },
+        "team_member_nzcVr7": {
+          "type": "team_member",
+          "settings": {
+            "image": "shopify://shop_images/1517450604840.jpg",
+            "name": "Andrew Brathwaite",
+            "role": "Co-Founder",
+            "linkedin_url": "https://www.linkedin.com/in/andrew-brathwaite-36553b6a",
+            "linkedin_label": "LinkedIn",
+            "email": "andrew.brathwaite@drye.se"
+          }
+        },
+        "form_panel_T43Nzj": {
+          "type": "form_panel",
+          "settings": {
+            "track_key": "customer",
+            "is_active": true,
+            "eyebrow": "Customer / Order",
+            "title": "Order question or product issue",
+            "description": "We respond within 24 hours on business days. Include your order number if you have one.",
+            "name_label": "Name",
+            "name_placeholder": "Your name",
+            "email_label": "Email",
+            "email_placeholder": "you@email.com",
+            "show_optional_field": true,
+            "optional_label": "Order number",
+            "optional_placeholder": "Optional — helps us find your order faster",
+            "optional_field_key": "order_number",
+            "message_label": "Message",
+            "message_placeholder": "Describe your question or issue",
+            "button_label": "Send message",
+            "guarantee": "We don't use ticketing systems.\nA person reads this.",
+            "success_heading": "Message received.",
+            "success_body": "We'll respond within 24 hours on business days.\nCheck your inbox — reply comes from a real address."
+          }
+        },
+        "form_panel_6PYxMh": {
+          "type": "form_panel",
+          "settings": {
+            "track_key": "b2b",
+            "is_active": false,
+            "eyebrow": "B2B / Procurement",
+            "title": "Bulk orders & institutional buyers",
+            "description": "This goes directly to Wilhelm. Not a CRM. Expect a reply within one business day.",
+            "name_label": "Name",
+            "name_placeholder": "Your name",
+            "email_label": "Email",
+            "email_placeholder": "you@email.com",
+            "show_optional_field": true,
+            "optional_label": "Company / Organization",
+            "optional_placeholder": "Your company, institution, or team",
+            "optional_field_key": "company_organization",
+            "message_label": "Message",
+            "message_placeholder": "Tell us about volume, region, or procurement requirements",
+            "button_label": "Send inquiry",
+            "guarantee": "We don't use ticketing systems.\nA person reads this.",
+            "success_heading": "Message received.",
+            "success_body": "We'll respond within 24 hours on business days.\nCheck your inbox — reply comes from a real address."
+          }
+        },
+        "form_panel_FERrAY": {
+          "type": "form_panel",
+          "settings": {
+            "track_key": "results",
+            "is_active": false,
+            "eyebrow": "Share Results",
+            "title": "Documented outcomes from professionals",
+            "description": "If you've documented outcomes in the field, we'd love to review them.",
+            "name_label": "Name",
+            "name_placeholder": "Your name",
+            "email_label": "Email",
+            "email_placeholder": "you@email.com",
+            "show_optional_field": true,
+            "optional_label": "Organization / Role",
+            "optional_placeholder": "Clinic, team, company, or title",
+            "optional_field_key": "organization_role",
+            "message_label": "Message",
+            "message_placeholder": "Describe the results, setting, and what you observed",
+            "button_label": "Share results",
+            "guarantee": "We don't use ticketing systems.\nA person reads this.",
+            "success_heading": "Message received.",
+            "success_body": "We'll respond within 24 hours on business days.\nCheck your inbox — reply comes from a real address."
+          }
+        }
+      },
+      "block_order": [
+        "track_card_jyDY4x",
+        "track_card_pE4V9m",
+        "track_card_THPh7k",
+        "team_member_fR8E4b",
+        "team_member_nzcVr7",
+        "form_panel_T43Nzj",
+        "form_panel_6PYxMh",
+        "form_panel_FERrAY"
+      ],
+      "name": "DRYE Contact Section 2",
+      "settings": {
+        "team_label": "Who you're writing to"
+      }
+    },
+    "drye_contact_section_3_Yc7g44": {
+      "type": "drye-contact-section-3",
+      "blocks": {
+        "info_item_wzyPMU": {
+          "type": "info_item",
+          "settings": {
+            "label": "Response time",
+            "value": "Within 24 hours",
+            "note": "Business days. Customer support and B2B both. No autoresponders."
+          }
+        },
+        "info_item_6LEjzf": {
+          "type": "info_item",
+          "settings": {
+            "label": "Returns",
+            "value": "30-day full refund",
+            "note": "Built on physics. If it doesn’t change your shift in 30 days — full refund. No forms beyond this page."
+          }
+        },
+        "info_item_Xyikf3": {
+          "type": "info_item",
+          "settings": {
+            "label": "Headquarters",
+            "value": "Stockholm, Sweden",
+            "note": "Ships from Sweden. USA, Canada, UK, and Europe. Delivery 3–7 business days."
+          }
+        }
+      },
+      "block_order": [
+        "info_item_wzyPMU",
+        "info_item_6LEjzf",
+        "info_item_Xyikf3"
+      ],
+      "name": "DRYE Contact Section 3",
+      "settings": {}
+    }
+  },
+  "order": [
+    "drye_contact_section_1_ygM8eG",
+    "drye_contact_section_2_9bLbwd",
+    "drye_contact_section_3_Yc7g44"
+  ]
+}

@@ -1,0 +1,84 @@
+.numbers-section {
+  background: var(--bg-ink);
+  border-top: var(--border-white-005);
+}
+
+.numbers-intro {
+  max-width: 600px;
+  margin-bottom: var(--space-48);
+}
+
+.numbers-intro__micro {
+  color: var(--sage);
+}
+
+.numbers-intro__heading {
+  margin: 0 0 var(--space-12);
+  color: var(--white-100);
+  max-width: 640px;
+}
+
+.numbers-intro__text {
+  color: var(--white-040);
+}
+
+.numbers-intro__text p {
+  margin: 0;
+}
+
+.numbers-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: var(--space-1);
+  background: var(--white-006);
+}
+
+.number-card {
+  background: var(--bg-ink);
+  padding: var(--space-24) var(--space-16);
+  position: relative;
+}
+
+.number-card::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 2px;
+  height: 100%;
+  background: var(--sage);
+  opacity: 0.3;
+}
+
+.number-stat {
+  margin-bottom: var(--space-8);
+  color: var(--white-100);
+}
+
+.number-stat span {
+  color: var(--sage);
+}
+
+.number-desc {
+  margin-bottom: var(--space-10);
+  color: var(--white-050);
+}
+
+.number-desc p {
+  margin: 0;
+}
+
+.number-source {
+  margin-bottom: 0;
+  color: var(--white-020);
+}
+
+@media (min-width: 768px) {
+  .numbers-grid {
+    grid-template-columns: var(--grid-4-col-desktop);
+  }
+
+  .number-card {
+    padding: var(--space-36) var(--space-28);
+  }
+}

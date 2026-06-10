@@ -1,0 +1,212 @@
+{{ 'section-drye-about-why.css' | asset_url | stylesheet_tag }}
+
+<section
+  class="dryeNEW-section drye-about-why"
+  id="drye-about-why-{{ section.id }}"
+  data-section-id="{{ section.id }}"
+>
+  <div class="dryeNEW-container">
+    {% if section.settings.eyebrow != blank %}
+      <span class="dryeNEW-micro drye-about-why__eyebrow dryeNEW-reveal">
+        {{ section.settings.eyebrow }}
+      </span>
+    {% endif %}
+
+    <h2 class="dryeNEW-h2 drye-about-why__heading dryeNEW-reveal dryeNEW-rd1">
+      {{ section.settings.heading }}
+    </h2>
+
+    {% if section.settings.subtext != blank %}
+      <div class="dryeNEW-body drye-about-why__sub dryeNEW-reveal dryeNEW-rd2">
+        <p>{{ section.settings.subtext }}</p>
+      </div>
+    {% endif %}
+
+    <div class="drye-about-why__body">
+      <div class="drye-about-why__col drye-about-why__col--fail dryeNEW-reveal dryeNEW-rd2">
+        {% if section.settings.fail_label != blank %}
+          <div class="dryeNEW-micro drye-about-why__col-label drye-about-why__col-label--fail">
+            {{ section.settings.fail_label }}
+          </div>
+        {% endif %}
+
+        {% for block in section.blocks %}
+          {% if block.type == 'fail_point' %}
+            <div class="drye-about-why__point" {{ block.shopify_attributes }}>
+              <span class="drye-about-why__icon drye-about-why__icon--fail" aria-hidden="true">✕</span>
+              <div class="dryeNEW-body--sm drye-about-why__text">
+                {% if block.settings.title != blank %}
+                  <strong>{{ block.settings.title }}</strong>
+                {% endif %}
+                {{ block.settings.body }}
+              </div>
+            </div>
+          {% endif %}
+        {% endfor %}
+      </div>
+
+      <div class="drye-about-why__col drye-about-why__col--drye dryeNEW-reveal dryeNEW-rd3">
+        {% if section.settings.drye_label != blank %}
+          <div class="dryeNEW-micro drye-about-why__col-label drye-about-why__col-label--drye">
+            {{ section.settings.drye_label }}
+          </div>
+        {% endif %}
+
+        {% for block in section.blocks %}
+          {% if block.type == 'drye_point' %}
+            <div class="drye-about-why__point" {{ block.shopify_attributes }}>
+              <span class="drye-about-why__icon drye-about-why__icon--drye" aria-hidden="true">→</span>
+              <div class="dryeNEW-body--sm drye-about-why__text">
+                {% if block.settings.title != blank %}
+                  <strong>{{ block.settings.title }}</strong>
+                {% endif %}
+                {{ block.settings.body }}
+              </div>
+            </div>
+          {% endif %}
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "DRYE About Why",
+  "tag": "section",
+  "class": "section-drye-about-why",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "The structural argument"
+    },
+    {
+      "type": "html",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Every conventional solution absorbs moisture.<br>Absorption has a ceiling. It saturates."
+    },
+    {
+      "type": "textarea",
+      "id": "subtext",
+      "label": "Subtext",
+      "default": "That is not a product flaw. That is a physics constraint. Once a material is saturated, it holds moisture against the skin — permanently, for the rest of the shift. No cotton liner, barrier cream, or DWR coating can change that."
+    },
+    {
+      "type": "text",
+      "id": "fail_label",
+      "label": "Left column label",
+      "default": "Why absorption fails"
+    },
+    {
+      "type": "text",
+      "id": "drye_label",
+      "label": "Right column label",
+      "default": "How routing works differently"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "fail_point",
+      "name": "Fail point",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Cotton liners"
+        },
+        {
+          "type": "textarea",
+          "id": "body",
+          "label": "Body",
+          "default": "Absorb until saturation — then hold a wet layer against the skin for the rest of the shift."
+        }
+      ]
+    },
+    {
+      "type": "drye_point",
+      "name": "DRYE point",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "No absorption ceiling"
+        },
+        {
+          "type": "textarea",
+          "id": "body",
+          "label": "Body",
+          "default": "DRYE routes moisture through fibre geometry — capillary action and structural gradient. No saturation point because there is no saturation mechanism."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "DRYE About Why",
+      "blocks": [
+        {
+          "type": "fail_point",
+          "settings": {
+            "title": "Cotton liners",
+            "body": "Absorb until saturation — then hold a wet layer against the skin for the rest of the shift."
+          }
+        },
+        {
+          "type": "fail_point",
+          "settings": {
+            "title": "Barrier creams",
+            "body": "Effective for 20–40 minutes. Irrelevant by hour two of a shift."
+          }
+        },
+        {
+          "type": "fail_point",
+          "settings": {
+            "title": "DWR coatings",
+            "body": "Degrade with washing and treat the symptom — not the environment that causes it."
+          }
+        },
+        {
+          "type": "fail_point",
+          "settings": {
+            "title": "Steroid creams",
+            "body": "Treat the damage after it's done. The moisture environment that caused it stays unchanged."
+          }
+        },
+        {
+          "type": "drye_point",
+          "settings": {
+            "title": "No absorption ceiling",
+            "body": "DRYE routes moisture through fibre geometry — capillary action and structural gradient. No saturation point because there is no saturation mechanism."
+          }
+        },
+        {
+          "type": "drye_point",
+          "settings": {
+            "title": "Continuous transport",
+            "body": "The mechanism is active for the full duration of wear — and doesn't degrade after washing."
+          }
+        },
+        {
+          "type": "drye_point",
+          "settings": {
+            "title": "No chemical inputs",
+            "body": "Entirely structural. No coatings, no treatments, nothing that degrades or transfers to skin."
+          }
+        },
+        {
+          "type": "drye_point",
+          "settings": {
+            "title": "0.4mm — no dexterity compromise",
+            "body": "Fits inside any standard glove. Verified across automotive and military field testing."
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

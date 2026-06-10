@@ -1,0 +1,67 @@
+
+{{ 'section-drye-article-hero.css' | asset_url | stylesheet_tag }}
+
+<section class="article-hero">
+  <div class="article-hero-in">
+    <nav class="breadcrumb" aria-label="breadcrumb">
+      <a href="{{ blog.url }}">{{ blog.title }}</a>
+      <span class="breadcrumb-sep">›</span>
+      <span>{{ article.title }}</span>
+    </nav>
+
+    {% if article.tags.size > 0 %}
+      <span class="article-cat rev">{{ article.tags.first }}</span>
+    {% endif %}
+
+    <h1 class="article-h rev rd1">
+      {{ article.title }}
+    </h1>
+
+    <div class="article-meta rev rd2">
+      <span class="meta-item">{{ article.published_at | date: "%B %Y" }}</span>
+
+      {% if section.settings.meta_location != blank %}
+        <span class="meta-sep"></span>
+        <span class="meta-item">{{ section.settings.meta_location }}</span>
+      {% endif %}
+
+      {% if section.settings.meta_study != blank %}
+        <span class="meta-sep"></span>
+        <span class="meta-item">{{ section.settings.meta_study }}</span>
+      {% endif %}
+
+      {% if section.settings.meta_read_time != blank %}
+        <span class="meta-sep"></span>
+        <span class="meta-item">{{ section.settings.meta_read_time }}</span>
+      {% endif %}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "DRYE Article Hero",
+  "tag": "section",
+  "class": "section-drye-article-hero",
+  "settings": [
+    {
+      "type": "text",
+      "id": "meta_location",
+      "label": "Meta location",
+      "default": "National Guard of Ukraine · 2nd Corps"
+    },
+    {
+      "type": "text",
+      "id": "meta_study",
+      "label": "Meta study",
+      "default": "Field Study · n=10"
+    },
+    {
+      "type": "text",
+      "id": "meta_read_time",
+      "label": "Meta read time",
+      "default": "6 min read"
+    }
+  ]
+}
+{% endschema %}

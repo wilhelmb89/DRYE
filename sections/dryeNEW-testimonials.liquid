@@ -1,0 +1,162 @@
+{{ 'dryeNEW-testimonials.css' | asset_url | stylesheet_tag }}
+
+<section
+  class="dryeNEW-testimonials"
+  id="{{ section.settings.section_id | default: 'testimonials' }}"
+  data-section-id="{{ section.id }}"
+  data-section-type="dryeNEW-testimonials"
+>
+  <div class="dryeNEW-testimonials__inner">
+    <div class="dryeNEW-testimonials__header">
+      <div class="dryeNEW-testimonials__header-left">
+        {%- if section.settings.eyebrow != blank -%}
+          <span class="dryeNEW-testimonials__eyebrow">{{ section.settings.eyebrow }}</span>
+        {%- endif -%}
+
+        <h2 class="dryeNEW-testimonials__heading">
+          {{ section.settings.heading_line_1 }}<br>
+          {{ section.settings.heading_line_2 }}
+          {%- if section.settings.heading_em != blank -%}
+            <br><em>{{ section.settings.heading_em }}</em>
+          {%- endif -%}
+        </h2>
+      </div>
+
+      {%- if section.settings.subtext != blank -%}
+        <p class="dryeNEW-testimonials__sub">{{ section.settings.subtext }}</p>
+      {%- endif -%}
+    </div>
+
+    <div class="dryeNEW-testimonials__cards">
+      {%- for block in section.blocks -%}
+        {%- if block.type == 'testimonial' -%}
+          <article class="dryeNEW-testimonials__card" {{ block.shopify_attributes }}>
+            <blockquote class="dryeNEW-testimonials__quote">
+              {{ block.settings.quote }}
+            </blockquote>
+
+            <div class="dryeNEW-testimonials__meta">
+              <div class="dryeNEW-testimonials__avatar">{{ block.settings.initials }}</div>
+
+              <div class="dryeNEW-testimonials__identity">
+                <div class="dryeNEW-testimonials__name">{{ block.settings.name }}</div>
+                <div class="dryeNEW-testimonials__role">{{ block.settings.role }}</div>
+              </div>
+            </div>
+          </article>
+        {%- endif -%}
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "DRYE NEW Testimonials",
+  "settings": [
+    {
+      "type": "text",
+      "id": "section_id",
+      "label": "Section ID",
+      "default": "testimonials"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "Real users"
+    },
+    {
+      "type": "text",
+      "id": "heading_line_1",
+      "label": "Heading line 1",
+      "default": "What changed wasn't"
+    },
+    {
+      "type": "text",
+      "id": "heading_line_2",
+      "label": "Heading line 2",
+      "default": "the glove."
+    },
+    {
+      "type": "text",
+      "id": "heading_em",
+      "label": "Heading emphasized",
+      "default": "It was the environment inside it."
+    },
+    {
+      "type": "textarea",
+      "id": "subtext",
+      "label": "Desktop subtext",
+      "default": "Neither found the answer in a new material. What changed was the environment inside the glove."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "testimonial",
+      "name": "Testimonial",
+      "settings": [
+        {
+          "type": "textarea",
+          "id": "quote",
+          "label": "Quote",
+          "default": "\"I've had eczema on my hands for years and it's been tough with hockey gloves. These liners have <strong>improved my experience by reducing friction against my skin.</strong> I don't want to play without them anymore.\""
+        },
+        {
+          "type": "text",
+          "id": "initials",
+          "label": "Initials",
+          "default": "LP"
+        },
+        {
+          "type": "text",
+          "id": "name",
+          "label": "Name",
+          "default": "Linnea P."
+        },
+        {
+          "type": "text",
+          "id": "role",
+          "label": "Role",
+          "default": "Hockey player, Frölunda HC"
+        }
+      ]
+    }
+  ],
+  "max_blocks": 3,
+  "presets": [
+    {
+      "name": "DRYE NEW Testimonials",
+      "blocks": [
+        {
+          "type": "testimonial",
+          "settings": {
+            "quote": "\"I've had eczema on my hands for years and it's been tough with hockey gloves. These liners have <strong>improved my experience by reducing friction against my skin.</strong> I don't want to play without them anymore.\"",
+            "initials": "LP",
+            "name": "Linnea P.",
+            "role": "Hockey player, Frölunda HC"
+          }
+        },
+        {
+          "type": "testimonial",
+          "settings": {
+            "quote": "\"No more eczema or rashes on my hands. <strong>Nitrile gloves don't tear anymore</strong> because they go on and off easily without sweaty skin.\"",
+            "initials": "BJ",
+            "name": "Brian J.",
+            "role": "Automotive repair & construction"
+          }
+        },
+        {
+          "type": "testimonial",
+          "settings": {
+            "quote": "\"They keep my hands dry, stop my eczema from flaring, and feel <strong>light and comfortable enough that I can type with them on.</strong>\"",
+            "initials": "AH",
+            "name": "Adam H.",
+            "role": "Electrical Mechanic, Tesla"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

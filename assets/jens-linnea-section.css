@@ -1,0 +1,273 @@
+.jens-linnea {
+  background: var(--bg);
+}
+
+.jens-linnea__header {
+  margin-bottom: var(--space-48);
+}
+
+.jens-linnea__heading {
+  margin-bottom: var(--space-12);
+  color: var(--deep);
+}
+
+.jens-linnea__heading em {
+  font-family: var(--font-editorial);
+  font-style: italic;
+  font-weight: var(--fw-regular);
+  color: var(--accent);
+}
+
+.jens-linnea__subheading {
+  max-width: 480px;
+  color: var(--muted);
+}
+
+.jens-linnea__subheading p {
+  margin: 0;
+}
+
+.jens-linnea__swipe-wrap {
+  position: relative;
+  padding-bottom: var(--space-64);
+}
+
+.jens-linnea__grid {
+  display: flex;
+  gap: var(--grid-gap-20);
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+}
+
+.jens-linnea__grid::-webkit-scrollbar {
+  display: none;
+}
+
+.jens-linnea__story {
+  display: flex;
+  flex: 0 0 84%;
+  flex-direction: column;
+  scroll-snap-align: start;
+}
+
+.jens-linnea__image-wrap {
+  width: 100%;
+  overflow: hidden;
+  margin-bottom: var(--space-20);
+  background: var(--bg-soft);
+}
+
+.jens-linnea__image {
+  display: block;
+  width: 100%;
+  height: 260px;
+  object-fit: cover;
+  object-position: center 25%;
+}
+
+.jens-linnea__pill {
+  display: inline-flex;
+  align-items: center;
+  align-self: flex-start;
+  margin-bottom: var(--space-14);
+  padding: var(--space-3) var(--space-9);
+  background: rgba(13, 148, 136, 0.07);
+  border: 1px solid rgba(13, 148, 136, 0.18);
+  color: var(--emerald);
+}
+
+.jens-linnea__label {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-7);
+  margin-bottom: var(--space-5);
+}
+
+.jens-linnea__label::before {
+  content: "";
+  width: 10px;
+  height: 1px;
+  flex-shrink: 0;
+  background: currentColor;
+}
+
+.jens-linnea__label--before {
+  color: var(--red);
+}
+
+.jens-linnea__label--after {
+  color: var(--emerald);
+}
+
+.jens-linnea__before-text {
+  margin-bottom: var(--space-18);
+  padding-bottom: var(--space-18);
+  border-bottom: var(--border-base);
+  color: var(--muted);
+}
+
+.jens-linnea__before-text p {
+  margin: 0;
+  font-style: italic;
+}
+
+.jens-linnea__after-text {
+  margin-bottom: var(--space-12);
+  color: var(--deep);
+}
+
+.jens-linnea__after-text p {
+  margin: 0;
+}
+
+.jens-linnea__attr {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-6);
+  margin-bottom: var(--space-16);
+  color: var(--caption);
+}
+
+.jens-linnea__attr-name {
+  color: var(--muted);
+  font-weight: var(--fw-semibold);
+}
+
+.jens-linnea__attr-sep {
+  color: var(--caption);
+}
+
+.jens-linnea__attr-role {
+  color: var(--caption);
+}
+
+.jens-linnea__read-more {
+  align-self: flex-start;
+  color: var(--sage);
+}
+
+.jens-linnea__read-more:hover {
+  color: var(--deep);
+}
+
+.jens-linnea__swipe-hint {
+  position: absolute;
+  right: var(--space-16);
+  bottom: var(--space-32);
+  z-index: 5;
+
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-8);
+  padding: var(--space-8) var(--space-14);
+
+  background: rgba(15, 34, 48, 0.82);
+  backdrop-filter: blur(6px);
+  color: var(--bg);
+
+  pointer-events: none;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  font-size: var(--fs-micro-2);
+  font-weight: var(--fw-semibold);
+  line-height: 1;
+
+  animation: jens-linnea-pill-pulse 2s infinite;
+}
+
+.jens-linnea__swipe-hint::after {
+  content: "→";
+  font-size: 12px;
+  letter-spacing: 0;
+  animation: jens-linnea-swipe 1.4s infinite;
+}
+
+.jens-linnea__dots {
+  position: absolute;
+  left: 50%;
+  bottom: var(--space-10);
+  transform: translateX(-50%);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: var(--space-8);
+}
+
+.jens-linnea__dot {
+  width: 6px;
+  height: 6px;
+  background: var(--border);
+}
+
+.jens-linnea__dot.is-active {
+  width: 18px;
+  background: var(--deep);
+}
+
+@keyframes jens-linnea-swipe {
+  0%,
+  100% {
+    transform: translateX(0);
+    opacity: 0.75;
+  }
+
+  50% {
+    transform: translateX(5px);
+    opacity: 1;
+  }
+}
+
+@keyframes jens-linnea-pill-pulse {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 rgba(15, 34, 48, 0.35);
+  }
+
+  50% {
+    box-shadow: 0 0 0 6px rgba(15, 34, 48, 0);
+  }
+}
+
+@media (min-width: 768px) {
+  .jens-linnea__swipe-wrap {
+    padding-bottom: 0;
+  }
+
+  .jens-linnea__swipe-hint,
+  .jens-linnea__dots {
+    display: none;
+  }
+
+  .jens-linnea__grid {
+    display: grid;
+    grid-template-columns: var(--grid-2-col-desktop);
+    gap: var(--grid-gap-48);
+    overflow: visible;
+    scroll-snap-type: none;
+  }
+
+  .jens-linnea__story {
+    flex: initial;
+    scroll-snap-align: none;
+  }
+
+  .jens-linnea__image {
+    height: 300px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .jens-linnea__grid {
+    scroll-behavior: auto;
+  }
+
+  .jens-linnea__swipe-hint,
+  .jens-linnea__swipe-hint::after {
+    animation: none;
+  }
+}

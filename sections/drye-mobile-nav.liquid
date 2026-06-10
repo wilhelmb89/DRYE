@@ -1,0 +1,318 @@
+{{ 'section-drye-mobile-nav.css' | asset_url | stylesheet_tag }}
+
+{%- liquid
+  assign section_id = 'drye-mobile-nav-' | append: section.id
+-%}
+
+<section class="drye-mobile-nav" id="{{ section_id }}" data-drye-mobile-nav>
+  <div class="drye-mobile-nav__bar">
+    <a href="{{ section.settings.logo_url | default: routes.root_url }}" class="drye-mobile-nav__logo">
+      {{ section.settings.logo_text }}
+    </a>
+
+    <div class="drye-mobile-nav__bar-right">
+      {% if section.settings.show_account %}
+        <a
+          href="{{ section.settings.account_url | default: routes.account_url }}"
+          class="drye-mobile-nav__icon-btn"
+          aria-label="{{ section.settings.account_label | escape }}"
+        >
+          <svg fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.5 20.25a8.25 8.25 0 0115 0"/>
+          </svg>
+        </a>
+      {% endif %}
+
+      {% if section.settings.show_cart %}
+        <a
+          href="{{ section.settings.cart_url | default: routes.cart_url }}"
+          class="drye-mobile-nav__icon-btn"
+          aria-label="{{ section.settings.cart_label | escape }}"
+        >
+          <svg fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M15.75 10.5V6a3.75 3.75 0 10-7.5 0v4.5m11.356-1.993l1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 01-1.12-1.243l1.264-12A1.125 1.125 0 015.513 7.5h12.974c.576 0 1.059.435 1.119 1.007z"/>
+          </svg>
+        </a>
+      {% endif %}
+
+      <button
+        class="drye-mobile-nav__hamburger"
+        type="button"
+        aria-label="{{ section.settings.open_menu_label | escape }}"
+        aria-expanded="false"
+        aria-controls="{{ section_id }}-overlay"
+        data-mobile-nav-open
+      >
+        <span class="drye-mobile-nav__ham-line"></span>
+        <span class="drye-mobile-nav__ham-line"></span>
+      </button>
+    </div>
+  </div>
+
+  <div
+    class="drye-mobile-nav__overlay"
+    id="{{ section_id }}-overlay"
+    role="dialog"
+    aria-modal="true"
+    aria-label="{{ section.settings.dialog_label | escape }}"
+    hidden
+    data-mobile-nav-overlay
+  >
+    <div class="drye-mobile-nav__overlay-inner">
+      <div class="drye-mobile-nav__header">
+        <a href="{{ section.settings.logo_url | default: routes.root_url }}" class="drye-mobile-nav__overlay-logo">
+          {{ section.settings.logo_text }}
+        </a>
+
+        <button
+          class="drye-mobile-nav__close"
+          type="button"
+          aria-label="{{ section.settings.close_menu_label | escape }}"
+          data-mobile-nav-close
+        >
+          ✕
+        </button>
+      </div>
+
+      <div class="drye-mobile-nav__icon-row">
+        {% if section.settings.show_account %}
+          <a href="{{ section.settings.account_url | default: routes.account_url }}" class="drye-mobile-nav__icon-item">
+            <svg fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.5 20.25a8.25 8.25 0 0115 0"/>
+            </svg>
+            <span class="drye-mobile-nav__icon-label">{{ section.settings.account_label }}</span>
+          </a>
+        {% endif %}
+
+        {% if section.settings.show_cart %}
+          <a href="{{ section.settings.cart_url | default: routes.cart_url }}" class="drye-mobile-nav__icon-item">
+            <svg fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M15.75 10.5V6a3.75 3.75 0 10-7.5 0v4.5m11.356-1.993l1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 01-1.12-1.243l1.264-12A1.125 1.125 0 015.513 7.5h12.974c.576 0 1.059.435 1.119 1.007z"/>
+            </svg>
+            <span class="drye-mobile-nav__icon-label">{{ section.settings.cart_label }}</span>
+          </a>
+        {% endif %}
+
+        <div class="drye-mobile-nav__icon-item drye-mobile-nav__icon-item--lang">
+          <select class="drye-mobile-nav__lang" aria-label="{{ section.settings.language_label | escape }}">
+            <option selected>{{ section.settings.language_option_1 }}</option>
+            <option>{{ section.settings.language_option_2 }}</option>
+          </select>
+        </div>
+      </div>
+
+      <nav class="drye-mobile-nav__nav" aria-label="{{ section.settings.nav_label | escape }}">
+        {% for block in section.blocks %}
+          {% if block.type == 'nav_item' %}
+            <a
+              href="{{ block.settings.url | default: '#' }}"
+              class="drye-mobile-nav__nav-item{% if block.settings.active %} is-active{% endif %}"
+              {{ block.shopify_attributes }}
+            >
+              <div class="drye-mobile-nav__nav-left">
+                <span class="drye-mobile-nav__nav-num">
+                  {{ block.settings.number }}
+                </span>
+                <span class="drye-mobile-nav__nav-label">
+                  {{ block.settings.label }}
+                </span>
+              </div>
+              <span class="drye-mobile-nav__nav-arrow">→</span>
+            </a>
+          {% endif %}
+        {% endfor %}
+      </nav>
+
+      <div class="drye-mobile-nav__footer">
+        <div class="drye-mobile-nav__footer-links">
+          {% for block in section.blocks %}
+            {% if block.type == 'footer_link' %}
+              <a
+                href="{{ block.settings.url | default: '#' }}"
+                class="drye-mobile-nav__footer-link"
+                {{ block.shopify_attributes }}
+              >
+                {{ block.settings.label }}
+              </a>
+            {% endif %}
+          {% endfor %}
+        </div>
+
+        {% if section.settings.footer_badge != blank %}
+          <span class="drye-mobile-nav__footer-badge">
+            {{ section.settings.footer_badge }}
+          </span>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</section>
+
+<script src="{{ 'section-drye-mobile-nav.js' | asset_url }}" defer></script>
+
+{% schema %}
+{
+  "name": "DRYE Mobile Nav",
+  "tag": "section",
+  "class": "section-drye-mobile-nav",
+  "settings": [
+    {
+      "type": "text",
+      "id": "logo_text",
+      "label": "Logo text",
+      "default": "◈ DRYE"
+    },
+    {
+      "type": "url",
+      "id": "logo_url",
+      "label": "Logo URL"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_account",
+      "label": "Show account icon",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_cart",
+      "label": "Show cart icon",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "account_label",
+      "label": "Account label",
+      "default": "Account"
+    },
+    {
+      "type": "url",
+      "id": "account_url",
+      "label": "Account URL"
+    },
+    {
+      "type": "text",
+      "id": "cart_label",
+      "label": "Cart label",
+      "default": "Cart"
+    },
+    {
+      "type": "url",
+      "id": "cart_url",
+      "label": "Cart URL"
+    },
+    {
+      "type": "text",
+      "id": "language_label",
+      "label": "Language selector aria label",
+      "default": "Language"
+    },
+    {
+      "type": "text",
+      "id": "language_option_1",
+      "label": "Language option 1",
+      "default": "EN"
+    },
+    {
+      "type": "text",
+      "id": "language_option_2",
+      "label": "Language option 2",
+      "default": "SV"
+    },
+    {
+      "type": "text",
+      "id": "open_menu_label",
+      "label": "Open menu aria label",
+      "default": "Open menu"
+    },
+    {
+      "type": "text",
+      "id": "close_menu_label",
+      "label": "Close menu aria label",
+      "default": "Close menu"
+    },
+    {
+      "type": "text",
+      "id": "dialog_label",
+      "label": "Dialog aria label",
+      "default": "Navigation"
+    },
+    {
+      "type": "text",
+      "id": "nav_label",
+      "label": "Navigation aria label",
+      "default": "Mobile navigation"
+    },
+    {
+      "type": "text",
+      "id": "footer_badge",
+      "label": "Footer badge",
+      "default": "Patent pending"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "nav_item",
+      "name": "Nav item",
+      "settings": [
+        {
+          "type": "text",
+          "id": "number",
+          "label": "Number",
+          "default": "01"
+        },
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Label",
+          "default": "Problem"
+        },
+        {
+          "type": "url",
+          "id": "url",
+          "label": "URL"
+        },
+        {
+          "type": "checkbox",
+          "id": "active",
+          "label": "Active state",
+          "default": false
+        }
+      ]
+    },
+    {
+      "type": "footer_link",
+      "name": "Footer link",
+      "settings": [
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Label",
+          "default": "Shipping"
+        },
+        {
+          "type": "url",
+          "id": "url",
+          "label": "URL"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "DRYE Mobile Nav",
+      "blocks": [
+        { "type": "nav_item", "settings": { "number": "01", "label": "Problem", "active": true } },
+        { "type": "nav_item", "settings": { "number": "02", "label": "How it works" } },
+        { "type": "nav_item", "settings": { "number": "03", "label": "Research" } },
+        { "type": "nav_item", "settings": { "number": "04", "label": "User stories" } },
+        { "type": "nav_item", "settings": { "number": "05", "label": "Shop" } },
+        { "type": "nav_item", "settings": { "number": "06", "label": "Contact" } },
+        { "type": "footer_link", "settings": { "label": "Shipping" } },
+        { "type": "footer_link", "settings": { "label": "Returns" } },
+        { "type": "footer_link", "settings": { "label": "B2B" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

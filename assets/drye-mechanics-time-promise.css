@@ -1,0 +1,37 @@
+/* ==========================================================================
+   DRYE Mechanics — Time Promise
+   Based on section 8 in drye-mechanics HTML
+   ========================================================================== */
+
+.mech-time {
+  background: var(--bg);
+}
+
+.mech-time__container {
+  max-width: 640px;
+  text-align: center;
+}
+
+.mech-time__eyebrow {
+  margin-bottom: var(--space-18);
+  color: var(--sage);
+  letter-spacing: 0.18em;
+}
+
+.mech-time__heading {
+  margin-bottom: var(--space-18);
+  color: var(--deep);
+}
+
+.mech-time__body {
+  color: var(--muted);
+}
+
+.mech-time__body p {
+  margin: 0;
+}
+
+.mech-time__body strong {
+  color: var(--deep);
+  font-weight: var(--fw-semibold);
+}

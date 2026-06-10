@@ -1,0 +1,58 @@
+{{ 'drye-mechanics-time-promise.css' | asset_url | stylesheet_tag }}
+
+<section class="dryeNEW-section mech-time" data-section-id="{{ section.id }}" data-drye-section data-section-index="14" data-section-name="time_promise">
+  <div class="dryeNEW-container mech-time__container">
+
+    {% if section.settings.eyebrow != blank %}
+      <div class="dryeNEW-micro mech-time__eyebrow">
+        {{ section.settings.eyebrow }}
+      </div>
+    {% endif %}
+
+    {% if section.settings.heading != blank %}
+      <h2 class="dryeNEW-h2 mech-time__heading">
+        {{ section.settings.heading }}
+      </h2>
+    {% endif %}
+
+    {% if section.settings.body != blank %}
+      <div class="dryeNEW-body mech-time__body">
+        {{ section.settings.body }}
+      </div>
+    {% endif %}
+
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "DRYE Mechanics Time",
+  "tag": "section",
+  "class": "shopify-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "Expectation"
+    },
+    {
+      "type": "html",
+      "id": "heading",
+      "label": "Heading",
+      "default": "You notice it in hours. <em class=\"dryeNEW-em\">Not weeks.</em>"
+    },
+    {
+      "type": "richtext",
+      "id": "body",
+      "label": "Body",
+      "default": "<p>This is not a long adaptation curve. If moisture is the trigger, removing it changes the condition quickly. Most users feel the difference during the first shift.</p>"
+    }
+  ],
+  "presets": [
+    {
+      "name": "DRYE Mechanics Time"
+    }
+  ]
+}
+{% endschema %}

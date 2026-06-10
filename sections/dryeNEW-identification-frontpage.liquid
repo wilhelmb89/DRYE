@@ -1,0 +1,235 @@
+{{ 'dryeNEW-identification2.css' | asset_url | stylesheet_tag }}
+
+<section
+  class="dryeNEW-section dryeNEW-identification"
+  id="{{ section.settings.section_id | default: 'identification2' }}"
+  data-section-id="{{ section.id }}"
+  data-section-type="dryeNEW-identification"
+  data-drye-section
+  data-section-index="2"
+  data-section-name="identification2"
+>
+  <div class="dryeNEW-container">
+    <div class="dryeNEW-identification__intro">
+      {%- if section.settings.eyebrow != blank -%}
+        <span class="dryeNEW-micro dryeNEW-identification__eyebrow">
+          {{ section.settings.eyebrow }}
+        </span>
+      {%- endif -%}
+
+      {%- if section.settings.heading != blank or section.settings.heading_echo != blank -%}
+        <h2 class="dryeNEW-h2 dryeNEW-identification__heading">
+          {{ section.settings.heading }}<br>
+          {%- if section.settings.heading_echo != blank -%}
+            <em>{{ section.settings.heading_echo }}</em>
+          {%- endif -%}
+        </h2>
+      {%- endif -%}
+
+      {%- if section.settings.body != blank -%}
+        <div class="dryeNEW-body dryeNEW-identification__body">
+          <p>{{ section.settings.body }}</p>
+        </div>
+      {%- endif -%}
+    </div>
+  </div>
+
+  <div class="dryeNEW-identification__strip-wrap">
+    <div class="dryeNEW-container">
+      <div class="dryeNEW-identification__strip">
+        {%- for block in section.blocks -%}
+          {%- if block.type == 'profession_item' -%}
+            <article class="dryeNEW-identification__profession" {{ block.shopify_attributes }}>
+              <div
+                class="dryeNEW-identification__profession-image-wrap"
+                {% if block.settings.fallback_color != blank %}style="background: {{ block.settings.fallback_color }};"{% endif %}
+              >
+                {%- if block.settings.image != blank -%}
+                  {{
+                    block.settings.image
+                    | image_url: width: 900
+                    | image_tag:
+                      class: 'dryeNEW-identification__profession-image',
+                      alt: block.settings.label,
+                      loading: 'lazy',
+                      widths: '260, 360, 520, 720, 900'
+                  }}
+                {%- elsif block.settings.image_url != blank -%}
+                  <img
+                    class="dryeNEW-identification__profession-image"
+                    src="{{ block.settings.image_url }}"
+                    alt="{{ block.settings.label | escape }}"
+                    loading="lazy"
+                  >
+                {%- endif -%}
+              </div>
+
+              {%- if block.settings.label != blank -%}
+                <p class="dryeNEW-identification__profession-label">{{ block.settings.label }}</p>
+              {%- endif -%}
+            </article>
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+    </div>
+
+    <div class="dryeNEW-identification__swipe-hint" aria-hidden="true">
+      <span class="dryeNEW-identification__swipe-text">Swipe</span>
+      <svg class="dryeNEW-identification__swipe-icon" width="18" height="18" viewBox="0 0 24 24" fill="none">
+        <path d="M8 5l8 7-8 7" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="miter"/>
+      </svg>
+    </div>
+  </div>
+
+  <div class="dryeNEW-container">
+    <div class="dryeNEW-identification__occlusion">
+      {%- for block in section.blocks -%}
+        {%- if block.type == 'occlusion_step' -%}
+          <article class="dryeNEW-identification__step" {{ block.shopify_attributes }}>
+            <div class="dryeNEW-identification__step-number">{{ block.settings.step_number }}</div>
+
+            <div class="dryeNEW-identification__step-copy">
+              {%- if block.settings.title != blank -%}
+                <div class="dryeNEW-h4 dryeNEW-identification__step-title">{{ block.settings.title }}</div>
+              {%- endif -%}
+
+              {%- if block.settings.body != blank -%}
+                <div class="dryeNEW-body dryeNEW-identification__step-body">
+                  {{ block.settings.body }}
+                </div>
+              {%- endif -%}
+            </div>
+          </article>
+        {%- endif -%}
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+<script>
+  (function() {
+    var section = document.querySelector('[data-section-id="{{ section.id }}"]');
+    if (!section) return;
+
+    var strip = section.querySelector('.dryeNEW-identification__strip');
+    var hint = section.querySelector('.dryeNEW-identification__swipe-hint');
+
+    if (!strip || !hint) return;
+    if (window.innerWidth >= 768) return;
+
+    var hideHint = function() {
+      hint.classList.add('is-hidden');
+      strip.removeEventListener('scroll', onScroll);
+      strip.removeEventListener('touchstart', hideHint);
+      strip.removeEventListener('pointerdown', hideHint);
+    };
+
+    var onScroll = function() {
+      if (strip.scrollLeft > 12) {
+        hideHint();
+      }
+    };
+
+    strip.addEventListener('scroll', onScroll, { passive: true });
+    strip.addEventListener('touchstart', hideHint, { passive: true });
+    strip.addEventListener('pointerdown', hideHint, { passive: true });
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "DRYE Identification2",
+  "settings": [
+    {
+      "type": "text",
+      "id": "section_id",
+      "label": "Section ID",
+      "default": "identification"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "Who this is for"
+    },
+    {
+      "type": "textarea",
+      "id": "heading",
+      "label": "Heading",
+      "default": "You've tried everything."
+    },
+    {
+      "type": "text",
+      "id": "heading_echo",
+      "label": "Heading echo",
+      "default": "Nothing worked."
+    },
+    {
+      "type": "textarea",
+      "id": "body",
+      "label": "Body",
+      "default": "Cracks that come back no matter how much cream you use. Skin that calms over the weekend — and flares again by Tuesday. Cotton liners that helped until they got wet."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "profession_item",
+      "name": "Profession item",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "url",
+          "id": "image_url",
+          "label": "Fallback image URL"
+        },
+        {
+          "type": "text",
+          "id": "fallback_color",
+          "label": "Fallback background color",
+          "default": "#1E3A4C"
+        },
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Label",
+          "default": "Healthcare"
+        }
+      ]
+    },
+    {
+      "type": "occlusion_step",
+      "name": "Occlusion step",
+      "settings": [
+        {
+          "type": "text",
+          "id": "step_number",
+          "label": "Step number",
+          "default": "01"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "01"
+        },
+        {
+          "type": "richtext",
+          "id": "body",
+          "label": "Body",
+          "default": "<p>Moisture saturates inside sealed equipment. The fabric absorbs — then holds it against skin.</p>"
+        }
+      ]
+    }
+  ],
+  "max_blocks": 8,
+  "presets": [
+    {
+      "name": "DRYE Identification2"
+    }
+  ]
+}
+{% endschema %}

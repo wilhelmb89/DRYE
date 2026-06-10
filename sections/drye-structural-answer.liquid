@@ -1,0 +1,497 @@
+{{ 'component-drye-structural-answer.css' | asset_url | stylesheet_tag }}
+
+<section
+  class="dryeNEW-section drye-answer"
+  id="drye-answer-{{ section.id }}"
+  data-section-id="{{ section.id }}"
+  data-drye-section
+  data-section-index="8"
+  data-section-name="structural_answer"
+>
+  <div class="dryeNEW-container">
+    <div class="drye-answer__grid dryeNEW-reveal">
+      <div class="drye-answer__gallery-wrap">
+        <div class="drye-answer__gallery">
+          <div class="drye-answer__slider" data-drye-answer-slider>
+            {% assign has_gallery_slides = false %}
+
+            {% for block in section.blocks %}
+              {% if block.type == 'gallery_image' %}
+                {% assign has_gallery_slides = true %}
+
+                <figure class="drye-answer__slide" {{ block.shopify_attributes }}>
+                  {% if block.settings.image != blank %}
+                    {{
+                      block.settings.image
+                      | image_url: width: 1600
+                      | image_tag:
+                        class: 'drye-answer__img',
+                        loading: 'lazy',
+                        widths: '480, 720, 960, 1200, 1600',
+                        sizes: '(min-width: 768px) 50vw, 100vw',
+                        alt: block.settings.image_alt | default: 'DRYE liner image'
+                    }}
+                  {% else %}
+                    {{ 'image' | placeholder_svg_tag: 'drye-answer__img drye-answer__img--placeholder' }}
+                  {% endif %}
+                </figure>
+              {% endif %}
+            {% endfor %}
+
+            {% unless has_gallery_slides %}
+              <figure class="drye-answer__slide">
+                {% if section.settings.image != blank %}
+                  {{
+                    section.settings.image
+                    | image_url: width: 1600
+                    | image_tag:
+                      class: 'drye-answer__img',
+                      loading: 'lazy',
+                      alt: section.settings.image_alt
+                  }}
+                {% else %}
+                  {{ 'image' | placeholder_svg_tag: 'drye-answer__img drye-answer__img--placeholder' }}
+                {% endif %}
+              </figure>
+            {% endunless %}
+          </div>
+
+          <button
+            type="button"
+            class="drye-answer__nav drye-answer__nav--prev is-disabled"
+            data-drye-answer-prev
+            aria-label="Previous image"
+          >
+            ←
+          </button>
+
+          <button
+            type="button"
+            class="drye-answer__nav drye-answer__nav--next"
+            data-drye-answer-next
+            aria-label="Next image"
+          >
+            →
+          </button>
+
+          <div
+            class="drye-answer__swipe-hint"
+            data-drye-answer-swipe-hint
+            aria-hidden="true"
+          >
+            {{ section.settings.swipe_label }}
+          </div>
+
+          <div
+            class="drye-answer__fade"
+            data-drye-answer-fade
+            aria-hidden="true"
+          ></div>
+        </div>
+
+        <div
+          class="drye-answer__dots"
+          data-drye-answer-dots
+          aria-hidden="true"
+        ></div>
+      </div>
+
+      <div class="drye-answer__text">
+        {% if section.settings.eyebrow != blank %}
+          <span class="dryeNEW-micro drye-answer__eyebrow">
+            {{ section.settings.eyebrow }}
+          </span>
+        {% endif %}
+
+        <h2 class="dryeNEW-h2 drye-answer__heading">
+          {% if section.settings.heading_before != blank %}
+            {{ section.settings.heading_before }}
+          {% endif %}
+          {% if section.settings.heading_em != blank %}
+            <em>{{ section.settings.heading_em }}</em>
+          {% endif %}
+        </h2>
+
+        {% if section.settings.subheading != blank %}
+          <div class="dryeNEW-body--caption drye-answer__subheading">
+            {{ section.settings.subheading }}
+          </div>
+        {% endif %}
+
+        {% if section.settings.body != blank %}
+          <div class="dryeNEW-body drye-answer__body">
+            <p>{{ section.settings.body }}</p>
+          </div>
+        {% endif %}
+
+        <div class="drye-answer__facts">
+          {% for block in section.blocks %}
+            {% if block.type == 'fact' %}
+              <div class="drye-answer__fact" {{ block.shopify_attributes }}>
+                <div class="drye-answer__fact-marker" aria-hidden="true"></div>
+
+                <div class="dryeNEW-body drye-answer__fact-text">
+                  {% if block.settings.strong != blank %}
+                    <strong>{{ block.settings.strong }}</strong>
+                  {% endif %}
+                  {{ block.settings.text }}
+                </div>
+              </div>
+            {% endif %}
+          {% endfor %}
+        </div>
+
+        {% if section.settings.footer_text != blank %}
+          <div class="dryeNEW-body--caption drye-answer__footer">
+            <p>{{ section.settings.footer_text }}</p>
+          </div>
+        {% endif %}
+      </div>
+    </div>
+
+    {% if section.settings.cta_label != blank %}
+      <div class="drye-answer__cta-wrap">
+        {% if section.settings.cta_url != blank %}
+          <a href="{{ section.settings.cta_url }}" class="drye-answer__cta">
+            {{ section.settings.cta_label }}
+          </a>
+        {% else %}
+          <button type="button" class="drye-answer__cta">
+            {{ section.settings.cta_label }}
+          </button>
+        {% endif %}
+
+        {% if section.settings.cta_note != blank %}
+          <div class="dryeNEW-body--caption drye-answer__cta-note">
+            {{ section.settings.cta_note }}
+          </div>
+        {% endif %}
+      </div>
+    {% endif %}
+  </div>
+</section>
+
+<script>
+  (() => {
+    const section = document.getElementById('drye-answer-{{ section.id }}');
+    if (!section) return;
+
+    const slider = section.querySelector('[data-drye-answer-slider]');
+    if (!slider) return;
+
+    const prevBtn = section.querySelector('[data-drye-answer-prev]');
+    const nextBtn = section.querySelector('[data-drye-answer-next]');
+    const hint = section.querySelector('[data-drye-answer-swipe-hint]');
+    const fade = section.querySelector('[data-drye-answer-fade]');
+    const dotsWrap = section.querySelector('[data-drye-answer-dots]');
+    const desktopMq = window.matchMedia('(min-width: 768px)');
+    const slides = Array.from(slider.querySelectorAll('.drye-answer__slide'));
+
+    let hasInteracted = false;
+    let dots = [];
+
+    const hasScrollableContent = () => {
+      return slider.scrollWidth - slider.clientWidth > 8;
+    };
+
+    const getScrollAmount = () => {
+      return slider.clientWidth;
+    };
+
+    const getActiveIndex = () => {
+      const step = getScrollAmount();
+      if (step <= 0) return 0;
+
+      return Math.min(slides.length - 1, Math.round(slider.scrollLeft / step));
+    };
+
+    const buildDots = () => {
+      if (!dotsWrap) return;
+
+      dotsWrap.innerHTML = '';
+      dots = [];
+
+      if (slides.length <= 1) {
+        dotsWrap.hidden = true;
+        return;
+      }
+
+      dotsWrap.hidden = false;
+
+      slides.forEach((_, index) => {
+        const dot = document.createElement('span');
+        dot.className = 'drye-answer__dot';
+
+        if (index === 0) {
+          dot.classList.add('is-active');
+        }
+
+        dotsWrap.appendChild(dot);
+        dots.push(dot);
+      });
+    };
+
+    const updateDots = () => {
+      if (!dots.length) return;
+
+      const active = getActiveIndex();
+
+      dots.forEach((dot, index) => {
+        dot.classList.toggle('is-active', index === active);
+      });
+    };
+
+    const updateButtons = () => {
+      if (!prevBtn || !nextBtn) return;
+
+      if (!hasScrollableContent()) {
+        prevBtn.classList.add('is-disabled');
+        nextBtn.classList.add('is-disabled');
+        return;
+      }
+
+      const maxScroll = slider.scrollWidth - slider.clientWidth;
+      const current = slider.scrollLeft;
+
+      prevBtn.classList.toggle('is-disabled', current <= 8);
+      nextBtn.classList.toggle('is-disabled', current >= maxScroll - 8);
+    };
+
+    const updateFade = () => {
+      if (!fade) return;
+
+      if (!hasScrollableContent()) {
+        fade.classList.add('is-hidden');
+        return;
+      }
+
+      const maxScroll = slider.scrollWidth - slider.clientWidth;
+      const atEnd = slider.scrollLeft >= maxScroll - 8;
+
+      fade.classList.toggle('is-hidden', atEnd);
+    };
+
+    const updateHint = () => {
+      if (!hint) return;
+
+      if (desktopMq.matches || !hasScrollableContent()) {
+        hint.classList.add('is-hidden');
+        return;
+      }
+
+      if (slider.scrollLeft > 16 || hasInteracted) {
+        hint.classList.add('is-hidden');
+      } else {
+        hint.classList.remove('is-hidden');
+      }
+    };
+
+    const fadeDots = () => {
+      if (dotsWrap && !dotsWrap.hidden) {
+        dotsWrap.classList.add('is-faded');
+      }
+    };
+
+    const hideHintOnInteraction = () => {
+      if (desktopMq.matches || hasInteracted) return;
+
+      hasInteracted = true;
+
+      if (hint) {
+        hint.classList.add('is-hidden');
+      }
+
+      fadeDots();
+    };
+
+    const scrollByAmount = (direction) => {
+      slider.scrollBy({
+        left: getScrollAmount() * direction,
+        behavior: 'smooth'
+      });
+    };
+
+    const updateAll = () => {
+      updateHint();
+      updateButtons();
+      updateFade();
+      updateDots();
+    };
+
+    if (prevBtn) {
+      prevBtn.addEventListener('click', () => scrollByAmount(-1));
+    }
+
+    if (nextBtn) {
+      nextBtn.addEventListener('click', () => scrollByAmount(1));
+    }
+
+    slider.addEventListener('scroll', updateAll, { passive: true });
+    slider.addEventListener('touchstart', hideHintOnInteraction, { passive: true });
+    slider.addEventListener('pointerdown', hideHintOnInteraction, { passive: true });
+    window.addEventListener('resize', updateAll);
+
+    if (desktopMq.addEventListener) {
+      desktopMq.addEventListener('change', updateAll);
+    } else if (desktopMq.addListener) {
+      desktopMq.addListener(updateAll);
+    }
+
+    buildDots();
+    updateAll();
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "DRYE Structural Answer",
+  "tag": "section",
+  "class": "shopify-section--drye-answer",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Fallback image"
+    },
+    {
+      "type": "text",
+      "id": "image_alt",
+      "label": "Fallback image alt text",
+      "default": "DRYE liner being put on under a nitrile glove"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "Asymmetric layering"
+    },
+    {
+      "type": "text",
+      "id": "heading_before",
+      "label": "Heading before italic",
+      "default": "A liner built for sealed gloves — "
+    },
+    {
+      "type": "text",
+      "id": "heading_em",
+      "label": "Italic heading text",
+      "default": "not open air."
+    },
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "Green subheading",
+      "default": "0.4mm thin. No chemicals. No coatings. Fits inside any work glove."
+    },
+    {
+      "type": "textarea",
+      "id": "body",
+      "label": "Body text",
+      "default": "In open air, fabrics work by absorbing sweat and releasing it into the air. Inside a sealed glove there is no air to release into. So the fabric saturates and sits wet against your skin. Asymmetric Layering doesn't absorb on the skin side. The structure routes moisture from skin to outer face — continuously, without saturation. Built for the only environment where this matters."
+    },
+    {
+      "type": "textarea",
+      "id": "footer_text",
+      "label": "Footer text",
+      "default": "Developed at the Swedish School of Textiles. Supported by Uppsala University and Vinnova."
+    },
+    {
+      "type": "text",
+      "id": "swipe_label",
+      "label": "Swipe pill label",
+      "default": "Swipe"
+    },
+    {
+      "type": "text",
+      "id": "cta_label",
+      "label": "CTA label",
+      "default": "SEE THE LINER"
+    },
+    {
+      "type": "url",
+      "id": "cta_url",
+      "label": "CTA URL"
+    },
+    {
+      "type": "text",
+      "id": "cta_note",
+      "label": "CTA note",
+      "default": "30-day refund · Ships within 24 hours"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "gallery_image",
+      "name": "Gallery image",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "text",
+          "id": "image_alt",
+          "label": "Image alt text"
+        }
+      ]
+    },
+    {
+      "type": "fact",
+      "name": "Fact",
+      "limit": 3,
+      "settings": [
+        {
+          "type": "text",
+          "id": "strong",
+          "label": "Bold lead-in",
+          "default": "No saturation point."
+        },
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "Fact text",
+          "default": " Moisture is continuously routed outward — not absorbed and held."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "DRYE Structural Answer",
+      "blocks": [
+        {
+          "type": "gallery_image"
+        },
+        {
+          "type": "gallery_image"
+        },
+        {
+          "type": "gallery_image"
+        },
+        {
+          "type": "fact",
+          "settings": {
+            "strong": "No saturation point.",
+            "text": " Moisture is continuously routed outward — not absorbed and held."
+          }
+        },
+        {
+          "type": "fact",
+          "settings": {
+            "strong": "Works under compression.",
+            "text": " The transport mechanism doesn't collapse when the glove presses down."
+          }
+        },
+        {
+          "type": "fact",
+          "settings": {
+            "strong": "0.4mm.",
+            "text": " Fits inside any sealed glove. No dexterity compromise."
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

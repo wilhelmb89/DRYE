@@ -9,82 +9,29 @@
  */
 {
   "sections": {
-    "article_hero_jnNYrA": {
-      "type": "article-hero",
-      "disabled": true,
-      "settings": {}
-    },
-    "article_hero_new_CMijb4": {
-      "type": "article-hero-new",
+    "hero": {
+      "type": "drye-article-hero",
       "settings": {
-        "article_title_font_size_desktop": 50,
-        "article_title_line_height_desktop": 60,
-        "article_title_font_size_tablet": 50,
-        "article_title_line_height_tablet": 60,
-        "article_title_font_size_mobile": 28,
-        "article_title_line_height_mobile": 32,
-        "date_font_size_desktop": 18,
-        "date_line_height_desktop": 28,
-        "date_font_size_tablet": 18,
-        "date_line_height_tablet": 28,
-        "date_font_size_mobile": 14,
-        "date_line_height_mobile": 21
+        "meta_location": "National Guard of Ukraine · 2nd Corps",
+        "meta_study": "Field Study · n=10",
+        "meta_read_time": "6 min read"
       }
     },
-    "main_article_CWgH44": {
-      "type": "main-article",
-      "disabled": true,
-      "custom_css": [
-        "{background-color: #ffffff;}"
-      ],
-      "settings": {}
-    },
-    "main_article_new_3jRG9T": {
-      "type": "main-article-new",
+    "main": {
+      "type": "drye-article-body",
       "settings": {
-        "title_font_size": 32
-      }
-    },
-    "articles_related_ayRN6d": {
-      "type": "articles-related",
-      "disabled": true,
-      "settings": {
-        "title": "You may also like",
-        "footer": true
-      }
-    },
-    "articles_related_new_yM7jaw": {
-      "type": "articles-related-new",
-      "settings": {
-        "title": "You may also like",
-        "footer": true,
-        "title_font_size_desktop": 48,
-        "title_line_height_desktop": 55,
-        "title_font_size_tablet": 42,
-        "title_line_height_tablet": 50,
-        "title_font_size_mobile": 24,
-        "title_line_height_mobile": 30,
-        "article_title_font_size_desktop": 24,
-        "article_title_line_height_desktop": 32,
-        "article_title_font_size_tablet": 23,
-        "article_title_line_height_tablet": 32,
-        "article_title_font_size_mobile": 22,
-        "article_title_line_height_mobile": 30,
-        "date_font_size_desktop": 16,
-        "date_line_height_desktop": 20,
-        "date_font_size_tablet": 16,
-        "date_line_height_tablet": 20,
-        "date_font_size_mobile": 16,
-        "date_line_height_mobile": 20
+        "hero_caption": "National Guard of Ukraine, 2nd Corps (\"Khartiya\"). 10 soldiers, structured questionnaire, signed personally by the Chaplain of 2nd Corps. 2025.",
+        "sidebar_claim": "Structural moisture transport. No saturation point.",
+        "sidebar_image": "shopify://shop_images/100i4444440055070_1_1_t.webp",
+        "sidebar_subline": "0.4mm · Machine washable · Patent pending",
+        "sidebar_cta_label": "See how it works →",
+        "sidebar_cta_link": "",
+        "toc_heading": "In this report"
       }
     }
   },
   "order": [
-    "article_hero_jnNYrA",
-    "article_hero_new_CMijb4",
-    "main_article_CWgH44",
-    "main_article_new_3jRG9T",
-    "articles_related_ayRN6d",
-    "articles_related_new_yM7jaw"
+    "hero",
+    "main"
   ]
 }

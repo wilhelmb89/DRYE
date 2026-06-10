@@ -1,0 +1,340 @@
+{% comment %}
+  DRYE — Textile Proof Videos
+  ----------------------------------------------------------------------------
+  Three vertical proof videos from the textile lab process. Answers the three
+  market objections: just another liner / liners get wet / liners fall apart.
+
+  Video delivery: Cloudflare Stream via iframe embed.
+    - Section-level setting:  cf_subdomain  (set once)
+    - Per-block setting:      stream_uid    (one per video)
+
+  Performance: iframes are NOT rendered on page load. An IntersectionObserver
+  injects the iframes only when the section is ~200px from entering the
+  viewport. Before that point, the section renders only the poster images.
+  Three videos never run their player JS until the user scrolls down here.
+
+  Build rules: dryeNEW-section + dryeNEW-container for global page width.
+  Typography owned by base.css via dryeNEW-* classes. Section CSS only
+  handles layout, color, spacing, borders, video framing, and the mobile
+  swipe-rail scroll behavior (local scroll behavior is allowed; the global
+  container is not replaced).
+{% endcomment %}
+
+{{ 'drye-textile-proof-videos.css' | asset_url | stylesheet_tag }}
+
+{%- assign cf_subdomain = section.settings.cf_subdomain | strip -%}
+
+<section
+  class="dryeNEW-section dryeTextileProof"
+  data-section-id="{{ section.id }}"
+  data-cf-subdomain="{{ cf_subdomain | escape }}"
+  aria-labelledby="dryeTextileProof-heading-{{ section.id }}"
+>
+  <div class="dryeNEW-container">
+
+    {%- comment -%} ──────── Intro ──────── {%- endcomment -%}
+    <header class="dryeTextileProof__intro">
+      {%- if section.settings.eyebrow != blank -%}
+        <span class="dryeNEW-micro dryeTextileProof__eyebrow dryeNEW-reveal">
+          {{ section.settings.eyebrow | escape }}
+        </span>
+      {%- endif -%}
+
+      {%- if section.settings.heading != blank or section.settings.heading_italic != blank -%}
+        <h2
+          id="dryeTextileProof-heading-{{ section.id }}"
+          class="dryeNEW-h2 dryeTextileProof__heading dryeNEW-reveal dryeNEW-rd1"
+        >
+          {%- if section.settings.heading != blank -%}
+            {{ section.settings.heading | escape }}
+          {%- endif -%}
+          {%- if section.settings.heading_italic != blank -%}
+            <em class="dryeNEW-em dryeTextileProof__headingItalic">
+              {{ section.settings.heading_italic | escape }}
+            </em>
+          {%- endif -%}
+        </h2>
+      {%- endif -%}
+
+      {%- if section.settings.body != blank -%}
+        <div class="dryeNEW-body dryeTextileProof__lede dryeNEW-reveal dryeNEW-rd2">
+          {{ section.settings.body }}
+        </div>
+      {%- endif -%}
+    </header>
+
+    {%- comment -%} ──────── Swipe rail / grid ──────── {%- endcomment -%}
+    {%- if section.blocks.size > 0 -%}
+      <div class="dryeTextileProof__railWrap">
+        <div class="dryeTextileProof__grid" role="list">
+
+          {%- for block in section.blocks -%}
+            {%- if block.type == 'proof_video' -%}
+              {%- liquid
+                assign delay_class = 'dryeNEW-rd1'
+                if forloop.index == 2
+                  assign delay_class = 'dryeNEW-rd2'
+                elsif forloop.index >= 3
+                  assign delay_class = 'dryeNEW-rd3'
+                endif
+              -%}
+
+              <article
+                class="dryeTextileProof__card dryeNEW-reveal {{ delay_class }}"
+                role="listitem"
+                {% if block.settings.stream_uid != blank %}data-stream-uid="{{ block.settings.stream_uid | strip | escape }}"{% endif %}
+                data-title="{{ block.settings.title | escape }}"
+                {{ block.shopify_attributes }}
+              >
+                <div class="dryeTextileProof__videoFrame">
+                  {%- if block.settings.fallback_image != blank -%}
+                    <img
+                      class="dryeTextileProof__poster"
+                      src="{{ block.settings.fallback_image | image_url: width: 1080 }}"
+                      srcset="{{ block.settings.fallback_image | image_url: width: 540 }} 540w, {{ block.settings.fallback_image | image_url: width: 1080 }} 1080w"
+                      sizes="(min-width: 768px) 33vw, 84vw"
+                      alt="{{ block.settings.title | escape }}"
+                      loading="lazy"
+                      width="{{ block.settings.fallback_image.width }}"
+                      height="{{ block.settings.fallback_image.height }}"
+                    >
+                  {%- else -%}
+                    <div class="dryeTextileProof__posterPlaceholder" aria-hidden="true"></div>
+                  {%- endif -%}
+                  {%- comment -%}
+                    Iframe is injected by the IntersectionObserver below,
+                    only when the section enters the viewport.
+                  {%- endcomment -%}
+                </div>
+
+                <div class="dryeTextileProof__cardText">
+                  {%- if block.settings.label != blank -%}
+                    <span class="dryeNEW-micro dryeTextileProof__cardLabel">
+                      {{ block.settings.label | escape }}
+                    </span>
+                  {%- endif -%}
+
+                  {%- if block.settings.title != blank -%}
+                    <h3 class="dryeNEW-h3 dryeTextileProof__cardTitle">
+                      {{ block.settings.title | escape }}
+                    </h3>
+                  {%- endif -%}
+
+                  {%- if block.settings.body != blank -%}
+                    <div class="dryeNEW-body--sm dryeTextileProof__cardBody">
+                      {{ block.settings.body }}
+                    </div>
+                  {%- endif -%}
+                </div>
+              </article>
+            {%- endif -%}
+          {%- endfor -%}
+
+        </div>
+      </div>
+    {%- endif -%}
+
+    {%- comment -%} ──────── Footer note ──────── {%- endcomment -%}
+    {%- if section.settings.footer_note != blank -%}
+      <div class="dryeNEW-body--sm dryeTextileProof__footer">
+        {{ section.settings.footer_note }}
+      </div>
+    {%- endif -%}
+
+  </div>
+</section>
+
+{%- comment -%}
+  Lazy loader: builds Cloudflare Stream iframes only when the section comes
+  near the viewport. Scoped to this section instance via data-section-id.
+{%- endcomment -%}
+<script>
+  (function () {
+    var sectionEl = document.querySelector('[data-section-id="{{ section.id }}"].dryeTextileProof');
+    if (!sectionEl) return;
+
+    var subdomain = (sectionEl.dataset.cfSubdomain || '').replace(/\/+$/, '');
+    var cards = sectionEl.querySelectorAll('[data-stream-uid]');
+    if (!cards.length || !subdomain) return;
+
+    function buildEmbedUrl(uid) {
+var params = [
+  'autoplay=true',
+  'muted=true',
+  'loop=true',
+  'preload=metadata',
+  'controls=false',
+  'fit=cover'
+].join('&');
+      return 'https://' + subdomain + '/' + encodeURIComponent(uid) + '/iframe?' + params;
+    }
+
+    function loadVideo(card) {
+      if (card.dataset.loaded === 'true') return;
+      var uid = card.dataset.streamUid;
+      if (!uid) return;
+
+      var frame = card.querySelector('.dryeTextileProof__videoFrame');
+      if (!frame) return;
+
+      var iframe = document.createElement('iframe');
+      iframe.src = buildEmbedUrl(uid);
+      iframe.className = 'dryeTextileProof__player';
+      iframe.setAttribute('allow', 'autoplay; encrypted-media; picture-in-picture');
+      iframe.setAttribute('allowfullscreen', '');
+      iframe.setAttribute('frameborder', '0');
+      iframe.setAttribute('loading', 'lazy');
+      iframe.setAttribute('title', (card.dataset.title || 'Proof video') + ' — DRYE textile lab');
+
+      frame.appendChild(iframe);
+      card.dataset.loaded = 'true';
+    }
+
+    function loadAll() {
+      cards.forEach(loadVideo);
+    }
+
+    if (!('IntersectionObserver' in window)) {
+      loadAll();
+      return;
+    }
+
+    var observer = new IntersectionObserver(function (entries) {
+      for (var i = 0; i < entries.length; i++) {
+        if (entries[i].isIntersecting) {
+          loadAll();
+          observer.disconnect();
+          return;
+        }
+      }
+    }, { rootMargin: '200px 0px' });
+
+    observer.observe(sectionEl);
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "DRYE textile proof videos",
+  "tag": "section",
+  "class": "shopify-section--drye-textile-proof",
+  "settings": [
+    { "type": "header", "content": "Intro" },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "BUILT DIFFERENTLY"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Not another liner."
+    },
+    {
+      "type": "text",
+      "id": "heading_italic",
+      "label": "Italic echo",
+      "info": "Renders italic on a new line under the heading.",
+      "default": "Built to behave differently."
+    },
+    {
+      "type": "richtext",
+      "id": "body",
+      "label": "Body",
+      "default": "<p>Most liners fail because they get wet or wear out. DRYE was engineered to avoid both.</p>"
+    },
+
+    { "type": "header", "content": "Cloudflare Stream" },
+    {
+      "type": "paragraph",
+      "content": "Videos are delivered via Cloudflare Stream. Set the customer subdomain once here, then paste each video's UID per block."
+    },
+    {
+      "type": "text",
+      "id": "cf_subdomain",
+      "label": "Cloudflare Stream subdomain",
+      "info": "e.g. customer-abc123.cloudflarestream.com (no https://, no trailing slash)"
+    },
+
+    { "type": "header", "content": "Footer" },
+    {
+      "type": "richtext",
+      "id": "footer_note",
+      "label": "Footer note",
+      "info": "Optional small note below the video grid."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "proof_video",
+      "name": "Proof video",
+      "limit": 3,
+      "settings": [
+        {
+          "type": "text",
+          "id": "stream_uid",
+          "label": "Cloudflare Stream UID",
+          "info": "The UID of the video in your Cloudflare Stream dashboard."
+        },
+        {
+          "type": "image_picker",
+          "id": "fallback_image",
+          "label": "Poster image",
+          "info": "Shown before the video loads. Vertical / 9:16 aspect recommended."
+        },
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Label",
+          "default": "01 / ORIGIN"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Built on rare textile machinery"
+        },
+        {
+          "type": "richtext",
+          "id": "body",
+          "label": "Body",
+          "default": "<p>Developed on advanced industrial textile machinery — not generic liner fabric. Engineered, not improvised.</p>"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "DRYE textile proof videos",
+      "blocks": [
+        {
+          "type": "proof_video",
+          "settings": {
+            "label": "01 / ORIGIN",
+            "title": "Built on rare textile machinery",
+            "body": "<p>Developed on advanced industrial textile machinery — not generic liner fabric. Engineered, not improvised.</p>"
+          }
+        },
+        {
+          "type": "proof_video",
+          "settings": {
+            "label": "02 / DURABILITY",
+            "title": "Knitted for repeated use",
+            "body": "<p>Built for repeated wear, washing and friction inside sealed gloves — designed to hold its shape shift after shift.</p>"
+          }
+        },
+        {
+          "type": "proof_video",
+          "settings": {
+            "label": "03 / DRYNESS",
+            "title": "Layered to stay dry longer",
+            "body": "<p>Asymmetric layering moves moisture away from the skin-facing side, helping the hand side stay drier for longer inside sealed gloves.</p>"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

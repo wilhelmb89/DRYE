@@ -1,0 +1,79 @@
+{{ 'drye-section-02-transformation-proof.css' | asset_url | stylesheet_tag }}
+
+<section class="drye-s2" aria-label="Transformation proof">
+  <div class="drye-s2__in">
+    {% for block in section.blocks %}
+      <div class="drye-s2__card" {{ block.shopify_attributes }}>
+        <div class="drye-s2__time">{{ block.settings.time }}</div>
+        <div class="drye-s2__quote">{{ block.settings.quote }}</div>
+        <div class="drye-s2__attr">{{ block.settings.attribution }}</div>
+      </div>
+    {% endfor %}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "DRYE— Transformation",
+  "tag": "section",
+  "class": "shopify-section-drye-section-02-transformation-proof",
+  "max_blocks": 3,
+  "blocks": [
+    {
+      "type": "timeline",
+      "name": "Timeline card",
+      "settings": [
+        {
+          "type": "text",
+          "id": "time",
+          "label": "Time",
+          "default": "After first use"
+        },
+        {
+          "type": "textarea",
+          "id": "quote",
+          "label": "Quote",
+          "default": "The irritation always came back. Since switching to the liners, my hands feel calmer after every game."
+        },
+        {
+          "type": "text",
+          "id": "attribution",
+          "label": "Attribution",
+          "default": "— Chris P. · Hockey player"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "DRYE — Transformation ",
+      "blocks": [
+        {
+          "type": "timeline",
+          "settings": {
+            "time": "After first use",
+            "quote": "The irritation always came back. Since switching to the liners, my hands feel calmer after every game.",
+            "attribution": "— Chris P. · Hockey player"
+          }
+        },
+        {
+          "type": "timeline",
+          "settings": {
+            "time": "After 2 weeks",
+            "quote": "Bright pink and raw. Completely healed in two weeks. After years of trying everything.",
+            "attribution": "— Deborah Fields · Cincinnati, OH"
+          }
+        },
+        {
+          "type": "timeline",
+          "settings": {
+            "time": "After 5 months",
+            "quote": "I still moisturize sometimes — but my hands are honestly just normal now.",
+            "attribution": "— Jens Stålnacke · Mine worker, Luleå"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

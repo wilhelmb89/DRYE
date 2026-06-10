@@ -1,0 +1,216 @@
+{{ 'dryeNEW-problem-beat-1.css' | asset_url | stylesheet_tag }}
+
+<section
+  class="dryeNEW-section dryeNEW-problem-beat-1"
+  id="{{ section.settings.section_id | default: 'problem' }}"
+  data-section-id="{{ section.id }}"
+  data-section-type="dryeNEW-problem-beat-1"
+  data-drye-section
+  data-section-index="4"
+  data-section-name="belief_breakers"
+>
+  <div class="dryeNEW-container">
+    <div class="dryeNEW-problem-beat-1__intro">
+      {% if section.settings.eyebrow != blank %}
+        <span class="dryeNEW-micro dryeNEW-problem-beat-1__eyebrow">
+          {{ section.settings.eyebrow }}
+        </span>
+      {% endif %}
+
+      {% if section.settings.heading_before != blank or section.settings.heading_em != blank %}
+        <h2 class="dryeNEW-h2 dryeNEW-problem-beat-1__heading">
+          {% if section.settings.heading_before != blank %}
+            {{ section.settings.heading_before }}
+          {% endif %}
+
+          {% if section.settings.heading_before != blank and section.settings.heading_em != blank %}
+            <br>
+          {% endif %}
+
+          {% if section.settings.heading_em != blank %}
+            <em>{{ section.settings.heading_em }}</em>
+          {% endif %}
+        </h2>
+      {% endif %}
+
+      {% if section.settings.lead != blank %}
+        <div class="dryeNEW-body dryeNEW-problem-beat-1__lead">
+          {{ section.settings.lead }}
+        </div>
+      {% endif %}
+    </div>
+
+    <div class="dryeNEW-problem-beat-1__cards-wrap">
+      <div class="dryeNEW-problem-beat-1__cards">
+        {% for block in section.blocks %}
+          {% if block.type == 'strike_card' %}
+            {% if block.settings.title != blank or block.settings.body != blank %}
+              <article class="dryeNEW-problem-beat-1__card" {{ block.shopify_attributes }}>
+                {% if block.settings.title != blank %}
+                  <div class="dryeNEW-body--caption dryeNEW-problem-beat-1__card-title">
+                    <span class="dryeNEW-problem-beat-1__strike">
+                      {{ block.settings.title }}
+                    </span>
+                  </div>
+                {% endif %}
+
+                {% if block.settings.body != blank %}
+                  <div class="dryeNEW-body--sm dryeNEW-problem-beat-1__card-body">
+                    {{ block.settings.body }}
+                  </div>
+                {% endif %}
+              </article>
+            {% endif %}
+          {% endif %}
+        {% endfor %}
+      </div>
+
+      <div class="dryeNEW-micro dryeNEW-problem-beat-1__swipe-hint" aria-hidden="true">
+        <span class="dryeNEW-problem-beat-1__swipe-text">Swipe</span>
+        <svg class="dryeNEW-problem-beat-1__swipe-icon" width="18" height="18" viewBox="0 0 24 24" fill="none">
+          <path d="M8 5l8 7-8 7" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="miter"/>
+        </svg>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  (function() {
+    var section = document.querySelector('[data-section-id="{{ section.id }}"]');
+    if (!section) return;
+
+    var cards = section.querySelector('.dryeNEW-problem-beat-1__cards');
+    var hint = section.querySelector('.dryeNEW-problem-beat-1__swipe-hint');
+
+    if (!cards || !hint) return;
+    if (window.innerWidth >= 768) return;
+
+    var hideHint = function() {
+      hint.classList.add('is-hidden');
+      cards.removeEventListener('scroll', onScroll);
+      cards.removeEventListener('touchstart', hideHint);
+      cards.removeEventListener('pointerdown', hideHint);
+    };
+
+    var onScroll = function() {
+      if (cards.scrollLeft > 12) {
+        hideHint();
+      }
+    };
+
+    cards.addEventListener('scroll', onScroll, { passive: true });
+    cards.addEventListener('touchstart', hideHint, { passive: true });
+    cards.addEventListener('pointerdown', hideHint, { passive: true });
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "DRYE NEW Problem Beat 1",
+  "tag": "section",
+  "class": "section-dryeNEW-problem-beat-1",
+  "settings": [
+    {
+      "type": "text",
+      "id": "section_id",
+      "label": "Section ID",
+      "default": "problem"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "Every solution you tried"
+    },
+    {
+      "type": "text",
+      "id": "heading_before",
+      "label": "Heading before italic",
+      "default": "It's not that you bought"
+    },
+    {
+      "type": "text",
+      "id": "heading_em",
+      "label": "Italic heading text",
+      "default": "the wrong product."
+    },
+    {
+      "type": "richtext",
+      "id": "lead",
+      "label": "Lead",
+      "default": "<p>Every solution you've tried is built for the wrong problem. They treat the symptom — cracked, red hands — instead of the cause: <strong>moisture locked against your skin for hours inside a sealed glove.</strong></p>"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "strike_card",
+      "name": "Strike card",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Cotton liners"
+        },
+        {
+          "type": "richtext",
+          "id": "body",
+          "label": "Body",
+          "default": "<p>Absorb moisture — then hold it against your skin. Inside a sealed glove, <strong>a wet cloth pressed against damaged skin.</strong> Hydrophilic fibres are the wrong material for this environment.</p>"
+        }
+      ]
+    }
+  ],
+  "max_blocks": 6,
+  "presets": [
+    {
+      "name": "DRYE NEW Problem Beat 1",
+      "blocks": [
+        {
+          "type": "strike_card",
+          "settings": {
+            "title": "Cotton liners",
+            "body": "<p>Absorb moisture — then hold it against your skin. Inside a sealed glove, <strong>a wet cloth pressed against damaged skin.</strong> Hydrophilic fibres are the wrong material for this environment.</p>"
+          }
+        },
+        {
+          "type": "strike_card",
+          "settings": {
+            "title": "Silk liners",
+            "body": "<p>Feel better initially. Saturate faster. <strong>By midday, the same wet-layer effect.</strong> Different texture, identical physics.</p>"
+          }
+        },
+        {
+          "type": "strike_card",
+          "settings": {
+            "title": "Barrier creams",
+            "body": "<p>Effective <em>after</em> a flare-up. <strong>None of them stop moisture from building up</strong> during your next 8-hour shift. You treat at night. It starts again Monday.</p>"
+          }
+        },
+        {
+          "type": "strike_card",
+          "settings": {
+            "title": "Switching glove brands",
+            "body": "<p>Nitrile, latex, vinyl, neoprene — they all occlude. <strong>Switching changes the feel. Not the physics.</strong></p>"
+          }
+        },
+        {
+          "type": "strike_card",
+          "settings": {
+            "title": "Moisturising before shifts",
+            "body": "<p>Standard advice. Assumes moisture can evaporate. <strong>Inside a sealed glove, it can't.</strong></p>"
+          }
+        },
+        {
+          "type": "strike_card",
+          "settings": {
+            "title": "Powder-free gloves",
+            "body": "<p>Removes one irritant. The core environment — <strong>sealed, occluded, compressed</strong> — remains completely unchanged.</p>"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

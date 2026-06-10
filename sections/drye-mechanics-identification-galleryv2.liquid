@@ -1,0 +1,284 @@
+{{ 'drye-mechanics-identification-galleryv2.css' | asset_url | stylesheet_tag }}
+
+<section class="dryeNEW-section mech-gallery" id="gallery-{{ section.id }}" data-section-id="{{ section.id }}">
+  <div class="dryeNEW-container">
+    <div class="mech-gallery__intro">
+      {% if section.settings.eyebrow != blank %}
+        <span class="dryeNEW-micro">{{ section.settings.eyebrow }}</span>
+      {% endif %}
+
+      {% if section.settings.heading != blank %}
+        <h2 class="dryeNEW-h2 mech-gallery__heading">
+          {{ section.settings.heading }}
+        </h2>
+      {% endif %}
+
+      {% if section.settings.body != blank %}
+        <div class="dryeNEW-body mech-gallery__sub">
+          {{ section.settings.body }}
+        </div>
+      {% endif %}
+    </div>
+
+    <div class="mech-gallery__strip-wrap">
+      <div class="mech-gallery__nav" aria-label="Gallery navigation">
+        <button
+          type="button"
+          class="mech-gallery__nav-btn mech-gallery__nav-btn--prev is-disabled"
+          data-gallery-prev
+          aria-label="Previous panels"
+        >
+          ←
+        </button>
+
+        <button
+          type="button"
+          class="mech-gallery__nav-btn mech-gallery__nav-btn--next"
+          data-gallery-next
+          aria-label="Next panels"
+        >
+          →
+        </button>
+      </div>
+
+      <div class="mech-gallery__strip" data-gallery-strip>
+        {% for block in section.blocks %}
+          <article class="mech-gallery__panel" {{ block.shopify_attributes }}>
+            <div class="mech-gallery__img">
+              {% if block.settings.image != blank %}
+                {% assign mech_gallery_image_alt = block.settings.image_alt | escape %}
+                {{
+                  block.settings.image
+                  | image_url: width: 900
+                  | image_tag: class: 'mech-gallery__img-el', loading: 'lazy', alt: mech_gallery_image_alt
+                }}
+              {% else %}
+                <div class="mech-gallery__img-placeholder"></div>
+              {% endif %}
+
+              <div class="mech-gallery__img-overlay"></div>
+
+              {% if block.settings.label != blank %}
+                <div class="mech-gallery__img-lbl">
+                  {{ block.settings.label }}
+                </div>
+              {% endif %}
+
+              {% if block.settings.role != blank %}
+                <div class="mech-gallery__img-role">
+                  {{ block.settings.role }}
+                </div>
+              {% endif %}
+            </div>
+
+            <div class="mech-gallery__quote">
+              {% if block.settings.quote != blank %}
+                <p class="dryeNEW-body mech-gallery__quote-text">
+                  {{ block.settings.quote }}
+                </p>
+              {% endif %}
+
+              {% if block.settings.source != blank %}
+                <p class="mech-gallery__quote-src">
+                  {{ block.settings.source }}
+                </p>
+              {% endif %}
+            </div>
+          </article>
+        {% endfor %}
+      </div>
+
+      <div class="mech-gallery__swipe-hint" data-gallery-swipe-hint aria-hidden="true">
+        {{ section.settings.swipe_label }}
+      </div>
+
+      <div class="mech-gallery__fade" aria-hidden="true"></div>
+    </div>
+  </div>
+</section>
+
+<script>
+  (() => {
+    const section = document.getElementById('gallery-{{ section.id }}');
+    if (!section) return;
+
+    const strip = section.querySelector('[data-gallery-strip]');
+    const hint = section.querySelector('[data-gallery-swipe-hint]');
+    const prevBtn = section.querySelector('[data-gallery-prev]');
+    const nextBtn = section.querySelector('[data-gallery-next]');
+
+    if (!strip) return;
+
+    const desktopMq = window.matchMedia('(min-width: 960px)');
+    let hasInteracted = false;
+
+    const getScrollAmount = () => {
+      const firstPanel = strip.querySelector('.mech-gallery__panel');
+      if (!firstPanel) return strip.clientWidth * 0.8;
+
+      const styles = window.getComputedStyle(strip);
+      const gapValue = styles.columnGap && styles.columnGap !== 'normal'
+        ? styles.columnGap
+        : styles.gap;
+      const gap = parseFloat(gapValue) || 0;
+
+      return firstPanel.getBoundingClientRect().width + gap;
+    };
+
+    const updateButtons = () => {
+      if (!prevBtn || !nextBtn) return;
+
+      const maxScroll = strip.scrollWidth - strip.clientWidth;
+      const current = strip.scrollLeft;
+
+      const isScrollable = maxScroll > 8;
+
+      prevBtn.classList.toggle('is-disabled', !isScrollable || current <= 8);
+      nextBtn.classList.toggle('is-disabled', !isScrollable || current >= maxScroll - 8);
+    };
+
+    const updateHint = () => {
+      if (!hint) return;
+
+      if (desktopMq.matches) {
+        hint.classList.add('is-hidden');
+        return;
+      }
+
+      const maxScroll = strip.scrollWidth - strip.clientWidth;
+      const hasScrollableContent = maxScroll > 8;
+
+      if (!hasScrollableContent || strip.scrollLeft > 16 || hasInteracted) {
+        hint.classList.add('is-hidden');
+      } else {
+        hint.classList.remove('is-hidden');
+      }
+    };
+
+    const hideHintOnInteraction = () => {
+      if (desktopMq.matches || !hint || hasInteracted) return;
+
+      hasInteracted = true;
+      hint.classList.add('is-hidden');
+    };
+
+    const scrollByAmount = (direction) => {
+      strip.scrollBy({
+        left: getScrollAmount() * direction,
+        behavior: 'smooth'
+      });
+    };
+
+    if (prevBtn) {
+      prevBtn.addEventListener('click', () => scrollByAmount(-1));
+    }
+
+    if (nextBtn) {
+      nextBtn.addEventListener('click', () => scrollByAmount(1));
+    }
+
+    strip.addEventListener('scroll', () => {
+      updateHint();
+      updateButtons();
+    }, { passive: true });
+
+    strip.addEventListener('touchstart', hideHintOnInteraction, { passive: true });
+    strip.addEventListener('pointerdown', hideHintOnInteraction, { passive: true });
+
+    window.addEventListener('resize', () => {
+      updateHint();
+      updateButtons();
+    });
+
+    window.addEventListener('load', () => {
+      updateHint();
+      updateButtons();
+    });
+
+    updateHint();
+    updateButtons();
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "DRYE Mechanics Gallery-v2",
+  "tag": "section",
+  "class": "shopify-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "Different shops. Same shift."
+    },
+    {
+      "type": "html",
+      "id": "heading",
+      "label": "Heading",
+      "default": "One of these <em class=\"dryeNEW-em\">is your Tuesday afternoon.</em>"
+    },
+    {
+      "type": "textarea",
+      "id": "body",
+      "label": "Body",
+      "default": "Five mechanics. Five glove types. Same thing happening inside every one of them."
+    },
+    {
+      "type": "text",
+      "id": "swipe_label",
+      "label": "Swipe hint label",
+      "default": "Swipe"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "panel",
+      "name": "Panel",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "text",
+          "id": "image_alt",
+          "label": "Image alt text",
+          "default": "Mechanic at work"
+        },
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Top label",
+          "default": "Nitrile · Summer"
+        },
+        {
+          "type": "text",
+          "id": "role",
+          "label": "Bottom role",
+          "default": "Auto repair, ~20 min in"
+        },
+        {
+          "type": "textarea",
+          "id": "quote",
+          "label": "Quote",
+          "default": "\"By 20 minutes my hands are sweating pools inside these gloves.\""
+        },
+        {
+          "type": "text",
+          "id": "source",
+          "label": "Source",
+          "default": "Automotive mechanic · TikTok #mechanic"
+        }
+      ]
+    }
+  ],
+  "max_blocks": 12,
+  "presets": [
+    {
+      "name": "DRYE Mechanics Gallery-v2"
+    }
+  ]
+}
+{% endschema %}
