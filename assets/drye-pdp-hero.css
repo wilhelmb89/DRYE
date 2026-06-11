@@ -227,7 +227,7 @@
 
 /* Right-side outer wrapper — mobile default */
 .hero .hero-info {
-  padding: 28px 20px 32px;
+  padding: 14px 20px 32px;
   border: none !important;
   display: flex;
   flex-direction: column;
@@ -498,8 +498,8 @@
   display: flex;
   align-items: baseline;
   gap: 10px;
-  margin-bottom: var(--space-16);
-  padding-top: var(--space-12);
+  margin-bottom: var(--space-10);
+  padding-top: var(--space-8);
   border-top: var(--border-base);
   flex-wrap: wrap;
 }
@@ -822,10 +822,10 @@
   list-style: none;
   display: flex;
   flex-direction: column;
-  gap: var(--space-8);
-  margin: 0 0 var(--space-14);
-  padding: var(--space-12) 0;
-  border-top: var(--border-base);
+  gap: var(--space-6);
+  margin: 0 0 var(--space-12);
+  padding: 0 0 var(--space-12);
+  border-top: none;
   border-bottom: var(--border-base);
 }
 
@@ -901,8 +901,8 @@
   background-color: transparent !important;
   gap: 0 !important;
   width: 100% !important;
-  padding: 14px 0 !important;
-  margin: 0 0 14px !important;
+  padding: 0 0 8px !important;
+  margin: 0 0 10px !important;
   border: none !important;
 }
 
@@ -931,8 +931,16 @@
   border-left: none !important;
 }
 
+.hero .trust-item {
+  padding: 6px 0 !important;
+}
+
 .hero .trust-item:first-child {
-  border-top: 1px solid var(--border) !important;
+  border-top: none !important;
+}
+
+.hero .trust-item:last-child {
+  border-bottom: none !important;
 }
 
 .hero .trust-item img {

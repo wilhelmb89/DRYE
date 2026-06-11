@@ -35,8 +35,8 @@
 
 /* Bleed modules carry their own vertical padding (the tinted/dark band) */
 .hero .pdp-mod--bleed {
-  padding-top: 26px;
-  padding-bottom: 26px;
+  padding-top: 22px;
+  padding-bottom: 22px;
   border-top: none;
 }
 
@@ -95,7 +95,7 @@
 /* ---- Missing interface: hairline 2-up grid ---------------------------- */
 
 .hero .pdp-mi__grid {
-  margin-top: 16px;
+  margin-top: 12px;
   display: grid;
   grid-template-columns: 1fr 1fr;
   border-left: 1px solid var(--border, #E5E7EB);
