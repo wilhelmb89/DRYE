@@ -203,7 +203,9 @@ assign review_count = section.settings.review_count_fallback
       </span>
     </div>
 
-    <div class="h-eye">{{ section.settings.eyebrow }}</div>
+    {% if section.settings.eyebrow != blank and section.settings.show_eyebrow %}
+      <div class="h-eye">{{ section.settings.eyebrow }}</div>
+    {% endif %}
 
     <h1 class="h-title">
       {{ section.settings.heading_line_1 }}<br>
@@ -576,27 +578,22 @@ assign review_count = section.settings.review_count_fallback
 {% assign wte_blocks = section.blocks | where: 'type', 'htab_wte_stage' %}
 {% assign faq_blocks = section.blocks | where: 'type', 'faq' %}
 
-{% comment %} v10 — FAQ: curated category tabs (in-column). Reuses tab + accordion JS. {% endcomment %}
+{% comment %}
+  v10 — FAQ: 3 tabs (in-column). Tab labels + per-tab counts are SECTION
+  settings (these survive Shopify's editor sync; per-block fields do not).
+  FAQ blocks are sliced into 3 groups by their order: tab 1 = first N1,
+  tab 2 = next N2, tab 3 = the rest. Reorder FAQs / tweak counts to taste.
+  Reuses the existing tab + accordion JS.
+{% endcomment %}
 {% if faq_blocks.size > 0 %}
   {% liquid
-    assign faq_cat_order = 'Feel,Grip,Lifetime,More' | split: ','
-    assign present = '|'
-    for b in faq_blocks
-      assign bc = b.settings.faq_tab | default: 'More'
-      assign marker = '|' | append: bc | append: '|'
-      unless present contains marker
-        assign present = present | append: bc | append: '|'
-      endunless
-    endfor
-    assign ordered_present = ''
-    for c in faq_cat_order
-      assign marker = '|' | append: c | append: '|'
-      if present contains marker
-        assign ordered_present = ordered_present | append: c | append: ','
-      endif
-    endfor
-    assign ordered_present = ordered_present | split: ','
-    assign cat_count = ordered_present.size
+    assign t1 = section.settings.faq_tab_1_label | default: 'Feel'
+    assign t2 = section.settings.faq_tab_2_label | default: 'Grip'
+    assign t3 = section.settings.faq_tab_3_label | default: 'Lifetime'
+
+    assign n1 = section.settings.faq_tab_1_count | default: 4
+    assign n2 = section.settings.faq_tab_2_count | default: 3
+    assign split2 = n1 | plus: n2
   %}
 
   <div class="pdp-mod pdp-mod--bleed pdp-faq" data-drye-tabs>
@@ -607,34 +604,34 @@ assign review_count = section.settings.review_count_fallback
       <h2 class="pdp-mod__h2">{{ section.settings.faq_heading }}</h2>
     {% endif %}
 
-    {% if cat_count > 1 %}
-      <div class="pdp-faq__tabs tab-nav" role="tablist">
-        {% for c in ordered_present %}
-          <button
-            type="button"
-            class="tab-btn{% if forloop.first %} active{% endif %}"
-            data-tab="faq-{{ forloop.index }}"
-            role="tab"
-            aria-selected="{% if forloop.first %}true{% else %}false{% endif %}"
-          >
-            {{ c }}
-          </button>
-        {% endfor %}
-      </div>
-    {% endif %}
+    <div class="pdp-faq__tabs tab-nav" role="tablist">
+      <button type="button" class="tab-btn active" data-tab="faq-1" role="tab" aria-selected="true">{{ t1 }}</button>
+      <button type="button" class="tab-btn" data-tab="faq-2" role="tab" aria-selected="false">{{ t2 }}</button>
+      <button type="button" class="tab-btn" data-tab="faq-3" role="tab" aria-selected="false">{{ t3 }}</button>
+    </div>
 
-    {% for c in ordered_present %}
+    {% for tabnum in (1..3) %}
       <div
-        class="tab-panel{% if forloop.first %} active{% endif %}{% if cat_count <= 1 %} pdp-faq__single{% endif %}"
-        data-panel="faq-{{ forloop.index }}"
+        class="tab-panel{% if forloop.first %} active{% endif %}"
+        data-panel="faq-{{ tabnum }}"
         role="tabpanel"
       >
         <div class="faq-list">
-          {% assign first_in_cat = true %}
+          {% assign first_in_tab = true %}
           {% for block in faq_blocks %}
-            {% assign bc = block.settings.faq_tab | default: 'More' %}
-            {% if bc == c %}
-              <div class="faq-item{% if first_in_cat or block.settings.open_by_default %} open{% endif %}" {{ block.shopify_attributes }}>
+            {% liquid
+              assign pos = forloop.index0
+              assign in_tab = false
+              if tabnum == 1 and pos < n1
+                assign in_tab = true
+              elsif tabnum == 2 and pos >= n1 and pos < split2
+                assign in_tab = true
+              elsif tabnum == 3 and pos >= split2
+                assign in_tab = true
+              endif
+            %}
+            {% if in_tab %}
+              <div class="faq-item{% if first_in_tab or block.settings.open_by_default %} open{% endif %}" {{ block.shopify_attributes }}>
                 <button type="button" class="faq-q">
                   <span class="faq-q-text">{{ block.settings.question }}</span>
                   <span class="faq-icon" aria-hidden="true"></span>
@@ -646,7 +643,7 @@ assign review_count = section.settings.review_count_fallback
                   </div>
                 </div>
               </div>
-              {% assign first_in_cat = false %}
+              {% assign first_in_tab = false %}
             {% endif %}
           {% endfor %}
         </div>
@@ -1112,6 +1109,7 @@ wteTimelines.forEach((timeline) => {
     { "type": "text", "id": "overlay_name", "label": "Overlay name", "default": "Deborah Fields — Cincinnati, OH" },
     { "type": "textarea", "id": "overlay_quote", "label": "Overlay quote", "default": "\"His hands were bright pink and raw. Completely healed in two weeks. I'd tried everything for years.\"" },
 
+    { "type": "checkbox", "id": "show_eyebrow", "label": "Show eyebrow above title", "default": false },
     { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "8 of 9 reported significant difference — first week" },
     { "type": "text", "id": "heading_line_1", "label": "Heading line 1", "default": "Moisture routing." },
     { "type": "text", "id": "heading_line_2", "label": "Heading line 2", "default": "Inside any glove." },
@@ -1197,8 +1195,14 @@ wteTimelines.forEach((timeline) => {
 
     { "type": "header", "content": "Module — FAQ tabs" },
     { "type": "text", "id": "faq_eyebrow", "label": "Eyebrow", "default": "Before you decide" },
-    { "type": "text", "id": "faq_heading", "label": "Heading", "default": "Three things buyers ask first." },
-    { "type": "paragraph", "content": "Group FAQ items into the Feel / Grip / Lifetime tabs using the FAQ tab field on each FAQ block. Items left on 'More' appear under a More tab. With only one category in use, the tab bar is hidden and a single accordion shows." },
+    { "type": "text", "id": "faq_heading", "label": "Heading", "default": "Common questions, sorted." },
+    { "type": "paragraph", "content": "Three tabs. FAQ blocks are split by their order: tab 1 gets the first N, tab 2 the next N, tab 3 the rest. Reorder FAQ blocks and set the counts below to control the grouping." },
+    { "type": "text", "id": "faq_tab_1_label", "label": "Tab 1 label", "default": "Feel" },
+    { "type": "range", "id": "faq_tab_1_count", "label": "Tab 1 — number of FAQs", "min": 1, "max": 12, "step": 1, "default": 4 },
+    { "type": "text", "id": "faq_tab_2_label", "label": "Tab 2 label", "default": "Grip" },
+    { "type": "range", "id": "faq_tab_2_count", "label": "Tab 2 — number of FAQs", "min": 1, "max": 12, "step": 1, "default": 3 },
+    { "type": "text", "id": "faq_tab_3_label", "label": "Tab 3 label", "default": "Lifetime" },
+    { "type": "paragraph", "content": "Tab 3 shows all remaining FAQs after tabs 1 and 2." },
 
     { "type": "header", "content": "Module — What to expect (timeline, dark)" },
     { "type": "text", "id": "wte_eyebrow", "label": "Eyebrow", "default": "What to expect" },
@@ -1380,8 +1384,7 @@ wteTimelines.forEach((timeline) => {
       "settings": [
         { "type": "text", "id": "question", "label": "Question", "default": "Your question" },
         { "type": "textarea", "id": "answer", "label": "Answer", "default": "Your answer." },
-        { "type": "checkbox", "id": "open_by_default", "label": "Open by default", "default": false },
-        { "type": "select", "id": "faq_tab", "label": "FAQ tab", "options": [ { "value": "Feel", "label": "Feel" }, { "value": "Grip", "label": "Grip" }, { "value": "Lifetime", "label": "Lifetime" }, { "value": "More", "label": "More" } ], "default": "More" }
+        { "type": "checkbox", "id": "open_by_default", "label": "Open by default", "default": false }
       ]
     },
     {

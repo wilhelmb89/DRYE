@@ -249,7 +249,7 @@
     top: var(--hero-nav-height);
     left: 0;
     width: 50%;
-    height: calc(100vh - var(--hero-nav-height));
+    height: calc(100vh - var(--hero-nav-height) - 40px);
     float: left;
     overflow: hidden;
   }
@@ -259,7 +259,7 @@
   }
 
   .hero .hero-info {
-    padding: 44px 48px;
+    padding: 22px 48px 44px;
     justify-content: flex-start;
     max-width: 520px;
     width: 50%;
@@ -287,7 +287,7 @@
 
   .hero .hero-media {
     width: auto;
-    height: calc(100vh - var(--hero-nav-height));
+    height: calc(100vh - var(--hero-nav-height) - 40px);
     max-height: var(--hero-media-max-height);
     position: sticky;
     top: var(--hero-nav-height);
@@ -476,7 +476,7 @@
 }
 
 .hero .stars {
-  color: var(--emerald);
+  color: #F5B301;
   font-size: 13px;
   letter-spacing: 1px;
   line-height: 1;
@@ -484,7 +484,7 @@
 
 .hero .stars-lbl {
   font-size: var(--fs-caption);
-  color: var(--emerald);
+  color: var(--muted);
   font-weight: var(--fw-semibold);
 }
 
@@ -749,6 +749,13 @@
 
 .hero .qty-block {
   margin-bottom: 12px;
+  display: none; /* mobile: hidden (qty defaults to 1) */
+}
+
+@media (min-width: 768px) {
+  .hero .qty-block {
+    display: block;
+  }
 }
 
 .hero .qty-wrap {

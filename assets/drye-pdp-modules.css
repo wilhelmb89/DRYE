@@ -338,7 +338,8 @@
 }
 
 .hero .pdp-wte .hero-wte-list li::before {
-  background: var(--sage, #5F8A8B);
+  background: none;
+  color: var(--sage, #5F8A8B);
 }
 
 .hero .pdp-wte .hero-wte-list strong {
