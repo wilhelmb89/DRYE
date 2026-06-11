@@ -1,0 +1,356 @@
+/* ==========================================================================
+   DRYE PDP v10 — in-column product-description modules
+   These live inside .hero-info (the right column). On desktop they scroll
+   beside the sticky gallery; on mobile .hero-info is the single column,
+   so they stack exactly like the v10 mockup.
+   Built through base.css tokens. Brand emerald/sage, DRYE fonts.
+   ========================================================================== */
+
+/* ---- Module shell ----------------------------------------------------- */
+
+.hero .pdp-mod {
+  margin-top: 22px;
+  padding-top: 24px;
+  border-top: 1px solid var(--border, #E5E7EB);
+}
+
+/* Full-bleed: cancel the hero-info horizontal padding so a module's
+   background spans the whole right column, then restore the padding inside.
+   hero-info padding-x is 20px below 768px and 48px at/above 768px. */
+.hero .pdp-mod--bleed {
+  margin-left: -20px;
+  margin-right: -20px;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+.hero .pdp-mod--soft {
+  background: var(--bg-soft, #F8FAFC);
+}
+
+.hero .pdp-mod--dark {
+  background: var(--bg-ink, #0F2230);
+  border-top-color: transparent;
+}
+
+/* Bleed modules carry their own vertical padding (the tinted/dark band) */
+.hero .pdp-mod--bleed {
+  padding-top: 26px;
+  padding-bottom: 26px;
+  border-top: none;
+}
+
+/* ---- Module type ------------------------------------------------------ */
+
+.hero .pdp-mod__eyebrow {
+  display: block;
+  margin-bottom: 8px;
+  font-family: "DM Sans", sans-serif;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--emerald, #0D9488);
+}
+
+.hero .pdp-mod--dark .pdp-mod__eyebrow {
+  color: var(--sage, #5F8A8B);
+}
+
+.hero .pdp-mod__h2 {
+  margin: 0 0 9px;
+  font-family: "Clash Grotesk", sans-serif;
+  font-size: clamp(20px, 5.5vw, 24px);
+  font-weight: 600;
+  letter-spacing: -0.03em;
+  line-height: 1.06;
+  color: var(--deep, #1E3A4C);
+}
+
+.hero .pdp-mod--dark .pdp-mod__h2 {
+  color: #fff;
+}
+
+.hero .pdp-mod__body {
+  margin: 0;
+  font-family: "DM Sans", sans-serif;
+  font-size: 13px;
+  line-height: 1.6;
+  color: var(--muted, #4B5563);
+}
+
+.hero .pdp-mod--dark .pdp-mod__body {
+  color: #C8D4DA;
+}
+
+.hero .pdp-mod__body strong {
+  color: var(--deep, #1E3A4C);
+  font-weight: 600;
+}
+
+.hero .pdp-mod--dark .pdp-mod__body strong {
+  color: #fff;
+}
+
+/* ---- Missing interface: hairline 2-up grid ---------------------------- */
+
+.hero .pdp-mi__grid {
+  margin-top: 16px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  border-left: 1px solid var(--border, #E5E7EB);
+  border-top: 1px solid var(--border, #E5E7EB);
+}
+
+.hero .pdp-mi__tile {
+  padding: 13px 13px 15px;
+  border-right: 1px solid var(--border, #E5E7EB);
+  border-bottom: 1px solid var(--border, #E5E7EB);
+  background: var(--bg, #fff);
+}
+
+.hero .pdp-mi__tile-title {
+  margin: 0 0 5px;
+  font-family: "Clash Grotesk", sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  line-height: 1.2;
+  color: var(--deep, #1E3A4C);
+}
+
+.hero .pdp-mi__tile-desc {
+  margin: 0;
+  font-family: "DM Sans", sans-serif;
+  font-size: 11.5px;
+  line-height: 1.45;
+  color: var(--muted, #4B5563);
+}
+
+/* ---- The invention: dark absorption comparison ------------------------ */
+
+.hero .pdp-inv__cmp {
+  margin-top: 18px;
+  display: grid;
+  gap: 12px;
+}
+
+.hero .pdp-inv__row {
+  display: grid;
+  grid-template-columns: 86px 1fr 48px;
+  gap: 10px;
+  align-items: center;
+}
+
+.hero .pdp-inv__name {
+  font-family: "DM Sans", sans-serif;
+  font-size: 10.5px;
+  line-height: 1.25;
+  color: #AEBFC8;
+}
+
+.hero .pdp-inv__bar {
+  display: block;
+  height: 2px;
+  background: var(--white-015, rgba(255, 255, 255, 0.15));
+}
+
+.hero .pdp-inv__bar i {
+  display: block;
+  height: 100%;
+  background: #8FA6B0;
+}
+
+.hero .pdp-inv__val {
+  font-family: "Clash Grotesk", sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+  text-align: right;
+  color: #fff;
+}
+
+.hero .pdp-inv__row.is-drye {
+  padding: 9px 0;
+  border-top: 1px solid rgba(13, 148, 136, 0.3);
+  border-bottom: 1px solid rgba(13, 148, 136, 0.3);
+}
+
+.hero .pdp-inv__row.is-drye .pdp-inv__name {
+  color: var(--white-085, rgba(255, 255, 255, 0.88));
+  font-weight: 500;
+}
+
+.hero .pdp-inv__row.is-drye .pdp-inv__bar i {
+  background: var(--emerald, #0D9488);
+}
+
+.hero .pdp-inv__row.is-drye .pdp-inv__val {
+  color: var(--emerald, #0D9488);
+}
+
+.hero .pdp-inv__note {
+  margin: 16px 0 0;
+  font-family: "DM Sans", sans-serif;
+  font-size: 11px;
+  line-height: 1.5;
+  color: var(--sage, #5F8A8B);
+}
+
+/* ---- Desktop refinements (sticky right column) ------------------------ */
+
+@media (min-width: 768px) {
+  .hero .pdp-mod--bleed {
+    margin-left: -48px;
+    margin-right: -48px;
+    padding-left: 48px;
+    padding-right: 48px;
+  }
+
+  .hero .pdp-mod__h2 {
+    font-size: 24px;
+  }
+
+  .hero .pdp-mod__body {
+    font-size: 14px;
+  }
+
+  .hero .pdp-mi__tile {
+    padding: 16px 16px 18px;
+  }
+
+  .hero .pdp-mi__tile-title {
+    font-size: 14px;
+  }
+
+  .hero .pdp-mi__tile-desc {
+    font-size: 12px;
+  }
+
+  .hero .pdp-inv__row {
+    grid-template-columns: 100px 1fr 52px;
+  }
+
+  .hero .pdp-inv__name {
+    font-size: 11.5px;
+  }
+
+  .hero .pdp-inv__val {
+    font-size: 12px;
+  }
+}
+
+/* ---- FAQ: curated category tabs --------------------------------------- */
+
+.hero .pdp-faq .pdp-faq__tabs {
+  margin-top: 14px;
+}
+
+.hero .pdp-faq .tab-panel.pdp-faq__single {
+  display: block;
+}
+
+/* Plus/minus icon in brand emerald */
+.hero .pdp-faq .faq-icon::before,
+.hero .pdp-faq .faq-icon::after {
+  background: var(--emerald, #0D9488);
+}
+
+/* ---- What to expect: dark timeline ------------------------------------ */
+
+.hero .pdp-wte .hero-wte-timeline {
+  margin-top: 16px;
+  display: block;
+}
+
+.hero .pdp-wte .hero-wte-stop {
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid var(--white-008, rgba(255, 255, 255, 0.08));
+  overflow: visible;
+}
+
+.hero .pdp-wte .hero-wte-stop:last-child {
+  border-bottom: none;
+}
+
+.hero .pdp-wte .hero-wte-stop::before {
+  display: none;
+}
+
+.hero .pdp-wte .hero-wte-stop.is-open {
+  background: transparent;
+  border-color: var(--white-008, rgba(255, 255, 255, 0.08));
+}
+
+.hero .pdp-wte .hero-wte-trigger {
+  grid-template-columns: 28px minmax(0, 1fr) 20px;
+  gap: 11px;
+  padding: 11px 0;
+}
+
+.hero .pdp-wte .hero-wte-clock {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  border: 1px solid var(--sage-030, rgba(95, 138, 139, 0.4));
+  background: transparent;
+  color: var(--sage, #5F8A8B);
+}
+
+.hero .pdp-wte .hero-wte-stop.is-open .hero-wte-clock {
+  background: var(--emerald, #0D9488);
+  border-color: var(--emerald, #0D9488);
+  color: #fff;
+}
+
+.hero .pdp-wte .hero-wte-clock svg {
+  width: 15px;
+  height: 15px;
+}
+
+.hero .pdp-wte .hero-wte-time {
+  color: var(--emerald, #0D9488);
+  font-family: "Clash Grotesk", sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.hero .pdp-wte .hero-wte-title {
+  color: var(--white-080, rgba(255, 255, 255, 0.82));
+  font-size: 11.5px;
+  line-height: 1.4;
+}
+
+.hero .pdp-wte .hero-wte-stop.is-open .hero-wte-title {
+  color: #fff;
+}
+
+.hero .pdp-wte .hero-wte-title em {
+  color: var(--sage, #5F8A8B);
+}
+
+.hero .pdp-wte .hero-wte-toggle {
+  color: var(--white-035, rgba(255, 255, 255, 0.35));
+}
+
+.hero .pdp-wte .hero-wte-list li {
+  color: var(--white-075, rgba(255, 255, 255, 0.75));
+}
+
+.hero .pdp-wte .hero-wte-list li::before {
+  background: var(--sage, #5F8A8B);
+}
+
+.hero .pdp-wte .hero-wte-list strong {
+  color: #fff;
+}
+
+@media (min-width: 768px) {
+  .hero .pdp-wte .hero-wte-time {
+    font-size: 14px;
+  }
+
+  .hero .pdp-wte .hero-wte-title {
+    font-size: 12px;
+  }
+}

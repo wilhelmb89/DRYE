@@ -13,6 +13,7 @@ assign review_count = section.settings.review_count_fallback
 
 {{ 'drye-pdp-hero.css' | asset_url | stylesheet_tag }}
 {{ 'drye-review-slider.css' | asset_url | stylesheet_tag }}
+{{ 'drye-pdp-modules.css' | asset_url | stylesheet_tag }}
 
 <section
   class="hero"
@@ -405,15 +406,6 @@ assign review_count = section.settings.review_count_fallback
     {% endform %}
 
 
-{% if section.settings.show_inline_review_slider %}
-  {% for block in section.blocks %}
-    {% if block.type == 'review_slider' %}
-      <div class="pdp-review-slider-block" {{ block.shopify_attributes }}>
-        {% render 'drye-review-slider-inline', block: block %}
-      </div>
-    {% endif %}
-  {% endfor %}
-{% endif %}
     <div class="trust-row">
       <div class="trust-item">
         <img
@@ -448,6 +440,16 @@ assign review_count = section.settings.review_count_fallback
         <span>{{ section.settings.trust_text_3 }}</span>
       </div>
     </div>
+
+    {% if section.settings.show_inline_review_slider %}
+      {% for block in section.blocks %}
+        {% if block.type == 'review_slider' %}
+          <div class="pdp-review-slider-block" {{ block.shopify_attributes }}>
+            {% render 'drye-review-slider-inline', block: block %}
+          </div>
+        {% endif %}
+      {% endfor %}
+    {% endif %}
 
 
     {% assign desc_media = section.blocks | where: 'type', 'desc_media' %}
@@ -498,62 +500,141 @@ assign review_count = section.settings.review_count_fallback
       </div>
     {% endif %}
 
-{% comment %}
-  Pixel tabs module: FAQs / What to Expect / Reviews
-  No eyebrow, no heading, no lead text.
-{% endcomment %}
+{% comment %} v10 — Missing interface: visual product-description grid (in-column) {% endcomment %}
+{% if section.settings.mi_heading != blank %}
+  <div class="pdp-mod pdp-mod--bleed pdp-mod--soft pdp-mi">
+    {% if section.settings.mi_eyebrow != blank %}
+      <span class="pdp-mod__eyebrow">{{ section.settings.mi_eyebrow }}</span>
+    {% endif %}
+    <h2 class="pdp-mod__h2">{{ section.settings.mi_heading }}</h2>
+    {% if section.settings.mi_body != blank %}
+      <p class="pdp-mod__body">{{ section.settings.mi_body }}</p>
+    {% endif %}
+
+    <div class="pdp-mi__grid">
+      {% for i in (1..6) %}
+        {% liquid
+          assign t_key = 'mi_tile_' | append: i | append: '_title'
+          assign d_key = 'mi_tile_' | append: i | append: '_desc'
+          assign tile_title = section.settings[t_key]
+          assign tile_desc = section.settings[d_key]
+        %}
+        {% if tile_title != blank %}
+          <div class="pdp-mi__tile">
+            <h3 class="pdp-mi__tile-title">{{ tile_title }}</h3>
+            {% if tile_desc != blank %}
+              <p class="pdp-mi__tile-desc">{{ tile_desc }}</p>
+            {% endif %}
+          </div>
+        {% endif %}
+      {% endfor %}
+    </div>
+  </div>
+{% endif %}
+
+{% comment %} v10 — The invention: dark absorption comparison (in-column) {% endcomment %}
+{% if section.settings.inv_heading != blank %}
+  <div class="pdp-mod pdp-mod--bleed pdp-mod--dark pdp-inv">
+    {% if section.settings.inv_eyebrow != blank %}
+      <span class="pdp-mod__eyebrow">{{ section.settings.inv_eyebrow }}</span>
+    {% endif %}
+    <h2 class="pdp-mod__h2">{{ section.settings.inv_heading }}</h2>
+    {% if section.settings.inv_body != blank %}
+      <p class="pdp-mod__body">{{ section.settings.inv_body }}</p>
+    {% endif %}
+
+    <div class="pdp-inv__cmp">
+      {% for i in (1..6) %}
+        {% liquid
+          assign n_key = 'inv_row_' | append: i | append: '_name'
+          assign v_key = 'inv_row_' | append: i | append: '_value'
+          assign p_key = 'inv_row_' | append: i | append: '_percent'
+          assign h_key = 'inv_row_' | append: i | append: '_highlight'
+          assign row_name = section.settings[n_key]
+          assign row_value = section.settings[v_key]
+          assign row_percent = section.settings[p_key] | default: 0
+          assign row_highlight = section.settings[h_key]
+        %}
+        {% if row_name != blank %}
+          <div class="pdp-inv__row{% if row_highlight %} is-drye{% endif %}">
+            <span class="pdp-inv__name">{{ row_name }}</span>
+            <span class="pdp-inv__bar" aria-hidden="true">
+              <i style="width: {{ row_percent }}%;"></i>
+            </span>
+            <strong class="pdp-inv__val">{{ row_value }}</strong>
+          </div>
+        {% endif %}
+      {% endfor %}
+    </div>
+
+    {% if section.settings.inv_note != blank %}
+      <p class="pdp-inv__note">{{ section.settings.inv_note }}</p>
+    {% endif %}
+  </div>
+{% endif %}
 
 {% assign wte_blocks = section.blocks | where: 'type', 'htab_wte_stage' %}
 {% assign faq_blocks = section.blocks | where: 'type', 'faq' %}
-{% assign review_block = section.blocks | where: 'type', 'review_slider' | first %}
 
-{% if faq_blocks.size > 0 or wte_blocks.size > 0 or review_block %}
-  <section class="tabs-section" data-drye-tabs>
-    <div class="inner">
+{% comment %} v10 — FAQ: curated category tabs (in-column). Reuses tab + accordion JS. {% endcomment %}
+{% if faq_blocks.size > 0 %}
+  {% liquid
+    assign faq_cat_order = 'Feel,Grip,Lifetime,More' | split: ','
+    assign present = '|'
+    for b in faq_blocks
+      assign bc = b.settings.faq_tab | default: 'More'
+      assign marker = '|' | append: bc | append: '|'
+      unless present contains marker
+        assign present = present | append: bc | append: '|'
+      endunless
+    endfor
+    assign ordered_present = ''
+    for c in faq_cat_order
+      assign marker = '|' | append: c | append: '|'
+      if present contains marker
+        assign ordered_present = ordered_present | append: c | append: ','
+      endif
+    endfor
+    assign ordered_present = ordered_present | split: ','
+    assign cat_count = ordered_present.size
+  %}
 
-      <div class="tab-nav" role="tablist">
-        {% if faq_blocks.size > 0 %}
+  <div class="pdp-mod pdp-mod--bleed pdp-faq" data-drye-tabs>
+    {% if section.settings.faq_eyebrow != blank %}
+      <span class="pdp-mod__eyebrow">{{ section.settings.faq_eyebrow }}</span>
+    {% endif %}
+    {% if section.settings.faq_heading != blank %}
+      <h2 class="pdp-mod__h2">{{ section.settings.faq_heading }}</h2>
+    {% endif %}
+
+    {% if cat_count > 1 %}
+      <div class="pdp-faq__tabs tab-nav" role="tablist">
+        {% for c in ordered_present %}
           <button
             type="button"
-            class="tab-btn active"
-            data-tab="faq"
+            class="tab-btn{% if forloop.first %} active{% endif %}"
+            data-tab="faq-{{ forloop.index }}"
             role="tab"
-            aria-selected="true"
+            aria-selected="{% if forloop.first %}true{% else %}false{% endif %}"
           >
-            {{ section.settings.htab_faq_label | default: 'FAQs' }}
+            {{ c }}
           </button>
-        {% endif %}
-
-        {% if wte_blocks.size > 0 %}
-          <button
-            type="button"
-            class="tab-btn{% unless faq_blocks.size > 0 %} active{% endunless %}"
-            data-tab="wte"
-            role="tab"
-            aria-selected="{% if faq_blocks.size > 0 %}false{% else %}true{% endif %}"
-          >
-            {{ section.settings.htab_wte_label | default: 'What to Expect' }}
-          </button>
-        {% endif %}
-
-        {% if review_block %}
-          <button
-            type="button"
-            class="tab-btn{% unless faq_blocks.size > 0 or wte_blocks.size > 0 %} active{% endunless %}"
-            data-tab="rev"
-            role="tab"
-            aria-selected="{% if faq_blocks.size > 0 or wte_blocks.size > 0 %}false{% else %}true{% endif %}"
-          >
-            {{ section.settings.htab_rev_label | default: 'Reviews' }}
-          </button>
-        {% endif %}
+        {% endfor %}
       </div>
+    {% endif %}
 
-      {% if faq_blocks.size > 0 %}
-        <div class="tab-panel active" data-panel="faq" role="tabpanel">
-          <div class="faq-list">
-            {% for block in faq_blocks %}
-              <div class="faq-item{% if block.settings.open_by_default %} open{% endif %}" {{ block.shopify_attributes }}>
+    {% for c in ordered_present %}
+      <div
+        class="tab-panel{% if forloop.first %} active{% endif %}{% if cat_count <= 1 %} pdp-faq__single{% endif %}"
+        data-panel="faq-{{ forloop.index }}"
+        role="tabpanel"
+      >
+        <div class="faq-list">
+          {% assign first_in_cat = true %}
+          {% for block in faq_blocks %}
+            {% assign bc = block.settings.faq_tab | default: 'More' %}
+            {% if bc == c %}
+              <div class="faq-item{% if first_in_cat or block.settings.open_by_default %} open{% endif %}" {{ block.shopify_attributes }}>
                 <button type="button" class="faq-q">
                   <span class="faq-q-text">{{ block.settings.question }}</span>
                   <span class="faq-icon" aria-hidden="true"></span>
@@ -565,17 +646,25 @@ assign review_count = section.settings.review_count_fallback
                   </div>
                 </div>
               </div>
-            {% endfor %}
-          </div>
+              {% assign first_in_cat = false %}
+            {% endif %}
+          {% endfor %}
         </div>
-      {% endif %}
+      </div>
+    {% endfor %}
+  </div>
+{% endif %}
 
+{% comment %} v10 — What to expect: dark timeline (in-column). Reuses WTE accordion JS. {% endcomment %}
 {% if wte_blocks.size > 0 %}
-  <div
-    class="tab-panel{% unless faq_blocks.size > 0 %} active{% endunless %}"
-    data-panel="wte"
-    role="tabpanel"
-  >
+  <div class="pdp-mod pdp-mod--bleed pdp-mod--dark pdp-wte">
+    {% if section.settings.wte_eyebrow != blank %}
+      <span class="pdp-mod__eyebrow">{{ section.settings.wte_eyebrow }}</span>
+    {% endif %}
+    {% if section.settings.wte_heading != blank %}
+      <h2 class="pdp-mod__h2">{{ section.settings.wte_heading }}</h2>
+    {% endif %}
+
     <div class="hero-wte-timeline" data-hero-wte-timeline>
       {% for block in wte_blocks %}
         {% liquid
@@ -667,89 +756,6 @@ assign review_count = section.settings.review_count_fallback
   </div>
 {% endif %}
 
-{% if review_block %}
-  <div
-    class="tab-panel{% unless faq_blocks.size > 0 or wte_blocks.size > 0 %} active{% endunless %}"
-    data-panel="rev"
-    role="tabpanel"
-  >
-    <div class="testi-grid">
-      {% for i in (1..9) %}
-        {% liquid
-          assign quote_key = 'review_' | append: i | append: '_quote'
-          assign name_key = 'review_' | append: i | append: '_name'
-          assign location_key = 'review_' | append: i | append: '_location'
-          assign label_key = 'review_' | append: i | append: '_label'
-          assign stars_key = 'review_' | append: i | append: '_stars'
-          assign badge_key = 'review_' | append: i | append: '_badge_text'
-          assign attribution_key = 'review_' | append: i | append: '_attribution'
-          assign show_b2b_key = 'review_' | append: i | append: '_show_as_b2b'
-
-          assign rev_quote = review_block.settings[quote_key]
-          assign rev_name = review_block.settings[name_key]
-          assign rev_location = review_block.settings[location_key]
-          assign rev_label = review_block.settings[label_key]
-          assign rev_stars = review_block.settings[stars_key] | default: 5 | plus: 0
-          assign rev_badge = review_block.settings[badge_key]
-          assign rev_attribution = review_block.settings[attribution_key]
-          assign rev_show_b2b = review_block.settings[show_b2b_key]
-        %}
-
-        {% if rev_quote != blank %}
-          <div class="testi-card">
-            {% if rev_show_b2b %}
-              <div class="testi-detail">
-                {{ rev_badge | default: 'Verified' }}
-              </div>
-            {% else %}
-              <div class="testi-stars" aria-label="{{ rev_stars }} out of 5 stars">
-                {% for s in (1..rev_stars) %}
-                  <svg viewBox="0 0 11 11" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                    <path d="M5.5 0L6.7 3.8h4L7.5 6.2 8.7 10 5.5 7.6 2.3 10l1.2-3.8L.3 3.8h4L5.5 0z" fill="#5F8A8B"/>
-                  </svg>
-                {% endfor %}
-              </div>
-            {% endif %}
-
-            <p class="testi-quote">
-              “{{ rev_quote | escape }}”
-            </p>
-
-            <div class="testi-meta">
-              {% if rev_name != blank %}
-                <span class="testi-name">{{ rev_name | escape }}</span>
-              {% endif %}
-
-              {% if rev_label != blank or rev_location != blank %}
-                <span class="testi-role">
-                  {{ rev_label | escape }}{% if rev_label != blank and rev_location != blank %} · {% endif %}{{ rev_location | escape }}
-                </span>
-              {% endif %}
-            </div>
-
-            <span class="testi-detail">
-              <svg viewBox="0 0 8 10" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                <path d="M3.94 9.65C2.83 9.35 1.85 8.7 1.14 7.79.43 6.89.03 5.78 0 4.63V1.21L3.94 0l3.94 1.21v3.42c-.03 1.15-.43 2.26-1.14 3.16-.71.91-1.69 1.56-2.8 1.86z" fill="#9CA3AF"/>
-                <path d="M3.3 5.27L2.16 4.22l-.57.53 1.14 1.05.57.53.57-.53 2.28-2.1-.57-.52-2.28 2.1z" fill="#fff"/>
-              </svg>
-              {{ rev_attribution | default: 'Verified buyer' }}
-            </span>
-          </div>
-        {% endif %}
-      {% endfor %}
-    </div>
-
-    <div class="tabs-cta-wrap">
-      <a href="#reviews" class="tabs-cta">
-        {{ section.settings.htab_rev_link_label | default: 'Read all reviews ↓' }}
-      </a>
-    </div>
-  </div>
-{% endif %}
-
-    </div>
-  </section>
-{% endif %}
 
     <script type="application/json" data-product-json>
       {{ current_product | json }}
@@ -1137,7 +1143,66 @@ wteTimelines.forEach((timeline) => {
     { "type": "text", "id": "trust_text_2", "label": "Trust text 2", "default": "30-day money-back guarantee" },
     { "type": "text", "id": "trust_text_3", "label": "Trust text 3", "default": "Ships within 24 hours" },
 
-    { "type": "text", "id": "description_toggle_closed", "label": "Description label", "default": "Product description" }
+    { "type": "text", "id": "description_toggle_closed", "label": "Description label", "default": "Product description" },
+
+    { "type": "checkbox", "id": "show_inline_review_slider", "label": "Show inline review slider (under buy box)", "default": true },
+
+    { "type": "header", "content": "Module — Missing interface (grid)" },
+    { "type": "text", "id": "mi_eyebrow", "label": "Eyebrow", "default": "The missing interface" },
+    { "type": "text", "id": "mi_heading", "label": "Heading", "default": "We wanted to solve the inside." },
+    { "type": "textarea", "id": "mi_body", "label": "Body", "default": "Every liner that absorbs has a saturation point. DRYE is built so the skin side does not hold sweat — it routes moisture outward." },
+    { "type": "text", "id": "mi_tile_1_title", "label": "Tile 1 title", "default": "Skin stays drier" },
+    { "type": "textarea", "id": "mi_tile_1_desc", "label": "Tile 1 desc", "default": "Sweat moves away from skin instead of sitting inside the glove." },
+    { "type": "text", "id": "mi_tile_2_title", "label": "Tile 2 title", "default": "Fits sealed gloves" },
+    { "type": "textarea", "id": "mi_tile_2_desc", "label": "Tile 2 desc", "default": "0.4mm thin under nitrile, latex, vinyl and rubber." },
+    { "type": "text", "id": "mi_tile_3_title", "label": "Tile 3 title", "default": "Easier glove changes" },
+    { "type": "textarea", "id": "mi_tile_3_desc", "label": "Tile 3 desc", "default": "Nitrile slides on and off over a dry layer, not wet skin." },
+    { "type": "text", "id": "mi_tile_4_title", "label": "Tile 4 title", "default": "Built for months" },
+    { "type": "textarea", "id": "mi_tile_4_desc", "label": "Tile 4 desc", "default": "Washable, reusable, made for repeated shifts." },
+    { "type": "text", "id": "mi_tile_5_title", "label": "Tile 5 title (optional)" },
+    { "type": "textarea", "id": "mi_tile_5_desc", "label": "Tile 5 desc (optional)" },
+    { "type": "text", "id": "mi_tile_6_title", "label": "Tile 6 title (optional)" },
+    { "type": "textarea", "id": "mi_tile_6_desc", "label": "Tile 6 desc (optional)" },
+
+    { "type": "header", "content": "Module — The invention (absorption, dark)" },
+    { "type": "text", "id": "inv_eyebrow", "label": "Eyebrow", "default": "The invention" },
+    { "type": "text", "id": "inv_heading", "label": "Heading", "default": "Why hands can remain dry." },
+    { "type": "textarea", "id": "inv_body", "label": "Body", "default": "Asymmetric layering. One direction: away from skin. Every absorbing liner eventually fills up and becomes the wet layer. DRYE routes moisture outward instead — the skin side is built not to hold sweat." },
+    { "type": "paragraph", "content": "Bars show moisture regain — how much water a fibre holds. Higher = wetter against skin." },
+    { "type": "text", "id": "inv_row_1_name", "label": "Row 1 name", "default": "Merino wool" },
+    { "type": "text", "id": "inv_row_1_value", "label": "Row 1 value", "default": "15–18%" },
+    { "type": "range", "id": "inv_row_1_percent", "label": "Row 1 bar %", "min": 0, "max": 100, "step": 1, "unit": "%", "default": 100 },
+    { "type": "checkbox", "id": "inv_row_1_highlight", "label": "Row 1 highlight (DRYE)", "default": false },
+    { "type": "text", "id": "inv_row_2_name", "label": "Row 2 name", "default": "Bamboo viscose" },
+    { "type": "text", "id": "inv_row_2_value", "label": "Row 2 value", "default": "13%" },
+    { "type": "range", "id": "inv_row_2_percent", "label": "Row 2 bar %", "min": 0, "max": 100, "step": 1, "unit": "%", "default": 78 },
+    { "type": "checkbox", "id": "inv_row_2_highlight", "label": "Row 2 highlight (DRYE)", "default": false },
+    { "type": "text", "id": "inv_row_3_name", "label": "Row 3 name", "default": "Silk" },
+    { "type": "text", "id": "inv_row_3_value", "label": "Row 3 value", "default": "11%" },
+    { "type": "range", "id": "inv_row_3_percent", "label": "Row 3 bar %", "min": 0, "max": 100, "step": 1, "unit": "%", "default": 65 },
+    { "type": "checkbox", "id": "inv_row_3_highlight", "label": "Row 3 highlight (DRYE)", "default": false },
+    { "type": "text", "id": "inv_row_4_name", "label": "Row 4 name", "default": "Cotton" },
+    { "type": "text", "id": "inv_row_4_value", "label": "Row 4 value", "default": "7–8%" },
+    { "type": "range", "id": "inv_row_4_percent", "label": "Row 4 bar %", "min": 0, "max": 100, "step": 1, "unit": "%", "default": 47 },
+    { "type": "checkbox", "id": "inv_row_4_highlight", "label": "Row 4 highlight (DRYE)", "default": false },
+    { "type": "text", "id": "inv_row_5_name", "label": "Row 5 name", "default": "Polyester" },
+    { "type": "text", "id": "inv_row_5_value", "label": "Row 5 value", "default": "0.4%" },
+    { "type": "range", "id": "inv_row_5_percent", "label": "Row 5 bar %", "min": 0, "max": 100, "step": 1, "unit": "%", "default": 6 },
+    { "type": "checkbox", "id": "inv_row_5_highlight", "label": "Row 5 highlight (DRYE)", "default": false },
+    { "type": "text", "id": "inv_row_6_name", "label": "Row 6 name", "default": "DRYE Asymmetric layering" },
+    { "type": "text", "id": "inv_row_6_value", "label": "Row 6 value", "default": "<0.1%" },
+    { "type": "range", "id": "inv_row_6_percent", "label": "Row 6 bar %", "min": 0, "max": 100, "step": 1, "unit": "%", "default": 3 },
+    { "type": "checkbox", "id": "inv_row_6_highlight", "label": "Row 6 highlight (DRYE)", "default": true },
+    { "type": "text", "id": "inv_note", "label": "Footnote", "default": "Same thin layer. One direction: away from skin." },
+
+    { "type": "header", "content": "Module — FAQ tabs" },
+    { "type": "text", "id": "faq_eyebrow", "label": "Eyebrow", "default": "Before you decide" },
+    { "type": "text", "id": "faq_heading", "label": "Heading", "default": "Three things buyers ask first." },
+    { "type": "paragraph", "content": "Group FAQ items into the Feel / Grip / Lifetime tabs using the FAQ tab field on each FAQ block. Items left on 'More' appear under a More tab. With only one category in use, the tab bar is hidden and a single accordion shows." },
+
+    { "type": "header", "content": "Module — What to expect (timeline, dark)" },
+    { "type": "text", "id": "wte_eyebrow", "label": "Eyebrow", "default": "What to expect" },
+    { "type": "text", "id": "wte_heading", "label": "Heading", "default": "One layer. One shift." }
   ],
   "blocks": [
     {
@@ -1315,7 +1380,8 @@ wteTimelines.forEach((timeline) => {
       "settings": [
         { "type": "text", "id": "question", "label": "Question", "default": "Your question" },
         { "type": "textarea", "id": "answer", "label": "Answer", "default": "Your answer." },
-        { "type": "checkbox", "id": "open_by_default", "label": "Open by default", "default": false }
+        { "type": "checkbox", "id": "open_by_default", "label": "Open by default", "default": false },
+        { "type": "select", "id": "faq_tab", "label": "FAQ tab", "options": [ { "value": "Feel", "label": "Feel" }, { "value": "Grip", "label": "Grip" }, { "value": "Lifetime", "label": "Lifetime" }, { "value": "More", "label": "More" } ], "default": "More" }
       ]
     },
     {

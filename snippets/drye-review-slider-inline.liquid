@@ -1,12 +1,10 @@
 {% comment %}
   DRYE Mini Review — compact PDP Hero review slider
-  Keeps new low/compact layout.
-  Adds old features:
-  - Prev/next arrows
-  - B2B badge instead of stars per review
-  - Flag per review
-  - Optional attribution
-  - No bottom trust/footer links
+  v10 mockup layout:
+  - Header row: static star summary (left) + prev/next arrows (right)
+  - Card body: optional B2B badge, italic quote, attribution, name/flag/role + verified
+  - Footer: progress dots (left) + "Read all reviews →" link (right)
+  Keeps JS hooks: data-drye-review-slider / -slide / -prev / -next / -dot
 {% endcomment %}
 
 {% liquid
@@ -26,6 +24,9 @@
       assign slide_count = slide_count | plus: 1
     endif
   endfor
+
+  assign reviews_url = block.settings.all_reviews_url | default: '#reviews'
+  assign reviews_label = block.settings.all_reviews_label | default: 'Read all reviews →'
 %}
 
 {% if slide_count > 0 %}
@@ -35,29 +36,41 @@
     aria-label="Customer reviews"
   >
 
-    {% if slide_count > 1 %}
-      <button
-        type="button"
-        class="drye-mini-review__arrow drye-mini-review__arrow--prev"
-        data-drye-review-prev
-        aria-label="Previous review"
-      >
-        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
-          <path d="M15 18L9 12L15 6" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-      </button>
+    <div class="drye-mini-review__head">
+      <div class="drye-mini-review__summary" aria-label="Rated 5 out of 5 stars">
+        {% for s in (1..5) %}
+          <svg viewBox="0 0 11 11" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path d="M5.5 0L6.7 3.8h4L7.5 6.2 8.7 10 5.5 7.6 2.3 10l1.2-3.8L.3 3.8h4L5.5 0z" fill="#5F8A8B"/>
+          </svg>
+        {% endfor %}
+      </div>
 
-      <button
-        type="button"
-        class="drye-mini-review__arrow drye-mini-review__arrow--next"
-        data-drye-review-next
-        aria-label="Next review"
-      >
-        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
-          <path d="M9 6L15 12L9 18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-      </button>
-    {% endif %}
+      {% if slide_count > 1 %}
+        <div class="drye-mini-review__arrows">
+          <button
+            type="button"
+            class="drye-mini-review__arrow drye-mini-review__arrow--prev"
+            data-drye-review-prev
+            aria-label="Previous review"
+          >
+            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M15 18L9 12L15 6" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+
+          <button
+            type="button"
+            class="drye-mini-review__arrow drye-mini-review__arrow--next"
+            data-drye-review-next
+            aria-label="Next review"
+          >
+            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M9 6L15 12L9 18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+        </div>
+      {% endif %}
+    </div>
 
     <div class="drye-mini-review__viewport">
       {% assign rendered_index = 0 %}
@@ -68,7 +81,6 @@
           assign name_key        = 'review_' | append: i | append: '_name'
           assign location_key    = 'review_' | append: i | append: '_location'
           assign label_key       = 'review_' | append: i | append: '_label'
-          assign stars_key       = 'review_' | append: i | append: '_stars'
           assign b2b_key         = 'review_' | append: i | append: '_show_as_b2b'
           assign badge_key       = 'review_' | append: i | append: '_badge_text'
           assign attribution_key = 'review_' | append: i | append: '_attribution'
@@ -78,7 +90,6 @@
           assign rev_name        = block.settings[name_key]
           assign rev_location    = block.settings[location_key]
           assign rev_label       = block.settings[label_key]
-          assign rev_stars       = block.settings[stars_key] | default: 5 | plus: 0
           assign rev_is_b2b      = block.settings[b2b_key]
           assign rev_badge       = block.settings[badge_key]
           assign rev_attribution = block.settings[attribution_key]
@@ -100,14 +111,6 @@
             {% if rev_is_b2b %}
               <div class="drye-mini-review__badge">
                 {{ rev_badge | default: 'FIELD STUDY' | escape }}
-              </div>
-            {% else %}
-              <div class="drye-mini-review__stars" aria-label="{{ rev_stars }} out of 5 stars">
-                {% for s in (1..rev_stars) %}
-                  <svg viewBox="0 0 11 11" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                    <path d="M5.5 0L6.7 3.8h4L7.5 6.2 8.7 10 5.5 7.6 2.3 10l1.2-3.8L.3 3.8h4L5.5 0z" fill="#5F8A8B"/>
-                  </svg>
-                {% endfor %}
               </div>
             {% endif %}
 
@@ -167,8 +170,8 @@
       {% endfor %}
     </div>
 
-    {% if slide_count > 1 %}
-      <div class="drye-mini-review__footer">
+    <div class="drye-mini-review__footer">
+      {% if slide_count > 1 %}
         <div class="drye-mini-review__dots" data-drye-review-dots>
           {% for i in (1..slide_count) %}
             <button
@@ -181,12 +184,14 @@
             ></button>
           {% endfor %}
         </div>
+      {% endif %}
 
-        <span class="drye-mini-review__swipe-hint" data-drye-swipe-hint aria-hidden="true">
-          swipe ›
-        </span>
-      </div>
-    {% endif %}
+      {% if reviews_label != blank %}
+        <a class="drye-mini-review__readall" href="{{ reviews_url }}">
+          {{ reviews_label | escape }}
+        </a>
+      {% endif %}
+    </div>
 
   </section>
 
@@ -201,20 +206,11 @@
         const dots = Array.from(slider.querySelectorAll('[data-drye-review-dot]'));
         const prev = slider.querySelector('[data-drye-review-prev]');
         const next = slider.querySelector('[data-drye-review-next]');
-        const swipeHint = slider.querySelector('[data-drye-swipe-hint]');
 
         if (!slides.length) return;
 
         let active = 0;
         let timer = null;
-        let hinted = false;
-
-        function hideHint() {
-          if (hinted || !swipeHint) return;
-
-          hinted = true;
-          swipeHint.classList.add('is-hidden');
-        }
 
         function setActive(index) {
           active = (index + slides.length) % slides.length;
@@ -254,7 +250,6 @@
           prev.addEventListener('click', () => {
             setActive(active - 1);
             startAuto();
-            hideHint();
           });
         }
 
@@ -262,7 +257,6 @@
           next.addEventListener('click', () => {
             setActive(active + 1);
             startAuto();
-            hideHint();
           });
         }
 
@@ -270,7 +264,6 @@
           dot.addEventListener('click', () => {
             setActive(i);
             startAuto();
-            hideHint();
           });
         });
 
@@ -289,7 +282,6 @@
 
           if (Math.abs(diff) > 40) {
             setActive(active + (diff > 0 ? 1 : -1));
-            hideHint();
           }
 
           startAuto();
