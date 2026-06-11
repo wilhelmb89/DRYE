@@ -617,7 +617,6 @@ assign review_count = section.settings.review_count_fallback
         role="tabpanel"
       >
         <div class="faq-list">
-          {% assign first_in_tab = true %}
           {% for block in faq_blocks %}
             {% liquid
               assign pos = forloop.index0
@@ -631,7 +630,7 @@ assign review_count = section.settings.review_count_fallback
               endif
             %}
             {% if in_tab %}
-              <div class="faq-item{% if first_in_tab or block.settings.open_by_default %} open{% endif %}" {{ block.shopify_attributes }}>
+              <div class="faq-item{% if block.settings.open_by_default %} open{% endif %}" {{ block.shopify_attributes }}>
                 <button type="button" class="faq-q">
                   <span class="faq-q-text">{{ block.settings.question }}</span>
                   <span class="faq-icon" aria-hidden="true"></span>
@@ -643,7 +642,6 @@ assign review_count = section.settings.review_count_fallback
                   </div>
                 </div>
               </div>
-              {% assign first_in_tab = false %}
             {% endif %}
           {% endfor %}
         </div>
