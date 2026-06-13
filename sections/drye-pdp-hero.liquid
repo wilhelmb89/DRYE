@@ -422,7 +422,7 @@ assign review_count = section.settings.review_count_fallback
 
       <div class="trust-item">
         <img
-          src="{{ 'icon-refund-arrows (2).svg' | asset_url }}"
+          src="{{ 'refresh-cycle.svg' | asset_url }}"
           alt=""
           width="20"
           height="20"
@@ -630,7 +630,7 @@ assign review_count = section.settings.review_count_fallback
               endif
             %}
             {% if in_tab %}
-              <div class="faq-item{% if block.settings.open_by_default %} open{% endif %}" {{ block.shopify_attributes }}>
+              <div class="faq-item" {{ block.shopify_attributes }}>
                 <button type="button" class="faq-q">
                   <span class="faq-q-text">{{ block.settings.question }}</span>
                   <span class="faq-icon" aria-hidden="true"></span>
