@@ -14,6 +14,7 @@ assign review_count = section.settings.review_count_fallback
 {{ 'drye-pdp-hero.css' | asset_url | stylesheet_tag }}
 {{ 'drye-review-slider.css' | asset_url | stylesheet_tag }}
 {{ 'drye-pdp-modules.css' | asset_url | stylesheet_tag }}
+{{ 'drye-worker-proof.css' | asset_url | stylesheet_tag }}
 
 <section
   class="hero"
@@ -407,6 +408,137 @@ assign review_count = section.settings.review_count_fallback
       </button>
     {% endform %}
 
+{% comment %} Worker Proof Receipt — near-cart trust module (proof, not mechanism) {% endcomment %}
+{% if section.settings.proof_enabled %}
+  <section class="drye-proof" data-drye-proof-module aria-label="Worker proof">
+    <div class="drye-proof__head">
+      <span class="drye-proof__check" aria-hidden="true">
+        <svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="8" cy="8" r="7" fill="#0D9488"/>
+          <path d="M4.8 8.2l2 2 4-4.4" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </span>
+      {% if section.settings.proof_header != blank %}
+        <span class="drye-proof__head-text">{{ section.settings.proof_header }}</span>
+      {% endif %}
+    </div>
+
+    {% if section.settings.proof_stat != blank %}
+      <div class="drye-proof__stat">{{ section.settings.proof_stat }}</div>
+    {% endif %}
+
+    {% if section.settings.proof_subline != blank %}
+      <p class="drye-proof__sub">{{ section.settings.proof_subline }}</p>
+    {% endif %}
+
+    {% if section.settings.proof_chips != blank %}
+      {% assign chip_items = section.settings.proof_chips | newline_to_br | split: '<br />' %}
+      <ul class="drye-proof__chips">
+        {% for chip in chip_items %}
+          {% assign chip_text = chip | strip %}
+          {% if chip_text != blank %}
+            <li class="drye-proof__chip">{{ chip_text }}</li>
+          {% endif %}
+        {% endfor %}
+      </ul>
+    {% endif %}
+
+    {% liquid
+      assign proof_has_cards = false
+      for i in (1..6)
+        assign q_key = 'proof_card_' | append: i | append: '_quote'
+        if section.settings[q_key] != blank
+          assign proof_has_cards = true
+          break
+        endif
+      endfor
+    %}
+
+    {% if proof_has_cards %}
+      {% if section.settings.proof_carousel_title != blank %}
+        <div class="drye-proof__ctitle">{{ section.settings.proof_carousel_title }}</div>
+      {% endif %}
+
+      <div class="drye-proof__carousel" data-drye-proof-carousel>
+        {% for i in (1..6) %}
+          {% liquid
+            assign q_key = 'proof_card_' | append: i | append: '_quote'
+            assign a_key = 'proof_card_' | append: i | append: '_attr'
+            assign card_q = section.settings[q_key]
+            assign card_a = section.settings[a_key]
+          %}
+          {% if card_q != blank %}
+            <article class="drye-proof__card" data-drye-proof-card data-proof-index="{{ i }}">
+              <p class="drye-proof__quote">“{{ card_q }}”</p>
+              {% if card_a != blank %}
+                <div class="drye-proof__meta">
+                  <svg class="drye-proof__vcheck" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                    <path d="M2 6.2l2.4 2.4L10 3" stroke="#0D9488" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                  <span>{{ card_a }}</span>
+                </div>
+              {% endif %}
+            </article>
+          {% endif %}
+        {% endfor %}
+      </div>
+    {% endif %}
+
+    {% if section.settings.proof_show_recent and section.settings.proof_recent_items != blank %}
+      <div class="drye-proof__recent">
+        {% if section.settings.proof_recent_label != blank %}
+          <span class="drye-proof__recent-label">{{ section.settings.proof_recent_label }}</span>
+        {% endif %}
+        {% assign recent_lines = section.settings.proof_recent_items | newline_to_br | split: '<br />' %}
+        <ul class="drye-proof__recent-list">
+          {% for line in recent_lines %}
+            {% assign line_text = line | strip %}
+            {% if line_text != blank %}
+              <li class="drye-proof__recent-item">{{ line_text }}</li>
+            {% endif %}
+          {% endfor %}
+        </ul>
+      </div>
+    {% endif %}
+  </section>
+
+  <script>
+    (function () {
+      var m = document.querySelector('[data-drye-proof-module]:not([data-proof-bound])');
+      if (!m) return;
+      m.setAttribute('data-proof-bound', '1');
+      window.dataLayer = window.dataLayer || [];
+      function push(ev, extra) {
+        try {
+          var o = { event: ev, page_path: window.location.pathname };
+          if (extra) { for (var k in extra) { o[k] = extra[k]; } }
+          window.dataLayer.push(o);
+        } catch (e) {}
+      }
+      try {
+        var io = new IntersectionObserver(function (entries) {
+          entries.forEach(function (en) {
+            if (en.isIntersecting) { push('proof_module_view'); io.disconnect(); }
+          });
+        }, { threshold: 0.4 });
+        io.observe(m);
+      } catch (e) { push('proof_module_view'); }
+      var car = m.querySelector('[data-drye-proof-carousel]');
+      if (car) {
+        var scrolled = false;
+        car.addEventListener('scroll', function () {
+          if (scrolled) return;
+          scrolled = true;
+          push('proof_carousel_scroll');
+        }, { passive: true });
+      }
+      m.addEventListener('click', function (e) {
+        var c = e.target.closest ? e.target.closest('[data-drye-proof-card]') : null;
+        if (c) { push('proof_card_click', { proof_index: c.getAttribute('data-proof-index') }); }
+      });
+    })();
+  </script>
+{% endif %}
 
     <div class="trust-row">
       <div class="trust-item">
@@ -440,16 +572,7 @@ assign review_count = section.settings.review_count_fallback
       </div>
     </div>
 
-    {% if section.settings.show_inline_review_slider %}
-      {% for block in section.blocks %}
-        {% if block.type == 'review_slider' %}
-          <div class="pdp-review-slider-block" {{ block.shopify_attributes }}>
-            {% render 'drye-review-slider-inline', block: block %}
-          </div>
-        {% endif %}
-      {% endfor %}
-    {% endif %}
-
+    {% comment %} Old near-cart review slider replaced by Worker Proof Receipt (above). {% endcomment %}
 
     {% assign desc_media = section.blocks | where: 'type', 'desc_media' %}
     {% assign rendered_desc = '' %}
@@ -1139,6 +1262,30 @@ wteTimelines.forEach((timeline) => {
     { "type": "text", "id": "description_toggle_closed", "label": "Description label", "default": "Product description" },
 
     { "type": "checkbox", "id": "show_inline_review_slider", "label": "Show inline review slider (under buy box)", "default": true },
+
+    { "type": "header", "content": "Module — Worker Proof Receipt (near cart)" },
+    { "type": "checkbox", "id": "proof_enabled", "label": "Show Worker Proof Receipt", "default": true },
+    { "type": "text", "id": "proof_header", "label": "Header", "default": "Workers are keeping them." },
+    { "type": "text", "id": "proof_stat", "label": "Primary proof stat", "default": "0 product returns" },
+    { "type": "textarea", "id": "proof_subline", "label": "Supporting line", "default": "0 product returns in the last 90 days. 4.84/5 from 43 verified reviews." },
+    { "type": "textarea", "id": "proof_chips", "label": "Mini stats (one per line, optional)", "default": "Built for nitrile, latex & rubber gloves\nMost buyers start with 1–3 pairs" },
+    { "type": "text", "id": "proof_carousel_title", "label": "Carousel title", "default": "Real comments from glove-wearing workers" },
+    { "type": "textarea", "id": "proof_card_1_quote", "label": "Card 1 quote", "default": "I'm ordering my second pair right now." },
+    { "type": "text", "id": "proof_card_1_attr", "label": "Card 1 attribution", "default": "James H. · Verified customer" },
+    { "type": "textarea", "id": "proof_card_2_quote", "label": "Card 2 quote", "default": "The inside of my latex gloves were moist, but the DRYE liner was dry to the touch." },
+    { "type": "text", "id": "proof_card_2_attr", "label": "Card 2 attribution", "default": "James H. · Verified customer" },
+    { "type": "textarea", "id": "proof_card_3_quote", "label": "Card 3 quote", "default": "Nearly no more sweat in nitrile gloves. They're so thin I barely notice them." },
+    { "type": "text", "id": "proof_card_3_attr", "label": "Card 3 attribution", "default": "Body tech · Verified comment" },
+    { "type": "textarea", "id": "proof_card_4_quote", "label": "Card 4 quote", "default": "A few of my coworkers are looking into getting a few pairs themselves." },
+    { "type": "text", "id": "proof_card_4_attr", "label": "Card 4 attribution", "default": "Work-glove user · Verified comment" },
+    { "type": "textarea", "id": "proof_card_5_quote", "label": "Card 5 quote (optional)" },
+    { "type": "text", "id": "proof_card_5_attr", "label": "Card 5 attribution (optional)" },
+    { "type": "textarea", "id": "proof_card_6_quote", "label": "Card 6 quote (optional)" },
+    { "type": "text", "id": "proof_card_6_attr", "label": "Card 6 attribution (optional)" },
+    { "type": "paragraph", "content": "Optional 'Recently bought' list — anonymized only. Use First name + last initial · country · qty. Do not paste full names, cities, or timestamps from orders. One per line." },
+    { "type": "checkbox", "id": "proof_show_recent", "label": "Show 'Recently bought' list", "default": false },
+    { "type": "text", "id": "proof_recent_label", "label": "Recently bought label", "default": "Recently bought" },
+    { "type": "textarea", "id": "proof_recent_items", "label": "Recently bought items (one per line)", "default": "" },
 
     { "type": "header", "content": "Module — Missing interface (grid)" },
     { "type": "text", "id": "mi_eyebrow", "label": "Eyebrow", "default": "The missing interface" },
