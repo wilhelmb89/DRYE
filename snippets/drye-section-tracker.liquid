@@ -1,95 +1,167 @@
 <script>
 (function() {
-  var sections = document.querySelectorAll('[data-drye-section]');
-  if (!sections.length) return;
+  try {
+    var EXCLUDE_PATTERNS = [
+      'header',
+      'footer',
+      'announcement',
+      'drawer',
+      'popups',
+      'popup',
+      'apps'
+    ];
 
-  var pagePath = window.location.pathname;
-  var storageKey = 'drye_max_section_' + pagePath;
-  var firedSections = {};
-  var pendingTimers = {};
+    function isExcluded(el) {
+      if (!el) return true;
+      if (el.hasAttribute('data-section-track-ignore')) return true;
 
-  function getCurrentMax() {
-    try {
-      var stored = sessionStorage.getItem(storageKey);
-      if (!stored) return { idx: 0, name: '' };
-      return JSON.parse(stored);
-    } catch (e) {
-      return { idx: 0, name: '' };
+      var id = (el.id || '').toLowerCase();
+      var cls = (el.className && typeof el.className === 'string' ? el.className : '').toLowerCase();
+
+      for (var i = 0; i < EXCLUDE_PATTERNS.length; i++) {
+        var p = EXCLUDE_PATTERNS[i];
+        if (id.indexOf(p) !== -1) return true;
+        if (cls.indexOf(p) !== -1) return true;
+      }
+
+      if (cls.indexOf('shopify-app-block') !== -1) return true;
+      if (cls.indexOf('shopify-section-group-header-group') !== -1) return true;
+      if (cls.indexOf('shopify-section-group-footer-group') !== -1) return true;
+      if (cls.indexOf('shopify-section-group-aside-group') !== -1) return true;
+      if (cls.indexOf('shopify-section-group-overlay-group') !== -1) return true;
+
+      return false;
     }
-  }
 
-  function setCurrentMax(idx, name) {
-    try {
-      sessionStorage.setItem(storageKey, JSON.stringify({ idx: idx, name: name }));
-    } catch (e) {}
-  }
+    function deriveName(el) {
+      var explicit = el.getAttribute('data-section-name');
+      if (explicit) return explicit;
 
-  function pushSectionView(idx, name) {
-    if (firedSections[idx]) return;
-    firedSections[idx] = true;
+      var rawId = el.id || '';
+      if (!rawId) return '';
 
-    window.dataLayer = window.dataLayer || [];
-    window.dataLayer.push({
-      event: 'section_view',
-      section_index: idx,
-      section_name: name,
-      page_path: pagePath
-    });
+      var key = rawId.replace(/^shopify-section-/, '');
+      key = key.replace(/^template--\d+__/, '');
+      key = key.replace(/^sections--\d+__/, '');
+      key = key.replace(/_[A-Za-z0-9]{6}$/, function(m) {
+        return /[A-Z]/.test(m) ? '' : m;
+      });
+      return key || rawId;
+    }
 
-    var current = getCurrentMax();
-    if (idx > current.idx) {
-      setCurrentMax(idx, name);
+    var all = document.querySelectorAll('.shopify-section');
+    if (!all.length) return;
+
+    var sections = [];
+    for (var i = 0; i < all.length; i++) {
+      if (!isExcluded(all[i])) sections.push(all[i]);
+    }
+    if (!sections.length) return;
+
+    var nameCounts = {};
+    for (var j = 0; j < sections.length; j++) {
+      var n = deriveName(sections[j]) || ('section_' + (j + 1));
+      nameCounts[n] = (nameCounts[n] || 0) + 1;
+      sections[j].__dryeBaseName = n;
+    }
+
+    var tracked = [];
+    for (var k = 0; k < sections.length; k++) {
+      var el = sections[k];
+      var idx = k + 1;
+      var base = el.__dryeBaseName;
+      var name = nameCounts[base] > 1 ? (base + '__' + idx) : base;
+      tracked.push({ el: el, idx: idx, name: name });
+      el.__dryeSectionIdx = idx;
+      el.__dryeSectionName = name;
+    }
+
+    var pagePath = window.location.pathname;
+    var storageKey = 'drye_max_section_' + pagePath;
+    var firedSections = {};
+    var pendingTimers = {};
+
+    function getCurrentMax() {
+      try {
+        var stored = sessionStorage.getItem(storageKey);
+        if (!stored) return { idx: 0, name: '' };
+        return JSON.parse(stored);
+      } catch (e) {
+        return { idx: 0, name: '' };
+      }
+    }
+
+    function setCurrentMax(idx, name) {
+      try {
+        sessionStorage.setItem(storageKey, JSON.stringify({ idx: idx, name: name }));
+      } catch (e) {}
+    }
+
+    function pushSectionView(idx, name) {
+      if (firedSections[idx]) return;
+      firedSections[idx] = true;
+
+      window.dataLayer = window.dataLayer || [];
       window.dataLayer.push({
-        event: 'section_progress',
+        event: 'section_view',
         section_index: idx,
         section_name: name,
-        max_section_index: idx,
-        max_section_name: name,
         page_path: pagePath
       });
+
+      var current = getCurrentMax();
+      if (idx > current.idx) {
+        setCurrentMax(idx, name);
+        window.dataLayer.push({
+          event: 'section_progress',
+          section_index: idx,
+          section_name: name,
+          max_section_index: idx,
+          max_section_name: name,
+          page_path: pagePath
+        });
+      }
     }
-  }
 
-  var observer = new IntersectionObserver(function(entries) {
-    entries.forEach(function(entry) {
-      var el = entry.target;
-      var idx = parseInt(el.getAttribute('data-section-index'), 10);
-      var name = el.getAttribute('data-section-name') || '';
+    var observer = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        var el = entry.target;
+        var idx = el.__dryeSectionIdx;
+        var name = el.__dryeSectionName;
+        if (!idx) return;
 
-      if (!idx) return;
-
-      if (entry.isIntersecting && entry.intersectionRatio >= 0.25) {
-        if (!pendingTimers[idx]) {
-          pendingTimers[idx] = setTimeout(function() {
-            pushSectionView(idx, name);
+        if (entry.isIntersecting && entry.intersectionRatio >= 0.25) {
+          if (!pendingTimers[idx]) {
+            pendingTimers[idx] = setTimeout(function() {
+              pushSectionView(idx, name);
+              delete pendingTimers[idx];
+            }, 800);
+          }
+        } else {
+          if (pendingTimers[idx]) {
+            clearTimeout(pendingTimers[idx]);
             delete pendingTimers[idx];
-          }, 800);
+          }
         }
-      } else {
-        if (pendingTimers[idx]) {
-          clearTimeout(pendingTimers[idx]);
-          delete pendingTimers[idx];
-        }
-      }
-    });
-  }, { threshold: [0.25] });
+      });
+    }, { threshold: [0.25] });
 
-  sections.forEach(function(s) {
-    observer.observe(s);
-  });
+    for (var m = 0; m < tracked.length; m++) {
+      observer.observe(tracked[m].el);
+    }
 
-  sections.forEach(function(s) {
-    var rect = s.getBoundingClientRect();
-    var inViewport = rect.top < window.innerHeight && rect.bottom > 0;
-    if (inViewport) {
-      var idx = parseInt(s.getAttribute('data-section-index'), 10);
-      var name = s.getAttribute('data-section-name') || '';
-      if (idx) {
-        setTimeout(function() {
-          pushSectionView(idx, name);
-        }, 500);
+    for (var n2 = 0; n2 < tracked.length; n2++) {
+      var t = tracked[n2];
+      var rect = t.el.getBoundingClientRect();
+      var inViewport = rect.top < window.innerHeight && rect.bottom > 0;
+      if (inViewport) {
+        (function(idx, name) {
+          setTimeout(function() {
+            pushSectionView(idx, name);
+          }, 500);
+        })(t.idx, t.name);
       }
     }
-  });
+  } catch (e) {}
 })();
 </script>
