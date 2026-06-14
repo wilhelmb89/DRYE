@@ -5,7 +5,7 @@
   assign overlay_id = 'dryeNEW-header-overlay-' | append: section.id
 -%}
 
-{% unless page.handle == 'mechanics' or page.handle == 'mechanics-v3' or page.handle == 'fishing' %}
+{% unless template.suffix == 'mechanic-20260513' or page.handle == 'mechanics' or page.handle == 'mechanics-v3' or page.handle == 'fishing' %}
 <div class="dryeNEW-header-shell" data-section-id="{{ section.id }}" data-section-type="dryeNEW-header" data-drye-header>
 
   <nav class="dryeNEW-header" aria-label="{{ section.settings.nav_aria_label }}">
