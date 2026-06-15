@@ -378,3 +378,22 @@
     font-size: 12px;
   }
 }
+/* ===== BLEED-FIX — håll modulerna inne i kolumnen ===== */
+.hero .pdp-mod--bleed {
+  width: auto !important;
+  max-width: none !important;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+@media (min-width: 768px) {
+  .hero .pdp-mod--bleed {
+    width: auto !important;
+    max-width: none !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+}
