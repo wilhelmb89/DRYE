@@ -203,6 +203,19 @@
     "drye_evidence_X7nFhb": {
       "type": "drye-evidence",
       "blocks": {
+        "card_i4XDnd": {
+          "type": "card",
+          "disabled": true,
+          "settings": {
+            "label": "Bacterial load",
+            "stat_prefix": "",
+            "stat": "52",
+            "stat_suffix": "×",
+            "stat_qualitative": false,
+            "body": "<strong>After 4 hours in a sealed glove: </strong>staph bacteria multiply 52×. Same bacteria that drives infection and slow healing — thriving on your hands.",
+            "source": "Nørreslet 2021, Acta Derm Venereol"
+          }
+        },
         "card_FE7Exi": {
           "type": "card",
           "settings": {
@@ -251,19 +264,6 @@
             "source": "Hikima & Maibach, Biol Pharm Bull, 2006."
           }
         },
-        "card_i4XDnd": {
-          "type": "card",
-          "disabled": true,
-          "settings": {
-            "label": "Bacterial load",
-            "stat_prefix": "",
-            "stat": "52",
-            "stat_suffix": "×",
-            "stat_qualitative": false,
-            "body": "<strong>After 4 hours in a sealed glove: </strong>staph bacteria multiply 52×. Same bacteria that drives infection and slow healing — thriving on your hands.",
-            "source": "Nørreslet 2021, Acta Derm Venereol"
-          }
-        },
         "card_DFV7fp": {
           "type": "card",
           "settings": {
@@ -300,11 +300,11 @@
         }
       },
       "block_order": [
+        "card_i4XDnd",
         "card_FE7Exi",
         "card_xx6yQJ",
         "card_zzFMeD",
         "card_MmAtBM",
-        "card_i4XDnd",
         "card_DFV7fp",
         "card_4d3QVz",
         "bridge_UB9LaJ"
