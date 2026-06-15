@@ -259,6 +259,18 @@
     "drye_evidence_V9B97n": {
       "type": "drye-evidence",
       "blocks": {
+        "card_xAhqGk": {
+          "type": "card",
+          "settings": {
+            "label": "TIME LOST ADDS UP",
+            "stat_prefix": "",
+            "stat": "12",
+            "stat_suffix": "min lost / shift",
+            "stat_qualitative": false,
+            "body": "Example calculation: 4 glove-drying breaks × 3 minutes = 12 minutes lost per technician, per day.\n\nPull off. Dry hands. Change gloves. Restart.",
+            "source": ""
+          }
+        },
         "card_hLkDz8": {
           "type": "card",
           "settings": {
@@ -307,19 +319,6 @@
             "source": "Bouwstra 2003, J Invest Dermatol"
           }
         },
-        "card_xAhqGk": {
-          "type": "card",
-          "disabled": true,
-          "settings": {
-            "label": "TIME LOST ADDS UP",
-            "stat_prefix": "",
-            "stat": "52",
-            "stat_suffix": "×",
-            "stat_qualitative": false,
-            "body": "<strong>After 4 hours in a sealed glove: </strong>staph bacteria multiply 52×. Same bacteria that drives infection and slow healing — thriving on your hands.",
-            "source": "Nørreslet 2021, Acta Derm Venereol"
-          }
-        },
         "card_TJ3NHr": {
           "type": "card",
           "disabled": true,
@@ -358,11 +357,11 @@
         }
       },
       "block_order": [
+        "card_xAhqGk",
         "card_hLkDz8",
         "card_BBwEUV",
         "card_FRxDBe",
         "card_r9m4MJ",
-        "card_xAhqGk",
         "card_TJ3NHr",
         "card_QWjq3t",
         "bridge_QYWYJL"
