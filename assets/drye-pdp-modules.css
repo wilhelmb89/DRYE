@@ -12,14 +12,20 @@
   margin-top: 22px;
   padding-top: 24px;
   border-top: 1px solid var(--border, #E5E7EB);
+  box-sizing: border-box;
+  min-width: 0;
 }
 
-/* Full-bleed: cancel the hero-info horizontal padding so a module's
-   background spans the whole right column, then restore the padding inside.
+/* Full-bleed: span the column edge-to-edge by giving the module an EXPLICIT
+   width (column content + the hero-info horizontal padding), then pulling it
+   left with a negative margin. Explicit width avoids the flex-stretch +
+   negative-margin bug that made the module size to its longest text line.
    hero-info padding-x is 20px below 768px and 48px at/above 768px. */
 .hero .pdp-mod--bleed {
+  width: calc(100% + 40px);
+  max-width: calc(100% + 40px);
   margin-left: -20px;
-  margin-right: -20px;
+  margin-right: 0;
   padding-left: 20px;
   padding-right: 20px;
 }
@@ -200,8 +206,10 @@
 
 @media (min-width: 768px) {
   .hero .pdp-mod--bleed {
+    width: calc(100% + 96px);
+    max-width: calc(100% + 96px);
     margin-left: -48px;
-    margin-right: -48px;
+    margin-right: 0;
     padding-left: 48px;
     padding-right: 48px;
   }
@@ -243,6 +251,21 @@
 
 .hero .pdp-faq .pdp-faq__tabs {
   margin-top: 14px;
+  flex-wrap: nowrap;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+/* Keep the 3 tabs on one row even at narrow widths (no wrapping) */
+.hero .pdp-faq .pdp-faq__tabs .tab-btn {
+  flex: 1 1 0;
+  min-width: 0;
+  padding-left: 6px;
+  padding-right: 6px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .hero .pdp-faq .tab-panel.pdp-faq__single {

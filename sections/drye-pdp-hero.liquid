@@ -408,79 +408,89 @@ assign review_count = section.settings.review_count_fallback
       </button>
     {% endform %}
 
-{% comment %} Worker Proof Receipt — near-cart trust module (proof, not mechanism) {% endcomment %}
+{% comment %} Worker Proof — compact green proof line + sliding/expandable comment ticker {% endcomment %}
 {% if section.settings.proof_enabled %}
+  {% liquid
+    assign proof_has_items = false
+    for i in (1..6)
+      assign s_key = 'proof_item_' | append: i | append: '_short'
+      if section.settings[s_key] != blank
+        assign proof_has_items = true
+        break
+      endif
+    endfor
+  %}
   <section class="drye-proof" data-drye-proof-module aria-label="Worker proof">
-    <div class="drye-proof__head">
-      <span class="drye-proof__check" aria-hidden="true">
-        <svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <circle cx="8" cy="8" r="7" fill="#0D9488"/>
-          <path d="M4.8 8.2l2 2 4-4.4" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+    {% if section.settings.proof_returns_line != blank %}
+      <div class="drye-proof__line">
+        <svg class="drye-proof__check" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <path d="M3 8.4l3 3 7-7.6" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
         </svg>
-      </span>
-      {% if section.settings.proof_header != blank %}
-        <span class="drye-proof__head-text">{{ section.settings.proof_header }}</span>
-      {% endif %}
-    </div>
-
-    {% if section.settings.proof_stat != blank %}
-      <div class="drye-proof__stat">{{ section.settings.proof_stat }}</div>
+        <span class="drye-proof__returns">{{ section.settings.proof_returns_line }}</span>
+      </div>
+    {% endif %}
+    {% if section.settings.proof_keep_line != blank %}
+      <div class="drye-proof__keep">{{ section.settings.proof_keep_line }}</div>
     {% endif %}
 
-    {% if section.settings.proof_subline != blank %}
-      <p class="drye-proof__sub">{{ section.settings.proof_subline }}</p>
-    {% endif %}
-
-    {% if section.settings.proof_chips != blank %}
-      {% assign chip_items = section.settings.proof_chips | newline_to_br | split: '<br />' %}
-      <ul class="drye-proof__chips">
-        {% for chip in chip_items %}
-          {% assign chip_text = chip | strip %}
-          {% if chip_text != blank %}
-            <li class="drye-proof__chip">{{ chip_text }}</li>
-          {% endif %}
-        {% endfor %}
-      </ul>
-    {% endif %}
-
-    {% liquid
-      assign proof_has_cards = false
-      for i in (1..6)
-        assign q_key = 'proof_card_' | append: i | append: '_quote'
-        if section.settings[q_key] != blank
-          assign proof_has_cards = true
-          break
-        endif
-      endfor
-    %}
-
-    {% if proof_has_cards %}
-      {% if section.settings.proof_carousel_title != blank %}
-        <div class="drye-proof__ctitle">{{ section.settings.proof_carousel_title }}</div>
+    {% if proof_has_items %}
+      {% if section.settings.proof_ticker_label != blank %}
+        <div class="drye-proof__tlabel">{{ section.settings.proof_ticker_label }}</div>
       {% endif %}
 
-      <div class="drye-proof__carousel" data-drye-proof-carousel>
-        {% for i in (1..6) %}
-          {% liquid
-            assign q_key = 'proof_card_' | append: i | append: '_quote'
-            assign a_key = 'proof_card_' | append: i | append: '_attr'
-            assign card_q = section.settings[q_key]
-            assign card_a = section.settings[a_key]
-          %}
-          {% if card_q != blank %}
-            <article class="drye-proof__card" data-drye-proof-card data-proof-index="{{ i }}">
-              <p class="drye-proof__quote">“{{ card_q }}”</p>
-              {% if card_a != blank %}
-                <div class="drye-proof__meta">
-                  <svg class="drye-proof__vcheck" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                    <path d="M2 6.2l2.4 2.4L10 3" stroke="#0D9488" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
-                  </svg>
-                  <span>{{ card_a }}</span>
-                </div>
+      <div class="drye-proof__ticker-wrap" data-drye-proof-tickerwrap>
+        <ul class="drye-proof__ticker" data-drye-proof-ticker>
+          {% for pass in (1..2) %}
+            {% for i in (1..6) %}
+              {% liquid
+                assign s_key = 'proof_item_' | append: i | append: '_short'
+                assign f_key = 'proof_item_' | append: i | append: '_full'
+                assign h_key = 'proof_item_' | append: i | append: '_handle'
+                assign l_key = 'proof_item_' | append: i | append: '_label'
+                assign u_key = 'proof_item_' | append: i | append: '_url'
+                assign it_short = section.settings[s_key]
+                assign it_full = section.settings[f_key] | default: section.settings[s_key]
+                assign it_handle = section.settings[h_key]
+                assign it_label = section.settings[l_key]
+                assign it_url = section.settings[u_key]
+              %}
+              {% if it_short != blank %}
+                <li class="drye-proof__item-wrap"{% if pass == 2 %} aria-hidden="true"{% endif %}>
+                  <button
+                    type="button"
+                    class="drye-proof__item"
+                    data-drye-proof-item
+                    data-index="{{ i }}"
+                    data-full="{{ it_full | escape }}"
+                    data-handle="{{ it_handle | escape }}"
+                    data-label="{{ it_label | escape }}"
+                    data-url="{{ it_url | escape }}"
+                  >
+                    {% if it_handle != blank %}<span class="drye-proof__ihandle">{{ it_handle }}</span>{% endif %}
+                    <span class="drye-proof__iquote">“{{ it_short }}”</span>
+                    <span class="drye-proof__iplus" aria-hidden="true">+</span>
+                  </button>
+                </li>
               {% endif %}
-            </article>
-          {% endif %}
-        {% endfor %}
+            {% endfor %}
+          {% endfor %}
+        </ul>
+      </div>
+
+      {% if section.settings.proof_hint != blank %}
+        <div class="drye-proof__hint">
+          <span class="drye-proof__hint-plus" aria-hidden="true">+</span>
+          <span>{{ section.settings.proof_hint }}</span>
+        </div>
+      {% endif %}
+
+      <div class="drye-proof__expand" data-drye-proof-expand hidden>
+        <button type="button" class="drye-proof__expand-close" data-drye-proof-close aria-label="Close">−</button>
+        <p class="drye-proof__expand-quote" data-proof-quote></p>
+        <div class="drye-proof__expand-meta">
+          <span class="drye-proof__expand-source" data-proof-source></span>
+          <a class="drye-proof__expand-link" data-proof-link href="#" target="_blank" rel="noopener" hidden>View on Instagram →</a>
+        </div>
       </div>
     {% endif %}
 
@@ -515,6 +525,7 @@ assign review_count = section.settings.review_count_fallback
           window.dataLayer.push(o);
         } catch (e) {}
       }
+
       try {
         var io = new IntersectionObserver(function (entries) {
           entries.forEach(function (en) {
@@ -523,18 +534,72 @@ assign review_count = section.settings.review_count_fallback
         }, { threshold: 0.4 });
         io.observe(m);
       } catch (e) { push('proof_module_view'); }
-      var car = m.querySelector('[data-drye-proof-carousel]');
-      if (car) {
-        var scrolled = false;
-        car.addEventListener('scroll', function () {
-          if (scrolled) return;
-          scrolled = true;
-          push('proof_carousel_scroll');
+
+      var ticker = m.querySelector('[data-drye-proof-ticker]');
+      var wrap = m.querySelector('[data-drye-proof-tickerwrap]');
+      var expand = m.querySelector('[data-drye-proof-expand]');
+      var hovering = false, locked = false, openItem = null, resumeTimer = null;
+
+      function setPaused() {
+        if (ticker) { ticker.classList.toggle('is-paused', hovering || locked); }
+      }
+      if (wrap) {
+        wrap.addEventListener('mouseenter', function () { hovering = true; setPaused(); });
+        wrap.addEventListener('mouseleave', function () { hovering = false; setPaused(); });
+        wrap.addEventListener('touchstart', function () {
+          hovering = true; setPaused();
+          if (resumeTimer) { clearTimeout(resumeTimer); }
+        }, { passive: true });
+        wrap.addEventListener('touchend', function () {
+          if (resumeTimer) { clearTimeout(resumeTimer); }
+          resumeTimer = setTimeout(function () { if (!locked) { hovering = false; setPaused(); } }, 2500);
         }, { passive: true });
       }
+
+      function setPlus(btn, isOpen) {
+        var p = btn.querySelector('.drye-proof__iplus');
+        if (p) { p.textContent = isOpen ? '−' : '+'; }
+        btn.classList.toggle('is-open', isOpen);
+      }
+      function openExpand(btn) {
+        if (!expand) return;
+        if (openItem && openItem !== btn) { setPlus(openItem, false); }
+        var full = btn.getAttribute('data-full') || '';
+        var handle = btn.getAttribute('data-handle') || '';
+        var label = btn.getAttribute('data-label') || '';
+        var url = btn.getAttribute('data-url') || '';
+        var q = expand.querySelector('[data-proof-quote]');
+        var src = expand.querySelector('[data-proof-source]');
+        var link = expand.querySelector('[data-proof-link]');
+        if (q) { q.textContent = '“' + full + '”'; }
+        if (src) {
+          var parts = [];
+          if (handle) { parts.push(handle); }
+          if (label) { parts.push(label); }
+          src.textContent = parts.join(' · ');
+        }
+        if (link) {
+          if (url) { link.href = url; link.hidden = false; } else { link.hidden = true; }
+        }
+        expand.hidden = false;
+        setPlus(btn, true);
+        openItem = btn;
+        locked = true; setPaused();
+        push('proof_comment_expand', { proof_index: btn.getAttribute('data-index') });
+      }
+      function closeExpand() {
+        if (expand) { expand.hidden = true; }
+        if (openItem) { setPlus(openItem, false); openItem = null; }
+        locked = false; hovering = false; setPaused();
+      }
+
       m.addEventListener('click', function (e) {
-        var c = e.target.closest ? e.target.closest('[data-drye-proof-card]') : null;
-        if (c) { push('proof_card_click', { proof_index: c.getAttribute('data-proof-index') }); }
+        var t = e.target;
+        if (t.closest && t.closest('[data-drye-proof-close]')) { closeExpand(); return; }
+        if (t.closest && t.closest('[data-proof-link]')) { push('proof_source_click'); return; }
+        var btn = t.closest ? t.closest('[data-drye-proof-item]') : null;
+        if (!btn) { return; }
+        if (btn === openItem) { closeExpand(); } else { openExpand(btn); }
       });
     })();
   </script>
@@ -1263,26 +1328,44 @@ wteTimelines.forEach((timeline) => {
 
     { "type": "checkbox", "id": "show_inline_review_slider", "label": "Show inline review slider (under buy box)", "default": true },
 
-    { "type": "header", "content": "Module — Worker Proof Receipt (near cart)" },
-    { "type": "checkbox", "id": "proof_enabled", "label": "Show Worker Proof Receipt", "default": true },
-    { "type": "text", "id": "proof_header", "label": "Header", "default": "Workers are keeping them." },
-    { "type": "text", "id": "proof_stat", "label": "Primary proof stat", "default": "0 product returns" },
-    { "type": "textarea", "id": "proof_subline", "label": "Supporting line", "default": "0 product returns in the last 90 days. 4.84/5 from 43 verified reviews." },
-    { "type": "textarea", "id": "proof_chips", "label": "Mini stats (one per line, optional)", "default": "Built for nitrile, latex & rubber gloves\nMost buyers start with 1–3 pairs" },
-    { "type": "text", "id": "proof_carousel_title", "label": "Carousel title", "default": "Real comments from glove-wearing workers" },
-    { "type": "textarea", "id": "proof_card_1_quote", "label": "Card 1 quote", "default": "I'm ordering my second pair right now." },
-    { "type": "text", "id": "proof_card_1_attr", "label": "Card 1 attribution", "default": "James H. · Verified customer" },
-    { "type": "textarea", "id": "proof_card_2_quote", "label": "Card 2 quote", "default": "The inside of my latex gloves were moist, but the DRYE liner was dry to the touch." },
-    { "type": "text", "id": "proof_card_2_attr", "label": "Card 2 attribution", "default": "James H. · Verified customer" },
-    { "type": "textarea", "id": "proof_card_3_quote", "label": "Card 3 quote", "default": "Nearly no more sweat in nitrile gloves. They're so thin I barely notice them." },
-    { "type": "text", "id": "proof_card_3_attr", "label": "Card 3 attribution", "default": "Body tech · Verified comment" },
-    { "type": "textarea", "id": "proof_card_4_quote", "label": "Card 4 quote", "default": "A few of my coworkers are looking into getting a few pairs themselves." },
-    { "type": "text", "id": "proof_card_4_attr", "label": "Card 4 attribution", "default": "Work-glove user · Verified comment" },
-    { "type": "textarea", "id": "proof_card_5_quote", "label": "Card 5 quote (optional)" },
-    { "type": "text", "id": "proof_card_5_attr", "label": "Card 5 attribution (optional)" },
-    { "type": "textarea", "id": "proof_card_6_quote", "label": "Card 6 quote (optional)" },
-    { "type": "text", "id": "proof_card_6_attr", "label": "Card 6 attribution (optional)" },
-    { "type": "paragraph", "content": "Optional 'Recently bought' list — anonymized only. Use First name + last initial · country · qty. Do not paste full names, cities, or timestamps from orders. One per line." },
+    { "type": "header", "content": "Module — Worker Proof (near cart)" },
+    { "type": "checkbox", "id": "proof_enabled", "label": "Show Worker Proof", "default": true },
+    { "type": "text", "id": "proof_returns_line", "label": "Returns proof line (green)", "default": "0 returns in the last 90 days" },
+    { "type": "text", "id": "proof_keep_line", "label": "Keep line", "default": "Workers are keeping them." },
+    { "type": "text", "id": "proof_ticker_label", "label": "Ticker label", "default": "Recent worker comments" },
+    { "type": "text", "id": "proof_hint", "label": "Tap-to-read hint", "default": "Tap a comment to read it in full" },
+    { "type": "paragraph", "content": "Comment ticker. Each item shows a short line; tap opens the full comment inline. Add a source URL only if a real public link exists (then 'View on Instagram →' shows). Use approved/public comments only." },
+    { "type": "text", "id": "proof_item_1_short", "label": "Item 1 short quote", "default": "These are incredible." },
+    { "type": "textarea", "id": "proof_item_1_full", "label": "Item 1 full quote", "default": "These are incredible. I have nearly no more sweat in nitrile gloves. They're so thin I barely notice them." },
+    { "type": "text", "id": "proof_item_1_handle", "label": "Item 1 handle/name", "default": "@fordbodytech811" },
+    { "type": "text", "id": "proof_item_1_label", "label": "Item 1 source label", "default": "Instagram comment" },
+    { "type": "url", "id": "proof_item_1_url", "label": "Item 1 source URL (optional)" },
+    { "type": "text", "id": "proof_item_2_short", "label": "Item 2 short quote", "default": "Ordering my second pair right now." },
+    { "type": "textarea", "id": "proof_item_2_full", "label": "Item 2 full quote", "default": "I'm actually ordering my second pair right now." },
+    { "type": "text", "id": "proof_item_2_handle", "label": "Item 2 handle/name", "default": "James H." },
+    { "type": "text", "id": "proof_item_2_label", "label": "Item 2 source label", "default": "Verified customer" },
+    { "type": "url", "id": "proof_item_2_url", "label": "Item 2 source URL (optional)" },
+    { "type": "text", "id": "proof_item_3_short", "label": "Item 3 short quote", "default": "Coworkers are looking into getting pairs too." },
+    { "type": "textarea", "id": "proof_item_3_full", "label": "Item 3 full quote", "default": "A few of my coworkers are looking into getting a few pairs themselves." },
+    { "type": "text", "id": "proof_item_3_handle", "label": "Item 3 handle/name", "default": "@fordbodytech811" },
+    { "type": "text", "id": "proof_item_3_label", "label": "Item 3 source label", "default": "Instagram comment" },
+    { "type": "url", "id": "proof_item_3_url", "label": "Item 3 source URL (optional)" },
+    { "type": "text", "id": "proof_item_4_short", "label": "Item 4 short quote", "default": "Nearly no more sweat in nitrile gloves." },
+    { "type": "textarea", "id": "proof_item_4_full", "label": "Item 4 full quote", "default": "I have nearly no more sweat in nitrile gloves. They're so thin I barely notice them." },
+    { "type": "text", "id": "proof_item_4_handle", "label": "Item 4 handle/name", "default": "@fordbodytech811" },
+    { "type": "text", "id": "proof_item_4_label", "label": "Item 4 source label", "default": "Instagram comment" },
+    { "type": "url", "id": "proof_item_4_url", "label": "Item 4 source URL (optional)" },
+    { "type": "text", "id": "proof_item_5_short", "label": "Item 5 short quote (optional)" },
+    { "type": "textarea", "id": "proof_item_5_full", "label": "Item 5 full quote (optional)" },
+    { "type": "text", "id": "proof_item_5_handle", "label": "Item 5 handle/name (optional)" },
+    { "type": "text", "id": "proof_item_5_label", "label": "Item 5 source label (optional)" },
+    { "type": "url", "id": "proof_item_5_url", "label": "Item 5 source URL (optional)" },
+    { "type": "text", "id": "proof_item_6_short", "label": "Item 6 short quote (optional)" },
+    { "type": "textarea", "id": "proof_item_6_full", "label": "Item 6 full quote (optional)" },
+    { "type": "text", "id": "proof_item_6_handle", "label": "Item 6 handle/name (optional)" },
+    { "type": "text", "id": "proof_item_6_label", "label": "Item 6 source label (optional)" },
+    { "type": "url", "id": "proof_item_6_url", "label": "Item 6 source URL (optional)" },
+    { "type": "paragraph", "content": "Optional 'Recently bought' list — anonymized only. First name + last initial · country · qty. No full names, cities, or timestamps from orders. One per line." },
     { "type": "checkbox", "id": "proof_show_recent", "label": "Show 'Recently bought' list", "default": false },
     { "type": "text", "id": "proof_recent_label", "label": "Recently bought label", "default": "Recently bought" },
     { "type": "textarea", "id": "proof_recent_items", "label": "Recently bought items (one per line)" },
