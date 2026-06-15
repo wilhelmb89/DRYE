@@ -1,55 +1,91 @@
 /* ==========================================================================
-   DRYE — Worker Proof (near-cart). Compact green proof line + sliding,
-   swipeable, expandable comment ticker. Mobile-first, low height.
-   No libraries. Belongs to the buy form, not a review section.
+   DRYE — Worker Proof Receipt (near-cart trust module)
+   Calm, verified-receipt feel. Proof, not mechanism. Mobile-first.
+   No external libs; CSS scroll-snap carousel. Built through brand tokens.
    ========================================================================== */
 
 .hero .drye-proof {
   margin: 14px 0 12px;
-  padding: 12px 14px;
+  padding: 14px;
   background: var(--bg, #fff);
   border: 1px solid #E5E5E5;
   border-radius: 12px;
   box-sizing: border-box;
 }
 
-/* ---- Proof line (the only green part) ---------------------------------- */
+/* ---- Top proof strip --------------------------------------------------- */
 
-.hero .drye-proof__line {
+.hero .drye-proof__head {
   display: flex;
   align-items: center;
-  gap: 6px;
-  color: var(--emerald, #0D9488);
+  gap: 7px;
 }
 
 .hero .drye-proof__check {
-  flex: 0 0 15px;
-  width: 15px;
-  height: 15px;
+  display: inline-flex;
+  flex: 0 0 16px;
+  width: 16px;
+  height: 16px;
+}
+
+.hero .drye-proof__check svg {
+  width: 16px;
+  height: 16px;
   display: block;
 }
 
-.hero .drye-proof__returns {
+.hero .drye-proof__head-text {
   font-family: "Clash Grotesk", sans-serif;
-  font-size: 13.5px;
+  font-size: 13px;
   font-weight: 600;
   letter-spacing: -0.01em;
-  color: var(--emerald, #0D9488);
-}
-
-.hero .drye-proof__keep {
-  margin-top: 3px;
-  font-family: "DM Sans", sans-serif;
-  font-size: 12.5px;
-  font-weight: 500;
-  line-height: 1.3;
   color: var(--deep, #1E3A4C);
 }
 
-/* ---- Ticker ------------------------------------------------------------ */
+.hero .drye-proof__stat {
+  margin-top: 8px;
+  font-family: "Clash Grotesk", sans-serif;
+  font-size: 17px;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+  color: var(--deep, #1E3A4C);
+}
 
-.hero .drye-proof__tlabel {
-  margin: 11px 0 5px;
+.hero .drye-proof__sub {
+  margin: 4px 0 0;
+  font-family: "DM Sans", sans-serif;
+  font-size: 12px;
+  line-height: 1.5;
+  color: var(--muted, #4B5563);
+}
+
+/* ---- Mini stat chips --------------------------------------------------- */
+
+.hero .drye-proof__chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin: 10px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.hero .drye-proof__chip {
+  font-family: "DM Sans", sans-serif;
+  font-size: 10.5px;
+  font-weight: 500;
+  line-height: 1.3;
+  color: var(--sage, #5F8A8B);
+  background: #F1F5F5;
+  border-radius: 999px;
+  padding: 3px 9px;
+}
+
+/* ---- Carousel ---------------------------------------------------------- */
+
+.hero .drye-proof__ctitle {
+  margin: 14px 0 8px;
   font-family: "DM Sans", sans-serif;
   font-size: 9px;
   font-weight: 700;
@@ -58,169 +94,34 @@
   color: var(--caption, #9CA3AF);
 }
 
-.hero .drye-proof__ticker-wrap {
-  position: relative;
-  width: 100%;
-  max-width: 100%;
-  overflow: hidden;
-  -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 14px, #000 calc(100% - 14px), transparent 100%);
-  mask-image: linear-gradient(90deg, transparent 0, #000 14px, #000 calc(100% - 14px), transparent 100%);
-}
-
-/* Continuous left-slide marquee (like the announcement bar). Track is twice
-   the content; translateX(-50%) = one full set, so it loops seamlessly. */
-.hero .drye-proof__ticker {
+.hero .drye-proof__carousel {
   display: flex;
-  align-items: center;
-  gap: 0;
-  margin: 0;
-  padding: 0;
-  list-style: none;
-  width: max-content;
-  will-change: transform;
-  animation: dryeProofTicker 38s linear infinite;
+  gap: 10px;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  padding-bottom: 2px;
 }
 
-.hero .drye-proof__ticker.is-paused {
-  animation-play-state: paused;
-}
-
-@keyframes dryeProofTicker {
-  from { transform: translateX(0); }
-  to   { transform: translateX(-50%); }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .hero .drye-proof__ticker {
-    animation: none;
-  }
-}
-
-.hero .drye-proof__item-wrap {
-  position: relative;
-  flex: 0 0 auto;
-  padding-right: 22px;
-}
-
-.hero .drye-proof__item-wrap::after {
-  content: "·";
-  position: absolute;
-  right: 9px;
-  top: 50%;
-  transform: translateY(-50%);
-  color: var(--caption, #9CA3AF);
-}
-
-.hero .drye-proof__item {
-  display: inline-flex;
-  align-items: center;
-  gap: 5px;
-  margin: 0;
-  padding: 7px 0;
-  border: 0;
-  background: none;
-  cursor: pointer;
-  white-space: nowrap;
-  font-family: "DM Sans", sans-serif;
-  font-size: 12.5px;
-  line-height: 1.2;
-  color: var(--deep, #1E3A4C);
-}
-
-.hero .drye-proof__ihandle {
-  font-weight: 600;
-  color: var(--emerald, #0D9488);
-}
-
-.hero .drye-proof__iquote {
-  color: var(--deep, #1E3A4C);
-}
-
-.hero .drye-proof__iplus {
-  display: inline-grid;
-  place-items: center;
-  width: 15px;
-  height: 15px;
-  margin-left: 3px;
-  border-radius: 999px;
-  background: var(--emerald, #0D9488);
-  color: #fff;
-  font-size: 11px;
-  line-height: 1;
-  font-weight: 600;
-}
-
-.hero .drye-proof__item.is-open .drye-proof__iplus {
-  background: var(--deep, #1E3A4C);
-}
-
-/* Tap-to-read hint */
-.hero .drye-proof__hint {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  margin-top: 7px;
-  font-family: "DM Sans", sans-serif;
-  font-size: 11px;
-  line-height: 1.3;
-  color: var(--muted, #4B5563);
-}
-
-.hero .drye-proof__hint-plus {
-  display: inline-grid;
-  place-items: center;
-  flex: 0 0 15px;
-  width: 15px;
-  height: 15px;
-  border-radius: 999px;
-  background: var(--emerald, #0D9488);
-  color: #fff;
-  font-size: 11px;
-  font-weight: 600;
-  line-height: 1;
-  animation: dryeProofPulse 1.8s ease-in-out infinite;
-}
-
-@keyframes dryeProofPulse {
-  0%, 100% { transform: scale(1); }
-  50%      { transform: scale(1.18); }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .hero .drye-proof__hint-plus {
-    animation: none;
-  }
-}
-
-/* ---- Inline expanded comment ------------------------------------------- */
-
-.hero .drye-proof__expand {
-  position: relative;
-  margin-top: 9px;
-  padding: 9px 24px 2px 0;
-  border-top: 1px solid #E5E5E5;
-}
-
-.hero .drye-proof__expand[hidden] {
+.hero .drye-proof__carousel::-webkit-scrollbar {
   display: none;
 }
 
-.hero .drye-proof__expand-close {
-  position: absolute;
-  top: 7px;
-  right: 0;
-  width: 22px;
-  height: 22px;
-  padding: 0;
-  border: 0;
-  background: none;
-  color: var(--caption, #9CA3AF);
-  font-size: 18px;
-  line-height: 1;
-  cursor: pointer;
+.hero .drye-proof__card {
+  flex: 0 0 82%;
+  min-width: 82%;
+  box-sizing: border-box;
+  scroll-snap-align: start;
+  background: var(--bg, #fff);
+  border: 1px solid #E5E5E5;
+  border-radius: 10px;
+  padding: 12px;
 }
 
-.hero .drye-proof__expand-quote {
+.hero .drye-proof__quote {
   margin: 0;
   font-family: "DM Sans", sans-serif;
   font-size: 13px;
@@ -229,44 +130,35 @@
   color: var(--deep, #1E3A4C);
 }
 
-.hero .drye-proof__expand-meta {
+.hero .drye-proof__meta {
   display: flex;
-  flex-wrap: wrap;
   align-items: center;
-  gap: 8px;
-  margin-top: 6px;
-}
-
-.hero .drye-proof__expand-source {
+  gap: 5px;
+  margin-top: 10px;
   font-family: "DM Sans", sans-serif;
   font-size: 11px;
+  line-height: 1.3;
   color: var(--muted, #4B5563);
 }
 
-.hero .drye-proof__expand-link {
-  font-family: "DM Sans", sans-serif;
-  font-size: 11px;
-  font-weight: 600;
-  color: var(--emerald, #0D9488);
-  text-decoration: none;
-  border-bottom: 1px solid currentColor;
-}
-
-.hero .drye-proof__expand-link[hidden] {
-  display: none;
+.hero .drye-proof__vcheck {
+  flex: 0 0 12px;
+  width: 12px;
+  height: 12px;
+  display: block;
 }
 
 /* ---- Recently bought (optional, anonymized) ---------------------------- */
 
 .hero .drye-proof__recent {
-  margin-top: 12px;
-  padding-top: 10px;
+  margin-top: 14px;
+  padding-top: 11px;
   border-top: 1px solid #E5E5E5;
 }
 
 .hero .drye-proof__recent-label {
   display: block;
-  margin-bottom: 6px;
+  margin-bottom: 7px;
   font-family: "DM Sans", sans-serif;
   font-size: 9px;
   font-weight: 700;
@@ -280,7 +172,7 @@
   padding: 0;
   list-style: none;
   display: grid;
-  gap: 4px;
+  gap: 5px;
 }
 
 .hero .drye-proof__recent-item {
@@ -290,8 +182,33 @@
   color: var(--muted, #4B5563);
 }
 
+/* ---- Desktop (sticky right column): compact grid, no scroll ------------ */
+
 @media (min-width: 768px) {
+  .hero .drye-proof {
+    padding: 16px;
+  }
+
+  .hero .drye-proof__carousel {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    overflow: visible;
+    scroll-snap-type: none;
+  }
+
+  .hero .drye-proof__card {
+    flex: initial;
+    min-width: 0;
+  }
+
   .hero .drye-proof__recent-list {
     grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero .drye-proof__carousel {
+    scroll-behavior: auto;
   }
 }
