@@ -438,7 +438,7 @@ assign review_count = section.settings.review_count_fallback
         <div class="drye-proof__tlabel">{{ section.settings.proof_ticker_label }}</div>
       {% endif %}
 
-      <div class="drye-proof__ticker-wrap">
+      <div class="drye-proof__ticker-wrap" data-drye-proof-tickerwrap>
         <ul class="drye-proof__ticker" data-drye-proof-ticker>
           {% for pass in (1..2) %}
             {% for i in (1..6) %}
@@ -476,6 +476,13 @@ assign review_count = section.settings.review_count_fallback
           {% endfor %}
         </ul>
       </div>
+
+      {% if section.settings.proof_hint != blank %}
+        <div class="drye-proof__hint">
+          <span class="drye-proof__hint-plus" aria-hidden="true">+</span>
+          <span>{{ section.settings.proof_hint }}</span>
+        </div>
+      {% endif %}
 
       <div class="drye-proof__expand" data-drye-proof-expand hidden>
         <button type="button" class="drye-proof__expand-close" data-drye-proof-close aria-label="Close">−</button>
@@ -529,36 +536,34 @@ assign review_count = section.settings.review_count_fallback
       } catch (e) { push('proof_module_view'); }
 
       var ticker = m.querySelector('[data-drye-proof-ticker]');
+      var wrap = m.querySelector('[data-drye-proof-tickerwrap]');
       var expand = m.querySelector('[data-drye-proof-expand]');
-      var paused = false, locked = false, swipedOnce = false, reduce = false;
-      try { reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches; } catch (e) {}
+      var hovering = false, locked = false, openItem = null, resumeTimer = null;
 
-      function canAuto() {
-        return ticker && !reduce && ticker.scrollWidth > ticker.clientWidth + 4;
+      function setPaused() {
+        if (ticker) { ticker.classList.toggle('is-paused', hovering || locked); }
       }
-      function step() {
-        if (ticker && !paused && !locked && canAuto()) {
-          ticker.scrollLeft += 0.4;
-          var half = ticker.scrollWidth / 2;
-          if (ticker.scrollLeft >= half) { ticker.scrollLeft -= half; }
-        }
-        window.requestAnimationFrame(step);
-      }
-      if (ticker) {
-        window.requestAnimationFrame(step);
-        ['mouseenter', 'pointerdown', 'touchstart'].forEach(function (ev) {
-          ticker.addEventListener(ev, function () { paused = true; }, { passive: true });
-        });
-        ['mouseleave', 'pointerup', 'touchend'].forEach(function (ev) {
-          ticker.addEventListener(ev, function () { if (!locked) { paused = false; } }, { passive: true });
-        });
-        ticker.addEventListener('scroll', function () {
-          if (!swipedOnce) { swipedOnce = true; push('proof_ticker_swipe'); }
+      if (wrap) {
+        wrap.addEventListener('mouseenter', function () { hovering = true; setPaused(); });
+        wrap.addEventListener('mouseleave', function () { hovering = false; setPaused(); });
+        wrap.addEventListener('touchstart', function () {
+          hovering = true; setPaused();
+          if (resumeTimer) { clearTimeout(resumeTimer); }
+        }, { passive: true });
+        wrap.addEventListener('touchend', function () {
+          if (resumeTimer) { clearTimeout(resumeTimer); }
+          resumeTimer = setTimeout(function () { if (!locked) { hovering = false; setPaused(); } }, 2500);
         }, { passive: true });
       }
 
+      function setPlus(btn, isOpen) {
+        var p = btn.querySelector('.drye-proof__iplus');
+        if (p) { p.textContent = isOpen ? '−' : '+'; }
+        btn.classList.toggle('is-open', isOpen);
+      }
       function openExpand(btn) {
         if (!expand) return;
+        if (openItem && openItem !== btn) { setPlus(openItem, false); }
         var full = btn.getAttribute('data-full') || '';
         var handle = btn.getAttribute('data-handle') || '';
         var label = btn.getAttribute('data-label') || '';
@@ -577,12 +582,15 @@ assign review_count = section.settings.review_count_fallback
           if (url) { link.href = url; link.hidden = false; } else { link.hidden = true; }
         }
         expand.hidden = false;
-        locked = true; paused = true;
+        setPlus(btn, true);
+        openItem = btn;
+        locked = true; setPaused();
         push('proof_comment_expand', { proof_index: btn.getAttribute('data-index') });
       }
       function closeExpand() {
         if (expand) { expand.hidden = true; }
-        locked = false; paused = false;
+        if (openItem) { setPlus(openItem, false); openItem = null; }
+        locked = false; hovering = false; setPaused();
       }
 
       m.addEventListener('click', function (e) {
@@ -590,7 +598,8 @@ assign review_count = section.settings.review_count_fallback
         if (t.closest && t.closest('[data-drye-proof-close]')) { closeExpand(); return; }
         if (t.closest && t.closest('[data-proof-link]')) { push('proof_source_click'); return; }
         var btn = t.closest ? t.closest('[data-drye-proof-item]') : null;
-        if (btn) { openExpand(btn); }
+        if (!btn) { return; }
+        if (btn === openItem) { closeExpand(); } else { openExpand(btn); }
       });
     })();
   </script>
@@ -1324,6 +1333,7 @@ wteTimelines.forEach((timeline) => {
     { "type": "text", "id": "proof_returns_line", "label": "Returns proof line (green)", "default": "0 returns in the last 90 days" },
     { "type": "text", "id": "proof_keep_line", "label": "Keep line", "default": "Workers are keeping them." },
     { "type": "text", "id": "proof_ticker_label", "label": "Ticker label", "default": "Recent worker comments" },
+    { "type": "text", "id": "proof_hint", "label": "Tap-to-read hint", "default": "Tap a comment to read it in full" },
     { "type": "paragraph", "content": "Comment ticker. Each item shows a short line; tap opens the full comment inline. Add a source URL only if a real public link exists (then 'View on Instagram →' shows). Use approved/public comments only." },
     { "type": "text", "id": "proof_item_1_short", "label": "Item 1 short quote", "default": "These are incredible." },
     { "type": "textarea", "id": "proof_item_1_full", "label": "Item 1 full quote", "default": "These are incredible. I have nearly no more sweat in nitrile gloves. They're so thin I barely notice them." },
