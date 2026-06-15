@@ -246,12 +246,9 @@
   max-width: 100%;
 }
 
-/* Mobile: keep the hero image from getting too tall */
-@media (max-width: 767.98px) {
-  .hero .hero-media {
-    max-height: 62vh;
-  }
-}
+/* Mobile: let the gallery fill its full width. No height cap — capping the
+   height while aspect-ratio: 3/4 is set makes the browser shrink the WIDTH to
+   keep the ratio, which left a white strip on the right (iPhone 13 Pro). */
 
 /* Tablet / existing layout: unchanged, no thumbnails */
 @media (min-width: 768px) {
