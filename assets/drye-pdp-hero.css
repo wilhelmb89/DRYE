@@ -27,7 +27,10 @@
 .hero .hero-media {
   position: relative;
   background: #0d1f2d;
-  aspect-ratio: 3 / 4;
+  /* 4/5 (was 3/4): trims ~6% off the height on mobile (≈645→605px) to lift the
+     price/ATC higher, without capping height (a cap shrinks width with aspect-
+     ratio set). Images use object-fit:cover, so the frame just crops slightly. */
+  aspect-ratio: 4 / 5;
   overflow: hidden;
   min-width: 0;
 }
