@@ -38,9 +38,20 @@
         <div class="dpw__media">
           <div class="dpw__media-frame">
             {% if block.settings.media_type == 'video' and block.settings.video != blank %}
-              {{ block.settings.video | video_tag: image_size: '600x', controls: true, loop: false, muted: false, preload: 'none' }}
+              {{ block.settings.video | video_tag: image_size: '900x', controls: true, loop: false, muted: false, preload: 'none' }}
             {% elsif block.settings.image != blank %}
-              {{ block.settings.image | image_url: width: 600 | image_tag: loading: 'lazy', sizes: '235px', widths: '235, 350, 470, 600', alt: block.settings.label }}
+              {%- assign dpw_img = block.settings.image -%}
+              <img
+                class="dpw__media-img"
+                src="{{ dpw_img | image_url: width: 470 }}"
+                srcset="{{ dpw_img | image_url: width: 235 }} 235w, {{ dpw_img | image_url: width: 470 }} 470w, {{ dpw_img | image_url: width: 705 }} 705w, {{ dpw_img | image_url: width: 940 }} 940w"
+                sizes="235px"
+                width="{{ dpw_img.width }}"
+                height="{{ dpw_img.height }}"
+                loading="lazy"
+                alt="{{ block.settings.label | escape }}"
+                {% if dpw_img.presentation.focal_point %}style="object-position: {{ dpw_img.presentation.focal_point }};"{% endif %}
+              >
             {% else %}
               <div class="dpw__media-todo">
                 <span>Add photo or video</span>
