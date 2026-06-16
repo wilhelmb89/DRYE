@@ -1,11 +1,10 @@
 {% comment %}
   DRYE Proof Wall — full-width below-the-fold review section.
-  Two independent rows:
-    1) Media row  — photo OR video per block (chosen in the customizer).
-    2) Review row — large verified-review cards.
-  Add this section to the product page via the theme editor, below the fold.
-  DRYE visual system: white / light grey, navy text, thin borders, teal accent.
-  No fake urgency, no countdowns, no before/after, no inflated claims.
+  Two independent auto-gliding rows (right → left), each pausable + swipeable:
+    1) Media row  — full-bleed; photo OR video per block (chosen in customizer).
+    2) Review row — large verified-review cards with outcome-led headlines.
+  Add via the theme editor, below the fold. DRYE system: white / light grey,
+  navy text, thin borders, teal accent. No fake urgency / before-after / hype.
 {% endcomment %}
 
 <section
@@ -25,48 +24,51 @@
         <p class="dpw__sub">{{ section.settings.subheading }}</p>
       {% endif %}
     </header>
+  </div>
 
-    {% assign media_blocks = section.blocks | where: 'type', 'media' %}
-    {% assign review_blocks = section.blocks | where: 'type', 'review' %}
+  {% assign media_blocks = section.blocks | where: 'type', 'media' %}
+  {% assign review_blocks = section.blocks | where: 'type', 'review' %}
 
-    {% if section.settings.show_media_row and media_blocks.size > 0 %}
-      <div class="dpw__row dpw__row--media" role="list" aria-label="Photos and videos from people who use DRYE">
-        {% for block in media_blocks %}
-          <div class="dpw__media" role="listitem" {{ block.shopify_attributes }}>
-            <div class="dpw__media-frame">
-              {% if block.settings.media_type == 'video' and block.settings.video != blank %}
-                {{ block.settings.video | video_tag: image_size: '800x', controls: true, loop: false, muted: false, preload: 'none' }}
-              {% elsif block.settings.image != blank %}
-                {{
-                  block.settings.image
-                  | image_url: width: 900
-                  | image_tag:
-                    loading: 'lazy',
-                    sizes: '(min-width: 768px) 25vw, 80vw',
-                    widths: '300, 450, 600, 900',
-                    alt: block.settings.label
-                }}
-              {% else %}
-                <div class="dpw__media-todo">
-                  <span>Add photo or video</span>
-                  <small>Customizer → this block → choose Photo or Video</small>
-                </div>
-              {% endif %}
+  {% if section.settings.show_media_row and media_blocks.size > 0 %}
+    {% comment %} Full-bleed media row {% endcomment %}
+    <div class="dpw__row dpw__row--media" data-dpw-track data-dpw-speed="0.45" role="list" aria-label="Photos and videos from people who use DRYE">
+      {% for block in media_blocks %}
+        <div class="dpw__media" role="listitem" {{ block.shopify_attributes }}>
+          <div class="dpw__media-frame">
+            {% if block.settings.media_type == 'video' and block.settings.video != blank %}
+              {{ block.settings.video | video_tag: image_size: '800x', controls: true, loop: false, muted: false, preload: 'none' }}
+            {% elsif block.settings.image != blank %}
+              {{
+                block.settings.image
+                | image_url: width: 900
+                | image_tag:
+                  loading: 'lazy',
+                  sizes: '(min-width: 768px) 300px, 70vw',
+                  widths: '300, 450, 600, 900',
+                  alt: block.settings.label
+              }}
+            {% else %}
+              <div class="dpw__media-todo">
+                <span>Add photo or video</span>
+                <small>Customizer → this block → Photo or Video</small>
+              </div>
+            {% endif %}
 
-              {% if block.settings.label != blank or block.settings.sublabel != blank %}
-                <div class="dpw__media-cap">
-                  {% if block.settings.label != blank %}<span class="dpw__media-label">{{ block.settings.label }}</span>{% endif %}
-                  {% if block.settings.sublabel != blank %}<span class="dpw__media-sub">{{ block.settings.sublabel }}</span>{% endif %}
-                </div>
-              {% endif %}
-            </div>
+            {% if block.settings.label != blank or block.settings.sublabel != blank %}
+              <div class="dpw__media-cap">
+                {% if block.settings.label != blank %}<span class="dpw__media-label">{{ block.settings.label }}</span>{% endif %}
+                {% if block.settings.sublabel != blank %}<span class="dpw__media-sub">{{ block.settings.sublabel }}</span>{% endif %}
+              </div>
+            {% endif %}
           </div>
-        {% endfor %}
-      </div>
-    {% endif %}
+        </div>
+      {% endfor %}
+    </div>
+  {% endif %}
 
-    {% if review_blocks.size > 0 %}
-      <div class="dpw__row dpw__row--reviews" role="list" aria-label="Customer reviews">
+  {% if review_blocks.size > 0 %}
+    <div class="dpw__inner">
+      <div class="dpw__row dpw__row--reviews" data-dpw-track data-dpw-speed="0.35" role="list" aria-label="Customer reviews">
         {% for block in review_blocks %}
           <article class="dpw__review" role="listitem" {{ block.shopify_attributes }}>
             <div class="dpw__review-top">
@@ -107,18 +109,72 @@
           </article>
         {% endfor %}
       </div>
-    {% endif %}
 
-    {% if section.settings.all_reviews_url != blank %}
-      <a class="dpw__all" href="{{ section.settings.all_reviews_url }}">{{ section.settings.all_reviews_label | default: 'Read all reviews →' }}</a>
-    {% endif %}
-  </div>
+      {% if section.settings.all_reviews_url != blank %}
+        <a class="dpw__all" href="{{ section.settings.all_reviews_url }}">{{ section.settings.all_reviews_label | default: 'Read all reviews →' }}</a>
+      {% endif %}
+    </div>
+  {% endif %}
 </section>
+
+<script>
+(function () {
+  var sec = document.currentScript.closest('[data-dpw]');
+  if (!sec || sec.dataset.dpwBound) return;
+  sec.dataset.dpwBound = '1';
+
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var tracks = sec.querySelectorAll('[data-dpw-track]');
+
+  tracks.forEach(function (track) {
+    var originals = Array.prototype.slice.call(track.children);
+    if (!originals.length) return;
+
+    // Clone one full set for a seamless right-to-left loop.
+    originals.forEach(function (node) {
+      var c = node.cloneNode(true);
+      c.setAttribute('aria-hidden', 'true');
+      c.querySelectorAll('a, button, video, [tabindex]').forEach(function (el) { el.setAttribute('tabindex', '-1'); });
+      track.appendChild(c);
+    });
+
+    if (reduce) return;
+
+    var speed = parseFloat(track.getAttribute('data-dpw-speed')) || 0.4;
+    var paused = false, resumeTO = null;
+
+    function halfWidth() { return track.scrollWidth / 2; }
+    function tick() {
+      if (!paused) {
+        track.scrollLeft += speed;
+        var half = halfWidth();
+        if (half > 0 && track.scrollLeft >= half) { track.scrollLeft -= half; }
+      }
+      requestAnimationFrame(tick);
+    }
+    function pause() { paused = true; if (resumeTO) clearTimeout(resumeTO); }
+    function resumeSoon() { if (resumeTO) clearTimeout(resumeTO); resumeTO = setTimeout(function () { paused = false; }, 1400); }
+
+    track.addEventListener('pointerenter', pause);
+    track.addEventListener('pointerleave', resumeSoon);
+    track.addEventListener('pointerdown', pause);
+    track.addEventListener('pointerup', resumeSoon);
+    track.addEventListener('touchstart', pause, { passive: true });
+    track.addEventListener('touchend', resumeSoon, { passive: true });
+    track.addEventListener('wheel', function () { pause(); resumeSoon(); }, { passive: true });
+    track.addEventListener('focusin', pause);
+    track.addEventListener('focusout', resumeSoon);
+
+    requestAnimationFrame(function () { requestAnimationFrame(tick); });
+  });
+})();
+</script>
 
 {% stylesheet %}
 .dpw {
   background: #fff;
   padding: 44px 0 48px;
+  overflow-x: clip;
   font-family: "DM Sans", -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
   color: #1E3A4C;
 }
@@ -131,7 +187,7 @@
 
 .dpw__head {
   max-width: 640px;
-  margin-bottom: 22px;
+  margin-bottom: 4px;
 }
 
 .dpw__eyebrow {
@@ -162,28 +218,40 @@
   max-width: 52ch;
 }
 
-/* ---- Rows: horizontal swipe; multi-up on desktop ---------------------- */
+/* ---- Rows: auto-glide + swipe ----------------------------------------- */
 .dpw__row {
   display: flex;
   gap: 14px;
   overflow-x: auto;
-  scroll-snap-type: x mandatory;
-  -webkit-overflow-scrolling: touch;
   scrollbar-width: none;
-  padding: 4px 0 8px;
+  -webkit-overflow-scrolling: touch;
+  padding: 4px 0 10px;
 }
-
 .dpw__row::-webkit-scrollbar { display: none; }
 
-.dpw__row--media { margin-top: 24px; }
-.dpw__row--reviews { margin-top: 14px; }
+/* Media row is full-bleed: spans the whole section, first card aligned to the
+   inner content edge, cards bleed off the right. */
+.dpw__row--media {
+  margin-top: 22px;
+  padding-left: max(20px, calc((100% - 1280px) / 2 + 20px));
+  padding-right: 0;
+}
 
-.dpw__media,
+.dpw__row--reviews {
+  margin-top: 16px;
+}
+
+.dpw__media {
+  flex: 0 0 70%;
+  max-width: 260px;
+}
+
 .dpw__review {
-  scroll-snap-align: start;
-  flex: 0 0 80%;
-  max-width: 340px;
+  flex: 0 0 88%;
+  max-width: 380px;
   box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
 }
 
 /* ---- Media card ------------------------------------------------------- */
@@ -195,7 +263,6 @@
   border-radius: 4px;
   background: #F8FAFC;
 }
-
 .dpw__media-frame img,
 .dpw__media-frame video {
   position: absolute;
@@ -205,7 +272,6 @@
   object-fit: cover;
   display: block;
 }
-
 .dpw__media-todo {
   position: absolute;
   inset: 0;
@@ -220,40 +286,22 @@
 }
 .dpw__media-todo span { font-size: 13px; font-weight: 600; color: #4B5563; }
 .dpw__media-todo small { font-size: 11px; line-height: 1.4; }
-
 .dpw__media-cap {
   position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  padding: 28px 14px 12px;
+  left: 0; right: 0; bottom: 0;
+  padding: 30px 14px 12px;
   background: linear-gradient(to top, rgba(15,34,48,0.82) 0%, rgba(15,34,48,0) 100%);
 }
-.dpw__media-label {
-  display: block;
-  font-size: 9px;
-  font-weight: 700;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: #fff;
-}
-.dpw__media-sub {
-  display: block;
-  margin-top: 2px;
-  font-size: 11.5px;
-  color: rgba(255,255,255,0.82);
-}
+.dpw__media-label { display: block; font-size: 9px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: #fff; }
+.dpw__media-sub { display: block; margin-top: 2px; font-size: 11.5px; color: rgba(255,255,255,0.82); }
 
 /* ---- Review card ------------------------------------------------------ */
 .dpw__review {
-  display: flex;
-  flex-direction: column;
   background: #fff;
   border: 1px solid #E5E7EB;
   border-radius: 4px;
-  padding: 20px 20px 18px;
+  padding: 22px 22px 20px;
 }
-
 .dpw__review-top {
   display: flex;
   align-items: center;
@@ -261,35 +309,22 @@
   gap: 10px;
   margin-bottom: 12px;
 }
-
-.dpw__stars {
-  font-size: 12px;
-  letter-spacing: 1px;
-  color: #F5B301;
-  white-space: nowrap;
-}
-
-.dpw__source {
-  font-size: 9px;
-  font-weight: 700;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: #5F8A8B;
-}
+.dpw__stars { font-size: 13px; letter-spacing: 1px; color: #F5B301; white-space: nowrap; }
+.dpw__source { font-size: 9px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: #5F8A8B; }
 
 .dpw__review-head {
-  margin: 0 0 8px;
+  margin: 0 0 9px;
   font-family: "Clash Grotesk", sans-serif;
-  font-size: 16px;
+  font-size: 18px;
   font-weight: 600;
-  letter-spacing: -0.01em;
-  line-height: 1.2;
+  letter-spacing: -0.015em;
+  line-height: 1.18;
   color: #1E3A4C;
 }
 
 .dpw__quote {
   margin: 0 0 16px;
-  font-size: 14px;
+  font-size: 15px;
   font-weight: 500;
   line-height: 1.55;
   color: #1E3A4C;
@@ -300,31 +335,22 @@
   padding-top: 13px;
   border-top: 1px solid #E5E7EB;
 }
-
 .dpw__name {
   display: inline-flex;
   align-items: center;
   gap: 6px;
   font-family: "Clash Grotesk", sans-serif;
-  font-size: 13px;
+  font-size: 13.5px;
   font-weight: 600;
   letter-spacing: -0.01em;
   color: #1E3A4C;
 }
-
 .dpw__check { width: 14px; height: 14px; flex: 0 0 14px; display: block; }
-
-.dpw__role {
-  display: block;
-  margin-top: 3px;
-  font-size: 11.5px;
-  line-height: 1.35;
-  color: #4B5563;
-}
+.dpw__role { display: block; margin-top: 3px; font-size: 12px; line-height: 1.35; color: #4B5563; }
 
 .dpw__all {
   display: inline-block;
-  margin-top: 20px;
+  margin-top: 18px;
   font-size: 11px;
   font-weight: 600;
   letter-spacing: 0.08em;
@@ -336,15 +362,14 @@
 }
 .dpw__all:hover { color: #0D9488; border-color: #0D9488; }
 
-/* ---- Desktop: show several cards across, no scroll until many ---------- */
+/* ---- Desktop ---------------------------------------------------------- */
 @media (min-width: 768px) {
   .dpw { padding: 64px 0 72px; }
   .dpw__inner { padding: 0 32px; }
-  .dpw__media,
-  .dpw__review {
-    flex-basis: calc((100% - 3 * 14px) / 4);
-    max-width: none;
-  }
+  .dpw__row--media { padding-left: max(32px, calc((100% - 1280px) / 2 + 32px)); }
+  .dpw__media { flex-basis: 300px; max-width: 300px; }
+  .dpw__review { flex-basis: calc((100% - 3 * 14px) / 4); max-width: none; }
+  .dpw__review-head { font-size: 17px; }
   .dpw__quote { font-size: 15px; }
 }
 
@@ -388,7 +413,7 @@
         { "type": "range", "id": "stars", "label": "Stars", "min": 0, "max": 5, "step": 1, "default": 5 },
         { "type": "text", "id": "source_label", "label": "Source label", "default": "Verified buyer" },
         { "type": "checkbox", "id": "verified", "label": "Show verified check by name", "default": true },
-        { "type": "text", "id": "headline", "label": "Headline (optional, bold)" },
+        { "type": "text", "id": "headline", "label": "Headline (outcome-led, optional)" },
         { "type": "textarea", "id": "quote", "label": "Quote (verified text only)" },
         { "type": "text", "id": "name", "label": "Name" },
         { "type": "text", "id": "role", "label": "Role / use case" },
@@ -405,12 +430,12 @@
         { "type": "media", "settings": { "media_type": "image", "label": "Field user", "sublabel": "Add photo or video" } },
         { "type": "media", "settings": { "media_type": "image", "label": "Field user", "sublabel": "Add photo or video" } },
         { "type": "media", "settings": { "media_type": "image", "label": "Field user", "sublabel": "Add photo or video" } },
-        { "type": "review", "settings": { "stars": 5, "source_label": "Verified buyer", "verified": true, "name": "Brian Jee", "role": "Automotive repair", "location": "San Francisco, CA", "quote": "Nitrile gloves don't tear anymore because they go on and off easily without sweaty skin. When I get oil on the liners, I just wipe them off with electrical contact cleaner and a dry paper towel, works perfectly." } },
-        { "type": "review", "settings": { "stars": 5, "source_label": "Independent field study", "verified": true, "name": "Gothenburg heavy vehicle mechanic", "role": "Truck mechanic", "location": "Gothenburg, Sweden", "quote": "My hands get so itchy I can't work without a layer between my skin and the glove. The lining gloves stay drier than cotton — I've been using them continuously." } },
-        { "type": "review", "settings": { "stars": 5, "source_label": "Verified buyer", "verified": true, "name": "BMW Bilia EV mechanic", "role": "EV glove workflow", "location": "Gothenburg, Sweden", "quote": "Without the lining gloves I had to remove my EV gloves, wash and dry my hands, then go to the computer. With the lining gloves, I could remove the EV gloves and go straight to the computer." } },
-        { "type": "review", "settings": { "stars": 5, "source_label": "Verified buyer", "verified": true, "name": "Chad Wuollet", "role": "Automotive painter", "location": "Phoenix, AZ", "quote": "So far the gloves have worked well and as advertised! Wearing these liners have been a huge help and I'm no longer dripping sweat on my paint jobs and my hands feel better." } },
-        { "type": "review", "settings": { "stars": 5, "source_label": "Verified buyer", "verified": true, "name": "Shoujun Shi", "role": "Car detailing", "location": "Rosemead, CA", "quote": "The slim thickness gives great dexterity. They do a great job keeping sweat off my hands — even when slightly wet, they still work. I just wash and reuse them again." } },
-        { "type": "review", "settings": { "stars": 5, "source_label": "Verified buyer", "verified": true, "name": "PPE-Coordinator, Scania CV AB", "role": "Electric safety gloves", "location": "Södertälje, Stockholm", "quote": "Did not appear to affect fingertip sensitivity in electric safety gloves. Raised comfort and reduced the need to air the hand." } }
+        { "type": "review", "settings": { "stars": 5, "source_label": "Verified buyer", "verified": true, "headline": "Nitrile gloves don't tear anymore", "name": "Brian Jee", "role": "Automotive repair", "location": "San Francisco, CA", "quote": "Nitrile gloves don't tear anymore because they go on and off easily without sweaty skin. When I get oil on the liners, I just wipe them off with electrical contact cleaner and a dry paper towel, works perfectly." } },
+        { "type": "review", "settings": { "stars": 5, "source_label": "Independent field study", "verified": true, "headline": "Drier than cotton, every shift", "name": "Gothenburg heavy vehicle mechanic", "role": "Truck mechanic", "location": "Gothenburg, Sweden", "quote": "My hands get so itchy I can't work without a layer between my skin and the glove. The lining gloves stay drier than cotton — I've been using them continuously." } },
+        { "type": "review", "settings": { "stars": 5, "source_label": "Verified buyer", "verified": true, "headline": "Off the gloves, straight to work", "name": "BMW Bilia EV mechanic", "role": "EV glove workflow", "location": "Gothenburg, Sweden", "quote": "Without the lining gloves I had to remove my EV gloves, wash and dry my hands, then go to the computer. With the lining gloves, I could remove the EV gloves and go straight to the computer." } },
+        { "type": "review", "settings": { "stars": 5, "source_label": "Verified buyer", "verified": true, "headline": "No more sweat on the paint job", "name": "Chad Wuollet", "role": "Automotive painter", "location": "Phoenix, AZ", "quote": "So far the gloves have worked well and as advertised! Wearing these liners have been a huge help and I'm no longer dripping sweat on my paint jobs and my hands feel better." } },
+        { "type": "review", "settings": { "stars": 5, "source_label": "Verified buyer", "verified": true, "headline": "Sweat off, then wash and reuse", "name": "Shoujun Shi", "role": "Car detailing", "location": "Rosemead, CA", "quote": "The slim thickness gives great dexterity. They do a great job keeping sweat off my hands — even when slightly wet, they still work. I just wash and reuse them again." } },
+        { "type": "review", "settings": { "stars": 5, "source_label": "Verified buyer", "verified": true, "headline": "Comfort without losing fingertip feel", "name": "PPE-Coordinator, Scania CV AB", "role": "Electric safety gloves", "location": "Södertälje, Stockholm", "quote": "Did not appear to affect fingertip sensitivity in electric safety gloves. Raised comfort and reduced the need to air the hand." } }
       ]
     }
   ]
