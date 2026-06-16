@@ -43,8 +43,8 @@
                 | image_url: width: 600
                 | image_tag:
                   loading: 'lazy',
-                  sizes: '(min-width: 768px) 190px, 46vw',
-                  widths: '180, 280, 380, 600',
+                  sizes: '235px',
+                  widths: '235, 350, 470, 600',
                   alt: block.settings.label
               }}
             {% else %}
@@ -111,17 +111,13 @@
       </div>
 
       <div class="dpw__nav">
-        <button type="button" class="dpw__arrow" data-dpw-prev aria-label="Previous reviews">
-          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M15 5l-7 7 7 7" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </button>
+        <button type="button" class="dpw__arrow" data-dpw-prev aria-label="Previous reviews">←</button>
         {% if section.settings.all_reviews_url != blank %}
           <a class="dpw__all" href="{{ section.settings.all_reviews_url }}">{{ section.settings.all_reviews_label | default: 'Read all reviews →' }}</a>
         {% else %}
           <span class="dpw__all dpw__all--static">See more</span>
         {% endif %}
-        <button type="button" class="dpw__arrow" data-dpw-next aria-label="More reviews">
-          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 5l7 7-7 7" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </button>
+        <button type="button" class="dpw__arrow" data-dpw-next aria-label="More reviews">→</button>
       </div>
     </div>
   {% endif %}
@@ -269,8 +265,8 @@
 }
 
 .dpw__media {
-  flex: 0 0 46%;
-  max-width: 220px;
+  flex: 0 0 235px;
+  max-width: 235px;
 }
 
 .dpw__review {
@@ -383,22 +379,26 @@
   margin-top: 24px;
 }
 
+/* Brand-book nav buttons (match .drye-worker-grid__nav-btn): square, thin
+   border, white-ish fill, navy glyph. */
 .dpw__arrow {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 40px;
-  height: 40px;
+  width: 44px;
+  height: 44px;
   padding: 0;
-  border: 1px solid #E5E7EB;
-  border-radius: 999px;
-  background: #fff;
-  color: #1E3A4C;
+  border: var(--border-base, 1px solid #E5E7EB);
+  border-radius: 0;
+  background: rgba(255, 255, 255, 0.92);
+  color: var(--deep, #1E3A4C);
+  font-size: 18px;
+  line-height: 1;
   cursor: pointer;
-  transition: border-color 0.18s ease, color 0.18s ease;
+  transition: background-color 0.18s ease, border-color 0.18s ease, opacity 0.18s ease;
 }
-.dpw__arrow:hover { border-color: #0D9488; color: #0D9488; }
-.dpw__arrow svg { width: 18px; height: 18px; }
+.dpw__arrow:hover { background: var(--bg, #fff); }
+.dpw__arrow.is-disabled { opacity: 0.35; pointer-events: none; }
 
 .dpw__all {
   font-size: 11px;
@@ -418,7 +418,7 @@
   .dpw { padding: 64px 0 72px; }
   .dpw__inner { padding: 0 32px; }
   .dpw__row--media { padding-left: max(32px, calc((100% - 1280px) / 2 + 32px)); }
-  .dpw__media { flex-basis: 190px; max-width: 190px; }
+  .dpw__media { flex-basis: 235px; max-width: 235px; }
   .dpw__review { flex-basis: calc((100% - 3 * 14px) / 4); max-width: none; }
   .dpw__review-head { font-size: 17px; }
   .dpw__quote { font-size: 15px; }
