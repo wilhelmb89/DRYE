@@ -43,8 +43,8 @@
                 | image_url: width: 600
                 | image_tag:
                   loading: 'lazy',
-                  sizes: '235px',
-                  widths: '235, 350, 470, 600',
+                  sizes: '(min-width: 768px) 190px, 46vw',
+                  widths: '180, 280, 380, 600',
                   alt: block.settings.label
               }}
             {% else %}
@@ -111,13 +111,17 @@
       </div>
 
       <div class="dpw__nav">
-        <button type="button" class="dpw__arrow" data-dpw-prev aria-label="Previous reviews">←</button>
+        <button type="button" class="dpw__arrow" data-dpw-prev aria-label="Previous reviews">
+          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M15 5l-7 7 7 7" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
         {% if section.settings.all_reviews_url != blank %}
           <a class="dpw__all" href="{{ section.settings.all_reviews_url }}">{{ section.settings.all_reviews_label | default: 'Read all reviews →' }}</a>
         {% else %}
           <span class="dpw__all dpw__all--static">See more</span>
         {% endif %}
-        <button type="button" class="dpw__arrow" data-dpw-next aria-label="More reviews">→</button>
+        <button type="button" class="dpw__arrow" data-dpw-next aria-label="More reviews">
+          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 5l7 7-7 7" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
       </div>
     </div>
   {% endif %}
@@ -125,71 +129,80 @@
 
 <script>
 (function () {
-  var sec = document.currentScript.closest('[data-dpw]');
-  if (!sec || sec.dataset.dpwBound) return;
-  sec.dataset.dpwBound = '1';
+  function setupSection(sec) {
+    if (!sec || sec.dataset.dpwBound) return;
+    sec.dataset.dpwBound = '1';
 
-  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  var tracks = sec.querySelectorAll('[data-dpw-track]');
+    var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  tracks.forEach(function (track) {
-    var originals = Array.prototype.slice.call(track.children);
-    if (!originals.length) return;
+    sec.querySelectorAll('[data-dpw-track]').forEach(function (track) {
+      var originals = Array.prototype.slice.call(track.children);
+      if (!originals.length) return;
 
-    // Clone one full set for a seamless right-to-left loop.
-    originals.forEach(function (node) {
-      var c = node.cloneNode(true);
-      c.setAttribute('aria-hidden', 'true');
-      c.querySelectorAll('a, button, video, [tabindex]').forEach(function (el) { el.setAttribute('tabindex', '-1'); });
-      track.appendChild(c);
+      // Clone one full set for a seamless right-to-left loop.
+      originals.forEach(function (node) {
+        var c = node.cloneNode(true);
+        c.setAttribute('aria-hidden', 'true');
+        c.querySelectorAll('a, button, video, [tabindex]').forEach(function (el) { el.setAttribute('tabindex', '-1'); });
+        track.appendChild(c);
+      });
+
+      if (reduce) return;
+
+      var speed = parseFloat(track.getAttribute('data-dpw-speed')) || 0.4;
+      var paused = false, resumeTO = null;
+
+      function halfWidth() { return track.scrollWidth / 2; }
+      function tick() {
+        if (!paused) {
+          track.scrollLeft += speed;
+          var half = halfWidth();
+          if (half > 0 && track.scrollLeft >= half) { track.scrollLeft -= half; }
+        }
+        requestAnimationFrame(tick);
+      }
+      function pause() { paused = true; if (resumeTO) clearTimeout(resumeTO); }
+      function resumeSoon() { if (resumeTO) clearTimeout(resumeTO); resumeTO = setTimeout(function () { paused = false; }, 1400); }
+
+      track.addEventListener('pointerenter', pause);
+      track.addEventListener('pointerleave', resumeSoon);
+      track.addEventListener('pointerdown', pause);
+      track.addEventListener('pointerup', resumeSoon);
+      track.addEventListener('touchstart', pause, { passive: true });
+      track.addEventListener('touchend', resumeSoon, { passive: true });
+      track.addEventListener('wheel', function () { pause(); resumeSoon(); }, { passive: true });
+      track.addEventListener('focusin', pause);
+      track.addEventListener('focusout', resumeSoon);
+
+      track.__dpwPause = pause;
+      track.__dpwResume = resumeSoon;
+      requestAnimationFrame(function () { requestAnimationFrame(tick); });
     });
 
-    if (reduce) return;
-
-    var speed = parseFloat(track.getAttribute('data-dpw-speed')) || 0.4;
-    var paused = false, resumeTO = null;
-
-    function halfWidth() { return track.scrollWidth / 2; }
-    function tick() {
-      if (!paused) {
-        track.scrollLeft += speed;
-        var half = halfWidth();
-        if (half > 0 && track.scrollLeft >= half) { track.scrollLeft -= half; }
-      }
-      requestAnimationFrame(tick);
+    // Prev / next arrows drive the reviews row (works with or without auto-glide).
+    var reviewsTrack = sec.querySelector('.dpw__row--reviews');
+    var prevBtn = sec.querySelector('[data-dpw-prev]');
+    var nextBtn = sec.querySelector('[data-dpw-next]');
+    function dpwStep(dir) {
+      if (!reviewsTrack) return;
+      if (reviewsTrack.__dpwPause) reviewsTrack.__dpwPause();
+      var card = reviewsTrack.querySelector('.dpw__review');
+      var amt = card ? (card.getBoundingClientRect().width + 14) : Math.round(reviewsTrack.clientWidth * 0.85);
+      reviewsTrack.scrollBy({ left: dir * amt, behavior: 'smooth' });
+      if (reviewsTrack.__dpwResume) reviewsTrack.__dpwResume();
     }
-    function pause() { paused = true; if (resumeTO) clearTimeout(resumeTO); }
-    function resumeSoon() { if (resumeTO) clearTimeout(resumeTO); resumeTO = setTimeout(function () { paused = false; }, 1400); }
-
-    track.addEventListener('pointerenter', pause);
-    track.addEventListener('pointerleave', resumeSoon);
-    track.addEventListener('pointerdown', pause);
-    track.addEventListener('pointerup', resumeSoon);
-    track.addEventListener('touchstart', pause, { passive: true });
-    track.addEventListener('touchend', resumeSoon, { passive: true });
-    track.addEventListener('wheel', function () { pause(); resumeSoon(); }, { passive: true });
-    track.addEventListener('focusin', pause);
-    track.addEventListener('focusout', resumeSoon);
-
-    track.__dpwPause = pause;
-    track.__dpwResume = resumeSoon;
-    requestAnimationFrame(function () { requestAnimationFrame(tick); });
-  });
-
-  // Prev / next arrows drive the reviews row (works with or without auto-glide).
-  var reviewsTrack = sec.querySelector('.dpw__row--reviews');
-  var prevBtn = sec.querySelector('[data-dpw-prev]');
-  var nextBtn = sec.querySelector('[data-dpw-next]');
-  function dpwStep(dir) {
-    if (!reviewsTrack) return;
-    if (reviewsTrack.__dpwPause) reviewsTrack.__dpwPause();
-    var card = reviewsTrack.querySelector('.dpw__review');
-    var amt = card ? (card.getBoundingClientRect().width + 14) : Math.round(reviewsTrack.clientWidth * 0.85);
-    reviewsTrack.scrollBy({ left: dir * amt, behavior: 'smooth' });
-    if (reviewsTrack.__dpwResume) reviewsTrack.__dpwResume();
+    if (prevBtn) prevBtn.addEventListener('click', function () { dpwStep(-1); });
+    if (nextBtn) nextBtn.addEventListener('click', function () { dpwStep(1); });
   }
-  if (prevBtn) prevBtn.addEventListener('click', function () { dpwStep(-1); });
-  if (nextBtn) nextBtn.addEventListener('click', function () { dpwStep(1); });
+
+  function initAll(root) {
+    (root || document).querySelectorAll('[data-dpw]').forEach(setupSection);
+  }
+
+  if (document.readyState !== 'loading') { initAll(); }
+  else { document.addEventListener('DOMContentLoaded', function () { initAll(); }); }
+  // Shopify theme editor: re-bind when the section is added/edited.
+  document.addEventListener('shopify:section:load', function (e) { initAll(e.target); });
 })();
 </script>
 
@@ -265,8 +278,8 @@
 }
 
 .dpw__media {
-  flex: 0 0 235px;
-  max-width: 235px;
+  flex: 0 0 46%;
+  max-width: 220px;
 }
 
 .dpw__review {
@@ -379,26 +392,22 @@
   margin-top: 24px;
 }
 
-/* Brand-book nav buttons (match .drye-worker-grid__nav-btn): square, thin
-   border, white-ish fill, navy glyph. */
 .dpw__arrow {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 44px;
-  height: 44px;
+  width: 40px;
+  height: 40px;
   padding: 0;
-  border: var(--border-base, 1px solid #E5E7EB);
-  border-radius: 0;
-  background: rgba(255, 255, 255, 0.92);
-  color: var(--deep, #1E3A4C);
-  font-size: 18px;
-  line-height: 1;
+  border: 1px solid #E5E7EB;
+  border-radius: 999px;
+  background: #fff;
+  color: #1E3A4C;
   cursor: pointer;
-  transition: background-color 0.18s ease, border-color 0.18s ease, opacity 0.18s ease;
+  transition: border-color 0.18s ease, color 0.18s ease;
 }
-.dpw__arrow:hover { background: var(--bg, #fff); }
-.dpw__arrow.is-disabled { opacity: 0.35; pointer-events: none; }
+.dpw__arrow:hover { border-color: #0D9488; color: #0D9488; }
+.dpw__arrow svg { width: 18px; height: 18px; }
 
 .dpw__all {
   font-size: 11px;
@@ -418,7 +427,7 @@
   .dpw { padding: 64px 0 72px; }
   .dpw__inner { padding: 0 32px; }
   .dpw__row--media { padding-left: max(32px, calc((100% - 1280px) / 2 + 32px)); }
-  .dpw__media { flex-basis: 235px; max-width: 235px; }
+  .dpw__media { flex-basis: 190px; max-width: 190px; }
   .dpw__review { flex-basis: calc((100% - 3 * 14px) / 4); max-width: none; }
   .dpw__review-head { font-size: 17px; }
   .dpw__quote { font-size: 15px; }
