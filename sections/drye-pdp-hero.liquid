@@ -835,6 +835,16 @@ assign review_count = section.settings.review_count_fallback
   </div>
 {% endif %}
 
+{% comment %} v10 — Review slider (in-column), between missing-interface and what-to-expect {% endcomment %}
+{% if section.settings.show_inline_review_slider %}
+  {% assign review_block = section.blocks | where: 'type', 'review_slider' | first %}
+  {% if review_block %}
+    <div class="pdp-review-slider-block pdp-review-slider-block--inline" {{ review_block.shopify_attributes }}>
+      {% render 'drye-review-slider-inline', block: review_block %}
+    </div>
+  {% endif %}
+{% endif %}
+
 {% comment %} v10 — What to expect: dark timeline (in-column). Reuses WTE accordion JS. {% endcomment %}
 {% if wte_blocks.size > 0 %}
   <div class="pdp-mod pdp-mod--bleed pdp-mod--dark pdp-wte">
