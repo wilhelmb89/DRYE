@@ -285,6 +285,17 @@
     width: 50%;
     margin-left: 50%;
   }
+
+  /* Desktop only: pull stars/title/subtext above the Worker Proof module so
+     the ticker sits between the subtext and the price. The proof stays first in
+     the DOM (so on mobile it renders at the very top, under the gallery); these
+     order:-1 items just move ahead of it on the two-column desktop layout. */
+  .hero .hero-info > .stars-row,
+  .hero .hero-info > .h-eye,
+  .hero .hero-info > .h-title,
+  .hero .hero-info > .h-sub {
+    order: -1;
+  }
 }
 
 /* Path B desktop/laptop gallery: thumbnails + native 2:3 media frame */
