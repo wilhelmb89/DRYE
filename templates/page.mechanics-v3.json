@@ -167,7 +167,6 @@
       "blocks": {
         "card_xAhqGk": {
           "type": "card",
-          "disabled": true,
           "settings": {
             "label": "TIME LOST ADDS UP",
             "stat_prefix": "",
@@ -470,46 +469,73 @@
         "drye_desc": "<p>Two fibers, one fabric. The skin side is hydrophobic - water cannot bond to it. The outer side pulls moisture toward it. <strong>Sweat routes from skin to outside, continuously, without saturation.</strong></p>"
       }
     },
+    "drye_research_video_full_JTTPGe": {
+      "type": "drye-research-video-full",
+      "name": "DRYE Research Video Full",
+      "settings": {
+        "video_src_desktop": "https://customer-fqpngdzqcoky7qmz.cloudflarestream.com/453bb4cae9bd147b7a10fc6213e64b12/manifest/video.m3u8",
+        "video_src_mobile": "https://customer-fqpngdzqcoky7qmz.cloudflarestream.com/ed9ad690d7f5c27060e215f05f9e4f8e/manifest/video.m3u8",
+        "video_label": "Asymmetric layering",
+        "video_caption": "Routes sweat from skin to outer fabric. No saturation point."
+      }
+    },
     "drye_structural_answer_tUG8Ht": {
       "type": "drye-structural-answer",
       "blocks": {
         "gallery_image_RHntXb": {
           "type": "gallery_image",
           "settings": {
+            "image": "shopify://shop_images/Frame_930.webp",
             "image_alt": ""
           }
         },
         "gallery_image_PkwERy": {
           "type": "gallery_image",
           "settings": {
+            "image": "shopify://shop_images/div.card_12.webp",
             "image_alt": ""
           }
         },
         "gallery_image_iJBmgm": {
           "type": "gallery_image",
           "settings": {
+            "image": "shopify://shop_images/div.card_9.webp",
+            "image_alt": ""
+          }
+        },
+        "gallery_image_n8PxXN": {
+          "type": "gallery_image",
+          "settings": {
+            "image": "shopify://shop_images/div.card_2.webp",
+            "image_alt": ""
+          }
+        },
+        "gallery_image_jNk7MT": {
+          "type": "gallery_image",
+          "settings": {
+            "image": "shopify://shop_images/div.card_11.webp",
             "image_alt": ""
           }
         },
         "fact_7iz9UF": {
           "type": "fact",
           "settings": {
-            "strong": "No saturation point.",
-            "text": "Moisture is continuously routed outward — not absorbed and held."
+            "strong": "Sweat.",
+            "text": "No saturation point. No maceration. Stays dry for the full shift - summer or winter, nitrile, latex, rubber or HV."
           }
         },
         "fact_EnXzRk": {
           "type": "fact",
           "settings": {
-            "strong": "Works under compression.",
-            "text": "The transport mechanism doesn't collapse when the glove presses down."
+            "strong": "Oil.",
+            "text": "Stays on the surface. Wipes off with electrical contact cleaner. Back in rotation in under a minute."
           }
         },
         "fact_Cwq79E": {
           "type": "fact",
           "settings": {
-            "strong": "0.4mm.",
-            "text": "Fits inside any sealed glove. No dexterity compromise."
+            "strong": "Tearing.",
+            "text": "Your nitriles go on dry, come off dry. No more ripping them off over soaked skin twice an hour."
           }
         }
       },
@@ -517,6 +543,8 @@
         "gallery_image_RHntXb",
         "gallery_image_PkwERy",
         "gallery_image_iJBmgm",
+        "gallery_image_n8PxXN",
+        "gallery_image_jNk7MT",
         "fact_7iz9UF",
         "fact_EnXzRk",
         "fact_Cwq79E"
@@ -525,14 +553,14 @@
       "settings": {
         "image_alt": "DRYE liner being put on under a nitrile glove",
         "eyebrow": "Asymmetric layering",
-        "heading_before": "A liner built for sealed gloves —",
-        "heading_em": "not open air.",
+        "heading_before": "A liner built for sealed gloves",
+        "heading_em": "— not open air.",
         "subheading": "0.4mm thin. No chemicals. No coatings. Fits inside any work glove.",
-        "body": "In open air, fabrics work by absorbing sweat and releasing it into the air. Inside a sealed glove there is no air to release into. So the fabric saturates and sits wet against your skin. Asymmetric Layering doesn't absorb on the skin side. The structure routes moisture from skin to outer face — continuously, without saturation. Built for the only environment where this matters.",
+        "body": "",
         "footer_text": "Developed at the Swedish School of Textiles. Supported by Uppsala University and Vinnova.",
         "swipe_label": "Swipe",
         "cta_label": "SEE THE LINER",
-        "cta_url": "",
+        "cta_url": "shopify://products/drye-moisture-routing-glove-liners",
         "cta_note": "30-day refund · Ships within 24 hours"
       }
     },
@@ -1255,6 +1283,7 @@
     "drye_evidence_V9B97n",
     "drye_new_problem_beat_1_R7GgRp",
     "drye_mechanics_mechanism_tgcnCV",
+    "drye_research_video_full_JTTPGe",
     "drye_structural_answer_tUG8Ht",
     "drye_product_reality_grid_ggq47H",
     "drye_functional_benefits_yhKLaV",
