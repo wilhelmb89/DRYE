@@ -1,8 +1,9 @@
 {% comment %}
   DRYE Proof Wall — full-width below-the-fold review section.
-  Two independent auto-gliding rows (right → left), each pausable + swipeable:
-    1) Media row  — full-bleed; photo OR video per block (chosen in customizer).
-    2) Review row — large verified-review cards with outcome-led headlines.
+  - Media row : full-bleed, photo OR video per block (chosen in customizer),
+                auto-glides right → left, pausable + swipeable.
+  - Review row: verified reviews baked into the section (always render, never
+                reset by Shopify sync), auto-glide + prev/next nav.
   Add via the theme editor, below the fold. DRYE system: white / light grey,
   navy text, thin borders, teal accent. No fake urgency / before-after / hype.
 {% endcomment %}
@@ -27,7 +28,6 @@
   </div>
 
   {% assign media_blocks = section.blocks | where: 'type', 'media' %}
-  {% assign review_blocks = section.blocks | where: 'type', 'review' %}
 
   {% if section.settings.show_media_row and media_blocks.size > 0 %}
     {% comment %} Full-bleed media row {% endcomment %}
@@ -43,8 +43,8 @@
                 | image_url: width: 600
                 | image_tag:
                   loading: 'lazy',
-                  sizes: '(min-width: 768px) 190px, 46vw',
-                  widths: '180, 280, 380, 600',
+                  sizes: '235px',
+                  widths: '235, 350, 470, 600',
                   alt: block.settings.label
               }}
             {% else %}
@@ -66,65 +66,116 @@
     </div>
   {% endif %}
 
-  {% if review_blocks.size > 0 %}
-    <div class="dpw__inner">
-      <div class="dpw__row dpw__row--reviews" data-dpw-track data-dpw-speed="0.35" role="list" aria-label="Customer reviews">
-        {% for block in review_blocks %}
-          <article class="dpw__review" role="listitem" {{ block.shopify_attributes }}>
-            <div class="dpw__review-top">
-              {% if block.settings.stars > 0 %}
-                <span class="dpw__stars" aria-label="{{ block.settings.stars }} out of 5 stars">{% for s in (1..block.settings.stars) %}★{% endfor %}</span>
-              {% endif %}
-              {% if block.settings.source_label != blank %}
-                <span class="dpw__source">{{ block.settings.source_label }}</span>
-              {% endif %}
-            </div>
+  {% comment %}
+    Verified reviews — baked in (mechanics first). These are real DRYE customer /
+    field quotes; editing them is a code change so they can never be wiped by a
+    theme sync. Headlines are short summaries pulled from each verified quote.
+  {% endcomment %}
+  <div class="dpw__inner">
+    <div class="dpw__row dpw__row--reviews" data-dpw-track data-dpw-speed="0.35" role="list" aria-label="Customer reviews">
 
-            {% if block.settings.headline != blank %}
-              <h3 class="dpw__review-head">{{ block.settings.headline }}</h3>
-            {% endif %}
+      <article class="dpw__review" role="listitem">
+        <div class="dpw__review-top">
+          <span class="dpw__stars" aria-label="5 out of 5 stars">★★★★★</span>
+          <span class="dpw__source">Verified buyer</span>
+        </div>
+        <h3 class="dpw__review-head">Nitrile gloves don't tear anymore</h3>
+        <blockquote class="dpw__quote">Nitrile gloves don't tear anymore because they go on and off easily without sweaty skin. When I get oil on the liners, I just wipe them off with electrical contact cleaner and a dry paper towel, works perfectly.</blockquote>
+        <div class="dpw__person">
+          <span class="dpw__name">Brian Jee
+            <svg class="dpw__check" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><circle cx="8" cy="8" r="8" fill="#0D9488"/><path d="M4.6 8.2l2.1 2.1 4.7-4.9" stroke="#fff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </span>
+          <span class="dpw__role">Automotive repair · San Francisco, CA</span>
+        </div>
+      </article>
 
-            {% if block.settings.quote != blank %}
-              <blockquote class="dpw__quote">{{ block.settings.quote }}</blockquote>
-            {% endif %}
+      <article class="dpw__review" role="listitem">
+        <div class="dpw__review-top">
+          <span class="dpw__stars" aria-label="5 out of 5 stars">★★★★★</span>
+          <span class="dpw__source">Independent field study</span>
+        </div>
+        <h3 class="dpw__review-head">Drier than cotton, every shift</h3>
+        <blockquote class="dpw__quote">My hands get so itchy I can't work without a layer between my skin and the glove. The lining gloves stay drier than cotton — I've been using them continuously.</blockquote>
+        <div class="dpw__person">
+          <span class="dpw__name">Gothenburg heavy vehicle mechanic
+            <svg class="dpw__check" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><circle cx="8" cy="8" r="8" fill="#0D9488"/><path d="M4.6 8.2l2.1 2.1 4.7-4.9" stroke="#fff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </span>
+          <span class="dpw__role">Truck mechanic · Gothenburg, Sweden</span>
+        </div>
+      </article>
 
-            {% if block.settings.name != blank or block.settings.role != blank or block.settings.location != blank %}
-              <div class="dpw__person">
-                {% if block.settings.name != blank %}
-                  <span class="dpw__name">
-                    {{ block.settings.name }}
-                    {% if block.settings.verified %}
-                      <svg class="dpw__check" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                        <circle cx="8" cy="8" r="8" fill="#0D9488"/>
-                        <path d="M4.6 8.2l2.1 2.1 4.7-4.9" stroke="#fff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
-                      </svg>
-                    {% endif %}
-                  </span>
-                {% endif %}
-                {% if block.settings.role != blank or block.settings.location != blank %}
-                  <span class="dpw__role">{{ block.settings.role }}{% if block.settings.role != blank and block.settings.location != blank %} · {% endif %}{{ block.settings.location }}</span>
-                {% endif %}
-              </div>
-            {% endif %}
-          </article>
-        {% endfor %}
-      </div>
+      <article class="dpw__review" role="listitem">
+        <div class="dpw__review-top">
+          <span class="dpw__stars" aria-label="5 out of 5 stars">★★★★★</span>
+          <span class="dpw__source">Verified buyer</span>
+        </div>
+        <h3 class="dpw__review-head">Off the gloves, straight to work</h3>
+        <blockquote class="dpw__quote">Without the lining gloves I had to remove my EV gloves, wash and dry my hands, then go to the computer. With the lining gloves, I could remove the EV gloves and go straight to the computer.</blockquote>
+        <div class="dpw__person">
+          <span class="dpw__name">BMW Bilia EV mechanic
+            <svg class="dpw__check" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><circle cx="8" cy="8" r="8" fill="#0D9488"/><path d="M4.6 8.2l2.1 2.1 4.7-4.9" stroke="#fff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </span>
+          <span class="dpw__role">EV glove workflow · Gothenburg, Sweden</span>
+        </div>
+      </article>
 
-      <div class="dpw__nav">
-        <button type="button" class="dpw__arrow" data-dpw-prev aria-label="Previous reviews">
-          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M15 5l-7 7 7 7" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </button>
-        {% if section.settings.all_reviews_url != blank %}
-          <a class="dpw__all" href="{{ section.settings.all_reviews_url }}">{{ section.settings.all_reviews_label | default: 'Read all reviews →' }}</a>
-        {% else %}
-          <span class="dpw__all dpw__all--static">See more</span>
-        {% endif %}
-        <button type="button" class="dpw__arrow" data-dpw-next aria-label="More reviews">
-          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 5l7 7-7 7" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </button>
-      </div>
+      <article class="dpw__review" role="listitem">
+        <div class="dpw__review-top">
+          <span class="dpw__stars" aria-label="5 out of 5 stars">★★★★★</span>
+          <span class="dpw__source">Verified buyer</span>
+        </div>
+        <h3 class="dpw__review-head">No more sweat on the paint job</h3>
+        <blockquote class="dpw__quote">So far the gloves have worked well and as advertised! Wearing these liners have been a huge help and I'm no longer dripping sweat on my paint jobs and my hands feel better.</blockquote>
+        <div class="dpw__person">
+          <span class="dpw__name">Chad Wuollet
+            <svg class="dpw__check" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><circle cx="8" cy="8" r="8" fill="#0D9488"/><path d="M4.6 8.2l2.1 2.1 4.7-4.9" stroke="#fff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </span>
+          <span class="dpw__role">Automotive painter · Phoenix, AZ</span>
+        </div>
+      </article>
+
+      <article class="dpw__review" role="listitem">
+        <div class="dpw__review-top">
+          <span class="dpw__stars" aria-label="5 out of 5 stars">★★★★★</span>
+          <span class="dpw__source">Verified buyer</span>
+        </div>
+        <h3 class="dpw__review-head">Sweat off, then wash and reuse</h3>
+        <blockquote class="dpw__quote">The slim thickness gives great dexterity. They do a great job keeping sweat off my hands — even when slightly wet, they still work. I just wash and reuse them again.</blockquote>
+        <div class="dpw__person">
+          <span class="dpw__name">Shoujun Shi
+            <svg class="dpw__check" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><circle cx="8" cy="8" r="8" fill="#0D9488"/><path d="M4.6 8.2l2.1 2.1 4.7-4.9" stroke="#fff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </span>
+          <span class="dpw__role">Car detailing · Rosemead, CA</span>
+        </div>
+      </article>
+
+      <article class="dpw__review" role="listitem">
+        <div class="dpw__review-top">
+          <span class="dpw__stars" aria-label="5 out of 5 stars">★★★★★</span>
+          <span class="dpw__source">Verified buyer</span>
+        </div>
+        <h3 class="dpw__review-head">Comfort without losing fingertip feel</h3>
+        <blockquote class="dpw__quote">Did not appear to affect fingertip sensitivity in electric safety gloves. Raised comfort and reduced the need to air the hand.</blockquote>
+        <div class="dpw__person">
+          <span class="dpw__name">PPE-Coordinator, Scania CV AB
+            <svg class="dpw__check" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><circle cx="8" cy="8" r="8" fill="#0D9488"/><path d="M4.6 8.2l2.1 2.1 4.7-4.9" stroke="#fff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </span>
+          <span class="dpw__role">Electric safety gloves · Södertälje, Stockholm</span>
+        </div>
+      </article>
+
     </div>
-  {% endif %}
+
+    <div class="dpw__nav">
+      <button type="button" class="dpw__arrow" data-dpw-prev aria-label="Previous reviews">←</button>
+      {% if section.settings.all_reviews_url != blank %}
+        <a class="dpw__all" href="{{ section.settings.all_reviews_url }}">{{ section.settings.all_reviews_label | default: 'Read all reviews →' }}</a>
+      {% else %}
+        <span class="dpw__all dpw__all--static">See more</span>
+      {% endif %}
+      <button type="button" class="dpw__arrow" data-dpw-next aria-label="More reviews">→</button>
+    </div>
+  </div>
 </section>
 
 <script>
@@ -201,7 +252,6 @@
 
   if (document.readyState !== 'loading') { initAll(); }
   else { document.addEventListener('DOMContentLoaded', function () { initAll(); }); }
-  // Shopify theme editor: re-bind when the section is added/edited.
   document.addEventListener('shopify:section:load', function (e) { initAll(e.target); });
 })();
 </script>
@@ -265,8 +315,6 @@
 }
 .dpw__row::-webkit-scrollbar { display: none; }
 
-/* Media row is full-bleed: spans the whole section, first card aligned to the
-   inner content edge, cards bleed off the right. */
 .dpw__row--media {
   margin-top: 22px;
   padding-left: max(20px, calc((100% - 1280px) / 2 + 20px));
@@ -278,8 +326,8 @@
 }
 
 .dpw__media {
-  flex: 0 0 46%;
-  max-width: 220px;
+  flex: 0 0 235px;
+  max-width: 235px;
 }
 
 .dpw__review {
@@ -384,6 +432,7 @@
 .dpw__check { width: 14px; height: 14px; flex: 0 0 14px; display: block; }
 .dpw__role { display: block; margin-top: 3px; font-size: 12px; line-height: 1.35; color: #4B5563; }
 
+/* ---- Nav (brand-book square buttons) ---------------------------------- */
 .dpw__nav {
   display: flex;
   align-items: center;
@@ -391,23 +440,24 @@
   gap: 18px;
   margin-top: 24px;
 }
-
 .dpw__arrow {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 40px;
-  height: 40px;
+  width: 44px;
+  height: 44px;
   padding: 0;
-  border: 1px solid #E5E7EB;
-  border-radius: 999px;
-  background: #fff;
-  color: #1E3A4C;
+  border: var(--border-base, 1px solid #E5E7EB);
+  border-radius: 0;
+  background: rgba(255, 255, 255, 0.92);
+  color: var(--deep, #1E3A4C);
+  font-size: 18px;
+  line-height: 1;
   cursor: pointer;
-  transition: border-color 0.18s ease, color 0.18s ease;
+  transition: background-color 0.18s ease, border-color 0.18s ease, opacity 0.18s ease;
 }
-.dpw__arrow:hover { border-color: #0D9488; color: #0D9488; }
-.dpw__arrow svg { width: 18px; height: 18px; }
+.dpw__arrow:hover { background: var(--bg, #fff); }
+.dpw__arrow.is-disabled { opacity: 0.35; pointer-events: none; }
 
 .dpw__all {
   font-size: 11px;
@@ -427,7 +477,7 @@
   .dpw { padding: 64px 0 72px; }
   .dpw__inner { padding: 0 32px; }
   .dpw__row--media { padding-left: max(32px, calc((100% - 1280px) / 2 + 32px)); }
-  .dpw__media { flex-basis: 190px; max-width: 190px; }
+  .dpw__media { flex-basis: 235px; max-width: 235px; }
   .dpw__review { flex-basis: calc((100% - 3 * 14px) / 4); max-width: none; }
   .dpw__review-head { font-size: 17px; }
   .dpw__quote { font-size: 15px; }
@@ -448,6 +498,7 @@
     { "type": "text", "id": "heading", "label": "Heading", "default": "Real reviews from people who wear gloves all day." },
     { "type": "textarea", "id": "subheading", "label": "Subheading", "default": "Not sponsored. Not lab copy. Just what workers noticed after wearing DRYE under sealed gloves." },
     { "type": "checkbox", "id": "show_media_row", "label": "Show media (photo/video) row", "default": true },
+    { "type": "paragraph", "content": "Review cards are built into this section (verified quotes, mechanics first) so they never reset. Add photos/videos as Media blocks below." },
     { "type": "url", "id": "all_reviews_url", "label": "Read all reviews link" },
     { "type": "text", "id": "all_reviews_label", "label": "Read all reviews label", "default": "Read all reviews →" }
   ],
@@ -465,20 +516,6 @@
         { "type": "text", "id": "label", "label": "Label (e.g. FIELD USER)" },
         { "type": "text", "id": "sublabel", "label": "Sub-label (role / use case)" }
       ]
-    },
-    {
-      "type": "review",
-      "name": "Review card",
-      "settings": [
-        { "type": "range", "id": "stars", "label": "Stars", "min": 0, "max": 5, "step": 1, "default": 5 },
-        { "type": "text", "id": "source_label", "label": "Source label", "default": "Verified buyer" },
-        { "type": "checkbox", "id": "verified", "label": "Show verified check by name", "default": true },
-        { "type": "text", "id": "headline", "label": "Headline (outcome-led, optional)" },
-        { "type": "textarea", "id": "quote", "label": "Quote (verified text only)" },
-        { "type": "text", "id": "name", "label": "Name" },
-        { "type": "text", "id": "role", "label": "Role / use case" },
-        { "type": "text", "id": "location", "label": "Location" }
-      ]
     }
   ],
   "max_blocks": 24,
@@ -489,13 +526,7 @@
         { "type": "media", "settings": { "media_type": "image", "label": "Field user", "sublabel": "Add photo or video" } },
         { "type": "media", "settings": { "media_type": "image", "label": "Field user", "sublabel": "Add photo or video" } },
         { "type": "media", "settings": { "media_type": "image", "label": "Field user", "sublabel": "Add photo or video" } },
-        { "type": "media", "settings": { "media_type": "image", "label": "Field user", "sublabel": "Add photo or video" } },
-        { "type": "review", "settings": { "stars": 5, "source_label": "Verified buyer", "verified": true, "headline": "Nitrile gloves don't tear anymore", "name": "Brian Jee", "role": "Automotive repair", "location": "San Francisco, CA", "quote": "Nitrile gloves don't tear anymore because they go on and off easily without sweaty skin. When I get oil on the liners, I just wipe them off with electrical contact cleaner and a dry paper towel, works perfectly." } },
-        { "type": "review", "settings": { "stars": 5, "source_label": "Independent field study", "verified": true, "headline": "Drier than cotton, every shift", "name": "Gothenburg heavy vehicle mechanic", "role": "Truck mechanic", "location": "Gothenburg, Sweden", "quote": "My hands get so itchy I can't work without a layer between my skin and the glove. The lining gloves stay drier than cotton — I've been using them continuously." } },
-        { "type": "review", "settings": { "stars": 5, "source_label": "Verified buyer", "verified": true, "headline": "Off the gloves, straight to work", "name": "BMW Bilia EV mechanic", "role": "EV glove workflow", "location": "Gothenburg, Sweden", "quote": "Without the lining gloves I had to remove my EV gloves, wash and dry my hands, then go to the computer. With the lining gloves, I could remove the EV gloves and go straight to the computer." } },
-        { "type": "review", "settings": { "stars": 5, "source_label": "Verified buyer", "verified": true, "headline": "No more sweat on the paint job", "name": "Chad Wuollet", "role": "Automotive painter", "location": "Phoenix, AZ", "quote": "So far the gloves have worked well and as advertised! Wearing these liners have been a huge help and I'm no longer dripping sweat on my paint jobs and my hands feel better." } },
-        { "type": "review", "settings": { "stars": 5, "source_label": "Verified buyer", "verified": true, "headline": "Sweat off, then wash and reuse", "name": "Shoujun Shi", "role": "Car detailing", "location": "Rosemead, CA", "quote": "The slim thickness gives great dexterity. They do a great job keeping sweat off my hands — even when slightly wet, they still work. I just wash and reuse them again." } },
-        { "type": "review", "settings": { "stars": 5, "source_label": "Verified buyer", "verified": true, "headline": "Comfort without losing fingertip feel", "name": "PPE-Coordinator, Scania CV AB", "role": "Electric safety gloves", "location": "Södertälje, Stockholm", "quote": "Did not appear to affect fingertip sensitivity in electric safety gloves. Raised comfort and reduced the need to air the hand." } }
+        { "type": "media", "settings": { "media_type": "image", "label": "Field user", "sublabel": "Add photo or video" } }
       ]
     }
   ]
