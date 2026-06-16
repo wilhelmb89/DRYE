@@ -1,11 +1,12 @@
 {% comment %}
   DRYE Proof Wall — full-width below-the-fold review section.
-  - Media row : full-bleed, photo OR video per block (chosen in customizer),
-                auto-glides right → left, pausable + swipeable.
-  - Review row: verified reviews baked into the section (always render, never
-                reset by Shopify sync), auto-glide + prev/next nav.
-  Add via the theme editor, below the fold. DRYE system: white / light grey,
-  navy text, thin borders, teal accent. No fake urgency / before-after / hype.
+  - Media row : full-bleed CSS marquee, auto right -> left (content duplicated
+                in Liquid for a seamless loop; no JS needed for motion).
+                Pauses on hover/touch.
+  - Review row: large verified-review cards (baked in, never reset), manual
+                swipe + brand prev/next arrows.
+  DRYE system: white / light grey, navy text, thin borders, teal accent.
+  No fake urgency / before-after / hype.
 {% endcomment %}
 
 <section
@@ -30,30 +31,22 @@
   {% assign media_blocks = section.blocks | where: 'type', 'media' %}
 
   {% if section.settings.show_media_row and media_blocks.size > 0 %}
-    {% comment %} Full-bleed media row {% endcomment %}
-    <div class="dpw__row dpw__row--media" data-dpw-track data-dpw-speed="0.45" role="list" aria-label="Photos and videos from people who use DRYE">
+    {% comment %} Build the card set once, then output it twice so the CSS
+       marquee (translateX -50%) loops seamlessly. {% endcomment %}
+    {% capture dpw_media_cards %}
       {% for block in media_blocks %}
-        <div class="dpw__media" role="listitem" {{ block.shopify_attributes }}>
+        <div class="dpw__media">
           <div class="dpw__media-frame">
             {% if block.settings.media_type == 'video' and block.settings.video != blank %}
-              {{ block.settings.video | video_tag: image_size: '800x', controls: true, loop: false, muted: false, preload: 'none' }}
+              {{ block.settings.video | video_tag: image_size: '600x', controls: true, loop: false, muted: false, preload: 'none' }}
             {% elsif block.settings.image != blank %}
-              {{
-                block.settings.image
-                | image_url: width: 600
-                | image_tag:
-                  loading: 'lazy',
-                  sizes: '235px',
-                  widths: '235, 350, 470, 600',
-                  alt: block.settings.label
-              }}
+              {{ block.settings.image | image_url: width: 600 | image_tag: loading: 'lazy', sizes: '235px', widths: '235, 350, 470, 600', alt: block.settings.label }}
             {% else %}
               <div class="dpw__media-todo">
                 <span>Add photo or video</span>
-                <small>Customizer → this block → Photo or Video</small>
+                <small>Customizer &rarr; this block &rarr; Photo or Video</small>
               </div>
             {% endif %}
-
             {% if block.settings.label != blank or block.settings.sublabel != blank %}
               <div class="dpw__media-cap">
                 {% if block.settings.label != blank %}<span class="dpw__media-label">{{ block.settings.label }}</span>{% endif %}
@@ -63,16 +56,23 @@
           </div>
         </div>
       {% endfor %}
+    {% endcapture %}
+
+    <div class="dpw__row dpw__row--media">
+      <div class="dpw__marquee" data-dpw-marquee>
+        {{ dpw_media_cards }}
+        <span class="dpw__marquee-dup" aria-hidden="true">{{ dpw_media_cards }}</span>
+      </div>
     </div>
   {% endif %}
 
   {% comment %}
-    Verified reviews — baked in (mechanics first). These are real DRYE customer /
-    field quotes; editing them is a code change so they can never be wiped by a
-    theme sync. Headlines are short summaries pulled from each verified quote.
+    Verified reviews — baked in (mechanics first). Real DRYE customer / field
+    quotes; editing is a code change so they can never be wiped by a theme sync.
+    Headlines are short summaries pulled from each verified quote.
   {% endcomment %}
   <div class="dpw__inner">
-    <div class="dpw__row dpw__row--reviews" data-dpw-track data-dpw-speed="0.35" role="list" aria-label="Customer reviews">
+    <div class="dpw__row dpw__row--reviews" role="list" aria-label="Customer reviews">
 
       <article class="dpw__review" role="listitem">
         <div class="dpw__review-top">
@@ -178,83 +178,7 @@
   </div>
 </section>
 
-<script>
-(function () {
-  function setupSection(sec) {
-    if (!sec || sec.dataset.dpwBound) return;
-    sec.dataset.dpwBound = '1';
-
-    var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-    sec.querySelectorAll('[data-dpw-track]').forEach(function (track) {
-      var originals = Array.prototype.slice.call(track.children);
-      if (!originals.length) return;
-
-      // Clone one full set for a seamless right-to-left loop.
-      originals.forEach(function (node) {
-        var c = node.cloneNode(true);
-        c.setAttribute('aria-hidden', 'true');
-        c.querySelectorAll('a, button, video, [tabindex]').forEach(function (el) { el.setAttribute('tabindex', '-1'); });
-        track.appendChild(c);
-      });
-
-      if (reduce) return;
-
-      var speed = parseFloat(track.getAttribute('data-dpw-speed')) || 0.4;
-      var paused = false, resumeTO = null;
-
-      function halfWidth() { return track.scrollWidth / 2; }
-      function tick() {
-        if (!paused) {
-          track.scrollLeft += speed;
-          var half = halfWidth();
-          if (half > 0 && track.scrollLeft >= half) { track.scrollLeft -= half; }
-        }
-        requestAnimationFrame(tick);
-      }
-      function pause() { paused = true; if (resumeTO) clearTimeout(resumeTO); }
-      function resumeSoon() { if (resumeTO) clearTimeout(resumeTO); resumeTO = setTimeout(function () { paused = false; }, 1400); }
-
-      track.addEventListener('pointerenter', pause);
-      track.addEventListener('pointerleave', resumeSoon);
-      track.addEventListener('pointerdown', pause);
-      track.addEventListener('pointerup', resumeSoon);
-      track.addEventListener('touchstart', pause, { passive: true });
-      track.addEventListener('touchend', resumeSoon, { passive: true });
-      track.addEventListener('wheel', function () { pause(); resumeSoon(); }, { passive: true });
-      track.addEventListener('focusin', pause);
-      track.addEventListener('focusout', resumeSoon);
-
-      track.__dpwPause = pause;
-      track.__dpwResume = resumeSoon;
-      requestAnimationFrame(function () { requestAnimationFrame(tick); });
-    });
-
-    // Prev / next arrows drive the reviews row (works with or without auto-glide).
-    var reviewsTrack = sec.querySelector('.dpw__row--reviews');
-    var prevBtn = sec.querySelector('[data-dpw-prev]');
-    var nextBtn = sec.querySelector('[data-dpw-next]');
-    function dpwStep(dir) {
-      if (!reviewsTrack) return;
-      if (reviewsTrack.__dpwPause) reviewsTrack.__dpwPause();
-      var card = reviewsTrack.querySelector('.dpw__review');
-      var amt = card ? (card.getBoundingClientRect().width + 14) : Math.round(reviewsTrack.clientWidth * 0.85);
-      reviewsTrack.scrollBy({ left: dir * amt, behavior: 'smooth' });
-      if (reviewsTrack.__dpwResume) reviewsTrack.__dpwResume();
-    }
-    if (prevBtn) prevBtn.addEventListener('click', function () { dpwStep(-1); });
-    if (nextBtn) nextBtn.addEventListener('click', function () { dpwStep(1); });
-  }
-
-  function initAll(root) {
-    (root || document).querySelectorAll('[data-dpw]').forEach(setupSection);
-  }
-
-  if (document.readyState !== 'loading') { initAll(); }
-  else { document.addEventListener('DOMContentLoaded', function () { initAll(); }); }
-  document.addEventListener('shopify:section:load', function (e) { initAll(e.target); });
-})();
-</script>
+<script src="{{ 'drye-proof-wall.js' | asset_url }}" defer></script>
 
 {% stylesheet %}
 .dpw {
@@ -265,80 +189,48 @@
   color: #1E3A4C;
 }
 
-.dpw__inner {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 0 20px;
-}
-
-.dpw__head {
-  max-width: 640px;
-  margin-bottom: 4px;
-}
+.dpw__inner { max-width: 1280px; margin: 0 auto; padding: 0 20px; }
+.dpw__head { max-width: 640px; margin-bottom: 4px; }
 
 .dpw__eyebrow {
-  display: block;
-  margin-bottom: 9px;
-  font-size: 10px;
-  font-weight: 700;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
+  display: block; margin-bottom: 9px;
+  font-size: 10px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase;
   color: #0D9488;
 }
-
 .dpw__h2 {
   margin: 0 0 10px;
   font-family: "Clash Grotesk", sans-serif;
-  font-size: clamp(24px, 4.4vw, 34px);
-  font-weight: 600;
-  letter-spacing: -0.03em;
-  line-height: 1.08;
+  font-size: clamp(24px, 4.4vw, 34px); font-weight: 600; letter-spacing: -0.03em; line-height: 1.08;
   color: #1E3A4C;
 }
+.dpw__sub { margin: 0; font-size: 15px; line-height: 1.6; color: #4B5563; max-width: 52ch; }
 
-.dpw__sub {
-  margin: 0;
-  font-size: 15px;
-  line-height: 1.6;
-  color: #4B5563;
-  max-width: 52ch;
-}
-
-/* ---- Rows: auto-glide + swipe ----------------------------------------- */
-.dpw__row {
-  display: flex;
-  gap: 14px;
-  overflow-x: auto;
-  scrollbar-width: none;
-  -webkit-overflow-scrolling: touch;
-  padding: 4px 0 10px;
-}
-.dpw__row::-webkit-scrollbar { display: none; }
-
+/* ---- Media row: full-bleed CSS marquee (auto right -> left) ----------- */
 .dpw__row--media {
   margin-top: 22px;
-  padding-left: max(20px, calc((100% - 1280px) / 2 + 20px));
-  padding-right: 0;
+  overflow: hidden;
 }
+.dpw__marquee {
+  display: flex;
+  width: max-content;
+  will-change: transform;
+  animation: dpwMarquee 48s linear infinite;
+}
+.dpw__marquee-dup { display: inline-flex; }
+.dpw__row--media:hover .dpw__marquee,
+.dpw__marquee.is-paused { animation-play-state: paused; }
 
-.dpw__row--reviews {
-  margin-top: 16px;
+@keyframes dpwMarquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
 }
 
 .dpw__media {
   flex: 0 0 235px;
   max-width: 235px;
+  margin-right: 14px;
 }
 
-.dpw__review {
-  flex: 0 0 88%;
-  max-width: 380px;
-  box-sizing: border-box;
-  display: flex;
-  flex-direction: column;
-}
-
-/* ---- Media card ------------------------------------------------------- */
 .dpw__media-frame {
   position: relative;
   aspect-ratio: 9 / 16;
@@ -349,125 +241,79 @@
 }
 .dpw__media-frame img,
 .dpw__media-frame video {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
+  position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block;
 }
 .dpw__media-todo {
-  position: absolute;
-  inset: 0;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 6px;
-  text-align: center;
-  padding: 16px;
-  color: #9CA3AF;
+  position: absolute; inset: 0;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: 6px; text-align: center; padding: 16px; color: #9CA3AF;
 }
 .dpw__media-todo span { font-size: 13px; font-weight: 600; color: #4B5563; }
 .dpw__media-todo small { font-size: 11px; line-height: 1.4; }
 .dpw__media-cap {
-  position: absolute;
-  left: 0; right: 0; bottom: 0;
-  padding: 30px 14px 12px;
+  position: absolute; left: 0; right: 0; bottom: 0; padding: 30px 14px 12px;
   background: linear-gradient(to top, rgba(15,34,48,0.82) 0%, rgba(15,34,48,0) 100%);
 }
 .dpw__media-label { display: block; font-size: 9px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: #fff; }
 .dpw__media-sub { display: block; margin-top: 2px; font-size: 11.5px; color: rgba(255,255,255,0.82); }
 
-/* ---- Review card ------------------------------------------------------ */
+/* ---- Review row: manual swipe + arrows -------------------------------- */
+.dpw__row--reviews {
+  margin-top: 16px;
+  display: flex;
+  gap: 14px;
+  overflow-x: auto;
+  scroll-snap-type: x proximity;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  padding: 4px 0 10px;
+}
+.dpw__row--reviews::-webkit-scrollbar { display: none; }
+
 .dpw__review {
+  scroll-snap-align: start;
+  flex: 0 0 88%;
+  max-width: 380px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
   background: #fff;
   border: 1px solid #E5E7EB;
   border-radius: 4px;
   padding: 22px 22px 20px;
 }
 .dpw__review-top {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 10px;
-  margin-bottom: 12px;
+  display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-bottom: 12px;
 }
 .dpw__stars { font-size: 13px; letter-spacing: 1px; color: #F5B301; white-space: nowrap; }
 .dpw__source { font-size: 9px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: #5F8A8B; }
-
 .dpw__review-head {
-  margin: 0 0 9px;
-  font-family: "Clash Grotesk", sans-serif;
-  font-size: 18px;
-  font-weight: 600;
-  letter-spacing: -0.015em;
-  line-height: 1.18;
-  color: #1E3A4C;
+  margin: 0 0 9px; font-family: "Clash Grotesk", sans-serif;
+  font-size: 18px; font-weight: 600; letter-spacing: -0.015em; line-height: 1.18; color: #1E3A4C;
 }
-
-.dpw__quote {
-  margin: 0 0 16px;
-  font-size: 15px;
-  font-weight: 500;
-  line-height: 1.55;
-  color: #1E3A4C;
-}
-
-.dpw__person {
-  margin-top: auto;
-  padding-top: 13px;
-  border-top: 1px solid #E5E7EB;
-}
+.dpw__quote { margin: 0 0 16px; font-size: 15px; font-weight: 500; line-height: 1.55; color: #1E3A4C; }
+.dpw__person { margin-top: auto; padding-top: 13px; border-top: 1px solid #E5E7EB; }
 .dpw__name {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  font-family: "Clash Grotesk", sans-serif;
-  font-size: 13.5px;
-  font-weight: 600;
-  letter-spacing: -0.01em;
-  color: #1E3A4C;
+  display: inline-flex; align-items: center; gap: 6px;
+  font-family: "Clash Grotesk", sans-serif; font-size: 13.5px; font-weight: 600; letter-spacing: -0.01em; color: #1E3A4C;
 }
 .dpw__check { width: 14px; height: 14px; flex: 0 0 14px; display: block; }
 .dpw__role { display: block; margin-top: 3px; font-size: 12px; line-height: 1.35; color: #4B5563; }
 
 /* ---- Nav (brand-book square buttons) ---------------------------------- */
-.dpw__nav {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 18px;
-  margin-top: 24px;
-}
+.dpw__nav { display: flex; align-items: center; justify-content: center; gap: 18px; margin-top: 24px; }
 .dpw__arrow {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 44px;
-  height: 44px;
-  padding: 0;
-  border: var(--border-base, 1px solid #E5E7EB);
-  border-radius: 0;
-  background: rgba(255, 255, 255, 0.92);
-  color: var(--deep, #1E3A4C);
-  font-size: 18px;
-  line-height: 1;
-  cursor: pointer;
-  transition: background-color 0.18s ease, border-color 0.18s ease, opacity 0.18s ease;
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 44px; height: 44px; padding: 0;
+  border: var(--border-base, 1px solid #E5E7EB); border-radius: 0;
+  background: rgba(255, 255, 255, 0.92); color: var(--deep, #1E3A4C);
+  font-size: 18px; line-height: 1; cursor: pointer;
+  transition: background-color 0.18s ease, border-color 0.18s ease;
 }
 .dpw__arrow:hover { background: var(--bg, #fff); }
-.dpw__arrow.is-disabled { opacity: 0.35; pointer-events: none; }
-
 .dpw__all {
-  font-size: 11px;
-  font-weight: 600;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: #1E3A4C;
-  text-decoration: none;
-  border-bottom: 1px solid #1E3A4C;
-  padding-bottom: 2px;
+  font-size: 11px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase;
+  color: #1E3A4C; text-decoration: none; border-bottom: 1px solid #1E3A4C; padding-bottom: 2px;
 }
 .dpw__all--static { border-bottom: 0; color: #4B5563; }
 .dpw__all:hover { color: #0D9488; border-color: #0D9488; }
@@ -476,15 +322,12 @@
 @media (min-width: 768px) {
   .dpw { padding: 64px 0 72px; }
   .dpw__inner { padding: 0 32px; }
-  .dpw__row--media { padding-left: max(32px, calc((100% - 1280px) / 2 + 32px)); }
-  .dpw__media { flex-basis: 235px; max-width: 235px; }
   .dpw__review { flex-basis: calc((100% - 3 * 14px) / 4); max-width: none; }
   .dpw__review-head { font-size: 17px; }
-  .dpw__quote { font-size: 15px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .dpw__row { scroll-behavior: auto; }
+  .dpw__marquee { animation: none; }
 }
 {% endstylesheet %}
 
