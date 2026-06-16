@@ -437,6 +437,132 @@
         "lead": ""
       }
     },
+    "drye_mechanics_mechanism_tgcnCV": {
+      "type": "drye-mechanics-mechanism",
+      "blocks": {
+        "old_step_erthQ3": {
+          "type": "old_step",
+          "settings": {
+            "icon": "✕",
+            "text": "Sweat enters the fabric and stays"
+          }
+        },
+        "old_step_D76G7T": {
+          "type": "old_step",
+          "settings": {
+            "icon": "✕",
+            "text": "At saturation, moisture sits on skin"
+          }
+        },
+        "old_step_9n7ryb": {
+          "type": "old_step",
+          "settings": {
+            "icon": "✕",
+            "text": "Sealed glove traps heat and humidity"
+          }
+        },
+        "old_step_eE4BNb": {
+          "type": "old_step",
+          "settings": {
+            "icon": "✕",
+            "text": "Heat and humidity trap inside the glove"
+          }
+        },
+        "old_step_qPKraL": {
+          "type": "old_step",
+          "settings": {
+            "icon": "✕",
+            "text": "Same wet glove on shift 1 as shift 8"
+          }
+        },
+        "drye_step_zLnHCn": {
+          "type": "drye_step",
+          "settings": {
+            "icon": "→",
+            "text": "Skin side repels - sweat cannot sit there"
+          }
+        },
+        "drye_step_NRx79e": {
+          "type": "drye_step",
+          "settings": {
+            "icon": "→",
+            "text": "Outer side pulls moisture toward it"
+          }
+        },
+        "drye_step_kdCYXT": {
+          "type": "drye_step",
+          "settings": {
+            "icon": "→",
+            "text": "Continuous transport, no saturation point"
+          }
+        },
+        "drye_step_8ePURK": {
+          "type": "drye_step",
+          "settings": {
+            "icon": "→",
+            "text": "One principle. Patent filed March 2026."
+          }
+        },
+        "property_yA43zp": {
+          "type": "property",
+          "disabled": true,
+          "settings": {
+            "label": "Property 01",
+            "title": "Works under compression",
+            "body": "The gradient functions regardless of external pressure. Compression makes the transport faster, not weaker."
+          }
+        },
+        "property_4a48VF": {
+          "type": "property",
+          "disabled": true,
+          "settings": {
+            "label": "Property 02",
+            "title": "No saturation point",
+            "body": "Transport is continuous. There is no maximum capacity after which function stops. Cotton has one. DRYE does not."
+          }
+        },
+        "property_MfXgrz": {
+          "type": "property",
+          "disabled": true,
+          "settings": {
+            "label": "Property 03",
+            "title": "Stays dry on the skin side",
+            "body": "The inner surface does not work like a towel. It is engineered to avoid moisture retention directly against the hand."
+          }
+        }
+      },
+      "block_order": [
+        "old_step_erthQ3",
+        "old_step_D76G7T",
+        "old_step_9n7ryb",
+        "old_step_eE4BNb",
+        "old_step_qPKraL",
+        "drye_step_zLnHCn",
+        "drye_step_NRx79e",
+        "drye_step_kdCYXT",
+        "drye_step_8ePURK",
+        "property_yA43zp",
+        "property_4a48VF",
+        "property_MfXgrz"
+      ],
+      "custom_css": [
+        ".mech-mechanism {padding-bottom: 0px !important;}",
+        ".occlusion-bridge {padding-top: 16px !important;}"
+      ],
+      "name": "DRYE Mechanics Mechanism",
+      "settings": {
+        "eyebrow": "The mechanism",
+        "heading_line_1": "Moisture doesn't need to be absorbed.",
+        "heading_emphasis": "It needs a route out.",
+        "body": "",
+        "old_label": "Every liner before DRYE",
+        "old_title": "Absorb and hold",
+        "old_desc": "<p>Cotton, silk, merino, polyester wicking. All fill with moisture until saturated - then<strong> hold it against your skin</strong> for the rest of the shift.</p>",
+        "drye_label": "DRYE · ASYMMETRIC LAYERING",
+        "drye_title": "Route continuously",
+        "drye_desc": "<p>Two fibers, one fabric. The skin side is hydrophobic - water cannot bond to it. The outer side pulls moisture toward it. <strong>Sweat routes from skin to outside, continuously, without saturation.</strong></p>"
+      }
+    },
     "drye_product_reality_grid_ggq47H": {
       "type": "drye-product-reality-grid",
       "blocks": {
@@ -555,6 +681,7 @@
     },
     "drye_system_section_nLgDc9": {
       "type": "drye-system-section",
+      "disabled": true,
       "name": "DRYE System Section",
       "settings": {
         "eyebrow": "How the system works",
@@ -1440,6 +1567,7 @@
     "drye_worker_grid_CG6VUJ",
     "drye_evidence_V9B97n",
     "drye_new_problem_beat_1_R7GgRp",
+    "drye_mechanics_mechanism_tgcnCV",
     "drye_product_reality_grid_ggq47H",
     "drye_functional_benefits_yhKLaV",
     "drye_system_section_nLgDc9",
