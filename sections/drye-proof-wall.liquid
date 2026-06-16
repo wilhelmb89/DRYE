@@ -40,11 +40,11 @@
             {% elsif block.settings.image != blank %}
               {{
                 block.settings.image
-                | image_url: width: 900
+                | image_url: width: 600
                 | image_tag:
                   loading: 'lazy',
-                  sizes: '(min-width: 768px) 300px, 70vw',
-                  widths: '300, 450, 600, 900',
+                  sizes: '(min-width: 768px) 190px, 46vw',
+                  widths: '180, 280, 380, 600',
                   alt: block.settings.label
               }}
             {% else %}
@@ -110,9 +110,19 @@
         {% endfor %}
       </div>
 
-      {% if section.settings.all_reviews_url != blank %}
-        <a class="dpw__all" href="{{ section.settings.all_reviews_url }}">{{ section.settings.all_reviews_label | default: 'Read all reviews →' }}</a>
-      {% endif %}
+      <div class="dpw__nav">
+        <button type="button" class="dpw__arrow" data-dpw-prev aria-label="Previous reviews">
+          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M15 5l-7 7 7 7" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        {% if section.settings.all_reviews_url != blank %}
+          <a class="dpw__all" href="{{ section.settings.all_reviews_url }}">{{ section.settings.all_reviews_label | default: 'Read all reviews →' }}</a>
+        {% else %}
+          <span class="dpw__all dpw__all--static">See more</span>
+        {% endif %}
+        <button type="button" class="dpw__arrow" data-dpw-next aria-label="More reviews">
+          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 5l7 7-7 7" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+      </div>
     </div>
   {% endif %}
 </section>
@@ -165,8 +175,25 @@
     track.addEventListener('focusin', pause);
     track.addEventListener('focusout', resumeSoon);
 
+    track.__dpwPause = pause;
+    track.__dpwResume = resumeSoon;
     requestAnimationFrame(function () { requestAnimationFrame(tick); });
   });
+
+  // Prev / next arrows drive the reviews row (works with or without auto-glide).
+  var reviewsTrack = sec.querySelector('.dpw__row--reviews');
+  var prevBtn = sec.querySelector('[data-dpw-prev]');
+  var nextBtn = sec.querySelector('[data-dpw-next]');
+  function dpwStep(dir) {
+    if (!reviewsTrack) return;
+    if (reviewsTrack.__dpwPause) reviewsTrack.__dpwPause();
+    var card = reviewsTrack.querySelector('.dpw__review');
+    var amt = card ? (card.getBoundingClientRect().width + 14) : Math.round(reviewsTrack.clientWidth * 0.85);
+    reviewsTrack.scrollBy({ left: dir * amt, behavior: 'smooth' });
+    if (reviewsTrack.__dpwResume) reviewsTrack.__dpwResume();
+  }
+  if (prevBtn) prevBtn.addEventListener('click', function () { dpwStep(-1); });
+  if (nextBtn) nextBtn.addEventListener('click', function () { dpwStep(1); });
 })();
 </script>
 
@@ -242,8 +269,8 @@
 }
 
 .dpw__media {
-  flex: 0 0 70%;
-  max-width: 260px;
+  flex: 0 0 46%;
+  max-width: 220px;
 }
 
 .dpw__review {
@@ -257,7 +284,7 @@
 /* ---- Media card ------------------------------------------------------- */
 .dpw__media-frame {
   position: relative;
-  aspect-ratio: 4 / 5;
+  aspect-ratio: 9 / 16;
   overflow: hidden;
   border: 1px solid #E5E7EB;
   border-radius: 4px;
@@ -348,9 +375,32 @@
 .dpw__check { width: 14px; height: 14px; flex: 0 0 14px; display: block; }
 .dpw__role { display: block; margin-top: 3px; font-size: 12px; line-height: 1.35; color: #4B5563; }
 
+.dpw__nav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+  margin-top: 24px;
+}
+
+.dpw__arrow {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  border: 1px solid #E5E7EB;
+  border-radius: 999px;
+  background: #fff;
+  color: #1E3A4C;
+  cursor: pointer;
+  transition: border-color 0.18s ease, color 0.18s ease;
+}
+.dpw__arrow:hover { border-color: #0D9488; color: #0D9488; }
+.dpw__arrow svg { width: 18px; height: 18px; }
+
 .dpw__all {
-  display: inline-block;
-  margin-top: 18px;
   font-size: 11px;
   font-weight: 600;
   letter-spacing: 0.08em;
@@ -360,6 +410,7 @@
   border-bottom: 1px solid #1E3A4C;
   padding-bottom: 2px;
 }
+.dpw__all--static { border-bottom: 0; color: #4B5563; }
 .dpw__all:hover { color: #0D9488; border-color: #0D9488; }
 
 /* ---- Desktop ---------------------------------------------------------- */
@@ -367,7 +418,7 @@
   .dpw { padding: 64px 0 72px; }
   .dpw__inner { padding: 0 32px; }
   .dpw__row--media { padding-left: max(32px, calc((100% - 1280px) / 2 + 32px)); }
-  .dpw__media { flex-basis: 300px; max-width: 300px; }
+  .dpw__media { flex-basis: 190px; max-width: 190px; }
   .dpw__review { flex-basis: calc((100% - 3 * 14px) / 4); max-width: none; }
   .dpw__review-head { font-size: 17px; }
   .dpw__quote { font-size: 15px; }
