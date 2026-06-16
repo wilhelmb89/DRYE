@@ -228,6 +228,7 @@
 
 /* Right-side outer wrapper — mobile default */
 .hero .hero-info {
+  --hi-pad-x: 20px; /* full-width bands escape + re-pad by exactly this */
   padding: 14px 20px 32px;
   border: none !important;
   display: flex;
@@ -274,6 +275,7 @@
   }
 
   .hero .hero-info {
+    --hi-pad-x: 48px;
     padding: 22px 48px 44px;
     justify-content: flex-start;
     max-width: 520px;
@@ -425,6 +427,7 @@
   }
 
   .hero .hero-info {
+    --hi-pad-x: var(--space-24);
     width: 100%;
     max-width: 520px;
     margin-left: 0;
@@ -432,7 +435,7 @@
     padding-top: var(--space-48);
     padding-bottom: var(--space-48);
     padding-left: var(--space-24);
-    padding-right: 0;
+    padding-right: var(--space-24);
   }
 }
 

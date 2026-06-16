@@ -16,18 +16,18 @@
   min-width: 0;
 }
 
-/* Full-bleed: span the column edge-to-edge by giving the module an EXPLICIT
-   width (column content + the hero-info horizontal padding), then pulling it
-   left with a negative margin. Explicit width avoids the flex-stretch +
-   negative-margin bug that made the module size to its longest text line.
-   hero-info padding-x is 20px below 768px and 48px at/above 768px. */
+/* Full-width tinted/dark band. The horizontal escape AND the inner padding both
+   track --hi-pad-x (the column's own side padding, set per breakpoint on
+   .hero-info). So the band reaches both column edges symmetrically and its
+   content always keeps equal left/right padding — nothing over-shoots a column
+   edge, so nothing gets clipped by .hero-info's overflow. */
 .hero .pdp-mod--bleed {
-  width: calc(100% + 40px);
-  max-width: calc(100% + 40px);
-  margin-left: -20px;
-  margin-right: 0;
-  padding-left: 20px;
-  padding-right: 20px;
+  width: calc(100% + 2 * var(--hi-pad-x));
+  max-width: calc(100% + 2 * var(--hi-pad-x));
+  margin-left: calc(-1 * var(--hi-pad-x));
+  margin-right: calc(-1 * var(--hi-pad-x));
+  padding-left: var(--hi-pad-x);
+  padding-right: var(--hi-pad-x);
 }
 
 .hero .pdp-mod--soft {
@@ -205,15 +205,6 @@
 /* ---- Desktop refinements (sticky right column) ------------------------ */
 
 @media (min-width: 768px) {
-  .hero .pdp-mod--bleed {
-    width: calc(100% + 96px);
-    max-width: calc(100% + 96px);
-    margin-left: -48px;
-    margin-right: 0;
-    padding-left: 48px;
-    padding-right: 48px;
-  }
-
   .hero .pdp-mod__h2 {
     font-size: 24px;
   }
