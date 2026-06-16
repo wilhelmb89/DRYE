@@ -438,35 +438,6 @@
         "wte_heading": "One layer. One shift."
       }
     },
-    "drye_functional_benefits_jPeUnt": {
-      "type": "drye-functional-benefits",
-      "disabled": true,
-      "name": "DRYE Functional Benefits",
-      "settings": {
-        "eyebrow": "WHY IT FEELS DIFFERENT",
-        "heading": "One dry layer changes the glove contact.",
-        "subheading": "DRYE does not replace your glove. It changes what your hand sits against inside it — less wet skin, less drag, less glove fight.",
-        "card_1_icon": "moisture-wicking (1).svg",
-        "card_1_title": "Skin-side stays drier",
-        "card_1_desc": "Sweat moves away from the skin side instead of sitting directly against your hand.",
-        "card_2_icon": "shield.svg",
-        "card_2_title": "Gloves slide better",
-        "card_2_desc": "Nitrile goes on and off over the layer — not over wet skin.",
-        "card_3_icon": "performance-arrow.svg",
-        "card_3_title": "Fits under sealed gloves",
-        "card_3_desc": "0.4mm thin. Built to sit under nitrile, latex, rubber and HV gloves.",
-        "card_4_icon": "layers-fabric.svg",
-        "card_4_title": "You still feel the work",
-        "card_4_desc": "The outer glove still does the gripping. DRYE changes the wet contact underneath.",
-        "card_5_icon": "wave-breathability.svg",
-        "card_5_title": "Nothing to wash out",
-        "card_5_desc": "The performance comes from the structure, not a chemical finish.",
-        "card_6_icon": "clock-timer.svg",
-        "card_6_title": "Built for months of shifts",
-        "card_6_desc": "Washable, reusable, and made to keep working through repeated wear.",
-        "note": "Performance properties are structural — built into the fabric architecture rather than applied as a coating or finish."
-      }
-    },
     "drye_functional_benefits_ddxLmg": {
       "type": "drye-functional-benefits",
       "custom_css": [
@@ -681,130 +652,6 @@
         "note": ""
       }
     },
-    "drye_mechanics_saturation_PnQ6TH": {
-      "type": "drye-mechanics-saturation",
-      "blocks": {
-        "fiber_row_tAdj6M": {
-          "type": "fiber_row",
-          "settings": {
-            "fiber_name": "Merino wool",
-            "fiber_note": "Soaks like a sponge. Stays heavy.",
-            "value": "15–18%",
-            "bar_percent": 100,
-            "is_highlighted": false
-          }
-        },
-        "fiber_row_ERMt6Q": {
-          "type": "fiber_row",
-          "settings": {
-            "fiber_name": "Bamboo viscose",
-            "fiber_note": "Soft-sell marketing. Wetter than cotton.",
-            "value": "13%",
-            "bar_percent": 78,
-            "is_highlighted": false
-          }
-        },
-        "fiber_row_pJYWVT": {
-          "type": "fiber_row",
-          "settings": {
-            "fiber_name": "Silk",
-            "fiber_note": "Soaks slow. Dries slower.",
-            "value": "11%",
-            "bar_percent": 65,
-            "is_highlighted": false
-          }
-        },
-        "fiber_row_QGCP6i": {
-          "type": "fiber_row",
-          "settings": {
-            "fiber_name": "Cotton",
-            "fiber_note": "Wet in under an hour.",
-            "value": "7–8%",
-            "bar_percent": 47,
-            "is_highlighted": false
-          }
-        },
-        "fiber_row_cFphdp": {
-          "type": "fiber_row",
-          "settings": {
-            "fiber_name": "Polyester",
-            "fiber_note": "Wets fast. Dries slow.",
-            "value": "0.4%",
-            "bar_percent": 3,
-            "is_highlighted": false
-          }
-        },
-        "fiber_row_CeMtwE": {
-          "type": "fiber_row",
-          "settings": {
-            "fiber_name": "DRYE Asymmetric layering",
-            "fiber_note": "Can't fill. Stays dry — full shift.",
-            "value": "<0.1%",
-            "bar_percent": 1,
-            "is_highlighted": true
-          }
-        }
-      },
-      "block_order": [
-        "fiber_row_tAdj6M",
-        "fiber_row_ERMt6Q",
-        "fiber_row_pJYWVT",
-        "fiber_row_QGCP6i",
-        "fiber_row_cFphdp",
-        "fiber_row_CeMtwE"
-      ],
-      "disabled": true,
-      "name": "DRYE Saturation Point",
-      "settings": {
-        "section_id": "mechanics-saturation",
-        "eyebrow": "The invention",
-        "heading_line_1": "Every other liner has a saturation point.",
-        "heading_echo": "Ours physically can’t.",
-        "subheading": "Cotton, wool, bamboo and silk all solve sweat the same way: they absorb it.\n\nDRYE does the opposite. One side refuses to hold moisture against your skin. The other side pulls it outward. <strong>Same thin layer. One direction: away from skin.</strong>",
-        "drye_chip": "Skin-side dry",
-        "close_heading": "Absorption has a limit. Direction doesn’t.",
-        "close_body": "<p>The point isn’t softness. It’s saturation. Absorbing fibres eventually fill up. DRYE is built so the skin side doesn’t hold water against your hand — while the outer side keeps pulling moisture away.</p>",
-        "close_statement": "The skin side stays dry. The shift ends before the fabric does.",
-        "cite": "Moisture regain: Kadolph 2014 · ASTM D2654 · CN GB national standard. Transport mechanism: Fangueiro et al., Textile Research Journal 80(15), 2010. Construction independently verified at the Swedish School of Textiles, 2025."
-      }
-    },
-    "drye_section_02_transformation_proof_7gBNiz": {
-      "type": "drye-section-02-transformation-proof",
-      "blocks": {
-        "timeline_73QMUj": {
-          "type": "timeline",
-          "settings": {
-            "time": "After 4 weeks",
-            "quote": "“Nitrile gloves don’t tear anymore because they go on and off easily without sweaty skin. When I get oil on the liners, I just wipe them off with electrical contact cleaner and a dry paper towel, works perfectly. ”",
-            "attribution": "— Brian Jee · Automotive repair · San Francisco, CA."
-          }
-        },
-        "timeline_fLGGct": {
-          "type": "timeline",
-          "settings": {
-            "time": "After 3 months",
-            "quote": "\"The stitching ripped once, but that might’ve been my fault. They do a great job keeping sweat off my hands — even when slightly wet, they still work. I just wash and reuse them again.\"",
-            "attribution": "— Shoujun Shi. · Car detailing · Rosemead"
-          }
-        },
-        "timeline_ayHeDU": {
-          "type": "timeline",
-          "settings": {
-            "time": "After 5 months",
-            "quote": "\"So far the gloves have worked well and as advertised! Wearing these liners have been a huge help and I'm no longer dripping sweat on my paint jobs and my hands feel better.\"",
-            "attribution": "— Chad Wuollet ·  Automotive painter, Phoenix, AZ"
-          }
-        }
-      },
-      "block_order": [
-        "timeline_73QMUj",
-        "timeline_fLGGct",
-        "timeline_ayHeDU"
-      ],
-      "disabled": true,
-      "name": "DRYE Section 02 — Transformation Proof",
-      "settings": {}
-    },
     "drye_objection_cards_LLNaVb": {
       "type": "drye-objection-cards",
       "blocks": {
@@ -855,7 +702,6 @@
         "card_mnHb6x",
         "card_WjFUc8"
       ],
-      "disabled": true,
       "name": "DRYE Objection Cards",
       "settings": {
         "eyebrow": "",
@@ -867,75 +713,6 @@
     "17733428339e36fc41": {
       "type": "apps",
       "settings": {}
-    },
-    "drye_section_06_faq_LBYNDJ": {
-      "type": "drye-section-06-faq",
-      "blocks": {
-        "faq_item_XVt9MA": {
-          "type": "faq_item",
-          "settings": {
-            "question": "Do I wear this under or instead of gloves?",
-            "answer": "They’re liners. You wear them under nitrile, latex, vinyl, or work gloves. The knit compresses naturally so your gloves still seal, flex, and grip as usual."
-          }
-        },
-        "faq_item_4N4Fnm": {
-          "type": "faq_item",
-          "settings": {
-            "question": "How long does a pair last and how do I wash them?",
-            "answer": "- Machine wash up to 60°C / 140°F. Air dry or tumble dry — both work.\n- Handles industrial laundry. No special care required.\n- Heavy daily use: 6 months. Light use: up to a year.\n- Performance is structural — no coatings, no membranes, no chemical treatments to wash out."
-          }
-        },
-        "faq_item_MEnNcp": {
-          "type": "faq_item",
-          "settings": {
-            "question": "Do they work with nitrile, latex, and vinyl gloves?",
-            "answer": "Yes — this is the primary use case. 0.4mm thin, designed to layer inside sealed gloves without affecting fit. Works with nitrile, latex, vinyl, rubber, hockey gloves, ski gloves, and work gloves."
-          }
-        },
-        "faq_item_4GzGcj": {
-          "type": "faq_item",
-          "settings": {
-            "question": "What's actually different from a cotton liner?",
-            "answer": "Cotton absorbs moisture and holds it. Once saturated, it becomes a wet layer between skin and glove — which accelerates breakdown. DRYE routes moisture through the fiber via a structural gradient. No absorption, no saturation point, nothing that can wash out."
-          }
-        },
-        "faq_item_PBMBwz": {
-          "type": "faq_item",
-          "settings": {
-            "question": "Will they make my gloves tighter or affect grip?",
-            "answer": "At 0.4mm, the liner adds less bulk than a standard glove lining. In the automotive field study, 9/9 workers reported zero dexterity compromise. Grip is typically maintained or improved — dry skin has better tactile contact with glove material."
-          }
-        },
-        "faq_item_3WgNjG": {
-          "type": "faq_item",
-          "settings": {
-            "question": "Will this heal my eczema or just protect it?",
-            "answer": "DRYE isn’t a medical treatment. What it does is reduce common triggers like sweat, friction, and heat inside gloves. Many people find that when their skin is kept drier and calmer, it feels less irritated and has a better chance to recover between flare-ups."
-          }
-        },
-        "faq_item_gNqRVE": {
-          "type": "faq_item",
-          "settings": {
-            "question": "Can I use them overnight with cream?",
-            "answer": "Yes. Many users combine overnight cream with DRYE as a liner under cotton gloves. The structural transport still functions. The cream is not displaced — DRYE routes moisture only, not cream or oil."
-          }
-        }
-      },
-      "block_order": [
-        "faq_item_XVt9MA",
-        "faq_item_4N4Fnm",
-        "faq_item_MEnNcp",
-        "faq_item_4GzGcj",
-        "faq_item_PBMBwz",
-        "faq_item_3WgNjG",
-        "faq_item_gNqRVE"
-      ],
-      "disabled": true,
-      "name": "DRYE Section 06 — FAQ",
-      "settings": {
-        "eyebrow": "Questions",
-        "heading": "FAQ"
-      }
     },
     "1773685540f3d5d7b0": {
       "type": "apps",
@@ -973,18 +750,14 @@
   },
   "order": [
     "drye_product_page_new_9ibHgd",
-    "drye_functional_benefits_jPeUnt",
     "drye_functional_benefits_ddxLmg",
     "drye_mechanics_time_promise_gNDGeD",
     "drye_mechanics_identification_gallery_YEXKbz",
     "drye_research_video_full_VPtXGb",
     "drye_reviews_mars_api_PWtkJh",
     "drye_before_after_KUYw4D",
-    "drye_mechanics_saturation_PnQ6TH",
-    "drye_section_02_transformation_proof_7gBNiz",
     "drye_objection_cards_LLNaVb",
     "17733428339e36fc41",
-    "drye_section_06_faq_LBYNDJ",
     "1773685540f3d5d7b0",
     "drye_new_closing_cta_ETinWV"
   ]
