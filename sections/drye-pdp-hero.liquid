@@ -687,79 +687,6 @@ assign review_count = section.settings.review_count_fallback
       </div>
     {% endif %}
 
-{% comment %} v10 — Missing interface: visual product-description grid (in-column) {% endcomment %}
-{% if section.settings.mi_heading != blank %}
-  <div class="pdp-mod pdp-mod--bleed pdp-mod--soft pdp-mi">
-    {% if section.settings.mi_eyebrow != blank %}
-      <span class="pdp-mod__eyebrow">{{ section.settings.mi_eyebrow }}</span>
-    {% endif %}
-    <h2 class="pdp-mod__h2">{{ section.settings.mi_heading }}</h2>
-    {% if section.settings.mi_body != blank %}
-      <p class="pdp-mod__body">{{ section.settings.mi_body }}</p>
-    {% endif %}
-
-    <div class="pdp-mi__grid">
-      {% for i in (1..6) %}
-        {% liquid
-          assign t_key = 'mi_tile_' | append: i | append: '_title'
-          assign d_key = 'mi_tile_' | append: i | append: '_desc'
-          assign tile_title = section.settings[t_key]
-          assign tile_desc = section.settings[d_key]
-        %}
-        {% if tile_title != blank %}
-          <div class="pdp-mi__tile">
-            <h3 class="pdp-mi__tile-title">{{ tile_title }}</h3>
-            {% if tile_desc != blank %}
-              <p class="pdp-mi__tile-desc">{{ tile_desc }}</p>
-            {% endif %}
-          </div>
-        {% endif %}
-      {% endfor %}
-    </div>
-  </div>
-{% endif %}
-
-{% comment %} v10 — The invention: dark absorption comparison (in-column) {% endcomment %}
-{% if section.settings.inv_heading != blank %}
-  <div class="pdp-mod pdp-mod--bleed pdp-mod--dark pdp-inv">
-    {% if section.settings.inv_eyebrow != blank %}
-      <span class="pdp-mod__eyebrow">{{ section.settings.inv_eyebrow }}</span>
-    {% endif %}
-    <h2 class="pdp-mod__h2">{{ section.settings.inv_heading }}</h2>
-    {% if section.settings.inv_body != blank %}
-      <p class="pdp-mod__body">{{ section.settings.inv_body }}</p>
-    {% endif %}
-
-    <div class="pdp-inv__cmp">
-      {% for i in (1..6) %}
-        {% liquid
-          assign n_key = 'inv_row_' | append: i | append: '_name'
-          assign v_key = 'inv_row_' | append: i | append: '_value'
-          assign p_key = 'inv_row_' | append: i | append: '_percent'
-          assign h_key = 'inv_row_' | append: i | append: '_highlight'
-          assign row_name = section.settings[n_key]
-          assign row_value = section.settings[v_key]
-          assign row_percent = section.settings[p_key] | default: 0
-          assign row_highlight = section.settings[h_key]
-        %}
-        {% if row_name != blank %}
-          <div class="pdp-inv__row{% if row_highlight %} is-drye{% endif %}">
-            <span class="pdp-inv__name">{{ row_name }}</span>
-            <span class="pdp-inv__bar" aria-hidden="true">
-              <i style="width: {{ row_percent }}%;"></i>
-            </span>
-            <strong class="pdp-inv__val">{{ row_value }}</strong>
-          </div>
-        {% endif %}
-      {% endfor %}
-    </div>
-
-    {% if section.settings.inv_note != blank %}
-      <p class="pdp-inv__note">{{ section.settings.inv_note }}</p>
-    {% endif %}
-  </div>
-{% endif %}
-
 {% assign wte_blocks = section.blocks | where: 'type', 'htab_wte_stage' %}
 {% assign faq_blocks = section.blocks | where: 'type', 'faq' %}
 
@@ -832,6 +759,79 @@ assign review_count = section.settings.review_count_fallback
         </div>
       </div>
     {% endfor %}
+  </div>
+{% endif %}
+
+{% comment %} v10 — The invention: dark absorption comparison (in-column) {% endcomment %}
+{% if section.settings.inv_heading != blank %}
+  <div class="pdp-mod pdp-mod--bleed pdp-mod--dark pdp-inv">
+    {% if section.settings.inv_eyebrow != blank %}
+      <span class="pdp-mod__eyebrow">{{ section.settings.inv_eyebrow }}</span>
+    {% endif %}
+    <h2 class="pdp-mod__h2">{{ section.settings.inv_heading }}</h2>
+    {% if section.settings.inv_body != blank %}
+      <p class="pdp-mod__body">{{ section.settings.inv_body }}</p>
+    {% endif %}
+
+    <div class="pdp-inv__cmp">
+      {% for i in (1..6) %}
+        {% liquid
+          assign n_key = 'inv_row_' | append: i | append: '_name'
+          assign v_key = 'inv_row_' | append: i | append: '_value'
+          assign p_key = 'inv_row_' | append: i | append: '_percent'
+          assign h_key = 'inv_row_' | append: i | append: '_highlight'
+          assign row_name = section.settings[n_key]
+          assign row_value = section.settings[v_key]
+          assign row_percent = section.settings[p_key] | default: 0
+          assign row_highlight = section.settings[h_key]
+        %}
+        {% if row_name != blank %}
+          <div class="pdp-inv__row{% if row_highlight %} is-drye{% endif %}">
+            <span class="pdp-inv__name">{{ row_name }}</span>
+            <span class="pdp-inv__bar" aria-hidden="true">
+              <i style="width: {{ row_percent }}%;"></i>
+            </span>
+            <strong class="pdp-inv__val">{{ row_value }}</strong>
+          </div>
+        {% endif %}
+      {% endfor %}
+    </div>
+
+    {% if section.settings.inv_note != blank %}
+      <p class="pdp-inv__note">{{ section.settings.inv_note }}</p>
+    {% endif %}
+  </div>
+{% endif %}
+
+{% comment %} v10 — Missing interface: visual product-description grid (in-column) {% endcomment %}
+{% if section.settings.mi_heading != blank %}
+  <div class="pdp-mod pdp-mod--bleed pdp-mod--soft pdp-mi">
+    {% if section.settings.mi_eyebrow != blank %}
+      <span class="pdp-mod__eyebrow">{{ section.settings.mi_eyebrow }}</span>
+    {% endif %}
+    <h2 class="pdp-mod__h2">{{ section.settings.mi_heading }}</h2>
+    {% if section.settings.mi_body != blank %}
+      <p class="pdp-mod__body">{{ section.settings.mi_body }}</p>
+    {% endif %}
+
+    <div class="pdp-mi__grid">
+      {% for i in (1..6) %}
+        {% liquid
+          assign t_key = 'mi_tile_' | append: i | append: '_title'
+          assign d_key = 'mi_tile_' | append: i | append: '_desc'
+          assign tile_title = section.settings[t_key]
+          assign tile_desc = section.settings[d_key]
+        %}
+        {% if tile_title != blank %}
+          <div class="pdp-mi__tile">
+            <h3 class="pdp-mi__tile-title">{{ tile_title }}</h3>
+            {% if tile_desc != blank %}
+              <p class="pdp-mi__tile-desc">{{ tile_desc }}</p>
+            {% endif %}
+          </div>
+        {% endif %}
+      {% endfor %}
+    </div>
   </div>
 {% endif %}
 
