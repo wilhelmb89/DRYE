@@ -522,18 +522,40 @@
         "next_image_label": "Next image"
       }
     },
+    "drye_functional_benefits_yhKLaV": {
+      "type": "drye-functional-benefits",
+      "custom_css": [
+        ".func-sec {padding-top: 4px !important; padding-bottom: 4px;}"
+      ],
+      "name": "DRYE Functional Benefits",
+      "settings": {
+        "eyebrow": "",
+        "heading": "",
+        "subheading": "",
+        "card_1_icon": "refresh-cycle.svg",
+        "card_1_title": "Skin-side stays dry",
+        "card_1_desc": "Sweat routes away from the skin side instead of sitting directly against your hand.",
+        "card_2_icon": "shield.svg",
+        "card_2_title": "Gloves slide better",
+        "card_2_desc": "Nitrile goes on and off over the layer — not over wet skin. No ripping.",
+        "card_3_icon": "performance-arrow.svg",
+        "card_3_title": "Fits under sealed gloves",
+        "card_3_desc": "0.4mm thin. Built to sit under nitrile, latex, rubber and HV gloves.",
+        "card_4_icon": "layers-fabric.svg",
+        "card_4_title": "You still feel the work",
+        "card_4_desc": "The outer glove still does the gripping. DRYE changes the wet contact underneath.",
+        "card_5_icon": "wave-breathability.svg",
+        "card_5_title": "Nothing to wash out",
+        "card_5_desc": "The performance comes from the structure, not a chemical finish.",
+        "card_6_icon": "clock-timer.svg",
+        "card_6_title": "Built for months of shifts",
+        "card_6_desc": "Washable, reusable, and made to keep working through repeated wear.",
+        "note": ""
+      }
+    },
     "drye_proof_wall_idGMik": {
       "type": "drye-proof-wall",
       "blocks": {
-        "media_P84HhQ": {
-          "type": "media",
-          "settings": {
-            "media_type": "image",
-            "image": "shopify://shop_images/Screenshot_33_30ef9347-fbda-447f-9a48-68b92f01d5e8.webp",
-            "label": "“I don’t get that slimy feeling anymore.”",
-            "sublabel": "Professional hockey player · Frölunda HC"
-          }
-        },
         "media_T7LF8c": {
           "type": "media",
           "settings": {
@@ -541,24 +563,6 @@
             "image": "shopify://shop_images/PXL_20250411_133548754.MP_1.webp",
             "label": "\"Completely solved it. Bonus — hands don't smell after.\"",
             "sublabel": "Ice hockey"
-          }
-        },
-        "media_dcLC9Q": {
-          "type": "media",
-          "settings": {
-            "media_type": "image",
-            "image": "shopify://shop_images/Screenshot_10_1.webp",
-            "label": "\"Peel off. Dry hands. No more creams.\"",
-            "sublabel": "Retail & Grocery"
-          }
-        },
-        "media_ha7wFD": {
-          "type": "media",
-          "settings": {
-            "media_type": "image",
-            "image": "shopify://shop_images/Cahjnjjpture_75d93d18-ea1f-47ec-b5ee-0747c4cbef61.webp",
-            "label": "\"I like them. But what matters is no compromise on precision.\"",
-            "sublabel": "Tatoo artist"
           }
         },
         "media_4xtRPK": {
@@ -624,33 +628,6 @@
             "sublabel": "Warehouse worker"
           }
         },
-        "media_pKzpcC": {
-          "type": "media",
-          "settings": {
-            "media_type": "image",
-            "image": "shopify://shop_images/Screenshot_8.jpg",
-            "label": "“Hair chemicals usually wreck my hands. These help.”",
-            "sublabel": "Hairdresser"
-          }
-        },
-        "media_QTxE7V": {
-          "type": "media",
-          "settings": {
-            "media_type": "image",
-            "image": "shopify://shop_images/20260327_185154_1_1_1.webp",
-            "label": "",
-            "sublabel": "Fencing"
-          }
-        },
-        "media_TVfjy3": {
-          "type": "media",
-          "settings": {
-            "media_type": "image",
-            "image": "shopify://shop_images/20260327_184949_1_1_1.webp",
-            "label": "",
-            "sublabel": "Fencing"
-          }
-        },
         "media_b8fVx9": {
           "type": "media",
           "settings": {
@@ -662,10 +639,7 @@
         }
       },
       "block_order": [
-        "media_P84HhQ",
         "media_T7LF8c",
-        "media_dcLC9Q",
-        "media_ha7wFD",
         "media_4xtRPK",
         "media_9WjPKE",
         "media_yy3RAH",
@@ -673,9 +647,6 @@
         "media_tyEcbH",
         "media_4wwtW4",
         "media_mcDqNK",
-        "media_pKzpcC",
-        "media_QTxE7V",
-        "media_TVfjy3",
         "media_b8fVx9"
       ],
       "name": "DRYE Proof Wall",
@@ -695,6 +666,20 @@
         "eyebrow": "Expectation",
         "heading": "You notice it in minutes. <br><em class=\"dryeNEW-em\">Not weeks.</em>",
         "body": "<p>Moisture is the trigger. Remove it and the condition changes fast. Most users feel <strong>the difference during the first </strong>shift. </p>"
+      }
+    },
+    "drye_about_cta_bmdVek": {
+      "type": "drye-about-cta",
+      "name": "DRYE About CTA",
+      "settings": {
+        "eyebrow": "YOU’VE SEEN WHERE IT COMES FROM",
+        "heading_line_1": "Either it changes your shift",
+        "heading_line_2": "Or it doesn't",
+        "subtext": "30 days. Full refund if the physics don't change anything. No forms. No questions.",
+        "primary_label": "Order DRYE Liners →",
+        "primary_url": "shopify://products/drye-moisture-routing-glove-liners",
+        "secondary_label": "",
+        "secondary_url": ""
       }
     },
     "drye_stretch_wTh9gp": {
@@ -835,51 +820,6 @@
         "cta_label": "",
         "cta_url": "",
         "cta_note": ""
-      }
-    },
-    "drye_functional_benefits_yhKLaV": {
-      "type": "drye-functional-benefits",
-      "custom_css": [
-        ".func-sec {padding-top: 4px !important; padding-bottom: 4px;}"
-      ],
-      "name": "DRYE Functional Benefits",
-      "settings": {
-        "eyebrow": "",
-        "heading": "",
-        "subheading": "",
-        "card_1_icon": "refresh-cycle.svg",
-        "card_1_title": "Skin-side stays dry",
-        "card_1_desc": "Sweat routes away from the skin side instead of sitting directly against your hand.",
-        "card_2_icon": "shield.svg",
-        "card_2_title": "Gloves slide better",
-        "card_2_desc": "Nitrile goes on and off over the layer — not over wet skin. No ripping.",
-        "card_3_icon": "performance-arrow.svg",
-        "card_3_title": "Fits under sealed gloves",
-        "card_3_desc": "0.4mm thin. Built to sit under nitrile, latex, rubber and HV gloves.",
-        "card_4_icon": "layers-fabric.svg",
-        "card_4_title": "You still feel the work",
-        "card_4_desc": "The outer glove still does the gripping. DRYE changes the wet contact underneath.",
-        "card_5_icon": "wave-breathability.svg",
-        "card_5_title": "Nothing to wash out",
-        "card_5_desc": "The performance comes from the structure, not a chemical finish.",
-        "card_6_icon": "clock-timer.svg",
-        "card_6_title": "Built for months of shifts",
-        "card_6_desc": "Washable, reusable, and made to keep working through repeated wear.",
-        "note": ""
-      }
-    },
-    "drye_about_cta_bmdVek": {
-      "type": "drye-about-cta",
-      "name": "DRYE About CTA",
-      "settings": {
-        "eyebrow": "YOU’VE SEEN WHERE IT COMES FROM",
-        "heading_line_1": "Either it changes your shift",
-        "heading_line_2": "Or it doesn't",
-        "subtext": "30 days. Full refund if the physics don't change anything. No forms. No questions.",
-        "primary_label": "Order DRYE Liners →",
-        "primary_url": "shopify://products/drye-moisture-routing-glove-liners",
-        "secondary_label": "",
-        "secondary_url": ""
       }
     },
     "drye_objection_cards_dYmK9b": {
