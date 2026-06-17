@@ -350,6 +350,37 @@
         "description_toggle_closed": ""
       }
     },
+    "drye_functional_benefits_ddxLmg": {
+      "type": "drye-functional-benefits",
+      "custom_css": [
+        ".func-sec {padding-top: 4px !important; padding-bottom: 4px;}"
+      ],
+      "name": "DRYE Functional Benefits",
+      "settings": {
+        "eyebrow": "",
+        "heading": "",
+        "subheading": "",
+        "card_1_icon": "refresh-cycle.svg",
+        "card_1_title": "Skin-side stays dry",
+        "card_1_desc": "Sweat routes away from the skin side instead of sitting directly against your hand.",
+        "card_2_icon": "shield.svg",
+        "card_2_title": "Gloves slide better",
+        "card_2_desc": "Nitrile goes on and off over the layer — not over wet skin. No ripping.",
+        "card_3_icon": "performance-arrow.svg",
+        "card_3_title": "Fits under sealed gloves",
+        "card_3_desc": "0.4mm thin. Built to sit under nitrile, latex, rubber and HV gloves.",
+        "card_4_icon": "layers-fabric.svg",
+        "card_4_title": "You still feel the work",
+        "card_4_desc": "The outer glove still does the gripping. DRYE changes the wet contact underneath.",
+        "card_5_icon": "wave-breathability.svg",
+        "card_5_title": "Nothing to wash out",
+        "card_5_desc": "The performance comes from the structure, not a chemical finish.",
+        "card_6_icon": "clock-timer.svg",
+        "card_6_title": "Built for months of shifts",
+        "card_6_desc": "Washable, reusable, and made to keep working through repeated wear.",
+        "note": ""
+      }
+    },
     "drye_proof_wall_myzqry": {
       "type": "drye-proof-wall",
       "blocks": {
@@ -514,37 +545,6 @@
         "show_media_row": true,
         "all_reviews_url": "",
         "all_reviews_label": "Read all reviews →"
-      }
-    },
-    "drye_functional_benefits_ddxLmg": {
-      "type": "drye-functional-benefits",
-      "custom_css": [
-        ".func-sec {padding-top: 4px !important; padding-bottom: 4px;}"
-      ],
-      "name": "DRYE Functional Benefits",
-      "settings": {
-        "eyebrow": "",
-        "heading": "",
-        "subheading": "",
-        "card_1_icon": "refresh-cycle.svg",
-        "card_1_title": "Skin-side stays dry",
-        "card_1_desc": "Sweat routes away from the skin side instead of sitting directly against your hand.",
-        "card_2_icon": "shield.svg",
-        "card_2_title": "Gloves slide better",
-        "card_2_desc": "Nitrile goes on and off over the layer — not over wet skin. No ripping.",
-        "card_3_icon": "performance-arrow.svg",
-        "card_3_title": "Fits under sealed gloves",
-        "card_3_desc": "0.4mm thin. Built to sit under nitrile, latex, rubber and HV gloves.",
-        "card_4_icon": "layers-fabric.svg",
-        "card_4_title": "You still feel the work",
-        "card_4_desc": "The outer glove still does the gripping. DRYE changes the wet contact underneath.",
-        "card_5_icon": "wave-breathability.svg",
-        "card_5_title": "Nothing to wash out",
-        "card_5_desc": "The performance comes from the structure, not a chemical finish.",
-        "card_6_icon": "clock-timer.svg",
-        "card_6_title": "Built for months of shifts",
-        "card_6_desc": "Washable, reusable, and made to keep working through repeated wear.",
-        "note": ""
       }
     },
     "drye_mechanics_time_promise_gNDGeD": {
@@ -734,8 +734,8 @@
   },
   "order": [
     "drye_product_page_new_9ibHgd",
-    "drye_proof_wall_myzqry",
     "drye_functional_benefits_ddxLmg",
+    "drye_proof_wall_myzqry",
     "drye_mechanics_time_promise_gNDGeD",
     "drye_research_video_full_VPtXGb",
     "drye_reviews_mars_api_PWtkJh",
