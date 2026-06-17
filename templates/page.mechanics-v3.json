@@ -835,12 +835,15 @@
     },
     "drye_mechanics_82x_proof_Dif9cy": {
       "type": "drye-mechanics-82x-proof",
+      "custom_css": [
+        ".proof-white {color: #ffffff; font-weight: 700;}"
+      ],
       "name": "DRYE Mechanics 82x Proof",
       "settings": {
         "eyebrow": "Independent verification · 2026",
         "heading_line_1": "Same family of knit. Different construction.",
         "heading_emphasis": "82× further moisture transport.",
-        "subheading": "The innovation is not just the fibre blend. It is how the knit is built to move moisture away from the skin side.",
+        "subheading": "The innovation <span class=\"proof-white\">is not just the fibre blend.</span><br>\n<span class=\"proof-white\">It is how the knit is built <u>to move moisture away from the skin side.</u></span>",
         "left_image": "shopify://shop_images/IMG_0797_2.webp",
         "left_image_alt": "DRYE textile sample showing large wicking area after Wickview test.",
         "left_label": "DRYE · ASYMMETRIC LAYERING",
