@@ -135,6 +135,7 @@
         "profession_item_BTwU89",
         "profession_item_b9Fi8U"
       ],
+      "disabled": true,
       "custom_css": [
         "section {padding-top: 72px !important; padding-bottom: 32px !important; margin-top: 0 !important; margin-bottom: 0 !important;}"
       ],
@@ -145,80 +146,6 @@
         "heading": "You've tried everything.",
         "heading_echo": "Nothing worked.",
         "body": ""
-      }
-    },
-    "drye_worker_grid_KeG9FM": {
-      "type": "drye-worker-grid",
-      "blocks": {
-        "panel_gi6Rq9": {
-          "type": "panel",
-          "settings": {
-            "image": "shopify://shop_images/Gemini_Generated_Image_wf831ewf831ewf83.webp",
-            "image_alt": "Mechanic at work",
-            "label": "Nitrile · Summer",
-            "role": "Auto repair, ~20 min in",
-            "quote": "\"By 20 minutes my hands are sweating pools inside these gloves.\"",
-            "source": "Automotive mechanic"
-          }
-        },
-        "panel_NCbjVp": {
-          "type": "panel",
-          "settings": {
-            "image": "shopify://shop_images/Gemini_Generated_Image_ain34ain34ain34a_1.webp",
-            "image_alt": "Mechanic at work",
-            "label": "Nitrile · Detailing",
-            "role": "Interior clean, hour 3",
-            "quote": "\"I pull the gloves off at lunch and my hands look boiled. Every day.\"",
-            "source": "Car detailer"
-          }
-        },
-        "panel_YgyRya": {
-          "type": "panel",
-          "settings": {
-            "image": "shopify://shop_images/Gemini_Generated_Image_j1uzt4j1uzt4j1uz.webp",
-            "image_alt": "Mechanic at work",
-            "label": "Rubber · All day",
-            "role": "Diesel, by Thursday",
-            "quote": "\"Knuckles split by Thursday. Every week. Been doing it 30 years.\"",
-            "source": "Diesel mechanic"
-          }
-        },
-        "panel_b6HUKQ": {
-          "type": "panel",
-          "settings": {
-            "image": "shopify://shop_images/Gemini_Generated_Image__3.webp",
-            "image_alt": "Mechanic at work",
-            "label": "HV Class 0 · Full shift",
-            "role": "EV battery, full shift",
-            "quote": "\"I have to take them off to air them out between every job. No way around it.\"",
-            "source": "EV technician"
-          }
-        },
-        "panel_qUhdYe": {
-          "type": "panel",
-          "settings": {
-            "image": "shopify://shop_images/Gemini_Generated_Image_77q3h377q3h377q3.webp",
-            "image_alt": "Mechanic at work",
-            "label": "Latex · Chemicals",
-            "role": "Paint booth, 4h in",
-            "quote": "“Same damp gloves all week.\"",
-            "source": "Auto body painter"
-          }
-        }
-      },
-      "block_order": [
-        "panel_gi6Rq9",
-        "panel_NCbjVp",
-        "panel_YgyRya",
-        "panel_b6HUKQ",
-        "panel_qUhdYe"
-      ],
-      "name": "DRYE Worker Grid",
-      "settings": {
-        "eyebrow": "",
-        "heading": "One of these <br><em class=\"dryeNEW-em\">is your Tuesday afternoon.</em>",
-        "body": "Five mechanics. Five glove types. <strong>Same thing happening inside every one of them.</strong>",
-        "swipe_label": "Swipe"
       }
     },
     "drye_worker_grid_CG6VUJ": {
@@ -287,7 +214,6 @@
         "panel_FtC8i3",
         "panel_Lky9YA"
       ],
-      "disabled": true,
       "name": "DRYE Worker Grid",
       "settings": {
         "eyebrow": "",
@@ -469,7 +395,6 @@
         "strike_card_xWHeLD",
         "strike_card_RQ3aff"
       ],
-      "disabled": true,
       "name": "DRYE NEW Problem Beat 1",
       "settings": {
         "section_id": "problem",
@@ -612,125 +537,6 @@
         "eyebrow": "— A. Riahi",
         "heading": "Eight hours in. The glove is humid. Your skin is dry.",
         "body": "<p><em>\"After 6 hours under rubber gloves, my hands felt wet inside. Took the gloves off — completely dry. Such a mindfuck.\"</em><br/><br/></p>"
-      }
-    },
-    "drye_research_video_full_JTTPGe": {
-      "type": "drye-research-video-full",
-      "name": "DRYE Research Video Full",
-      "settings": {
-        "video_src_desktop": "https://customer-fqpngdzqcoky7qmz.cloudflarestream.com/453bb4cae9bd147b7a10fc6213e64b12/manifest/video.m3u8",
-        "video_src_mobile": "https://customer-fqpngdzqcoky7qmz.cloudflarestream.com/ed9ad690d7f5c27060e215f05f9e4f8e/manifest/video.m3u8",
-        "video_label": "Asymmetric layering",
-        "video_caption": "Routes sweat from skin to outer fabric. No saturation point."
-      }
-    },
-    "drye_structural_answer_tUG8Ht": {
-      "type": "drye-structural-answer",
-      "blocks": {
-        "gallery_image_RHntXb": {
-          "type": "gallery_image",
-          "settings": {
-            "image": "shopify://shop_images/Frame_930.webp",
-            "image_alt": ""
-          }
-        },
-        "gallery_image_PkwERy": {
-          "type": "gallery_image",
-          "settings": {
-            "image": "shopify://shop_images/div.card_12.webp",
-            "image_alt": ""
-          }
-        },
-        "gallery_image_iJBmgm": {
-          "type": "gallery_image",
-          "settings": {
-            "image": "shopify://shop_images/div.card_9.webp",
-            "image_alt": ""
-          }
-        },
-        "gallery_image_n8PxXN": {
-          "type": "gallery_image",
-          "settings": {
-            "image": "shopify://shop_images/div.card_2.webp",
-            "image_alt": ""
-          }
-        },
-        "gallery_image_xULnVd": {
-          "type": "gallery_image",
-          "settings": {
-            "image": "shopify://shop_images/100i4444440055070_1_1_t.webp",
-            "image_alt": ""
-          }
-        },
-        "gallery_image_GxtYb7": {
-          "type": "gallery_image",
-          "settings": {
-            "image": "shopify://shop_images/content.webp",
-            "image_alt": ""
-          }
-        },
-        "gallery_image_jNk7MT": {
-          "type": "gallery_image",
-          "settings": {
-            "image": "shopify://shop_images/div.card_11.webp",
-            "image_alt": ""
-          }
-        },
-        "gallery_image_XjQzVw": {
-          "type": "gallery_image",
-          "settings": {
-            "image": "shopify://shop_images/refore.ai_with.webp",
-            "image_alt": ""
-          }
-        },
-        "fact_7iz9UF": {
-          "type": "fact",
-          "settings": {
-            "strong": "Sweat.",
-            "text": "No saturation point. No maceration. Stays dry for the full shift - summer or winter, nitrile, latex, rubber or HV."
-          }
-        },
-        "fact_EnXzRk": {
-          "type": "fact",
-          "settings": {
-            "strong": "Oil.",
-            "text": "Stays on the surface. Wipes off with electrical contact cleaner. Back in rotation in under a minute."
-          }
-        },
-        "fact_Cwq79E": {
-          "type": "fact",
-          "settings": {
-            "strong": "Tearing.",
-            "text": "Your nitriles go on dry, come off dry. No more ripping them off over soaked skin twice an hour."
-          }
-        }
-      },
-      "block_order": [
-        "gallery_image_RHntXb",
-        "gallery_image_PkwERy",
-        "gallery_image_iJBmgm",
-        "gallery_image_n8PxXN",
-        "gallery_image_xULnVd",
-        "gallery_image_GxtYb7",
-        "gallery_image_jNk7MT",
-        "gallery_image_XjQzVw",
-        "fact_7iz9UF",
-        "fact_EnXzRk",
-        "fact_Cwq79E"
-      ],
-      "name": "DRYE Structural Answer",
-      "settings": {
-        "image_alt": "DRYE liner being put on under a nitrile glove",
-        "eyebrow": "Asymmetric layering",
-        "heading_before": "A liner built for sealed gloves",
-        "heading_em": "— not open air.",
-        "subheading": "0.4mm thin. No chemicals. No coatings. Fits inside any work glove.",
-        "body": "",
-        "footer_text": "Developed at the Swedish School of Textiles. Supported by Uppsala University and Vinnova.",
-        "swipe_label": "Swipe",
-        "cta_label": "Order DRYE Liners →",
-        "cta_url": "shopify://products/drye-moisture-routing-glove-liners",
-        "cta_note": "30-day refund · Ships within 24 hours"
       }
     },
     "drye_objection_cards_dYmK9b": {
@@ -900,7 +706,6 @@
         "image_card_qeMcR3",
         "image_card_JKjpTD"
       ],
-      "disabled": true,
       "custom_css": [
         ".dryeNEW-section.drye-product-grid {padding-bottom: 0 !important;}"
       ],
@@ -922,7 +727,6 @@
     },
     "drye_functional_benefits_yhKLaV": {
       "type": "drye-functional-benefits",
-      "disabled": true,
       "custom_css": [
         ".func-sec {padding-top: 4px !important; padding-bottom: 4px;}"
       ],
@@ -1366,29 +1170,124 @@
         "padding_top_desktop": 80,
         "padding_bottom_desktop": 80
       }
+    },
+    "drye_mechanism_nav_tezMhC": {
+      "type": "drye-mechanism-nav",
+      "name": "DRYE Mechanism Nav",
+      "settings": {
+        "step_1_label": "Saturation",
+        "step_2_label": "Routing",
+        "step_3_label": "Verification",
+        "aria_label": "Asymmetric Layering — the invention"
+      }
+    },
+    "drye_mechanics_saturation_cfL3Ua": {
+      "type": "drye-mechanics-saturation",
+      "blocks": {
+        "fiber_row_QJxCFP": {
+          "type": "fiber_row",
+          "settings": {
+            "fiber_name": "Merino wool",
+            "fiber_note": "Absorbs. Stays heavy.",
+            "value": "15–18%",
+            "bar_percent": 90,
+            "is_highlighted": false
+          }
+        },
+        "fiber_row_8UNNrG": {
+          "type": "fiber_row",
+          "settings": {
+            "fiber_name": "Bamboo viscose",
+            "fiber_note": "Absorbs. Marketed as softer.",
+            "value": "13%",
+            "bar_percent": 72,
+            "is_highlighted": false
+          }
+        },
+        "fiber_row_enpNw7": {
+          "type": "fiber_row",
+          "settings": {
+            "fiber_name": "Silk",
+            "fiber_note": "Absorbs less. Still holds moisture.",
+            "value": "11%",
+            "bar_percent": 60,
+            "is_highlighted": false
+          }
+        },
+        "fiber_row_wpHDGT": {
+          "type": "fiber_row",
+          "settings": {
+            "fiber_name": "Cotton",
+            "fiber_note": "Absorbs fast. Turns wet quickly.",
+            "value": "7–8%",
+            "bar_percent": 42,
+            "is_highlighted": false
+          }
+        },
+        "fiber_row_A3PWrM": {
+          "type": "fiber_row",
+          "settings": {
+            "fiber_name": "Polyester",
+            "fiber_note": "Low regain. Does not create the dry layer.",
+            "value": "0.4%",
+            "bar_percent": 4,
+            "is_highlighted": false
+          }
+        },
+        "fiber_row_TagQtQ": {
+          "type": "fiber_row",
+          "settings": {
+            "fiber_name": "DRYE Asymmetric Layering",
+            "fiber_note": "Doesn’t absorb. Routes outward.",
+            "value": "<0.1%",
+            "bar_percent": 1,
+            "is_highlighted": true
+          }
+        }
+      },
+      "block_order": [
+        "fiber_row_QJxCFP",
+        "fiber_row_8UNNrG",
+        "fiber_row_enpNw7",
+        "fiber_row_wpHDGT",
+        "fiber_row_A3PWrM",
+        "fiber_row_TagQtQ"
+      ],
+      "name": "DRYE Saturation Point",
+      "settings": {
+        "section_id": "mechanics-saturation",
+        "eyebrow": "The invention",
+        "heading_line_1": "Every other liner has a saturation point.",
+        "heading_echo": "Ours physically can’t.",
+        "subheading": "Every fibre your hand has ever met inside a glove fills up with sweat — until it can’t hold any more. From that moment on, the sweat stops moving. It sits against your skin for the rest of the shift.",
+        "drye_chip": "Skin-side dry",
+        "close_heading": "The others soak. DRYE doesn’t.",
+        "close_body": "<p>Cotton, wool, bamboo and silk absorb sweat into the fibre itself. Once they’re full, the water has nowhere left to go. It sits against your skin until the glove comes off.</p><p>DRYE is built different. Polypropylene on the skin side cannot hold water the same way. Lyocell on the outside pulls moisture across the fabric. Two fibres, one direction: away from your hand.</p>",
+        "close_statement": "The skin side stays dry. The shift ends before the fabric does.",
+        "cite": "Moisture regain references: Kadolph 2014 · ASTM D2654 · GB/T 9995. Transport mechanism independently validated in DRYE textile testing."
+      }
     }
   },
   "order": [
     "drye_new_hero_jE4LCa",
     "drye_new_identification_hctDdM",
-    "drye_worker_grid_KeG9FM",
     "drye_worker_grid_CG6VUJ",
     "drye_evidence_V9B97n",
     "drye_new_problem_beat_1_R7GgRp",
-    "drye_mechanics_mechanism_tgcnCV",
-    "drye_mechanics_time_promise_ieYYEU",
-    "drye_research_video_full_JTTPGe",
-    "drye_structural_answer_tUG8Ht",
-    "drye_objection_cards_dYmK9b",
-    "drye_mechanics_time2_wd4WRy",
     "drye_product_reality_grid_ggq47H",
     "drye_functional_benefits_yhKLaV",
+    "drye_mechanics_saturation_cfL3Ua",
+    "drye_mechanics_mechanism_tgcnCV",
+    "drye_mechanics_time_promise_ieYYEU",
+    "drye_objection_cards_dYmK9b",
+    "drye_mechanics_time2_wd4WRy",
     "drye_proof_wall_idGMik",
     "drye_about_cta_bmdVek",
     "drye_research_study_breakdown_TrRXii",
     "drye_mechanics_cta_khadEy",
     "drye_stretch_wTh9gp",
     "drye_validation_TYhQTK",
-    "drye_new_closing_cta_rDAaUw"
+    "drye_new_closing_cta_rDAaUw",
+    "drye_mechanism_nav_tezMhC"
   ]
 }
