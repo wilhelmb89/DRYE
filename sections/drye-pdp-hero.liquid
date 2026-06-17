@@ -13,6 +13,8 @@ assign review_count = section.settings.review_count_fallback
 
 {{ 'drye-pdp-hero.css' | asset_url | stylesheet_tag }}
 {{ 'drye-review-slider.css' | asset_url | stylesheet_tag }}
+{{ 'drye-pdp-modules.css' | asset_url | stylesheet_tag }}
+{{ 'drye-worker-proof.css' | asset_url | stylesheet_tag }}
 
 <section
   class="hero"
@@ -195,6 +197,202 @@ assign review_count = section.settings.review_count_fallback
     </div>
   </div>
   <div class="hero-info">
+{% comment %} Worker Proof — compact green proof line + sliding/expandable comment ticker {% endcomment %}
+{% if section.settings.proof_enabled %}
+  {% liquid
+    assign proof_has_items = false
+    for i in (1..6)
+      assign s_key = 'proof_item_' | append: i | append: '_short'
+      if section.settings[s_key] != blank
+        assign proof_has_items = true
+        break
+      endif
+    endfor
+  %}
+  <section class="drye-proof" data-drye-proof-module aria-label="Worker proof">
+    {% if section.settings.proof_returns_line != blank %}
+      <div class="drye-proof__line">
+        <svg class="drye-proof__check" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <path d="M3 8.4l3 3 7-7.6" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <span class="drye-proof__returns">{{ section.settings.proof_returns_line }}</span>
+      </div>
+    {% endif %}
+    {% if section.settings.proof_keep_line != blank %}
+      <div class="drye-proof__keep">{{ section.settings.proof_keep_line }}</div>
+    {% endif %}
+
+    {% if proof_has_items %}
+      {% if section.settings.proof_ticker_label != blank %}
+        <div class="drye-proof__tlabel">{{ section.settings.proof_ticker_label }}</div>
+      {% endif %}
+
+      <div class="drye-proof__ticker-wrap" data-drye-proof-tickerwrap>
+        <ul class="drye-proof__ticker" data-drye-proof-ticker>
+          {% for pass in (1..2) %}
+            {% for i in (1..6) %}
+              {% liquid
+                assign s_key = 'proof_item_' | append: i | append: '_short'
+                assign f_key = 'proof_item_' | append: i | append: '_full'
+                assign h_key = 'proof_item_' | append: i | append: '_handle'
+                assign l_key = 'proof_item_' | append: i | append: '_label'
+                assign u_key = 'proof_item_' | append: i | append: '_url'
+                assign it_short = section.settings[s_key]
+                assign it_full = section.settings[f_key] | default: section.settings[s_key]
+                assign it_handle = section.settings[h_key]
+                assign it_label = section.settings[l_key]
+                assign it_url = section.settings[u_key]
+              %}
+              {% if it_short != blank %}
+                <li class="drye-proof__item-wrap"{% if pass == 2 %} aria-hidden="true"{% endif %}>
+                  <button
+                    type="button"
+                    class="drye-proof__item"
+                    data-drye-proof-item
+                    data-index="{{ i }}"
+                    data-full="{{ it_full | escape }}"
+                    data-handle="{{ it_handle | escape }}"
+                    data-label="{{ it_label | escape }}"
+                    data-url="{{ it_url | escape }}"
+                  >
+                    {% if it_handle != blank %}<span class="drye-proof__ihandle">{{ it_handle }}</span>{% endif %}
+                    <span class="drye-proof__iquote">“{{ it_short }}”</span>
+                    <span class="drye-proof__iplus" aria-hidden="true">+</span>
+                  </button>
+                </li>
+              {% endif %}
+            {% endfor %}
+          {% endfor %}
+        </ul>
+      </div>
+
+      {% if section.settings.proof_hint != blank %}
+        <div class="drye-proof__hint">
+          <span class="drye-proof__hint-plus" aria-hidden="true">+</span>
+          <span>{{ section.settings.proof_hint }}</span>
+        </div>
+      {% endif %}
+
+      <div class="drye-proof__expand" data-drye-proof-expand hidden>
+        <button type="button" class="drye-proof__expand-close" data-drye-proof-close aria-label="Close">−</button>
+        <p class="drye-proof__expand-quote" data-proof-quote></p>
+        <div class="drye-proof__expand-meta">
+          <span class="drye-proof__expand-source" data-proof-source></span>
+          <a class="drye-proof__expand-link" data-proof-link href="#" target="_blank" rel="noopener" hidden>View on Instagram →</a>
+        </div>
+      </div>
+    {% endif %}
+
+    {% if section.settings.proof_show_recent and section.settings.proof_recent_items != blank %}
+      <div class="drye-proof__recent">
+        {% if section.settings.proof_recent_label != blank %}
+          <span class="drye-proof__recent-label">{{ section.settings.proof_recent_label }}</span>
+        {% endif %}
+        {% assign recent_lines = section.settings.proof_recent_items | newline_to_br | split: '<br />' %}
+        <ul class="drye-proof__recent-list">
+          {% for line in recent_lines %}
+            {% assign line_text = line | strip %}
+            {% if line_text != blank %}
+              <li class="drye-proof__recent-item">{{ line_text }}</li>
+            {% endif %}
+          {% endfor %}
+        </ul>
+      </div>
+    {% endif %}
+  </section>
+
+  <script>
+    (function () {
+      var m = document.querySelector('[data-drye-proof-module]:not([data-proof-bound])');
+      if (!m) return;
+      m.setAttribute('data-proof-bound', '1');
+      window.dataLayer = window.dataLayer || [];
+      function push(ev, extra) {
+        try {
+          var o = { event: ev, page_path: window.location.pathname };
+          if (extra) { for (var k in extra) { o[k] = extra[k]; } }
+          window.dataLayer.push(o);
+        } catch (e) {}
+      }
+
+      try {
+        var io = new IntersectionObserver(function (entries) {
+          entries.forEach(function (en) {
+            if (en.isIntersecting) { push('proof_module_view'); io.disconnect(); }
+          });
+        }, { threshold: 0.4 });
+        io.observe(m);
+      } catch (e) { push('proof_module_view'); }
+
+      var ticker = m.querySelector('[data-drye-proof-ticker]');
+      var wrap = m.querySelector('[data-drye-proof-tickerwrap]');
+      var expand = m.querySelector('[data-drye-proof-expand]');
+      var hovering = false, locked = false, openItem = null, resumeTimer = null;
+
+      function setPaused() {
+        if (ticker) { ticker.classList.toggle('is-paused', hovering || locked); }
+      }
+      if (wrap) {
+        wrap.addEventListener('mouseenter', function () { hovering = true; setPaused(); });
+        wrap.addEventListener('mouseleave', function () { hovering = false; setPaused(); });
+        wrap.addEventListener('touchstart', function () {
+          hovering = true; setPaused();
+          if (resumeTimer) { clearTimeout(resumeTimer); }
+        }, { passive: true });
+        wrap.addEventListener('touchend', function () {
+          if (resumeTimer) { clearTimeout(resumeTimer); }
+          resumeTimer = setTimeout(function () { if (!locked) { hovering = false; setPaused(); } }, 2500);
+        }, { passive: true });
+      }
+
+      function setPlus(btn, isOpen) {
+        var p = btn.querySelector('.drye-proof__iplus');
+        if (p) { p.textContent = isOpen ? '−' : '+'; }
+        btn.classList.toggle('is-open', isOpen);
+      }
+      function openExpand(btn) {
+        if (!expand) return;
+        if (openItem && openItem !== btn) { setPlus(openItem, false); }
+        var full = btn.getAttribute('data-full') || '';
+        var handle = btn.getAttribute('data-handle') || '';
+        var label = btn.getAttribute('data-label') || '';
+        var url = btn.getAttribute('data-url') || '';
+        var q = expand.querySelector('[data-proof-quote]');
+        var src = expand.querySelector('[data-proof-source]');
+        var link = expand.querySelector('[data-proof-link]');
+        if (q) { q.textContent = '“' + full + '”'; }
+        if (src) {
+          var parts = [];
+          if (handle) { parts.push(handle); }
+          if (label) { parts.push(label); }
+          src.textContent = parts.join(' · ');
+        }
+        if (link) {
+          if (url) { link.href = url; link.hidden = false; } else { link.hidden = true; }
+        }
+        expand.hidden = false;
+        setPlus(btn, true);
+        openItem = btn;
+        locked = true; setPaused();
+        push('proof_comment_expand', { proof_index: btn.getAttribute('data-index') });
+      }
+      function closeExpand() {
+        if (expand) { expand.hidden = true; }
+        if (openItem) { setPlus(openItem, false); openItem = null; }
+        locked = false; hovering = false; setPaused();
+      }
+
+      m.addEventListener('click', function (e) {
+        var t = e.target;
+        if (t.closest && t.closest('[data-drye-proof-close]')) { closeExpand(); return; }
+        if (t.closest && t.closest('[data-proof-link]')) { push('proof_source_click'); return; }
+        var btn = t.closest ? t.closest('[data-drye-proof-item]') : null;
+        if (!btn) { return; }
+        if (btn === openItem) { closeExpand(); } else { openExpand(btn); }
+      });
+    })();
+  </script>
+{% endif %}
     <div class="h-eye">{{ section.settings.eyebrow }}</div>
 
     <h1 class="h-title">
@@ -1101,39 +1299,374 @@ wteTimelines.forEach((timeline) => {
 {
   "name": "DRYE PDP Hero",
   "settings": [
-    { "type": "image_picker", "id": "hero_image", "label": "Hero image" },
-    { "type": "text", "id": "overlay_name", "label": "Overlay name", "default": "Deborah Fields — Cincinnati, OH" },
-    { "type": "textarea", "id": "overlay_quote", "label": "Overlay quote", "default": "\"His hands were bright pink and raw. Completely healed in two weeks. I'd tried everything for years.\"" },
-
-    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "8 of 9 reported significant difference — first week" },
-    { "type": "text", "id": "heading_line_1", "label": "Heading line 1", "default": "Moisture routing." },
-    { "type": "text", "id": "heading_line_2", "label": "Heading line 2", "default": "Inside any glove." },
-    { "type": "richtext", "id": "subtext", "label": "Subtext", "default": "<p>Stops skin breakdown in sealed gloves. No chemicals. No membranes. No coatings. No saturation point. <strong>0.4mm thin.</strong></p>" },
-
-    { "type": "text", "id": "review_rating_fallback", "label": "Fallback review rating", "default": "4.84" },
-    { "type": "text", "id": "review_count_fallback", "label": "Fallback review count", "default": "43" },
-    { "type": "text", "id": "review_anchor", "label": "Review anchor", "default": "#reviews" },
-
-    { "type": "text", "id": "price_note", "label": "Price note", "default": "Free shipping on 3+ pairs" },
-
-    { "type": "text", "id": "option_label", "label": "Option label", "default": "SIZES" },
-    { "type": "text", "id": "size_placeholder", "label": "Size placeholder", "default": "Choose your size" },
-    { "type": "text", "id": "size_guide_label", "label": "Size guide label", "default": "Size guide" },
-
-    { "type": "text", "id": "quantity_label", "label": "Quantity label", "default": "QUANTITY" },
-
-    { "type": "text", "id": "atc_button_label", "label": "Main ATC label", "default": "ADD TO CART" },
-    { "type": "text", "id": "sticky_button_label", "label": "Sticky ATC label", "default": "ADD TO CART — 30-DAY REFUND" },
-
-    { "type": "text", "id": "bullet_1", "label": "Bullet 1", "default": "Keeps hands dry inside sealed gloves — full shift, no reapplying" },
-    { "type": "text", "id": "bullet_2", "label": "Bullet 2", "default": "Works under nitrile, latex, and vinyl — no lost grip or dexterity" },
-    { "type": "text", "id": "bullet_3", "label": "Bullet 3", "default": "Lasts 4–12 months — machine washable, no chemicals to wear off" },
-
-    { "type": "text", "id": "trust_text_1", "label": "Trust text 1", "default": "Secure, encrypted checkout" },
-    { "type": "text", "id": "trust_text_2", "label": "Trust text 2", "default": "30-day money-back guarantee" },
-    { "type": "text", "id": "trust_text_3", "label": "Trust text 3", "default": "Ships within 24 hours" },
-
-    { "type": "text", "id": "description_toggle_closed", "label": "Description label", "default": "Product description" }
+    {
+      "type": "image_picker",
+      "id": "hero_image",
+      "label": "Hero image"
+    },
+    {
+      "type": "text",
+      "id": "overlay_name",
+      "label": "Overlay name",
+      "default": "Deborah Fields — Cincinnati, OH"
+    },
+    {
+      "type": "textarea",
+      "id": "overlay_quote",
+      "label": "Overlay quote",
+      "default": "\"His hands were bright pink and raw. Completely healed in two weeks. I'd tried everything for years.\""
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "8 of 9 reported significant difference — first week"
+    },
+    {
+      "type": "text",
+      "id": "heading_line_1",
+      "label": "Heading line 1",
+      "default": "Moisture routing."
+    },
+    {
+      "type": "text",
+      "id": "heading_line_2",
+      "label": "Heading line 2",
+      "default": "Inside any glove."
+    },
+    {
+      "type": "richtext",
+      "id": "subtext",
+      "label": "Subtext",
+      "default": "<p>Stops skin breakdown in sealed gloves. No chemicals. No membranes. No coatings. No saturation point. <strong>0.4mm thin.</strong></p>"
+    },
+    {
+      "type": "text",
+      "id": "review_rating_fallback",
+      "label": "Fallback review rating",
+      "default": "4.84"
+    },
+    {
+      "type": "text",
+      "id": "review_count_fallback",
+      "label": "Fallback review count",
+      "default": "43"
+    },
+    {
+      "type": "text",
+      "id": "review_anchor",
+      "label": "Review anchor",
+      "default": "#reviews"
+    },
+    {
+      "type": "text",
+      "id": "price_note",
+      "label": "Price note",
+      "default": "Free shipping on 3+ pairs"
+    },
+    {
+      "type": "text",
+      "id": "option_label",
+      "label": "Option label",
+      "default": "SIZES"
+    },
+    {
+      "type": "text",
+      "id": "size_placeholder",
+      "label": "Size placeholder",
+      "default": "Choose your size"
+    },
+    {
+      "type": "text",
+      "id": "size_guide_label",
+      "label": "Size guide label",
+      "default": "Size guide"
+    },
+    {
+      "type": "text",
+      "id": "quantity_label",
+      "label": "Quantity label",
+      "default": "QUANTITY"
+    },
+    {
+      "type": "text",
+      "id": "atc_button_label",
+      "label": "Main ATC label",
+      "default": "ADD TO CART"
+    },
+    {
+      "type": "checkbox",
+      "id": "proof_enabled",
+      "label": "Show Worker Proof",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "proof_returns_line",
+      "label": "Returns proof line (green)",
+      "default": "0 returns in the last 90 days"
+    },
+    {
+      "type": "text",
+      "id": "proof_keep_line",
+      "label": "Keep line",
+      "default": "Workers are keeping them."
+    },
+    {
+      "type": "text",
+      "id": "proof_ticker_label",
+      "label": "Ticker label",
+      "default": "Recent worker comments on instagram"
+    },
+    {
+      "type": "text",
+      "id": "proof_hint",
+      "label": "Tap-to-read hint",
+      "default": "Tap a comment to read it in full"
+    },
+    {
+      "type": "paragraph",
+      "content": "Comment ticker. Each item shows a short line; tap opens the full comment inline. Add a source URL only if a real public link exists (then 'View on Instagram →' shows). Use approved/public comments only."
+    },
+    {
+      "type": "text",
+      "id": "proof_item_1_short",
+      "label": "Item 1 short quote",
+      "default": "These are incredible."
+    },
+    {
+      "type": "textarea",
+      "id": "proof_item_1_full",
+      "label": "Item 1 full quote",
+      "default": "This product works incredible. The inside of my latex gloves are literally peeling off moist, just before I remove my hand from the DRYE liner dry to the touch. They really work. They have cured my contact dermatitis in 4 days of being sweat free. I have worn them for one week as a mechanic . ￼ They are durable as they can be for being fabric ……. I wish the stitching was stronger. The seam on the thumb of my right hand has split and starting to come apart. I have been careful that if I tear a latex glove, I replace it right away and not damage/oil stain the liner. I take them off on my break and on lunch and I hang them up to dry and put them back on. After a couple days, I take them home and wash them. The science from the two separate layers is solid, the inner black layer never gets your hands moist. And the outer gray layer soaks everything up like a sponge. The longest that I have worn them is 2 to 3 hours straight. And still my hands stay dry."
+    },
+    {
+      "type": "text",
+      "id": "proof_item_1_handle",
+      "label": "Item 1 handle/name",
+      "default": "@James H."
+    },
+    {
+      "type": "text",
+      "id": "proof_item_1_label",
+      "label": "Item 1 source label",
+      "default": "Facebook"
+    },
+    {
+      "type": "url",
+      "id": "proof_item_1_url",
+      "label": "Item 1 source URL (optional)"
+    },
+    {
+      "type": "text",
+      "id": "proof_item_2_short",
+      "label": "Item 2 short quote",
+      "default": "Ordering my second pair right now."
+    },
+    {
+      "type": "textarea",
+      "id": "proof_item_2_full",
+      "label": "Item 2 full quote",
+      "default": "I have just gotten these last week and wore them for the first time today at work. These are incredible, nearly no more sweat in nitrile gloves, plus being so thin I barely notice them so this is definitely worth getting. I've been battling eczema and hyperhydrosis which only get worse with gloves I have to wear at work, so glad I found these, a few of my coworkers are looking into getting a few pairs themselves!"
+    },
+    {
+      "type": "text",
+      "id": "proof_item_2_handle",
+      "label": "Item 2 handle/name",
+      "default": "@fordbodytech811"
+    },
+    {
+      "type": "text",
+      "id": "proof_item_2_label",
+      "label": "Item 2 source label",
+      "default": "Instagram"
+    },
+    {
+      "type": "url",
+      "id": "proof_item_2_url",
+      "label": "Item 2 source URL (optional)"
+    },
+    {
+      "type": "text",
+      "id": "proof_item_3_short",
+      "label": "Item 3 short quote",
+      "default": "The liners have been a huge help"
+    },
+    {
+      "type": "textarea",
+      "id": "proof_item_3_full",
+      "label": "Item 3 full quote",
+      "default": "I'm an automotive painter in Phoenix and was having terrible sweat issues wearing nitrile gloves during the summer months. The liners have been a huge help — I'm no longer dripping sweat on my paint jobs and my hands feel better."
+    },
+    {
+      "type": "text",
+      "id": "proof_item_3_handle",
+      "label": "Item 3 handle/name",
+      "default": "@Chad W."
+    },
+    {
+      "type": "text",
+      "id": "proof_item_3_label",
+      "label": "Item 3 source label",
+      "default": "Facebook"
+    },
+    {
+      "type": "url",
+      "id": "proof_item_3_url",
+      "label": "Item 3 source URL (optional)"
+    },
+    {
+      "type": "text",
+      "id": "proof_item_4_short",
+      "label": "Item 4 short quote",
+      "default": "Nearly no more sweat in nitrile gloves."
+    },
+    {
+      "type": "textarea",
+      "id": "proof_item_4_full",
+      "label": "Item 4 full quote",
+      "default": "@fordbodytech811 I 100% agree started wearing mine last week and my cracked cuts are starting to heal. It crazy how the inside of the latex glove is moist/humid but your actual skin is totally dry underneath the liners !!! Just be careful taking them off the stitching on the thumb seam and wrist cuff can rip apart. I suggest Go slow when removing finger by finger gradually"
+    },
+    {
+      "type": "text",
+      "id": "proof_item_4_handle",
+      "label": "Item 4 handle/name",
+      "default": "@dsmmaster2003"
+    },
+    {
+      "type": "text",
+      "id": "proof_item_4_label",
+      "label": "Item 4 source label",
+      "default": "Instagram comment"
+    },
+    {
+      "type": "url",
+      "id": "proof_item_4_url",
+      "label": "Item 4 source URL (optional)"
+    },
+    {
+      "type": "text",
+      "id": "proof_item_5_short",
+      "label": "Item 5 short quote (optional)",
+      "default": "They do a great job keeping sweat off my hands "
+    },
+    {
+      "type": "textarea",
+      "id": "proof_item_5_full",
+      "label": "Item 5 full quote (optional)",
+      "default": "I mainly use these for car detailing. The slim thickness gives great dexterity, but after about two hours under gloves, it can feel a bit damp. The stitching ripped once, but that might’ve been my fault. They do a great job keeping sweat off my hands — even when slightly wet, they still work. I just wash and reuse them again."
+    },
+    {
+      "type": "text",
+      "id": "proof_item_5_handle",
+      "label": "Item 5 handle/name (optional)",
+      "default": "@Shoujun Shi"
+    },
+    {
+      "type": "text",
+      "id": "proof_item_5_label",
+      "label": "Item 5 source label (optional)",
+      "default": "Facebook"
+    },
+    {
+      "type": "url",
+      "id": "proof_item_5_url",
+      "label": "Item 5 source URL (optional)"
+    },
+    {
+      "type": "text",
+      "id": "proof_item_6_short",
+      "label": "Item 6 short quote (optional)"
+    },
+    {
+      "type": "textarea",
+      "id": "proof_item_6_full",
+      "label": "Item 6 full quote (optional)"
+    },
+    {
+      "type": "text",
+      "id": "proof_item_6_handle",
+      "label": "Item 6 handle/name (optional)"
+    },
+    {
+      "type": "text",
+      "id": "proof_item_6_label",
+      "label": "Item 6 source label (optional)"
+    },
+    {
+      "type": "url",
+      "id": "proof_item_6_url",
+      "label": "Item 6 source URL (optional)"
+    },
+    {
+      "type": "paragraph",
+      "content": "Optional 'Recently bought' list — anonymized only. First name + last initial · country · qty. No full names, cities, or timestamps from orders. One per line."
+    },
+    {
+      "type": "checkbox",
+      "id": "proof_show_recent",
+      "label": "Show 'Recently bought' list",
+      "default": false
+    },
+    {
+      "type": "text",
+      "id": "proof_recent_label",
+      "label": "Recently bought label",
+      "default": "Recently bought"
+    },
+    {
+      "type": "textarea",
+      "id": "proof_recent_items",
+      "label": "Recently bought items (one per line)"
+    },
+    {
+      "type": "text",
+      "id": "sticky_button_label",
+      "label": "Sticky ATC label",
+      "default": "ADD TO CART — 30-DAY REFUND"
+    },
+    {
+      "type": "text",
+      "id": "bullet_1",
+      "label": "Bullet 1",
+      "default": "Keeps hands dry inside sealed gloves — full shift, no reapplying"
+    },
+    {
+      "type": "text",
+      "id": "bullet_2",
+      "label": "Bullet 2",
+      "default": "Works under nitrile, latex, and vinyl — no lost grip or dexterity"
+    },
+    {
+      "type": "text",
+      "id": "bullet_3",
+      "label": "Bullet 3",
+      "default": "Lasts 4–12 months — machine washable, no chemicals to wear off"
+    },
+    {
+      "type": "text",
+      "id": "trust_text_1",
+      "label": "Trust text 1",
+      "default": "Secure, encrypted checkout"
+    },
+    {
+      "type": "text",
+      "id": "trust_text_2",
+      "label": "Trust text 2",
+      "default": "30-day money-back guarantee"
+    },
+    {
+      "type": "text",
+      "id": "trust_text_3",
+      "label": "Trust text 3",
+      "default": "Ships within 24 hours"
+    },
+    {
+      "type": "text",
+      "id": "description_toggle_closed",
+      "label": "Description label",
+      "default": "Product description"
+    }
   ],
   "blocks": [
     {
@@ -1141,186 +1674,647 @@ wteTimelines.forEach((timeline) => {
       "name": "Description",
       "limit": 1,
       "settings": [
-        { "type": "text", "id": "title", "label": "Title", "default": "Product description" },
-        { "type": "checkbox", "id": "use_product_description", "label": "Use product.description (HTML)", "default": false },
-        { "type": "html", "id": "custom_description", "label": "Custom description (HTML)", "default": "<p>Built on a moisture gradient — not absorption, not wicking. A patent-pending Swedish textile with a one-directional structure that drives moisture away from skin, even inside sealed gloves under compression. Where cotton and wicking fabrics saturate and stop, DRYE continues.</p><p><strong>How to use</strong></p><p>Put DRYE on first. Put your gloves over them. Work your full shift. Take both off — hands are dry. Works with any glove.</p><p><strong>What's different</strong></p><p>Moisture moves through the fiber — not into it. No saturation. No collapse under compression.</p><p><strong>Care</strong></p><p>Machine wash. Air dry. Lasts 4–12 months. No chemicals. No coatings. 30-day money-back guarantee.</p>" }
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Product description"
+        },
+        {
+          "type": "checkbox",
+          "id": "use_product_description",
+          "label": "Use product.description (HTML)",
+          "default": false
+        },
+        {
+          "type": "html",
+          "id": "custom_description",
+          "label": "Custom description (HTML)",
+          "default": "<p>Built on a moisture gradient — not absorption, not wicking. A patent-pending Swedish textile with a one-directional structure that drives moisture away from skin, even inside sealed gloves under compression. Where cotton and wicking fabrics saturate and stop, DRYE continues.</p><p><strong>How to use</strong></p><p>Put DRYE on first. Put your gloves over them. Work your full shift. Take both off — hands are dry. Works with any glove.</p><p><strong>What's different</strong></p><p>Moisture moves through the fiber — not into it. No saturation. No collapse under compression.</p><p><strong>Care</strong></p><p>Machine wash. Air dry. Lasts 4–12 months. No chemicals. No coatings. 30-day money-back guarantee.</p>"
+        }
       ]
     },
     {
-  "type": "htab_wte_stage",
-  "name": "What to Expect — Stage",
-  "settings": [
-    {
-      "type": "text",
-      "id": "stage_label",
-      "label": "Stage label",
-      "default": "Stage 1"
+      "type": "htab_wte_stage",
+      "name": "What to Expect — Stage",
+      "settings": [
+        {
+          "type": "text",
+          "id": "stage_label",
+          "label": "Stage label",
+          "default": "Stage 1"
+        },
+        {
+          "type": "text",
+          "id": "headline_start",
+          "label": "Headline",
+          "default": "Minute 20"
+        },
+        {
+          "type": "text",
+          "id": "headline_italic",
+          "label": "Headline italic accent",
+          "default": "asd"
+        },
+        {
+          "type": "text",
+          "id": "bullet_1",
+          "label": "Bullet 1",
+          "default": "First time you peel off the nitrile, it slides."
+        },
+        {
+          "type": "text",
+          "id": "bullet_2",
+          "label": "Bullet 2",
+          "default": "Dry hands."
+        },
+        {
+          "type": "text",
+          "id": "bullet_3",
+          "label": "Bullet 3",
+          "default": "No glove fighting."
+        },
+        {
+          "type": "text",
+          "id": "bullet_4",
+          "label": "Bullet 4 bold",
+          "default": "asd"
+        }
+      ]
     },
     {
-      "type": "text",
-      "id": "headline_start",
-      "label": "Headline",
-      "default": "Minute 20"
+      "type": "review_slider",
+      "name": "Review slider",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "text",
+          "id": "review_1_name",
+          "label": "Review 1 name",
+          "default": "Mike R."
+        },
+        {
+          "type": "text",
+          "id": "review_1_location",
+          "label": "Review 1 location",
+          "default": "Fort Worth, TX"
+        },
+        {
+          "type": "textarea",
+          "id": "review_1_quote",
+          "label": "Review 1 quote",
+          "default": "Three hours into a nitrile shift, my gloves usually felt soaked inside. These kept my hands way drier."
+        },
+        {
+          "type": "text",
+          "id": "review_1_label",
+          "label": "Review 1 label",
+          "default": "Auto Mechanic"
+        },
+        {
+          "type": "range",
+          "id": "review_1_stars",
+          "label": "Review 1 stars",
+          "min": 1,
+          "max": 5,
+          "step": 1,
+          "default": 5
+        },
+        {
+          "type": "range",
+          "id": "review_2_stars",
+          "label": "Review 2 stars",
+          "min": 1,
+          "max": 5,
+          "step": 1,
+          "default": 5
+        },
+        {
+          "type": "range",
+          "id": "review_3_stars",
+          "label": "Review 3 stars",
+          "min": 1,
+          "max": 5,
+          "step": 1,
+          "default": 5
+        },
+        {
+          "type": "range",
+          "id": "review_4_stars",
+          "label": "Review 4 stars",
+          "min": 1,
+          "max": 5,
+          "step": 1,
+          "default": 5
+        },
+        {
+          "type": "range",
+          "id": "review_5_stars",
+          "label": "Review 5 stars",
+          "min": 1,
+          "max": 5,
+          "step": 1,
+          "default": 5
+        },
+        {
+          "type": "text",
+          "id": "review_2_name",
+          "label": "Review 2 name",
+          "default": "Sarah K."
+        },
+        {
+          "type": "text",
+          "id": "review_2_location",
+          "label": "Review 2 location",
+          "default": "Columbus, OH"
+        },
+        {
+          "type": "textarea",
+          "id": "review_2_quote",
+          "label": "Review 2 quote",
+          "default": "Cotton liners just stayed wet. This felt different — the sweat didn’t sit against my skin."
+        },
+        {
+          "type": "text",
+          "id": "review_2_label",
+          "label": "Review 2 label",
+          "default": "Dental Assistant"
+        },
+        {
+          "type": "text",
+          "id": "review_3_name",
+          "label": "Review 3 name",
+          "default": "Jason T."
+        },
+        {
+          "type": "text",
+          "id": "review_3_location",
+          "label": "Review 3 location",
+          "default": "Phoenix, AZ"
+        },
+        {
+          "type": "textarea",
+          "id": "review_3_quote",
+          "label": "Review 3 quote",
+          "default": "My hands used to be wrinkled and irritated after every shift. This changed the inside of the glove completely."
+        },
+        {
+          "type": "text",
+          "id": "review_3_label",
+          "label": "Review 3 label",
+          "default": "Warehouse Operator"
+        },
+        {
+          "type": "text",
+          "id": "review_4_name",
+          "label": "Review 4 name",
+          "default": "Emily P."
+        },
+        {
+          "type": "text",
+          "id": "review_4_location",
+          "label": "Review 4 location",
+          "default": "Nashville, TN"
+        },
+        {
+          "type": "textarea",
+          "id": "review_4_quote",
+          "label": "Review 4 quote",
+          "default": "I thought liners would make gloves bulky. These are thin enough that I forgot they were there."
+        },
+        {
+          "type": "text",
+          "id": "review_4_label",
+          "label": "Review 4 label",
+          "default": "Lab Technician"
+        },
+        {
+          "type": "url",
+          "id": "review_4_flag_url",
+          "label": "Review 4 flag SVG"
+        },
+        {
+          "type": "text",
+          "id": "review_5_name",
+          "label": "Review 5 name",
+          "default": "Chris M."
+        },
+        {
+          "type": "text",
+          "id": "review_5_location",
+          "label": "Review 5 location",
+          "default": "Tampa, FL"
+        },
+        {
+          "type": "textarea",
+          "id": "review_5_quote",
+          "label": "Review 5 quote",
+          "default": "After years of taking gloves off just to dry my hands, this is the first thing that actually helped."
+        },
+        {
+          "type": "text",
+          "id": "review_5_label",
+          "label": "Review 5 label",
+          "default": "Painter"
+        },
+        {
+          "type": "url",
+          "id": "review_5_flag_url",
+          "label": "Review 5 flag SVG"
+        },
+        {
+          "type": "text",
+          "id": "review_6_name",
+          "label": "Review 6 name"
+        },
+        {
+          "type": "text",
+          "id": "review_6_location",
+          "label": "Review 6 location"
+        },
+        {
+          "type": "textarea",
+          "id": "review_6_quote",
+          "label": "Review 6 quote"
+        },
+        {
+          "type": "text",
+          "id": "review_6_label",
+          "label": "Review 6 label"
+        },
+        {
+          "type": "range",
+          "id": "review_6_stars",
+          "label": "Review 6 stars",
+          "min": 1,
+          "max": 5,
+          "step": 1,
+          "default": 5
+        },
+        {
+          "type": "checkbox",
+          "id": "review_6_show_as_b2b",
+          "label": "Review 6: Show as B2B/institutional",
+          "default": false
+        },
+        {
+          "type": "text",
+          "id": "review_6_badge_text",
+          "label": "Review 6 badge text",
+          "default": "FIELD STUDY"
+        },
+        {
+          "type": "text",
+          "id": "review_6_attribution",
+          "label": "Review 6 attribution (optional)"
+        },
+        {
+          "type": "url",
+          "id": "review_6_flag_url",
+          "label": "Review 6 flag SVG"
+        },
+        {
+          "type": "text",
+          "id": "review_7_name",
+          "label": "Review 7 name"
+        },
+        {
+          "type": "text",
+          "id": "review_7_location",
+          "label": "Review 7 location"
+        },
+        {
+          "type": "textarea",
+          "id": "review_7_quote",
+          "label": "Review 7 quote"
+        },
+        {
+          "type": "text",
+          "id": "review_7_label",
+          "label": "Review 7 label"
+        },
+        {
+          "type": "range",
+          "id": "review_7_stars",
+          "label": "Review 7 stars",
+          "min": 1,
+          "max": 5,
+          "step": 1,
+          "default": 5
+        },
+        {
+          "type": "checkbox",
+          "id": "review_7_show_as_b2b",
+          "label": "Review 7: Show as B2B/institutional",
+          "default": false
+        },
+        {
+          "type": "text",
+          "id": "review_7_badge_text",
+          "label": "Review 7 badge text",
+          "default": "FIELD STUDY"
+        },
+        {
+          "type": "text",
+          "id": "review_7_attribution",
+          "label": "Review 7 attribution (optional)"
+        },
+        {
+          "type": "url",
+          "id": "review_7_flag_url",
+          "label": "Review 7 flag SVG"
+        },
+        {
+          "type": "text",
+          "id": "review_8_name",
+          "label": "Review 8 name"
+        },
+        {
+          "type": "text",
+          "id": "review_8_location",
+          "label": "Review 8 location"
+        },
+        {
+          "type": "textarea",
+          "id": "review_8_quote",
+          "label": "Review 8 quote"
+        },
+        {
+          "type": "text",
+          "id": "review_8_label",
+          "label": "Review 8 label"
+        },
+        {
+          "type": "range",
+          "id": "review_8_stars",
+          "label": "Review 8 stars",
+          "min": 1,
+          "max": 5,
+          "step": 1,
+          "default": 5
+        },
+        {
+          "type": "checkbox",
+          "id": "review_8_show_as_b2b",
+          "label": "Review 8: Show as B2B/institutional",
+          "default": false
+        },
+        {
+          "type": "text",
+          "id": "review_8_badge_text",
+          "label": "Review 8 badge text",
+          "default": "FIELD STUDY"
+        },
+        {
+          "type": "text",
+          "id": "review_8_attribution",
+          "label": "Review 8 attribution (optional)"
+        },
+        {
+          "type": "url",
+          "id": "review_8_flag_url",
+          "label": "Review 8 flag SVG"
+        },
+        {
+          "type": "text",
+          "id": "review_9_name",
+          "label": "Review 9 name"
+        },
+        {
+          "type": "text",
+          "id": "review_9_location",
+          "label": "Review 9 location"
+        },
+        {
+          "type": "textarea",
+          "id": "review_9_quote",
+          "label": "Review 9 quote"
+        },
+        {
+          "type": "text",
+          "id": "review_9_label",
+          "label": "Review 9 label"
+        },
+        {
+          "type": "range",
+          "id": "review_9_stars",
+          "label": "Review 9 stars",
+          "min": 1,
+          "max": 5,
+          "step": 1,
+          "default": 5
+        },
+        {
+          "type": "checkbox",
+          "id": "review_9_show_as_b2b",
+          "label": "Review 9: Show as B2B/institutional",
+          "default": false
+        },
+        {
+          "type": "text",
+          "id": "review_9_badge_text",
+          "label": "Review 9 badge text",
+          "default": "FIELD STUDY"
+        },
+        {
+          "type": "text",
+          "id": "review_9_attribution",
+          "label": "Review 9 attribution (optional)"
+        },
+        {
+          "type": "url",
+          "id": "review_9_flag_url",
+          "label": "Review 9 flag SVG"
+        },
+        {
+          "type": "checkbox",
+          "id": "show_trust_footer",
+          "label": "Show trust footer",
+          "default": true
+        },
+        {
+          "type": "text",
+          "id": "trust_rating",
+          "label": "On-site rating",
+          "default": "4.84/5"
+        },
+        {
+          "type": "text",
+          "id": "trust_count",
+          "label": "On-site review count text",
+          "default": "from 34 verified reviews"
+        },
+        {
+          "type": "url",
+          "id": "all_reviews_url",
+          "label": "All reviews link"
+        },
+        {
+          "type": "text",
+          "id": "all_reviews_label",
+          "label": "All reviews label",
+          "default": "Read all reviews →"
+        },
+        {
+          "type": "checkbox",
+          "id": "review_1_show_as_b2b",
+          "label": "Review 1: Show as B2B/institutional (replaces stars with badge)",
+          "default": false
+        },
+        {
+          "type": "text",
+          "id": "review_1_badge_text",
+          "label": "Review 1 badge text",
+          "default": "B2B REVIEW"
+        },
+        {
+          "type": "text",
+          "id": "review_1_attribution",
+          "label": "Review 1 attribution (optional, shown under quote)"
+        },
+        {
+          "type": "checkbox",
+          "id": "review_2_show_as_b2b",
+          "label": "Review 2: Show as B2B/institutional",
+          "default": false
+        },
+        {
+          "type": "text",
+          "id": "review_2_badge_text",
+          "label": "Review 2 badge text",
+          "default": "B2B REVIEW"
+        },
+        {
+          "type": "text",
+          "id": "review_2_attribution",
+          "label": "Review 2 attribution (optional)"
+        },
+        {
+          "type": "checkbox",
+          "id": "review_3_show_as_b2b",
+          "label": "Review 3: Show as B2B/institutional",
+          "default": false
+        },
+        {
+          "type": "text",
+          "id": "review_3_badge_text",
+          "label": "Review 3 badge text",
+          "default": "B2B REVIEW"
+        },
+        {
+          "type": "text",
+          "id": "review_3_attribution",
+          "label": "Review 3 attribution (optional)"
+        },
+        {
+          "type": "checkbox",
+          "id": "review_4_show_as_b2b",
+          "label": "Review 4: Show as B2B/institutional",
+          "default": false
+        },
+        {
+          "type": "text",
+          "id": "review_4_badge_text",
+          "label": "Review 4 badge text",
+          "default": "B2B REVIEW"
+        },
+        {
+          "type": "text",
+          "id": "review_4_attribution",
+          "label": "Review 4 attribution (optional)"
+        },
+        {
+          "type": "checkbox",
+          "id": "review_5_show_as_b2b",
+          "label": "Review 5: Show as B2B/institutional",
+          "default": false
+        },
+        {
+          "type": "text",
+          "id": "review_5_badge_text",
+          "label": "Review 5 badge text",
+          "default": "FIELD STUDY"
+        },
+        {
+          "type": "text",
+          "id": "review_5_attribution",
+          "label": "Review 5 attribution (optional)"
+        },
+        {
+          "type": "text",
+          "id": "trust_platform",
+          "label": "Trust platform",
+          "default": "Trustpilot"
+        },
+        {
+          "type": "text",
+          "id": "trustpilot_rating",
+          "label": "Trustpilot rating",
+          "default": "4.5/5"
+        },
+        {
+          "type": "text",
+          "id": "trustpilot_count",
+          "label": "Trustpilot count text",
+          "default": "on Trustpilot"
+        },
+        {
+          "type": "url",
+          "id": "trust_url",
+          "label": "Trustpilot link"
+        },
+        {
+          "type": "text",
+          "id": "trust_link_label",
+          "label": "Trustpilot link label",
+          "default": "Review us on Trustpilot →"
+        }
+      ]
     },
-    {
-      "type": "text",
-      "id": "headline_italic",
-      "label": "Headline italic accent",
-      "default": "asd"
-    },
-    {
-      "type": "text",
-      "id": "bullet_1",
-      "label": "Bullet 1",
-      "default": "First time you peel off the nitrile, it slides."
-    },
-    {
-      "type": "text",
-      "id": "bullet_2",
-      "label": "Bullet 2",
-      "default": "Dry hands."
-    },
-    {
-      "type": "text",
-      "id": "bullet_3",
-      "label": "Bullet 3",
-      "default": "No glove fighting."
-    },
-    {
-      "type": "text",
-      "id": "bullet_4",
-      "label": "Bullet 4 bold",
-      "default": "asd"
-    }
-  ]
-},
-    {
-  "type": "review_slider",
-  "name": "Review slider",
-  "limit": 1,
-  "settings": [
-    { "type": "text", "id": "review_1_name", "label": "Review 1 name", "default": "Mike R." },
-    { "type": "text", "id": "review_1_location", "label": "Review 1 location", "default": "Fort Worth, TX" },
-    { "type": "textarea", "id": "review_1_quote", "label": "Review 1 quote", "default": "Three hours into a nitrile shift, my gloves usually felt soaked inside. These kept my hands way drier." },
-    { "type": "text", "id": "review_1_label", "label": "Review 1 label", "default": "Auto Mechanic" },
-
-    { "type": "range", "id": "review_1_stars", "label": "Review 1 stars", "min": 1, "max": 5, "step": 1, "default": 5 },
-{ "type": "range", "id": "review_2_stars", "label": "Review 2 stars", "min": 1, "max": 5, "step": 1, "default": 5 },
-{ "type": "range", "id": "review_3_stars", "label": "Review 3 stars", "min": 1, "max": 5, "step": 1, "default": 5 },
-{ "type": "range", "id": "review_4_stars", "label": "Review 4 stars", "min": 1, "max": 5, "step": 1, "default": 5 },
-{ "type": "range", "id": "review_5_stars", "label": "Review 5 stars", "min": 1, "max": 5, "step": 1, "default": 5 },
-
-    { "type": "text", "id": "review_2_name", "label": "Review 2 name", "default": "Sarah K." },
-    { "type": "text", "id": "review_2_location", "label": "Review 2 location", "default": "Columbus, OH" },
-    { "type": "textarea", "id": "review_2_quote", "label": "Review 2 quote", "default": "Cotton liners just stayed wet. This felt different — the sweat didn’t sit against my skin." },
-    { "type": "text", "id": "review_2_label", "label": "Review 2 label", "default": "Dental Assistant" },
-
-    { "type": "text", "id": "review_3_name", "label": "Review 3 name", "default": "Jason T." },
-    { "type": "text", "id": "review_3_location", "label": "Review 3 location", "default": "Phoenix, AZ" },
-    { "type": "textarea", "id": "review_3_quote", "label": "Review 3 quote", "default": "My hands used to be wrinkled and irritated after every shift. This changed the inside of the glove completely." },
-    { "type": "text", "id": "review_3_label", "label": "Review 3 label", "default": "Warehouse Operator" },
-
-    { "type": "text", "id": "review_4_name", "label": "Review 4 name", "default": "Emily P." },
-    { "type": "text", "id": "review_4_location", "label": "Review 4 location", "default": "Nashville, TN" },
-    { "type": "textarea", "id": "review_4_quote", "label": "Review 4 quote", "default": "I thought liners would make gloves bulky. These are thin enough that I forgot they were there." },
-    { "type": "text", "id": "review_4_label", "label": "Review 4 label", "default": "Lab Technician" },
-    { "type": "url", "id": "review_4_flag_url", "label": "Review 4 flag SVG" },
-
-    { "type": "text", "id": "review_5_name", "label": "Review 5 name", "default": "Chris M." },
-    { "type": "text", "id": "review_5_location", "label": "Review 5 location", "default": "Tampa, FL" },
-    { "type": "textarea", "id": "review_5_quote", "label": "Review 5 quote", "default": "After years of taking gloves off just to dry my hands, this is the first thing that actually helped." },
-    { "type": "text", "id": "review_5_label", "label": "Review 5 label", "default": "Painter" },
-    { "type": "url", "id": "review_5_flag_url", "label": "Review 5 flag SVG" },
-
-    { "type": "text", "id": "review_6_name", "label": "Review 6 name" },
-{ "type": "text", "id": "review_6_location", "label": "Review 6 location" },
-{ "type": "textarea", "id": "review_6_quote", "label": "Review 6 quote" },
-{ "type": "text", "id": "review_6_label", "label": "Review 6 label" },
-{ "type": "range", "id": "review_6_stars", "label": "Review 6 stars", "min": 1, "max": 5, "step": 1, "default": 5 },
-{ "type": "checkbox", "id": "review_6_show_as_b2b", "label": "Review 6: Show as B2B/institutional", "default": false },
-{ "type": "text", "id": "review_6_badge_text", "label": "Review 6 badge text", "default": "FIELD STUDY" },
-{ "type": "text", "id": "review_6_attribution", "label": "Review 6 attribution (optional)" },
-{ "type": "url", "id": "review_6_flag_url", "label": "Review 6 flag SVG" },
-
-{ "type": "text", "id": "review_7_name", "label": "Review 7 name" },
-{ "type": "text", "id": "review_7_location", "label": "Review 7 location" },
-{ "type": "textarea", "id": "review_7_quote", "label": "Review 7 quote" },
-{ "type": "text", "id": "review_7_label", "label": "Review 7 label" },
-{ "type": "range", "id": "review_7_stars", "label": "Review 7 stars", "min": 1, "max": 5, "step": 1, "default": 5 },
-{ "type": "checkbox", "id": "review_7_show_as_b2b", "label": "Review 7: Show as B2B/institutional", "default": false },
-{ "type": "text", "id": "review_7_badge_text", "label": "Review 7 badge text", "default": "FIELD STUDY" },
-{ "type": "text", "id": "review_7_attribution", "label": "Review 7 attribution (optional)" },
-{ "type": "url", "id": "review_7_flag_url", "label": "Review 7 flag SVG" },
-
-{ "type": "text", "id": "review_8_name", "label": "Review 8 name" },
-{ "type": "text", "id": "review_8_location", "label": "Review 8 location" },
-{ "type": "textarea", "id": "review_8_quote", "label": "Review 8 quote" },
-{ "type": "text", "id": "review_8_label", "label": "Review 8 label" },
-{ "type": "range", "id": "review_8_stars", "label": "Review 8 stars", "min": 1, "max": 5, "step": 1, "default": 5 },
-{ "type": "checkbox", "id": "review_8_show_as_b2b", "label": "Review 8: Show as B2B/institutional", "default": false },
-{ "type": "text", "id": "review_8_badge_text", "label": "Review 8 badge text", "default": "FIELD STUDY" },
-{ "type": "text", "id": "review_8_attribution", "label": "Review 8 attribution (optional)" },
-{ "type": "url", "id": "review_8_flag_url", "label": "Review 8 flag SVG" },
-
-{ "type": "text", "id": "review_9_name", "label": "Review 9 name" },
-{ "type": "text", "id": "review_9_location", "label": "Review 9 location" },
-{ "type": "textarea", "id": "review_9_quote", "label": "Review 9 quote" },
-{ "type": "text", "id": "review_9_label", "label": "Review 9 label" },
-{ "type": "range", "id": "review_9_stars", "label": "Review 9 stars", "min": 1, "max": 5, "step": 1, "default": 5 },
-{ "type": "checkbox", "id": "review_9_show_as_b2b", "label": "Review 9: Show as B2B/institutional", "default": false },
-{ "type": "text", "id": "review_9_badge_text", "label": "Review 9 badge text", "default": "FIELD STUDY" },
-{ "type": "text", "id": "review_9_attribution", "label": "Review 9 attribution (optional)" },
-{ "type": "url", "id": "review_9_flag_url", "label": "Review 9 flag SVG" },
-
-{ "type": "checkbox", "id": "show_trust_footer", "label": "Show trust footer", "default": true },
-
-{ "type": "text", "id": "trust_rating", "label": "On-site rating", "default": "4.84/5" },
-{ "type": "text", "id": "trust_count", "label": "On-site review count text", "default": "from 34 verified reviews" },
-{ "type": "url", "id": "all_reviews_url", "label": "All reviews link" },
-{ "type": "text", "id": "all_reviews_label", "label": "All reviews label", "default": "Read all reviews →" },
-{ "type": "checkbox", "id": "review_1_show_as_b2b", "label": "Review 1: Show as B2B/institutional (replaces stars with badge)", "default": false },
-{ "type": "text", "id": "review_1_badge_text", "label": "Review 1 badge text", "default": "B2B REVIEW" },
-{ "type": "text", "id": "review_1_attribution", "label": "Review 1 attribution (optional, shown under quote)" },
-
-{ "type": "checkbox", "id": "review_2_show_as_b2b", "label": "Review 2: Show as B2B/institutional", "default": false },
-{ "type": "text", "id": "review_2_badge_text", "label": "Review 2 badge text", "default": "B2B REVIEW" },
-{ "type": "text", "id": "review_2_attribution", "label": "Review 2 attribution (optional)" },
-
-{ "type": "checkbox", "id": "review_3_show_as_b2b", "label": "Review 3: Show as B2B/institutional", "default": false },
-{ "type": "text", "id": "review_3_badge_text", "label": "Review 3 badge text", "default": "B2B REVIEW" },
-{ "type": "text", "id": "review_3_attribution", "label": "Review 3 attribution (optional)" },
-
-{ "type": "checkbox", "id": "review_4_show_as_b2b", "label": "Review 4: Show as B2B/institutional", "default": false },
-{ "type": "text", "id": "review_4_badge_text", "label": "Review 4 badge text", "default": "B2B REVIEW" },
-{ "type": "text", "id": "review_4_attribution", "label": "Review 4 attribution (optional)" },
-
-{ "type": "checkbox", "id": "review_5_show_as_b2b", "label": "Review 5: Show as B2B/institutional", "default": false },
-{ "type": "text", "id": "review_5_badge_text", "label": "Review 5 badge text", "default": "FIELD STUDY" },
-{ "type": "text", "id": "review_5_attribution", "label": "Review 5 attribution (optional)" },
-
-{ "type": "text", "id": "trust_platform", "label": "Trust platform", "default": "Trustpilot" },
-{ "type": "text", "id": "trustpilot_rating", "label": "Trustpilot rating", "default": "4.5/5" },
-{ "type": "text", "id": "trustpilot_count", "label": "Trustpilot count text", "default": "on Trustpilot" },
-{ "type": "url", "id": "trust_url", "label": "Trustpilot link" },
-{ "type": "text", "id": "trust_link_label", "label": "Trustpilot link label", "default": "Review us on Trustpilot →" }
-  ]
-},
     {
       "type": "faq",
       "name": "FAQ item",
       "settings": [
-        { "type": "text", "id": "question", "label": "Question", "default": "Your question" },
-        { "type": "textarea", "id": "answer", "label": "Answer", "default": "Your answer." },
-        { "type": "checkbox", "id": "open_by_default", "label": "Open by default", "default": false }
+        {
+          "type": "text",
+          "id": "question",
+          "label": "Question",
+          "default": "Your question"
+        },
+        {
+          "type": "textarea",
+          "id": "answer",
+          "label": "Answer",
+          "default": "Your answer."
+        },
+        {
+          "type": "checkbox",
+          "id": "open_by_default",
+          "label": "Open by default",
+          "default": false
+        }
       ]
     },
     {
       "type": "desc_media",
       "name": "Description media",
       "settings": [
-        { "type": "text", "id": "key", "label": "Placeholder key", "default": "##image11##" },
-        { "type": "video", "id": "video", "label": "Video (optional)" },
-        { "type": "image_picker", "id": "image", "label": "Image (fallback)" }
+        {
+          "type": "text",
+          "id": "key",
+          "label": "Placeholder key",
+          "default": "##image11##"
+        },
+        {
+          "type": "video",
+          "id": "video",
+          "label": "Video (optional)"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image (fallback)"
+        }
       ]
     }
   ],
@@ -1329,17 +2323,79 @@ wteTimelines.forEach((timeline) => {
     {
       "name": "DRYE PDP Hero",
       "blocks": [
-        { "type": "description" },
-        { "type": "faq", "settings": { "question": "Do they work with nitrile/latex/vinyl gloves?", "answer": "Yes — this is the primary use case. 0.4mm thin, designed to layer inside sealed gloves without affecting fit. Works with nitrile, latex, vinyl, rubber, hockey gloves, ski gloves, and work gloves." } },
-        { "type": "faq", "settings": { "question": "Do I wear this under or instead of gloves?", "answer": "Under. DRYE is a liner — put it on first, then your gloves over them. It works inside any sealed glove." } },
-        { "type": "faq", "settings": { "question": "Do they make my gloves tighter or uncomfortable?", "answer": "At 0.4mm, the liner adds less bulk than a standard glove lining. 9/9 workers in the automotive field study reported zero dexterity compromise. Grip is typically maintained or improved." } },
-        { "type": "faq", "settings": { "question": "What makes these better than cotton or silk liners?", "answer": "It's not comparable — they work on completely different principles. Cotton, bamboo, and silk absorb moisture. Under pressure, they collapse and trap it against your skin. DRYE doesn't absorb. It routes moisture through the fiber via a structural gradient. No saturation point." } },
-        { "type": "faq", "settings": { "question": "Will this help heal my eczema or just protect it?", "answer": "Both — but the mechanism is protection, not treatment. By removing the wet environment that causes continuous re-irritation, the skin recovers on its own schedule. It removes the condition that prevents healing." } },
-        { "type": "faq", "settings": { "question": "Can I use them overnight with cream?", "answer": "Yes. Many users combine overnight cream with DRYE as a liner under cotton gloves. The cream is not displaced — DRYE routes moisture only, not cream or oil." } },
-        { "type": "faq", "settings": { "question": "How does it actually help my skin?", "answer": "Sealed gloves trap sweat against skin. pH rises, the skin barrier breaks down, bacteria multiply. DRYE keeps the skin surface dry — the barrier stays intact and the skin can recover." } },
-        { "type": "faq", "settings": { "question": "Will these make my hands too warm or tight?", "answer": "No. The moisture transport keeps the microclimate drier, which typically feels cooler — not warmer. At 0.4mm there is no meaningful compression or tightness." } },
-        { "type": "faq", "settings": { "question": "How long does a pair last, and how do I wash it?", "answer": "Machine wash cold, air dry. 4–12 months depending on frequency. Performance is structural — no coatings or chemical treatments to wash out." } },
-        { "type": "faq", "settings": { "question": "Shipping, Customs & Delivery", "answer": "Ships within 24 hours from Sweden. USA, Canada, UK delivery: 5–9 business days. Import duties may apply depending on destination." } }
+        {
+          "type": "description"
+        },
+        {
+          "type": "faq",
+          "settings": {
+            "question": "Do they work with nitrile/latex/vinyl gloves?",
+            "answer": "Yes — this is the primary use case. 0.4mm thin, designed to layer inside sealed gloves without affecting fit. Works with nitrile, latex, vinyl, rubber, hockey gloves, ski gloves, and work gloves."
+          }
+        },
+        {
+          "type": "faq",
+          "settings": {
+            "question": "Do I wear this under or instead of gloves?",
+            "answer": "Under. DRYE is a liner — put it on first, then your gloves over them. It works inside any sealed glove."
+          }
+        },
+        {
+          "type": "faq",
+          "settings": {
+            "question": "Do they make my gloves tighter or uncomfortable?",
+            "answer": "At 0.4mm, the liner adds less bulk than a standard glove lining. 9/9 workers in the automotive field study reported zero dexterity compromise. Grip is typically maintained or improved."
+          }
+        },
+        {
+          "type": "faq",
+          "settings": {
+            "question": "What makes these better than cotton or silk liners?",
+            "answer": "It's not comparable — they work on completely different principles. Cotton, bamboo, and silk absorb moisture. Under pressure, they collapse and trap it against your skin. DRYE doesn't absorb. It routes moisture through the fiber via a structural gradient. No saturation point."
+          }
+        },
+        {
+          "type": "faq",
+          "settings": {
+            "question": "Will this help heal my eczema or just protect it?",
+            "answer": "Both — but the mechanism is protection, not treatment. By removing the wet environment that causes continuous re-irritation, the skin recovers on its own schedule. It removes the condition that prevents healing."
+          }
+        },
+        {
+          "type": "faq",
+          "settings": {
+            "question": "Can I use them overnight with cream?",
+            "answer": "Yes. Many users combine overnight cream with DRYE as a liner under cotton gloves. The cream is not displaced — DRYE routes moisture only, not cream or oil."
+          }
+        },
+        {
+          "type": "faq",
+          "settings": {
+            "question": "How does it actually help my skin?",
+            "answer": "Sealed gloves trap sweat against skin. pH rises, the skin barrier breaks down, bacteria multiply. DRYE keeps the skin surface dry — the barrier stays intact and the skin can recover."
+          }
+        },
+        {
+          "type": "faq",
+          "settings": {
+            "question": "Will these make my hands too warm or tight?",
+            "answer": "No. The moisture transport keeps the microclimate drier, which typically feels cooler — not warmer. At 0.4mm there is no meaningful compression or tightness."
+          }
+        },
+        {
+          "type": "faq",
+          "settings": {
+            "question": "How long does a pair last, and how do I wash it?",
+            "answer": "Machine wash cold, air dry. 4–12 months depending on frequency. Performance is structural — no coatings or chemical treatments to wash out."
+          }
+        },
+        {
+          "type": "faq",
+          "settings": {
+            "question": "Shipping, Customs & Delivery",
+            "answer": "Ships within 24 hours from Sweden. USA, Canada, UK delivery: 5–9 business days. Import duties may apply depending on destination."
+          }
+        }
       ]
     }
   ]
