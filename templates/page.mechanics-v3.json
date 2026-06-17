@@ -161,6 +161,80 @@
         "body": ""
       }
     },
+    "drye_worker_grid_KeG9FM": {
+      "type": "drye-worker-grid",
+      "blocks": {
+        "panel_gi6Rq9": {
+          "type": "panel",
+          "settings": {
+            "image": "shopify://shop_images/Gemini_Generated_Image_wf831ewf831ewf83.webp",
+            "image_alt": "Mechanic at work",
+            "label": "Nitrile · Summer",
+            "role": "Auto repair, ~20 min in",
+            "quote": "\"By 20 minutes my hands are sweating pools inside these gloves.\"",
+            "source": "Automotive mechanic"
+          }
+        },
+        "panel_NCbjVp": {
+          "type": "panel",
+          "settings": {
+            "image": "shopify://shop_images/Gemini_Generated_Image_ain34ain34ain34a_1.webp",
+            "image_alt": "Mechanic at work",
+            "label": "Nitrile · Detailing",
+            "role": "Interior clean, hour 3",
+            "quote": "\"I pull the gloves off at lunch and my hands look boiled. Every day.\"",
+            "source": "Car detailer"
+          }
+        },
+        "panel_YgyRya": {
+          "type": "panel",
+          "settings": {
+            "image": "shopify://shop_images/Gemini_Generated_Image_j1uzt4j1uzt4j1uz.webp",
+            "image_alt": "Mechanic at work",
+            "label": "Rubber · All day",
+            "role": "Diesel, by Thursday",
+            "quote": "\"Knuckles split by Thursday. Every week. Been doing it 30 years.\"",
+            "source": "Diesel mechanic"
+          }
+        },
+        "panel_b6HUKQ": {
+          "type": "panel",
+          "settings": {
+            "image": "shopify://shop_images/Gemini_Generated_Image__3.webp",
+            "image_alt": "Mechanic at work",
+            "label": "HV Class 0 · Full shift",
+            "role": "EV battery, full shift",
+            "quote": "\"I have to take them off to air them out between every job. No way around it.\"",
+            "source": "EV technician"
+          }
+        },
+        "panel_qUhdYe": {
+          "type": "panel",
+          "settings": {
+            "image": "shopify://shop_images/Gemini_Generated_Image_77q3h377q3h377q3.webp",
+            "image_alt": "Mechanic at work",
+            "label": "Latex · Chemicals",
+            "role": "Paint booth, 4h in",
+            "quote": "“Same damp gloves all week.\"",
+            "source": "Auto body painter"
+          }
+        }
+      },
+      "block_order": [
+        "panel_gi6Rq9",
+        "panel_NCbjVp",
+        "panel_YgyRya",
+        "panel_b6HUKQ",
+        "panel_qUhdYe"
+      ],
+      "name": "DRYE Worker Grid",
+      "settings": {
+        "eyebrow": "",
+        "heading": "One of these <br><em class=\"dryeNEW-em\">is your Tuesday afternoon.</em>",
+        "body": "Five mechanics. Five glove types. <strong>Same thing happening inside every one of them.</strong>",
+        "swipe_label": "Swipe"
+      }
+    },
     "drye_worker_grid_CG6VUJ": {
       "type": "drye-worker-grid",
       "blocks": {
@@ -227,6 +301,7 @@
         "panel_FtC8i3",
         "panel_Lky9YA"
       ],
+      "disabled": true,
       "name": "DRYE Worker Grid",
       "settings": {
         "eyebrow": "",
@@ -1310,6 +1385,7 @@
   "order": [
     "drye_new_hero_jE4LCa",
     "drye_new_identification_hctDdM",
+    "drye_worker_grid_KeG9FM",
     "drye_worker_grid_CG6VUJ",
     "drye_evidence_V9B97n",
     "drye_new_problem_beat_1_R7GgRp",
