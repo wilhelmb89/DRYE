@@ -1,0 +1,1348 @@
+{% liquid
+  assign current_product = product
+  assign selected_variant = current_product.selected_or_first_available_variant
+assign review_rating = section.settings.review_rating_fallback
+assign review_count = section.settings.review_count_fallback
+  assign review_anchor = '#reviews'
+  assign price_note = section.settings.price_note
+  assign sticky_button_label = section.settings.sticky_button_label
+  assign atc_button_label = section.settings.atc_button_label
+  assign preorder_note = ''
+  assign in_stock_note = 'In stock'
+%}
+
+{{ 'drye-pdp-deps.css' | asset_url | stylesheet_tag }}
+{{ 'drye-pdp-hero.css' | asset_url | stylesheet_tag }}
+{{ 'drye-review-slider.css' | asset_url | stylesheet_tag }}
+
+<section
+  class="hero"
+  id="product-top"
+  data-section-id="{{ section.id }}"
+  data-product-section
+>
+  <div class="hero-media" data-gallery-root>
+    {% assign visible_media_count = 0 %}
+
+    {% for media in current_product.media %}
+      {% assign media_src = media.preview_image | image_url | split: '?' | first %}
+
+      {% unless media_src contains 'cart-drawer-image' %}
+        {% assign visible_media_count = visible_media_count | plus: 1 %}
+      {% endunless %}
+    {% endfor %}
+
+    {% if visible_media_count > 1 %}
+      <div class="hero-gallery-thumbs" aria-hidden="true">
+        {% assign thumb_index = 0 %}
+
+        {% for media in current_product.media %}
+          {% assign media_src = media.preview_image | image_url | split: '?' | first %}
+
+          {% unless media_src contains 'cart-drawer-image' %}
+            <button
+              type="button"
+              class="hero-gallery-thumb{% if thumb_index == 0 %} is-active{% endif %}"
+              data-gallery-thumb
+              data-gallery-thumb-index="{{ thumb_index }}"
+              aria-label="View product media {{ thumb_index | plus: 1 }}"
+              tabindex="-1"
+            >
+              {% if media.preview_image != blank %}
+                {{
+                  media.preview_image
+                  | image_url: width: 240
+                  | image_tag:
+                    alt: media.alt | default: current_product.title,
+                    widths: '120, 180, 240',
+                    sizes: '(min-width: 1024px) 60px, 0px',
+                    loading: 'lazy'
+                }}
+
+                {% if media.media_type == 'video' or media.media_type == 'external_video' %}
+                  <span class="hero-gallery-thumb__play" aria-hidden="true">▶</span>
+                {% endif %}
+              {% else %}
+                <span class="hero-gallery-thumb__fallback">
+                  {{ media.media_type }}
+                </span>
+              {% endif %}
+            </button>
+
+            {% assign thumb_index = thumb_index | plus: 1 %}
+          {% endunless %}
+        {% endfor %}
+        <button
+  type="button"
+  class="hero-gallery-thumb hero-gallery-thumb--review"
+  data-gallery-thumb
+  data-gallery-thumb-index="{{ visible_media_count }}"
+  aria-label="View reviews slide"
+  tabindex="-1"
+>
+  <span class="hero-gallery-thumb__fallback">
+    ★
+  </span>
+</button>
+      </div>
+    {% endif %}
+
+    <div class="hero-gallery-main" data-gallery-viewport>
+      <div class="hero-gallery-track" data-gallery-track>
+        {% if visible_media_count > 0 %}
+          {% for media in current_product.media %}
+            {% assign media_src = media.preview_image | image_url | split: '?' | first %}
+
+            {% unless media_src contains 'cart-drawer-image' %}
+              <div class="hero-gallery-slide" data-gallery-slide>
+                {% case media.media_type %}
+
+                  {% when 'image' %}
+                    {{
+                      media
+                      | image_url: width: 2200
+                      | image_tag:
+                        alt: media.alt | default: current_product.title,
+                        widths: '480, 720, 960, 1200, 1600, 2000, 2200',
+                        sizes: '(min-width: 1024px) 600px, (min-width: 768px) 50vw, 100vw',
+                        loading: 'eager',
+                        class: 'hero-media-img'
+                    }}
+
+                  {% when 'video' %}
+                    {{
+                      media
+                      | video_tag:
+                        class: 'hero-media-video',
+                        autoplay: true,
+                        loop: true,
+                        muted: true,
+                        controls: false,
+                        playsinline: true,
+                        preload: 'auto'
+                    }}
+
+                  {% when 'external_video' %}
+                    {{
+                      media
+                      | external_video_tag:
+                        class: 'hero-media-video'
+                    }}
+
+                  {% else %}
+                    {{ media | media_tag: class: 'hero-media-img' }}
+
+                {% endcase %}
+              </div>
+            {% endunless %}
+          {% endfor %}
+          <a
+  href="#reviews"
+  class="hero-gallery-slide hero-gallery-slide--review-cta"
+  data-gallery-slide
+  aria-label="Read customer reviews"
+>
+  <div class="hero-review-cta-card">
+    <span class="dryeNEW-micro hero-review-cta-card__eyebrow">
+      Reviews
+    </span>
+
+    <h2 class="dryeNEW-h2 hero-review-cta-card__heading">
+      See what workers say after the first week
+    </h2>
+
+    <p class="dryeNEW-body hero-review-cta-card__body">
+      Read verified reviews from people using DRYE inside sealed gloves.
+    </p>
+
+    <span class="hero-review-cta-card__link">
+      Read reviews ↓
+    </span>
+  </div>
+</a>
+        {% else %}
+          <div class="hero-gallery-slide" data-gallery-slide>
+            {{ 'product-1' | placeholder_svg_tag: 'hero-media-img hero-media-placeholder' }}
+          </div>
+        {% endif %}
+      </div>
+
+      {% if visible_media_count > 1 %}
+        <div class="hero-gallery-nav">
+          <button
+            type="button"
+            class="hero-gallery-arrow hero-gallery-arrow--prev"
+            data-gallery-prev
+            aria-label="Previous image"
+            disabled
+          >
+            ‹
+          </button>
+          <button
+            type="button"
+            class="hero-gallery-arrow hero-gallery-arrow--next"
+            data-gallery-next
+            aria-label="Next image"
+          >
+            ›
+          </button>
+        </div>
+      {% endif %}
+
+      <div class="hero-overlay">
+        <div class="ho-name">{{ section.settings.overlay_name }}</div>
+        <div class="ho-quote">{{ section.settings.overlay_quote }}</div>
+      </div>
+    </div>
+  </div>
+  <div class="hero-info">
+    <div class="h-eye">{{ section.settings.eyebrow }}</div>
+
+    <h1 class="h-title">
+      {{ section.settings.heading_line_1 }}<br>
+      {{ section.settings.heading_line_2 }}
+    </h1>
+
+    <div class="h-sub">
+      {{ section.settings.subtext }}
+    </div>
+
+    <div class="stars-row">
+      <span class="stars" aria-hidden="true">★★★★★</span>
+      <span class="stars-lbl">
+        {{ review_rating }}/5 · <a href="{{ review_anchor }}">{{ review_count }} reviews</a>
+      </span>
+    </div>
+
+    <div class="price-row" data-price-row>
+      <span class="price" data-price>{{ selected_variant.price | money_with_currency }}</span>
+      {% if price_note != blank %}
+        <span class="price-note">{{ price_note }}</span>
+      {% endif %}
+    </div>
+
+    {% assign size_option_position = blank %}
+    {% for option in current_product.options_with_values %}
+      {% assign option_name_downcase = option.name | downcase %}
+      {% if option_name_downcase contains 'size' or option_name_downcase contains 'storlek' %}
+        {% assign size_option_position = option.position %}
+        {% break %}
+      {% endif %}
+    {% endfor %}
+
+    {% form 'product', current_product, class: 'product-form', novalidate: 'novalidate', action: routes.cart_add_url, data-product-form: '' %}
+      {% if size_option_position != blank %}
+        <input type="hidden" name="id" value="{{ selected_variant.id }}" data-variant-id>
+      {% endif %}
+
+      <div class="buy-block">
+        <div class="form-lbl">
+          <span>{{ section.settings.option_label }}</span>
+          <button type="button" class="size-guide-link js-open-size-guide">
+            {{ section.settings.size_guide_label }}
+          </button>
+        </div>
+
+        {% if size_option_position != blank %}
+          {% assign size_option_index = size_option_position | minus: 1 %}
+          {% assign size_option = current_product.options_with_values[size_option_index] %}
+
+          <div class="sz-dd" data-size-dropdown>
+            <button
+              type="button"
+              class="sz-dd-trigger{% if selected_variant.options[size_option_index] != blank %} has-val{% endif %}"
+              data-size-trigger
+              aria-expanded="false"
+              aria-haspopup="listbox"
+            >
+              <span data-size-label>
+                {% if selected_variant.options[size_option_index] != blank %}
+                  {{ selected_variant.options[size_option_index] }}
+                {% else %}
+                  {{ section.settings.size_placeholder }}
+                {% endif %}
+              </span>
+              <svg class="sz-dd-arrow" viewBox="0 0 10 6" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <path d="M0 0l5 6 5-6z" fill="#9CA3AF"/>
+              </svg>
+            </button>
+
+<div class="sz-dd-list" data-size-list role="listbox" aria-label="{{ size_option.name }}">
+
+<button
+  type="button"
+  class="sz-dd-help dryeNEW-body--caption js-open-size-guide"
+>
+  <span>Unsure of your size? Click here</span>
+  <span class="sz-dd-help__arrow" aria-hidden="true">→</span>
+</button>
+
+{% for value in size_option.values %}
+  {% liquid
+    assign matched_variant = blank
+    for variant in current_product.variants
+      if variant.options[size_option_index] == value
+        assign matched_variant = variant
+        break
+      endif
+    endfor
+
+    assign is_selected = false
+    if selected_variant.options[size_option_index] == value
+      assign is_selected = true
+    endif
+
+    assign is_preorder = false
+    if matched_variant != blank
+      if matched_variant.inventory_policy == 'continue' and matched_variant.inventory_quantity <= 0
+        assign is_preorder = true
+      endif
+    endif
+
+    assign is_available = true
+    if matched_variant != blank and matched_variant.available == false and is_preorder == false
+      assign is_available = false
+    endif
+
+    assign is_in_stock = false
+    if matched_variant != blank and matched_variant.available and is_preorder == false
+      assign is_in_stock = true
+    endif
+  %}
+  <button
+    type="button"
+    class="sz-dd-opt{% unless is_available %} sold-out{% endunless %}{% if is_selected %} selected{% endif %}{% if is_preorder %} preorder{% endif %}"
+    data-size-option
+    data-option-position="{{ size_option_position }}"
+    data-option-value="{{ value | escape }}"
+    data-available="{% if is_available %}true{% else %}false{% endif %}"
+    data-preorder="{% if is_preorder %}true{% else %}false{% endif %}"
+    role="option"
+    aria-selected="{% if is_selected %}true{% else %}false{% endif %}"
+    {% unless is_available %}disabled{% endunless %}
+  >
+    {{ value }}{% if is_preorder %} — {{ preorder_note }}{% elsif is_in_stock %} — {{ in_stock_note }}{% elsif is_available == false %} — Sold out{% endif %}
+  </button>
+{% endfor %}
+            </div>
+          </div>
+        {% else %}
+          <select class="variant-select-fallback" name="id">
+            {% for variant in current_product.variants %}
+              <option
+                value="{{ variant.id }}"
+                {% if variant.id == selected_variant.id %}selected{% endif %}
+                {% unless variant.available %}disabled{% endunless %}
+              >
+                {{ variant.title }} - {{ variant.price | money_with_currency }}
+              </option>
+            {% endfor %}
+          </select>
+        {% endif %}
+      </div>
+
+<div class="qty-block">
+  <div class="form-lbl">
+    <span>{{ section.settings.quantity_label }}</span>
+  </div>
+
+  <div class="qty-wrap">
+    <button
+      type="button"
+      class="qty-btn"
+      data-qty-minus
+      aria-label="Decrease quantity"
+    >
+      −
+    </button>
+
+    <input
+      class="qty-val"
+      id="qty-{{ section.id }}"
+      name="quantity"
+      type="text"
+      value="1"
+      inputmode="numeric"
+      readonly
+    >
+
+    <button
+      type="button"
+      class="qty-btn"
+      data-qty-plus
+      aria-label="Increase quantity"
+    >
+      +
+    </button>
+  </div>
+</div>
+
+<ul class="bullets">
+
+      <ul class="bullets">
+        {% if section.settings.bullet_1 != blank %}<li>{{ section.settings.bullet_1 }}</li>{% endif %}
+        {% if section.settings.bullet_2 != blank %}<li>{{ section.settings.bullet_2 }}</li>{% endif %}
+        {% if section.settings.bullet_3 != blank %}<li>{{ section.settings.bullet_3 }}</li>{% endif %}
+      </ul>
+
+      {% assign selected_variant_preorder = false %}
+      {% if selected_variant.inventory_policy == 'continue' and selected_variant.inventory_quantity <= 0 %}
+        {% assign selected_variant_preorder = true %}
+      {% endif %}
+
+      <button
+        type="submit"
+        class="atc-btn-full"
+        data-main-atc
+        {% unless selected_variant.available or selected_variant_preorder %}disabled{% endunless %}
+      >
+        {% if selected_variant.available or selected_variant_preorder %}
+          {{ atc_button_label }}
+        {% else %}
+          Sold out
+        {% endif %}
+      </button>
+    {% endform %}
+
+
+{% if section.settings.show_inline_review_slider %}
+  {% for block in section.blocks %}
+    {% if block.type == 'review_slider' %}
+      <div class="pdp-review-slider-block" {{ block.shopify_attributes }}>
+        {% render 'drye-review-slider-inline', block: block %}
+      </div>
+    {% endif %}
+  {% endfor %}
+{% endif %}
+    <div class="trust-row">
+      <div class="trust-item">
+        <img
+          src="{{ 'icon-shield-check.svg' | asset_url }}"
+          alt=""
+          width="20"
+          height="20"
+          loading="lazy"
+        >
+        <span>{{ section.settings.trust_text_1 }}</span>
+      </div>
+
+      <div class="trust-item">
+        <img
+          src="{{ 'icon-refund-arrows (2).svg' | asset_url }}"
+          alt=""
+          width="20"
+          height="20"
+          loading="lazy"
+        >
+        <span>{{ section.settings.trust_text_2 }}</span>
+      </div>
+
+      <div class="trust-item">
+        <img
+          src="{{ 'icon-truck.svg' | asset_url }}"
+          alt=""
+          width="20"
+          height="20"
+          loading="lazy"
+        >
+        <span>{{ section.settings.trust_text_3 }}</span>
+      </div>
+    </div>
+
+
+    {% assign desc_media = section.blocks | where: 'type', 'desc_media' %}
+    {% assign rendered_desc = '' %}
+    {% assign desc_title = section.settings.description_toggle_closed %}
+    {% assign found_description_block = false %}
+
+    {% for block in section.blocks %}
+      {% if block.type == 'description' %}
+        {% assign found_description_block = true %}
+        {% assign desc_title = block.settings.title | default: section.settings.description_toggle_closed %}
+
+        {% if block.settings.use_product_description and product.description != blank %}
+          {% assign rendered_desc = product.description %}
+        {% else %}
+          {% assign rendered_desc = block.settings.custom_description %}
+        {% endif %}
+
+        {% for m in desc_media %}
+          {% assign key = m.settings.key | strip %}
+          {% if key != blank and rendered_desc contains key %}
+            {% capture media_markup %}
+<div class="desc-media">
+  {% if m.settings.video != blank %}
+    {{ m.settings.video | video_tag: class: 'desc-media__video', autoplay: true, loop: true, muted: true, controls: false, playsinline: true, preload: 'auto' }}
+  {% elsif m.settings.image != blank %}
+    {{ m.settings.image | image_url: width: 1600 | image_tag: class: 'desc-media__img', loading: 'lazy', decoding: 'async' }}
+  {% endif %}
+</div>
+            {% endcapture %}
+            {% assign rendered_desc = rendered_desc | replace: key, media_markup %}
+          {% endif %}
+        {% endfor %}
+      {% endif %}
+    {% endfor %}
+
+    {% if found_description_block %}
+      <div class="pdp-desc">
+        <div class="pdp-desc-title">
+          {{ desc_title }}
+        </div>
+
+        <div class="pdp-extra open">
+          <div class="pdp-richtext">
+            {{ rendered_desc }}
+          </div>
+        </div>
+      </div>
+    {% endif %}
+
+{% comment %}
+  Pixel tabs module: FAQs / What to Expect / Reviews
+  No eyebrow, no heading, no lead text.
+{% endcomment %}
+
+{% assign wte_blocks = section.blocks | where: 'type', 'htab_wte_stage' %}
+{% assign faq_blocks = section.blocks | where: 'type', 'faq' %}
+{% assign review_block = section.blocks | where: 'type', 'review_slider' | first %}
+
+{% if faq_blocks.size > 0 or wte_blocks.size > 0 or review_block %}
+  <section class="tabs-section" data-drye-tabs>
+    <div class="inner">
+
+      <div class="tab-nav" role="tablist">
+        {% if faq_blocks.size > 0 %}
+          <button
+            type="button"
+            class="tab-btn active"
+            data-tab="faq"
+            role="tab"
+            aria-selected="true"
+          >
+            {{ section.settings.htab_faq_label | default: 'FAQs' }}
+          </button>
+        {% endif %}
+
+        {% if wte_blocks.size > 0 %}
+          <button
+            type="button"
+            class="tab-btn{% unless faq_blocks.size > 0 %} active{% endunless %}"
+            data-tab="wte"
+            role="tab"
+            aria-selected="{% if faq_blocks.size > 0 %}false{% else %}true{% endif %}"
+          >
+            {{ section.settings.htab_wte_label | default: 'What to Expect' }}
+          </button>
+        {% endif %}
+
+        {% if review_block %}
+          <button
+            type="button"
+            class="tab-btn{% unless faq_blocks.size > 0 or wte_blocks.size > 0 %} active{% endunless %}"
+            data-tab="rev"
+            role="tab"
+            aria-selected="{% if faq_blocks.size > 0 or wte_blocks.size > 0 %}false{% else %}true{% endif %}"
+          >
+            {{ section.settings.htab_rev_label | default: 'Reviews' }}
+          </button>
+        {% endif %}
+      </div>
+
+      {% if faq_blocks.size > 0 %}
+        <div class="tab-panel active" data-panel="faq" role="tabpanel">
+          <div class="faq-list">
+            {% for block in faq_blocks %}
+              <div class="faq-item{% if block.settings.open_by_default %} open{% endif %}" {{ block.shopify_attributes }}>
+                <button type="button" class="faq-q">
+                  <span class="faq-q-text">{{ block.settings.question }}</span>
+                  <span class="faq-icon" aria-hidden="true"></span>
+                </button>
+
+                <div class="faq-a">
+                  <div class="faq-a-inner">
+                    {{ block.settings.answer | escape | newline_to_br }}
+                  </div>
+                </div>
+              </div>
+            {% endfor %}
+          </div>
+        </div>
+      {% endif %}
+
+{% if wte_blocks.size > 0 %}
+  <div
+    class="tab-panel{% unless faq_blocks.size > 0 %} active{% endunless %}"
+    data-panel="wte"
+    role="tabpanel"
+  >
+    <div class="hero-wte-timeline" data-hero-wte-timeline>
+      {% for block in wte_blocks %}
+        {% liquid
+          assign clock_angle = 210
+
+          case forloop.index
+            when 1
+              assign clock_angle = 210
+            when 2
+              assign clock_angle = 330
+            when 3
+              assign clock_angle = 30
+            when 4
+              assign clock_angle = 90
+            when 5
+              assign clock_angle = 120
+            when 6
+              assign clock_angle = 150
+          endcase
+        %}
+
+        <div
+          class="hero-wte-stop{% if forloop.first %} is-open{% endif %}"
+          {{ block.shopify_attributes }}
+        >
+          <button
+            type="button"
+            class="hero-wte-trigger"
+            aria-expanded="{% if forloop.first %}true{% else %}false{% endif %}"
+          >
+            <span class="hero-wte-clock" aria-hidden="true">
+              <svg viewBox="0 0 60 60" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="30" cy="30" r="26" stroke-width="1.5"/>
+                <line x1="30" y1="7" x2="30" y2="12" stroke-width="1.5"/>
+                <line x1="53" y1="30" x2="48" y2="30" stroke-width="1.5"/>
+                <line x1="30" y1="53" x2="30" y2="48" stroke-width="1.5"/>
+                <line x1="7" y1="30" x2="12" y2="30" stroke-width="1.5"/>
+                <line x1="30" y1="30" x2="30" y2="16" stroke-width="2.5" transform="rotate({{ clock_angle }}, 30, 30)"/>
+                <circle cx="30" cy="30" r="2.5" fill="currentColor" stroke="none"/>
+              </svg>
+            </span>
+
+            <span class="hero-wte-heading">
+              {% if block.settings.stage_label != blank %}
+                <span class="dryeNEW-stat-number hero-wte-time">
+                  {{ block.settings.stage_label }}
+                </span>
+              {% endif %}
+
+              {% if block.settings.headline_start != blank or block.settings.headline_italic != blank %}
+                <span class="dryeNEW-body--sm hero-wte-title">
+                  {{ block.settings.headline_start }}
+                  {% if block.settings.headline_italic != blank %}
+                    <em class="dryeNEW-em">{{ block.settings.headline_italic }}</em>
+                  {% endif %}
+                </span>
+              {% endif %}
+            </span>
+
+            <span class="hero-wte-toggle" aria-hidden="true"></span>
+          </button>
+
+          <div class="hero-wte-body">
+            <div class="hero-wte-body-inner">
+              <ul class="hero-wte-list">
+                {% if block.settings.bullet_1 != blank %}
+                  <li class="dryeNEW-body--sm">{{ block.settings.bullet_1 }}</li>
+                {% endif %}
+
+                {% if block.settings.bullet_2 != blank %}
+                  <li class="dryeNEW-body--sm">{{ block.settings.bullet_2 }}</li>
+                {% endif %}
+
+                {% if block.settings.bullet_3 != blank %}
+                  <li class="dryeNEW-body--sm">{{ block.settings.bullet_3 }}</li>
+                {% endif %}
+
+                {% if block.settings.bullet_4 != blank %}
+                  <li class="dryeNEW-body--sm">
+                    <strong>{{ block.settings.bullet_4 }}</strong>
+                  </li>
+                {% endif %}
+              </ul>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+{% endif %}
+
+{% if review_block %}
+  <div
+    class="tab-panel{% unless faq_blocks.size > 0 or wte_blocks.size > 0 %} active{% endunless %}"
+    data-panel="rev"
+    role="tabpanel"
+  >
+    <div class="testi-grid">
+      {% for i in (1..9) %}
+        {% liquid
+          assign quote_key = 'review_' | append: i | append: '_quote'
+          assign name_key = 'review_' | append: i | append: '_name'
+          assign location_key = 'review_' | append: i | append: '_location'
+          assign label_key = 'review_' | append: i | append: '_label'
+          assign stars_key = 'review_' | append: i | append: '_stars'
+          assign badge_key = 'review_' | append: i | append: '_badge_text'
+          assign attribution_key = 'review_' | append: i | append: '_attribution'
+          assign show_b2b_key = 'review_' | append: i | append: '_show_as_b2b'
+
+          assign rev_quote = review_block.settings[quote_key]
+          assign rev_name = review_block.settings[name_key]
+          assign rev_location = review_block.settings[location_key]
+          assign rev_label = review_block.settings[label_key]
+          assign rev_stars = review_block.settings[stars_key] | default: 5 | plus: 0
+          assign rev_badge = review_block.settings[badge_key]
+          assign rev_attribution = review_block.settings[attribution_key]
+          assign rev_show_b2b = review_block.settings[show_b2b_key]
+        %}
+
+        {% if rev_quote != blank %}
+          <div class="testi-card">
+            {% if rev_show_b2b %}
+              <div class="testi-detail">
+                {{ rev_badge | default: 'Verified' }}
+              </div>
+            {% else %}
+              <div class="testi-stars" aria-label="{{ rev_stars }} out of 5 stars">
+                {% for s in (1..rev_stars) %}
+                  <svg viewBox="0 0 11 11" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                    <path d="M5.5 0L6.7 3.8h4L7.5 6.2 8.7 10 5.5 7.6 2.3 10l1.2-3.8L.3 3.8h4L5.5 0z" fill="#5F8A8B"/>
+                  </svg>
+                {% endfor %}
+              </div>
+            {% endif %}
+
+            <p class="testi-quote">
+              “{{ rev_quote | escape }}”
+            </p>
+
+            <div class="testi-meta">
+              {% if rev_name != blank %}
+                <span class="testi-name">{{ rev_name | escape }}</span>
+              {% endif %}
+
+              {% if rev_label != blank or rev_location != blank %}
+                <span class="testi-role">
+                  {{ rev_label | escape }}{% if rev_label != blank and rev_location != blank %} · {% endif %}{{ rev_location | escape }}
+                </span>
+              {% endif %}
+            </div>
+
+            <span class="testi-detail">
+              <svg viewBox="0 0 8 10" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <path d="M3.94 9.65C2.83 9.35 1.85 8.7 1.14 7.79.43 6.89.03 5.78 0 4.63V1.21L3.94 0l3.94 1.21v3.42c-.03 1.15-.43 2.26-1.14 3.16-.71.91-1.69 1.56-2.8 1.86z" fill="#9CA3AF"/>
+                <path d="M3.3 5.27L2.16 4.22l-.57.53 1.14 1.05.57.53.57-.53 2.28-2.1-.57-.52-2.28 2.1z" fill="#fff"/>
+              </svg>
+              {{ rev_attribution | default: 'Verified buyer' }}
+            </span>
+          </div>
+        {% endif %}
+      {% endfor %}
+    </div>
+
+    <div class="tabs-cta-wrap">
+      <a href="#reviews" class="tabs-cta">
+        {{ section.settings.htab_rev_link_label | default: 'Read all reviews ↓' }}
+      </a>
+    </div>
+  </div>
+{% endif %}
+
+    </div>
+  </section>
+{% endif %}
+
+    <script type="application/json" data-product-json>
+      {{ current_product | json }}
+    </script>
+  </div>
+</section>
+
+{% if review_rating != blank and review_count != blank %}
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Product",
+      "name": {{ current_product.title | json }},
+      {% if current_product.featured_image %}
+        "image": [{{ current_product.featured_image | image_url: width: 1200 | json }}],
+      {% endif %}
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": {{ review_rating | json }},
+        "reviewCount": {{ review_count | json }}
+      }
+    }
+  </script>
+{% endif %}
+
+<script>
+  (() => {
+    const sectionEl = document.querySelector('[data-section-id="{{ section.id }}"][data-product-section]');
+    if (!sectionEl || sectionEl.dataset.dryePdpBound === 'true') return;
+    sectionEl.dataset.dryePdpBound = 'true';
+
+    const productJsonEl = sectionEl.querySelector('[data-product-json]');
+    if (!productJsonEl) return;
+
+    const productData = JSON.parse(productJsonEl.textContent);
+    const form = sectionEl.querySelector('[data-product-form]');
+    const variantIdInput = form ? form.querySelector('[data-variant-id]') : null;
+    const priceEl = sectionEl.querySelector('[data-price]');
+    const stickyPriceEl = document.querySelector('[data-sticky-price]');
+    const mainAtc = sectionEl.querySelector('[data-main-atc]');
+    const stickySubmit = sectionEl.querySelector('[data-sticky-submit]');
+    const qtyInput = sectionEl.querySelector('.qty-val');
+    const qtyMinus = sectionEl.querySelector('[data-qty-minus]');
+    const qtyPlus = sectionEl.querySelector('[data-qty-plus]');
+    const sizeTrigger = sectionEl.querySelector('[data-size-trigger]');
+    const sizeList = sectionEl.querySelector('[data-size-list]');
+    const sizeLabel = sectionEl.querySelector('[data-size-label]');
+    const sizeOptions = Array.from(sectionEl.querySelectorAll('[data-size-option]'));
+    const tabButtons = Array.from(sectionEl.querySelectorAll('[data-drye-tabs] .tab-btn'));
+const faqButtons = Array.from(sectionEl.querySelectorAll('[data-drye-tabs] .faq-q'));
+
+const shopifyRoot = (window.Shopify && window.Shopify.routes && window.Shopify.routes.root) || '/';
+
+    let currentOptions = (productData.selected_or_first_available_variant && productData.selected_or_first_available_variant.options)
+      ? [...productData.selected_or_first_available_variant.options]
+      : (productData.variants[0] ? [...productData.variants[0].options] : []);
+
+    function isVariantPreorder(variant) {
+      if (!variant) return false;
+      return variant.inventory_policy === 'continue' && Number(variant.inventory_quantity) <= 0;
+    }
+
+    function syncButtonStates(selectedVariant) {
+      const canBuy = !!(selectedVariant && (selectedVariant.available || isVariantPreorder(selectedVariant)));
+
+      if (mainAtc) {
+        mainAtc.disabled = !canBuy;
+        mainAtc.textContent = canBuy ? {{ atc_button_label | json }} : 'Sold out';
+      }
+
+      if (stickySubmit) {
+        stickySubmit.disabled = !canBuy;
+        stickySubmit.textContent = canBuy ? {{ sticky_button_label | json }} : 'Sold out';
+      }
+    }
+
+
+    function syncSizeUI() {
+      if (!sizeOptions.length || !sizeLabel || !sizeTrigger) return;
+
+      sizeOptions.forEach((option) => {
+        const position = Number(option.dataset.optionPosition) - 1;
+        const isSelected = currentOptions[position] === option.dataset.optionValue;
+
+        option.classList.toggle('selected', isSelected);
+        option.setAttribute('aria-selected', isSelected ? 'true' : 'false');
+
+        if (isSelected) {
+          sizeLabel.textContent = option.dataset.optionValue;
+          sizeTrigger.classList.add('has-val');
+        }
+      });
+    }
+
+    function closeSizeDropdown() {
+      if (!sizeTrigger || !sizeList) return;
+
+      sizeTrigger.classList.remove('open');
+      sizeList.classList.remove('open');
+      sizeTrigger.setAttribute('aria-expanded', 'false');
+    }
+    sectionEl.querySelectorAll('.js-open-size-guide').forEach((button) => {
+  button.addEventListener('click', () => {
+    closeSizeDropdown();
+  });
+});
+
+    function getVariantFromOptions() {
+      return productData.variants.find((variant) => {
+        return variant.options.every((option, index) => option === currentOptions[index]);
+      }) || null;
+    }
+
+    function pushViewItem(selectedVariant) {
+      if (!selectedVariant) return;
+
+      const eventKey = `view_item:${productData.id}:${selectedVariant.id}`;
+      window.DRYETrackedEvents = window.DRYETrackedEvents || {};
+
+      if (window.DRYETrackedEvents[eventKey]) return;
+      window.DRYETrackedEvents[eventKey] = true;
+
+      fetch(shopifyRoot + 'variants/' + selectedVariant.id + '.js', {
+        credentials: 'same-origin',
+        headers: { Accept: 'application/json' }
+      })
+        .then(function (res) { return res.ok ? res.json() : null; })
+        .then(function (variant) {
+          if (!variant) return;
+
+          const presentmentValue = Number(variant.price) / 100;
+
+          return fetch(shopifyRoot + 'cart.js', {
+            credentials: 'same-origin',
+            headers: { Accept: 'application/json' }
+          })
+            .then(function (res) { return res.ok ? res.json() : null; })
+            .then(function (cart) {
+              const currency = (cart && cart.currency) || 'SEK';
+
+              window.dataLayer = window.dataLayer || [];
+              window.dataLayer.push({
+                event: 'view_item',
+                event_source: 'drye_pdp_hero',
+                ecommerce: {
+                  currency: currency,
+                  value: presentmentValue,
+                  items: [{
+                    item_id: String(selectedVariant.sku || selectedVariant.id),
+                    item_name: productData.title,
+                    item_brand: 'DRYE',
+                    item_variant: selectedVariant.title,
+                    price: presentmentValue,
+                    quantity: 1
+                  }]
+                }
+              });
+            });
+        })
+        .catch(function (err) {
+          console.warn('[DRYE PDP] view_item tracking skipped', err);
+        });
+    }
+
+    function pushAddToCart(selectedVariant, quantity) {
+      if (!selectedVariant) return;
+
+      const qty = Number(quantity || 1);
+
+      fetch(shopifyRoot + 'variants/' + selectedVariant.id + '.js', {
+        credentials: 'same-origin',
+        headers: { Accept: 'application/json' }
+      })
+        .then(function (res) { return res.ok ? res.json() : null; })
+        .then(function (variant) {
+          if (!variant) return;
+
+          const unitPrice = Number(variant.price) / 100;
+
+          return fetch(shopifyRoot + 'cart.js', {
+            credentials: 'same-origin',
+            headers: { Accept: 'application/json' }
+          })
+            .then(function (res) { return res.ok ? res.json() : null; })
+            .then(function (cart) {
+              const currency = (cart && cart.currency) || 'SEK';
+
+              window.dataLayer = window.dataLayer || [];
+              window.dataLayer.push({
+                event: 'add_to_cart',
+                event_source: 'drye_pdp_hero',
+                ecommerce: {
+                  currency: currency,
+                  value: unitPrice * qty,
+                  items: [{
+                    item_id: String(selectedVariant.sku || selectedVariant.id),
+                    item_name: productData.title,
+                    item_brand: 'DRYE',
+                    item_variant: selectedVariant.title,
+                    price: unitPrice,
+                    quantity: qty
+                  }]
+                }
+              });
+            });
+        })
+        .catch(function (err) {
+          console.warn('[DRYE PDP] add_to_cart tracking skipped', err);
+        });
+    }
+
+function updateVariant(pushEvent = false) {
+      const selectedVariant = getVariantFromOptions();
+
+      syncSizeUI();
+      syncButtonStates(selectedVariant);
+
+      if (selectedVariant) {
+        // Uppdatera variant-ID i form:en så rätt variant läggs i cart
+        if (variantIdInput) variantIdInput.value = selectedVariant.id;
+
+if (pushEvent && !(window.Shopify && window.Shopify.designMode)) {
+  pushViewItem(selectedVariant);
+}
+      }
+    }
+
+    if (sizeTrigger && sizeList) {
+      sizeTrigger.addEventListener('click', (event) => {
+        event.stopPropagation();
+        const isOpen = sizeTrigger.classList.toggle('open');
+        sizeList.classList.toggle('open', isOpen);
+        sizeTrigger.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+      });
+
+      sizeOptions.forEach((option) => {
+        option.addEventListener('click', (event) => {
+          event.stopPropagation();
+          if (option.disabled) return;
+
+          const position = Number(option.dataset.optionPosition) - 1;
+          currentOptions[position] = option.dataset.optionValue;
+
+          closeSizeDropdown();
+          updateVariant(true);
+        });
+      });
+
+      document.addEventListener('click', (event) => {
+        if (!event.target.closest('[data-size-dropdown]')) {
+          closeSizeDropdown();
+        }
+      });
+    }
+
+    function setQty(nextValue) {
+      if (!qtyInput) return;
+      const safeValue = Math.max(1, Math.min(10, Number(nextValue) || 1));
+      qtyInput.value = safeValue;
+    }
+
+    if (qtyMinus) {
+      qtyMinus.addEventListener('click', () => {
+        setQty((parseInt(qtyInput.value, 10) || 1) - 1);
+      });
+    }
+
+    if (qtyPlus) {
+      qtyPlus.addEventListener('click', () => {
+        setQty((parseInt(qtyInput.value, 10) || 1) + 1);
+      });
+    }
+
+    if (stickySubmit && form) {
+      stickySubmit.addEventListener('click', () => {
+        form.requestSubmit();
+      });
+    }
+
+
+tabButtons.forEach((btn) => {
+  btn.addEventListener('click', () => {
+    const tabId = btn.dataset.tab;
+    const tabs = btn.closest('[data-drye-tabs]');
+    if (!tabs) return;
+
+    tabs.querySelectorAll('.tab-btn').forEach((button) => {
+      const isActive = button === btn;
+      button.classList.toggle('active', isActive);
+      button.setAttribute('aria-selected', isActive ? 'true' : 'false');
+    });
+
+    tabs.querySelectorAll('.tab-panel').forEach((panel) => {
+      panel.classList.toggle('active', panel.dataset.panel === tabId);
+    });
+  });
+});
+
+faqButtons.forEach((button) => {
+  button.addEventListener('click', () => {
+    const item = button.closest('.faq-item');
+    if (!item) return;
+
+    item.classList.toggle('open');
+  });
+});
+const wteTimelines = Array.from(sectionEl.querySelectorAll('[data-hero-wte-timeline]'));
+
+wteTimelines.forEach((timeline) => {
+  const stops = Array.from(timeline.querySelectorAll('.hero-wte-stop'));
+
+  stops.forEach((stop) => {
+    const trigger = stop.querySelector('.hero-wte-trigger');
+    if (!trigger) return;
+
+    trigger.addEventListener('click', () => {
+      const isOpen = stop.classList.contains('is-open');
+
+      stops.forEach((item) => {
+        item.classList.remove('is-open');
+
+        const itemTrigger = item.querySelector('.hero-wte-trigger');
+        if (itemTrigger) {
+          itemTrigger.setAttribute('aria-expanded', 'false');
+        }
+      });
+
+      if (!isOpen) {
+        stop.classList.add('is-open');
+        trigger.setAttribute('aria-expanded', 'true');
+      }
+    });
+  });
+});
+    const isThemeEditor = window.Shopify && window.Shopify.designMode;
+
+    updateVariant();
+
+    const initialVariant = getVariantFromOptions();
+
+    if (!isThemeEditor && initialVariant) {
+      pushViewItem(initialVariant);
+    }
+  })();
+</script>
+
+<script src="{{ 'drye-pdp-gallery.js' | asset_url }}" defer></script>
+
+{% schema %}
+{
+  "name": "DRYE PDP Hero",
+  "settings": [
+    { "type": "image_picker", "id": "hero_image", "label": "Hero image" },
+    { "type": "text", "id": "overlay_name", "label": "Overlay name", "default": "Deborah Fields — Cincinnati, OH" },
+    { "type": "textarea", "id": "overlay_quote", "label": "Overlay quote", "default": "\"His hands were bright pink and raw. Completely healed in two weeks. I'd tried everything for years.\"" },
+
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "8 of 9 reported significant difference — first week" },
+    { "type": "text", "id": "heading_line_1", "label": "Heading line 1", "default": "Moisture routing." },
+    { "type": "text", "id": "heading_line_2", "label": "Heading line 2", "default": "Inside any glove." },
+    { "type": "richtext", "id": "subtext", "label": "Subtext", "default": "<p>Stops skin breakdown in sealed gloves. No chemicals. No membranes. No coatings. No saturation point. <strong>0.4mm thin.</strong></p>" },
+
+    { "type": "text", "id": "review_rating_fallback", "label": "Fallback review rating", "default": "4.84" },
+    { "type": "text", "id": "review_count_fallback", "label": "Fallback review count", "default": "43" },
+    { "type": "text", "id": "review_anchor", "label": "Review anchor", "default": "#reviews" },
+
+    { "type": "text", "id": "price_note", "label": "Price note", "default": "Free shipping on 3+ pairs" },
+
+    { "type": "text", "id": "option_label", "label": "Option label", "default": "SIZES" },
+    { "type": "text", "id": "size_placeholder", "label": "Size placeholder", "default": "Choose your size" },
+    { "type": "text", "id": "size_guide_label", "label": "Size guide label", "default": "Size guide" },
+
+    { "type": "text", "id": "quantity_label", "label": "Quantity label", "default": "QUANTITY" },
+
+    { "type": "text", "id": "atc_button_label", "label": "Main ATC label", "default": "ADD TO CART" },
+    { "type": "text", "id": "sticky_button_label", "label": "Sticky ATC label", "default": "ADD TO CART — 30-DAY REFUND" },
+
+    { "type": "text", "id": "bullet_1", "label": "Bullet 1", "default": "Keeps hands dry inside sealed gloves — full shift, no reapplying" },
+    { "type": "text", "id": "bullet_2", "label": "Bullet 2", "default": "Works under nitrile, latex, and vinyl — no lost grip or dexterity" },
+    { "type": "text", "id": "bullet_3", "label": "Bullet 3", "default": "Lasts 4–12 months — machine washable, no chemicals to wear off" },
+
+    { "type": "text", "id": "trust_text_1", "label": "Trust text 1", "default": "Secure, encrypted checkout" },
+    { "type": "text", "id": "trust_text_2", "label": "Trust text 2", "default": "30-day money-back guarantee" },
+    { "type": "text", "id": "trust_text_3", "label": "Trust text 3", "default": "Ships within 24 hours" },
+
+    { "type": "text", "id": "description_toggle_closed", "label": "Description label", "default": "Product description" }
+  ],
+  "blocks": [
+    {
+      "type": "description",
+      "name": "Description",
+      "limit": 1,
+      "settings": [
+        { "type": "text", "id": "title", "label": "Title", "default": "Product description" },
+        { "type": "checkbox", "id": "use_product_description", "label": "Use product.description (HTML)", "default": false },
+        { "type": "html", "id": "custom_description", "label": "Custom description (HTML)", "default": "<p>Built on a moisture gradient — not absorption, not wicking. A patent-pending Swedish textile with a one-directional structure that drives moisture away from skin, even inside sealed gloves under compression. Where cotton and wicking fabrics saturate and stop, DRYE continues.</p><p><strong>How to use</strong></p><p>Put DRYE on first. Put your gloves over them. Work your full shift. Take both off — hands are dry. Works with any glove.</p><p><strong>What's different</strong></p><p>Moisture moves through the fiber — not into it. No saturation. No collapse under compression.</p><p><strong>Care</strong></p><p>Machine wash. Air dry. Lasts 4–12 months. No chemicals. No coatings. 30-day money-back guarantee.</p>" }
+      ]
+    },
+    {
+  "type": "htab_wte_stage",
+  "name": "What to Expect — Stage",
+  "settings": [
+    {
+      "type": "text",
+      "id": "stage_label",
+      "label": "Stage label",
+      "default": "Stage 1"
+    },
+    {
+      "type": "text",
+      "id": "headline_start",
+      "label": "Headline",
+      "default": "Minute 20"
+    },
+    {
+      "type": "text",
+      "id": "headline_italic",
+      "label": "Headline italic accent",
+      "default": "asd"
+    },
+    {
+      "type": "text",
+      "id": "bullet_1",
+      "label": "Bullet 1",
+      "default": "First time you peel off the nitrile, it slides."
+    },
+    {
+      "type": "text",
+      "id": "bullet_2",
+      "label": "Bullet 2",
+      "default": "Dry hands."
+    },
+    {
+      "type": "text",
+      "id": "bullet_3",
+      "label": "Bullet 3",
+      "default": "No glove fighting."
+    },
+    {
+      "type": "text",
+      "id": "bullet_4",
+      "label": "Bullet 4 bold",
+      "default": "asd"
+    }
+  ]
+},
+    {
+  "type": "review_slider",
+  "name": "Review slider",
+  "limit": 1,
+  "settings": [
+    { "type": "text", "id": "review_1_name", "label": "Review 1 name", "default": "Mike R." },
+    { "type": "text", "id": "review_1_location", "label": "Review 1 location", "default": "Fort Worth, TX" },
+    { "type": "textarea", "id": "review_1_quote", "label": "Review 1 quote", "default": "Three hours into a nitrile shift, my gloves usually felt soaked inside. These kept my hands way drier." },
+    { "type": "text", "id": "review_1_label", "label": "Review 1 label", "default": "Auto Mechanic" },
+
+    { "type": "range", "id": "review_1_stars", "label": "Review 1 stars", "min": 1, "max": 5, "step": 1, "default": 5 },
+{ "type": "range", "id": "review_2_stars", "label": "Review 2 stars", "min": 1, "max": 5, "step": 1, "default": 5 },
+{ "type": "range", "id": "review_3_stars", "label": "Review 3 stars", "min": 1, "max": 5, "step": 1, "default": 5 },
+{ "type": "range", "id": "review_4_stars", "label": "Review 4 stars", "min": 1, "max": 5, "step": 1, "default": 5 },
+{ "type": "range", "id": "review_5_stars", "label": "Review 5 stars", "min": 1, "max": 5, "step": 1, "default": 5 },
+
+    { "type": "text", "id": "review_2_name", "label": "Review 2 name", "default": "Sarah K." },
+    { "type": "text", "id": "review_2_location", "label": "Review 2 location", "default": "Columbus, OH" },
+    { "type": "textarea", "id": "review_2_quote", "label": "Review 2 quote", "default": "Cotton liners just stayed wet. This felt different — the sweat didn’t sit against my skin." },
+    { "type": "text", "id": "review_2_label", "label": "Review 2 label", "default": "Dental Assistant" },
+
+    { "type": "text", "id": "review_3_name", "label": "Review 3 name", "default": "Jason T." },
+    { "type": "text", "id": "review_3_location", "label": "Review 3 location", "default": "Phoenix, AZ" },
+    { "type": "textarea", "id": "review_3_quote", "label": "Review 3 quote", "default": "My hands used to be wrinkled and irritated after every shift. This changed the inside of the glove completely." },
+    { "type": "text", "id": "review_3_label", "label": "Review 3 label", "default": "Warehouse Operator" },
+
+    { "type": "text", "id": "review_4_name", "label": "Review 4 name", "default": "Emily P." },
+    { "type": "text", "id": "review_4_location", "label": "Review 4 location", "default": "Nashville, TN" },
+    { "type": "textarea", "id": "review_4_quote", "label": "Review 4 quote", "default": "I thought liners would make gloves bulky. These are thin enough that I forgot they were there." },
+    { "type": "text", "id": "review_4_label", "label": "Review 4 label", "default": "Lab Technician" },
+    { "type": "url", "id": "review_4_flag_url", "label": "Review 4 flag SVG" },
+
+    { "type": "text", "id": "review_5_name", "label": "Review 5 name", "default": "Chris M." },
+    { "type": "text", "id": "review_5_location", "label": "Review 5 location", "default": "Tampa, FL" },
+    { "type": "textarea", "id": "review_5_quote", "label": "Review 5 quote", "default": "After years of taking gloves off just to dry my hands, this is the first thing that actually helped." },
+    { "type": "text", "id": "review_5_label", "label": "Review 5 label", "default": "Painter" },
+    { "type": "url", "id": "review_5_flag_url", "label": "Review 5 flag SVG" },
+
+    { "type": "text", "id": "review_6_name", "label": "Review 6 name" },
+{ "type": "text", "id": "review_6_location", "label": "Review 6 location" },
+{ "type": "textarea", "id": "review_6_quote", "label": "Review 6 quote" },
+{ "type": "text", "id": "review_6_label", "label": "Review 6 label" },
+{ "type": "range", "id": "review_6_stars", "label": "Review 6 stars", "min": 1, "max": 5, "step": 1, "default": 5 },
+{ "type": "checkbox", "id": "review_6_show_as_b2b", "label": "Review 6: Show as B2B/institutional", "default": false },
+{ "type": "text", "id": "review_6_badge_text", "label": "Review 6 badge text", "default": "FIELD STUDY" },
+{ "type": "text", "id": "review_6_attribution", "label": "Review 6 attribution (optional)" },
+{ "type": "url", "id": "review_6_flag_url", "label": "Review 6 flag SVG" },
+
+{ "type": "text", "id": "review_7_name", "label": "Review 7 name" },
+{ "type": "text", "id": "review_7_location", "label": "Review 7 location" },
+{ "type": "textarea", "id": "review_7_quote", "label": "Review 7 quote" },
+{ "type": "text", "id": "review_7_label", "label": "Review 7 label" },
+{ "type": "range", "id": "review_7_stars", "label": "Review 7 stars", "min": 1, "max": 5, "step": 1, "default": 5 },
+{ "type": "checkbox", "id": "review_7_show_as_b2b", "label": "Review 7: Show as B2B/institutional", "default": false },
+{ "type": "text", "id": "review_7_badge_text", "label": "Review 7 badge text", "default": "FIELD STUDY" },
+{ "type": "text", "id": "review_7_attribution", "label": "Review 7 attribution (optional)" },
+{ "type": "url", "id": "review_7_flag_url", "label": "Review 7 flag SVG" },
+
+{ "type": "text", "id": "review_8_name", "label": "Review 8 name" },
+{ "type": "text", "id": "review_8_location", "label": "Review 8 location" },
+{ "type": "textarea", "id": "review_8_quote", "label": "Review 8 quote" },
+{ "type": "text", "id": "review_8_label", "label": "Review 8 label" },
+{ "type": "range", "id": "review_8_stars", "label": "Review 8 stars", "min": 1, "max": 5, "step": 1, "default": 5 },
+{ "type": "checkbox", "id": "review_8_show_as_b2b", "label": "Review 8: Show as B2B/institutional", "default": false },
+{ "type": "text", "id": "review_8_badge_text", "label": "Review 8 badge text", "default": "FIELD STUDY" },
+{ "type": "text", "id": "review_8_attribution", "label": "Review 8 attribution (optional)" },
+{ "type": "url", "id": "review_8_flag_url", "label": "Review 8 flag SVG" },
+
+{ "type": "text", "id": "review_9_name", "label": "Review 9 name" },
+{ "type": "text", "id": "review_9_location", "label": "Review 9 location" },
+{ "type": "textarea", "id": "review_9_quote", "label": "Review 9 quote" },
+{ "type": "text", "id": "review_9_label", "label": "Review 9 label" },
+{ "type": "range", "id": "review_9_stars", "label": "Review 9 stars", "min": 1, "max": 5, "step": 1, "default": 5 },
+{ "type": "checkbox", "id": "review_9_show_as_b2b", "label": "Review 9: Show as B2B/institutional", "default": false },
+{ "type": "text", "id": "review_9_badge_text", "label": "Review 9 badge text", "default": "FIELD STUDY" },
+{ "type": "text", "id": "review_9_attribution", "label": "Review 9 attribution (optional)" },
+{ "type": "url", "id": "review_9_flag_url", "label": "Review 9 flag SVG" },
+
+{ "type": "checkbox", "id": "show_trust_footer", "label": "Show trust footer", "default": true },
+
+{ "type": "text", "id": "trust_rating", "label": "On-site rating", "default": "4.84/5" },
+{ "type": "text", "id": "trust_count", "label": "On-site review count text", "default": "from 34 verified reviews" },
+{ "type": "url", "id": "all_reviews_url", "label": "All reviews link" },
+{ "type": "text", "id": "all_reviews_label", "label": "All reviews label", "default": "Read all reviews →" },
+{ "type": "checkbox", "id": "review_1_show_as_b2b", "label": "Review 1: Show as B2B/institutional (replaces stars with badge)", "default": false },
+{ "type": "text", "id": "review_1_badge_text", "label": "Review 1 badge text", "default": "B2B REVIEW" },
+{ "type": "text", "id": "review_1_attribution", "label": "Review 1 attribution (optional, shown under quote)" },
+
+{ "type": "checkbox", "id": "review_2_show_as_b2b", "label": "Review 2: Show as B2B/institutional", "default": false },
+{ "type": "text", "id": "review_2_badge_text", "label": "Review 2 badge text", "default": "B2B REVIEW" },
+{ "type": "text", "id": "review_2_attribution", "label": "Review 2 attribution (optional)" },
+
+{ "type": "checkbox", "id": "review_3_show_as_b2b", "label": "Review 3: Show as B2B/institutional", "default": false },
+{ "type": "text", "id": "review_3_badge_text", "label": "Review 3 badge text", "default": "B2B REVIEW" },
+{ "type": "text", "id": "review_3_attribution", "label": "Review 3 attribution (optional)" },
+
+{ "type": "checkbox", "id": "review_4_show_as_b2b", "label": "Review 4: Show as B2B/institutional", "default": false },
+{ "type": "text", "id": "review_4_badge_text", "label": "Review 4 badge text", "default": "B2B REVIEW" },
+{ "type": "text", "id": "review_4_attribution", "label": "Review 4 attribution (optional)" },
+
+{ "type": "checkbox", "id": "review_5_show_as_b2b", "label": "Review 5: Show as B2B/institutional", "default": false },
+{ "type": "text", "id": "review_5_badge_text", "label": "Review 5 badge text", "default": "FIELD STUDY" },
+{ "type": "text", "id": "review_5_attribution", "label": "Review 5 attribution (optional)" },
+
+{ "type": "text", "id": "trust_platform", "label": "Trust platform", "default": "Trustpilot" },
+{ "type": "text", "id": "trustpilot_rating", "label": "Trustpilot rating", "default": "4.5/5" },
+{ "type": "text", "id": "trustpilot_count", "label": "Trustpilot count text", "default": "on Trustpilot" },
+{ "type": "url", "id": "trust_url", "label": "Trustpilot link" },
+{ "type": "text", "id": "trust_link_label", "label": "Trustpilot link label", "default": "Review us on Trustpilot →" }
+  ]
+},
+    {
+      "type": "faq",
+      "name": "FAQ item",
+      "settings": [
+        { "type": "text", "id": "question", "label": "Question", "default": "Your question" },
+        { "type": "textarea", "id": "answer", "label": "Answer", "default": "Your answer." },
+        { "type": "checkbox", "id": "open_by_default", "label": "Open by default", "default": false }
+      ]
+    },
+    {
+      "type": "desc_media",
+      "name": "Description media",
+      "settings": [
+        { "type": "text", "id": "key", "label": "Placeholder key", "default": "##image11##" },
+        { "type": "video", "id": "video", "label": "Video (optional)" },
+        { "type": "image_picker", "id": "image", "label": "Image (fallback)" }
+      ]
+    }
+  ],
+  "max_blocks": 24,
+  "presets": [
+    {
+      "name": "DRYE PDP Hero",
+      "blocks": [
+        { "type": "description" },
+        { "type": "faq", "settings": { "question": "Do they work with nitrile/latex/vinyl gloves?", "answer": "Yes — this is the primary use case. 0.4mm thin, designed to layer inside sealed gloves without affecting fit. Works with nitrile, latex, vinyl, rubber, hockey gloves, ski gloves, and work gloves." } },
+        { "type": "faq", "settings": { "question": "Do I wear this under or instead of gloves?", "answer": "Under. DRYE is a liner — put it on first, then your gloves over them. It works inside any sealed glove." } },
+        { "type": "faq", "settings": { "question": "Do they make my gloves tighter or uncomfortable?", "answer": "At 0.4mm, the liner adds less bulk than a standard glove lining. 9/9 workers in the automotive field study reported zero dexterity compromise. Grip is typically maintained or improved." } },
+        { "type": "faq", "settings": { "question": "What makes these better than cotton or silk liners?", "answer": "It's not comparable — they work on completely different principles. Cotton, bamboo, and silk absorb moisture. Under pressure, they collapse and trap it against your skin. DRYE doesn't absorb. It routes moisture through the fiber via a structural gradient. No saturation point." } },
+        { "type": "faq", "settings": { "question": "Will this help heal my eczema or just protect it?", "answer": "Both — but the mechanism is protection, not treatment. By removing the wet environment that causes continuous re-irritation, the skin recovers on its own schedule. It removes the condition that prevents healing." } },
+        { "type": "faq", "settings": { "question": "Can I use them overnight with cream?", "answer": "Yes. Many users combine overnight cream with DRYE as a liner under cotton gloves. The cream is not displaced — DRYE routes moisture only, not cream or oil." } },
+        { "type": "faq", "settings": { "question": "How does it actually help my skin?", "answer": "Sealed gloves trap sweat against skin. pH rises, the skin barrier breaks down, bacteria multiply. DRYE keeps the skin surface dry — the barrier stays intact and the skin can recover." } },
+        { "type": "faq", "settings": { "question": "Will these make my hands too warm or tight?", "answer": "No. The moisture transport keeps the microclimate drier, which typically feels cooler — not warmer. At 0.4mm there is no meaningful compression or tightness." } },
+        { "type": "faq", "settings": { "question": "How long does a pair last, and how do I wash it?", "answer": "Machine wash cold, air dry. 4–12 months depending on frequency. Performance is structural — no coatings or chemical treatments to wash out." } },
+        { "type": "faq", "settings": { "question": "Shipping, Customs & Delivery", "answer": "Ships within 24 hours from Sweden. USA, Canada, UK delivery: 5–9 business days. Import duties may apply depending on destination." } }
+      ]
+    }
+  ]
+}
+{% endschema %}

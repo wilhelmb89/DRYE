@@ -1,0 +1,345 @@
+/* ==========================================================================
+   DRYE Mini Review — PDP Hero block
+   Matches mockup mini-review component.
+   Hidden on desktop ≥1100px (wrong grid position there).
+   ========================================================================== */
+
+/* Hide on desktop — review card is between two grid columns there */
+/* Mobile/tablet slider placement */
+.hero .pdp-review-slider-block--desktop {
+  display: none;
+}
+
+.hero .pdp-review-slider-block--mobile {
+  display: block;
+}
+
+/* Desktop slider placement */
+@media (min-width: 1100px) {
+  .hero .pdp-review-slider-block--mobile {
+    display: none;
+  }
+
+  .hero .pdp-review-slider-block--desktop {
+    display: block;
+    margin-top: 14px;
+    margin-bottom: 16px;
+  }
+}
+
+.hero .pdp-review-slider-block {
+  width: 100%;
+  margin: 0;
+}
+
+.hero .drye-mini-review {
+  background: #fff;
+  border: 1px solid var(--border, #E5E7EB);
+  padding: 10px 14px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* ---- Viewport (single card at a time) ---------------------- */
+
+.hero .drye-mini-review__viewport {
+  position: relative;
+  width: 100%;
+}
+
+.hero .drye-mini-review__card {
+  display: none;
+}
+
+.hero .drye-mini-review__card.is-active {
+  display: block;
+  animation: dryeReviewFadeIn 0.3s ease;
+}
+
+@keyframes dryeReviewFadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero .drye-mini-review__card.is-active {
+    animation: none;
+  }
+}
+
+/* ---- Stars ------------------------------------------------- */
+
+.hero .drye-mini-review__stars {
+  display: flex;
+  gap: 2px;
+  margin-bottom: 10px;
+}
+
+.hero .drye-mini-review__stars svg {
+  width: 11px;
+  height: auto;
+  display: block;
+}
+
+/* ---- B2B badge --------------------------------------------- */
+
+.hero .drye-mini-review__badge {
+  display: inline-block;
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--deep, #1E3A4C);
+  border: 1px solid var(--deep, #1E3A4C);
+  padding: 3px 8px 2px;
+  margin-bottom: 10px;
+}
+
+/* ---- Quote ------------------------------------------------- */
+
+.hero .drye-mini-review__quote {
+  font-size: 14px;
+  color: var(--body, #374151);
+  line-height: 1.65;
+  font-style: italic;
+  font-weight: 400;
+  margin: 0 0 14px;
+}
+
+/* ---- Meta (space-between, border-top) ---------------------- */
+
+.hero .drye-mini-review__meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding-top: 12px;
+  border-top: 1px solid var(--border, #E5E7EB);
+}
+
+.hero .drye-mini-review__left {
+  min-width: 0;
+}
+
+.hero .drye-mini-review__name {
+  font-family: "Clash Grotesk", sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--deep, #1E3A4C);
+  letter-spacing: -0.01em;
+  display: block;
+  line-height: 1.3;
+}
+
+.hero .drye-mini-review__role {
+  font-size: 11px;
+  color: var(--muted, #4B5563);
+  margin-top: 2px;
+  line-height: 1.3;
+}
+
+.hero .drye-mini-review__verified {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-family: "DM Sans", sans-serif;
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--sage, #5F8A8B);
+  flex: 0 0 auto;
+  white-space: nowrap;
+}
+
+.hero .drye-mini-review__verified svg {
+  width: 9px;
+  height: auto;
+  display: block;
+}
+
+/* ---- Footer: dots + swipe hint ----------------------------- */
+
+.hero .drye-mini-review__footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 12px;
+}
+
+.hero .drye-mini-review__dots {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.hero .drye-mini-review__dot {
+  width: 14px;
+  height: 2px;
+  border: none;
+  background: var(--border, #E5E7EB);
+  padding: 0;
+  margin: 0;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.hero .drye-mini-review__dot.is-active {
+  background: var(--deep, #1E3A4C);
+}
+
+.hero .drye-mini-review__dot:hover:not(.is-active) {
+  background: var(--muted, #4B5563);
+}
+
+/* ---- Swipe hint -------------------------------------------- */
+
+.hero .drye-mini-review__swipe-hint {
+  font-family: "DM Sans", sans-serif;
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--caption, #9CA3AF);
+
+  animation: dryeSwipeNudge 1.6s ease-in-out infinite;
+  transition: opacity 0.4s ease;
+}
+
+.hero .drye-mini-review__swipe-hint.is-hidden {
+  opacity: 0;
+  pointer-events: none;
+  animation: none;
+}
+
+@keyframes dryeSwipeNudge {
+  0%, 100% { transform: translateX(0); opacity: 0.6; }
+  50%       { transform: translateX(3px); opacity: 1; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero .drye-mini-review__swipe-hint {
+    animation: none;
+  }
+} 
+/* ==========================================================================
+   Compact review arrows — keep buttons off the text
+   ========================================================================== */
+
+.hero .drye-mini-review {
+  position: relative;
+  width: calc(100% - 28px);
+  margin-left: auto;
+  margin-right: auto;
+  padding: 12px 18px;
+}
+
+.hero .drye-mini-review__arrow {
+  position: absolute;
+  top: 50%;
+  z-index: 4;
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  border: 0;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.94);
+  color: #111827;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform: translateY(-50%);
+  box-shadow: 0 2px 8px rgba(15, 23, 42, 0.14);
+}
+
+.hero .drye-mini-review__arrow svg {
+  width: 17px;
+  height: 17px;
+}
+
+.hero .drye-mini-review__arrow--prev {
+  left: -14px;
+}
+
+.hero .drye-mini-review__arrow--next {
+  right: -14px;
+}
+
+.hero .drye-mini-review__viewport {
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+.hero .drye-mini-review__badge {
+  display: inline-flex;
+  align-items: center;
+  width: fit-content;
+  min-height: 17px;
+  padding: 2px 7px;
+  border-radius: 999px;
+  background: #eef4f4;
+  color: #5F8A8B;
+  font-size: 9px;
+  line-height: 1;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.hero .drye-mini-review__flag {
+  display: inline-block;
+  width: 14px;
+  height: 9px;
+  margin-left: 5px;
+  object-fit: cover;
+  border-radius: 1px;
+  vertical-align: -1px;
+}
+
+.hero .drye-mini-review__attribution {
+  margin-top: -2px;
+  margin-bottom: 8px;
+  font-size: 10px;
+  line-height: 1.25;
+  color: #6b7280;
+  font-style: italic;
+}
+
+.hero .drye-mini-review__role {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0;
+}
+
+@media (max-width: 390px) {
+  .hero .drye-mini-review {
+    width: calc(100% - 20px);
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+
+  .hero .drye-mini-review__arrow--prev {
+    left: -10px;
+  }
+
+  .hero .drye-mini-review__arrow--next {
+    right: -10px;
+  }
+}
+.hero .drye-mini-review__name-row {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  line-height: 1.3;
+}
+
+.hero .drye-mini-review__name-row .drye-mini-review__name {
+  display: inline-block;
+}
+
+.hero .drye-mini-review__name-row .drye-mini-review__flag {
+  flex: 0 0 auto;
+  margin-left: 0;
+  transform: translateY(1px);
+}

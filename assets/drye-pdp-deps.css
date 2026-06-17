@@ -1,0 +1,356 @@
+/* ==========================================================================
+   DRYE PDP Hero — scoped dependencies
+   --------------------------------------------------------------------------
+   Carries the design tokens, fonts, base resets and typography helpers that
+   the `drye-pdp-hero` section was authored against (originally in the rebrand
+   theme's base.css), WITHOUT touching the rest of this (live) theme.
+
+   Strategy:
+   - @font-face: global, harmless (just makes the fonts available; fonts are
+     served from this store's own Shopify CDN).
+   - Tokens + base inheritance: applied on `.hero` (the section root) only.
+   - Resets: scoped with :where(.hero ...) so they keep ZERO extra specificity
+     and never override the section's own class-based styles, and never leak
+     out to the rest of the live theme.
+   - Typography helpers (.dryeNEW-*): copied verbatim. The live theme does not
+     use these class names, so there is no collision.
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   1. Self-hosted fonts (same CDN files as the source theme / same store)
+   -------------------------------------------------------------------------- */
+@font-face {
+  font-family: 'DM Sans';
+  src: url('https://cdn.shopify.com/s/files/1/0686/9581/8505/files/dm-sans-v17-latin-regular.woff2?v=1777484823') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'DM Sans';
+  src: url('https://cdn.shopify.com/s/files/1/0686/9581/8505/files/dm-sans-v17-latin-600.woff2?v=1777484823') format('woff2');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Clash Grotesk';
+  src: url('https://cdn.shopify.com/s/files/1/0686/9581/8505/files/ClashGrotesk-Medium.woff2?v=1777485035') format('woff2');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Clash Grotesk';
+  src: url('https://cdn.shopify.com/s/files/1/0686/9581/8505/files/ClashGrotesk-Semibold.woff2?v=1777485035') format('woff2');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Playfair Display';
+  src: url('https://cdn.shopify.com/s/files/1/0686/9581/8505/files/playfair-display-v40-latin-regular.woff2?v=1777485122') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Playfair Display';
+  src: url('https://cdn.shopify.com/s/files/1/0686/9581/8505/files/playfair-display-v40-latin-italic.woff2?v=1777485121') format('woff2');
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+
+/* --------------------------------------------------------------------------
+   2. Design tokens + base inheritance, scoped to the section root
+   -------------------------------------------------------------------------- */
+.hero {
+  /* Brand colours */
+  --deep: #1E3A4C;
+  --accent: #3D5A5E;
+  --sage: #5F8A8B;
+  --emerald: #0D9488;
+  --green: #10B981;
+  --red: #EF4444;
+
+  /* Text colours */
+  --body: #374151;
+  --muted: #4B5563;
+  --caption: #9CA3AF;
+
+  /* Structure colours */
+  --border: #E5E7EB;
+  --bg: #FFFFFF;
+  --bg-soft: #F8FAFC;
+  --bg-ink: #0F2230;
+  --bg-tint: rgba(30, 58, 76, 0.025);
+
+  /* Reusable alpha colours */
+  --white-100: rgba(255, 255, 255, 1);
+  --white-075: rgba(255, 255, 255, 0.75);
+  --white-070: rgba(255, 255, 255, 0.7);
+  --white-050: rgba(255, 255, 255, 0.5);
+  --white-015: rgba(255, 255, 255, 0.15);
+  --white-010: rgba(255, 255, 255, 0.1);
+
+  --ink-092: rgba(10, 22, 33, 0.92);
+  --ink-075: rgba(10, 22, 33, 0.75);
+  --ink-065: rgba(10, 22, 33, 0.65);
+  --ink-030: rgba(10, 22, 33, 0.3);
+
+  --deep-030: rgba(30, 58, 76, 0.3);
+  --sage-030: rgba(95, 138, 139, 0.3);
+  --sage-020: rgba(95, 138, 139, 0.2);
+
+  /* Typography */
+  --font-display: "Clash Grotesk", sans-serif;
+  --font-editorial: "Playfair Display", Georgia, serif;
+  --font-body: "DM Sans", sans-serif;
+
+  --fw-regular: 400;
+  --fw-medium: 500;
+  --fw-semibold: 600;
+
+  /* Type scale */
+  --fs-hero-h1: clamp(34px, 9vw, 52px);
+  --fs-section-h2: clamp(22px, 6vw, 32px);
+  --fs-sub-h3: 17px;
+  --fs-h4: 14px;
+  --fs-body: 15px;
+  --fs-body-lg: 16px;
+  --fs-body-sm: 14px;
+  --fs-caption: 13px;
+  --fs-micro-1: 8px;
+  --fs-micro-2: 9px;
+  --fs-micro-3: 10px;
+  --fs-stat-sm: 22px;
+  --fs-stat-lg: 28px;
+
+  --ls-tight-display: -0.03em;
+  --ls-tight-h2: -0.03em;
+  --ls-tight-h3: -0.02em;
+  --ls-micro: 0.18em;
+
+  --lh-display: 1;
+  --lh-heading: 1.1;
+  --lh-heading-tight: 1.2;
+  --lh-body-tight: 1.55;
+  --lh-body-mid: 1.6;
+  --lh-body: 1.75;
+
+  /* Layout */
+  --page-pad: 20px;
+  --max-width: 1100px;
+  --stack-gap: 16px;
+  --card-pad-y: 20px;
+  --card-pad-x: 16px;
+  --card-pad: var(--card-pad-y) var(--card-pad-x);
+
+  /* Space scale */
+  --space-0: 0;
+  --space-1: 1px;
+  --space-2: 2px;
+  --space-3: 3px;
+  --space-4: 4px;
+  --space-5: 5px;
+  --space-6: 6px;
+  --space-7: 7px;
+  --space-8: 8px;
+  --space-9: 9px;
+  --space-10: 10px;
+  --space-11: 11px;
+  --space-12: 12px;
+  --space-13: 13px;
+  --space-14: 14px;
+  --space-16: 16px;
+  --space-18: 18px;
+  --space-20: 20px;
+  --space-22: 22px;
+  --space-24: 24px;
+  --space-28: 28px;
+  --space-32: 32px;
+  --space-36: 36px;
+  --space-40: 40px;
+  --space-48: 48px;
+  --space-52: 52px;
+  --space-56: 56px;
+  --space-64: 64px;
+  --space-80: 80px;
+
+  /* Grid gaps */
+  --grid-gap-12: 12px;
+  --grid-gap-16: 16px;
+  --grid-gap-24: 24px;
+
+  /* Borders */
+  --border-width: 1px;
+  --border-width-strong: 2px;
+  --border-base: var(--border-width) solid var(--border);
+  --border-sage-020: var(--border-width) solid var(--sage-020);
+  --border-emerald-strong: var(--border-width-strong) solid var(--emerald);
+
+  /* Radius / shadow */
+  --radius-none: 0;
+  --shadow-none: none;
+
+  /* Motion */
+  --ease-standard: ease;
+  --dur-fast: 0.15s;
+  --dur-base: 0.2s;
+  --dur-reveal: 0.5s;
+
+  /* Shared component tokens.
+     Live theme header is in normal flow (not fixed/overlay), so no offset is
+     needed above the gallery — keep it at 0 to avoid a gap under the ticker. */
+  --nav-height: 0px;
+  --sticky-cta-height: 60px;
+
+  /* Base inheritance (mirrors the source theme's <body> defaults) */
+  font-family: var(--font-body);
+  color: var(--body);
+  font-size: var(--fs-body);
+  font-weight: var(--fw-regular);
+  line-height: var(--lh-body);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* --------------------------------------------------------------------------
+   3. Base resets — scoped to the section, zero extra specificity
+   (mirrors the source theme's base.css reset so component CSS behaves)
+   -------------------------------------------------------------------------- */
+:where(.hero),
+:where(.hero) *,
+:where(.hero) *::before,
+:where(.hero) *::after {
+  box-sizing: border-box;
+}
+
+:where(.hero) :is(h1, h2, h3, h4, h5, h6, p, blockquote, figure, ol, ul, dl, dd) {
+  margin: 0;
+}
+
+:where(.hero) :is(ol, ul) {
+  padding: 0;
+  list-style: none;
+}
+
+:where(.hero) :is(img, picture, video, canvas, svg) {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+:where(.hero) a {
+  color: inherit;
+  text-decoration: none;
+}
+
+:where(.hero) :is(button, input, textarea, select) {
+  font: inherit;
+  color: inherit;
+}
+
+:where(.hero) button {
+  appearance: none;
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
+  cursor: pointer;
+}
+
+/* --------------------------------------------------------------------------
+   4. Typography helpers used by the section (verbatim; class names unique)
+   -------------------------------------------------------------------------- */
+.dryeNEW-h1,
+.dryeNEW-h2,
+.dryeNEW-h3,
+.dryeNEW-h4 {
+  margin: 0;
+  color: inherit;
+}
+.dryeNEW-h1 {
+  font-family: var(--font-display);
+  font-size: var(--fs-hero-h1);
+  font-weight: var(--fw-semibold);
+  letter-spacing: var(--ls-tight-display);
+  line-height: var(--lh-display);
+}
+.dryeNEW-h2 {
+  font-family: var(--font-display);
+  font-size: var(--fs-section-h2);
+  font-weight: var(--fw-semibold);
+  letter-spacing: var(--ls-tight-h2);
+  line-height: var(--lh-heading);
+}
+.dryeNEW-h3 {
+  font-family: var(--font-display);
+  font-size: var(--fs-sub-h3);
+  font-weight: var(--fw-semibold);
+  letter-spacing: var(--ls-tight-h3);
+  line-height: var(--lh-heading-tight);
+}
+.dryeNEW-h4 {
+  font-family: var(--font-display);
+  font-size: var(--fs-h4);
+  font-weight: var(--fw-medium);
+  letter-spacing: -0.02em;
+  line-height: var(--lh-heading);
+}
+.dryeNEW-body {
+  font-family: var(--font-body);
+  font-size: var(--fs-body);
+  font-weight: var(--fw-regular);
+  line-height: var(--lh-body);
+}
+.dryeNEW-body--lg {
+  font-family: var(--font-body);
+  font-size: var(--fs-body-lg);
+  font-weight: var(--fw-regular);
+  line-height: var(--lh-body-mid);
+}
+.dryeNEW-body--sm {
+  font-family: var(--font-body);
+  font-size: var(--fs-body-sm);
+  font-weight: var(--fw-regular);
+  line-height: var(--lh-body-mid);
+}
+.dryeNEW-body--caption {
+  font-family: var(--font-body);
+  font-size: var(--fs-caption);
+  font-weight: var(--fw-regular);
+  line-height: 1.6;
+}
+.dryeNEW-editorial,
+.dryeNEW-em,
+.dryeNEW-italic {
+  font-family: var(--font-editorial);
+  font-style: italic;
+  font-weight: var(--fw-regular);
+  letter-spacing: normal;
+}
+.dryeNEW-micro {
+  display: block;
+  margin-bottom: var(--space-10);
+  font-family: var(--font-body);
+  font-size: var(--fs-micro-2);
+  font-weight: var(--fw-semibold);
+  letter-spacing: var(--ls-micro);
+  line-height: 1.2;
+  text-transform: uppercase;
+  color: var(--caption);
+}
+.dryeNEW-stat-number {
+  font-family: var(--font-display);
+  font-size: var(--fs-stat-sm);
+  font-weight: var(--fw-semibold);
+  letter-spacing: var(--ls-tight-display);
+  line-height: 1;
+}
+@media (min-width: 768px) {
+  .dryeNEW-stat-number {
+    font-size: var(--fs-stat-lg);
+  }
+}
