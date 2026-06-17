@@ -29,6 +29,7 @@
   background: #0d1f2d;
   aspect-ratio: 3 / 4;
   overflow: hidden;
+  min-width: 0; /* width guard: never let media balloon the grid column */
 }
 
 /* Thumbnails are desktop-only */
@@ -233,6 +234,15 @@
   flex-direction: column;
   gap: 0;
   justify-content: flex-start;
+  min-width: 0; /* width guard */
+}
+
+/* Width guard (from known-good 944179c): keep column children — incl. the
+   worker-proof marquee (width: max-content) — from pushing the column/page
+   wider than the viewport on mobile. This is the fix that was missing. */
+.hero .hero-info > * {
+  min-width: 0;
+  max-width: 100%;
 }
 
 /* Tablet / existing layout: unchanged, no thumbnails */
