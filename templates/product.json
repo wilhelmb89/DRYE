@@ -11,6 +11,31 @@
   "sections": {
     "drye_product_page_new_9ibHgd": {
       "type": "drye-pdp-hero",
+      "settings": {
+        "overlay_name": "",
+        "overlay_quote": "",
+        "eyebrow": "Engineered with asymmetric layering",
+        "heading_line_1": "A reusable interface liner",
+        "heading_line_2": "for sealed gloves.",
+        "subtext": "<p>Add one <span style=\"text-decoration:underline\">dry layer </span>under your gloves.<br/>You may <strong>never want skin-to-glove</strong> contact again.<strong> </strong></p>",
+        "review_rating_fallback": "4.84",
+        "review_count_fallback": "43",
+        "review_anchor": "#reviews",
+        "price_note": "Free shipping on 3+ pairs",
+        "option_label": "Size",
+        "size_placeholder": "Choose your size",
+        "size_guide_label": "Size guide →",
+        "quantity_label": "QUANTITY",
+        "atc_button_label": "Add to cart",
+        "sticky_button_label": "Add to Cart — 30-Day Refund",
+        "bullet_1": "Softer layer between skin and glove.",
+        "bullet_2": "Stop pulling gloves off to air out your hands.",
+        "bullet_3": "Take both off — clean hands, drier shift.",
+        "trust_text_1": "7 years of R&D · Patent pending",
+        "trust_text_2": "Lasts 6–12 months — machine washable,",
+        "trust_text_3": "PostNord 4–7 days or UPS 1–3 days · 30-day full refund",
+        "description_toggle_closed": ""
+      },
       "blocks": {
         "htab_wte_stage_Jfq4zP": {
           "type": "htab_wte_stage",
@@ -86,7 +111,6 @@
         },
         "review_slider_RbnVba": {
           "type": "review_slider",
-          "disabled": true,
           "settings": {
             "review_1_name": "Shoujun Shi",
             "review_1_location": "Rosemead, CA",
@@ -185,11 +209,19 @@
             "video": "shopify://files/videos/Hemsida textilvideo.mp4"
           }
         },
+        "description_czn8Gm": {
+          "type": "description",
+          "settings": {
+            "title": "",
+            "use_product_description": true,
+            "custom_description": "<style>\n  .hero .drye-pdp-desc {\n    max-width: 520px;\n    padding: 0;\n    background: var(--bg);\n    box-sizing: border-box;\n  }\n\n  .hero .drye-pdp-desc p {\n    margin: 0;\n    color: var(--deep);\n  }\n\n  .hero .drye-pdp-desc p + p {\n    margin-top: var(--space-10);\n  }\n\n  .hero .drye-pdp-desc__block {\n    margin-top: var(--space-18);\n  }\n\n  .hero .drye-pdp-desc__block:first-child {\n    margin-top: 0;\n  }\n\n  .hero .drye-pdp-desc__heading {\n    margin-bottom: var(--space-2);\n  }\n\n  .hero .drye-pdp-desc__heading p {\n    font-weight: var(--fw-semibold);\n  }\n\n  .hero .drye-pdp-desc strong {\n    color: var(--deep);\n    font-weight: var(--fw-semibold);\n  }\n\n  .hero .drye-pdp-desc__footnote {\n    margin-top: var(--space-16);\n  }\n\n  .hero .drye-pdp-desc__footnote p {\n    color: var(--caption);\n  }\n</style>\n\n<div class=\"drye-pdp-desc\">\n\n  <div class=\"drye-pdp-desc__block\">\n    <div class=\"drye-pdp-desc__heading\">\n      <p class=\"dryeNEW-body\">What changes</p>\n    </div>\n\n    <p class=\"dryeNEW-body\">\n      Your glove still does the protecting. DRYE changes what touches your skin.\n    </p>\n\n    <p class=\"dryeNEW-body\">\n      A thin dry layer sits between your hand and the glove — so sweaty nitrile, latex, rubber or sealed work gloves are not sitting directly against your skin.\n    </p>\n  </div>\n\n  <div class=\"drye-pdp-desc__block\">\n    <div class=\"drye-pdp-desc__heading\">\n      <p class=\"dryeNEW-body\">Why it’s different</p>\n    </div>\n\n    <p class=\"dryeNEW-body\">\n      Every liner that absorbs has a saturation point. Once it fills up, it becomes the wet layer. DRYE routes moisture outward instead. It does not have a saturation point like other liners — because the skin side is built not to hold sweat.\n    </p>\n\n    <p class=\"dryeNEW-body\">\n      \n    </p>\n  </div>\n\n  <div class=\"drye-pdp-desc__block\">\n    <div class=\"drye-pdp-desc__heading\">\n      <p class=\"dryeNEW-body\">How it’s built</p>\n    </div>\n\n    <p class=\"dryeNEW-body\">\n      Asymmetric Layering — one layer. One direction: away from skin. No coatings. No chemicals. No membranes. Just a washable textile structure built for months of sealed-glove use.\n    </p>\n  </div>\n\n  <div class=\"drye-pdp-desc__footnote\">\n    <p class=\"dryeNEW-body--caption\">\n      Seven years of textile development. Patent pending · SE 261539-3.\n    </p>\n  </div>\n\n</div>"
+          }
+        },
         "faq_RmnBHQ": {
           "type": "faq",
           "settings": {
             "question": "I've worn gloves for ten years. Why would I start using a liner now?",
-            "answer": "Because changing gloves doesn’t fix the sweat inside them.  Cotton soaks. Creams come too late. DRYE adds a thin dry layer that moves sweat away from your skin while you work. Your hands stay drier. Gloves slide better. Your shift feels easier.  \nTry it once — you’ll know.",
+            "answer": "Because changing gloves doesn’t fix the sweat inside them.  Cotton soaks. Creams come too late. DRYE adds a thin dry layer that moves sweat away from your skin while you work.\n\nYour hands stay drier. Gloves slide better. Your shift feels easier.  \nTry it once — you’ll know.",
             "open_by_default": false
           }
         },
@@ -209,27 +241,11 @@
             "open_by_default": false
           }
         },
-        "faq_fKYhkJ": {
-          "type": "faq",
-          "settings": {
-            "question": "Will my hands get hotter?",
-            "answer": "A little. Any extra layer can add warmth. But DRYE moves sweat away from your skin, so the warmth feels drier — not like trapped-sweat clamminess. Most users find it more comfortable than glove-on-skin.",
-            "open_by_default": false
-          }
-        },
         "faq_YPHreL": {
           "type": "faq",
           "settings": {
             "question": "Do they work with nitrile/latex/vinyl gloves?",
             "answer": "Yes. DRYE is 0.4mm thin and fits under nitrile, latex, vinyl, rubber, and many sealed work gloves without changing the feel much.",
-            "open_by_default": false
-          }
-        },
-        "faq_8BwAyY": {
-          "type": "faq",
-          "settings": {
-            "question": "What makes DRYE different from cotton liners?",
-            "answer": "Cotton absorbs sweat and stays wet under pressure. DRYE doesn't absorb on the skin side — moisture moves outward. Skin stays dry through the shift.",
             "open_by_default": false
           }
         },
@@ -241,6 +257,15 @@
             "open_by_default": false
           }
         },
+        "faq_4gTn8g": {
+          "type": "faq",
+          "disabled": true,
+          "settings": {
+            "question": "Can I wear DRYE for EV/battery work?",
+            "answer": "Yes. It's made for Class 00 and Class 0 gloves (up to 1,000V) — standard for EV service and battery assembly. That's shock work, not arc-flash. Not for Class 1+ or grid/high-voltage work. DRYE isn't arc-rated. Unsure? Ask your safety officer.",
+            "open_by_default": false
+          }
+        },
         "faq_yEB4kW": {
           "type": "faq",
           "settings": {
@@ -249,28 +274,27 @@
             "open_by_default": false
           }
         },
+        "faq_fKYhkJ": {
+          "type": "faq",
+          "settings": {
+            "question": "Will my hands get hotter?",
+            "answer": "A little. Any extra layer can add warmth. But DRYE moves sweat away from your skin, so the warmth feels drier — not like trapped-sweat clamminess. Most users find it more comfortable than glove-on-skin.",
+            "open_by_default": false
+          }
+        },
+        "faq_8BwAyY": {
+          "type": "faq",
+          "settings": {
+            "question": "What makes DRYE different from cotton liners?",
+            "answer": "Cotton absorbs sweat and stays wet under pressure. DRYE doesn't absorb on the skin side — moisture moves outward. Skin stays dry through the shift.",
+            "open_by_default": false
+          }
+        },
         "faq_aqPJyd": {
           "type": "faq",
           "settings": {
             "question": "Will this help heal my skin issues or just protect it?",
             "answer": "DRYE isn’t a medical treatment. It helps reduce the wet-glove conditions that can make hands feel cracked, irritated, or overworked. If you have a medical skin condition, check with a professional.",
-            "open_by_default": false
-          }
-        },
-        "faq_hzYRrW": {
-          "type": "faq",
-          "settings": {
-            "question": "Shipping, Customs & Delivery",
-            "answer": "Ships from Sweden.\n- PostNord · 4–7 business days · Duties covered. No brokerage fee.\n- UPS · 1–3 business days · Customs and brokerage fee charged at delivery.",
-            "open_by_default": false
-          }
-        },
-        "faq_4gTn8g": {
-          "type": "faq",
-          "disabled": true,
-          "settings": {
-            "question": "Can I wear DRYE for EV/battery work?",
-            "answer": "Yes. It's made for Class 00 and Class 0 gloves (up to 1,000V) — standard for EV service and battery assembly. That's shock work, not arc-flash. Not for Class 1+ or grid/high-voltage work. DRYE isn't arc-rated. Unsure? Ask your safety officer.",
             "open_by_default": false
           }
         },
@@ -291,6 +315,14 @@
             "answer": "DRYE is built for long hours inside sealed gloves — nitrile, latex, rubber and Class 00/0 dielectric HV gloves. If gloves come off every few minutes, there's less moisture buildup to solve. Not for arc flash rated environments (NFPA 70E). Non-sterile use only.",
             "open_by_default": false
           }
+        },
+        "faq_hzYRrW": {
+          "type": "faq",
+          "settings": {
+            "question": "Shipping, Customs & Delivery",
+            "answer": "Ships from Sweden.\n- PostNord · 4–7 business days · Duties covered. No brokerage fee.\n- UPS · 1–3 business days · Customs and brokerage fee charged at delivery.",
+            "open_by_default": false
+          }
         }
       },
       "block_order": [
@@ -302,142 +334,21 @@
         "htab_wte_stage_DBKHUh",
         "review_slider_RbnVba",
         "desc_media_7MaHMX",
+        "description_czn8Gm",
         "faq_RmnBHQ",
         "faq_wCzg8J",
         "faq_cVYHKP",
-        "faq_fKYhkJ",
         "faq_YPHreL",
-        "faq_8BwAyY",
         "faq_FeFy9M",
-        "faq_yEB4kW",
-        "faq_aqPJyd",
-        "faq_hzYRrW",
         "faq_4gTn8g",
+        "faq_yEB4kW",
+        "faq_fKYhkJ",
+        "faq_8BwAyY",
+        "faq_aqPJyd",
         "faq_cR9VYK",
-        "faq_dHAEH3"
-      ],
-      "custom_css": [],
-      "name": "DRYE PDP Hero",
-      "settings": {
-        "overlay_name": "",
-        "overlay_quote": "",
-        "show_eyebrow": false,
-        "eyebrow": "Engineered with asymmetric layering",
-        "heading_line_1": "A reusable interface liner",
-        "heading_line_2": "for sealed gloves.",
-        "subtext": "<p>Add one <span style=\"text-decoration:underline\">dry layer </span>under your gloves.<br/>You may <strong>never want skin-to-glove</strong> contact again.<strong> </strong></p>",
-        "review_rating_fallback": "4.84",
-        "review_count_fallback": "43",
-        "review_anchor": "#reviews",
-        "price_note": "Free shipping on 3+ pairs",
-        "option_label": "Size",
-        "size_placeholder": "Choose your size",
-        "size_guide_label": "Size guide →",
-        "quantity_label": "QUANTITY",
-        "atc_button_label": "Add to cart",
-        "sticky_button_label": "Add to Cart — 30-Day Refund",
-        "bullet_1": "0.4mm thin — no bulk, no lost grip ",
-        "bullet_2": "No mid-shift glove-off airing",
-        "bullet_3": "Oil, grease and dirt hit the liner first.",
-        "bullet_4": "Gloves slide on and off easier, with less ripping ",
-        "bullet_5": "Washable and reusable for 6–12 months",
-        "bullet_6": "A dry layer between your skin and nitrile, rubber or work gloves",
-        "trust_text_1": "7 years of R&D · Patent pending",
-        "trust_text_2": "Lasts 6–12 months — machine washable,",
-        "trust_text_3": "Tracked delivery: 4–7 days · Express UPS: 1–3 days · 30-day refund",
-        "description_toggle_closed": "",
-        "show_inline_review_slider": true,
-        "proof_enabled": true,
-        "proof_returns_line": "0 returns in the last 90 days",
-        "proof_keep_line": "Workers are keeping them.",
-        "proof_ticker_label": "Recent worker comments on instagram",
-        "proof_hint": "Tap a comment to read it in full",
-        "proof_item_1_short": "These are incredible.",
-        "proof_item_1_full": "This product works incredible. The inside of my latex gloves are literally peeling off moist, just before I remove my hand from the DRYE liner dry to the touch. They really work. They have cured my contact dermatitis in 4 days of being sweat free. I have worn them for one week as a mechanic . ￼ They are durable as they can be for being fabric ……. I wish the stitching was stronger. The seam on the thumb of my right hand has split and starting to come apart. I have been careful that if I tear a latex glove, I replace it right away and not damage/oil stain the liner. I take them off on my break and on lunch and I hang them up to dry and put them back on. After a couple days, I take them home and wash them. The science from the two separate layers is solid, the inner black layer never gets your hands moist. And the outer gray layer soaks everything up like a sponge. The longest that I have worn them is 2 to 3 hours straight. And still my hands stay dry.",
-        "proof_item_1_handle": "@James H.",
-        "proof_item_1_label": "Facebook",
-        "proof_item_1_url": "",
-        "proof_item_2_short": "Ordering my second pair right now.",
-        "proof_item_2_full": "I have just gotten these last week and wore them for the first time today at work. These are incredible, nearly no more sweat in nitrile gloves, plus being so thin I barely notice them so this is definitely worth getting. I've been battling eczema and hyperhydrosis which only get worse with gloves I have to wear at work, so glad I found these, a few of my coworkers are looking into getting a few pairs themselves!",
-        "proof_item_2_handle": "@fordbodytech811",
-        "proof_item_2_label": "Instagram",
-        "proof_item_2_url": "",
-        "proof_item_3_short": "The liners have been a huge help",
-        "proof_item_3_full": "I'm an automotive painter in Phoenix and was having terrible sweat issues wearing nitrile gloves during the summer months. The liners have been a huge help — I'm no longer dripping sweat on my paint jobs and my hands feel better.",
-        "proof_item_3_handle": "@Chad W.",
-        "proof_item_3_label": "Facebook",
-        "proof_item_3_url": "",
-        "proof_item_4_short": "Nearly no more sweat in nitrile gloves.",
-        "proof_item_4_full": "@fordbodytech811 I 100% agree started wearing mine last week and my cracked cuts are starting to heal. It crazy how the inside of the latex glove is moist/humid but your actual skin is totally dry underneath the liners !!! Just be careful taking them off the stitching on the thumb seam and wrist cuff can rip apart. I suggest Go slow when removing finger by finger gradually",
-        "proof_item_4_handle": "@dsmmaster2003",
-        "proof_item_4_label": "Instagram comment",
-        "proof_item_4_url": "",
-        "proof_item_5_short": "They do a great job keeping sweat off my hands ",
-        "proof_item_5_full": "I mainly use these for car detailing. The slim thickness gives great dexterity, but after about two hours under gloves, it can feel a bit damp. The stitching ripped once, but that might’ve been my fault. They do a great job keeping sweat off my hands — even when slightly wet, they still work. I just wash and reuse them again.",
-        "proof_item_5_handle": "@Shoujun Shi",
-        "proof_item_5_label": "Facebook",
-        "proof_item_5_url": "",
-        "proof_item_6_short": "",
-        "proof_item_6_full": "",
-        "proof_item_6_handle": "",
-        "proof_item_6_label": "",
-        "proof_item_6_url": "",
-        "proof_show_recent": false,
-        "proof_recent_label": "Recently bought",
-        "proof_recent_items": "",
-        "mi_eyebrow": "The missing interface",
-        "mi_heading": "We wanted to solve the inside.",
-        "mi_body": "Every liner that absorbs has a saturation point. DRYE is built so the skin side does not hold sweat — it routes moisture outward.",
-        "mi_tile_1_title": "Skin stays drier",
-        "mi_tile_1_desc": "Sweat moves away from skin instead of sitting inside the glove.",
-        "mi_tile_2_title": "Fits sealed gloves",
-        "mi_tile_2_desc": "0.4mm thin under nitrile, latex, vinyl and rubber.",
-        "mi_tile_3_title": "Easier glove changes",
-        "mi_tile_3_desc": "Nitrile slides on and off over a dry layer, not wet skin.",
-        "mi_tile_4_title": "Built for months",
-        "mi_tile_4_desc": "Washable, reusable, made for repeated shifts.",
-        "mi_tile_5_title": "",
-        "mi_tile_5_desc": "",
-        "mi_tile_6_title": "",
-        "mi_tile_6_desc": "",
-        "inv_eyebrow": "The invention",
-        "inv_heading": "Why hands can remain dry.",
-        "inv_body": "Asymmetric layering. One direction: away from skin. Every absorbing liner eventually fills up and becomes the wet layer. DRYE routes moisture outward instead — the skin side is built not to hold sweat.",
-        "inv_row_1_name": "Merino wool",
-        "inv_row_1_value": "15–18%",
-        "inv_row_1_percent": 100,
-        "inv_row_1_highlight": false,
-        "inv_row_2_name": "",
-        "inv_row_2_value": "13%",
-        "inv_row_2_percent": 78,
-        "inv_row_2_highlight": false,
-        "inv_row_3_name": "",
-        "inv_row_3_value": "11%",
-        "inv_row_3_percent": 65,
-        "inv_row_3_highlight": false,
-        "inv_row_4_name": "Cotton",
-        "inv_row_4_value": "7–8%",
-        "inv_row_4_percent": 47,
-        "inv_row_4_highlight": false,
-        "inv_row_5_name": "",
-        "inv_row_5_value": "0.4%",
-        "inv_row_5_percent": 6,
-        "inv_row_5_highlight": false,
-        "inv_row_6_name": "DRYE Asymmetric layering",
-        "inv_row_6_value": "<0.1%",
-        "inv_row_6_percent": 3,
-        "inv_row_6_highlight": true,
-        "inv_note": "Same thin layer. One direction: away from skin.",
-        "faq_eyebrow": "Before you decide",
-        "faq_heading": "",
-        "faq_tab_1_label": "Feel",
-        "faq_tab_1_count": 4,
-        "faq_tab_2_label": "Grip/Grease",
-        "faq_tab_2_count": 3,
-        "faq_tab_3_label": "Lifetime",
-        "wte_eyebrow": "What to expect",
-        "wte_heading": "One layer. One shift."
-      }
+        "faq_dHAEH3",
+        "faq_hzYRrW"
+      ]
     },
     "drye_proof_wall_myzqry": {
       "type": "drye-proof-wall",

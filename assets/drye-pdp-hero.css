@@ -27,12 +27,8 @@
 .hero .hero-media {
   position: relative;
   background: #0d1f2d;
-  /* 4/5 (was 3/4): trims ~6% off the height on mobile (≈645→605px) to lift the
-     price/ATC higher, without capping height (a cap shrinks width with aspect-
-     ratio set). Images use object-fit:cover, so the frame just crops slightly. */
-  aspect-ratio: 4 / 5;
+  aspect-ratio: 3 / 4;
   overflow: hidden;
-  min-width: 0;
 }
 
 /* Thumbnails are desktop-only */
@@ -231,28 +227,13 @@
 
 /* Right-side outer wrapper — mobile default */
 .hero .hero-info {
-  --hi-pad-x: 20px; /* full-width bands escape + re-pad by exactly this */
-  padding: 14px 20px 32px;
+  padding: 28px 20px 32px;
   border: none !important;
   display: flex;
   flex-direction: column;
   gap: 0;
   justify-content: flex-start;
-  overflow-x: clip;
-  min-width: 0;
 }
-
-/* Every direct child of the right column must be allowed to shrink, so a wide
-   element (e.g. the ticker) can never force the column — and the shared grid
-   track / gallery — wider than the screen. */
-.hero .hero-info > * {
-  min-width: 0;
-  max-width: 100%;
-}
-
-/* Mobile: let the gallery fill its full width. No height cap — capping the
-   height while aspect-ratio: 3/4 is set makes the browser shrink the WIDTH to
-   keep the ratio, which left a white strip on the right (iPhone 13 Pro). */
 
 /* Tablet / existing layout: unchanged, no thumbnails */
 @media (min-width: 768px) {
@@ -268,7 +249,7 @@
     top: var(--hero-nav-height);
     left: 0;
     width: 50%;
-    height: calc(100vh - var(--hero-nav-height) - 40px);
+    height: calc(100vh - var(--hero-nav-height));
     float: left;
     overflow: hidden;
   }
@@ -278,23 +259,11 @@
   }
 
   .hero .hero-info {
-    --hi-pad-x: 48px;
-    padding: 22px 48px 44px;
+    padding: 44px 48px;
     justify-content: flex-start;
     max-width: 520px;
     width: 50%;
     margin-left: 50%;
-  }
-
-  /* Desktop only: pull stars/title/subtext above the Worker Proof module so
-     the ticker sits between the subtext and the price. The proof stays first in
-     the DOM (so on mobile it renders at the very top, under the gallery); these
-     order:-1 items just move ahead of it on the two-column desktop layout. */
-  .hero .hero-info > .stars-row,
-  .hero .hero-info > .h-eye,
-  .hero .hero-info > .h-title,
-  .hero .hero-info > .h-sub {
-    order: -1;
   }
 }
 
@@ -318,7 +287,7 @@
 
   .hero .hero-media {
     width: auto;
-    height: calc(100vh - var(--hero-nav-height) - 40px);
+    height: calc(100vh - var(--hero-nav-height));
     max-height: var(--hero-media-max-height);
     position: sticky;
     top: var(--hero-nav-height);
@@ -441,7 +410,6 @@
   }
 
   .hero .hero-info {
-    --hi-pad-x: var(--space-24);
     width: 100%;
     max-width: 520px;
     margin-left: 0;
@@ -449,7 +417,7 @@
     padding-top: var(--space-48);
     padding-bottom: var(--space-48);
     padding-left: var(--space-24);
-    padding-right: var(--space-24);
+    padding-right: 0;
   }
 }
 
@@ -475,13 +443,13 @@
 }
 
 .hero .h-title {
-  font-family: var(--font-display);
-  font-size: clamp(24px, 6.4vw, 34px);
-  font-weight: var(--fw-semibold);
-  letter-spacing: var(--ls-tight-display);
+  font-family: "Clash Grotesk", sans-serif;
+  font-size: clamp(24px, 6vw, 38px);
+  font-weight: 600;
+  letter-spacing: -0.025em;
   color: var(--deep);
-  line-height: 1.06;
-  margin-bottom: var(--space-12);
+  line-height: 1.1;
+  margin-bottom: 14px;
 }
 
 .hero .h-sub {
@@ -508,16 +476,15 @@
 }
 
 .hero .stars {
-  color: #F5B301;
+  color: #f59e0b;
   font-size: 13px;
   letter-spacing: 1px;
   line-height: 1;
 }
 
 .hero .stars-lbl {
-  font-size: var(--fs-caption);
+  font-size: 12px;
   color: var(--muted);
-  font-weight: var(--fw-semibold);
 }
 
 .hero .stars-lbl a {
@@ -530,18 +497,16 @@
   display: flex;
   align-items: baseline;
   gap: 10px;
-  margin-bottom: var(--space-10);
-  padding-top: var(--space-8);
-  border-top: var(--border-base);
+  margin-bottom: 18px;
   flex-wrap: wrap;
 }
 
 .hero .price {
-  font-family: var(--font-display);
-  font-size: 22px;
-  font-weight: var(--fw-semibold);
+  font-family: "Clash Grotesk", sans-serif;
+  font-size: 26px;
+  font-weight: 600;
   color: var(--deep);
-  letter-spacing: var(--ls-tight-h2);
+  letter-spacing: -0.02em;
 }
 
 .hero .price-note {
@@ -585,9 +550,7 @@
 }
 
 .hero .buy-block {
-  margin-bottom: var(--space-12);
-  padding-top: var(--space-12);
-  border-top: var(--border-base);
+  margin-bottom: 12px;
 }
 
 .hero .sz-dd {
@@ -597,14 +560,13 @@
 
 .hero .sz-dd-trigger {
   width: 100%;
-  height: 44px;
+  height: 46px;
   padding: 0 14px;
-  font-family: var(--font-body);
-  font-size: var(--fs-body-sm);
+  font-family: "DM Sans", sans-serif;
+  font-size: 13px;
   color: var(--body);
-  border: var(--border-base);
-  border-radius: 8px;
-  background: var(--bg);
+  border: 1px solid var(--border);
+  background: #fff;
   appearance: none;
   -webkit-appearance: none;
   cursor: pointer;
@@ -697,15 +659,12 @@
 }
 
 .hero .sz-dd-trigger.open {
-  border-color: var(--deep);
-  border-bottom-left-radius: 0;
-  border-bottom-right-radius: 0;
+  border-color: #1e3a4c;
 }
 
 .hero .sz-dd-list.open {
-  border: 1px solid var(--deep);
+  border: 1px solid #1e3a4c;
   border-top: 0;
-  border-radius: 0 0 8px 8px;
 }
 
 .hero .sz-dd-opt {
@@ -781,18 +740,15 @@
 
 .hero .qty-block {
   margin-bottom: 12px;
-  display: block; /* shown on mobile and desktop */
 }
 
 .hero .qty-wrap {
   display: flex;
   align-items: stretch;
   width: 144px;
-  height: 44px;
-  border: var(--border-base);
-  border-radius: 8px;
-  overflow: hidden;
-  background: var(--bg);
+  height: 46px;
+  border: 1px solid var(--border);
+  background: #fff;
   box-sizing: border-box;
 }
 
@@ -848,11 +804,8 @@
   list-style: none;
   display: flex;
   flex-direction: column;
-  gap: var(--space-6);
-  margin: 0 0 var(--space-12);
-  padding: 0 0 var(--space-12);
-  border-top: none;
-  border-bottom: var(--border-base);
+  gap: 8px;
+  margin-bottom: 14px;
 }
 
 .hero .bullets li {
@@ -866,30 +819,27 @@
 }
 
 .hero .bullets li::before {
-  content: "✓";
-  color: var(--emerald);
-  font-weight: var(--fw-semibold);
-  font-size: 12px;
-  margin-top: 2px;
+  content: "→";
+  color: var(--sage);
+  font-size: 11px;
+  margin-top: 3px;
   flex-shrink: 0;
 }
 
 .hero .atc-btn-full {
   width: 100%;
-  min-height: 50px;
   background: var(--emerald);
   border: none;
-  border-radius: 8px;
   cursor: pointer;
-  font-family: var(--font-body);
-  font-size: var(--fs-body-sm);
-  font-weight: var(--fw-semibold);
-  letter-spacing: 0.1em;
+  font-family: "DM Sans", sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: var(--white-100);
+  color: white;
   padding: 16px;
   transition: background 0.15s;
-  margin-bottom: var(--space-6);
+  margin-bottom: 6px;
 }
 
 .hero .atc-btn-full {
@@ -927,8 +877,8 @@
   background-color: transparent !important;
   gap: 0 !important;
   width: 100% !important;
-  padding: 0 0 8px !important;
-  margin: 0 0 10px !important;
+  padding: 14px 0 !important;
+  margin: 0 0 14px !important;
   border: none !important;
 }
 
@@ -957,19 +907,11 @@
   border-left: none !important;
 }
 
-.hero .trust-item {
-  padding: 6px 0 !important;
-}
-
 .hero .trust-item:first-child {
-  border-top: none !important;
+  border-top: 1px solid var(--border) !important;
 }
 
-.hero .trust-item:last-child {
-  border-bottom: none !important;
-}
-
-.hero .trust-item img, .hero .trust-item svg {
+.hero .trust-item img {
   display: block !important;
   width: 20px !important;
   height: 20px !important;
@@ -1483,14 +1425,13 @@
   flex: 1;
   background: var(--emerald);
   border: none;
-  border-radius: 8px;
   cursor: pointer;
-  font-family: var(--font-body);
+  font-family: "DM Sans", sans-serif;
   font-size: 11px;
-  font-weight: var(--fw-semibold);
-  letter-spacing: 0.1em;
+  font-weight: 600;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: var(--white-100);
+  color: white;
   padding: 13px 8px;
 }
 

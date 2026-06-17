@@ -13,8 +13,6 @@ assign review_count = section.settings.review_count_fallback
 
 {{ 'drye-pdp-hero.css' | asset_url | stylesheet_tag }}
 {{ 'drye-review-slider.css' | asset_url | stylesheet_tag }}
-{{ 'drye-pdp-modules.css' | asset_url | stylesheet_tag }}
-{{ 'drye-worker-proof.css' | asset_url | stylesheet_tag }}
 
 <section
   class="hero"
@@ -91,7 +89,6 @@ assign review_count = section.settings.review_count_fallback
     <div class="hero-gallery-main" data-gallery-viewport>
       <div class="hero-gallery-track" data-gallery-track>
         {% if visible_media_count > 0 %}
-          {% assign lcp_assigned = false %}
           {% for media in current_product.media %}
             {% assign media_src = media.preview_image | image_url | split: '?' | first %}
 
@@ -100,15 +97,6 @@ assign review_count = section.settings.review_count_fallback
                 {% case media.media_type %}
 
                   {% when 'image' %}
-                    {%- comment -%} Only the first visible image is the LCP element; load it eagerly with high priority and lazy-load the rest so the gallery doesn't saturate bandwidth on slow connections. {%- endcomment -%}
-                    {% if lcp_assigned == false %}
-                      {% assign img_loading = 'eager' %}
-                      {% assign img_fetch = 'high' %}
-                      {% assign lcp_assigned = true %}
-                    {% else %}
-                      {% assign img_loading = 'lazy' %}
-                      {% assign img_fetch = 'auto' %}
-                    {% endif %}
                     {{
                       media
                       | image_url: width: 2200
@@ -116,8 +104,7 @@ assign review_count = section.settings.review_count_fallback
                         alt: media.alt | default: current_product.title,
                         widths: '480, 720, 960, 1200, 1600, 2000, 2200',
                         sizes: '(min-width: 1024px) 600px, (min-width: 768px) 50vw, 100vw',
-                        loading: img_loading,
-                        fetchpriority: img_fetch,
+                        loading: 'eager',
                         class: 'hero-media-img'
                     }}
 
@@ -208,213 +195,7 @@ assign review_count = section.settings.review_count_fallback
     </div>
   </div>
   <div class="hero-info">
-{% comment %} Worker Proof — compact green proof line + sliding/expandable comment ticker {% endcomment %}
-{% if section.settings.proof_enabled %}
-  {% liquid
-    assign proof_has_items = false
-    for i in (1..6)
-      assign s_key = 'proof_item_' | append: i | append: '_short'
-      if section.settings[s_key] != blank
-        assign proof_has_items = true
-        break
-      endif
-    endfor
-  %}
-  <section class="drye-proof" data-drye-proof-module aria-label="Worker proof">
-    {% if section.settings.proof_returns_line != blank %}
-      <div class="drye-proof__line">
-        <svg class="drye-proof__check" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-          <path d="M3 8.4l3 3 7-7.6" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-        <span class="drye-proof__returns">{{ section.settings.proof_returns_line }}</span>
-      </div>
-    {% endif %}
-    {% if section.settings.proof_keep_line != blank %}
-      <div class="drye-proof__keep">{{ section.settings.proof_keep_line }}</div>
-    {% endif %}
-
-    {% if proof_has_items %}
-      {% if section.settings.proof_ticker_label != blank %}
-        <div class="drye-proof__tlabel">{{ section.settings.proof_ticker_label }}</div>
-      {% endif %}
-
-      <div class="drye-proof__ticker-wrap" data-drye-proof-tickerwrap>
-        <ul class="drye-proof__ticker" data-drye-proof-ticker>
-          {% for pass in (1..2) %}
-            {% for i in (1..6) %}
-              {% liquid
-                assign s_key = 'proof_item_' | append: i | append: '_short'
-                assign f_key = 'proof_item_' | append: i | append: '_full'
-                assign h_key = 'proof_item_' | append: i | append: '_handle'
-                assign l_key = 'proof_item_' | append: i | append: '_label'
-                assign u_key = 'proof_item_' | append: i | append: '_url'
-                assign it_short = section.settings[s_key]
-                assign it_full = section.settings[f_key] | default: section.settings[s_key]
-                assign it_handle = section.settings[h_key]
-                assign it_label = section.settings[l_key]
-                assign it_url = section.settings[u_key]
-              %}
-              {% if it_short != blank %}
-                <li class="drye-proof__item-wrap"{% if pass == 2 %} aria-hidden="true"{% endif %}>
-                  <button
-                    type="button"
-                    class="drye-proof__item"
-                    data-drye-proof-item
-                    data-index="{{ i }}"
-                    data-full="{{ it_full | escape }}"
-                    data-handle="{{ it_handle | escape }}"
-                    data-label="{{ it_label | escape }}"
-                    data-url="{{ it_url | escape }}"
-                  >
-                    {% if it_handle != blank %}<span class="drye-proof__ihandle">{{ it_handle }}</span>{% endif %}
-                    <span class="drye-proof__iquote">“{{ it_short }}”</span>
-                    <span class="drye-proof__iplus" aria-hidden="true">+</span>
-                  </button>
-                </li>
-              {% endif %}
-            {% endfor %}
-          {% endfor %}
-        </ul>
-      </div>
-
-      {% if section.settings.proof_hint != blank %}
-        <div class="drye-proof__hint">
-          <span class="drye-proof__hint-plus" aria-hidden="true">+</span>
-          <span>{{ section.settings.proof_hint }}</span>
-        </div>
-      {% endif %}
-
-      <div class="drye-proof__expand" data-drye-proof-expand hidden>
-        <button type="button" class="drye-proof__expand-close" data-drye-proof-close aria-label="Close">−</button>
-        <p class="drye-proof__expand-quote" data-proof-quote></p>
-        <div class="drye-proof__expand-meta">
-          <span class="drye-proof__expand-source" data-proof-source></span>
-          <a class="drye-proof__expand-link" data-proof-link href="#" target="_blank" rel="noopener" hidden>View on Instagram →</a>
-        </div>
-      </div>
-    {% endif %}
-
-    {% if section.settings.proof_show_recent and section.settings.proof_recent_items != blank %}
-      <div class="drye-proof__recent">
-        {% if section.settings.proof_recent_label != blank %}
-          <span class="drye-proof__recent-label">{{ section.settings.proof_recent_label }}</span>
-        {% endif %}
-        {% assign recent_lines = section.settings.proof_recent_items | newline_to_br | split: '<br />' %}
-        <ul class="drye-proof__recent-list">
-          {% for line in recent_lines %}
-            {% assign line_text = line | strip %}
-            {% if line_text != blank %}
-              <li class="drye-proof__recent-item">{{ line_text }}</li>
-            {% endif %}
-          {% endfor %}
-        </ul>
-      </div>
-    {% endif %}
-  </section>
-
-  <script>
-    (function () {
-      var m = document.querySelector('[data-drye-proof-module]:not([data-proof-bound])');
-      if (!m) return;
-      m.setAttribute('data-proof-bound', '1');
-      window.dataLayer = window.dataLayer || [];
-      function push(ev, extra) {
-        try {
-          var o = { event: ev, page_path: window.location.pathname };
-          if (extra) { for (var k in extra) { o[k] = extra[k]; } }
-          window.dataLayer.push(o);
-        } catch (e) {}
-      }
-
-      try {
-        var io = new IntersectionObserver(function (entries) {
-          entries.forEach(function (en) {
-            if (en.isIntersecting) { push('proof_module_view'); io.disconnect(); }
-          });
-        }, { threshold: 0.4 });
-        io.observe(m);
-      } catch (e) { push('proof_module_view'); }
-
-      var ticker = m.querySelector('[data-drye-proof-ticker]');
-      var wrap = m.querySelector('[data-drye-proof-tickerwrap]');
-      var expand = m.querySelector('[data-drye-proof-expand]');
-      var hovering = false, locked = false, openItem = null, resumeTimer = null;
-
-      function setPaused() {
-        if (ticker) { ticker.classList.toggle('is-paused', hovering || locked); }
-      }
-      if (wrap) {
-        wrap.addEventListener('mouseenter', function () { hovering = true; setPaused(); });
-        wrap.addEventListener('mouseleave', function () { hovering = false; setPaused(); });
-        wrap.addEventListener('touchstart', function () {
-          hovering = true; setPaused();
-          if (resumeTimer) { clearTimeout(resumeTimer); }
-        }, { passive: true });
-        wrap.addEventListener('touchend', function () {
-          if (resumeTimer) { clearTimeout(resumeTimer); }
-          resumeTimer = setTimeout(function () { if (!locked) { hovering = false; setPaused(); } }, 2500);
-        }, { passive: true });
-      }
-
-      function setPlus(btn, isOpen) {
-        var p = btn.querySelector('.drye-proof__iplus');
-        if (p) { p.textContent = isOpen ? '−' : '+'; }
-        btn.classList.toggle('is-open', isOpen);
-      }
-      function openExpand(btn) {
-        if (!expand) return;
-        if (openItem && openItem !== btn) { setPlus(openItem, false); }
-        var full = btn.getAttribute('data-full') || '';
-        var handle = btn.getAttribute('data-handle') || '';
-        var label = btn.getAttribute('data-label') || '';
-        var url = btn.getAttribute('data-url') || '';
-        var q = expand.querySelector('[data-proof-quote]');
-        var src = expand.querySelector('[data-proof-source]');
-        var link = expand.querySelector('[data-proof-link]');
-        if (q) { q.textContent = '“' + full + '”'; }
-        if (src) {
-          var parts = [];
-          if (handle) { parts.push(handle); }
-          if (label) { parts.push(label); }
-          src.textContent = parts.join(' · ');
-        }
-        if (link) {
-          if (url) { link.href = url; link.hidden = false; } else { link.hidden = true; }
-        }
-        expand.hidden = false;
-        setPlus(btn, true);
-        openItem = btn;
-        locked = true; setPaused();
-        push('proof_comment_expand', { proof_index: btn.getAttribute('data-index') });
-      }
-      function closeExpand() {
-        if (expand) { expand.hidden = true; }
-        if (openItem) { setPlus(openItem, false); openItem = null; }
-        locked = false; hovering = false; setPaused();
-      }
-
-      m.addEventListener('click', function (e) {
-        var t = e.target;
-        if (t.closest && t.closest('[data-drye-proof-close]')) { closeExpand(); return; }
-        if (t.closest && t.closest('[data-proof-link]')) { push('proof_source_click'); return; }
-        var btn = t.closest ? t.closest('[data-drye-proof-item]') : null;
-        if (!btn) { return; }
-        if (btn === openItem) { closeExpand(); } else { openExpand(btn); }
-      });
-    })();
-  </script>
-{% endif %}
-
-    <div class="stars-row">
-      <span class="stars" aria-hidden="true">★★★★★</span>
-      <span class="stars-lbl">
-        {{ review_rating }}/5 · <a href="{{ review_anchor }}">{{ review_count }} reviews</a>
-      </span>
-    </div>
-
-    {% if section.settings.eyebrow != blank and section.settings.show_eyebrow %}
-      <div class="h-eye">{{ section.settings.eyebrow }}</div>
-    {% endif %}
+    <div class="h-eye">{{ section.settings.eyebrow }}</div>
 
     <h1 class="h-title">
       {{ section.settings.heading_line_1 }}<br>
@@ -423,6 +204,13 @@ assign review_count = section.settings.review_count_fallback
 
     <div class="h-sub">
       {{ section.settings.subtext }}
+    </div>
+
+    <div class="stars-row">
+      <span class="stars" aria-hidden="true">★★★★★</span>
+      <span class="stars-lbl">
+        {{ review_rating }}/5 · <a href="{{ review_anchor }}">{{ review_count }} reviews</a>
+      </span>
     </div>
 
     <div class="price-row" data-price-row>
@@ -588,13 +376,12 @@ assign review_count = section.settings.review_count_fallback
   </div>
 </div>
 
+<ul class="bullets">
+
       <ul class="bullets">
         {% if section.settings.bullet_1 != blank %}<li>{{ section.settings.bullet_1 }}</li>{% endif %}
         {% if section.settings.bullet_2 != blank %}<li>{{ section.settings.bullet_2 }}</li>{% endif %}
         {% if section.settings.bullet_3 != blank %}<li>{{ section.settings.bullet_3 }}</li>{% endif %}
-        {% if section.settings.bullet_4 != blank %}<li>{{ section.settings.bullet_4 }}</li>{% endif %}
-        {% if section.settings.bullet_5 != blank %}<li>{{ section.settings.bullet_5 }}</li>{% endif %}
-        {% if section.settings.bullet_6 != blank %}<li>{{ section.settings.bullet_6 }}</li>{% endif %}
       </ul>
 
       {% assign selected_variant_preorder = false %}
@@ -616,6 +403,16 @@ assign review_count = section.settings.review_count_fallback
       </button>
     {% endform %}
 
+
+{% if section.settings.show_inline_review_slider %}
+  {% for block in section.blocks %}
+    {% if block.type == 'review_slider' %}
+      <div class="pdp-review-slider-block" {{ block.shopify_attributes }}>
+        {% render 'drye-review-slider-inline', block: block %}
+      </div>
+    {% endif %}
+  {% endfor %}
+{% endif %}
     <div class="trust-row">
       <div class="trust-item">
         <img
@@ -629,10 +426,13 @@ assign review_count = section.settings.review_count_fallback
       </div>
 
       <div class="trust-item">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" style="flex:0 0 20px">
-          <path d="M21 12a9 9 0 1 1-2.64-6.36" stroke="#0D9488" stroke-width="1.6" stroke-linecap="round"/>
-          <path d="M21 4v5h-5" stroke="#0D9488" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
+        <img
+          src="{{ 'icon-refund-arrows (2).svg' | asset_url }}"
+          alt=""
+          width="20"
+          height="20"
+          loading="lazy"
+        >
         <span>{{ section.settings.trust_text_2 }}</span>
       </div>
 
@@ -648,7 +448,6 @@ assign review_count = section.settings.review_count_fallback
       </div>
     </div>
 
-    {% comment %} Old near-cart review slider replaced by Worker Proof Receipt (above). {% endcomment %}
 
     {% assign desc_media = section.blocks | where: 'type', 'desc_media' %}
     {% assign rendered_desc = '' %}
@@ -698,62 +497,62 @@ assign review_count = section.settings.review_count_fallback
       </div>
     {% endif %}
 
+{% comment %}
+  Pixel tabs module: FAQs / What to Expect / Reviews
+  No eyebrow, no heading, no lead text.
+{% endcomment %}
+
 {% assign wte_blocks = section.blocks | where: 'type', 'htab_wte_stage' %}
 {% assign faq_blocks = section.blocks | where: 'type', 'faq' %}
+{% assign review_block = section.blocks | where: 'type', 'review_slider' | first %}
 
-{% comment %}
-  v10 — FAQ: 3 tabs (in-column). Tab labels + per-tab counts are SECTION
-  settings (these survive Shopify's editor sync; per-block fields do not).
-  FAQ blocks are sliced into 3 groups by their order: tab 1 = first N1,
-  tab 2 = next N2, tab 3 = the rest. Reorder FAQs / tweak counts to taste.
-  Reuses the existing tab + accordion JS.
-{% endcomment %}
-{% if faq_blocks.size > 0 %}
-  {% liquid
-    assign t1 = section.settings.faq_tab_1_label | default: 'Feel'
-    assign t2 = section.settings.faq_tab_2_label | default: 'Grip'
-    assign t3 = section.settings.faq_tab_3_label | default: 'Lifetime'
+{% if faq_blocks.size > 0 or wte_blocks.size > 0 or review_block %}
+  <section class="tabs-section" data-drye-tabs>
+    <div class="inner">
 
-    assign n1 = section.settings.faq_tab_1_count | default: 4
-    assign n2 = section.settings.faq_tab_2_count | default: 3
-    assign split2 = n1 | plus: n2
-  %}
+      <div class="tab-nav" role="tablist">
+        {% if faq_blocks.size > 0 %}
+          <button
+            type="button"
+            class="tab-btn active"
+            data-tab="faq"
+            role="tab"
+            aria-selected="true"
+          >
+            {{ section.settings.htab_faq_label | default: 'FAQs' }}
+          </button>
+        {% endif %}
 
-  <div class="pdp-mod pdp-mod--bleed pdp-faq" data-drye-tabs>
-    {% if section.settings.faq_eyebrow != blank %}
-      <span class="pdp-mod__eyebrow">{{ section.settings.faq_eyebrow }}</span>
-    {% endif %}
-    {% if section.settings.faq_heading != blank %}
-      <h2 class="pdp-mod__h2">{{ section.settings.faq_heading }}</h2>
-    {% endif %}
+        {% if wte_blocks.size > 0 %}
+          <button
+            type="button"
+            class="tab-btn{% unless faq_blocks.size > 0 %} active{% endunless %}"
+            data-tab="wte"
+            role="tab"
+            aria-selected="{% if faq_blocks.size > 0 %}false{% else %}true{% endif %}"
+          >
+            {{ section.settings.htab_wte_label | default: 'What to Expect' }}
+          </button>
+        {% endif %}
 
-    <div class="pdp-faq__tabs tab-nav" role="tablist">
-      <button type="button" class="tab-btn active" data-tab="faq-1" role="tab" aria-selected="true">{{ t1 }}</button>
-      <button type="button" class="tab-btn" data-tab="faq-2" role="tab" aria-selected="false">{{ t2 }}</button>
-      <button type="button" class="tab-btn" data-tab="faq-3" role="tab" aria-selected="false">{{ t3 }}</button>
-    </div>
+        {% if review_block %}
+          <button
+            type="button"
+            class="tab-btn{% unless faq_blocks.size > 0 or wte_blocks.size > 0 %} active{% endunless %}"
+            data-tab="rev"
+            role="tab"
+            aria-selected="{% if faq_blocks.size > 0 or wte_blocks.size > 0 %}false{% else %}true{% endif %}"
+          >
+            {{ section.settings.htab_rev_label | default: 'Reviews' }}
+          </button>
+        {% endif %}
+      </div>
 
-    {% for tabnum in (1..3) %}
-      <div
-        class="tab-panel{% if forloop.first %} active{% endif %}"
-        data-panel="faq-{{ tabnum }}"
-        role="tabpanel"
-      >
-        <div class="faq-list">
-          {% for block in faq_blocks %}
-            {% liquid
-              assign pos = forloop.index0
-              assign in_tab = false
-              if tabnum == 1 and pos < n1
-                assign in_tab = true
-              elsif tabnum == 2 and pos >= n1 and pos < split2
-                assign in_tab = true
-              elsif tabnum == 3 and pos >= split2
-                assign in_tab = true
-              endif
-            %}
-            {% if in_tab %}
-              <div class="faq-item" {{ block.shopify_attributes }}>
+      {% if faq_blocks.size > 0 %}
+        <div class="tab-panel active" data-panel="faq" role="tabpanel">
+          <div class="faq-list">
+            {% for block in faq_blocks %}
+              <div class="faq-item{% if block.settings.open_by_default %} open{% endif %}" {{ block.shopify_attributes }}>
                 <button type="button" class="faq-q">
                   <span class="faq-q-text">{{ block.settings.question }}</span>
                   <span class="faq-icon" aria-hidden="true"></span>
@@ -765,107 +564,17 @@ assign review_count = section.settings.review_count_fallback
                   </div>
                 </div>
               </div>
-            {% endif %}
-          {% endfor %}
+            {% endfor %}
+          </div>
         </div>
-      </div>
-    {% endfor %}
-  </div>
-{% endif %}
+      {% endif %}
 
-{% comment %} v10 — Review slider (in-column), directly under the FAQ {% endcomment %}
-{% if section.settings.show_inline_review_slider %}
-  {% assign review_block = section.blocks | where: 'type', 'review_slider' | first %}
-  {% if review_block %}
-    <div class="pdp-review-slider-block pdp-review-slider-block--inline" {{ review_block.shopify_attributes }}>
-      {% render 'drye-review-slider-inline', block: review_block %}
-    </div>
-  {% endif %}
-{% endif %}
-
-{% comment %} v10 — The invention: dark absorption comparison (in-column) {% endcomment %}
-{% if section.settings.inv_heading != blank %}
-  <div class="pdp-mod pdp-mod--bleed pdp-mod--dark pdp-inv">
-    {% if section.settings.inv_eyebrow != blank %}
-      <span class="pdp-mod__eyebrow">{{ section.settings.inv_eyebrow }}</span>
-    {% endif %}
-    <h2 class="pdp-mod__h2">{{ section.settings.inv_heading }}</h2>
-    {% if section.settings.inv_body != blank %}
-      <p class="pdp-mod__body">{{ section.settings.inv_body }}</p>
-    {% endif %}
-
-    <div class="pdp-inv__cmp">
-      {% for i in (1..6) %}
-        {% liquid
-          assign n_key = 'inv_row_' | append: i | append: '_name'
-          assign v_key = 'inv_row_' | append: i | append: '_value'
-          assign p_key = 'inv_row_' | append: i | append: '_percent'
-          assign h_key = 'inv_row_' | append: i | append: '_highlight'
-          assign row_name = section.settings[n_key]
-          assign row_value = section.settings[v_key]
-          assign row_percent = section.settings[p_key] | default: 0
-          assign row_highlight = section.settings[h_key]
-        %}
-        {% if row_name != blank %}
-          <div class="pdp-inv__row{% if row_highlight %} is-drye{% endif %}">
-            <span class="pdp-inv__name">{{ row_name }}</span>
-            <span class="pdp-inv__bar" aria-hidden="true">
-              <i style="width: {{ row_percent }}%;"></i>
-            </span>
-            <strong class="pdp-inv__val">{{ row_value }}</strong>
-          </div>
-        {% endif %}
-      {% endfor %}
-    </div>
-
-    {% if section.settings.inv_note != blank %}
-      <p class="pdp-inv__note">{{ section.settings.inv_note }}</p>
-    {% endif %}
-  </div>
-{% endif %}
-
-{% comment %} v10 — Missing interface: visual product-description grid (in-column) {% endcomment %}
-{% if section.settings.mi_heading != blank %}
-  <div class="pdp-mod pdp-mod--bleed pdp-mod--soft pdp-mi">
-    {% if section.settings.mi_eyebrow != blank %}
-      <span class="pdp-mod__eyebrow">{{ section.settings.mi_eyebrow }}</span>
-    {% endif %}
-    <h2 class="pdp-mod__h2">{{ section.settings.mi_heading }}</h2>
-    {% if section.settings.mi_body != blank %}
-      <p class="pdp-mod__body">{{ section.settings.mi_body }}</p>
-    {% endif %}
-
-    <div class="pdp-mi__grid">
-      {% for i in (1..6) %}
-        {% liquid
-          assign t_key = 'mi_tile_' | append: i | append: '_title'
-          assign d_key = 'mi_tile_' | append: i | append: '_desc'
-          assign tile_title = section.settings[t_key]
-          assign tile_desc = section.settings[d_key]
-        %}
-        {% if tile_title != blank %}
-          <div class="pdp-mi__tile">
-            <h3 class="pdp-mi__tile-title">{{ tile_title }}</h3>
-            {% if tile_desc != blank %}
-              <p class="pdp-mi__tile-desc">{{ tile_desc }}</p>
-            {% endif %}
-          </div>
-        {% endif %}
-      {% endfor %}
-    </div>
-  </div>
-{% endif %}
-
-{% comment %} v10 — What to expect: dark timeline (in-column). Reuses WTE accordion JS. {% endcomment %}
 {% if wte_blocks.size > 0 %}
-  <div class="pdp-mod pdp-mod--bleed pdp-mod--dark pdp-wte">
-    {% if section.settings.wte_eyebrow != blank %}
-      <span class="pdp-mod__eyebrow">{{ section.settings.wte_eyebrow }}</span>
-    {% endif %}
-    {% if section.settings.wte_heading != blank %}
-      <h2 class="pdp-mod__h2">{{ section.settings.wte_heading }}</h2>
-    {% endif %}
-
+  <div
+    class="tab-panel{% unless faq_blocks.size > 0 %} active{% endunless %}"
+    data-panel="wte"
+    role="tabpanel"
+  >
     <div class="hero-wte-timeline" data-hero-wte-timeline>
       {% for block in wte_blocks %}
         {% liquid
@@ -957,6 +666,89 @@ assign review_count = section.settings.review_count_fallback
   </div>
 {% endif %}
 
+{% if review_block %}
+  <div
+    class="tab-panel{% unless faq_blocks.size > 0 or wte_blocks.size > 0 %} active{% endunless %}"
+    data-panel="rev"
+    role="tabpanel"
+  >
+    <div class="testi-grid">
+      {% for i in (1..9) %}
+        {% liquid
+          assign quote_key = 'review_' | append: i | append: '_quote'
+          assign name_key = 'review_' | append: i | append: '_name'
+          assign location_key = 'review_' | append: i | append: '_location'
+          assign label_key = 'review_' | append: i | append: '_label'
+          assign stars_key = 'review_' | append: i | append: '_stars'
+          assign badge_key = 'review_' | append: i | append: '_badge_text'
+          assign attribution_key = 'review_' | append: i | append: '_attribution'
+          assign show_b2b_key = 'review_' | append: i | append: '_show_as_b2b'
+
+          assign rev_quote = review_block.settings[quote_key]
+          assign rev_name = review_block.settings[name_key]
+          assign rev_location = review_block.settings[location_key]
+          assign rev_label = review_block.settings[label_key]
+          assign rev_stars = review_block.settings[stars_key] | default: 5 | plus: 0
+          assign rev_badge = review_block.settings[badge_key]
+          assign rev_attribution = review_block.settings[attribution_key]
+          assign rev_show_b2b = review_block.settings[show_b2b_key]
+        %}
+
+        {% if rev_quote != blank %}
+          <div class="testi-card">
+            {% if rev_show_b2b %}
+              <div class="testi-detail">
+                {{ rev_badge | default: 'Verified' }}
+              </div>
+            {% else %}
+              <div class="testi-stars" aria-label="{{ rev_stars }} out of 5 stars">
+                {% for s in (1..rev_stars) %}
+                  <svg viewBox="0 0 11 11" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                    <path d="M5.5 0L6.7 3.8h4L7.5 6.2 8.7 10 5.5 7.6 2.3 10l1.2-3.8L.3 3.8h4L5.5 0z" fill="#5F8A8B"/>
+                  </svg>
+                {% endfor %}
+              </div>
+            {% endif %}
+
+            <p class="testi-quote">
+              “{{ rev_quote | escape }}”
+            </p>
+
+            <div class="testi-meta">
+              {% if rev_name != blank %}
+                <span class="testi-name">{{ rev_name | escape }}</span>
+              {% endif %}
+
+              {% if rev_label != blank or rev_location != blank %}
+                <span class="testi-role">
+                  {{ rev_label | escape }}{% if rev_label != blank and rev_location != blank %} · {% endif %}{{ rev_location | escape }}
+                </span>
+              {% endif %}
+            </div>
+
+            <span class="testi-detail">
+              <svg viewBox="0 0 8 10" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <path d="M3.94 9.65C2.83 9.35 1.85 8.7 1.14 7.79.43 6.89.03 5.78 0 4.63V1.21L3.94 0l3.94 1.21v3.42c-.03 1.15-.43 2.26-1.14 3.16-.71.91-1.69 1.56-2.8 1.86z" fill="#9CA3AF"/>
+                <path d="M3.3 5.27L2.16 4.22l-.57.53 1.14 1.05.57.53.57-.53 2.28-2.1-.57-.52-2.28 2.1z" fill="#fff"/>
+              </svg>
+              {{ rev_attribution | default: 'Verified buyer' }}
+            </span>
+          </div>
+        {% endif %}
+      {% endfor %}
+    </div>
+
+    <div class="tabs-cta-wrap">
+      <a href="#reviews" class="tabs-cta">
+        {{ section.settings.htab_rev_link_label | default: 'Read all reviews ↓' }}
+      </a>
+    </div>
+  </div>
+{% endif %}
+
+    </div>
+  </section>
+{% endif %}
 
     <script type="application/json" data-product-json>
       {{ current_product | json }}
@@ -1313,7 +1105,6 @@ wteTimelines.forEach((timeline) => {
     { "type": "text", "id": "overlay_name", "label": "Overlay name", "default": "Deborah Fields — Cincinnati, OH" },
     { "type": "textarea", "id": "overlay_quote", "label": "Overlay quote", "default": "\"His hands were bright pink and raw. Completely healed in two weeks. I'd tried everything for years.\"" },
 
-    { "type": "checkbox", "id": "show_eyebrow", "label": "Show eyebrow above title", "default": false },
     { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "8 of 9 reported significant difference — first week" },
     { "type": "text", "id": "heading_line_1", "label": "Heading line 1", "default": "Moisture routing." },
     { "type": "text", "id": "heading_line_2", "label": "Heading line 2", "default": "Inside any glove." },
@@ -1337,122 +1128,12 @@ wteTimelines.forEach((timeline) => {
     { "type": "text", "id": "bullet_1", "label": "Bullet 1", "default": "Keeps hands dry inside sealed gloves — full shift, no reapplying" },
     { "type": "text", "id": "bullet_2", "label": "Bullet 2", "default": "Works under nitrile, latex, and vinyl — no lost grip or dexterity" },
     { "type": "text", "id": "bullet_3", "label": "Bullet 3", "default": "Lasts 4–12 months — machine washable, no chemicals to wear off" },
-    { "type": "text", "id": "bullet_4", "label": "Bullet 4", "default": "0.4mm thin — nothing to adjust or feel" },
-    { "type": "text", "id": "bullet_5", "label": "Bullet 5", "default": "Washable and reusable for 6–12 months" },
-    { "type": "text", "id": "bullet_6", "label": "Bullet 6", "default": "No coatings, no chemicals, no membranes" },
 
     { "type": "text", "id": "trust_text_1", "label": "Trust text 1", "default": "Secure, encrypted checkout" },
     { "type": "text", "id": "trust_text_2", "label": "Trust text 2", "default": "30-day money-back guarantee" },
     { "type": "text", "id": "trust_text_3", "label": "Trust text 3", "default": "Ships within 24 hours" },
 
-    { "type": "text", "id": "description_toggle_closed", "label": "Description label", "default": "Product description" },
-
-    { "type": "checkbox", "id": "show_inline_review_slider", "label": "Show inline review slider (under buy box)", "default": true },
-
-    { "type": "header", "content": "Module — Worker Proof (near cart)" },
-    { "type": "checkbox", "id": "proof_enabled", "label": "Show Worker Proof", "default": true },
-    { "type": "text", "id": "proof_returns_line", "label": "Returns proof line (green)", "default": "0 returns in the last 90 days" },
-    { "type": "text", "id": "proof_keep_line", "label": "Keep line", "default": "Workers are keeping them." },
-    { "type": "text", "id": "proof_ticker_label", "label": "Ticker label", "default": "Recent worker comments" },
-    { "type": "text", "id": "proof_hint", "label": "Tap-to-read hint", "default": "Tap a comment to read it in full" },
-    { "type": "paragraph", "content": "Comment ticker. Each item shows a short line; tap opens the full comment inline. Add a source URL only if a real public link exists (then 'View on Instagram →' shows). Use approved/public comments only." },
-    { "type": "text", "id": "proof_item_1_short", "label": "Item 1 short quote", "default": "These are incredible." },
-    { "type": "textarea", "id": "proof_item_1_full", "label": "Item 1 full quote", "default": "These are incredible. I have nearly no more sweat in nitrile gloves. They're so thin I barely notice them." },
-    { "type": "text", "id": "proof_item_1_handle", "label": "Item 1 handle/name", "default": "@fordbodytech811" },
-    { "type": "text", "id": "proof_item_1_label", "label": "Item 1 source label", "default": "Instagram comment" },
-    { "type": "url", "id": "proof_item_1_url", "label": "Item 1 source URL (optional)" },
-    { "type": "text", "id": "proof_item_2_short", "label": "Item 2 short quote", "default": "Ordering my second pair right now." },
-    { "type": "textarea", "id": "proof_item_2_full", "label": "Item 2 full quote", "default": "I'm actually ordering my second pair right now." },
-    { "type": "text", "id": "proof_item_2_handle", "label": "Item 2 handle/name", "default": "James H." },
-    { "type": "text", "id": "proof_item_2_label", "label": "Item 2 source label", "default": "Verified customer" },
-    { "type": "url", "id": "proof_item_2_url", "label": "Item 2 source URL (optional)" },
-    { "type": "text", "id": "proof_item_3_short", "label": "Item 3 short quote", "default": "Coworkers are looking into getting pairs too." },
-    { "type": "textarea", "id": "proof_item_3_full", "label": "Item 3 full quote", "default": "A few of my coworkers are looking into getting a few pairs themselves." },
-    { "type": "text", "id": "proof_item_3_handle", "label": "Item 3 handle/name", "default": "@fordbodytech811" },
-    { "type": "text", "id": "proof_item_3_label", "label": "Item 3 source label", "default": "Instagram comment" },
-    { "type": "url", "id": "proof_item_3_url", "label": "Item 3 source URL (optional)" },
-    { "type": "text", "id": "proof_item_4_short", "label": "Item 4 short quote", "default": "Nearly no more sweat in nitrile gloves." },
-    { "type": "textarea", "id": "proof_item_4_full", "label": "Item 4 full quote", "default": "I have nearly no more sweat in nitrile gloves. They're so thin I barely notice them." },
-    { "type": "text", "id": "proof_item_4_handle", "label": "Item 4 handle/name", "default": "@fordbodytech811" },
-    { "type": "text", "id": "proof_item_4_label", "label": "Item 4 source label", "default": "Instagram comment" },
-    { "type": "url", "id": "proof_item_4_url", "label": "Item 4 source URL (optional)" },
-    { "type": "text", "id": "proof_item_5_short", "label": "Item 5 short quote (optional)" },
-    { "type": "textarea", "id": "proof_item_5_full", "label": "Item 5 full quote (optional)" },
-    { "type": "text", "id": "proof_item_5_handle", "label": "Item 5 handle/name (optional)" },
-    { "type": "text", "id": "proof_item_5_label", "label": "Item 5 source label (optional)" },
-    { "type": "url", "id": "proof_item_5_url", "label": "Item 5 source URL (optional)" },
-    { "type": "text", "id": "proof_item_6_short", "label": "Item 6 short quote (optional)" },
-    { "type": "textarea", "id": "proof_item_6_full", "label": "Item 6 full quote (optional)" },
-    { "type": "text", "id": "proof_item_6_handle", "label": "Item 6 handle/name (optional)" },
-    { "type": "text", "id": "proof_item_6_label", "label": "Item 6 source label (optional)" },
-    { "type": "url", "id": "proof_item_6_url", "label": "Item 6 source URL (optional)" },
-    { "type": "paragraph", "content": "Optional 'Recently bought' list — anonymized only. First name + last initial · country · qty. No full names, cities, or timestamps from orders. One per line." },
-    { "type": "checkbox", "id": "proof_show_recent", "label": "Show 'Recently bought' list", "default": false },
-    { "type": "text", "id": "proof_recent_label", "label": "Recently bought label", "default": "Recently bought" },
-    { "type": "textarea", "id": "proof_recent_items", "label": "Recently bought items (one per line)" },
-
-    { "type": "header", "content": "Module — Missing interface (grid)" },
-    { "type": "text", "id": "mi_eyebrow", "label": "Eyebrow", "default": "The missing interface" },
-    { "type": "text", "id": "mi_heading", "label": "Heading", "default": "We wanted to solve the inside." },
-    { "type": "textarea", "id": "mi_body", "label": "Body", "default": "Every liner that absorbs has a saturation point. DRYE is built so the skin side does not hold sweat — it routes moisture outward." },
-    { "type": "text", "id": "mi_tile_1_title", "label": "Tile 1 title", "default": "Skin stays drier" },
-    { "type": "textarea", "id": "mi_tile_1_desc", "label": "Tile 1 desc", "default": "Sweat moves away from skin instead of sitting inside the glove." },
-    { "type": "text", "id": "mi_tile_2_title", "label": "Tile 2 title", "default": "Fits sealed gloves" },
-    { "type": "textarea", "id": "mi_tile_2_desc", "label": "Tile 2 desc", "default": "0.4mm thin under nitrile, latex, vinyl and rubber." },
-    { "type": "text", "id": "mi_tile_3_title", "label": "Tile 3 title", "default": "Easier glove changes" },
-    { "type": "textarea", "id": "mi_tile_3_desc", "label": "Tile 3 desc", "default": "Nitrile slides on and off over a dry layer, not wet skin." },
-    { "type": "text", "id": "mi_tile_4_title", "label": "Tile 4 title", "default": "Built for months" },
-    { "type": "textarea", "id": "mi_tile_4_desc", "label": "Tile 4 desc", "default": "Washable, reusable, made for repeated shifts." },
-    { "type": "text", "id": "mi_tile_5_title", "label": "Tile 5 title (optional)" },
-    { "type": "textarea", "id": "mi_tile_5_desc", "label": "Tile 5 desc (optional)" },
-    { "type": "text", "id": "mi_tile_6_title", "label": "Tile 6 title (optional)" },
-    { "type": "textarea", "id": "mi_tile_6_desc", "label": "Tile 6 desc (optional)" },
-
-    { "type": "header", "content": "Module — The invention (absorption, dark)" },
-    { "type": "text", "id": "inv_eyebrow", "label": "Eyebrow", "default": "The invention" },
-    { "type": "text", "id": "inv_heading", "label": "Heading", "default": "Why hands can remain dry." },
-    { "type": "textarea", "id": "inv_body", "label": "Body", "default": "Asymmetric layering. One direction: away from skin. Every absorbing liner eventually fills up and becomes the wet layer. DRYE routes moisture outward instead — the skin side is built not to hold sweat." },
-    { "type": "paragraph", "content": "Bars show moisture regain — how much water a fibre holds. Higher = wetter against skin." },
-    { "type": "text", "id": "inv_row_1_name", "label": "Row 1 name", "default": "Merino wool" },
-    { "type": "text", "id": "inv_row_1_value", "label": "Row 1 value", "default": "15–18%" },
-    { "type": "range", "id": "inv_row_1_percent", "label": "Row 1 bar %", "min": 0, "max": 100, "step": 1, "unit": "%", "default": 100 },
-    { "type": "checkbox", "id": "inv_row_1_highlight", "label": "Row 1 highlight (DRYE)", "default": false },
-    { "type": "text", "id": "inv_row_2_name", "label": "Row 2 name" },
-    { "type": "text", "id": "inv_row_2_value", "label": "Row 2 value", "default": "13%" },
-    { "type": "range", "id": "inv_row_2_percent", "label": "Row 2 bar %", "min": 0, "max": 100, "step": 1, "unit": "%", "default": 78 },
-    { "type": "checkbox", "id": "inv_row_2_highlight", "label": "Row 2 highlight (DRYE)", "default": false },
-    { "type": "text", "id": "inv_row_3_name", "label": "Row 3 name" },
-    { "type": "text", "id": "inv_row_3_value", "label": "Row 3 value", "default": "11%" },
-    { "type": "range", "id": "inv_row_3_percent", "label": "Row 3 bar %", "min": 0, "max": 100, "step": 1, "unit": "%", "default": 65 },
-    { "type": "checkbox", "id": "inv_row_3_highlight", "label": "Row 3 highlight (DRYE)", "default": false },
-    { "type": "text", "id": "inv_row_4_name", "label": "Row 4 name", "default": "Cotton" },
-    { "type": "text", "id": "inv_row_4_value", "label": "Row 4 value", "default": "7–8%" },
-    { "type": "range", "id": "inv_row_4_percent", "label": "Row 4 bar %", "min": 0, "max": 100, "step": 1, "unit": "%", "default": 47 },
-    { "type": "checkbox", "id": "inv_row_4_highlight", "label": "Row 4 highlight (DRYE)", "default": false },
-    { "type": "text", "id": "inv_row_5_name", "label": "Row 5 name" },
-    { "type": "text", "id": "inv_row_5_value", "label": "Row 5 value", "default": "0.4%" },
-    { "type": "range", "id": "inv_row_5_percent", "label": "Row 5 bar %", "min": 0, "max": 100, "step": 1, "unit": "%", "default": 6 },
-    { "type": "checkbox", "id": "inv_row_5_highlight", "label": "Row 5 highlight (DRYE)", "default": false },
-    { "type": "text", "id": "inv_row_6_name", "label": "Row 6 name", "default": "DRYE Asymmetric layering" },
-    { "type": "text", "id": "inv_row_6_value", "label": "Row 6 value", "default": "<0.1%" },
-    { "type": "range", "id": "inv_row_6_percent", "label": "Row 6 bar %", "min": 0, "max": 100, "step": 1, "unit": "%", "default": 3 },
-    { "type": "checkbox", "id": "inv_row_6_highlight", "label": "Row 6 highlight (DRYE)", "default": true },
-    { "type": "text", "id": "inv_note", "label": "Footnote", "default": "Same thin layer. One direction: away from skin." },
-
-    { "type": "header", "content": "Module — FAQ tabs" },
-    { "type": "text", "id": "faq_eyebrow", "label": "Eyebrow", "default": "Before you decide" },
-    { "type": "text", "id": "faq_heading", "label": "Heading", "default": "Common questions, sorted." },
-    { "type": "paragraph", "content": "Three tabs. FAQ blocks are split by their order: tab 1 gets the first N, tab 2 the next N, tab 3 the rest. Reorder FAQ blocks and set the counts below to control the grouping." },
-    { "type": "text", "id": "faq_tab_1_label", "label": "Tab 1 label", "default": "Feel" },
-    { "type": "range", "id": "faq_tab_1_count", "label": "Tab 1 — number of FAQs", "min": 1, "max": 12, "step": 1, "default": 4 },
-    { "type": "text", "id": "faq_tab_2_label", "label": "Tab 2 label", "default": "Grip" },
-    { "type": "range", "id": "faq_tab_2_count", "label": "Tab 2 — number of FAQs", "min": 1, "max": 12, "step": 1, "default": 3 },
-    { "type": "text", "id": "faq_tab_3_label", "label": "Tab 3 label", "default": "Lifetime" },
-    { "type": "paragraph", "content": "Tab 3 shows all remaining FAQs after tabs 1 and 2." },
-
-    { "type": "header", "content": "Module — What to expect (timeline, dark)" },
-    { "type": "text", "id": "wte_eyebrow", "label": "Eyebrow", "default": "What to expect" },
-    { "type": "text", "id": "wte_heading", "label": "Heading", "default": "One layer. One shift." }
+    { "type": "text", "id": "description_toggle_closed", "label": "Description label", "default": "Product description" }
   ],
   "blocks": [
     {
