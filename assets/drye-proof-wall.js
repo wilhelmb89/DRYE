@@ -53,7 +53,10 @@
         acc += speed;
         var half = loopPoint();
         if (half > 0 && acc >= half) { acc -= half; }
-        scroller.scrollLeft = acc;
+        // Round to whole pixels: a fractional scrollLeft re-rasterises text glyphs
+        // on the sub-pixel grid every frame, which makes the overlay labels appear
+        // to shimmer/wobble horizontally. Integer scroll positions render crisply.
+        scroller.scrollLeft = Math.round(acc);
       }
       rafId = requestAnimationFrame(frame);
     }
