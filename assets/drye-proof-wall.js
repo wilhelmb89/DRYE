@@ -17,8 +17,20 @@
     var acc = scroller.scrollLeft || 0;
     var paused = false;
     var resumeTO = null;
+    var rafId = null;
+    var inView = false;
 
     function loopPoint() { return scroller.scrollWidth / 2; } // content is duplicated
+    function eligible() {
+      // Only animate while the row is on screen AND the tab is in the foreground.
+      // Previously the rAF loop changed scrollLeft ~60x/sec forever (even off-screen
+      // or in a background tab), which floods session recorders like Microsoft Clarity
+      // with scroll events and makes them exceed their per-session cap and drop the
+      // recording. Gating the loop keeps the visual behaviour but stops the flood.
+      return inView && !reduce && document.visibilityState === 'visible';
+    }
+    function start() { if (rafId == null && eligible()) { rafId = requestAnimationFrame(frame); } }
+    function stop() { if (rafId != null) { cancelAnimationFrame(rafId); rafId = null; } }
     function pause() { paused = true; if (resumeTO) { clearTimeout(resumeTO); } }
     function resumeSoon() {
       if (resumeTO) { clearTimeout(resumeTO); }
@@ -35,15 +47,32 @@
     scroller.addEventListener('scroll', function () { if (paused) { acc = scroller.scrollLeft; } }, { passive: true });
 
     function frame() {
-      if (!paused && !reduce) {
+      rafId = null;
+      if (!eligible()) { return; } // stop the loop; observers below will restart it
+      if (!paused) {
         acc += speed;
         var half = loopPoint();
         if (half > 0 && acc >= half) { acc -= half; }
         scroller.scrollLeft = acc;
       }
-      requestAnimationFrame(frame);
+      rafId = requestAnimationFrame(frame);
     }
-    requestAnimationFrame(function () { requestAnimationFrame(frame); });
+
+    // Run only while the row is visible in the viewport.
+    if ('IntersectionObserver' in window) {
+      new IntersectionObserver(function (entries) {
+        inView = entries[0].isIntersecting;
+        if (inView) { acc = scroller.scrollLeft; start(); } else { stop(); }
+      }, { threshold: 0 }).observe(scroller);
+    } else {
+      inView = true;
+      start();
+    }
+
+    // Pause when the tab goes to the background, resume when it returns.
+    document.addEventListener('visibilitychange', function () {
+      if (document.visibilityState === 'visible') { acc = scroller.scrollLeft; start(); } else { stop(); }
+    });
   }
 
   function setup(sec) {
