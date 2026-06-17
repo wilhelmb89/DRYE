@@ -91,6 +91,7 @@ assign review_count = section.settings.review_count_fallback
     <div class="hero-gallery-main" data-gallery-viewport>
       <div class="hero-gallery-track" data-gallery-track>
         {% if visible_media_count > 0 %}
+          {% assign lcp_assigned = false %}
           {% for media in current_product.media %}
             {% assign media_src = media.preview_image | image_url | split: '?' | first %}
 
@@ -99,6 +100,15 @@ assign review_count = section.settings.review_count_fallback
                 {% case media.media_type %}
 
                   {% when 'image' %}
+                    {%- comment -%} Only the first visible image is the LCP element; load it eagerly with high priority and lazy-load the rest so the gallery doesn't saturate bandwidth on slow connections. {%- endcomment -%}
+                    {% if lcp_assigned == false %}
+                      {% assign img_loading = 'eager' %}
+                      {% assign img_fetch = 'high' %}
+                      {% assign lcp_assigned = true %}
+                    {% else %}
+                      {% assign img_loading = 'lazy' %}
+                      {% assign img_fetch = 'auto' %}
+                    {% endif %}
                     {{
                       media
                       | image_url: width: 2200
@@ -106,7 +116,8 @@ assign review_count = section.settings.review_count_fallback
                         alt: media.alt | default: current_product.title,
                         widths: '480, 720, 960, 1200, 1600, 2000, 2200',
                         sizes: '(min-width: 1024px) 600px, (min-width: 768px) 50vw, 100vw',
-                        loading: 'eager',
+                        loading: img_loading,
+                        fetchpriority: img_fetch,
                         class: 'hero-media-img'
                     }}
 
