@@ -661,18 +661,6 @@
         "body": "<p>First thing you notice: <strong>your hands come out dry. </strong>Then nitriles stop fighting you. Gloves peel off easier. Even impact tools feel a bit less brutal.</p>"
       }
     },
-    "drye_proof_wall_EKw3Dq": {
-      "type": "drye-proof-wall",
-      "name": "DRYE Proof Wall",
-      "settings": {
-        "eyebrow": "FIELD NOTES",
-        "heading": "What changed under the glove",
-        "subheading": "Pull gloves off\n→ hands aren't soaked\n→ no towel routine\n→ gloves slide back on\n→ back to the computer, the car, or the next job",
-        "show_media_row": true,
-        "all_reviews_url": "",
-        "all_reviews_label": "Read all reviews →"
-      }
-    },
     "apps_rjNBgt": {
       "type": "apps",
       "blocks": {
@@ -1051,6 +1039,23 @@
         "eyebrow": "",
         "heading": ""
       }
+    },
+    "178180806109aeb006": {
+      "type": "apps",
+      "blocks": {
+        "judge_me_reviews_review_widget_homepage_ndXHpq": {
+          "type": "shopify://apps/judge-me-reviews/blocks/review_widget_homepage/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
+          "settings": {
+            "product": "drye-moisture-routing-glove-liners",
+            "review_data": "real_data",
+            "max_width": 1200
+          }
+        }
+      },
+      "block_order": [
+        "judge_me_reviews_review_widget_homepage_ndXHpq"
+      ],
+      "settings": {}
     }
   },
   "order": [
@@ -1065,10 +1070,10 @@
     "drye_objection_cards_dYmK9b",
     "drye_about_founder_story_B899RM",
     "drye_mechanics_time2_wd4WRy",
-    "drye_proof_wall_EKw3Dq",
     "apps_rjNBgt",
     "drye_competitive_table_Rhhded",
     "drye_research_study_breakdown_TrRXii",
+    "178180806109aeb006",
     "drye_mechanics_cta_pYjFDe",
     "drye_documented_results_grqiUX",
     "jens_linnea_section_yeaz4w",
