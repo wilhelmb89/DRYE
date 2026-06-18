@@ -12,6 +12,24 @@
     "drye_new_hero_jE4LCa": {
       "type": "dryeNEW-hero",
       "blocks": {
+        "credibility_item_dhEx79": {
+          "type": "credibility_item",
+          "settings": {
+            "text": ""
+          }
+        },
+        "credibility_item_iGim8M": {
+          "type": "credibility_item",
+          "settings": {
+            "text": "Uppsala University"
+          }
+        },
+        "credibility_item_VrixKF": {
+          "type": "credibility_item",
+          "settings": {
+            "text": "Uppsala University"
+          }
+        },
         "stat_item_gMY4wD": {
           "type": "stat_item",
           "settings": {
@@ -46,6 +64,9 @@
         }
       },
       "block_order": [
+        "credibility_item_dhEx79",
+        "credibility_item_iGim8M",
+        "credibility_item_VrixKF",
         "stat_item_gMY4wD",
         "stat_item_gWdFxY",
         "stat_item_drP8H3",
@@ -162,6 +183,17 @@
             "source": "Automotive mechanic"
           }
         },
+        "panel_9EzgzN": {
+          "type": "panel",
+          "settings": {
+            "image": "shopify://shop_images/Gemini_Generated_Image_77q3h377q3h377q3.webp",
+            "image_alt": "Mechanic at work",
+            "label": "Latex · Chemicals",
+            "role": "Paint booth, hour 4",
+            "quote": "\"Oil, paint, sweat - it all ends up on the gloves. Then you strill have to peel them off.\"",
+            "source": "Automotive mechanic · TikTok #mechanic"
+          }
+        },
         "panel_hGCikL": {
           "type": "panel",
           "settings": {
@@ -209,6 +241,7 @@
       },
       "block_order": [
         "panel_aic3gK",
+        "panel_9EzgzN",
         "panel_hGCikL",
         "panel_Lky9YA",
         "panel_FtC8i3",
