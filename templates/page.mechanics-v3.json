@@ -1035,6 +1035,47 @@
         "body": "<p><em>\"After 6 hours under rubber gloves, my hands felt wet inside. Took the gloves off — completely dry. Such a mindfuck.\"</em><br/><br/></p>"
       }
     },
+    "drye_validation_TYhQTK": {
+      "type": "drye-validation",
+      "blocks": {
+        "institution_iyNeLW": {
+          "type": "institution",
+          "settings": {
+            "mark": "R",
+            "name": "RISE Research Institutes of Sweden",
+            "role": "Early-stage requirements & system development"
+          }
+        },
+        "institution_xKQJ36": {
+          "type": "institution",
+          "settings": {
+            "mark": "U",
+            "name": "Uppsala University",
+            "role": "Clinical conditions & dermatological impact"
+          }
+        },
+        "institution_GpyUJG": {
+          "type": "institution",
+          "settings": {
+            "mark": "S",
+            "name": "Swedish School of Textiles",
+            "role": "Textile engineering & structural analysis"
+          }
+        }
+      },
+      "block_order": [
+        "institution_iyNeLW",
+        "institution_xKQJ36",
+        "institution_GpyUJG"
+      ],
+      "name": "DRYE Validation",
+      "settings": {
+        "micro_label": "",
+        "heading_line_1": "Seven years solving one problem:",
+        "heading_line_2": "trapped sweat.",
+        "lead_text": "Seven years of R&D across five independent research institutions."
+      }
+    },
     "drye_mechanics_cta_khadEy": {
       "type": "drye-mechanics-cta",
       "name": "DRYE Mechanics CTA",
@@ -1125,49 +1166,8 @@
       "name": "DRYE Study Breakdown",
       "settings": {
         "micro_label": "",
-        "heading": "Different gloves. Same failure point.\n <em class=\"dryeNEW-em\"><br>The skin underneath.</em>",
-        "intro_text": "EV technicians and automotive mechanics reported the same pattern: less trapped sweat, fewer flare-ups, and no loss of dexterity."
-      }
-    },
-    "drye_validation_TYhQTK": {
-      "type": "drye-validation",
-      "blocks": {
-        "institution_iyNeLW": {
-          "type": "institution",
-          "settings": {
-            "mark": "R",
-            "name": "RISE Research Institutes of Sweden",
-            "role": "Early-stage requirements & system development"
-          }
-        },
-        "institution_xKQJ36": {
-          "type": "institution",
-          "settings": {
-            "mark": "U",
-            "name": "Uppsala University",
-            "role": "Clinical conditions & dermatological impact"
-          }
-        },
-        "institution_GpyUJG": {
-          "type": "institution",
-          "settings": {
-            "mark": "S",
-            "name": "Swedish School of Textiles",
-            "role": "Textile engineering & structural analysis"
-          }
-        }
-      },
-      "block_order": [
-        "institution_iyNeLW",
-        "institution_xKQJ36",
-        "institution_GpyUJG"
-      ],
-      "name": "DRYE Validation",
-      "settings": {
-        "micro_label": "",
-        "heading_line_1": "Seven years solving one problem:",
-        "heading_line_2": "trapped sweat.",
-        "lead_text": "Seven years of R&D across five independent research institutions."
+        "heading": "Three environments\n <em class=\"dryeNEW-em\"><br>Same pattern.</em>",
+        "intro_text": "Independent observations across real working environments."
       }
     },
     "drye_new_closing_cta_rDAaUw": {
@@ -1218,9 +1218,9 @@
     "drye_mechanics_time2_wd4WRy",
     "drye_about_cta_bmdVek",
     "drye_mechanics_time_promise_ieYYEU",
+    "drye_validation_TYhQTK",
     "drye_mechanics_cta_khadEy",
     "drye_research_study_breakdown_TrRXii",
-    "drye_validation_TYhQTK",
     "drye_new_closing_cta_rDAaUw",
     "drye_mechanism_nav_tezMhC"
   ]
