@@ -55,7 +55,7 @@
       "settings": {
         "section_id": "hero",
         "poster_image_desktop": "shopify://shop_images/Gemini_Generated_Image_2rtxik2rtxik2rtx.webp",
-        "poster_image_mobile": "shopify://shop_images/Gemini_Generated_Image_ain34ain34ain34a_1.webp",
+        "poster_image_mobile": "shopify://shop_images/Firefly.webp",
         "video_hls_url_desktop": "",
         "video_hls_url_mobile": "",
         "heading_line_1": "Add one <span style=\"text-decoration:underline\">dry layer</span>",
@@ -154,7 +154,7 @@
         "panel_aic3gK": {
           "type": "panel",
           "settings": {
-            "image": "shopify://shop_images/8384066585938811776.webp",
+            "image": "shopify://shop_images/Gemini_Generated_Image_wf831ewf831ewf83.webp",
             "image_alt": "Mechanic at work",
             "label": "NITRILE · HOT BAY ",
             "role": "Auto repair, ~20 min in",
@@ -225,19 +225,6 @@
     "drye_evidence_V9B97n": {
       "type": "drye-evidence",
       "blocks": {
-        "card_xAhqGk": {
-          "type": "card",
-          "disabled": true,
-          "settings": {
-            "label": "TIME LOST ADDS UP",
-            "stat_prefix": "",
-            "stat": "12",
-            "stat_suffix": "min lost / shift",
-            "stat_qualitative": false,
-            "body": "4 glove-drying breaks × 3 minutes = 12 minutes lost per technician, per day.",
-            "source": ""
-          }
-        },
         "card_hLkDz8": {
           "type": "card",
           "settings": {
@@ -252,6 +239,7 @@
         },
         "card_BBwEUV": {
           "type": "card",
+          "disabled": true,
           "settings": {
             "label": "WET SKIN SOFTENS",
             "stat_prefix": "",
@@ -260,6 +248,31 @@
             "stat_qualitative": false,
             "body": "<strong>After 27 minutes: </strong>skin damage risk doubles in women, 55 minutes in men. Most shifts run 3-6 hours - 8x the threshold.",
             "source": "Lund 2020, Scand J Work Environ Health"
+          }
+        },
+        "card_QWjq3t": {
+          "type": "card",
+          "disabled": true,
+          "settings": {
+            "label": "Workforce cost",
+            "stat_prefix": "",
+            "stat": "57",
+            "stat_suffix": "% sick leave",
+            "stat_qualitative": false,
+            "body": "<strong>In chronic cases:</strong> 57% take sick leave. 1 in 4 change or leave their trade. Direct healthcare costs run thousands per case, year after year.",
+            "source": "Armstrong 2022, Diepgen"
+          }
+        },
+        "card_TJ3NHr": {
+          "type": "card",
+          "settings": {
+            "label": "Who it hits",
+            "stat_prefix": "",
+            "stat": "59.5",
+            "stat_suffix": "%",
+            "stat_qualitative": false,
+            "body": "In NACDG patch-test data, <strong>59.5% of mechanics and repairers had hand involvement. </strong> For people working with gloves, oils, solvents and tools, the hands are where the problem shows up.",
+            "source": "NACDG 2017"
           }
         },
         "card_FRxDBe": {
@@ -286,32 +299,6 @@
             "source": "Bouwstra 2003, J Invest Dermatol"
           }
         },
-        "card_TJ3NHr": {
-          "type": "card",
-          "disabled": true,
-          "settings": {
-            "label": "Who it hits",
-            "stat_prefix": "",
-            "stat": "59.5",
-            "stat_suffix": "%",
-            "stat_qualitative": false,
-            "body": "In NACDG patch-test data, <strong>59.5% of mechanics and repairers had hand involvement. </strong> For people working with gloves, oils, solvents and tools, the hands are where the problem shows up.",
-            "source": "NACDG 2017"
-          }
-        },
-        "card_QWjq3t": {
-          "type": "card",
-          "disabled": true,
-          "settings": {
-            "label": "Workforce cost",
-            "stat_prefix": "",
-            "stat": "57",
-            "stat_suffix": "% sick leave",
-            "stat_qualitative": false,
-            "body": "<strong>In chronic cases:</strong> 57% take sick leave. 1 in 4 change or leave their trade. Direct healthcare costs run thousands per case, year after year.",
-            "source": "Armstrong 2022, Diepgen"
-          }
-        },
         "bridge_QYWYJL": {
           "type": "bridge",
           "settings": {
@@ -324,13 +311,12 @@
         }
       },
       "block_order": [
-        "card_xAhqGk",
         "card_hLkDz8",
         "card_BBwEUV",
+        "card_QWjq3t",
+        "card_TJ3NHr",
         "card_FRxDBe",
         "card_r9m4MJ",
-        "card_TJ3NHr",
-        "card_QWjq3t",
         "bridge_QYWYJL"
       ],
       "name": "DRYE Evidence",
