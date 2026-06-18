@@ -173,6 +173,17 @@
             "source": "Car detailer"
           }
         },
+        "panel_Lky9YA": {
+          "type": "panel",
+          "settings": {
+            "image": "shopify://shop_images/Karosserifabriken.webp",
+            "image_alt": "Mechanic at work",
+            "label": "NITRILE · HEAVY REPAIR ",
+            "role": "Truck repair, hour 4 ",
+            "quote": "“Same damp gloves all day. Same cracked hands by Thursday.”",
+            "source": "Diesel mechanic"
+          }
+        },
         "panel_hbYY6N": {
           "type": "panel",
           "settings": {
@@ -181,7 +192,7 @@
             "label": "RUBBER · OIL CHANGE ",
             "role": "Under the lift, mid-shift",
             "quote": "“By lunch, it’s sweat, oil, and grease inside the gloves.”",
-            "source": "DIESEL TECH"
+            "source": "Diesel mechanic"
           }
         },
         "panel_FtC8i3": {
@@ -194,26 +205,14 @@
             "quote": "“I’m airing them out between every job.”",
             "source": "EV technician"
           }
-        },
-        "panel_Lky9YA": {
-          "type": "panel",
-          "disabled": true,
-          "settings": {
-            "image": "shopify://shop_images/Gemini_Generated_Image_77q3h377q3h377q3.webp",
-            "image_alt": "Mechanic at work",
-            "label": "LATEX · CHEMICALS",
-            "role": "Paint booth, 4 h in",
-            "quote": "“Same damp gloves all week. Same cracked hands by Thursday.”",
-            "source": "Diesel mechanic"
-          }
         }
       },
       "block_order": [
         "panel_aic3gK",
         "panel_hGCikL",
+        "panel_Lky9YA",
         "panel_hbYY6N",
-        "panel_FtC8i3",
-        "panel_Lky9YA"
+        "panel_FtC8i3"
       ],
       "name": "DRYE Worker Grid",
       "settings": {
