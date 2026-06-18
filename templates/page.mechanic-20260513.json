@@ -200,62 +200,49 @@
         "swipe_label": "Swipe"
       }
     },
-    "drye_evidence_X7nFhb": {
+    "drye_evidence_pwCHH7": {
       "type": "drye-evidence",
       "blocks": {
-        "card_i4XDnd": {
-          "type": "card",
-          "disabled": true,
-          "settings": {
-            "label": "Bacterial load",
-            "stat_prefix": "",
-            "stat": "52",
-            "stat_suffix": "×",
-            "stat_qualitative": false,
-            "body": "<strong>After 4 hours in a sealed glove: </strong>staph bacteria multiply 52×. Same bacteria that drives infection and slow healing — thriving on your hands.",
-            "source": "Nørreslet 2021, Acta Derm Venereol"
-          }
-        },
-        "card_FE7Exi": {
+        "card_n8hX64": {
           "type": "card",
           "settings": {
-            "label": "Exposure threshold",
+            "label": "exposure threshold",
             "stat_prefix": "",
             "stat": "5–7",
             "stat_suffix": "min",
             "stat_qualitative": false,
-            "body": "<strong>In a sealed glove:</strong> relative humidity hits 90% within 5–7 minutes. Skin temperature climbs to 35°C. This is the environment that softens skin and feeds bacteria — long before you notice it.",
+            "body": "<strong>In a sealed glove: </strong>relative humidity hits 90% within 5–7 minutes. Skin temperature climbs to 95°F.",
             "source": "Park & Lee 2025"
           }
         },
-        "card_xx6yQJ": {
+        "card_RtetXC": {
           "type": "card",
           "settings": {
-            "label": "Maceration",
+            "label": "WET SKIN SOFTENS",
             "stat_prefix": "",
             "stat": "27",
             "stat_suffix": "min",
             "stat_qualitative": false,
-            "body": "<strong>After 27 minutes</strong>: skin damage risk doubles in women, 55 minutes in men. Most shifts run 3-6 hours - 8x the threshold.",
+            "body": "<strong>After 27 minutes: </strong>skin damage risk doubles in women, 55 minutes in men. Most shifts run 3-6 hours - 8x the threshold.",
             "source": "Lund 2020, Scand J Work Environ Health"
           }
         },
-        "card_zzFMeD": {
+        "card_iHX66m": {
           "type": "card",
           "settings": {
-            "label": "Maceration",
+            "label": "maceration",
             "stat_prefix": "",
             "stat": "3",
             "stat_suffix": "x swelling",
             "stat_qualitative": false,
-            "body": "<strong>After 4 hours:</strong> your outer skin barrier swells 3x thicker. Oil, solvents and chemicals soak in deeper - into skin that can't fight back.",
-            "source": "Bouwstra 2003, J Invest Dermatol"
+            "body": "<strong>after 4 hours:</strong> your outer skin barrier swells 3x thicker. Oil, solvents and chemicals soak in deeper - into skin that can't fight back.",
+            "source": "Bouwstra 2003, J invest Dermatol"
           }
         },
-        "card_MmAtBM": {
+        "card_UhKBx8": {
           "type": "card",
           "settings": {
-            "label": "WET SKIN LETS MORE THROUGH",
+            "label": "Wet skin lets more through",
             "stat_prefix": "",
             "stat": "3,6",
             "stat_suffix": "x faster",
@@ -264,7 +251,19 @@
             "source": "Hikima & Maibach, Biol Pharm Bull, 2006."
           }
         },
-        "card_DFV7fp": {
+        "card_4qDDb3": {
+          "type": "card",
+          "settings": {
+            "label": "Who it hits",
+            "stat_prefix": "",
+            "stat": "59.5",
+            "stat_suffix": "%",
+            "stat_qualitative": false,
+            "body": "In NACDG patch-test data, <strong>59.5% of mechanics and repairers had hand involvement. </strong> For people working with gloves, oils, solvents and tools, the hands are where the problem shows up.",
+            "source": "NACDG 2017"
+          }
+        },
+        "card_ERXacp": {
           "type": "card",
           "settings": {
             "label": "Who it hits",
@@ -272,48 +271,35 @@
             "stat": "60",
             "stat_suffix": "%",
             "stat_qualitative": false,
-            "body": "<strong>Across 691 mechanics screened: </strong>60% had visible hand damage. Not from accidents — from daily exposure to tools and sealed gloves.",
+            "body": "<strong>Across 691 mecahnics screened</strong> 60% had visible hand damage. Not from accidents - from daily exposure to tools and sealed gloves.",
             "source": "NACDG 2017"
           }
         },
-        "card_4d3QVz": {
-          "type": "card",
-          "settings": {
-            "label": "Workforce cost",
-            "stat_prefix": "",
-            "stat": "57",
-            "stat_suffix": "% sick leave",
-            "stat_qualitative": false,
-            "body": "<strong>In chronic cases:</strong> 57% take sick leave. 1 in 4 change or leave their trade. Direct healthcare costs run thousands per case, year after year.",
-            "source": "Armstrong 2022, Diepgen"
-          }
-        },
-        "bridge_UB9LaJ": {
+        "bridge_HUKWGF": {
           "type": "bridge",
           "settings": {
             "label": "The mechanism",
             "paradigm": "Every glove, liner, barrier cream and powder fails on the physics.",
-            "mechanism": "DRYE routes sweat from skin to outer fabric. One-directional gradient. We call it <span class=\"evidence__bridge-name\">Asymmetric Layering</span>.",
+            "mechanism": "DRYE routes sweat from skin to outer fabric. One-directional gradient. We call it <span style=\"color: #fff; font-weight: 700;\">Asymmetric layering.</span>",
             "cta_label": "See how it works",
-            "cta_link": "#mechanism-mechanism"
+            "cta_link": "#mechanics-saturation"
           }
         }
       },
       "block_order": [
-        "card_i4XDnd",
-        "card_FE7Exi",
-        "card_xx6yQJ",
-        "card_zzFMeD",
-        "card_MmAtBM",
-        "card_DFV7fp",
-        "card_4d3QVz",
-        "bridge_UB9LaJ"
+        "card_n8hX64",
+        "card_RtetXC",
+        "card_iHX66m",
+        "card_UhKBx8",
+        "card_4qDDb3",
+        "card_ERXacp",
+        "bridge_HUKWGF"
       ],
       "name": "DRYE Evidence",
       "settings": {
-        "eyebrow": "The evidence",
-        "heading": "Why every foreman and mechanic <em class=\"dryeNEW-em\"><br>should care</em>",
-        "body": "What happens inside a sealed glove - from the first half hour to a career cut short. peer-reviewed data on why the environment, not the treatment, is the problem.",
+        "eyebrow": "",
+        "heading": "Why every mechanic \n\n <em class=\"dryeNEW-em\"><br> should care about the insde.\n</em>",
+        "body": "Sweating inside a sealed glove <strong> opens a direct pathway past the skin barrier.</strong>\n<br> <a href=\"https://dermnetnz.org/topics/skin-problems-in-motor-vehicle-repair-workers\" target=\"_blank\" rel=\"noopener\" style=\"font-size: 11px; color: #9ca3af; text-decoration: none; font-style: normal;\">DermNet · Susan Ford BSc, Occupational Health</a>",
         "swipe_label": "Swipe"
       }
     },
@@ -1153,7 +1139,7 @@
     "drye_mechanics_herov2_dWdJNT",
     "drye_new_identification_atPnnz",
     "drye_worker_grid_ztaMcE",
-    "drye_evidence_X7nFhb",
+    "drye_evidence_pwCHH7",
     "drye_mechanics_mechanism_PgEzcw",
     "drye_mechanics_time_promise_AcqgeQ",
     "drye_research_video_full_xpTFFd",
