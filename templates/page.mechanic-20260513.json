@@ -126,6 +126,80 @@
         "body": ""
       }
     },
+    "drye_worker_grid_bxcDVk": {
+      "type": "drye-worker-grid",
+      "blocks": {
+        "panel_FgjirM": {
+          "type": "panel",
+          "settings": {
+            "image": "shopify://shop_images/8384066585938811776.webp",
+            "image_alt": "Mechanic at work",
+            "label": "NITRILE · HOT BAY ",
+            "role": "Auto repair, ~20 min in",
+            "quote": "“By 20 minutes, there’s sweat pooled inside the gloves.”",
+            "source": "Automotive mechanic"
+          }
+        },
+        "panel_hHPPzt": {
+          "type": "panel",
+          "settings": {
+            "image": "shopify://shop_images/Gemini_Generated_Image_ain34ain34ain34a_1.webp",
+            "image_alt": "Mechanic at work",
+            "label": "Nitrile · Detailing",
+            "role": "Interior clean, hour 3",
+            "quote": "“I pull them off at lunch and my hands look boiled.”",
+            "source": "Car detailer"
+          }
+        },
+        "panel_zPiY3g": {
+          "type": "panel",
+          "settings": {
+            "image": "shopify://shop_images/Karosserifabriken.webp",
+            "image_alt": "Mechanic at work",
+            "label": "NITRILE · HEAVY REPAIR ",
+            "role": "Truck repair, hour 4 ",
+            "quote": "“Same damp gloves all day. Same cracked hands by Thursday.”",
+            "source": "Diesel mechanic"
+          }
+        },
+        "panel_AGqhma": {
+          "type": "panel",
+          "settings": {
+            "image": "shopify://shop_images/Gemini_Generated_Image__3.webp",
+            "image_alt": "Mechanic at work",
+            "label": "HV CLASS 0 · HV WORK",
+            "role": "EV battery, full shift",
+            "quote": "“I’m airing them out between every job.”",
+            "source": "EV technician"
+          }
+        },
+        "panel_iFhhNx": {
+          "type": "panel",
+          "settings": {
+            "image": "shopify://shop_images/Gemini_Generated_Image_j1uzt4j1uzt4j1uz.webp",
+            "image_alt": "Mechanic at work",
+            "label": "NITRILE · DIESEL SHOP ",
+            "role": "Heavy repair, mid-shift ",
+            "quote": "“By lunch, it’s sweat, oil, and grease inside the gloves.”",
+            "source": "Diesel mechanic"
+          }
+        }
+      },
+      "block_order": [
+        "panel_FgjirM",
+        "panel_hHPPzt",
+        "panel_zPiY3g",
+        "panel_AGqhma",
+        "panel_iFhhNx"
+      ],
+      "name": "DRYE Worker Grid",
+      "settings": {
+        "eyebrow": "",
+        "heading": "Your gloves get wet  <br><em class=\"dryeNEW-em\">before the job is done.</em>",
+        "body": "Different jobs. Same wet layer inside the glove.",
+        "swipe_label": "Swipe"
+      }
+    },
     "drye_worker_grid_TChbRQ": {
       "type": "drye-worker-grid",
       "blocks": {
@@ -1152,6 +1226,7 @@
   "order": [
     "drye_mechanics_herov2_dWdJNT",
     "drye_new_identification_atPnnz",
+    "drye_worker_grid_bxcDVk",
     "drye_worker_grid_TChbRQ",
     "drye_evidence_X7nFhb",
     "drye_mechanics_mechanism_PgEzcw",
