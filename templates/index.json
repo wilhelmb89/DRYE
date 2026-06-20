@@ -102,6 +102,98 @@
         "path_2_link": "#system"
       }
     },
+    "drye_new_identification_frontpage_JzzzCA": {
+      "type": "dryeNEW-identification-frontpage",
+      "blocks": {
+        "profession_item_MjjCxH": {
+          "type": "profession_item",
+          "settings": {
+            "image": "shopify://shop_images/Gemini_Generated_Image_w06v6dw06v6dw06v_1_1.webp",
+            "image_url": "",
+            "fallback_color": "#1E3A4C",
+            "label": "Cotton, silk, merino, bamboo"
+          }
+        },
+        "profession_item_zfMw48": {
+          "type": "profession_item",
+          "settings": {
+            "image": "shopify://shop_images/Gemini_Generated_Image_ebmtjvebmtjvebmt.webp",
+            "image_url": "",
+            "fallback_color": "#1E3A4C",
+            "label": "Reddit hacks"
+          }
+        },
+        "profession_item_TpVbgN": {
+          "type": "profession_item",
+          "settings": {
+            "image": "shopify://shop_images/Gemini_Generated_Image_tlg2uetlg2uetlg2.webp",
+            "image_url": "",
+            "fallback_color": "#1E3A4C",
+            "label": "Glove flips"
+          }
+        },
+        "profession_item_7pcNUN": {
+          "type": "profession_item",
+          "settings": {
+            "image": "shopify://shop_images/Gemini_Generated_Image_dp0gkpdp0gkpdp0g.webp",
+            "image_url": "",
+            "fallback_color": "#1E3A4C",
+            "label": "barrier creams"
+          }
+        },
+        "profession_item_dC99wD": {
+          "type": "profession_item",
+          "settings": {
+            "image": "shopify://shop_images/Gemini_Generated_Image_9cwtbp9cwtbp9cwt.webp",
+            "image_url": "",
+            "fallback_color": "#1E3A4C",
+            "label": "powders"
+          }
+        },
+        "occlusion_step_YUC8Hj": {
+          "type": "occlusion_step",
+          "settings": {
+            "step_number": "01",
+            "title": "20 minutes in",
+            "body": "<p>Sweat has nowhere to go. Fabric, powder, cream — they all soak it up. It sits against your skin.<br/></p>"
+          }
+        },
+        "occlusion_step_Gyific": {
+          "type": "occlusion_step",
+          "settings": {
+            "step_number": "02",
+            "title": "It's called occlusion",
+            "body": "<p>Every absorbent material saturates. Cotton, nylon, silk, bamboo — they all hit a limit. Then they hold moisture against the skin.</p>"
+          }
+        },
+        "occlusion_step_TfrnN9": {
+          "type": "occlusion_step",
+          "settings": {
+            "step_number": "03",
+            "title": "The cycle repeats",
+            "body": "<p>Weekend recovery. Monday relapse. No glove, liner, cream, or powder stops this — because none of them route the moisture out.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "profession_item_MjjCxH",
+        "profession_item_zfMw48",
+        "profession_item_TpVbgN",
+        "profession_item_7pcNUN",
+        "profession_item_dC99wD",
+        "occlusion_step_YUC8Hj",
+        "occlusion_step_Gyific",
+        "occlusion_step_TfrnN9"
+      ],
+      "name": "DRYE Identification2",
+      "settings": {
+        "section_id": "identification",
+        "eyebrow": "",
+        "heading": "You've tried everything.",
+        "heading_echo": "Nothing worked.",
+        "body": ""
+      }
+    },
     "drye_dry_layer_matters_PK4fiV": {
       "type": "drye-dry-layer-matters",
       "blocks": {
@@ -183,6 +275,7 @@
         "step_3PnA7C",
         "step_x8JWFx"
       ],
+      "disabled": true,
       "name": "DRYE dry layer matters",
       "settings": {
         "eyebrow": "WHY THE DRY LAYER MATTERS",
@@ -278,37 +371,6 @@
         "next_image_label": "Next image"
       }
     },
-    "drye_functional_benefits_YMg9qN": {
-      "type": "drye-functional-benefits",
-      "custom_css": [
-        ".func-sec {padding-top: 4px !important;}"
-      ],
-      "name": "DRYE Functional Benefits",
-      "settings": {
-        "eyebrow": "",
-        "heading": "",
-        "subheading": "",
-        "card_1_icon": "moisture-wicking (1).svg",
-        "card_1_title": "Skin-side stays drier",
-        "card_1_desc": "Sweat moves away from the skin side instead of sitting directly against your hand.",
-        "card_2_icon": "shield.svg",
-        "card_2_title": "Gloves slide better",
-        "card_2_desc": "Nitrile goes on and off over the layer — not over wet skin.",
-        "card_3_icon": "performance-arrow.svg",
-        "card_3_title": "Fits under sealed gloves",
-        "card_3_desc": "0.4mm thin. Built to sit under nitrile, latex, rubber and HV gloves.",
-        "card_4_icon": "layers-fabric.svg",
-        "card_4_title": "You still feel the work",
-        "card_4_desc": "The outer glove still does the gripping. DRYE changes the wet contact underneath.",
-        "card_5_icon": "wave-breathability.svg",
-        "card_5_title": "Nothing to wash out",
-        "card_5_desc": "The performance comes from the structure, not a chemical finish.",
-        "card_6_icon": "clock-timer.svg",
-        "card_6_title": "Built for months of shifts",
-        "card_6_desc": "Washable, reusable, and made to keep working through repeated wear.",
-        "note": "Performance properties are structural — built into the fabric architecture rather than applied as a coating or finish."
-      }
-    },
     "drye_system_section_E9igMr": {
       "type": "drye-system-section",
       "name": "DRYE System Section",
@@ -380,99 +442,6 @@
         "heading_before": "The glove is not the problem.",
         "heading_em": "What happens inside it is.",
         "lead": "<p>Inside sealed gloves, sweat has nowhere to evaporate. So anything that absorbs eventually becomes the wet layer.</p>"
-      }
-    },
-    "drye_new_identification_frontpage_JzzzCA": {
-      "type": "dryeNEW-identification-frontpage",
-      "blocks": {
-        "profession_item_MjjCxH": {
-          "type": "profession_item",
-          "settings": {
-            "image": "shopify://shop_images/Gemini_Generated_Image_w06v6dw06v6dw06v_1_1.webp",
-            "image_url": "",
-            "fallback_color": "#1E3A4C",
-            "label": "Cotton, silk, merino, bamboo"
-          }
-        },
-        "profession_item_zfMw48": {
-          "type": "profession_item",
-          "settings": {
-            "image": "shopify://shop_images/Gemini_Generated_Image_ebmtjvebmtjvebmt.webp",
-            "image_url": "",
-            "fallback_color": "#1E3A4C",
-            "label": "Reddit hacks"
-          }
-        },
-        "profession_item_TpVbgN": {
-          "type": "profession_item",
-          "settings": {
-            "image": "shopify://shop_images/Gemini_Generated_Image_tlg2uetlg2uetlg2.webp",
-            "image_url": "",
-            "fallback_color": "#1E3A4C",
-            "label": "Glove flips"
-          }
-        },
-        "profession_item_7pcNUN": {
-          "type": "profession_item",
-          "settings": {
-            "image": "shopify://shop_images/Gemini_Generated_Image_dp0gkpdp0gkpdp0g.webp",
-            "image_url": "",
-            "fallback_color": "#1E3A4C",
-            "label": "barrier creams"
-          }
-        },
-        "profession_item_dC99wD": {
-          "type": "profession_item",
-          "settings": {
-            "image": "shopify://shop_images/Gemini_Generated_Image_9cwtbp9cwtbp9cwt.webp",
-            "image_url": "",
-            "fallback_color": "#1E3A4C",
-            "label": "powders"
-          }
-        },
-        "occlusion_step_YUC8Hj": {
-          "type": "occlusion_step",
-          "settings": {
-            "step_number": "01",
-            "title": "20 minutes in",
-            "body": "<p>Sweat has nowhere to go. Fabric, powder, cream — they all soak it up. It sits against your skin.<br/></p>"
-          }
-        },
-        "occlusion_step_Gyific": {
-          "type": "occlusion_step",
-          "settings": {
-            "step_number": "02",
-            "title": "It's called occlusion",
-            "body": "<p>Every absorbent material saturates. Cotton, nylon, silk, bamboo — they all hit a limit. Then they hold moisture against the skin.</p>"
-          }
-        },
-        "occlusion_step_TfrnN9": {
-          "type": "occlusion_step",
-          "settings": {
-            "step_number": "03",
-            "title": "The cycle repeats",
-            "body": "<p>Weekend recovery. Monday relapse. No glove, liner, cream, or powder stops this — because none of them route the moisture out.</p>"
-          }
-        }
-      },
-      "block_order": [
-        "profession_item_MjjCxH",
-        "profession_item_zfMw48",
-        "profession_item_TpVbgN",
-        "profession_item_7pcNUN",
-        "profession_item_dC99wD",
-        "occlusion_step_YUC8Hj",
-        "occlusion_step_Gyific",
-        "occlusion_step_TfrnN9"
-      ],
-      "disabled": true,
-      "name": "DRYE Identification2",
-      "settings": {
-        "section_id": "identification",
-        "eyebrow": "",
-        "heading": "You've tried everything.",
-        "heading_echo": "Nothing worked.",
-        "body": ""
       }
     },
     "drye_section_06_faq_9BK9Uy": {
@@ -586,83 +555,17 @@
         "padding_top_desktop": 72,
         "padding_bottom_desktop": 72
       }
-    },
-    "drye_proof_wall_KhdRWN": {
-      "type": "drye-proof-wall",
-      "blocks": {
-        "media_ACxqCm": {
-          "type": "media",
-          "settings": {
-            "media_type": "image",
-            "label": "",
-            "sublabel": ""
-          }
-        },
-        "media_M8xB88": {
-          "type": "media",
-          "settings": {
-            "media_type": "image",
-            "image": "shopify://shop_images/Screenshot_33.webp",
-            "label": "Field user",
-            "sublabel": "Add photo or video"
-          }
-        },
-        "media_BfDThY": {
-          "type": "media",
-          "settings": {
-            "media_type": "image",
-            "image": "shopify://shop_images/Screenshot_3_0b9d3add-51ef-4e6b-969d-ec151b037864.jpg",
-            "label": "Field user",
-            "sublabel": "Add photo or video"
-          }
-        },
-        "media_kXFBxw": {
-          "type": "media",
-          "settings": {
-            "media_type": "image",
-            "label": "Field user",
-            "sublabel": "Add photo or video"
-          }
-        },
-        "media_KtryFA": {
-          "type": "media",
-          "settings": {
-            "media_type": "image",
-            "label": "Field user",
-            "sublabel": "Add photo or video"
-          }
-        }
-      },
-      "block_order": [
-        "media_ACxqCm",
-        "media_M8xB88",
-        "media_BfDThY",
-        "media_kXFBxw",
-        "media_KtryFA"
-      ],
-      "disabled": true,
-      "name": "DRYE Proof Wall",
-      "settings": {
-        "eyebrow": "Workers who kept them",
-        "heading": "Real reviews from people who wear gloves all day.",
-        "subheading": "Not sponsored. Not lab copy. Just what workers noticed after wearing DRYE under sealed gloves.",
-        "show_media_row": true,
-        "all_reviews_url": "",
-        "all_reviews_label": "Read all reviews →"
-      }
     }
   },
   "order": [
     "drye_new_hero_ddfGwJ",
+    "drye_new_identification_frontpage_JzzzCA",
     "drye_dry_layer_matters_PK4fiV",
     "drye_product_reality_grid_QbtiwK",
-    "drye_functional_benefits_YMg9qN",
     "drye_system_section_E9igMr",
     "drye_new_problem_beat_1_PphKw8",
-    "drye_new_identification_frontpage_JzzzCA",
     "drye_section_06_faq_9BK9Uy",
     "jens_linnea_section_FQgtPH",
-    "drye_new_closing_cta_BkJmfN",
-    "drye_proof_wall_KhdRWN"
+    "drye_new_closing_cta_BkJmfN"
   ]
 }
