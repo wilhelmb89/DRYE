@@ -1,4 +1,4 @@
-﻿
+﻿﻿
 {{ 'jens-linnea-section.css' | asset_url | stylesheet_tag }}
 
 <section
@@ -33,13 +33,28 @@
     <div class="jens-linnea__swipe-wrap">
       <div class="jens-linnea__grid">
         {% for block in section.blocks %}
+          {%- assign jl_url = block.settings.video_url | strip -%}
+          {%- assign jl_id = '' -%}
+          {%- if jl_url != blank -%}
+            {%- if jl_url contains 'shorts/' -%}
+              {%- assign jl_id = jl_url | split: 'shorts/' | last | split: '?' | first | split: '/' | first -%}
+            {%- elsif jl_url contains 'youtu.be/' -%}
+              {%- assign jl_id = jl_url | split: 'youtu.be/' | last | split: '?' | first | split: '/' | first -%}
+            {%- elsif jl_url contains 'embed/' -%}
+              {%- assign jl_id = jl_url | split: 'embed/' | last | split: '?' | first | split: '/' | first -%}
+            {%- elsif jl_url contains 'v=' -%}
+              {%- assign jl_id = jl_url | split: 'v=' | last | split: '&' | first -%}
+            {%- else -%}
+              {%- assign jl_id = jl_url | split: '/' | last | split: '?' | first -%}
+            {%- endif -%}
+          {%- endif -%}
           <article
             class="jens-linnea__story dryeNEW-reveal {% if forloop.index == 1 %}dryeNEW-rd1{% elsif forloop.index == 2 %}dryeNEW-rd2{% endif %}"
             {{ block.shopify_attributes }}
           >
             <div
-              class="jens-linnea__image-wrap{% if block.settings.video_url != blank %} jens-linnea__image-wrap--video{% endif %}"
-              {% if block.settings.video_url != blank %}data-jl-video="{{ block.settings.video_url.id }}"{% endif %}
+              class="jens-linnea__image-wrap{% if jl_id != blank %} jens-linnea__image-wrap--video{% endif %}"
+              {% if jl_id != blank %}data-jl-video="{{ jl_id }}"{% endif %}
             >
               {% if block.settings.image != blank %}
                 {{
@@ -50,10 +65,10 @@
                     alt: block.settings.image_alt,
                     loading: 'lazy'
                 }}
-              {% elsif block.settings.video_url != blank %}
+              {% elsif jl_id != blank %}
                 <img
                   class="jens-linnea__image"
-                  src="https://i.ytimg.com/vi/{{ block.settings.video_url.id }}/hqdefault.jpg"
+                  src="https://i.ytimg.com/vi/{{ jl_id }}/hqdefault.jpg"
                   alt="{{ block.settings.image_alt }}"
                   loading="lazy"
                   width="480"
@@ -61,7 +76,7 @@
                 >
               {% endif %}
 
-              {% if block.settings.video_url != blank %}
+              {% if jl_id != blank %}
                 <button
                   type="button"
                   class="jens-linnea__play"
@@ -223,11 +238,10 @@
           "content": "Video (interview)"
         },
         {
-          "type": "video_url",
+          "type": "text",
           "id": "video_url",
           "label": "YouTube link",
-          "accept": ["youtube"],
-          "info": "Paste the YouTube link to the interview. A play button appears on the image â€” visitors click it to watch the interview right here."
+          "info": "Paste any YouTube link — Shorts, youtu.be or watch links all work. A play button appears on the image; visitors click it to watch right here."
         },
         {
           "type": "text",

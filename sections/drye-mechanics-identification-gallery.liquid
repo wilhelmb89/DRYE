@@ -1,4 +1,4 @@
-﻿{{ 'drye-mechanics-identification-gallery.css' | asset_url | stylesheet_tag }}
+﻿﻿{{ 'drye-mechanics-identification-gallery.css' | asset_url | stylesheet_tag }}
 
 <section class="dryeNEW-section mech-gallery" id="gallery-{{ section.id }}" data-section-id="{{ section.id }}" data-drye-section data-section-index="15" data-section-name="field_gallery">  
   <div class="dryeNEW-container">
@@ -45,10 +45,25 @@
 
       <div class="mech-gallery__strip" data-gallery-strip>
         {% for block in section.blocks %}
+          {%- assign mg_url = block.settings.video_url | strip -%}
+          {%- assign mg_id = '' -%}
+          {%- if mg_url != blank -%}
+            {%- if mg_url contains 'shorts/' -%}
+              {%- assign mg_id = mg_url | split: 'shorts/' | last | split: '?' | first | split: '/' | first -%}
+            {%- elsif mg_url contains 'youtu.be/' -%}
+              {%- assign mg_id = mg_url | split: 'youtu.be/' | last | split: '?' | first | split: '/' | first -%}
+            {%- elsif mg_url contains 'embed/' -%}
+              {%- assign mg_id = mg_url | split: 'embed/' | last | split: '?' | first | split: '/' | first -%}
+            {%- elsif mg_url contains 'v=' -%}
+              {%- assign mg_id = mg_url | split: 'v=' | last | split: '&' | first -%}
+            {%- else -%}
+              {%- assign mg_id = mg_url | split: '/' | last | split: '?' | first -%}
+            {%- endif -%}
+          {%- endif -%}
           <article class="mech-gallery__panel" {{ block.shopify_attributes }}>
             <div
-              class="mech-gallery__img{% if block.settings.video_url != blank %} mech-gallery__img--video{% endif %}"
-              {% if block.settings.video_url != blank %}data-mg-video="{{ block.settings.video_url.id }}"{% endif %}
+              class="mech-gallery__img{% if mg_id != blank %} mech-gallery__img--video{% endif %}"
+              {% if mg_id != blank %}data-mg-video="{{ mg_id }}"{% endif %}
             >
               {% if block.settings.image != blank %}
                 {{
@@ -60,10 +75,10 @@
                     sizes: '(min-width: 960px) 33vw, 82vw',
                     alt: block.settings.image_alt
                 }}
-              {% elsif block.settings.video_url != blank %}
+              {% elsif mg_id != blank %}
                 <img
                   class="mech-gallery__img-el"
-                  src="https://i.ytimg.com/vi/{{ block.settings.video_url.id }}/hqdefault.jpg"
+                  src="https://i.ytimg.com/vi/{{ mg_id }}/hqdefault.jpg"
                   alt="{{ block.settings.image_alt }}"
                   loading="lazy"
                   width="480"
@@ -81,7 +96,7 @@
                 </div>
               {% endif %}
 
-              {% if block.settings.video_url != blank %}
+              {% if mg_id != blank %}
                 <button
                   type="button"
                   class="mech-gallery__play"
@@ -298,11 +313,10 @@
           "content": "Video (optional)"
         },
         {
-          "type": "video_url",
+          "type": "text",
           "id": "video_url",
           "label": "YouTube link",
-          "accept": ["youtube"],
-          "info": "Paste a YouTube link to turn this panel into a clickable video. A play button appears on the image — visitors click it to watch right here."
+          "info": "Paste any YouTube link — Shorts, youtu.be or watch links all work. A play button appears on the image; visitors click it to watch right here."
         },
         {
           "type": "text",
