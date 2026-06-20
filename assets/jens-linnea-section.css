@@ -1,4 +1,4 @@
-.jens-linnea {
+﻿.jens-linnea {
   background: var(--bg);
 }
 
@@ -58,6 +58,62 @@
   overflow: hidden;
   margin-bottom: var(--space-20);
   background: var(--bg-soft);
+}
+
+.jens-linnea__image-wrap--video {
+  position: relative;
+  cursor: pointer;
+}
+
+.jens-linnea__play {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 64px;
+  height: 64px;
+  padding: 0;
+  border: none;
+  border-radius: 50%;
+  background: rgba(15, 34, 48, 0.78);
+  -webkit-backdrop-filter: blur(4px);
+  backdrop-filter: blur(4px);
+  box-shadow: 0 8px 24px rgba(15, 34, 48, 0.28);
+  cursor: pointer;
+  transition: transform 0.2s ease, background 0.2s ease;
+}
+
+.jens-linnea__play svg {
+  width: 22px;
+  height: 22px;
+  margin-left: 3px;
+  fill: #fff;
+}
+
+.jens-linnea__image-wrap--video:hover .jens-linnea__play,
+.jens-linnea__play:focus-visible {
+  background: var(--emerald, #0d9488);
+  transform: translate(-50%, -50%) scale(1.06);
+}
+
+.jens-linnea__video-frame {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  background: #000;
+}
+
+.jens-linnea__video-frame iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
 }
 
 .jens-linnea__image {
@@ -180,7 +236,7 @@
 }
 
 .jens-linnea__swipe-hint::after {
-  content: "→";
+  content: "â†’";
   font-size: 12px;
   letter-spacing: 0;
   animation: jens-linnea-swipe 1.4s infinite;

@@ -1,4 +1,4 @@
-
+﻿
 {{ 'jens-linnea-section.css' | asset_url | stylesheet_tag }}
 
 <section
@@ -37,7 +37,10 @@
             class="jens-linnea__story dryeNEW-reveal {% if forloop.index == 1 %}dryeNEW-rd1{% elsif forloop.index == 2 %}dryeNEW-rd2{% endif %}"
             {{ block.shopify_attributes }}
           >
-            <div class="jens-linnea__image-wrap">
+            <div
+              class="jens-linnea__image-wrap{% if block.settings.video_url != blank %} jens-linnea__image-wrap--video{% endif %}"
+              {% if block.settings.video_url != blank %}data-jl-video="{{ block.settings.video_url.id }}"{% endif %}
+            >
               {% if block.settings.image != blank %}
                 {{
                   block.settings.image
@@ -47,6 +50,25 @@
                     alt: block.settings.image_alt,
                     loading: 'lazy'
                 }}
+              {% elsif block.settings.video_url != blank %}
+                <img
+                  class="jens-linnea__image"
+                  src="https://i.ytimg.com/vi/{{ block.settings.video_url.id }}/hqdefault.jpg"
+                  alt="{{ block.settings.image_alt }}"
+                  loading="lazy"
+                  width="480"
+                  height="360"
+                >
+              {% endif %}
+
+              {% if block.settings.video_url != blank %}
+                <button
+                  type="button"
+                  class="jens-linnea__play"
+                  aria-label="{{ block.settings.video_play_label | default: 'Play video' }}"
+                >
+                  {% render 'icon-play' %}
+                </button>
               {% endif %}
             </div>
 
@@ -86,7 +108,7 @@
               {% endif %}
 
               {% if block.settings.name != blank and block.settings.role != blank %}
-                <span class="jens-linnea__attr-sep">·</span>
+                <span class="jens-linnea__attr-sep">Â·</span>
               {% endif %}
 
               {% if block.settings.role != blank %}
@@ -117,6 +139,37 @@
     </div>
   </div>
 </section>
+
+<script>
+  (function () {
+    var root = document.getElementById('jens-linnea-{{ section.id }}');
+    if (!root || root.dataset.jlVideoInit) return;
+    root.dataset.jlVideoInit = '1';
+
+    root.addEventListener('click', function (e) {
+      var btn = e.target.closest('.jens-linnea__play');
+      if (!btn) return;
+
+      var wrap = btn.closest('[data-jl-video]');
+      if (!wrap) return;
+
+      var id = wrap.getAttribute('data-jl-video');
+      if (!id) return;
+
+      var frame = document.createElement('div');
+      frame.className = 'jens-linnea__video-frame';
+      frame.innerHTML =
+        '<iframe src="https://www.youtube.com/embed/' +
+        encodeURIComponent(id) +
+        '?autoplay=1&rel=0&playsinline=1" title="Interview video" frameborder="0" ' +
+        'allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" ' +
+        'allowfullscreen></iframe>';
+
+      wrap.innerHTML = '';
+      wrap.appendChild(frame);
+    });
+  })();
+</script>
 
 {% schema %}
 {
@@ -166,6 +219,23 @@
           "default": "Story image"
         },
         {
+          "type": "header",
+          "content": "Video (interview)"
+        },
+        {
+          "type": "video_url",
+          "id": "video_url",
+          "label": "YouTube link",
+          "accept": ["youtube"],
+          "info": "Paste the YouTube link to the interview. A play button appears on the image â€” visitors click it to watch the interview right here."
+        },
+        {
+          "type": "text",
+          "id": "video_play_label",
+          "label": "Play button label (accessibility)",
+          "default": "Play interview"
+        },
+        {
           "type": "text",
           "id": "pill_text",
           "label": "Pill text",
@@ -199,7 +269,7 @@
           "type": "text",
           "id": "name",
           "label": "Name",
-          "default": "Jens Stålnacke"
+          "default": "Jens StÃ¥lnacke"
         },
         {
           "type": "text",
@@ -216,7 +286,7 @@
           "type": "text",
           "id": "read_more_text",
           "label": "Read more text",
-          "default": "Read Jens' case →"
+          "default": "Read Jens' case â†’"
         }
       ]
     }
