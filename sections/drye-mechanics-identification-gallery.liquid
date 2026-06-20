@@ -1,4 +1,4 @@
-{{ 'drye-mechanics-identification-gallery.css' | asset_url | stylesheet_tag }}
+﻿{{ 'drye-mechanics-identification-gallery.css' | asset_url | stylesheet_tag }}
 
 <section class="dryeNEW-section mech-gallery" id="gallery-{{ section.id }}" data-section-id="{{ section.id }}" data-drye-section data-section-index="15" data-section-name="field_gallery">  
   <div class="dryeNEW-container">
@@ -30,7 +30,7 @@
           data-gallery-prev
           aria-label="Previous panels"
         >
-          ←
+          &larr;
         </button>
 
         <button
@@ -39,14 +39,17 @@
           data-gallery-next
           aria-label="Next panels"
         >
-          →
+          &rarr;
         </button>
       </div>
 
       <div class="mech-gallery__strip" data-gallery-strip>
         {% for block in section.blocks %}
           <article class="mech-gallery__panel" {{ block.shopify_attributes }}>
-            <div class="mech-gallery__img">
+            <div
+              class="mech-gallery__img{% if block.settings.video_url != blank %} mech-gallery__img--video{% endif %}"
+              {% if block.settings.video_url != blank %}data-mg-video="{{ block.settings.video_url.id }}"{% endif %}
+            >
               {% if block.settings.image != blank %}
                 {{
                   block.settings.image
@@ -57,6 +60,15 @@
                     sizes: '(min-width: 960px) 33vw, 82vw',
                     alt: block.settings.image_alt
                 }}
+              {% elsif block.settings.video_url != blank %}
+                <img
+                  class="mech-gallery__img-el"
+                  src="https://i.ytimg.com/vi/{{ block.settings.video_url.id }}/hqdefault.jpg"
+                  alt="{{ block.settings.image_alt }}"
+                  loading="lazy"
+                  width="480"
+                  height="360"
+                >
               {% else %}
                 <div class="mech-gallery__img-placeholder"></div>
               {% endif %}
@@ -67,6 +79,16 @@
                 <div class="mech-gallery__img-lbl">
                   {{ block.settings.label }}
                 </div>
+              {% endif %}
+
+              {% if block.settings.video_url != blank %}
+                <button
+                  type="button"
+                  class="mech-gallery__play"
+                  aria-label="{{ block.settings.video_play_label | default: 'Play video' }}"
+                >
+                  {% render 'icon-play' %}
+                </button>
               {% endif %}
             </div>
 
@@ -102,6 +124,28 @@
   (() => {
     const section = document.getElementById('gallery-{{ section.id }}');
     if (!section) return;
+
+    section.addEventListener('click', (e) => {
+      const btn = e.target.closest('.mech-gallery__play');
+      if (!btn) return;
+
+      const box = btn.closest('[data-mg-video]');
+      if (!box) return;
+
+      const id = box.getAttribute('data-mg-video');
+      if (!id) return;
+
+      const frame = document.createElement('div');
+      frame.className = 'mech-gallery__video-frame';
+      frame.innerHTML =
+        '<iframe src="https://www.youtube.com/embed/' +
+        encodeURIComponent(id) +
+        '?autoplay=1&rel=0&playsinline=1" title="Video" frameborder="0" ' +
+        'allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" ' +
+        'allowfullscreen></iframe>';
+
+      box.appendChild(frame);
+    });
 
     const strip = section.querySelector('[data-gallery-strip]');
     const hint = section.querySelector('[data-gallery-swipe-hint]');
@@ -248,6 +292,23 @@
           "id": "image_alt",
           "label": "Image alt text",
           "default": "Worker wearing DRYE glove liners"
+        },
+        {
+          "type": "header",
+          "content": "Video (optional)"
+        },
+        {
+          "type": "video_url",
+          "id": "video_url",
+          "label": "YouTube link",
+          "accept": ["youtube"],
+          "info": "Paste a YouTube link to turn this panel into a clickable video. A play button appears on the image — visitors click it to watch right here."
+        },
+        {
+          "type": "text",
+          "id": "video_play_label",
+          "label": "Play button label (accessibility)",
+          "default": "Play video"
         },
         {
           "type": "text",

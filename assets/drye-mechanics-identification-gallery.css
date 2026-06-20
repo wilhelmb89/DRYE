@@ -1,4 +1,4 @@
-/* ==========================================================================
+﻿/* ==========================================================================
    DRYE Mechanics — Field Use Gallery
    ========================================================================== */
 
@@ -81,6 +81,63 @@
   height: 100%;
   object-fit: cover;
   filter: saturate(0.92) brightness(0.98) contrast(1);
+}
+
+.mech-gallery__img--video {
+  cursor: pointer;
+}
+
+.mech-gallery__play {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 3;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 60px;
+  height: 60px;
+  padding: 0;
+  border: none;
+  border-radius: 50%;
+  background: rgba(15, 34, 48, 0.78);
+  -webkit-backdrop-filter: blur(4px);
+  backdrop-filter: blur(4px);
+  box-shadow: 0 8px 24px rgba(15, 34, 48, 0.28);
+  cursor: pointer;
+  transition: transform 0.2s ease, background 0.2s ease;
+}
+
+.mech-gallery__play svg {
+  width: 20px;
+  height: 20px;
+  margin-left: 3px;
+  fill: #fff;
+}
+
+.mech-gallery__img--video:hover .mech-gallery__play,
+.mech-gallery__play:focus-visible {
+  background: var(--emerald, #0d9488);
+  transform: translate(-50%, -50%) scale(1.06);
+}
+
+.mech-gallery__video-frame {
+  position: absolute;
+  inset: 0;
+  z-index: 4;
+  width: 100%;
+  height: 100%;
+  background: #000;
+}
+
+.mech-gallery__video-frame iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
 }
 
 .mech-gallery__img-placeholder {
