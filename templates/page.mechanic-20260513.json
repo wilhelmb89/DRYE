@@ -140,17 +140,6 @@
             "source": "Automotive mechanic"
           }
         },
-        "panel_jnDjDc": {
-          "type": "panel",
-          "settings": {
-            "image": "shopify://shop_images/Gemini_Generated_Image_77q3h377q3h377q3.webp",
-            "image_alt": "Mechanic at work",
-            "label": "Latex · Chemicals",
-            "role": "Paint booth, hour 4",
-            "quote": "\"Oil, paint, sweat - it all ends up on the gloves. Then you strill have to peel them off.\"",
-            "source": "Automotive mechanic · TikTok #mechanic"
-          }
-        },
         "panel_PGNCRP": {
           "type": "panel",
           "settings": {
@@ -186,6 +175,7 @@
         },
         "panel_CHCbf8": {
           "type": "panel",
+          "disabled": true,
           "settings": {
             "image": "shopify://shop_images/Karosserifabriken.webp",
             "image_alt": "Mechanic at work",
@@ -194,15 +184,26 @@
             "quote": "“Same damp gloves all day. Same cracked hands by Thursday.”",
             "source": "Diesel mechanic"
           }
+        },
+        "panel_jnDjDc": {
+          "type": "panel",
+          "settings": {
+            "image": "shopify://shop_images/Gemini_Generated_Image_77q3h377q3h377q3.webp",
+            "image_alt": "Mechanic at work",
+            "label": "Latex · Chemicals",
+            "role": "Paint booth, hour 4",
+            "quote": "\"Oil, paint, sweat - it all ends up on the gloves. Then you strill have to peel them off.\"",
+            "source": "Automotive mechanic · TikTok #mechanic"
+          }
         }
       },
       "block_order": [
         "panel_dCjKWp",
-        "panel_jnDjDc",
         "panel_PGNCRP",
         "panel_Umjqd6",
         "panel_fqaVXj",
-        "panel_CHCbf8"
+        "panel_CHCbf8",
+        "panel_jnDjDc"
       ],
       "name": "DRYE Worker Grid",
       "settings": {
