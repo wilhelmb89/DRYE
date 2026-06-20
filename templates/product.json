@@ -567,6 +567,17 @@
     "drye_mechanics_identification_gallery_rFwWJt": {
       "type": "drye-mechanics-identification-gallery",
       "blocks": {
+        "panel_YNYziG": {
+          "type": "panel",
+          "settings": {
+            "image_alt": "Worker wearing DRYE glove liners",
+            "video_url": "https://www.youtube.com/shorts/dV5oCZGYWcU",
+            "video_play_label": "Play video",
+            "label": "Automotive",
+            "quote": "\"Hands are just less beat up now.\"",
+            "source": "Automotive mechanic"
+          }
+        },
         "panel_3B3J9e": {
           "type": "panel",
           "settings": {
@@ -651,17 +662,6 @@
             "source": "Hairdresser"
           }
         },
-        "panel_YNYziG": {
-          "type": "panel",
-          "settings": {
-            "image_alt": "Worker wearing DRYE glove liners",
-            "video_url": "",
-            "video_play_label": "Play video",
-            "label": "Automotive",
-            "quote": "\"Hands are just less beat up now.\"",
-            "source": "Automotive mechanic"
-          }
-        },
         "panel_jqEPUP": {
           "type": "panel",
           "settings": {
@@ -676,6 +676,7 @@
         }
       },
       "block_order": [
+        "panel_YNYziG",
         "panel_3B3J9e",
         "panel_93QaHT",
         "panel_gUaAMR",
@@ -683,14 +684,13 @@
         "panel_PzzAxF",
         "panel_PKziRW",
         "panel_TxU8Pz",
-        "panel_YNYziG",
         "panel_jqEPUP"
       ],
       "name": "DRYE Mechanics Gallery",
       "settings": {
         "eyebrow": "DIFFERENT GLOVES. SAME PROBLEM.",
         "heading": "One dry layer under gloves  \n <em class=\"dryeNEW-em\">wherever hands get trapped.</em>",
-        "body": "Mechanics, cake decorators, hairdressers, healthcare workers and elite athletes.  \nDifferent work. Same sweat trapped against the skin.",
+        "body": "Mechanics, PPE users and hockey players are our core customers. But once hands stay inside gloves for hours, the physics does not care what job you do.",
         "swipe_label": "Swipe"
       }
     },
