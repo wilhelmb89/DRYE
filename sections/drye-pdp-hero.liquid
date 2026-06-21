@@ -3,7 +3,7 @@
   assign selected_variant = current_product.selected_or_first_available_variant
 assign review_rating = section.settings.review_rating_fallback
 assign review_count = section.settings.review_count_fallback
-  assign review_anchor = '#reviews'
+  assign review_anchor = '#judgeme_product_reviews'
   assign price_note = section.settings.price_note
   assign sticky_button_label = section.settings.sticky_button_label
   assign atc_button_label = section.settings.atc_button_label
@@ -207,7 +207,7 @@ assign review_count = section.settings.review_count_fallback
       {{ section.settings.subtext }}
     </div>
 
-    <div class="stars-row">
+    <div class="stars-row" data-review-scroll role="link" tabindex="0" aria-label="Read customer reviews">
       <span class="stars" aria-hidden="true">★★★★★</span>
       <span class="stars-lbl">
         {{ review_rating }}/5 · <a href="{{ review_anchor }}">{{ review_count }} reviews</a>
