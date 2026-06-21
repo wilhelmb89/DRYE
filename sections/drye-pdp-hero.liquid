@@ -998,6 +998,39 @@ assign review_count = section.settings.review_count_fallback
     const sizeOptions = Array.from(sectionEl.querySelectorAll('[data-size-option]'));
     const tabButtons = Array.from(sectionEl.querySelectorAll('[data-drye-tabs] .tab-btn'));
 const faqButtons = Array.from(sectionEl.querySelectorAll('[data-drye-tabs] .faq-q'));
+const reviewScrollRows = Array.from(sectionEl.querySelectorAll('[data-review-scroll]'));
+
+function scrollToReviews(event) {
+  const targetSelector = {{ review_anchor | json }};
+  const target =
+    document.querySelector(targetSelector) ||
+    document.querySelector('.jdgm-review-widget') ||
+    document.querySelector('.jdgm-rev-widg');
+
+  if (!target) {
+    window.location.hash = targetSelector.replace('#', '');
+    return;
+  }
+
+  event.preventDefault();
+
+  target.scrollIntoView({
+    behavior: 'smooth',
+    block: 'start'
+  });
+
+  history.replaceState(null, '', targetSelector);
+}
+
+reviewScrollRows.forEach((row) => {
+  row.addEventListener('click', scrollToReviews);
+
+  row.addEventListener('keydown', (event) => {
+    if (event.key === 'Enter' || event.key === ' ') {
+      scrollToReviews(event);
+    }
+  });
+});
 
 const shopifyRoot = (window.Shopify && window.Shopify.routes && window.Shopify.routes.root) || '/';
 
