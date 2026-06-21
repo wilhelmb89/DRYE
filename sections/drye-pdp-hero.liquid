@@ -136,8 +136,8 @@ assign review_count = section.settings.review_count_fallback
               </div>
             {% endunless %}
           {% endfor %}
-          <a
-  href="#reviews"
+<a
+  href="{{ review_anchor }}"
   class="hero-gallery-slide hero-gallery-slide--review-cta"
   data-gallery-slide
   aria-label="Read customer reviews"
@@ -938,7 +938,7 @@ assign review_count = section.settings.review_count_fallback
     </div>
 
     <div class="tabs-cta-wrap">
-      <a href="#reviews" class="tabs-cta">
+      <a href="{{ review_anchor }}" class="tabs-cta">
         {{ section.settings.htab_rev_link_label | default: 'Read all reviews ↓' }}
       </a>
     </div>
