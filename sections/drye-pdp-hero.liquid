@@ -207,12 +207,16 @@ assign review_count = section.settings.review_count_fallback
       {{ section.settings.subtext }}
     </div>
 
-    <div class="stars-row">
-      <span class="stars" aria-hidden="true">★★★★★</span>
-      <span class="stars-lbl">
-        {{ review_rating }}/5 · <a href="{{ review_anchor }}">{{ review_count }} reviews</a>
-      </span>
-    </div>
+<a
+  href="{{ review_anchor }}"
+  class="stars-row stars-row--link"
+  aria-label="Read verified customer reviews"
+>
+  <span class="stars" aria-hidden="true">★★★★★</span>
+  <span class="stars-lbl">
+    {{ review_rating }}/5 · {{ review_count }} reviews
+  </span>
+</a>
 
     <div class="price-row" data-price-row>
       <span class="price" data-price>{{ selected_variant.price | money_with_currency }}</span>
