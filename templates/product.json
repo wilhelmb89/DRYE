@@ -388,6 +388,24 @@
         "description_toggle_closed": ""
       }
     },
+    "17820025558baba7f4": {
+      "type": "apps",
+      "blocks": {
+        "judge_me_reviews_review_widget_X7UeAd": {
+          "type": "shopify://apps/judge-me-reviews/blocks/review_widget/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
+          "settings": {
+            "review_data": "real_data",
+            "max_width": 1200,
+            "show_shop_reviews": false,
+            "empty_state": "empty_widget"
+          }
+        }
+      },
+      "block_order": [
+        "judge_me_reviews_review_widget_X7UeAd"
+      ],
+      "settings": {}
+    },
     "drye_functional_benefits_ddxLmg": {
       "type": "drye-functional-benefits",
       "custom_css": [
@@ -771,7 +789,6 @@
         "case_ypqK9M",
         "case_MP4mcm"
       ],
-      "disabled": true,
       "name": "DRYE Before / After",
       "settings": {
         "micro_label": "User photos",
@@ -802,24 +819,6 @@
         "padding_top_desktop": 80,
         "padding_bottom_desktop": 80
       }
-    },
-    "17820025558baba7f4": {
-      "type": "apps",
-      "blocks": {
-        "judge_me_reviews_review_widget_X7UeAd": {
-          "type": "shopify://apps/judge-me-reviews/blocks/review_widget/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
-          "settings": {
-            "review_data": "real_data",
-            "max_width": 1200,
-            "show_shop_reviews": false,
-            "empty_state": "empty_widget"
-          }
-        }
-      },
-      "block_order": [
-        "judge_me_reviews_review_widget_X7UeAd"
-      ],
-      "settings": {}
     }
   },
   "order": [
