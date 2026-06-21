@@ -1048,6 +1048,24 @@
         "body": "<p><em>\"After 6 hours under rubber gloves, my hands felt wet inside. Took the gloves off — completely dry. Such a mindfuck.\"</em><br/><br/></p>"
       }
     },
+    "apps_zHecji": {
+      "type": "apps",
+      "blocks": {
+        "judge_me_reviews_review_widget_yGhjig": {
+          "type": "shopify://apps/judge-me-reviews/blocks/review_widget/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
+          "settings": {
+            "review_data": "real_data",
+            "max_width": 1100,
+            "show_shop_reviews": false,
+            "empty_state": "empty_widget"
+          }
+        }
+      },
+      "block_order": [
+        "judge_me_reviews_review_widget_yGhjig"
+      ],
+      "settings": {}
+    },
     "drye_validation_TYhQTK": {
       "type": "drye-validation",
       "blocks": {
@@ -1300,6 +1318,7 @@
     "drye_mechanics_time2_wd4WRy",
     "drye_about_cta_bmdVek",
     "drye_mechanics_time_promise_ieYYEU",
+    "apps_zHecji",
     "drye_validation_TYhQTK",
     "drye_research_study_breakdown_TrRXii",
     "drye_mechanics_cta_khadEy",
