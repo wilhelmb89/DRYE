@@ -1289,7 +1289,10 @@ faqButtons.forEach((button) => {
     const allItems = Array.from(item.parentNode.querySelectorAll('.faq-item'));
     const faqIndex = allItems.indexOf(item) + 1;
     window.dataLayer = window.dataLayer || [];
-    window.dataLayer.push({ event: 'faq_open', faq_index: faqIndex });
+    window.dataLayer.push(function() {
+      this.set('faq_index', faqIndex);
+    });
+    window.dataLayer.push({ event: 'faq_open' });
   });
 });
 const wteTimelines = Array.from(sectionEl.querySelectorAll('[data-hero-wte-timeline]'));
