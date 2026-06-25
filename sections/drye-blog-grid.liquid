@@ -17,162 +17,36 @@
       </span>
     </div>
 
+    {% assign pin_tag = section.settings.pin_tag | default: 'pinned' %}
+    {% liquid
+      assign exclude_id = ''
+      if section.settings.exclude_first_post and blog.articles.size > 0
+        assign exclude_id = blog.articles.first.id
+      endif
+      assign shown = 0
+      assign card_index = 0
+    %}
+
     <div class="post-grid" id="post-grid">
-      {% if section.settings.exclude_first_post %}
-        {% for article in blog.articles limit: max_posts offset: 1 %}
-          {% liquid
-            assign category_handle = 'science'
-            assign category_label = 'Science'
-            assign placeholder_class = 'ph-science'
-            assign placeholder_symbol = '⬡'
+      {%- comment -%} Pinned posts first (any article tagged with the pin tag) {%- endcomment -%}
+      {% for article in blog.articles %}
+        {% if shown >= max_posts %}{% break %}{% endif %}
+        {% unless article.tags contains pin_tag %}{% continue %}{% endunless %}
+        {% if exclude_id != '' and article.id == exclude_id %}{% continue %}{% endif %}
+        {% assign card_index = card_index | plus: 1 %}
+        {% render 'drye-blog-card', article: article, card_index: card_index %}
+        {% assign shown = shown | plus: 1 %}
+      {% endfor %}
 
-            if article.tags contains 'Field Report'
-              assign category_handle = 'field'
-              assign category_label = 'Field Report'
-              assign placeholder_class = 'ph-mining'
-              assign placeholder_symbol = '⬤'
-            elsif article.tags contains 'User Story'
-              assign category_handle = 'stories'
-              assign category_label = 'User Story'
-              assign placeholder_class = 'ph-hockey'
-              assign placeholder_symbol = '❄'
-            elsif article.tags contains 'Science'
-              assign category_handle = 'science'
-              assign category_label = 'Science'
-              assign placeholder_class = 'ph-science'
-              assign placeholder_symbol = '⬡'
-            endif
-
-            assign word_count = article.content | strip_html | split: ' ' | size
-            assign read_time = word_count | plus: 199 | divided_by: 200
-            if read_time < 1
-              assign read_time = 1
-            endif
-
-            assign excerpt_text = article.excerpt_or_content | strip_html | truncatewords: 24
-          %}
-
-          <article
-            class="post-card rev{% if forloop.index == 1 %} rd1{% elsif forloop.index == 2 %} rd2{% elsif forloop.index == 3 %} rd3{% elsif forloop.index == 4 %} rd4{% elsif forloop.index == 5 %} rd5{% endif %}"
-            data-cat="{{ category_handle }}"
-          >
-            <a href="{{ article.url }}" class="post-card__link" aria-label="{{ article.title | escape }}">
-              <div class="pc-img">
-                {% if article.image != blank %}
-                  <div class="pc-img-inner">
-                    {{
-                      article.image
-                      | image_url: width: 1200
-                      | image_tag:
-                        loading: 'lazy',
-                        widths: '400, 600, 800, 1200',
-                        sizes: '(min-width: 900px) 33vw, (min-width: 600px) 50vw, 100vw',
-                        alt: article.title
-                    }}
-                  </div>
-                {% else %}
-                  <div class="pc-img-inner ph {{ placeholder_class }}">
-                    <span>{{ placeholder_symbol }}</span>
-                  </div>
-                {% endif %}
-              </div>
-
-              <div class="pc-body">
-                <span class="pc-cat">
-                  <span class="pc-cat-dot"></span>{{ category_label }}
-                </span>
-
-                <h3 class="pc-h">{{ article.title }}</h3>
-
-                <p class="pc-excerpt">{{ excerpt_text }}</p>
-
-                <div class="pc-footer">
-                  <span class="pc-date">{{ article.published_at | date: "%b %Y" }}</span>
-                  <span class="pc-read">{{ read_time }} min</span>
-                  <span class="pc-arrow">→</span>
-                </div>
-              </div>
-            </a>
-          </article>
-        {% endfor %}
-      {% else %}
-        {% for article in blog.articles limit: max_posts %}
-          {% liquid
-            assign category_handle = 'science'
-            assign category_label = 'Science'
-            assign placeholder_class = 'ph-science'
-            assign placeholder_symbol = '⬡'
-
-            if article.tags contains 'Field Report'
-              assign category_handle = 'field'
-              assign category_label = 'Field Report'
-              assign placeholder_class = 'ph-mining'
-              assign placeholder_symbol = '⬤'
-            elsif article.tags contains 'User Story'
-              assign category_handle = 'stories'
-              assign category_label = 'User Story'
-              assign placeholder_class = 'ph-hockey'
-              assign placeholder_symbol = '❄'
-            elsif article.tags contains 'Science'
-              assign category_handle = 'science'
-              assign category_label = 'Science'
-              assign placeholder_class = 'ph-science'
-              assign placeholder_symbol = '⬡'
-            endif
-
-            assign word_count = article.content | strip_html | split: ' ' | size
-            assign read_time = word_count | plus: 199 | divided_by: 200
-            if read_time < 1
-              assign read_time = 1
-            endif
-
-            assign excerpt_text = article.excerpt_or_content | strip_html | truncatewords: 24
-          %}
-
-          <article
-            class="post-card rev{% if forloop.index == 1 %} rd1{% elsif forloop.index == 2 %} rd2{% elsif forloop.index == 3 %} rd3{% elsif forloop.index == 4 %} rd4{% elsif forloop.index == 5 %} rd5{% endif %}"
-            data-cat="{{ category_handle }}"
-          >
-            <a href="{{ article.url }}" class="post-card__link" aria-label="{{ article.title | escape }}">
-              <div class="pc-img">
-                {% if article.image != blank %}
-                  <div class="pc-img-inner">
-                    {{
-                      article.image
-                      | image_url: width: 1200
-                      | image_tag:
-                        loading: 'lazy',
-                        widths: '400, 600, 800, 1200',
-                        sizes: '(min-width: 900px) 33vw, (min-width: 600px) 50vw, 100vw',
-                        alt: article.title
-                    }}
-                  </div>
-                {% else %}
-                  <div class="pc-img-inner ph {{ placeholder_class }}">
-                    <span>{{ placeholder_symbol }}</span>
-                  </div>
-                {% endif %}
-              </div>
-
-              <div class="pc-body">
-                <span class="pc-cat">
-                  <span class="pc-cat-dot"></span>{{ category_label }}
-                </span>
-
-                <h3 class="pc-h">{{ article.title }}</h3>
-
-                <p class="pc-excerpt">{{ excerpt_text }}</p>
-
-                <div class="pc-footer">
-                  <span class="pc-date">{{ article.published_at | date: "%b %Y" }}</span>
-                  <span class="pc-read">{{ read_time }} min</span>
-                  <span class="pc-arrow">→</span>
-                </div>
-              </div>
-            </a>
-          </article>
-        {% endfor %}
-      {% endif %}
+      {%- comment -%} Then the remaining posts in normal (newest-first) order {%- endcomment -%}
+      {% for article in blog.articles %}
+        {% if shown >= max_posts %}{% break %}{% endif %}
+        {% if article.tags contains pin_tag %}{% continue %}{% endif %}
+        {% if exclude_id != '' and article.id == exclude_id %}{% continue %}{% endif %}
+        {% assign card_index = card_index | plus: 1 %}
+        {% render 'drye-blog-card', article: article, card_index: card_index %}
+        {% assign shown = shown | plus: 1 %}
+      {% endfor %}
     </div>
   </div>
 </section>
@@ -202,6 +76,13 @@
       "label": "Exclude first post from grid",
       "default": true,
       "info": "Use this if the newest post is already shown in the featured section above."
+    },
+    {
+      "type": "text",
+      "id": "pin_tag",
+      "label": "Pin tag",
+      "default": "pinned",
+      "info": "Articles with this tag are shown first in the grid. Add the tag to a blog post in the admin to pin it to the top."
     }
   ],
   "presets": [

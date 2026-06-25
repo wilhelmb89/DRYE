@@ -1,0 +1,80 @@
+{%- comment -%}
+  Renders one blog post card for the DRYE Blog Grid.
+  Accepts:
+    - article    {object}  the article to render
+    - card_index {number}  1-based position in the grid (drives the rd1..rd5 reveal stagger)
+{%- endcomment -%}
+{% liquid
+  assign category_handle = 'science'
+  assign category_label = 'Science'
+  assign placeholder_class = 'ph-science'
+  assign placeholder_symbol = '⬡'
+
+  if article.tags contains 'Field Report'
+    assign category_handle = 'field'
+    assign category_label = 'Field Report'
+    assign placeholder_class = 'ph-mining'
+    assign placeholder_symbol = '⬤'
+  elsif article.tags contains 'User Story'
+    assign category_handle = 'stories'
+    assign category_label = 'User Story'
+    assign placeholder_class = 'ph-hockey'
+    assign placeholder_symbol = '❄'
+  elsif article.tags contains 'Science'
+    assign category_handle = 'science'
+    assign category_label = 'Science'
+    assign placeholder_class = 'ph-science'
+    assign placeholder_symbol = '⬡'
+  endif
+
+  assign word_count = article.content | strip_html | split: ' ' | size
+  assign read_time = word_count | plus: 199 | divided_by: 200
+  if read_time < 1
+    assign read_time = 1
+  endif
+
+  assign excerpt_text = article.excerpt_or_content | strip_html | truncatewords: 24
+%}
+
+<article
+  class="post-card rev{% if card_index == 1 %} rd1{% elsif card_index == 2 %} rd2{% elsif card_index == 3 %} rd3{% elsif card_index == 4 %} rd4{% elsif card_index == 5 %} rd5{% endif %}"
+  data-cat="{{ category_handle }}"
+>
+  <a href="{{ article.url }}" class="post-card__link" aria-label="{{ article.title | escape }}">
+    <div class="pc-img">
+      {% if article.image != blank %}
+        <div class="pc-img-inner">
+          {{
+            article.image
+            | image_url: width: 1200
+            | image_tag:
+              loading: 'lazy',
+              widths: '400, 600, 800, 1200',
+              sizes: '(min-width: 900px) 33vw, (min-width: 600px) 50vw, 100vw',
+              alt: article.title
+          }}
+        </div>
+      {% else %}
+        <div class="pc-img-inner ph {{ placeholder_class }}">
+          <span>{{ placeholder_symbol }}</span>
+        </div>
+      {% endif %}
+    </div>
+
+    <div class="pc-body">
+      <span class="pc-cat">
+        <span class="pc-cat-dot"></span>{{ category_label }}
+      </span>
+
+      <h3 class="pc-h">{{ article.title }}</h3>
+
+      <p class="pc-excerpt">{{ excerpt_text }}</p>
+
+      <div class="pc-footer">
+        <span class="pc-date">{{ article.published_at | date: "%b %Y" }}</span>
+        <span class="pc-read">{{ read_time }} min</span>
+        <span class="pc-arrow">→</span>
+      </div>
+    </div>
+  </a>
+</article>
