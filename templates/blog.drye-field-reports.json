@@ -19,19 +19,6 @@
         "description": "Field studies, peer-reviewed science, and documented results from real conditions."
       }
     },
-    "drye_blog_filter_gpLCNC": {
-      "type": "drye-blog-filter",
-      "name": "DRYE Blog Filter",
-      "settings": {
-        "label_all": "All",
-        "label_science": "Science",
-        "label_field": "Field Reports",
-        "label_stories": "User Stories",
-        "tag_science": "Science",
-        "tag_field": "Field Report",
-        "tag_stories": "User Story"
-      }
-    },
     "drye_blog_featured_post_d9WpTC": {
       "type": "drye-blog-featured-post",
       "name": "DRYE Blog Featured Post",
@@ -48,6 +35,19 @@
         "meta_type": "Field Observation · n=9",
         "meta_read_time": "5 min read",
         "link_text": "Read the report"
+      }
+    },
+    "drye_blog_filter_gpLCNC": {
+      "type": "drye-blog-filter",
+      "name": "DRYE Blog Filter",
+      "settings": {
+        "label_all": "All",
+        "label_science": "Science",
+        "label_field": "Field Reports",
+        "label_stories": "User Stories",
+        "tag_science": "Science",
+        "tag_field": "Field Report",
+        "tag_stories": "User Story"
       }
     },
     "drye_blog_grid_qptz9r": {
@@ -95,8 +95,8 @@
   },
   "order": [
     "drye_blog_hero_J77NQM",
-    "drye_blog_filter_gpLCNC",
     "drye_blog_featured_post_d9WpTC",
+    "drye_blog_filter_gpLCNC",
     "drye_blog_grid_qptz9r",
     "drye_blog_science_callout_ex4dTF",
     "drye_blog_cta_strip_WaBL3H"
