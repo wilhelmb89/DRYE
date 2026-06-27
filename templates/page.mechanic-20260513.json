@@ -192,8 +192,8 @@
             "image_alt": "Mechanic at work",
             "label": "Latex · Chemicals",
             "role": "Paint booth, hour 4",
-            "quote": "\"Oil, paint, sweat - it all ends up on the gloves. Then you still have to peel them off.\"",
-            "source": "Automotive mechanic · TikTok #mechanic"
+            "quote": "\"Oil, paint, sweat — it all ends up inside the gloves. Then you still have to peel them off.\"",
+            "source": "Body shop painter"
           }
         }
       },
@@ -209,7 +209,7 @@
       "settings": {
         "eyebrow": "",
         "heading": "One of these <br><em class=\"dryeNEW-em\">is your Tuesday afternoon</em>",
-        "body": "Different jobs. Same wet layer inside the glove.",
+        "body": "Different jobs. Same wet layer inside the glove. Real glove-user words from Reddit, TikTok, and customers. Visuals are illustrative.",
         "swipe_label": "Swipe"
       }
     },
@@ -654,6 +654,23 @@
         "cta_url": "shopify://pages/why-drye"
       }
     },
+    "apps_rjNBgt": {
+      "type": "apps",
+      "blocks": {
+        "judge_me_reviews_review_widget_homepage_ndXztD": {
+          "type": "shopify://apps/judge-me-reviews/blocks/review_widget_homepage/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
+          "settings": {
+            "product": "drye-moisture-routing-glove-liners",
+            "review_data": "real_data",
+            "max_width": 1100
+          }
+        }
+      },
+      "block_order": [
+        "judge_me_reviews_review_widget_homepage_ndXztD"
+      ],
+      "settings": {}
+    },
     "drye_mechanics_time2_wd4WRy": {
       "type": "drye-mechanics-time2",
       "name": "DRYE Mechanics Time2",
@@ -677,23 +694,6 @@
         "secondary_label": "",
         "secondary_link": "shopify://blogs/insights/automotive-mechanics-field-study"
       }
-    },
-    "apps_rjNBgt": {
-      "type": "apps",
-      "blocks": {
-        "judge_me_reviews_review_widget_homepage_ndXztD": {
-          "type": "shopify://apps/judge-me-reviews/blocks/review_widget_homepage/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
-          "settings": {
-            "product": "drye-moisture-routing-glove-liners",
-            "review_data": "real_data",
-            "max_width": 1100
-          }
-        }
-      },
-      "block_order": [
-        "judge_me_reviews_review_widget_homepage_ndXztD"
-      ],
-      "settings": {}
     },
     "drye_competitive_table_Rhhded": {
       "type": "drye-competitive-table",
