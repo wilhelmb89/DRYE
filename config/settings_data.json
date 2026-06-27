@@ -239,13 +239,6 @@
         "type": "shopify://apps/judge-me-reviews/blocks/judgeme_core/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
         "disabled": false,
         "settings": {}
-      },
-      "16017602894386113438": {
-        "type": "shopify://apps/junip/blocks/junip-store-key/dc14f5a8-ed15-41b1-ad08-cfba23f9789b",
-        "disabled": true,
-        "settings": {
-          "enablePreviewMode": true
-        }
       }
     }
   },
@@ -253,5 +246,10 @@
     "Default": {
       "heading_font": "assistant_n4"
     }
+  },
+  "platform_customizations": {
+    "custom_css": [
+      "@media (max-width: 768px) {#judgeme_product_reviews > div {padding-left: 5% !important;padding-right: 5% !important;}}"
+    ]
   }
 }
