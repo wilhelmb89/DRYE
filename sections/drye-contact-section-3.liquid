@@ -1,6 +1,6 @@
 {{ 'drye-contact-section-3.css' | asset_url | stylesheet_tag }}
 
-<section class="contact-bottom">
+<section class="contact-bottom" data-drye-section data-section-name="contact_bottom">
   <div class="contact-bottom-in">
     {% for block in section.blocks %}
       {% if block.type == 'info_item' %}
