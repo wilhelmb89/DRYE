@@ -2,7 +2,7 @@
 
 <section
   class="dryeNEW-section drye-research-video-full"
-  id="drye-research-video-full-{{ section.id }}"
+  id="{% if section.settings.anchor != blank %}{{ section.settings.anchor | handleize }}{% else %}drye-research-video-full-{{ section.id }}{% endif %}"
   data-section-id="{{ section.id }}"
   data-drye-section
   data-section-name="research_video"
