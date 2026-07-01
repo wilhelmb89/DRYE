@@ -337,7 +337,7 @@
       "name": "DRYE Evidence",
       "settings": {
         "eyebrow": "",
-        "heading": "Why every mechanic should care.\n<em class=\"dryeNEW-em\"><br>Wet skin lets more through.</em>",
+        "heading": "Why every mechanic should care.\n<em class=\"dryeNEW-em\">Wet skin lets more through.</em>",
         "body": "Not from the outside. <strong>From what happens inside your gloves.</strong>",
         "swipe_label": "Swipe"
       }
@@ -521,30 +521,40 @@
         "note": ""
       }
     },
-    "drye_objection_cards_dYmK9b": {
+    "drye_objection_cards_7gyajr": {
       "type": "drye-objection-cards",
       "blocks": {
-        "card_BGk8Fi": {
+        "card_QdqLwm": {
+          "type": "card",
+          "settings": {
+            "profession": "Automotive repair",
+            "question": "Is this just cotton?",
+            "quote": "<i>“These are incredible, nearly no more sweat in nitrile gloves, plus being so thin I barely notice them.”</i>",
+            "name": "@fordbodytech811",
+            "meta": "Automotive repair"
+          }
+        },
+        "card_3z8w4D": {
           "type": "card",
           "settings": {
             "profession": "Car detailing",
             "question": "Will it kill my grip?",
-            "quote": "<i>\"The slim thickness gives great dexterity. They do a great job keeping sweat off my hands.\"</i>",
+            "quote": "<i>\"The slim thickness gives great dexterity. They do a great job keeping sweat off my hands.\"</i><br>\n<br>",
             "name": "Shoujun S.",
             "meta": "Car detailing, Rosemead, CA"
           }
         },
-        "card_4qjNmV": {
+        "card_mFxirV": {
           "type": "card",
           "settings": {
             "profession": "Automotive repair",
-            "question": "What about oil?",
+            "question": "What happens if oil gets on them?",
             "quote": "<i>\"When I get oil on the liners, I just wipe them off with electrical contact cleaner and a dry paper towel. Wipes right off.\"</i>",
             "name": "Brian Jee",
             "meta": "Automotive repair,  San Francisco, CA."
           }
         },
-        "card_F8hcUG": {
+        "card_TJcwTq": {
           "type": "card",
           "settings": {
             "profession": "Automotive repair",
@@ -554,7 +564,7 @@
             "meta": "EV service technician, Gothenburg, Sweden"
           }
         },
-        "card_AxpxD3": {
+        "card_6JiFGX": {
           "type": "card",
           "settings": {
             "profession": "Automotive repair",
@@ -564,31 +574,31 @@
             "meta": "Vehicle inspection technician, Gothenburg, Sweden"
           }
         },
-        "card_6hKk3g": {
+        "card_dNUnBc": {
           "type": "card",
           "settings": {
             "profession": "Automotive painter",
-            "question": "Won't I still sweat through summer?",
+            "question": "What about hot shops and summer heat?",
             "quote": "<i>\"Terrible sweat issues during summer wearing nitrile gloves. Wearing these, I'm no longer dripping sweat on my paint jobs and my hands feel better.\"</i>",
             "name": "Chad W.",
             "meta": "Automotive painter, Phoenix, AZ"
           }
         },
-        "card_Dpg3ED": {
+        "card_dWtNBr": {
           "type": "card",
           "settings": {
             "profession": "AUTOMOTIVE · SCANIA BATTERY FACTORY",
-            "question": "Will it affect my dexterity?",
+            "question": "Does it work under EV safety gloves?",
             "quote": "<i>\"Did not appear to affect fingertip sensitivity in electric safety gloves. Raised comfort and reduced the need to air the hand.\"</i>",
             "name": "Simon Vicini",
             "meta": "PPE-Coordinator, Scania CV AB"
           }
         },
-        "card_BtA9r3": {
+        "card_bCPnWf": {
           "type": "card",
           "settings": {
             "profession": "Automotive repair",
-            "question": "Why wear a liner at all?",
+            "question": "Why put anything under nitrile?",
             "quote": "<i> “My hands get so itchy I can’t work without a layer between my skin and the glove. The lining gloves stay drier than cotton — I’ve been using them continuously.” </i>",
             "name": "Field study / SCANIA",
             "meta": "Heavy vehicle mechanic, Gothenburg, Sweden"
@@ -596,20 +606,21 @@
         }
       },
       "block_order": [
-        "card_BGk8Fi",
-        "card_4qjNmV",
-        "card_F8hcUG",
-        "card_AxpxD3",
-        "card_6hKk3g",
-        "card_Dpg3ED",
-        "card_BtA9r3"
+        "card_QdqLwm",
+        "card_3z8w4D",
+        "card_mFxirV",
+        "card_TJcwTq",
+        "card_6JiFGX",
+        "card_dNUnBc",
+        "card_dWtNBr",
+        "card_bCPnWf"
       ],
       "custom_css": [],
       "name": "DRYE Objection Cards",
       "settings": {
         "eyebrow": "",
-        "heading": "Will this actually work<br>",
-        "heading_emphasis": "under my gloves?",
+        "heading": "The questions every mechanic asks.",
+        "heading_emphasis": "",
         "body": ""
       }
     },
@@ -1315,7 +1326,7 @@
     "drye_new_problem_beat_1_R7GgRp",
     "drye_product_reality_grid_ggq47H",
     "drye_functional_benefits_yhKLaV",
-    "drye_objection_cards_dYmK9b",
+    "drye_objection_cards_7gyajr",
     "drye_mechanics_saturation_wQ8QqQ",
     "drye_mechanics_mechanism_tgcnCV",
     "drye_mechanics_82x_proof_Dif9cy",
