@@ -2,7 +2,7 @@
 
 <section
   class="dryeNEW-section drye-research-video-full"
-  id="{% if section.settings.anchor != blank %}{{ section.settings.anchor | handleize }}{% else %}drye-research-video-full-{{ section.id }}{% endif %}"
+  id="research-video"
   data-section-id="{{ section.id }}"
   data-drye-section
   data-section-name="research_video"
@@ -56,7 +56,7 @@
 
 <script>
   (function () {
-    var root = document.getElementById('{% if section.settings.anchor != blank %}{{ section.settings.anchor | handleize }}{% else %}drye-research-video-full-{{ section.id }}{% endif %}');
+    var root = document.getElementById('research-video');
     if (!root) return;
 
     var desktopVideo = root.querySelector('.drye-research-video-full__video--desktop');
@@ -144,12 +144,6 @@
       "id": "poster_image_desktop",
       "label": "Poster image — desktop"
     },
-    {
-  "type": "text",
-  "id": "anchor",
-  "label": "Anchor ID (för länkning)",
-  "info": "Skriv ett ord, t.ex. 'research-video'. Används som #anchor i URL:en."
-},
     {
       "type": "image_picker",
       "id": "poster_image_mobile",
