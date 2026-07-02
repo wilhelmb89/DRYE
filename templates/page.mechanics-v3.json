@@ -734,23 +734,6 @@
         "cta_note": ""
       }
     },
-    "apps_zHecji": {
-      "type": "apps",
-      "blocks": {
-        "judge_me_reviews_review_widget_homepage_Uf7CcK": {
-          "type": "shopify://apps/judge-me-reviews/blocks/review_widget_homepage/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
-          "settings": {
-            "product": "drye-moisture-routing-glove-liners",
-            "review_data": "real_data",
-            "max_width": 1200
-          }
-        }
-      },
-      "block_order": [
-        "judge_me_reviews_review_widget_homepage_Uf7CcK"
-      ],
-      "settings": {}
-    },
     "drye_mechanics_saturation_wQ8QqQ": {
       "type": "drye-mechanics-saturation",
       "blocks": {
@@ -945,7 +928,6 @@
         "property_TDTMK4",
         "property_kihKQe"
       ],
-      "disabled": true,
       "custom_css": [
         ".mech-mechanism {padding-bottom: 0px !important;}",
         ".occlusion-bridge {padding-top: 16px !important;}"
@@ -972,6 +954,23 @@
         "heading": "Eight hours in. The glove is humid. Your skin is dry.",
         "body": "<p><em>\"After 6 hours under rubber gloves, my hands felt wet inside. Took the gloves off — completely dry. Such a mindfuck.\"</em><br/><br/></p>"
       }
+    },
+    "apps_zHecji": {
+      "type": "apps",
+      "blocks": {
+        "judge_me_reviews_review_widget_homepage_Uf7CcK": {
+          "type": "shopify://apps/judge-me-reviews/blocks/review_widget_homepage/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
+          "settings": {
+            "product": "drye-moisture-routing-glove-liners",
+            "review_data": "real_data",
+            "max_width": 1200
+          }
+        }
+      },
+      "block_order": [
+        "judge_me_reviews_review_widget_homepage_Uf7CcK"
+      ],
+      "settings": {}
     },
     "drye_about_cta_bmdVek": {
       "type": "drye-about-cta",
