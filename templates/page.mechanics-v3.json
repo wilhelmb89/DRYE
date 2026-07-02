@@ -942,6 +942,9 @@
     },
     "occlusion_bridge_fezXqN": {
       "type": "occlusion-bridge",
+      "custom_css": [
+        ".drye-source-note {display: block; margin-top: 10px; font-size: 11px; line-height: 1.45; color: rgba(35, 55, 70, 0.55); font-weight: 400; letter-spacing: 0;}"
+      ],
       "name": "Occlusion Bridge",
       "settings": {
         "reveal_cta": "See what changes with DRYE →",
@@ -964,7 +967,7 @@
         "right_text_top": "Skin side: dry",
         "right_text_mid": "Continuous moisture flow",
         "right_text_climax": "Sweat exits, doesn't pool",
-        "right_desc": "That is why sweat keeps moving instead of pooling inside the glove.\n\nVerified transport difference\n82× further moisture transport\n\nDRYE asymmetric layering: 8,111 mm² wicking area  \nConventional layering: 99 mm² wicking area\n\nSmall source line:\nWickView AATCC 195 · Borås, Sweden · 2025"
+        "right_desc": "That is why sweat keeps moving instead of pooling inside the glove.\n\n<span class=\"drye-source-note\">\nVerified transport difference: 82× further moisture transport<br>\nDRYE asymmetric layering: 8,111 mm² wicking area<br>\nConventional layering: 99 mm² wicking area<br>\nSource: WickView AATCC 195 · Borås, Sweden · 2025\n</span>"
       }
     },
     "drye_mechanics_time_promise_LatRqd": {
