@@ -408,6 +408,36 @@
         "cite": "Moisture regain references: Kadolph 2014 · ASTM D2654 · CN GB national standard. Transport mechanism independently verified at the Swedish School of Textiles, 2025."
       }
     },
+    "occlusion_bridge_ajizCH": {
+      "type": "occlusion-bridge",
+      "custom_css": [
+        ".drye-source-note {display: block; margin-top: 10px; font-size: 11px; line-height: 1.45; color: rgba(35, 55, 70, 0.55); font-weight: 400; letter-spacing: 0;}"
+      ],
+      "name": "Occlusion Bridge",
+      "settings": {
+        "reveal_cta": "See what changes with DRYE →",
+        "eyebrow": "The invention",
+        "heading": "How DRYE moves sweat away from skin.",
+        "heading_echo": "",
+        "lead": "DRYE has two working sides: the skin side repels moisture, the outer side pulls it away.",
+        "glove_text": "Sealed glove",
+        "lyocell_label": "Lyocell · Outer side pulls",
+        "pp_label": "Polypropylene · Skin side repels",
+        "thickness_label": "DRYE 0.4mm",
+        "left_label": "Without DRYE",
+        "left_title": "Sweat traps against skin",
+        "left_text_top": "Sweat traps against skin",
+        "left_text_mid": "Skin softens and swells 3×",
+        "left_text_climax": "Chemicals get through 3.6× faster",
+        "left_desc": "That is why sweat keeps moving instead of pooling inside the glove.",
+        "right_label": "With DRYE",
+        "right_title": "Repel. Pull. No saturation.",
+        "right_text_top": "",
+        "right_text_mid": "Sweat exits",
+        "right_text_climax": "",
+        "right_desc": "Sweat keeps moving instead of pooling inside the glove.\n\n<span class=\"drye-source-note\">\nVerified by WickView AATCC 195 · Sweden · 2025:  \n<br>\n·  8,111 mm² vs 99 mm² wicking area  \n<br>\n·  82× further moisture transport<br>\n</span>"
+      }
+    },
     "drye_mechanics_mechanism_PgEzcw": {
       "type": "drye-mechanics-mechanism",
       "blocks": {
@@ -546,6 +576,7 @@
     },
     "drye_research_video_full_xpTFFd": {
       "type": "drye-research-video-full",
+      "disabled": true,
       "name": "DRYE Research Video Full",
       "settings": {
         "video_src_desktop": "https://customer-fqpngdzqcoky7qmz.cloudflarestream.com/453bb4cae9bd147b7a10fc6213e64b12/manifest/video.m3u8",
@@ -560,28 +591,28 @@
         "gallery_image_4VB8aA": {
           "type": "gallery_image",
           "settings": {
-            "image": "shopify://shop_images/Frame_930.webp",
+            "image": "shopify://shop_images/5Y9A9306.webp",
             "image_alt": ""
           }
         },
         "gallery_image_r4WXf4": {
           "type": "gallery_image",
           "settings": {
-            "image": "shopify://shop_images/div.card.webp",
+            "image": "shopify://shop_images/5Y9A9331_1.webp",
             "image_alt": ""
           }
         },
         "gallery_image_f4BqcA": {
           "type": "gallery_image",
           "settings": {
-            "image": "shopify://shop_images/div.card_9.webp",
+            "image": "shopify://shop_images/5Y9A9293.webp",
             "image_alt": ""
           }
         },
         "gallery_image_XPUbcR": {
           "type": "gallery_image",
           "settings": {
-            "image": "shopify://shop_images/div.card_10.webp",
+            "image": "shopify://shop_images/5Y9A9291.webp",
             "image_alt": ""
           }
         },
@@ -615,6 +646,7 @@
         },
         "gallery_image_Q69yCU": {
           "type": "gallery_image",
+          "disabled": true,
           "settings": {
             "image": "shopify://shop_images/v3_2.webp",
             "image_alt": ""
@@ -1122,6 +1154,7 @@
     "drye_worker_grid_UVf4QL",
     "drye_evidence_xmyAdp",
     "drye_mechanics_saturation_P6ACzj",
+    "occlusion_bridge_ajizCH",
     "drye_mechanics_mechanism_PgEzcw",
     "drye_mechanics_time_promise_AcqgeQ",
     "drye_research_video_full_xpTFFd",
