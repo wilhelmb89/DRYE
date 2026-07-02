@@ -320,6 +320,94 @@
         "swipe_label": "Swipe"
       }
     },
+    "drye_mechanics_saturation_P6ACzj": {
+      "type": "drye-mechanics-saturation",
+      "blocks": {
+        "fiber_row_MD4qPX": {
+          "type": "fiber_row",
+          "settings": {
+            "fiber_name": "Merino wool",
+            "fiber_note": "Soaks like a sponge. Stays heavy.",
+            "value": "15–18%",
+            "bar_percent": 100,
+            "is_highlighted": false
+          }
+        },
+        "fiber_row_H3erWR": {
+          "type": "fiber_row",
+          "settings": {
+            "fiber_name": "Bamboo viscose",
+            "fiber_note": "Soft-sell marketing. Wetter than cotton.",
+            "value": "13%",
+            "bar_percent": 78,
+            "is_highlighted": false
+          }
+        },
+        "fiber_row_4RzYHA": {
+          "type": "fiber_row",
+          "disabled": true,
+          "settings": {
+            "fiber_name": "Silk",
+            "fiber_note": "Soaks slow. Dries slower.",
+            "value": "11%",
+            "bar_percent": 65,
+            "is_highlighted": false
+          }
+        },
+        "fiber_row_kLUWXf": {
+          "type": "fiber_row",
+          "settings": {
+            "fiber_name": "Cotton",
+            "fiber_note": "Wet in under an hour.",
+            "value": "7–8%",
+            "bar_percent": 47,
+            "is_highlighted": false
+          }
+        },
+        "fiber_row_Vc6KN7": {
+          "type": "fiber_row",
+          "disabled": true,
+          "settings": {
+            "fiber_name": "Polyester",
+            "fiber_note": "Wets fast. Dries slow.",
+            "value": "0.4%",
+            "bar_percent": 3,
+            "is_highlighted": false
+          }
+        },
+        "fiber_row_xUcXQP": {
+          "type": "fiber_row",
+          "settings": {
+            "fiber_name": "DRYE Asymmetric layering",
+            "fiber_note": "Can't fill. Stays dry — full shift.",
+            "value": "<0.1%",
+            "bar_percent": 1,
+            "is_highlighted": true
+          }
+        }
+      },
+      "block_order": [
+        "fiber_row_MD4qPX",
+        "fiber_row_H3erWR",
+        "fiber_row_4RzYHA",
+        "fiber_row_kLUWXf",
+        "fiber_row_Vc6KN7",
+        "fiber_row_xUcXQP"
+      ],
+      "name": "DRYE Saturation Point",
+      "settings": {
+        "section_id": "mechanics-saturation",
+        "eyebrow": "The invention",
+        "heading_line_1": "Why every normal liner eventually fails",
+        "heading_echo": "",
+        "subheading": "",
+        "drye_chip": "Skin-side dry",
+        "close_heading": "",
+        "close_body": "",
+        "close_statement": "",
+        "cite": "Moisture regain references: Kadolph 2014 · ASTM D2654 · CN GB national standard. Transport mechanism independently verified at the Swedish School of Textiles, 2025."
+      }
+    },
     "drye_mechanics_mechanism_PgEzcw": {
       "type": "drye-mechanics-mechanism",
       "blocks": {
@@ -428,6 +516,7 @@
         "property_xwY7Hc",
         "property_DB6TeY"
       ],
+      "disabled": true,
       "custom_css": [
         ".mech-mechanism {padding-bottom: 0px !important;}",
         ".occlusion-bridge {padding-top: 16px !important;}"
@@ -1032,6 +1121,7 @@
     "drye_new_identification_atPnnz",
     "drye_worker_grid_UVf4QL",
     "drye_evidence_xmyAdp",
+    "drye_mechanics_saturation_P6ACzj",
     "drye_mechanics_mechanism_PgEzcw",
     "drye_mechanics_time_promise_AcqgeQ",
     "drye_research_video_full_xpTFFd",
