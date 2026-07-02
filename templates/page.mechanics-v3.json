@@ -69,7 +69,7 @@
         "path_1_text_line_2": "",
         "path_1_link": "#research-video",
         "path_2_label": "IF YOU WANT THE PROOF",
-        "path_2_text_line_1": "Jag vill inte ha något jävla dynamiskt ID. Det ska vara hårdkodat så att jag kan lägga in det i editorn.Vad är det du inte fattar?",
+        "path_2_text_line_1": "See why it works ↓",
         "path_2_text_line_2": "",
         "path_2_link": "#mechanics-mechanism"
       }
@@ -342,267 +342,150 @@
         "swipe_label": "Swipe"
       }
     },
-    "drye_mechanics_mechanism_VyehmU": {
-      "type": "drye-mechanics-mechanism",
+    "drye_new_problem_beat_1_R7GgRp": {
+      "type": "dryeNEW-problem-beat-1",
       "blocks": {
-        "old_step_LigDH9": {
-          "type": "old_step",
+        "strike_card_mUDqaT": {
+          "type": "strike_card",
           "settings": {
-            "icon": "✕",
-            "text": "Sweat enters the fabric and stays"
+            "title": "MORE MILS",
+            "body": "<p>More rubber outside. <strong><br/>Same sweat inside.</strong></p>"
           }
         },
-        "old_step_XN3jJk": {
-          "type": "old_step",
+        "strike_card_e7nkNG": {
+          "type": "strike_card",
           "settings": {
-            "icon": "✕",
-            "text": "At saturation, moisture sits on skin"
+            "title": "COTTON",
+            "body": "<p>Absorbs at first.<br/><strong>Then becomes the wet layer.</strong></p>"
           }
         },
-        "old_step_9Kjdac": {
-          "type": "old_step",
+        "strike_card_VeDbwG": {
+          "type": "strike_card",
           "settings": {
-            "icon": "✕",
-            "text": "Sealed glove traps heat and humidity"
+            "title": "POWDER",
+            "body": "<p>Helps at the start.<br/><strong>Stops mattering once sweat builds.</strong></p>"
           }
         },
-        "old_step_NDazdG": {
-          "type": "old_step",
+        "strike_card_46DaG4": {
+          "type": "strike_card",
           "settings": {
-            "icon": "✕",
-            "text": "Heat and humidity trap inside the glove"
+            "title": "CREAMS",
+            "body": "<p>Help after the shift.<br/><strong>Do not change the shift.</strong></p>"
           }
         },
-        "old_step_FRgtE9": {
-          "type": "old_step",
+        "strike_card_xWHeLD": {
+          "type": "strike_card",
           "settings": {
-            "icon": "✕",
-            "text": "Same wet glove on shift 1 as shift 8"
+            "title": "GLOVE FLIP",
+            "body": "<p>Buys a few minutes.<br/><strong>Same wet glove goes back on. Rips.</strong></p>"
           }
         },
-        "drye_step_dmiD4G": {
-          "type": "drye_step",
+        "strike_card_RQ3aff": {
+          "type": "strike_card",
           "settings": {
-            "icon": "→",
-            "text": "Skin side repels - sweat cannot sit there"
-          }
-        },
-        "drye_step_3TVNqX": {
-          "type": "drye_step",
-          "settings": {
-            "icon": "→",
-            "text": "Outer side pulls moisture toward it"
-          }
-        },
-        "drye_step_pQL48w": {
-          "type": "drye_step",
-          "settings": {
-            "icon": "→",
-            "text": "Continuous transport, no saturation point"
-          }
-        },
-        "drye_step_xWWhPt": {
-          "type": "drye_step",
-          "settings": {
-            "icon": "→",
-            "text": "One principle. Patent filed March 2026."
-          }
-        },
-        "property_ewbBUy": {
-          "type": "property",
-          "disabled": true,
-          "settings": {
-            "label": "Property 01",
-            "title": "Works under compression",
-            "body": "The gradient functions regardless of external pressure. Compression makes the transport faster, not weaker."
-          }
-        },
-        "property_TDTMK4": {
-          "type": "property",
-          "disabled": true,
-          "settings": {
-            "label": "Property 02",
-            "title": "No saturation point",
-            "body": "Transport is continuous. There is no maximum capacity after which function stops. Cotton has one. DRYE does not."
-          }
-        },
-        "property_kihKQe": {
-          "type": "property",
-          "disabled": true,
-          "settings": {
-            "label": "Property 03",
-            "title": "Stays dry on the skin side",
-            "body": "The inner surface does not work like a towel. It is engineered to avoid moisture retention directly against the hand."
+            "title": "SAME PROBLEM",
+            "body": "<p>Sweat has nowhere to go.</p>"
           }
         }
       },
       "block_order": [
-        "old_step_LigDH9",
-        "old_step_XN3jJk",
-        "old_step_9Kjdac",
-        "old_step_NDazdG",
-        "old_step_FRgtE9",
-        "drye_step_dmiD4G",
-        "drye_step_3TVNqX",
-        "drye_step_pQL48w",
-        "drye_step_xWWhPt",
-        "property_ewbBUy",
-        "property_TDTMK4",
-        "property_kihKQe"
+        "strike_card_mUDqaT",
+        "strike_card_e7nkNG",
+        "strike_card_VeDbwG",
+        "strike_card_46DaG4",
+        "strike_card_xWHeLD",
+        "strike_card_RQ3aff"
       ],
-      "custom_css": [
-        ".mech-mechanism {padding-bottom: 0px !important;}",
-        ".occlusion-bridge {padding-top: 16px !important;}"
-      ],
-      "name": "DRYE Mechanics Mechanism",
+      "name": "DRYE NEW Problem Beat 1",
       "settings": {
-        "eyebrow": "The mechanism",
-        "heading_line_1": "Moisture doesn't need to be absorbed.",
-        "heading_emphasis": "It needs a route out.",
-        "body": "",
-        "old_label": "Every liner before DRYE",
-        "old_title": "Absorb and hold",
-        "old_desc": "<p>Cotton, silk, merino, polyester wicking. All fill with moisture until saturated - then<strong> hold it against your skin</strong> for the rest of the shift.</p>",
-        "drye_label": "DRYE · ASYMMETRIC LAYERING",
-        "drye_title": "Route continuously",
-        "drye_desc": "<p>Two fibers, one fabric. The skin side is hydrophobic - water cannot bond to it. The outer side pulls moisture toward it. <strong>Sweat routes from skin to outside, continuously, without saturation.</strong></p>"
+        "section_id": "problem",
+        "eyebrow": "THE WORKAROUNDS",
+        "heading_before": "You've tried everything.",
+        "heading_em": "Nothing worked.",
+        "lead": ""
       }
     },
-    "drye_mechanics_time_promise_LatRqd": {
-      "type": "drye-mechanics-time-promise",
-      "name": "DRYE Mechanics Time",
-      "settings": {
-        "eyebrow": "— A. Riahi",
-        "heading": "Eight hours in. The glove is humid. Your skin is dry.",
-        "body": "<p><em>\"After 6 hours under rubber gloves, my hands felt wet inside. Took the gloves off — completely dry. Such a mindfuck.\"</em><br/><br/></p>"
-      }
-    },
-    "drye_research_video_full_UybTMV": {
-      "type": "drye-research-video-full",
-      "name": "DRYE Research Video Full",
-      "settings": {
-        "video_src_desktop": "https://customer-fqpngdzqcoky7qmz.cloudflarestream.com/453bb4cae9bd147b7a10fc6213e64b12/manifest/video.m3u8",
-        "video_src_mobile": "https://customer-fqpngdzqcoky7qmz.cloudflarestream.com/ed9ad690d7f5c27060e215f05f9e4f8e/manifest/video.m3u8",
-        "video_label": "Asymmetric layering",
-        "video_caption": "Routes sweat from skin to outer fabric. No saturation point."
-      }
-    },
-    "drye_structural_answer_Xg6y3h": {
-      "type": "drye-structural-answer",
+    "drye_product_reality_grid_ggq47H": {
+      "type": "drye-product-reality-grid",
       "blocks": {
-        "gallery_image_KX8VJd": {
-          "type": "gallery_image",
+        "image_card_TWj7ef": {
+          "type": "image_card",
           "settings": {
-            "image": "shopify://shop_images/Frame_930.webp",
-            "image_alt": ""
+            "image": "shopify://shop_images/5Y9A9331.webp",
+            "fallback_image_url": "",
+            "image_alt": "DRYE liner worn on hand before nitrile glove",
+            "caption": "The layer against your skin."
           }
         },
-        "gallery_image_AxMMtN": {
-          "type": "gallery_image",
+        "image_card_BUdzzj": {
+          "type": "image_card",
           "settings": {
-            "image": "shopify://shop_images/div.card.webp",
-            "image_alt": ""
+            "image": "shopify://shop_images/5Y9A9291.webp",
+            "fallback_image_url": "",
+            "image_alt": "Nitrile glove pulled over DRYE liner",
+            "caption": "Your nitrile goes over it. No ripping."
           }
         },
-        "gallery_image_8KW7mL": {
-          "type": "gallery_image",
+        "image_card_yBnhFd": {
+          "type": "image_card",
           "settings": {
-            "image": "shopify://shop_images/div.card_9.webp",
-            "image_alt": ""
+            "image": "shopify://shop_images/5Y9A9293.webp",
+            "fallback_image_url": "https://images.unsplash.com/photo-1605618826115-fb9e775cf795?w=1200&q=80",
+            "image_alt": "Full nitrile glove worn over DRYE liner",
+            "caption": "Thin enough for sealed gloves."
           }
         },
-        "gallery_image_GURLDt": {
-          "type": "gallery_image",
+        "image_card_UjjHFt": {
+          "type": "image_card",
           "settings": {
-            "image": "shopify://shop_images/div.card_10.webp",
-            "image_alt": ""
+            "image": "shopify://shop_images/D.webp",
+            "fallback_image_url": "https://images.unsplash.com/photo-1581092580497-e0d23cbdf1dc?w=1200&q=80",
+            "image_alt": "Hand wearing DRYE liner showing thin profile",
+            "caption": "No bulky second-glove feel."
           }
         },
-        "gallery_image_GTAKjB": {
-          "type": "gallery_image",
+        "image_card_qeMcR3": {
+          "type": "image_card",
           "settings": {
-            "image": "shopify://shop_images/div.card_11.webp",
-            "image_alt": ""
+            "image": "shopify://shop_images/5Y9A9307.webp",
+            "fallback_image_url": "https://images.unsplash.com/photo-1581093588401-fbb62a02f120?w=1200&q=80",
+            "image_alt": "Removing nitrile glove over DRYE liner",
+            "caption": "Slides off the layer, not wet skin."
           }
         },
-        "gallery_image_dqBhHc": {
-          "type": "gallery_image",
+        "image_card_JKjpTD": {
+          "type": "image_card",
           "settings": {
-            "image": "shopify://shop_images/100i4444440055070_1_1_t.webp",
-            "image_alt": ""
-          }
-        },
-        "gallery_image_4wWMam": {
-          "type": "gallery_image",
-          "settings": {
-            "image": "shopify://shop_images/slide.webp",
-            "image_alt": ""
-          }
-        },
-        "gallery_image_HrygGV": {
-          "type": "gallery_image",
-          "settings": {
-            "image": "shopify://shop_images/refore.ai_with.webp",
-            "image_alt": ""
-          }
-        },
-        "gallery_image_MXxHyD": {
-          "type": "gallery_image",
-          "settings": {
-            "image": "shopify://shop_images/v3_2.webp",
-            "image_alt": ""
-          }
-        },
-        "fact_qCMrtz": {
-          "type": "fact",
-          "settings": {
-            "strong": "Sweat.",
-            "text": "No saturation point. No maceration. Stays dry for the full shift - summer or winter, nitrile, latex, rubber or HV."
-          }
-        },
-        "fact_hDcTEX": {
-          "type": "fact",
-          "settings": {
-            "strong": "Oil.",
-            "text": "Stays on the surface. Wipes off with electrical contact cleaner. Back in rotation in under a minute."
-          }
-        },
-        "fact_tEb4fB": {
-          "type": "fact",
-          "settings": {
-            "strong": "Tearing.",
-            "text": "Your nitriles go on dry, come off dry. No more ripping them off over soaked skin twice an hour."
+            "image": "shopify://shop_images/5Y9A9314_1.jpg",
+            "fallback_image_url": "https://images.unsplash.com/photo-1599058917212-d750089bc07e?w=1200&q=80",
+            "image_alt": "Pair of DRYE liners product closeup",
+            "caption": "Washable. Reusable. Built for shifts."
           }
         }
       },
       "block_order": [
-        "gallery_image_KX8VJd",
-        "gallery_image_AxMMtN",
-        "gallery_image_8KW7mL",
-        "gallery_image_GURLDt",
-        "gallery_image_GTAKjB",
-        "gallery_image_dqBhHc",
-        "gallery_image_4wWMam",
-        "gallery_image_HrygGV",
-        "gallery_image_MXxHyD",
-        "fact_qCMrtz",
-        "fact_hDcTEX",
-        "fact_tEb4fB"
+        "image_card_TWj7ef",
+        "image_card_BUdzzj",
+        "image_card_yBnhFd",
+        "image_card_UjjHFt",
+        "image_card_qeMcR3",
+        "image_card_JKjpTD"
       ],
-      "name": "DRYE Structural Answer",
+      "custom_css": [],
+      "name": "DRYE product reality grid",
       "settings": {
-        "image": "shopify://shop_images/Screenshot_7.webp",
-        "image_alt": "DRYE liner being put on under a nitrile glove",
-        "eyebrow": "Asymmetric layering",
-        "heading_before": "A liner built for sealed gloves",
-        "heading_em": "— not open air.",
-        "subheading": "0.4mm thin. No chemicals. No coatings. Fits inside any work glove.",
-        "body": "",
-        "footer_text": "Developed at the Swedish School of Textiles. Supported by Uppsala University and Vinnova.",
-        "swipe_label": "Swipe",
-        "cta_label": "I'm ready, show me the price →",
-        "cta_url": "shopify://products/drye-moisture-routing-glove-liners",
-        "cta_note": "0.4mm washable liner · Engineered in Sweden · 30-day refund"
+        "eyebrow": "",
+        "heading_line_1": "Cotton absorbs.",
+        "heading_emphasis": "DRYE routes.",
+        "heading_line_2": "",
+        "body": "DRYE does not replace your glove. It changes what your hand sits against inside it.",
+        "show_next_link": true,
+        "next_label": "",
+        "next_url": "",
+        "lightbox_label": "Product image viewer",
+        "close_label": "Close image viewer",
+        "prev_label": "Previous image",
+        "next_image_label": "Next image"
       }
     },
     "drye_objection_cards_7gyajr": {
@@ -706,350 +589,6 @@
         "heading": "Will this actually work under my gloves?",
         "heading_emphasis": "",
         "body": ""
-      }
-    },
-    "drye_mechanics_saturation_wQ8QqQ": {
-      "type": "drye-mechanics-saturation",
-      "blocks": {
-        "fiber_row_bgLzKH": {
-          "type": "fiber_row",
-          "settings": {
-            "fiber_name": "Merino wool",
-            "fiber_note": "Soaks like a sponge. Stays heavy.",
-            "value": "15–18%",
-            "bar_percent": 100,
-            "is_highlighted": false
-          }
-        },
-        "fiber_row_dGpNGk": {
-          "type": "fiber_row",
-          "settings": {
-            "fiber_name": "Bamboo viscose",
-            "fiber_note": "Soft-sell marketing. Wetter than cotton.",
-            "value": "13%",
-            "bar_percent": 78,
-            "is_highlighted": false
-          }
-        },
-        "fiber_row_hDkgXd": {
-          "type": "fiber_row",
-          "settings": {
-            "fiber_name": "Silk",
-            "fiber_note": "Soaks slow. Dries slower.",
-            "value": "11%",
-            "bar_percent": 65,
-            "is_highlighted": false
-          }
-        },
-        "fiber_row_jb7nEY": {
-          "type": "fiber_row",
-          "settings": {
-            "fiber_name": "Cotton",
-            "fiber_note": "Wet in under an hour.",
-            "value": "7–8%",
-            "bar_percent": 47,
-            "is_highlighted": false
-          }
-        },
-        "fiber_row_cFXz6d": {
-          "type": "fiber_row",
-          "settings": {
-            "fiber_name": "Polyester",
-            "fiber_note": "Wets fast. Dries slow.",
-            "value": "0.4%",
-            "bar_percent": 3,
-            "is_highlighted": false
-          }
-        },
-        "fiber_row_fyUmUz": {
-          "type": "fiber_row",
-          "settings": {
-            "fiber_name": "DRYE Asymmetric layering",
-            "fiber_note": "Can't fill. Stays dry — full shift.",
-            "value": "<0.1%",
-            "bar_percent": 1,
-            "is_highlighted": true
-          }
-        }
-      },
-      "block_order": [
-        "fiber_row_bgLzKH",
-        "fiber_row_dGpNGk",
-        "fiber_row_hDkgXd",
-        "fiber_row_jb7nEY",
-        "fiber_row_cFXz6d",
-        "fiber_row_fyUmUz"
-      ],
-      "name": "DRYE Saturation Point",
-      "settings": {
-        "section_id": "mechanics-saturation",
-        "eyebrow": "The invention",
-        "heading_line_1": "Every other liner saturates.",
-        "heading_echo": "Ours physically can't.",
-        "subheading": "Every fibre that's ever been inside your glove fills up with sweat. Then it stops moving. The rest of the shift, it sits against your hand.",
-        "drye_chip": "Skin-side dry",
-        "close_heading": "",
-        "close_body": "",
-        "close_statement": "",
-        "cite": "Moisture regain references: Kadolph 2014 · ASTM D2654 · CN GB national standard. Transport mechanism independently verified at the Swedish School of Textiles, 2025."
-      }
-    },
-    "occlusion_bridge_fezXqN": {
-      "type": "occlusion-bridge",
-      "name": "Occlusion Bridge",
-      "settings": {
-        "reveal_cta": "See what changes with DRYE →",
-        "eyebrow": "",
-        "heading": "How it works",
-        "heading_echo": "",
-        "lead": "",
-        "glove_text": "Sealed glove",
-        "lyocell_label": "Lyocell · pulls outward",
-        "pp_label": "Polypropylene · repels skin side",
-        "thickness_label": "DRYE 0.4mm",
-        "left_label": "Without DRYE",
-        "left_title": "Sweat traps against skin",
-        "left_text_top": "Sweat traps against skin",
-        "left_text_mid": "Skin softens and swells 3×",
-        "left_text_climax": "Chemicals get through 3.6× faster",
-        "left_desc": "The longer you wear them, the more permeable your skin becomes.",
-        "right_label": "With DRYE",
-        "right_title": "Repel. Pull. No saturation.",
-        "right_text_top": "Skin side: dry",
-        "right_text_mid": "Continuous moisture flow",
-        "right_text_climax": "Sweat exits, doesn't pool",
-        "right_desc": "Moisture moves out continuously. Skin side stays dry."
-      }
-    },
-    "drye_new_problem_beat_1_R7GgRp": {
-      "type": "dryeNEW-problem-beat-1",
-      "blocks": {
-        "strike_card_mUDqaT": {
-          "type": "strike_card",
-          "settings": {
-            "title": "MORE MILS",
-            "body": "<p>More rubber outside. <strong><br/>Same sweat inside.</strong></p>"
-          }
-        },
-        "strike_card_e7nkNG": {
-          "type": "strike_card",
-          "settings": {
-            "title": "COTTON",
-            "body": "<p>Absorbs at first.<br/><strong>Then becomes the wet layer.</strong></p>"
-          }
-        },
-        "strike_card_VeDbwG": {
-          "type": "strike_card",
-          "settings": {
-            "title": "POWDER",
-            "body": "<p>Helps at the start.<br/><strong>Stops mattering once sweat builds.</strong></p>"
-          }
-        },
-        "strike_card_46DaG4": {
-          "type": "strike_card",
-          "settings": {
-            "title": "CREAMS",
-            "body": "<p>Help after the shift.<br/><strong>Do not change the shift.</strong></p>"
-          }
-        },
-        "strike_card_xWHeLD": {
-          "type": "strike_card",
-          "settings": {
-            "title": "GLOVE FLIP",
-            "body": "<p>Buys a few minutes.<br/><strong>Same wet glove goes back on. Rips.</strong></p>"
-          }
-        },
-        "strike_card_RQ3aff": {
-          "type": "strike_card",
-          "settings": {
-            "title": "SAME PROBLEM",
-            "body": "<p>Sweat has nowhere to go.</p>"
-          }
-        }
-      },
-      "block_order": [
-        "strike_card_mUDqaT",
-        "strike_card_e7nkNG",
-        "strike_card_VeDbwG",
-        "strike_card_46DaG4",
-        "strike_card_xWHeLD",
-        "strike_card_RQ3aff"
-      ],
-      "disabled": true,
-      "name": "DRYE NEW Problem Beat 1",
-      "settings": {
-        "section_id": "problem",
-        "eyebrow": "THE WORKAROUNDS",
-        "heading_before": "You've tried everything.",
-        "heading_em": "Nothing worked.",
-        "lead": ""
-      }
-    },
-    "drye_product_reality_grid_ggq47H": {
-      "type": "drye-product-reality-grid",
-      "blocks": {
-        "image_card_TWj7ef": {
-          "type": "image_card",
-          "settings": {
-            "image": "shopify://shop_images/5Y9A9331.webp",
-            "fallback_image_url": "",
-            "image_alt": "DRYE liner worn on hand before nitrile glove",
-            "caption": "The layer against your skin."
-          }
-        },
-        "image_card_BUdzzj": {
-          "type": "image_card",
-          "settings": {
-            "image": "shopify://shop_images/5Y9A9291.webp",
-            "fallback_image_url": "",
-            "image_alt": "Nitrile glove pulled over DRYE liner",
-            "caption": "Your nitrile goes over it. No ripping."
-          }
-        },
-        "image_card_yBnhFd": {
-          "type": "image_card",
-          "settings": {
-            "image": "shopify://shop_images/5Y9A9293.webp",
-            "fallback_image_url": "https://images.unsplash.com/photo-1605618826115-fb9e775cf795?w=1200&q=80",
-            "image_alt": "Full nitrile glove worn over DRYE liner",
-            "caption": "Thin enough for sealed gloves."
-          }
-        },
-        "image_card_UjjHFt": {
-          "type": "image_card",
-          "settings": {
-            "image": "shopify://shop_images/D.webp",
-            "fallback_image_url": "https://images.unsplash.com/photo-1581092580497-e0d23cbdf1dc?w=1200&q=80",
-            "image_alt": "Hand wearing DRYE liner showing thin profile",
-            "caption": "No bulky second-glove feel."
-          }
-        },
-        "image_card_qeMcR3": {
-          "type": "image_card",
-          "settings": {
-            "image": "shopify://shop_images/5Y9A9307.webp",
-            "fallback_image_url": "https://images.unsplash.com/photo-1581093588401-fbb62a02f120?w=1200&q=80",
-            "image_alt": "Removing nitrile glove over DRYE liner",
-            "caption": "Slides off the layer, not wet skin."
-          }
-        },
-        "image_card_JKjpTD": {
-          "type": "image_card",
-          "settings": {
-            "image": "shopify://shop_images/5Y9A9314_1.jpg",
-            "fallback_image_url": "https://images.unsplash.com/photo-1599058917212-d750089bc07e?w=1200&q=80",
-            "image_alt": "Pair of DRYE liners product closeup",
-            "caption": "Washable. Reusable. Built for shifts."
-          }
-        }
-      },
-      "block_order": [
-        "image_card_TWj7ef",
-        "image_card_BUdzzj",
-        "image_card_yBnhFd",
-        "image_card_UjjHFt",
-        "image_card_qeMcR3",
-        "image_card_JKjpTD"
-      ],
-      "disabled": true,
-      "custom_css": [
-        ".dryeNEW-section.drye-product-grid {padding-bottom: 0 !important;}"
-      ],
-      "name": "DRYE product reality grid",
-      "settings": {
-        "eyebrow": "The dry layer",
-        "heading_line_1": "Cotton absorbs.",
-        "heading_emphasis": "DRYE routes.",
-        "heading_line_2": "",
-        "body": "DRYE does not replace your glove. It changes what your hand sits against inside it.",
-        "show_next_link": true,
-        "next_label": "",
-        "next_url": "",
-        "lightbox_label": "Product image viewer",
-        "close_label": "Close image viewer",
-        "prev_label": "Previous image",
-        "next_image_label": "Next image"
-      }
-    },
-    "drye_functional_benefits_yhKLaV": {
-      "type": "drye-functional-benefits",
-      "disabled": true,
-      "custom_css": [
-        ".func-sec {padding-top: 4px !important; padding-bottom: 4px;}"
-      ],
-      "name": "DRYE Functional Benefits",
-      "settings": {
-        "eyebrow": "",
-        "heading": "",
-        "subheading": "",
-        "card_1_icon": "wave-breathability.svg",
-        "card_1_title": "Skin-side stays dry",
-        "card_1_desc": "Sweat routes away from the skin side instead of sitting directly against your hand.",
-        "card_2_icon": "shield.svg",
-        "card_2_title": "Gloves slide better",
-        "card_2_desc": "Nitrile goes on and off over the layer — not over wet skin. No ripping.",
-        "card_3_icon": "performance-arrow.svg",
-        "card_3_title": "Fits under sealed gloves",
-        "card_3_desc": "0.4mm thin. Built to sit under nitrile, latex, rubber and HV gloves.",
-        "card_4_icon": "layers-fabric.svg",
-        "card_4_title": "You still feel the work",
-        "card_4_desc": "The outer glove still does the gripping. DRYE changes the wet contact underneath.",
-        "card_5_icon": "wave-breathability.svg",
-        "card_5_title": "Nothing to wash out",
-        "card_5_desc": "The performance comes from the structure, not a chemical finish.",
-        "card_6_icon": "clock-timer.svg",
-        "card_6_title": "Built for months of shifts",
-        "card_6_desc": "Washable, reusable, and made to keep working through repeated wear.",
-        "note": ""
-      }
-    },
-    "drye_mechanics_82x_proof_Dif9cy": {
-      "type": "drye-mechanics-82x-proof",
-      "disabled": true,
-      "custom_css": [
-        ".proof-white {color: #ffffff; font-weight: 700;}"
-      ],
-      "name": "DRYE Mechanics 82x Proof",
-      "settings": {
-        "eyebrow": "Independent verification · 2026",
-        "heading_line_1": "Same family of knit. Different construction.",
-        "heading_emphasis": "82× further moisture transport.",
-        "subheading": "The innovation is not just the fibre blend.\nIt is how the knit is built to move moisture away from the skin side.",
-        "left_image": "shopify://shop_images/IMG_0797_2.webp",
-        "left_image_alt": "DRYE textile sample showing large wicking area after Wickview test.",
-        "left_label": "DRYE · ASYMMETRIC LAYERING",
-        "left_value": "8,111",
-        "left_unit": "mm² wicking area",
-        "vs_label": "vs",
-        "right_image": "shopify://shop_images/IMG_0798.webp",
-        "right_image_alt": "Control textile sample with same fibres but different knit, showing minimal wicking area.",
-        "right_label": "CONVENTIONAL LAYERING",
-        "right_value": "99",
-        "right_unit": "mm² wicking area",
-        "citation": "Wickview AATCC 195 · Borås, Sweden · Jenny Tran, MSc thesis 2025"
-      }
-    },
-    "drye_mechanics_time2_wd4WRy": {
-      "type": "drye-mechanics-time2",
-      "name": "DRYE Mechanics Time2",
-      "settings": {
-        "eyebrow": "Expectation",
-        "heading": "You notice it in minutes. <br><em class=\"dryeNEW-em\">Not weeks.</em>",
-        "body": "<p>Moisture is the trigger. Remove it and the condition changes fast. Most users feel <strong>the difference during the first </strong>shift. </p>"
-      }
-    },
-    "drye_about_cta_bmdVek": {
-      "type": "drye-about-cta",
-      "name": "DRYE About CTA",
-      "settings": {
-        "eyebrow": "YOU’VE SEEN WHERE IT COMES FROM",
-        "heading_line_1": "Either it changes your shift<br>",
-        "heading_line_2": "Or it doesn't",
-        "subtext": "30 days. Full refund if the physics don't change anything. No forms. No questions.",
-        "primary_label": "Order DRYE Liners →",
-        "primary_url": "shopify://products/drye-moisture-routing-glove-liners",
-        "secondary_label": "See the research",
-        "secondary_url": "shopify://pages/research"
       }
     },
     "drye_stretch_wTh9gp": {
@@ -1188,8 +727,8 @@
       "settings": {
         "eyebrow": "",
         "heading": "\"No way I'm wearing another layer.\"",
-        "heading_italic": "Then they tried it for one shift.",
-        "lead": "What changed after 300 mechanics wore DRYE under their gloves.",
+        "heading_italic": "",
+        "lead": "Then they tried it for one shift. What changed after 300 mechanics wore DRYE under their gloves.",
         "cta_label": "",
         "cta_url": "",
         "cta_note": ""
@@ -1202,6 +741,465 @@
         "eyebrow": "— A. Riahi",
         "heading": "Eight hours in. The glove is humid.  <br><em class=\"dryeNEW-em\">Your skin is dry.</em>",
         "body": "<p><em>\"After 6 hours under rubber gloves, my hands felt wet inside. Took the gloves off — completely dry. Such a mindfuck.\"</em><br/><br/></p>"
+      }
+    },
+    "drye_about_cta_bmdVek": {
+      "type": "drye-about-cta",
+      "name": "DRYE About CTA",
+      "settings": {
+        "eyebrow": "YOU’VE SEEN WHERE IT COMES FROM",
+        "heading_line_1": "Either it changes your shift",
+        "heading_line_2": "Or it doesn't",
+        "subtext": "30 days. Full refund if the physics don't change anything. No forms. No questions.",
+        "primary_label": "Order DRYE Liners →",
+        "primary_url": "shopify://products/drye-moisture-routing-glove-liners",
+        "secondary_label": "See the research",
+        "secondary_url": "shopify://pages/research"
+      }
+    },
+    "drye_mechanics_saturation_wQ8QqQ": {
+      "type": "drye-mechanics-saturation",
+      "blocks": {
+        "fiber_row_bgLzKH": {
+          "type": "fiber_row",
+          "settings": {
+            "fiber_name": "Merino wool",
+            "fiber_note": "Soaks like a sponge. Stays heavy.",
+            "value": "15–18%",
+            "bar_percent": 100,
+            "is_highlighted": false
+          }
+        },
+        "fiber_row_dGpNGk": {
+          "type": "fiber_row",
+          "settings": {
+            "fiber_name": "Bamboo viscose",
+            "fiber_note": "Soft-sell marketing. Wetter than cotton.",
+            "value": "13%",
+            "bar_percent": 78,
+            "is_highlighted": false
+          }
+        },
+        "fiber_row_hDkgXd": {
+          "type": "fiber_row",
+          "settings": {
+            "fiber_name": "Silk",
+            "fiber_note": "Soaks slow. Dries slower.",
+            "value": "11%",
+            "bar_percent": 65,
+            "is_highlighted": false
+          }
+        },
+        "fiber_row_jb7nEY": {
+          "type": "fiber_row",
+          "settings": {
+            "fiber_name": "Cotton",
+            "fiber_note": "Wet in under an hour.",
+            "value": "7–8%",
+            "bar_percent": 47,
+            "is_highlighted": false
+          }
+        },
+        "fiber_row_cFXz6d": {
+          "type": "fiber_row",
+          "settings": {
+            "fiber_name": "Polyester",
+            "fiber_note": "Wets fast. Dries slow.",
+            "value": "0.4%",
+            "bar_percent": 3,
+            "is_highlighted": false
+          }
+        },
+        "fiber_row_fyUmUz": {
+          "type": "fiber_row",
+          "settings": {
+            "fiber_name": "DRYE Asymmetric layering",
+            "fiber_note": "Can't fill. Stays dry — full shift.",
+            "value": "<0.1%",
+            "bar_percent": 1,
+            "is_highlighted": true
+          }
+        }
+      },
+      "block_order": [
+        "fiber_row_bgLzKH",
+        "fiber_row_dGpNGk",
+        "fiber_row_hDkgXd",
+        "fiber_row_jb7nEY",
+        "fiber_row_cFXz6d",
+        "fiber_row_fyUmUz"
+      ],
+      "name": "DRYE Saturation Point",
+      "settings": {
+        "section_id": "mechanics-saturation",
+        "eyebrow": "The invention",
+        "heading_line_1": "Every other liner saturates.",
+        "heading_echo": "Ours physically can't.",
+        "subheading": "Every fibre that's ever been inside your glove fills up with sweat. Then it stops moving. The rest of the shift, it sits against your hand.",
+        "drye_chip": "Skin-side dry",
+        "close_heading": "",
+        "close_body": "",
+        "close_statement": "",
+        "cite": "Moisture regain references: Kadolph 2014 · ASTM D2654 · CN GB national standard. Transport mechanism independently verified at the Swedish School of Textiles, 2025."
+      }
+    },
+    "drye_mechanics_mechanism_VyehmU": {
+      "type": "drye-mechanics-mechanism",
+      "blocks": {
+        "old_step_LigDH9": {
+          "type": "old_step",
+          "settings": {
+            "icon": "✕",
+            "text": "Sweat enters the fabric and stays"
+          }
+        },
+        "old_step_XN3jJk": {
+          "type": "old_step",
+          "settings": {
+            "icon": "✕",
+            "text": "At saturation, moisture sits on skin"
+          }
+        },
+        "old_step_9Kjdac": {
+          "type": "old_step",
+          "settings": {
+            "icon": "✕",
+            "text": "Sealed glove traps heat and humidity"
+          }
+        },
+        "old_step_NDazdG": {
+          "type": "old_step",
+          "settings": {
+            "icon": "✕",
+            "text": "Heat and humidity trap inside the glove"
+          }
+        },
+        "old_step_FRgtE9": {
+          "type": "old_step",
+          "settings": {
+            "icon": "✕",
+            "text": "Same wet glove on shift 1 as shift 8"
+          }
+        },
+        "drye_step_dmiD4G": {
+          "type": "drye_step",
+          "settings": {
+            "icon": "→",
+            "text": "Skin side repels - sweat cannot sit there"
+          }
+        },
+        "drye_step_3TVNqX": {
+          "type": "drye_step",
+          "settings": {
+            "icon": "→",
+            "text": "Outer side pulls moisture toward it"
+          }
+        },
+        "drye_step_pQL48w": {
+          "type": "drye_step",
+          "settings": {
+            "icon": "→",
+            "text": "Continuous transport, no saturation point"
+          }
+        },
+        "drye_step_xWWhPt": {
+          "type": "drye_step",
+          "settings": {
+            "icon": "→",
+            "text": "One principle. Patent filed March 2026."
+          }
+        },
+        "property_ewbBUy": {
+          "type": "property",
+          "disabled": true,
+          "settings": {
+            "label": "Property 01",
+            "title": "Works under compression",
+            "body": "The gradient functions regardless of external pressure. Compression makes the transport faster, not weaker."
+          }
+        },
+        "property_TDTMK4": {
+          "type": "property",
+          "disabled": true,
+          "settings": {
+            "label": "Property 02",
+            "title": "No saturation point",
+            "body": "Transport is continuous. There is no maximum capacity after which function stops. Cotton has one. DRYE does not."
+          }
+        },
+        "property_kihKQe": {
+          "type": "property",
+          "disabled": true,
+          "settings": {
+            "label": "Property 03",
+            "title": "Stays dry on the skin side",
+            "body": "The inner surface does not work like a towel. It is engineered to avoid moisture retention directly against the hand."
+          }
+        }
+      },
+      "block_order": [
+        "old_step_LigDH9",
+        "old_step_XN3jJk",
+        "old_step_9Kjdac",
+        "old_step_NDazdG",
+        "old_step_FRgtE9",
+        "drye_step_dmiD4G",
+        "drye_step_3TVNqX",
+        "drye_step_pQL48w",
+        "drye_step_xWWhPt",
+        "property_ewbBUy",
+        "property_TDTMK4",
+        "property_kihKQe"
+      ],
+      "custom_css": [
+        ".mech-mechanism {padding-bottom: 0px !important;}",
+        ".occlusion-bridge {padding-top: 16px !important;}"
+      ],
+      "name": "DRYE Mechanics Mechanism",
+      "settings": {
+        "eyebrow": "The mechanism",
+        "heading_line_1": "Moisture doesn't need to be absorbed.",
+        "heading_emphasis": "It needs a route out.",
+        "body": "",
+        "old_label": "Every liner before DRYE",
+        "old_title": "Absorb and hold",
+        "old_desc": "<p>Cotton, silk, merino, polyester wicking. All fill with moisture until saturated - then<strong> hold it against your skin</strong> for the rest of the shift.</p>",
+        "drye_label": "DRYE · ASYMMETRIC LAYERING",
+        "drye_title": "Route continuously",
+        "drye_desc": "<p>Two fibers, one fabric. The skin side is hydrophobic - water cannot bond to it. The outer side pulls moisture toward it. <strong>Sweat routes from skin to outside, continuously, without saturation.</strong></p>"
+      }
+    },
+    "drye_mechanics_time_promise_LatRqd": {
+      "type": "drye-mechanics-time-promise",
+      "name": "DRYE Mechanics Time",
+      "settings": {
+        "eyebrow": "— A. Riahi",
+        "heading": "Eight hours in. The glove is humid. Your skin is dry.",
+        "body": "<p><em>\"After 6 hours under rubber gloves, my hands felt wet inside. Took the gloves off — completely dry. Such a mindfuck.\"</em><br/><br/></p>"
+      }
+    },
+    "drye_research_video_full_UybTMV": {
+      "type": "drye-research-video-full",
+      "disabled": true,
+      "name": "DRYE Research Video Full",
+      "settings": {
+        "video_src_desktop": "https://customer-fqpngdzqcoky7qmz.cloudflarestream.com/453bb4cae9bd147b7a10fc6213e64b12/manifest/video.m3u8",
+        "video_src_mobile": "https://customer-fqpngdzqcoky7qmz.cloudflarestream.com/ed9ad690d7f5c27060e215f05f9e4f8e/manifest/video.m3u8",
+        "video_label": "Asymmetric layering",
+        "video_caption": "Routes sweat from skin to outer fabric. No saturation point."
+      }
+    },
+    "drye_structural_answer_Xg6y3h": {
+      "type": "drye-structural-answer",
+      "blocks": {
+        "gallery_image_KX8VJd": {
+          "type": "gallery_image",
+          "settings": {
+            "image": "shopify://shop_images/Frame_930.webp",
+            "image_alt": ""
+          }
+        },
+        "gallery_image_AxMMtN": {
+          "type": "gallery_image",
+          "settings": {
+            "image": "shopify://shop_images/div.card.webp",
+            "image_alt": ""
+          }
+        },
+        "gallery_image_8KW7mL": {
+          "type": "gallery_image",
+          "settings": {
+            "image": "shopify://shop_images/div.card_9.webp",
+            "image_alt": ""
+          }
+        },
+        "gallery_image_GURLDt": {
+          "type": "gallery_image",
+          "settings": {
+            "image": "shopify://shop_images/div.card_10.webp",
+            "image_alt": ""
+          }
+        },
+        "gallery_image_GTAKjB": {
+          "type": "gallery_image",
+          "settings": {
+            "image": "shopify://shop_images/div.card_11.webp",
+            "image_alt": ""
+          }
+        },
+        "gallery_image_dqBhHc": {
+          "type": "gallery_image",
+          "settings": {
+            "image": "shopify://shop_images/100i4444440055070_1_1_t.webp",
+            "image_alt": ""
+          }
+        },
+        "gallery_image_4wWMam": {
+          "type": "gallery_image",
+          "settings": {
+            "image": "shopify://shop_images/slide.webp",
+            "image_alt": ""
+          }
+        },
+        "gallery_image_HrygGV": {
+          "type": "gallery_image",
+          "settings": {
+            "image": "shopify://shop_images/refore.ai_with.webp",
+            "image_alt": ""
+          }
+        },
+        "gallery_image_MXxHyD": {
+          "type": "gallery_image",
+          "settings": {
+            "image": "shopify://shop_images/v3_2.webp",
+            "image_alt": ""
+          }
+        },
+        "fact_qCMrtz": {
+          "type": "fact",
+          "settings": {
+            "strong": "Sweat.",
+            "text": "No saturation point. No maceration. Stays dry for the full shift - summer or winter, nitrile, latex, rubber or HV."
+          }
+        },
+        "fact_hDcTEX": {
+          "type": "fact",
+          "settings": {
+            "strong": "Oil.",
+            "text": "Stays on the surface. Wipes off with electrical contact cleaner. Back in rotation in under a minute."
+          }
+        },
+        "fact_tEb4fB": {
+          "type": "fact",
+          "settings": {
+            "strong": "Tearing.",
+            "text": "Your nitriles go on dry, come off dry. No more ripping them off over soaked skin twice an hour."
+          }
+        }
+      },
+      "block_order": [
+        "gallery_image_KX8VJd",
+        "gallery_image_AxMMtN",
+        "gallery_image_8KW7mL",
+        "gallery_image_GURLDt",
+        "gallery_image_GTAKjB",
+        "gallery_image_dqBhHc",
+        "gallery_image_4wWMam",
+        "gallery_image_HrygGV",
+        "gallery_image_MXxHyD",
+        "fact_qCMrtz",
+        "fact_hDcTEX",
+        "fact_tEb4fB"
+      ],
+      "disabled": true,
+      "name": "DRYE Structural Answer",
+      "settings": {
+        "image": "shopify://shop_images/Screenshot_7.webp",
+        "image_alt": "DRYE liner being put on under a nitrile glove",
+        "eyebrow": "Asymmetric layering",
+        "heading_before": "A liner built for sealed gloves",
+        "heading_em": "— not open air.",
+        "subheading": "0.4mm thin. No chemicals. No coatings. Fits inside any work glove.",
+        "body": "",
+        "footer_text": "Developed at the Swedish School of Textiles. Supported by Uppsala University and Vinnova.",
+        "swipe_label": "Swipe",
+        "cta_label": "I'm ready, show me the price →",
+        "cta_url": "shopify://products/drye-moisture-routing-glove-liners",
+        "cta_note": "0.4mm washable liner · Engineered in Sweden · 30-day refund"
+      }
+    },
+    "occlusion_bridge_fezXqN": {
+      "type": "occlusion-bridge",
+      "name": "Occlusion Bridge",
+      "settings": {
+        "reveal_cta": "See what changes with DRYE →",
+        "eyebrow": "",
+        "heading": "How it works",
+        "heading_echo": "",
+        "lead": "",
+        "glove_text": "Sealed glove",
+        "lyocell_label": "Lyocell · pulls outward",
+        "pp_label": "Polypropylene · repels skin side",
+        "thickness_label": "DRYE 0.4mm",
+        "left_label": "Without DRYE",
+        "left_title": "Sweat traps against skin",
+        "left_text_top": "Sweat traps against skin",
+        "left_text_mid": "Skin softens and swells 3×",
+        "left_text_climax": "Chemicals get through 3.6× faster",
+        "left_desc": "The longer you wear them, the more permeable your skin becomes.",
+        "right_label": "With DRYE",
+        "right_title": "Repel. Pull. No saturation.",
+        "right_text_top": "Skin side: dry",
+        "right_text_mid": "Continuous moisture flow",
+        "right_text_climax": "Sweat exits, doesn't pool",
+        "right_desc": "Moisture moves out continuously. Skin side stays dry."
+      }
+    },
+    "drye_functional_benefits_yhKLaV": {
+      "type": "drye-functional-benefits",
+      "disabled": true,
+      "custom_css": [
+        ".func-sec {padding-top: 4px !important; padding-bottom: 4px;}"
+      ],
+      "name": "DRYE Functional Benefits",
+      "settings": {
+        "eyebrow": "",
+        "heading": "",
+        "subheading": "",
+        "card_1_icon": "wave-breathability.svg",
+        "card_1_title": "Skin-side stays dry",
+        "card_1_desc": "Sweat routes away from the skin side instead of sitting directly against your hand.",
+        "card_2_icon": "shield.svg",
+        "card_2_title": "Gloves slide better",
+        "card_2_desc": "Nitrile goes on and off over the layer — not over wet skin. No ripping.",
+        "card_3_icon": "performance-arrow.svg",
+        "card_3_title": "Fits under sealed gloves",
+        "card_3_desc": "0.4mm thin. Built to sit under nitrile, latex, rubber and HV gloves.",
+        "card_4_icon": "layers-fabric.svg",
+        "card_4_title": "You still feel the work",
+        "card_4_desc": "The outer glove still does the gripping. DRYE changes the wet contact underneath.",
+        "card_5_icon": "wave-breathability.svg",
+        "card_5_title": "Nothing to wash out",
+        "card_5_desc": "The performance comes from the structure, not a chemical finish.",
+        "card_6_icon": "clock-timer.svg",
+        "card_6_title": "Built for months of shifts",
+        "card_6_desc": "Washable, reusable, and made to keep working through repeated wear.",
+        "note": ""
+      }
+    },
+    "drye_mechanics_82x_proof_Dif9cy": {
+      "type": "drye-mechanics-82x-proof",
+      "disabled": true,
+      "custom_css": [
+        ".proof-white {color: #ffffff; font-weight: 700;}"
+      ],
+      "name": "DRYE Mechanics 82x Proof",
+      "settings": {
+        "eyebrow": "Independent verification · 2026",
+        "heading_line_1": "Same family of knit. Different construction.",
+        "heading_emphasis": "82× further moisture transport.",
+        "subheading": "The innovation is not just the fibre blend.\nIt is how the knit is built to move moisture away from the skin side.",
+        "left_image": "shopify://shop_images/IMG_0797_2.webp",
+        "left_image_alt": "DRYE textile sample showing large wicking area after Wickview test.",
+        "left_label": "DRYE · ASYMMETRIC LAYERING",
+        "left_value": "8,111",
+        "left_unit": "mm² wicking area",
+        "vs_label": "vs",
+        "right_image": "shopify://shop_images/IMG_0798.webp",
+        "right_image_alt": "Control textile sample with same fibres but different knit, showing minimal wicking area.",
+        "right_label": "CONVENTIONAL LAYERING",
+        "right_value": "99",
+        "right_unit": "mm² wicking area",
+        "citation": "Wickview AATCC 195 · Borås, Sweden · Jenny Tran, MSc thesis 2025"
+      }
+    },
+    "drye_mechanics_time2_wd4WRy": {
+      "type": "drye-mechanics-time2",
+      "name": "DRYE Mechanics Time2",
+      "settings": {
+        "eyebrow": "Expectation",
+        "heading": "You notice it in minutes. <br><em class=\"dryeNEW-em\">Not weeks.</em>",
+        "body": "<p>Moisture is the trigger. Remove it and the condition changes fast. Most users feel <strong>the difference during the first </strong>shift. </p>"
       }
     },
     "apps_zHecji": {
@@ -1453,21 +1451,21 @@
     "drye_new_identification_hctDdM",
     "drye_worker_grid_CG6VUJ",
     "drye_evidence_V9B97n",
+    "drye_new_problem_beat_1_R7GgRp",
+    "drye_product_reality_grid_ggq47H",
+    "drye_objection_cards_7gyajr",
+    "drye_stretch_wTh9gp",
+    "drye_mechanics_time_promise_ieYYEU",
+    "drye_about_cta_bmdVek",
+    "drye_mechanics_saturation_wQ8QqQ",
     "drye_mechanics_mechanism_VyehmU",
     "drye_mechanics_time_promise_LatRqd",
     "drye_research_video_full_UybTMV",
     "drye_structural_answer_Xg6y3h",
-    "drye_objection_cards_7gyajr",
-    "drye_mechanics_saturation_wQ8QqQ",
     "occlusion_bridge_fezXqN",
-    "drye_new_problem_beat_1_R7GgRp",
-    "drye_product_reality_grid_ggq47H",
     "drye_functional_benefits_yhKLaV",
     "drye_mechanics_82x_proof_Dif9cy",
     "drye_mechanics_time2_wd4WRy",
-    "drye_about_cta_bmdVek",
-    "drye_stretch_wTh9gp",
-    "drye_mechanics_time_promise_ieYYEU",
     "apps_zHecji",
     "drye_validation_TYhQTK",
     "drye_research_study_breakdown_TrRXii",
