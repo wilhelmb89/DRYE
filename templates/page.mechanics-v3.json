@@ -74,80 +74,6 @@
         "path_2_link": "#mechanics-saturation"
       }
     },
-    "drye_new_identification_hctDdM": {
-      "type": "dryeNEW-identification",
-      "blocks": {
-        "profession_item_7Yykgd": {
-          "type": "profession_item",
-          "settings": {
-            "image": "shopify://shop_images/Gemini_Generated_Image_ebmtjvebmtjvebmt.webp",
-            "image_url": "https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?w=1200&q=75",
-            "fallback_color": "#1E3A4C",
-            "label": "Reddit hacks",
-            "body": ""
-          }
-        },
-        "profession_item_N3r8pt": {
-          "type": "profession_item",
-          "settings": {
-            "image": "shopify://shop_images/Gemini_Generated_Image_tlg2uetlg2uetlg2.webp",
-            "image_url": "https://images.unsplash.com/photo-1530026405186-ed1f139313f8?w=1200&q=75",
-            "fallback_color": "#1E3A4C",
-            "label": "GLOVE FLIPS",
-            "body": ""
-          }
-        },
-        "profession_item_3yRXE9": {
-          "type": "profession_item",
-          "settings": {
-            "image": "shopify://shop_images/Gemini_Generated_Image_9cwtbp9cwtbp9cwt.webp",
-            "image_url": "https://images.unsplash.com/photo-1587293852726-70cdb56c2866?w=1200&q=75",
-            "fallback_color": "#1E3A4C",
-            "label": "POWDERS",
-            "body": ""
-          }
-        },
-        "profession_item_BTwU89": {
-          "type": "profession_item",
-          "settings": {
-            "image": "shopify://shop_images/Gemini_Generated_Image_mxqdfimxqdfimxqd.webp",
-            "image_url": "",
-            "fallback_color": "",
-            "label": "Cotton liners",
-            "body": ""
-          }
-        },
-        "profession_item_b9Fi8U": {
-          "type": "profession_item",
-          "settings": {
-            "image": "shopify://shop_images/Gemini_Generated_Image_dp0gkpdp0gkpdp0g.webp",
-            "image_url": "https://images.unsplash.com/photo-1551522435-a13afa10f103?w=1200&q=75",
-            "fallback_color": "#1E3A4C",
-            "label": "barrier creams",
-            "body": ""
-          }
-        }
-      },
-      "block_order": [
-        "profession_item_7Yykgd",
-        "profession_item_N3r8pt",
-        "profession_item_3yRXE9",
-        "profession_item_BTwU89",
-        "profession_item_b9Fi8U"
-      ],
-      "disabled": true,
-      "custom_css": [
-        "section {padding-top: 72px !important; padding-bottom: 32px !important; margin-top: 0 !important; margin-bottom: 0 !important;}"
-      ],
-      "name": "DRYE NEW Identification",
-      "settings": {
-        "section_id": "identification",
-        "eyebrow": "",
-        "heading": "You've tried everything.",
-        "heading_echo": "Nothing worked.",
-        "body": ""
-      }
-    },
     "drye_worker_grid_CG6VUJ": {
       "type": "drye-worker-grid",
       "blocks": {
@@ -850,6 +776,23 @@
         "secondary_url": "shopify://pages/research"
       }
     },
+    "apps_zHecji": {
+      "type": "apps",
+      "blocks": {
+        "judge_me_reviews_review_widget_homepage_Uf7CcK": {
+          "type": "shopify://apps/judge-me-reviews/blocks/review_widget_homepage/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
+          "settings": {
+            "product": "drye-moisture-routing-glove-liners",
+            "review_data": "real_data",
+            "max_width": 1200
+          }
+        }
+      },
+      "block_order": [
+        "judge_me_reviews_review_widget_homepage_Uf7CcK"
+      ],
+      "settings": {}
+    },
     "drye_stretch_wTh9gp": {
       "type": "drye-stretch",
       "blocks": {
@@ -991,185 +934,6 @@
         "cta_label": "",
         "cta_url": "",
         "cta_note": ""
-      }
-    },
-    "apps_zHecji": {
-      "type": "apps",
-      "blocks": {
-        "judge_me_reviews_review_widget_homepage_Uf7CcK": {
-          "type": "shopify://apps/judge-me-reviews/blocks/review_widget_homepage/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
-          "settings": {
-            "product": "drye-moisture-routing-glove-liners",
-            "review_data": "real_data",
-            "max_width": 1200
-          }
-        }
-      },
-      "block_order": [
-        "judge_me_reviews_review_widget_homepage_Uf7CcK"
-      ],
-      "settings": {}
-    },
-    "drye_research_video_full_UybTMV": {
-      "type": "drye-research-video-full",
-      "disabled": true,
-      "name": "DRYE Research Video Full",
-      "settings": {
-        "video_src_desktop": "https://customer-fqpngdzqcoky7qmz.cloudflarestream.com/453bb4cae9bd147b7a10fc6213e64b12/manifest/video.m3u8",
-        "video_src_mobile": "https://customer-fqpngdzqcoky7qmz.cloudflarestream.com/ed9ad690d7f5c27060e215f05f9e4f8e/manifest/video.m3u8",
-        "video_label": "Asymmetric layering",
-        "video_caption": "Routes sweat from skin to outer fabric. No saturation point."
-      }
-    },
-    "drye_structural_answer_Xg6y3h": {
-      "type": "drye-structural-answer",
-      "blocks": {
-        "gallery_image_KX8VJd": {
-          "type": "gallery_image",
-          "settings": {
-            "image": "shopify://shop_images/Frame_930.webp",
-            "image_alt": ""
-          }
-        },
-        "gallery_image_AxMMtN": {
-          "type": "gallery_image",
-          "settings": {
-            "image": "shopify://shop_images/div.card.webp",
-            "image_alt": ""
-          }
-        },
-        "gallery_image_8KW7mL": {
-          "type": "gallery_image",
-          "settings": {
-            "image": "shopify://shop_images/div.card_9.webp",
-            "image_alt": ""
-          }
-        },
-        "gallery_image_GURLDt": {
-          "type": "gallery_image",
-          "settings": {
-            "image": "shopify://shop_images/div.card_10.webp",
-            "image_alt": ""
-          }
-        },
-        "gallery_image_GTAKjB": {
-          "type": "gallery_image",
-          "settings": {
-            "image": "shopify://shop_images/div.card_11.webp",
-            "image_alt": ""
-          }
-        },
-        "gallery_image_dqBhHc": {
-          "type": "gallery_image",
-          "settings": {
-            "image": "shopify://shop_images/100i4444440055070_1_1_t.webp",
-            "image_alt": ""
-          }
-        },
-        "gallery_image_4wWMam": {
-          "type": "gallery_image",
-          "settings": {
-            "image": "shopify://shop_images/slide.webp",
-            "image_alt": ""
-          }
-        },
-        "gallery_image_HrygGV": {
-          "type": "gallery_image",
-          "settings": {
-            "image": "shopify://shop_images/refore.ai_with.webp",
-            "image_alt": ""
-          }
-        },
-        "gallery_image_MXxHyD": {
-          "type": "gallery_image",
-          "settings": {
-            "image": "shopify://shop_images/v3_2.webp",
-            "image_alt": ""
-          }
-        },
-        "fact_qCMrtz": {
-          "type": "fact",
-          "settings": {
-            "strong": "Sweat.",
-            "text": "No saturation point. No maceration. Stays dry for the full shift - summer or winter, nitrile, latex, rubber or HV."
-          }
-        },
-        "fact_hDcTEX": {
-          "type": "fact",
-          "settings": {
-            "strong": "Oil.",
-            "text": "Stays on the surface. Wipes off with electrical contact cleaner. Back in rotation in under a minute."
-          }
-        },
-        "fact_tEb4fB": {
-          "type": "fact",
-          "settings": {
-            "strong": "Tearing.",
-            "text": "Your nitriles go on dry, come off dry. No more ripping them off over soaked skin twice an hour."
-          }
-        }
-      },
-      "block_order": [
-        "gallery_image_KX8VJd",
-        "gallery_image_AxMMtN",
-        "gallery_image_8KW7mL",
-        "gallery_image_GURLDt",
-        "gallery_image_GTAKjB",
-        "gallery_image_dqBhHc",
-        "gallery_image_4wWMam",
-        "gallery_image_HrygGV",
-        "gallery_image_MXxHyD",
-        "fact_qCMrtz",
-        "fact_hDcTEX",
-        "fact_tEb4fB"
-      ],
-      "disabled": true,
-      "name": "DRYE Structural Answer",
-      "settings": {
-        "image": "shopify://shop_images/Screenshot_7.webp",
-        "image_alt": "DRYE liner being put on under a nitrile glove",
-        "eyebrow": "Asymmetric layering",
-        "heading_before": "A liner built for sealed gloves",
-        "heading_em": "— not open air.",
-        "subheading": "0.4mm thin. No chemicals. No coatings. Fits inside any work glove.",
-        "body": "",
-        "footer_text": "Developed at the Swedish School of Textiles. Supported by Uppsala University and Vinnova.",
-        "swipe_label": "Swipe",
-        "cta_label": "I'm ready, show me the price →",
-        "cta_url": "shopify://products/drye-moisture-routing-glove-liners",
-        "cta_note": "0.4mm washable liner · Engineered in Sweden · 30-day refund"
-      }
-    },
-    "drye_functional_benefits_yhKLaV": {
-      "type": "drye-functional-benefits",
-      "disabled": true,
-      "custom_css": [
-        ".func-sec {padding-top: 4px !important; padding-bottom: 4px;}"
-      ],
-      "name": "DRYE Functional Benefits",
-      "settings": {
-        "eyebrow": "",
-        "heading": "",
-        "subheading": "",
-        "card_1_icon": "wave-breathability.svg",
-        "card_1_title": "Skin-side stays dry",
-        "card_1_desc": "Sweat routes away from the skin side instead of sitting directly against your hand.",
-        "card_2_icon": "shield.svg",
-        "card_2_title": "Gloves slide better",
-        "card_2_desc": "Nitrile goes on and off over the layer — not over wet skin. No ripping.",
-        "card_3_icon": "performance-arrow.svg",
-        "card_3_title": "Fits under sealed gloves",
-        "card_3_desc": "0.4mm thin. Built to sit under nitrile, latex, rubber and HV gloves.",
-        "card_4_icon": "layers-fabric.svg",
-        "card_4_title": "You still feel the work",
-        "card_4_desc": "The outer glove still does the gripping. DRYE changes the wet contact underneath.",
-        "card_5_icon": "wave-breathability.svg",
-        "card_5_title": "Nothing to wash out",
-        "card_5_desc": "The performance comes from the structure, not a chemical finish.",
-        "card_6_icon": "clock-timer.svg",
-        "card_6_title": "Built for months of shifts",
-        "card_6_desc": "Washable, reusable, and made to keep working through repeated wear.",
-        "note": ""
       }
     },
     "drye_mechanics_cta_khadEy": {
@@ -1316,78 +1080,9 @@
         "intro_text": "Independent observations across real working environments."
       }
     },
-    "section_story_gallery_CXtnLE": {
-      "type": "section-story-gallery",
-      "blocks": {
-        "story_MTLUeg": {
-          "type": "story",
-          "settings": {
-            "image": "shopify://shop_images/5Y9A9307.webp",
-            "image_alt": "",
-            "label": "DAY 1",
-            "caption": "Sweat moves out from the first pull-on. Skin side stays dry."
-          }
-        },
-        "story_QjiftY": {
-          "type": "story",
-          "settings": {
-            "image": "shopify://shop_images/5Y9A9331_1.webp",
-            "image_alt": "",
-            "label": "DAY 3",
-            "caption": "By the third shift, the cycle starts to break. Less sting. Less swap-outs."
-          }
-        },
-        "story_aVhHR6": {
-          "type": "story",
-          "settings": {
-            "image": "shopify://shop_images/Firefly.webp",
-            "image_alt": "",
-            "label": "WEEK 2",
-            "caption": "Two weeks in. Less reaching for the cream tube. Hands feel different."
-          }
-        },
-        "story_gmCYc7": {
-          "type": "story",
-          "settings": {
-            "image": "shopify://shop_images/5Y9A9331.webp",
-            "image_alt": "",
-            "label": "MONTH 1",
-            "caption": "One month, one liner. The same pair you started with."
-          }
-        },
-        "story_QjK3hF": {
-          "type": "story",
-          "settings": {
-            "image": "shopify://shop_images/100i4444440055070_1_1_t.webp",
-            "image_alt": "",
-            "label": "MONTH 6",
-            "caption": "120 disposable liners, replaced by one. No coatings. Performance is structural — washing can't strip it."
-          }
-        }
-      },
-      "block_order": [
-        "story_MTLUeg",
-        "story_QjiftY",
-        "story_aVhHR6",
-        "story_gmCYc7",
-        "story_QjK3hF"
-      ],
-      "disabled": true,
-      "name": "Story gallery v2",
-      "settings": {
-        "eyebrow": "From first wear to months of shifts",
-        "heading": "One layer under the nitrile.",
-        "heading_emphasis": "Day one to month six.",
-        "subheading": "0.4mm thin. No chemicals. No coatings. Fits inside any work glove.",
-        "body": "",
-        "swipe_label": "Swipe",
-        "cta_label": "Order now →",
-        "cta_url": "shopify://products/drye-moisture-routing-glove-liners",
-        "cta_note": ""
-      }
-    },
     "drye_mechanics_82x_proof_Dif9cy": {
       "type": "drye-mechanics-82x-proof",
+      "disabled": true,
       "custom_css": [
         ".proof-white {color: #ffffff; font-weight: 700;}"
       ],
@@ -1433,7 +1128,6 @@
     },
     "drye_mechanism_nav_n73TxK": {
       "type": "drye-mechanism-nav",
-      "disabled": true,
       "name": "DRYE Mechanism Nav",
       "settings": {
         "step_1_label": "Saturation",
@@ -1445,7 +1139,6 @@
   },
   "order": [
     "drye_new_hero_jE4LCa",
-    "drye_new_identification_hctDdM",
     "drye_worker_grid_CG6VUJ",
     "drye_evidence_V9B97n",
     "drye_new_problem_beat_1_R7GgRp",
@@ -1456,16 +1149,12 @@
     "occlusion_bridge_fezXqN",
     "drye_mechanics_time_promise_LatRqd",
     "drye_about_cta_bmdVek",
-    "drye_stretch_wTh9gp",
     "apps_zHecji",
-    "drye_research_video_full_UybTMV",
-    "drye_structural_answer_Xg6y3h",
-    "drye_functional_benefits_yhKLaV",
+    "drye_stretch_wTh9gp",
     "drye_mechanics_cta_khadEy",
     "drye_mechanics_time2_wd4WRy",
     "drye_validation_TYhQTK",
     "drye_research_study_breakdown_TrRXii",
-    "section_story_gallery_CXtnLE",
     "drye_mechanics_82x_proof_Dif9cy",
     "drye_new_closing_cta_rDAaUw",
     "drye_mechanism_nav_n73TxK"
