@@ -946,6 +946,31 @@
         "drye_desc": "<p>Two fibers, one fabric. The skin side is hydrophobic - water cannot bond to it. The outer side pulls moisture toward it. <strong>Sweat routes from skin to outside, continuously, without saturation.</strong></p>"
       }
     },
+    "drye_mechanics_82x_proof_Dif9cy": {
+      "type": "drye-mechanics-82x-proof",
+      "custom_css": [
+        ".proof-white {color: #ffffff; font-weight: 700;}"
+      ],
+      "name": "DRYE Mechanics 82x Proof",
+      "settings": {
+        "eyebrow": "Independent verification · 2026",
+        "heading_line_1": "Same family of knit. Different construction.",
+        "heading_emphasis": "82× further moisture transport.",
+        "subheading": "The innovation is not just the fibre blend.\nIt is how the knit is built to move moisture away from the skin side.",
+        "left_image": "shopify://shop_images/IMG_0797_2.webp",
+        "left_image_alt": "DRYE textile sample showing large wicking area after Wickview test.",
+        "left_label": "DRYE · ASYMMETRIC LAYERING",
+        "left_value": "8,111",
+        "left_unit": "mm² wicking area",
+        "vs_label": "vs",
+        "right_image": "shopify://shop_images/IMG_0798.webp",
+        "right_image_alt": "Control textile sample with same fibres but different knit, showing minimal wicking area.",
+        "right_label": "CONVENTIONAL LAYERING",
+        "right_value": "99",
+        "right_unit": "mm² wicking area",
+        "citation": "Wickview AATCC 195 · Borås, Sweden · Jenny Tran, MSc thesis 2025"
+      }
+    },
     "drye_mechanics_time_promise_LatRqd": {
       "type": "drye-mechanics-time-promise",
       "name": "DRYE Mechanics Time",
@@ -1173,32 +1198,6 @@
         "card_6_title": "Built for months of shifts",
         "card_6_desc": "Washable, reusable, and made to keep working through repeated wear.",
         "note": ""
-      }
-    },
-    "drye_mechanics_82x_proof_Dif9cy": {
-      "type": "drye-mechanics-82x-proof",
-      "disabled": true,
-      "custom_css": [
-        ".proof-white {color: #ffffff; font-weight: 700;}"
-      ],
-      "name": "DRYE Mechanics 82x Proof",
-      "settings": {
-        "eyebrow": "Independent verification · 2026",
-        "heading_line_1": "Same family of knit. Different construction.",
-        "heading_emphasis": "82× further moisture transport.",
-        "subheading": "The innovation is not just the fibre blend.\nIt is how the knit is built to move moisture away from the skin side.",
-        "left_image": "shopify://shop_images/IMG_0797_2.webp",
-        "left_image_alt": "DRYE textile sample showing large wicking area after Wickview test.",
-        "left_label": "DRYE · ASYMMETRIC LAYERING",
-        "left_value": "8,111",
-        "left_unit": "mm² wicking area",
-        "vs_label": "vs",
-        "right_image": "shopify://shop_images/IMG_0798.webp",
-        "right_image_alt": "Control textile sample with same fibres but different knit, showing minimal wicking area.",
-        "right_label": "CONVENTIONAL LAYERING",
-        "right_value": "99",
-        "right_unit": "mm² wicking area",
-        "citation": "Wickview AATCC 195 · Borås, Sweden · Jenny Tran, MSc thesis 2025"
       }
     },
     "drye_mechanics_cta_khadEy": {
@@ -1434,6 +1433,16 @@
         "padding_top_desktop": 80,
         "padding_bottom_desktop": 80
       }
+    },
+    "drye_mechanism_nav_n73TxK": {
+      "type": "drye-mechanism-nav",
+      "name": "DRYE Mechanism Nav",
+      "settings": {
+        "step_1_label": "Saturation",
+        "step_2_label": "Routing",
+        "step_3_label": "Textile architecture",
+        "aria_label": "Asymmetric Layering — the invention"
+      }
     }
   },
   "order": [
@@ -1447,6 +1456,7 @@
     "drye_stretch_wTh9gp",
     "drye_mechanics_saturation_wQ8QqQ",
     "drye_mechanics_mechanism_VyehmU",
+    "drye_mechanics_82x_proof_Dif9cy",
     "drye_mechanics_time_promise_LatRqd",
     "apps_zHecji",
     "drye_about_cta_bmdVek",
@@ -1454,12 +1464,12 @@
     "drye_structural_answer_Xg6y3h",
     "occlusion_bridge_fezXqN",
     "drye_functional_benefits_yhKLaV",
-    "drye_mechanics_82x_proof_Dif9cy",
     "drye_mechanics_cta_khadEy",
     "drye_mechanics_time2_wd4WRy",
     "drye_validation_TYhQTK",
     "drye_research_study_breakdown_TrRXii",
     "section_story_gallery_CXtnLE",
-    "drye_new_closing_cta_rDAaUw"
+    "drye_new_closing_cta_rDAaUw",
+    "drye_mechanism_nav_n73TxK"
   ]
 }
