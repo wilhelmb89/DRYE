@@ -408,66 +408,66 @@
         "cite": "Moisture regain references: Kadolph 2014 · ASTM D2654 · CN GB national standard. Transport mechanism independently verified at the Swedish School of Textiles, 2025."
       }
     },
-    "drye_mechanics_mechanism_Kka9NU": {
+    "drye_mechanics_mechanism_zTDaza": {
       "type": "drye-mechanics-mechanism",
       "blocks": {
-        "old_step_hWH8eC": {
+        "old_step_pCgg9C": {
           "type": "old_step",
           "settings": {
             "icon": "✕",
             "text": "Sweat enters the fabric"
           }
         },
-        "old_step_JzNtij": {
+        "old_step_DH43id": {
           "type": "old_step",
           "settings": {
             "icon": "✕",
             "text": "Fabric fills up"
           }
         },
-        "old_step_a8YjPd": {
+        "old_step_9YL9Tt": {
           "type": "old_step",
           "settings": {
             "icon": "✕",
             "text": "Moisture sits back against skin"
           }
         },
-        "old_step_XXADFk": {
+        "old_step_MqLh9M": {
           "type": "old_step",
           "settings": {
             "icon": "✕",
             "text": "Sealed gloves trap heat and humidity"
           }
         },
-        "drye_step_PkEcfh": {
+        "drye_step_kjrQEz": {
           "type": "drye_step",
           "settings": {
             "icon": "→",
             "text": "Skin side repels moisture"
           }
         },
-        "drye_step_Gy94Cw": {
+        "drye_step_gjgAV8": {
           "type": "drye_step",
           "settings": {
             "icon": "→",
             "text": "Outer side pulls it away"
           }
         },
-        "drye_step_QUy4Er": {
+        "drye_step_qGcbwW": {
           "type": "drye_step",
           "settings": {
             "icon": "→",
             "text": "Transport continues without saturation"
           }
         },
-        "drye_step_XNwzPq": {
+        "drye_step_KLRj4P": {
           "type": "drye_step",
           "settings": {
             "icon": "→",
             "text": "Patent filed March 2026."
           }
         },
-        "property_Hp8Jbj": {
+        "property_7FLbrU": {
           "type": "property",
           "disabled": true,
           "settings": {
@@ -476,7 +476,7 @@
             "body": "The gradient functions regardless of external pressure. Compression makes the transport faster, not weaker."
           }
         },
-        "property_h3qDFp": {
+        "property_khWmwx": {
           "type": "property",
           "disabled": true,
           "settings": {
@@ -485,7 +485,7 @@
             "body": "Transport is continuous. There is no maximum capacity after which function stops. Cotton has one. DRYE does not."
           }
         },
-        "property_B8e4Ai": {
+        "property_PLmb3z": {
           "type": "property",
           "disabled": true,
           "settings": {
@@ -496,17 +496,17 @@
         }
       },
       "block_order": [
-        "old_step_hWH8eC",
-        "old_step_JzNtij",
-        "old_step_a8YjPd",
-        "old_step_XXADFk",
-        "drye_step_PkEcfh",
-        "drye_step_Gy94Cw",
-        "drye_step_QUy4Er",
-        "drye_step_XNwzPq",
-        "property_Hp8Jbj",
-        "property_h3qDFp",
-        "property_B8e4Ai"
+        "old_step_pCgg9C",
+        "old_step_DH43id",
+        "old_step_9YL9Tt",
+        "old_step_MqLh9M",
+        "drye_step_kjrQEz",
+        "drye_step_gjgAV8",
+        "drye_step_qGcbwW",
+        "drye_step_KLRj4P",
+        "property_7FLbrU",
+        "property_khWmwx",
+        "property_PLmb3z"
       ],
       "custom_css": [
         ".mech-mechanism {padding-bottom: 0px !important;}",
@@ -1264,6 +1264,17 @@
         "secondary_label": "Read the full Gothenburg field report →",
         "secondary_link": ""
       }
+    },
+    "drye_mechanism_nav_xU8QpT": {
+      "type": "drye-mechanism-nav",
+      "disabled": true,
+      "name": "DRYE Mechanism Nav",
+      "settings": {
+        "step_1_label": "Saturation",
+        "step_2_label": "Routing",
+        "step_3_label": "Verification",
+        "aria_label": "Asymmetric Layering — the invention"
+      }
     }
   },
   "order": [
@@ -1272,7 +1283,7 @@
     "drye_worker_grid_UVf4QL",
     "drye_evidence_xmyAdp",
     "drye_mechanics_saturation_P6ACzj",
-    "drye_mechanics_mechanism_Kka9NU",
+    "drye_mechanics_mechanism_zTDaza",
     "occlusion_bridge_7Be3iX",
     "drye_mechanics_mechanism_PgEzcw",
     "drye_mechanics_time_promise_AcqgeQ",
@@ -1287,6 +1298,7 @@
     "drye_research_study_breakdown_TrRXii",
     "drye_documented_results_grqiUX",
     "jens_linnea_section_yeaz4w",
-    "drye_mechanics_cta_2_krhUaj"
+    "drye_mechanics_cta_2_krhUaj",
+    "drye_mechanism_nav_xU8QpT"
   ]
 }
