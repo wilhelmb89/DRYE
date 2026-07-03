@@ -700,133 +700,6 @@
         "cta_note": "0.4mm washable liner · Engineered in Sweden · 30-day refund"
       }
     },
-    "drye_mechanics_mechanism_PgEzcw": {
-      "type": "drye-mechanics-mechanism",
-      "blocks": {
-        "old_step_BCjdxx": {
-          "type": "old_step",
-          "settings": {
-            "icon": "✕",
-            "text": "Sweat enters the fabric and stays"
-          }
-        },
-        "old_step_8meBXd": {
-          "type": "old_step",
-          "settings": {
-            "icon": "✕",
-            "text": "At saturation, moisture sits on skin"
-          }
-        },
-        "old_step_HqV8Mx": {
-          "type": "old_step",
-          "settings": {
-            "icon": "✕",
-            "text": "Sealed glove traps heat and humidity"
-          }
-        },
-        "old_step_wHnreN": {
-          "type": "old_step",
-          "settings": {
-            "icon": "✕",
-            "text": "Heat and humidity trap inside the glove"
-          }
-        },
-        "old_step_HMAQHP": {
-          "type": "old_step",
-          "settings": {
-            "icon": "✕",
-            "text": "Same wet glove on shift 1 as shift 8"
-          }
-        },
-        "drye_step_9r8xWA": {
-          "type": "drye_step",
-          "settings": {
-            "icon": "→",
-            "text": "Skin side repels - sweat cannot sit there"
-          }
-        },
-        "drye_step_zR9A3G": {
-          "type": "drye_step",
-          "settings": {
-            "icon": "→",
-            "text": "Outer side pulls moisture toward it"
-          }
-        },
-        "drye_step_6iqKT4": {
-          "type": "drye_step",
-          "settings": {
-            "icon": "→",
-            "text": "Continuous transport, no saturation point"
-          }
-        },
-        "drye_step_Fz6PtW": {
-          "type": "drye_step",
-          "settings": {
-            "icon": "→",
-            "text": "One principle. Patent filed March 2026."
-          }
-        },
-        "property_gcpefE": {
-          "type": "property",
-          "disabled": true,
-          "settings": {
-            "label": "Property 01",
-            "title": "Works under compression",
-            "body": "The gradient functions regardless of external pressure. Compression makes the transport faster, not weaker."
-          }
-        },
-        "property_xwY7Hc": {
-          "type": "property",
-          "disabled": true,
-          "settings": {
-            "label": "Property 02",
-            "title": "No saturation point",
-            "body": "Transport is continuous. There is no maximum capacity after which function stops. Cotton has one. DRYE does not."
-          }
-        },
-        "property_DB6TeY": {
-          "type": "property",
-          "disabled": true,
-          "settings": {
-            "label": "Property 03",
-            "title": "Stays dry on the skin side",
-            "body": "The inner surface does not work like a towel. It is engineered to avoid moisture retention directly against the hand."
-          }
-        }
-      },
-      "block_order": [
-        "old_step_BCjdxx",
-        "old_step_8meBXd",
-        "old_step_HqV8Mx",
-        "old_step_wHnreN",
-        "old_step_HMAQHP",
-        "drye_step_9r8xWA",
-        "drye_step_zR9A3G",
-        "drye_step_6iqKT4",
-        "drye_step_Fz6PtW",
-        "property_gcpefE",
-        "property_xwY7Hc",
-        "property_DB6TeY"
-      ],
-      "disabled": true,
-      "custom_css": [
-        ".mech-mechanism {padding-bottom: 0px !important;}",
-        ".occlusion-bridge {padding-top: 16px !important;}"
-      ],
-      "name": "DRYE Mechanics Mechanism",
-      "settings": {
-        "eyebrow": "The mechanism",
-        "heading_line_1": "Moisture doesn't need to be absorbed.",
-        "heading_emphasis": "It needs a route out.",
-        "body": "",
-        "old_label": "Every liner before DRYE",
-        "old_title": "Absorb and hold",
-        "old_desc": "<p>Cotton, silk, merino, polyester wicking. All fill with moisture until saturated - then<strong> hold it against your skin</strong> for the rest of the shift.</p>",
-        "drye_label": "DRYE · ASYMMETRIC LAYERING",
-        "drye_title": "Route continuously",
-        "drye_desc": "<p>Two fibers, one fabric. The skin side is hydrophobic - water cannot bond to it. The outer side pulls moisture toward it. <strong>Sweat routes from skin to outside, continuously, without saturation.</strong></p>"
-      }
-    },
     "drye_mechanics_time_promise_AcqgeQ": {
       "type": "drye-mechanics-time-promise",
       "name": "DRYE Mechanics Time",
@@ -834,17 +707,6 @@
         "eyebrow": "— A. Riahi",
         "heading": "Eight hours in. The glove is humid. Your skin is dry.",
         "body": "<p><em>\"After 6 hours under rubber gloves, my hands felt wet inside. Took the gloves off — completely dry. Such a mindfuck.\"</em><br/><br/></p>"
-      }
-    },
-    "drye_research_video_full_xpTFFd": {
-      "type": "drye-research-video-full",
-      "disabled": true,
-      "name": "DRYE Research Video Full",
-      "settings": {
-        "video_src_desktop": "https://customer-fqpngdzqcoky7qmz.cloudflarestream.com/453bb4cae9bd147b7a10fc6213e64b12/manifest/video.m3u8",
-        "video_src_mobile": "https://customer-fqpngdzqcoky7qmz.cloudflarestream.com/ed9ad690d7f5c27060e215f05f9e4f8e/manifest/video.m3u8",
-        "video_label": "Asymmetric layering",
-        "video_caption": "Routes sweat from skin to outer fabric. No saturation point."
       }
     },
     "drye_objection_cards_PPDxpW": {
@@ -948,22 +810,6 @@
         "heading": "Will this actually work under my gloves?",
         "heading_emphasis": "",
         "body": ""
-      }
-    },
-    "drye_about_founder_story_B899RM": {
-      "type": "drye-about-founder-story",
-      "disabled": true,
-      "name": "DRYE About Founder Story",
-      "settings": {
-        "image": "shopify://shop_images/URZ03767_2_-min_fb60d491-6691-423b-a449-6ba709c25859.jpg",
-        "image_alt": "Wilhelm and Andrew",
-        "tag_name": "Wilhelm Bäckström,",
-        "tag_role": "Stockholm, Sweden — 2019",
-        "eyebrow": "Not another liner.",
-        "heading": "For a hundred years, this was treated medically.<em></em>\n <em class=\"dryeNEW-em\"><br> It was always physical.</em>",
-        "body": "<p>You've heard \"hydration is good for skin.\" Nobody told you about <strong>overhydration.</strong> Dry, cracked, burning hands — it isn't the cream, the cold, or the glove material. Same physics as fingers pruning in a bath. Cotton saturates and sits wet. <strong>Back to square one.</strong> Softened skin lets oil and chemicals through faster. Think of it as an <strong>open door.</strong><br/><br/>Seven years of R&D with Sweden's leading textile school and one of the world's leading textile engineers. The construction is called <strong>Asymmetric Layering </strong>— a textile that routes moisture physically away from the skin. We are helping <span style=\"text-decoration:underline\">healthcare</span>, <span style=\"text-decoration:underline\">tradespeople</span>, and <span style=\"text-decoration:underline\">elite hockey players</span> shut that door.</p><p><strong>Stop changing the treatment. Change the environment.</strong></p>",
-        "cta_text": "Read the full story →",
-        "cta_url": "shopify://pages/why-drye"
       }
     },
     "apps_rjNBgt": {
@@ -1163,118 +1009,6 @@
         "intro_text": "Independent observations across real working environments."
       }
     },
-    "drye_documented_results_grqiUX": {
-      "type": "drye-documented-results",
-      "blocks": {
-        "result_card_8HMG4G": {
-          "type": "result_card",
-          "settings": {
-            "before_image": "shopify://shop_images/PXL_20250222_150439970.MP_1.webp",
-            "after_image": "shopify://shop_images/PXL_20250411_133548754.MP_1.webp",
-            "before_label": "Before",
-            "after_label": "After",
-            "before_fallback_color": "#7a4040",
-            "after_fallback_color": "#c09a70",
-            "time_label": "After first use",
-            "quote": "\"These gloves completely solved my contact dermatitis problems, and as a bonus my hands no longer smell bad after a game!\"",
-            "attribution": "— Chris P."
-          }
-        },
-        "result_card_FeTKU9": {
-          "type": "result_card",
-          "settings": {
-            "before_image": "shopify://shop_images/eksem_78da7a3d-7cf1-468e-a157-c294a4002454.webp",
-            "after_image": "shopify://shop_images/354132505_582885927326551_8106202714240206805_n.webp",
-            "before_label": "Before",
-            "after_label": "After 5 months",
-            "before_fallback_color": "#6a3535",
-            "after_fallback_color": "#b88a60",
-            "time_label": "After 5 months",
-            "quote": "“Real skin problems started in 2017 - pain, open scars and wounds. Nothing worked for years.\"",
-            "attribution": "— Jens Stålnacke · Mine worker, Luleå"
-          }
-        },
-        "result_card_7DtXgD": {
-          "type": "result_card",
-          "settings": {
-            "before_image": "shopify://shop_images/c875f5ab-ae50-4921-a2a5-56b7ebd0b2d5_1_1.webp",
-            "after_image": "shopify://shop_images/Screenshot_2.webp",
-            "before_label": "Before",
-            "after_label": "After one season",
-            "before_fallback_color": "#7a4040",
-            "after_fallback_color": "#c09a70",
-            "time_label": "After one season",
-            "quote": "\"Cracks all over my knuckles, redness and eczema. My hands stay drier, grip is better, skin holds up.\"",
-            "attribution": "— Linnea Pettersson Dove Professional hockey player"
-          }
-        }
-      },
-      "block_order": [
-        "result_card_8HMG4G",
-        "result_card_FeTKU9",
-        "result_card_7DtXgD"
-      ],
-      "disabled": true,
-      "name": "DRYE Documented Results",
-      "settings": {
-        "eyebrow": "",
-        "heading": "Why millions of tradespeople thought cream was the answer.",
-        "subheading": "Sealed gloves cause <strong>maceration. </strong>No cream, powder, or steroid on earth can solve that."
-      }
-    },
-    "jens_linnea_section_yeaz4w": {
-      "type": "jens-linnea-section",
-      "blocks": {
-        "story_xEeEgD": {
-          "type": "story",
-          "settings": {
-            "image": "shopify://shop_images/1677852306136.jpg",
-            "image_alt": "Jens Stålnacke, LKAB Kiruna",
-            "video_url": "",
-            "video_play_label": "Play interview",
-            "pill_text": "2 years later",
-            "before_label": "Before",
-            "before_text": "\"Some creams did nothing. My hands got worse every shift. Open wounds. I dealt with the damage for months.\"",
-            "after_label": "After",
-            "after_text": "\"My hands are honestly normal now. Without a doubt, those liners gave my hands a real chance.\"",
-            "name": "Jens Stålnacke",
-            "role": "Mine worker, Luleå",
-            "read_more_url": "shopify://blogs/insights/jens-cracked-dry-hands-glove-irritation",
-            "read_more_text": "Read Jens' case →"
-          }
-        },
-        "story_NCYGPN": {
-          "type": "story",
-          "settings": {
-            "image": "shopify://shop_images/0tlIYshLXnDaL_JrVPb4wo5T5UCo-REGULAR_6e73652e-f7b0-4985-9351-a952ed05c270_1_1.jpg",
-            "image_alt": "Linnea Pettersson Dove, Frölunda HC",
-            "video_url": "",
-            "video_play_label": "Play interview",
-            "pill_text": "One season",
-            "before_label": "Before",
-            "before_text": "\"Redness and cracking after every practice. Cotton liners helped briefly — then the same cycle returned.\"",
-            "after_label": "After",
-            "after_text": "\"My grip was better, my hands stayed drier, and my skin started doing better. Now it feels weird not to wear them.\"",
-            "name": "Linnéa Pettersson Dove",
-            "role": "SDHL Swedish Champion 2025, Frölunda HC",
-            "read_more_url": "shopify://blogs/insights/hockey-pro-relieves-eczema-completely-with-drye-glove-liner",
-            "read_more_text": "Read Linnea's case →"
-          }
-        }
-      },
-      "block_order": [
-        "story_xEeEgD",
-        "story_NCYGPN"
-      ],
-      "disabled": true,
-      "name": "Jens + Linnea",
-      "settings": {
-        "micro_text": "Real users",
-        "heading": "This is what changes.",
-        "subheading": "The outer glove didn't change. The cream didn't change. What changed was what happened between skin and glove.",
-        "swipe_label": "Swipe"
-      }
-    },
     "drye_mechanics_cta_2_krhUaj": {
       "type": "drye-mechanics-cta-2",
       "name": "DRYE Mechanics CTA-2",
@@ -1311,18 +1045,13 @@
     "drye_mechanics_82x_proof_JLCmmt",
     "occlusion_bridge_iJaqtg",
     "drye_structural_answer_p3UjcR",
-    "drye_mechanics_mechanism_PgEzcw",
     "drye_mechanics_time_promise_AcqgeQ",
-    "drye_research_video_full_xpTFFd",
     "drye_objection_cards_PPDxpW",
-    "drye_about_founder_story_B899RM",
     "apps_rjNBgt",
     "drye_mechanics_time2_wd4WRy",
     "drye_mechanics_cta_pYjFDe",
     "drye_competitive_table_Rhhded",
     "drye_research_study_breakdown_TrRXii",
-    "drye_documented_results_grqiUX",
-    "jens_linnea_section_yeaz4w",
     "drye_mechanics_cta_2_krhUaj",
     "drye_mechanism_nav_xU8QpT"
   ]
