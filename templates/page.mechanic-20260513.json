@@ -408,6 +408,124 @@
         "cite": "Moisture regain references: Kadolph 2014 · ASTM D2654 · CN GB national standard. Transport mechanism independently verified at the Swedish School of Textiles, 2025."
       }
     },
+    "drye_mechanics_mechanism_Kka9NU": {
+      "type": "drye-mechanics-mechanism",
+      "blocks": {
+        "old_step_hWH8eC": {
+          "type": "old_step",
+          "settings": {
+            "icon": "✕",
+            "text": "Sweat enters the fabric"
+          }
+        },
+        "old_step_JzNtij": {
+          "type": "old_step",
+          "settings": {
+            "icon": "✕",
+            "text": "Fabric fills up"
+          }
+        },
+        "old_step_a8YjPd": {
+          "type": "old_step",
+          "settings": {
+            "icon": "✕",
+            "text": "Moisture sits back against skin"
+          }
+        },
+        "old_step_XXADFk": {
+          "type": "old_step",
+          "settings": {
+            "icon": "✕",
+            "text": "Sealed gloves trap heat and humidity"
+          }
+        },
+        "drye_step_PkEcfh": {
+          "type": "drye_step",
+          "settings": {
+            "icon": "→",
+            "text": "Skin side repels moisture"
+          }
+        },
+        "drye_step_Gy94Cw": {
+          "type": "drye_step",
+          "settings": {
+            "icon": "→",
+            "text": "Outer side pulls it away"
+          }
+        },
+        "drye_step_QUy4Er": {
+          "type": "drye_step",
+          "settings": {
+            "icon": "→",
+            "text": "Transport continues without saturation"
+          }
+        },
+        "drye_step_XNwzPq": {
+          "type": "drye_step",
+          "settings": {
+            "icon": "→",
+            "text": "Patent filed March 2026."
+          }
+        },
+        "property_Hp8Jbj": {
+          "type": "property",
+          "disabled": true,
+          "settings": {
+            "label": "Property 01",
+            "title": "Works under compression",
+            "body": "The gradient functions regardless of external pressure. Compression makes the transport faster, not weaker."
+          }
+        },
+        "property_h3qDFp": {
+          "type": "property",
+          "disabled": true,
+          "settings": {
+            "label": "Property 02",
+            "title": "No saturation point",
+            "body": "Transport is continuous. There is no maximum capacity after which function stops. Cotton has one. DRYE does not."
+          }
+        },
+        "property_B8e4Ai": {
+          "type": "property",
+          "disabled": true,
+          "settings": {
+            "label": "Property 03",
+            "title": "Stays dry on the skin side",
+            "body": "The inner surface does not work like a towel. It is engineered to avoid moisture retention directly against the hand."
+          }
+        }
+      },
+      "block_order": [
+        "old_step_hWH8eC",
+        "old_step_JzNtij",
+        "old_step_a8YjPd",
+        "old_step_XXADFk",
+        "drye_step_PkEcfh",
+        "drye_step_Gy94Cw",
+        "drye_step_QUy4Er",
+        "drye_step_XNwzPq",
+        "property_Hp8Jbj",
+        "property_h3qDFp",
+        "property_B8e4Ai"
+      ],
+      "custom_css": [
+        ".mech-mechanism {padding-bottom: 0px !important;}",
+        ".occlusion-bridge {padding-top: 16px !important;}"
+      ],
+      "name": "DRYE Mechanics Mechanism",
+      "settings": {
+        "eyebrow": "The invention",
+        "heading_line_1": "Moisture doesn't need to be absorbed.",
+        "heading_emphasis": "It needs a route out.",
+        "body": "",
+        "old_label": "Every liner before DRYE",
+        "old_title": "Absorb and hold",
+        "old_desc": "",
+        "drye_label": "DRYE · ASYMMETRIC LAYERING",
+        "drye_title": "Repel. Pull. Route out.",
+        "drye_desc": ""
+      }
+    },
     "occlusion_bridge_7Be3iX": {
       "type": "occlusion-bridge",
       "custom_css": [
@@ -1154,6 +1272,7 @@
     "drye_worker_grid_UVf4QL",
     "drye_evidence_xmyAdp",
     "drye_mechanics_saturation_P6ACzj",
+    "drye_mechanics_mechanism_Kka9NU",
     "occlusion_bridge_7Be3iX",
     "drye_mechanics_mechanism_PgEzcw",
     "drye_mechanics_time_promise_AcqgeQ",
