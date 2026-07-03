@@ -723,6 +723,31 @@
         "drye_desc": ""
       }
     },
+    "drye_mechanics_82x_proof_Dif9cy": {
+      "type": "drye-mechanics-82x-proof",
+      "custom_css": [
+        ".proof-white {color: #ffffff; font-weight: 700;}"
+      ],
+      "name": "DRYE Mechanics 82x Proof",
+      "settings": {
+        "eyebrow": "Independent verification · 2026",
+        "heading_line_1": "Same fibre family. Built to move sweat away.",
+        "heading_emphasis": "8× larger wicking area than conventional layering.",
+        "subheading": "DRYE’s knit construction pulls moisture outward instead of letting it sit against your skin.",
+        "left_image": "shopify://shop_images/IMG_0797_2.webp",
+        "left_image_alt": "DRYE textile sample showing large wicking area after Wickview test.",
+        "left_label": "DRYE · ASYMMETRIC LAYERING",
+        "left_value": "8,111",
+        "left_unit": "mm² wicking area",
+        "vs_label": "vs",
+        "right_image": "shopify://shop_images/IMG_0798.webp",
+        "right_image_alt": "Control textile sample with same fibres but different knit, showing minimal wicking area.",
+        "right_label": "CONVENTIONAL LAYERING",
+        "right_value": "99",
+        "right_unit": "mm² wicking area",
+        "citation": "Wickview AATCC 195 · Borås, Sweden · Jenny Tran, MSc thesis 2025"
+      }
+    },
     "occlusion_bridge_fezXqN": {
       "type": "occlusion-bridge",
       "custom_css": [
@@ -1080,31 +1105,6 @@
         "intro_text": "Independent observations across real working environments."
       }
     },
-    "drye_mechanics_82x_proof_Dif9cy": {
-      "type": "drye-mechanics-82x-proof",
-      "custom_css": [
-        ".proof-white {color: #ffffff; font-weight: 700;}"
-      ],
-      "name": "DRYE Mechanics 82x Proof",
-      "settings": {
-        "eyebrow": "Independent verification · 2026",
-        "heading_line_1": "Same family of knit. Different construction.",
-        "heading_emphasis": "82× further moisture transport.",
-        "subheading": "The innovation is not just the fibre blend.\nIt is how the knit is built to move moisture away from the skin side.",
-        "left_image": "shopify://shop_images/IMG_0797_2.webp",
-        "left_image_alt": "DRYE textile sample showing large wicking area after Wickview test.",
-        "left_label": "DRYE · ASYMMETRIC LAYERING",
-        "left_value": "8,111",
-        "left_unit": "mm² wicking area",
-        "vs_label": "vs",
-        "right_image": "shopify://shop_images/IMG_0798.webp",
-        "right_image_alt": "Control textile sample with same fibres but different knit, showing minimal wicking area.",
-        "right_label": "CONVENTIONAL LAYERING",
-        "right_value": "99",
-        "right_unit": "mm² wicking area",
-        "citation": "Wickview AATCC 195 · Borås, Sweden · Jenny Tran, MSc thesis 2025"
-      }
-    },
     "drye_new_closing_cta_rDAaUw": {
       "type": "dryeNEW-closing-cta",
       "name": "DRYE NEW Closing CTA",
@@ -1127,7 +1127,6 @@
     },
     "drye_mechanism_nav_n73TxK": {
       "type": "drye-mechanism-nav",
-      "disabled": true,
       "name": "DRYE Mechanism Nav",
       "settings": {
         "step_1_label": "Saturation",
