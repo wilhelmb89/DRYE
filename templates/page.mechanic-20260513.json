@@ -551,6 +551,36 @@
         "citation": "Independent WickView test · Borås, Sweden · AATCC 195"
       }
     },
+    "occlusion_bridge_iJaqtg": {
+      "type": "occlusion-bridge",
+      "custom_css": [
+        ".drye-source-note {display: block; margin-top: 10px; font-size: 11px; line-height: 1.45; color: rgba(35, 55, 70, 0.55); font-weight: 400; letter-spacing: 0;}"
+      ],
+      "name": "Occlusion Bridge",
+      "settings": {
+        "reveal_cta": "Show me what changes →",
+        "eyebrow": "",
+        "heading": "So how does it keep your hands dry inside gloves?",
+        "heading_echo": "",
+        "lead": "DRYE has two working sides: the skin side repels sweat, the outer side pulls it away.",
+        "glove_text": "Sealed glove",
+        "lyocell_label": "Lyocell · Outer side pulls",
+        "pp_label": "Polypropylene · Skin side repels",
+        "thickness_label": "DRYE 0.4mm",
+        "left_label": "Without DRYE",
+        "left_title": "Sweat traps against skin",
+        "left_text_top": "Sweat traps against skin",
+        "left_text_mid": "Skin softens and swells 3×",
+        "left_text_climax": "Chemicals get through 3.6× faster",
+        "left_desc": "",
+        "right_label": "With DRYE",
+        "right_title": "Repel. Pull. No saturation.",
+        "right_text_top": "",
+        "right_text_mid": "Sweat exits",
+        "right_text_climax": "",
+        "right_desc": "That is why sweat keeps moving instead of pooling inside the glove.\n\n<span class=\"drye-source-note\">\nVerified by WickView AATCC 195 · Sweden · 2025:  \n<br>\n·  8,111 mm² vs 99 mm² wicking area  \n<br>\n·  82× further moisture transport<br>\n</span>"
+      }
+    },
     "drye_structural_answer_p3UjcR": {
       "type": "drye-structural-answer",
       "blocks": {
@@ -668,36 +698,6 @@
         "cta_label": "I'm ready, show me the price →",
         "cta_url": "shopify://products/drye-moisture-routing-glove-liners",
         "cta_note": "0.4mm washable liner · Engineered in Sweden · 30-day refund"
-      }
-    },
-    "occlusion_bridge_iJaqtg": {
-      "type": "occlusion-bridge",
-      "custom_css": [
-        ".drye-source-note {display: block; margin-top: 10px; font-size: 11px; line-height: 1.45; color: rgba(35, 55, 70, 0.55); font-weight: 400; letter-spacing: 0;}"
-      ],
-      "name": "Occlusion Bridge",
-      "settings": {
-        "reveal_cta": "Show me what changes →",
-        "eyebrow": "",
-        "heading": "So how does it keep your hands dry inside gloves?",
-        "heading_echo": "",
-        "lead": "DRYE has two working sides: the skin side repels sweat, the outer side pulls it away.",
-        "glove_text": "Sealed glove",
-        "lyocell_label": "Lyocell · Outer side pulls",
-        "pp_label": "Polypropylene · Skin side repels",
-        "thickness_label": "DRYE 0.4mm",
-        "left_label": "Without DRYE",
-        "left_title": "Sweat traps against skin",
-        "left_text_top": "Sweat traps against skin",
-        "left_text_mid": "Skin softens and swells 3×",
-        "left_text_climax": "Chemicals get through 3.6× faster",
-        "left_desc": "",
-        "right_label": "With DRYE",
-        "right_title": "Repel. Pull. No saturation.",
-        "right_text_top": "",
-        "right_text_mid": "Sweat exits",
-        "right_text_climax": "",
-        "right_desc": "That is why sweat keeps moving instead of pooling inside the glove.\n\n<span class=\"drye-source-note\">\nVerified by WickView AATCC 195 · Sweden · 2025:  \n<br>\n·  8,111 mm² vs 99 mm² wicking area  \n<br>\n·  82× further moisture transport<br>\n</span>"
       }
     },
     "drye_mechanics_mechanism_PgEzcw": {
@@ -1292,7 +1292,6 @@
     },
     "drye_mechanism_nav_xU8QpT": {
       "type": "drye-mechanism-nav",
-      "disabled": true,
       "name": "DRYE Mechanism Nav",
       "settings": {
         "step_1_label": "Saturation",
