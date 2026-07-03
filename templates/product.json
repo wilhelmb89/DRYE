@@ -367,6 +367,24 @@
         "description_toggle_closed": ""
       }
     },
+    "17820025558baba7f4": {
+      "type": "apps",
+      "blocks": {
+        "judge_me_reviews_review_widget_X7UeAd": {
+          "type": "shopify://apps/judge-me-reviews/blocks/review_widget/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
+          "settings": {
+            "review_data": "real_data",
+            "max_width": 1100,
+            "show_shop_reviews": false,
+            "empty_state": "empty_widget"
+          }
+        }
+      },
+      "block_order": [
+        "judge_me_reviews_review_widget_X7UeAd"
+      ],
+      "settings": {}
+    },
     "drye_functional_benefits_ddxLmg": {
       "type": "drye-functional-benefits",
       "custom_css": [
@@ -553,24 +571,6 @@
         "body": "Mechanics, PPE users and hockey players are our core customers. But once hands stay inside gloves for hours, the physics does not care what job you do.",
         "swipe_label": "Swipe"
       }
-    },
-    "17820025558baba7f4": {
-      "type": "apps",
-      "blocks": {
-        "judge_me_reviews_review_widget_X7UeAd": {
-          "type": "shopify://apps/judge-me-reviews/blocks/review_widget/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
-          "settings": {
-            "review_data": "real_data",
-            "max_width": 1100,
-            "show_shop_reviews": false,
-            "empty_state": "empty_widget"
-          }
-        }
-      },
-      "block_order": [
-        "judge_me_reviews_review_widget_X7UeAd"
-      ],
-      "settings": {}
     },
     "drye_research_video_full_VPtXGb": {
       "type": "drye-research-video-full",
@@ -840,9 +840,9 @@
   },
   "order": [
     "drye_product_page_new_9ibHgd",
-    "drye_functional_benefits_ddxLmg",
-    "drye_mechanics_identification_gallery_rFwWJt",
     "17820025558baba7f4",
+    "drye_mechanics_identification_gallery_rFwWJt",
+    "drye_functional_benefits_ddxLmg",
     "drye_research_video_full_VPtXGb",
     "drye_objection_cards_VWMaaG",
     "jens_linnea_section_A3xynd",
