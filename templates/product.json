@@ -401,6 +401,18 @@
     "drye_mechanics_identification_gallery_rFwWJt": {
       "type": "drye-mechanics-identification-gallery",
       "blocks": {
+        "panel_qkpPbK": {
+          "type": "panel",
+          "settings": {
+            "image": "shopify://shop_images/unnamed.webp",
+            "image_alt": "Worker wearing DRYE glove liners",
+            "video_url": "",
+            "video_play_label": "Play video",
+            "label": "EV mechanic",
+            "quote": "“The fabric is really breathable and airy — it keeps my hands dry inside my gloves.”",
+            "source": "Kevin Parra · EV mechanic · Santa Maria, CA"
+          }
+        },
         "panel_3B3J9e": {
           "type": "panel",
           "settings": {
@@ -425,6 +437,17 @@
             "source": "Jens Stålnacke · Mine worker"
           }
         },
+        "panel_YNYziG": {
+          "type": "panel",
+          "settings": {
+            "image_alt": "Worker wearing DRYE glove liners",
+            "video_url": "https://www.youtube.com/shorts/dV5oCZGYWcU",
+            "video_play_label": "Play video",
+            "label": "VERIFIED CUSTOMER",
+            "quote": "\"Normally my hands are all pruned. With DRYE, they're perfect.\"",
+            "source": " Deborah Fields · Ohio"
+          }
+        },
         "panel_93QaHT": {
           "type": "panel",
           "settings": {
@@ -435,17 +458,6 @@
             "label": "Automotive",
             "quote": "\"Hands don't stink after the shift.\"",
             "source": "EV technician"
-          }
-        },
-        "panel_YNYziG": {
-          "type": "panel",
-          "settings": {
-            "image_alt": "Worker wearing DRYE glove liners",
-            "video_url": "https://www.youtube.com/shorts/dV5oCZGYWcU",
-            "video_play_label": "Play video",
-            "label": "VERIFIED CUSTOMER",
-            "quote": "\"Normally my hands are all pruned. With DRYE, they're perfect.\"",
-            "source": " Deborah Fields · Ohio"
           }
         },
         "panel_gUaAMR": {
@@ -522,10 +534,11 @@
         }
       },
       "block_order": [
+        "panel_qkpPbK",
         "panel_3B3J9e",
         "panel_rUGYqm",
-        "panel_93QaHT",
         "panel_YNYziG",
+        "panel_93QaHT",
         "panel_gUaAMR",
         "panel_Gwj3dq",
         "panel_PzzAxF",
