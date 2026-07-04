@@ -1,0 +1,82 @@
+.drye-liner-fail-cards {
+  background: var(--bg-soft);
+}
+
+.drye-liner-fail-cards__eyebrow {
+  color: var(--caption);
+}
+
+.drye-liner-fail-cards__heading {
+  color: var(--deep);
+}
+
+.drye-liner-fail-cards__body {
+  margin-top: var(--space-12);
+  color: var(--body);
+}
+
+.drye-liner-fail-cards__stack {
+  display: grid;
+  gap: 10px;
+  margin-top: var(--space-16);
+}
+
+.drye-liner-fail-cards__card {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  padding: var(--space-16);
+  display: grid;
+  grid-template-columns: 28px 1fr;
+  gap: var(--space-12);
+  align-items: flex-start;
+}
+
+.drye-liner-fail-cards__num {
+  font-family: var(--font-display);
+  font-size: 20px;
+  font-weight: var(--fw-semibold);
+  color: var(--emerald);
+  letter-spacing: -0.03em;
+  line-height: 1;
+  padding-top: 1px;
+}
+
+.drye-liner-fail-cards__title {
+  font-family: var(--font-display);
+  font-size: 14px;
+  font-weight: var(--fw-semibold);
+  letter-spacing: -0.01em;
+  color: var(--deep);
+  margin-bottom: 4px;
+  line-height: 1.2;
+}
+
+.drye-liner-fail-cards__desc {
+  font-family: var(--font-body);
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--muted);
+}
+
+@media (min-width: 768px) {
+  .drye-liner-fail-cards__inner {
+    text-align: center;
+  }
+
+  .drye-liner-fail-cards__inner .drye-liner-fail-cards__eyebrow,
+  .drye-liner-fail-cards__inner .drye-liner-fail-cards__heading,
+  .drye-liner-fail-cards__inner .drye-liner-fail-cards__body {
+    max-width: 760px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .drye-liner-fail-cards__inner .drye-liner-fail-cards__stack {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin-top: 40px;
+    text-align: left;
+    max-width: 1000px;
+    margin-inline: auto;
+  }
+}

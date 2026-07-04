@@ -1,0 +1,257 @@
+{{ 'drye-liner-mechanism.css' | asset_url | stylesheet_tag }}
+
+<section class="dryeNEW-section drye-liner-mechanism" id="{{ section.settings.section_id | default: 'liner-mechanism' }}" data-section-id="{{ section.id }}">
+  <div class="dryeNEW-container">
+    <div class="drye-liner-mechanism__inner">
+      {%- if section.settings.eyebrow != blank -%}
+        <span class="dryeNEW-micro drye-liner-mechanism__eyebrow">{{ section.settings.eyebrow }}</span>
+      {%- endif -%}
+
+      {%- if section.settings.heading != blank or section.settings.heading_emphasis != blank -%}
+        <h2 class="dryeNEW-h2 drye-liner-mechanism__heading">
+          {%- if section.settings.heading != blank -%}
+            {{ section.settings.heading }}
+          {%- endif -%}
+          {%- if section.settings.heading_emphasis != blank -%}
+            <span class="dryeNEW-editorial drye-liner-mechanism__heading-em">{{ section.settings.heading_emphasis }}</span>
+          {%- endif -%}
+        </h2>
+      {%- endif -%}
+
+      {%- if section.settings.body != blank -%}
+        <p class="dryeNEW-body drye-liner-mechanism__body">{{ section.settings.body }}</p>
+      {%- endif -%}
+
+      <div class="drye-liner-mechanism__vs-block">
+        {%- if section.settings.vs_label != blank -%}
+          <div class="drye-liner-mechanism__vs-label">{{ section.settings.vs_label }}</div>
+        {%- endif -%}
+
+        <div class="drye-liner-mechanism__vs-grid">
+          <div class="drye-liner-mechanism__vs-card">
+            <div class="drye-liner-mechanism__media">
+              <div class="drye-liner-mechanism__media-inner">
+                <svg viewBox="0 0 100 80" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                  <rect x="6" y="8" width="88" height="8" fill="#1E3A4C"/>
+                  <line x1="8" y1="16" x2="8" y2="70" stroke="#E5E7EB" stroke-width="1"/>
+                  <line x1="92" y1="16" x2="92" y2="70" stroke="#E5E7EB" stroke-width="1"/>
+                  <rect x="8" y="62" width="84" height="8" fill="#A8B5BC"/>
+                  <path d="M25 60 L25 22 M22 27 L25 22 L28 27" stroke="#0D9488" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+                  <path d="M50 60 L50 22 M47 27 L50 22 L53 27" stroke="#0D9488" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+                  <path d="M75 60 L75 22 M72 27 L75 22 L78 27" stroke="#0D9488" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+                  <path d="M45 4 L55 14 M55 4 L45 14" stroke="#EF4444" stroke-width="1.6" stroke-linecap="round"/>
+                  <line x1="8" y1="70" x2="92" y2="70" stroke="#1E3A4C" stroke-width="1.5"/>
+                </svg>
+              </div>
+            </div>
+            <div class="drye-liner-mechanism__vs-body">
+              {%- if section.settings.cotton_name != blank -%}
+                <div class="drye-liner-mechanism__vs-name">{{ section.settings.cotton_name }}</div>
+              {%- endif -%}
+              {%- if section.settings.cotton_description != blank -%}
+                <p class="drye-liner-mechanism__vs-desc">{{ section.settings.cotton_description }}</p>
+              {%- endif -%}
+            </div>
+          </div>
+
+          <div class="drye-liner-mechanism__vs-card drye-liner-mechanism__vs-card--drye">
+            <div class="drye-liner-mechanism__media">
+              <div class="drye-liner-mechanism__media-inner">
+                <svg viewBox="0 0 100 80" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                  <rect x="6" y="0" width="88" height="4" fill="#1E3A4C"/>
+                  <rect x="6" y="4" width="88" height="4" fill="#DDE9E9"/>
+                  <rect x="6" y="8" width="88" height="4" fill="#E8EFEF"/>
+                  <line x1="8" y1="12" x2="92" y2="12" stroke="#9CA3AF" stroke-width="1" stroke-dasharray="3 3"/>
+                  <line x1="8" y1="12" x2="8" y2="70" stroke="#E5E7EB" stroke-width="1"/>
+                  <line x1="92" y1="12" x2="92" y2="70" stroke="#E5E7EB" stroke-width="1"/>
+                  <rect x="8" y="62" width="84" height="8" fill="#E5E7EB"/>
+                  <g>
+                    <ellipse cx="37" cy="60" rx="1.5" ry="2.2" fill="rgba(80,160,240,0.8)" opacity="0">
+                      <animate attributeName="cy" values="60;30;12;6" keyTimes="0;0.5;0.85;1" dur="4.5s" begin="0s" repeatCount="indefinite"/>
+                      <animate attributeName="opacity" values="0;0.75;0.75;0.4;0" keyTimes="0;0.08;0.6;0.9;1" dur="4.5s" begin="0s" repeatCount="indefinite"/>
+                      <animate attributeName="rx" values="1.5;1.5;3;4" keyTimes="0;0.6;0.9;1" dur="4.5s" begin="0s" repeatCount="indefinite"/>
+                      <animate attributeName="ry" values="2.2;2.2;0.8;0.4" keyTimes="0;0.6;0.9;1" dur="4.5s" begin="0s" repeatCount="indefinite"/>
+                    </ellipse>
+                    <ellipse cx="62" cy="60" rx="1.5" ry="2.2" fill="rgba(80,160,240,0.8)" opacity="0">
+                      <animate attributeName="cy" values="60;30;12;6" keyTimes="0;0.5;0.85;1" dur="4.5s" begin="1.5s" repeatCount="indefinite"/>
+                      <animate attributeName="opacity" values="0;0.75;0.75;0.4;0" keyTimes="0;0.08;0.6;0.9;1" dur="4.5s" begin="1.5s" repeatCount="indefinite"/>
+                      <animate attributeName="rx" values="1.5;1.5;3;4" keyTimes="0;0.6;0.9;1" dur="4.5s" begin="1.5s" repeatCount="indefinite"/>
+                      <animate attributeName="ry" values="2.2;2.2;0.8;0.4" keyTimes="0;0.6;0.9;1" dur="4.5s" begin="1.5s" repeatCount="indefinite"/>
+                    </ellipse>
+                    <ellipse cx="15" cy="60" rx="1.5" ry="2.2" fill="rgba(80,160,240,0.8)" opacity="0">
+                      <animate attributeName="cy" values="60;30;12;6" keyTimes="0;0.5;0.85;1" dur="4.5s" begin="3s" repeatCount="indefinite"/>
+                      <animate attributeName="opacity" values="0;0.75;0.75;0.4;0" keyTimes="0;0.08;0.6;0.9;1" dur="4.5s" begin="3s" repeatCount="indefinite"/>
+                      <animate attributeName="rx" values="1.5;1.5;3;4" keyTimes="0;0.6;0.9;1" dur="4.5s" begin="3s" repeatCount="indefinite"/>
+                      <animate attributeName="ry" values="2.2;2.2;0.8;0.4" keyTimes="0;0.6;0.9;1" dur="4.5s" begin="3s" repeatCount="indefinite"/>
+                    </ellipse>
+                  </g>
+                  <path d="M25 60 L25 5 M22 10 L25 5 L28 10" stroke="#1E3A4C" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+                  <path d="M50 60 L50 5 M47 10 L50 5 L53 10" stroke="#1E3A4C" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+                  <path d="M75 60 L75 5 M72 10 L75 5 L78 10" stroke="#1E3A4C" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+                  <line x1="8" y1="70" x2="92" y2="70" stroke="#1E3A4C" stroke-width="1.5"/>
+                </svg>
+              </div>
+            </div>
+            <div class="drye-liner-mechanism__vs-body">
+              {%- if section.settings.drye_name != blank -%}
+                <div class="drye-liner-mechanism__vs-name">{{ section.settings.drye_name }}</div>
+              {%- endif -%}
+              {%- if section.settings.drye_description != blank -%}
+                <p class="drye-liner-mechanism__vs-desc">{{ section.settings.drye_description }}</p>
+              {%- endif -%}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="drye-liner-mechanism__diagram">
+        {%- if section.settings.diagram_label != blank -%}
+          <div class="drye-liner-mechanism__diagram-label">{{ section.settings.diagram_label }}</div>
+        {%- endif -%}
+
+        <div class="drye-liner-mechanism__step">
+          {%- if section.settings.step_1_label != blank -%}
+            <div class="drye-liner-mechanism__step-label">{{ section.settings.step_1_label }}</div>
+          {%- endif -%}
+          {%- if section.settings.step_1_title != blank -%}
+            <div class="drye-liner-mechanism__step-title">{{ section.settings.step_1_title }}</div>
+          {%- endif -%}
+          {%- if section.settings.step_1_body != blank -%}
+            <p class="drye-liner-mechanism__step-body">{{ section.settings.step_1_body }}</p>
+          {%- endif -%}
+        </div>
+
+        <div class="drye-liner-mechanism__arrow" aria-hidden="true">&#8595;</div>
+
+        <div class="drye-liner-mechanism__step">
+          {%- if section.settings.step_2_label != blank -%}
+            <div class="drye-liner-mechanism__step-label">{{ section.settings.step_2_label }}</div>
+          {%- endif -%}
+          {%- if section.settings.step_2_title != blank -%}
+            <div class="drye-liner-mechanism__step-title">{{ section.settings.step_2_title }}</div>
+          {%- endif -%}
+          {%- if section.settings.step_2_body != blank -%}
+            <p class="drye-liner-mechanism__step-body">{{ section.settings.step_2_body }}</p>
+          {%- endif -%}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "DRYE Liner Mechanism",
+  "tag": "section",
+  "class": "shopify-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "section_id",
+      "label": "Section ID",
+      "default": "liner-mechanism"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "The difference"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Most liners absorb. DRYE"
+    },
+    {
+      "type": "text",
+      "id": "heading_emphasis",
+      "label": "Heading emphasis (italic)",
+      "default": "routes."
+    },
+    {
+      "type": "text",
+      "id": "body",
+      "label": "Body",
+      "default": "See what happens when sweat meets fabric."
+    },
+    {
+      "type": "text",
+      "id": "vs_label",
+      "label": "Comparison label",
+      "default": "Cotton · DRYE"
+    },
+    {
+      "type": "text",
+      "id": "cotton_name",
+      "label": "Cotton name",
+      "default": "Cotton"
+    },
+    {
+      "type": "text",
+      "id": "cotton_description",
+      "label": "Cotton description",
+      "default": "Water sits on the surface. Sweat stays trapped against your skin."
+    },
+    {
+      "type": "text",
+      "id": "drye_name",
+      "label": "DRYE name",
+      "default": "DRYE Liner"
+    },
+    {
+      "type": "text",
+      "id": "drye_description",
+      "label": "DRYE description",
+      "default": "Water is pulled through and spread outward. Skin side stays dry."
+    },
+    {
+      "type": "text",
+      "id": "diagram_label",
+      "label": "Diagram label",
+      "default": "Asymmetric Layering — one layer, one direction"
+    },
+    {
+      "type": "text",
+      "id": "step_1_label",
+      "label": "Step 1 label",
+      "default": "Skin side — hydrophobic"
+    },
+    {
+      "type": "text",
+      "id": "step_1_title",
+      "label": "Step 1 title",
+      "default": "Repels sweat."
+    },
+    {
+      "type": "text",
+      "id": "step_1_body",
+      "label": "Step 1 body",
+      "default": "The surface touching your skin doesn't absorb. It pushes moisture away immediately."
+    },
+    {
+      "type": "text",
+      "id": "step_2_label",
+      "label": "Step 2 label",
+      "default": "Outer side — hydrophilic"
+    },
+    {
+      "type": "text",
+      "id": "step_2_title",
+      "label": "Step 2 title",
+      "default": "Pulls moisture out."
+    },
+    {
+      "type": "text",
+      "id": "step_2_body",
+      "label": "Step 2 body",
+      "default": "The outer layer draws moisture through and spreads it toward the glove — where it can evaporate."
+    }
+  ],
+  "presets": [
+    {
+      "name": "DRYE Liner Mechanism"
+    }
+  ]
+}
+{% endschema %}

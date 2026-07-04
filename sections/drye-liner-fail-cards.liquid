@@ -1,0 +1,134 @@
+{{ 'drye-liner-fail-cards.css' | asset_url | stylesheet_tag }}
+
+<section class="dryeNEW-section drye-liner-fail-cards" id="{{ section.settings.section_id | default: 'liner-fails' }}" data-section-id="{{ section.id }}">
+  <div class="dryeNEW-container">
+    <div class="drye-liner-fail-cards__inner">
+      {%- if section.settings.eyebrow != blank -%}
+        <span class="dryeNEW-micro drye-liner-fail-cards__eyebrow">{{ section.settings.eyebrow }}</span>
+      {%- endif -%}
+
+      {%- if section.settings.heading != blank or section.settings.heading_emphasis != blank -%}
+        <h2 class="dryeNEW-h2 drye-liner-fail-cards__heading">
+          {%- if section.settings.heading != blank -%}
+            {{ section.settings.heading }}
+          {%- endif -%}
+          {%- if section.settings.heading_emphasis != blank -%}
+            <span class="dryeNEW-editorial">{{ section.settings.heading_emphasis }}</span>
+          {%- endif -%}
+        </h2>
+      {%- endif -%}
+
+      {%- if section.settings.body != blank -%}
+        <p class="dryeNEW-body drye-liner-fail-cards__body">{{ section.settings.body }}</p>
+      {%- endif -%}
+
+      <div class="drye-liner-fail-cards__stack">
+        {%- for block in section.blocks -%}
+          {%- if block.type == 'fail' -%}
+            <div class="drye-liner-fail-cards__card" {{ block.shopify_attributes }}>
+              <div class="drye-liner-fail-cards__num">
+                {%- if forloop.index < 10 -%}0{{ forloop.index }}{%- else -%}{{ forloop.index }}{%- endif -%}
+              </div>
+              <div class="drye-liner-fail-cards__content">
+                {%- if block.settings.title != blank -%}
+                  <div class="drye-liner-fail-cards__title">{{ block.settings.title }}</div>
+                {%- endif -%}
+                {%- if block.settings.description != blank -%}
+                  <div class="drye-liner-fail-cards__desc">{{ block.settings.description }}</div>
+                {%- endif -%}
+              </div>
+            </div>
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "DRYE Liner Fail Cards",
+  "tag": "section",
+  "class": "shopify-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "section_id",
+      "label": "Section ID",
+      "default": "liner-fails"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "The usual fixes"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Why every other liner"
+    },
+    {
+      "type": "text",
+      "id": "heading_emphasis",
+      "label": "Heading emphasis",
+      "default": "fails."
+    },
+    {
+      "type": "text",
+      "id": "body",
+      "label": "Body",
+      "default": "You've tried them. That's not what this is."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "fail",
+      "name": "Fail card",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Cotton absorbs"
+        },
+        {
+          "type": "text",
+          "id": "description",
+          "label": "Description",
+          "default": "Takes in sweat first — then becomes the wet layer pressed against your skin. The harder you work, the worse it gets."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "DRYE Liner Fail Cards",
+      "blocks": [
+        {
+          "type": "fail",
+          "settings": {
+            "title": "Cotton absorbs",
+            "description": "Takes in sweat first — then becomes the wet layer pressed against your skin. The harder you work, the worse it gets."
+          }
+        },
+        {
+          "type": "fail",
+          "settings": {
+            "title": "Stays wet",
+            "description": "Wet fabric means wet hands, irritation, and odor. There's no exit route for moisture."
+          }
+        },
+        {
+          "type": "fail",
+          "settings": {
+            "title": "Glove flip buys minutes",
+            "description": "Same wet hand goes right back in. Two hours later, same problem."
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

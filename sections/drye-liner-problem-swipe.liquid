@@ -1,0 +1,197 @@
+{{ 'drye-liner-problem-swipe.css' | asset_url | stylesheet_tag }}
+
+<section class="dryeNEW-section drye-liner-problem-swipe" id="{{ section.settings.section_id | default: 'liner-problem' }}" data-section-id="{{ section.id }}">
+  <div class="dryeNEW-container">
+    <div class="drye-liner-problem-swipe__intro">
+      {%- if section.settings.eyebrow != blank -%}
+        <span class="dryeNEW-micro drye-liner-problem-swipe__eyebrow">{{ section.settings.eyebrow }}</span>
+      {%- endif -%}
+
+      {%- if section.settings.heading != blank or section.settings.heading_emphasis != blank -%}
+        <h2 class="dryeNEW-h2 drye-liner-problem-swipe__heading">
+          {%- if section.settings.heading != blank -%}
+            {{ section.settings.heading }}<br>
+          {%- endif -%}
+          {%- if section.settings.heading_emphasis != blank -%}
+            <span class="dryeNEW-editorial drye-liner-problem-swipe__heading-em">{{ section.settings.heading_emphasis }}</span>
+          {%- endif -%}
+        </h2>
+      {%- endif -%}
+
+      {%- if section.settings.body != blank -%}
+        <p class="dryeNEW-body drye-liner-problem-swipe__body">{{ section.settings.body }}</p>
+      {%- endif -%}
+    </div>
+  </div>
+
+  <div class="drye-liner-problem-swipe__wrap" data-drye-liner-swipe-wrap>
+    <div class="drye-liner-problem-swipe__track" id="problem-track-{{ section.id }}">
+      {%- for block in section.blocks -%}
+        {%- if block.type == 'card' -%}
+          <div class="drye-liner-problem-swipe__card" {{ block.shopify_attributes }}>
+            <div class="drye-liner-problem-swipe__media">
+              {%- if block.settings.image != blank -%}
+                {{
+                  block.settings.image
+                  | image_url: width: 700
+                  | image_tag: class: 'drye-liner-problem-swipe__img', loading: 'lazy', alt: block.settings.label | escape
+                }}
+              {%- else -%}
+                <div class="drye-liner-problem-swipe__placeholder">
+                  <span>{{ block.settings.label }}</span>
+                </div>
+              {%- endif -%}
+            </div>
+
+            {%- if block.settings.label != blank -%}
+              <div class="drye-liner-problem-swipe__label">{{ block.settings.label }}</div>
+            {%- endif -%}
+
+            {%- if block.settings.description != blank -%}
+              <div class="drye-liner-problem-swipe__sub">{{ block.settings.description }}</div>
+            {%- endif -%}
+          </div>
+        {%- endif -%}
+      {%- endfor -%}
+    </div>
+  </div>
+
+  <div class="dryeNEW-container">
+    <div class="drye-liner-problem-swipe__dots" id="problem-dots-{{ section.id }}">
+      {%- for block in section.blocks -%}
+        {%- if block.type == 'card' -%}
+          <div class="drye-liner-problem-swipe__dot{% if forloop.first %} is-active{% endif %}" data-drye-liner-dot></div>
+        {%- endif -%}
+      {%- endfor -%}
+    </div>
+
+    <div class="drye-liner-problem-swipe__nav" id="problem-nav-{{ section.id }}" style="display:none;">
+      <button type="button" class="drye-liner-problem-swipe__nav-btn" id="problem-prev-{{ section.id }}" aria-label="Previous">←</button>
+      <button type="button" class="drye-liner-problem-swipe__nav-btn" id="problem-next-{{ section.id }}" aria-label="Next">→</button>
+    </div>
+  </div>
+</section>
+
+{{ 'drye-liner-swipe.js' | asset_url | script_tag }}
+<script>
+  (function () {
+    if (typeof initDryeLinerSwipe === 'function') {
+      initDryeLinerSwipe({
+        trackId: 'problem-track-{{ section.id }}',
+        dotsId: 'problem-dots-{{ section.id }}',
+        navId: 'problem-nav-{{ section.id }}',
+        prevId: 'problem-prev-{{ section.id }}',
+        nextId: 'problem-next-{{ section.id }}',
+        cardSelector: '.drye-liner-problem-swipe__card',
+        gap: 8
+      });
+    }
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "DRYE Liner Problem Swipe",
+  "tag": "section",
+  "class": "shopify-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "section_id",
+      "label": "Section ID",
+      "default": "liner-problem"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "Tuesday afternoon"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Your hands are wet."
+    },
+    {
+      "type": "text",
+      "id": "heading_emphasis",
+      "label": "Heading emphasis (italic line)",
+      "default": "Your gloves are soaked."
+    },
+    {
+      "type": "text",
+      "id": "body",
+      "label": "Body",
+      "default": "Everything feels worse. You know the shift."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "card",
+      "name": "Problem card",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Label",
+          "default": "Slippery tools"
+        },
+        {
+          "type": "text",
+          "id": "description",
+          "label": "Description",
+          "default": "No feel, no control."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "DRYE Liner Problem Swipe",
+      "blocks": [
+        {
+          "type": "card",
+          "settings": {
+            "label": "Slippery tools",
+            "description": "No feel, no control."
+          }
+        },
+        {
+          "type": "card",
+          "settings": {
+            "label": "Less grip",
+            "description": "Wet glove, shaky hold."
+          }
+        },
+        {
+          "type": "card",
+          "settings": {
+            "label": "Skin irritation",
+            "description": "Moisture trapped against skin."
+          }
+        },
+        {
+          "type": "card",
+          "settings": {
+            "label": "Always damp",
+            "description": "Still wet by lunch."
+          }
+        },
+        {
+          "type": "card",
+          "settings": {
+            "label": "Forever to dry",
+            "description": "Changed twice. Same result."
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

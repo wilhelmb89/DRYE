@@ -1,0 +1,105 @@
+/* DRYE Liner — Shift Changes section (all rules scoped under .drye-liner-shift-changes) */
+
+.drye-liner-shift-changes {
+  background: var(--bg-soft);
+  color: var(--body);
+}
+
+.drye-liner-shift-changes__stack {
+  display: grid;
+  gap: var(--space-16);
+  margin-top: var(--space-24);
+}
+
+.drye-liner-shift-changes__card {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  padding: var(--space-20) var(--space-16);
+  display: grid;
+  grid-template-columns: 42px 1fr;
+  column-gap: var(--space-14);
+  row-gap: var(--space-12);
+  align-items: start;
+}
+
+.drye-liner-shift-changes__card-num {
+  font-family: var(--font-editorial);
+  font-style: italic;
+  font-weight: 500;
+  font-size: 30px;
+  line-height: 1;
+  color: var(--emerald);
+  letter-spacing: -0.02em;
+}
+
+.drye-liner-shift-changes__card-title {
+  font-family: var(--font-display);
+  font-size: 18px;
+  font-weight: var(--fw-semibold);
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+  color: var(--deep);
+  align-self: center;
+  margin: 0;
+}
+
+.drye-liner-shift-changes__card-list {
+  grid-column: 1 / -1;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  border-top: 1px solid var(--border);
+}
+
+.drye-liner-shift-changes__card-list li {
+  padding: var(--space-12) 0;
+  border-bottom: 1px solid var(--border);
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--muted);
+}
+
+.drye-liner-shift-changes__card-list li:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+@media (min-width: 768px) {
+  .drye-liner-shift-changes__inner {
+    text-align: center;
+  }
+
+  .drye-liner-shift-changes__inner > .dryeNEW-micro,
+  .drye-liner-shift-changes__inner > .dryeNEW-h2,
+  .drye-liner-shift-changes__inner > .dryeNEW-body {
+    max-width: 760px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .drye-liner-shift-changes__stack {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    margin-top: 48px;
+    text-align: left;
+    max-width: 1100px;
+    margin-inline: auto;
+  }
+
+  .drye-liner-shift-changes__card {
+    padding: 32px 28px;
+  }
+
+  .drye-liner-shift-changes__card-num {
+    font-size: 44px;
+  }
+
+  .drye-liner-shift-changes__card-title {
+    font-size: 22px;
+  }
+
+  .drye-liner-shift-changes__card-list li {
+    padding: 14px 0;
+    font-size: 14px;
+  }
+}

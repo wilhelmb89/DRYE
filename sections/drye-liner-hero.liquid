@@ -1,0 +1,160 @@
+{{ 'drye-liner-hero.css' | asset_url | stylesheet_tag }}
+
+<section
+  class="drye-liner-hero"
+  id="{{ section.settings.section_id | default: 'liner-hero' }}"
+  data-section-id="{{ section.id }}"
+>
+  <div class="drye-liner-hero__inner">
+    <div class="drye-liner-hero__media" aria-hidden="true">
+      {% if section.settings.image != blank %}
+        {{
+          section.settings.image
+          | image_url: width: 1200
+          | image_tag:
+            class: 'drye-liner-hero__img',
+            loading: 'eager',
+            fetchpriority: 'high',
+            sizes: '(min-width: 768px) 400px, 100vw',
+            alt: section.settings.image.alt | default: section.settings.heading
+        }}
+      {% else %}
+        <div class="drye-liner-hero__media-placeholder">
+          <span>Hero image — mechanic wearing DRYE liner under work glove</span>
+        </div>
+      {% endif %}
+    </div>
+
+    <div class="drye-liner-hero__info">
+      {% if section.settings.eyebrow != blank %}
+        <p class="drye-liner-hero__eyebrow">{{ section.settings.eyebrow }}</p>
+      {% endif %}
+
+      {% if section.settings.heading != blank %}
+        <h1 class="drye-liner-hero__title">{{ section.settings.heading }}</h1>
+      {% endif %}
+
+      {% if section.settings.subheading != blank %}
+        <div class="drye-liner-hero__sub">{{ section.settings.subheading }}</div>
+      {% endif %}
+
+      {% if section.blocks.size > 0 %}
+        <ul class="drye-liner-hero__bullets">
+          {%- for block in section.blocks -%}
+            {%- if block.type == 'bullet' -%}
+              <li class="drye-liner-hero__bullet" {{ block.shopify_attributes }}>
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 7l3 3 5-6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                <span>{{ block.settings.text }}</span>
+              </li>
+            {%- endif -%}
+          {%- endfor -%}
+        </ul>
+      {% endif %}
+
+      {% if section.settings.cta_label != blank %}
+        <a href="{{ section.settings.cta_url | default: '#' }}" class="dryeNEW-button drye-liner-hero__cta">
+          {{ section.settings.cta_label }}
+        </a>
+      {% endif %}
+
+      {% if section.settings.guarantee_text != blank %}
+        <p class="drye-liner-hero__guarantee">{{ section.settings.guarantee_text }}</p>
+      {% endif %}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "DRYE Liner Hero",
+  "tag": "section",
+  "class": "shopify-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "section_id",
+      "label": "Section ID",
+      "default": "liner-hero"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Hero image"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "Not a glove. Not cotton."
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Add one dry layer under your gloves."
+    },
+    {
+      "type": "richtext",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "<p>A thin liner worn under nitrile, latex, rubber or sealed work gloves. <strong>Keeps hands dry so you can work longer.</strong></p>"
+    },
+    {
+      "type": "text",
+      "id": "cta_label",
+      "label": "CTA label",
+      "default": "Get DRYE Liner"
+    },
+    {
+      "type": "url",
+      "id": "cta_url",
+      "label": "CTA URL"
+    },
+    {
+      "type": "text",
+      "id": "guarantee_text",
+      "label": "Guarantee text",
+      "default": "30-Day Money Back Guarantee"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "bullet",
+      "name": "Bullet",
+      "settings": [
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Text",
+          "default": "Keeps hands dry all shift"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "DRYE Liner Hero",
+      "blocks": [
+        {
+          "type": "bullet",
+          "settings": {
+            "text": "Keeps hands dry all shift"
+          }
+        },
+        {
+          "type": "bullet",
+          "settings": {
+            "text": "More comfort, less glove fight"
+          }
+        },
+        {
+          "type": "bullet",
+          "settings": {
+            "text": "Cleaner hands at end of day"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
