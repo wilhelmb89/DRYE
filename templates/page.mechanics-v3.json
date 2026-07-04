@@ -51,6 +51,7 @@
         "stat_item_drP8H3",
         "stat_item_VmHim4"
       ],
+      "disabled": true,
       "name": "DRYE NEW Hero",
       "settings": {
         "section_id": "hero",
@@ -72,6 +73,45 @@
         "path_2_text_line_1": "See why it works ↓",
         "path_2_text_line_2": "",
         "path_2_link": "#mechanics-saturation"
+      }
+    },
+    "drye_liner_hero_AqHpD3": {
+      "type": "drye-liner-hero",
+      "blocks": {
+        "bullet_Jr8JHi": {
+          "type": "bullet",
+          "settings": {
+            "text": "Keeps hands dry all shift"
+          }
+        },
+        "bullet_yygEew": {
+          "type": "bullet",
+          "settings": {
+            "text": "More comfort, less glove fight"
+          }
+        },
+        "bullet_QibMrk": {
+          "type": "bullet",
+          "settings": {
+            "text": "Cleaner hands at end of day"
+          }
+        }
+      },
+      "block_order": [
+        "bullet_Jr8JHi",
+        "bullet_yygEew",
+        "bullet_QibMrk"
+      ],
+      "name": "DRYE Liner Hero",
+      "settings": {
+        "section_id": "liner-hero",
+        "image": "shopify://shop_images/5Y9A9331_1_1.webp",
+        "eyebrow": "Not a glove. Not cotton.",
+        "heading": "Add one dry layer under your gloves.",
+        "subheading": "<p>A thin liner worn under nitrile, latex, rubber or sealed work gloves. <strong>Keeps hands dry so you can work longer.</strong></p>",
+        "cta_label": "Get DRYE Liner",
+        "cta_url": "",
+        "guarantee_text": "30-Day Money Back Guarantee"
       }
     },
     "drye_worker_grid_CG6VUJ": {
@@ -707,30 +747,18 @@
         "drye_desc": "<p>Two fibers, one fabric. The skin side is hydrophobic - water cannot bond to it. The outer side pulls moisture toward it. <strong>The skin side repels. The outer side pulls. Sweat exits — it doesn't pool..</strong></p>"
       }
     },
-    "drye_mechanics_82x_proof_Dif9cy": {
-      "type": "drye-mechanics-82x-proof",
-      "disabled": true,
-      "custom_css": [
-        ".proof-white {color: #ffffff; font-weight: 700;}"
-      ],
-      "name": "DRYE Mechanics 82x Proof",
+    "drye_about_cta_bmdVek": {
+      "type": "drye-about-cta",
+      "name": "DRYE About CTA",
       "settings": {
-        "eyebrow": "Independent verification · 2026",
-        "heading_line_1": "Same fibre family. Built to move sweat away.",
-        "heading_emphasis": "8× larger wicking area than conventional layering.",
-        "subheading": "DRYE’s knit construction pulls moisture outward instead of letting it sit against your skin.",
-        "left_image": "shopify://shop_images/IMG_0797_2.webp",
-        "left_image_alt": "DRYE textile sample showing large wicking area after Wickview test.",
-        "left_label": "DRYE",
-        "left_value": "8,111",
-        "left_unit": "mm² wicking area",
-        "vs_label": "vs",
-        "right_image": "shopify://shop_images/IMG_0798.webp",
-        "right_image_alt": "Control textile sample with same fibres but different knit, showing minimal wicking area.",
-        "right_label": "CONVENTIONAL",
-        "right_value": "99",
-        "right_unit": "mm² wicking area",
-        "citation": "Independent WickView test · Borås, Sweden · AATCC 195"
+        "eyebrow": "YOU’VE SEEN WHERE IT COMES FROM",
+        "heading_line_1": "Either it changes your shift",
+        "heading_line_2": "Or it doesn't",
+        "subtext": "30 days. Full refund if the physics don't change anything. No forms. No questions.",
+        "primary_label": "Order DRYE Liners →",
+        "primary_url": "shopify://products/drye-moisture-routing-glove-liners",
+        "secondary_label": "See the research",
+        "secondary_url": "shopify://pages/research"
       }
     },
     "occlusion_bridge_fezXqN": {
@@ -761,20 +789,6 @@
         "right_text_mid": "Sweat exits",
         "right_text_climax": "",
         "right_desc": "That is why sweat keeps moving instead of pooling inside the glove.\n\n<span class=\"drye-source-note\">\nVerified by WickView AATCC 195 · Sweden · 2025:  \n<br>\n·  8,111 mm² vs 99 mm² wicking area  \n<br>\n·  82× further moisture transport<br>\n</span>"
-      }
-    },
-    "drye_about_cta_bmdVek": {
-      "type": "drye-about-cta",
-      "name": "DRYE About CTA",
-      "settings": {
-        "eyebrow": "YOU’VE SEEN WHERE IT COMES FROM",
-        "heading_line_1": "Either it changes your shift",
-        "heading_line_2": "Or it doesn't",
-        "subtext": "30 days. Full refund if the physics don't change anything. No forms. No questions.",
-        "primary_label": "Order DRYE Liners →",
-        "primary_url": "shopify://products/drye-moisture-routing-glove-liners",
-        "secondary_label": "See the research",
-        "secondary_url": "shopify://pages/research"
       }
     },
     "drye_mechanics_time_promise_LatRqd": {
@@ -1123,6 +1137,7 @@
   },
   "order": [
     "drye_new_hero_jE4LCa",
+    "drye_liner_hero_AqHpD3",
     "drye_worker_grid_CG6VUJ",
     "drye_evidence_V9B97n",
     "drye_new_problem_beat_1_R7GgRp",
@@ -1132,7 +1147,6 @@
     "drye_mechanics_mechanism_wJ8CqD",
     "drye_about_cta_bmdVek",
     "occlusion_bridge_fezXqN",
-    "drye_mechanics_82x_proof_Dif9cy",
     "drye_mechanics_time_promise_LatRqd",
     "apps_zHecji",
     "drye_stretch_wTh9gp",
