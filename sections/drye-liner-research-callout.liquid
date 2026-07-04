@@ -1,0 +1,73 @@
+{{ 'drye-liner-research-callout.css' | asset_url | stylesheet_tag }}
+
+<div class="dryeNEW-section drye-liner-research-callout" id="{{ section.settings.section_id | default: 'liner-research' }}" data-section-id="{{ section.id }}">
+  <div class="dryeNEW-container">
+    <div class="drye-liner-research-callout__box">
+      <div class="drye-liner-research-callout__icon" aria-hidden="true">
+        <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+          <path d="M7 2v4L3 14a2 2 0 0 0 2 3h8a2 2 0 0 0 2-3l-4-8V2" stroke="currentColor" stroke-width="1.3"></path>
+          <path d="M7 2h4" stroke="currentColor" stroke-width="1.3"></path>
+        </svg>
+      </div>
+
+      <div class="drye-liner-research-callout__text">
+        {%- if section.settings.title != blank -%}
+          <h4>{{ section.settings.title }}</h4>
+        {%- endif -%}
+
+        {%- if section.settings.body != blank -%}
+          <p>{{ section.settings.body }}</p>
+        {%- endif -%}
+
+        {%- if section.settings.link_label != blank -%}
+          <a href="{{ section.settings.link_url | default: '#' }}" class="drye-liner-research-callout__link">{{ section.settings.link_label }}</a>
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "DRYE Liner Research Callout",
+  "tag": "section",
+  "class": "shopify-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "section_id",
+      "label": "Section ID",
+      "default": "liner-research"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Want the research?"
+    },
+    {
+      "type": "text",
+      "id": "body",
+      "label": "Body",
+      "default": "See the fabric testing behind DRYE."
+    },
+    {
+      "type": "text",
+      "id": "link_label",
+      "label": "Link label",
+      "default": "See the research →"
+    },
+    {
+      "type": "url",
+      "id": "link_url",
+      "label": "Link URL",
+      "default": "/pages/research"
+    }
+  ],
+  "presets": [
+    {
+      "name": "DRYE Liner Research Callout"
+    }
+  ]
+}
+{% endschema %}
