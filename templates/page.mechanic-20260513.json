@@ -320,94 +320,6 @@
         "swipe_label": "Swipe"
       }
     },
-    "drye_mechanics_saturation_P6ACzj": {
-      "type": "drye-mechanics-saturation",
-      "blocks": {
-        "fiber_row_MD4qPX": {
-          "type": "fiber_row",
-          "settings": {
-            "fiber_name": "Merino wool",
-            "fiber_note": "Soaks like a sponge. Stays heavy.",
-            "value": "15–18%",
-            "bar_percent": 100,
-            "is_highlighted": false
-          }
-        },
-        "fiber_row_H3erWR": {
-          "type": "fiber_row",
-          "settings": {
-            "fiber_name": "Bamboo viscose",
-            "fiber_note": "Soft-sell marketing. Wetter than cotton.",
-            "value": "13%",
-            "bar_percent": 78,
-            "is_highlighted": false
-          }
-        },
-        "fiber_row_4RzYHA": {
-          "type": "fiber_row",
-          "disabled": true,
-          "settings": {
-            "fiber_name": "Silk",
-            "fiber_note": "Soaks slow. Dries slower.",
-            "value": "11%",
-            "bar_percent": 65,
-            "is_highlighted": false
-          }
-        },
-        "fiber_row_kLUWXf": {
-          "type": "fiber_row",
-          "settings": {
-            "fiber_name": "Cotton",
-            "fiber_note": "Wet in under an hour.",
-            "value": "7–8%",
-            "bar_percent": 47,
-            "is_highlighted": false
-          }
-        },
-        "fiber_row_Vc6KN7": {
-          "type": "fiber_row",
-          "disabled": true,
-          "settings": {
-            "fiber_name": "Polyester",
-            "fiber_note": "Wets fast. Dries slow.",
-            "value": "0.4%",
-            "bar_percent": 3,
-            "is_highlighted": false
-          }
-        },
-        "fiber_row_xUcXQP": {
-          "type": "fiber_row",
-          "settings": {
-            "fiber_name": "DRYE Asymmetric layering",
-            "fiber_note": "Can't fill. Stays dry — full shift.",
-            "value": "<0.1%",
-            "bar_percent": 1,
-            "is_highlighted": true
-          }
-        }
-      },
-      "block_order": [
-        "fiber_row_MD4qPX",
-        "fiber_row_H3erWR",
-        "fiber_row_4RzYHA",
-        "fiber_row_kLUWXf",
-        "fiber_row_Vc6KN7",
-        "fiber_row_xUcXQP"
-      ],
-      "name": "DRYE Saturation Point",
-      "settings": {
-        "section_id": "mechanics-saturation",
-        "eyebrow": "The invention",
-        "heading_line_1": "Why every normal liner eventually fails",
-        "heading_echo": "",
-        "subheading": "",
-        "drye_chip": "Skin-side dry",
-        "close_heading": "",
-        "close_body": "",
-        "close_statement": "",
-        "cite": "Moisture regain references: Kadolph 2014 · ASTM D2654 · CN GB national standard. Transport mechanism independently verified at the Swedish School of Textiles, 2025."
-      }
-    },
     "drye_mechanics_mechanism_zTDaza": {
       "type": "drye-mechanics-mechanism",
       "blocks": {
@@ -524,61 +436,6 @@
         "drye_label": "DRYE · ASYMMETRIC LAYERING",
         "drye_title": "Repel. Pull. Route out.",
         "drye_desc": ""
-      }
-    },
-    "drye_mechanics_82x_proof_JLCmmt": {
-      "type": "drye-mechanics-82x-proof",
-      "custom_css": [
-        ".proof-white {color: #ffffff; font-weight: 700;}"
-      ],
-      "name": "DRYE Mechanics 82x Proof",
-      "settings": {
-        "eyebrow": "Independent verification · 2026",
-        "heading_line_1": "Same fibre family. Built to move sweat away.",
-        "heading_emphasis": "8× larger wicking area than conventional layering.",
-        "subheading": "DRYE’s knit construction pulls moisture outward instead of letting it sit against your skin.",
-        "left_image": "shopify://shop_images/IMG_0797_2.webp",
-        "left_image_alt": "DRYE textile sample showing large wicking area after Wickview test.",
-        "left_label": "DRYE",
-        "left_value": "8,111",
-        "left_unit": "mm² wicking area",
-        "vs_label": "vs",
-        "right_image": "shopify://shop_images/IMG_0798.webp",
-        "right_image_alt": "Control textile sample with same fibres but different knit, showing minimal wicking area.",
-        "right_label": "CONVENTIONAL",
-        "right_value": "99",
-        "right_unit": "mm² wicking area",
-        "citation": "Independent WickView test · Borås, Sweden · AATCC 195"
-      }
-    },
-    "occlusion_bridge_iJaqtg": {
-      "type": "occlusion-bridge",
-      "custom_css": [
-        ".drye-source-note {display: block; margin-top: 10px; font-size: 11px; line-height: 1.45; color: rgba(35, 55, 70, 0.55); font-weight: 400; letter-spacing: 0;}"
-      ],
-      "name": "Occlusion Bridge",
-      "settings": {
-        "reveal_cta": "Show me what changes →",
-        "eyebrow": "",
-        "heading": "So how does it keep my hands dry inside gloves?",
-        "heading_echo": "",
-        "lead": "DRYE has two working sides: the skin side repels sweat, the outer side pulls it away.",
-        "glove_text": "Sealed glove",
-        "lyocell_label": "Lyocell · Outer side pulls",
-        "pp_label": "Polypropylene · Skin side repels",
-        "thickness_label": "DRYE 0.4mm",
-        "left_label": "Without DRYE",
-        "left_title": "Sweat traps against skin",
-        "left_text_top": "Sweat traps against skin",
-        "left_text_mid": "Skin softens and swells 3×",
-        "left_text_climax": "Chemicals get through 3.6× faster",
-        "left_desc": "",
-        "right_label": "With DRYE",
-        "right_title": "Repel. Pull. No saturation.",
-        "right_text_top": "",
-        "right_text_mid": "Sweat exits",
-        "right_text_climax": "",
-        "right_desc": "That is why sweat keeps moving instead of pooling inside the glove.\n\n<span class=\"drye-source-note\">\nVerified by WickView AATCC 195 · Sweden · 2025:  \n<br>\n·  8,111 mm² vs 99 mm² wicking area  \n<br>\n·  82× further moisture transport<br>\n</span>"
       }
     },
     "drye_structural_answer_p3UjcR": {
@@ -1023,16 +880,6 @@
         "secondary_label": "Read the full Gothenburg field report →",
         "secondary_link": ""
       }
-    },
-    "drye_mechanism_nav_xU8QpT": {
-      "type": "drye-mechanism-nav",
-      "name": "DRYE Mechanism Nav",
-      "settings": {
-        "step_1_label": "Saturation",
-        "step_2_label": "Routing",
-        "step_3_label": "Verification",
-        "aria_label": "Asymmetric Layering — the invention"
-      }
     }
   },
   "order": [
@@ -1040,10 +887,7 @@
     "drye_new_identification_atPnnz",
     "drye_worker_grid_UVf4QL",
     "drye_evidence_xmyAdp",
-    "drye_mechanics_saturation_P6ACzj",
     "drye_mechanics_mechanism_zTDaza",
-    "drye_mechanics_82x_proof_JLCmmt",
-    "occlusion_bridge_iJaqtg",
     "drye_structural_answer_p3UjcR",
     "drye_mechanics_time_promise_AcqgeQ",
     "drye_objection_cards_PPDxpW",
@@ -1052,7 +896,6 @@
     "drye_mechanics_cta_pYjFDe",
     "drye_competitive_table_Rhhded",
     "drye_research_study_breakdown_TrRXii",
-    "drye_mechanics_cta_2_krhUaj",
-    "drye_mechanism_nav_xU8QpT"
+    "drye_mechanics_cta_2_krhUaj"
   ]
 }
