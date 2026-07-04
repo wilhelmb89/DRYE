@@ -20,7 +20,7 @@
         {%- endif -%}
 
         {%- if section.settings.link_label != blank -%}
-          <a href="{{ section.settings.link_url | default: '#' }}" class="drye-liner-research-callout__link">{{ section.settings.link_label }}</a>
+          <a href="{{ section.settings.link_url | default: '/pages/research' }}" class="drye-liner-research-callout__link">{{ section.settings.link_label }}</a>
         {%- endif -%}
       </div>
     </div>
@@ -29,7 +29,7 @@
 
 {% schema %}
 {
-  "name": "DRYE Liner Research Callout",
+  "name": "DRYE Liner Research C",
   "tag": "section",
   "class": "shopify-section",
   "settings": [
@@ -60,8 +60,7 @@
     {
       "type": "url",
       "id": "link_url",
-      "label": "Link URL",
-      "default": "/pages/research"
+      "label": "Link URL"
     }
   ],
   "presets": [
