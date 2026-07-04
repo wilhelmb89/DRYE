@@ -61,7 +61,7 @@
     </div>
 
     {%- if section.settings.cta_label != blank -%}
-      <a href="{{ section.settings.cta_url | default: '#' }}" class="drye-liner-more-reviews__cta">{{ section.settings.cta_label }}</a>
+      <a href="{{ section.settings.cta_url | default: 'https://se.trustpilot.com/review/hudsverige.se' }}" class="drye-liner-more-reviews__cta">{{ section.settings.cta_label }}</a>
     {%- endif -%}
   </div>
 </section>
@@ -134,8 +134,7 @@
     {
       "type": "url",
       "id": "cta_url",
-      "label": "CTA URL",
-      "default": "https://se.trustpilot.com/review/hudsverige.se"
+      "label": "CTA URL"
     }
   ],
   "blocks": [
