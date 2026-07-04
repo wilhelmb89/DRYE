@@ -1,0 +1,169 @@
+{{ 'drye-liner-saturation.css' | asset_url | stylesheet_tag }}
+
+<section class="dryeNEW-section drye-liner-saturation" id="{{ section.settings.section_id | default: 'liner-saturation' }}" data-section-id="{{ section.id }}">
+  <div class="dryeNEW-container">
+    <div class="drye-liner-saturation__intro">
+      {%- if section.settings.heading != blank -%}
+        <h2 class="dryeNEW-h2 drye-liner-saturation__heading">{{ section.settings.heading }}</h2>
+      {%- endif -%}
+
+      {%- if section.settings.body != blank -%}
+        <p class="dryeNEW-body drye-liner-saturation__body">{{ section.settings.body }}</p>
+      {%- endif -%}
+    </div>
+
+    <div class="drye-liner-saturation__chart">
+      {%- for block in section.blocks -%}
+        {%- if block.type == 'material' -%}
+          <div
+            class="drye-liner-saturation__row{% if block.settings.highlight %} drye-liner-saturation__row--drye{% endif %}"
+            {{ block.shopify_attributes }}
+          >
+            <div class="drye-liner-saturation__name">
+              {{ block.settings.name }}
+              {%- if block.settings.highlight -%}
+                <span class="drye-liner-saturation__chip">Skin-side dry</span>
+              {%- endif -%}
+              {%- if block.settings.note != blank -%}
+                <span class="drye-liner-saturation__note">{{ block.settings.note }}</span>
+              {%- endif -%}
+            </div>
+
+            <div class="drye-liner-saturation__value">{{ block.settings.value_text }}</div>
+
+            <div class="drye-liner-saturation__bar" style="--bar: {{ block.settings.bar_percent }}%">
+              <i></i>
+            </div>
+          </div>
+        {%- endif -%}
+      {%- endfor -%}
+    </div>
+
+    {%- if section.settings.source_text != blank -%}
+      <p class="drye-liner-saturation__source">{{ section.settings.source_text }}</p>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "DRYE Liner Saturation",
+  "tag": "section",
+  "class": "shopify-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "section_id",
+      "label": "Section ID",
+      "default": "liner-saturation"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Why normal liners stay wet."
+    },
+    {
+      "type": "text",
+      "id": "body",
+      "label": "Body",
+      "default": "Common materials absorb moisture. Inside sealed gloves, absorbed moisture stays with your skin."
+    },
+    {
+      "type": "text",
+      "id": "source_text",
+      "label": "Source text",
+      "default": "Moisture regain references: ASTM D2654 · Kadolph 2014."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "material",
+      "name": "Material row",
+      "settings": [
+        {
+          "type": "text",
+          "id": "name",
+          "label": "Name",
+          "default": "Material"
+        },
+        {
+          "type": "text",
+          "id": "note",
+          "label": "Note",
+          "default": "Absorbs and stays wet"
+        },
+        {
+          "type": "text",
+          "id": "value_text",
+          "label": "Displayed value",
+          "default": "0%"
+        },
+        {
+          "type": "range",
+          "id": "bar_percent",
+          "label": "Bar fill",
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "unit": "%",
+          "default": 50
+        },
+        {
+          "type": "checkbox",
+          "id": "highlight",
+          "label": "Highlight as DRYE row",
+          "default": false
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "DRYE Liner Saturation",
+      "blocks": [
+        {
+          "type": "material",
+          "settings": {
+            "name": "Merino wool",
+            "note": "Soaks and stays heavy",
+            "value_text": "15–18%",
+            "bar_percent": 100,
+            "highlight": false
+          }
+        },
+        {
+          "type": "material",
+          "settings": {
+            "name": "Bamboo",
+            "note": "Wetter than cotton",
+            "value_text": "13%",
+            "bar_percent": 76,
+            "highlight": false
+          }
+        },
+        {
+          "type": "material",
+          "settings": {
+            "name": "Cotton",
+            "note": "Wet within the hour",
+            "value_text": "7–8%",
+            "bar_percent": 44,
+            "highlight": false
+          }
+        },
+        {
+          "type": "material",
+          "settings": {
+            "name": "DRYE skin side",
+            "note": "Near-zero regain",
+            "value_text": "<0.1%",
+            "bar_percent": 2,
+            "highlight": true
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
