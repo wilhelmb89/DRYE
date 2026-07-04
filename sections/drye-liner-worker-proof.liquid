@@ -1,0 +1,212 @@
+{{ 'drye-liner-worker-proof.css' | asset_url | stylesheet_tag }}
+{{ 'drye-liner-worker-proof.js' | asset_url | script_tag }}
+
+<div class="drye-liner-worker-proof" id="{{ section.settings.section_id | default: 'liner-worker-proof' }}" data-section-id="{{ section.id }}">
+  <div class="drye-liner-worker-proof__card" id="drye-liner-worker-proof-{{ section.id }}">
+    <div class="drye-liner-worker-proof__line">
+      <svg class="drye-liner-worker-proof__check" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+        <circle cx="12" cy="12" r="10" fill="currentColor" opacity="0.15"></circle>
+        <path d="M7 12.5l3 3 7-7.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+      </svg>
+      {%- if section.settings.headline != blank -%}
+        <span class="drye-liner-worker-proof__returns">{{ section.settings.headline }}</span>
+      {%- endif -%}
+    </div>
+
+    {%- if section.settings.subline != blank -%}
+      <div class="drye-liner-worker-proof__keep">{{ section.settings.subline }}</div>
+    {%- endif -%}
+
+    {%- if section.settings.ticker_label != blank -%}
+      <div class="drye-liner-worker-proof__tlabel">{{ section.settings.ticker_label }}</div>
+    {%- endif -%}
+
+    <div class="drye-liner-worker-proof__ticker-wrap" data-drye-liner-worker-proof-wrap>
+      <ul class="drye-liner-worker-proof__ticker" data-drye-liner-worker-proof-ticker>
+        {%- for pass in (1..2) -%}
+          {%- for block in section.blocks -%}
+            {%- if block.type == 'quote' -%}
+              <li class="drye-liner-worker-proof__item-wrap">
+                <button
+                  type="button"
+                  class="drye-liner-worker-proof__item"
+                  data-drye-liner-worker-proof-item
+                  data-full="{{ block.settings.full_text | escape }}"
+                  data-handle="{{ block.settings.handle | escape }}"
+                  data-label="{{ block.settings.label | escape }}"
+                  {% if pass == 1 %}{{ block.shopify_attributes }}{% endif %}
+                >
+                  {%- if block.settings.handle != blank -%}
+                    <span class="drye-liner-worker-proof__ihandle">{{ block.settings.handle }}</span>
+                  {%- endif -%}
+                  <span class="drye-liner-worker-proof__iquote">{{ block.settings.short_text }}</span>
+                  <span class="drye-liner-worker-proof__iplus" aria-hidden="true">+</span>
+                </button>
+              </li>
+            {%- endif -%}
+          {%- endfor -%}
+        {%- endfor -%}
+      </ul>
+    </div>
+
+    {%- if section.settings.hint_text != blank -%}
+      <div class="drye-liner-worker-proof__hint">
+        <span class="drye-liner-worker-proof__hint-plus" aria-hidden="true">+</span>
+        <span>{{ section.settings.hint_text }}</span>
+      </div>
+    {%- endif -%}
+
+    <div class="drye-liner-worker-proof__expand" data-drye-liner-worker-proof-expand hidden>
+      <button type="button" class="drye-liner-worker-proof__expand-close" data-drye-liner-worker-proof-close aria-label="Close">×</button>
+      <p class="drye-liner-worker-proof__expand-quote" data-drye-liner-worker-proof-quote></p>
+      <div class="drye-liner-worker-proof__expand-meta">
+        <span class="drye-liner-worker-proof__expand-source" data-drye-liner-worker-proof-source></span>
+      </div>
+    </div>
+
+    {%- if section.settings.orders_line != blank -%}
+      <div class="drye-liner-worker-proof__orders"><strong>{{ section.settings.orders_line }}</strong></div>
+    {%- endif -%}
+
+    {%- if section.settings.states_line != blank -%}
+      <div class="drye-liner-worker-proof__states">{{ section.settings.states_line }}</div>
+    {%- endif -%}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "DRYE Liner Worker Proof",
+  "tag": "section",
+  "class": "shopify-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "section_id",
+      "label": "Section ID",
+      "default": "liner-worker-proof"
+    },
+    {
+      "type": "text",
+      "id": "headline",
+      "label": "Headline",
+      "default": "Mechanic buyers aren't sending them back"
+    },
+    {
+      "type": "text",
+      "id": "subline",
+      "label": "Subline",
+      "default": "0 returns recorded in the last 90 days."
+    },
+    {
+      "type": "text",
+      "id": "ticker_label",
+      "label": "Ticker label",
+      "default": "Live from our ads"
+    },
+    {
+      "type": "text",
+      "id": "hint_text",
+      "label": "Hint text",
+      "default": "Tap a comment to read it in full"
+    },
+    {
+      "type": "text",
+      "id": "orders_line",
+      "label": "Orders line",
+      "default": "101 orders across 27 US states since April 19"
+    },
+    {
+      "type": "text",
+      "id": "states_line",
+      "label": "States line",
+      "default": "CA · TX · FL · CO · GA · AZ · NC · MA · CT · OR"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "quote",
+      "name": "Quote",
+      "settings": [
+        {
+          "type": "textarea",
+          "id": "full_text",
+          "label": "Full quote",
+          "default": "These are incredible. I have nearly no more sweat in nitrile gloves — so thin I barely notice them. I've been battling hyperhidrosis, which only gets worse with gloves I have to wear for work."
+        },
+        {
+          "type": "text",
+          "id": "short_text",
+          "label": "Short ticker preview",
+          "default": "\"These are incredible. Nearly no more sweat.\""
+        },
+        {
+          "type": "text",
+          "id": "handle",
+          "label": "Handle / name",
+          "default": "@fordbodytech811"
+        },
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Source label",
+          "default": "Instagram comment"
+        }
+      ]
+    }
+  ],
+  "max_blocks": 10,
+  "presets": [
+    {
+      "name": "DRYE Liner Worker Proof",
+      "blocks": [
+        {
+          "type": "quote",
+          "settings": {
+            "full_text": "These are incredible. I have nearly no more sweat in nitrile gloves — so thin I barely notice them. I've been battling hyperhidrosis, which only gets worse with gloves I have to wear for work.",
+            "short_text": "\"These are incredible. Nearly no more sweat.\"",
+            "handle": "@fordbodytech811",
+            "label": "Instagram comment"
+          }
+        },
+        {
+          "type": "quote",
+          "settings": {
+            "full_text": "Pulling the liners off and having my hands be dry is nothing short of exceptional. It makes those hot and humid days in the shop a little more bearable. I work at a Freightliner/Western Star dealership doing frame and suspension repair.",
+            "short_text": "\"Pulling the liners off and finding my hands dry was exceptional.\"",
+            "handle": "Alex A.",
+            "label": "Verified buyer"
+          }
+        },
+        {
+          "type": "quote",
+          "settings": {
+            "full_text": "I'm an automotive painter in Phoenix and was having terrible sweat issues wearing nitrile gloves during summer months. The liners have been a huge help — I'm no longer dripping sweat on my paint jobs and my hands feel better.",
+            "short_text": "\"No longer dripping sweat on my paint jobs.\"",
+            "handle": "Chad W.",
+            "label": "Verified buyer"
+          }
+        },
+        {
+          "type": "quote",
+          "settings": {
+            "full_text": "Good dexterity and keeps hands dry. I mainly use these for car detailing. The slim thickness gives great dexterity. They do a great job keeping sweat off my hands — even when slightly wet, they still work.",
+            "short_text": "\"Great dexterity — keeps sweat off my hands.\"",
+            "handle": "Shoujun S.",
+            "label": "Verified buyer"
+          }
+        },
+        {
+          "type": "quote",
+          "settings": {
+            "full_text": "A few of my coworkers are looking into getting a few pairs themselves — so glad I found these.",
+            "short_text": "\"A few of my coworkers are looking into getting pairs too.\"",
+            "handle": "@fordbodytech811",
+            "label": "Instagram comment"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

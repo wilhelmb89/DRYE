@@ -1,0 +1,80 @@
+{{ 'drye-liner-benefit-strip.css' | asset_url | stylesheet_tag }}
+
+<div
+  class="drye-liner-benefit-strip"
+  id="{{ section.settings.section_id | default: 'liner-benefits' }}"
+  data-section-id="{{ section.id }}"
+>
+  {%- for block in section.blocks -%}
+    {%- if block.type == 'benefit' -%}
+      <span class="drye-liner-benefit-strip__item" {{ block.shopify_attributes }}>{{ block.settings.text }}</span>
+    {%- endif -%}
+  {%- endfor -%}
+</div>
+
+{% schema %}
+{
+  "name": "DRYE Liner Benefit Strip",
+  "tag": "section",
+  "class": "shopify-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "section_id",
+      "label": "Section ID",
+      "default": "liner-benefits"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "benefit",
+      "name": "Benefit",
+      "settings": [
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Text",
+          "default": "Dry hands"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "DRYE Liner Benefit Strip",
+      "blocks": [
+        {
+          "type": "benefit",
+          "settings": {
+            "text": "Dry hands"
+          }
+        },
+        {
+          "type": "benefit",
+          "settings": {
+            "text": "More comfort"
+          }
+        },
+        {
+          "type": "benefit",
+          "settings": {
+            "text": "Cleaner hands"
+          }
+        },
+        {
+          "type": "benefit",
+          "settings": {
+            "text": "6–12 months"
+          }
+        },
+        {
+          "type": "benefit",
+          "settings": {
+            "text": "30-day guarantee"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

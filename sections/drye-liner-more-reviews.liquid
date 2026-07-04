@@ -1,0 +1,216 @@
+{{ 'drye-liner-more-reviews.css' | asset_url | stylesheet_tag }}
+
+<section class="dryeNEW-section drye-liner-more-reviews" id="{{ section.settings.section_id | default: 'liner-more-reviews' }}" data-section-id="{{ section.id }}">
+  <div class="dryeNEW-container">
+    <div class="drye-liner-more-reviews__header">
+      {%- if section.settings.eyebrow != blank -%}
+        <span class="dryeNEW-micro drye-liner-more-reviews__eyebrow">{{ section.settings.eyebrow }}</span>
+      {%- endif -%}
+
+      {%- if section.settings.heading != blank -%}
+        <h2 class="dryeNEW-h2 drye-liner-more-reviews__heading">{{ section.settings.heading }}</h2>
+      {%- endif -%}
+
+      <div class="drye-liner-more-reviews__rating">
+        {%- if section.settings.rating_stars_text != blank -%}
+          <span class="drye-liner-more-reviews__rating-stars" aria-hidden="true">{{ section.settings.rating_stars_text }}</span>
+        {%- endif -%}
+        {%- if section.settings.rating_score != blank -%}
+          <span class="drye-liner-more-reviews__rating-score">{{ section.settings.rating_score }}</span>
+        {%- endif -%}
+        {%- if section.settings.rating_source_text != blank -%}
+          <span class="drye-liner-more-reviews__rating-source">{{ section.settings.rating_source_text }}</span>
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+
+  <div class="drye-liner-more-reviews__wrap" data-drye-liner-swipe-wrap>
+    <div class="drye-liner-more-reviews__track" id="more-review-track-{{ section.id }}">
+      {%- for block in section.blocks -%}
+        {%- if block.type == 'review' -%}
+          <div class="drye-liner-more-reviews__card" {{ block.shopify_attributes }}>
+            <div class="drye-liner-more-reviews__stars" aria-hidden="true">★★★★★</div>
+
+            {%- if block.settings.quote != blank -%}
+              <p class="drye-liner-more-reviews__quote">{{ block.settings.quote }}</p>
+            {%- endif -%}
+
+            <div class="drye-liner-more-reviews__meta">
+              <span class="drye-liner-more-reviews__verified" aria-hidden="true">✓</span>
+              <span>{{ block.settings.name }} · {{ block.settings.country }}</span>
+            </div>
+          </div>
+        {%- endif -%}
+      {%- endfor -%}
+    </div>
+  </div>
+
+  <div class="dryeNEW-container">
+    <div class="drye-liner-more-reviews__dots" id="more-review-dots-{{ section.id }}">
+      {%- for block in section.blocks -%}
+        {%- if block.type == 'review' -%}
+          <div class="drye-liner-more-reviews__dot{% if forloop.first %} is-active{% endif %}" data-drye-liner-dot></div>
+        {%- endif -%}
+      {%- endfor -%}
+    </div>
+
+    <div class="drye-liner-more-reviews__nav" id="more-review-nav-{{ section.id }}" style="display:none;">
+      <button type="button" class="drye-liner-more-reviews__nav-btn" id="more-review-prev-{{ section.id }}" aria-label="Previous review">←</button>
+      <button type="button" class="drye-liner-more-reviews__nav-btn" id="more-review-next-{{ section.id }}" aria-label="Next review">→</button>
+    </div>
+
+    {%- if section.settings.cta_label != blank -%}
+      <a href="{{ section.settings.cta_url | default: '#' }}" class="drye-liner-more-reviews__cta">{{ section.settings.cta_label }}</a>
+    {%- endif -%}
+  </div>
+</section>
+
+{{ 'drye-liner-swipe.js' | asset_url | script_tag }}
+<script>
+  (function () {
+    if (typeof initDryeLinerSwipe === 'function') {
+      initDryeLinerSwipe({
+        trackId: 'more-review-track-{{ section.id }}',
+        dotsId: 'more-review-dots-{{ section.id }}',
+        navId: 'more-review-nav-{{ section.id }}',
+        prevId: 'more-review-prev-{{ section.id }}',
+        nextId: 'more-review-next-{{ section.id }}',
+        cardSelector: '.drye-liner-more-reviews__card',
+        gap: 8
+      });
+    }
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "DRYE Liner More Reviews",
+  "tag": "section",
+  "class": "shopify-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "section_id",
+      "label": "Section ID",
+      "default": "liner-more-reviews"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "More feedback"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "From real customers."
+    },
+    {
+      "type": "text",
+      "id": "rating_stars_text",
+      "label": "Rating stars text",
+      "default": "★★★★☆"
+    },
+    {
+      "type": "text",
+      "id": "rating_score",
+      "label": "Rating score",
+      "default": "4.4"
+    },
+    {
+      "type": "text",
+      "id": "rating_source_text",
+      "label": "Rating source text",
+      "default": "10 reviews via Trustpilot"
+    },
+    {
+      "type": "text",
+      "id": "cta_label",
+      "label": "CTA label",
+      "default": "See all reviews on Trustpilot"
+    },
+    {
+      "type": "url",
+      "id": "cta_url",
+      "label": "CTA URL",
+      "default": "https://se.trustpilot.com/review/hudsverige.se"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "review",
+      "name": "Review",
+      "settings": [
+        {
+          "type": "textarea",
+          "id": "quote",
+          "label": "Quote",
+          "default": "I have eczema and these liners have been the best things I bought for my hands. I wear latex gloves all day for work — every hour I'd change gloves and liners, and even with sweat on the DRYE, my hands stayed dry."
+        },
+        {
+          "type": "text",
+          "id": "name",
+          "label": "Name",
+          "default": "PN"
+        },
+        {
+          "type": "text",
+          "id": "country",
+          "label": "Country",
+          "default": "US"
+        }
+      ]
+    }
+  ],
+  "max_blocks": 10,
+  "presets": [
+    {
+      "name": "DRYE Liner More Reviews",
+      "blocks": [
+        {
+          "type": "review",
+          "settings": {
+            "quote": "I have eczema and these liners have been the best things I bought for my hands. I wear latex gloves all day for work — every hour I'd change gloves and liners, and even with sweat on the DRYE, my hands stayed dry.",
+            "name": "PN",
+            "country": "US"
+          }
+        },
+        {
+          "type": "review",
+          "settings": {
+            "quote": "My son's hands were bright pink and raw from wearing work gloves. Within a few days of wearing the liners, his hands were drastically improved — within two weeks, completely healed.",
+            "name": "Debby Fields",
+            "country": "US"
+          }
+        },
+        {
+          "type": "review",
+          "settings": {
+            "quote": "Excellent fit, quick delivery, and they do as the site describes. They keep the sweat and extra heat off my palms — one of my triggers. If you've tried everything else, give these a try.",
+            "name": "Jon",
+            "country": "GB"
+          }
+        },
+        {
+          "type": "review",
+          "settings": {
+            "quote": "I've worn them under vinyl gloves, hockey gloves, and a wrist support — they alleviate irritation and itching from sweat really well. One developed a small hole, but customer service replaced it immediately. That alone earns 5 stars.",
+            "name": "Alric",
+            "country": "CA"
+          }
+        },
+        {
+          "type": "review",
+          "settings": {
+            "quote": "Coming up on a year with these liners — still comfortable, keep my hands dry, and no signs of wear. They do what they're supposed to.",
+            "name": "Athena",
+            "country": "SE"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

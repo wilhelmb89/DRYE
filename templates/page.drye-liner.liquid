@@ -1,0 +1,2836 @@
+{% comment %}
+  Standalone DRYE Liner landing page.
+  Rendered without theme chrome via {% layout none %}; the page is a fully
+  self-contained document (own <head>, fonts, nav, footer). Content is wrapped
+  in {% raw %} so Liquid never parses the inline CSS/JS.
+  Reachable at /pages/<page-handle> for any page assigned this template.
+{% endcomment %}
+{% layout none %}{% raw %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>DRYE Liner — Add one dry layer under your gloves</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,300;1,9..40,400&family=Playfair+Display:ital,wght@1,400;1,500&display=swap" rel="stylesheet">
+
+<style>
+/* ═══════════════════════════════════════════════════════════
+   DRYE — TOKENS (matches base.css)
+   ═══════════════════════════════════════════════════════════ */
+:root {
+  --deep:      #1E3A4C;
+  --emerald:   #0D9488;
+  --sage:      #5F8A8B;
+  --accent:    #3D5A5E;
+  --gold:      #F5B301;
+
+  --body:      #374151;
+  --muted:     #4B5563;
+  --caption:   #9CA3AF;
+
+  --border:    #E5E7EB;
+  --bg:        #FFFFFF;
+  --bg-soft:   #F8FAFC;
+  --bg-ink:    #0F2230;
+  --border-base: 1px solid #E5E7EB;
+
+  --white-100: rgba(255,255,255,1);
+  --white-085: rgba(255,255,255,.88);
+  --white-075: rgba(255,255,255,.75);
+  --white-050: rgba(255,255,255,.5);
+  --white-035: rgba(255,255,255,.35);
+  --white-015: rgba(255,255,255,.15);
+  --white-008: rgba(255,255,255,.08);
+
+  --font-display:   'Clash Grotesk', 'DM Sans', sans-serif;
+  --font-body:      'DM Sans', sans-serif;
+  --font-editorial: 'Playfair Display', Georgia, serif;
+
+  --fw-medium: 500;
+  --fw-semibold: 600;
+
+  --fs-hero-h1:    clamp(30px, 8vw, 40px);
+  --fs-section-h2: clamp(20px, 5.5vw, 26px);
+  --fs-h3:         17px;
+  --fs-body:       13px;
+  --fs-body-md:    14px;
+  --fs-caption:    12px;
+  --fs-micro:      10px;
+  --fs-micro-2:    9px;
+
+  --space-4: 4px;   --space-6: 6px;   --space-8: 8px;
+  --space-10: 10px; --space-12: 12px; --space-14: 14px;
+  --space-16: 16px; --space-18: 18px; --space-20: 20px;
+  --space-24: 24px; --space-28: 28px; --space-32: 32px;
+  --space-40: 40px;
+
+  --page-pad: 20px;
+  --section-pad-y: 40px;
+  --nav-h: 52px;
+  --sticky-h: 60px;
+
+  --dur-base: .2s;
+  --dur-reveal: .5s;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: var(--font-body);
+  font-size: var(--fs-body);
+  background: var(--bg);
+  color: var(--body);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+  padding-bottom: var(--sticky-h);
+}
+img { display: block; max-width: 100%; height: auto; }
+a { color: inherit; text-decoration: none; }
+button { font: inherit; background: none; border: none; cursor: pointer; color: inherit; }
+svg { display: block; }
+
+/* ═══════════════════════════════════════════════════════════
+   NAV + BENEFIT STRIP
+   ═══════════════════════════════════════════════════════════ */
+.nav {
+  position: sticky; top: 0; z-index: 100; height: var(--nav-h);
+  background: var(--bg); border-bottom: var(--border-base);
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 var(--page-pad);
+}
+.nav-logo { font-family: var(--font-display); font-size: 16px; font-weight: var(--fw-semibold); letter-spacing: 0.14em; color: var(--deep); }
+.nav-menu { width: 22px; height: 22px; color: var(--deep); display: flex; flex-direction: column; justify-content: center; gap: 4px; }
+.nav-menu span { display: block; width: 100%; height: 1.5px; background: currentColor; }
+.nav-bag { width: 22px; height: 22px; color: var(--deep); }
+
+.benefit-strip {
+  display: flex; overflow-x: auto; border-bottom: var(--border-base);
+  scrollbar-width: none; background: var(--bg);
+  padding-left: var(--page-pad);
+  scroll-snap-type: x mandatory;
+  -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 16px, #000 calc(100% - 48px), transparent 100%);
+  mask-image: linear-gradient(90deg, transparent 0, #000 16px, #000 calc(100% - 48px), transparent 100%);
+}
+.benefit-strip::-webkit-scrollbar { display: none; }
+.benefit-item {
+  flex: 0 0 auto; white-space: nowrap;
+  scroll-snap-align: start;
+  font-size: var(--fs-micro-2); font-weight: 700;
+  letter-spacing: 0.14em; text-transform: uppercase;
+  padding: 10px 14px; color: var(--sage);
+  border-right: var(--border-base);
+}
+.benefit-item:last-child { padding-right: var(--page-pad); border-right: none; }
+
+/* ═══════════════════════════════════════════════════════════
+   SECTION SYSTEM
+   ═══════════════════════════════════════════════════════════ */
+.section { padding: var(--section-pad-y) var(--page-pad); border-top: var(--border-base); }
+.section:first-of-type { border-top: none; }
+.section--soft { background: var(--bg-soft); }
+.section--dark { background: var(--bg-ink); color: var(--white-085); border-top-color: transparent; }
+
+.section-eyebrow {
+  display: block; font-family: var(--font-body);
+  font-size: var(--fs-micro-2); font-weight: 700;
+  letter-spacing: 0.16em; text-transform: uppercase;
+  color: var(--emerald); margin-bottom: var(--space-8);
+}
+.section--dark .section-eyebrow { color: var(--sage); }
+
+.section-h2 {
+  font-family: var(--font-display);
+  font-size: var(--fs-section-h2); font-weight: var(--fw-semibold);
+  letter-spacing: -0.03em; line-height: 1.06;
+  color: var(--deep); margin-bottom: var(--space-10);
+}
+.section--dark .section-h2 { color: var(--white-100); }
+
+.section-body {
+  font-size: var(--fs-body); line-height: 1.6;
+  color: var(--muted); margin-bottom: var(--space-16);
+}
+.section--dark .section-body { color: #C8D4DA; }
+.section-body strong { color: var(--deep); font-weight: var(--fw-semibold); }
+.section--dark .section-body strong { color: var(--white-100); }
+
+.em { font-family: var(--font-editorial); font-style: italic; font-weight: 400; }
+
+/* ═══════════════════════════════════════════════════════════
+   BUTTONS
+   ═══════════════════════════════════════════════════════════ */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center;
+  gap: var(--space-8);
+  font-family: var(--font-body); font-size: var(--fs-caption);
+  font-weight: var(--fw-semibold); letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 14px 20px; border-radius: 0;
+  border: 1.5px solid transparent;
+  transition: background var(--dur-base) ease, color var(--dur-base) ease;
+}
+.btn--primary { background: var(--emerald); color: #fff; border-color: var(--emerald); width: 100%; }
+.btn--primary:hover { background: #0a7d73; border-color: #0a7d73; }
+.btn--outline { background: transparent; color: var(--deep); border-color: var(--deep); width: 100%; }
+.btn--outline:hover { background: var(--deep); color: #fff; }
+
+.text-link {
+  display: inline-block; font-family: var(--font-body);
+  font-size: var(--fs-micro); font-weight: var(--fw-semibold);
+  letter-spacing: 0.08em; text-transform: uppercase;
+  color: var(--emerald); border-bottom: 1px solid var(--emerald);
+  padding-bottom: 2px;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   HERO
+   ═══════════════════════════════════════════════════════════ */
+.hero { border-top: none; padding: 0; }
+.hero-media { position: relative; aspect-ratio: 4 / 5; background: #0d1f2d; overflow: hidden; }
+.hero-media-placeholder {
+  position: absolute; inset: 0;
+  background: linear-gradient(160deg, #1c3040 0%, #0a1620 100%);
+  display: flex; align-items: flex-end; padding: var(--space-20);
+}
+.hero-media-placeholder span { font-size: var(--fs-micro-2); letter-spacing: 0.12em; text-transform: uppercase; color: var(--sage); }
+
+.hero-info { padding: 18px var(--page-pad) 28px; }
+.hero-eyebrow { font-size: var(--fs-micro-2); font-weight: var(--fw-semibold); letter-spacing: 0.18em; text-transform: uppercase; color: var(--sage); margin-bottom: 12px; }
+.hero-title {
+  font-family: var(--font-display); font-size: var(--fs-hero-h1);
+  font-weight: var(--fw-semibold); letter-spacing: -0.03em;
+  line-height: 1.02; color: var(--deep); margin-bottom: var(--space-12);
+}
+.hero-sub { font-size: var(--fs-body-md); color: var(--muted); line-height: 1.6; margin-bottom: var(--space-18); }
+.hero-sub strong { color: var(--body); font-weight: var(--fw-semibold); }
+
+.hero-bullets { list-style: none; margin-bottom: var(--space-20); border-top: var(--border-base); }
+.hero-bullets li {
+  font-size: var(--fs-body); color: var(--muted);
+  padding: 9px 0; border-bottom: var(--border-base);
+  display: flex; align-items: center; gap: var(--space-10);
+}
+.hero-bullets li svg { flex-shrink: 0; color: var(--emerald); }
+
+.hero-guarantee {
+  text-align: center; font-size: var(--fs-micro-2);
+  color: var(--caption); letter-spacing: 0.1em;
+  margin-top: var(--space-10); text-transform: uppercase; font-weight: 700;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   SWIPE GALLERIES
+   ═══════════════════════════════════════════════════════════ */
+.swipe-wrap {
+  overflow-x: auto; overflow-y: hidden;
+  scrollbar-width: none; -webkit-overflow-scrolling: touch;
+  scroll-snap-type: x mandatory;
+  -webkit-mask-image: linear-gradient(90deg, #000 0, #000 calc(100% - 14px), transparent 100%);
+  mask-image: linear-gradient(90deg, #000 0, #000 calc(100% - 14px), transparent 100%);
+}
+.swipe-wrap::-webkit-scrollbar { display: none; }
+.swipe-track {
+  display: flex; gap: 8px;
+  padding-left: var(--space-12);
+  padding-right: var(--page-pad);
+  width: max-content;
+}
+.problem-card { flex: 0 0 62vw; scroll-snap-align: start; }
+.problem-card-media {
+  aspect-ratio: 2 / 3; background: var(--bg-ink);
+  overflow: hidden; margin-bottom: var(--space-8); position: relative;
+}
+.problem-card-media .placeholder {
+  position: absolute; inset: 0;
+  background: linear-gradient(145deg, #1a2b38 0%, #0d1f2d 100%);
+  display: flex; align-items: flex-end; padding: var(--space-12);
+}
+.problem-card-media .placeholder span {
+  font-size: var(--fs-micro-2); color: var(--sage);
+  letter-spacing: 0.08em; text-transform: uppercase;
+}
+.problem-card-label {
+  font-family: var(--font-display); font-size: var(--fs-body-md);
+  font-weight: var(--fw-semibold); color: var(--deep);
+  line-height: 1.2; letter-spacing: -0.01em;
+}
+.problem-card-sub { font-size: 11.5px; color: var(--muted); margin-top: 2px; line-height: 1.35; }
+
+.dots { display: flex; gap: 5px; margin-top: var(--space-14); justify-content: center; }
+.dot { width: 5px; height: 5px; background: var(--border); transition: all var(--dur-base) ease; }
+.dot.is-active { background: var(--emerald); width: 16px; }
+
+/* ═══════════════════════════════════════════════════════════
+   PRODUCT CLARITY
+   ═══════════════════════════════════════════════════════════ */
+.product-image {
+  aspect-ratio: 2 / 3; background: var(--bg-soft);
+  overflow: hidden; margin: var(--space-16) 0; position: relative;
+}
+.product-image .placeholder {
+  position: absolute; inset: 0;
+  background: linear-gradient(145deg, #f8fafc 0%, #e5e7eb 100%);
+  display: flex; align-items: center; justify-content: center;
+}
+.product-image .placeholder span {
+  font-size: var(--fs-micro-2); color: var(--caption);
+  letter-spacing: 0.08em; text-transform: uppercase;
+  text-align: center; padding: 0 20px;
+}
+
+.spec-list { list-style: none; border-top: var(--border-base); }
+.spec-list li {
+  display: grid; grid-template-columns: 20px 1fr;
+  gap: var(--space-10); padding: var(--space-10) 0;
+  border-bottom: var(--border-base);
+  font-size: var(--fs-body); color: var(--muted); line-height: 1.5;
+}
+.spec-list li strong { color: var(--deep); font-weight: var(--fw-semibold); }
+.spec-list li svg { color: var(--emerald); margin-top: 2px; }
+
+/* ═══════════════════════════════════════════════════════════
+   FAIL CARDS — 3 STACKED READABLE
+   ═══════════════════════════════════════════════════════════ */
+.fail-stack { display: grid; gap: 10px; margin-top: var(--space-16); }
+.fail-card {
+  background: var(--bg); border: var(--border-base); padding: var(--space-16);
+  display: grid; grid-template-columns: 28px 1fr; gap: var(--space-12);
+  align-items: flex-start;
+}
+.fail-card-num {
+  font-family: var(--font-display); font-size: 20px; font-weight: var(--fw-semibold);
+  color: var(--emerald); letter-spacing: -0.03em; line-height: 1; padding-top: 1px;
+}
+.fail-card-title {
+  font-family: var(--font-display); font-size: var(--fs-body-md);
+  font-weight: var(--fw-semibold); letter-spacing: -0.01em;
+  color: var(--deep); margin-bottom: var(--space-4); line-height: 1.2;
+}
+.fail-card-desc { font-size: var(--fs-body); line-height: 1.5; color: var(--muted); }
+
+.fail-note {
+  margin-top: var(--space-20);
+  padding-top: var(--space-14);
+  border-top: var(--border-base);
+  font-size: 11px;
+  line-height: 1.5;
+  color: var(--caption);
+  font-style: italic;
+}
+
+/* ── Handske-bild bredvid fail-cards ── */
+.fail-hand {
+  margin: var(--space-20) 0 var(--space-20) auto;
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+  background: var(--bg-soft);
+  position: relative;
+  max-width: 50%;
+}
+.fail-hand img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 30%;
+  display: block;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   VS-BLOCK — Cotton vs DRYE side by side (mörk sektion)
+   ═══════════════════════════════════════════════════════════ */
+.vs-block { margin-top: var(--space-20); margin-bottom: var(--space-24); }
+.vs-label {
+  text-align: center;
+  font-size: var(--fs-micro-2);
+  font-weight: 700;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--sage);
+  margin-bottom: var(--space-14);
+  position: relative;
+}
+.vs-label::before,
+.vs-label::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  width: calc(50% - 48px);
+  height: 1px;
+  background: var(--white-015);
+}
+.vs-label::before { left: 0; }
+.vs-label::after { right: 0; }
+
+.vs-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+.vs-card {
+  border: 1px solid var(--white-015);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+.vs-card--drye { border-color: rgba(13, 148, 136, 0.5); }
+.vs-media {
+  aspect-ratio: 1 / 1;
+  background: #0a1620;
+  position: relative;
+  overflow: hidden;
+}
+.vs-media .placeholder {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-10);
+  text-align: center;
+}
+.vs-media .placeholder span {
+  font-size: 9px;
+  color: var(--sage);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  line-height: 1.4;
+}
+.vs-media--wet {
+  background: #FAFAFA;
+}
+.vs-media--dry {
+  background: #FAFAFA;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   COTTON-FLOW — exakt original-SVG från Section 4 sealed glove
+   Vit ram, padding runt så diagrammet får luft. Matchar DRYE-kortets
+   struktur för visuell parallell.
+   ═══════════════════════════════════════════════════════════ */
+.cotton-flow {
+  position: absolute;
+  inset: 12%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.cotton-flow svg {
+  width: 100%;
+  height: auto;
+  max-height: 100%;
+  display: block;
+}
+
+.vs-body {
+  padding: var(--space-12);
+  background: rgba(255,255,255,0.02);
+}
+.vs-name {
+  font-family: var(--font-display);
+  font-size: var(--fs-caption);
+  font-weight: var(--fw-semibold);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--white-050);
+  margin-bottom: var(--space-6);
+}
+.vs-card--drye .vs-name { color: var(--emerald); }
+.vs-desc {
+  font-family: var(--font-body);
+  font-size: 12px;
+  line-height: 1.4;
+  color: var(--white-075);
+}
+.vs-card--drye .vs-desc { color: var(--white-085); font-weight: var(--fw-medium); }
+
+/* Asymmetric layering diagram (nedanför VS) */
+.mech-diagram {
+  border-top: 1px solid var(--white-008);
+  padding-top: var(--space-24);
+  margin-top: var(--space-8);
+}
+.mech-diagram-label {
+  font-size: var(--fs-micro-2);
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--sage);
+  margin-bottom: var(--space-12);
+  text-align: center;
+}
+.mech-step { padding: var(--space-14) 0; }
+.mech-step-label {
+  font-size: var(--fs-micro-2);
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--sage);
+  margin-bottom: var(--space-4);
+}
+.mech-step-title {
+  font-family: var(--font-display);
+  font-size: var(--fs-h3);
+  font-weight: var(--fw-semibold);
+  color: var(--white-100);
+  letter-spacing: -0.02em;
+  margin-bottom: var(--space-4);
+}
+.mech-step-body {
+  font-size: var(--fs-body);
+  color: #C8D4DA;
+  line-height: 1.5;
+}
+.mech-arrow {
+  text-align: center;
+  color: var(--emerald);
+  font-size: 20px;
+  padding: var(--space-6) 0;
+  opacity: 0.7;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   HOW IT WORKS — 4 COMPRESSED BEATS
+   ═══════════════════════════════════════════════════════════ */
+
+/* ═══════════════════════════════════════════════════════════
+   PROOF SECTION — media first, then big stat block
+   ═══════════════════════════════════════════════════════════ */
+
+/* Full-bleed proof image */
+.proof-media-wrap {
+  margin: 0 calc(-1 * var(--page-pad)) var(--space-20);
+}
+.proof-media {
+  position: relative;
+  aspect-ratio: 4 / 5;
+  background: var(--bg-ink);
+  overflow: hidden;
+}
+.proof-media .placeholder {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(to top, rgba(15,34,48,0.85) 0%, rgba(15,34,48,0.15) 55%, transparent 100%),
+    linear-gradient(145deg, #1a2b38 0%, #0a1620 100%);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: var(--space-16);
+}
+.proof-media .placeholder-label {
+  font-size: 9px;
+  color: var(--sage);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+.proof-media .placeholder-title {
+  font-family: var(--font-display);
+  font-size: 15px;
+  color: var(--white-085);
+  line-height: 1.3;
+  max-width: 240px;
+}
+
+.proof-media-badge {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  background: rgba(15,34,48,0.7);
+  backdrop-filter: blur(4px);
+  border: 1px solid var(--white-015);
+  padding: 6px 10px;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--emerald);
+  z-index: 2;
+}
+
+/* Big stat block (dark) */
+.proof-stat {
+  background: var(--bg-ink);
+  color: #fff;
+  padding: var(--space-24) var(--space-20);
+  margin: 0 calc(-1 * var(--page-pad));
+  display: grid;
+  gap: var(--space-16);
+}
+.proof-stat-row {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: var(--space-12);
+  align-items: baseline;
+}
+.proof-stat-name {
+  font-size: 11px;
+  font-weight: var(--fw-semibold);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--sage);
+}
+.proof-stat-num {
+  font-family: var(--font-display);
+  font-size: 20px;
+  font-weight: var(--fw-semibold);
+  color: var(--white-050);
+  letter-spacing: -0.03em;
+  line-height: 1;
+}
+.proof-stat-row--drye {
+  padding: var(--space-16) 0;
+  border-top: 1px solid rgba(13, 148, 136, 0.3);
+  border-bottom: 1px solid rgba(13, 148, 136, 0.3);
+}
+.proof-stat-row--drye .proof-stat-name { color: var(--emerald); }
+.proof-stat-row--drye .proof-stat-num {
+  font-size: 48px;
+  color: var(--emerald);
+}
+
+.proof-source {
+  font-size: 11px;
+  color: var(--sage);
+  line-height: 1.5;
+  letter-spacing: 0.02em;
+}
+
+.proof-cta-wrap { margin-top: var(--space-20); }
+
+/* ═══════════════════════════════════════════════════════════
+   WHAT CHANGES ON SHIFT — belief-shift bridge
+   3 stora tiles, ingen dekoration som konkurrerar med copy.
+   Nummer i editorial serif, titel i display, punkter med hairline.
+   ═══════════════════════════════════════════════════════════ */
+.shift-stack {
+  display: grid;
+  gap: var(--space-16);
+  margin-top: var(--space-24);
+}
+.shift-card {
+  background: var(--bg);
+  border: var(--border-base);
+  padding: var(--space-20) var(--space-16);
+  display: grid;
+  grid-template-columns: 42px 1fr;
+  column-gap: var(--space-14);
+  row-gap: var(--space-12);
+  align-items: start;
+}
+.shift-card__num {
+  font-family: var(--font-editorial);
+  font-style: italic;
+  font-weight: 500;
+  font-size: 30px;
+  line-height: 1;
+  color: var(--emerald);
+  letter-spacing: -0.02em;
+}
+.shift-card__title {
+  font-family: var(--font-display);
+  font-size: 18px;
+  font-weight: var(--fw-semibold);
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+  color: var(--deep);
+  align-self: center;
+}
+.shift-card__list {
+  grid-column: 1 / -1;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  border-top: var(--border-base);
+}
+.shift-card__list li {
+  padding: var(--space-12) 0;
+  border-bottom: var(--border-base);
+  font-size: var(--fs-body);
+  line-height: 1.5;
+  color: var(--muted);
+}
+.shift-card__list li:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   SATURATION — mobil kompakt (samma som beat2), desktop stacked
+   Mobile: flat 3-child grid — name/note stack i vänster kolumn,
+           bar i mitten, value till höger. Ren och kompakt.
+   Desktop (≥768px): grid template areas → name+value på topp,
+           note under, bar full-width.
+   ═══════════════════════════════════════════════════════════ */
+.sat { color: var(--white-085); }
+.sat-intro { margin-bottom: var(--space-20); }
+.sat-chart { display: grid; gap: 10px; }
+.sat-chart-head { display: none; }
+
+/* ── MOBIL: 3-child grid (name / bar / value) ── */
+.sat-row {
+  display: grid;
+  grid-template-columns: 84px 1fr 52px;
+  column-gap: 8px;
+  align-items: center;
+}
+.sat-name {
+  font-family: var(--font-display);
+  font-size: 11px;
+  font-weight: var(--fw-semibold);
+  color: #AEBFC8;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+}
+.sat-note {
+  display: block;
+  font-family: var(--font-body);
+  font-style: normal;
+  font-size: 10px;
+  font-weight: 400;
+  color: rgba(255,255,255,0.4);
+  margin-top: 1px;
+  line-height: 1.3;
+}
+.sat-chip { display: none; }
+.sat-bar {
+  display: block;
+  height: 8px;
+  background: var(--white-015);
+  position: relative;
+  overflow: hidden;
+}
+.sat-bar i {
+  display: block;
+  height: 100%;
+  width: var(--bar, 0%);
+  background: #8FA6B0;
+}
+.sat-value {
+  font-family: var(--font-display);
+  font-size: 12px;
+  font-weight: var(--fw-semibold);
+  color: rgba(255,255,255,0.75);
+  text-align: right;
+  letter-spacing: -0.02em;
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+}
+
+/* DRYE row — mobil */
+.sat-row--drye {
+  padding: 8px 0 0;
+  border-top: 1px solid rgba(13, 148, 136, 0.35);
+  margin-top: 4px;
+}
+.sat-row--drye .sat-name { color: var(--emerald); font-weight: var(--fw-semibold); }
+.sat-row--drye .sat-note { color: var(--sage); }
+.sat-row--drye .sat-bar { background: rgba(13, 148, 136, 0.18); }
+.sat-row--drye .sat-bar i { background: var(--emerald); min-width: 3px; }
+.sat-row--drye .sat-value { color: var(--emerald); }
+
+.sat-source {
+  margin-top: 14px;
+  padding-top: 14px;
+  border-top: 1px solid var(--white-008);
+  font-size: 10px;
+  color: var(--sage);
+  line-height: 1.5;
+}
+
+/* ── DESKTOP: mech-saturation stacked layout ── */
+@media (min-width: 768px) {
+  .sat-intro {
+    text-align: center;
+    max-width: 760px;
+    margin: 0 auto 48px;
+  }
+  .sat-chart {
+    max-width: 920px;
+    margin: 0 auto;
+    display: grid;
+    border-top: 1px solid rgba(255,255,255,0.1);
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+    gap: 0;
+  }
+  .sat-chart-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 20px;
+    padding: 16px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+  }
+  .sat-col-label {
+    display: inline-block;
+    margin: 0;
+    font-family: var(--font-body);
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.4);
+  }
+  .sat-col-label--right { text-align: right; }
+
+  .sat-row {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    grid-template-areas:
+      "name value"
+      "bar  bar";
+    column-gap: 24px;
+    row-gap: 16px;
+    padding: 28px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+    align-items: baseline;
+  }
+  .sat-row:last-child { border-bottom: 0; }
+
+  .sat-name {
+    grid-area: name;
+    font-size: 18px;
+    color: var(--white-100);
+    line-height: 1.15;
+    display: flex;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  .sat-note {
+    width: 100%;
+    font-family: var(--font-editorial);
+    font-style: italic;
+    font-size: 13px;
+    color: rgba(255,255,255,0.4);
+    margin-top: 6px;
+    line-height: 1.4;
+  }
+  .sat-value {
+    grid-area: value;
+    font-size: 22px;
+    color: var(--white-100);
+    text-align: right;
+  }
+  .sat-bar {
+    grid-area: bar;
+    height: 4px;
+  }
+
+  .sat-chip {
+    display: inline-block;
+    font-family: var(--font-body);
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--emerald);
+    padding: 3px 8px;
+    border: 1px solid var(--emerald);
+    white-space: nowrap;
+    line-height: 1;
+  }
+
+  .sat-row--drye {
+    padding: 28px 20px;
+    margin-inline: -20px;
+    background: linear-gradient(90deg, rgba(255,255,255,0.05) 0%, transparent 70%);
+    border-top: 1px solid rgba(95, 138, 139, 0.3);
+    border-bottom: 1px solid rgba(95, 138, 139, 0.3);
+    margin-top: 0;
+  }
+  .sat-row--drye .sat-bar { height: 5px; }
+  .sat-row--drye .sat-note { color: rgba(255,255,255,0.6); }
+
+  .sat-source {
+    max-width: 920px;
+    margin: 32px auto 0;
+    padding-top: 0;
+    border-top: 0;
+    font-size: 12px;
+    color: rgba(255,255,255,0.4);
+    text-align: left;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════
+   SLUT SATURATION
+   ═══════════════════════════════════════════════════════════ */
+
+/* ═══════════════════════════════════════════════════════════
+   HOW IT WORKS — 3 BEATS (previously 4)
+   ═══════════════════════════════════════════════════════════ */
+/* ═══════════════════════════════════════════════════════════
+   DRYE DIAGRAM — routing visualization (Beat 02)
+   Adapted from Occlusion Bridge — glove → DRYE layers → skin
+   ═══════════════════════════════════════════════════════════ */
+.drye-diag {
+  --d-height: 320px;
+  --d-glove-h: 26px;
+  --d-lyocell-h: 22px;
+  --d-pp-h: 22px;
+  --d-drye-h: calc(var(--d-lyocell-h) + var(--d-pp-h));
+
+  --d-skin-top-h: 28px;
+  --d-skin-mid-h: 58px;
+  --d-skin-deep-h: 48px;
+  --d-skin-total: calc(var(--d-skin-top-h) + var(--d-skin-mid-h) + var(--d-skin-deep-h));
+
+  --d-rise-end: calc(var(--d-height) - var(--d-glove-h) - 4px);
+  --d-rise-mid: calc(var(--d-height) - var(--d-glove-h) - var(--d-drye-h) - 5px);
+  --d-rise-start: 30px;
+
+  position: relative;
+  width: 100%;
+  height: var(--d-height);
+  overflow: hidden;
+  background: var(--bg);
+  border: var(--border-base);
+}
+
+.drye-diag__video-slot {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  z-index: 10;
+  background: rgba(15,34,48,0.85);
+  color: var(--white-085);
+  padding: 4px 8px;
+  font-size: 8px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  font-weight: 700;
+}
+
+.drye-diag-micro {
+  display: inline-block;
+  font-family: var(--font-body);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  line-height: 1;
+}
+
+/* Sealed glove bar at top */
+.drye-diag__glove {
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: var(--d-glove-h);
+  background: var(--deep);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 8;
+}
+.drye-diag__glove .drye-diag-micro { color: rgba(255,255,255,0.8); }
+
+/* DRYE layers */
+.drye-diag__drye {
+  position: absolute;
+  top: var(--d-glove-h);
+  left: 0; right: 0;
+  z-index: 5;
+}
+.drye-diag__lyocell,
+.drye-diag__pp {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-inline: var(--space-12);
+}
+.drye-diag__lyocell {
+  height: var(--d-lyocell-h);
+  background: linear-gradient(180deg, #DDE9E9 0%, #E8F0F0 100%);
+  border-bottom: 1px dashed rgba(95, 138, 139, 0.4);
+}
+.drye-diag__pp {
+  height: var(--d-pp-h);
+  background: linear-gradient(180deg, #EAEFEF 0%, #F0F4F4 100%);
+}
+.drye-diag__layer-text { position: relative; z-index: 2; }
+.drye-diag__lyocell .drye-diag__layer-text { color: var(--sage); }
+.drye-diag__pp .drye-diag__layer-text { color: var(--deep); }
+
+/* Layer textures */
+.drye-diag__lyocell::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(45deg, rgba(95, 138, 139, 0.18) 25%, transparent 25%),
+    linear-gradient(-45deg, rgba(95, 138, 139, 0.18) 25%, transparent 25%);
+  background-size: 6px 6px;
+  pointer-events: none;
+}
+.drye-diag__pp::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(circle, rgba(30, 58, 76, 0.2) 0.6px, transparent 0.6px);
+  background-size: 5px 5px;
+  pointer-events: none;
+}
+
+/* Emerald up-arrows */
+.drye-diag__arrows {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  pointer-events: none;
+  color: var(--emerald);
+}
+.drye-diag__arrow {
+  position: absolute;
+  top: 76px;
+  width: 16px;
+}
+.drye-diag__arrow svg { width: 16px; height: 130px; display: block; }
+.drye-diag__arrow--1 { left: calc(20% - 8px); }
+.drye-diag__arrow--2 { left: calc(45% - 8px); }
+.drye-diag__arrow--3 { left: calc(70% - 8px); }
+
+/* Rising droplets */
+.drye-diag__droplets {
+  position: absolute;
+  inset: 0;
+  z-index: 6;
+  pointer-events: none;
+}
+.drye-diag__droplet {
+  position: absolute;
+  width: 6px;
+  height: 8px;
+  border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+  background: rgba(100, 180, 255, 0.7);
+  animation-name: drye-diag-rise;
+  animation-duration: 4.5s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+.drye-diag__droplet--1 { left: calc(20% - 3px); animation-delay: 0s; }
+.drye-diag__droplet--2 { left: calc(45% - 3px); animation-delay: 1s; }
+.drye-diag__droplet--3 { left: calc(70% - 3px); animation-delay: 2s; }
+.drye-diag__droplet--4 { left: calc(32% - 3px); animation-delay: 0.5s; }
+.drye-diag__droplet--5 { left: calc(57% - 3px); animation-delay: 1.5s; }
+.drye-diag__droplet--6 { left: calc(82% - 3px); animation-delay: 2.5s; }
+
+@keyframes drye-diag-rise {
+  0% {
+    bottom: var(--d-rise-start);
+    opacity: 0;
+    transform: scale(1);
+  }
+  8% { opacity: 0.9; }
+  75% {
+    bottom: var(--d-rise-mid);
+    opacity: 0.9;
+    transform: scale(1);
+    background: rgba(100, 180, 255, 0.7);
+  }
+  88% {
+    bottom: calc(var(--d-rise-mid) + 15px);
+    opacity: 0.55;
+    transform: scale(1.5, 0.7);
+    background: rgba(80, 140, 220, 0.4);
+  }
+  96% {
+    bottom: var(--d-rise-end);
+    opacity: 0.2;
+    transform: scale(2.6, 0.4);
+  }
+  100% {
+    bottom: var(--d-rise-end);
+    opacity: 0;
+    transform: scale(3.5, 0.3);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .drye-diag__droplet {
+    animation: none;
+    opacity: 0.7;
+    bottom: var(--d-rise-mid);
+  }
+}
+
+/* Skin block underneath */
+.drye-diag__skin {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  z-index: 1;
+}
+.drye-diag__skin-layer {
+  position: relative;
+  display: flex;
+  align-items: center;
+  padding-inline: var(--space-12);
+}
+.drye-diag__skin-layer--top {
+  height: var(--d-skin-top-h);
+  background: linear-gradient(180deg, #F4D7DB 0%, #F1E2E0 100%);
+}
+.drye-diag__skin-layer--mid {
+  height: var(--d-skin-mid-h);
+  background: linear-gradient(180deg, #F8E0E3 0%, #F2C8CC 100%);
+}
+.drye-diag__skin-layer--mid::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    radial-gradient(ellipse 8px 4px at 8px 8px, rgba(217, 160, 166, 0.4) 0%, transparent 70%),
+    radial-gradient(ellipse 8px 4px at 24px 16px, rgba(217, 160, 166, 0.4) 0%, transparent 70%),
+    radial-gradient(ellipse 8px 4px at 40px 8px, rgba(217, 160, 166, 0.4) 0%, transparent 70%),
+    radial-gradient(ellipse 8px 4px at 16px 24px, rgba(217, 160, 166, 0.4) 0%, transparent 70%);
+  background-size: 32px 32px;
+  pointer-events: none;
+}
+.drye-diag__skin-layer--deep {
+  height: var(--d-skin-deep-h);
+  background: #F5EBD8;
+}
+.drye-diag__skin-text {
+  position: relative;
+  z-index: 2;
+  color: var(--emerald);
+}
+
+.beats { display: grid; gap: var(--space-20); margin-top: var(--space-20); }
+
+.beat {
+  background: var(--bg);
+  border: var(--border-base);
+  padding: var(--space-18) var(--space-16);
+}
+.beat-num {
+  display: inline-block;
+  font-family: var(--font-body);
+  font-size: var(--fs-micro-2);
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  color: var(--emerald);
+  margin-bottom: var(--space-8);
+}
+.beat-num::before { content: '— '; opacity: 0.6; }
+.beat-title {
+  font-family: var(--font-display);
+  font-size: var(--fs-h3);
+  font-weight: var(--fw-semibold);
+  color: var(--deep);
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+  margin-bottom: var(--space-14);
+}
+.beat-title--large {
+  font-size: var(--fs-section-h2);
+  letter-spacing: -0.03em;
+  line-height: 1.06;
+}
+.beat-visual {
+  margin: 0 calc(-1 * var(--space-16)) var(--space-14);
+  padding: var(--space-16) var(--space-16);
+  background: var(--bg-soft);
+  border-top: var(--border-base);
+  border-bottom: var(--border-base);
+}
+.beat-copy {
+  font-size: var(--fs-body);
+  line-height: 1.55;
+  color: var(--muted);
+}
+.beat-copy strong { color: var(--deep); font-weight: var(--fw-semibold); }
+
+/* ── DARK beat variant — for material fail (02) and proof payoff (04) ── */
+.beat--dark {
+  background: var(--bg-ink);
+  border-color: var(--bg-ink);
+  color: var(--white-085);
+  position: relative;
+}
+.beat--dark .beat-num { color: var(--emerald); }
+.beat--dark .beat-title { color: var(--white-100); }
+.beat--dark .beat-title .em { color: var(--white-100); }
+.beat--dark .beat-copy { color: #C8D4DA; }
+.beat--dark .beat-copy strong { color: var(--white-100); }
+
+/* Dark beat visuals sit flush without inner soft band */
+.beat--dark .beat-visual {
+  background: transparent;
+  border-top-color: var(--white-008);
+  border-bottom-color: var(--white-008);
+  padding-top: var(--space-18);
+  padding-bottom: var(--space-18);
+}
+
+/* ── BEAT 1: Open air vs sealed system ── */
+.beat1-pair {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+.beat1-box {
+  background: var(--bg);
+  border: var(--border-base);
+  padding: var(--space-10);
+}
+.beat1-box-label {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--caption);
+  margin-bottom: var(--space-8);
+  text-align: center;
+}
+.beat1-box svg { width: 100%; height: auto; display: block; }
+.beat1-box-status {
+  margin-top: var(--space-8);
+  font-size: 11px;
+  text-align: center;
+  color: var(--muted);
+  line-height: 1.35;
+}
+.beat1-box--fail .beat1-box-status { color: var(--muted); }
+.beat1-box--fail .beat1-box-status strong { color: var(--deep); }
+
+/* ── BEAT 2: Material regain bars ── */
+.beat2-chart { display: grid; gap: var(--space-10); }
+.beat2-row {
+  display: grid;
+  grid-template-columns: 68px 1fr 44px;
+  gap: 8px;
+  align-items: center;
+}
+.beat2-name {
+  font-size: 11px;
+  font-weight: var(--fw-medium);
+  color: var(--deep);
+  line-height: 1.2;
+}
+.beat2-name em {
+  display: block;
+  font-family: var(--font-body);
+  font-style: normal;
+  font-size: 10px;
+  font-weight: 400;
+  color: var(--caption);
+  margin-top: 1px;
+}
+.beat2-bar {
+  display: block;
+  height: 8px;
+  background: var(--border);
+  position: relative;
+}
+.beat2-bar i {
+  display: block;
+  height: 100%;
+  background: #A8B5BC;
+}
+.beat2-value {
+  font-family: var(--font-display);
+  font-size: 12px;
+  font-weight: var(--fw-semibold);
+  color: var(--deep);
+  text-align: right;
+  letter-spacing: -0.02em;
+}
+.beat2-row--drye {
+  padding: var(--space-8) 0 0;
+  border-top: 1px solid rgba(13, 148, 136, 0.25);
+  margin-top: 4px;
+}
+.beat2-row--drye .beat2-name { color: var(--emerald); font-weight: var(--fw-semibold); }
+.beat2-row--drye .beat2-name em { color: var(--sage); }
+.beat2-row--drye .beat2-bar i { background: var(--emerald); }
+.beat2-row--drye .beat2-value { color: var(--emerald); }
+
+.beat2-source {
+  margin-top: var(--space-14);
+  font-size: 10px;
+  color: var(--caption);
+  line-height: 1.4;
+  letter-spacing: 0.02em;
+}
+
+/* Dark context (PDP invention pattern) */
+.beat--dark .beat2-name { color: #AEBFC8; }
+.beat--dark .beat2-name em { color: rgba(255,255,255,0.4); }
+.beat--dark .beat2-bar { background: var(--white-015); }
+.beat--dark .beat2-bar i { background: #8FA6B0; }
+.beat--dark .beat2-value { color: var(--white-100); }
+.beat--dark .beat2-row--drye {
+  padding: var(--space-10) 0;
+  border-top: 1px solid rgba(13, 148, 136, 0.35);
+  border-bottom: 1px solid rgba(13, 148, 136, 0.35);
+  margin-top: 4px;
+  background: linear-gradient(90deg, rgba(13, 148, 136, 0.12) 0%, transparent 70%);
+  margin-inline: calc(-1 * var(--space-16));
+  padding-inline: var(--space-16);
+}
+
+.beat--dark .beat2-row--drye .beat2-bar {
+  background: rgba(13, 148, 136, 0.18);
+}
+.beat--dark .beat2-row--drye .beat2-name { color: var(--white-085); font-weight: var(--fw-semibold); }
+.beat--dark .beat2-row--drye .beat2-name em { color: var(--sage); }
+.beat--dark .beat2-row--drye .beat2-bar i {
+  background: linear-gradient(90deg, var(--emerald) 0%, var(--sage) 60%, transparent 100%);
+  min-width: 20px;
+}
+.beat--dark .beat2-row--drye .beat2-value { color: var(--emerald); }
+.beat--dark .beat2-source { color: var(--sage); }
+
+/* ── BEAT 3: Routing diagram / video slot ── */
+.beat3-visual {
+  aspect-ratio: 3 / 2;
+  background: var(--bg);
+  border: var(--border-base);
+  position: relative;
+  overflow: hidden;
+}
+.beat3-visual .diagram {
+  position: absolute;
+  inset: 0;
+  padding: var(--space-16);
+}
+.beat3-visual .diagram svg {
+  width: 100%;
+  height: 100%;
+}
+.beat3-video-slot {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  background: rgba(15,34,48,0.8);
+  color: var(--white-085);
+  padding: 4px 8px;
+  font-size: 8px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  font-weight: 700;
+}
+
+/* ── BEAT 4: 8,111 vs 99 ── */
+.beat4-cmp { display: grid; gap: var(--space-14); }
+.beat4-row {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: baseline;
+  gap: var(--space-10);
+}
+.beat4-name-block {
+  min-width: 0;
+}
+.beat4-name {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--caption);
+  margin-bottom: var(--space-6);
+}
+.beat4-bar {
+  display: block;
+  height: 6px;
+  background: var(--border);
+}
+.beat4-bar i {
+  display: block;
+  height: 100%;
+  background: #A8B5BC;
+}
+.beat4-value {
+  font-family: var(--font-display);
+  font-size: 18px;
+  font-weight: var(--fw-semibold);
+  color: var(--muted);
+  letter-spacing: -0.02em;
+  line-height: 1;
+}
+.beat4-value sup {
+  font-size: 9px;
+  font-weight: var(--fw-medium);
+  color: var(--caption);
+  margin-left: 2px;
+}
+.beat4-row--drye .beat4-name { color: var(--emerald); }
+.beat4-row--drye .beat4-bar { background: rgba(13, 148, 136, 0.15); }
+.beat4-row--drye .beat4-bar i { background: var(--emerald); }
+.beat4-row--drye .beat4-value {
+  font-size: 32px;
+  color: var(--emerald);
+}
+.beat4-row--drye .beat4-value sup { color: var(--sage); }
+
+.beat4-source {
+  margin-top: var(--space-14);
+  padding-top: var(--space-14);
+  border-top: var(--border-base);
+  font-size: 10px;
+  color: var(--caption);
+  line-height: 1.4;
+}
+.beat4-source strong { color: var(--muted); font-weight: var(--fw-semibold); }
+
+/* Dark context */
+.beat--dark .beat4-name { color: #AEBFC8; }
+.beat--dark .beat4-bar { background: var(--white-015); }
+.beat--dark .beat4-bar i { background: #8FA6B0; }
+.beat--dark .beat4-value { color: rgba(255,255,255,0.6); }
+.beat--dark .beat4-value sup { color: rgba(255,255,255,0.4); }
+.beat--dark .beat4-row--drye {
+  padding: var(--space-12) 0;
+  border-top: 1px solid rgba(13, 148, 136, 0.3);
+  border-bottom: 1px solid rgba(13, 148, 136, 0.3);
+}
+.beat--dark .beat4-row--drye .beat4-name { color: var(--emerald); }
+.beat--dark .beat4-row--drye .beat4-bar { background: rgba(13, 148, 136, 0.15); }
+.beat--dark .beat4-row--drye .beat4-bar i { background: var(--emerald); }
+.beat--dark .beat4-row--drye .beat4-value {
+  font-size: 36px;
+  color: var(--emerald);
+}
+.beat--dark .beat4-row--drye .beat4-value sup { color: var(--sage); }
+.beat--dark .beat4-source {
+  border-top-color: var(--white-008);
+  color: var(--sage);
+}
+.beat--dark .beat4-source strong { color: var(--white-085); }
+
+.how-cta { margin-top: var(--space-20); }
+
+/* ═══════════════════════════════════════════════════════════
+   OBJECTION REVIEWS
+   ═══════════════════════════════════════════════════════════ */
+/* ═══════════════════════════════════════════════════════════
+   WORKER PROOF TICKER — adapted from PDP drye-worker-proof.css
+   Compact card: returns line + sliding/expandable comment ticker.
+   ═══════════════════════════════════════════════════════════ */
+.lp-proof {
+  margin: var(--space-12) var(--page-pad) var(--space-32);
+  padding: var(--space-14) var(--space-16);
+  background: var(--bg);
+  border: 1px solid #E5E5E5;
+  border-radius: 12px;
+  box-sizing: border-box;
+}
+.lp-proof__line {
+  display: flex; align-items: center; gap: 6px;
+  color: var(--emerald);
+}
+.lp-proof__check { flex: 0 0 15px; width: 15px; height: 15px; display: block; }
+.lp-proof__returns {
+  font-family: var(--font-display); font-size: 13.5px; font-weight: var(--fw-semibold);
+  letter-spacing: -0.01em; color: var(--emerald);
+}
+.lp-proof__keep {
+  margin-top: 3px; font-size: 12.5px; font-weight: var(--fw-medium);
+  line-height: 1.3; color: var(--deep);
+}
+.lp-proof__tlabel {
+  margin: 11px 0 5px; font-size: 9px; font-weight: 700;
+  letter-spacing: 0.14em; text-transform: uppercase; color: var(--caption);
+}
+.lp-proof__ticker-wrap {
+  position: relative; width: 100%; max-width: 100%; overflow: hidden;
+  -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 14px, #000 calc(100% - 14px), transparent 100%);
+  mask-image: linear-gradient(90deg, transparent 0, #000 14px, #000 calc(100% - 14px), transparent 100%);
+}
+.lp-proof__ticker {
+  display: flex; align-items: center; gap: 0; margin: 0; padding: 0; list-style: none;
+  width: max-content; will-change: transform;
+  animation: lpProofTicker 38s linear infinite;
+}
+.lp-proof__ticker.is-paused { animation-play-state: paused; }
+@keyframes lpProofTicker {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .lp-proof__ticker { animation: none; }
+}
+.lp-proof__item-wrap { position: relative; flex: 0 0 auto; padding-right: 22px; }
+.lp-proof__item-wrap::after {
+  content: "·"; position: absolute; right: 9px; top: 50%;
+  transform: translateY(-50%); color: var(--caption);
+}
+.lp-proof__item {
+  display: inline-flex; align-items: center; gap: 5px;
+  margin: 0; padding: 7px 0; border: 0; background: none; cursor: pointer;
+  white-space: nowrap; font-size: 12.5px; line-height: 1.2; color: var(--deep);
+  font-family: var(--font-body);
+}
+.lp-proof__ihandle { font-weight: var(--fw-semibold); color: var(--emerald); }
+.lp-proof__iquote { color: var(--deep); }
+.lp-proof__iplus {
+  display: inline-grid; place-items: center; width: 15px; height: 15px;
+  margin-left: 3px; border-radius: 999px; background: var(--emerald);
+  color: #fff; font-size: 11px; line-height: 1; font-weight: var(--fw-semibold);
+}
+.lp-proof__item.is-open .lp-proof__iplus { background: var(--deep); }
+.lp-proof__hint {
+  display: flex; align-items: center; gap: 6px; margin-top: 7px;
+  font-size: 11px; line-height: 1.3; color: var(--muted);
+}
+.lp-proof__hint-plus {
+  display: inline-grid; place-items: center; flex: 0 0 15px; width: 15px; height: 15px;
+  border-radius: 999px; background: var(--emerald); color: #fff;
+  font-size: 11px; font-weight: var(--fw-semibold); line-height: 1;
+  animation: lpProofPulse 1.8s ease-in-out infinite;
+}
+@keyframes lpProofPulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.18); } }
+@media (prefers-reduced-motion: reduce) { .lp-proof__hint-plus { animation: none; } }
+
+.lp-proof__expand {
+  position: relative; margin-top: 9px; padding: 9px 24px 2px 0;
+  border-top: 1px solid #E5E5E5;
+}
+.lp-proof__expand[hidden] { display: none; }
+.lp-proof__expand-close {
+  position: absolute; top: 7px; right: 0; width: 22px; height: 22px;
+  padding: 0; border: 0; background: none; color: var(--caption);
+  font-size: 18px; line-height: 1; cursor: pointer;
+}
+.lp-proof__expand-quote { margin: 0; font-size: 13px; font-weight: var(--fw-medium); line-height: 1.45; color: var(--deep); }
+.lp-proof__expand-meta { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-top: 6px; }
+.lp-proof__expand-source { font-size: 11px; color: var(--muted); }
+.lp-proof__expand-link {
+  font-size: 11px; font-weight: var(--fw-semibold); color: var(--emerald);
+  text-decoration: none; border-bottom: 1px solid currentColor;
+}
+.lp-proof__expand-link[hidden] { display: none; }
+
+.lp-proof__orders {
+  margin-top: 12px; padding-top: 4px;
+  font-size: 11.5px; line-height: 1.5; color: var(--muted);
+}
+.lp-proof__orders strong { color: var(--deep); font-weight: var(--fw-semibold); }
+.lp-proof__states { margin-top: 4px; color: var(--caption); }
+
+.review-slider { margin-top: var(--space-14); }
+
+.rating-badge {
+  display: flex; align-items: center; gap: 6px;
+  margin-bottom: var(--space-16);
+}
+.rating-badge-stars { color: var(--gold); font-size: 14px; letter-spacing: 1px; }
+.rating-badge-score {
+  font-family: var(--font-display); font-weight: var(--fw-semibold);
+  font-size: 14px; color: var(--deep);
+}
+.rating-badge-count {
+  font-size: 13px; color: var(--emerald); font-weight: var(--fw-medium);
+  text-decoration: underline; text-decoration-color: rgba(13,148,136,0.4);
+}
+.review-card { background: var(--bg); border: var(--border-base); padding: var(--space-20) var(--space-16); }
+.review-question {
+  font-size: var(--fs-micro-2); font-weight: 700;
+  letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--sage); margin-bottom: var(--space-10);
+}
+.review-quote {
+  font-family: var(--font-body); font-style: normal;
+  font-size: var(--fs-body); line-height: 1.45;
+  color: var(--body); margin-bottom: var(--space-14);
+}
+.review-attribution { display: flex; align-items: center; gap: var(--space-8); margin-bottom: var(--space-4); }
+.review-verified { display: inline-flex; align-items: center; justify-content: center; width: 14px; height: 14px; background: var(--emerald); color: #fff; }
+.review-name { font-family: var(--font-display); font-size: 13px; font-weight: var(--fw-semibold); color: var(--deep); }
+.review-role { font-size: 11.5px; color: var(--muted); margin-left: 22px; }
+.review-stars { color: var(--gold); font-size: 12px; letter-spacing: 1.5px; margin-top: var(--space-6); margin-left: 22px; }
+
+.review-nav { display: flex; align-items: center; justify-content: space-between; margin-top: var(--space-14); }
+.review-nav-btns { display: flex; gap: 8px; }
+.review-nav-btn {
+  width: 36px; height: 36px; border: var(--border-base);
+  background: var(--bg); color: var(--deep); font-size: 16px;
+  display: flex; align-items: center; justify-content: center;
+}
+.review-readall {
+  font-family: var(--font-body); font-size: var(--fs-micro);
+  font-weight: var(--fw-semibold); letter-spacing: 0.08em;
+  text-transform: uppercase; color: var(--deep);
+  border-bottom: 1px solid var(--deep); padding-bottom: 1px;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   RISK REVERSAL
+   ═══════════════════════════════════════════════════════════ */
+.risk-wrap {
+  display: grid; grid-template-columns: 68px 1fr;
+  gap: var(--space-16); align-items: center;
+  margin-bottom: var(--space-18);
+}
+.risk-badge {
+  width: 68px; height: 68px; border: 1.5px solid var(--deep);
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+}
+.risk-num { font-family: var(--font-display); font-size: 22px; font-weight: var(--fw-semibold); line-height: 1; color: var(--deep); letter-spacing: -0.02em; }
+.risk-word { font-size: 8.5px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--deep); margin-top: 2px; }
+.risk-copy h3 { font-family: var(--font-display); font-size: 18px; font-weight: var(--fw-semibold); letter-spacing: -0.02em; color: var(--deep); margin-bottom: 4px; line-height: 1.15; }
+.risk-copy p { font-size: 12px; color: var(--muted); line-height: 1.5; }
+
+/* ═══════════════════════════════════════════════════════════
+   MORE REVIEWS + FAQ
+   ═══════════════════════════════════════════════════════════ */
+.more-review-card {
+  flex: 0 0 72vw; scroll-snap-align: start;
+  border: var(--border-base); padding: var(--space-16); background: var(--bg);
+}
+.more-review-stars { color: var(--gold); font-size: 12px; letter-spacing: 1.5px; margin-bottom: var(--space-8); }
+.more-review-quote { font-size: var(--fs-body); line-height: 1.45; color: var(--body); margin-bottom: var(--space-10); }
+.more-review-meta { font-size: 11px; color: var(--muted); display: flex; align-items: center; gap: 6px; }
+
+.faq-list { margin-top: var(--space-14); }
+.faq-item { border-bottom: var(--border-base); }
+.faq-question {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: var(--space-14) 0; width: 100%; text-align: left;
+  font-family: var(--font-body); font-size: var(--fs-body-md);
+  font-weight: var(--fw-semibold); color: var(--deep);
+}
+.faq-icon { position: relative; width: 14px; height: 14px; flex-shrink: 0; }
+.faq-icon::before, .faq-icon::after {
+  content: ''; position: absolute; top: 50%; left: 50%;
+  background: var(--emerald); transition: transform var(--dur-base) ease;
+}
+.faq-icon::before { width: 12px; height: 1.5px; transform: translate(-50%, -50%); }
+.faq-icon::after { width: 1.5px; height: 12px; transform: translate(-50%, -50%); }
+.faq-item.is-open .faq-icon::after { transform: translate(-50%, -50%) rotate(90deg); opacity: 0; }
+.faq-answer {
+  font-size: var(--fs-body); line-height: 1.6; color: var(--muted);
+  max-height: 0; overflow: hidden;
+  transition: max-height var(--dur-base) ease, padding-bottom var(--dur-base) ease;
+}
+.faq-item.is-open .faq-answer { max-height: 320px; padding-bottom: var(--space-14); }
+
+.research-box {
+  margin-top: var(--space-24); padding: var(--space-16);
+  background: var(--bg-soft); border: var(--border-base);
+  display: grid; grid-template-columns: 40px 1fr;
+  gap: var(--space-12); align-items: flex-start;
+}
+.research-icon {
+  width: 40px; height: 40px; border: 1px solid var(--border);
+  background: var(--bg); display: flex; align-items: center; justify-content: center;
+  color: var(--emerald);
+}
+.research-text h4 { font-family: var(--font-display); font-size: var(--fs-body-md); font-weight: var(--fw-semibold); color: var(--deep); margin-bottom: 2px; }
+.research-text p { font-size: 11.5px; color: var(--muted); margin-bottom: var(--space-10); line-height: 1.45; }
+
+/* ═══════════════════════════════════════════════════════════
+   STICKY CTA + FOOTER
+   ═══════════════════════════════════════════════════════════ */
+.sticky-cta {
+  position: fixed; bottom: 0; left: 0; right: 0; z-index: 90;
+  background: var(--bg); border-top: var(--border-base);
+  padding: 8px var(--page-pad); height: var(--sticky-h);
+  display: flex; align-items: center;
+  transform: translateY(100%); transition: transform var(--dur-base) ease;
+}
+.sticky-cta.is-visible { transform: translateY(0); }
+.sticky-cta .btn { padding: 12px 20px; font-size: 11.5px; }
+
+.footer-cta { background: var(--bg-ink); padding: var(--space-32) var(--page-pad); text-align: center; }
+.footer-cta .btn { background: var(--emerald); color: #fff; border-color: var(--emerald); }
+.footer-cta p { margin-top: var(--space-10); font-size: var(--fs-micro-2); color: var(--sage); letter-spacing: 0.14em; text-transform: uppercase; font-weight: 700; }
+.footer { background: var(--bg-ink); padding: var(--space-20) var(--page-pad) var(--space-32); text-align: center; border-top: 1px solid var(--white-008); }
+.footer p { font-size: 11px; color: var(--white-035); letter-spacing: 0.08em; }
+
+.reveal { opacity: 0; transform: translateY(12px); transition: opacity var(--dur-reveal) ease, transform var(--dur-reveal) ease; }
+.reveal.is-visible { opacity: 1; transform: none; }
+@media (prefers-reduced-motion: reduce) {
+  .reveal { opacity: 1; transform: none; transition: none; }
+  * { animation: none !important; transition: none !important; }
+}
+/* ═══════════════════════════════════════════════════════════════════════
+   DESKTOP (≥768px)
+   -----------------------------------------------------------------------
+   Arkitektur: varje .section är full-bleed bakgrund.
+   Innehåll centreras via .dt-wrap — en inre div som är max 1100px bred
+   och har 40px sidopadding. Noll negativa margins, noll !important.
+   Mobil-CSS ovan är helt orörd.
+   ═══════════════════════════════════════════════════════════════════════ */
+@media (min-width: 768px) {
+
+  /* ── Typografi: skala upp till desktop-storlekar ── */
+  :root {
+    --fs-hero-h1:    clamp(40px, 5.5vw, 60px);
+    --fs-section-h2: clamp(28px, 3.2vw, 40px);
+    --fs-h3:         20px;
+    --fs-body:       15px;
+    --fs-body-md:    16px;
+    --fs-caption:    13px;
+  }
+
+  /* ── dt-wrap: den enda containern som styr bredd och centrering ── */
+  .dt-wrap {
+    width: 100%;
+    max-width: 1180px;
+    margin-inline: auto;
+    padding-inline: 40px;
+  }
+
+  /* ── NAV ── */
+  .nav {
+    padding-inline: 40px;
+  }
+
+  /* ── BENEFIT STRIP: statisk rad, ingen scroll ── */
+  .benefit-strip {
+    padding-inline: 40px;
+    overflow-x: visible;
+    scroll-snap-type: none;
+    mask-image: none;
+    -webkit-mask-image: none;
+    justify-content: flex-start;
+  }
+  .benefit-item:last-child {
+    padding-right: 0;
+    border-right: none;
+  }
+
+  /* ── SECTION: enbart vertikal padding. Horisontell hanteras av dt-wrap ── */
+  .section {
+    padding-top: 88px;
+    padding-bottom: 88px;
+    padding-inline: 0;
+  }
+
+  /* ── HERO: bild vänster, text höger ── */
+  .hero {
+    padding-inline: 40px;
+    padding-block: 72px;
+  }
+  .hero .dt-wrap {
+    display: flex;
+    align-items: center;
+    gap: 64px;
+  }
+  .hero-media {
+    flex: 0 0 360px;
+    aspect-ratio: 4 / 5;
+  }
+  .hero-info {
+    flex: 1 1 auto;
+    padding: 0;
+    max-width: 500px;
+  }
+  .hero-sub { max-width: 440px; }
+  .btn--primary, .btn--outline { width: auto; min-width: 240px; }
+  .hero-info .btn--primary { width: auto; }
+
+  /* ── SECTION 2 — TUESDAY AFTERNOON ──
+     Kort behåller mobil-storlek. Pilar visas. Dots döljs. ── */
+  .section-2-inner {
+    position: relative;
+  }
+  .swipe-nav {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 24px;
+  }
+  .swipe-nav-btn {
+    width: 40px;
+    height: 40px;
+    border: 1px solid var(--border);
+    background: var(--bg);
+    color: var(--deep);
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background 0.15s ease, color 0.15s ease;
+    flex-shrink: 0;
+  }
+  .swipe-nav-btn:hover {
+    background: var(--deep);
+    color: #fff;
+  }
+  /* På desktop: dölj dots, visa pilar */
+  .section-2-dots { display: none; }
+  .swipe-nav { display: flex; }
+
+  /* Scroll-wrap får full bredd av .dt-wrap */
+  .section-2-inner .swipe-wrap {
+    margin-inline: 0;
+  }
+  .section-2-inner .swipe-track {
+    padding-left: 0;
+    padding-right: 0;
+  }
+  /* Kort: behåll mobil-storlek (62vw är för stort på desktop — cap:a till 220px) */
+  .problem-card {
+    flex: 0 0 220px;
+  }
+
+  /* ── SECTION 3 — PRODUCT CLARITY: text vänster, bild höger ──
+     Mobil: naturlig DOM-ordning: intro → bild → specs
+     Desktop: 2-kolumn grid; intro+specs staplade vänster, bild höger ── */
+  .section-3-inner {
+    display: grid;
+    grid-template-columns: 1fr 300px;
+    grid-template-areas:
+      "intro image"
+      "specs image";
+    column-gap: 56px;
+    align-items: start;
+  }
+  .section-3-intro { grid-area: intro; }
+  .section-3-specs { grid-area: specs; }
+  .section-3-image {
+    grid-area: image;
+  }
+  .section-3-image .product-image {
+    margin: 0;
+    aspect-ratio: 2 / 3;
+  }
+
+  /* ── SECTION 4 (fail cards) — 3 kolumner på desktop, centrerad intro ── */
+  .section-fail-inner {
+    text-align: center;
+  }
+  .section-fail-inner .section-eyebrow,
+  .section-fail-inner .section-h2,
+  .section-fail-inner .section-body {
+    max-width: 760px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .section-fail-inner .fail-stack {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin-top: 40px;
+    text-align: left;
+    max-width: 1000px;
+    margin-inline: auto;
+  }
+
+  /* ── SECTION 4.5 (mechanism) — centrerad intro, VS + diagram ── */
+  .section-mech-inner {
+    max-width: 900px;
+    margin-inline: auto;
+    text-align: center;
+  }
+  .section-mech-inner .section-eyebrow,
+  .section-mech-inner .section-h2,
+  .section-mech-inner .section-body {
+    max-width: 760px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .section-mech-inner .vs-block {
+    max-width: 720px;
+    margin-inline: auto;
+    margin-top: 40px;
+    text-align: left;
+  }
+  .section-mech-inner .vs-grid {
+    gap: 16px;
+  }
+  .section-mech-inner .vs-body {
+    padding: 20px;
+  }
+  .section-mech-inner .mech-diagram {
+    max-width: 640px;
+    margin: 24px auto 0;
+    padding-top: 32px;
+    text-align: left;
+  }
+  .section-mech-inner .mech-diagram-label {
+    text-align: center;
+  }
+  .section-mech-inner .mech-step {
+    padding: 20px 0;
+  }
+
+  /* ── SECTION 5 — WHY NORMAL LINERS STAY WET (mörk) ──
+     Sat-blocket har egen mobile-first + desktop-CSS ovan.
+     Inga overrides behövs här. ── */
+
+  /* ── PROOF (Independent lab test) — desktop ── */
+  .proof-inner {
+    text-align: center;
+    max-width: 760px;
+    margin: 0 auto;
+  }
+  .proof-inner .section-eyebrow,
+  .proof-inner .section-h2 {
+    text-align: center;
+  }
+  .proof-media-wrap {
+    max-width: 720px;
+    margin: 40px auto 0;
+  }
+  .proof-media {
+    aspect-ratio: 16 / 9;
+  }
+  .proof-stat {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 40px 48px;
+  }
+  .proof-stat-row {
+    padding: 8px 0;
+  }
+  .proof-stat-num {
+    font-size: 28px;
+  }
+  .proof-stat-row--drye .proof-stat-num {
+    font-size: 64px;
+  }
+  .proof-cta-wrap {
+    text-align: center;
+    margin-top: 32px;
+  }
+  .proof-cta-wrap .btn {
+    width: auto;
+    min-width: 240px;
+  }
+
+  /* ── WHAT CHANGES ON SHIFT — 3 kolumner desktop ── */
+  .shift-inner {
+    text-align: center;
+  }
+  .shift-inner > .section-eyebrow,
+  .shift-inner > .section-h2,
+  .shift-inner > .section-body {
+    max-width: 760px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .shift-stack {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    margin-top: 48px;
+    text-align: left;
+    max-width: 1100px;
+    margin-inline: auto;
+  }
+  .shift-card {
+    padding: 32px 28px;
+  }
+  .shift-card__num {
+    font-size: 44px;
+  }
+  .shift-card__title {
+    font-size: 22px;
+  }
+  .shift-card__list li {
+    padding: 14px 0;
+    font-size: 14px;
+  }
+
+  /* ── OBJECTION REVIEWS ── */
+  .section-reviews-inner .review-slider,
+  .section-reviews-inner .rating-badge {
+    max-width: 640px;
+  }
+
+  /* ── RISK REVERSAL: centrerad på desktop ──
+     text-align på wrapper räcker inte eftersom risk-wrap är grid.
+     Lösning: gör risk-wrap till inline-grid med auto-kolumn så den
+     kryper till innehållsbredd, sen centrera via text-align på parent. ── */
+  .section-risk-inner {
+    max-width: 640px;
+    margin-inline: auto;
+    text-align: center;
+  }
+  .section-risk-inner .risk-wrap {
+    display: inline-grid;
+    grid-template-columns: 68px auto;
+    gap: 16px;
+    text-align: left;
+    margin-bottom: 32px;
+  }
+  .section-risk-inner .btn--primary {
+    width: auto;
+    min-width: 240px;
+  }
+
+  /* ── WORKER PROOF TICKER: cappa container OCH inre ticker-wrap ── */
+  .lp-proof {
+    max-width: 720px;
+    margin: 0 auto var(--space-32);
+    padding: 24px 28px;
+  }
+  .lp-proof__ticker-wrap {
+    max-width: 100%;
+    width: 100%;
+  }
+
+  /* ── MORE REVIEWS ── */
+  .more-review-card { flex: 0 0 300px; }
+  .section-more-reviews-inner .swipe-track {
+    padding-left: 0;
+    padding-right: 0;
+  }
+  /* Pilar för more-reviews */
+  .more-reviews-nav { display: flex; margin-top: 20px; }
+  .more-reviews-dots { display: none; }
+
+  /* ── FAQ ── */
+  .section-faq-inner .faq-list,
+  .section-faq-inner .research-box {
+    max-width: 640px;
+  }
+
+  /* ── FOOTER ── */
+  .footer-cta, .footer { padding-inline: 40px; }
+  .footer-cta .btn--primary { width: auto; min-width: 240px; }
+
+  /* ── STICKY CTA ── */
+  .sticky-cta { padding-inline: 40px; justify-content: center; }
+  .sticky-cta .btn { width: auto; min-width: 260px; }
+
+  /* ── Sektion-body och h2: max-width för läsbarhet ── */
+  .section-body { max-width: 640px; }
+  .section-h2 { max-width: 760px; }
+}
+
+/* ── 1200px+: marginellt mer luft och lite större hero-bild ── */
+@media (min-width: 1200px) {
+  .hero { padding-block: 96px; }
+  .hero .dt-wrap { gap: 80px; }
+  .hero-media { flex-basis: 400px; }
+  .hero-info { max-width: 540px; }
+
+  .section-3-inner { grid-template-columns: 1fr 340px; column-gap: 72px; }
+}
+</style>
+</head>
+
+<body>
+
+<!-- ═══ NAV ═════════════════════════════════════════════ -->
+<nav class="nav">
+  <button class="nav-menu" aria-label="Menu"><span></span><span></span><span></span></button>
+  <div class="nav-logo">DRYE</div>
+  <button class="nav-bag" aria-label="Cart">
+    <svg viewBox="0 0 22 22" fill="none" width="22" height="22">
+      <path d="M4 7h14l-1.5 12H5.5L4 7z" stroke="currentColor" stroke-width="1.4"/>
+      <path d="M8 7V5a3 3 0 0 1 6 0v2" stroke="currentColor" stroke-width="1.4"/>
+    </svg>
+  </button>
+</nav>
+
+<div class="benefit-strip">
+  <span class="benefit-item">Dry hands</span>
+  <span class="benefit-item">More comfort</span>
+  <span class="benefit-item">Cleaner hands</span>
+  <span class="benefit-item">6–12 months</span>
+  <span class="benefit-item">30-day guarantee</span>
+</div>
+
+<!-- ═══ 1. HERO ═════════════════════════════════════════ -->
+<section class="hero" id="hero-section">
+  <div class="dt-wrap">
+    <div class="hero-media">
+      <div class="hero-media-placeholder">
+        <span>Hero image — mechanic wearing DRYE under work glove (2:3)</span>
+      </div>
+    </div>
+    <div class="hero-info">
+      <div class="hero-eyebrow">Not a glove. Not cotton.</div>
+      <h1 class="hero-title">Add one dry layer under your gloves.</h1>
+      <p class="hero-sub">A thin liner worn under nitrile, latex, rubber or sealed work gloves. <strong>Keeps hands dry so you can work longer.</strong></p>
+      <ul class="hero-bullets">
+        <li><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 7l3 3 5-6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Keeps hands dry all shift</li>
+        <li><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 7l3 3 5-6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>More comfort, less glove fight</li>
+        <li><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 7l3 3 5-6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Cleaner hands at end of day</li>
+      </ul>
+      <a href="/products/drye-liner" class="btn btn--primary">Get DRYE Liner</a>
+      <p class="hero-guarantee">30-Day Money Back Guarantee</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ 2. TUESDAY AFTERNOON ════════════════════════════ -->
+<section class="section">
+  <div class="dt-wrap">
+    <span class="section-eyebrow">Tuesday afternoon</span>
+    <h2 class="section-h2">Your hands are wet.<br><span class="em">Your gloves are soaked.</span></h2>
+    <p class="section-body">Everything feels worse. You know the shift.</p>
+
+    <div class="section-2-inner">
+      <div class="swipe-wrap">
+        <div class="swipe-track" id="problem-track">
+          <div class="problem-card"><div class="problem-card-media"><div class="placeholder"><span>Slippery tools</span></div></div><p class="problem-card-label">Slippery tools</p><p class="problem-card-sub">No feel, no control.</p></div>
+          <div class="problem-card"><div class="problem-card-media"><div class="placeholder"><span>Less grip</span></div></div><p class="problem-card-label">Less grip</p><p class="problem-card-sub">Wet glove, shaky hold.</p></div>
+          <div class="problem-card"><div class="problem-card-media"><div class="placeholder"><span>Skin irritation</span></div></div><p class="problem-card-label">Skin irritation</p><p class="problem-card-sub">Moisture trapped against skin.</p></div>
+          <div class="problem-card"><div class="problem-card-media"><div class="placeholder"><span>Always damp</span></div></div><p class="problem-card-label">Always damp</p><p class="problem-card-sub">Still wet by lunch.</p></div>
+          <div class="problem-card"><div class="problem-card-media"><div class="placeholder"><span>Forever to dry</span></div></div><p class="problem-card-label">Forever to dry</p><p class="problem-card-sub">Changed twice. Same result.</p></div>
+        </div>
+      </div>
+
+      <div class="dots section-2-dots" id="problem-dots">
+        <div class="dot is-active"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div>
+      </div>
+
+      <div class="swipe-nav" id="problem-nav" style="display:none;">
+        <button class="swipe-nav-btn" id="problem-prev" aria-label="Previous">←</button>
+        <button class="swipe-nav-btn" id="problem-next" aria-label="Next">→</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ 3. PRODUCT CLARITY ══════════════════════════════ -->
+<section class="section">
+  <div class="dt-wrap">
+    <div class="section-3-inner">
+      <div class="section-3-intro">
+        <h2 class="section-h2">DRYE goes under<br><span class="em">your existing glove.</span></h2>
+        <p class="section-body">Thin enough you forget it's there. Strong enough to last a shift.</p>
+      </div>
+      <div class="section-3-image">
+        <div class="product-image">
+          <div class="placeholder"><span>Product-in-use — liner going under nitrile glove (2:3)</span></div>
+        </div>
+      </div>
+      <div class="section-3-specs">
+        <ul class="spec-list">
+          <li><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 7l3 3 5-6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg><span><strong>Thin by design.</strong> Doesn't add bulk or reduce dexterity.</span></li>
+          <li><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 7l3 3 5-6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg><span><strong>Works under any glove.</strong> Nitrile, latex, rubber, HV.</span></li>
+          <li><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 7l3 3 5-6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg><span><strong>Stays in place.</strong> Between skin and glove. All shift.</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ 4. WHY OTHERS FAIL — 3 stacked readable cards ═══ -->
+<section class="section section--soft">
+  <div class="dt-wrap">
+    <div class="section-fail-inner">
+      <span class="section-eyebrow">The usual fixes</span>
+      <h2 class="section-h2">Why every other liner <span class="em">fails.</span></h2>
+      <p class="section-body">You've tried them. That's not what this is.</p>
+
+      <div class="fail-stack">
+        <div class="fail-card">
+          <div class="fail-card-num">01</div>
+          <div>
+            <p class="fail-card-title">Cotton absorbs</p>
+            <p class="fail-card-desc">Takes in sweat first — then becomes the wet layer pressed against your skin. The harder you work, the worse it gets.</p>
+          </div>
+        </div>
+        <div class="fail-card">
+          <div class="fail-card-num">02</div>
+          <div>
+            <p class="fail-card-title">Stays wet</p>
+            <p class="fail-card-desc">Wet fabric means wet hands, irritation, and odor. There's no exit route for moisture.</p>
+          </div>
+        </div>
+        <div class="fail-card">
+          <div class="fail-card-num">03</div>
+          <div>
+            <p class="fail-card-title">Glove flip buys minutes</p>
+            <p class="fail-card-desc">Same wet hand goes right back in. Two hours later, same problem.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ 4.5 MECHANISM — VS visual first, then diagram ════ -->
+<section class="section section--dark">
+  <div class="dt-wrap">
+    <div class="section-mech-inner">
+      <span class="section-eyebrow">The difference</span>
+      <h2 class="section-h2">Most liners absorb. DRYE <span class="em">routes.</span></h2>
+      <p class="section-body">See what happens when sweat meets fabric.</p>
+
+      <!-- Large VS comparison -->
+      <div class="vs-block">
+        <p class="vs-label">Cotton &nbsp;·&nbsp; DRYE</p>
+        <div class="vs-grid">
+          <div class="vs-card">
+            <div class="vs-media vs-media--wet">
+              <div class="cotton-flow">
+                <svg viewBox="0 0 100 80" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                  <rect x="6" y="8" width="88" height="8" fill="#1E3A4C"/>
+                  <line x1="8" y1="16" x2="8" y2="70" stroke="#E5E7EB" stroke-width="1"/>
+                  <line x1="92" y1="16" x2="92" y2="70" stroke="#E5E7EB" stroke-width="1"/>
+                  <rect x="8" y="62" width="84" height="8" fill="#A8B5BC"/>
+                  <path d="M25 60 L25 22 M22 27 L25 22 L28 27" stroke="#0D9488" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+                  <path d="M50 60 L50 22 M47 27 L50 22 L53 27" stroke="#0D9488" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+                  <path d="M75 60 L75 22 M72 27 L75 22 L78 27" stroke="#0D9488" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+                  <path d="M45 4 L55 14 M55 4 L45 14" stroke="#EF4444" stroke-width="1.6" stroke-linecap="round"/>
+                  <line x1="8" y1="70" x2="92" y2="70" stroke="#1E3A4C" stroke-width="1.5"/>
+                </svg>
+              </div>
+            </div>
+            <div class="vs-body">
+              <p class="vs-name">Cotton</p>
+              <p class="vs-desc">Water sits on the surface. Sweat stays trapped against your skin.</p>
+            </div>
+          </div>
+          <div class="vs-card vs-card--drye">
+            <div class="vs-media vs-media--dry">
+              <div class="cotton-flow">
+                <svg viewBox="0 0 100 80" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                  <rect x="6" y="0" width="88" height="4" fill="#1E3A4C"/>
+                  <rect x="6" y="4" width="88" height="4" fill="#DDE9E9"/>
+                  <rect x="6" y="8" width="88" height="4" fill="#E8EFEF"/>
+                  <line x1="8" y1="12" x2="92" y2="12" stroke="#9CA3AF" stroke-width="1" stroke-dasharray="3 3"/>
+                  <line x1="8" y1="12" x2="8" y2="70" stroke="#E5E7EB" stroke-width="1"/>
+                  <line x1="92" y1="12" x2="92" y2="70" stroke="#E5E7EB" stroke-width="1"/>
+                  <rect x="8" y="62" width="84" height="8" fill="#E5E7EB"/>
+
+                  <!-- Water drops rising from skin, routed through DRYE layers -->
+                  <g>
+                    <ellipse cx="37" cy="60" rx="1.5" ry="2.2" fill="rgba(80,160,240,0.8)" opacity="0">
+                      <animate attributeName="cy" values="60;30;12;6" keyTimes="0;0.5;0.85;1" dur="4.5s" begin="0s" repeatCount="indefinite"/>
+                      <animate attributeName="opacity" values="0;0.75;0.75;0.4;0" keyTimes="0;0.08;0.6;0.9;1" dur="4.5s" begin="0s" repeatCount="indefinite"/>
+                      <animate attributeName="rx" values="1.5;1.5;3;4" keyTimes="0;0.6;0.9;1" dur="4.5s" begin="0s" repeatCount="indefinite"/>
+                      <animate attributeName="ry" values="2.2;2.2;0.8;0.4" keyTimes="0;0.6;0.9;1" dur="4.5s" begin="0s" repeatCount="indefinite"/>
+                    </ellipse>
+                    <ellipse cx="62" cy="60" rx="1.5" ry="2.2" fill="rgba(80,160,240,0.8)" opacity="0">
+                      <animate attributeName="cy" values="60;30;12;6" keyTimes="0;0.5;0.85;1" dur="4.5s" begin="1.5s" repeatCount="indefinite"/>
+                      <animate attributeName="opacity" values="0;0.75;0.75;0.4;0" keyTimes="0;0.08;0.6;0.9;1" dur="4.5s" begin="1.5s" repeatCount="indefinite"/>
+                      <animate attributeName="rx" values="1.5;1.5;3;4" keyTimes="0;0.6;0.9;1" dur="4.5s" begin="1.5s" repeatCount="indefinite"/>
+                      <animate attributeName="ry" values="2.2;2.2;0.8;0.4" keyTimes="0;0.6;0.9;1" dur="4.5s" begin="1.5s" repeatCount="indefinite"/>
+                    </ellipse>
+                    <ellipse cx="15" cy="60" rx="1.5" ry="2.2" fill="rgba(80,160,240,0.8)" opacity="0">
+                      <animate attributeName="cy" values="60;30;12;6" keyTimes="0;0.5;0.85;1" dur="4.5s" begin="3s" repeatCount="indefinite"/>
+                      <animate attributeName="opacity" values="0;0.75;0.75;0.4;0" keyTimes="0;0.08;0.6;0.9;1" dur="4.5s" begin="3s" repeatCount="indefinite"/>
+                      <animate attributeName="rx" values="1.5;1.5;3;4" keyTimes="0;0.6;0.9;1" dur="4.5s" begin="3s" repeatCount="indefinite"/>
+                      <animate attributeName="ry" values="2.2;2.2;0.8;0.4" keyTimes="0;0.6;0.9;1" dur="4.5s" begin="3s" repeatCount="indefinite"/>
+                    </ellipse>
+                  </g>
+
+                  <path d="M25 60 L25 5 M22 10 L25 5 L28 10" stroke="#1E3A4C" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+                  <path d="M50 60 L50 5 M47 10 L50 5 L53 10" stroke="#1E3A4C" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+                  <path d="M75 60 L75 5 M72 10 L75 5 L78 10" stroke="#1E3A4C" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+                  <line x1="8" y1="70" x2="92" y2="70" stroke="#1E3A4C" stroke-width="1.5"/>
+                </svg>
+              </div>
+            </div>
+            <div class="vs-body">
+              <p class="vs-name">DRYE Liner</p>
+              <p class="vs-desc">Water is pulled through and spread outward. Skin side stays dry.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Asymmetric layering diagram -->
+      <div class="mech-diagram">
+        <p class="mech-diagram-label">Asymmetric Layering — one layer, one direction</p>
+
+        <div class="mech-step">
+          <p class="mech-step-label">Skin side — hydrophobic</p>
+          <p class="mech-step-title">Repels sweat.</p>
+          <p class="mech-step-body">The surface touching your skin doesn't absorb. It pushes moisture away immediately.</p>
+        </div>
+
+        <div class="mech-arrow">↓</div>
+
+        <div class="mech-step">
+          <p class="mech-step-label">Outer side — hydrophilic</p>
+          <p class="mech-step-title">Pulls moisture out.</p>
+          <p class="mech-step-body">The outer layer draws moisture through and spreads it toward the glove — where it can evaporate.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══ 5. WHY NORMAL LINERS STAY WET ═══════════════════ -->
+<section class="section section--dark sat">
+  <div class="dt-wrap">
+    <div class="sat-intro">
+      <h2 class="section-h2">Why normal liners stay wet.</h2>
+      <p class="section-body">Common materials absorb moisture. Inside sealed gloves, absorbed moisture stays with your skin.</p>
+    </div>
+
+    <div class="sat-chart" role="table" aria-label="Material moisture regain comparison">
+      <div class="sat-chart-head" role="row">
+        <span class="sat-col-label" role="columnheader">Material</span>
+        <span class="sat-col-label sat-col-label--right" role="columnheader">Moisture regain</span>
+      </div>
+
+      <div class="sat-row" role="row">
+        <div class="sat-name" role="cell">Merino wool<em class="sat-note">Soaks and stays heavy</em></div>
+        <span class="sat-bar" aria-hidden="true"><i style="--bar:100%"></i></span>
+        <span class="sat-value" role="cell">15–18%</span>
+      </div>
+
+      <div class="sat-row" role="row">
+        <div class="sat-name" role="cell">Bamboo<em class="sat-note">Wetter than cotton</em></div>
+        <span class="sat-bar" aria-hidden="true"><i style="--bar:76%"></i></span>
+        <span class="sat-value" role="cell">13%</span>
+      </div>
+
+      <div class="sat-row" role="row">
+        <div class="sat-name" role="cell">Cotton<em class="sat-note">Wet within the hour</em></div>
+        <span class="sat-bar" aria-hidden="true"><i style="--bar:44%"></i></span>
+        <span class="sat-value" role="cell">7–8%</span>
+      </div>
+
+      <div class="sat-row sat-row--drye" role="row">
+        <div class="sat-name" role="cell">DRYE skin side<span class="sat-chip">Skin-side dry</span><em class="sat-note">Near-zero regain</em></div>
+        <span class="sat-bar" aria-hidden="true"><i style="--bar:2%"></i></span>
+        <span class="sat-value" role="cell">&lt;0.1%</span>
+      </div>
+    </div>
+
+    <p class="sat-source">Moisture regain references: ASTM D2654 · Kadolph 2014.</p>
+  </div>
+</section>
+
+<!-- ═══ 7. PROOF — media first, then big stat ═══════════ -->
+<section class="section">
+  <div class="dt-wrap">
+    <div class="proof-inner">
+      <span class="section-eyebrow">Independent lab test</span>
+      <h2 class="section-h2">Proven to move moisture <span class="em">82×</span> further.</h2>
+
+      <div class="proof-media-wrap">
+        <div class="proof-media">
+          <div class="proof-media-badge">WickView® test · 2025</div>
+          <div class="placeholder">
+            <p class="placeholder-label">Reserved for lab test still</p>
+            <p class="placeholder-title">Water absorption test — Textile Fashion Center, Swedish School of Textiles</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="proof-stat">
+        <div class="proof-stat-row">
+          <span class="proof-stat-name">Cotton liner</span>
+          <span class="proof-stat-num">99</span>
+        </div>
+        <div class="proof-stat-row proof-stat-row--drye">
+          <span class="proof-stat-name">DRYE Liner</span>
+          <span class="proof-stat-num">8,111</span>
+        </div>
+        <p class="proof-source">Wick Flow Index — higher = faster moisture transfer away from skin.<br>Independent testing, Swedish School of Textiles, 2025.</p>
+      </div>
+
+      <div class="proof-cta-wrap">
+        <a href="/pages/research" class="btn btn--outline">See the test</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ 7.5 WHAT CHANGES ON SHIFT — belief-shift bridge ══ -->
+<section class="section section--soft">
+  <div class="dt-wrap">
+    <div class="shift-inner">
+      <span class="section-eyebrow">What changes on shift</span>
+      <h2 class="section-h2">Drier hands changes<br><span class="em">more than comfort.</span></h2>
+      <p class="section-body">Here's what the shift feels like after DRYE.</p>
+
+      <div class="shift-stack">
+        <article class="shift-card">
+          <div class="shift-card__num">01</div>
+          <h3 class="shift-card__title">Back to work faster.</h3>
+          <ul class="shift-card__list">
+            <li>Gloves come off easier. No fighting wet nitrile between jobs.</li>
+            <li>Touch tools, screens and paperwork right away.</li>
+            <li>Less waiting for hands and gloves to dry.</li>
+          </ul>
+        </article>
+
+        <article class="shift-card">
+          <div class="shift-card__num">02</div>
+          <h3 class="shift-card__title">Less end-of-shift punishment.</h3>
+          <ul class="shift-card__list">
+            <li>Oil, grime and sweat hit the liner before your skin.</li>
+            <li>Less scrubbing, less reaching for towels.</li>
+            <li>Less skin damage by 5 PM.</li>
+          </ul>
+        </article>
+
+        <article class="shift-card">
+          <div class="shift-card__num">03</div>
+          <h3 class="shift-card__title">Fewer ruined gloves.</h3>
+          <ul class="shift-card__list">
+            <li>Better feel inside the glove — less wet slip.</li>
+            <li>Drier contact can mean less stretching and sticking.</li>
+            <li>Fewer torn gloves per shift.</li>
+          </ul>
+        </article>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ 6. OBJECTION REVIEWS ════════════════════════════ -->
+<section class="section section--soft">
+  <div class="dt-wrap">
+    <div class="section-reviews-inner">
+      <span class="section-eyebrow">Straight answers</span>
+      <h2 class="section-h2">What mechanics ask first.</h2>
+
+      <div class="rating-badge">
+        <span class="rating-badge-stars">★★★★★</span>
+        <span class="rating-badge-score">4.85/5</span>
+        <span>·</span>
+        <a href="/reviews" class="rating-badge-count">47 reviews</a>
+      </div>
+
+      <div class="review-slider">
+        <div class="review-card" id="review-current"></div>
+        <div class="review-nav">
+          <div class="review-nav-btns">
+            <button class="review-nav-btn" id="review-prev" aria-label="Previous">←</button>
+            <button class="review-nav-btn" id="review-next" aria-label="Next">→</button>
+          </div>
+          <a href="/reviews" class="review-readall">Read all →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ 7. RISK REVERSAL ════════════════════════════════ -->
+<section class="section">
+  <div class="dt-wrap">
+    <div class="section-risk-inner">
+      <div class="risk-wrap">
+        <div class="risk-badge"><span class="risk-num">30</span><span class="risk-word">Days</span></div>
+        <div class="risk-copy">
+          <h3>Try it risk-free.</h3>
+          <p>If DRYE Liner doesn't change your shift, full refund. No hassle.</p>
+        </div>
+      </div>
+      <a href="/products/drye-liner" class="btn btn--primary">Get DRYE Liner</a>
+      <p class="hero-guarantee">30-Day Money Back Guarantee</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ 7.5 WORKER PROOF TICKER ═══════════════════════════ -->
+<div class="lp-proof" id="lp-proof-module">
+  <div class="lp-proof__line">
+    <svg class="lp-proof__check" viewBox="0 0 16 16" fill="none"><path d="M2 8.5l4 4 8-9" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    <span class="lp-proof__returns">Mechanic buyers aren't sending them back</span>
+  </div>
+  <p class="lp-proof__keep">0 returns recorded in the last 90 days.</p>
+
+  <div class="lp-proof__tlabel">Live from our ads</div>
+
+  <div class="lp-proof__ticker-wrap" id="lp-proof-wrap">
+    <ul class="lp-proof__ticker" id="lp-proof-ticker">
+      <!-- Pass 1 -->
+      <li class="lp-proof__item-wrap">
+        <button type="button" class="lp-proof__item" data-lp-proof-item
+          data-full="These are incredible. I have nearly no more sweat in nitrile gloves — so thin I barely notice them. I've been battling hyperhidrosis, which only gets worse with gloves I have to wear for work."
+          data-handle="@fordbodytech811" data-label="Instagram comment">
+          <span class="lp-proof__ihandle">@fordbodytech811</span>
+          <span class="lp-proof__iquote">"These are incredible. Nearly no more sweat."</span>
+          <span class="lp-proof__iplus" aria-hidden="true">+</span>
+        </button>
+      </li>
+      <li class="lp-proof__item-wrap">
+        <button type="button" class="lp-proof__item" data-lp-proof-item
+          data-full="Pulling the liners off and having my hands be dry is nothing short of exceptional. It makes those hot and humid days in the shop a little more bearable. I work at a Freightliner/Western Star dealership doing frame and suspension repair."
+          data-handle="Alex Addison" data-label="Verified buyer">
+          <span class="lp-proof__ihandle">Alex A.</span>
+          <span class="lp-proof__iquote">"Pulling the liners off and finding my hands dry was exceptional."</span>
+          <span class="lp-proof__iplus" aria-hidden="true">+</span>
+        </button>
+      </li>
+      <li class="lp-proof__item-wrap">
+        <button type="button" class="lp-proof__item" data-lp-proof-item
+          data-full="I'm an automotive painter in Phoenix and was having terrible sweat issues wearing nitrile gloves during summer months. The liners have been a huge help — I'm no longer dripping sweat on my paint jobs and my hands feel better."
+          data-handle="Chad Wuollet" data-label="Verified buyer">
+          <span class="lp-proof__ihandle">Chad W.</span>
+          <span class="lp-proof__iquote">"No longer dripping sweat on my paint jobs."</span>
+          <span class="lp-proof__iplus" aria-hidden="true">+</span>
+        </button>
+      </li>
+      <li class="lp-proof__item-wrap">
+        <button type="button" class="lp-proof__item" data-lp-proof-item
+          data-full="Good dexterity and keeps hands dry. I mainly use these for car detailing. The slim thickness gives great dexterity. They do a great job keeping sweat off my hands — even when slightly wet, they still work."
+          data-handle="Shoujun Shi" data-label="Verified buyer">
+          <span class="lp-proof__ihandle">Shoujun S.</span>
+          <span class="lp-proof__iquote">"Great dexterity — keeps sweat off my hands."</span>
+          <span class="lp-proof__iplus" aria-hidden="true">+</span>
+        </button>
+      </li>
+      <li class="lp-proof__item-wrap">
+        <button type="button" class="lp-proof__item" data-lp-proof-item
+          data-full="A few of my coworkers are looking into getting a few pairs themselves — so glad I found these."
+          data-handle="@fordbodytech811" data-label="Instagram comment">
+          <span class="lp-proof__ihandle">@fordbodytech811</span>
+          <span class="lp-proof__iquote">"A few of my coworkers are looking into getting pairs too."</span>
+          <span class="lp-proof__iplus" aria-hidden="true">+</span>
+        </button>
+      </li>
+      <!-- Pass 2 (duplicate for seamless loop) -->
+      <li class="lp-proof__item-wrap">
+        <button type="button" class="lp-proof__item" data-lp-proof-item
+          data-full="These are incredible. I have nearly no more sweat in nitrile gloves — so thin I barely notice them. I've been battling hyperhidrosis, which only gets worse with gloves I have to wear for work."
+          data-handle="@fordbodytech811" data-label="Instagram comment">
+          <span class="lp-proof__ihandle">@fordbodytech811</span>
+          <span class="lp-proof__iquote">"These are incredible. Nearly no more sweat."</span>
+          <span class="lp-proof__iplus" aria-hidden="true">+</span>
+        </button>
+      </li>
+      <li class="lp-proof__item-wrap">
+        <button type="button" class="lp-proof__item" data-lp-proof-item
+          data-full="Pulling the liners off and having my hands be dry is nothing short of exceptional. It makes those hot and humid days in the shop a little more bearable. I work at a Freightliner/Western Star dealership doing frame and suspension repair."
+          data-handle="Alex Addison" data-label="Verified buyer">
+          <span class="lp-proof__ihandle">Alex A.</span>
+          <span class="lp-proof__iquote">"Pulling the liners off and finding my hands dry was exceptional."</span>
+          <span class="lp-proof__iplus" aria-hidden="true">+</span>
+        </button>
+      </li>
+      <li class="lp-proof__item-wrap">
+        <button type="button" class="lp-proof__item" data-lp-proof-item
+          data-full="I'm an automotive painter in Phoenix and was having terrible sweat issues wearing nitrile gloves during summer months. The liners have been a huge help — I'm no longer dripping sweat on my paint jobs and my hands feel better."
+          data-handle="Chad Wuollet" data-label="Verified buyer">
+          <span class="lp-proof__ihandle">Chad W.</span>
+          <span class="lp-proof__iquote">"No longer dripping sweat on my paint jobs."</span>
+          <span class="lp-proof__iplus" aria-hidden="true">+</span>
+        </button>
+      </li>
+      <li class="lp-proof__item-wrap">
+        <button type="button" class="lp-proof__item" data-lp-proof-item
+          data-full="Good dexterity and keeps hands dry. I mainly use these for car detailing. The slim thickness gives great dexterity. They do a great job keeping sweat off my hands — even when slightly wet, they still work."
+          data-handle="Shoujun Shi" data-label="Verified buyer">
+          <span class="lp-proof__ihandle">Shoujun S.</span>
+          <span class="lp-proof__iquote">"Great dexterity — keeps sweat off my hands."</span>
+          <span class="lp-proof__iplus" aria-hidden="true">+</span>
+        </button>
+      </li>
+      <li class="lp-proof__item-wrap">
+        <button type="button" class="lp-proof__item" data-lp-proof-item
+          data-full="A few of my coworkers are looking into getting a few pairs themselves — so glad I found these."
+          data-handle="@fordbodytech811" data-label="Instagram comment">
+          <span class="lp-proof__ihandle">@fordbodytech811</span>
+          <span class="lp-proof__iquote">"A few of my coworkers are looking into getting pairs too."</span>
+          <span class="lp-proof__iplus" aria-hidden="true">+</span>
+        </button>
+      </li>
+    </ul>
+  </div>
+
+  <div class="lp-proof__hint">
+    <span class="lp-proof__hint-plus" aria-hidden="true">+</span>
+    <span>Tap a comment to read it in full</span>
+  </div>
+
+  <div class="lp-proof__expand" data-lp-proof-expand hidden>
+    <button type="button" class="lp-proof__expand-close" data-lp-proof-close aria-label="Close">−</button>
+    <p class="lp-proof__expand-quote" data-lp-proof-quote></p>
+    <div class="lp-proof__expand-meta">
+      <span class="lp-proof__expand-source" data-lp-proof-source></span>
+    </div>
+  </div>
+
+  <div class="lp-proof__orders">
+    <strong>101 orders across 27 US states since April 19</strong>
+    <div class="lp-proof__states">CA · TX · FL · CO · GA · AZ · NC · MA · CT · OR</div>
+  </div>
+</div>
+
+<!-- ═══ 8. MORE REVIEWS — real Trustpilot data ═══════════ -->
+<section class="section">
+  <div class="dt-wrap">
+    <div class="section-more-reviews-inner">
+      <span class="section-eyebrow">More feedback</span>
+      <h2 class="section-h2">From real customers.</h2>
+
+      <div style="display:flex; align-items:center; gap:8px; margin-bottom:var(--space-16);">
+        <span style="color:var(--gold); font-size:14px; letter-spacing:1px;">★★★★☆</span>
+        <span style="font-family:var(--font-display); font-weight:var(--fw-semibold); font-size:14px; color:var(--deep);">4.4</span>
+        <span style="font-size:12px; color:var(--muted);">· 10 reviews via Trustpilot</span>
+      </div>
+
+      <div class="swipe-wrap">
+        <div class="swipe-track" id="more-review-track">
+          <div class="more-review-card">
+            <p class="more-review-stars">★★★★★</p>
+            <p class="more-review-quote">"I have eczema and these liners have been the best things I bought for my hands. I wear latex gloves all day for work — every hour I'd change gloves and liners, and even with sweat on the DRYE, my hands stayed dry."</p>
+            <p class="more-review-meta"><span class="review-verified"><svg width="8" height="8" viewBox="0 0 8 8" fill="none"><path d="M2 4l1.2 1.2L6 2.5" stroke="#fff" stroke-width="1.4"/></svg></span>PN · US</p>
+          </div>
+          <div class="more-review-card">
+            <p class="more-review-stars">★★★★★</p>
+            <p class="more-review-quote">"My son's hands were bright pink and raw from wearing work gloves. Within a few days of wearing the liners, his hands were drastically improved — within two weeks, completely healed."</p>
+            <p class="more-review-meta"><span class="review-verified"><svg width="8" height="8" viewBox="0 0 8 8" fill="none"><path d="M2 4l1.2 1.2L6 2.5" stroke="#fff" stroke-width="1.4"/></svg></span>Debby Fields · US</p>
+          </div>
+          <div class="more-review-card">
+            <p class="more-review-stars">★★★★★</p>
+            <p class="more-review-quote">"Excellent fit, quick delivery, and they do as the site describes. They keep the sweat and extra heat off my palms — one of my triggers. If you've tried everything else, give these a try."</p>
+            <p class="more-review-meta"><span class="review-verified"><svg width="8" height="8" viewBox="0 0 8 8" fill="none"><path d="M2 4l1.2 1.2L6 2.5" stroke="#fff" stroke-width="1.4"/></svg></span>Jon · GB</p>
+          </div>
+          <div class="more-review-card">
+            <p class="more-review-stars">★★★★★</p>
+            <p class="more-review-quote">"I've worn them under vinyl gloves, hockey gloves, and a wrist support — they alleviate irritation and itching from sweat really well. One developed a small hole, but customer service replaced it immediately. That alone earns 5 stars."</p>
+            <p class="more-review-meta"><span class="review-verified"><svg width="8" height="8" viewBox="0 0 8 8" fill="none"><path d="M2 4l1.2 1.2L6 2.5" stroke="#fff" stroke-width="1.4"/></svg></span>Alric · CA</p>
+          </div>
+          <div class="more-review-card">
+            <p class="more-review-stars">★★★★★</p>
+            <p class="more-review-quote">"Coming up on a year with these liners — still comfortable, keep my hands dry, and no signs of wear. They do what they're supposed to."</p>
+            <p class="more-review-meta"><span class="review-verified"><svg width="8" height="8" viewBox="0 0 8 8" fill="none"><path d="M2 4l1.2 1.2L6 2.5" stroke="#fff" stroke-width="1.4"/></svg></span>Athena · SE</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="dots more-reviews-dots" id="more-review-dots">
+        <div class="dot is-active"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div>
+      </div>
+
+      <div class="swipe-nav more-reviews-nav" id="more-review-nav" style="display:none;">
+        <button class="swipe-nav-btn" id="more-review-prev" aria-label="Previous">←</button>
+        <button class="swipe-nav-btn" id="more-review-next" aria-label="Next">→</button>
+      </div>
+
+      <div style="margin-top:var(--space-16);">
+        <a href="https://se.trustpilot.com/review/hudsverige.se" target="_blank" rel="noopener" class="btn btn--outline">See all reviews on Trustpilot</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ 9. FAQ ══════════════════════════════════════════ -->
+<section class="section">
+  <div class="dt-wrap">
+    <div class="section-faq-inner">
+      <span class="section-eyebrow">Questions</span>
+      <h2 class="section-h2">Before you wear it.</h2>
+      <p class="section-body">Fit, care, glove compatibility and returns.</p>
+
+      <div class="faq-list">
+        <div class="faq-item" id="faq-1"><button class="faq-question" onclick="toggleFaq('faq-1')">How does DRYE Liner work?<span class="faq-icon"></span></button><div class="faq-answer">Asymmetric layering — the skin side repels moisture while the outer side pulls it toward the glove and spreads it. Moisture moves away from your skin, not into it.</div></div>
+        <div class="faq-item" id="faq-2"><button class="faq-question" onclick="toggleFaq('faq-2')">What gloves can I use it with?<span class="faq-icon"></span></button><div class="faq-answer">Works under nitrile, latex, rubber and most sealed work gloves — including HV. Thin enough not to affect fit or dexterity.</div></div>
+        <div class="faq-item" id="faq-3"><button class="faq-question" onclick="toggleFaq('faq-3')">How long does it last?<span class="faq-icon"></span></button><div class="faq-answer">With normal use and regular washing: 6–12 months. Most mechanics use the same pair for 8+ months.</div></div>
+        <div class="faq-item" id="faq-4"><button class="faq-question" onclick="toggleFaq('faq-4')">Care instructions<span class="faq-icon"></span></button><div class="faq-answer">Machine wash cold, gentle. No bleach. Tumble dry low or air dry. Regular washing maintains wicking performance.</div></div>
+        <div class="faq-item" id="faq-5"><button class="faq-question" onclick="toggleFaq('faq-5')">Shipping & returns<span class="faq-icon"></span></button><div class="faq-answer">Free shipping on qualifying orders. 30-day money-back guarantee, no questions.</div></div>
+      </div>
+
+      <div class="research-box">
+        <div class="research-icon">
+          <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+            <path d="M7 2v4L3 14a2 2 0 0 0 2 3h8a2 2 0 0 0 2-3l-4-8V2" stroke="currentColor" stroke-width="1.3"/>
+            <path d="M7 2h4" stroke="currentColor" stroke-width="1.3"/>
+          </svg>
+        </div>
+        <div class="research-text">
+          <h4>Want the research?</h4>
+          <p>See the fabric testing behind DRYE.</p>
+          <a href="/pages/research" class="text-link">See the research →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<div class="footer-cta">
+  <a href="/products/drye-liner" class="btn btn--primary">Get DRYE Liner</a>
+  <p>30-Day Money Back Guarantee</p>
+</div>
+<div class="footer"><p>© 2026 DRYE · Made for mechanics</p></div>
+
+<div class="sticky-cta" id="sticky-cta">
+  <a href="/products/drye-liner" class="btn btn--primary">Get DRYE Liner</a>
+</div>
+
+<script>
+const stickyCta = document.getElementById('sticky-cta');
+const heroSection = document.getElementById('hero-section');
+if (stickyCta && heroSection) {
+  new IntersectionObserver(([e]) => stickyCta.classList.toggle('is-visible', !e.isIntersecting), { threshold: 0.15 }).observe(heroSection);
+}
+
+/* ── Swipe gallery: scroll tracking, dots, desktop arrow nav ── */
+function initSwipeGallery({ trackId, dotsId, navId, prevId, nextId, cardSel }) {
+  const track = document.getElementById(trackId);
+  if (!track) return;
+  const wrap = track.closest('.swipe-wrap');
+  if (!wrap) return;
+
+  const dots = dotsId ? document.querySelectorAll('#' + dotsId + ' .dot') : [];
+  const nav = navId ? document.getElementById(navId) : null;
+
+  function getCardStep() {
+    const cards = track.querySelectorAll(cardSel);
+    if (!cards.length) return 0;
+    return cards[0].offsetWidth + 8;
+  }
+
+  wrap.addEventListener('scroll', () => {
+    const step = getCardStep();
+    if (!step) return;
+    const cards = track.querySelectorAll(cardSel);
+    const idx = Math.min(Math.round(wrap.scrollLeft / step), cards.length - 1);
+    dots.forEach((d, i) => d.classList.toggle('is-active', i === idx));
+  }, { passive: true });
+
+  function applyBreakpoint() {
+    const isDesktop = window.innerWidth >= 768;
+    if (nav) nav.style.display = isDesktop ? 'flex' : 'none';
+  }
+  applyBreakpoint();
+  window.addEventListener('resize', applyBreakpoint);
+
+  document.getElementById(prevId)?.addEventListener('click', () => {
+    wrap.scrollBy({ left: -getCardStep(), behavior: 'smooth' });
+  });
+  document.getElementById(nextId)?.addEventListener('click', () => {
+    wrap.scrollBy({ left: getCardStep(), behavior: 'smooth' });
+  });
+}
+
+initSwipeGallery({
+  trackId: 'problem-track',
+  dotsId: 'problem-dots',
+  navId: 'problem-nav',
+  prevId: 'problem-prev',
+  nextId: 'problem-next',
+  cardSel: '.problem-card'
+});
+
+initSwipeGallery({
+  trackId: 'more-review-track',
+  dotsId: 'more-review-dots',
+  navId: 'more-review-nav',
+  prevId: 'more-review-prev',
+  nextId: 'more-review-next',
+  cardSel: '.more-review-card'
+});
+
+/* One-time "swipe teach" nudge: gently scrolls a swipeable row a few px
+   right then back, once on load, so first-time visitors physically feel
+   that the row moves — without adding a persistent icon or text hint.
+   Skips entirely for prefers-reduced-motion and for rows with nothing
+   to scroll (content narrower than the viewport). */
+function nudgeSwipe(track, delay) {
+  if (!track) return;
+  const wrap = track.parentElement;
+  if (!wrap) return;
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (reduce) return;
+  if (wrap.scrollWidth <= wrap.clientWidth + 4) return;
+  setTimeout(() => {
+    const prevSnap = wrap.style.scrollSnapType;
+    wrap.style.scrollSnapType = 'none'; // mandatory snap would otherwise cancel the scrollTo instantly
+    wrap.scrollTo({ left: 46, behavior: 'smooth' });
+    setTimeout(() => {
+      wrap.scrollTo({ left: 0, behavior: 'smooth' });
+      setTimeout(() => { wrap.style.scrollSnapType = prevSnap; }, 500);
+    }, 480);
+  }, delay);
+}
+nudgeSwipe(document.getElementById('problem-track'), 700);
+nudgeSwipe(document.getElementById('more-review-track'), 1100);
+
+const reviews = [
+  { q: "Do they really keep hands dry?", quote: "Without the lining gloves I had to remove my EV gloves, wash and dry my hands, then go to the computer. With the lining gloves, I could remove the EV gloves and go straight to the computer.", name: "EV Mechanic", role: "BMW Bilia" },
+  { q: "Won't they feel weird under the glove?", quote: "No impact on fingertip sensitivity in electric safety gloves. Increased comfort and reduced the need to air the hand.", name: "Simon V.", role: "Verified buyer" },
+  { q: "Do they actually last?", quote: "My hands get so itchy I can't work without a layer between my skin and the glove. The lining gloves stay drier than cotton — I've been using them continuously.", name: "Heavy Vehicle Mechanic", role: "Verified buyer" },
+  { q: "Work across different jobs?", quote: "I've been using them in automotive repair, home construction, and moving heavy materials — work that needs real grip and precision. No more eczema or rashes on my hands. Nitrile gloves don't tear anymore because they go on and off easily without sweaty skin.", name: "Brian Jee", role: "Verified buyer" }
+];
+let ri = 0;
+function renderReview(idx) {
+  const r = reviews[idx];
+  document.getElementById('review-current').innerHTML = `
+    <p class="review-question">${r.q}</p>
+    <p class="review-quote">"${r.quote}"</p>
+    <div class="review-attribution">
+      <span class="review-verified"><svg width="8" height="8" viewBox="0 0 8 8" fill="none"><path d="M2 4l1.2 1.2L6 2.5" stroke="#fff" stroke-width="1.4"/></svg></span>
+      <span class="review-name">${r.name}</span>
+    </div>
+    <p class="review-role">${r.role}</p>`;
+}
+document.getElementById('review-next').addEventListener('click', () => { ri = (ri + 1) % reviews.length; renderReview(ri); });
+document.getElementById('review-prev').addEventListener('click', () => { ri = (ri - 1 + reviews.length) % reviews.length; renderReview(ri); });
+renderReview(0);
+
+/* Worker Proof ticker: pause on touch, tap-to-expand */
+(function () {
+  var wrap = document.getElementById('lp-proof-wrap');
+  var ticker = document.getElementById('lp-proof-ticker');
+  var expand = document.querySelector('[data-lp-proof-expand]');
+  var module = document.getElementById('lp-proof-module');
+  var hovering = false, locked = false, openItem = null, resumeTimer = null;
+
+  function setPaused() {
+    if (ticker) ticker.classList.toggle('is-paused', hovering || locked);
+  }
+  if (wrap) {
+    wrap.addEventListener('touchstart', function () {
+      hovering = true; setPaused();
+      if (resumeTimer) clearTimeout(resumeTimer);
+    }, { passive: true });
+    wrap.addEventListener('touchend', function () {
+      if (resumeTimer) clearTimeout(resumeTimer);
+      resumeTimer = setTimeout(function () { if (!locked) { hovering = false; setPaused(); } }, 2500);
+    }, { passive: true });
+    wrap.addEventListener('mouseenter', function () { hovering = true; setPaused(); });
+    wrap.addEventListener('mouseleave', function () { hovering = false; setPaused(); });
+  }
+
+  function setPlus(btn, isOpen) {
+    var p = btn.querySelector('.lp-proof__iplus');
+    if (p) p.textContent = isOpen ? '−' : '+';
+    btn.classList.toggle('is-open', isOpen);
+  }
+  function openExpand(btn) {
+    if (!expand) return;
+    if (openItem && openItem !== btn) setPlus(openItem, false);
+    var full = btn.getAttribute('data-full') || '';
+    var handle = btn.getAttribute('data-handle') || '';
+    var label = btn.getAttribute('data-label') || '';
+    var q = expand.querySelector('[data-lp-proof-quote]');
+    var src = expand.querySelector('[data-lp-proof-source]');
+    if (q) q.textContent = '"' + full + '"';
+    if (src) src.textContent = [handle, label].filter(Boolean).join(' · ');
+    expand.hidden = false;
+    setPlus(btn, true);
+    openItem = btn;
+    locked = true; setPaused();
+  }
+  function closeExpand() {
+    if (expand) expand.hidden = true;
+    if (openItem) { setPlus(openItem, false); openItem = null; }
+    locked = false; hovering = false; setPaused();
+  }
+  if (module) {
+    module.addEventListener('click', function (e) {
+      var t = e.target;
+      if (t.closest && t.closest('[data-lp-proof-close]')) { closeExpand(); return; }
+      var btn = t.closest ? t.closest('[data-lp-proof-item]') : null;
+      if (!btn) return;
+      if (btn === openItem) closeExpand(); else openExpand(btn);
+    });
+  }
+})();
+
+function toggleFaq(id) {
+  const item = document.getElementById(id);
+  const isOpen = item.classList.contains('is-open');
+  document.querySelectorAll('.faq-item').forEach(el => el.classList.remove('is-open'));
+  if (!isOpen) item.classList.add('is-open');
+}
+
+const revealObs = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) { e.target.classList.add('is-visible'); revealObs.unobserve(e.target); }
+  });
+}, { threshold: 0.12 });
+document.querySelectorAll('.section, .beat').forEach(s => { s.classList.add('reveal'); revealObs.observe(s); });
+</script>
+
+</body>
+</html>
+{% endraw %}

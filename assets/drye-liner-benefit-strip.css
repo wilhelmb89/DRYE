@@ -1,0 +1,50 @@
+.drye-liner-benefit-strip {
+  display: flex;
+  overflow-x: auto;
+  border-bottom: 1px solid var(--border);
+  scrollbar-width: none;
+  background: var(--bg);
+  padding-left: var(--page-pad);
+  scroll-snap-type: x mandatory;
+  -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 16px, #000 calc(100% - 48px), transparent 100%);
+  mask-image: linear-gradient(90deg, transparent 0, #000 16px, #000 calc(100% - 48px), transparent 100%);
+}
+
+.drye-liner-benefit-strip::-webkit-scrollbar {
+  display: none;
+}
+
+.drye-liner-benefit-strip__item {
+  flex: 0 0 auto;
+  white-space: nowrap;
+  scroll-snap-align: start;
+  font-family: var(--font-body);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  padding: 10px 14px;
+  color: var(--sage);
+  border-right: 1px solid var(--border);
+}
+
+.drye-liner-benefit-strip__item:last-child {
+  padding-right: var(--page-pad);
+  border-right: none;
+}
+
+@media (min-width: 768px) {
+  .drye-liner-benefit-strip {
+    padding-inline: 40px;
+    overflow-x: visible;
+    scroll-snap-type: none;
+    mask-image: none;
+    -webkit-mask-image: none;
+    justify-content: flex-start;
+  }
+
+  .drye-liner-benefit-strip__item:last-child {
+    padding-right: 0;
+    border-right: none;
+  }
+}

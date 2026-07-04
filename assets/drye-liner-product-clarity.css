@@ -1,0 +1,108 @@
+.drye-liner-product-clarity__inner {
+  width: 100%;
+}
+
+.drye-liner-product-clarity__heading {
+  margin-bottom: var(--space-16);
+}
+
+.drye-liner-product-clarity__heading em {
+  font-family: var(--font-editorial);
+  font-style: italic;
+  font-weight: var(--fw-regular);
+}
+
+.drye-liner-product-clarity__body {
+  color: var(--muted);
+}
+
+.drye-liner-product-clarity__image {
+  aspect-ratio: 2 / 3;
+  background: var(--bg-soft);
+  overflow: hidden;
+  margin: var(--space-16) 0;
+  position: relative;
+}
+
+.drye-liner-product-clarity__img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.drye-liner-product-clarity__placeholder {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(145deg, #f8fafc 0%, #e5e7eb 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.drye-liner-product-clarity__placeholder span {
+  font-family: var(--font-body);
+  font-size: 9px;
+  color: var(--caption);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-align: center;
+  padding: 0 20px;
+}
+
+.drye-liner-product-clarity__specs {
+  list-style: none;
+  border-top: 1px solid var(--border);
+}
+
+.drye-liner-product-clarity__spec {
+  display: grid;
+  grid-template-columns: 20px 1fr;
+  gap: var(--space-10);
+  padding: var(--space-10) 0;
+  border-bottom: 1px solid var(--border);
+  font-family: var(--font-body);
+  font-size: 13px;
+  color: var(--muted);
+  line-height: 1.5;
+}
+
+.drye-liner-product-clarity__spec strong {
+  color: var(--deep);
+  font-weight: var(--fw-semibold);
+}
+
+.drye-liner-product-clarity__spec svg {
+  color: var(--emerald);
+  margin-top: 2px;
+}
+
+@media (min-width: 768px) {
+  .drye-liner-product-clarity__inner {
+    display: grid;
+    grid-template-columns: 1fr 300px;
+    grid-template-areas: "intro image" "specs image";
+    column-gap: 56px;
+    align-items: start;
+  }
+
+  .drye-liner-product-clarity__intro {
+    grid-area: intro;
+  }
+
+  .drye-liner-product-clarity__specs {
+    grid-area: specs;
+  }
+
+  .drye-liner-product-clarity__image {
+    grid-area: image;
+    margin: 0;
+    aspect-ratio: 2 / 3;
+  }
+}
+
+@media (min-width: 1200px) {
+  .drye-liner-product-clarity__inner {
+    grid-template-columns: 1fr 340px;
+    column-gap: 72px;
+  }
+}

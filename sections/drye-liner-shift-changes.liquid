@@ -1,0 +1,134 @@
+{{ 'drye-liner-shift-changes.css' | asset_url | stylesheet_tag }}
+
+<section class="dryeNEW-section drye-liner-shift-changes" id="{{ section.settings.section_id | default: 'liner-shift' }}" data-section-id="{{ section.id }}">
+  <div class="dryeNEW-container drye-liner-shift-changes__inner">
+    {%- if section.settings.eyebrow != blank -%}
+      <span class="dryeNEW-micro">{{ section.settings.eyebrow }}</span>
+    {%- endif -%}
+
+    {%- if section.settings.heading != blank -%}
+      <h2 class="dryeNEW-h2">
+        {{ section.settings.heading }}
+        {%- if section.settings.heading_emphasis != blank -%}
+          <span class="dryeNEW-editorial">{{ section.settings.heading_emphasis }}</span>
+        {%- endif -%}
+      </h2>
+    {%- endif -%}
+
+    {%- if section.settings.body != blank -%}
+      <p class="dryeNEW-body">{{ section.settings.body }}</p>
+    {%- endif -%}
+
+    <div class="drye-liner-shift-changes__stack">
+      {%- for block in section.blocks -%}
+        {%- if block.type == 'shift_card' -%}
+          <div class="drye-liner-shift-changes__card" {{ block.shopify_attributes }}>
+            <span class="drye-liner-shift-changes__card-num">
+              {%- if forloop.index < 10 -%}0{{ forloop.index }}{%- else -%}{{ forloop.index }}{%- endif -%}
+            </span>
+            <h3 class="drye-liner-shift-changes__card-title">{{ block.settings.title }}</h3>
+
+            {%- assign lines = block.settings.items | newline_to_br | split: '<br />' -%}
+            <ul class="drye-liner-shift-changes__card-list">
+              {%- for line in lines -%}
+                {%- assign trimmed_line = line | strip -%}
+                {%- if trimmed_line != blank -%}
+                  <li>{{ trimmed_line }}</li>
+                {%- endif -%}
+              {%- endfor -%}
+            </ul>
+          </div>
+        {%- endif -%}
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "DRYE Liner Shift Changes",
+  "tag": "section",
+  "class": "shopify-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "section_id",
+      "label": "Section ID",
+      "default": "liner-shift"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "What changes on shift"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Drier hands changes"
+    },
+    {
+      "type": "text",
+      "id": "heading_emphasis",
+      "label": "Heading emphasized",
+      "default": "more than comfort."
+    },
+    {
+      "type": "text",
+      "id": "body",
+      "label": "Body",
+      "default": "Here's what the shift feels like after DRYE."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "shift_card",
+      "name": "Shift card",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Back to work faster."
+        },
+        {
+          "type": "textarea",
+          "id": "items",
+          "label": "Outcomes (one per line)",
+          "default": "Gloves come off easier. No fighting wet nitrile between jobs.\nTouch tools, screens and paperwork right away.\nLess waiting for hands and gloves to dry."
+        }
+      ]
+    }
+  ],
+  "max_blocks": 3,
+  "presets": [
+    {
+      "name": "DRYE Liner Shift Changes",
+      "blocks": [
+        {
+          "type": "shift_card",
+          "settings": {
+            "title": "Back to work faster.",
+            "items": "Gloves come off easier. No fighting wet nitrile between jobs.\nTouch tools, screens and paperwork right away.\nLess waiting for hands and gloves to dry."
+          }
+        },
+        {
+          "type": "shift_card",
+          "settings": {
+            "title": "Less end-of-shift punishment.",
+            "items": "Oil, grime and sweat hit the liner before your skin.\nLess scrubbing, less reaching for towels.\nLess skin damage by 5 PM."
+          }
+        },
+        {
+          "type": "shift_card",
+          "settings": {
+            "title": "Fewer ruined gloves.",
+            "items": "Better feel inside the glove — less wet slip.\nDrier contact can mean less stretching and sticking.\nFewer torn gloves per shift."
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

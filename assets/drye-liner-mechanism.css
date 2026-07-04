@@ -1,0 +1,231 @@
+.drye-liner-mechanism {
+  background: var(--bg-ink);
+  color: rgba(255, 255, 255, 0.88);
+}
+
+.drye-liner-mechanism .dryeNEW-h2 {
+  color: #fff;
+}
+
+.drye-liner-mechanism .dryeNEW-body {
+  color: rgba(255, 255, 255, 0.75);
+}
+
+.drye-liner-mechanism__heading {
+  margin-top: var(--space-8);
+}
+
+.drye-liner-mechanism__heading-em {
+  display: block;
+  margin-top: var(--space-4);
+  color: var(--emerald);
+}
+
+.drye-liner-mechanism__body {
+  margin-top: var(--space-12);
+  max-width: 480px;
+}
+
+/* Cotton vs DRYE comparison */
+
+.drye-liner-mechanism__vs-block {
+  margin-top: var(--space-20);
+  margin-bottom: var(--space-24);
+}
+
+.drye-liner-mechanism__vs-label {
+  text-align: center;
+  font-family: var(--font-body);
+  font-size: 9px;
+  font-weight: var(--fw-semibold);
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--sage);
+  margin-bottom: var(--space-14);
+  position: relative;
+}
+
+.drye-liner-mechanism__vs-label::before,
+.drye-liner-mechanism__vs-label::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  width: calc(50% - 48px);
+  height: 1px;
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.drye-liner-mechanism__vs-label::before {
+  left: 0;
+}
+
+.drye-liner-mechanism__vs-label::after {
+  right: 0;
+}
+
+.drye-liner-mechanism__vs-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+
+.drye-liner-mechanism__vs-card {
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.drye-liner-mechanism__vs-card--drye {
+  border-color: rgba(13, 148, 136, 0.5);
+}
+
+.drye-liner-mechanism__media {
+  aspect-ratio: 1 / 1;
+  background: #fafafa;
+  position: relative;
+  overflow: hidden;
+}
+
+.drye-liner-mechanism__media-inner {
+  position: absolute;
+  inset: 12%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.drye-liner-mechanism__media-inner svg {
+  width: 100%;
+  height: auto;
+  max-height: 100%;
+  display: block;
+}
+
+.drye-liner-mechanism__vs-body {
+  padding: var(--space-12);
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.drye-liner-mechanism__vs-name {
+  font-family: var(--font-display);
+  font-size: 12px;
+  font-weight: var(--fw-semibold);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.5);
+  margin-bottom: var(--space-6);
+}
+
+.drye-liner-mechanism__vs-card--drye .drye-liner-mechanism__vs-name {
+  color: var(--emerald);
+}
+
+.drye-liner-mechanism__vs-desc {
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: 12px;
+  line-height: 1.4;
+  color: rgba(255, 255, 255, 0.75);
+}
+
+.drye-liner-mechanism__vs-card--drye .drye-liner-mechanism__vs-desc {
+  color: rgba(255, 255, 255, 0.88);
+  font-weight: var(--fw-medium);
+}
+
+/* Asymmetric layering explainer */
+
+.drye-liner-mechanism__diagram {
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  padding-top: var(--space-24);
+  margin-top: var(--space-8);
+}
+
+.drye-liner-mechanism__diagram-label {
+  font-family: var(--font-body);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--sage);
+  margin-bottom: var(--space-12);
+  text-align: center;
+}
+
+.drye-liner-mechanism__step {
+  padding: var(--space-14) 0;
+}
+
+.drye-liner-mechanism__step-label {
+  font-family: var(--font-body);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--sage);
+  margin-bottom: var(--space-4);
+}
+
+.drye-liner-mechanism__step-title {
+  font-family: var(--font-display);
+  font-size: 17px;
+  font-weight: var(--fw-semibold);
+  color: #fff;
+  letter-spacing: -0.02em;
+  margin-bottom: var(--space-4);
+}
+
+.drye-liner-mechanism__step-body {
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: 13px;
+  color: #c8d4da;
+  line-height: 1.5;
+}
+
+.drye-liner-mechanism__arrow {
+  text-align: center;
+  color: var(--emerald);
+  font-size: 20px;
+  padding: var(--space-6) 0;
+  opacity: 0.7;
+}
+
+@media (min-width: 768px) {
+  .drye-liner-mechanism__inner {
+    max-width: 900px;
+    margin-inline: auto;
+    text-align: center;
+  }
+
+  .drye-liner-mechanism__vs-block {
+    max-width: 720px;
+    margin-inline: auto;
+    margin-top: 40px;
+    text-align: left;
+  }
+
+  .drye-liner-mechanism__vs-grid {
+    gap: 16px;
+  }
+
+  .drye-liner-mechanism__vs-body {
+    padding: 20px;
+  }
+
+  .drye-liner-mechanism__diagram {
+    max-width: 640px;
+    margin: 24px auto 0;
+    padding-top: 32px;
+    text-align: left;
+  }
+
+  .drye-liner-mechanism__diagram-label {
+    text-align: center;
+  }
+
+  .drye-liner-mechanism__step {
+    padding: 20px 0;
+  }
+}
