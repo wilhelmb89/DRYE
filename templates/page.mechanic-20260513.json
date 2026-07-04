@@ -713,6 +713,83 @@
         "body": "<p>First thing you notice: <strong>your hands come out dry. </strong>Then nitriles stop fighting you. Gloves peel off easier. Even impact tools feel a bit less brutal.</p>"
       }
     },
+    "drye_competitive_table_Rhhded": {
+      "type": "drye-competitive-table",
+      "blocks": {
+        "row_RFGfTw": {
+          "type": "row",
+          "settings": {
+            "is_drye": true,
+            "solution": "DRYE Glove Liner",
+            "skin_status": "yes",
+            "skin_text": "Stays dry — oil hits the liner first",
+            "col_3_status": "yes",
+            "col_3_text": "Go on dry, come off dry",
+            "cost": "$98/yr",
+            "cost_math": "($49/pair, 6 months)"
+          }
+        },
+        "row_UgzQWk": {
+          "type": "row",
+          "settings": {
+            "is_drye": false,
+            "solution": "Cotton liners",
+            "skin_status": "no",
+            "skin_text": "Soaks through — skin stays wet underneath",
+            "col_3_status": "no",
+            "col_3_text": "Go on dry, come off wet",
+            "cost": "$50–400/yr",
+            "cost_math": "higher in daily replacement use"
+          }
+        },
+        "row_yYLgHd": {
+          "type": "row",
+          "settings": {
+            "is_drye": false,
+            "solution": "Glove flipping (no liner)",
+            "skin_status": "no",
+            "skin_text": "Opens with each peel",
+            "col_3_status": "no",
+            "col_3_text": "Tear every peel-off",
+            "cost": "Free up front. More nitriles every week.",
+            "cost_math": ""
+          }
+        },
+        "row_n3geTf": {
+          "type": "row",
+          "settings": {
+            "is_drye": false,
+            "solution": "Barrier creams",
+            "skin_status": "no",
+            "skin_text": "Wears off — skin still wet underneath",
+            "col_3_status": "no",
+            "col_3_text": "Still tear wet",
+            "cost": "$225/yr",
+            "cost_math": ""
+          }
+        }
+      },
+      "block_order": [
+        "row_RFGfTw",
+        "row_UgzQWk",
+        "row_yYLgHd",
+        "row_n3geTf"
+      ],
+      "name": "DRYE Competitive Table",
+      "settings": {
+        "eyebrow": "",
+        "heading": "What you've actually tried.",
+        "heading_emphasis": "And what it costs you.",
+        "body": "Everything works. <strong>Until the gloves get wet inside.</strong>",
+        "mobile_hint": "",
+        "col_1": "Solution",
+        "col_2": "What happens to your skin",
+        "col_3": "Effect on nitriles",
+        "col_4": "Cost per year",
+        "note_text": "",
+        "note_strong": ""
+      }
+    },
     "drye_mechanics_identification_gallery_hdX8eB": {
       "type": "drye-mechanics-identification-gallery",
       "blocks": {
@@ -897,81 +974,60 @@
         "secondary_link": "shopify://blogs/insights/automotive-mechanics-field-study"
       }
     },
-    "drye_competitive_table_Rhhded": {
-      "type": "drye-competitive-table",
+    "drye_before_after_xDYP4i": {
+      "type": "drye-before-after",
       "blocks": {
-        "row_RFGfTw": {
-          "type": "row",
+        "case_RKkLBU": {
+          "type": "case",
           "settings": {
-            "is_drye": true,
-            "solution": "DRYE Glove Liner",
-            "skin_status": "yes",
-            "skin_text": "Stays dry — oil hits the liner first",
-            "col_3_status": "yes",
-            "col_3_text": "Go on dry, come off dry",
-            "cost": "$98/yr",
-            "cost_math": "($49/pair, 6 months)"
+            "before_image": "shopify://shop_images/PXL_20250222_150439970.MP_1.webp",
+            "before_alt": "Before image",
+            "after_image": "shopify://shop_images/PXL_20250411_133548754.MP_1.webp",
+            "after_alt": "After image",
+            "timeline": "After first use",
+            "quote": "<i>\"These gloves completely solved my contact dermatitis problems, and as a bonus my hands no longer smell bad after a game!\"</i>",
+            "attribution": "— Chris P., Fort Worth, Texas"
           }
         },
-        "row_UgzQWk": {
-          "type": "row",
+        "case_jUnWGy": {
+          "type": "case",
           "settings": {
-            "is_drye": false,
-            "solution": "Cotton liners",
-            "skin_status": "no",
-            "skin_text": "Soaks through — skin stays wet underneath",
-            "col_3_status": "no",
-            "col_3_text": "Go on dry, come off wet",
-            "cost": "$50–400/yr",
-            "cost_math": "higher in daily replacement use"
+            "before_image": "shopify://shop_images/342980460_145864585096501_5436614094207203114_n_1_6218ec88-eb69-4d0b-b0bd-8799c0ed029a.jpg",
+            "before_alt": "Before image",
+            "after_image": "shopify://shop_images/354132505_582885927326551_8106202714240206805_n.webp",
+            "after_alt": "After image",
+            "timeline": "After 5 months",
+            "quote": "<i>“Real skin problems started in 2017 - pain, open scars and wounds. Nothing worked for years.\"</i>",
+            "attribution": "— Jens Stålnacke, Mine Worker, Luleå"
           }
         },
-        "row_yYLgHd": {
-          "type": "row",
+        "case_VTwpni": {
+          "type": "case",
           "settings": {
-            "is_drye": false,
-            "solution": "Glove flipping (no liner)",
-            "skin_status": "no",
-            "skin_text": "Opens with each peel",
-            "col_3_status": "no",
-            "col_3_text": "Tear every peel-off",
-            "cost": "Free up front. More nitriles every week.",
-            "cost_math": ""
-          }
-        },
-        "row_n3geTf": {
-          "type": "row",
-          "settings": {
-            "is_drye": false,
-            "solution": "Barrier creams",
-            "skin_status": "no",
-            "skin_text": "Wears off — skin still wet underneath",
-            "col_3_status": "no",
-            "col_3_text": "Still tear wet",
-            "cost": "$225/yr",
-            "cost_math": ""
+            "before_image": "shopify://shop_images/c875f5ab-ae50-4921-a2a5-56b7ebd0b2d5_1_1.webp",
+            "before_alt": "Before image",
+            "after_image": "shopify://shop_images/Screenshot_2.webp",
+            "after_alt": "After image",
+            "timeline": "After one season",
+            "quote": "<i>\"Cracks all over my knuckles, redness and eczema. My hands stay drier, grip is better, skin holds up.\"</i>",
+            "attribution": "— Linnéa Pettersson Dove, SDHL Swedish Champion 2025, Frölunda HC"
           }
         }
       },
       "block_order": [
-        "row_RFGfTw",
-        "row_UgzQWk",
-        "row_yYLgHd",
-        "row_n3geTf"
+        "case_RKkLBU",
+        "case_jUnWGy",
+        "case_VTwpni"
       ],
-      "name": "DRYE Competitive Table",
+      "name": "DRYE Before / After",
       "settings": {
-        "eyebrow": "",
-        "heading": "What you've actually tried.",
-        "heading_emphasis": "And what it costs you.",
-        "body": "Everything works. <strong>Until the gloves get wet inside.</strong>",
-        "mobile_hint": "",
-        "col_1": "Solution",
-        "col_2": "What happens to your skin",
-        "col_3": "Effect on nitriles",
-        "col_4": "Cost per year",
-        "note_text": "",
-        "note_strong": ""
+        "micro_label": "User photos",
+        "heading_line_1": "Why millions of tradespeople thought",
+        "heading_line_2": "cream was the answer.",
+        "intro": "Sealed gloves cause <strong>maceration. </strong>No cream, powder, or steroid on earth <br>can solve that.",
+        "before_label": "Before",
+        "after_label": "After",
+        "note": ""
       }
     },
     "drye_research_study_breakdown_TrRXii": {
@@ -1081,9 +1137,10 @@
     "drye_objection_cards_PPDxpW",
     "apps_rjNBgt",
     "drye_mechanics_time2_wd4WRy",
+    "drye_competitive_table_Rhhded",
     "drye_mechanics_identification_gallery_hdX8eB",
     "drye_mechanics_cta_pYjFDe",
-    "drye_competitive_table_Rhhded",
+    "drye_before_after_xDYP4i",
     "drye_research_study_breakdown_TrRXii",
     "drye_mechanics_cta_2_krhUaj"
   ]
