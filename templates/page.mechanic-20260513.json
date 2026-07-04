@@ -320,75 +320,73 @@
         "swipe_label": "Swipe"
       }
     },
-    "drye_mechanics_time_promise_AcqgeQ": {
-      "type": "drye-mechanics-time-promise",
-      "name": "DRYE Mechanics Time",
-      "settings": {
-        "eyebrow": "— A. Riahi",
-        "heading": "Eight hours in. The glove is humid. Your skin is dry.",
-        "body": "<p><em>\"After 6 hours under rubber gloves, my hands felt wet inside. Took the gloves off — completely dry. Such a mindfuck.\"</em><br/><br/></p>"
-      }
-    },
-    "drye_mechanics_mechanism_zTDaza": {
+    "drye_mechanics_mechanism_GdehX4": {
       "type": "drye-mechanics-mechanism",
       "blocks": {
-        "old_step_pCgg9C": {
+        "old_step_WnkfGT": {
           "type": "old_step",
           "settings": {
             "icon": "✕",
-            "text": "Sweat enters the fabric"
+            "text": "Sweat enters the fabric and stays"
           }
         },
-        "old_step_DH43id": {
+        "old_step_ND4P9W": {
           "type": "old_step",
           "settings": {
             "icon": "✕",
-            "text": "Fabric fills up"
+            "text": "At saturation, moisture sits on skin"
           }
         },
-        "old_step_9YL9Tt": {
+        "old_step_tbPCT8": {
           "type": "old_step",
           "settings": {
             "icon": "✕",
-            "text": "Moisture sits back against skin"
+            "text": "Sealed glove traps heat and humidity"
           }
         },
-        "old_step_MqLh9M": {
+        "old_step_YCxKNa": {
           "type": "old_step",
           "settings": {
             "icon": "✕",
-            "text": "Sealed gloves trap heat and humidity"
+            "text": "Heat and humidity trap inside the glove"
           }
         },
-        "drye_step_kjrQEz": {
+        "old_step_hpd3AL": {
+          "type": "old_step",
+          "settings": {
+            "icon": "✕",
+            "text": "Same wet glove on shift 1 as shift 8"
+          }
+        },
+        "drye_step_arbQH4": {
           "type": "drye_step",
           "settings": {
             "icon": "→",
-            "text": "Skin side repels moisture"
+            "text": "Skin side repels - sweat cannot sit there"
           }
         },
-        "drye_step_gjgAV8": {
+        "drye_step_tHJNnq": {
           "type": "drye_step",
           "settings": {
             "icon": "→",
-            "text": "Outer side pulls it away"
+            "text": "Outer side pulls moisture toward it"
           }
         },
-        "drye_step_qGcbwW": {
+        "drye_step_EemQxC": {
           "type": "drye_step",
           "settings": {
             "icon": "→",
-            "text": "Transport continues without saturation"
+            "text": "Continuous transport, no saturation point"
           }
         },
-        "drye_step_KLRj4P": {
+        "drye_step_i8Gd4j": {
           "type": "drye_step",
           "settings": {
             "icon": "→",
-            "text": "Patent filed March 2026."
+            "text": "One principle. Patent filed March 2026."
           }
         },
-        "property_7FLbrU": {
+        "property_GTTth9": {
           "type": "property",
           "disabled": true,
           "settings": {
@@ -397,7 +395,7 @@
             "body": "The gradient functions regardless of external pressure. Compression makes the transport faster, not weaker."
           }
         },
-        "property_khWmwx": {
+        "property_EVUpgp": {
           "type": "property",
           "disabled": true,
           "settings": {
@@ -406,7 +404,7 @@
             "body": "Transport is continuous. There is no maximum capacity after which function stops. Cotton has one. DRYE does not."
           }
         },
-        "property_PLmb3z": {
+        "property_K7VpdM": {
           "type": "property",
           "disabled": true,
           "settings": {
@@ -417,17 +415,18 @@
         }
       },
       "block_order": [
-        "old_step_pCgg9C",
-        "old_step_DH43id",
-        "old_step_9YL9Tt",
-        "old_step_MqLh9M",
-        "drye_step_kjrQEz",
-        "drye_step_gjgAV8",
-        "drye_step_qGcbwW",
-        "drye_step_KLRj4P",
-        "property_7FLbrU",
-        "property_khWmwx",
-        "property_PLmb3z"
+        "old_step_WnkfGT",
+        "old_step_ND4P9W",
+        "old_step_tbPCT8",
+        "old_step_YCxKNa",
+        "old_step_hpd3AL",
+        "drye_step_arbQH4",
+        "drye_step_tHJNnq",
+        "drye_step_EemQxC",
+        "drye_step_i8Gd4j",
+        "property_GTTth9",
+        "property_EVUpgp",
+        "property_K7VpdM"
       ],
       "custom_css": [
         ".mech-mechanism {padding-bottom: 0px !important;}",
@@ -435,16 +434,25 @@
       ],
       "name": "DRYE Mechanics Mechanism",
       "settings": {
-        "eyebrow": "The invention",
+        "eyebrow": "The mechanism",
         "heading_line_1": "Moisture doesn't need to be absorbed.",
         "heading_emphasis": "It needs a route out.",
         "body": "",
         "old_label": "Every liner before DRYE",
         "old_title": "Absorb and hold",
-        "old_desc": "",
+        "old_desc": "<p>Cotton, silk, merino, polyester wicking. All fill with moisture until saturated - then<strong> hold it against your skin</strong> for the rest of the shift.</p>",
         "drye_label": "DRYE · ASYMMETRIC LAYERING",
-        "drye_title": "Repel. Pull. Route out.",
-        "drye_desc": ""
+        "drye_title": "Repel. Pull. No saturation.",
+        "drye_desc": "<p>Two fibers, one fabric. The skin side is hydrophobic - water cannot bond to it. The outer side pulls moisture toward it. <strong>The skin side repels. The outer side pulls. Sweat exits — it doesn't pool..</strong></p>"
+      }
+    },
+    "drye_mechanics_time_promise_AcqgeQ": {
+      "type": "drye-mechanics-time-promise",
+      "name": "DRYE Mechanics Time",
+      "settings": {
+        "eyebrow": "— A. Riahi",
+        "heading": "Eight hours in. The glove is humid. Your skin is dry.",
+        "body": "<p><em>\"After 6 hours under rubber gloves, my hands felt wet inside. Took the gloves off — completely dry. Such a mindfuck.\"</em><br/><br/></p>"
       }
     },
     "drye_structural_answer_p3UjcR": {
@@ -887,8 +895,8 @@
     "drye_new_identification_atPnnz",
     "drye_worker_grid_UVf4QL",
     "drye_evidence_xmyAdp",
+    "drye_mechanics_mechanism_GdehX4",
     "drye_mechanics_time_promise_AcqgeQ",
-    "drye_mechanics_mechanism_zTDaza",
     "drye_structural_answer_p3UjcR",
     "drye_objection_cards_PPDxpW",
     "apps_rjNBgt",
