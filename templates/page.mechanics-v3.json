@@ -9,6 +9,38 @@
  */
 {
   "sections": {
+    "drye_liner_benefit_strip_t7K7Xi": {
+      "type": "drye-liner-benefit-strip",
+      "blocks": {
+        "benefit_nQaVjt": {
+          "type": "benefit",
+          "settings": {
+            "text": "Dry hands"
+          }
+        },
+        "benefit_hh6BtV": {
+          "type": "benefit",
+          "settings": {
+            "text": "Cleaner hands"
+          }
+        },
+        "benefit_DfqwRt": {
+          "type": "benefit",
+          "settings": {
+            "text": "6–12 months"
+          }
+        }
+      },
+      "block_order": [
+        "benefit_nQaVjt",
+        "benefit_hh6BtV",
+        "benefit_DfqwRt"
+      ],
+      "name": "DRYE Liner Benefit Strip",
+      "settings": {
+        "section_id": "liner-benefits"
+      }
+    },
     "drye_liner_hero_AqHpD3": {
       "type": "drye-liner-hero",
       "blocks": {
@@ -1070,6 +1102,7 @@
     }
   },
   "order": [
+    "drye_liner_benefit_strip_t7K7Xi",
     "drye_liner_hero_AqHpD3",
     "drye_worker_grid_CG6VUJ",
     "drye_evidence_V9B97n",
