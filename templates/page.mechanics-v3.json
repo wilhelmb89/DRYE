@@ -170,108 +170,43 @@
         "swipe_label": "Swipe"
       }
     },
-    "drye_evidence_V9B97n": {
-      "type": "drye-evidence",
+    "drye_liner_fail_cards_T7PmUD": {
+      "type": "drye-liner-fail-cards",
       "blocks": {
-        "card_hLkDz8": {
-          "type": "card",
+        "fail_cPwUbB": {
+          "type": "fail",
           "settings": {
-            "label": "exposure threshold",
-            "stat_prefix": "",
-            "stat": "5–7",
-            "stat_suffix": "min",
-            "stat_qualitative": false,
-            "body": "<strong>In a sealed glove: </strong>relative humidity hits 90% within 5–7 minutes. Skin temperature climbs to 95°F.",
-            "source": "Park & Lee 2025"
+            "title": "Cotton absorbs",
+            "description": "Takes in sweat first — then becomes the wet layer pressed against your skin. The harder you work, the worse it gets."
           }
         },
-        "card_BBwEUV": {
-          "type": "card",
+        "fail_GNGq9z": {
+          "type": "fail",
           "settings": {
-            "label": "WET SKIN SOFTENS",
-            "stat_prefix": "",
-            "stat": "27",
-            "stat_suffix": "min",
-            "stat_qualitative": false,
-            "body": "<strong>After 27 minutes: </strong>skin damage risk doubles in women, 55 minutes in men. Most shifts run 3-6 hours - 8x the threshold.",
-            "source": "Lund 2020, Scand J Work Environ Health"
+            "title": "Stays wet",
+            "description": "Wet fabric means wet hands, irritation, and odor. There's no exit route for moisture."
           }
         },
-        "card_QWjq3t": {
-          "type": "card",
+        "fail_wc6pTg": {
+          "type": "fail",
           "settings": {
-            "label": "maceration",
-            "stat_prefix": "",
-            "stat": "3",
-            "stat_suffix": "x swelling",
-            "stat_qualitative": false,
-            "body": "<strong>after 4 hours:</strong> your outer skin barrier swells 3x thicker. Oil, solvents and chemicals soak in deeper - into skin that can't fight back.",
-            "source": "Bouwstra 2003, J invest Dermatol"
-          }
-        },
-        "card_FRxDBe": {
-          "type": "card",
-          "settings": {
-            "label": "Wet skin lets more through",
-            "stat_prefix": "",
-            "stat": "3,6",
-            "stat_suffix": "x faster",
-            "stat_qualitative": false,
-            "body": "Hydrated human skin allowed some fat-soluble model compounds to <strong>penetrate up to 3.6× more in vitro.</strong>",
-            "source": "Hikima & Maibach, Biol Pharm Bull, 2006."
-          }
-        },
-        "card_TJ3NHr": {
-          "type": "card",
-          "settings": {
-            "label": "Who it hits",
-            "stat_prefix": "",
-            "stat": "59.5",
-            "stat_suffix": "%",
-            "stat_qualitative": false,
-            "body": "<strong> Across 691 mechanics screened:</strong> 59.5% had visible hand damage. Not from accidents - from daily exposure to tools and sealed gloves.",
-            "source": "NACDG 2017"
-          }
-        },
-        "card_r9m4MJ": {
-          "type": "card",
-          "disabled": true,
-          "settings": {
-            "label": "Workforce cost",
-            "stat_prefix": "",
-            "stat": "57",
-            "stat_suffix": "% sick leave",
-            "stat_qualitative": false,
-            "body": "<strong>In chronic cases</strong> 57% take sick leave. 1 in 4 change or leave their trade. Direct healthcare costs run thousands per case, year after year.",
-            "source": "Armstrong 2022, DIepgen"
-          }
-        },
-        "bridge_QYWYJL": {
-          "type": "bridge",
-          "settings": {
-            "label": "The mechanism",
-            "paradigm": "Every glove, liner, barrier cream and powder fails on the physics.",
-            "mechanism": "DRYE routes sweat from skin to outer fabric. One-directional gradient. We call it <span style=\"color: #fff; font-weight: 700;\">Asymmetric layering.</span>",
-            "cta_label": "See how it works",
-            "cta_link": "#mechanics-saturation"
+            "title": "Glove flip buys minutes",
+            "description": "Same wet hand goes right back in. Two hours later, same problem."
           }
         }
       },
       "block_order": [
-        "card_hLkDz8",
-        "card_BBwEUV",
-        "card_QWjq3t",
-        "card_FRxDBe",
-        "card_TJ3NHr",
-        "card_r9m4MJ",
-        "bridge_QYWYJL"
+        "fail_cPwUbB",
+        "fail_GNGq9z",
+        "fail_wc6pTg"
       ],
-      "name": "DRYE Evidence",
+      "name": "DRYE Liner Fail Cards",
       "settings": {
-        "eyebrow": "",
-        "heading": "Why every mechanic should care.\n<em class=\"dryeNEW-em\"><br>Wet skin lets more through.</em>",
-        "body": "Not from the outside. <strong>From what happens inside your gloves.</strong>",
-        "swipe_label": "Swipe"
+        "section_id": "liner-fails",
+        "eyebrow": "The usual fixes",
+        "heading": "Why every other liner",
+        "heading_emphasis": "fails.",
+        "body": "You've tried them. That's not what this is."
       }
     },
     "drye_new_problem_beat_1_R7GgRp": {
@@ -1105,7 +1040,7 @@
     "drye_liner_benefit_strip_t7K7Xi",
     "drye_liner_hero_AqHpD3",
     "drye_worker_grid_CG6VUJ",
-    "drye_evidence_V9B97n",
+    "drye_liner_fail_cards_T7PmUD",
     "drye_new_problem_beat_1_R7GgRp",
     "drye_product_reality_grid_ggq47H",
     "drye_objection_cards_7gyajr",
