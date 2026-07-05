@@ -161,26 +161,3 @@
     font-size: 11px;
   }
 }
-/* ── Light (white) scheme — opt-in via section setting, default stays dark ── */
-.dryeNEW-closing-cta--light {
-  background: var(--bg);
-}
-.dryeNEW-closing-cta--light .dryeNEW-closing-cta__micro {
-  color: var(--emerald);
-}
-.dryeNEW-closing-cta--light .dryeNEW-closing-cta__heading {
-  color: var(--deep);
-}
-.dryeNEW-closing-cta--light .dryeNEW-closing-cta__heading-em {
-  color: var(--sage);
-}
-.dryeNEW-closing-cta--light .dryeNEW-closing-cta__body {
-  color: var(--muted);
-}
-.dryeNEW-closing-cta--light .dryeNEW-closing-cta__btn--secondary {
-  color: var(--deep);
-  border-color: var(--border);
-}
-.dryeNEW-closing-cta--light .dryeNEW-closing-cta__meta {
-  color: var(--caption);
-}
