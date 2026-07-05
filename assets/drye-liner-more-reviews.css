@@ -19,7 +19,7 @@
 }
 
 .drye-liner-more-reviews__rating-stars {
-  color: var(--gold);
+  color: var(--gold, #F5B301);
   font-size: 13px;
   letter-spacing: 1px;
 }
@@ -67,7 +67,7 @@
 }
 
 .drye-liner-more-reviews__stars {
-  color: var(--gold);
+  color: var(--gold, #F5B301);
   font-size: 12px;
   letter-spacing: 1.5px;
   margin-bottom: var(--space-8);
@@ -163,6 +163,13 @@
 @media (min-width: 768px) {
   .drye-liner-more-reviews__dots {
     display: none;
+  }
+
+  /* Cap the carousel viewport at the site content width and center it,
+     so cards align with the header instead of spanning the full screen. */
+  .drye-liner-more-reviews__wrap {
+    max-width: calc(var(--max-width) + var(--page-pad) * 2);
+    margin-inline: auto;
   }
 
   .drye-liner-more-reviews__card {
