@@ -1,8 +1,9 @@
 {{ 'drye-liner-objection-reviews.css' | asset_url | stylesheet_tag }}
+{{ 'drye-liner-swipe.js' | asset_url | script_tag }}
 
 <section class="dryeNEW-section drye-liner-objection-reviews" id="{{ section.settings.section_id | default: 'liner-objections' }}" data-section-id="{{ section.id }}">
   <div class="dryeNEW-container">
-    <div class="drye-liner-objection-reviews__widget" id="drye-liner-objection-reviews-{{ section.id }}">
+    <div class="drye-liner-objection-reviews__inner" id="drye-liner-objection-reviews-{{ section.id }}">
       {%- if section.settings.eyebrow != blank -%}
         <span class="dryeNEW-micro drye-liner-objection-reviews__eyebrow">{{ section.settings.eyebrow }}</span>
       {%- endif -%}
@@ -17,56 +18,57 @@
           <span class="drye-liner-objection-reviews__score">{{ section.settings.rating_score }}</span>
         {%- endif -%}
         {%- if section.settings.rating_count_text != blank -%}
+          <span class="drye-liner-objection-reviews__dot" aria-hidden="true">·</span>
           <a href="{{ section.settings.rating_count_url | default: '#' }}" class="drye-liner-objection-reviews__count">{{ section.settings.rating_count_text }}</a>
         {%- endif -%}
       </div>
 
-      <div class="drye-liner-objection-reviews__panels">
-        {%- for block in section.blocks -%}
-          {%- if block.type == 'review' -%}
-            <div
-              class="drye-liner-objection-reviews__panel{% if forloop.first %} is-active{% endif %}"
-              data-review-index="{{ forloop.index0 }}"
-              {{ block.shopify_attributes }}
-            >
-              {%- if block.settings.question != blank -%}
-                <div class="drye-liner-objection-reviews__question">{{ block.settings.question }}</div>
+      <div class="drye-liner-objection-reviews__slider">
+        <div class="drye-liner-objection-reviews__wrap" data-drye-liner-swipe-wrap>
+          <div class="drye-liner-objection-reviews__track" id="drye-liner-objection-reviews-track-{{ section.id }}">
+            {%- for block in section.blocks -%}
+              {%- if block.type == 'review' -%}
+                <div class="drye-liner-objection-reviews__card" data-review-index="{{ forloop.index0 }}" {{ block.shopify_attributes }}>
+                  {%- if block.settings.question != blank -%}
+                    <div class="drye-liner-objection-reviews__question">{{ block.settings.question }}</div>
+                  {%- endif -%}
+
+                  {%- if block.settings.quote != blank -%}
+                    <p class="drye-liner-objection-reviews__quote">{{ block.settings.quote }}</p>
+                  {%- endif -%}
+
+                  <div class="drye-liner-objection-reviews__attribution">
+                    <span class="drye-liner-objection-reviews__verified" aria-hidden="true">✓</span>
+                    <span class="drye-liner-objection-reviews__name">{{ block.settings.name }}</span>
+                  </div>
+
+                  {%- if block.settings.role != blank -%}
+                    <div class="drye-liner-objection-reviews__role">{{ block.settings.role }}</div>
+                  {%- endif -%}
+                </div>
               {%- endif -%}
-
-              {%- if block.settings.quote != blank -%}
-                <p class="drye-liner-objection-reviews__quote">{{ block.settings.quote }}</p>
-              {%- endif -%}
-
-              <div class="drye-liner-objection-reviews__attribution">
-                <span class="drye-liner-objection-reviews__verified" aria-hidden="true">✓</span>
-                <span class="drye-liner-objection-reviews__name">{{ block.settings.name }}</span>
-              </div>
-
-              {%- if block.settings.role != blank -%}
-                <div class="drye-liner-objection-reviews__role">{{ block.settings.role }}</div>
-              {%- endif -%}
-            </div>
-          {%- endif -%}
-        {%- endfor -%}
-      </div>
-
-      <div class="drye-liner-objection-reviews__nav">
-        <div class="drye-liner-objection-reviews__nav-btns">
-          <button
-            type="button"
-            class="drye-liner-objection-reviews__nav-btn"
-            data-drye-liner-objection-reviews-prev
-            aria-label="Previous review"
-          >←</button>
-          <button
-            type="button"
-            class="drye-liner-objection-reviews__nav-btn"
-            data-drye-liner-objection-reviews-next
-            aria-label="Next review"
-          >→</button>
+            {%- endfor -%}
+          </div>
         </div>
 
-        <a href="{{ section.settings.rating_count_url | default: '#' }}" class="drye-liner-objection-reviews__readall">Read all</a>
+        <div class="drye-liner-objection-reviews__nav">
+          <div class="drye-liner-objection-reviews__nav-btns">
+            <button
+              type="button"
+              class="drye-liner-objection-reviews__nav-btn"
+              id="drye-liner-objection-reviews-prev-{{ section.id }}"
+              aria-label="Previous review"
+            >←</button>
+            <button
+              type="button"
+              class="drye-liner-objection-reviews__nav-btn"
+              id="drye-liner-objection-reviews-next-{{ section.id }}"
+              aria-label="Next review"
+            >→</button>
+          </div>
+
+          <a href="{{ section.settings.rating_count_url | default: '#' }}" class="drye-liner-objection-reviews__readall">Read all →</a>
+        </div>
       </div>
     </div>
   </div>
@@ -74,39 +76,20 @@
 
 <script>
   (function () {
-    var root = document.getElementById('drye-liner-objection-reviews-{{ section.id }}');
-    if (!root) return;
-
-    var panels = root.querySelectorAll('.drye-liner-objection-reviews__panel');
-    if (!panels.length) return;
-
-    var current = 0;
-    panels.forEach(function (panel, i) {
-      if (panel.classList.contains('is-active')) {
-        current = i;
-      }
-    });
-
-    function show(index) {
-      panels.forEach(function (panel, i) {
-        panel.classList.toggle('is-active', i === index);
-      });
-      current = index;
-    }
-
-    var prevBtn = root.querySelector('[data-drye-liner-objection-reviews-prev]');
-    var nextBtn = root.querySelector('[data-drye-liner-objection-reviews-next]');
-
-    if (prevBtn) {
-      prevBtn.addEventListener('click', function () {
-        show((current - 1 + panels.length) % panels.length);
+    function init() {
+      if (typeof initDryeLinerSwipe !== 'function') return;
+      initDryeLinerSwipe({
+        trackId: 'drye-liner-objection-reviews-track-{{ section.id }}',
+        prevId: 'drye-liner-objection-reviews-prev-{{ section.id }}',
+        nextId: 'drye-liner-objection-reviews-next-{{ section.id }}',
+        cardSelector: '.drye-liner-objection-reviews__card',
+        gap: 8
       });
     }
-
-    if (nextBtn) {
-      nextBtn.addEventListener('click', function () {
-        show((current + 1) % panels.length);
-      });
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', init);
+    } else {
+      init();
     }
   })();
 </script>

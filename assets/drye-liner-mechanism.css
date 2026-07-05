@@ -1,29 +1,34 @@
+/* DRYE Liner — Mechanism (DARK, bg-ink, reversed text). Scoped under .drye-liner-mechanism */
+
 .drye-liner-mechanism {
   background: var(--bg-ink);
-  color: rgba(255, 255, 255, 0.88);
+  color: #C8D4DA;
+  padding-block: 40px;
 }
 
-.drye-liner-mechanism .dryeNEW-h2 {
-  color: #fff;
-}
-
-.drye-liner-mechanism .dryeNEW-body {
-  color: rgba(255, 255, 255, 0.75);
+.drye-liner-mechanism__eyebrow {
+  font-size: var(--fs-micro-2);
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--sage);
+  margin-bottom: var(--space-8);
 }
 
 .drye-liner-mechanism__heading {
-  margin-top: var(--space-8);
-}
-
-.drye-liner-mechanism__heading-em {
-  display: block;
-  margin-top: var(--space-4);
-  color: var(--emerald);
+  font-size: clamp(20px, 5.5vw, 26px);
+  font-weight: var(--fw-semibold);
+  letter-spacing: -0.03em;
+  line-height: 1.06;
+  color: var(--white-100);
+  margin-bottom: var(--space-10);
 }
 
 .drye-liner-mechanism__body {
-  margin-top: var(--space-12);
-  max-width: 480px;
+  font-size: var(--fs-body);
+  line-height: 1.6;
+  color: #C8D4DA;
+  margin-bottom: var(--space-16);
 }
 
 /* Cotton vs DRYE comparison */
@@ -36,8 +41,8 @@
 .drye-liner-mechanism__vs-label {
   text-align: center;
   font-family: var(--font-body);
-  font-size: 9px;
-  font-weight: var(--fw-semibold);
+  font-size: var(--fs-micro-2);
+  font-weight: 700;
   letter-spacing: 0.24em;
   text-transform: uppercase;
   color: var(--sage);
@@ -52,7 +57,7 @@
   top: 50%;
   width: calc(50% - 48px);
   height: 1px;
-  background: rgba(255, 255, 255, 0.15);
+  background: var(--white-015);
 }
 
 .drye-liner-mechanism__vs-label::before {
@@ -70,7 +75,7 @@
 }
 
 .drye-liner-mechanism__vs-card {
-  border: 1px solid rgba(255, 255, 255, 0.15);
+  border: 1px solid var(--white-015);
   overflow: hidden;
   display: flex;
   flex-direction: column;
@@ -82,7 +87,7 @@
 
 .drye-liner-mechanism__media {
   aspect-ratio: 1 / 1;
-  background: #fafafa;
+  background: #FAFAFA;
   position: relative;
   overflow: hidden;
 }
@@ -109,11 +114,11 @@
 
 .drye-liner-mechanism__vs-name {
   font-family: var(--font-display);
-  font-size: 12px;
+  font-size: var(--fs-caption);
   font-weight: var(--fw-semibold);
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.5);
+  color: var(--white-050);
   margin-bottom: var(--space-6);
 }
 
@@ -126,25 +131,25 @@
   font-family: var(--font-body);
   font-size: 12px;
   line-height: 1.4;
-  color: rgba(255, 255, 255, 0.75);
+  color: var(--white-075);
 }
 
 .drye-liner-mechanism__vs-card--drye .drye-liner-mechanism__vs-desc {
-  color: rgba(255, 255, 255, 0.88);
+  color: var(--white-085);
   font-weight: var(--fw-medium);
 }
 
 /* Asymmetric layering explainer */
 
 .drye-liner-mechanism__diagram {
-  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  border-top: 1px solid var(--white-008);
   padding-top: var(--space-24);
   margin-top: var(--space-8);
 }
 
 .drye-liner-mechanism__diagram-label {
   font-family: var(--font-body);
-  font-size: 9px;
+  font-size: var(--fs-micro-2);
   font-weight: 700;
   letter-spacing: 0.16em;
   text-transform: uppercase;
@@ -159,7 +164,7 @@
 
 .drye-liner-mechanism__step-label {
   font-family: var(--font-body);
-  font-size: 9px;
+  font-size: var(--fs-micro-2);
   font-weight: 700;
   letter-spacing: 0.14em;
   text-transform: uppercase;
@@ -171,7 +176,7 @@
   font-family: var(--font-display);
   font-size: 17px;
   font-weight: var(--fw-semibold);
-  color: #fff;
+  color: var(--white-100);
   letter-spacing: -0.02em;
   margin-bottom: var(--space-4);
 }
@@ -180,7 +185,7 @@
   margin: 0;
   font-family: var(--font-body);
   font-size: 13px;
-  color: #c8d4da;
+  color: #C8D4DA;
   line-height: 1.5;
 }
 
@@ -193,10 +198,30 @@
 }
 
 @media (min-width: 768px) {
+  .drye-liner-mechanism {
+    padding-block: 88px;
+  }
+
+  .drye-liner-mechanism__heading {
+    font-size: var(--fs-section-h2);
+  }
+
+  .drye-liner-mechanism__step-title {
+    font-size: var(--fs-sub-h3);
+  }
+
   .drye-liner-mechanism__inner {
     max-width: 900px;
     margin-inline: auto;
     text-align: center;
+  }
+
+  .drye-liner-mechanism__inner .drye-liner-mechanism__eyebrow,
+  .drye-liner-mechanism__inner .drye-liner-mechanism__heading,
+  .drye-liner-mechanism__inner .drye-liner-mechanism__body {
+    max-width: 760px;
+    margin-left: auto;
+    margin-right: auto;
   }
 
   .drye-liner-mechanism__vs-block {

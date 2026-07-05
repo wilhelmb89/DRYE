@@ -18,8 +18,12 @@
       </h2>
     {%- endif -%}
 
+    {%- assign proof_has_media = false -%}
+    {%- if section.settings.video_url != blank or section.settings.media_image != blank -%}
+      {%- assign proof_has_media = true -%}
+    {%- endif -%}
     <div class="drye-liner-proof__media-wrap">
-      <div class="drye-liner-proof__media">
+      <div class="drye-liner-proof__media{% unless proof_has_media %} drye-liner-proof__media--empty{% endunless %}">
         {%- if section.settings.media_badge != blank -%}
           <span class="drye-liner-proof__media-badge">{{ section.settings.media_badge }}</span>
         {%- endif -%}
@@ -75,13 +79,15 @@
               loading: 'lazy',
               widths: '480, 720, 1000, 1400, 1600'
           }}
-        {%- else -%}
-          <div class="drye-liner-proof__placeholder">
+        {%- endif -%}
+
+        {%- if section.settings.media_placeholder_label != blank or section.settings.media_placeholder_title != blank -%}
+          <div class="drye-liner-proof__media-caption">
             {%- if section.settings.media_placeholder_label != blank -%}
-              <span class="drye-liner-proof__placeholder-label">{{ section.settings.media_placeholder_label }}</span>
+              <span class="drye-liner-proof__caption-label">{{ section.settings.media_placeholder_label }}</span>
             {%- endif -%}
             {%- if section.settings.media_placeholder_title != blank -%}
-              <span class="drye-liner-proof__placeholder-title">{{ section.settings.media_placeholder_title }}</span>
+              <span class="drye-liner-proof__caption-title">{{ section.settings.media_placeholder_title }}</span>
             {%- endif -%}
           </div>
         {%- endif -%}
@@ -97,11 +103,10 @@
         <span class="drye-liner-proof__stat-name">{{ section.settings.drye_label }}</span>
         <span class="drye-liner-proof__stat-num">{{ section.settings.drye_value }}</span>
       </div>
+      {%- if section.settings.source_text != blank -%}
+        <div class="drye-liner-proof__source">{{ section.settings.source_text }}</div>
+      {%- endif -%}
     </div>
-
-    {%- if section.settings.source_text != blank -%}
-      <div class="drye-liner-proof__source">{{ section.settings.source_text }}</div>
-    {%- endif -%}
 
     {%- if section.settings.cta_label != blank -%}
       <div class="drye-liner-proof__cta-wrap">
@@ -224,13 +229,13 @@
     {
       "type": "text",
       "id": "media_placeholder_label",
-      "label": "Placeholder label (shown when no image)",
+      "label": "Media caption — small label (overlays video/image)",
       "default": "Reserved for lab test still"
     },
     {
       "type": "text",
       "id": "media_placeholder_title",
-      "label": "Placeholder title (shown when no image)",
+      "label": "Media caption — title (overlays video/image)",
       "default": "Water absorption test — Textile Fashion Center, Swedish School of Textiles"
     },
     {

@@ -3,6 +3,33 @@
 .drye-liner-shift-changes {
   background: var(--bg-soft);
   color: var(--body);
+  border-top: 1px solid var(--border);
+  padding-block: 40px;
+}
+
+.drye-liner-shift-changes .dryeNEW-micro {
+  font-size: var(--fs-micro-2);
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--emerald);
+  margin-bottom: var(--space-8);
+}
+
+.drye-liner-shift-changes .dryeNEW-h2 {
+  font-size: clamp(20px, 5.5vw, 26px);
+  font-weight: var(--fw-semibold);
+  letter-spacing: -0.03em;
+  line-height: 1.06;
+  color: var(--deep);
+  margin-bottom: var(--space-10);
+}
+
+.drye-liner-shift-changes .dryeNEW-body {
+  font-size: var(--fs-body);
+  line-height: 1.6;
+  color: var(--muted);
+  margin-bottom: var(--space-16);
 }
 
 .drye-liner-shift-changes__stack {
@@ -65,6 +92,14 @@
 }
 
 @media (min-width: 768px) {
+  .drye-liner-shift-changes {
+    padding-block: 88px;
+  }
+
+  .drye-liner-shift-changes .dryeNEW-h2 {
+    font-size: var(--fs-section-h2);
+  }
+
   .drye-liner-shift-changes__inner {
     text-align: center;
   }

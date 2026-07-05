@@ -1,9 +1,40 @@
+.drye-liner-product-clarity {
+  border-top: 1px solid var(--border);
+  padding-top: 40px;
+  padding-bottom: 40px;
+}
+
+/* Mobile: DOM order is text(intro, specs) then image, but the visual
+   order must be intro -> image -> specs. display:contents on the text
+   wrapper lets flex + order arrange the three parts. */
 .drye-liner-product-clarity__inner {
-  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.drye-liner-product-clarity__text {
+  display: contents;
+}
+
+.drye-liner-product-clarity__intro {
+  order: 1;
+}
+
+.drye-liner-product-clarity__image {
+  order: 2;
+}
+
+.drye-liner-product-clarity__specs {
+  order: 3;
 }
 
 .drye-liner-product-clarity__heading {
-  margin-bottom: var(--space-16);
+  font-size: clamp(20px, 5.5vw, 26px);
+  font-weight: var(--fw-semibold);
+  letter-spacing: -0.03em;
+  line-height: 1.06;
+  color: var(--deep);
+  margin-bottom: var(--space-10);
 }
 
 .drye-liner-product-clarity__heading em {
@@ -13,7 +44,9 @@
 }
 
 .drye-liner-product-clarity__body {
+  line-height: 1.6;
   color: var(--muted);
+  margin-bottom: var(--space-16);
 }
 
 .drye-liner-product-clarity__image {
@@ -49,7 +82,7 @@
   padding: 0 20px;
 }
 
-.drye-liner-product-clarity__specs {
+.drye-liner-product-clarity__spec-list {
   list-style: none;
   border-top: 1px solid var(--border);
 }
@@ -77,24 +110,36 @@
 }
 
 @media (min-width: 768px) {
-  .drye-liner-product-clarity__inner {
-    display: grid;
-    grid-template-columns: 1fr 300px;
-    grid-template-areas: "intro image" "specs image";
-    column-gap: 56px;
-    align-items: start;
+  .drye-liner-product-clarity {
+    padding-top: 88px;
+    padding-bottom: 88px;
   }
 
-  .drye-liner-product-clarity__intro {
-    grid-area: intro;
+  .drye-liner-product-clarity__heading {
+    font-size: var(--fs-section-h2);
+  }
+
+  /* Desktop: text (intro + specs) left, real 2:3 image right.
+     Pair is centered (max 940) so the image sits nearer the middle. */
+  .drye-liner-product-clarity__inner {
+    display: grid;
+    grid-template-columns: 1fr 320px;
+    column-gap: 64px;
+    align-items: center;
+    max-width: 940px;
+    margin-inline: auto;
+  }
+
+  .drye-liner-product-clarity__text {
+    display: block;
+    max-width: 520px;
   }
 
   .drye-liner-product-clarity__specs {
-    grid-area: specs;
+    margin-top: 32px;
   }
 
   .drye-liner-product-clarity__image {
-    grid-area: image;
     margin: 0;
     aspect-ratio: 2 / 3;
   }

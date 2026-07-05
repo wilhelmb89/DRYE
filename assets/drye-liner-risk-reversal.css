@@ -3,6 +3,8 @@
 .drye-liner-risk-reversal {
   background: var(--bg);
   color: var(--body);
+  border-top: 1px solid var(--border);
+  padding-block: 40px;
 }
 
 .drye-liner-risk-reversal__wrap {
@@ -92,6 +94,10 @@
 }
 
 @media (min-width: 768px) {
+  .drye-liner-risk-reversal {
+    padding-block: 88px;
+  }
+
   .drye-liner-risk-reversal__inner {
     max-width: 640px;
     margin-inline: auto;

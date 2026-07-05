@@ -1,5 +1,6 @@
 .drye-liner-hero {
   padding: 0;
+  border-top: none;
 }
 
 .drye-liner-hero__inner {
@@ -52,10 +53,10 @@
 
 .drye-liner-hero__title {
   font-family: var(--font-display);
-  font-size: var(--fs-hero-h1);
+  font-size: clamp(30px, 8vw, 40px);
   font-weight: var(--fw-semibold);
-  letter-spacing: var(--ls-tight-display);
-  line-height: var(--lh-display);
+  letter-spacing: -0.03em;
+  line-height: 1.02;
   color: var(--deep);
   margin-bottom: var(--space-12);
 }
@@ -151,6 +152,10 @@
     flex: 1 1 auto;
     padding: 0;
     max-width: 500px;
+  }
+
+  .drye-liner-hero__title {
+    font-size: var(--fs-hero-h1);
   }
 
   .drye-liner-hero__sub {

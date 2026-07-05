@@ -1,5 +1,7 @@
 .drye-liner-more-reviews {
   background: var(--bg);
+  border-top: 1px solid var(--border);
+  padding-block: 40px;
 }
 
 .drye-liner-more-reviews__header {
@@ -20,14 +22,14 @@
 
 .drye-liner-more-reviews__rating-stars {
   color: var(--gold, #F5B301);
-  font-size: 13px;
+  font-size: 14px;
   letter-spacing: 1px;
 }
 
 .drye-liner-more-reviews__rating-score {
   font-family: var(--font-display);
   font-weight: var(--fw-semibold);
-  font-size: 13px;
+  font-size: 14px;
   color: var(--deep);
 }
 
@@ -162,8 +164,16 @@
 }
 
 @media (min-width: 768px) {
+  .drye-liner-more-reviews {
+    padding-block: 88px;
+  }
+
   .drye-liner-more-reviews__dots {
     display: none;
+  }
+
+  .drye-liner-more-reviews__nav {
+    margin-top: 20px;
   }
 
   /* Cap the carousel viewport at the site content width and center it,
