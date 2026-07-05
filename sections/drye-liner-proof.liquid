@@ -24,7 +24,36 @@
           <span class="drye-liner-proof__media-badge">{{ section.settings.media_badge }}</span>
         {%- endif -%}
 
-        {%- if section.settings.media_image != blank -%}
+        {%- if section.settings.video_url != blank -%}
+          {%- assign proof_v = section.settings.video_url -%}
+          {%- assign proof_v_lower = proof_v | downcase -%}
+          {%- if proof_v_lower contains '.mp4' or proof_v_lower contains '.webm' -%}
+            {%- comment -%} Direct video file (Cloudflare R2 / hosted MP4) {%- endcomment -%}
+            <video
+              class="drye-liner-proof__media-video"
+              autoplay
+              muted
+              loop
+              playsinline
+              preload="metadata"
+              {%- if section.settings.media_image != blank %} poster="{{ section.settings.media_image | image_url: width: 1600 }}"{% endif -%}
+            >
+              <source src="{{ proof_v }}" type="video/mp4">
+            </video>
+          {%- else -%}
+            {%- comment -%} Cloudflare Stream (or other) iframe embed — append autoplay params {%- endcomment -%}
+            {%- if proof_v contains '?' -%}{%- assign proof_sep = '&' -%}{%- else -%}{%- assign proof_sep = '?' -%}{%- endif -%}
+            <div class="drye-liner-proof__media-embed">
+              <iframe
+                src="{{ proof_v }}{{ proof_sep }}autoplay=true&muted=true&loop=true&controls=false"
+                loading="lazy"
+                allow="autoplay; fullscreen; picture-in-picture"
+                allowfullscreen
+                title="{{ section.settings.media_placeholder_title | escape }}"
+              ></iframe>
+            </div>
+          {%- endif -%}
+        {%- elsif section.settings.media_image != blank -%}
           {{
             section.settings.media_image
             | image_url: width: 1600
@@ -115,9 +144,15 @@
       "default": "WickView® test · 2025"
     },
     {
+      "type": "text",
+      "id": "video_url",
+      "label": "Video URL (MP4 — e.g. Cloudflare R2/Stream)",
+      "info": "If set, plays instead of the image. Autoplays muted and loops. Use a direct .mp4 URL."
+    },
+    {
       "type": "image_picker",
       "id": "media_image",
-      "label": "Media image"
+      "label": "Media image (also used as video poster)"
     },
     {
       "type": "text",
