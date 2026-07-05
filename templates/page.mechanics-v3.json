@@ -541,7 +541,6 @@
     },
     "drye_liner_proof_mYgPJa": {
       "type": "drye-liner-proof",
-      "disabled": true,
       "name": "DRYE Liner Proof",
       "settings": {
         "section_id": "liner-proof",
@@ -550,6 +549,7 @@
         "heading_emphasis": "82×",
         "heading_suffix": "further.",
         "media_badge": "WickView® test · 2025",
+        "video_url": "",
         "media_placeholder_label": "Reserved for lab test still",
         "media_placeholder_title": "Water absorption test — Textile Fashion Center, Swedish School of Textiles",
         "cotton_label": "Cotton liner",
@@ -572,40 +572,56 @@
         "link_url": "shopify://pages/research"
       }
     },
-    "drye_section_06_faq_LWrEnT": {
+    "drye_section_06_faq_NanA39": {
       "type": "drye-section-06-faq",
       "blocks": {
-        "faq_item_xtYLdP": {
+        "faq_item_t8zgQ4": {
           "type": "faq_item",
           "settings": {
-            "question": "Do they work with nitrile, latex, and vinyl gloves?",
-            "answer": "Yes — this is the primary use case. 0.4mm thin, designed to layer inside sealed gloves without affecting fit. Works with nitrile, latex, vinyl, rubber, hockey gloves, ski gloves, and work gloves."
+            "question": "Does it work under nitrile gloves specifically?",
+            "answer": "Yes. DRYE was developed and tested primarily for use under nitrile — the most common glove in healthcare, automotive, and lab environments. At 0.4mm, it fits inside any standard nitrile glove without affecting the fit or tactile feel. Dexterity is unchanged."
           }
         },
-        "faq_item_UgrcM9": {
+        "faq_item_3xXVG9": {
           "type": "faq_item",
           "settings": {
-            "question": "What's actually different from a cotton liner?",
-            "answer": "Cotton absorbs moisture and holds it. Once saturated, it becomes a wet layer between skin and glove — which accelerates breakdown. DRYE routes moisture through the fiber via a structural gradient. No absorption, no saturation point, nothing that can wash out."
+            "question": "What if it doesn't work for me?",
+            "answer": "Full refund within 30 days. No questions. The claim is that the physics works — if it doesn't change your shift, you pay nothing."
           }
         },
-        "faq_item_ByxiG6": {
+        "faq_item_7LAyF9": {
           "type": "faq_item",
           "settings": {
-            "question": "Will they make my gloves tighter or affect grip?",
-            "answer": "At 0.4mm, the liner adds less bulk than a standard glove lining. In the automotive field study, 9/9 workers reported zero dexterity compromise. Grip is typically maintained or improved — dry skin has better tactile contact with glove material."
+            "question": "Can I wash it? How?",
+            "answer": "Machine washable. Cold or warm cycle, no fabric softener. Do not tumble dry — air dry flat. Fabric softener coats fibres and can partially block the capillary transport channels. One pair per person, washed after each shift."
+          }
+        },
+        "faq_item_eWk7cW": {
+          "type": "faq_item",
+          "settings": {
+            "question": "How long does it last? Does it degrade?",
+            "answer": "With regular use and machine washing, DRYE lasts 6–12 months. The routing structure is built into the physical composition of the textile — it doesn't rely on a chemical treatment that can wash out. The mechanism doesn't degrade with washing."
+          }
+        },
+        "faq_item_cJEeEB": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Who it's not for",
+            "answer": "DRYE works when gloves stay on. If you remove them every few minutes — hairdressers feeling individual hair strands, food handlers in open kitchens — the routing mechanism doesn't have time to function and the liner becomes an extra layer with no benefit.It's also not for sterile surgical environments. Non-sterile use only."
           }
         }
       },
       "block_order": [
-        "faq_item_xtYLdP",
-        "faq_item_UgrcM9",
-        "faq_item_ByxiG6"
+        "faq_item_t8zgQ4",
+        "faq_item_3xXVG9",
+        "faq_item_7LAyF9",
+        "faq_item_eWk7cW",
+        "faq_item_cJEeEB"
       ],
       "name": "DRYE Section 06 — FAQ",
       "settings": {
-        "eyebrow": "Questions",
-        "heading": "Answers for the skeptical."
+        "eyebrow": "",
+        "heading": "Frequently asked questions"
       }
     }
   },
@@ -624,6 +640,6 @@
     "drye_mechanism_nav_n73TxK",
     "drye_liner_proof_mYgPJa",
     "drye_liner_research_callout_FVYMXh",
-    "drye_section_06_faq_LWrEnT"
+    "drye_section_06_faq_NanA39"
   ]
 }
