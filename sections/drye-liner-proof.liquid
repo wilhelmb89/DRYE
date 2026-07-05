@@ -27,7 +27,19 @@
         {%- if section.settings.video_url != blank -%}
           {%- assign proof_v = section.settings.video_url -%}
           {%- assign proof_v_lower = proof_v | downcase -%}
-          {%- if proof_v_lower contains '.mp4' or proof_v_lower contains '.webm' -%}
+          {%- if proof_v_lower contains '.m3u8' -%}
+            {%- comment -%} HLS stream (Cloudflare Stream manifest) — cover-fill video via hls.js {%- endcomment -%}
+            <video
+              class="drye-liner-proof__media-video"
+              data-proof-hls="{{ proof_v | escape }}"
+              autoplay
+              muted
+              loop
+              playsinline
+              preload="metadata"
+              {%- if section.settings.media_image != blank %} poster="{{ section.settings.media_image | image_url: width: 1600 }}"{% endif -%}
+            ></video>
+          {%- elsif proof_v_lower contains '.mp4' or proof_v_lower contains '.webm' -%}
             {%- comment -%} Direct video file (Cloudflare R2 / hosted MP4) {%- endcomment -%}
             <video
               class="drye-liner-proof__media-video"
@@ -41,7 +53,7 @@
               <source src="{{ proof_v }}" type="video/mp4">
             </video>
           {%- else -%}
-            {%- comment -%} Cloudflare Stream (or other) iframe embed — append autoplay params {%- endcomment -%}
+            {%- comment -%} Fallback: iframe embed (e.g. a Cloudflare Stream /iframe URL) {%- endcomment -%}
             {%- if proof_v contains '?' -%}{%- assign proof_sep = '&' -%}{%- else -%}{%- assign proof_sep = '?' -%}{%- endif -%}
             <div class="drye-liner-proof__media-embed">
               <iframe
@@ -100,6 +112,51 @@
     {%- endif -%}
   </div>
 </section>
+
+{%- if section.settings.video_url contains '.m3u8' -%}
+<script>
+  (function () {
+    function initHls(video, url) {
+      if (video.dataset.hlsReady) return;
+      video.dataset.hlsReady = '1';
+      var hls = new Hls({ autoStartLoad: true });
+      hls.loadSource(url);
+      hls.attachMedia(video);
+      hls.on(Hls.Events.MANIFEST_PARSED, function () {
+        var p = video.play();
+        if (p && p.catch) p.catch(function () {});
+      });
+    }
+    var loading = false;
+    function loadLib() {
+      if (loading) return;
+      loading = true;
+      var s = document.createElement('script');
+      s.src = 'https://cdn.jsdelivr.net/npm/hls.js@1';
+      s.onload = function () {
+        document.querySelectorAll('[data-proof-hls]').forEach(function (v) {
+          initHls(v, v.getAttribute('data-proof-hls'));
+        });
+      };
+      document.head.appendChild(s);
+    }
+    document.querySelectorAll('[data-proof-hls]').forEach(function (video) {
+      var url = video.getAttribute('data-proof-hls');
+      if (!url) return;
+      if (video.canPlayType('application/vnd.apple.mpegurl')) {
+        // Native HLS (Safari / iOS)
+        video.src = url;
+        var p = video.play();
+        if (p && p.catch) p.catch(function () {});
+      } else if (window.Hls) {
+        initHls(video, url);
+      } else {
+        loadLib();
+      }
+    });
+  })();
+</script>
+{%- endif -%}
 
 {% schema %}
 {
