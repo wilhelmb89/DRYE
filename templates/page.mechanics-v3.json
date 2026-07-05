@@ -726,16 +726,6 @@
     "drye_objection_cards_qF4PMr": {
       "type": "drye-objection-cards",
       "blocks": {
-        "card_qARGri": {
-          "type": "card",
-          "settings": {
-            "profession": "Automotive repair",
-            "question": "Is this just cotton?",
-            "quote": "<i>“These are incredible, nearly no more sweat in nitrile gloves, plus being so thin I barely notice them.”</i>",
-            "name": "@fordbodytech811",
-            "meta": "Automotive repair"
-          }
-        },
         "card_9WHzkY": {
           "type": "card",
           "settings": {
@@ -744,6 +734,16 @@
             "quote": "<i>\"The slim thickness gives great dexterity. They do a great job keeping sweat off my hands.\"</i><br>\n<br>",
             "name": "Shoujun S.",
             "meta": "Car detailing, Rosemead, CA"
+          }
+        },
+        "card_qARGri": {
+          "type": "card",
+          "settings": {
+            "profession": "Automotive repair",
+            "question": "Is this just cotton?",
+            "quote": "<i>“These are incredible, nearly no more sweat in nitrile gloves, plus being so thin I barely notice them.”</i>",
+            "name": "@fordbodytech811",
+            "meta": "Automotive repair"
           }
         },
         "card_n4drjQ": {
@@ -808,8 +808,8 @@
         }
       },
       "block_order": [
-        "card_qARGri",
         "card_9WHzkY",
+        "card_qARGri",
         "card_n4drjQ",
         "card_DNE7Kr",
         "card_eGaYGK",
@@ -942,16 +942,6 @@
         "rating_source_text": "via Trustpilot",
         "cta_label": "See all reviews on Trustpilot",
         "cta_url": "https://se.trustpilot.com/review/hudsverige.se"
-      }
-    },
-    "drye_mechanism_nav_n73TxK": {
-      "type": "drye-mechanism-nav",
-      "name": "DRYE Mechanism Nav",
-      "settings": {
-        "step_1_label": "Saturation",
-        "step_2_label": "Routing",
-        "step_3_label": "How it works",
-        "aria_label": "Asymmetric Layering — the invention"
       }
     },
     "drye_section_06_faq_NanA39": {
@@ -1150,6 +1140,16 @@
         "rating_count_text": "47 reviews",
         "rating_count_url": "shopify://products/drye-moisture-routing-glove-liners"
       }
+    },
+    "drye_mechanism_nav_n73TxK": {
+      "type": "drye-mechanism-nav",
+      "name": "DRYE Mechanism Nav",
+      "settings": {
+        "step_1_label": "Saturation",
+        "step_2_label": "Routing",
+        "step_3_label": "How it works",
+        "aria_label": "Asymmetric Layering — the invention"
+      }
     }
   },
   "order": [
@@ -1169,11 +1169,11 @@
     "apps_tejzzz",
     "drye_liner_risk_reversal_kbCRUJ",
     "drye_liner_more_reviews_YLTp3P",
-    "drye_mechanism_nav_n73TxK",
     "drye_section_06_faq_NanA39",
     "drye_mechanics_cta_2_ajF6PB",
     "drye_liner_proof_mYgPJa",
     "drye_liner_research_callout_FVYMXh",
-    "drye_liner_objection_reviews_yktLhW"
+    "drye_liner_objection_reviews_yktLhW",
+    "drye_mechanism_nav_n73TxK"
   ]
 }
