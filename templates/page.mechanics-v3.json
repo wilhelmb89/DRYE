@@ -429,6 +429,15 @@
         "step_2_body": "The outer layer draws moisture through and spreads it toward the glove — where it can evaporate."
       }
     },
+    "drye_mechanics_time_promise_LatRqd": {
+      "type": "drye-mechanics-time-promise",
+      "name": "DRYE Mechanics Time",
+      "settings": {
+        "eyebrow": "— A. Riahi",
+        "heading": "Eight hours in. The glove is humid. Your skin is dry.",
+        "body": "<p><em>\"After 6 hours under rubber gloves, my hands felt wet inside. Took the gloves off — completely dry. Such a mindfuck.\"</em><br/><br/></p>"
+      }
+    },
     "drye_about_cta_bmdVek": {
       "type": "drye-about-cta",
       "name": "DRYE About CTA",
@@ -443,32 +452,6 @@
         "secondary_url": "shopify://pages/research"
       }
     },
-    "drye_mechanics_time_promise_LatRqd": {
-      "type": "drye-mechanics-time-promise",
-      "name": "DRYE Mechanics Time",
-      "settings": {
-        "eyebrow": "— A. Riahi",
-        "heading": "Eight hours in. The glove is humid. Your skin is dry.",
-        "body": "<p><em>\"After 6 hours under rubber gloves, my hands felt wet inside. Took the gloves off — completely dry. Such a mindfuck.\"</em><br/><br/></p>"
-      }
-    },
-    "apps_zHecji": {
-      "type": "apps",
-      "blocks": {
-        "judge_me_reviews_review_widget_homepage_Uf7CcK": {
-          "type": "shopify://apps/judge-me-reviews/blocks/review_widget_homepage/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
-          "settings": {
-            "product": "drye-moisture-routing-glove-liners",
-            "review_data": "real_data",
-            "max_width": 1200
-          }
-        }
-      },
-      "block_order": [
-        "judge_me_reviews_review_widget_homepage_Uf7CcK"
-      ],
-      "settings": {}
-    },
     "drye_mechanics_cta_khadEy": {
       "type": "drye-mechanics-cta",
       "name": "DRYE Mechanics CTA",
@@ -482,6 +465,69 @@
         "meta": "Secure checkout · Ships 24h · 4.83/5 on 43 reviews",
         "secondary_label": "Read the full Gothenburg field report →",
         "secondary_link": "shopify://blogs/insights/automotive-mechanics-field-study"
+      }
+    },
+    "drye_liner_more_reviews_YLTp3P": {
+      "type": "drye-liner-more-reviews",
+      "blocks": {
+        "review_YhginN": {
+          "type": "review",
+          "settings": {
+            "quote": "I have eczema and these liners have been the best things I bought for my hands. I wear latex gloves all day for work — every hour I'd change gloves and liners, and even with sweat on the DRYE, my hands stayed dry.",
+            "name": "PN",
+            "country": "US"
+          }
+        },
+        "review_Lp7PCA": {
+          "type": "review",
+          "settings": {
+            "quote": "My son's hands were bright pink and raw from wearing work gloves. Within a few days of wearing the liners, his hands were drastically improved — within two weeks, completely healed.",
+            "name": "Debby Fields",
+            "country": "US"
+          }
+        },
+        "review_8gDw7n": {
+          "type": "review",
+          "settings": {
+            "quote": "Excellent fit, quick delivery, and they do as the site describes. They keep the sweat and extra heat off my palms — one of my triggers. If you've tried everything else, give these a try.",
+            "name": "Jon",
+            "country": "GB"
+          }
+        },
+        "review_djWttt": {
+          "type": "review",
+          "settings": {
+            "quote": "I've worn them under vinyl gloves, hockey gloves, and a wrist support — they alleviate irritation and itching from sweat really well. One developed a small hole, but customer service replaced it immediately. That alone earns 5 stars.",
+            "name": "Alric",
+            "country": "CA"
+          }
+        },
+        "review_xPqrLf": {
+          "type": "review",
+          "settings": {
+            "quote": "Coming up on a year with these liners — still comfortable, keep my hands dry, and no signs of wear. They do what they're supposed to.",
+            "name": "Athena",
+            "country": "SE"
+          }
+        }
+      },
+      "block_order": [
+        "review_YhginN",
+        "review_Lp7PCA",
+        "review_8gDw7n",
+        "review_djWttt",
+        "review_xPqrLf"
+      ],
+      "name": "DRYE Liner More Reviews",
+      "settings": {
+        "section_id": "liner-more-reviews",
+        "eyebrow": "More feedback",
+        "heading": "From real customers.",
+        "rating_stars_text": "★★★★☆",
+        "rating_score": "4.4",
+        "rating_source_text": "10 reviews via Trustpilot",
+        "cta_label": "See all reviews on Trustpilot",
+        "cta_url": ""
       }
     },
     "drye_mechanics_time2_wd4WRy": {
@@ -655,8 +701,8 @@
     "drye_liner_mechanism_FYWXiz",
     "drye_mechanics_time_promise_LatRqd",
     "drye_about_cta_bmdVek",
-    "apps_zHecji",
     "drye_mechanics_cta_khadEy",
+    "drye_liner_more_reviews_YLTp3P",
     "drye_mechanics_time2_wd4WRy",
     "drye_validation_TYhQTK",
     "drye_research_study_breakdown_TrRXii",
