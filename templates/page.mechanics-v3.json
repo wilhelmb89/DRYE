@@ -9,77 +9,108 @@
  */
 {
   "sections": {
-    "drye_liner_benefit_strip_t7K7Xi": {
-      "type": "drye-liner-benefit-strip",
+    "drye_evidence_NiKLxX": {
+      "type": "drye-evidence",
       "blocks": {
-        "benefit_nQaVjt": {
-          "type": "benefit",
+        "card_iideU3": {
+          "type": "card",
           "settings": {
-            "text": "Dry hands"
+            "label": "exposure threshold",
+            "stat_prefix": "",
+            "stat": "5–7",
+            "stat_suffix": "min",
+            "stat_qualitative": false,
+            "body": "<strong>In a sealed glove: </strong>relative humidity hits 90% within 5–7 minutes. Skin temperature climbs to 95°F.",
+            "source": "Park & Lee 2025"
           }
         },
-        "benefit_hh6BtV": {
-          "type": "benefit",
+        "card_LBHCV9": {
+          "type": "card",
           "settings": {
-            "text": "Cleaner hands"
+            "label": "WET SKIN SOFTENS",
+            "stat_prefix": "",
+            "stat": "27",
+            "stat_suffix": "min",
+            "stat_qualitative": false,
+            "body": "<strong>After 27 minutes: </strong>skin damage risk doubles in women, 55 minutes in men. Most shifts run 3-6 hours - 8x the threshold.",
+            "source": "Lund 2020, Scand J Work Environ Health"
           }
         },
-        "benefit_DfqwRt": {
-          "type": "benefit",
+        "card_FdDh4N": {
+          "type": "card",
           "settings": {
-            "text": "6–12 months"
+            "label": "maceration",
+            "stat_prefix": "",
+            "stat": "3",
+            "stat_suffix": "x swelling",
+            "stat_qualitative": false,
+            "body": "<strong>after 4 hours:</strong> your outer skin barrier swells 3x thicker. Oil, solvents and chemicals soak in deeper - into skin that can't fight back.",
+            "source": "Bouwstra 2003, J invest Dermatol"
+          }
+        },
+        "card_j4QFaR": {
+          "type": "card",
+          "settings": {
+            "label": "Wet skin lets more through",
+            "stat_prefix": "",
+            "stat": "3,6",
+            "stat_suffix": "x faster",
+            "stat_qualitative": false,
+            "body": "Hydrated human skin allowed some fat-soluble model compounds to <strong>penetrate up to 3.6× more in vitro.</strong>",
+            "source": "Hikima & Maibach, Biol Pharm Bull, 2006."
+          }
+        },
+        "card_J7AYCN": {
+          "type": "card",
+          "settings": {
+            "label": "Who it hits",
+            "stat_prefix": "",
+            "stat": "59.5",
+            "stat_suffix": "%",
+            "stat_qualitative": false,
+            "body": "<strong> Across 691 mechanics screened:</strong> 59.5% had visible hand damage. Not from accidents - from daily exposure to tools and sealed gloves.",
+            "source": "NACDG 2017"
+          }
+        },
+        "card_NKwXYB": {
+          "type": "card",
+          "disabled": true,
+          "settings": {
+            "label": "Workforce cost",
+            "stat_prefix": "",
+            "stat": "57",
+            "stat_suffix": "% sick leave",
+            "stat_qualitative": false,
+            "body": "<strong>In chronic cases</strong> 57% take sick leave. 1 in 4 change or leave their trade. Direct healthcare costs run thousands per case, year after year.",
+            "source": "Armstrong 2022, DIepgen"
+          }
+        },
+        "bridge_FBgqwe": {
+          "type": "bridge",
+          "settings": {
+            "label": "The mechanism",
+            "paradigm": "Every glove, liner, barrier cream and powder fails on the physics.",
+            "mechanism": "DRYE routes sweat from skin to outer fabric. One-directional gradient. We call it <span style=\"color: #fff; font-weight: 700;\">Asymmetric layering.</span>",
+            "cta_label": "See how it works",
+            "cta_link": "#mechanics-mechanism"
           }
         }
       },
       "block_order": [
-        "benefit_nQaVjt",
-        "benefit_hh6BtV",
-        "benefit_DfqwRt"
+        "card_iideU3",
+        "card_LBHCV9",
+        "card_FdDh4N",
+        "card_j4QFaR",
+        "card_J7AYCN",
+        "card_NKwXYB",
+        "bridge_FBgqwe"
       ],
-      "disabled": true,
-      "name": "DRYE Liner Benefit Strip",
+      "name": "DRYE Evidence",
       "settings": {
-        "section_id": "liner-benefits"
-      }
-    },
-    "drye_liner_hero_AqHpD3": {
-      "type": "drye-liner-hero",
-      "blocks": {
-        "bullet_Jr8JHi": {
-          "type": "bullet",
-          "settings": {
-            "text": "Sweat routes away from skin "
-          }
-        },
-        "bullet_yygEew": {
-          "type": "bullet",
-          "settings": {
-            "text": "Oil hits the liner first "
-          }
-        },
-        "bullet_QibMrk": {
-          "type": "bullet",
-          "settings": {
-            "text": "Less wet-glove fight"
-          }
-        }
-      },
-      "block_order": [
-        "bullet_Jr8JHi",
-        "bullet_yygEew",
-        "bullet_QibMrk"
-      ],
-      "disabled": true,
-      "name": "DRYE Liner Hero",
-      "settings": {
-        "section_id": "liner-hero",
-        "image": "shopify://shop_images/5Y9A9331_1_1.webp",
-        "eyebrow": "Not a outer glove. Not cotton.",
-        "heading": "Add one dry layer under your gloves.",
-        "subheading": "<p>Thin 0.4mm liner worn under nitrile, latex, rubber or sealed work gloves —<strong> built to keep hands drier through the shift.</strong></p>",
-        "cta_label": "Get DRYE Liner",
-        "cta_url": "shopify://products/drye-moisture-routing-glove-liners",
-        "guarantee_text": "30-Day Money Back Guarantee"
+        "eyebrow": "",
+        "heading": "Why every mechanic should care.\n<em class=\"dryeNEW-em\"><br>Wet skin lets more through.</em>",
+        "body": "Not from the outside. <strong>From what happens inside your gloves.</strong>",
+        "swipe_label": "Swipe"
       }
     },
     "drye_mechanics_herov2_WaUTLC": {
@@ -688,11 +719,10 @@
     }
   },
   "order": [
-    "drye_liner_benefit_strip_t7K7Xi",
-    "drye_liner_hero_AqHpD3",
     "drye_mechanics_herov2_WaUTLC",
     "drye_worker_grid_iFbWqP",
     "drye_liner_productclarity_hAX9ek",
+    "drye_evidence_NiKLxX",
     "drye_liner_fail_cards_T7PmUD",
     "drye_liner_mechanism_FYWXiz",
     "drye_liner_proof_mYgPJa",
