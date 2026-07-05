@@ -9,24 +9,40 @@
  */
 {
   "sections": {
-    "drye_mechanics_herov2_WaUTLC": {
-      "type": "drye-mechanics-herov2",
-      "name": "DRYE Mechanics Hero",
+    "drye_new_hero_bh6kTP": {
+      "type": "dryeNEW-hero",
+      "blocks": {
+        "credibility_item_zgerYk": {
+          "type": "credibility_item",
+          "settings": {
+            "text": "Patent pending"
+          }
+        }
+      },
+      "block_order": [
+        "credibility_item_zgerYk"
+      ],
+      "name": "DRYE NEW Hero",
       "settings": {
-        "section_id": "mechanics-hero",
-        "image_desktop": "shopify://shop_images/Gemini_Generated_Image_nyx625nyx625nyx6.webp",
-        "image_mobile": "shopify://shop_images/Gemini_Generated_Image_ain34ain34ain34a_1.webp",
-        "eyebrow": "",
-        "heading_line_1": "You already know",
-        "heading_emphasis": "how the shift ends.",
-        "show_rule": true,
-        "subheading": "<p>Hands that drip inside the glove by 9am. Gloves that tear on every other bolt. The smell when you peel them off. Same gloves waiting Monday.</p>",
-        "scroll_text": "Keep reading",
-        "scroll_target": "#gallery",
-        "quote_1": "\"my hands literally drip sweat\"",
-        "quote_2": "\"I can't feel the bolt anymore\"",
-        "quote_3": "\"knuckles split by Thursday\"",
-        "quote_4": "“oil’s a chemical — I need them on”"
+        "section_id": "hero",
+        "poster_image_desktop": "shopify://shop_images/Gemini_Generated_Image_2rtxik2rtxik2rtx.webp",
+        "poster_image_mobile": "shopify://shop_images/5Y9A9324.webp",
+        "video_hls_url_desktop": "",
+        "video_hls_url_mobile": "",
+        "heading_line_1": "Add one <span style=\"text-decoration:underline\">dry layer</span>",
+        "heading_line_2": "under your gloves.",
+        "heading_echo": "",
+        "subheading_line_1": "",
+        "subheading_line_2": "0.4mm thin. Worn inside your existing glove — nitrile, latex, rubber or HV. Your outer glove stays the same. ",
+        "subheading_emphasis": "What changes is what your skin sits against.",
+        "path_1_label": "IF YOUR GLOVES FEEL WET",
+        "path_1_text_line_1": "Show me what changes ↓",
+        "path_1_text_line_2": "",
+        "path_1_link": "",
+        "path_2_label": "IF YOU WANT THE PROOF",
+        "path_2_text_line_1": "See why it works ↓",
+        "path_2_text_line_2": "",
+        "path_2_link": "#system"
       }
     },
     "drye_worker_grid_iFbWqP": {
@@ -780,7 +796,7 @@
     }
   },
   "order": [
-    "drye_mechanics_herov2_WaUTLC",
+    "drye_new_hero_bh6kTP",
     "drye_worker_grid_iFbWqP",
     "drye_evidence_NiKLxX",
     "drye_liner_fail_cards_T7PmUD",
