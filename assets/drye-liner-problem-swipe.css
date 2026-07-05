@@ -146,6 +146,13 @@
     display: none;
   }
 
+  /* Cap the carousel viewport at the site content width and center it,
+     so cards align with the header instead of spanning the full screen. */
+  .drye-liner-problem-swipe__wrap {
+    max-width: calc(var(--max-width) + var(--page-pad) * 2);
+    margin-inline: auto;
+  }
+
   .drye-liner-problem-swipe__card {
     flex: 0 0 220px;
   }
