@@ -1,6 +1,12 @@
 {{ 'drye-liner-mechanism.css' | asset_url | stylesheet_tag }}
 
-<section class="dryeNEW-section drye-liner-mechanism" id="{{ section.settings.section_id | default: 'liner-mechanism' }}" data-section-id="{{ section.id }}">
+<section
+  class="dryeNEW-section drye-liner-mechanism"
+  id="drye-mechanism-step-3"
+  data-mechanism-section
+  data-mechanism-step="3"
+  data-section-id="{{ section.id }}"
+>
   <div class="dryeNEW-container">
     <div class="drye-liner-mechanism__inner">
       {%- if section.settings.eyebrow != blank -%}
