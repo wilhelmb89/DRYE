@@ -367,107 +367,62 @@
         "description_toggle_closed": ""
       }
     },
-    "drye_objection_cards_VWMaaG": {
-      "type": "drye-objection-cards",
+    "drye_liner_saturation_jxeR99": {
+      "type": "drye-liner-saturation",
       "blocks": {
-        "card_xVgV4D": {
-          "type": "card",
+        "material_UKARX6": {
+          "type": "material",
           "settings": {
-            "profession": "Automotive repair",
-            "question": "Is this just cotton?",
-            "quote": "<i>“These are incredible, nearly no more sweat in nitrile gloves, plus being so thin I barely notice them.”</i>",
-            "name": "@fordbodytech811",
-            "meta": "Automotive repair"
+            "name": "Merino wool",
+            "note": "Soaks and stays heavy",
+            "value_text": "15–18%",
+            "bar_percent": 100,
+            "highlight": false
           }
         },
-        "card_mD3KMM": {
-          "type": "card",
+        "material_Xj9dQe": {
+          "type": "material",
           "settings": {
-            "profession": "Car detailing",
-            "question": "Will it kill my grip?",
-            "quote": "<i>\"The slim thickness gives great dexterity. They do a great job keeping sweat off my hands.\"</i><br>\n<br>",
-            "name": "Shoujun S.",
-            "meta": "Car detailing, Rosemead, CA"
+            "name": "Bamboo",
+            "note": "Wetter than cotton",
+            "value_text": "13%",
+            "bar_percent": 76,
+            "highlight": false
           }
         },
-        "card_m9kQYA": {
-          "type": "card",
+        "material_nAkFg7": {
+          "type": "material",
           "settings": {
-            "profession": "Automotive repair",
-            "question": "What happens if oil gets on them?",
-            "quote": "<i>\"When I get oil on the liners, I just wipe them off with electrical contact cleaner and a dry paper towel. Wipes right off.\"</i>",
-            "name": "Brian Jee",
-            "meta": "Automotive repair,  San Francisco, CA."
+            "name": "Cotton",
+            "note": "Wet within the hour",
+            "value_text": "7–8%",
+            "bar_percent": 44,
+            "highlight": false
           }
         },
-        "card_kQqDQE": {
-          "type": "card",
+        "material_YYAhgj": {
+          "type": "material",
           "settings": {
-            "profession": "Automotive repair",
-            "question": "How much time does it save?",
-            "quote": "<i> “Without the lining gloves I had to remove my EV gloves, wash and dry my hands, then go to the computer. With the lining gloves, I could remove the EV gloves and go straight to the computer.” </i>",
-            "name": "Field study / BMW",
-            "meta": "EV service technician, Gothenburg, Sweden"
-          }
-        },
-        "card_TzQFzt": {
-          "type": "card",
-          "settings": {
-            "profession": "Automotive repair",
-            "question": "What if I take gloves off all day?",
-            "quote": "<i> “I take gloves on and off 9 times an hour. After two weeks with the lining gloves, my hands felt less itchy, less dry, and less rough.” </i>",
-            "name": "Independent field study",
-            "meta": "Vehicle inspection technician, Gothenburg, Sweden"
-          }
-        },
-        "card_Tiwk6D": {
-          "type": "card",
-          "settings": {
-            "profession": "Automotive painter",
-            "question": "What about hot shops and summer heat?",
-            "quote": "<i>\"Terrible sweat issues during summer wearing nitrile gloves. Wearing these, I'm no longer dripping sweat on my paint jobs and my hands feel better.\"</i>",
-            "name": "Chad W.",
-            "meta": "Automotive painter, Phoenix, AZ"
-          }
-        },
-        "card_KwkBwL": {
-          "type": "card",
-          "settings": {
-            "profession": "AUTOMOTIVE · SCANIA BATTERY FACTORY",
-            "question": "Does it work under EV safety gloves?",
-            "quote": "<i>\"Did not appear to affect fingertip sensitivity in electric safety gloves. Raised comfort and reduced the need to air the hand.\"</i>",
-            "name": "Simon Vicini",
-            "meta": "PPE-Coordinator, Scania CV AB"
-          }
-        },
-        "card_PXQGLa": {
-          "type": "card",
-          "settings": {
-            "profession": "Automotive repair",
-            "question": "Why put anything under nitrile?",
-            "quote": "<i> “My hands get so itchy I can’t work without a layer between my skin and the glove. The lining gloves stay drier than cotton — I’ve been using them continuously.” </i>",
-            "name": "Field study / SCANIA",
-            "meta": "Heavy vehicle mechanic, Gothenburg, Sweden"
+            "name": "DRYE skin side",
+            "note": "Near-zero regain",
+            "value_text": "<0.1%",
+            "bar_percent": 2,
+            "highlight": true
           }
         }
       },
       "block_order": [
-        "card_xVgV4D",
-        "card_mD3KMM",
-        "card_m9kQYA",
-        "card_kQqDQE",
-        "card_TzQFzt",
-        "card_Tiwk6D",
-        "card_KwkBwL",
-        "card_PXQGLa"
+        "material_UKARX6",
+        "material_Xj9dQe",
+        "material_nAkFg7",
+        "material_YYAhgj"
       ],
-      "custom_css": [],
-      "name": "DRYE Objection Cards",
+      "name": "DRYE Liner Saturation",
       "settings": {
-        "eyebrow": "",
-        "heading": "Will this actually work under my gloves?",
-        "heading_emphasis": "",
-        "body": ""
+        "section_id": "liner-saturation",
+        "heading": "Why normal liners stay wet.",
+        "body": "",
+        "source_text": "Moisture regain references: ASTM D2654 · Kadolph 2014."
       }
     },
     "drye_functional_benefits_ddxLmg": {
@@ -853,7 +808,7 @@
   },
   "order": [
     "drye_product_page_new_9ibHgd",
-    "drye_objection_cards_VWMaaG",
+    "drye_liner_saturation_jxeR99",
     "drye_functional_benefits_ddxLmg",
     "drye_research_video_full_VPtXGb",
     "17820025558baba7f4",
