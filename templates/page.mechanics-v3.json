@@ -209,6 +209,64 @@
         "body": "You've tried them. That's not what this is."
       }
     },
+    "drye_liner_saturation_UWW3jb": {
+      "type": "drye-liner-saturation",
+      "blocks": {
+        "material_JFmcLQ": {
+          "type": "material",
+          "settings": {
+            "name": "Merino wool",
+            "note": "Soaks and stays heavy",
+            "value_text": "15–18%",
+            "bar_percent": 100,
+            "highlight": false
+          }
+        },
+        "material_dapwcm": {
+          "type": "material",
+          "settings": {
+            "name": "Bamboo",
+            "note": "Wetter than cotton",
+            "value_text": "13%",
+            "bar_percent": 76,
+            "highlight": false
+          }
+        },
+        "material_Vff4fz": {
+          "type": "material",
+          "settings": {
+            "name": "Cotton",
+            "note": "Wet within the hour",
+            "value_text": "7–8%",
+            "bar_percent": 44,
+            "highlight": false
+          }
+        },
+        "material_edVGPn": {
+          "type": "material",
+          "settings": {
+            "name": "DRYE skin side",
+            "note": "Near-zero regain",
+            "value_text": "<0.1%",
+            "bar_percent": 2,
+            "highlight": true
+          }
+        }
+      },
+      "block_order": [
+        "material_JFmcLQ",
+        "material_dapwcm",
+        "material_Vff4fz",
+        "material_edVGPn"
+      ],
+      "name": "DRYE Liner Saturation",
+      "settings": {
+        "section_id": "liner-saturation",
+        "heading": "Why normal liners stay wet.",
+        "body": "Common materials absorb moisture. Inside sealed gloves, absorbed moisture stays with your skin.",
+        "source_text": "Moisture regain references: ASTM D2654 · Kadolph 2014."
+      }
+    },
     "drye_product_reality_grid_ggq47H": {
       "type": "drye-product-reality-grid",
       "blocks": {
@@ -290,6 +348,62 @@
         "close_label": "Close image viewer",
         "prev_label": "Previous image",
         "next_image_label": "Next image"
+      }
+    },
+    "drye_liner_objection_reviews_yktLhW": {
+      "type": "drye-liner-objection-reviews",
+      "blocks": {
+        "review_9Q9YRi": {
+          "type": "review",
+          "settings": {
+            "question": "Do they really keep hands dry?",
+            "quote": "Without the lining gloves I had to remove my EV gloves, wash and dry my hands, then go to the computer. With the lining gloves, I could remove the EV gloves and go straight to the computer.",
+            "name": "EV Mechanic",
+            "role": "BMW Bilia"
+          }
+        },
+        "review_ULBUQY": {
+          "type": "review",
+          "settings": {
+            "question": "Won't they feel weird under the glove?",
+            "quote": "No impact on fingertip sensitivity in electric safety gloves. Increased comfort and reduced the need to air the hand.",
+            "name": "Simon V.",
+            "role": "Verified buyer"
+          }
+        },
+        "review_fJbdMx": {
+          "type": "review",
+          "settings": {
+            "question": "Do they actually last?",
+            "quote": "My hands get so itchy I can't work without a layer between my skin and the glove. The lining gloves stay drier than cotton — I've been using them continuously.",
+            "name": "Heavy Vehicle Mechanic",
+            "role": "Verified buyer"
+          }
+        },
+        "review_R6hcWg": {
+          "type": "review",
+          "settings": {
+            "question": "Work across different jobs?",
+            "quote": "I've been using them in automotive repair, home construction, and moving heavy materials — work that needs real grip and precision. No more eczema or rashes on my hands. Nitrile gloves don't tear anymore because they go on and off easily without sweaty skin.",
+            "name": "Brian Jee",
+            "role": "Verified buyer"
+          }
+        }
+      },
+      "block_order": [
+        "review_9Q9YRi",
+        "review_ULBUQY",
+        "review_fJbdMx",
+        "review_R6hcWg"
+      ],
+      "name": "DRYE Liner Objection",
+      "settings": {
+        "section_id": "liner-objections",
+        "eyebrow": "Straight answers",
+        "heading": "What mechanics ask first.",
+        "rating_score": "4.85/5",
+        "rating_count_text": "47 reviews",
+        "rating_count_url": "shopify://products/drye-moisture-routing-glove-liners"
       }
     },
     "drye_liner_mechanism_FYWXiz": {
@@ -631,64 +745,6 @@
         "step_3_label": "Architecture",
         "aria_label": "Asymmetric Layering — the invention"
       }
-    },
-    "drye_liner_saturation_UWW3jb": {
-      "type": "drye-liner-saturation",
-      "blocks": {
-        "material_JFmcLQ": {
-          "type": "material",
-          "settings": {
-            "name": "Merino wool",
-            "note": "Soaks and stays heavy",
-            "value_text": "15–18%",
-            "bar_percent": 100,
-            "highlight": false
-          }
-        },
-        "material_dapwcm": {
-          "type": "material",
-          "settings": {
-            "name": "Bamboo",
-            "note": "Wetter than cotton",
-            "value_text": "13%",
-            "bar_percent": 76,
-            "highlight": false
-          }
-        },
-        "material_Vff4fz": {
-          "type": "material",
-          "settings": {
-            "name": "Cotton",
-            "note": "Wet within the hour",
-            "value_text": "7–8%",
-            "bar_percent": 44,
-            "highlight": false
-          }
-        },
-        "material_edVGPn": {
-          "type": "material",
-          "settings": {
-            "name": "DRYE skin side",
-            "note": "Near-zero regain",
-            "value_text": "<0.1%",
-            "bar_percent": 2,
-            "highlight": true
-          }
-        }
-      },
-      "block_order": [
-        "material_JFmcLQ",
-        "material_dapwcm",
-        "material_Vff4fz",
-        "material_edVGPn"
-      ],
-      "name": "DRYE Liner Saturation",
-      "settings": {
-        "section_id": "liner-saturation",
-        "heading": "Why normal liners stay wet.",
-        "body": "Common materials absorb moisture. Inside sealed gloves, absorbed moisture stays with your skin.",
-        "source_text": "Moisture regain references: ASTM D2654 · Kadolph 2014."
-      }
     }
   },
   "order": [
@@ -698,6 +754,7 @@
     "drye_liner_fail_cards_T7PmUD",
     "drye_liner_saturation_UWW3jb",
     "drye_product_reality_grid_ggq47H",
+    "drye_liner_objection_reviews_yktLhW",
     "drye_liner_mechanism_FYWXiz",
     "drye_objection_cards_7gyajr",
     "drye_about_cta_bmdVek",
