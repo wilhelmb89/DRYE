@@ -342,6 +342,119 @@
         "cite": "Moisture regain references: Kadolph 2014 · ASTM D2654 · GB/T 9995. Transport mechanism independently validated in DRYE textile testing."
       }
     },
+    "drye_stretch_7XjKcD": {
+      "type": "drye-stretch",
+      "blocks": {
+        "timeline_stop_DDVKc4": {
+          "type": "timeline_stop",
+          "settings": {
+            "time": "07:00",
+            "title": "You put it on. That's it.",
+            "clock_angle": 210,
+            "inverted": false,
+            "bullet_1": "0.4mm. You won't notice it's there.",
+            "bullet_2": "Works under nitrile, latex, rubber, HV gloves.",
+            "bullet_3": "Nothing to adjust. Nothing to think about.",
+            "proof_label": "Thickness",
+            "proof_value": "0.4mm",
+            "proof_sub": "Under any sealed glove"
+          }
+        },
+        "timeline_stop_PKNxTL": {
+          "type": "timeline_stop",
+          "settings": {
+            "time": "11:00",
+            "title": "Three jobs in. Hands still dry.",
+            "clock_angle": 330,
+            "inverted": false,
+            "bullet_1": "You haven't thought about your gloves once.",
+            "bullet_2": "No mid-shift drying. No flips. No towel on the dash.",
+            "bullet_3": "The liner routes moisture out. Continuously. No saturation point.",
+            "proof_label": "Uptime",
+            "proof_value": "8h+",
+            "proof_sub": "No saturation point"
+          }
+        },
+        "timeline_stop_49ydtL": {
+          "type": "timeline_stop",
+          "settings": {
+            "time": "13:00",
+            "title": "Glove off. Glove back on. It slides.",
+            "clock_angle": 30,
+            "inverted": false,
+            "bullet_1": "Every context switch. Every task change.",
+            "bullet_2": "HV gloves, nitrile, back to nitrile — liner stays on through all of it.",
+            "bullet_3": "No wash between tasks. Straight to the computer. Straight back under the hood.",
+            "proof_label": "Dexterity",
+            "proof_value": "9/9",
+            "proof_sub": "Mechanics. Zero compromise."
+          }
+        },
+        "timeline_stop_HGp8zx": {
+          "type": "timeline_stop",
+          "settings": {
+            "time": "15:00",
+            "title": "Nitrile still intact. Not one rip.",
+            "clock_angle": 90,
+            "inverted": false,
+            "bullet_1": "Dry skin under the glove means no friction on the way on or off.",
+            "bullet_2": "Nitrile lasts the shift. Not just the morning.",
+            "bullet_3": "You're burning through fewer boxes. You'll realize it around Thursday.",
+            "proof_label": "Glove waste",
+            "proof_value": "3 → 2",
+            "proof_sub": "Boxes of nitrile per week"
+          }
+        },
+        "timeline_stop_LmpmEW": {
+          "type": "timeline_stop",
+          "settings": {
+            "time": "16:00",
+            "title": "Nitrile rips anyway. Oil hits the liner first.",
+            "clock_angle": 120,
+            "inverted": false,
+            "bullet_1": "Oil stays on the surface. Doesn't bond the way it does against skin.",
+            "bullet_2": "Wipe it off with electrical contact cleaner, dry paper towel.",
+            "bullet_3": "Back in rotation. Under a minute.",
+            "proof_label": "Back in rotation",
+            "proof_value": "< 1 min",
+            "proof_sub": "Contact cleaner. Paper towel. Done."
+          }
+        },
+        "timeline_stop_xdRAty": {
+          "type": "timeline_stop",
+          "settings": {
+            "time": "17:00",
+            "title": "Hands come out clean. Your partner notices before you do.",
+            "clock_angle": 150,
+            "inverted": true,
+            "bullet_1": "End of shift. No scrubbing. No cream.",
+            "bullet_2": "Not fixed. Just not broken anymore.",
+            "bullet_3": "Every shift after this one compounds. The liner doesn't saturate. It doesn't stop. One pair, rest of the year.",
+            "proof_label": "Compound",
+            "proof_value": "1 : 600",
+            "proof_sub": "One pair vs cotton liners per year"
+          }
+        }
+      },
+      "block_order": [
+        "timeline_stop_DDVKc4",
+        "timeline_stop_PKNxTL",
+        "timeline_stop_49ydtL",
+        "timeline_stop_HGp8zx",
+        "timeline_stop_LmpmEW",
+        "timeline_stop_xdRAty"
+      ],
+      "name": "DRYE stretch timeline",
+      "settings": {
+        "eyebrow": "",
+        "heading": "\"No way I'm wearing another layer.\"",
+        "heading_italic": "Then they tried it for one shift.",
+        "lead": "What changed after 300 mechanics wore DRYE under their gloves.",
+        "cta_label": "SEE THE LINER",
+        "cta_url": "",
+        "cta_note": "30-day refund · Ships within 24 hours"
+      }
+    },
     "drye_liner_fail_cards_R4xrfA": {
       "type": "drye-liner-fail-cards",
       "blocks": {
@@ -388,6 +501,7 @@
         "fail_wNhTUc",
         "fail_qiypq8"
       ],
+      "disabled": true,
       "name": "DRYE Liner Fail Cards",
       "settings": {
         "section_id": "liner-fails",
@@ -855,6 +969,7 @@
     "drye_worker_grid_iFbWqP",
     "drye_evidence_NiKLxX",
     "drye_liner_productclarity_hAX9ek",
+    "drye_stretch_7XjKcD",
     "drye_mechanics_saturation_MhcCAb",
     "drye_liner_fail_cards_R4xrfA",
     "drye_objection_cards_qF4PMr",
