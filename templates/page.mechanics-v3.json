@@ -471,22 +471,6 @@
         "cta_url": ""
       }
     },
-    "drye_mechanics_cta_khadEy": {
-      "type": "drye-mechanics-cta",
-      "disabled": true,
-      "name": "DRYE Mechanics CTA",
-      "settings": {
-        "eyebrow": "30-day FULl refund",
-        "heading_line_1": "If the physics don't change your shift",
-        "heading_emphasis": "- full refund",
-        "body": "<p>full refund within 30 days. No forms. No conditions. :We can offer this because of how it works - not as a concession.</p>",
-        "button_label": "Order now →",
-        "button_link": "shopify://products/drye-moisture-routing-glove-liners",
-        "meta": "Secure checkout · Ships 24h · 4.83/5 on 43 reviews",
-        "secondary_label": "Read the full Gothenburg field report →",
-        "secondary_link": "shopify://blogs/insights/automotive-mechanics-field-study"
-      }
-    },
     "drye_liner_worker_proof_xC36E7": {
       "type": "drye-liner-worker-proof",
       "blocks": {
@@ -554,35 +538,6 @@
         "states_line": "CA · TX · FL · CO · GA · AZ · NC · MA · CT · OR"
       }
     },
-    "drye_mechanics_time2_wd4WRy": {
-      "type": "drye-mechanics-time2",
-      "name": "DRYE Mechanics Time2",
-      "settings": {
-        "eyebrow": "Expectation",
-        "heading": "You notice it in minutes. <br><em class=\"dryeNEW-em\">Not weeks.</em>",
-        "body": "<p>Moisture is the trigger. Remove it and the condition changes fast. Most users feel <strong>the difference during the first </strong>shift. </p>"
-      }
-    },
-    "drye_new_closing_cta_rDAaUw": {
-      "type": "dryeNEW-closing-cta",
-      "name": "DRYE NEW Closing CTA",
-      "settings": {
-        "section_id": "shop",
-        "micro": "30-day free trial",
-        "heading_main": "See if it<br>",
-        "heading_em": "changes anything for you.",
-        "body": "<p>Try them. 30 days. Full refund if they don't work.<br/>Works under any sealed glove. Machine wash. Lasts 4–12 months.</p>",
-        "primary_label": "ORDER DRYE LINER →",
-        "primary_url": "shopify://products/drye-moisture-routing-glove-liners",
-        "secondary_label": "Read the research →",
-        "secondary_url": "shopify://pages/research",
-        "meta": "Free shipping on orders over $100",
-        "padding_top_mobile": 56,
-        "padding_bottom_mobile": 56,
-        "padding_top_desktop": 80,
-        "padding_bottom_desktop": 80
-      }
-    },
     "drye_mechanism_nav_n73TxK": {
       "type": "drye-mechanism-nav",
       "name": "DRYE Mechanism Nav",
@@ -625,6 +580,42 @@
         "link_label": "See the research →",
         "link_url": "shopify://pages/research"
       }
+    },
+    "drye_section_06_faq_LWrEnT": {
+      "type": "drye-section-06-faq",
+      "blocks": {
+        "faq_item_xtYLdP": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Do they work with nitrile, latex, and vinyl gloves?",
+            "answer": "Yes — this is the primary use case. 0.4mm thin, designed to layer inside sealed gloves without affecting fit. Works with nitrile, latex, vinyl, rubber, hockey gloves, ski gloves, and work gloves."
+          }
+        },
+        "faq_item_UgrcM9": {
+          "type": "faq_item",
+          "settings": {
+            "question": "What's actually different from a cotton liner?",
+            "answer": "Cotton absorbs moisture and holds it. Once saturated, it becomes a wet layer between skin and glove — which accelerates breakdown. DRYE routes moisture through the fiber via a structural gradient. No absorption, no saturation point, nothing that can wash out."
+          }
+        },
+        "faq_item_ByxiG6": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Will they make my gloves tighter or affect grip?",
+            "answer": "At 0.4mm, the liner adds less bulk than a standard glove lining. In the automotive field study, 9/9 workers reported zero dexterity compromise. Grip is typically maintained or improved — dry skin has better tactile contact with glove material."
+          }
+        }
+      },
+      "block_order": [
+        "faq_item_xtYLdP",
+        "faq_item_UgrcM9",
+        "faq_item_ByxiG6"
+      ],
+      "name": "DRYE Section 06 — FAQ",
+      "settings": {
+        "eyebrow": "Questions",
+        "heading": "Answers for the skeptical."
+      }
     }
   },
   "order": [
@@ -638,13 +629,11 @@
     "drye_liner_mechanism_FYWXiz",
     "drye_mechanics_time_promise_LatRqd",
     "drye_about_cta_bmdVek",
-    "drye_liner_more_reviews_YLTp3P",
-    "drye_mechanics_cta_khadEy",
     "drye_liner_worker_proof_xC36E7",
-    "drye_mechanics_time2_wd4WRy",
-    "drye_new_closing_cta_rDAaUw",
+    "drye_liner_more_reviews_YLTp3P",
     "drye_mechanism_nav_n73TxK",
     "drye_liner_proof_mYgPJa",
-    "drye_liner_research_callout_FVYMXh"
+    "drye_liner_research_callout_FVYMXh",
+    "drye_section_06_faq_LWrEnT"
   ]
 }
