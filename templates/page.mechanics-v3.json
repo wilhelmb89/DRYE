@@ -364,6 +364,64 @@
         "step_2_body": "The outer layer pulls moisture away from your skin — helping the surface against your hand stay drier."
       }
     },
+    "drye_liner_saturation_UWW3jb": {
+      "type": "drye-liner-saturation",
+      "blocks": {
+        "material_JFmcLQ": {
+          "type": "material",
+          "settings": {
+            "name": "Merino wool",
+            "note": "Soaks and stays heavy",
+            "value_text": "15–18%",
+            "bar_percent": 100,
+            "highlight": false
+          }
+        },
+        "material_dapwcm": {
+          "type": "material",
+          "settings": {
+            "name": "Bamboo",
+            "note": "Wetter than cotton",
+            "value_text": "13%",
+            "bar_percent": 76,
+            "highlight": false
+          }
+        },
+        "material_Vff4fz": {
+          "type": "material",
+          "settings": {
+            "name": "Cotton",
+            "note": "Wet within the hour",
+            "value_text": "7–8%",
+            "bar_percent": 44,
+            "highlight": false
+          }
+        },
+        "material_edVGPn": {
+          "type": "material",
+          "settings": {
+            "name": "DRYE skin side",
+            "note": "Near-zero regain",
+            "value_text": "<0.1%",
+            "bar_percent": 2,
+            "highlight": true
+          }
+        }
+      },
+      "block_order": [
+        "material_JFmcLQ",
+        "material_dapwcm",
+        "material_Vff4fz",
+        "material_edVGPn"
+      ],
+      "name": "DRYE Liner Saturation",
+      "settings": {
+        "section_id": "liner-saturation",
+        "heading": "Why normal liners stay wet.",
+        "body": "",
+        "source_text": "Moisture regain references: ASTM D2654 · Kadolph 2014."
+      }
+    },
     "drye_objection_cards_GAaWjQ": {
       "type": "drye-objection-cards",
       "blocks": {
@@ -488,64 +546,6 @@
         "source_text": "<p>Wick Flow Index — higher = faster moisture transfer away from skin. Independent testing, Swedish School of Textiles, 2025.</p>",
         "cta_label": "See the test",
         "cta_url": "shopify://pages/research"
-      }
-    },
-    "drye_liner_saturation_UWW3jb": {
-      "type": "drye-liner-saturation",
-      "blocks": {
-        "material_JFmcLQ": {
-          "type": "material",
-          "settings": {
-            "name": "Merino wool",
-            "note": "Soaks and stays heavy",
-            "value_text": "15–18%",
-            "bar_percent": 100,
-            "highlight": false
-          }
-        },
-        "material_dapwcm": {
-          "type": "material",
-          "settings": {
-            "name": "Bamboo",
-            "note": "Wetter than cotton",
-            "value_text": "13%",
-            "bar_percent": 76,
-            "highlight": false
-          }
-        },
-        "material_Vff4fz": {
-          "type": "material",
-          "settings": {
-            "name": "Cotton",
-            "note": "Wet within the hour",
-            "value_text": "7–8%",
-            "bar_percent": 44,
-            "highlight": false
-          }
-        },
-        "material_edVGPn": {
-          "type": "material",
-          "settings": {
-            "name": "DRYE skin side",
-            "note": "Near-zero regain",
-            "value_text": "<0.1%",
-            "bar_percent": 2,
-            "highlight": true
-          }
-        }
-      },
-      "block_order": [
-        "material_JFmcLQ",
-        "material_dapwcm",
-        "material_Vff4fz",
-        "material_edVGPn"
-      ],
-      "name": "DRYE Liner Saturation",
-      "settings": {
-        "section_id": "liner-saturation",
-        "heading": "Why normal liners stay wet.",
-        "body": "",
-        "source_text": "Moisture regain references: ASTM D2654 · Kadolph 2014."
       }
     },
     "drye_liner_objection_reviews_yktLhW": {
@@ -805,9 +805,9 @@
     "drye_liner_risk_reversal_kbCRUJ",
     "drye_mechanics_time_promise_qNUeyD",
     "drye_liner_mechanism_FYWXiz",
+    "drye_liner_saturation_UWW3jb",
     "drye_objection_cards_GAaWjQ",
     "drye_liner_proof_mYgPJa",
-    "drye_liner_saturation_UWW3jb",
     "drye_liner_objection_reviews_yktLhW",
     "drye_liner_more_reviews_YLTp3P",
     "drye_mechanism_nav_n73TxK",
