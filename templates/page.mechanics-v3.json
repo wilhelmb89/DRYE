@@ -239,6 +239,69 @@
         "swipe_label": "Swipe"
       }
     },
+    "drye_new_problem_beat_1_rD9VQ6": {
+      "type": "dryeNEW-problem-beat-1",
+      "blocks": {
+        "strike_card_8PEkrU": {
+          "type": "strike_card",
+          "settings": {
+            "title": "MORE MILS",
+            "body": "<p>More rubber outside.<br/><strong>Same sweat inside.</strong></p>"
+          }
+        },
+        "strike_card_3Xt8DX": {
+          "type": "strike_card",
+          "settings": {
+            "title": "COTTON",
+            "body": "<p>Absorbs at first.<strong><br/>Then becomes the wet layer.</strong></p>"
+          }
+        },
+        "strike_card_9LjdqQ": {
+          "type": "strike_card",
+          "settings": {
+            "title": "POWDER",
+            "body": "<p>Helps at start.<br/><strong>Stops mattering once sweat builds.</strong></p>"
+          }
+        },
+        "strike_card_ngQAfM": {
+          "type": "strike_card",
+          "settings": {
+            "title": "CREAMS",
+            "body": "<p>Helps after the shift.<br/><strong>Do not change the shift.</strong></p>"
+          }
+        },
+        "strike_card_Ndhdrx": {
+          "type": "strike_card",
+          "settings": {
+            "title": "GLOVE FLIPS",
+            "body": "<p>Buys a few minutes.<strong><br/>Same wet glove gloes back on. Rips.</strong></p>"
+          }
+        },
+        "strike_card_PreMVe": {
+          "type": "strike_card",
+          "settings": {
+            "title": "Powder-free gloves",
+            "body": "<p>Removes one irritant. The core environment — <strong>sealed, occluded, compressed</strong> — remains completely unchanged.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "strike_card_8PEkrU",
+        "strike_card_3Xt8DX",
+        "strike_card_9LjdqQ",
+        "strike_card_ngQAfM",
+        "strike_card_Ndhdrx",
+        "strike_card_PreMVe"
+      ],
+      "name": "DRYE NEW Problem Beat 1",
+      "settings": {
+        "section_id": "problem",
+        "eyebrow": "The workarounds",
+        "heading_before": "You've tried everything.",
+        "heading_em": "Nothing worked.",
+        "lead": ""
+      }
+    },
     "drye_liner_productclarity_hAX9ek": {
       "type": "drye-liner-productclarity",
       "blocks": {
@@ -276,70 +339,6 @@
         "heading_emphasis": "under your existing glove.",
         "body": "<p>Thin enough you forget it’s there. Built for repeated shifts.</p>",
         "image": "shopify://shop_images/5Y9A9306.webp"
-      }
-    },
-    "drye_mechanics_saturation_MhcCAb": {
-      "type": "drye-mechanics-saturation",
-      "blocks": {
-        "fiber_row_8A4qGq": {
-          "type": "fiber_row",
-          "settings": {
-            "fiber_name": "Merino wool",
-            "fiber_note": "Absorbs. Stays heavy.",
-            "value": "15–18%",
-            "bar_percent": 90,
-            "is_highlighted": false
-          }
-        },
-        "fiber_row_b6BAmp": {
-          "type": "fiber_row",
-          "settings": {
-            "fiber_name": "Bamboo viscose",
-            "fiber_note": "Absorbs. Marketed as softer.",
-            "value": "13%",
-            "bar_percent": 72,
-            "is_highlighted": false
-          }
-        },
-        "fiber_row_FfedYf": {
-          "type": "fiber_row",
-          "settings": {
-            "fiber_name": "Cotton",
-            "fiber_note": "Absorbs fast. Turns wet quickly.",
-            "value": "7–8%",
-            "bar_percent": 42,
-            "is_highlighted": false
-          }
-        },
-        "fiber_row_xMhdrR": {
-          "type": "fiber_row",
-          "settings": {
-            "fiber_name": "DRYE Asymmetric Layering",
-            "fiber_note": "Doesn’t absorb. Routes outward.",
-            "value": "<0.1%",
-            "bar_percent": 1,
-            "is_highlighted": true
-          }
-        }
-      },
-      "block_order": [
-        "fiber_row_8A4qGq",
-        "fiber_row_b6BAmp",
-        "fiber_row_FfedYf",
-        "fiber_row_xMhdrR"
-      ],
-      "name": "DRYE Saturation Point",
-      "settings": {
-        "section_id": "mechanics-saturation",
-        "eyebrow": "The invention",
-        "heading_line_1": "Every other liner has a saturation point.",
-        "heading_echo": "Ours physically can’t.",
-        "subheading": "Every fibre your hand has ever met inside a glove fills up with sweat — until it can’t hold any more.",
-        "drye_chip": "Skin-side dry",
-        "close_heading": "",
-        "close_body": "",
-        "close_statement": "",
-        "cite": "Moisture regain references: Kadolph 2014 · ASTM D2654 · GB/T 9995. Transport mechanism independently validated in DRYE textile testing."
       }
     },
     "drye_stretch_7XjKcD": {
@@ -453,6 +452,70 @@
         "cta_label": "SEE THE LINER",
         "cta_url": "",
         "cta_note": "30-day refund · Ships within 24 hours"
+      }
+    },
+    "drye_mechanics_saturation_MhcCAb": {
+      "type": "drye-mechanics-saturation",
+      "blocks": {
+        "fiber_row_8A4qGq": {
+          "type": "fiber_row",
+          "settings": {
+            "fiber_name": "Merino wool",
+            "fiber_note": "Absorbs. Stays heavy.",
+            "value": "15–18%",
+            "bar_percent": 90,
+            "is_highlighted": false
+          }
+        },
+        "fiber_row_b6BAmp": {
+          "type": "fiber_row",
+          "settings": {
+            "fiber_name": "Bamboo viscose",
+            "fiber_note": "Absorbs. Marketed as softer.",
+            "value": "13%",
+            "bar_percent": 72,
+            "is_highlighted": false
+          }
+        },
+        "fiber_row_FfedYf": {
+          "type": "fiber_row",
+          "settings": {
+            "fiber_name": "Cotton",
+            "fiber_note": "Absorbs fast. Turns wet quickly.",
+            "value": "7–8%",
+            "bar_percent": 42,
+            "is_highlighted": false
+          }
+        },
+        "fiber_row_xMhdrR": {
+          "type": "fiber_row",
+          "settings": {
+            "fiber_name": "DRYE Asymmetric Layering",
+            "fiber_note": "Doesn’t absorb. Routes outward.",
+            "value": "<0.1%",
+            "bar_percent": 1,
+            "is_highlighted": true
+          }
+        }
+      },
+      "block_order": [
+        "fiber_row_8A4qGq",
+        "fiber_row_b6BAmp",
+        "fiber_row_FfedYf",
+        "fiber_row_xMhdrR"
+      ],
+      "name": "DRYE Saturation Point",
+      "settings": {
+        "section_id": "mechanics-saturation",
+        "eyebrow": "The invention",
+        "heading_line_1": "Every other liner has a saturation point.",
+        "heading_echo": "Ours physically can’t.",
+        "subheading": "Every fibre your hand has ever met inside a glove fills up with sweat — until it can’t hold any more.",
+        "drye_chip": "Skin-side dry",
+        "close_heading": "",
+        "close_body": "",
+        "close_statement": "",
+        "cite": "Moisture regain references: Kadolph 2014 · ASTM D2654 · GB/T 9995. Transport mechanism independently validated in DRYE textile testing."
       }
     },
     "drye_liner_fail_cards_R4xrfA": {
@@ -968,6 +1031,7 @@
     "drye_new_hero_bh6kTP",
     "drye_worker_grid_iFbWqP",
     "drye_evidence_NiKLxX",
+    "drye_new_problem_beat_1_rD9VQ6",
     "drye_liner_productclarity_hAX9ek",
     "drye_stretch_7XjKcD",
     "drye_mechanics_saturation_MhcCAb",
