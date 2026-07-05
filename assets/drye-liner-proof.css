@@ -215,3 +215,24 @@
     min-width: 240px;
   }
 }
+
+/* ── Light stat block (opt-in via section setting; default stays dark) ── */
+.drye-liner-proof--stat-light .drye-liner-proof__stat {
+  background: var(--bg);
+  color: var(--deep);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+.drye-liner-proof--stat-light .drye-liner-proof__stat-name {
+  color: var(--muted);
+}
+.drye-liner-proof--stat-light .drye-liner-proof__stat-num {
+  color: var(--caption);
+}
+.drye-liner-proof--stat-light .drye-liner-proof__stat-row--drye .drye-liner-proof__stat-name,
+.drye-liner-proof--stat-light .drye-liner-proof__stat-row--drye .drye-liner-proof__stat-num {
+  color: var(--emerald);
+}
+.drye-liner-proof--stat-light .drye-liner-proof__source {
+  color: var(--muted);
+}
