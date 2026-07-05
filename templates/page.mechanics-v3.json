@@ -664,6 +664,53 @@
         "secondary_label": "Read the full Gothenburg field report →",
         "secondary_link": ""
       }
+    },
+    "drye_liner_fail_cards_GxeHfr": {
+      "type": "drye-liner-fail-cards",
+      "blocks": {
+        "fail_jFtKHf": {
+          "type": "fail",
+          "settings": {
+            "title": "Back to work faster.",
+            "description": "Gloves come off easier. No fighting wet nitrile between jobs. No waiting for hands and gloves to dry."
+          }
+        },
+        "fail_7cXYUE": {
+          "type": "fail",
+          "settings": {
+            "title": "Less end-of-shift punishment.",
+            "description": "Oil, grime and sweat hit the liner before your skin."
+          }
+        },
+        "fail_cp8yjK": {
+          "type": "fail",
+          "settings": {
+            "title": "Fewer ruined gloves.",
+            "description": "Better feel inside the glove — less wet slip. Fewer torn gloves per shift."
+          }
+        },
+        "fail_fzRJtr": {
+          "type": "fail",
+          "settings": {
+            "title": "Less skin damage by 5 PM.",
+            "description": "Less scrubbing, less reaching for towels.Less skin damage by 5 PM."
+          }
+        }
+      },
+      "block_order": [
+        "fail_jFtKHf",
+        "fail_7cXYUE",
+        "fail_cp8yjK",
+        "fail_fzRJtr"
+      ],
+      "name": "DRYE Liner Fail Cards",
+      "settings": {
+        "section_id": "liner-fails",
+        "eyebrow": "What changes on shift",
+        "heading": "Drier hands changes<br>",
+        "heading_emphasis": "more than comfort.",
+        "body": "Here's what the shift feels like after DRYE."
+      }
     }
   },
   "order": [
@@ -683,6 +730,7 @@
     "drye_mechanism_nav_n73TxK",
     "drye_section_06_faq_NanA39",
     "drye_liner_research_callout_FVYMXh",
-    "drye_mechanics_cta_2_ajF6PB"
+    "drye_mechanics_cta_2_ajF6PB",
+    "drye_liner_fail_cards_GxeHfr"
   ]
 }
