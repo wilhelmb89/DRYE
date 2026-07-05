@@ -1,6 +1,6 @@
 {{ 'drye-liner-proof.css' | asset_url | stylesheet_tag }}
 
-<section class="dryeNEW-section drye-liner-proof" id="{{ section.settings.section_id | default: 'liner-proof' }}" data-section-id="{{ section.id }}">
+<section class="dryeNEW-section drye-liner-proof drye-liner-proof--stat-{{ section.settings.stat_scheme | default: 'dark' }}" id="{{ section.settings.section_id | default: 'liner-proof' }}" data-section-id="{{ section.id }}">
   <div class="dryeNEW-container drye-liner-proof__inner">
     {%- if section.settings.eyebrow != blank -%}
       <span class="dryeNEW-micro drye-liner-proof__eyebrow">{{ section.settings.eyebrow }}</span>
@@ -112,6 +112,16 @@
       "id": "section_id",
       "label": "Section ID",
       "default": "liner-proof"
+    },
+    {
+      "type": "select",
+      "id": "stat_scheme",
+      "label": "Stat block color scheme",
+      "options": [
+        { "value": "dark", "label": "Dark (navy)" },
+        { "value": "light", "label": "Light (white)" }
+      ],
+      "default": "dark"
     },
     {
       "type": "text",
