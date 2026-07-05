@@ -19,7 +19,7 @@
 }
 
 .drye-liner-objection-reviews__stars {
-  color: var(--gold);
+  color: var(--gold, #F5B301);
   font-size: 14px;
   letter-spacing: 1px;
 }
@@ -144,4 +144,34 @@
   color: var(--deep);
   border-bottom: 1px solid var(--deep);
   padding-bottom: 1px;
+}
+
+@media (min-width: 768px) {
+  .drye-liner-objection-reviews__widget {
+    max-width: 720px;
+    margin-inline: auto;
+  }
+
+  .drye-liner-objection-reviews__panel {
+    padding: var(--space-32) var(--space-32);
+    min-height: 200px;
+  }
+
+  .drye-liner-objection-reviews__question {
+    font-size: 11px;
+    margin-bottom: var(--space-16);
+  }
+
+  .drye-liner-objection-reviews__quote {
+    font-size: 18px;
+    line-height: 1.5;
+  }
+
+  .drye-liner-objection-reviews__name {
+    font-size: 15px;
+  }
+
+  .drye-liner-objection-reviews__role {
+    font-size: 13px;
+  }
 }
