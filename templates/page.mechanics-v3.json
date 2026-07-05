@@ -446,6 +446,64 @@
         "body": "<p><em>\"After 6 hours under rubber gloves, my hands felt wet inside. Took the gloves off — completely dry. Such a mindfuck.\"</em><br/><br/></p>"
       }
     },
+    "drye_liner_saturation_zpVacb": {
+      "type": "drye-liner-saturation",
+      "blocks": {
+        "material_cGdNaY": {
+          "type": "material",
+          "settings": {
+            "name": "Merino wool",
+            "note": "Soaks and stays heavy",
+            "value_text": "15–18%",
+            "bar_percent": 100,
+            "highlight": false
+          }
+        },
+        "material_njQLzn": {
+          "type": "material",
+          "settings": {
+            "name": "Bamboo",
+            "note": "Wetter than cotton",
+            "value_text": "13%",
+            "bar_percent": 76,
+            "highlight": false
+          }
+        },
+        "material_wNLGT3": {
+          "type": "material",
+          "settings": {
+            "name": "Cotton",
+            "note": "Wet within the hour",
+            "value_text": "7–8%",
+            "bar_percent": 44,
+            "highlight": false
+          }
+        },
+        "material_wYyQUe": {
+          "type": "material",
+          "settings": {
+            "name": "DRYE skin side",
+            "note": "Near-zero regain",
+            "value_text": "<0.1%",
+            "bar_percent": 2,
+            "highlight": true
+          }
+        }
+      },
+      "block_order": [
+        "material_cGdNaY",
+        "material_njQLzn",
+        "material_wNLGT3",
+        "material_wYyQUe"
+      ],
+      "name": "DRYE Liner Saturation",
+      "settings": {
+        "section_id": "liner-saturation",
+        "heading": "Why normal liners stay wet.",
+        "body": "",
+        "source_text": "Moisture regain references: ASTM D2654 · Kadolph 2014."
+      }
+    },
     "drye_mechanics_cta_H4QANa": {
       "type": "drye-mechanics-cta",
       "name": "DRYE Mechanics CTA",
@@ -730,6 +788,7 @@
     "drye_liner_objection_reviews_yktLhW",
     "drye_liner_mechanism_FYWXiz",
     "drye_mechanics_time_promise_qNUeyD",
+    "drye_liner_saturation_zpVacb",
     "drye_mechanics_cta_H4QANa",
     "drye_liner_proof_mYgPJa",
     "drye_liner_risk_reversal_kbCRUJ",
