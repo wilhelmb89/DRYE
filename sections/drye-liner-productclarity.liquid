@@ -7,20 +7,44 @@
 >
   <div class="dryeNEW-container">
     <div class="drye-liner-product-clarity__inner">
-      <div class="drye-liner-product-clarity__intro">
-        {% if section.settings.heading != blank or section.settings.heading_emphasis != blank %}
-          <h2 class="dryeNEW-h2 drye-liner-product-clarity__heading">
-            {%- if section.settings.heading != blank -%}
-              {{ section.settings.heading }}<br>
-            {%- endif -%}
-            {%- if section.settings.heading_emphasis != blank -%}
-              <span class="dryeNEW-editorial">{{ section.settings.heading_emphasis }}</span>
-            {%- endif -%}
-          </h2>
-        {% endif %}
+      <div class="drye-liner-product-clarity__text">
+        <div class="drye-liner-product-clarity__intro">
+          {% if section.settings.heading != blank or section.settings.heading_emphasis != blank %}
+            <h2 class="dryeNEW-h2 drye-liner-product-clarity__heading">
+              {%- if section.settings.heading != blank -%}
+                {{ section.settings.heading }}<br>
+              {%- endif -%}
+              {%- if section.settings.heading_emphasis != blank -%}
+                <span class="dryeNEW-editorial">{{ section.settings.heading_emphasis }}</span>
+              {%- endif -%}
+            </h2>
+          {% endif %}
 
-        {% if section.settings.body != blank %}
-          <div class="dryeNEW-body drye-liner-product-clarity__body">{{ section.settings.body }}</div>
+          {% if section.settings.body != blank %}
+            <div class="dryeNEW-body drye-liner-product-clarity__body">{{ section.settings.body }}</div>
+          {% endif %}
+        </div>
+
+        {% if section.blocks.size > 0 %}
+          <div class="drye-liner-product-clarity__specs">
+            <ul class="drye-liner-product-clarity__spec-list">
+              {%- for block in section.blocks -%}
+                {%- if block.type == 'spec' -%}
+                  <li class="drye-liner-product-clarity__spec" {{ block.shopify_attributes }}>
+                    <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 7l3 3 5-6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    <span>
+                      {% if block.settings.title != blank %}
+                        <strong>{{ block.settings.title }}</strong>
+                      {% endif %}
+                      {% if block.settings.description != blank %}
+                        {{ block.settings.description }}
+                      {% endif %}
+                    </span>
+                  </li>
+                {%- endif -%}
+              {%- endfor -%}
+            </ul>
+          </div>
         {% endif %}
       </div>
 
@@ -42,26 +66,6 @@
           </div>
         {% endif %}
       </div>
-
-      {% if section.blocks.size > 0 %}
-        <ul class="drye-liner-product-clarity__specs">
-          {%- for block in section.blocks -%}
-            {%- if block.type == 'spec' -%}
-              <li class="drye-liner-product-clarity__spec" {{ block.shopify_attributes }}>
-                <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 7l3 3 5-6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                <span>
-                  {% if block.settings.title != blank %}
-                    <strong>{{ block.settings.title }}</strong>
-                  {% endif %}
-                  {% if block.settings.description != blank %}
-                    {{ block.settings.description }}
-                  {% endif %}
-                </span>
-              </li>
-            {%- endif -%}
-          {%- endfor -%}
-        </ul>
-      {% endif %}
     </div>
   </div>
 </section>
