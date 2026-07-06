@@ -345,15 +345,11 @@
     margin-left: 50%;
   }
 
-  /* Proof strip sits under the floated media in the LEFT column.
-     Float + clear:left keeps it out of normal flow (like .hero-media),
-     so .hero-info's block box stays anchored at the container top-right
-     and cannot be pushed down. */
+  /* Desktop: hide the standalone strip — the "recent orders" line is restored
+     inside the worker-proof module instead (.drye-proof__recent). Mobile keeps
+     the strip under the gallery. */
   .hero .hero-proof-strip {
-    float: left;
-    clear: left;
-    width: 50%;
-    box-sizing: border-box;
+    display: none;
   }
 }
 
@@ -520,9 +516,7 @@
   }
 
   .hero .hero-proof-strip {
-    grid-column: 1;
-    grid-row: 2;
-    width: auto;
+    display: none;
   }
 
   .hero .hero-info {
@@ -1718,3 +1712,39 @@
 .hero .atc-btn-full { margin-bottom: 0; }
 .hero .trust-row { margin: 10px 0 14px !important; }
 .hero .drye-proof { margin-bottom: 0; }
+
+/* ==========================================================================
+   Recent-orders line: shown INSIDE the worker-proof module on desktop only.
+   On mobile it lives in the standalone .hero-proof-strip under the gallery.
+   ========================================================================== */
+.hero .drye-proof__recent {
+  display: none;
+  padding: 10px 0 4px;
+  border-top: 1px solid var(--border);
+  margin-top: 8px;
+}
+.hero .drye-proof__recent-label {
+  display: block;
+  margin-bottom: 4px;
+  font-family: var(--font-body);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: var(--emerald);
+}
+.hero .drye-proof__recent-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.hero .drye-proof__recent-item {
+  font-family: var(--font-body);
+  font-size: 11px;
+  letter-spacing: 0.04em;
+  color: var(--caption);
+}
+@media (min-width: 768px) {
+  .hero .drye-proof__recent {
+    display: block;
+  }
+}

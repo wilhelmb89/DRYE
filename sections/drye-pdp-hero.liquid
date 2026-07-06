@@ -615,6 +615,23 @@ assign review_count = section.settings.review_count_fallback
         </div>
       </div>
     {% endif %}
+
+    {% if section.settings.proof_show_recent and section.settings.proof_recent_items != blank %}
+      <div class="drye-proof__recent">
+        {% if section.settings.proof_recent_label != blank %}
+          <span class="drye-proof__recent-label">{{ section.settings.proof_recent_label }}</span>
+        {% endif %}
+        {% assign recent_lines = section.settings.proof_recent_items | newline_to_br | split: '<br />' %}
+        <ul class="drye-proof__recent-list">
+          {% for line in recent_lines %}
+            {% assign line_text = line | strip %}
+            {% if line_text != blank %}
+              <li class="drye-proof__recent-item">{{ line_text }}</li>
+            {% endif %}
+          {% endfor %}
+        </ul>
+      </div>
+    {% endif %}
   </section>
 
   <script>
