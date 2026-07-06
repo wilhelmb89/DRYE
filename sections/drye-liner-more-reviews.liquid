@@ -1,6 +1,6 @@
 {{ 'drye-liner-more-reviews.css' | asset_url | stylesheet_tag }}
 
-<section class="dryeNEW-section drye-liner-more-reviews" id="{{ section.settings.section_id | default: 'liner-more-reviews' }}" data-section-id="{{ section.id }}">
+<section class="dryeNEW-section drye-liner-more-reviews" id="{{ section.settings.section_id | default: 'liner-more-reviews' }}" data-section-id="{{ section.id }}" data-drye-section data-section-name="more_reviews" data-section-type="drye-liner-more-reviews">
   <div class="dryeNEW-container">
     <div class="drye-liner-more-reviews__header">
       {%- if section.settings.eyebrow != blank -%}

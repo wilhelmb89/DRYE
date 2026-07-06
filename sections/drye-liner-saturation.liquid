@@ -1,6 +1,6 @@
 {{ 'drye-liner-saturation.css' | asset_url | stylesheet_tag }}
 
-<section class="dryeNEW-section drye-liner-saturation" id="{{ section.settings.section_id | default: 'liner-saturation' }}" data-section-id="{{ section.id }}">
+<section class="dryeNEW-section drye-liner-saturation" id="{{ section.settings.section_id | default: 'liner-saturation' }}" data-section-id="{{ section.id }}" data-drye-section data-section-name="why_liners_stay_wet" data-section-type="drye-liner-saturation">
   <div class="dryeNEW-container">
     <div class="drye-liner-saturation__intro">
       {%- if section.settings.heading != blank -%}

@@ -35,6 +35,12 @@
 
     function deriveName(el) {
       var explicit = el.getAttribute('data-section-name');
+      if (!explicit) {
+        // Shopify wraps each section in .shopify-section; the explicit
+        // data-section-name lives on the section's own inner element.
+        var inner = el.querySelector('[data-section-name]');
+        if (inner) explicit = inner.getAttribute('data-section-name');
+      }
       if (explicit) return explicit;
 
       var rawId = el.id || '';

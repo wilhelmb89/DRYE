@@ -1,6 +1,6 @@
 {{ 'drye-liner-problem-swipe.css' | asset_url | stylesheet_tag }}
 
-<section class="dryeNEW-section drye-liner-problem-swipe" id="{{ section.settings.section_id | default: 'liner-problem' }}" data-section-id="{{ section.id }}">
+<section class="dryeNEW-section drye-liner-problem-swipe" id="{{ section.settings.section_id | default: 'liner-problem' }}" data-section-id="{{ section.id }}" data-drye-section data-section-name="problem_swipe" data-section-type="drye-liner-problem-swipe">
   <div class="dryeNEW-container">
     <div class="drye-liner-problem-swipe__intro">
       {%- if section.settings.eyebrow != blank -%}

@@ -1,7 +1,7 @@
 {{ 'drye-liner-worker-proof.css' | asset_url | stylesheet_tag }}
 {{ 'drye-liner-worker-proof.js' | asset_url | script_tag }}
 
-<div class="drye-liner-worker-proof" id="{{ section.settings.section_id | default: 'liner-worker-proof' }}" data-section-id="{{ section.id }}">
+<div class="drye-liner-worker-proof" id="{{ section.settings.section_id | default: 'liner-worker-proof' }}" data-section-id="{{ section.id }}" data-drye-section data-section-name="worker_proof" data-section-type="drye-liner-worker-proof">
   <div class="drye-liner-worker-proof__card" id="drye-liner-worker-proof-{{ section.id }}">
     <div class="drye-liner-worker-proof__line">
       <svg class="drye-liner-worker-proof__check" viewBox="0 0 24 24" fill="none" aria-hidden="true">

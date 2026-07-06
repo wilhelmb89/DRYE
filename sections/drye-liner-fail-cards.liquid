@@ -1,6 +1,6 @@
 {{ 'drye-liner-fail-cards.css' | asset_url | stylesheet_tag }}
 
-<section class="dryeNEW-section drye-liner-fail-cards" id="{{ section.settings.section_id | default: 'liner-fails' }}" data-section-id="{{ section.id }}">
+<section class="dryeNEW-section drye-liner-fail-cards" id="{{ section.settings.section_id | default: 'liner-fails' }}" data-section-id="{{ section.id }}" data-drye-section data-section-name="fail_cards" data-section-type="drye-liner-fail-cards">
   <div class="dryeNEW-container">
     <div class="drye-liner-fail-cards__inner">
       {%- if section.settings.eyebrow != blank -%}

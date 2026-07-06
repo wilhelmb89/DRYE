@@ -1,6 +1,6 @@
 {{ 'drye-liner-proof.css' | asset_url | stylesheet_tag }}
 
-<section class="dryeNEW-section drye-liner-proof drye-liner-proof--stat-{{ section.settings.stat_scheme | default: 'light' }}" id="{{ section.settings.section_id | default: 'liner-proof' }}" data-section-id="{{ section.id }}">
+<section class="dryeNEW-section drye-liner-proof drye-liner-proof--stat-{{ section.settings.stat_scheme | default: 'light' }}" id="{{ section.settings.section_id | default: 'liner-proof' }}" data-section-id="{{ section.id }}" data-drye-section data-section-name="proof" data-section-type="drye-liner-proof">
   <div class="dryeNEW-container drye-liner-proof__inner">
     {%- if section.settings.eyebrow != blank -%}
       <span class="dryeNEW-micro drye-liner-proof__eyebrow">{{ section.settings.eyebrow }}</span>

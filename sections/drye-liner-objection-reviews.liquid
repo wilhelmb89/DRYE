@@ -1,7 +1,7 @@
 {{ 'drye-liner-objection-reviews.css' | asset_url | stylesheet_tag }}
 {{ 'drye-liner-swipe.js' | asset_url | script_tag }}
 
-<section class="dryeNEW-section drye-liner-objection-reviews" id="{{ section.settings.section_id | default: 'liner-objections' }}" data-section-id="{{ section.id }}">
+<section class="dryeNEW-section drye-liner-objection-reviews" id="{{ section.settings.section_id | default: 'liner-objections' }}" data-section-id="{{ section.id }}" data-drye-section data-section-name="objection_reviews" data-section-type="drye-liner-objection-reviews">
   <div class="dryeNEW-container">
     <div class="drye-liner-objection-reviews__inner" id="drye-liner-objection-reviews-{{ section.id }}">
       {%- if section.settings.eyebrow != blank -%}

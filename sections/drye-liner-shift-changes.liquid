@@ -1,6 +1,6 @@
 {{ 'drye-liner-shift-changes.css' | asset_url | stylesheet_tag }}
 
-<section class="dryeNEW-section drye-liner-shift-changes" id="{{ section.settings.section_id | default: 'liner-shift' }}" data-section-id="{{ section.id }}">
+<section class="dryeNEW-section drye-liner-shift-changes" id="{{ section.settings.section_id | default: 'liner-shift' }}" data-section-id="{{ section.id }}" data-drye-section data-section-name="shift_changes" data-section-type="drye-liner-shift-changes">
   <div class="dryeNEW-container drye-liner-shift-changes__inner">
     {%- if section.settings.eyebrow != blank -%}
       <span class="dryeNEW-micro">{{ section.settings.eyebrow }}</span>
