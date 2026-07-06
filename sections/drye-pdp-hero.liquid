@@ -21,6 +21,19 @@ assign review_count = section.settings.review_count_fallback
   data-section-id="{{ section.id }}"
   data-product-section
 >
+  <div class="pdp-announce">
+    <div class="pdp-announce__track" aria-hidden="true">
+      {% for i in (1..2) %}
+        <span class="pdp-announce__item">{{ section.settings.announce_1 }}</span>
+        <span class="pdp-announce__dot" aria-hidden="true">·</span>
+        <span class="pdp-announce__item">{{ section.settings.announce_2 }}</span>
+        <span class="pdp-announce__dot" aria-hidden="true">·</span>
+        <span class="pdp-announce__item">{{ section.settings.announce_3 }}</span>
+        <span class="pdp-announce__dot" aria-hidden="true">·</span>
+      {% endfor %}
+    </div>
+  </div>
+
   <div class="hero-media" data-gallery-root>
     {% assign visible_media_count = 0 %}
 
@@ -189,13 +202,26 @@ assign review_count = section.settings.review_count_fallback
         </div>
       {% endif %}
 
-      <div class="hero-overlay">
-        <div class="ho-name">{{ section.settings.overlay_name }}</div>
-        <div class="ho-quote">{{ section.settings.overlay_quote }}</div>
-      </div>
     </div>
   </div>
+
+  <div class="pdp-orderproof">
+    {% if section.settings.proof_orders_line != blank %}
+      <div class="pdp-orderproof__line1">{{ section.settings.proof_orders_line }}</div>
+    {% endif %}
+    {% if section.settings.proof_states_line != blank %}
+      <div class="pdp-orderproof__line2">{{ section.settings.proof_states_line }}</div>
+    {% endif %}
+  </div>
+
   <div class="hero-info">
+    <div class="stars-row" data-review-scroll role="link" tabindex="0" aria-label="Read customer reviews">
+      <span class="stars" aria-hidden="true">★★★★★</span>
+      <span class="stars-lbl">
+        {{ review_rating }}/5 · <a href="{{ review_anchor }}">{{ review_count }} reviews</a>
+      </span>
+    </div>
+
     <div class="h-eye">{{ section.settings.eyebrow }}</div>
 
     <h1 class="h-title">
@@ -207,12 +233,8 @@ assign review_count = section.settings.review_count_fallback
       {{ section.settings.subtext }}
     </div>
 
-    <div class="stars-row" data-review-scroll role="link" tabindex="0" aria-label="Read customer reviews">
-      <span class="stars" aria-hidden="true">★★★★★</span>
-      <span class="stars-lbl">
-        {{ review_rating }}/5 · <a href="{{ review_anchor }}">{{ review_count }} reviews</a>
-      </span>
-    </div>
+    <button type="button" class="pdp-readmore" data-pdp-readmore>Read more <span aria-hidden="true">↓</span></button>
+    <div class="pdp-readmore__body" data-pdp-readmore-body hidden>{{ section.settings.subtext_more }}</div>
 
     <div class="price-row" data-price-row>
       <span class="price" data-price>{{ selected_variant.price | money_with_currency }}</span>
@@ -377,6 +399,29 @@ assign review_count = section.settings.review_count_fallback
   </div>
 </div>
 
+<div class="pdp-compare">
+  <div class="pdp-compare__col pdp-compare__col--loop">
+    <p class="pdp-compare__eyebrow pdp-compare__eyebrow--loop">The workaround loop</p>
+    <div class="pdp-compare__item"><span class="pdp-compare__x">✕</span><span>Soaked liners</span></div>
+    <div class="pdp-compare__item"><span class="pdp-compare__x">✕</span><span>Glove-stick</span></div>
+    <div class="pdp-compare__item"><span class="pdp-compare__x">✕</span><span>Constant hand resets</span></div>
+    <div class="pdp-compare__item"><span class="pdp-compare__x">✕</span><span>Wet, irritated skin</span></div>
+    <div class="pdp-compare__item"><span class="pdp-compare__x">✕</span><span>Cream after every shift</span></div>
+  </div>
+  <div class="pdp-compare__div" aria-hidden="true"></div>
+  <div class="pdp-compare__col pdp-compare__col--base">
+    <p class="pdp-compare__eyebrow pdp-compare__eyebrow--base">One base layer</p>
+    <div class="pdp-compare__item"><span class="pdp-compare__arrow">→</span><span>Dryer hands all shift</span></div>
+    <div class="pdp-compare__item"><span class="pdp-compare__arrow">→</span><span>No sticky glove changes</span></div>
+    <div class="pdp-compare__item"><span class="pdp-compare__arrow">→</span><span>No washing or drying</span></div>
+    <div class="pdp-compare__item"><span class="pdp-compare__arrow">→</span><span>Skin stays dry</span></div>
+    <div class="pdp-compare__item"><span class="pdp-compare__arrow">→</span><span>Lasts 6–12 months</span></div>
+    <div class="pdp-compare__foot">
+      <p class="pdp-compare__price">{{ selected_variant.price | money }} · 30-day refund</p>
+    </div>
+  </div>
+</div>
+
 <ul class="bullets">
 
       <ul class="bullets">
@@ -403,6 +448,41 @@ assign review_count = section.settings.review_count_fallback
         {% endif %}
       </button>
     {% endform %}
+
+    <div class="trust-row">
+      <div class="trust-item">
+        <img
+          src="{{ 'icon-shield-check.svg' | asset_url }}"
+          alt=""
+          width="20"
+          height="20"
+          loading="lazy"
+        >
+        <span>{{ section.settings.trust_text_1 }}</span>
+      </div>
+
+      <div class="trust-item">
+        <img
+          src="{{ 'icon-refund-arrows (2).svg' | asset_url }}"
+          alt=""
+          width="20"
+          height="20"
+          loading="lazy"
+        >
+        <span>{{ section.settings.trust_text_2 }}</span>
+      </div>
+
+      <div class="trust-item">
+        <img
+          src="{{ 'icon-truck.svg' | asset_url }}"
+          alt=""
+          width="20"
+          height="20"
+          loading="lazy"
+        >
+        <span>{{ section.settings.trust_text_3 }}</span>
+      </div>
+    </div>
 
 {% comment %} Worker Proof — compact green proof line + sliding/expandable comment ticker {% endcomment %}
 {% if section.settings.proof_enabled %}
@@ -612,41 +692,6 @@ assign review_count = section.settings.review_count_fallback
     {% endif %}
   {% endfor %}
 {% endif %}
-    <div class="trust-row">
-      <div class="trust-item">
-        <img
-          src="{{ 'icon-shield-check.svg' | asset_url }}"
-          alt=""
-          width="20"
-          height="20"
-          loading="lazy"
-        >
-        <span>{{ section.settings.trust_text_1 }}</span>
-      </div>
-
-      <div class="trust-item">
-        <img
-          src="{{ 'icon-refund-arrows (2).svg' | asset_url }}"
-          alt=""
-          width="20"
-          height="20"
-          loading="lazy"
-        >
-        <span>{{ section.settings.trust_text_2 }}</span>
-      </div>
-
-      <div class="trust-item">
-        <img
-          src="{{ 'icon-truck.svg' | asset_url }}"
-          alt=""
-          width="20"
-          height="20"
-          loading="lazy"
-        >
-        <span>{{ section.settings.trust_text_3 }}</span>
-      </div>
-    </div>
-
 
     {% assign desc_media = section.blocks | where: 'type', 'desc_media' %}
     {% assign rendered_desc = '' %}
@@ -1335,6 +1380,26 @@ wteTimelines.forEach((timeline) => {
 </script>
 
 
+<script>
+  (function () {
+    var sectionEl = document.querySelector('[data-section-id="{{ section.id }}"][data-product-section]');
+    if (!sectionEl) return;
+    var btn = sectionEl.querySelector('[data-pdp-readmore]');
+    var body = sectionEl.querySelector('[data-pdp-readmore-body]');
+    if (!btn || !body || btn.dataset.pdpReadmoreBound === '1') return;
+    btn.dataset.pdpReadmoreBound = '1';
+    btn.addEventListener('click', function () {
+      if (body.hasAttribute('hidden')) {
+        body.removeAttribute('hidden');
+        btn.innerHTML = 'Read less <span aria-hidden="true">↑</span>';
+      } else {
+        body.setAttribute('hidden', '');
+        btn.innerHTML = 'Read more <span aria-hidden="true">↓</span>';
+      }
+    });
+  })();
+</script>
+
 <script src="{{ 'drye-pdp-gallery.js' | asset_url }}" defer></script>
 
 {% schema %}
@@ -1381,6 +1446,30 @@ wteTimelines.forEach((timeline) => {
       "id": "subtext",
       "label": "Subtext",
       "default": "<p>Stops skin breakdown in sealed gloves. No chemicals. No membranes. No coatings. No saturation point. <strong>0.4mm thin.</strong></p>"
+    },
+    {
+      "type": "richtext",
+      "id": "subtext_more",
+      "label": "Subtext — read more",
+      "default": "<p>Built on a moisture gradient — not absorption, not wicking. A patent-pending Swedish textile with a one-directional structure that drives moisture away from skin, even inside sealed gloves under compression. Machine wash. Air dry. Lasts 4–12 months.</p>"
+    },
+    {
+      "type": "text",
+      "id": "announce_1",
+      "label": "Announcement 1",
+      "default": "Free shipping on 3+ pairs"
+    },
+    {
+      "type": "text",
+      "id": "announce_2",
+      "label": "Announcement 2",
+      "default": "30-day money-back guarantee"
+    },
+    {
+      "type": "text",
+      "id": "announce_3",
+      "label": "Announcement 3",
+      "default": "Dispatched within 24 hours"
     },
     {
       "type": "text",
@@ -1453,6 +1542,18 @@ wteTimelines.forEach((timeline) => {
       "id": "proof_keep_line",
       "label": "Keep line",
       "default": "Workers are keeping them."
+    },
+    {
+      "type": "text",
+      "id": "proof_orders_line",
+      "label": "Order-proof line 1 (orders)",
+      "default": "101 orders since April 19"
+    },
+    {
+      "type": "text",
+      "id": "proof_states_line",
+      "label": "Order-proof line 2 (states)",
+      "default": "Shipped to 27 US states"
     },
     {
       "type": "text",
