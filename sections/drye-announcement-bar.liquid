@@ -28,42 +28,20 @@
   {% for group in (1..2) %}
     <div class="dryeNEW-annbar__group">
       {% for i in (1..3) %}
-        <div class="dryeNEW-annbar__item">
-          {% case i %}{% when 1 %}{% assign ann_text = section.settings.text %}{% when 2 %}{% assign ann_text = section.settings.text_2 %}{% when 3 %}{% assign ann_text = section.settings.text_3 %}{% endcase %}
-          {% if section.settings.left_icon != blank %}
-            {{
-              section.settings.left_icon
-              | image_url: width: 200
-              | image_tag:
-                class: 'dryeNEW-annbar__icon',
-                loading: 'eager',
-                decoding: 'async',
-                alt: ''
-            }}
-          {% endif %}
-
-          {% if section.settings.link_url != blank %}
-            <a href="{{ section.settings.link_url }}" class="dryeNEW-annbar__link dryeNEW-body--sm">
-              {{ ann_text }}
-            </a>
-          {% else %}
-            <span class="dryeNEW-annbar__text dryeNEW-body--sm">
-              {{ ann_text }}
-            </span>
-          {% endif %}
-
-          {% if section.settings.right_icon != blank %}
-            {{
-              section.settings.right_icon
-              | image_url: width: 200
-              | image_tag:
-                class: 'dryeNEW-annbar__icon',
-                loading: 'eager',
-                decoding: 'async',
-                alt: ''
-            }}
-          {% endif %}
-        </div>
+        {% case i %}
+          {% when 1 %}{% assign ann_text = section.settings.text %}
+          {% when 2 %}{% assign ann_text = section.settings.text_2 %}
+          {% when 3 %}{% assign ann_text = section.settings.text_3 %}
+        {% endcase %}
+        <span class="dryeNEW-annbar__item">
+          {% case i %}
+            {% when 1 %}<svg class="dryeNEW-annbar__svg" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><rect x="1" y="6" width="14" height="9" rx="1"></rect><path d="M15 9l3 1v4h-3V9zM5 15v2M11 15v2"></path></svg>
+            {% when 2 %}<svg class="dryeNEW-annbar__svg" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M10 2l7 3v5c0 4.5-3.5 7.5-7 8.5C6.5 17.5 3 14.5 3 10V5l7-3z"></path><path d="M7 10l2 2 4-4" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+            {% when 3 %}<svg class="dryeNEW-annbar__svg" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><circle cx="8" cy="8" r="7"></circle><path d="M8 5v3l2 2" stroke-linecap="round"></path></svg>
+          {% endcase %}
+          <span class="dryeNEW-annbar__text">{{ ann_text }}</span>
+        </span>
+        <span class="dryeNEW-annbar__dot" aria-hidden="true">·</span>
       {% endfor %}
     </div>
   {% endfor %}
@@ -123,17 +101,37 @@
 #shopify-section-{{ section.id }} .dryeNEW-annbar__group {
   display: flex;
   align-items: center;
-  gap: 80px;
+  gap: 0;
   flex: 0 0 auto;
-  padding-right: 80px;
+  padding-right: 0;
 }
 
 #shopify-section-{{ section.id }} .dryeNEW-annbar__item {
   display: inline-flex;
   align-items: center;
-  gap: 20px;
+  gap: 8px;
+  padding: 9px 28px;
   white-space: nowrap;
   flex: 0 0 auto;
+  font-family: var(--font-body);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  color: rgba(255, 255, 255, 0.75);
+}
+
+#shopify-section-{{ section.id }} .dryeNEW-annbar__svg {
+  width: 13px;
+  height: 13px;
+  flex: 0 0 auto;
+  display: block;
+  opacity: 0.6;
+}
+
+#shopify-section-{{ section.id }} .dryeNEW-annbar__dot {
+  flex: 0 0 auto;
+  color: rgba(255, 255, 255, 0.2);
+  font-size: 9px;
 }
 
       #shopify-section-{{ section.id }} .dryeNEW-annbar__text,
@@ -179,16 +177,12 @@
       /* Mobile spacing — proportionally tighter but still breathing */
 @media (max-width: 767px) {
   #shopify-section-{{ section.id }} .dryeNEW-annbar__group {
-    gap: 56px;
-    padding-right: 56px;
+    gap: 0;
+    padding-right: 0;
   }
 
   #shopify-section-{{ section.id }} .dryeNEW-annbar__item {
-    gap: 14px;
-  }
-
-  #shopify-section-{{ section.id }} .dryeNEW-annbar__icon {
-    height: calc(var(--ann-icon-height) - 4px);
+    gap: 8px;
   }
 }
 
