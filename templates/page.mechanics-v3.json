@@ -622,6 +622,7 @@
         },
         "old_step_gjjetz": {
           "type": "old_step",
+          "disabled": true,
           "settings": {
             "icon": "✕",
             "text": "At saturation, moisture sits on skin"
@@ -643,6 +644,7 @@
         },
         "old_step_tJ3wja": {
           "type": "old_step",
+          "disabled": true,
           "settings": {
             "icon": "✕",
             "text": "Same wet glove on shift 1 as shift 8"
@@ -671,6 +673,7 @@
         },
         "drye_step_QJkxk9": {
           "type": "drye_step",
+          "disabled": true,
           "settings": {
             "icon": "→",
             "text": "One principle. Patent filed March 2026."
@@ -757,6 +760,124 @@
         "step_2_label": "",
         "step_2_title": "",
         "step_2_body": ""
+      }
+    },
+    "drye_mechanics_identification_gallery_itNhgg": {
+      "type": "drye-mechanics-identification-gallery",
+      "blocks": {
+        "panel_J6bpMP": {
+          "type": "panel",
+          "settings": {
+            "image": "shopify://shop_images/unnamed.webp",
+            "image_alt": "Worker wearing DRYE glove liners",
+            "video_url": "",
+            "video_play_label": "Play video",
+            "label": "EV mechanic",
+            "quote": "",
+            "source": "Kevin Parra · Santa Maria, CA"
+          }
+        },
+        "panel_wCD7jJ": {
+          "type": "panel",
+          "settings": {
+            "image": "shopify://shop_images/unnamed_3.webp",
+            "image_alt": "Worker wearing DRYE glove liners",
+            "video_url": "",
+            "video_play_label": "Play video",
+            "label": "EV mechanic",
+            "quote": "",
+            "source": "Kevin Parra · Santa Maria, CA"
+          }
+        },
+        "panel_y4fMtP": {
+          "type": "panel",
+          "settings": {
+            "image": "shopify://shop_images/Screenshot_7.webp",
+            "image_alt": "Worker wearing DRYE glove liners",
+            "video_url": "",
+            "video_play_label": "Play video",
+            "label": "Automotive",
+            "quote": "\"Dry hands at lunch. First time in years.\"",
+            "source": "Automotive mechanic"
+          }
+        },
+        "panel_q9RrwA": {
+          "type": "panel",
+          "settings": {
+            "image": "shopify://shop_images/Screenshot_8.png",
+            "image_alt": "Worker wearing DRYE glove liners",
+            "video_url": "https://www.youtube.com/watch?v=byFSAZZSsl4",
+            "video_play_label": "Play video",
+            "label": "Mine worker",
+            "quote": "\"Stop buying cotton gloves. They fall apart, stink, get filthy. They don't help — they're just a temporary barrier. Your liners actually make a difference. And I've got my own hands to prove it.\"",
+            "source": "Jens Stålnacke · Mine worker"
+          }
+        },
+        "panel_9Uapxb": {
+          "type": "panel",
+          "settings": {
+            "image": "shopify://shop_images/Screenshot_3_1.webp",
+            "image_alt": "Worker wearing DRYE glove liners",
+            "video_url": "",
+            "video_play_label": "Play video",
+            "label": "Automotive",
+            "quote": "\"Hands don't stink after the shift.\"",
+            "source": "EV technician"
+          }
+        },
+        "panel_b3ex3r": {
+          "type": "panel",
+          "settings": {
+            "image": "shopify://shop_images/Screenshot_4.webp",
+            "image_alt": "Worker wearing DRYE glove liners",
+            "video_url": "",
+            "video_play_label": "Play video",
+            "label": "Automotive",
+            "quote": "\"Off the gloves, straight to the laptop.\"",
+            "source": "EV technician"
+          }
+        },
+        "panel_iGTerM": {
+          "type": "panel",
+          "settings": {
+            "image": "shopify://shop_images/Screenshot_4_3.webp",
+            "image_alt": "Worker wearing DRYE glove liners",
+            "video_url": "",
+            "video_play_label": "Play video",
+            "label": "Forestry",
+            "quote": "\"They hold up out here. Dry hands is the bonus.\"",
+            "source": "Forest worker"
+          }
+        },
+        "panel_U9PR7t": {
+          "type": "panel",
+          "settings": {
+            "image": "shopify://shop_images/Screenshot_5_1.webp",
+            "image_alt": "Worker wearing DRYE glove liners",
+            "video_url": "",
+            "video_play_label": "Play video",
+            "label": "Construction",
+            "quote": "\"I've had cracked hands for years. Anything that helps, even a little, is appreciated.\"",
+            "source": "Construction worker · Veidekke"
+          }
+        }
+      },
+      "block_order": [
+        "panel_J6bpMP",
+        "panel_wCD7jJ",
+        "panel_y4fMtP",
+        "panel_q9RrwA",
+        "panel_9Uapxb",
+        "panel_b3ex3r",
+        "panel_iGTerM",
+        "panel_U9PR7t"
+      ],
+      "name": "DRYE Mechanics Gallery",
+      "settings": {
+        "eyebrow": "DIFFERENT GLOVES. SAME PROBLEM.",
+        "heading": "One dry layer under gloves  \n <em class=\"dryeNEW-em\">wherever hands get trapped.</em>",
+        "body": "",
+        "swipe_label": "Swipe"
       }
     },
     "drye_mechanics_time_promise_qNUeyD": {
@@ -1098,6 +1219,7 @@
     "drye_liner_mechanism_FYWXiz",
     "drye_mechanics_time_promise_qNUeyD",
     "drye_mechanics_cta_H4QANa",
+    "drye_mechanics_identification_gallery_itNhgg",
     "apps_tejzzz",
     "drye_liner_proof_mYgPJa",
     "drye_liner_risk_reversal_kbCRUJ",
