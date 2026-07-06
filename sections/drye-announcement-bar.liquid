@@ -29,6 +29,7 @@
     <div class="dryeNEW-annbar__group">
       {% for i in (1..3) %}
         <div class="dryeNEW-annbar__item">
+          {% case i %}{% when 1 %}{% assign ann_text = section.settings.text %}{% when 2 %}{% assign ann_text = section.settings.text_2 %}{% when 3 %}{% assign ann_text = section.settings.text_3 %}{% endcase %}
           {% if section.settings.left_icon != blank %}
             {{
               section.settings.left_icon
@@ -43,11 +44,11 @@
 
           {% if section.settings.link_url != blank %}
             <a href="{{ section.settings.link_url }}" class="dryeNEW-annbar__link dryeNEW-body--sm">
-              {{ section.settings.text }}
+              {{ ann_text }}
             </a>
           {% else %}
             <span class="dryeNEW-annbar__text dryeNEW-body--sm">
-              {{ section.settings.text }}
+              {{ ann_text }}
             </span>
           {% endif %}
 
@@ -70,9 +71,9 @@
 
           <div class="dryeNEW-visually-hidden">
             {% if section.settings.link_url != blank %}
-              <a href="{{ section.settings.link_url }}">{{ section.settings.text }}</a>
+              <a href="{{ section.settings.link_url }}">{{ section.settings.text }} · {{ section.settings.text_2 }} · {{ section.settings.text_3 }}</a>
             {% else %}
-              {{ section.settings.text }}
+              {{ section.settings.text }} · {{ section.settings.text_2 }} · {{ section.settings.text_3 }}
             {% endif %}
           </div>
         </div>
@@ -215,6 +216,18 @@
       "id": "text",
       "label": "Announcement text",
       "default": "Free shipping on 3+ pairs"
+    },
+    {
+      "type": "text",
+      "id": "text_2",
+      "label": "Ticker item 2",
+      "default": "30-day money-back guarantee"
+    },
+    {
+      "type": "text",
+      "id": "text_3",
+      "label": "Ticker item 3",
+      "default": "Dispatched within 24 hours"
     },
     {
       "type": "url",

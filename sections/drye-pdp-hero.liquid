@@ -195,8 +195,25 @@ assign review_count = section.settings.review_count_fallback
       </div>
     </div>
   </div>
+  {% if section.settings.proof_show_recent and section.settings.proof_recent_items != blank %}
+    <div class="hero-proof-strip">
+      {% if section.settings.proof_recent_label != blank %}
+        <span class="hero-proof-strip__label">{{ section.settings.proof_recent_label }}</span>
+      {% endif %}
+      {% assign recent_lines = section.settings.proof_recent_items | newline_to_br | split: '<br />' %}
+      {% for line in recent_lines %}
+        {% assign line_text = line | strip %}
+        {% if line_text != blank %}<span class="hero-proof-strip__item">{{ line_text }}</span>{% endif %}
+      {% endfor %}
+    </div>
+  {% endif %}
   <div class="hero-info">
-    <div class="h-eye">{{ section.settings.eyebrow }}</div>
+    <div class="stars-row" data-review-scroll role="link" tabindex="0" aria-label="Read customer reviews">
+      <span class="stars" aria-hidden="true">★★★★★</span>
+      <span class="stars-lbl">
+        {{ review_rating }}/5 · <a href="{{ review_anchor }}">{{ review_count }} reviews</a>
+      </span>
+    </div>
 
     <h1 class="h-title">
       {{ section.settings.heading_line_1 }}<br>
@@ -205,13 +222,6 @@ assign review_count = section.settings.review_count_fallback
 
     <div class="h-sub">
       {{ section.settings.subtext }}
-    </div>
-
-    <div class="stars-row" data-review-scroll role="link" tabindex="0" aria-label="Read customer reviews">
-      <span class="stars" aria-hidden="true">★★★★★</span>
-      <span class="stars-lbl">
-        {{ review_rating }}/5 · <a href="{{ review_anchor }}">{{ review_count }} reviews</a>
-      </span>
     </div>
 
     <div class="price-row" data-price-row>
@@ -377,18 +387,39 @@ assign review_count = section.settings.review_count_fallback
   </div>
 </div>
 
-<ul class="bullets">
-
-      <ul class="bullets">
-        {% if section.settings.bullet_1 != blank %}<li>{{ section.settings.bullet_1 }}</li>{% endif %}
-        {% if section.settings.bullet_2 != blank %}<li>{{ section.settings.bullet_2 }}</li>{% endif %}
-        {% if section.settings.bullet_3 != blank %}<li>{{ section.settings.bullet_3 }}</li>{% endif %}
-      </ul>
-
       {% assign selected_variant_preorder = false %}
       {% if selected_variant.inventory_policy == 'continue' and selected_variant.inventory_quantity <= 0 %}
         {% assign selected_variant_preorder = true %}
       {% endif %}
+
+      <div class="value-card">
+        <div class="value-card__grid">
+          <div class="value-card__col value-card__col--loop">
+            <p class="value-card__eyebrow value-card__eyebrow--loop">The workaround loop</p>
+            <div class="value-card__items">
+              <div class="value-card__item"><span class="value-card__x">✕</span><span>Soaked liners</span></div>
+              <div class="value-card__item"><span class="value-card__x">✕</span><span>Glove-stick</span></div>
+              <div class="value-card__item"><span class="value-card__x">✕</span><span>Constant hand resets</span></div>
+              <div class="value-card__item"><span class="value-card__x">✕</span><span>Wet, irritated skin</span></div>
+              <div class="value-card__item"><span class="value-card__x">✕</span><span>Cream after every shift</span></div>
+            </div>
+          </div>
+          <div class="value-card__div" aria-hidden="true"></div>
+          <div class="value-card__col value-card__col--base">
+            <p class="value-card__eyebrow value-card__eyebrow--base">One base layer</p>
+            <div class="value-card__items">
+              <div class="value-card__item"><span class="value-card__arrow">→</span><span>Dryer hands all shift</span></div>
+              <div class="value-card__item"><span class="value-card__arrow">→</span><span>No sticky glove changes</span></div>
+              <div class="value-card__item"><span class="value-card__arrow">→</span><span>No washing or drying</span></div>
+              <div class="value-card__item"><span class="value-card__arrow">→</span><span>Skin stays dry</span></div>
+              <div class="value-card__item"><span class="value-card__arrow">→</span><span>Lasts 6–12 months</span></div>
+            </div>
+            <div class="value-card__foot">
+              <p class="value-card__price">{{ selected_variant.price | money }} · 30-day refund</p>
+            </div>
+          </div>
+        </div>
+      </div>
 
       <button
         type="submit"
@@ -487,23 +518,6 @@ assign review_count = section.settings.review_count_fallback
           <span class="drye-proof__expand-source" data-proof-source></span>
           <a class="drye-proof__expand-link" data-proof-link href="#" target="_blank" rel="noopener" hidden>View on Instagram →</a>
         </div>
-      </div>
-    {% endif %}
-
-    {% if section.settings.proof_show_recent and section.settings.proof_recent_items != blank %}
-      <div class="drye-proof__recent">
-        {% if section.settings.proof_recent_label != blank %}
-          <span class="drye-proof__recent-label">{{ section.settings.proof_recent_label }}</span>
-        {% endif %}
-        {% assign recent_lines = section.settings.proof_recent_items | newline_to_br | split: '<br />' %}
-        <ul class="drye-proof__recent-list">
-          {% for line in recent_lines %}
-            {% assign line_text = line | strip %}
-            {% if line_text != blank %}
-              <li class="drye-proof__recent-item">{{ line_text }}</li>
-            {% endif %}
-          {% endfor %}
-        </ul>
       </div>
     {% endif %}
   </section>
@@ -683,17 +697,31 @@ assign review_count = section.settings.review_count_fallback
     {% endfor %}
 
     {% if found_description_block %}
-      <div class="pdp-desc">
-        <div class="pdp-desc-title">
-          {{ desc_title }}
-        </div>
-
-        <div class="pdp-extra open">
-          <div class="pdp-richtext">
-            {{ rendered_desc }}
-          </div>
+      <button type="button" class="pdp-readmore" data-pdp-toggle>Read more <span class="pdp-readmore__arrow" data-pdp-arrow aria-hidden="true">↓</span></button>
+      <div class="pdp-readmore__body" data-pdp-more hidden>
+        <div class="pdp-richtext">
+          {{ rendered_desc }}
         </div>
       </div>
+
+      <script>
+        (function () {
+          var root = document.querySelector('[data-section-id="{{ section.id }}"] [data-pdp-toggle]');
+          if (!root || root.dataset.pdpReadmoreBound === 'true') return;
+          root.dataset.pdpReadmoreBound = 'true';
+          var body = document.querySelector('[data-section-id="{{ section.id }}"] [data-pdp-more]');
+          var arrow = root.querySelector('[data-pdp-arrow]');
+          root.addEventListener('click', function () {
+            var isOpen = body && body.hasAttribute('hidden');
+            if (body) {
+              if (isOpen) { body.removeAttribute('hidden'); } else { body.setAttribute('hidden', ''); }
+            }
+            root.classList.toggle('is-open', isOpen);
+            if (arrow) { arrow.style.transform = isOpen ? 'rotate(180deg)' : 'rotate(0deg)'; }
+            root.firstChild.nodeValue = isOpen ? 'Read less ' : 'Read more ';
+          });
+        })();
+      </script>
     {% endif %}
 
 {% comment %}
@@ -1689,19 +1717,19 @@ wteTimelines.forEach((timeline) => {
       "type": "text",
       "id": "trust_text_1",
       "label": "Trust text 1",
-      "default": "Secure, encrypted checkout"
+      "default": "Secure checkout"
     },
     {
       "type": "text",
       "id": "trust_text_2",
       "label": "Trust text 2",
-      "default": "30-day money-back guarantee"
+      "default": "30-day refund"
     },
     {
       "type": "text",
       "id": "trust_text_3",
       "label": "Trust text 3",
-      "default": "Ships within 24 hours"
+      "default": "Free shipping on 3+ pairs"
     },
     {
       "type": "text",

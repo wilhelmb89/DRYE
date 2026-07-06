@@ -27,14 +27,58 @@
 .hero .hero-media {
   position: relative;
   background: #0d1f2d;
-  aspect-ratio: 3 / 4;
+  height: 500px;
   overflow: hidden;
   min-width: 0; /* width guard: never let media balloon the grid column */
 }
 
-/* Thumbnails are desktop-only */
+/* Thumbnails are desktop-only (rail). Mobile overlay treatment is scoped below. */
 .hero .hero-gallery-thumbs {
   display: none;
+}
+
+/* Mobile: thumbnails as an overlay strip at the bottom of the gallery */
+@media (max-width: 767px) {
+  .hero .hero-gallery-thumbs {
+    display: flex;
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 6;
+    gap: 4px;
+    padding: 8px 10px;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0));
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+
+  .hero .hero-gallery-thumbs::-webkit-scrollbar {
+    display: none;
+  }
+
+  .hero .hero-gallery-thumb {
+    flex: 0 0 auto;
+    width: 44px;
+    height: 58px;
+    border: 1.5px solid transparent;
+    background: rgba(255, 255, 255, 0.15);
+    opacity: 0.6;
+    overflow: hidden;
+    padding: 0;
+    cursor: pointer;
+  }
+
+  .hero .hero-gallery-thumb.is-active {
+    border-color: rgba(255, 255, 255, 0.9);
+    opacity: 1;
+  }
+
+  .hero .hero-gallery-thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
 }
 
 .hero .hero-gallery-main {
@@ -245,6 +289,31 @@
   max-width: 100%;
 }
 
+/* Recently-bought proof strip — standalone strip below the gallery */
+.hero .hero-proof-strip {
+  background: var(--bg);
+  border-bottom: var(--border-base);
+  padding: 8px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.hero .hero-proof-strip__label {
+  font-family: var(--font-body);
+  font-size: 10px;
+  font-weight: var(--fw-semibold);
+  color: var(--emerald);
+  letter-spacing: 0.06em;
+}
+
+.hero .hero-proof-strip__item {
+  font-family: var(--font-body);
+  font-size: 10px;
+  color: var(--caption);
+  letter-spacing: 0.04em;
+}
+
 /* Tablet / existing layout: unchanged, no thumbnails */
 @media (min-width: 768px) {
   .hero {
@@ -274,6 +343,17 @@
     max-width: 520px;
     width: 50%;
     margin-left: 50%;
+  }
+
+  /* Proof strip sits under the floated media in the LEFT column.
+     Float + clear:left keeps it out of normal flow (like .hero-media),
+     so .hero-info's block box stays anchored at the container top-right
+     and cannot be pushed down. */
+  .hero .hero-proof-strip {
+    float: left;
+    clear: left;
+    width: 50%;
+    box-sizing: border-box;
   }
 }
 
@@ -428,6 +508,26 @@
     padding-bottom: var(--space-48);
     padding-left: var(--space-24);
     padding-right: 0;
+  }
+
+  /* Explicit grid placement so the proof strip sits in the LEFT/gallery
+     column (row 2) and NEVER displaces the info column. Media = col 1 row 1,
+     proof strip = col 1 row 2, info = col 2 spanning both rows. Float/clear
+     from the 768 rule are ignored on grid items; width is reset to auto. */
+  .hero .hero-media {
+    grid-column: 1;
+    grid-row: 1;
+  }
+
+  .hero .hero-proof-strip {
+    grid-column: 1;
+    grid-row: 2;
+    width: auto;
+  }
+
+  .hero .hero-info {
+    grid-column: 2;
+    grid-row: 1 / span 2;
   }
 }
 
@@ -1488,3 +1588,165 @@
   opacity: 0;
   pointer-events: none;
 }
+
+/* ==========================================================================
+   Read-more collapsible description (replaces old .pdp-desc)
+   ========================================================================== */
+.hero .pdp-readmore {
+  background: none;
+  border: 0;
+  padding: 0;
+  margin-bottom: 16px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: var(--fw-semibold);
+  color: var(--emerald);
+  letter-spacing: 0.02em;
+}
+
+.hero .pdp-readmore__arrow {
+  font-size: 10px;
+  transition: transform 0.2s;
+}
+
+.hero .pdp-readmore.is-open .pdp-readmore__arrow {
+  transform: rotate(180deg);
+}
+
+.hero .pdp-readmore__body[hidden] {
+  display: none;
+}
+
+.hero .pdp-readmore__body p {
+  font-size: 13px;
+  color: var(--muted);
+  line-height: 1.65;
+  margin: 0 0 14px;
+}
+
+.hero .pdp-readmore__body strong {
+  color: var(--deep);
+  font-weight: var(--fw-semibold);
+}
+
+/* ==========================================================================
+   Value comparison card (before ATC)
+   ========================================================================== */
+.hero .value-card {
+  border: 1px solid var(--border);
+  margin-bottom: 14px;
+}
+
+.hero .value-card__grid {
+  display: grid;
+  grid-template-columns: 1fr 1px 1fr;
+}
+
+.hero .value-card__col {
+  padding: 10px 10px 12px;
+}
+
+.hero .value-card__col--loop {
+  border-left: 2px solid #c0392b;
+}
+
+.hero .value-card__col--base {
+  background: var(--bg-soft);
+}
+
+.hero .value-card__div {
+  background: var(--border);
+}
+
+.hero .value-card__eyebrow {
+  margin: 0 0 7px;
+  font-family: var(--font-body);
+  font-size: 9px;
+  font-weight: var(--fw-semibold);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.hero .value-card__eyebrow--loop {
+  color: #c0392b;
+}
+
+.hero .value-card__eyebrow--base {
+  color: var(--emerald);
+}
+
+.hero .value-card__items {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.hero .value-card__item {
+  display: flex;
+  gap: 5px;
+  align-items: baseline;
+  font-family: var(--font-body);
+  font-size: 10px;
+  line-height: 1.35;
+}
+
+.hero .value-card__col--loop .value-card__item span:last-child {
+  color: var(--muted);
+}
+
+.hero .value-card__col--base .value-card__item span:last-child {
+  color: var(--body);
+}
+
+.hero .value-card__x {
+  color: #c0392b;
+  font-size: 9px;
+  flex-shrink: 0;
+}
+
+.hero .value-card__arrow {
+  color: var(--emerald);
+  font-size: 9px;
+  flex-shrink: 0;
+}
+
+.hero .value-card__foot {
+  border-top: 1px solid var(--border);
+  padding-top: 8px;
+  margin-top: 10px;
+}
+
+.hero .value-card__price {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: 14px;
+  font-weight: var(--fw-semibold);
+  letter-spacing: -0.01em;
+  color: var(--deep);
+}
+
+/* ==========================================================================
+   H1 sizing (B8) + buy-zone spacing (B9) — placed last to win source order
+   ========================================================================== */
+.hero .h-title {
+  font-size: 26px;
+  font-weight: 600;
+  letter-spacing: -0.025em;
+  line-height: 1.1;
+}
+
+.hero .stars-row { margin-bottom: 4px; }
+.hero .h-title { margin-bottom: 10px; }
+.hero .h-sub { margin-bottom: 12px; font-size: 13px; color: var(--muted); line-height: 1.65; }
+.hero .pdp-readmore { margin-bottom: 16px; }
+.hero .price-row { margin-bottom: 12px; }
+.hero .buy-block { margin-bottom: 12px; }
+.hero .qty-block { margin-bottom: 12px; }
+.hero .value-card { margin-bottom: 14px; }
+.hero .atc-btn-full { margin-bottom: 0; }
+.hero .trust-row { margin: 10px 0 14px !important; }
+.hero .drye-proof { margin-bottom: 0; }
