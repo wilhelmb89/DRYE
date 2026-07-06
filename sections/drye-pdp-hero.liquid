@@ -207,6 +207,41 @@ assign review_count = section.settings.review_count_fallback
       {% endfor %}
     </div>
   {% endif %}
+
+  {% assign desc_media = section.blocks | where: 'type', 'desc_media' %}
+  {% assign rendered_desc = '' %}
+  {% assign desc_title = section.settings.description_toggle_closed %}
+  {% assign found_description_block = false %}
+
+  {% for block in section.blocks %}
+    {% if block.type == 'description' %}
+      {% assign found_description_block = true %}
+      {% assign desc_title = block.settings.title | default: section.settings.description_toggle_closed %}
+
+      {% if block.settings.use_product_description and product.description != blank %}
+        {% assign rendered_desc = product.description %}
+      {% else %}
+        {% assign rendered_desc = block.settings.custom_description %}
+      {% endif %}
+
+      {% for m in desc_media %}
+        {% assign key = m.settings.key | strip %}
+        {% if key != blank and rendered_desc contains key %}
+          {% capture media_markup %}
+<div class="desc-media">
+  {% if m.settings.video != blank %}
+    {{ m.settings.video | video_tag: class: 'desc-media__video', autoplay: true, loop: true, muted: true, controls: false, playsinline: true, preload: 'auto' }}
+  {% elsif m.settings.image != blank %}
+    {{ m.settings.image | image_url: width: 1600 | image_tag: class: 'desc-media__img', loading: 'lazy', decoding: 'async' }}
+  {% endif %}
+</div>
+          {% endcapture %}
+          {% assign rendered_desc = rendered_desc | replace: key, media_markup %}
+        {% endif %}
+      {% endfor %}
+    {% endif %}
+  {% endfor %}
+
   <div class="hero-info">
     <div class="stars-row" data-review-scroll role="link" tabindex="0" aria-label="Read customer reviews">
       <span class="stars" aria-hidden="true">★★★★★</span>
@@ -224,12 +259,33 @@ assign review_count = section.settings.review_count_fallback
       {{ section.settings.subtext }}
     </div>
 
-    <div class="price-row" data-price-row>
-      <span class="price" data-price>{{ selected_variant.price | money_with_currency }}</span>
-      {% if price_note != blank %}
-        <span class="price-note">{{ price_note }}</span>
-      {% endif %}
-    </div>
+    {% if found_description_block %}
+      <button type="button" class="pdp-readmore" data-pdp-toggle>Read more <span class="pdp-readmore__arrow" data-pdp-arrow aria-hidden="true">↓</span></button>
+      <div class="pdp-readmore__body" data-pdp-more hidden>
+        <div class="pdp-richtext">
+          {{ rendered_desc }}
+        </div>
+      </div>
+
+      <script>
+        (function () {
+          var root = document.querySelector('[data-section-id="{{ section.id }}"] [data-pdp-toggle]');
+          if (!root || root.dataset.pdpReadmoreBound === 'true') return;
+          root.dataset.pdpReadmoreBound = 'true';
+          var body = document.querySelector('[data-section-id="{{ section.id }}"] [data-pdp-more]');
+          var arrow = root.querySelector('[data-pdp-arrow]');
+          root.addEventListener('click', function () {
+            var isOpen = body && body.hasAttribute('hidden');
+            if (body) {
+              if (isOpen) { body.removeAttribute('hidden'); } else { body.setAttribute('hidden', ''); }
+            }
+            root.classList.toggle('is-open', isOpen);
+            if (arrow) { arrow.style.transform = isOpen ? 'rotate(180deg)' : 'rotate(0deg)'; }
+            root.firstChild.nodeValue = isOpen ? 'Read less ' : 'Read more ';
+          });
+        })();
+      </script>
+    {% endif %}
 
     {% assign size_option_position = blank %}
     {% for option in current_product.options_with_values %}
@@ -414,11 +470,15 @@ assign review_count = section.settings.review_count_fallback
               <div class="value-card__item"><span class="value-card__arrow">→</span><span>Skin stays dry</span></div>
               <div class="value-card__item"><span class="value-card__arrow">→</span><span>Lasts 6–12 months</span></div>
             </div>
-            <div class="value-card__foot">
-              <p class="value-card__price">{{ selected_variant.price | money }} · 30-day refund</p>
-            </div>
           </div>
         </div>
+      </div>
+
+      <div class="price-row" data-price-row>
+        <span class="price" data-price>{{ selected_variant.price | money_with_currency }}</span>
+        {% if price_note != blank %}
+          <span class="price-note">{{ price_note }}</span>
+        {% endif %}
       </div>
 
       <button
@@ -434,6 +494,41 @@ assign review_count = section.settings.review_count_fallback
         {% endif %}
       </button>
     {% endform %}
+
+    <div class="trust-row">
+      <div class="trust-item">
+        <img
+          src="{{ 'icon-shield-check.svg' | asset_url }}"
+          alt=""
+          width="20"
+          height="20"
+          loading="lazy"
+        >
+        <span>{{ section.settings.trust_text_1 }}</span>
+      </div>
+
+      <div class="trust-item">
+        <img
+          src="{{ 'icon-refund-arrows (2).svg' | asset_url }}"
+          alt=""
+          width="20"
+          height="20"
+          loading="lazy"
+        >
+        <span>{{ section.settings.trust_text_2 }}</span>
+      </div>
+
+      <div class="trust-item">
+        <img
+          src="{{ 'icon-truck.svg' | asset_url }}"
+          alt=""
+          width="20"
+          height="20"
+          loading="lazy"
+        >
+        <span>{{ section.settings.trust_text_3 }}</span>
+      </div>
+    </div>
 
 {% comment %} Worker Proof — compact green proof line + sliding/expandable comment ticker {% endcomment %}
 {% if section.settings.proof_enabled %}
@@ -626,103 +721,6 @@ assign review_count = section.settings.review_count_fallback
     {% endif %}
   {% endfor %}
 {% endif %}
-    <div class="trust-row">
-      <div class="trust-item">
-        <img
-          src="{{ 'icon-shield-check.svg' | asset_url }}"
-          alt=""
-          width="20"
-          height="20"
-          loading="lazy"
-        >
-        <span>{{ section.settings.trust_text_1 }}</span>
-      </div>
-
-      <div class="trust-item">
-        <img
-          src="{{ 'icon-refund-arrows (2).svg' | asset_url }}"
-          alt=""
-          width="20"
-          height="20"
-          loading="lazy"
-        >
-        <span>{{ section.settings.trust_text_2 }}</span>
-      </div>
-
-      <div class="trust-item">
-        <img
-          src="{{ 'icon-truck.svg' | asset_url }}"
-          alt=""
-          width="20"
-          height="20"
-          loading="lazy"
-        >
-        <span>{{ section.settings.trust_text_3 }}</span>
-      </div>
-    </div>
-
-
-    {% assign desc_media = section.blocks | where: 'type', 'desc_media' %}
-    {% assign rendered_desc = '' %}
-    {% assign desc_title = section.settings.description_toggle_closed %}
-    {% assign found_description_block = false %}
-
-    {% for block in section.blocks %}
-      {% if block.type == 'description' %}
-        {% assign found_description_block = true %}
-        {% assign desc_title = block.settings.title | default: section.settings.description_toggle_closed %}
-
-        {% if block.settings.use_product_description and product.description != blank %}
-          {% assign rendered_desc = product.description %}
-        {% else %}
-          {% assign rendered_desc = block.settings.custom_description %}
-        {% endif %}
-
-        {% for m in desc_media %}
-          {% assign key = m.settings.key | strip %}
-          {% if key != blank and rendered_desc contains key %}
-            {% capture media_markup %}
-<div class="desc-media">
-  {% if m.settings.video != blank %}
-    {{ m.settings.video | video_tag: class: 'desc-media__video', autoplay: true, loop: true, muted: true, controls: false, playsinline: true, preload: 'auto' }}
-  {% elsif m.settings.image != blank %}
-    {{ m.settings.image | image_url: width: 1600 | image_tag: class: 'desc-media__img', loading: 'lazy', decoding: 'async' }}
-  {% endif %}
-</div>
-            {% endcapture %}
-            {% assign rendered_desc = rendered_desc | replace: key, media_markup %}
-          {% endif %}
-        {% endfor %}
-      {% endif %}
-    {% endfor %}
-
-    {% if found_description_block %}
-      <button type="button" class="pdp-readmore" data-pdp-toggle>Read more <span class="pdp-readmore__arrow" data-pdp-arrow aria-hidden="true">↓</span></button>
-      <div class="pdp-readmore__body" data-pdp-more hidden>
-        <div class="pdp-richtext">
-          {{ rendered_desc }}
-        </div>
-      </div>
-
-      <script>
-        (function () {
-          var root = document.querySelector('[data-section-id="{{ section.id }}"] [data-pdp-toggle]');
-          if (!root || root.dataset.pdpReadmoreBound === 'true') return;
-          root.dataset.pdpReadmoreBound = 'true';
-          var body = document.querySelector('[data-section-id="{{ section.id }}"] [data-pdp-more]');
-          var arrow = root.querySelector('[data-pdp-arrow]');
-          root.addEventListener('click', function () {
-            var isOpen = body && body.hasAttribute('hidden');
-            if (body) {
-              if (isOpen) { body.removeAttribute('hidden'); } else { body.setAttribute('hidden', ''); }
-            }
-            root.classList.toggle('is-open', isOpen);
-            if (arrow) { arrow.style.transform = isOpen ? 'rotate(180deg)' : 'rotate(0deg)'; }
-            root.firstChild.nodeValue = isOpen ? 'Read less ' : 'Read more ';
-          });
-        })();
-      </script>
-    {% endif %}
 
 {% comment %}
   Pixel tabs module: FAQs / What to Expect / Reviews
