@@ -596,6 +596,7 @@
         "fiber_row_FfedYf",
         "fiber_row_xMhdrR"
       ],
+      "disabled": true,
       "name": "DRYE Saturation Point",
       "settings": {
         "section_id": "mechanics-saturation",
@@ -622,7 +623,6 @@
         },
         "old_step_gjjetz": {
           "type": "old_step",
-          "disabled": true,
           "settings": {
             "icon": "✕",
             "text": "At saturation, moisture sits on skin"
@@ -644,7 +644,6 @@
         },
         "old_step_tJ3wja": {
           "type": "old_step",
-          "disabled": true,
           "settings": {
             "icon": "✕",
             "text": "Same wet glove on shift 1 as shift 8"
@@ -673,7 +672,6 @@
         },
         "drye_step_QJkxk9": {
           "type": "drye_step",
-          "disabled": true,
           "settings": {
             "icon": "→",
             "text": "One principle. Patent filed March 2026."
@@ -741,11 +739,12 @@
     },
     "drye_liner_mechanism_FYWXiz": {
       "type": "drye-liner-mechanism",
+      "disabled": true,
       "name": "DRYE Liner Mechanism",
       "settings": {
         "section_id": "liner-mechanism",
         "eyebrow": "",
-        "heading": "Every liner fills up.<br>",
+        "heading": "Every liner fills up.",
         "heading_emphasis": "DRYE routes it out.",
         "body": "",
         "vs_label": "Cotton · DRYE",
@@ -760,6 +759,30 @@
         "step_2_label": "",
         "step_2_title": "",
         "step_2_body": ""
+      }
+    },
+    "drye_mechanics_time_promise_qNUeyD": {
+      "type": "drye-mechanics-time-promise",
+      "name": "DRYE Mechanics Time",
+      "settings": {
+        "eyebrow": "— A. Riahi",
+        "heading": "Eight hours in. The glove is humid. Your skin is dry.",
+        "body": "<p><em>\"After 6 hours under rubber gloves, my hands felt wet inside. Took the gloves off — completely dry. Such a mindfuck.\"</em><br/><br/></p>"
+      }
+    },
+    "drye_mechanics_cta_H4QANa": {
+      "type": "drye-mechanics-cta",
+      "name": "DRYE Mechanics CTA",
+      "settings": {
+        "eyebrow": "",
+        "heading_line_1": "Either your shift feels different",
+        "heading_emphasis": "or it doesn’t.",
+        "body": "<p>Full refund within 30 days. No forms. No conditions. </p>",
+        "button_label": "order now →",
+        "button_link": "shopify://products/drye-moisture-routing-glove-liners",
+        "meta": "One layer changes the whole shift.",
+        "secondary_label": "",
+        "secondary_link": "shopify://blogs/insights/automotive-mechanics-field-study"
       }
     },
     "drye_mechanics_identification_gallery_itNhgg": {
@@ -878,30 +901,6 @@
         "heading": "One dry layer under gloves  \n <em class=\"dryeNEW-em\">wherever hands get trapped.</em>",
         "body": "",
         "swipe_label": "Swipe"
-      }
-    },
-    "drye_mechanics_time_promise_qNUeyD": {
-      "type": "drye-mechanics-time-promise",
-      "name": "DRYE Mechanics Time",
-      "settings": {
-        "eyebrow": "— A. Riahi",
-        "heading": "Eight hours in. The glove is humid. Your skin is dry.",
-        "body": "<p><em>\"After 6 hours under rubber gloves, my hands felt wet inside. Took the gloves off — completely dry. Such a mindfuck.\"</em><br/><br/></p>"
-      }
-    },
-    "drye_mechanics_cta_H4QANa": {
-      "type": "drye-mechanics-cta",
-      "name": "DRYE Mechanics CTA",
-      "settings": {
-        "eyebrow": "",
-        "heading_line_1": "Either your shift feels different",
-        "heading_emphasis": "or it doesn’t.",
-        "body": "<p>Full refund within 30 days. No forms. No conditions. </p>",
-        "button_label": "order now →",
-        "button_link": "shopify://products/drye-moisture-routing-glove-liners",
-        "meta": "One layer changes the whole shift.",
-        "secondary_label": "",
-        "secondary_link": "shopify://blogs/insights/automotive-mechanics-field-study"
       }
     },
     "apps_tejzzz": {
@@ -1211,13 +1210,13 @@
     "drye_worker_grid_iFbWqP",
     "drye_evidence_NiKLxX",
     "drye_new_problem_beat_1_rD9VQ6",
-    "drye_liner_productclarity_hAX9ek",
     "drye_stretch_7XjKcD",
-    "drye_objection_cards_qF4PMr",
     "drye_mechanics_saturation_MhcCAb",
     "drye_mechanics_mechanism_Mt3j93",
-    "drye_liner_mechanism_FYWXiz",
     "drye_mechanics_time_promise_qNUeyD",
+    "drye_liner_productclarity_hAX9ek",
+    "drye_liner_mechanism_FYWXiz",
+    "drye_objection_cards_qF4PMr",
     "drye_mechanics_cta_H4QANa",
     "drye_mechanics_identification_gallery_itNhgg",
     "apps_tejzzz",
