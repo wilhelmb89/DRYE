@@ -11,6 +11,7 @@
   "sections": {
     "drye_new_hero_bh6kTP": {
       "type": "dryeNEW-hero",
+      "disabled": true,
       "name": "DRYE NEW Hero",
       "settings": {
         "section_id": "hero",
@@ -32,6 +33,26 @@
         "path_2_text_line_1": "See why it works ↓",
         "path_2_text_line_2": "",
         "path_2_link": "#mechanics-saturation"
+      }
+    },
+    "drye_mechanics_herov2_738J64": {
+      "type": "drye-mechanics-herov2",
+      "name": "DRYE Mechanics Hero",
+      "settings": {
+        "section_id": "mechanics-hero",
+        "image_desktop": "shopify://shop_images/Gemini_Generated_Image_nyx625nyx625nyx6.webp",
+        "image_mobile": "shopify://shop_images/Gemini_Generated_Image_ain34ain34ain34a_1.webp",
+        "eyebrow": "",
+        "heading_line_1": "You already know",
+        "heading_emphasis": "how the shift ends.",
+        "show_rule": true,
+        "subheading": "<p>Hands that drip inside the glove by 9am. Gloves that tear on every other bolt. The smell when you peel them off. Same gloves waiting Monday.</p>",
+        "scroll_text": "Keep reading",
+        "scroll_target": "#gallery",
+        "quote_1": "\"my hands literally drip sweat\"",
+        "quote_2": "\"I can't feel the bolt anymore\"",
+        "quote_3": "\"knuckles split by Thursday\"",
+        "quote_4": "“oil’s a chemical — I need them on”"
       }
     },
     "drye_worker_grid_iFbWqP": {
@@ -1218,6 +1239,7 @@
   },
   "order": [
     "drye_new_hero_bh6kTP",
+    "drye_mechanics_herov2_738J64",
     "drye_worker_grid_iFbWqP",
     "drye_evidence_NiKLxX",
     "drye_new_problem_beat_1_rD9VQ6",
