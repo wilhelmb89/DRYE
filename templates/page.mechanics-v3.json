@@ -55,6 +55,103 @@
         "quote_4": "“oil’s a chemical — I need them on”"
       }
     },
+    "drye_new_identification_Ei3jxY": {
+      "type": "dryeNEW-identification",
+      "blocks": {
+        "profession_item_YRpm3G": {
+          "type": "profession_item",
+          "settings": {
+            "image": "shopify://shop_images/Gemini_Generated_Image_ebmtjvebmtjvebmt.webp",
+            "image_url": "https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?w=1200&q=75",
+            "fallback_color": "#1E3A4C",
+            "label": "Reddit hacks",
+            "body": ""
+          }
+        },
+        "profession_item_7rjEHR": {
+          "type": "profession_item",
+          "settings": {
+            "image": "shopify://shop_images/Gemini_Generated_Image_tlg2uetlg2uetlg2.webp",
+            "image_url": "https://images.unsplash.com/photo-1530026405186-ed1f139313f8?w=1200&q=75",
+            "fallback_color": "#1E3A4C",
+            "label": "GLOVE FLIPS",
+            "body": ""
+          }
+        },
+        "profession_item_QHDXnW": {
+          "type": "profession_item",
+          "settings": {
+            "image": "shopify://shop_images/Gemini_Generated_Image_9cwtbp9cwtbp9cwt.webp",
+            "image_url": "https://images.unsplash.com/photo-1587293852726-70cdb56c2866?w=1200&q=75",
+            "fallback_color": "#1E3A4C",
+            "label": "POWDERS",
+            "body": ""
+          }
+        },
+        "profession_item_7Vqp67": {
+          "type": "profession_item",
+          "settings": {
+            "image": "shopify://shop_images/Gemini_Generated_Image_mxqdfimxqdfimxqd.webp",
+            "image_url": "",
+            "fallback_color": "",
+            "label": "Cotton liners",
+            "body": ""
+          }
+        },
+        "profession_item_BFq7w9": {
+          "type": "profession_item",
+          "settings": {
+            "image": "shopify://shop_images/Gemini_Generated_Image_dp0gkpdp0gkpdp0g.webp",
+            "image_url": "https://images.unsplash.com/photo-1551522435-a13afa10f103?w=1200&q=75",
+            "fallback_color": "#1E3A4C",
+            "label": "barrier creams",
+            "body": ""
+          }
+        },
+        "occlusion_step_ieRAaQ": {
+          "type": "occlusion_step",
+          "settings": {
+            "step_number": "01",
+            "title": "20 minutes in",
+            "body": "<p>Sweat has nowhere to go. Fabric, powder, cream — they all soak it up. It sits against your skin.<br/><br/></p>"
+          }
+        },
+        "occlusion_step_i4pwPC": {
+          "type": "occlusion_step",
+          "settings": {
+            "step_number": "02",
+            "title": "Saturation point",
+            "body": "<p>Every absorbent material hits a wall. Then it sits wet against your skin for the rest of the shift.</p>"
+          }
+        },
+        "occlusion_step_UDVrG4": {
+          "type": "occlusion_step",
+          "settings": {
+            "step_number": "03",
+            "title": "Monday again",
+            "body": "<p>Weekend off. Skin recovers. Monday morning the same wet gloves is waiting. Nothing breaks the cycle.<br/></p>"
+          }
+        }
+      },
+      "block_order": [
+        "profession_item_YRpm3G",
+        "profession_item_7rjEHR",
+        "profession_item_QHDXnW",
+        "profession_item_7Vqp67",
+        "profession_item_BFq7w9",
+        "occlusion_step_ieRAaQ",
+        "occlusion_step_i4pwPC",
+        "occlusion_step_UDVrG4"
+      ],
+      "name": "DRYE NEW Identification",
+      "settings": {
+        "section_id": "identification",
+        "eyebrow": "",
+        "heading": "You've tried everything.",
+        "heading_echo": "Nothing worked.",
+        "body": ""
+      }
+    },
     "drye_worker_grid_iFbWqP": {
       "type": "drye-worker-grid",
       "blocks": {
@@ -247,69 +344,6 @@
         "heading": "Why every mechanic should care.\n<em class=\"dryeNEW-em\">Wet skin lets more through.</em>",
         "body": "Not from the outside. <strong>From what happens inside your gloves.</strong>",
         "swipe_label": "Swipe"
-      }
-    },
-    "drye_new_problem_beat_1_rD9VQ6": {
-      "type": "dryeNEW-problem-beat-1",
-      "blocks": {
-        "strike_card_8PEkrU": {
-          "type": "strike_card",
-          "settings": {
-            "title": "MORE MILS",
-            "body": "<p>More rubber outside.<br/><strong>Same sweat inside.</strong></p>"
-          }
-        },
-        "strike_card_3Xt8DX": {
-          "type": "strike_card",
-          "settings": {
-            "title": "COTTON",
-            "body": "<p>Absorbs at first.<strong><br/>Then becomes the wet layer.</strong></p>"
-          }
-        },
-        "strike_card_9LjdqQ": {
-          "type": "strike_card",
-          "settings": {
-            "title": "POWDER",
-            "body": "<p>Helps at start.<br/><strong>Stops mattering once sweat builds.</strong></p>"
-          }
-        },
-        "strike_card_ngQAfM": {
-          "type": "strike_card",
-          "settings": {
-            "title": "CREAMS",
-            "body": "<p>Helps after the shift.<br/><strong>Do not change the shift.</strong></p>"
-          }
-        },
-        "strike_card_Ndhdrx": {
-          "type": "strike_card",
-          "settings": {
-            "title": "GLOVE FLIPS",
-            "body": "<p>Buys a few minutes.<strong><br/>Same wet glove gloes back on. Rips.</strong></p>"
-          }
-        },
-        "strike_card_PreMVe": {
-          "type": "strike_card",
-          "settings": {
-            "title": "SAME PROBLEM",
-            "body": "<p><strong>Sweat has nowhere to go.</strong></p>"
-          }
-        }
-      },
-      "block_order": [
-        "strike_card_8PEkrU",
-        "strike_card_3Xt8DX",
-        "strike_card_9LjdqQ",
-        "strike_card_ngQAfM",
-        "strike_card_Ndhdrx",
-        "strike_card_PreMVe"
-      ],
-      "name": "DRYE NEW Problem Beat 1",
-      "settings": {
-        "section_id": "problem",
-        "eyebrow": "The workarounds",
-        "heading_before": "You've tried everything.",
-        "heading_em": "Nothing worked.",
-        "lead": ""
       }
     },
     "drye_stretch_7XjKcD": {
@@ -1241,9 +1275,9 @@
   "order": [
     "drye_new_hero_bh6kTP",
     "drye_mechanics_herov2_738J64",
+    "drye_new_identification_Ei3jxY",
     "drye_worker_grid_iFbWqP",
     "drye_evidence_NiKLxX",
-    "drye_new_problem_beat_1_rD9VQ6",
     "drye_stretch_7XjKcD",
     "drye_mechanics_saturation_MhcCAb",
     "drye_mechanics_mechanism_Mt3j93",
