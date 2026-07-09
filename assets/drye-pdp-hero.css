@@ -1701,6 +1701,13 @@
   line-height: 1.1;
 }
 
+/* Desktop: larger, scaling title (mobile stays 26px) */
+@media (min-width: 768px) {
+  .hero .h-title {
+    font-size: clamp(32px, 3.2vw, 40px);
+  }
+}
+
 .hero .stars-row { margin-bottom: 4px; }
 .hero .h-title { margin-bottom: 10px; }
 .hero .h-sub { margin-bottom: 12px; font-size: 13px; color: var(--muted); line-height: 1.65; }
