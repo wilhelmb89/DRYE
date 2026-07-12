@@ -1315,7 +1315,9 @@ if (pushEvent && !(window.Shopify && window.Shopify.designMode)) {
       cutoffDate        : {{ section.settings.cutoff_date | default: 'TBD' | json }},
       regularPrice      : parseFloat(({{ product.price | money_without_currency | json }}).replace(/[^0-9.]/g, '')) || 0,
       currency          : {{ cart.currency.iso_code | json }},
-      discountCode      : {{ section.settings.preorder_discount_code | default: 'PREORDER15' | json }}
+      discountCode      : {{ section.settings.preorder_discount_code | default: 'PREORDER15' | json }},
+      discountPercent   : {{ section.settings.preorder_discount_percent | default: 15 }},
+      cutoffText        : {{ section.settings.preorder_cutoff_text | default: 'Your 15% preorder discount is applied automatically at checkout.' | json }}
     };
 
     const pushDL = (eventName, data) => {
@@ -1350,19 +1352,24 @@ if (pushEvent && !(window.Shopify && window.Shopify.designMode)) {
           const cutoffEl = preorderBlock.querySelector('[data-panel-cutoff]');
           const btnEl = preorderBlock.querySelector('[data-panel-preorder-btn]');
 
+          const pct = PANEL_CFG.discountPercent;
           if (headingEl) headingEl.textContent = 'Reserve your ' + size + ' now';
           if (shipsEl) shipsEl.textContent = 'Ships ' + PANEL_CFG.shippingDate;
-          // Deviation: no struck price / sale price / discount badge in the panel.
-          // The real 15% comes from the discount code applied at cart time.
+          // Show only the discount chip (no struck/sale price). The real discount
+          // is applied by the code at cart time; this just advertises it.
           if (origEl) origEl.textContent = '';
           if (saleEl) saleEl.textContent = '';
-          if (discEl) discEl.textContent = '';
-          if (priceRow) priceRow.hidden = true;
-          if (cutoffEl) cutoffEl.textContent =
-            'Order by ' + PANEL_CFG.cutoffDate +
-            ' to be in the ' + PANEL_CFG.shippingMonth + ' production run';
+          if (discEl) discEl.textContent = pct + '% OFF';
+          if (priceRow) priceRow.hidden = !(pct > 0);
+          if (cutoffEl) cutoffEl.textContent = String(PANEL_CFG.cutoffText)
+            .replace(/\{date\}/g, PANEL_CFG.shippingDate)
+            .replace(/\{cutoff\}/g, PANEL_CFG.cutoffDate)
+            .replace(/\{percent\}/g, pct)
+            .replace(/\{month\}/g, PANEL_CFG.shippingMonth);
           if (btnEl) {
-            btnEl.textContent = 'PREORDER — SHIPS ' + String(PANEL_CFG.shippingDate).toUpperCase();
+            btnEl.textContent = pct > 0
+              ? 'PREORDER — ' + pct + '% OFF'
+              : 'PREORDER — SHIPS ' + String(PANEL_CFG.shippingDate).toUpperCase();
             btnEl.disabled = false;
             btnEl.style.background = '';
           }
@@ -2090,6 +2097,24 @@ wteTimelines.forEach((timeline) => {
       "id": "cutoff_date",
       "label": "Order cutoff date",
       "default": "Aug 31"
+    },
+    {
+      "type": "range",
+      "id": "preorder_discount_percent",
+      "label": "Preorder discount %",
+      "min": 0,
+      "max": 50,
+      "step": 1,
+      "unit": "%",
+      "default": 15,
+      "info": "Shown as the '15% OFF' chip + on the preorder button. The real discount comes from the matching Shopify discount code. Set to 0 to hide the discount messaging."
+    },
+    {
+      "type": "text",
+      "id": "preorder_cutoff_text",
+      "label": "Preorder — sub line",
+      "default": "Your 15% preorder discount is applied automatically at checkout.",
+      "info": "Line under the heading. Tokens: {percent} {date} {cutoff} {month}"
     },
     {
       "type": "text",
