@@ -374,6 +374,13 @@ assign review_count = section.settings.review_count_fallback
     if matched_variant != blank and matched_variant.available and is_preorder == false
       assign is_in_stock = true
     endif
+
+    if matched_variant.inventory_management == 'shopify'
+      assign variant_policy = matched_variant.inventory_policy
+    else
+      assign variant_policy = 'deny'
+    endif
+    assign variant_qty = matched_variant.inventory_quantity
   %}
   <button
     type="button"
@@ -383,14 +390,60 @@ assign review_count = section.settings.review_count_fallback
     data-option-value="{{ value | escape }}"
     data-available="{% if is_available %}true{% else %}false{% endif %}"
     data-preorder="{% if is_preorder %}true{% else %}false{% endif %}"
+    data-policy="{% if matched_variant.inventory_management == 'shopify' %}{{ matched_variant.inventory_policy }}{% else %}deny{% endif %}"
+    data-qty="{{ matched_variant.inventory_quantity }}"
+    data-variant-id="{{ matched_variant.id }}"
     role="option"
     aria-selected="{% if is_selected %}true{% else %}false{% endif %}"
-    {% unless is_available %}disabled{% endunless %}
   >
-    {{ value }}{% if is_preorder %} — {{ preorder_note }}{% elsif is_in_stock %} — {{ in_stock_note }}{% elsif is_available == false %} — Sold out{% endif %}
+    {{ value }}{% if matched_variant != blank %}{% if variant_policy == 'continue' and variant_qty <= 0 %}<span class="sz-dd-note sz-dd-note--low">— {{ section.settings.preorder_dropdown_label | default: 'Low stock' }}</span>{% elsif variant_policy == 'deny' and variant_qty <= 0 %}<span class="sz-dd-note sz-dd-note--soldout">— Sold out · Notify me →</span>{% elsif variant_qty > 0 and variant_qty <= section.settings.low_stock_threshold %}<span class="sz-dd-note sz-dd-note--low">— Only {{ variant_qty }} left</span>{% else %}<span class="sz-dd-note">— In stock</span>{% endif %}{% endif %}
   </button>
 {% endfor %}
             </div>
+          </div>
+
+          <div class="sz-inline-panel" data-size-panel hidden>
+
+            {% comment %} Preorder block — hidden by default, JS shows it for preorder sizes {% endcomment %}
+            <div class="sz-panel-preorder" data-panel-preorder hidden>
+              <div class="sz-panel-preorder-head">
+                <p class="sz-panel-heading" data-panel-preorder-heading></p>
+                <span class="sz-panel-ships-badge" data-panel-ships-badge></span>
+              </div>
+              <div class="sz-panel-price-row">
+                <s class="sz-panel-price-orig" data-panel-price-orig></s>
+                <span class="sz-panel-price-sale" data-panel-price-sale></span>
+                <span class="sz-panel-discount" data-panel-discount></span>
+              </div>
+              <p class="sz-panel-cutoff" data-panel-cutoff></p>
+              <button type="button" class="sz-panel-preorder-btn" data-panel-preorder-btn></button>
+              <p class="sz-panel-micro">{{ section.settings.preorder_micro }}</p>
+            </div>
+
+            {% comment %} Divider — visible only when preorder block is shown {% endcomment %}
+            <div class="sz-panel-divider" data-panel-divider hidden></div>
+
+            {% comment %} Notify me block — always shown in panel {% endcomment %}
+            <div class="sz-panel-notify" data-panel-notify>
+              <p class="sz-panel-notify-heading" data-panel-notify-heading></p>
+              <div data-notify-form>
+                <div class="sz-panel-form-row">
+                  <input type="email" class="sz-panel-email" data-notify-email
+                         placeholder="{{ section.settings.notify_placeholder }}"
+                         autocomplete="email">
+                  <button type="button" class="sz-panel-notify-btn" data-notify-submit>
+                    {{ section.settings.notify_cta }}
+                  </button>
+                </div>
+                <p class="sz-panel-email-err" data-notify-err hidden>
+                  {{ section.settings.notify_email_error }}
+                </p>
+              </div>
+              <p class="sz-panel-success" data-notify-success hidden>
+                {{ section.settings.notify_success }}
+              </p>
+            </div>
+
           </div>
         {% else %}
           <select class="variant-select-fallback" name="id">
@@ -1039,6 +1092,7 @@ assign review_count = section.settings.review_count_fallback
     const sizeList = sectionEl.querySelector('[data-size-list]');
     const sizeLabel = sectionEl.querySelector('[data-size-label]');
     const sizeOptions = Array.from(sectionEl.querySelectorAll('[data-size-option]'));
+    const panelEl = sectionEl.querySelector('[data-size-panel]');
     const tabButtons = Array.from(sectionEl.querySelectorAll('[data-drye-tabs] .tab-btn'));
 const faqButtons = Array.from(sectionEl.querySelectorAll('[data-drye-tabs] .faq-q'));
 const reviewScrollRows = Array.from(sectionEl.querySelectorAll('[data-review-scroll]'));
@@ -1251,6 +1305,94 @@ if (pushEvent && !(window.Shopify && window.Shopify.designMode)) {
       }
     }
 
+    // ── Sold-out & Preorder size panel ──
+    const PREORDER_MAIN_LABEL = {{ section.settings.preorder_main_atc_label | default: 'Preorder below ↓' | json }};
+
+    const PANEL_CFG = {
+      lowStockThreshold : {{ section.settings.low_stock_threshold | default: 10 }},
+      shippingDate      : {{ section.settings.shipping_date | default: 'TBD' | json }},
+      shippingMonth     : {{ section.settings.shipping_month | default: 'TBD' | json }},
+      cutoffDate        : {{ section.settings.cutoff_date | default: 'TBD' | json }},
+      regularPrice      : parseFloat(({{ product.price | money_without_currency | json }}).replace(/[^0-9.]/g, '')) || 0,
+      currency          : {{ cart.currency.iso_code | json }},
+      discountCode      : {{ section.settings.preorder_discount_code | default: 'PREORDER15' | json }}
+    };
+
+    const pushDL = (eventName, data) => {
+      window.dataLayer = window.dataLayer || [];
+      window.dataLayer.push(Object.assign({ event: eventName, event_source: 'drye_pdp_hero' }, data));
+    };
+
+    let currentPanelVariant = null;
+
+    const openPanel = (opt) => {
+      if (!panelEl) return;
+      const size = opt.dataset.optionValue;
+      const variantId = opt.dataset.variantId || '';
+      const policy = opt.dataset.policy || 'deny';
+      const qty = parseInt(opt.dataset.qty || '0', 10);
+      const isPreorder = policy === 'continue' && qty <= 0;
+      currentPanelVariant = { size, variantId };
+
+      const preorderBlock = panelEl.querySelector('[data-panel-preorder]');
+      const divider = panelEl.querySelector('[data-panel-divider]');
+      const notifyBlock = panelEl.querySelector('[data-panel-notify]');
+
+      if (preorderBlock) {
+        preorderBlock.hidden = !isPreorder;
+        if (isPreorder) {
+          const headingEl = preorderBlock.querySelector('[data-panel-preorder-heading]');
+          const shipsEl = preorderBlock.querySelector('[data-panel-ships-badge]');
+          const origEl = preorderBlock.querySelector('[data-panel-price-orig]');
+          const saleEl = preorderBlock.querySelector('[data-panel-price-sale]');
+          const discEl = preorderBlock.querySelector('[data-panel-discount]');
+          const priceRow = preorderBlock.querySelector('.sz-panel-price-row');
+          const cutoffEl = preorderBlock.querySelector('[data-panel-cutoff]');
+          const btnEl = preorderBlock.querySelector('[data-panel-preorder-btn]');
+
+          if (headingEl) headingEl.textContent = 'Reserve your ' + size + ' now';
+          if (shipsEl) shipsEl.textContent = 'Ships ' + PANEL_CFG.shippingDate;
+          // Deviation: no struck price / sale price / discount badge in the panel.
+          // The real 15% comes from the discount code applied at cart time.
+          if (origEl) origEl.textContent = '';
+          if (saleEl) saleEl.textContent = '';
+          if (discEl) discEl.textContent = '';
+          if (priceRow) priceRow.hidden = true;
+          if (cutoffEl) cutoffEl.textContent =
+            'Order by ' + PANEL_CFG.cutoffDate +
+            ' to be in the ' + PANEL_CFG.shippingMonth + ' production run';
+          if (btnEl) {
+            btnEl.textContent = 'PREORDER — SHIPS ' + String(PANEL_CFG.shippingDate).toUpperCase();
+            btnEl.disabled = false;
+            btnEl.style.background = '';
+          }
+        }
+      }
+
+      if (divider) divider.hidden = !isPreorder;
+
+      if (notifyBlock) {
+        const notifyHeadingEl = notifyBlock.querySelector('[data-panel-notify-heading]');
+        if (notifyHeadingEl) notifyHeadingEl.textContent =
+          'Not ready to wait? Get an email the second ' + size + ' is back.';
+        const formEl = notifyBlock.querySelector('[data-notify-form]');
+        const emailEl = notifyBlock.querySelector('[data-notify-email]');
+        const errEl = notifyBlock.querySelector('[data-notify-err]');
+        const successEl = notifyBlock.querySelector('[data-notify-success]');
+        if (formEl) formEl.hidden = false;
+        if (emailEl) emailEl.value = '';
+        if (errEl) errEl.hidden = true;
+        if (successEl) successEl.hidden = true;
+      }
+
+      panelEl.hidden = false;
+    };
+
+    const closePanel = () => {
+      if (panelEl) panelEl.hidden = true;
+      currentPanelVariant = null;
+    };
+
     if (sizeTrigger && sizeList) {
       sizeTrigger.addEventListener('click', (event) => {
         event.stopPropagation();
@@ -1262,20 +1404,150 @@ if (pushEvent && !(window.Shopify && window.Shopify.designMode)) {
       sizeOptions.forEach((option) => {
         option.addEventListener('click', (event) => {
           event.stopPropagation();
-          if (option.disabled) return;
 
           const position = Number(option.dataset.optionPosition) - 1;
-          currentOptions[position] = option.dataset.optionValue;
+          const value = option.dataset.optionValue;
+          const variantId = option.dataset.variantId || '';
+          const policy = option.dataset.policy || 'deny';
+          const qty = parseInt(option.dataset.qty || '0', 10);
+          const isPreorder = policy === 'continue' && qty <= 0;
+          const isSoldOut = option.dataset.available === 'false' && policy === 'deny';
 
+          currentOptions[position] = value;
           closeSizeDropdown();
           updateVariant(true);
+
+          if (isSoldOut) {
+            pushDL('size_soldout_click', { size: value, variant_id: variantId });
+            openPanel(option);
+          } else if (isPreorder) {
+            pushDL('size_soldout_click', { size: value, variant_id: variantId });
+            openPanel(option);
+            // Preorder is bought ONLY via the panel button (single path + discount),
+            // so force the main ATC + sticky submit disabled.
+            if (mainAtc) {
+              mainAtc.disabled = true;
+              mainAtc.textContent = PREORDER_MAIN_LABEL;
+            }
+            if (stickySubmit) {
+              stickySubmit.disabled = true;
+              stickySubmit.textContent = PREORDER_MAIN_LABEL;
+            }
+          } else {
+            closePanel();
+          }
         });
       });
 
       document.addEventListener('click', (event) => {
-        if (!event.target.closest('[data-size-dropdown]')) {
+        if (!event.target.closest('[data-size-dropdown]') && !event.target.closest('[data-size-panel]')) {
           closeSizeDropdown();
         }
+      });
+    }
+
+    // Panel interactions
+    if (panelEl) {
+      const preorderBtn = panelEl.querySelector('[data-panel-preorder-btn]');
+
+      const reAssertPreorderDisabled = () => {
+        if (mainAtc) {
+          mainAtc.disabled = true;
+          mainAtc.textContent = PREORDER_MAIN_LABEL;
+        }
+        if (stickySubmit) {
+          stickySubmit.disabled = true;
+          stickySubmit.textContent = PREORDER_MAIN_LABEL;
+        }
+      };
+
+      if (preorderBtn) {
+        preorderBtn.addEventListener('click', async () => {
+          if (!currentPanelVariant) return;
+          const { size, variantId } = currentPanelVariant;
+
+          pushDL('preorder_add_to_cart', { size, variant_id: variantId, currency: PANEL_CFG.currency });
+
+          // Apply the preorder discount code (sets the cart-level discount cookie).
+          await fetch('/discount/' + encodeURIComponent(PANEL_CFG.discountCode), { credentials: 'same-origin' }).catch(() => {});
+
+          if (form) {
+            // Point the main product form at the preorder variant.
+            if (variantIdInput) variantIdInput.value = variantId;
+
+            // Ensure the Preorder line-item property exists in the form.
+            let propInput = form.querySelector('input[name="properties[Preorder]"]');
+            if (!propInput) {
+              propInput = document.createElement('input');
+              propInput.type = 'hidden';
+              propInput.name = 'properties[Preorder]';
+              form.appendChild(propInput);
+            }
+            propInput.value = 'Ships ' + PANEL_CFG.shippingDate;
+
+            // Reuse the theme cart-drawer's global submit listener: AJAX-adds AND opens the drawer.
+            form.requestSubmit();
+
+            // The drawer's addToCart re-enables the submit button in its finally block;
+            // keep the main ATC + sticky disabled for this preorder size.
+            [0, 600, 1200, 2000].forEach((t) => setTimeout(reAssertPreorderDisabled, t));
+          }
+
+          const origText = preorderBtn.textContent;
+          preorderBtn.textContent = 'Added ✓';
+          preorderBtn.style.background = '#0a6960';
+          preorderBtn.disabled = true;
+          setTimeout(() => {
+            preorderBtn.textContent = origText;
+            preorderBtn.style.background = '';
+            preorderBtn.disabled = false;
+          }, 3000);
+        });
+      }
+
+      // The email input lives inside the product form; stop Enter from submitting it.
+      const notifyEmailInput = panelEl.querySelector('[data-notify-email]');
+      if (notifyEmailInput) {
+        notifyEmailInput.addEventListener('keydown', (event) => {
+          if (event.key === 'Enter') {
+            event.preventDefault();
+            const submitBtn = panelEl.querySelector('[data-notify-submit]');
+            if (submitBtn) submitBtn.click();
+          }
+        });
+      }
+
+      // Notify me — email capture
+      panelEl.addEventListener('click', (event) => {
+        if (!event.target.closest('[data-notify-submit]')) return;
+        if (!currentPanelVariant) return;
+        const emailEl = panelEl.querySelector('[data-notify-email]');
+        const errEl = panelEl.querySelector('[data-notify-err]');
+        const formEl = panelEl.querySelector('[data-notify-form]');
+        const successEl = panelEl.querySelector('[data-notify-success]');
+        const email = emailEl ? emailEl.value.trim() : '';
+        const valid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+        if (!valid) { if (errEl) errEl.hidden = false; return; }
+        if (errEl) errEl.hidden = true;
+        const { size, variantId } = currentPanelVariant;
+
+        const kl = window.klaviyo || window._learnq;
+        if (kl) {
+          kl.push(['identify', { '$email': email }]);
+          kl.push(['track', 'Back in Stock Requested', {
+            product: {{ product.title | json }}, variant_id: variantId, size
+          }]);
+        } else {
+          const fd = new FormData();
+          fd.append('form_type', 'customer');
+          fd.append('utf8', '✓');
+          fd.append('contact[email]', email);
+          fd.append('contact[tags]', 'backinstock-' + size);
+          fetch('/contact#contact_form', { method: 'POST', body: fd }).catch(() => {});
+        }
+        pushDL('notify_me_submit', { size, variant_id: variantId });
+        if (formEl) formEl.hidden = true;
+        if (successEl) successEl.hidden = false;
       });
     }
 
@@ -1751,6 +2023,97 @@ wteTimelines.forEach((timeline) => {
       "id": "description_toggle_closed",
       "label": "Description label",
       "default": "Product description"
+    },
+    {
+      "type": "header",
+      "content": "Sold-out & Preorder size panel"
+    },
+    {
+      "type": "range",
+      "id": "low_stock_threshold",
+      "label": "Low stock threshold",
+      "min": 1,
+      "max": 20,
+      "step": 1,
+      "default": 10,
+      "info": "At or below this qty, show 'Only N left' in the size dropdown"
+    },
+    {
+      "type": "text",
+      "id": "preorder_note",
+      "label": "Preorder label",
+      "default": "Preorder",
+      "info": "Fallback preorder label"
+    },
+    {
+      "type": "text",
+      "id": "preorder_dropdown_label",
+      "label": "Preorder size — dropdown label",
+      "default": "Low stock",
+      "info": "Shown in the size list for preorder sizes (FOMO). The preorder panel still opens on click."
+    },
+    {
+      "type": "text",
+      "id": "shipping_date",
+      "label": "Ships date",
+      "default": "Sept 15",
+      "info": "e.g. Sept 15 — shown in panel + preorder button"
+    },
+    {
+      "type": "text",
+      "id": "shipping_month",
+      "label": "Production month",
+      "default": "September",
+      "info": "Used in cutoff copy: 'to be in the [X] production run'"
+    },
+    {
+      "type": "text",
+      "id": "cutoff_date",
+      "label": "Order cutoff date",
+      "default": "Aug 31"
+    },
+    {
+      "type": "text",
+      "id": "preorder_micro",
+      "label": "Preorder microcopy",
+      "default": "Charged today. Cancel anytime before it ships."
+    },
+    {
+      "type": "text",
+      "id": "preorder_discount_code",
+      "label": "Preorder discount code",
+      "default": "PREORDER15",
+      "info": "Discount code applied at cart time when a preorder is placed via the panel"
+    },
+    {
+      "type": "text",
+      "id": "preorder_main_atc_label",
+      "label": "Main ATC label (preorder size selected)",
+      "default": "Preorder below ↓"
+    },
+    {
+      "type": "text",
+      "id": "notify_placeholder",
+      "label": "Email placeholder",
+      "default": "your@email.com"
+    },
+    {
+      "type": "text",
+      "id": "notify_cta",
+      "label": "Notify me button",
+      "default": "NOTIFY ME"
+    },
+    {
+      "type": "text",
+      "id": "notify_email_error",
+      "label": "Email validation error",
+      "default": "Please enter a valid email."
+    },
+    {
+      "type": "text",
+      "id": "notify_success",
+      "label": "Notify me success message",
+      "default": "Done. We'll email you."
     }
   ],
   "blocks": [
