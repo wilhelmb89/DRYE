@@ -1450,58 +1450,77 @@ if (pushEvent && !(window.Shopify && window.Shopify.designMode)) {
     if (panelEl) {
       const preorderBtn = panelEl.querySelector('[data-panel-preorder-btn]');
 
-      const reAssertPreorderDisabled = () => {
-        if (mainAtc) {
-          mainAtc.disabled = true;
-          mainAtc.textContent = PREORDER_MAIN_LABEL;
-        }
-        if (stickySubmit) {
-          stickySubmit.disabled = true;
-          stickySubmit.textContent = PREORDER_MAIN_LABEL;
-        }
+      const keepPreorderMainDisabled = () => {
+        if (mainAtc) { mainAtc.disabled = true; mainAtc.textContent = PREORDER_MAIN_LABEL; }
+        if (stickySubmit) { stickySubmit.disabled = true; stickySubmit.textContent = PREORDER_MAIN_LABEL; }
       };
+
+      const applyDiscountCode = () =>
+        fetch('/discount/' + encodeURIComponent(PANEL_CFG.discountCode), { credentials: 'same-origin' })
+          .then(() => {})
+          .catch(() => {});
+
+      const getCartDiscount = () =>
+        fetch(shopifyRoot + 'cart.js', { credentials: 'same-origin', headers: { Accept: 'application/json' } })
+          .then((r) => (r.ok ? r.json() : null))
+          .then((c) => (c ? (Number(c.original_total_price) - Number(c.total_price)) : 0))
+          .catch(() => 0);
 
       if (preorderBtn) {
         preorderBtn.addEventListener('click', async () => {
-          if (!currentPanelVariant) return;
+          if (!currentPanelVariant || preorderBtn.disabled) return;
           const { size, variantId } = currentPanelVariant;
+          const origText = preorderBtn.textContent;
 
           pushDL('preorder_add_to_cart', { size, variant_id: variantId, currency: PANEL_CFG.currency });
 
-          // Apply the preorder discount code (sets the cart-level discount cookie).
-          await fetch('/discount/' + encodeURIComponent(PANEL_CFG.discountCode), { credentials: 'same-origin' }).catch(() => {});
-
-          if (form) {
-            // Point the main product form at the preorder variant.
-            if (variantIdInput) variantIdInput.value = variantId;
-
-            // Ensure the Preorder line-item property exists in the form.
-            let propInput = form.querySelector('input[name="properties[Preorder]"]');
-            if (!propInput) {
-              propInput = document.createElement('input');
-              propInput.type = 'hidden';
-              propInput.name = 'properties[Preorder]';
-              form.appendChild(propInput);
-            }
-            propInput.value = 'Ships ' + PANEL_CFG.shippingDate;
-
-            // Reuse the theme cart-drawer's global submit listener: AJAX-adds AND opens the drawer.
-            form.requestSubmit();
-
-            // The drawer's addToCart re-enables the submit button in its finally block;
-            // keep the main ATC + sticky disabled for this preorder size.
-            [0, 600, 1200, 2000].forEach((t) => setTimeout(reAssertPreorderDisabled, t));
-          }
-
-          const origText = preorderBtn.textContent;
-          preorderBtn.textContent = 'Added ✓';
-          preorderBtn.style.background = '#0a6960';
           preorderBtn.disabled = true;
-          setTimeout(() => {
+          preorderBtn.textContent = 'Adding…';
+
+          try {
+            // 1) Apply the preorder discount code first (sets the cart-level discount).
+            await applyDiscountCode();
+
+            // 2) Add the preorder variant directly so the Preorder line-item property
+            //    actually persists (the drawer's own add path forwards only id + quantity).
+            await fetch(shopifyRoot + 'cart/add.js', {
+              method: 'POST',
+              credentials: 'same-origin',
+              headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+              body: JSON.stringify({
+                id: variantId,
+                quantity: 1,
+                properties: { Preorder: 'Ships ' + PANEL_CFG.shippingDate }
+              })
+            });
+
+            // 3) Confirm the discount actually landed; if not, re-apply once and re-check.
+            let discount = await getCartDiscount();
+            if (discount <= 0) {
+              await applyDiscountCode();
+              discount = await getCartDiscount();
+            }
+
+            // 4) Open + refresh the drawer so it shows the discounted cart.
+            if (window.DRYE_CartDrawer && typeof window.DRYE_CartDrawer.refresh === 'function') {
+              window.DRYE_CartDrawer.refresh(true);
+            } else if (window.DRYE_CartDrawer && typeof window.DRYE_CartDrawer.open === 'function') {
+              window.DRYE_CartDrawer.open();
+            }
+
+            keepPreorderMainDisabled();
+
+            preorderBtn.textContent = 'Added ✓';
+            preorderBtn.style.background = '#0a6960';
+            setTimeout(() => {
+              preorderBtn.textContent = origText;
+              preorderBtn.style.background = '';
+              preorderBtn.disabled = false;
+            }, 3000);
+          } catch (err) {
             preorderBtn.textContent = origText;
-            preorderBtn.style.background = '';
             preorderBtn.disabled = false;
-          }, 3000);
+          }
         });
       }
 
