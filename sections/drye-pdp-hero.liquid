@@ -540,26 +540,34 @@ assign review_count = section.settings.review_count_fallback
         {%- assign cpm_low = section.settings.cpm_months_low | default: 6 -%}
         {%- assign cpm_high = section.settings.cpm_months_high | default: 12 -%}
         {%- assign cpm_suffix = section.settings.cpm_month_suffix | default: 'mo' -%}
+        {%- assign cpm_note_low = section.settings.cpm_note_low -%}
+        {%- assign cpm_note_high = section.settings.cpm_note_high -%}
         <div class="cpm" data-cpm hidden>
-          <div class="cpm__row">
-            <span class="cpm__price"><span data-cpm-price="{{ cpm_low }}"></span><small> /{{ cpm_suffix }}</small></span>
-            <span class="cpm__tw">
-              <span class="cpm__axis">
-                <span class="cpm__line"></span>
-                <span class="cpm__nodes">{%- for i in (1..cpm_low) -%}<i class="cpm__node{% if forloop.last %} cpm__node--end{% endif %}"></i>{%- endfor -%}</span>
+          <div class="cpm__block">
+            <div class="cpm__row">
+              <span class="cpm__price"><span data-cpm-price="{{ cpm_low }}"></span><small> /{{ cpm_suffix }}</small></span>
+              <span class="cpm__tw">
+                <span class="cpm__axis">
+                  <span class="cpm__line"></span>
+                  <span class="cpm__nodes">{%- for i in (1..cpm_low) -%}<i class="cpm__node{% if forloop.last %} cpm__node--end{% endif %}"></i>{%- endfor -%}</span>
+                </span>
+                <span class="cpm__mo">{{ cpm_low }} {{ cpm_suffix }}</span>
               </span>
-              <span class="cpm__mo">{{ cpm_low }} {{ cpm_suffix }}</span>
-            </span>
+            </div>
+            {% if cpm_note_low != blank %}<span class="cpm__note">{{ cpm_note_low }}</span>{% endif %}
           </div>
-          <div class="cpm__row">
-            <span class="cpm__price"><span data-cpm-price="{{ cpm_high }}"></span><small> /{{ cpm_suffix }}</small></span>
-            <span class="cpm__tw">
-              <span class="cpm__axis">
-                <span class="cpm__line"></span>
-                <span class="cpm__nodes">{%- for i in (1..cpm_high) -%}<i class="cpm__node{% if forloop.last %} cpm__node--end{% endif %}"></i>{%- endfor -%}</span>
+          <div class="cpm__block">
+            <div class="cpm__row">
+              <span class="cpm__price"><span data-cpm-price="{{ cpm_high }}"></span><small> /{{ cpm_suffix }}</small></span>
+              <span class="cpm__tw">
+                <span class="cpm__axis">
+                  <span class="cpm__line"></span>
+                  <span class="cpm__nodes">{%- for i in (1..cpm_high) -%}<i class="cpm__node{% if forloop.last %} cpm__node--end{% endif %}"></i>{%- endfor -%}</span>
+                </span>
+                <span class="cpm__mo">{{ cpm_high }} {{ cpm_suffix }}</span>
               </span>
-              <span class="cpm__mo">{{ cpm_high }} {{ cpm_suffix }}</span>
-            </span>
+            </div>
+            {% if cpm_note_high != blank %}<span class="cpm__note">{{ cpm_note_high }}</span>{% endif %}
           </div>
         </div>
       {% endif %}
@@ -1908,6 +1916,18 @@ wteTimelines.forEach((timeline) => {
       "id": "cpm_month_suffix",
       "label": "Month suffix",
       "default": "mo"
+    },
+    {
+      "type": "text",
+      "id": "cpm_note_low",
+      "label": "Timeline 1 note",
+      "default": "Heavy shop use"
+    },
+    {
+      "type": "text",
+      "id": "cpm_note_high",
+      "label": "Timeline 2 note",
+      "default": "Regular shop use"
     },
     {
       "type": "text",
