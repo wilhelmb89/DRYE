@@ -532,7 +532,37 @@ assign review_count = section.settings.review_count_fallback
         {% if price_note != blank %}
           <span class="price-note">{{ price_note }}</span>
         {% endif %}
+        {%- comment -%} Market-correct money format sample — read by JS so it never guesses currency/separators {%- endcomment -%}
+        <span class="dryeNEW-visually-hidden" data-money-sample aria-hidden="true">{{ 123456789 | money_with_currency }}</span>
       </div>
+
+      {% if section.settings.cpm_enabled %}
+        {%- assign cpm_low = section.settings.cpm_months_low | default: 6 -%}
+        {%- assign cpm_high = section.settings.cpm_months_high | default: 12 -%}
+        {%- assign cpm_suffix = section.settings.cpm_month_suffix | default: 'mo' -%}
+        <div class="cpm" data-cpm hidden>
+          <div class="cpm__row">
+            <span class="cpm__price"><span data-cpm-price="{{ cpm_low }}"></span><small> /{{ cpm_suffix }}</small></span>
+            <span class="cpm__tw">
+              <span class="cpm__axis">
+                <span class="cpm__line"></span>
+                <span class="cpm__nodes">{%- for i in (1..cpm_low) -%}<i class="cpm__node{% if forloop.last %} cpm__node--end{% endif %}"></i>{%- endfor -%}</span>
+              </span>
+              <span class="cpm__mo">{{ cpm_low }} {{ cpm_suffix }}</span>
+            </span>
+          </div>
+          <div class="cpm__row">
+            <span class="cpm__price"><span data-cpm-price="{{ cpm_high }}"></span><small> /{{ cpm_suffix }}</small></span>
+            <span class="cpm__tw">
+              <span class="cpm__axis">
+                <span class="cpm__line"></span>
+                <span class="cpm__nodes">{%- for i in (1..cpm_high) -%}<i class="cpm__node{% if forloop.last %} cpm__node--end{% endif %}"></i>{%- endfor -%}</span>
+              </span>
+              <span class="cpm__mo">{{ cpm_high }} {{ cpm_suffix }}</span>
+            </span>
+          </div>
+        </div>
+      {% endif %}
 
       <button
         type="submit"
@@ -1088,6 +1118,86 @@ assign review_count = section.settings.review_count_fallback
     const qtyInput = sectionEl.querySelector('.qty-val');
     const qtyMinus = sectionEl.querySelector('[data-qty-minus]');
     const qtyPlus = sectionEl.querySelector('[data-qty-plus]');
+
+    // ── Live price (unit × quantity) + cost-per-month timeline ──
+    const cpmWrap = sectionEl.querySelector('[data-cpm]');
+    const cpmRows = cpmWrap ? Array.from(cpmWrap.querySelectorAll('[data-cpm-price]')) : [];
+    const moneySampleEl = sectionEl.querySelector('[data-money-sample]');
+
+    function parseMoneyParts(str) {
+      if (!str) return null;
+      const first = str.search(/\d/);
+      if (first === -1) return null;
+      let last = first;
+      for (let i = str.length - 1; i >= 0; i--) { if (/\d/.test(str.charAt(i))) { last = i; break; } }
+      const prefix = str.slice(0, first);
+      const suffix = str.slice(last + 1);
+      const numStr = str.slice(first, last + 1);
+      const hasDot = numStr.indexOf('.') !== -1;
+      const hasComma = numStr.indexOf(',') !== -1;
+      let decSep = '', grpSep = '';
+      if (hasDot && hasComma) {
+        decSep = numStr.lastIndexOf('.') > numStr.lastIndexOf(',') ? '.' : ',';
+        grpSep = decSep === '.' ? ',' : '.';
+      } else if (hasDot || hasComma) {
+        const sep = hasDot ? '.' : ',';
+        const afterLen = numStr.length - numStr.lastIndexOf(sep) - 1;
+        const count = numStr.split(sep).length - 1;
+        if (count === 1 && afterLen >= 1 && afterLen <= 2) { decSep = sep; grpSep = sep === '.' ? ',' : '.'; }
+        else { grpSep = sep; decSep = sep === '.' ? ',' : '.'; }
+      }
+      let dec = 0;
+      if (decSep) {
+        const afterLen = numStr.length - numStr.lastIndexOf(decSep) - 1;
+        if (afterLen >= 1 && afterLen <= 2) { dec = afterLen; } else { grpSep = grpSep || decSep; decSep = ''; }
+      }
+      var wsMatch = numStr.match(/\d(\s)\d/);
+      if (wsMatch) grpSep = wsMatch[1];
+      let clean = numStr.replace(/[\s ]/g, '');
+      if (grpSep) clean = clean.split(grpSep).join('');
+      if (decSep) clean = clean.replace(decSep, '.');
+      const value = parseFloat(clean);
+      if (isNaN(value)) return null;
+      return { prefix: prefix, suffix: suffix, value: value, dec: dec, decSep: decSep || '.', grpSep: grpSep || ',' };
+    }
+
+    function formatMoneyTpl(value, tpl, decOverride) {
+      const d = (decOverride == null) ? tpl.dec : decOverride;
+      const factor = Math.pow(10, d);
+      const fixed = (Math.round(value * factor) / factor).toFixed(d);
+      const parts = fixed.split('.');
+      parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, tpl.grpSep);
+      const num = (d > 0 && parts[1] != null) ? parts[0] + tpl.decSep + parts[1] : parts[0];
+      return tpl.prefix + num + tpl.suffix;
+    }
+
+    // Market-correct format template from Shopify's own money output; base unit amount from the rendered price.
+    const cpmMoneyTpl = parseMoneyParts(moneySampleEl ? moneySampleEl.textContent : (priceEl ? priceEl.textContent : ''));
+    const cpmBaseUnit = priceEl ? parseMoneyParts(priceEl.textContent) : null;
+    const cpmBaseAmount = cpmBaseUnit ? cpmBaseUnit.value : null;
+    const cpmInitCents = (productData.selected_or_first_available_variant && productData.selected_or_first_available_variant.price)
+      || (productData.variants && productData.variants[0] && productData.variants[0].price) || 0;
+
+    function renderPriceCPM() {
+      if (!priceEl || !cpmMoneyTpl || cpmBaseAmount == null) return;
+      const qty = Math.max(1, Math.min(10, parseInt(qtyInput && qtyInput.value, 10) || 1));
+      const variant = (typeof getVariantFromOptions === 'function' && getVariantFromOptions())
+        || productData.selected_or_first_available_variant;
+      let unit = cpmBaseAmount;
+      if (variant && variant.price && cpmInitCents) unit = cpmBaseAmount * (Number(variant.price) / Number(cpmInitCents));
+      const total = unit * qty;
+      const totalStr = formatMoneyTpl(total, cpmMoneyTpl);
+      priceEl.textContent = totalStr;
+      if (stickyPriceEl) stickyPriceEl.textContent = totalStr;
+      if (cpmWrap && cpmRows.length) {
+        cpmRows.forEach(function (el) {
+          const months = parseInt(el.getAttribute('data-cpm-price'), 10) || 1;
+          el.textContent = formatMoneyTpl(total / months, cpmMoneyTpl, 0);
+        });
+        cpmWrap.hidden = false;
+      }
+    }
+
     const sizeTrigger = sectionEl.querySelector('[data-size-trigger]');
     const sizeList = sectionEl.querySelector('[data-size-list]');
     const sizeLabel = sectionEl.querySelector('[data-size-label]');
@@ -1303,6 +1413,8 @@ if (pushEvent && !(window.Shopify && window.Shopify.designMode)) {
   pushViewItem(selectedVariant);
 }
       }
+
+      renderPriceCPM();
     }
 
     // ── Sold-out & Preorder size panel ──
@@ -1581,6 +1693,7 @@ if (pushEvent && !(window.Shopify && window.Shopify.designMode)) {
       if (!qtyInput) return;
       const safeValue = Math.max(1, Math.min(10, Number(nextValue) || 1));
       qtyInput.value = safeValue;
+      renderPriceCPM();
     }
 
     if (qtyMinus) {
@@ -1770,6 +1883,31 @@ wteTimelines.forEach((timeline) => {
       "id": "quantity_label",
       "label": "Quantity label",
       "default": "QUANTITY"
+    },
+    {
+      "type": "checkbox",
+      "id": "cpm_enabled",
+      "label": "Show cost-per-month timeline",
+      "default": true,
+      "info": "Two timelines above Add to Cart. Amounts = price × quantity ÷ months, in the shopper's currency."
+    },
+    {
+      "type": "range",
+      "id": "cpm_months_low",
+      "label": "Timeline 1 — months (heavy use)",
+      "min": 1, "max": 18, "step": 1, "default": 6
+    },
+    {
+      "type": "range",
+      "id": "cpm_months_high",
+      "label": "Timeline 2 — months (everyday use)",
+      "min": 1, "max": 24, "step": 1, "default": 12
+    },
+    {
+      "type": "text",
+      "id": "cpm_month_suffix",
+      "label": "Month suffix",
+      "default": "mo"
     },
     {
       "type": "text",

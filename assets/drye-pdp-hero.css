@@ -1957,3 +1957,20 @@
 .hero .sz-panel-success[hidden] {
   display: none;
 }
+
+/* ==========================================================================
+   Cost-per-month timeline (neutral) — between price and Add to cart.
+   Amounts are written live by JS from the real price × quantity.
+   ========================================================================== */
+.hero .cpm { margin: 2px 0 16px; padding: 12px 0 0; border-top: 1px solid var(--border); display: flex; flex-direction: column; gap: 14px; }
+.hero .cpm[hidden] { display: none; }
+.hero .cpm__row { display: grid; grid-template-columns: 72px 1fr; align-items: center; gap: 12px; }
+.hero .cpm__price { font-family: var(--font-display); font-weight: 600; font-size: 14px; letter-spacing: -0.02em; color: var(--deep); white-space: nowrap; font-variant-numeric: tabular-nums; }
+.hero .cpm__price small { font-size: 0.62em; font-weight: 500; color: var(--muted); letter-spacing: 0; }
+.hero .cpm__tw { display: flex; align-items: center; gap: 8px; min-width: 0; }
+.hero .cpm__mo { font-size: 10px; color: var(--caption); white-space: nowrap; }
+.hero .cpm__axis { position: relative; height: 12px; display: inline-flex; }
+.hero .cpm__line { position: absolute; top: 50%; left: 3px; right: 3px; height: 2px; background: var(--border); transform: translateY(-50%); border-radius: 2px; }
+.hero .cpm__nodes { position: relative; display: flex; gap: 11px; align-items: center; height: 100%; }
+.hero .cpm__node { width: 7px; height: 7px; border-radius: 50%; background: var(--caption); box-shadow: 0 0 0 2.5px var(--bg); flex: 0 0 auto; }
+.hero .cpm__node--end { width: 9px; height: 9px; background: var(--deep); }
