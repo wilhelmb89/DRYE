@@ -316,32 +316,18 @@ assign review_count = section.settings.review_count_fallback
           <div class="sz-dd" data-size-dropdown>
             <button
               type="button"
-              class="sz-dd-trigger{% if selected_variant.options[size_option_index] != blank %} has-val{% endif %}"
+              class="sz-dd-trigger"
               data-size-trigger
               aria-expanded="false"
               aria-haspopup="listbox"
             >
-              <span data-size-label>
-                {% if selected_variant.options[size_option_index] != blank %}
-                  {{ selected_variant.options[size_option_index] }}
-                {% else %}
-                  {{ section.settings.size_placeholder }}
-                {% endif %}
-              </span>
+              <span data-size-label>{{ section.settings.size_placeholder }}</span>
               <svg class="sz-dd-arrow" viewBox="0 0 10 6" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                 <path d="M0 0l5 6 5-6z" fill="#9CA3AF"/>
               </svg>
             </button>
 
 <div class="sz-dd-list" data-size-list role="listbox" aria-label="{{ size_option.name }}">
-
-<button
-  type="button"
-  class="sz-dd-help dryeNEW-body--caption js-open-size-guide"
->
-  <span>Unsure of your size? Click here</span>
-  <span class="sz-dd-help__arrow" aria-hidden="true">→</span>
-</button>
 
 {% for value in size_option.values %}
   {% liquid
@@ -381,6 +367,17 @@ assign review_count = section.settings.review_count_fallback
       assign variant_policy = 'deny'
     endif
     assign variant_qty = matched_variant.inventory_quantity
+
+    assign fit_note = ''
+    assign fit_lines = section.settings.size_fit_notes | newline_to_br | split: '<br />'
+    for fit_line in fit_lines
+      assign fit_parts = fit_line | strip | split: '='
+      assign fit_key = fit_parts[0] | strip
+      if fit_key == value and fit_parts.size > 1
+        assign fit_note = fit_parts[1] | strip
+        break
+      endif
+    endfor
   %}
   <button
     type="button"
@@ -396,9 +393,17 @@ assign review_count = section.settings.review_count_fallback
     role="option"
     aria-selected="{% if is_selected %}true{% else %}false{% endif %}"
   >
-    {{ value }}{% if matched_variant != blank %}{% if variant_policy == 'continue' and variant_qty <= 0 %}<span class="sz-dd-note sz-dd-note--low">— {{ section.settings.preorder_dropdown_label | default: 'Low stock' }}</span>{% elsif variant_policy == 'deny' and variant_qty <= 0 %}<span class="sz-dd-note sz-dd-note--soldout">— Sold out · Notify me →</span>{% elsif variant_qty > 0 and variant_qty <= section.settings.low_stock_threshold %}<span class="sz-dd-note sz-dd-note--low">— Only {{ variant_qty }} left</span>{% else %}<span class="sz-dd-note">— In stock</span>{% endif %}{% endif %}
+    <span class="sz-dd-main"><span class="sz-dd-size">{{ value }}</span>{% if fit_note != blank %}<span class="sz-dd-fit">{{ fit_note }}</span>{% endif %}</span>{% if matched_variant != blank %}{% if variant_policy == 'continue' and variant_qty <= 0 %}<span class="sz-dd-note sz-dd-note--low">{{ section.settings.preorder_dropdown_label | default: 'Low stock' }}</span>{% elsif variant_policy == 'deny' and variant_qty <= 0 %}<span class="sz-dd-note sz-dd-note--soldout">Sold out · Notify me →</span>{% elsif variant_qty > 0 and variant_qty <= section.settings.low_stock_threshold %}<span class="sz-dd-note sz-dd-note--low">Only {{ variant_qty }} left</span>{% else %}<span class="sz-dd-note">In stock</span>{% endif %}{% endif %}
   </button>
 {% endfor %}
+
+<button
+  type="button"
+  class="sz-dd-help js-open-size-guide"
+>
+  <span class="sz-dd-help__text">{{ section.settings.size_help_label | default: 'Unsure of your size?' }}</span>
+  <span class="sz-dd-help__arrow" aria-hidden="true">→</span>
+</button>
             </div>
           </div>
 
@@ -620,6 +625,10 @@ assign review_count = section.settings.review_count_fallback
         <span>{{ section.settings.trust_text_3 }}</span>
       </div>
     </div>
+
+    {% if section.settings.atc_undernote != blank %}
+      <p class="atc-undernote">{{ section.settings.atc_undernote }}</p>
+    {% endif %}
 
 {% comment %} Worker Proof — compact green proof line + sliding/expandable comment ticker {% endcomment %}
 {% if section.settings.proof_enabled %}
@@ -1253,6 +1262,11 @@ const shopifyRoot = (window.Shopify && window.Shopify.routes && window.Shopify.r
       ? [...productData.selected_or_first_available_variant.options]
       : (productData.variants[0] ? [...productData.variants[0].options] : []);
 
+    // Trigger shows "Choose your size" until the shopper actually picks one.
+    // currentOptions still holds a real variant under the hood, so price / ATC /
+    // cart-drawer / market coupling all stay intact — only the visible label waits.
+    let userHasPickedSize = false;
+
     function isVariantPreorder(variant) {
       if (!variant) return false;
       return variant.inventory_policy === 'continue' && Number(variant.inventory_quantity) <= 0;
@@ -1279,11 +1293,12 @@ const shopifyRoot = (window.Shopify && window.Shopify.routes && window.Shopify.r
       sizeOptions.forEach((option) => {
         const position = Number(option.dataset.optionPosition) - 1;
         const isSelected = currentOptions[position] === option.dataset.optionValue;
+        const showSelected = isSelected && userHasPickedSize;
 
-        option.classList.toggle('selected', isSelected);
-        option.setAttribute('aria-selected', isSelected ? 'true' : 'false');
+        option.classList.toggle('selected', showSelected);
+        option.setAttribute('aria-selected', showSelected ? 'true' : 'false');
 
-        if (isSelected) {
+        if (showSelected) {
           sizeLabel.textContent = option.dataset.optionValue;
           sizeTrigger.classList.add('has-val');
         }
@@ -1541,6 +1556,7 @@ if (pushEvent && !(window.Shopify && window.Shopify.designMode)) {
           const isSoldOut = option.dataset.available === 'false' && policy === 'deny';
 
           currentOptions[position] = value;
+          userHasPickedSize = true;
           closeSizeDropdown();
           updateVariant(true);
 
@@ -1879,6 +1895,25 @@ wteTimelines.forEach((timeline) => {
       "id": "size_placeholder",
       "label": "Size placeholder",
       "default": "Choose your size"
+    },
+    {
+      "type": "textarea",
+      "id": "size_fit_notes",
+      "label": "Size fit notes",
+      "info": "One per line, format: Size value=Fit note (e.g. M (8)=Man / Woman). The size value must match the variant option exactly.",
+      "default": "XXS (5)=Child\nXS (6)=Child / Woman\nS (7)=Child / Woman\nM (8)=Man / Woman\nL (9)=Man / Woman\nXL (10)=Man\nXXL (11)=Man\nXXXL (12)=Man"
+    },
+    {
+      "type": "text",
+      "id": "size_help_label",
+      "label": "Unsure-of-size label",
+      "default": "Unsure of your size?"
+    },
+    {
+      "type": "text",
+      "id": "atc_undernote",
+      "label": "Under-ATC guarantee line",
+      "default": "30 shifts. If your hands aren't dry at lunch, keep the liners and get your money back."
     },
     {
       "type": "text",
