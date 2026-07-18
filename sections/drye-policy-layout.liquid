@@ -1,6 +1,5 @@
 {{ 'drye-policy-layout.css' | asset_url | stylesheet_tag }}
 {{ 'drye-policy-content.css' | asset_url | stylesheet_tag }}
-
 <script src="{{ 'drye-policy.js' | asset_url }}" defer></script>
 
 <section class="drye-policy-layout">
@@ -10,675 +9,61 @@
       {% case block.type %}
 
         {% when 'side_nav' %}
-          <aside
-            class="drye-policy-side-nav"
-            aria-label="Policy sections"
-            {{ block.shopify_attributes }}
-          >
-            <nav class="drye-policy-side-nav__nav">
+        <aside class="drye-policy-side-nav" aria-label="Policy sections" {{ block.shopify_attributes }}>
+          <nav class="drye-policy-side-nav__nav">
 
-              <div
-                class="drye-policy-side-nav__group"
-                data-policy-group="shipping"
-              >
-                <div class="drye-policy-side-nav__label">
-                  Shipping
-                </div>
+            <div class="drye-policy-side-nav__group" data-policy-group="shipping">
+              <div class="drye-policy-side-nav__label">Shipping</div>
+              <a class="drye-policy-side-nav__link is-active" href="#what-to-expect">What to expect</a>
+              <a class="drye-policy-side-nav__link" href="#delivery-times">Delivery times</a>
+              <a class="drye-policy-side-nav__link" href="#shipping-costs">Shipping costs</a>
+              <a class="drye-policy-side-nav__link" href="#customs">Customs & duties</a>
+              <a class="drye-policy-side-nav__link" href="#tracking">Tracking</a>
+              <a class="drye-policy-side-nav__link" href="#delivery-issues">Delivery issues</a>
+            </div>
 
-                <a
-                  class="drye-policy-side-nav__link is-active"
-                  href="#what-to-expect"
-                >
-                  What to expect
-                </a>
+            <div class="drye-policy-side-nav__group" data-policy-group="returns" hidden>
+              <div class="drye-policy-side-nav__label">Returns</div>
+              <a class="drye-policy-side-nav__link" href="#guarantee">30-day guarantee</a>
+              <a class="drye-policy-side-nav__link" href="#eligibility">Eligibility</a>
+              <a class="drye-policy-side-nav__link" href="#how-to-return">How to return</a>
+              <a class="drye-policy-side-nav__link" href="#refunds">Refunds</a>
+              <a class="drye-policy-side-nav__link" href="#what-can-be-returned">What can be returned</a>
+            </div>
 
-                <a
-                  class="drye-policy-side-nav__link"
-                  href="#delivery-times"
-                >
-                  Delivery times
-                </a>
+            <div class="drye-policy-side-nav__group" data-policy-group="privacy" hidden>
+              <div class="drye-policy-side-nav__label">Privacy Policy</div>
+              <a class="drye-policy-side-nav__link" href="#privacy-overview">Overview</a>
+            </div>
 
-                <a
-                  class="drye-policy-side-nav__link"
-                  href="#shipping-costs"
-                >
-                  Shipping costs
-                </a>
+            <div class="drye-policy-side-nav__group" data-policy-group="terms" hidden>
+              <div class="drye-policy-side-nav__label">Terms of Service</div>
+              <a class="drye-policy-side-nav__link" href="#terms-overview">Overview</a>
+            </div>
 
-                <a
-                  class="drye-policy-side-nav__link"
-                  href="#customs"
-                >
-                  Customs & duties
-                </a>
-
-                <a
-                  class="drye-policy-side-nav__link"
-                  href="#estimated-import-costs"
-                >
-                  Estimated import costs
-                </a>
-
-                <a
-                  class="drye-policy-side-nav__link"
-                  href="#tracking"
-                >
-                  Tracking
-                </a>
-
-                <a
-                  class="drye-policy-side-nav__link"
-                  href="#delivery-issues"
-                >
-                  Delivery issues
-                </a>
-              </div>
-
-              <div
-                class="drye-policy-side-nav__group"
-                data-policy-group="returns"
-                hidden
-              >
-                <div class="drye-policy-side-nav__label">
-                  Returns
-                </div>
-
-                <a
-                  class="drye-policy-side-nav__link"
-                  href="#guarantee"
-                >
-                  30-day guarantee
-                </a>
-
-                <a
-                  class="drye-policy-side-nav__link"
-                  href="#eligibility"
-                >
-                  Eligibility
-                </a>
-
-                <a
-                  class="drye-policy-side-nav__link"
-                  href="#how-to-return"
-                >
-                  How to return
-                </a>
-
-                <a
-                  class="drye-policy-side-nav__link"
-                  href="#refunds"
-                >
-                  Refunds
-                </a>
-
-                <a
-                  class="drye-policy-side-nav__link"
-                  href="#what-can-be-returned"
-                >
-                  What can be returned
-                </a>
-              </div>
-
-              <div
-                class="drye-policy-side-nav__group"
-                data-policy-group="privacy"
-                hidden
-              >
-                <div class="drye-policy-side-nav__label">
-                  Privacy Policy
-                </div>
-
-                <a
-                  class="drye-policy-side-nav__link"
-                  href="#privacy-overview"
-                >
-                  Overview
-                </a>
-              </div>
-
-              <div
-                class="drye-policy-side-nav__group"
-                data-policy-group="terms"
-                hidden
-              >
-                <div class="drye-policy-side-nav__label">
-                  Terms of Service
-                </div>
-
-                <a
-                  class="drye-policy-side-nav__link"
-                  href="#terms-overview"
-                >
-                  Overview
-                </a>
-              </div>
-
-            </nav>
-          </aside>
+          </nav>
+        </aside>
 
         {% when 'content' %}
-          <div
-            class="policy-content"
-            {{ block.shopify_attributes }}
-          >
+        <div class="policy-content" {{ block.shopify_attributes }}>
 
-            <div
-              class="policy-panel active"
-              id="panel-shipping"
-            >
-
-              <section
-                class="policy-section"
-                id="what-to-expect"
-              >
-                <div class="policy-section__eyebrow">
-                  Shipping
-                </div>
-
-                <h1>Shipping policy</h1>
-
-                <p>
-                  Orders are shipped from Sweden using the delivery method
-                  selected at checkout.
-                </p>
-
-                <p>
-                  PostNord and UPS use different import terms. PostNord
-                  shipments to the United States and Canada are offered with
-                  applicable import charges prepaid by DRYE. UPS shipments to
-                  the United States and Canada are sent under Delivered at
-                  Place terms, which means that import charges may be collected
-                  from the recipient.
-                </p>
-
-                <p>
-                  The shipping option shown at checkout will state whether
-                  import charges are included or payable by the recipient.
-                </p>
-
-                <p>
-                  DRYE glove liners are lightweight textile products made from
-                  polypropylene and lyocell. Each pair weighs approximately
-                  40 grams and contains no chemical treatment, coating or
-                  membrane that can wash out.
-                </p>
-              </section>
-
-              <section
-                class="policy-section"
-                id="delivery-times"
-              >
-                <div class="policy-section__eyebrow">
-                  Delivery
-                </div>
-
-                <h2>Delivery times</h2>
-
-                <p>
-                  The estimated delivery time for each available shipping
-                  method is shown at checkout.
-                </p>
-
-                <p>
-                  Delivery estimates begin when the order has been dispatched.
-                  Customs reviews, incomplete address information, carrier
-                  disruptions and local delivery conditions may cause delays.
-                </p>
-
-                <p>
-                  Express shipping normally receives priority handling, but
-                  customs clearance times are controlled by the destination
-                  country and cannot be guaranteed by DRYE.
-                </p>
-              </section>
-
-              <section
-                class="policy-section"
-                id="shipping-costs"
-              >
-                <div class="policy-section__eyebrow">
-                  Pricing
-                </div>
-
-                <h2>Shipping costs</h2>
-
-                <p>
-                  Available shipping methods and their prices are calculated
-                  from the delivery address and shown before payment.
-                </p>
-
-                <p>
-                  The shipping charge paid at checkout covers transportation.
-                  For DAP shipping methods, customs duty, taxes and carrier
-                  processing fees are separate and may be collected from the
-                  recipient.
-                </p>
-
-                <p>
-                  For shipping methods marked
-                  <strong>Import charges included</strong>,
-                  <strong>PDDP</strong> or <strong>DDP</strong>,
-                  applicable import charges are prepaid by DRYE.
-                </p>
-              </section>
-
-              <section
-                class="policy-section"
-                id="customs"
-              >
-                <div class="policy-section__eyebrow">
-                  Import charges
-                </div>
-
-                <h2>Customs, duties, taxes & carrier fees</h2>
-
-                <p>
-                  Import charges depend on the destination and the shipping
-                  method selected at checkout.
-                </p>
-
-                <div class="policy-table-wrap">
-                  <table class="policy-table">
-                    <thead>
-                      <tr>
-                        <th>Destination</th>
-                        <th>Shipping method</th>
-                        <th>Import terms</th>
-                        <th>What the customer may pay after checkout</th>
-                      </tr>
-                    </thead>
-
-                    <tbody>
-                      <tr>
-                        <td>United States</td>
-                        <td>PostNord</td>
-                        <td>
-                          Postal Delivered Duties Paid
-                        </td>
-                        <td>
-                          <strong>USD 0 expected at delivery.</strong>
-                          DRYE prepays applicable customs duty and postal
-                          import-processing charges.
-                        </td>
-                      </tr>
-
-                      <tr>
-                        <td>United States</td>
-                        <td>UPS</td>
-                        <td>
-                          Delivered at Place — DAP
-                        </td>
-                        <td>
-                          The recipient is responsible for applicable customs
-                          duty and any UPS brokerage, disbursement, clearance
-                          or processing fees.
-                        </td>
-                      </tr>
-
-                      <tr>
-                        <td>Canada</td>
-                        <td>PostNord</td>
-                        <td>
-                          Delivered Duty Paid — DDP
-                        </td>
-                        <td>
-                          <strong>CAD 0 expected at delivery.</strong>
-                          DRYE prepays applicable customs duty, Canadian sales
-                          taxes and postal import-processing charges.
-                        </td>
-                      </tr>
-
-                      <tr>
-                        <td>Canada</td>
-                        <td>UPS</td>
-                        <td>
-                          Delivered at Place — DAP
-                        </td>
-                        <td>
-                          The recipient is responsible for applicable
-                          GST, HST, PST or QST and any UPS brokerage,
-                          disbursement, clearance or processing fees.
-                        </td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
-
-                <h3>United States sales tax</h3>
-
-                <p>
-                  The United States does not apply a federal import VAT
-                  equivalent to Canadian GST or HST.
-                </p>
-
-                <p>
-                  State or local sales tax may apply depending on the delivery
-                  address and DRYE's tax obligations. Any sales tax collected
-                  directly by DRYE is calculated and shown at checkout. It is
-                  separate from customs duty and carrier import fees.
-                </p>
-
-                <h3>Canada and CETA</h3>
-
-                <p>
-                  Qualifying products of European Union origin may receive
-                  preferential customs-duty treatment under the
-                  Canada–European Union Comprehensive Economic and Trade
-                  Agreement.
-                </p>
-
-                <p>
-                  CETA may reduce customs duty to 0%, but it does not remove
-                  Canadian GST, HST, PST or QST, or carrier import-processing
-                  fees.
-                </p>
-
-                <p>
-                  Preferential treatment depends on the product meeting the
-                  applicable rules of origin and the required origin
-                  documentation being accepted by the customs authority.
-                </p>
-              </section>
-
-              <section
-                class="policy-section"
-                id="estimated-import-costs"
-              >
-                <div class="policy-section__eyebrow">
-                  Cost examples
-                </div>
-
-                <h2>Estimated import costs</h2>
-
-                <p>
-                  The examples below explain what may be charged under each
-                  shipping method. Final assessments are made by customs
-                  authorities and the carrier.
-                </p>
-
-                <h3>United States</h3>
-
-                <div class="policy-table-wrap">
-                  <table class="policy-table">
-                    <thead>
-                      <tr>
-                        <th>Shipping method</th>
-                        <th>Customs duty</th>
-                        <th>Federal import VAT</th>
-                        <th>Carrier fees</th>
-                      </tr>
-                    </thead>
-
-                    <tbody>
-                      <tr>
-                        <td>PostNord</td>
-                        <td>Paid by DRYE</td>
-                        <td>None</td>
-                        <td>Paid by DRYE</td>
-                      </tr>
-
-                      <tr>
-                        <td>UPS DAP</td>
-                        <td>
-                          Paid by recipient based on the declared value,
-                          classification and current tariff rules
-                        </td>
-                        <td>None</td>
-                        <td>
-                          UPS brokerage, disbursement or processing fees may
-                          apply
-                        </td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
-
-                <p>
-                  Any applicable state or local sales tax collected by DRYE
-                  is displayed before payment. Sales tax is not included in
-                  an import invoice from the carrier.
-                </p>
-
-                <h3>Canada</h3>
-
-                <p>
-                  Under PostNord DDP, the Canadian taxes below are paid by
-                  DRYE. Under UPS DAP, they may be collected from the
-                  recipient.
-                </p>
-
-                <p>
-                  The table shows indicative combined sales tax on each
-                  CAD 100 of taxable value.
-                </p>
-
-                <div class="policy-table-wrap">
-                  <table class="policy-table">
-                    <thead>
-                      <tr>
-                        <th>Province or territory</th>
-                        <th>Indicative combined tax</th>
-                        <th>Tax per CAD 100</th>
-                      </tr>
-                    </thead>
-
-                    <tbody>
-                      <tr>
-                        <td>
-                          Alberta, Northwest Territories, Nunavut and Yukon
-                        </td>
-                        <td>5%</td>
-                        <td>CAD 5.00</td>
-                      </tr>
-
-                      <tr>
-                        <td>Saskatchewan</td>
-                        <td>11%</td>
-                        <td>CAD 11.00</td>
-                      </tr>
-
-                      <tr>
-                        <td>British Columbia and Manitoba</td>
-                        <td>12%</td>
-                        <td>CAD 12.00</td>
-                      </tr>
-
-                      <tr>
-                        <td>Ontario</td>
-                        <td>13%</td>
-                        <td>CAD 13.00</td>
-                      </tr>
-
-                      <tr>
-                        <td>Nova Scotia</td>
-                        <td>14%</td>
-                        <td>CAD 14.00</td>
-                      </tr>
-
-                      <tr>
-                        <td>Quebec</td>
-                        <td>14.975%</td>
-                        <td>Approximately CAD 14.98</td>
-                      </tr>
-
-                      <tr>
-                        <td>
-                          New Brunswick, Newfoundland and Labrador,
-                          and Prince Edward Island
-                        </td>
-                        <td>15%</td>
-                        <td>CAD 15.00</td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
-
-                <p>
-                  For example, on a taxable value of CAD 52, the estimated
-                  Canadian sales tax would normally range from approximately
-                  CAD 2.60 to CAD 7.80, depending on the province or territory.
-                </p>
-
-                <div class="policy-table-wrap">
-                  <table class="policy-table">
-                    <thead>
-                      <tr>
-                        <th>Canada shipping method</th>
-                        <th>Estimated customer payment after checkout</th>
-                      </tr>
-                    </thead>
-
-                    <tbody>
-                      <tr>
-                        <td>PostNord DDP</td>
-                        <td>
-                          <strong>CAD 0 expected.</strong>
-                          DRYE pays applicable customs duty, Canadian sales
-                          taxes and postal import-processing charges.
-                        </td>
-                      </tr>
-
-                      <tr>
-                        <td>UPS DAP</td>
-                        <td>
-                          Applicable Canadian sales tax, plus any UPS
-                          brokerage, disbursement, clearance or processing
-                          fees. Customs duty may be 0% where CETA treatment
-                          is accepted.
-                        </td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
-              </section>
-
-              <section
-                class="policy-section"
-                id="tracking"
-              >
-                <div class="policy-section__eyebrow">
-                  Order status
-                </div>
-
-                <h2>Tracking</h2>
-
-                <p>
-                  A shipping confirmation is sent when the order has been
-                  dispatched. If the selected shipping method includes
-                  tracking, the confirmation will contain the tracking link
-                  or tracking number.
-                </p>
-
-                <p>
-                  Tracking updates may pause while a shipment is travelling
-                  between countries or undergoing customs processing.
-                </p>
-
-                <p>
-                  Some postal shipments receive a new local tracking event
-                  when they are transferred to USPS, Canada Post or another
-                  destination-country postal operator.
-                </p>
-              </section>
-
-              <section
-                class="policy-section"
-                id="delivery-issues"
-              >
-                <div class="policy-section__eyebrow">
-                  Problems
-                </div>
-
-                <h2>Delivery issues</h2>
-
-                <h3>Incorrect or incomplete address</h3>
-
-                <p>
-                  Customers are responsible for providing a complete and
-                  accurate delivery address. Contact DRYE as soon as possible
-                  if the address needs to be corrected.
-                </p>
-
-                <p>
-                  Once an order has been dispatched, an address change may no
-                  longer be possible.
-                </p>
-
-                <h3>Unexpected import charge</h3>
-
-                <p>
-                  If a carrier requests payment even though the selected
-                  shipping method was marked
-                  <strong>Import charges included</strong>,
-                  <strong>PDDP</strong> or <strong>DDP</strong>,
-                  pay the charge if necessary to prevent the package from
-                  being returned.
-                </p>
-
-                <p>
-                  Send DRYE a copy of the complete customs or carrier receipt,
-                  including the tracking number and a breakdown of duty,
-                  taxes and carrier fees. DRYE will review whether the charge
-                  should have been prepaid under the selected shipping method.
-                </p>
-
-                <h3>DAP charges</h3>
-
-                <p>
-                  Import charges assessed on a UPS DAP shipment are the
-                  responsibility of the recipient. Refusing or failing to pay
-                  these charges may result in delay, return or abandonment of
-                  the shipment.
-                </p>
-
-                <h3>Delayed or missing delivery</h3>
-
-                <p>
-                  Contact DRYE if the tracking has not updated for an extended
-                  period or the shipment has passed the estimated delivery
-                  window.
-                </p>
-
-                <p>
-                  DRYE may need to open an investigation with the carrier
-                  before a shipment can be treated as lost.
-                </p>
-
-                <h3>Final customs assessment</h3>
-
-                <p>
-                  Customs authorities and carriers make the final assessment
-                  of classification, value, origin, duty, tax and processing
-                  fees. Rates, thresholds, exchange rates and carrier fees may
-                  change.
-                </p>
-              </section>
-
-            </div>
-
-            <div
-              class="policy-panel"
-              id="panel-returns"
-            >
-              {{ block.settings.returns_html }}
-            </div>
-
-            <div
-              class="policy-panel"
-              id="panel-privacy"
-            >
-              {{ block.settings.privacy_html }}
-            </div>
-
-            <div
-              class="policy-panel"
-              id="panel-terms"
-            >
-              {{ block.settings.terms_html }}
-            </div>
-
+          <div class="policy-panel active" id="panel-shipping">
+            {{ block.settings.shipping_html }}
           </div>
+
+          <div class="policy-panel" id="panel-returns">
+            {{ block.settings.returns_html }}
+          </div>
+
+          <div class="policy-panel" id="panel-privacy">
+            {{ block.settings.privacy_html }}
+          </div>
+
+          <div class="policy-panel" id="panel-terms">
+            {{ block.settings.terms_html }}
+          </div>
+
+        </div>
 
       {% endcase %}
     {% endfor %}
@@ -703,6 +88,11 @@
       "settings": [
         {
           "type": "html",
+          "id": "shipping_html",
+          "label": "Shipping HTML"
+        },
+        {
+          "type": "html",
           "id": "returns_html",
           "label": "Returns HTML"
         },
@@ -723,12 +113,8 @@
     {
       "name": "DRYE Policy Layout",
       "blocks": [
-        {
-          "type": "side_nav"
-        },
-        {
-          "type": "content"
-        }
+        { "type": "side_nav" },
+        { "type": "content" }
       ]
     }
   ]
