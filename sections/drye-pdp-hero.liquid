@@ -514,7 +514,15 @@ assign review_count = section.settings.review_count_fallback
         </button>
         <div class="step2__panel" id="step2panel-{{ section.id }}"><div class="step2__inner">
           <div class="vtl">
-            {% for block in section.blocks %}{% if block.type == 'timeline_row' %}<div class="vtl__row" {{ block.shopify_attributes }}><span class="vtl__mark">{{ block.settings.marker }}</span><span class="vtl__out">{{ block.settings.outcome }}</span></div>{% endif %}{% endfor %}
+            {% assign timeline_rows = section.blocks | where: 'type', 'timeline_row' %}
+            {% if timeline_rows.size > 0 %}
+              {% for block in timeline_rows %}<div class="vtl__row" {{ block.shopify_attributes }}><span class="vtl__mark">{{ block.settings.marker }}</span><span class="vtl__out">{{ block.settings.outcome }}</span></div>{% endfor %}
+            {% else %}
+              <div class="vtl__row"><span class="vtl__mark">Day 1</span><span class="vtl__out">Peel the glove at lunch. Hands dry.</span></div>
+              <div class="vtl__row"><span class="vtl__mark">Week 1</span><span class="vtl__out">Nitriles stop tearing. Fewer glove changes.</span></div>
+              <div class="vtl__row"><span class="vtl__mark">Month 1</span><span class="vtl__out">The cream tube stops emptying.</span></div>
+              <div class="vtl__row"><span class="vtl__mark">Month 6–12</span><span class="vtl__out">Still the same pair.</span></div>
+            {% endif %}
           </div>
         </div></div>
       </div>
@@ -884,6 +892,22 @@ assign review_count = section.settings.review_count_fallback
             }
           });
         });
+
+        // "See the FAQ below" links inside the accordion — scroll DOWN to the FAQ tabs
+        sectionEl.addEventListener('click', function (e) {
+          var link = e.target.closest ? e.target.closest('.acc__body a') : null;
+          if (!link) { return; }
+          var href = link.getAttribute('href') || '';
+          var wantsFaq = href.indexOf('#drye-faq') !== -1 || (href === '#' && /faq/i.test(link.textContent || ''));
+          if (!wantsFaq) { return; }
+          var faqSection = document.getElementById('drye-faq');
+          if (!faqSection) { return; }
+          e.preventDefault();
+          // Make sure the FAQ tab is the one showing before we land there
+          var faqTab = faqSection.querySelector('.tab-btn[data-tab="faq"]');
+          if (faqTab && faqTab.getAttribute('aria-selected') !== 'true') { faqTab.click(); }
+          faqSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        });
       })();
     </script>
 
@@ -909,7 +933,7 @@ assign review_count = section.settings.review_count_fallback
 {% assign review_block = section.blocks | where: 'type', 'review_slider' | first %}
 
 {% if faq_blocks.size > 0 or wte_blocks.size > 0 or review_block %}
-  <section class="tabs-section" data-drye-tabs>
+  <section class="tabs-section" id="drye-faq" data-drye-tabs>
     <div class="inner">
 
       <div class="tab-nav" role="tablist">
@@ -2383,7 +2407,7 @@ wteTimelines.forEach((timeline) => {
       "type": "richtext",
       "id": "acc_shipping_body",
       "label": "Accordion — Shipping And Returns body",
-      "default": "<h5>The Glove-Off Test — 30 days</h5><p>Wear them one full shift under your sealed glove. If your skin isn't drier when the glove comes off, keep the liners and we refund every dollar. Sending a worn pair back from the US costs more than the pair is worth. No forms, no return shipping.</p><h5>Wrong size?</h5><p>If you measured against our guide and it still doesn't fit, we ship the correct size at no cost.</p><h5>Ships from Sweden</h5><p>10–14 business days to the US with PostNord, no import charges at delivery. UPS is faster but the recipient pays brokerage and duty.</p><p><a href=\"#\">Full shipping and returns policy → See the FAQ below</a></p>"
+      "default": "<h5>The Glove-Off Test — 30 days</h5><p>Wear them one full shift under your sealed glove. If your skin isn't drier when the glove comes off, keep the liners and we refund every dollar. Sending a worn pair back from the US costs more than the pair is worth. No forms, no return shipping.</p><h5>Wrong size?</h5><p>If you measured against our guide and it still doesn't fit, we ship the correct size at no cost.</p><h5>Ships from Sweden</h5><p>10–14 business days to the US with PostNord, no import charges at delivery. UPS is faster but the recipient pays brokerage and duty.</p><p><a href=\"#drye-faq\">Full shipping and returns policy → See the FAQ below</a></p>"
     },
     {
       "type": "header",

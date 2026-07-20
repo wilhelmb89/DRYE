@@ -2055,7 +2055,7 @@
   transform: translateY(-50%);
   width: 10px;
   height: 6px;
-  color: var(--caption);
+  color: #fff;
   transition: transform 0.28s ease;
 }
 .hero .step2__btn[aria-expanded="true"] .step2__chev { transform: translateY(-50%) rotate(180deg); }
@@ -2080,7 +2080,7 @@
   color: var(--muted);
   white-space: nowrap;
 }
-.hero .vtl__out { font-size: 13px; color: var(--body); line-height: 1.35; }
+.hero .vtl__out { font-size: 14px; color: var(--body); line-height: 1.35; }
 @media (max-width: 360px) {
   .hero .vtl__row { grid-template-columns: 1fr; gap: 2px; }
   .hero .vtl__mark { font-size: 9.5px; }
@@ -2127,10 +2127,10 @@
 .hero .acc__panel { display: grid; grid-template-rows: 0fr; transition: grid-template-rows 0.3s ease; }
 .hero .acc__panel.open { grid-template-rows: 1fr; }
 .hero .acc__inner { overflow: hidden; }
-.hero .acc__body { padding: 2px 2px 18px; font-size: 12.5px; line-height: 1.6; color: var(--body); }
+.hero .acc__body { padding: 2px 2px 18px; font-size: 14px; line-height: 1.6; color: var(--body); }
 .hero .acc__body h5 {
   font-family: var(--font-display);
-  font-size: 12px;
+  font-size: 14px;
   font-weight: 600;
   color: var(--deep);
   margin: 14px 0 4px;
@@ -2139,7 +2139,7 @@
 .hero .acc__body p { margin: 0 0 10px; }
 .hero .acc__body p:last-child { margin-bottom: 0; }
 .hero .acc__body a { color: var(--emerald); text-decoration: none; font-weight: 500; }
-.hero .acc__body .fn { font-size: 11px; color: var(--caption); margin: 0; }
+.hero .acc__body .fn { font-size: 14px; color: var(--caption); margin: 0; }
 .hero .acc__link { margin: 12px 0 0; }
 .hero .acc__link-btn {
   background: none;
@@ -2148,12 +2148,12 @@
   margin: 0;
   cursor: pointer;
   font-family: var(--font-body);
-  font-size: 12.5px;
+  font-size: 14px;
   color: var(--emerald);
   font-weight: 500;
   text-align: left;
 }
-.hero .acc__empty { font-size: 12px; color: var(--caption); font-style: italic; }
+.hero .acc__empty { font-size: 14px; color: var(--caption); font-style: italic; }
 .hero .acc__sources { font-size: 10.5px; color: var(--caption); line-height: 1.5; margin: 12px 0 0; }
 
 /* Specifications — technical datasheet */
