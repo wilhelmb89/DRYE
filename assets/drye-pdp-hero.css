@@ -601,14 +601,14 @@
   display: flex;
   align-items: baseline;
   gap: 10px;
-  margin-bottom: 18px;
+  margin-bottom: 8px;
   flex-wrap: wrap;
 }
 
 .hero .price {
   font-family: "Clash Grotesk", sans-serif;
   font-size: 26px;
-  font-weight: 600;
+  font-weight: 700;
   color: var(--deep);
   letter-spacing: -0.02em;
 }
@@ -1759,7 +1759,7 @@
 .hero .h-title { margin-bottom: 10px; }
 .hero .h-sub { margin-bottom: 12px; font-size: 13px; color: var(--muted); line-height: 1.65; }
 .hero .pdp-readmore { margin-bottom: 16px; }
-.hero .price-row { margin-bottom: 12px; }
+.hero .price-row { margin-bottom: 8px; }
 .hero .buy-block { margin-bottom: 12px; }
 .hero .qty-block { margin-bottom: 12px; }
 .hero .value-card { margin-bottom: 14px; }
@@ -2080,18 +2080,21 @@
   color: var(--muted);
   white-space: nowrap;
 }
-.hero .vtl__out { font-size: 14px; color: var(--body); line-height: 1.35; }
+.hero .vtl__out { font-size: 15px; color: var(--body); line-height: 1.35; }
 @media (max-width: 360px) {
   .hero .vtl__row { grid-template-columns: 1fr; gap: 2px; }
   .hero .vtl__mark { font-size: 9.5px; }
 }
 
-/* Per-month — single line */
+/* Per-month — two lines */
 .hero .permo {
+  margin: 0 0 16px;
+}
+.hero .permo-line {
   font-size: 11.5px;
   color: var(--muted);
-  margin: 6px 0 0;
-  line-height: 1.4;
+  margin: 0;
+  line-height: 1.5;
 }
 
 /* Bottom accordion */
@@ -2127,10 +2130,10 @@
 .hero .acc__panel { display: grid; grid-template-rows: 0fr; transition: grid-template-rows 0.3s ease; }
 .hero .acc__panel.open { grid-template-rows: 1fr; }
 .hero .acc__inner { overflow: hidden; }
-.hero .acc__body { padding: 2px 2px 18px; font-size: 14px; line-height: 1.6; color: var(--body); }
+.hero .acc__body { padding: 2px 2px 18px; font-size: 15px; line-height: 1.6; color: var(--body); }
 .hero .acc__body h5 {
   font-family: var(--font-display);
-  font-size: 14px;
+  font-size: 15px;
   font-weight: 600;
   color: var(--deep);
   margin: 14px 0 4px;
@@ -2139,7 +2142,7 @@
 .hero .acc__body p { margin: 0 0 10px; }
 .hero .acc__body p:last-child { margin-bottom: 0; }
 .hero .acc__body a { color: var(--emerald); text-decoration: none; font-weight: 500; }
-.hero .acc__body .fn { font-size: 14px; color: var(--caption); margin: 0; }
+.hero .acc__body .fn { font-size: 15px; color: var(--caption); margin: 0; }
 .hero .acc__link { margin: 12px 0 0; }
 .hero .acc__link-btn {
   background: none;
@@ -2148,12 +2151,12 @@
   margin: 0;
   cursor: pointer;
   font-family: var(--font-body);
-  font-size: 14px;
+  font-size: 15px;
   color: var(--emerald);
   font-weight: 500;
   text-align: left;
 }
-.hero .acc__empty { font-size: 14px; color: var(--caption); font-style: italic; }
+.hero .acc__empty { font-size: 15px; color: var(--caption); font-style: italic; }
 .hero .acc__sources { font-size: 10.5px; color: var(--caption); line-height: 1.5; margin: 12px 0 0; }
 
 /* Specifications — technical datasheet */

@@ -49,27 +49,6 @@
   color: var(--deep, #1E3A4C);
 }
 
-/* ---- Guarantee line (bottom of the ticker block) ---------------------- */
-
-.hero .drye-proof__guarantee {
-  display: flex;
-  align-items: flex-start;
-  gap: 7px;
-  margin-top: 12px;
-  padding-top: 11px;
-  border-top: 1px solid #E5E5E5;
-  font-family: "DM Sans", sans-serif;
-  font-size: 12.5px;
-  font-weight: 500;
-  line-height: 1.4;
-  color: var(--deep, #1E3A4C);
-}
-
-.hero .drye-proof__guarantee .drye-proof__check {
-  margin-top: 1px;
-  color: var(--emerald, #0D9488);
-}
-
 /* ---- Ticker ------------------------------------------------------------ */
 
 .hero .drye-proof__tlabel {

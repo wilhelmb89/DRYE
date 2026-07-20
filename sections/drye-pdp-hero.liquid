@@ -256,7 +256,7 @@ assign review_count = section.settings.review_count_fallback
     </h1>
 
     <div class="h-sub">
-      {{ section.settings.subtext }}
+      <p>Add one <span style="text-decoration:underline">dry layer</span> under your gloves.<br>Cotton absorbs. DRYE routes it out.</p>
     </div>
 
     {% assign size_option_position = blank %}
@@ -542,7 +542,10 @@ assign review_count = section.settings.review_count_fallback
         {%- assign cpm_suffix = section.settings.cpm_month_suffix | default: 'mo' -%}
         {%- assign cpm_note_low = section.settings.cpm_note_low -%}
         {%- assign cpm_note_high = section.settings.cpm_note_high -%}
-        <p class="permo" data-cpm hidden>About <span data-cpm-price="{{ cpm_low }}"></span>/{{ cpm_suffix }} over {{ cpm_low }} months of heavy shop use · <span data-cpm-price="{{ cpm_high }}"></span>/{{ cpm_suffix }} over {{ cpm_high }}</p>
+        <div class="permo" data-cpm hidden>
+          <p class="permo-line">About <span data-cpm-price="{{ cpm_low }}"></span>/{{ cpm_suffix }} over six months of heavy use</p>
+          <p class="permo-line">About <span data-cpm-price="{{ cpm_high }}"></span>/{{ cpm_suffix }} over twelve months of light use</p>
+        </div>
       {% endif %}
 
       <button
@@ -608,14 +611,12 @@ assign review_count = section.settings.review_count_fallback
     endfor
   %}
   <section class="drye-proof" data-drye-proof-module aria-label="Worker proof">
-    {% if section.settings.proof_returns_line != blank %}
-      <div class="drye-proof__line">
-        <svg class="drye-proof__check" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-          <path d="M3 8.4l3 3 7-7.6" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-        <span class="drye-proof__returns">{{ section.settings.proof_returns_line }}</span>
-      </div>
-    {% endif %}
+    <div class="drye-proof__line">
+      <svg class="drye-proof__check" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <path d="M3 8.4l3 3 7-7.6" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      <span class="drye-proof__returns">30 shifts. If your hands aren't dry at lunch, keep the liners and get your money back.</span>
+    </div>
     {% if section.settings.proof_keep_line != blank %}
       <div class="drye-proof__keep">{{ section.settings.proof_keep_line }}</div>
     {% endif %}
@@ -698,15 +699,6 @@ assign review_count = section.settings.review_count_fallback
       </div>
     {% endif %}
 
-    {% assign proof_guarantee = section.settings.proof_guarantee_line | default: section.settings.atc_undernote %}
-    {% if proof_guarantee != blank %}
-      <div class="drye-proof__guarantee">
-        <svg class="drye-proof__check" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-          <path d="M3 8.4l3 3 7-7.6" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-        <span>{{ proof_guarantee }}</span>
-      </div>
-    {% endif %}
   </section>
 
   <script>
@@ -2084,13 +2076,6 @@ wteTimelines.forEach((timeline) => {
       "id": "proof_ticker_label",
       "label": "Ticker label",
       "default": "Recent worker comments on instagram"
-    },
-    {
-      "type": "text",
-      "id": "proof_guarantee_line",
-      "label": "Guarantee line (bottom of ticker)",
-      "info": "Shows as a check line under the comment ticker. Falls back to the under-ATC guarantee if left blank.",
-      "default": "30 shifts. If your hands aren't dry at lunch, keep the liners and get your money back."
     },
     {
       "type": "text",
