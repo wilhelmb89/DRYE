@@ -178,3 +178,45 @@
   transition:background .15s;
 }
 .btn-shop:hover{background:#0b837b;}
+
+/* ─── SHORTCUT + GUARANTEE (top of drawer) ────────────────── */
+.sg-top{padding:20px 24px 4px;}
+.sg-shortcut{
+  font-size:13px;font-weight:600;color:var(--deep);
+  margin:0 0 10px;line-height:1.45;
+}
+.sg-guarantee{
+  margin:0;padding:11px 14px;
+  background:rgba(13,148,136,.07);
+  border:1px solid rgba(13,148,136,.22);
+  border-radius:8px;
+  font-size:12.5px;color:#0b7d72;font-weight:500;line-height:1.5;
+}
+.sg-guarantee p{margin:0;}
+
+/* ─── GLOVE-TYPE TOGGLE ───────────────────────────────────── */
+.glove-toggle{margin-bottom:16px;}
+.glove-toggle[hidden]{display:none;}
+.glove-toggle__q{
+  font-size:9px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--caption);margin:0 0 7px;
+}
+.seg{
+  display:inline-flex;align-items:center;
+  background:var(--bg-tint);border:1.5px solid var(--border);
+  width:fit-content;
+}
+.seg-btn{
+  font-size:10px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;
+  color:var(--caption);padding:7px 14px;background:none;border:none;cursor:pointer;
+  transition:color .15s,background .15s;
+}
+.seg-btn[aria-pressed="true"]{background:var(--deep);color:#fff;}
+
+/* ─── TABLE CELL VARIANTS (numbers-only, optional glove col) ─ */
+.size-table th.h-glove,
+.size-table td.st-glove{text-align:left;}
+.size-table td.st-size{text-align:left;color:var(--deep);font-weight:600;white-space:nowrap;}
+.size-table td.st-glove{color:var(--body);}
+.size-table td.st-glove.empty{color:var(--caption);}
+.size-table td.st-circ{text-align:right;color:var(--muted);white-space:nowrap;}

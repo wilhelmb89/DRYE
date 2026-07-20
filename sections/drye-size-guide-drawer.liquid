@@ -2,15 +2,29 @@
   assign section_id = 'drye-size-guide-' | append: section.id
   assign default_heading = 'Size Guide'
   assign default_diag_label = 'How to measure'
-  assign default_length_label = 'Length'
-  assign default_length_desc = 'Wrist crease to tip of middle finger'
-  assign default_circ_label = 'Circumference'
-  assign default_circ_desc = 'Around the hand, just below the knuckles'
-  assign default_tip_html = '<strong>Between sizes?</strong> The liner is thin and stretchable. Hand circumference is typically the best guide for a comfortable fit — size up if unsure.'
+  assign default_circ_label = 'Hand circumference'
+  assign default_circ_desc = 'Measure around your palm, below the knuckles, without the thumb. This decides your size.'
+  assign default_tip_html = '<strong>Between sizes?</strong> The liner is thin and stretchable. Hand circumference is the best guide for a comfortable fit — size up if unsure.'
   assign default_footer_label = "Still unsure? We'll help —"
   assign default_email = 'info@drye.se'
   assign default_cta_label = 'Shop DRYE Liners →'
   assign default_cta_link = '#'
+
+  assign default_shortcut_nitrile = 'Most people order the same number as their nitrile.'
+  assign default_shortcut_hv = 'HV gloves run loose. Order one size up from your HV size.'
+  assign default_guarantee = 'Wrong size? If you measured against our guide and it still doesn’t fit, we ship the correct size at no cost.'
+  assign default_glove_q = 'Which gloves do you wear?'
+  assign default_glove_nitrile = 'Nitrile'
+  assign default_glove_hv = 'HV / Class 0'
+  assign default_head_nitrile = 'Your nitrile'
+  assign default_head_hv = 'Your HV glove'
+  assign default_head_size = 'DRYE Size'
+  assign default_head_circ = 'Hand circumference'
+  assign default_size_word = 'Size'
+
+  assign head_size = section.settings.table_heading_size | default: default_head_size
+  assign head_circ = section.settings.table_heading_circ | default: default_head_circ
+  assign size_word = section.settings.size_word | default: default_size_word
 %}
 
 {{ 'section-drye-size-guide-drawer.css' | asset_url | stylesheet_tag }}
@@ -30,6 +44,15 @@
   role="dialog"
   aria-modal="true"
   aria-label="{{ section.settings.drawer_aria_label | escape }}"
+  data-glove="nitrile"
+  data-unit="mm"
+  data-shortcut-nitrile="{{ section.settings.shortcut_nitrile | default: default_shortcut_nitrile | escape }}"
+  data-shortcut-hv="{{ section.settings.shortcut_hv | default: default_shortcut_hv | escape }}"
+  data-head-nitrile="{{ section.settings.glove_head_nitrile | default: default_head_nitrile | escape }}"
+  data-head-hv="{{ section.settings.glove_head_hv | default: default_head_hv | escape }}"
+  data-head-size="{{ head_size | escape }}"
+  data-head-circ="{{ head_circ | escape }}"
+  data-size-word="{{ size_word | escape }}"
 >
 
   <!-- HEADER -->
@@ -46,7 +69,16 @@
   <!-- BODY -->
   <div class="drawer-body">
 
-    <!-- DIAGRAM -->
+    <!-- SHORTCUT + GUARANTEE (top) -->
+    <div class="sg-top">
+      <p class="sg-shortcut" id="{{ section_id }}-shortcut">{{ section.settings.shortcut_nitrile | default: default_shortcut_nitrile }}</p>
+      {% assign sg_guarantee = section.settings.guarantee_text | default: default_guarantee %}
+      {% if sg_guarantee != blank %}
+        <div class="sg-guarantee">{{ sg_guarantee }}</div>
+      {% endif %}
+    </div>
+
+    <!-- DIAGRAM (circumference only) -->
     <div class="diagram-section">
       <span class="diag-label">{{ section.settings.diagram_label | default: default_diag_label }}</span>
       <div class="diag-wrap">
@@ -64,12 +96,8 @@
   {% endif %}
 </div>
 
-        <!-- Callouts -->
+        <!-- Callout — circumference decides the size -->
         <div class="diag-callouts">
-          <div class="diag-callout">
-            <div class="dc-name length"><span class="dc-dot length"></span>{{ section.settings.length_label | default: default_length_label }}</div>
-            <p class="dc-desc">{{ section.settings.length_desc | default: default_length_desc }}</p>
-          </div>
           <div class="diag-callout">
             <div class="dc-name circ"><span class="dc-dot circ"></span>{{ section.settings.circ_label | default: default_circ_label }}</div>
             <p class="dc-desc">{{ section.settings.circ_desc | default: default_circ_desc }}</p>
@@ -80,6 +108,27 @@
 
     <!-- TABLE -->
     <div class="table-section">
+
+      <!-- Glove-type toggle (hidden until glove data is filled in) -->
+      <div class="glove-toggle" id="{{ section_id }}-glove-toggle" hidden>
+        <p class="glove-toggle__q">{{ section.settings.glove_q | default: default_glove_q }}</p>
+        <div class="seg" role="group" aria-label="{{ section.settings.glove_q | default: default_glove_q | escape }}">
+          <button
+            class="seg-btn"
+            type="button"
+            data-glove="nitrile"
+            aria-pressed="true"
+            onclick="window.DryeSizeGuideDrawer && window.DryeSizeGuideDrawer.setGlove('{{ section_id }}', 'nitrile', this)"
+          >{{ section.settings.glove_nitrile_label | default: default_glove_nitrile }}</button>
+          <button
+            class="seg-btn"
+            type="button"
+            data-glove="hv"
+            aria-pressed="false"
+            onclick="window.DryeSizeGuideDrawer && window.DryeSizeGuideDrawer.setGlove('{{ section_id }}', 'hv', this)"
+          >{{ section.settings.glove_hv_label | default: default_glove_hv }}</button>
+        </div>
+      </div>
 
       <!-- Unit toggle -->
       <div class="unit-toggle">
@@ -97,16 +146,26 @@
 
       <table class="size-table" id="{{ section_id }}-size-table">
         <thead>
-          <tr>
-            <th>{{ section.settings.table_heading_size }}</th>
-            <th>{{ section.settings.table_heading_length }}</th>
-            <th>{{ section.settings.table_heading_circ }}</th>
-          </tr>
+          <tr id="{{ section_id }}-thead-row"><!-- filled by JS --></tr>
         </thead>
         <tbody id="{{ section_id }}-table-body">
           <!-- filled by JS -->
         </tbody>
       </table>
+
+      <noscript>
+        <table class="size-table">
+          <thead><tr><th>{{ head_size }}</th><th>{{ head_circ }}</th></tr></thead>
+          <tbody>
+            {% for block in section.blocks %}
+              <tr>
+                <td class="st-size">{{ size_word }} {{ block.settings.size }}</td>
+                <td class="st-circ">{{ block.settings.circ_min_mm }}–{{ block.settings.circ_max_mm }} mm</td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </noscript>
     </div>
 
     <!-- TIP -->
@@ -147,9 +206,9 @@
           {% for block in section.blocks %}
             {
               size: {{ block.settings.size | json }},
-              label: {{ block.settings.label | json }},
-              lengthMM: [{{ block.settings.length_min_mm | default: 0 }}, {{ block.settings.length_max_mm | default: 0 }}],
-              circMM: [{{ block.settings.circ_min_mm | default: 0 }}, {{ block.settings.circ_max_mm | default: 0 }}]
+              circMM: [{{ block.settings.circ_min_mm | default: 0 }}, {{ block.settings.circ_max_mm | default: 0 }}],
+              nitrile: {{ block.settings.nitrile_val | default: '' | json }},
+              hv: {{ block.settings.hv_val | default: '' | json }}
             }{% unless forloop.last %},{% endunless %}
           {% endfor %}
         ]
@@ -158,32 +217,75 @@
       return sizeMap[sectionId] || [];
     },
 
+    activeGloveKey(sizes, chosen) {
+      const anyN = sizes.some(function(s) { return (s.nitrile || '').trim() !== ''; });
+      const anyH = sizes.some(function(s) { return (s.hv || '').trim() !== ''; });
+      if (anyN && anyH) return chosen || 'nitrile';
+      if (anyN) return 'nitrile';
+      if (anyH) return 'hv';
+      return null;
+    },
+
     renderTable(sectionId, unit) {
+      const drawer = document.getElementById(sectionId + '-drawer');
+      const theadRow = document.getElementById(sectionId + '-thead-row');
       const tbody = document.getElementById(sectionId + '-table-body');
-      if (!tbody) return;
+      if (!drawer || !theadRow || !tbody) return;
 
+      const ds = drawer.dataset;
       const sizes = this.getSizes(sectionId);
+      const anyN = sizes.some(function(s) { return (s.nitrile || '').trim() !== ''; });
+      const anyH = sizes.some(function(s) { return (s.hv || '').trim() !== ''; });
+      const showToggle = anyN && anyH;
+      const gkey = this.activeGloveKey(sizes, ds.glove);
 
+      // Glove toggle visibility + pressed state
+      const toggle = document.getElementById(sectionId + '-glove-toggle');
+      if (toggle) {
+        toggle.hidden = !showToggle;
+        toggle.querySelectorAll('.seg-btn').forEach(function(b) {
+          b.setAttribute('aria-pressed', b.getAttribute('data-glove') === gkey ? 'true' : 'false');
+        });
+      }
+
+      // Shortcut line follows the active glove (defaults to nitrile copy)
+      const shortcut = document.getElementById(sectionId + '-shortcut');
+      if (shortcut) {
+        const txt = gkey === 'hv' ? ds.shortcutHv : ds.shortcutNitrile;
+        if (txt) shortcut.textContent = txt;
+      }
+
+      // Header — glove column first (only when a glove column is shown)
+      let head = '';
+      if (gkey) {
+        head += '<th class="h-glove">' + (gkey === 'hv' ? ds.headHv : ds.headNitrile) + '</th>';
+      }
+      head += '<th>' + ds.headSize + '</th><th>' + ds.headCirc + '</th>';
+      theadRow.innerHTML = head;
+
+      // Body
+      const sizeWord = ds.sizeWord || 'Size';
       tbody.innerHTML = sizes.map(function(s) {
-        const l = unit === 'mm'
-          ? s.lengthMM[0] + '–' + s.lengthMM[1]
-          : window.DryeSizeGuideDrawer.mmToIn(s.lengthMM[0]) + '–' + window.DryeSizeGuideDrawer.mmToIn(s.lengthMM[1]);
-
         const c = unit === 'mm'
-          ? s.circMM[0] + '–' + s.circMM[1]
-          : window.DryeSizeGuideDrawer.mmToIn(s.circMM[0]) + '–' + window.DryeSizeGuideDrawer.mmToIn(s.circMM[1]);
+          ? s.circMM[0] + '–' + s.circMM[1] + ' mm'
+          : window.DryeSizeGuideDrawer.mmToIn(s.circMM[0]) + '–' + window.DryeSizeGuideDrawer.mmToIn(s.circMM[1]) + '"';
 
-        return '<tr>' +
-          '<td><span class="size-name">' + s.size + '</span><span class="size-abbr">' + s.label + '</span></td>' +
-          '<td>' + l + '</td>' +
-          '<td>' + c + '</td>' +
-        '</tr>';
+        let cells = '';
+        if (gkey) {
+          const v = ((gkey === 'hv' ? s.hv : s.nitrile) || '').trim();
+          cells += '<td class="st-glove' + (v ? '' : ' empty') + '">' + (v || '—') + '</td>';
+        }
+        cells += '<td class="st-size">' + sizeWord + ' ' + s.size + '</td>' +
+                 '<td class="st-circ">' + c + '</td>';
+        return '<tr>' + cells + '</tr>';
       }).join('');
     },
 
     setUnit(sectionId, unit, btn) {
       const drawer = document.getElementById(sectionId + '-drawer');
       if (!drawer) return;
+
+      drawer.dataset.unit = unit;
 
       drawer.querySelectorAll('.unit-btn').forEach(function(button) {
         button.classList.remove('active');
@@ -192,6 +294,14 @@
       if (btn) btn.classList.add('active');
 
       this.renderTable(sectionId, unit);
+    },
+
+    setGlove(sectionId, glove, btn) {
+      const drawer = document.getElementById(sectionId + '-drawer');
+      if (!drawer) return;
+
+      drawer.dataset.glove = glove;
+      this.renderTable(sectionId, drawer.dataset.unit || 'mm');
     },
 
     open(sectionId) {
@@ -257,7 +367,14 @@
     init(sectionId) {
       this.bindEscape();
       this.bindExternalTriggers();
-      this.renderTable(sectionId, 'mm');
+      const drawer = document.getElementById(sectionId + '-drawer');
+      if (drawer) {
+        if (!drawer.dataset.unit) drawer.dataset.unit = 'mm';
+        if (!drawer.dataset.glove) drawer.dataset.glove = 'nitrile';
+        this.renderTable(sectionId, drawer.dataset.unit);
+      } else {
+        this.renderTable(sectionId, 'mm');
+      }
     }
   };
 
@@ -326,13 +443,72 @@
       "type": "text",
       "id": "circ_label",
       "label": "Circumference label",
-      "default": "Circumference"
+      "default": "Hand circumference"
     },
     {
       "type": "text",
       "id": "circ_desc",
       "label": "Circumference description",
-      "default": "Around the hand, just below the knuckles"
+      "default": "Measure around your palm, below the knuckles, without the thumb. This decides your size."
+    },
+    {
+      "type": "header",
+      "content": "Shortcut, guarantee & glove toggle"
+    },
+    {
+      "type": "text",
+      "id": "size_word",
+      "label": "Size word prefix",
+      "info": "Prefix shown before each size number, e.g. \"Size 8\".",
+      "default": "Size"
+    },
+    {
+      "type": "text",
+      "id": "shortcut_nitrile",
+      "label": "Shortcut line — nitrile",
+      "default": "Most people order the same number as their nitrile."
+    },
+    {
+      "type": "text",
+      "id": "shortcut_hv",
+      "label": "Shortcut line — HV",
+      "default": "HV gloves run loose. Order one size up from your HV size."
+    },
+    {
+      "type": "richtext",
+      "id": "guarantee_text",
+      "label": "Guarantee line (top of drawer)",
+      "default": "<p>Wrong size? If you measured against our guide and it still doesn’t fit, we ship the correct size at no cost.</p>"
+    },
+    {
+      "type": "text",
+      "id": "glove_q",
+      "label": "Glove toggle question",
+      "default": "Which gloves do you wear?"
+    },
+    {
+      "type": "text",
+      "id": "glove_nitrile_label",
+      "label": "Glove toggle — nitrile label",
+      "default": "Nitrile"
+    },
+    {
+      "type": "text",
+      "id": "glove_hv_label",
+      "label": "Glove toggle — HV label",
+      "default": "HV / Class 0"
+    },
+    {
+      "type": "text",
+      "id": "glove_head_nitrile",
+      "label": "Glove column header — nitrile",
+      "default": "Your nitrile"
+    },
+    {
+      "type": "text",
+      "id": "glove_head_hv",
+      "label": "Glove column header — HV",
+      "default": "Your HV glove"
     },
     {
       "type": "text",
@@ -350,19 +526,13 @@
       "type": "text",
       "id": "table_heading_size",
       "label": "Table heading: Size",
-      "default": "Size"
-    },
-    {
-      "type": "text",
-      "id": "table_heading_length",
-      "label": "Table heading: Length",
-      "default": "Length"
+      "default": "DRYE Size"
     },
     {
       "type": "text",
       "id": "table_heading_circ",
       "label": "Table heading: Circumference",
-      "default": "Circumference"
+      "default": "Hand circumference"
     },
     {
       "type": "richtext",
@@ -434,6 +604,18 @@
           "id": "circ_max_mm",
           "label": "Circumference max (mm)",
           "default": 214
+        },
+        {
+          "type": "text",
+          "id": "nitrile_val",
+          "label": "Nitrile glove size (optional)",
+          "info": "Fill this to show a \"Your nitrile\" column. Leave blank on every row to hide it."
+        },
+        {
+          "type": "text",
+          "id": "hv_val",
+          "label": "HV / Class 0 glove size (optional)",
+          "info": "Fill this to show a \"Your HV glove\" column. Leave blank on every row to hide it."
         }
       ]
     }
@@ -443,14 +625,14 @@
     {
       "name": "DRYE Size Guide Drawer",
       "blocks": [
-        { "type": "size_row", "settings": { "size": "5", "label": "XXS", "length_min_mm": 158, "length_max_mm": 167, "circ_min_mm": 178, "circ_max_mm": 187 } },
-        { "type": "size_row", "settings": { "size": "6", "label": "XS", "length_min_mm": 167, "length_max_mm": 176, "circ_min_mm": 187, "circ_max_mm": 196 } },
+        { "type": "size_row", "settings": { "size": "5", "label": "XXS", "length_min_mm": 163, "length_max_mm": 171, "circ_min_mm": 183, "circ_max_mm": 189 } },
+        { "type": "size_row", "settings": { "size": "6", "label": "XS", "length_min_mm": 171, "length_max_mm": 179, "circ_min_mm": 189, "circ_max_mm": 196 } },
         { "type": "size_row", "settings": { "size": "7", "label": "S", "length_min_mm": 176, "length_max_mm": 185, "circ_min_mm": 196, "circ_max_mm": 205 } },
         { "type": "size_row", "settings": { "size": "8", "label": "M", "length_min_mm": 185, "length_max_mm": 194, "circ_min_mm": 205, "circ_max_mm": 214 } },
         { "type": "size_row", "settings": { "size": "9", "label": "L", "length_min_mm": 194, "length_max_mm": 203, "circ_min_mm": 214, "circ_max_mm": 223 } },
         { "type": "size_row", "settings": { "size": "10", "label": "XL", "length_min_mm": 203, "length_max_mm": 212, "circ_min_mm": 223, "circ_max_mm": 232 } },
         { "type": "size_row", "settings": { "size": "11", "label": "XXL", "length_min_mm": 212, "length_max_mm": 219, "circ_min_mm": 232, "circ_max_mm": 241 } },
-        { "type": "size_row", "settings": { "size": "12", "label": "XXXL", "length_min_mm": 221, "length_max_mm": 230, "circ_min_mm": 241, "circ_max_mm": 250 } }
+        { "type": "size_row", "settings": { "size": "12", "label": "XXXL", "length_min_mm": 219, "length_max_mm": 226, "circ_min_mm": 241, "circ_max_mm": 250 } }
       ]
     }
   ]

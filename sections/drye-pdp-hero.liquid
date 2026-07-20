@@ -594,9 +594,6 @@ assign review_count = section.settings.review_count_fallback
       </div>
     </div>
 
-    {% if section.settings.atc_undernote != blank %}
-      <p class="atc-undernote">{{ section.settings.atc_undernote }}</p>
-    {% endif %}
 
 {% comment %} Worker Proof — compact green proof line + sliding/expandable comment ticker {% endcomment %}
 {% if section.settings.proof_enabled %}
@@ -698,6 +695,16 @@ assign review_count = section.settings.review_count_fallback
             {% endif %}
           {% endfor %}
         </ul>
+      </div>
+    {% endif %}
+
+    {% assign proof_guarantee = section.settings.proof_guarantee_line | default: section.settings.atc_undernote %}
+    {% if proof_guarantee != blank %}
+      <div class="drye-proof__guarantee">
+        <svg class="drye-proof__check" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <path d="M3 8.4l3 3 7-7.6" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <span>{{ proof_guarantee }}</span>
       </div>
     {% endif %}
   </section>
@@ -1942,7 +1949,7 @@ wteTimelines.forEach((timeline) => {
       "type": "richtext",
       "id": "subtext",
       "label": "Subtext",
-      "default": "<p>Stops skin breakdown in sealed gloves. No chemicals. No membranes. No coatings. No saturation point. <strong>0.4mm thin.</strong></p>"
+      "default": "<p>Add one dry layer under your gloves.<br>Cotton absorbs. DRYE routes it out.</p>"
     },
     {
       "type": "text",
@@ -2077,6 +2084,13 @@ wteTimelines.forEach((timeline) => {
       "id": "proof_ticker_label",
       "label": "Ticker label",
       "default": "Recent worker comments on instagram"
+    },
+    {
+      "type": "text",
+      "id": "proof_guarantee_line",
+      "label": "Guarantee line (bottom of ticker)",
+      "info": "Shows as a check line under the comment ticker. Falls back to the under-ATC guarantee if left blank.",
+      "default": "30 shifts. If your hands aren't dry at lunch, keep the liners and get your money back."
     },
     {
       "type": "text",
