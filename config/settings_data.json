@@ -79,11 +79,11 @@
             "type": "size_row",
             "settings": {
               "size": "5",
-              "label": "XXS",
-              "length_min_mm": 158,
-              "length_max_mm": 167,
-              "circ_min_mm": 178,
-              "circ_max_mm": 187
+              "label": "XXXS",
+              "length_min_mm": 163,
+              "length_max_mm": 169,
+              "circ_min_mm": 183,
+              "circ_max_mm": 189
             }
           },
           "size_row_6": {
@@ -249,7 +249,7 @@
   },
   "platform_customizations": {
     "custom_css": [
-      "@media (max-width: 768px) {#judgeme_product_reviews > div {padding-left: 5% !important;padding-right: 5% !important;}}"
+      "@media (max-width: 768px) {#judgeme_product_reviews > div {padding-left: 5% !important; padding-right: 5% !important; }}"
     ]
   }
 }
