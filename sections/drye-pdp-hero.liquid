@@ -508,7 +508,7 @@ assign review_count = section.settings.review_count_fallback
       </div>
 
       <div class="step2">
-        <button class="step2__btn" aria-expanded="false" aria-controls="step2panel-{{ section.id }}" id="step2btn-{{ section.id }}">
+        <button type="button" class="step2__btn" aria-expanded="false" aria-controls="step2panel-{{ section.id }}" id="step2btn-{{ section.id }}">
           {{ section.settings.step2_label | default: 'Step 2: Notice the difference after 5 min' }}
           <svg class="step2__chev" viewBox="0 0 10 6" fill="none"><path d="M0 0l5 6 5-6z" fill="currentColor"/></svg>
         </button>
@@ -534,7 +534,7 @@ assign review_count = section.settings.review_count_fallback
         {%- assign cpm_suffix = section.settings.cpm_month_suffix | default: 'mo' -%}
         {%- assign cpm_note_low = section.settings.cpm_note_low -%}
         {%- assign cpm_note_high = section.settings.cpm_note_high -%}
-        <p class="cpm permo" data-cpm hidden>About <span data-cpm-price="{{ cpm_low }}"></span>/{{ cpm_suffix }} over {{ cpm_low }} months of heavy shop use · <span data-cpm-price="{{ cpm_high }}"></span>/{{ cpm_suffix }} over {{ cpm_high }}</p>
+        <p class="permo" data-cpm hidden>About <span data-cpm-price="{{ cpm_low }}"></span>/{{ cpm_suffix }} over {{ cpm_low }} months of heavy shop use · <span data-cpm-price="{{ cpm_high }}"></span>/{{ cpm_suffix }} over {{ cpm_high }}</p>
       {% endif %}
 
       <button
