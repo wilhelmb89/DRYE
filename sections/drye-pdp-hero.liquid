@@ -259,34 +259,6 @@ assign review_count = section.settings.review_count_fallback
       {{ section.settings.subtext }}
     </div>
 
-    {% if found_description_block %}
-      <button type="button" class="pdp-readmore" data-pdp-toggle>Read more <span class="pdp-readmore__arrow" data-pdp-arrow aria-hidden="true">↓</span></button>
-      <div class="pdp-readmore__body" data-pdp-more hidden>
-        <div class="pdp-richtext">
-          {{ rendered_desc }}
-        </div>
-      </div>
-
-      <script>
-        (function () {
-          var root = document.querySelector('[data-section-id="{{ section.id }}"] [data-pdp-toggle]');
-          if (!root || root.dataset.pdpReadmoreBound === 'true') return;
-          root.dataset.pdpReadmoreBound = 'true';
-          var body = document.querySelector('[data-section-id="{{ section.id }}"] [data-pdp-more]');
-          var arrow = root.querySelector('[data-pdp-arrow]');
-          root.addEventListener('click', function () {
-            var isOpen = body && body.hasAttribute('hidden');
-            if (body) {
-              if (isOpen) { body.removeAttribute('hidden'); } else { body.setAttribute('hidden', ''); }
-            }
-            root.classList.toggle('is-open', isOpen);
-            if (arrow) { arrow.style.transform = isOpen ? 'rotate(180deg)' : 'rotate(0deg)'; }
-            root.firstChild.nodeValue = isOpen ? 'Read less ' : 'Read more ';
-          });
-        })();
-      </script>
-    {% endif %}
-
     {% assign size_option_position = blank %}
     {% for option in current_product.options_with_values %}
       {% assign option_name_downcase = option.name | downcase %}
@@ -507,6 +479,9 @@ assign review_count = section.settings.review_count_fallback
       {% endif %}
 
       <div class="value-card">
+        <div class="value-card__principle">
+          <span class="value-card__principle-t">{{ section.settings.compare_principle | default: 'Step 1: Change the environment' }}</span>
+        </div>
         <div class="value-card__grid">
           <div class="value-card__col value-card__col--loop">
             <p class="value-card__eyebrow value-card__eyebrow--loop">The workaround loop</p>
@@ -524,12 +499,24 @@ assign review_count = section.settings.review_count_fallback
             <div class="value-card__items">
               <div class="value-card__item"><span class="value-card__arrow">→</span><span>Dryer hands all shift</span></div>
               <div class="value-card__item"><span class="value-card__arrow">→</span><span>No sticky glove changes</span></div>
-              <div class="value-card__item"><span class="value-card__arrow">→</span><span>No washing or drying</span></div>
-              <div class="value-card__item"><span class="value-card__arrow">→</span><span>Skin stays dry</span></div>
-              <div class="value-card__item"><span class="value-card__arrow">→</span><span>Lasts 6–12 months</span></div>
+              <div class="value-card__item"><span class="value-card__arrow">→</span><span>Oil and grime hit the liner, not your skin</span></div>
+              <div class="value-card__item"><span class="value-card__arrow">→</span><span>Machine washable</span></div>
+              <div class="value-card__item"><span class="value-card__arrow">→</span><span>Fits under any sealed glove</span></div>
             </div>
           </div>
         </div>
+      </div>
+
+      <div class="step2">
+        <button class="step2__btn" aria-expanded="false" aria-controls="step2panel-{{ section.id }}" id="step2btn-{{ section.id }}">
+          {{ section.settings.step2_label | default: 'Step 2: Notice the difference after 5 min' }}
+          <svg class="step2__chev" viewBox="0 0 10 6" fill="none"><path d="M0 0l5 6 5-6z" fill="currentColor"/></svg>
+        </button>
+        <div class="step2__panel" id="step2panel-{{ section.id }}"><div class="step2__inner">
+          <div class="vtl">
+            {% for block in section.blocks %}{% if block.type == 'timeline_row' %}<div class="vtl__row" {{ block.shopify_attributes }}><span class="vtl__mark">{{ block.settings.marker }}</span><span class="vtl__out">{{ block.settings.outcome }}</span></div>{% endif %}{% endfor %}
+          </div>
+        </div></div>
       </div>
 
       <div class="price-row" data-price-row>
@@ -547,34 +534,7 @@ assign review_count = section.settings.review_count_fallback
         {%- assign cpm_suffix = section.settings.cpm_month_suffix | default: 'mo' -%}
         {%- assign cpm_note_low = section.settings.cpm_note_low -%}
         {%- assign cpm_note_high = section.settings.cpm_note_high -%}
-        <div class="cpm" data-cpm hidden>
-          <div class="cpm__block">
-            <div class="cpm__row">
-              <span class="cpm__price"><span data-cpm-price="{{ cpm_low }}"></span><small> /{{ cpm_suffix }}</small></span>
-              <span class="cpm__tw">
-                <span class="cpm__axis">
-                  <span class="cpm__line"></span>
-                  <span class="cpm__nodes">{%- for i in (1..cpm_low) -%}<i class="cpm__node{% if forloop.last %} cpm__node--end{% endif %}"></i>{%- endfor -%}</span>
-                </span>
-                <span class="cpm__mo">{{ cpm_low }} {{ cpm_suffix }}</span>
-              </span>
-            </div>
-            {% if cpm_note_low != blank %}<span class="cpm__note">{{ cpm_note_low }}</span>{% endif %}
-          </div>
-          <div class="cpm__block">
-            <div class="cpm__row">
-              <span class="cpm__price"><span data-cpm-price="{{ cpm_high }}"></span><small> /{{ cpm_suffix }}</small></span>
-              <span class="cpm__tw">
-                <span class="cpm__axis">
-                  <span class="cpm__line"></span>
-                  <span class="cpm__nodes">{%- for i in (1..cpm_high) -%}<i class="cpm__node{% if forloop.last %} cpm__node--end{% endif %}"></i>{%- endfor -%}</span>
-                </span>
-                <span class="cpm__mo">{{ cpm_high }} {{ cpm_suffix }}</span>
-              </span>
-            </div>
-            {% if cpm_note_high != blank %}<span class="cpm__note">{{ cpm_note_high }}</span>{% endif %}
-          </div>
-        </div>
+        <p class="cpm permo" data-cpm hidden>About <span data-cpm-price="{{ cpm_low }}"></span>/{{ cpm_suffix }} over {{ cpm_low }} months of heavy shop use · <span data-cpm-price="{{ cpm_high }}"></span>/{{ cpm_suffix }} over {{ cpm_high }}</p>
       {% endif %}
 
       <button
@@ -826,6 +786,106 @@ assign review_count = section.settings.review_count_fallback
     })();
   </script>
 {% endif %}
+
+    <div class="acc-wrap">
+      <div class="acc">
+        <button class="acc__btn" type="button" aria-expanded="false" aria-controls="acc-p0-{{ section.id }}" id="acc-b0-{{ section.id }}">{{ section.settings.acc_why_label | default: 'Why It Matters' }}<svg class="acc__chev" viewBox="0 0 10 6" fill="none"><path d="M0 0l5 6 5-6z" fill="currentColor"/></svg></button>
+        <div class="acc__panel" id="acc-p0-{{ section.id }}" role="region" aria-labelledby="acc-b0-{{ section.id }}"><div class="acc__inner"><div class="acc__body">
+          {{ section.settings.acc_why_body }}
+          <p class="acc__sources">Park &amp; Lee 2025 · TRGS 401 · Warner et al., J Invest Dermatol 2003 · Hikima &amp; Maibach 2006</p>
+        </div></div></div>
+      </div>
+      <div class="acc">
+        <button class="acc__btn" type="button" aria-expanded="false" aria-controls="acc-p1-{{ section.id }}" id="acc-b1-{{ section.id }}">{{ section.settings.acc_specs_label | default: 'Specifications' }}<svg class="acc__chev" viewBox="0 0 10 6" fill="none"><path d="M0 0l5 6 5-6z" fill="currentColor"/></svg></button>
+        <div class="acc__panel" id="acc-p1-{{ section.id }}" role="region" aria-labelledby="acc-b1-{{ section.id }}"><div class="acc__inner"><div class="acc__body">
+          <table class="ds">
+            <tr><td class="k">Construction</td><td class="v">Single jersey, plated · circular knitted</td></tr>
+            <tr><td class="k">Skin side</td><td class="v">55% polypropylene — hydrophobic</td></tr>
+            <tr><td class="k">Outer side</td><td class="v">45% lyocell (Tencel) — hydrophilic</td></tr>
+            <tr><td class="k">Moisture asymmetry</td><td class="v">28% higher absorption on outer side (n=10)</td></tr>
+            <tr><td class="k">Air permeability</td><td class="v">1800–1850 mm/s (ISO 9237)</td></tr>
+            <tr><td class="k">Thickness</td><td class="v">0.4 mm</td></tr>
+            <tr><td class="k">Weight</td><td class="v">200 g/m²</td></tr>
+            <tr><td class="k">Size range</td><td class="v">5–12</td></tr>
+            <tr><td class="k">Length range</td><td class="v">163–226 mm</td></tr>
+            <tr><td class="k">Wash</td><td class="v">Machine, up to 90 °C</td></tr>
+            <tr><td class="k">Lifespan</td><td class="v">6–12 months</td></tr>
+            <tr><td class="k">Worn under</td><td class="v">Nitrile, latex, rubber, HV</td></tr>
+            <tr><td class="k">Certification</td><td class="v">OEKO-TEX® Standard 100 — fabric and thread</td></tr>
+            <tr><td class="k">Patent</td><td class="v">Pending · SE 2615359-3</td></tr>
+          </table>
+          <p class="ds-note-h">Not designed for</p>
+          <ul class="ds-note">
+            <li>Wearing without an outer glove</li>
+            <li>Cut protection</li>
+            <li>Touchscreen use</li>
+          </ul>
+        </div></div></div>
+      </div>
+      <div class="acc">
+        <button class="acc__btn" type="button" aria-expanded="false" aria-controls="acc-p2-{{ section.id }}" id="acc-b2-{{ section.id }}">{{ section.settings.acc_maker_label | default: 'Who Makes This' }}<svg class="acc__chev" viewBox="0 0 10 6" fill="none"><path d="M0 0l5 6 5-6z" fill="currentColor"/></svg></button>
+        <div class="acc__panel" id="acc-p2-{{ section.id }}" role="region" aria-labelledby="acc-b2-{{ section.id }}"><div class="acc__inner"><div class="acc__body">
+          {{ section.settings.acc_maker_body }}
+        </div></div></div>
+      </div>
+      <div class="acc">
+        <button class="acc__btn" type="button" aria-expanded="false" aria-controls="acc-p3-{{ section.id }}" id="acc-b3-{{ section.id }}">{{ section.settings.acc_how_label | default: 'How It Works' }}<svg class="acc__chev" viewBox="0 0 10 6" fill="none"><path d="M0 0l5 6 5-6z" fill="currentColor"/></svg></button>
+        <div class="acc__panel" id="acc-p3-{{ section.id }}" role="region" aria-labelledby="acc-b3-{{ section.id }}"><div class="acc__inner"><div class="acc__body">
+          {{ section.settings.acc_how_body }}
+          <p class="fn">Seven years of textile development. Patent pending · SE 2615359-3.</p>
+        </div></div></div>
+      </div>
+      <div class="acc">
+        <button class="acc__btn" type="button" aria-expanded="false" aria-controls="acc-p4-{{ section.id }}" id="acc-b4-{{ section.id }}">{{ section.settings.acc_sizing_label | default: 'Sizing And Fit' }}<svg class="acc__chev" viewBox="0 0 10 6" fill="none"><path d="M0 0l5 6 5-6z" fill="currentColor"/></svg></button>
+        <div class="acc__panel" id="acc-p4-{{ section.id }}" role="region" aria-labelledby="acc-b4-{{ section.id }}"><div class="acc__inner"><div class="acc__body">
+          {{ section.settings.acc_sizing_body }}
+          <p class="acc__link"><button type="button" class="js-open-size-guide acc__link-btn">Not sure of your size? → Open the size guide</button></p>
+        </div></div></div>
+      </div>
+      <div class="acc">
+        <button class="acc__btn" type="button" aria-expanded="false" aria-controls="acc-p5-{{ section.id }}" id="acc-b5-{{ section.id }}">{{ section.settings.acc_shipping_label | default: 'Shipping And Returns' }}<svg class="acc__chev" viewBox="0 0 10 6" fill="none"><path d="M0 0l5 6 5-6z" fill="currentColor"/></svg></button>
+        <div class="acc__panel" id="acc-p5-{{ section.id }}" role="region" aria-labelledby="acc-b5-{{ section.id }}"><div class="acc__inner"><div class="acc__body">
+          {{ section.settings.acc_shipping_body }}
+        </div></div></div>
+      </div>
+    </div>
+
+    <script>
+      (function () {
+        var sectionEl = document.querySelector('[data-section-id="{{ section.id }}"][data-product-section]');
+        if (!sectionEl || sectionEl.dataset.dryeAccBound === 'true') return;
+        sectionEl.dataset.dryeAccBound = 'true';
+
+        // Step 2 collapsible timeline (independent)
+        var s2 = sectionEl.querySelector('.step2__btn');
+        if (s2) {
+          s2.addEventListener('click', function () {
+            var panel = sectionEl.querySelector('#' + s2.getAttribute('aria-controls'));
+            var open = s2.getAttribute('aria-expanded') === 'true';
+            s2.setAttribute('aria-expanded', open ? 'false' : 'true');
+            if (panel) { panel.classList.toggle('open', !open); }
+          });
+        }
+
+        // Bottom accordion — one open at a time
+        var accBtns = Array.prototype.slice.call(sectionEl.querySelectorAll('.acc__btn'));
+        accBtns.forEach(function (btn) {
+          btn.addEventListener('click', function () {
+            var panel = sectionEl.querySelector('#' + btn.getAttribute('aria-controls'));
+            var open = btn.getAttribute('aria-expanded') === 'true';
+            accBtns.forEach(function (b) {
+              b.setAttribute('aria-expanded', 'false');
+              var p = sectionEl.querySelector('#' + b.getAttribute('aria-controls'));
+              if (p) { p.classList.remove('open'); }
+            });
+            if (!open) {
+              btn.setAttribute('aria-expanded', 'true');
+              if (panel) { panel.classList.add('open'); }
+            }
+          });
+        });
+      })();
+    </script>
 
 
 
@@ -2245,6 +2305,88 @@ wteTimelines.forEach((timeline) => {
     },
     {
       "type": "header",
+      "content": "Buy-zone redesign — comparison, timeline & accordion"
+    },
+    {
+      "type": "text",
+      "id": "compare_principle",
+      "label": "Comparison — Step 1 principle",
+      "default": "Step 1: Change the environment"
+    },
+    {
+      "type": "text",
+      "id": "step2_label",
+      "label": "Timeline — Step 2 label",
+      "default": "Step 2: Notice the difference after 5 min"
+    },
+    {
+      "type": "text",
+      "id": "acc_why_label",
+      "label": "Accordion — Why It Matters label",
+      "default": "Why It Matters"
+    },
+    {
+      "type": "richtext",
+      "id": "acc_why_body",
+      "label": "Accordion — Why It Matters body",
+      "default": "<p>Inside a sealed glove, humidity passes 90% within minutes and skin temperature holds around 35°C for the rest of the shift.</p><p>German TRGS 401 classifies more than two hours a day in occlusive gloves as wet work — a recognised occupational hazard. EV and HV technicians run three to six hours per shift.</p><p>Skin that stays wet softens and swells. Wet skin is more permeable than dry skin.</p><p>DRYE keeps skin drier. That's the whole intervention.</p>"
+    },
+    {
+      "type": "text",
+      "id": "acc_specs_label",
+      "label": "Accordion — Specifications label",
+      "default": "Specifications"
+    },
+    {
+      "type": "text",
+      "id": "acc_maker_label",
+      "label": "Accordion — Who Makes This label",
+      "default": "Who Makes This"
+    },
+    {
+      "type": "richtext",
+      "id": "acc_maker_body",
+      "label": "Accordion — Who Makes This body",
+      "default": "<p>Made by Granqvists Gloves AB, Karlstad, Sweden — a glove manufacturer since 1984. The same production unit has supplied roughly 80% of military gloves to the Swedish, Norwegian and Finnish armed forces. ISO 9001 and ISO 14001 certified. Fabric knitted in Sweden by Trikåby. Sewn in the EU.</p>"
+    },
+    {
+      "type": "text",
+      "id": "acc_how_label",
+      "label": "Accordion — How It Works label",
+      "default": "How It Works"
+    },
+    {
+      "type": "richtext",
+      "id": "acc_how_body",
+      "label": "Accordion — How It Works body",
+      "default": "<p>Your glove still does the protecting. DRYE changes what touches your skin — a thin dry layer between your hand and the nitrile, latex, rubber or sealed work glove.</p><p>Every liner that absorbs has a saturation point. Once it fills, it becomes the wet layer against your skin. DRYE routes moisture outward instead. The skin side is built not to hold sweat, so it has no saturation point.</p><p>One fabric, knitted in one operation. Two surfaces. One direction. No coatings, no chemicals, no membranes.</p>"
+    },
+    {
+      "type": "text",
+      "id": "acc_sizing_label",
+      "label": "Accordion — Sizing And Fit label",
+      "default": "Sizing And Fit"
+    },
+    {
+      "type": "richtext",
+      "id": "acc_sizing_body",
+      "label": "Accordion — Sizing And Fit body",
+      "default": "<h5>How it should feel</h5><p>Snug, like a second skin. You should feel the fabric, not the seams. If it's tight across the back of the hand, size up. Circumference decides — not finger length.</p><h5>Putting them on</h5><p>The fabric is 0.4 mm. Pull them on gently, finger by finger. Do not yank them on the way you would an outer glove — that puts all the load on the thumb and finger seams.</p><h5>Taking them off</h5><p>Go slow. Peel finger by finger rather than pulling from the cuff.</p><h5>Washing</h5><p>Machine wash up to 90°C. They do not shrink and nothing washes out — there are no coatings or finishes to lose.</p>"
+    },
+    {
+      "type": "text",
+      "id": "acc_shipping_label",
+      "label": "Accordion — Shipping And Returns label",
+      "default": "Shipping And Returns"
+    },
+    {
+      "type": "richtext",
+      "id": "acc_shipping_body",
+      "label": "Accordion — Shipping And Returns body",
+      "default": "<h5>The Glove-Off Test — 30 days</h5><p>Wear them one full shift under your sealed glove. If your skin isn't drier when the glove comes off, keep the liners and we refund every dollar. Sending a worn pair back from the US costs more than the pair is worth. No forms, no return shipping.</p><h5>Wrong size?</h5><p>If you measured against our guide and it still doesn't fit, we ship the correct size at no cost.</p><h5>Ships from Sweden</h5><p>10–14 business days to the US with PostNord, no import charges at delivery. UPS is faster but the recipient pays brokerage and duty.</p><p><a href=\"#\">Full shipping and returns policy → See the FAQ below</a></p>"
+    },
+    {
+      "type": "header",
       "content": "Sold-out & Preorder size panel"
     },
     {
@@ -3001,6 +3143,24 @@ wteTimelines.forEach((timeline) => {
           "label": "Image (fallback)"
         }
       ]
+    },
+    {
+      "type": "timeline_row",
+      "name": "Timeline row (Step 2)",
+      "settings": [
+        {
+          "type": "text",
+          "id": "marker",
+          "label": "Marker",
+          "default": "Day 1"
+        },
+        {
+          "type": "text",
+          "id": "outcome",
+          "label": "Outcome",
+          "default": "Peel the glove at lunch. Hands dry."
+        }
+      ]
     }
   ],
   "max_blocks": 24,
@@ -3079,6 +3239,34 @@ wteTimelines.forEach((timeline) => {
           "settings": {
             "question": "Shipping, Customs & Delivery",
             "answer": "Ships within 24 hours from Sweden. USA, Canada, UK delivery: 5–9 business days. Import duties may apply depending on destination."
+          }
+        },
+        {
+          "type": "timeline_row",
+          "settings": {
+            "marker": "Day 1",
+            "outcome": "Peel the glove at lunch. Hands dry."
+          }
+        },
+        {
+          "type": "timeline_row",
+          "settings": {
+            "marker": "Week 1",
+            "outcome": "Nitriles stop tearing. Fewer glove changes."
+          }
+        },
+        {
+          "type": "timeline_row",
+          "settings": {
+            "marker": "Month 1",
+            "outcome": "The cream tube stops emptying."
+          }
+        },
+        {
+          "type": "timeline_row",
+          "settings": {
+            "marker": "Month 6–12",
+            "outcome": "Still the same pair."
           }
         }
       ]
