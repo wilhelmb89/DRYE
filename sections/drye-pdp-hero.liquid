@@ -528,12 +528,12 @@ assign review_count = section.settings.review_count_fallback
       </div>
 
       <div class="price-row" data-price-row>
-        <span class="price" data-price>{{ selected_variant.price | money_with_currency }}</span>
+        <span class="price" data-price>{{ selected_variant.price | money }}</span>
         {% if price_note != blank %}
           <span class="price-note">{{ price_note }}</span>
         {% endif %}
         {%- comment -%} Market-correct money format sample — read by JS so it never guesses currency/separators {%- endcomment -%}
-        <span class="dryeNEW-visually-hidden" data-money-sample aria-hidden="true">{{ 123456789 | money_with_currency }}</span>
+        <span class="dryeNEW-visually-hidden" data-money-sample aria-hidden="true">{{ 123456789 | money }}</span>
       </div>
 
       {% if section.settings.cpm_enabled %}
@@ -543,8 +543,8 @@ assign review_count = section.settings.review_count_fallback
         {%- assign cpm_note_low = section.settings.cpm_note_low -%}
         {%- assign cpm_note_high = section.settings.cpm_note_high -%}
         <div class="permo" data-cpm hidden>
-          <p class="permo-line">About <span data-cpm-price="{{ cpm_low }}"></span>/{{ cpm_suffix }} over six months of heavy use</p>
-          <p class="permo-line">About <span data-cpm-price="{{ cpm_high }}"></span>/{{ cpm_suffix }} over twelve months of light use</p>
+          <p class="permo-line">About <span data-cpm-price="{{ cpm_low }}"></span> a month over six months of heavy use</p>
+          <p class="permo-line">About <span data-cpm-price="{{ cpm_high }}"></span> a month over twelve months of light use</p>
         </div>
       {% endif %}
 
@@ -1286,7 +1286,8 @@ assign review_count = section.settings.review_count_fallback
       let unit = cpmBaseAmount;
       if (variant && variant.price && cpmInitCents) unit = cpmBaseAmount * (Number(variant.price) / Number(cpmInitCents));
       const total = unit * qty;
-      const totalStr = formatMoneyTpl(total, cpmMoneyTpl);
+      const mainDec = (Math.round(total * 100) % 100 === 0) ? 0 : cpmMoneyTpl.dec;
+      const totalStr = formatMoneyTpl(total, cpmMoneyTpl, mainDec);
       priceEl.textContent = totalStr;
       if (stickyPriceEl) stickyPriceEl.textContent = totalStr;
       if (cpmWrap && cpmRows.length) {
