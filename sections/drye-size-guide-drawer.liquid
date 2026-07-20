@@ -46,6 +46,7 @@
   aria-label="{{ section.settings.drawer_aria_label | escape }}"
   data-glove="nitrile"
   data-unit="mm"
+  data-glove-provisional="{% if section.settings.glove_provisional == false %}false{% else %}true{% endif %}"
   data-shortcut-nitrile="{{ section.settings.shortcut_nitrile | default: default_shortcut_nitrile | escape }}"
   data-shortcut-hv="{{ section.settings.shortcut_hv | default: default_shortcut_hv | escape }}"
   data-head-nitrile="{{ section.settings.glove_head_nitrile | default: default_head_nitrile | escape }}"
@@ -214,7 +215,20 @@
         ]
       };
 
-      return sizeMap[sectionId] || [];
+      const raw = sizeMap[sectionId] || [];
+      // Provisional mapping: until real glove sizes are entered per row, derive them from
+      // the copy rule — nitrile = same number as the DRYE size, HV = one size up.
+      const drawer = document.getElementById(sectionId + '-drawer');
+      const prov = drawer && drawer.dataset.gloveProvisional === 'true';
+      return raw.map(function(s) {
+        let n = (s.nitrile || '').trim();
+        let h = (s.hv || '').trim();
+        if (prov) {
+          if (!n) { n = s.size; }
+          if (!h) { const num = parseInt(s.size, 10); h = isNaN(num) ? '' : String(num - 1); }
+        }
+        return { size: s.size, circMM: s.circMM, nitrile: n, hv: h };
+      });
     },
 
     activeGloveKey(sizes, chosen) {
@@ -509,6 +523,13 @@
       "id": "glove_head_hv",
       "label": "Glove column header — HV",
       "default": "Your HV glove"
+    },
+    {
+      "type": "checkbox",
+      "id": "glove_provisional",
+      "label": "Provisional glove mapping",
+      "info": "While on, empty glove cells are auto-filled: nitrile = same number as the DRYE size, HV = one size up. Turn off once you enter measured values on each row.",
+      "default": true
     },
     {
       "type": "text",
