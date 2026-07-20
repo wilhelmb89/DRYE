@@ -843,7 +843,7 @@ assign review_count = section.settings.review_count_fallback
         </div></div></div>
       </div>
       <div class="acc">
-        <button class="acc__btn" type="button" aria-expanded="false" aria-controls="acc-p4-{{ section.id }}" id="acc-b4-{{ section.id }}">{{ section.settings.acc_sizing_label | default: 'Sizing And Fit' }}<svg class="acc__chev" viewBox="0 0 10 6" fill="none"><path d="M0 0l5 6 5-6z" fill="currentColor"/></svg></button>
+        <button class="acc__btn" type="button" aria-expanded="false" aria-controls="acc-p4-{{ section.id }}" id="acc-b4-{{ section.id }}">{{ section.settings.acc_sizing_label | default: 'Fit and care' }}<svg class="acc__chev" viewBox="0 0 10 6" fill="none"><path d="M0 0l5 6 5-6z" fill="currentColor"/></svg></button>
         <div class="acc__panel" id="acc-p4-{{ section.id }}" role="region" aria-labelledby="acc-b4-{{ section.id }}"><div class="acc__inner"><div class="acc__body">
           {{ section.settings.acc_sizing_body }}
           <p class="acc__link"><button type="button" class="js-open-size-guide acc__link-btn">Not sure of your size? → Open the size guide</button></p>
@@ -2388,14 +2388,14 @@ wteTimelines.forEach((timeline) => {
     {
       "type": "text",
       "id": "acc_sizing_label",
-      "label": "Accordion — Sizing And Fit label",
-      "default": "Sizing And Fit"
+      "label": "Accordion — Fit and care label",
+      "default": "Fit and care"
     },
     {
       "type": "richtext",
       "id": "acc_sizing_body",
-      "label": "Accordion — Sizing And Fit body",
-      "default": "<h5>How it should feel</h5><p>Snug, like a second skin. You should feel the fabric, not the seams. If it's tight across the back of the hand, size up. Circumference decides — not finger length.</p><h5>Putting them on</h5><p>The fabric is 0.4 mm. Pull them on gently, finger by finger. Do not yank them on the way you would an outer glove — that puts all the load on the thumb and finger seams.</p><h5>Taking them off</h5><p>Go slow. Peel finger by finger rather than pulling from the cuff.</p><h5>Washing</h5><p>Machine wash up to 90°C. They do not shrink and nothing washes out — there are no coatings or finishes to lose.</p>"
+      "label": "Accordion — Fit and care body",
+      "default": "<h5>How it should feel</h5><p>Snug, like a second skin. You should feel the fabric, not the seams. If it's tight across the back of the hand, size up. Circumference decides — not finger length.</p><h5>Putting them on</h5><p>The fabric is 0.4 mm. Pull them on gently, finger by finger. Do not yank them on the way you would an outer glove — that puts all the load on the thumb and finger seams.</p><h5>Taking them off</h5><p>Go slow. Peel finger by finger rather than pulling from the cuff.</p><h5>Washing</h5><p>Machine wash up to 90 °C. Nothing washes out — there are no coatings or chemical finishes to lose, and they do not shrink. Air dry if you can. They dry fast. Tumble drying works but will make the surface pill over time.</p><h5>Daily wear</h5><p>If you wear them every shift, two or three pairs works best — one on, one drying, one in the bag. Same idea as work boots.</p>"
     },
     {
       "type": "text",
