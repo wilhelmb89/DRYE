@@ -425,12 +425,16 @@
   object-fit: contain;
   opacity: 0.7;
   filter: grayscale(1);
-  transition: opacity 0.15s ease, filter 0.15s ease;
+  transition: opacity 0.18s ease, filter 0.18s ease, transform 0.18s ease;
 }
 
-.hero a.drye-press__logo:hover img {
+.hero a.drye-press__logo { cursor: pointer; }
+
+.hero a.drye-press__logo:hover img,
+.hero a.drye-press__logo:focus-visible img {
   opacity: 1;
   filter: grayscale(0);
+  transform: translateY(-2px);
 }
 
 /* Text wordmark fallbacks (Byggtjänst / Gnosjö / Smarta Saker) */
@@ -439,6 +443,7 @@
   color: #111;
   opacity: 0.55;
   filter: grayscale(1);
+  transition: opacity 0.18s ease, transform 0.18s ease, color 0.18s ease;
 }
 
 .hero .lg-bygg {
@@ -477,13 +482,17 @@
   letter-spacing: -0.01em;
 }
 
-/* Wordmark links keep the same look, no underline */
+/* Wordmark links keep the same look, no underline; lift + darken on hover */
 .hero a.drye-press__logo--text {
   text-decoration: none;
+  cursor: pointer;
 }
 
-.hero a.drye-press__logo--text:hover {
-  opacity: 0.85;
+.hero a.drye-press__logo--text:hover,
+.hero a.drye-press__logo--text:focus-visible {
+  opacity: 1;
+  color: var(--emerald, #0D9488);
+  transform: translateY(-2px);
 }
 
 /* ---- Who Makes This — seamstress photo + partner logos ---------------- */
