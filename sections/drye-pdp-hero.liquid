@@ -252,7 +252,7 @@ assign review_count = section.settings.review_count_fallback
 
     <h1 class="h-title">
       {{ section.settings.heading_line_1 }}<br>
-      {{ section.settings.heading_line_2 }}
+      {{ section.settings.heading_line_2 | escape | replace: '. ', '.<br>' }}
     </h1>
 
     <div class="h-sub">
@@ -611,12 +611,14 @@ assign review_count = section.settings.review_count_fallback
     endfor
   %}
   <section class="drye-proof" data-drye-proof-module aria-label="Worker proof">
-    <div class="drye-proof__line">
-      <svg class="drye-proof__check" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-        <path d="M3 8.4l3 3 7-7.6" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
-      </svg>
-      <span class="drye-proof__returns">30 shifts. If your hands aren't dry at lunch, keep the liners and get your money back.</span>
-    </div>
+    {% if section.settings.proof_returns_line != blank %}
+      <div class="drye-proof__line">
+        <svg class="drye-proof__check" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <path d="M3 8.4l3 3 7-7.6" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <span class="drye-proof__returns">{{ section.settings.proof_returns_line }}</span>
+      </div>
+    {% endif %}
     {% if section.settings.proof_keep_line != blank %}
       <div class="drye-proof__keep">{{ section.settings.proof_keep_line }}</div>
     {% endif %}
@@ -696,6 +698,33 @@ assign review_count = section.settings.review_count_fallback
             {% endif %}
           {% endfor %}
         </ul>
+      </div>
+    {% endif %}
+
+    {% if section.settings.proof_stamp_line != blank %}
+      <div class="drye-proof__stamp">
+        <svg class="drye-proof__laurel drye-proof__laurel--l" viewBox="0 0 26 56" fill="currentColor" aria-hidden="true">
+          <path d="M20 4c-6 4-9 10-9 24 0 10 3 18 8 24" fill="none" stroke="currentColor" stroke-width="1.4"/>
+          <path d="M18 10c-4 0-6 2-7 5 3 1 6 0 7-5z"/>
+          <path d="M15 20c-4 0-6 2-7 5 3 1 6 0 7-5z"/>
+          <path d="M13 31c-4 0-6 2-6 5 3 1 6 0 6-5z"/>
+          <path d="M14 42c-4-1-6 1-7 4 3 1 6 0 7-4z"/>
+          <path d="M17 51c-4-1-6 1-7 4 3 1 6 0 7-4z"/>
+        </svg>
+        <span class="drye-proof__stamp-inner">
+          <svg class="drye-proof__stamp-check" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+            <path d="M3 8.4l3 3 7-7.6" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <span class="drye-proof__stamp-t">{{ section.settings.proof_stamp_line }}</span>
+        </span>
+        <svg class="drye-proof__laurel drye-proof__laurel--r" viewBox="0 0 26 56" fill="currentColor" aria-hidden="true">
+          <path d="M20 4c-6 4-9 10-9 24 0 10 3 18 8 24" fill="none" stroke="currentColor" stroke-width="1.4"/>
+          <path d="M18 10c-4 0-6 2-7 5 3 1 6 0 7-5z"/>
+          <path d="M15 20c-4 0-6 2-7 5 3 1 6 0 7-5z"/>
+          <path d="M13 31c-4 0-6 2-6 5 3 1 6 0 6-5z"/>
+          <path d="M14 42c-4-1-6 1-7 4 3 1 6 0 7-4z"/>
+          <path d="M17 51c-4-1-6 1-7 4 3 1 6 0 7-4z"/>
+        </svg>
       </div>
     {% endif %}
 
@@ -838,7 +867,15 @@ assign review_count = section.settings.review_count_fallback
       <div class="acc">
         <button class="acc__btn" type="button" aria-expanded="false" aria-controls="acc-p3-{{ section.id }}" id="acc-b3-{{ section.id }}">{{ section.settings.acc_how_label | default: 'How It Works' }}<svg class="acc__chev" viewBox="0 0 10 6" fill="none"><path d="M0 0l5 6 5-6z" fill="currentColor"/></svg></button>
         <div class="acc__panel" id="acc-p3-{{ section.id }}" role="region" aria-labelledby="acc-b3-{{ section.id }}"><div class="acc__inner"><div class="acc__body">
-          {{ section.settings.acc_how_body }}
+          {%- assign rendered_how = section.settings.acc_how_body -%}
+          {%- for m in desc_media -%}
+            {%- assign how_key = m.settings.key | strip -%}
+            {%- if how_key != blank and rendered_how contains how_key -%}
+              {%- capture how_media -%}<div class="desc-media">{% if m.settings.video != blank %}{{ m.settings.video | video_tag: class: 'desc-media__video', autoplay: true, loop: true, muted: true, controls: false, playsinline: true, preload: 'auto' }}{% elsif m.settings.image != blank %}{{ m.settings.image | image_url: width: 1600 | image_tag: class: 'desc-media__img', loading: 'lazy', decoding: 'async' }}{% endif %}</div>{%- endcapture -%}
+              {%- assign rendered_how = rendered_how | replace: how_key, how_media -%}
+            {%- endif -%}
+          {%- endfor -%}
+          {{ rendered_how }}
           <p class="fn">Seven years of textile development. Patent pending · SE 2615359-3.</p>
         </div></div></div>
       </div>
@@ -2079,13 +2116,20 @@ wteTimelines.forEach((timeline) => {
       "type": "text",
       "id": "proof_returns_line",
       "label": "Returns proof line (green)",
-      "default": "0 returns in the last 90 days"
+      "default": "Mechanics aren't sending them back."
     },
     {
       "type": "text",
       "id": "proof_keep_line",
       "label": "Keep line",
       "default": "Workers are keeping them."
+    },
+    {
+      "type": "text",
+      "id": "proof_stamp_line",
+      "label": "Guarantee stamp (below ticker)",
+      "info": "Framed with laurels under the comment ticker. Leave blank to hide.",
+      "default": "30 shifts. If your hands aren't dry at lunch, keep the liners and get your money back."
     },
     {
       "type": "text",

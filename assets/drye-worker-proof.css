@@ -299,3 +299,52 @@
     grid-template-columns: 1fr 1fr;
   }
 }
+
+/* ---- Guarantee stamp (laurel-framed, below the ticker) ---------------- */
+
+.hero .drye-proof__stamp {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px solid #E5E5E5;
+}
+
+.hero .drye-proof__laurel {
+  flex: 0 0 auto;
+  width: 18px;
+  height: 40px;
+  color: var(--emerald, #0D9488);
+  opacity: 0.8;
+}
+
+.hero .drye-proof__laurel--r {
+  transform: scaleX(-1);
+}
+
+.hero .drye-proof__stamp-inner {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 6px;
+  max-width: 320px;
+}
+
+.hero .drye-proof__stamp-check {
+  flex: 0 0 14px;
+  width: 14px;
+  height: 14px;
+  margin-top: 1px;
+  color: var(--emerald, #0D9488);
+}
+
+.hero .drye-proof__stamp-t {
+  font-family: "DM Sans", sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1.35;
+  color: var(--deep, #1E3A4C);
+  text-align: center;
+}
