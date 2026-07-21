@@ -322,6 +322,10 @@
         "proof_enabled": true,
         "proof_returns_line": "Buyers aren’t sending them back ",
         "proof_keep_line": "0 returns recorded in the last 90 days.",
+        "proof_stamp_line": "30 shifts. If your hands aren't dry at lunch, keep the liners and get your money back.",
+        "skapa_line": "SKAPA Innovation Award — in memory of the inventor Alfred Nobel",
+        "skapa_url": "",
+        "seen_in_label": "Seen in",
         "proof_ticker_label": "LIVE FROM OUR ADS ",
         "proof_hint": "Tap a comment to read it in full",
         "proof_item_1_short": "These are incredible.",
@@ -393,6 +397,85 @@
         "notify_cta": "NOTIFY ME",
         "notify_email_error": "Please enter a valid email.",
         "notify_success": "Done. We'll email you."
+      }
+    },
+    "drye_research_study_breakdown_BzbdGT": {
+      "type": "drye-research-study-breakdown",
+      "blocks": {
+        "study_card_Az6PCM": {
+          "type": "study_card",
+          "settings": {
+            "title_line_1": "EV Technicians",
+            "title_line_2": "Multiple Nordic Service Centers",
+            "badge": "15 Weeks",
+            "result_label_1": "Technician field rating",
+            "result_value_1": "7.76/10",
+            "result_width_1": 78,
+            "result_label_2": "Reduced sweat under HV gloves",
+            "result_value_2": "14/16",
+            "result_width_2": 100,
+            "result_label_3": "Dexterity unaffected",
+            "result_value_3": "16/16",
+            "result_width_3": 100,
+            "result_label_4": "",
+            "result_value_4": "",
+            "result_width_4": 100,
+            "note": "Certified Class 0 high-voltage rubber gloves, 8h shifts, 15 weeks. Structured field survey, 16 technicians, 2023."
+          }
+        },
+        "study_card_J649Up": {
+          "type": "study_card",
+          "settings": {
+            "title_line_1": "Automotive Mechanics",
+            "title_line_2": "Gothenburg, Sweden",
+            "badge": "8 Weeks",
+            "result_label_1": "Reduced sweat retention",
+            "result_value_1": "7/9",
+            "result_width_1": 78,
+            "result_label_2": "Fewer dermatitis flare-ups",
+            "result_value_2": "3/3",
+            "result_width_2": 100,
+            "result_label_3": "Continued use voluntarily",
+            "result_value_3": "9/9",
+            "result_width_3": 100,
+            "result_label_4": "Zero adverse reactions",
+            "result_value_4": "9/9",
+            "result_width_4": 100,
+            "note": "Observational study, June–Aug 2023. 9 participants, Gothenburg. Published: Textilhögskolan Borås, Oct 2023."
+          }
+        },
+        "study_card_TiyMJc": {
+          "type": "study_card",
+          "settings": {
+            "title_line_1": "Infantry Soldiers",
+            "title_line_2": "Ukraine, Active Field Use",
+            "badge": "Combat Conditions",
+            "result_label_1": "Improved thermal comfort",
+            "result_value_1": "9/10",
+            "result_width_1": 90,
+            "result_label_2": "Reduced skin damage",
+            "result_value_2": "10/10",
+            "result_width_2": 100,
+            "result_label_3": "Weapon precision: unaffected",
+            "result_value_3": "9/10",
+            "result_width_3": 90,
+            "result_label_4": "Would use in combat",
+            "result_value_4": "10/10",
+            "result_width_4": 100,
+            "note": "Structured questionnaire, 10 infantry soldiers. National Guard of Ukraine, 2nd Corps. Active field conditions, 2025."
+          }
+        }
+      },
+      "block_order": [
+        "study_card_Az6PCM",
+        "study_card_J649Up",
+        "study_card_TiyMJc"
+      ],
+      "name": "DRYE Study Breakdown",
+      "settings": {
+        "micro_label": "INDEPENDENT VALIDATION",
+        "heading": "",
+        "intro_text": "Independent observations across real working environments."
       }
     },
     "drye_research_video_full_VPtXGb": {
@@ -748,6 +831,7 @@
   },
   "order": [
     "drye_product_page_new_9ibHgd",
+    "drye_research_study_breakdown_BzbdGT",
     "drye_research_video_full_VPtXGb",
     "17820025558baba7f4",
     "drye_about_skapa_WFa9Bz",
