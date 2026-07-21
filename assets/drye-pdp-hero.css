@@ -1650,7 +1650,7 @@
 }
 
 .hero .value-card__col {
-  padding: 10px 10px 12px;
+  padding: 8px 10px 8px;
 }
 
 .hero .value-card__col--loop {
@@ -2073,17 +2073,17 @@
 }
 .hero .vtl__row:first-child { border-top: 0; }
 .hero .vtl__mark {
-  font-size: 13px;
+  font-size: 10.5px;
   font-weight: 600;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: var(--muted);
+  color: var(--caption);
   white-space: nowrap;
 }
 .hero .vtl__out { font-size: 13px; color: var(--body); line-height: 1.35; }
 @media (max-width: 360px) {
   .hero .vtl__row { grid-template-columns: 1fr; gap: 2px; }
-  .hero .vtl__mark { font-size: 12px; }
+  .hero .vtl__mark { font-size: 10px; }
 }
 
 /* Per-month — two lines */
@@ -2141,6 +2141,10 @@
 .hero .acc__body h5:first-child { margin-top: 0; }
 .hero .acc__body p { margin: 0 0 10px; }
 .hero .acc__body p:last-child { margin-bottom: 0; }
+.hero .acc__body ul { margin: 0 0 12px; padding-left: 18px; list-style: disc; }
+.hero .acc__body li { margin: 0 0 6px; padding-left: 2px; }
+.hero .acc__body li:last-child { margin-bottom: 0; }
+.hero .acc__body li::marker { color: var(--caption); }
 .hero .acc__body a { color: var(--emerald); text-decoration: none; font-weight: 500; }
 .hero .acc__body .fn { font-size: 14px; color: var(--caption); margin: 0; }
 .hero .acc__link { margin: 12px 0 0; }
