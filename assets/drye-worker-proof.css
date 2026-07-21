@@ -416,6 +416,43 @@
   filter: grayscale(0);
 }
 
+/* Text wordmark fallbacks (Byggtjänst / Gnosjö / Smarta Saker) */
+.hero .drye-press__logo--text {
+  height: 26px;
+  color: #111;
+  opacity: 0.55;
+  filter: grayscale(1);
+}
+
+.hero .lg-bygg {
+  font-family: "DM Sans", sans-serif;
+  font-size: 12px;
+  line-height: 1;
+  text-align: left;
+  font-weight: 800;
+}
+
+.hero .lg-bygg small {
+  display: block;
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.hero .lg-gnosjo {
+  font-family: "DM Sans", sans-serif;
+  font-size: 13px;
+  line-height: 1;
+  font-weight: 900;
+  letter-spacing: 0.02em;
+}
+
+.hero .lg-smarta {
+  font-family: "DM Sans", sans-serif;
+  font-size: 16px;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+}
+
 /* ---- Who Makes This — seamstress photo + partner logos ---------------- */
 
 .drye-maker__photo {

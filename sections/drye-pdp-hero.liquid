@@ -479,11 +479,11 @@ assign review_count = section.settings.review_count_fallback
       {% endif %}
 
       <div class="stepbar">
-        <button type="button" class="stepbar__btn" aria-expanded="true" aria-controls="step1panel-{{ section.id }}" id="step1btn-{{ section.id }}">
+        <button type="button" class="stepbar__btn" aria-expanded="false" aria-controls="step1panel-{{ section.id }}" id="step1btn-{{ section.id }}">
           {{ section.settings.compare_principle | default: 'Step 1: Change the environment' }}
           <svg class="stepbar__chev" viewBox="0 0 10 6" fill="none"><path d="M0 0l5 6 5-6z" fill="currentColor"/></svg>
         </button>
-        <div class="stepbar__panel open" id="step1panel-{{ section.id }}"><div class="stepbar__inner">
+        <div class="stepbar__panel" id="step1panel-{{ section.id }}"><div class="stepbar__inner">
           <div class="value-card__grid">
             <div class="value-card__col value-card__col--loop">
               <p class="value-card__eyebrow value-card__eyebrow--loop">The workaround loop</p>
@@ -546,8 +546,7 @@ assign review_count = section.settings.review_count_fallback
         {%- assign cpm_note_low = section.settings.cpm_note_low -%}
         {%- assign cpm_note_high = section.settings.cpm_note_high -%}
         <div class="permo" data-cpm hidden>
-          <p class="permo-line">About <span data-cpm-price="{{ cpm_low }}"></span> a month over six months of heavy use</p>
-          <p class="permo-line">About <span data-cpm-price="{{ cpm_high }}"></span> a month over twelve months of light use</p>
+          <p class="permo-line">Heavy shop: <span data-cpm-price="{{ cpm_low }}"></span>/mo over {{ cpm_low }} months · Light shop: <span data-cpm-price="{{ cpm_high }}"></span>/mo over {{ cpm_high }} months</p>
         </div>
       {% endif %}
 
@@ -717,6 +716,34 @@ assign review_count = section.settings.review_count_fallback
         <path d="M28 82 c -6 3 -7 8 -4 13 c 5 -3 8 -8 4 -13 z"/>
       </svg>
     {%- endcapture -%}
+    {%- comment -%} Seen in — press row (sits above the guarantee seal) {%- endcomment -%}
+    {% assign press_logos = section.blocks | where: 'type', 'press_logo' %}
+    <div class="drye-press">
+      <span class="drye-press__label">{{ section.settings.seen_in_label | default: 'Seen in' }}</span>
+      <div class="drye-press__logos">
+        {% if press_logos.size > 0 %}
+          {% for block in press_logos %}
+            {% if block.settings.image != blank %}
+              {% if block.settings.url != blank %}
+                <a class="drye-press__logo" href="{{ block.settings.url }}" target="_blank" rel="noopener" {{ block.shopify_attributes }}>
+                  <img src="{{ block.settings.image | image_url: width: 320 }}" alt="{{ block.settings.name | escape }}" loading="lazy" width="{{ block.settings.image.width }}" height="{{ block.settings.image.height }}">
+                </a>
+              {% else %}
+                <span class="drye-press__logo" {{ block.shopify_attributes }}>
+                  <img src="{{ block.settings.image | image_url: width: 320 }}" alt="{{ block.settings.name | escape }}" loading="lazy" width="{{ block.settings.image.width }}" height="{{ block.settings.image.height }}">
+                </span>
+              {% endif %}
+            {% endif %}
+          {% endfor %}
+        {% else %}
+          <span class="drye-press__logo drye-press__logo--text"><span class="lg-bygg">SVENSK<small>BYGGTJÄNST</small></span></span>
+          <span class="drye-press__logo drye-press__logo--text"><span class="lg-gnosjo">GNOSJÖ<br>SVARVNING</span></span>
+          <span class="drye-press__logo drye-press__logo--text"><span class="lg-smarta">smartasaker</span></span>
+          <span class="drye-press__logo"><img src="https://cdn.shopify.com/s/files/1/0686/9581/8505/files/images_1.png?v=1784673274" alt="Gadget Flow" loading="lazy"></span>
+        {% endif %}
+      </div>
+    </div>
+
     {% if section.settings.proof_stamp_line != blank %}
       <div class="drye-seal">
         <div class="drye-seal__wrap">
@@ -737,32 +764,6 @@ assign review_count = section.settings.review_count_fallback
         {% endif %}
       </div>
     {% endif %}
-
-    {% assign press_logos = section.blocks | where: 'type', 'press_logo' %}
-    <div class="drye-press">
-      <span class="drye-press__label">{{ section.settings.seen_in_label | default: 'Seen in' }}</span>
-      <div class="drye-press__logos">
-        {% if press_logos.size > 0 %}
-          {% for block in press_logos %}
-            {% if block.settings.image != blank %}
-              {% if block.settings.url != blank %}
-                <a class="drye-press__logo" href="{{ block.settings.url }}" target="_blank" rel="noopener" {{ block.shopify_attributes }}>
-                  <img src="{{ block.settings.image | image_url: width: 320 }}" alt="{{ block.settings.name | escape }}" loading="lazy" width="{{ block.settings.image.width }}" height="{{ block.settings.image.height }}">
-                </a>
-              {% else %}
-                <span class="drye-press__logo" {{ block.shopify_attributes }}>
-                  <img src="{{ block.settings.image | image_url: width: 320 }}" alt="{{ block.settings.name | escape }}" loading="lazy" width="{{ block.settings.image.width }}" height="{{ block.settings.image.height }}">
-                </span>
-              {% endif %}
-            {% endif %}
-          {% endfor %}
-        {% else %}
-          <span class="drye-press__logo">
-            <img src="https://cdn.shopify.com/s/files/1/0686/9581/8505/files/images_1.png?v=1784673274" alt="Gadget Flow" loading="lazy">
-          </span>
-        {% endif %}
-      </div>
-    </div>
 
   </section>
 
@@ -902,7 +903,7 @@ assign review_count = section.settings.review_count_fallback
           {% endif %}
           {{ section.settings.acc_maker_body }}
           <div class="drye-partners">
-            <span class="drye-partners__label">Developed with</span>
+            <span class="drye-partners__label">Developed &amp; validated with</span>
             <div class="drye-partners__logos">
               <span class="drye-partners__logo"><img src="https://cdn.shopify.com/s/files/1/0686/9581/8505/files/images_4.png?v=1784673289" alt="Uppsala University" loading="lazy"></span>
               <span class="drye-partners__logo"><img src="https://cdn.shopify.com/s/files/1/0686/9581/8505/files/1652448387777.jpg?v=1784673262" alt="The Swedish School of Textiles, Borås" loading="lazy"></span>
