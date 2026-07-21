@@ -415,3 +415,52 @@
   opacity: 1;
   filter: grayscale(0);
 }
+
+/* ---- Who Makes This — seamstress photo + partner logos ---------------- */
+
+.drye-maker__photo {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  margin: 0 0 12px;
+  object-fit: cover;
+}
+
+.drye-partners {
+  margin-top: 14px;
+  padding-top: 12px;
+  border-top: 1px solid #E5E5E5;
+}
+
+.drye-partners__label {
+  display: block;
+  margin-bottom: 10px;
+  font-family: "DM Sans", sans-serif;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--caption, #9CA3AF);
+}
+
+.drye-partners__logos {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 14px 22px;
+}
+
+.drye-partners__logo {
+  display: inline-flex;
+  align-items: center;
+}
+
+.drye-partners__logo img {
+  height: 30px;
+  width: auto;
+  max-width: 120px;
+  object-fit: contain;
+  opacity: 0.65;
+  filter: grayscale(1);
+}

@@ -478,41 +478,44 @@ assign review_count = section.settings.review_count_fallback
         {% assign selected_variant_preorder = true %}
       {% endif %}
 
-      <div class="value-card">
-        <div class="value-card__principle">
-          <span class="value-card__principle-t">{{ section.settings.compare_principle | default: 'Step 1: Change the environment' }}</span>
-        </div>
-        <div class="value-card__grid">
-          <div class="value-card__col value-card__col--loop">
-            <p class="value-card__eyebrow value-card__eyebrow--loop">The workaround loop</p>
-            <div class="value-card__items">
-              <div class="value-card__item"><span class="value-card__x">✕</span><span>Soaked liners</span></div>
-              <div class="value-card__item"><span class="value-card__x">✕</span><span>Glove-stick</span></div>
-              <div class="value-card__item"><span class="value-card__x">✕</span><span>Constant hand resets</span></div>
-              <div class="value-card__item"><span class="value-card__x">✕</span><span>Wet, irritated skin</span></div>
-              <div class="value-card__item"><span class="value-card__x">✕</span><span>Cream after every shift</span></div>
+      <div class="stepbar">
+        <button type="button" class="stepbar__btn" aria-expanded="true" aria-controls="step1panel-{{ section.id }}" id="step1btn-{{ section.id }}">
+          {{ section.settings.compare_principle | default: 'Step 1: Change the environment' }}
+          <svg class="stepbar__chev" viewBox="0 0 10 6" fill="none"><path d="M0 0l5 6 5-6z" fill="currentColor"/></svg>
+        </button>
+        <div class="stepbar__panel open" id="step1panel-{{ section.id }}"><div class="stepbar__inner">
+          <div class="value-card__grid">
+            <div class="value-card__col value-card__col--loop">
+              <p class="value-card__eyebrow value-card__eyebrow--loop">The workaround loop</p>
+              <div class="value-card__items">
+                <div class="value-card__item"><span class="value-card__x">✕</span><span>Soaked liners</span></div>
+                <div class="value-card__item"><span class="value-card__x">✕</span><span>Glove-stick</span></div>
+                <div class="value-card__item"><span class="value-card__x">✕</span><span>Constant hand resets</span></div>
+                <div class="value-card__item"><span class="value-card__x">✕</span><span>Wet, irritated skin</span></div>
+                <div class="value-card__item"><span class="value-card__x">✕</span><span>Cream after every shift</span></div>
+              </div>
+            </div>
+            <div class="value-card__div" aria-hidden="true"></div>
+            <div class="value-card__col value-card__col--base">
+              <p class="value-card__eyebrow value-card__eyebrow--base">One base layer</p>
+              <div class="value-card__items">
+                <div class="value-card__item"><span class="value-card__arrow">→</span><span>Dryer hands all shift</span></div>
+                <div class="value-card__item"><span class="value-card__arrow">→</span><span>No sticky glove changes</span></div>
+                <div class="value-card__item"><span class="value-card__arrow">→</span><span>Oil and grime hit the liner, not your skin</span></div>
+                <div class="value-card__item"><span class="value-card__arrow">→</span><span>Machine washable</span></div>
+                <div class="value-card__item"><span class="value-card__arrow">→</span><span>Fits under any sealed glove</span></div>
+              </div>
             </div>
           </div>
-          <div class="value-card__div" aria-hidden="true"></div>
-          <div class="value-card__col value-card__col--base">
-            <p class="value-card__eyebrow value-card__eyebrow--base">One base layer</p>
-            <div class="value-card__items">
-              <div class="value-card__item"><span class="value-card__arrow">→</span><span>Dryer hands all shift</span></div>
-              <div class="value-card__item"><span class="value-card__arrow">→</span><span>No sticky glove changes</span></div>
-              <div class="value-card__item"><span class="value-card__arrow">→</span><span>Oil and grime hit the liner, not your skin</span></div>
-              <div class="value-card__item"><span class="value-card__arrow">→</span><span>Machine washable</span></div>
-              <div class="value-card__item"><span class="value-card__arrow">→</span><span>Fits under any sealed glove</span></div>
-            </div>
-          </div>
-        </div>
+        </div></div>
       </div>
 
-      <div class="step2">
-        <button type="button" class="step2__btn" aria-expanded="false" aria-controls="step2panel-{{ section.id }}" id="step2btn-{{ section.id }}">
+      <div class="stepbar">
+        <button type="button" class="stepbar__btn" aria-expanded="false" aria-controls="step2panel-{{ section.id }}" id="step2btn-{{ section.id }}">
           {{ section.settings.step2_label | default: 'Step 2: Notice the difference after 5 min' }}
-          <svg class="step2__chev" viewBox="0 0 10 6" fill="none"><path d="M0 0l5 6 5-6z" fill="currentColor"/></svg>
+          <svg class="stepbar__chev" viewBox="0 0 10 6" fill="none"><path d="M0 0l5 6 5-6z" fill="currentColor"/></svg>
         </button>
-        <div class="step2__panel" id="step2panel-{{ section.id }}"><div class="step2__inner">
+        <div class="stepbar__panel" id="step2panel-{{ section.id }}"><div class="stepbar__inner">
           <div class="vtl">
             {% assign timeline_rows = section.blocks | where: 'type', 'timeline_row' %}
             {% if timeline_rows.size > 0 %}
@@ -723,7 +726,7 @@ assign review_count = section.settings.review_count_fallback
         </div>
         {% if section.settings.skapa_line != blank or section.settings.skapa_logo != blank %}
           {%- capture skapa_inner -%}
-            {% if section.settings.skapa_logo != blank %}<img class="drye-seal__skapa-logo" src="{{ section.settings.skapa_logo | image_url: width: 260 }}" alt="{{ section.settings.skapa_line | escape }}" loading="lazy" width="{{ section.settings.skapa_logo.width }}" height="{{ section.settings.skapa_logo.height }}">{% endif %}
+            {% if section.settings.skapa_logo != blank %}<img class="drye-seal__skapa-logo" src="{{ section.settings.skapa_logo | image_url: width: 260 }}" alt="{{ section.settings.skapa_line | escape }}" loading="lazy" width="{{ section.settings.skapa_logo.width }}" height="{{ section.settings.skapa_logo.height }}">{% else %}<img class="drye-seal__skapa-logo" src="https://cdn.shopify.com/s/files/1/0686/9581/8505/files/stiftelsen_skapa_cover.jpg?v=1784673270" alt="{{ section.settings.skapa_line | escape }}" loading="lazy">{% endif %}
             {% if section.settings.skapa_line != blank %}<span class="drye-seal__skapa-t">{{ section.settings.skapa_line }}</span>{% endif %}
           {%- endcapture -%}
           {% if section.settings.skapa_url != blank %}
@@ -736,10 +739,10 @@ assign review_count = section.settings.review_count_fallback
     {% endif %}
 
     {% assign press_logos = section.blocks | where: 'type', 'press_logo' %}
-    {% if press_logos.size > 0 %}
-      <div class="drye-press">
-        <span class="drye-press__label">{{ section.settings.seen_in_label | default: 'Seen in' }}</span>
-        <div class="drye-press__logos">
+    <div class="drye-press">
+      <span class="drye-press__label">{{ section.settings.seen_in_label | default: 'Seen in' }}</span>
+      <div class="drye-press__logos">
+        {% if press_logos.size > 0 %}
           {% for block in press_logos %}
             {% if block.settings.image != blank %}
               {% if block.settings.url != blank %}
@@ -753,9 +756,13 @@ assign review_count = section.settings.review_count_fallback
               {% endif %}
             {% endif %}
           {% endfor %}
-        </div>
+        {% else %}
+          <span class="drye-press__logo">
+            <img src="https://cdn.shopify.com/s/files/1/0686/9581/8505/files/images_1.png?v=1784673274" alt="Gadget Flow" loading="lazy">
+          </span>
+        {% endif %}
       </div>
-    {% endif %}
+    </div>
 
   </section>
 
@@ -890,7 +897,18 @@ assign review_count = section.settings.review_count_fallback
       <div class="acc">
         <button class="acc__btn" type="button" aria-expanded="false" aria-controls="acc-p2-{{ section.id }}" id="acc-b2-{{ section.id }}">{{ section.settings.acc_maker_label | default: 'Who Makes This' }}<svg class="acc__chev" viewBox="0 0 10 6" fill="none"><path d="M0 0l5 6 5-6z" fill="currentColor"/></svg></button>
         <div class="acc__panel" id="acc-p2-{{ section.id }}" role="region" aria-labelledby="acc-b2-{{ section.id }}"><div class="acc__inner"><div class="acc__body">
+          {% if section.settings.maker_image != blank %}
+            <img class="drye-maker__photo" src="{{ section.settings.maker_image | image_url: width: 900 }}" alt="{{ section.settings.acc_maker_label | default: 'Who Makes This' | escape }}" loading="lazy" width="{{ section.settings.maker_image.width }}" height="{{ section.settings.maker_image.height }}">
+          {% endif %}
           {{ section.settings.acc_maker_body }}
+          <div class="drye-partners">
+            <span class="drye-partners__label">Developed with</span>
+            <div class="drye-partners__logos">
+              <span class="drye-partners__logo"><img src="https://cdn.shopify.com/s/files/1/0686/9581/8505/files/images_4.png?v=1784673289" alt="Uppsala University" loading="lazy"></span>
+              <span class="drye-partners__logo"><img src="https://cdn.shopify.com/s/files/1/0686/9581/8505/files/1652448387777.jpg?v=1784673262" alt="The Swedish School of Textiles, Borås" loading="lazy"></span>
+              <span class="drye-partners__logo"><img src="https://cdn.shopify.com/s/files/1/0686/9581/8505/files/images_5.png?v=1784673293" alt="Wargön Innovation" loading="lazy"></span>
+            </div>
+          </div>
         </div></div></div>
       </div>
       <div class="acc">
@@ -944,16 +962,16 @@ assign review_count = section.settings.review_count_fallback
         if (!sectionEl || sectionEl.dataset.dryeAccBound === 'true') return;
         sectionEl.dataset.dryeAccBound = 'true';
 
-        // Step 2 collapsible timeline (independent)
-        var s2 = sectionEl.querySelector('.step2__btn');
-        if (s2) {
-          s2.addEventListener('click', function () {
-            var panel = sectionEl.querySelector('#' + s2.getAttribute('aria-controls'));
-            var open = s2.getAttribute('aria-expanded') === 'true';
-            s2.setAttribute('aria-expanded', open ? 'false' : 'true');
+        // Step 1 + Step 2 collapsible bars (each toggles independently)
+        var stepBtns = Array.prototype.slice.call(sectionEl.querySelectorAll('.stepbar__btn'));
+        stepBtns.forEach(function (btn) {
+          btn.addEventListener('click', function () {
+            var panel = sectionEl.querySelector('#' + btn.getAttribute('aria-controls'));
+            var open = btn.getAttribute('aria-expanded') === 'true';
+            btn.setAttribute('aria-expanded', open ? 'false' : 'true');
             if (panel) { panel.classList.toggle('open', !open); }
           });
-        }
+        });
 
         // Bottom accordion — one open at a time
         var accBtns = Array.prototype.slice.call(sectionEl.querySelectorAll('.acc__btn'));
@@ -2477,6 +2495,12 @@ wteTimelines.forEach((timeline) => {
       "id": "acc_maker_label",
       "label": "Accordion — Who Makes This label",
       "default": "Who Makes This"
+    },
+    {
+      "type": "image_picker",
+      "id": "maker_image",
+      "label": "Who Makes This — photo (seamstress)",
+      "info": "Shown above the maker text to add a human face."
     },
     {
       "type": "richtext",
