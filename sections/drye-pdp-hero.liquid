@@ -1200,6 +1200,8 @@ assign review_count = section.settings.review_count_fallback
     data-panel="rev"
     role="tabpanel"
   >
+    {%- assign rev_max = section.settings.reviews_visible_max | default: 3 -%}
+    {%- assign shown_reviews = 0 -%}
     <div class="testi-grid">
       {% for i in (1..9) %}
         {% liquid
@@ -1222,7 +1224,8 @@ assign review_count = section.settings.review_count_fallback
           assign rev_show_b2b = review_block.settings[show_b2b_key]
         %}
 
-        {% if rev_quote != blank %}
+        {% if rev_quote != blank and shown_reviews < rev_max %}
+          {%- assign shown_reviews = shown_reviews | plus: 1 -%}
           <div class="testi-card">
             {% if rev_show_b2b %}
               <div class="testi-detail">
@@ -2058,6 +2061,15 @@ wteTimelines.forEach((timeline) => {
       "id": "review_count_fallback",
       "label": "Fallback review count",
       "default": "43"
+    },
+    {
+      "type": "range",
+      "id": "reviews_visible_max",
+      "label": "Reviews shown in tab",
+      "min": 1,
+      "max": 9,
+      "step": 1,
+      "default": 3
     },
     {
       "type": "text",
