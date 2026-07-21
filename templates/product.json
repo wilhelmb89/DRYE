@@ -408,72 +408,6 @@
         "quote_attr": "SKAPA Foundation — Innovation in Memory of Alfred Nobel"
       }
     },
-    "drye_mechanics_time_promise_gNDGeD": {
-      "type": "drye-mechanics-time-promise",
-      "disabled": true,
-      "name": "DRYE Mechanics Time",
-      "settings": {
-        "eyebrow": "— A. Riahi",
-        "heading": "Eight hours in. The glove is humid. Your skin is dry.",
-        "body": "<p><em>\"After 6 hours under rubber gloves, my hands felt wet inside. Took the gloves off — completely dry. Such a mindfuck.\"</em><br/><br/></p>"
-      }
-    },
-    "drye_liner_fail_cards_bazFUt": {
-      "type": "drye-liner-fail-cards",
-      "blocks": {
-        "fail_LWk6Da": {
-          "type": "fail",
-          "settings": {
-            "title": "Gloves come off easier. ",
-            "description": "No peeling off wet nitrile between jobs."
-          }
-        },
-        "fail_z96AA9": {
-          "type": "fail",
-          "settings": {
-            "title": "Less sweat, oil, and grime on skin. ",
-            "description": "DRYE takes the first hit inside the glove."
-          }
-        },
-        "fail_cnBcAB": {
-          "type": "fail",
-          "settings": {
-            "title": "Less end-of-day hand damage. ",
-            "description": "Less soaked skin. Less wiping. Less scrubbing."
-          }
-        },
-        "fail_RUyBbc": {
-          "type": "fail",
-          "settings": {
-            "title": "Fewer trashed gloves. ",
-            "description": "Less wet slip, sticking, and stretched-out nitrile."
-          }
-        },
-        "fail_WFTrmY": {
-          "type": "fail",
-          "settings": {
-            "title": "Give your skin a break. ",
-            "description": "Less time trapped wet inside the glove. More time to dry out and recover."
-          }
-        }
-      },
-      "block_order": [
-        "fail_LWk6Da",
-        "fail_z96AA9",
-        "fail_cnBcAB",
-        "fail_RUyBbc",
-        "fail_WFTrmY"
-      ],
-      "disabled": true,
-      "name": "DRYE Liner Fail Cards",
-      "settings": {
-        "section_id": "liner-fails",
-        "eyebrow": "",
-        "heading": "Drier hands changes",
-        "heading_emphasis": "the whole shift.",
-        "body": ""
-      }
-    },
     "drye_research_video_full_VPtXGb": {
       "type": "drye-research-video-full",
       "name": "DRYE Research Video Full",
@@ -723,21 +657,6 @@
         "swipe_label": "Swipe"
       }
     },
-    "drye_reviews_mars_api_PWtkJh": {
-      "type": "drye-reviews-mars-api",
-      "disabled": true,
-      "name": "DRYE Reviews Mars API",
-      "settings": {
-        "api_endpoint": "https://drye-judgeme-reviews.wilhelm-backstrom.workers.dev/reviews?per_page=100&v=2026-05-21-subcategories",
-        "eyebrow": "Verified customer reviews",
-        "heading": "Used under nitrile, latex, rubber and hockey gloves.",
-        "subtext": "See what changed for people dealing with sweat, irritation, glove changes and long shifts.",
-        "initial_visible_count": 8,
-        "load_more_count": 8,
-        "load_more_label": "Load more reviews →",
-        "form_endpoint": ""
-      }
-    },
     "drye_before_after_KUYw4D": {
       "type": "drye-before-after",
       "blocks": {
@@ -830,13 +749,10 @@
   "order": [
     "drye_product_page_new_9ibHgd",
     "drye_about_skapa_WFa9Bz",
-    "drye_mechanics_time_promise_gNDGeD",
-    "drye_liner_fail_cards_bazFUt",
     "drye_research_video_full_VPtXGb",
     "17820025558baba7f4",
     "drye_mechanics_identification_gallery_rFwWJt",
     "jens_linnea_section_A3xynd",
-    "drye_reviews_mars_api_PWtkJh",
     "drye_before_after_KUYw4D",
     "drye_new_closing_cta_ETinWV",
     "drye_new_sticky_bar_hz6rPt"
