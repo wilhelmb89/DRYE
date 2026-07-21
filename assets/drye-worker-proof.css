@@ -300,51 +300,118 @@
   }
 }
 
-/* ---- Guarantee stamp (laurel-framed, below the ticker) ---------------- */
+/* ---- Guarantee seal (laurel-framed) + award + press ------------------- */
 
-.hero .drye-proof__stamp {
+.hero .drye-seal {
+  margin-top: 14px;
+  padding-top: 14px;
+  border-top: 1px solid #E5E5E5;
+  text-align: center;
+}
+
+.hero .drye-seal__wrap {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 8px;
-  margin-top: 12px;
-  padding-top: 12px;
-  border-top: 1px solid #E5E5E5;
+  gap: 10px;
 }
 
-.hero .drye-proof__laurel {
+.hero .drye-seal__laurel-box {
   flex: 0 0 auto;
-  width: 18px;
-  height: 40px;
-  color: var(--emerald, #0D9488);
-  opacity: 0.8;
+  display: block;
+  width: 30px;
+  height: 62px;
+  color: #B08D57;
 }
 
-.hero .drye-proof__laurel--r {
+.hero .drye-seal__laurel {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.hero .drye-seal__laurel-box--r {
   transform: scaleX(-1);
 }
 
-.hero .drye-proof__stamp-inner {
-  display: flex;
-  align-items: flex-start;
-  justify-content: center;
-  gap: 6px;
-  max-width: 320px;
-}
-
-.hero .drye-proof__stamp-check {
-  flex: 0 0 14px;
-  width: 14px;
-  height: 14px;
-  margin-top: 1px;
-  color: var(--emerald, #0D9488);
-}
-
-.hero .drye-proof__stamp-t {
-  font-family: "DM Sans", sans-serif;
-  font-size: 12px;
-  font-weight: 600;
-  line-height: 1.35;
+.hero .drye-seal__guarantee {
+  margin: 0;
+  max-width: 300px;
+  font-family: "Playfair Display", Georgia, serif;
+  font-style: italic;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.4;
   color: var(--deep, #1E3A4C);
+}
+
+.hero .drye-seal__skapa {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 10px;
+  text-decoration: none;
+  color: var(--muted, #4B5563);
+}
+
+.hero .drye-seal__skapa-logo {
+  height: 22px;
+  width: auto;
+  display: block;
+}
+
+.hero .drye-seal__skapa-t {
+  font-family: "DM Sans", sans-serif;
+  font-size: 10.5px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: var(--muted, #4B5563);
+}
+
+/* Press row — Seen in */
+.hero .drye-press {
+  margin-top: 14px;
+  padding-top: 12px;
+  border-top: 1px solid #E5E5E5;
   text-align: center;
+}
+
+.hero .drye-press__label {
+  display: block;
+  margin-bottom: 10px;
+  font-family: "DM Sans", sans-serif;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--caption, #9CA3AF);
+}
+
+.hero .drye-press__logos {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 18px 24px;
+}
+
+.hero .drye-press__logo {
+  display: inline-flex;
+  align-items: center;
+}
+
+.hero .drye-press__logo img {
+  height: 26px;
+  width: auto;
+  max-width: 130px;
+  object-fit: contain;
+  opacity: 0.7;
+  filter: grayscale(1);
+  transition: opacity 0.15s ease, filter 0.15s ease;
+}
+
+.hero a.drye-press__logo:hover img {
+  opacity: 1;
+  filter: grayscale(0);
 }

@@ -701,30 +701,59 @@ assign review_count = section.settings.review_count_fallback
       </div>
     {% endif %}
 
+    {%- capture drye_laurel -%}
+      <svg class="drye-seal__laurel" viewBox="0 0 48 96" fill="currentColor" aria-hidden="true">
+        <path fill="none" stroke="currentColor" stroke-width="1.6" d="M40 6 C 16 22, 8 46, 15 72 C 18 84, 28 90, 37 92"/>
+        <path d="M39 9 c -7 -1 -12 2 -14 8 c 7 1 13 -2 14 -8 z"/>
+        <path d="M31 15 c -7 -1 -12 2 -14 8 c 7 1 13 -2 14 -8 z"/>
+        <path d="M24 24 c -7 -1 -12 3 -13 9 c 7 0 12 -3 13 -9 z"/>
+        <path d="M18 35 c -7 0 -11 3 -12 9 c 7 0 11 -3 12 -9 z"/>
+        <path d="M15 47 c -7 1 -10 5 -10 11 c 6 -1 11 -5 10 -11 z"/>
+        <path d="M16 60 c -6 2 -9 6 -8 12 c 6 -2 10 -6 8 -12 z"/>
+        <path d="M21 72 c -6 2 -8 7 -6 13 c 5 -2 9 -7 6 -13 z"/>
+        <path d="M28 82 c -6 3 -7 8 -4 13 c 5 -3 8 -8 4 -13 z"/>
+      </svg>
+    {%- endcapture -%}
     {% if section.settings.proof_stamp_line != blank %}
-      <div class="drye-proof__stamp">
-        <svg class="drye-proof__laurel drye-proof__laurel--l" viewBox="0 0 26 56" fill="currentColor" aria-hidden="true">
-          <path d="M20 4c-6 4-9 10-9 24 0 10 3 18 8 24" fill="none" stroke="currentColor" stroke-width="1.4"/>
-          <path d="M18 10c-4 0-6 2-7 5 3 1 6 0 7-5z"/>
-          <path d="M15 20c-4 0-6 2-7 5 3 1 6 0 7-5z"/>
-          <path d="M13 31c-4 0-6 2-6 5 3 1 6 0 6-5z"/>
-          <path d="M14 42c-4-1-6 1-7 4 3 1 6 0 7-4z"/>
-          <path d="M17 51c-4-1-6 1-7 4 3 1 6 0 7-4z"/>
-        </svg>
-        <span class="drye-proof__stamp-inner">
-          <svg class="drye-proof__stamp-check" viewBox="0 0 16 16" fill="none" aria-hidden="true">
-            <path d="M3 8.4l3 3 7-7.6" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-          <span class="drye-proof__stamp-t">{{ section.settings.proof_stamp_line }}</span>
-        </span>
-        <svg class="drye-proof__laurel drye-proof__laurel--r" viewBox="0 0 26 56" fill="currentColor" aria-hidden="true">
-          <path d="M20 4c-6 4-9 10-9 24 0 10 3 18 8 24" fill="none" stroke="currentColor" stroke-width="1.4"/>
-          <path d="M18 10c-4 0-6 2-7 5 3 1 6 0 7-5z"/>
-          <path d="M15 20c-4 0-6 2-7 5 3 1 6 0 7-5z"/>
-          <path d="M13 31c-4 0-6 2-6 5 3 1 6 0 6-5z"/>
-          <path d="M14 42c-4-1-6 1-7 4 3 1 6 0 7-4z"/>
-          <path d="M17 51c-4-1-6 1-7 4 3 1 6 0 7-4z"/>
-        </svg>
+      <div class="drye-seal">
+        <div class="drye-seal__wrap">
+          <span class="drye-seal__laurel-box drye-seal__laurel-box--l">{{ drye_laurel }}</span>
+          <p class="drye-seal__guarantee">{{ section.settings.proof_stamp_line }}</p>
+          <span class="drye-seal__laurel-box drye-seal__laurel-box--r">{{ drye_laurel }}</span>
+        </div>
+        {% if section.settings.skapa_line != blank or section.settings.skapa_logo != blank %}
+          {%- capture skapa_inner -%}
+            {% if section.settings.skapa_logo != blank %}<img class="drye-seal__skapa-logo" src="{{ section.settings.skapa_logo | image_url: width: 260 }}" alt="{{ section.settings.skapa_line | escape }}" loading="lazy" width="{{ section.settings.skapa_logo.width }}" height="{{ section.settings.skapa_logo.height }}">{% endif %}
+            {% if section.settings.skapa_line != blank %}<span class="drye-seal__skapa-t">{{ section.settings.skapa_line }}</span>{% endif %}
+          {%- endcapture -%}
+          {% if section.settings.skapa_url != blank %}
+            <a class="drye-seal__skapa" href="{{ section.settings.skapa_url }}" target="_blank" rel="noopener">{{ skapa_inner }}</a>
+          {% else %}
+            <div class="drye-seal__skapa">{{ skapa_inner }}</div>
+          {% endif %}
+        {% endif %}
+      </div>
+    {% endif %}
+
+    {% assign press_logos = section.blocks | where: 'type', 'press_logo' %}
+    {% if press_logos.size > 0 %}
+      <div class="drye-press">
+        <span class="drye-press__label">{{ section.settings.seen_in_label | default: 'Seen in' }}</span>
+        <div class="drye-press__logos">
+          {% for block in press_logos %}
+            {% if block.settings.image != blank %}
+              {% if block.settings.url != blank %}
+                <a class="drye-press__logo" href="{{ block.settings.url }}" target="_blank" rel="noopener" {{ block.shopify_attributes }}>
+                  <img src="{{ block.settings.image | image_url: width: 320 }}" alt="{{ block.settings.name | escape }}" loading="lazy" width="{{ block.settings.image.width }}" height="{{ block.settings.image.height }}">
+                </a>
+              {% else %}
+                <span class="drye-press__logo" {{ block.shopify_attributes }}>
+                  <img src="{{ block.settings.image | image_url: width: 320 }}" alt="{{ block.settings.name | escape }}" loading="lazy" width="{{ block.settings.image.width }}" height="{{ block.settings.image.height }}">
+                </span>
+              {% endif %}
+            {% endif %}
+          {% endfor %}
+        </div>
       </div>
     {% endif %}
 
@@ -2132,6 +2161,29 @@ wteTimelines.forEach((timeline) => {
       "default": "30 shifts. If your hands aren't dry at lunch, keep the liners and get your money back."
     },
     {
+      "type": "image_picker",
+      "id": "skapa_logo",
+      "label": "Award emblem (SKAPA)",
+      "info": "Upload the SKAPA emblem/logo. Shows under the guarantee stamp."
+    },
+    {
+      "type": "text",
+      "id": "skapa_line",
+      "label": "Award line",
+      "default": "SKAPA Innovation Award — in memory of the inventor Alfred Nobel"
+    },
+    {
+      "type": "url",
+      "id": "skapa_url",
+      "label": "Award link (optional)"
+    },
+    {
+      "type": "text",
+      "id": "seen_in_label",
+      "label": "Press row label",
+      "default": "Seen in"
+    },
+    {
       "type": "text",
       "id": "proof_ticker_label",
       "label": "Ticker label",
@@ -3224,6 +3276,27 @@ wteTimelines.forEach((timeline) => {
           "type": "image_picker",
           "id": "image",
           "label": "Image (fallback)"
+        }
+      ]
+    },
+    {
+      "type": "press_logo",
+      "name": "Press logo (Seen in)",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Logo"
+        },
+        {
+          "type": "url",
+          "id": "url",
+          "label": "Link (article/product)"
+        },
+        {
+          "type": "text",
+          "id": "name",
+          "label": "Name (alt text)"
         }
       ]
     },
