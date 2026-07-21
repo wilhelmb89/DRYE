@@ -302,9 +302,14 @@
 
 /* ---- Guarantee seal (laurel-framed) + award + press ------------------- */
 
+/* Frameless wrapper below the proof card (no border/background) */
+.hero .drye-trust {
+  margin-top: 18px;
+}
+
 .hero .drye-seal {
-  margin-top: 14px;
-  padding-top: 14px;
+  margin-top: 20px;
+  padding-top: 18px;
   border-top: 1px solid #E5E5E5;
   text-align: center;
 }
@@ -346,34 +351,46 @@
 }
 
 .hero .drye-seal__skapa {
-  display: inline-flex;
+  display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 8px;
-  margin-top: 10px;
+  gap: 5px;
+  margin-top: 22px;
   text-decoration: none;
   color: var(--muted, #4B5563);
 }
 
 .hero .drye-seal__skapa-logo {
-  height: 22px;
+  height: 40px;
   width: auto;
   display: block;
+  margin-bottom: 2px;
+}
+
+.hero .drye-seal__skapa-name {
+  font-family: "DM Sans", sans-serif;
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  color: var(--deep, #1E3A4C);
 }
 
 .hero .drye-seal__skapa-t {
   font-family: "DM Sans", sans-serif;
   font-size: 10.5px;
-  font-weight: 600;
-  letter-spacing: 0.04em;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  line-height: 1.35;
+  max-width: 260px;
+  text-align: center;
   color: var(--muted, #4B5563);
 }
 
-/* Press row — Seen in */
+/* Press row — Seen in (frameless: no top border) */
 .hero .drye-press {
-  margin-top: 14px;
-  padding-top: 12px;
-  border-top: 1px solid #E5E5E5;
+  margin-top: 0;
+  padding-top: 0;
   text-align: center;
 }
 
@@ -453,6 +470,22 @@
   letter-spacing: -0.02em;
 }
 
+.hero .lg-gadget {
+  font-family: "DM Sans", sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+/* Wordmark links keep the same look, no underline */
+.hero a.drye-press__logo--text {
+  text-decoration: none;
+}
+
+.hero a.drye-press__logo--text:hover {
+  opacity: 0.85;
+}
+
 /* ---- Who Makes This — seamstress photo + partner logos ---------------- */
 
 .drye-maker__photo {
@@ -500,4 +533,15 @@
   object-fit: contain;
   opacity: 0.65;
   filter: grayscale(1);
+}
+
+/* Borås logo reads tiny at 30px — 3x it; Uppsala +20% */
+.drye-partners__logo--boras img {
+  height: 90px;
+  max-width: 240px;
+}
+
+.drye-partners__logo--uppsala img {
+  height: 36px;
+  max-width: 140px;
 }

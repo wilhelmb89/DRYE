@@ -716,8 +716,11 @@ assign review_count = section.settings.review_count_fallback
         <path d="M28 82 c -6 3 -7 8 -4 13 c 5 -3 8 -8 4 -13 z"/>
       </svg>
     {%- endcapture -%}
-    {%- comment -%} Seen in — press row (sits above the guarantee seal) {%- endcomment -%}
-    {% assign press_logos = section.blocks | where: 'type', 'press_logo' %}
+  </section>
+
+  {%- comment -%} Seen in — press row (frameless, below the proof card) {%- endcomment -%}
+  {% assign press_logos = section.blocks | where: 'type', 'press_logo' %}
+  <div class="drye-trust">
     <div class="drye-press">
       <span class="drye-press__label">{{ section.settings.seen_in_label | default: 'Seen in' }}</span>
       <div class="drye-press__logos">
@@ -736,10 +739,10 @@ assign review_count = section.settings.review_count_fallback
             {% endif %}
           {% endfor %}
         {% else %}
-          <span class="drye-press__logo drye-press__logo--text"><span class="lg-bygg">SVENSK<small>BYGGTJÄNST</small></span></span>
-          <span class="drye-press__logo drye-press__logo--text"><span class="lg-gnosjo">GNOSJÖ<br>SVARVNING</span></span>
+          {% if section.settings.seen_bygg_url != blank %}<a class="drye-press__logo drye-press__logo--text" href="{{ section.settings.seen_bygg_url }}" target="_blank" rel="noopener"><span class="lg-bygg">SVENSK<small>BYGGTJÄNST</small></span></a>{% else %}<span class="drye-press__logo drye-press__logo--text"><span class="lg-bygg">SVENSK<small>BYGGTJÄNST</small></span></span>{% endif %}
+          {% if section.settings.seen_gnosjo_url != blank %}<a class="drye-press__logo drye-press__logo--text" href="{{ section.settings.seen_gnosjo_url }}" target="_blank" rel="noopener"><span class="lg-gnosjo">GNOSJÖ<br>SVARVNING</span></a>{% else %}<span class="drye-press__logo drye-press__logo--text"><span class="lg-gnosjo">GNOSJÖ<br>SVARVNING</span></span>{% endif %}
           <span class="drye-press__logo drye-press__logo--text"><span class="lg-smarta">smartasaker</span></span>
-          <span class="drye-press__logo"><img src="https://cdn.shopify.com/s/files/1/0686/9581/8505/files/images_1.png?v=1784673274" alt="Gadget Flow" loading="lazy"></span>
+          <span class="drye-press__logo drye-press__logo--text"><span class="lg-gadget">Gadget&nbsp;Flow</span></span>
         {% endif %}
       </div>
     </div>
@@ -753,7 +756,8 @@ assign review_count = section.settings.review_count_fallback
         </div>
         {% if section.settings.skapa_line != blank or section.settings.skapa_logo != blank %}
           {%- capture skapa_inner -%}
-            {% if section.settings.skapa_logo != blank %}<img class="drye-seal__skapa-logo" src="{{ section.settings.skapa_logo | image_url: width: 260 }}" alt="{{ section.settings.skapa_line | escape }}" loading="lazy" width="{{ section.settings.skapa_logo.width }}" height="{{ section.settings.skapa_logo.height }}">{% else %}<img class="drye-seal__skapa-logo" src="https://cdn.shopify.com/s/files/1/0686/9581/8505/files/stiftelsen_skapa_cover.jpg?v=1784673270" alt="{{ section.settings.skapa_line | escape }}" loading="lazy">{% endif %}
+            {% if section.settings.skapa_logo != blank %}<img class="drye-seal__skapa-logo" src="{{ section.settings.skapa_logo | image_url: width: 260 }}" alt="SKAPA" loading="lazy" width="{{ section.settings.skapa_logo.width }}" height="{{ section.settings.skapa_logo.height }}">{% else %}<img class="drye-seal__skapa-logo" src="https://cdn.shopify.com/s/files/1/0686/9581/8505/files/stiftelsen_skapa_cover.jpg?v=1784673270" alt="SKAPA" loading="lazy">{% endif %}
+            <span class="drye-seal__skapa-name">SKAPA</span>
             {% if section.settings.skapa_line != blank %}<span class="drye-seal__skapa-t">{{ section.settings.skapa_line }}</span>{% endif %}
           {%- endcapture -%}
           {% if section.settings.skapa_url != blank %}
@@ -764,8 +768,7 @@ assign review_count = section.settings.review_count_fallback
         {% endif %}
       </div>
     {% endif %}
-
-  </section>
+  </div>
 
   <script>
     (function () {
@@ -905,8 +908,8 @@ assign review_count = section.settings.review_count_fallback
           <div class="drye-partners">
             <span class="drye-partners__label">Developed &amp; validated with</span>
             <div class="drye-partners__logos">
-              <span class="drye-partners__logo"><img src="https://cdn.shopify.com/s/files/1/0686/9581/8505/files/images_4.png?v=1784673289" alt="Uppsala University" loading="lazy"></span>
-              <span class="drye-partners__logo"><img src="https://cdn.shopify.com/s/files/1/0686/9581/8505/files/1652448387777.jpg?v=1784673262" alt="The Swedish School of Textiles, Borås" loading="lazy"></span>
+              <span class="drye-partners__logo drye-partners__logo--uppsala"><img src="https://cdn.shopify.com/s/files/1/0686/9581/8505/files/images_4.png?v=1784673289" alt="Uppsala University" loading="lazy"></span>
+              <span class="drye-partners__logo drye-partners__logo--boras"><img src="https://cdn.shopify.com/s/files/1/0686/9581/8505/files/1652448387777.jpg?v=1784673262" alt="The Swedish School of Textiles, Borås" loading="lazy"></span>
               <span class="drye-partners__logo"><img src="https://cdn.shopify.com/s/files/1/0686/9581/8505/files/images_5.png?v=1784673293" alt="Wargön Innovation" loading="lazy"></span>
             </div>
           </div>
@@ -2201,6 +2204,16 @@ wteTimelines.forEach((timeline) => {
       "id": "seen_in_label",
       "label": "Press row label",
       "default": "Seen in"
+    },
+    {
+      "type": "url",
+      "id": "seen_bygg_url",
+      "label": "Seen in — Svensk Byggtjänst link"
+    },
+    {
+      "type": "url",
+      "id": "seen_gnosjo_url",
+      "label": "Seen in — Gnosjö Svarvning link"
     },
     {
       "type": "text",
