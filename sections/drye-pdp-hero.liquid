@@ -721,6 +721,16 @@ assign review_count = section.settings.review_count_fallback
   {%- comment -%} Seen in — press row (frameless, below the proof card) {%- endcomment -%}
   {% assign press_logos = section.blocks | where: 'type', 'press_logo' %}
   <div class="drye-trust">
+    {% if section.settings.proof_stamp_line != blank %}
+      <div class="drye-guarantee">
+        <div class="drye-seal__wrap">
+          <span class="drye-seal__laurel-box drye-seal__laurel-box--l">{{ drye_laurel }}</span>
+          <p class="drye-seal__guarantee">60 shifts. If your hands aren't dry at lunch, keep the liners and get your money back.</p>
+          <span class="drye-seal__laurel-box drye-seal__laurel-box--r">{{ drye_laurel }}</span>
+        </div>
+      </div>
+    {% endif %}
+
     <div class="drye-press">
       <span class="drye-press__label">{{ section.settings.seen_in_label | default: 'Seen in' }}</span>
       <div class="drye-press__logos">
@@ -747,26 +757,16 @@ assign review_count = section.settings.review_count_fallback
       </div>
     </div>
 
-    {% if section.settings.proof_stamp_line != blank %}
-      <div class="drye-seal">
-        <div class="drye-seal__wrap">
-          <span class="drye-seal__laurel-box drye-seal__laurel-box--l">{{ drye_laurel }}</span>
-          <p class="drye-seal__guarantee">{{ section.settings.proof_stamp_line }}</p>
-          <span class="drye-seal__laurel-box drye-seal__laurel-box--r">{{ drye_laurel }}</span>
-        </div>
-        {% if section.settings.skapa_line != blank or section.settings.skapa_logo != blank %}
-          {%- capture skapa_inner -%}
-            {% if section.settings.skapa_logo != blank %}<img class="drye-seal__skapa-logo" src="{{ section.settings.skapa_logo | image_url: width: 260 }}" alt="SKAPA" loading="lazy" width="{{ section.settings.skapa_logo.width }}" height="{{ section.settings.skapa_logo.height }}">{% else %}<img class="drye-seal__skapa-logo" src="https://cdn.shopify.com/s/files/1/0686/9581/8505/files/stiftelsen_skapa_cover.jpg?v=1784673270" alt="SKAPA" loading="lazy">{% endif %}
-            <span class="drye-seal__skapa-name">SKAPA</span>
-            {% if section.settings.skapa_line != blank %}<span class="drye-seal__skapa-t">{{ section.settings.skapa_line }}</span>{% endif %}
-          {%- endcapture -%}
-          {% if section.settings.skapa_url != blank %}
-            <a class="drye-seal__skapa" href="{{ section.settings.skapa_url }}" target="_blank" rel="noopener">{{ skapa_inner }}</a>
-          {% else %}
-            <div class="drye-seal__skapa">{{ skapa_inner }}</div>
-          {% endif %}
-        {% endif %}
-      </div>
+    {% if section.settings.skapa_line != blank or section.settings.skapa_logo != blank %}
+      {%- capture skapa_inner -%}
+        {% if section.settings.skapa_logo != blank %}<img class="drye-seal__skapa-logo" src="{{ section.settings.skapa_logo | image_url: width: 260 }}" alt="SKAPA" loading="lazy" width="{{ section.settings.skapa_logo.width }}" height="{{ section.settings.skapa_logo.height }}">{% else %}<img class="drye-seal__skapa-logo" src="https://cdn.shopify.com/s/files/1/0686/9581/8505/files/stiftelsen_skapa_cover.jpg?v=1784673270" alt="SKAPA" loading="lazy">{% endif %}
+        {% if section.settings.skapa_line != blank %}<span class="drye-seal__skapa-t">{{ section.settings.skapa_line }}</span>{% endif %}
+      {%- endcapture -%}
+      {% if section.settings.skapa_url != blank %}
+        <a class="drye-seal__skapa drye-skapa" href="{{ section.settings.skapa_url }}" target="_blank" rel="noopener">{{ skapa_inner }}</a>
+      {% else %}
+        <div class="drye-seal__skapa drye-skapa">{{ skapa_inner }}</div>
+      {% endif %}
     {% endif %}
   </div>
 
@@ -2191,8 +2191,8 @@ wteTimelines.forEach((timeline) => {
       "type": "text",
       "id": "proof_stamp_line",
       "label": "Guarantee stamp (below ticker)",
-      "info": "Framed with laurels under the comment ticker. Leave blank to hide.",
-      "default": "30 shifts. If your hands aren't dry at lunch, keep the liners and get your money back."
+      "info": "Framed with laurels under the comment ticker. Leave blank to hide. (Display text is fixed to 60 shifts in the layout.)",
+      "default": "60 shifts. If your hands aren't dry at lunch, keep the liners and get your money back."
     },
     {
       "type": "image_picker",

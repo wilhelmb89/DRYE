@@ -307,6 +307,11 @@
   margin-top: 18px;
 }
 
+/* Guarantee sits first, directly under the ticker */
+.hero .drye-guarantee {
+  text-align: center;
+}
+
 .hero .drye-seal {
   margin-top: 20px;
   padding-top: 18px;
@@ -327,6 +332,7 @@
   width: 30px;
   height: 62px;
   color: #B08D57;
+  opacity: 0.5;
 }
 
 .hero .drye-seal__laurel {
@@ -356,7 +362,9 @@
   align-items: center;
   justify-content: center;
   gap: 5px;
-  margin-top: 22px;
+  margin-top: 20px;
+  padding-top: 16px;
+  border-top: 1px solid #E5E5E5;
   text-decoration: none;
   color: var(--muted, #4B5563);
 }
@@ -387,10 +395,11 @@
   color: var(--muted, #4B5563);
 }
 
-/* Press row — Seen in (frameless: no top border) */
+/* Press row — Seen in (divider from the guarantee above) */
 .hero .drye-press {
-  margin-top: 0;
-  padding-top: 0;
+  margin-top: 20px;
+  padding-top: 16px;
+  border-top: 1px solid #E5E5E5;
   text-align: center;
 }
 
@@ -423,7 +432,7 @@
   width: auto;
   max-width: 130px;
   object-fit: contain;
-  opacity: 0.7;
+  opacity: 0.5;
   filter: grayscale(1);
   transition: opacity 0.18s ease, filter 0.18s ease, transform 0.18s ease;
 }
@@ -441,7 +450,7 @@
 .hero .drye-press__logo--text {
   height: 26px;
   color: #111;
-  opacity: 0.55;
+  opacity: 0.4;
   filter: grayscale(1);
   transition: opacity 0.18s ease, transform 0.18s ease, color 0.18s ease;
 }
