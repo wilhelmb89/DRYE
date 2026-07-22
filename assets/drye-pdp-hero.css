@@ -2099,17 +2099,11 @@
    Below-the-buy-zone details area — full width, centered content
    (accordion + tabs moved out of the narrow buy column)
    ========================================================================== */
+/* Only the details accordion lives here now — full-width, centered.
+   FAQ/What/Reviews tabs stay in the narrow buy column (hero-info). */
 .hero .hero-below {
-  display: flex;
-  flex-direction: column;
   padding: 0 20px 8px;
 }
-
-/* Order under the buy zone: FAQ/What to Expect/Reviews first (right under
-   SKAPA), then the inline review slider, then the details accordion last. */
-.hero .hero-below .tabs-section { order: 1; }
-.hero .hero-below .pdp-review-slider-block { order: 2; }
-.hero .hero-below .acc-wrap { order: 3; }
 
 .hero .hero-below .acc-wrap {
   max-width: 720px;
@@ -2117,22 +2111,10 @@
   margin-right: auto;
 }
 
-.hero .hero-below .tabs-section {
-  max-width: 860px;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-.hero .hero-below .pdp-review-slider-block {
-  max-width: 860px;
-  margin-left: auto;
-  margin-right: auto;
-}
-
 @media (min-width: 1024px) {
   .hero .hero-below {
     grid-column: 1 / -1;
-    padding: 16px 24px 0;
+    padding: 24px 24px 0;
   }
 }
 
