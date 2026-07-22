@@ -1,27 +1,65 @@
 {{ 'drye-liner-product-clarity.css' | asset_url | stylesheet_tag }}
 
+{%- liquid
+  assign ss = section.settings
+  assign has_ba = false
+  if ss.before_image != blank or ss.after_image != blank
+    assign has_ba = true
+  endif
+  assign before_img = ss.before_image | default: ss.image
+  assign after_img = ss.after_image | default: ss.image | default: ss.before_image
+-%}
+
+{%- if has_ba -%}
+  <style>
+    #shopify-section-{{ section.id }} .drye-liner-product-clarity__ba {
+      display: flex; align-items: center; gap: var(--space-12);
+    }
+    #shopify-section-{{ section.id }} .drye-liner-product-clarity__ba-item {
+      flex: 1; min-width: 0; display: flex; flex-direction: column; gap: var(--space-8);
+    }
+    #shopify-section-{{ section.id }} .drye-liner-product-clarity__ba-label {
+      font-family: var(--font-body); font-size: var(--fs-micro-2); font-weight: 700;
+      letter-spacing: 0.14em; text-transform: uppercase; color: var(--caption); text-align: center;
+    }
+    #shopify-section-{{ section.id }} .drye-liner-product-clarity__ba-img {
+      width: 100%; aspect-ratio: 2 / 3; object-fit: cover; object-position: 13% 79%; display: block;
+    }
+    #shopify-section-{{ section.id }} .drye-liner-product-clarity__ba-img--before { filter: grayscale(0.4); }
+    #shopify-section-{{ section.id }} .drye-liner-product-clarity__ba-arrow {
+      font-size: 22px; line-height: 1; color: var(--emerald); flex: none;
+    }
+    @media (min-width: 768px) {
+      #shopify-section-{{ section.id }} .drye-liner-product-clarity.has-ba .drye-liner-product-clarity__inner {
+        grid-template-columns: minmax(0, 400px) 1fr;
+      }
+      #shopify-section-{{ section.id }} .drye-liner-product-clarity__ba-arrow { font-size: 28px; }
+    }
+  </style>
+{%- endif -%}
+
 <section
-  class="dryeNEW-section drye-liner-product-clarity"
-  id="{{ section.settings.section_id | default: 'liner-product' }}"
+  class="dryeNEW-section drye-liner-product-clarity{% if has_ba %} has-ba{% endif %}"
+  id="{{ ss.section_id | default: 'liner-product' }}"
   data-section-id="{{ section.id }}"
 >
   <div class="dryeNEW-container">
     <div class="drye-liner-product-clarity__inner">
       <div class="drye-liner-product-clarity__text">
         <div class="drye-liner-product-clarity__intro">
-          {% if section.settings.heading != blank or section.settings.heading_emphasis != blank %}
+          {% if ss.heading != blank or ss.heading_emphasis != blank %}
             <h2 class="dryeNEW-h2 drye-liner-product-clarity__heading">
-              {%- if section.settings.heading != blank -%}
-                {{ section.settings.heading }}<br>
+              {%- if ss.heading != blank -%}
+                {{ ss.heading }}<br>
               {%- endif -%}
-              {%- if section.settings.heading_emphasis != blank -%}
-                <span class="dryeNEW-editorial">{{ section.settings.heading_emphasis }}</span>
+              {%- if ss.heading_emphasis != blank -%}
+                <span class="dryeNEW-editorial">{{ ss.heading_emphasis }}</span>
               {%- endif -%}
             </h2>
           {% endif %}
 
-          {% if section.settings.body != blank %}
-            <div class="dryeNEW-body drye-liner-product-clarity__body">{{ section.settings.body }}</div>
+          {% if ss.body != blank %}
+            <div class="dryeNEW-body drye-liner-product-clarity__body">{{ ss.body }}</div>
           {% endif %}
         </div>
 
@@ -49,10 +87,30 @@
       </div>
 
       <div class="drye-liner-product-clarity__image">
-        {% if section.settings.image != blank %}
-          {%- assign clarity_alt = section.settings.image.alt | default: section.settings.heading -%}
+        {%- if has_ba -%}
+          <div class="drye-liner-product-clarity__ba">
+            <div class="drye-liner-product-clarity__ba-item">
+              {%- if ss.before_label != blank -%}<span class="drye-liner-product-clarity__ba-label">{{ ss.before_label }}</span>{%- endif -%}
+              {% if before_img != blank %}
+                {{ before_img | image_url: width: 700 | image_tag: class: 'drye-liner-product-clarity__ba-img drye-liner-product-clarity__ba-img--before', loading: 'lazy', sizes: '(min-width: 768px) 300px, 45vw', alt: ss.before_label }}
+              {% else %}
+                <div class="drye-liner-product-clarity__placeholder"><span>Without DRYE</span></div>
+              {% endif %}
+            </div>
+            <span class="drye-liner-product-clarity__ba-arrow" aria-hidden="true">→</span>
+            <div class="drye-liner-product-clarity__ba-item">
+              {%- if ss.after_label != blank -%}<span class="drye-liner-product-clarity__ba-label">{{ ss.after_label }}</span>{%- endif -%}
+              {% if after_img != blank %}
+                {{ after_img | image_url: width: 700 | image_tag: class: 'drye-liner-product-clarity__ba-img', loading: 'lazy', sizes: '(min-width: 768px) 300px, 45vw', alt: ss.after_label }}
+              {% else %}
+                <div class="drye-liner-product-clarity__placeholder"><span>With DRYE</span></div>
+              {% endif %}
+            </div>
+          </div>
+        {%- elsif ss.image != blank -%}
+          {%- assign clarity_alt = ss.image.alt | default: ss.heading -%}
           {{
-            section.settings.image
+            ss.image
             | image_url: width: 900
             | image_tag:
               class: 'drye-liner-product-clarity__img',
@@ -60,11 +118,11 @@
               sizes: '(min-width: 768px) 340px, 100vw',
               alt: clarity_alt
           }}
-        {% else %}
+        {%- else -%}
           <div class="drye-liner-product-clarity__placeholder">
             <span>Product photo — mechanic's hand wearing DRYE liner under work glove, 2:3 crop</span>
           </div>
-        {% endif %}
+        {%- endif -%}
       </div>
     </div>
   </div>
@@ -76,53 +134,26 @@
   "tag": "section",
   "class": "shopify-section",
   "settings": [
-    {
-      "type": "text",
-      "id": "section_id",
-      "label": "Section ID",
-      "default": "liner-product"
-    },
-    {
-      "type": "text",
-      "id": "heading",
-      "label": "Heading",
-      "default": "DRYE goes under"
-    },
-    {
-      "type": "text",
-      "id": "heading_emphasis",
-      "label": "Heading emphasis",
-      "default": "your existing glove."
-    },
-    {
-      "type": "richtext",
-      "id": "body",
-      "label": "Body",
-      "default": "<p>Thin enough you forget it's there. Strong enough to last a shift.</p>"
-    },
-    {
-      "type": "image_picker",
-      "id": "image",
-      "label": "Product image (2:3)"
-    }
+    { "type": "text", "id": "section_id", "label": "Section ID", "default": "liner-product" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "DRYE goes" },
+    { "type": "text", "id": "heading_emphasis", "label": "Heading emphasis", "default": "under your existing glove." },
+    { "type": "richtext", "id": "body", "label": "Body", "default": "<p>Thin enough you forget it's there. Built for repeated shifts.</p>" },
+    { "type": "header", "content": "Before / After (two images)" },
+    { "type": "paragraph", "content": "Set both to show the two-image before/after. If left empty, the single Product image below is used." },
+    { "type": "image_picker", "id": "before_image", "label": "Before image (2:3)" },
+    { "type": "text", "id": "before_label", "label": "Before label", "default": "Without DRYE" },
+    { "type": "image_picker", "id": "after_image", "label": "After image (2:3)" },
+    { "type": "text", "id": "after_label", "label": "After label", "default": "With DRYE" },
+    { "type": "header", "content": "Single image (fallback)" },
+    { "type": "image_picker", "id": "image", "label": "Product image (2:3)" }
   ],
   "blocks": [
     {
       "type": "spec",
       "name": "Spec",
       "settings": [
-        {
-          "type": "text",
-          "id": "title",
-          "label": "Title",
-          "default": "Thin by design."
-        },
-        {
-          "type": "text",
-          "id": "description",
-          "label": "Description",
-          "default": "Doesn't add bulk or reduce dexterity."
-        }
+        { "type": "text", "id": "title", "label": "Title", "default": "Thin by design." },
+        { "type": "text", "id": "description", "label": "Description", "default": "Doesn't add bulk or reduce dexterity." }
       ]
     }
   ],
@@ -130,27 +161,9 @@
     {
       "name": "DRYE Liner Product Clarity",
       "blocks": [
-        {
-          "type": "spec",
-          "settings": {
-            "title": "Thin by design.",
-            "description": "Doesn't add bulk or reduce dexterity."
-          }
-        },
-        {
-          "type": "spec",
-          "settings": {
-            "title": "Works under any glove.",
-            "description": "Nitrile, latex, rubber, HV."
-          }
-        },
-        {
-          "type": "spec",
-          "settings": {
-            "title": "Stays in place.",
-            "description": "Between skin and glove. All shift."
-          }
-        }
+        { "type": "spec", "settings": { "title": "Sweat.", "description": "Stays dry for the full shift." } },
+        { "type": "spec", "settings": { "title": "Oil.", "description": "Stays on the surface. Wipes off." } },
+        { "type": "spec", "settings": { "title": "Tearing.", "description": "Your nitriles go on dry, come off dry." } }
       ]
     }
   ]

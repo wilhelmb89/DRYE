@@ -10,13 +10,29 @@
 {%- liquid
   assign ss = section.settings
   assign scrim = ss.scrim_opacity | default: 82 | divided_by: 100.0
-  assign needs_cf_script = false
+  assign cf_sub = ss.cf_subdomain | default: 'customer-fqpngdzqcoky7qmz'
+
+  assign d_src = ''
   if ss.desktop_media_type == 'video' and ss.desktop_video_id != blank
-    assign needs_cf_script = true
+    assign d_src = ss.desktop_video_id
+    unless d_src contains 'http'
+      assign d_src = 'https://' | append: cf_sub | append: '.cloudflarestream.com/' | append: d_src | append: '/manifest/video.m3u8'
+    endunless
   endif
+
+  assign m_src = ''
   if ss.mobile_media_type == 'video' and ss.mobile_video_id != blank
-    assign needs_cf_script = true
+    assign m_src = ss.mobile_video_id
+    unless m_src contains 'http'
+      assign m_src = 'https://' | append: cf_sub | append: '.cloudflarestream.com/' | append: m_src | append: '/manifest/video.m3u8'
+    endunless
   endif
+
+  assign needs_hls = false
+  if d_src != '' or m_src != ''
+    assign needs_hls = true
+  endif
+
   assign m_label = ss.cta_mobile_label | default: ss.cta_primary_label
   assign m_text = ss.cta_mobile_text | default: ss.cta_primary_text
   assign m_url = ss.cta_mobile_url | default: ss.cta_primary_url
@@ -101,7 +117,7 @@
 
     #shopify-section-{{ section.id }} .m-hero {
       position: relative; min-height: 620px; display: flex; flex-direction: column;
-      padding: 24px var(--page-pad) 28px; color: #fff; overflow: hidden;
+      padding: calc(var(--nav-height) + 24px) var(--page-pad) 28px; color: #fff; overflow: hidden;
     }
     #shopify-section-{{ section.id }} .m-hero__poster {
       position: absolute; inset: 0; width: 100%; height: 100%;
@@ -118,7 +134,7 @@
     #shopify-section-{{ section.id }} .m-hero h1 {
       font-family: var(--font-display); font-weight: var(--fw-semibold);
       font-size: 35px; line-height: 1; letter-spacing: -0.03em;
-      margin: 15% 0 0; color: #fff; text-shadow: 0 2px 16px rgba(0, 0, 0, 0.5);
+      margin: 20% 0 0; color: #fff; text-shadow: 0 2px 16px rgba(0, 0, 0, 0.5);
     }
     #shopify-section-{{ section.id }} .m-sub {
       margin-top: auto; font-family: var(--font-body);
@@ -152,8 +168,10 @@
   {%- comment -%} ================= DESKTOP ================= {%- endcomment -%}
   <div class="drye-hero">
     <div class="drye-hero__media">
-      {%- if ss.desktop_media_type == 'video' and ss.desktop_video_id != blank -%}
-        <stream src="{{ ss.desktop_video_id }}" autoplay muted loop playsinline class="drye-hero__poster"></stream>
+      {%- if d_src != '' -%}
+        <video class="drye-hero__poster" muted loop playsinline autoplay preload="none"
+          {%- if ss.desktop_image != blank %} poster="{{ ss.desktop_image | image_url: width: 2200 }}"{% endif %}
+          data-hero-hls="{{ d_src | escape }}"></video>
       {%- elsif ss.desktop_image != blank -%}
         {{ ss.desktop_image | image_url: width: 2200 | image_tag: class: 'drye-hero__poster', alt: '', loading: 'eager', fetchpriority: 'high', widths: '768,1200,1600,2200' }}
       {%- endif -%}
@@ -169,8 +187,8 @@
           </h1>
         {%- endif -%}
 
-        {%- if ss.subheading != blank -%}
-          <p class="drye-sub">{{ ss.subheading }}</p>
+        {%- if ss.subheading != blank or ss.subheading_emphasis != blank -%}
+          <p class="drye-sub">{{ ss.subheading }}{% if ss.subheading_emphasis != blank %} <strong>{{ ss.subheading_emphasis }}</strong>{% endif %}</p>
         {%- endif -%}
 
         {%- if ss.star_label != blank -%}
@@ -219,8 +237,10 @@
 
   {%- comment -%} ================= MOBILE ================= {%- endcomment -%}
   <div class="m-hero">
-    {%- if ss.mobile_media_type == 'video' and ss.mobile_video_id != blank -%}
-      <stream src="{{ ss.mobile_video_id }}" autoplay muted loop playsinline class="m-hero__poster"></stream>
+    {%- if m_src != '' -%}
+      <video class="m-hero__poster" muted loop playsinline autoplay preload="none"
+        {%- if ss.mobile_image != blank %} poster="{{ ss.mobile_image | image_url: width: 1200 }}"{% endif %}
+        data-hero-hls="{{ m_src | escape }}"></video>
     {%- elsif ss.mobile_image != blank -%}
       {{ ss.mobile_image | image_url: width: 1200 | image_tag: class: 'm-hero__poster', alt: '', loading: 'eager', fetchpriority: 'high', widths: '480,768,960,1200' }}
     {%- endif -%}
@@ -230,8 +250,8 @@
       <h1>{{ ss.heading_line_1 }} {{ ss.heading_line_2 }}</h1>
     {%- endif -%}
 
-    {%- if ss.subheading != blank -%}
-      <p class="m-sub">{{ ss.subheading }}</p>
+    {%- if ss.subheading != blank or ss.subheading_emphasis != blank -%}
+      <p class="m-sub">{{ ss.subheading }}{% if ss.subheading_emphasis != blank %} <strong>{{ ss.subheading_emphasis }}</strong>{% endif %}</p>
     {%- endif -%}
 
     {%- if m_text != blank -%}
@@ -258,8 +278,47 @@
   </div>
 </section>
 
-{%- if needs_cf_script -%}
-  <script defer src="https://embed.cloudflare.com/embed/r4.js"></script>
+{%- if needs_hls -%}
+  <script>
+    (function () {
+      var root = document.querySelector('[data-section-id="{{ section.id }}"]');
+      if (!root) return;
+      function initHls(video, url) {
+        if (video.dataset.hlsReady) return;
+        video.dataset.hlsReady = '1';
+        var hls = new Hls({ autoStartLoad: true });
+        hls.loadSource(url);
+        hls.attachMedia(video);
+        hls.on(Hls.Events.MANIFEST_PARSED, function () {
+          var p = video.play(); if (p && p.catch) p.catch(function () {});
+        });
+      }
+      var loading = false;
+      function loadLib() {
+        if (loading) return; loading = true;
+        var s = document.createElement('script');
+        s.src = 'https://cdn.jsdelivr.net/npm/hls.js@1';
+        s.onload = function () {
+          root.querySelectorAll('[data-hero-hls]').forEach(function (v) {
+            initHls(v, v.getAttribute('data-hero-hls'));
+          });
+        };
+        document.head.appendChild(s);
+      }
+      root.querySelectorAll('[data-hero-hls]').forEach(function (video) {
+        var url = video.getAttribute('data-hero-hls');
+        if (!url) return;
+        if (video.canPlayType('application/vnd.apple.mpegurl')) {
+          video.src = url;
+          var p = video.play(); if (p && p.catch) p.catch(function () {});
+        } else if (window.Hls) {
+          initHls(video, url);
+        } else {
+          loadLib();
+        }
+      });
+    })();
+  </script>
 {%- endif -%}
 
 {% schema %}
@@ -271,7 +330,8 @@
     { "type": "header", "content": "Heading" },
     { "type": "text", "id": "heading_line_1", "label": "Heading line 1", "default": "Add one dry layer" },
     { "type": "text", "id": "heading_line_2", "label": "Heading line 2", "default": "under your gloves" },
-    { "type": "textarea", "id": "subheading", "label": "Subheading", "default": "0.4 mm thin. Worn inside your existing glove — nitrile, latex, textile, rubber or HV. What changes is what your skin sits against." },
+    { "type": "textarea", "id": "subheading", "label": "Subheading", "default": "0.4 mm thin. Worn inside your existing glove — nitrile, latex, textile, rubber or HV." },
+    { "type": "text", "id": "subheading_emphasis", "label": "Subheading — bold sentence", "info": "Shown bold/white after the subheading.", "default": "What changes is what your skin sits against." },
 
     { "type": "header", "content": "Reviews" },
     { "type": "range", "id": "star_count", "label": "Star count", "min": 0, "max": 5, "step": 1, "default": 5 },
@@ -301,15 +361,18 @@
     { "type": "image_picker", "id": "cert_right_image", "label": "Cert strip — right logo (optional)" },
     { "type": "text", "id": "cert_right_label", "label": "Cert strip — right text", "default": "Field-validated: EV workshops, Ukraine defense, elite hockey." },
 
+    { "type": "header", "content": "Cloudflare video" },
+    { "type": "text", "id": "cf_subdomain", "label": "Cloudflare customer subdomain", "info": "e.g. customer-fqpngdzqcoky7qmz — used to build the .m3u8 URL from a video UID.", "default": "customer-fqpngdzqcoky7qmz" },
+
     { "type": "header", "content": "Background — Desktop" },
     { "type": "select", "id": "desktop_media_type", "label": "Desktop media type", "options": [ { "value": "image", "label": "Image" }, { "value": "video", "label": "Cloudflare Stream video" } ], "default": "image" },
-    { "type": "image_picker", "id": "desktop_image", "label": "Desktop image" },
-    { "type": "text", "id": "desktop_video_id", "label": "Desktop Cloudflare Stream video UID" },
+    { "type": "image_picker", "id": "desktop_image", "label": "Desktop image", "info": "Also used as the video poster when media type is Video." },
+    { "type": "text", "id": "desktop_video_id", "label": "Desktop video — UID or .m3u8 URL", "info": "Paste the Cloudflare Stream video UID, or a full HLS .m3u8 URL." },
 
     { "type": "header", "content": "Background — Mobile" },
     { "type": "select", "id": "mobile_media_type", "label": "Mobile media type", "options": [ { "value": "image", "label": "Image" }, { "value": "video", "label": "Cloudflare Stream video" } ], "default": "image" },
-    { "type": "image_picker", "id": "mobile_image", "label": "Mobile image" },
-    { "type": "text", "id": "mobile_video_id", "label": "Mobile Cloudflare Stream video UID" },
+    { "type": "image_picker", "id": "mobile_image", "label": "Mobile image", "info": "Also used as the video poster when media type is Video." },
+    { "type": "text", "id": "mobile_video_id", "label": "Mobile video — UID or .m3u8 URL", "info": "Paste the Cloudflare Stream video UID, or a full HLS .m3u8 URL." },
 
     { "type": "header", "content": "Appearance" },
     { "type": "range", "id": "scrim_opacity", "label": "Scrim opacity", "min": 0, "max": 100, "step": 1, "unit": "%", "default": 82 }
