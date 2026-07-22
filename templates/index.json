@@ -103,96 +103,46 @@
         "bg_color": "#ffffff"
       }
     },
-    "drye_new_identification_frontpage_JzzzCA": {
-      "type": "dryeNEW-identification-frontpage",
+    "drye_liner_product_clarity_pengPG": {
+      "type": "drye-liner-product-clarity",
       "blocks": {
-        "profession_item_MjjCxH": {
-          "type": "profession_item",
+        "spec_Abrah7": {
+          "type": "spec",
           "settings": {
-            "image": "shopify://shop_images/1626932025968271001.webp",
-            "image_url": "",
-            "fallback_color": "#1E3A4C",
-            "label": "Cotton"
+            "title": "Sweat.",
+            "description": "Stays dry for the full shift."
           }
         },
-        "profession_item_zfMw48": {
-          "type": "profession_item",
+        "spec_JUHgn8": {
+          "type": "spec",
           "settings": {
-            "image": "shopify://shop_images/Screenshot_29.webp",
-            "image_url": "",
-            "fallback_color": "#1E3A4C",
-            "label": "Bamboo"
+            "title": "Oil.",
+            "description": "Stays on the surface. Wipes off."
           }
         },
-        "profession_item_TpVbgN": {
-          "type": "profession_item",
+        "spec_BfYbej": {
+          "type": "spec",
           "settings": {
-            "image": "shopify://shop_images/Screenshot_21.webp",
-            "image_url": "",
-            "fallback_color": "#1E3A4C",
-            "label": "Nylon"
-          }
-        },
-        "profession_item_7pcNUN": {
-          "type": "profession_item",
-          "settings": {
-            "image": "shopify://shop_images/Screenshot_22.webp",
-            "image_url": "",
-            "fallback_color": "#1E3A4C",
-            "label": "Polyester"
-          }
-        },
-        "profession_item_dC99wD": {
-          "type": "profession_item",
-          "settings": {
-            "image": "shopify://shop_images/Screenshot_26_4c9e936b-10db-4cf4-b8e8-9feb4e919c47.webp",
-            "image_url": "",
-            "fallback_color": "#1E3A4C",
-            "label": "Lycra"
-          }
-        },
-        "occlusion_step_YUC8Hj": {
-          "type": "occlusion_step",
-          "settings": {
-            "step_number": "01",
-            "title": "20 minutes in",
-            "body": "<p>Moisture saturates inside sealed equipment. Skin has nowhere to breathe.</p>"
-          }
-        },
-        "occlusion_step_Gyific": {
-          "type": "occlusion_step",
-          "settings": {
-            "step_number": "02",
-            "title": "Trapped moisture",
-            "body": "<p>The barrier softens. Chemicals and bacteria move through. This is called occlusion.</p>"
-          }
-        },
-        "occlusion_step_TfrnN9": {
-          "type": "occlusion_step",
-          "settings": {
-            "step_number": "03",
-            "title": "The cycle repeats",
-            "body": "<p>Weekend recovery. Monday relapse. no glove, liner, or cream on the market stops it.</p>"
+            "title": "Tearing.",
+            "description": "Your nitriles go on dry, come off dry."
           }
         }
       },
       "block_order": [
-        "profession_item_MjjCxH",
-        "profession_item_zfMw48",
-        "profession_item_TpVbgN",
-        "profession_item_7pcNUN",
-        "profession_item_dC99wD",
-        "occlusion_step_YUC8Hj",
-        "occlusion_step_Gyific",
-        "occlusion_step_TfrnN9"
+        "spec_Abrah7",
+        "spec_JUHgn8",
+        "spec_BfYbej"
       ],
-      "name": "DRYE Identification2",
+      "name": "DRYE Product Clarity",
       "settings": {
-        "section_id": "identification",
-        "eyebrow": "",
-        "heading": "You've tried everything.",
-        "heading_echo": "Nothing worked.",
-        "body": ""
+        "section_id": "liner-product",
+        "heading": "DRYE goes",
+        "heading_emphasis": "under your existing glove.",
+        "body": "<p>Thin enough you forget it's there. Built for repeated shifts.</p>",
+        "before_image": "shopify://shop_images/5Y9A9324.webp",
+        "before_label": "Without DRYE",
+        "after_image": "shopify://shop_images/5Y9A9331_1_1.webp",
+        "after_label": "With DRYE"
       }
     },
     "drye_system_section_E9igMr": {
@@ -280,55 +230,12 @@
     "17830175964c62b62a": {
       "type": "apps",
       "settings": {}
-    },
-    "drye_liner_product_clarity_pengPG": {
-      "type": "drye-liner-product-clarity",
-      "blocks": {
-        "spec_Abrah7": {
-          "type": "spec",
-          "settings": {
-            "title": "Sweat.",
-            "description": "Stays dry for the full shift."
-          }
-        },
-        "spec_JUHgn8": {
-          "type": "spec",
-          "settings": {
-            "title": "Oil.",
-            "description": "Stays on the surface. Wipes off."
-          }
-        },
-        "spec_BfYbej": {
-          "type": "spec",
-          "settings": {
-            "title": "Tearing.",
-            "description": "Your nitriles go on dry, come off dry."
-          }
-        }
-      },
-      "block_order": [
-        "spec_Abrah7",
-        "spec_JUHgn8",
-        "spec_BfYbej"
-      ],
-      "name": "DRYE Product Clarity",
-      "settings": {
-        "section_id": "liner-product",
-        "heading": "DRYE goes",
-        "heading_emphasis": "under your existing glove.",
-        "body": "<p>Thin enough you forget it's there. Built for repeated shifts.</p>",
-        "before_image": "shopify://shop_images/5Y9A9324.webp",
-        "before_label": "Without DRYE",
-        "after_image": "shopify://shop_images/5Y9A9331_1_1.webp",
-        "after_label": "With DRYE"
-      }
     }
   },
   "order": [
     "hero_new_v4_qJcY9y",
     "drye_featured_in_GDPJ49",
     "drye_industry_cards_6iD7bq",
-    "drye_new_identification_frontpage_JzzzCA",
     "drye_liner_product_clarity_pengPG",
     "drye_system_section_E9igMr",
     "drye_new_closing_cta_BkJmfN",
