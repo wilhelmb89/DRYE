@@ -9,83 +9,31 @@
  */
 {
   "sections": {
-    "drye_new_hero_ddfGwJ": {
-      "type": "dryeNEW-hero",
-      "blocks": {
-        "credibility_item_Wnp3YG": {
-          "type": "credibility_item",
-          "settings": {
-            "text": "SKAPA Prize — Nobel memory, 2020"
-          }
-        },
-        "credibility_item_L8CY9T": {
-          "type": "credibility_item",
-          "settings": {
-            "text": "Patent pending"
-          }
-        },
-        "stat_item_NxmmWq": {
-          "type": "stat_item",
-          "settings": {
-            "value": "Dry hands",
-            "label_line_1": "through the shift",
-            "label_line_2": ""
-          }
-        },
-        "stat_item_HVaF47": {
-          "type": "stat_item",
-          "settings": {
-            "value": "Less glove fighting",
-            "label_line_1": "no wet-skin drag",
-            "label_line_2": ""
-          }
-        },
-        "stat_item_Kk4LCT": {
-          "type": "stat_item",
-          "settings": {
-            "value": "Cleaner hands",
-            "label_line_1": "when gloves come off",
-            "label_line_2": ""
-          }
-        },
-        "stat_item_dBrURc": {
-          "type": "stat_item",
-          "settings": {
-            "value": "6–12 months",
-            "label_line_1": "washable use",
-            "label_line_2": ""
-          }
-        }
-      },
-      "block_order": [
-        "credibility_item_Wnp3YG",
-        "credibility_item_L8CY9T",
-        "stat_item_NxmmWq",
-        "stat_item_HVaF47",
-        "stat_item_Kk4LCT",
-        "stat_item_dBrURc"
-      ],
-      "name": "DRYE NEW Hero",
+    "hero_new_v4_qJcY9y": {
+      "type": "hero-new-v4",
+      "name": "Hero New V4",
       "settings": {
-        "section_id": "hero",
-        "poster_image_desktop": "shopify://shop_images/Gemini_Generated_Image_2rtxik2rtxik2rtx.webp",
-        "poster_image_mobile": "shopify://shop_images/5Y9A9324.webp",
-        "video_hls_url_desktop": "",
-        "video_hls_url_mobile": "",
-        "heading_line_1": "Add one <span style=\"text-decoration:underline\">dry layer</span>",
-        "heading_line_2": "under your gloves.",
-        "heading_echo": "",
-        "subheading_line_1": "",
-        "subheading_line_2": "0.4mm thin. Worn inside your existing glove — nitrile, latex, rubber or HV. Your outer glove stays the same. ",
-        "subheading_emphasis": "What changes is what your skin sits against.",
-        "path_1_label": "IF YOUR GLOVES FEEL WET",
-        "path_1_text_line_1": "Order DRYE liners here ->",
-        "path_1_text_line_2": "",
-        "path_1_link": "shopify://products/drye-moisture-routing-glove-liners",
-        "path_2_label": "IF YOU WANT THE PROOF",
-        "path_2_text_line_1": "See why it works ↓",
-        "path_2_text_line_2": "",
-        "path_2_link": "#system"
+        "heading_line_1": "Add one dry layer",
+        "heading_line_2": "under your gloves",
+        "subheading": "0.4 mm thin. Worn inside your existing glove — nitrile, latex, textile, rubber or HV. What changes is what your skin sits against.",
+        "star_count": 5,
+        "star_label": "Rated 4.8/5 by 1,200+ glove-wearers",
+        "cta_primary_label": "Order now",
+        "cta_primary_text": "Order one DRYE layer →",
+        "cta_primary_url": "shopify://products/drye-moisture-routing-glove-liners",
+        "cta_secondary_label": "The evidence",
+        "cta_secondary_text": "See the proof →",
+        "cta_secondary_url": "",
+        "trust_left_label": "SKAPA Innovation Award",
+        "trust_right_label": "Field-validated: EV workshops, Ukraine defense, elite hockey.",
+        "cert_left_label": "SKAPA Innovation Award — in memory of the inventor Alfred Nobel",
+        "cert_right_label": "Field-validated: EV workshops, Ukraine defense, elite hockey.",
+        "desktop_media_type": "image",
+        "desktop_image": "shopify://shop_images/ChatGPT_Image_Jul_22_2026_04_49_42_PM.webp",
+        "desktop_video_id": "",
+        "mobile_media_type": "image",
+        "mobile_video_id": "",
+        "scrim_opacity": 92
       }
     },
     "drye_new_identification_frontpage_JzzzCA": {
@@ -654,7 +602,7 @@
     }
   },
   "order": [
-    "drye_new_hero_ddfGwJ",
+    "hero_new_v4_qJcY9y",
     "drye_new_identification_frontpage_JzzzCA",
     "drye_mechanics_identification_gallery_BDmRCB",
     "drye_product_reality_grid_QbtiwK",
