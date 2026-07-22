@@ -2095,6 +2095,39 @@
   font-weight: 600;
 }
 
+/* ==========================================================================
+   Below-the-buy-zone details area — full width, centered content
+   (accordion + tabs moved out of the narrow buy column)
+   ========================================================================== */
+.hero .hero-below {
+  padding: 0 20px 8px;
+}
+
+.hero .hero-below .acc-wrap {
+  max-width: 720px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.hero .hero-below .tabs-section {
+  max-width: 860px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.hero .hero-below .pdp-review-slider-block {
+  max-width: 860px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+@media (min-width: 1024px) {
+  .hero .hero-below {
+    grid-column: 1 / -1;
+    padding: 16px 24px 0;
+  }
+}
+
 /* Bottom accordion */
 .hero .acc-wrap { margin-top: 18px; }
 .hero .acc { border-bottom: 1px solid var(--border); }

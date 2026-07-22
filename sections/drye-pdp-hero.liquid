@@ -749,10 +749,10 @@ assign review_count = section.settings.review_count_fallback
             {% endif %}
           {% endfor %}
         {% else %}
-          {% if section.settings.seen_bygg_url != blank %}<a class="drye-press__logo drye-press__logo--text" href="{{ section.settings.seen_bygg_url }}" target="_blank" rel="noopener"><span class="lg-bygg">SVENSK<small>BYGGTJÄNST</small></span></a>{% else %}<span class="drye-press__logo drye-press__logo--text"><span class="lg-bygg">SVENSK<small>BYGGTJÄNST</small></span></span>{% endif %}
-          {% if section.settings.seen_gnosjo_url != blank %}<a class="drye-press__logo drye-press__logo--text" href="{{ section.settings.seen_gnosjo_url }}" target="_blank" rel="noopener"><span class="lg-gnosjo">GNOSJÖ<br>SVARVNING</span></a>{% else %}<span class="drye-press__logo drye-press__logo--text"><span class="lg-gnosjo">GNOSJÖ<br>SVARVNING</span></span>{% endif %}
+          <a class="drye-press__logo drye-press__logo--text" href="{{ section.settings.seen_bygg_url | default: 'https://byggkatalogen.byggtjanst.se/nyheter/torra-hander-i-handskarna/37639' }}" target="_blank" rel="noopener"><span class="lg-bygg">SVENSK<small>BYGGTJÄNST</small></span></a>
+          <a class="drye-press__logo drye-press__logo--text" href="{{ section.settings.seen_gnosjo_url | default: 'https://www.svarvning.nu/personlig-kamp-mot-hudproblem-resulterar-i-innovativa-handskar/' }}" target="_blank" rel="noopener"><span class="lg-gnosjo">GNOSJÖ<br>SVARVNING</span></a>
           <span class="drye-press__logo drye-press__logo--text"><span class="lg-smarta">smartasaker</span></span>
-          <span class="drye-press__logo drye-press__logo--text"><span class="lg-gadget">Gadget&nbsp;Flow</span></span>
+          <a class="drye-press__logo drye-press__logo--text" href="https://thegadgetflow.com/blog/drye-liner-review-glove-liner/" target="_blank" rel="noopener"><span class="lg-gadget">Gadget&nbsp;Flow</span></a>
         {% endif %}
       </div>
     </div>
@@ -862,7 +862,10 @@ assign review_count = section.settings.review_count_fallback
     })();
   </script>
 {% endif %}
+  </div>
+  {%- comment -%} /hero-info (buy zone ends). Below: full-width centered details {%- endcomment -%}
 
+  <div class="hero-below">
     <div class="acc-wrap">
       <div class="acc">
         <button class="acc__btn" type="button" aria-expanded="false" aria-controls="acc-p0-{{ section.id }}" id="acc-b0-{{ section.id }}">{{ section.settings.acc_why_label | default: 'Why It Matters' }}<svg class="acc__chev" viewBox="0 0 10 6" fill="none"><path d="M0 0l5 6 5-6z" fill="currentColor"/></svg></button>
