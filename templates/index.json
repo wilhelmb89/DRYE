@@ -9,6 +9,49 @@
  */
 {
   "sections": {
+    "drye_new_hero_v3_VDGCeM": {
+      "type": "dryeNEW-hero-v3",
+      "blocks": {
+        "credibility_item_UhqBQG": {
+          "type": "credibility_item",
+          "settings": {
+            "text": "SKAPA Prize — Nobel memory, 2020"
+          }
+        },
+        "credibility_item_BDwTHq": {
+          "type": "credibility_item",
+          "settings": {
+            "text": "Patent pending"
+          }
+        }
+      },
+      "block_order": [
+        "credibility_item_UhqBQG",
+        "credibility_item_BDwTHq"
+      ],
+      "disabled": true,
+      "name": "DRYE NEW Hero v3",
+      "settings": {
+        "product_image": "shopify://shop_images/5Y9A9331_1_1.webp",
+        "image_169": true,
+        "image_blend": true,
+        "bg_base": "#0a1621",
+        "bg_glow": "#1E6FA8",
+        "pad_top": 56,
+        "pad_bottom": 56,
+        "heading_line_1": "Add one <span style=\"text-decoration:underline\">dry layer</span>",
+        "heading_line_2": "under your gloves.",
+        "sub": "0.4mm thin. Worn inside your existing glove — nitrile, latex, rubber or HV.",
+        "sub_emphasis": "What changes is what your skin sits against.",
+        "proof_line": "Validated by global EV manufacturers & the Ukraine military — in extreme environments.",
+        "review_text": "Rated 4.8/5 by 1,200+ glove-wearers",
+        "cta_label": "Shop DRYE →",
+        "cta_link": "",
+        "trust_1": "60-day money-back guarantee",
+        "trust_2": "Fast Shipping",
+        "return_line": "0% return rate — last 90 days"
+      }
+    },
     "drye_new_hero_ddfGwJ": {
       "type": "dryeNEW-hero",
       "blocks": {
@@ -655,6 +698,7 @@
     }
   },
   "order": [
+    "drye_new_hero_v3_VDGCeM",
     "drye_new_hero_ddfGwJ",
     "drye_new_identification_frontpage_JzzzCA",
     "drye_mechanics_identification_gallery_BDmRCB",
