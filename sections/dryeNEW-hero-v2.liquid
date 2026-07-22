@@ -1,0 +1,224 @@
+{%- comment -%}
+  DRYE NEW Hero v2 — duplicate of the homepage hero with a conversion layout:
+  star review + two CTA buttons (primary + ghost) + trust badges, above the
+  fold. Same fonts/identity as the site (Clash Grotesk display, DM Sans body).
+  Select it in the theme editor in place of the original hero.
+{%- endcomment -%}
+
+{{ 'dryeNEW-hero.css' | asset_url | stylesheet_tag }}
+
+{%- assign credibility_blocks = section.blocks | where: 'type', 'credibility_item' -%}
+{%- assign stat_blocks = section.blocks | where: 'type', 'stat_item' -%}
+
+<style>
+  #dryeheroV2-{{ section.id }} .dryeNEW-hero__buy {
+    margin: 2px 0 2px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+  }
+  #dryeheroV2-{{ section.id }} .dryeNEW-hero__review {
+    display: flex; align-items: center; gap: 8px;
+    font-family: var(--font-body, "DM Sans", sans-serif);
+    font-size: 13px; color: rgba(255, 255, 255, 0.85);
+  }
+  #dryeheroV2-{{ section.id }} .dryeNEW-hero__stars { color: #F5B301; font-size: 14px; letter-spacing: 2px; }
+  #dryeheroV2-{{ section.id }} .dryeNEW-hero__ctas { display: flex; flex-wrap: wrap; gap: 12px; }
+  #dryeheroV2-{{ section.id }} .dryeNEW-hero__btn {
+    display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+    font-family: var(--font-display, "Clash Grotesk", sans-serif);
+    font-weight: 600; font-size: 15px; letter-spacing: -0.01em;
+    padding: 15px 30px; border-radius: 10px; text-decoration: none; border: 1px solid transparent;
+    transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease, border-color 0.15s ease;
+  }
+  #dryeheroV2-{{ section.id }} .dryeNEW-hero__btn--primary {
+    background: #0D9488; color: #fff; box-shadow: 0 8px 22px rgba(13, 148, 136, 0.35);
+  }
+  #dryeheroV2-{{ section.id }} .dryeNEW-hero__btn--primary:hover,
+  #dryeheroV2-{{ section.id }} .dryeNEW-hero__btn--primary:focus-visible {
+    transform: translateY(-2px); background: #0fa89b; box-shadow: 0 12px 30px rgba(13, 148, 136, 0.45);
+  }
+  #dryeheroV2-{{ section.id }} .dryeNEW-hero__btn--ghost {
+    background: rgba(255, 255, 255, 0.06); color: #fff; border-color: rgba(255, 255, 255, 0.28);
+  }
+  #dryeheroV2-{{ section.id }} .dryeNEW-hero__btn--ghost:hover,
+  #dryeheroV2-{{ section.id }} .dryeNEW-hero__btn--ghost:focus-visible {
+    transform: translateY(-2px); background: rgba(255, 255, 255, 0.12); border-color: rgba(255, 255, 255, 0.5);
+  }
+  #dryeheroV2-{{ section.id }} .dryeNEW-hero__trust { display: flex; flex-wrap: wrap; gap: 8px 20px; }
+  #dryeheroV2-{{ section.id }} .dryeNEW-hero__trust span {
+    display: inline-flex; align-items: center; gap: 6px;
+    font-family: var(--font-body, "DM Sans", sans-serif);
+    font-size: 12.5px; color: rgba(255, 255, 255, 0.72);
+  }
+  #dryeheroV2-{{ section.id }} .dryeNEW-hero__trust svg { width: 14px; height: 14px; color: #14b8a6; flex: 0 0 14px; }
+
+  @media (max-width: 767px) {
+    #dryeheroV2-{{ section.id }} .dryeNEW-hero__buy { align-items: stretch; width: 100%; }
+    #dryeheroV2-{{ section.id }} .dryeNEW-hero__ctas { width: 100%; flex-direction: column; gap: 10px; }
+    #dryeheroV2-{{ section.id }} .dryeNEW-hero__btn { width: 100%; font-size: 15px; padding: 15px 22px; }
+    #dryeheroV2-{{ section.id }} .dryeNEW-hero__review,
+    #dryeheroV2-{{ section.id }} .dryeNEW-hero__trust { justify-content: flex-start; }
+  }
+</style>
+
+<section
+  class="dryeNEW-hero"
+  id="dryeheroV2-{{ section.id }}"
+  data-section-id="{{ section.id }}"
+  data-section-type="dryeNEW-hero"
+  data-drye-section
+  data-section-index="1"
+  data-section-name="hero"
+>
+  <div class="dryeNEW-hero__media">
+    {%- if section.settings.poster_image_desktop != blank -%}
+      {{ section.settings.poster_image_desktop | image_url: width: 2200 | image_tag: class: 'dryeNEW-hero__poster dryeNEW-hero__poster--desktop', alt: '', loading: 'eager', fetchpriority: 'high', widths: '768, 1200, 1600, 2200' }}
+    {%- endif -%}
+    {%- if section.settings.poster_image_mobile != blank -%}
+      {{ section.settings.poster_image_mobile | image_url: width: 1200 | image_tag: class: 'dryeNEW-hero__poster dryeNEW-hero__poster--mobile', alt: '', loading: 'eager', fetchpriority: 'high', widths: '480, 768, 960, 1200' }}
+    {%- endif -%}
+    <div class="dryeNEW-hero__overlay"></div>
+  </div>
+
+  <div class="dryeNEW-hero__content-wrap">
+    {%- if credibility_blocks.size > 0 -%}
+      <div class="dryeNEW-cred-bar">
+        {%- for block in credibility_blocks -%}
+          <div class="dryeNEW-cred-item" {{ block.shopify_attributes }}>
+            <div class="dryeNEW-cred-dot"></div>
+            <span>{{ block.settings.text }}</span>
+          </div>
+          {%- unless forloop.last -%}<div class="dryeNEW-cred-divider"></div>{%- endunless -%}
+        {%- endfor -%}
+      </div>
+    {%- endif -%}
+
+    {%- if section.settings.heading_line_1 != blank or section.settings.heading_line_2 != blank or section.settings.heading_echo != blank -%}
+      <h1 class="dryeNEW-hero__heading">
+        {%- if section.settings.heading_line_1 != blank -%}<span class="dryeNEW-hero__heading-line">{{ section.settings.heading_line_1 }}</span>{%- endif -%}
+        {%- if section.settings.heading_line_2 != blank -%}<span class="dryeNEW-hero__heading-line">{{ section.settings.heading_line_2 }}</span>{%- endif -%}
+        {%- if section.settings.heading_echo != blank -%}<span class="dryeNEW-hero__heading-echo">{{ section.settings.heading_echo }}</span>{%- endif -%}
+      </h1>
+    {%- endif -%}
+
+    {%- if section.settings.subheading_line_1 != blank or section.settings.subheading_line_2 != blank or section.settings.subheading_emphasis != blank -%}
+      <p class="dryeNEW-hero__sub">
+        {%- if section.settings.subheading_line_1 != blank -%}<span class="dryeNEW-hero__sub-line">{{ section.settings.subheading_line_1 }}</span>{%- endif -%}
+        {%- if section.settings.subheading_line_2 != blank or section.settings.subheading_emphasis != blank -%}
+          <span class="dryeNEW-hero__sub-line">{{ section.settings.subheading_line_2 }}{%- if section.settings.subheading_emphasis != blank -%}<strong> {{ section.settings.subheading_emphasis }}</strong>{%- endif -%}</span>
+        {%- endif -%}
+      </p>
+    {%- endif -%}
+
+    <div class="dryeNEW-hero__buy">
+      {%- if section.settings.hero_review_text != blank -%}
+        <div class="dryeNEW-hero__review">
+          <span class="dryeNEW-hero__stars" aria-hidden="true">★★★★★</span>
+          <span>{{ section.settings.hero_review_text }}</span>
+        </div>
+      {%- endif -%}
+      <div class="dryeNEW-hero__ctas">
+        {%- if section.settings.cta1_label != blank -%}
+          <a class="dryeNEW-hero__btn dryeNEW-hero__btn--primary" href="{{ section.settings.cta1_link | default: '/products/drye-moisture-routing-glove-liners' }}">{{ section.settings.cta1_label }}</a>
+        {%- endif -%}
+        {%- if section.settings.cta2_label != blank -%}
+          <a class="dryeNEW-hero__btn dryeNEW-hero__btn--ghost" href="{{ section.settings.cta2_link | default: '#system' }}" data-scroll-target="{{ section.settings.cta2_link | default: '#system' }}">{{ section.settings.cta2_label }}</a>
+        {%- endif -%}
+      </div>
+      {%- if section.settings.hero_trust_1 != blank or section.settings.hero_trust_2 != blank -%}
+        <div class="dryeNEW-hero__trust">
+          {%- if section.settings.hero_trust_1 != blank -%}<span><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8.4l3 3 7-7.6" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>{{ section.settings.hero_trust_1 }}</span>{%- endif -%}
+          {%- if section.settings.hero_trust_2 != blank -%}<span><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8.4l3 3 7-7.6" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>{{ section.settings.hero_trust_2 }}</span>{%- endif -%}
+        </div>
+      {%- endif -%}
+    </div>
+  </div>
+
+  {%- if stat_blocks.size > 0 -%}
+    <div class="dryeNEW-hero__stats-shell">
+      <div class="dryeNEW-hero__stats-inner" style="--drye-stat-count: {{ stat_blocks.size }};">
+        {%- for block in stat_blocks -%}
+          <div class="dryeNEW-hstat" {{ block.shopify_attributes }}>
+            <div class="dryeNEW-hstat__num">{{ block.settings.value }}</div>
+            <div class="dryeNEW-hstat__label">{{ block.settings.label_line_1 }}{%- if block.settings.label_line_2 != blank -%}<br>{{ block.settings.label_line_2 }}{%- endif -%}</div>
+          </div>
+        {%- endfor -%}
+      </div>
+    </div>
+  {%- endif -%}
+</section>
+
+<script>
+  (function () {
+    var section = document.getElementById('dryeheroV2-{{ section.id }}');
+    if (!section) return;
+    var scrollLinks = section.querySelectorAll('[data-scroll-target]');
+    function getHeaderOffset() { return window.innerWidth < 768 ? 104 : 72; }
+    scrollLinks.forEach(function (link) {
+      link.addEventListener('click', function (event) {
+        var selector = link.getAttribute('data-scroll-target');
+        if (!selector || selector.charAt(0) !== '#') return;
+        var target = document.querySelector(selector);
+        if (!target) return;
+        event.preventDefault();
+        var top = target.getBoundingClientRect().top + window.pageYOffset - getHeaderOffset();
+        window.scrollTo({ top: top, behavior: 'smooth' });
+      });
+    });
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "DRYE NEW Hero v2",
+  "settings": [
+    { "type": "text", "id": "section_id", "label": "Section ID", "default": "hero" },
+    { "type": "image_picker", "id": "poster_image_desktop", "label": "Poster image — desktop" },
+    { "type": "image_picker", "id": "poster_image_mobile", "label": "Poster image — mobile" },
+    { "type": "inline_richtext", "id": "heading_line_1", "label": "Heading line 1", "default": "Add one <span style=\"text-decoration:underline\">dry layer</span>" },
+    { "type": "text", "id": "heading_line_2", "label": "Heading line 2", "default": "under your gloves." },
+    { "type": "text", "id": "heading_echo", "label": "Heading echo", "default": "" },
+    { "type": "text", "id": "subheading_line_1", "label": "Subheading line 1", "default": "" },
+    { "type": "text", "id": "subheading_line_2", "label": "Subheading line 2", "default": "0.4mm thin. Worn inside your existing glove — nitrile, latex, rubber or HV. Your outer glove stays the same." },
+    { "type": "text", "id": "subheading_emphasis", "label": "Subheading emphasis", "default": "What changes is what your skin sits against." },
+    { "type": "header", "content": "Review + CTA buttons + trust" },
+    { "type": "text", "id": "hero_review_text", "label": "Review line (stars shown before it)", "default": "Rated 4.8/5 by 1,200+ glove-wearers" },
+    { "type": "text", "id": "cta1_label", "label": "Button 1 — label", "default": "Shop DRYE →" },
+    { "type": "url", "id": "cta1_link", "label": "Button 1 — link", "info": "Defaults to the product page." },
+    { "type": "text", "id": "cta2_label", "label": "Button 2 — label", "default": "See why it works →" },
+    { "type": "url", "id": "cta2_link", "label": "Button 2 — link", "info": "Defaults to #system (scrolls down)." },
+    { "type": "text", "id": "hero_trust_1", "label": "Trust badge 1", "default": "90-day money-back guarantee" },
+    { "type": "text", "id": "hero_trust_2", "label": "Trust badge 2", "default": "Fast Shipping" }
+  ],
+  "blocks": [
+    {
+      "type": "credibility_item",
+      "name": "Credibility item",
+      "settings": [ { "type": "text", "id": "text", "label": "Text", "default": "Uppsala University" } ]
+    },
+    {
+      "type": "stat_item",
+      "name": "Stat item",
+      "settings": [
+        { "type": "text", "id": "value", "label": "Value", "default": "8h+" },
+        { "type": "text", "id": "label_line_1", "label": "Label line 1", "default": "Tested under nitrile" },
+        { "type": "text", "id": "label_line_2", "label": "Label line 2", "default": "by healthcare workers" }
+      ]
+    }
+  ],
+  "max_blocks": 8,
+  "presets": [
+    {
+      "name": "DRYE NEW Hero v2",
+      "blocks": [
+        { "type": "credibility_item", "settings": { "text": "SKAPA Prize — Nobel memory, 2020" } },
+        { "type": "credibility_item", "settings": { "text": "Swedish School of Textiles" } },
+        { "type": "credibility_item", "settings": { "text": "Uppsala University" } },
+        { "type": "credibility_item", "settings": { "text": "Patent pending" } }
+      ]
+    }
+  ]
+}
+{% endschema %}
