@@ -37,98 +37,6 @@
         "scrim_opacity": 68
       }
     },
-    "drye_new_hero_gMmR4b": {
-      "type": "dryeNEW-hero",
-      "blocks": {
-        "credibility_item_pMgyb8": {
-          "type": "credibility_item",
-          "settings": {
-            "text": "SKAPA Prize — Nobel memory, 2020"
-          }
-        },
-        "credibility_item_ghbmA8": {
-          "type": "credibility_item",
-          "settings": {
-            "text": "Swedish School of Textiles"
-          }
-        },
-        "credibility_item_B3XUQn": {
-          "type": "credibility_item",
-          "settings": {
-            "text": "Uppsala University"
-          }
-        },
-        "credibility_item_pptUNH": {
-          "type": "credibility_item",
-          "settings": {
-            "text": "Patent pending"
-          }
-        },
-        "stat_item_6Na94h": {
-          "type": "stat_item",
-          "settings": {
-            "value": "8h+",
-            "label_line_1": "Tested under nitrile",
-            "label_line_2": "by healthcare workers"
-          }
-        },
-        "stat_item_8rAWzf": {
-          "type": "stat_item",
-          "settings": {
-            "value": "7 yr",
-            "label_line_1": "R&D before",
-            "label_line_2": "first unit shipped"
-          }
-        },
-        "stat_item_kW69zq": {
-          "type": "stat_item",
-          "settings": {
-            "value": "30",
-            "label_line_1": "Day full refund",
-            "label_line_2": "if it doesn't work"
-          }
-        },
-        "stat_item_NLqNWg": {
-          "type": "stat_item",
-          "settings": {
-            "value": "0.4mm",
-            "label_line_1": "Thin enough that",
-            "label_line_2": "dexterity is unchanged"
-          }
-        }
-      },
-      "block_order": [
-        "credibility_item_pMgyb8",
-        "credibility_item_ghbmA8",
-        "credibility_item_B3XUQn",
-        "credibility_item_pptUNH",
-        "stat_item_6Na94h",
-        "stat_item_8rAWzf",
-        "stat_item_kW69zq",
-        "stat_item_NLqNWg"
-      ],
-      "disabled": true,
-      "name": "DRYE NEW Hero",
-      "settings": {
-        "section_id": "hero",
-        "video_hls_url_desktop": "",
-        "video_hls_url_mobile": "",
-        "heading_line_1": "Every day you",
-        "heading_line_2": "put gloves on.",
-        "heading_echo": "Every day your hands pay for it.",
-        "subheading_line_1": "It's not the brand. It's not the material.",
-        "subheading_line_2": "It's not how much you sweat.",
-        "subheading_emphasis": "It's physics.",
-        "path_1_label": "If you're not sure why",
-        "path_1_text_line_1": "I've noticed my hands",
-        "path_1_text_line_2": "getting worse →",
-        "path_1_link": "",
-        "path_2_label": "If you already know",
-        "path_2_text_line_1": "I know it's the gloves.",
-        "path_2_text_line_2": "Nothing fixes it →",
-        "path_2_link": ""
-      }
-    },
     "drye_industry_cards_6iD7bq": {
       "type": "drye-industry-cards",
       "blocks": {
@@ -278,50 +186,6 @@
         "body": "One tries to absorb moisture. One moves it. Under compression inside a sealed glove, only one of those approaches still works."
       }
     },
-    "drye_section_06_faq_9BK9Uy": {
-      "type": "drye-section-06-faq",
-      "blocks": {
-        "faq_item_yw9EKh": {
-          "type": "faq_item",
-          "settings": {
-            "question": "What is a glove liner?",
-            "answer": "A glove liner is a thin textile worn between skin and a protective glove to manage moisture. Most liners absorb sweat — and eventually saturate, holding wetness against the skin. DRYE routes moisture directionally through the fabric instead, with no saturation point."
-          }
-        },
-        "faq_item_GqgjLE": {
-          "type": "faq_item",
-          "settings": {
-            "question": "Does it work under nitrile gloves specifically?",
-            "answer": "Yes. DRYE was developed and tested primarily for use under nitrile — the most common glove in healthcare, automotive, and lab environments. At 0.4mm, it fits inside any standard nitrile glove without affecting the fit or tactile feel. Dexterity is unchanged."
-          }
-        },
-        "faq_item_Xeg4W3": {
-          "type": "faq_item",
-          "settings": {
-            "question": "Do glove liners work for hockey?",
-            "answer": "Yes — if they route moisture instead of absorbing it. A hockey period is 20 minutes. Any absorbent liner saturates within that time and holds warm, damp material against skin for the rest of play. DRYE has no saturation point and continues working through full game conditions."
-          }
-        },
-        "faq_item_LXfMBR": {
-          "type": "faq_item",
-          "settings": {
-            "question": "Do glove liners help with eczema?",
-            "answer": "Yes, when the mechanism is right. Sealed gloves trap sweat against skin, which prevents the barrier from recovering between exposures. A liner that keeps the skin surface dry removes that trigger. DRYE users with hand eczema report skin stabilising within days to weeks of consistent use."
-          }
-        }
-      },
-      "block_order": [
-        "faq_item_yw9EKh",
-        "faq_item_GqgjLE",
-        "faq_item_Xeg4W3",
-        "faq_item_LXfMBR"
-      ],
-      "name": "DRYE Section 06 — FAQ",
-      "settings": {
-        "eyebrow": "",
-        "heading": "Frequently asked questions"
-      }
-    },
     "jens_linnea_section_FQgtPH": {
       "type": "jens-linnea-section",
       "blocks": {
@@ -401,11 +265,9 @@
   },
   "order": [
     "hero_new_v4_qJcY9y",
-    "drye_new_hero_gMmR4b",
     "drye_industry_cards_6iD7bq",
     "drye_new_identification_frontpage_JzzzCA",
     "drye_system_section_E9igMr",
-    "drye_section_06_faq_9BK9Uy",
     "jens_linnea_section_FQgtPH",
     "17830175964c62b62a",
     "drye_new_closing_cta_BkJmfN"
