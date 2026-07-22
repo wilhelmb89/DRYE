@@ -1,22 +1,15 @@
 {% comment %}
-  Hero New V4 — grounded in the existing theme system.
-  Reuses dryeNEW-hero.css classes (.dryeNEW-hero, __media, __overlay,
-  __content-wrap, __heading, __sub, .dryeNEW-dual-cta, .dryeNEW-cta-path)
-  and base.css design tokens. Only V4-specific additions (stars row,
-  trust row, mobile cert strip, scrim control) are defined below, all
-  using tokens — no hardcoded fonts/colours/spacing where a token exists.
+  Hero New V4 — matches the desktop + mobile preview layout exactly.
+  Buttons reuse the theme's two-row button (dryeNEW-cta-path, loaded via
+  dryeNEW-hero.css) but are equal-width side by side on desktop and a
+  single full-width button on mobile. Values use base.css tokens.
 {% endcomment %}
 
 {{ 'dryeNEW-hero.css' | asset_url | stylesheet_tag }}
 
 {%- liquid
   assign ss = section.settings
-  assign scrim = ss.scrim_opacity | default: 92 | divided_by: 100.0
-  assign txt_right = false
-  if ss.text_position == 'right'
-    assign txt_right = true
-  endif
-
+  assign scrim = ss.scrim_opacity | default: 82 | divided_by: 100.0
   assign needs_cf_script = false
   if ss.desktop_media_type == 'video' and ss.desktop_video_id != blank
     assign needs_cf_script = true
@@ -24,265 +17,244 @@
   if ss.mobile_media_type == 'video' and ss.mobile_video_id != blank
     assign needs_cf_script = true
   endif
+  assign m_label = ss.cta_mobile_label | default: ss.cta_primary_label
+  assign m_text = ss.cta_mobile_text | default: ss.cta_primary_text
+  assign m_url = ss.cta_mobile_url | default: ss.cta_primary_url
 -%}
 
 <style>
-  /* ---- V4 scrim (token-driven, merchant-controlled) ---- */
-  #shopify-section-{{ section.id }} .dryeNEW-hero__overlay {
-    background: linear-gradient(
-      180deg,
-      rgba(10, 22, 33, calc({{ scrim }} * 0.7)) 0%,
-      rgba(10, 22, 33, calc({{ scrim }} * 0.4)) 40%,
-      rgba(10, 22, 33, {{ scrim }}) 100%);
-  }
-
-  /* ---- V4 content vertical placement + optional right alignment ---- */
-  #shopify-section-{{ section.id }} .hero-new-v4__col { width: 100%; }
-
-  /* ---- Reviews row ---- */
-  #shopify-section-{{ section.id }} .hero-new-v4__reviews {
+  /* ============ DESKTOP HERO ============ */
+  #shopify-section-{{ section.id }} .drye-hero {
+    position: relative;
+    overflow: hidden;
+    color: #fff;
+    min-height: 620px;
     display: flex;
-    align-items: center;
-    gap: var(--space-10);
-    margin: 0 0 var(--space-20);
   }
-  #shopify-section-{{ section.id }} .hero-new-v4__stars {
-    color: #f5b301; /* rating gold — no brand token for stars */
-    font-size: var(--fs-caption);
-    letter-spacing: 1px;
-    line-height: 1;
+  #shopify-section-{{ section.id }} .drye-hero__media { position: absolute; inset: 0; z-index: 0; }
+  #shopify-section-{{ section.id }} .drye-hero__poster {
+    position: absolute; inset: 0; width: 100%; height: 100%;
+    object-fit: cover; object-position: center;
   }
-  #shopify-section-{{ section.id }} .hero-new-v4__reviews-text {
+  #shopify-section-{{ section.id }} .drye-hero__overlay {
+    position: absolute; inset: 0; z-index: 1;
+    background: linear-gradient(90deg,
+      rgba(10, 22, 33, {{ scrim }}) 0%,
+      rgba(10, 22, 33, calc({{ scrim }} * 0.72)) 42%,
+      rgba(10, 22, 33, 0) 82%);
+  }
+  #shopify-section-{{ section.id }} .drye-hero__inner {
+    position: relative; z-index: 2; width: 100%;
+    max-width: calc(var(--max-width) + (var(--page-pad) * 2));
+    margin: 0 auto;
+    padding: 72px var(--page-pad);
+    display: flex; flex-direction: column;
+    align-items: flex-start; justify-content: center;
+  }
+  #shopify-section-{{ section.id }} .drye-hero__col {
+    display: flex; flex-direction: column; gap: var(--space-18);
+    max-width: 700px; width: 100%;
+  }
+  #shopify-section-{{ section.id }} .drye-hero h1 {
+    font-family: var(--font-display);
+    font-weight: var(--fw-semibold);
+    font-size: 48px; line-height: 1.04; letter-spacing: -0.02em;
+    margin: 0; text-align: left; color: #fff;
+  }
+  #shopify-section-{{ section.id }} .drye-sub {
     font-family: var(--font-body);
-    font-size: var(--fs-caption);
-    color: var(--white-070);
+    font-size: 15px; font-weight: var(--fw-medium);
+    line-height: 1.55; letter-spacing: -0.01em;
+    color: var(--white-075); margin: 0; max-width: 34ch;
   }
+  #shopify-section-{{ section.id }} .drye-sub strong { color: #fff; font-weight: var(--fw-semibold); }
+  #shopify-section-{{ section.id }} .drye-reviews { display: flex; align-items: center; gap: var(--space-10); }
+  #shopify-section-{{ section.id }} .drye-reviews__stars { color: #f5b301; font-size: 15px; letter-spacing: 1px; line-height: 1; }
+  #shopify-section-{{ section.id }} .drye-reviews__text { font-family: var(--font-body); font-size: var(--fs-caption); color: var(--white-070); }
 
-  /* ---- Trust row (desktop) ---- */
-  #shopify-section-{{ section.id }} .hero-new-v4__trust {
-    display: none;
-    margin-top: var(--space-20);
-    gap: var(--space-24);
-    align-items: center;
-    justify-content: space-between;
+  /* action cluster shrinks to its widest child (buttons stretch to match) */
+  #shopify-section-{{ section.id }} .drye-action {
+    display: inline-flex; flex-direction: column; align-items: stretch;
+    gap: var(--space-16); align-self: flex-start;
   }
-  #shopify-section-{{ section.id }} .hero-new-v4__trust-item {
-    display: inline-flex;
-    align-items: center;
-    gap: var(--space-9);
-    font-family: var(--font-body);
-    font-size: var(--fs-body-sm);
-    color: var(--white-075);
+  #shopify-section-{{ section.id }} .drye-action__btns { display: flex; gap: var(--space-12); width: 100%; }
+  /* equal width, two-row theme buttons */
+  #shopify-section-{{ section.id }} .drye-action__btns .dryeNEW-cta-path {
+    flex: 1 1 0; max-width: none; min-height: 0;
   }
-  #shopify-section-{{ section.id }} .hero-new-v4__trust-icon {
-    width: 16px;
-    height: 16px;
-    color: var(--emerald);
-    flex: none;
+  #shopify-section-{{ section.id }} .drye-trust {
+    display: flex; flex-flow: row nowrap; justify-content: space-between;
+    gap: var(--space-24); align-items: center;
   }
+  #shopify-section-{{ section.id }} .drye-trust__item {
+    display: inline-flex; align-items: center; gap: var(--space-9);
+    font-family: var(--font-body); font-size: var(--fs-caption);
+    color: var(--white-075); white-space: nowrap;
+  }
+  #shopify-section-{{ section.id }} .drye-trust__icon { width: 16px; height: 16px; color: #14b8a6; flex: none; }
 
-  /* ---- Mobile cert strip ---- */
-  #shopify-section-{{ section.id }} .hero-new-v4__cert-strip {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    margin-top: var(--space-18);
-    border-top: 1px solid var(--white-010);
-  }
-  #shopify-section-{{ section.id }} .hero-new-v4__cert-col {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-start;
-    gap: var(--space-7);
-    padding: var(--space-12) var(--space-10);
-    text-align: center;
-    font-family: var(--font-body);
-    font-size: var(--fs-micro-1);
-    font-weight: var(--fw-medium);
-    line-height: 1.4;
-    color: var(--white-080);
-  }
-  #shopify-section-{{ section.id }} .hero-new-v4__cert-col:first-child {
-    border-right: 1px solid var(--white-010);
-  }
-  #shopify-section-{{ section.id }} .hero-new-v4__cert-logo { height: 30px; width: auto; }
-
-  @media (min-width: 768px) {
-    /* Left/right text position on desktop */
-    {% if txt_right %}
-    #shopify-section-{{ section.id }} .dryeNEW-hero__content-wrap { text-align: right; }
-    #shopify-section-{{ section.id }} .hero-new-v4__col { margin-left: auto; }
-    #shopify-section-{{ section.id }} .dryeNEW-hero__overlay {
-      background: linear-gradient(
-        270deg,
-        rgba(10, 22, 33, {{ scrim }}) 0%,
-        rgba(10, 22, 33, calc({{ scrim }} * 0.72)) 42%,
-        rgba(10, 22, 33, 0) 82%);
-    }
-    #shopify-section-{{ section.id }} .hero-new-v4__reviews,
-    #shopify-section-{{ section.id }} .dryeNEW-dual-cta { justify-content: flex-end; }
-    {% else %}
-    #shopify-section-{{ section.id }} .dryeNEW-hero__overlay {
-      background: linear-gradient(
-        90deg,
-        rgba(10, 22, 33, {{ scrim }}) 0%,
-        rgba(10, 22, 33, calc({{ scrim }} * 0.72)) 42%,
-        rgba(10, 22, 33, 0) 82%);
-    }
-    {% endif %}
-    #shopify-section-{{ section.id }} .hero-new-v4__col { max-width: 620px; }
-    #shopify-section-{{ section.id }} .hero-new-v4__trust { display: flex; }
-    #shopify-section-{{ section.id }} .hero-new-v4__cert-strip { display: none; }
-  }
+  /* ============ MOBILE HERO ============ */
+  #shopify-section-{{ section.id }} .m-hero { display: none; }
 
   @media (max-width: 767px) {
-    /* Desktop-only trust row hidden; cert strip shown */
-    #shopify-section-{{ section.id }} .hero-new-v4__trust { display: none; }
+    #shopify-section-{{ section.id }} .drye-hero { display: none; }
+
+    #shopify-section-{{ section.id }} .m-hero {
+      position: relative; min-height: 620px; display: flex; flex-direction: column;
+      padding: 24px var(--page-pad) 28px; color: #fff; overflow: hidden;
+    }
+    #shopify-section-{{ section.id }} .m-hero__poster {
+      position: absolute; inset: 0; width: 100%; height: 100%;
+      object-fit: cover; object-position: center 20%; z-index: 0;
+    }
+    #shopify-section-{{ section.id }} .m-hero__overlay {
+      content: ""; position: absolute; inset: 0; z-index: 1;
+      background: linear-gradient(180deg,
+        rgba(10, 22, 33, 0.64) 0%, rgba(10, 22, 33, 0.34) 36%,
+        rgba(10, 22, 33, 0.46) 62%, rgba(10, 22, 33, 0.9) 100%);
+    }
+    #shopify-section-{{ section.id }} .m-hero > *:not(.m-hero__poster):not(.m-hero__overlay) { position: relative; z-index: 2; }
+
+    #shopify-section-{{ section.id }} .m-hero h1 {
+      font-family: var(--font-display); font-weight: var(--fw-semibold);
+      font-size: 35px; line-height: 1; letter-spacing: -0.03em;
+      margin: 15% 0 0; color: #fff; text-shadow: 0 2px 16px rgba(0, 0, 0, 0.5);
+    }
+    #shopify-section-{{ section.id }} .m-sub {
+      margin-top: auto; font-family: var(--font-body);
+      font-size: 15px; font-weight: var(--fw-medium); line-height: 1.55;
+      letter-spacing: -0.01em; color: var(--white-075); margin-bottom: 16px; max-width: 34ch;
+    }
+    #shopify-section-{{ section.id }} .m-sub strong { color: #fff; font-weight: var(--fw-semibold); }
+
+    #shopify-section-{{ section.id }} .m-cta-group { margin-bottom: 18px; }
+    #shopify-section-{{ section.id }} .m-cta-group .dryeNEW-cta-path {
+      width: 100%; max-width: none; min-height: 0;
+    }
+
+    #shopify-section-{{ section.id }} .m-cert-strip {
+      display: grid; grid-template-columns: 1fr 1fr; margin-bottom: 22px;
+      border-top: 1px solid var(--white-015);
+    }
+    #shopify-section-{{ section.id }} .m-cert-col {
+      display: flex; flex-direction: column; align-items: center; justify-content: flex-start;
+      gap: var(--space-6); text-align: center; padding: var(--space-12) var(--space-10);
+      font-family: var(--font-body); font-size: var(--fs-micro-1); font-weight: var(--fw-medium);
+      line-height: 1.4; color: var(--white-080);
+    }
+    #shopify-section-{{ section.id }} .m-cert-col:first-child { border-right: 1px solid var(--white-015); }
+    #shopify-section-{{ section.id }} .m-cert-logo { height: 30px; width: auto; }
   }
 </style>
 
-<section
-  class="dryeNEW-hero hero-new-v4"
-  data-section-id="{{ section.id }}"
-  data-section-type="hero-new-v4"
->
-  <div class="dryeNEW-hero__media">
-    {%- comment -%} Desktop background {%- endcomment -%}
-    {%- if ss.desktop_media_type == 'video' and ss.desktop_video_id != blank -%}
-      <stream
-        src="{{ ss.desktop_video_id }}"
-        autoplay muted loop playsinline
-        class="dryeNEW-hero__poster dryeNEW-hero__poster--desktop"
-      ></stream>
-    {%- elsif ss.desktop_image != blank -%}
-      {{
-        ss.desktop_image
-        | image_url: width: 2200
-        | image_tag:
-          class: 'dryeNEW-hero__poster dryeNEW-hero__poster--desktop',
-          alt: '',
-          loading: 'eager',
-          fetchpriority: 'high',
-          widths: '768, 1200, 1600, 2200'
-      }}
-    {%- endif -%}
+<section class="hero-new-v4-wrap" data-section-id="{{ section.id }}">
 
-    {%- comment -%} Mobile background {%- endcomment -%}
-    {%- if ss.mobile_media_type == 'video' and ss.mobile_video_id != blank -%}
-      <stream
-        src="{{ ss.mobile_video_id }}"
-        autoplay muted loop playsinline
-        class="dryeNEW-hero__poster dryeNEW-hero__poster--mobile"
-      ></stream>
-    {%- elsif ss.mobile_image != blank -%}
-      {{
-        ss.mobile_image
-        | image_url: width: 1200
-        | image_tag:
-          class: 'dryeNEW-hero__poster dryeNEW-hero__poster--mobile',
-          alt: '',
-          loading: 'eager',
-          fetchpriority: 'high',
-          widths: '480, 768, 960, 1200'
-      }}
-    {%- endif -%}
+  {%- comment -%} ================= DESKTOP ================= {%- endcomment -%}
+  <div class="drye-hero">
+    <div class="drye-hero__media">
+      {%- if ss.desktop_media_type == 'video' and ss.desktop_video_id != blank -%}
+        <stream src="{{ ss.desktop_video_id }}" autoplay muted loop playsinline class="drye-hero__poster"></stream>
+      {%- elsif ss.desktop_image != blank -%}
+        {{ ss.desktop_image | image_url: width: 2200 | image_tag: class: 'drye-hero__poster', alt: '', loading: 'eager', fetchpriority: 'high', widths: '768,1200,1600,2200' }}
+      {%- endif -%}
+      <div class="drye-hero__overlay"></div>
+    </div>
 
-    <div class="dryeNEW-hero__overlay"></div>
+    <div class="drye-hero__inner">
+      <div class="drye-hero__col">
+        {%- if ss.heading_line_1 != blank or ss.heading_line_2 != blank -%}
+          <h1>
+            {{- ss.heading_line_1 -}}
+            {%- if ss.heading_line_2 != blank -%}<br>{{ ss.heading_line_2 }}{%- endif -%}
+          </h1>
+        {%- endif -%}
+
+        {%- if ss.subheading != blank -%}
+          <p class="drye-sub">{{ ss.subheading }}</p>
+        {%- endif -%}
+
+        {%- if ss.star_label != blank -%}
+          <div class="drye-reviews">
+            <span class="drye-reviews__stars" aria-hidden="true">{%- assign n = ss.star_count | round -%}{%- for i in (1..n) -%}★{%- endfor -%}</span>
+            <span class="drye-reviews__text">{{ ss.star_label }}</span>
+          </div>
+        {%- endif -%}
+
+        <div class="drye-action">
+          <div class="drye-action__btns">
+            {%- if ss.cta_primary_text != blank -%}
+              <a href="{{ ss.cta_primary_url | default: '#' }}" class="dryeNEW-cta-path dryeNEW-cta-path--primary">
+                {%- if ss.cta_primary_label != blank -%}<span class="dryeNEW-cta-path__label">{{ ss.cta_primary_label }}</span>{%- endif -%}
+                <span class="dryeNEW-cta-path__text"><span class="dryeNEW-cta-path__text-line">{{ ss.cta_primary_text }}</span></span>
+              </a>
+            {%- endif -%}
+            {%- if ss.cta_secondary_text != blank -%}
+              <a href="{{ ss.cta_secondary_url | default: '#' }}" class="dryeNEW-cta-path dryeNEW-cta-path--passive">
+                {%- if ss.cta_secondary_label != blank -%}<span class="dryeNEW-cta-path__label">{{ ss.cta_secondary_label }}</span>{%- endif -%}
+                <span class="dryeNEW-cta-path__text"><span class="dryeNEW-cta-path__text-line">{{ ss.cta_secondary_text }}</span></span>
+              </a>
+            {%- endif -%}
+          </div>
+
+          {%- if ss.trust_left_label != blank or ss.trust_right_label != blank -%}
+            <div class="drye-trust">
+              {%- if ss.trust_left_label != blank -%}
+                <span class="drye-trust__item">
+                  <svg class="drye-trust__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></svg>
+                  {{ ss.trust_left_label }}
+                </span>
+              {%- endif -%}
+              {%- if ss.trust_right_label != blank -%}
+                <span class="drye-trust__item">
+                  <svg class="drye-trust__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></svg>
+                  {{ ss.trust_right_label }}
+                </span>
+              {%- endif -%}
+            </div>
+          {%- endif -%}
+        </div>
+      </div>
+    </div>
   </div>
 
-  <div class="dryeNEW-hero__content-wrap">
-    <div class="hero-new-v4__col">
+  {%- comment -%} ================= MOBILE ================= {%- endcomment -%}
+  <div class="m-hero">
+    {%- if ss.mobile_media_type == 'video' and ss.mobile_video_id != blank -%}
+      <stream src="{{ ss.mobile_video_id }}" autoplay muted loop playsinline class="m-hero__poster"></stream>
+    {%- elsif ss.mobile_image != blank -%}
+      {{ ss.mobile_image | image_url: width: 1200 | image_tag: class: 'm-hero__poster', alt: '', loading: 'eager', fetchpriority: 'high', widths: '480,768,960,1200' }}
+    {%- endif -%}
+    <div class="m-hero__overlay"></div>
 
-      {%- if ss.heading_line_1 != blank or ss.heading_line_2 != blank -%}
-        <h1 class="dryeNEW-hero__heading">
-          {%- if ss.heading_line_1 != blank -%}
-            <span class="dryeNEW-hero__heading-line">{{ ss.heading_line_1 }}</span>
-          {%- endif -%}
-          {%- if ss.heading_line_2 != blank -%}
-            <span class="dryeNEW-hero__heading-line">{{ ss.heading_line_2 }}</span>
-          {%- endif -%}
-        </h1>
-      {%- endif -%}
+    {%- if ss.heading_line_1 != blank or ss.heading_line_2 != blank -%}
+      <h1>{{ ss.heading_line_1 }} {{ ss.heading_line_2 }}</h1>
+    {%- endif -%}
 
-      {%- if ss.subheading != blank -%}
-        <p class="dryeNEW-hero__sub">{{ ss.subheading }}</p>
-      {%- endif -%}
+    {%- if ss.subheading != blank -%}
+      <p class="m-sub">{{ ss.subheading }}</p>
+    {%- endif -%}
 
-      {%- if ss.star_label != blank -%}
-        <div class="hero-new-v4__reviews">
-          <span class="hero-new-v4__stars" aria-hidden="true">
-            {%- assign star_total = ss.star_count | round -%}
-            {%- for i in (1..star_total) -%}★{%- endfor -%}
-          </span>
-          <span class="hero-new-v4__reviews-text">{{ ss.star_label }}</span>
-        </div>
-      {%- endif -%}
-
-      <div class="dryeNEW-dual-cta">
-        {%- if ss.cta_primary_text != blank -%}
-          <a
-            href="{{ ss.cta_primary_url | default: '#' }}"
-            class="dryeNEW-cta-path dryeNEW-cta-path--primary"
-          >
-            {%- if ss.cta_primary_label != blank -%}
-              <span class="dryeNEW-cta-path__label">{{ ss.cta_primary_label }}</span>
-            {%- endif -%}
-            <span class="dryeNEW-cta-path__text">
-              <span class="dryeNEW-cta-path__text-line">{{ ss.cta_primary_text }}</span>
-            </span>
-          </a>
-        {%- endif -%}
-
-        {%- if ss.cta_secondary_text != blank -%}
-          <a
-            href="{{ ss.cta_secondary_url | default: '#' }}"
-            class="dryeNEW-cta-path dryeNEW-cta-path--passive"
-          >
-            {%- if ss.cta_secondary_label != blank -%}
-              <span class="dryeNEW-cta-path__label">{{ ss.cta_secondary_label }}</span>
-            {%- endif -%}
-            <span class="dryeNEW-cta-path__text">
-              <span class="dryeNEW-cta-path__text-line">{{ ss.cta_secondary_text }}</span>
-            </span>
-          </a>
-        {%- endif -%}
+    {%- if m_text != blank -%}
+      <div class="m-cta-group">
+        <a href="{{ m_url | default: '#' }}" class="dryeNEW-cta-path dryeNEW-cta-path--passive">
+          {%- if m_label != blank -%}<span class="dryeNEW-cta-path__label">{{ m_label }}</span>{%- endif -%}
+          <span class="dryeNEW-cta-path__text"><span class="dryeNEW-cta-path__text-line">{{ m_text }}</span></span>
+        </a>
       </div>
+    {%- endif -%}
 
-      {%- if ss.trust_left_label != blank or ss.trust_right_label != blank -%}
-        <div class="hero-new-v4__trust">
-          {%- if ss.trust_left_label != blank -%}
-            <span class="hero-new-v4__trust-item">
-              <svg class="hero-new-v4__trust-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></svg>
-              {{ ss.trust_left_label }}
-            </span>
-          {%- endif -%}
-          {%- if ss.trust_right_label != blank -%}
-            <span class="hero-new-v4__trust-item">
-              <svg class="hero-new-v4__trust-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></svg>
-              {{ ss.trust_right_label }}
-            </span>
-          {%- endif -%}
+    {%- if ss.trust_left_label != blank or ss.trust_right_label != blank -%}
+      <div class="m-cert-strip">
+        <div class="m-cert-col">
+          {%- if ss.cert_left_image != blank -%}{{ ss.cert_left_image | image_url: width: 120 | image_tag: class: 'm-cert-logo', alt: '', loading: 'lazy' }}{%- endif -%}
+          <span>{{ ss.cert_left_label | default: ss.trust_left_label }}</span>
         </div>
-      {%- endif -%}
-
-      {%- if ss.trust_left_label != blank or ss.trust_right_label != blank -%}
-        <div class="hero-new-v4__cert-strip">
-          <div class="hero-new-v4__cert-col">
-            {%- if ss.cert_left_image != blank -%}
-              {{ ss.cert_left_image | image_url: width: 120 | image_tag: class: 'hero-new-v4__cert-logo', alt: '', loading: 'lazy' }}
-            {%- endif -%}
-            <span>{{ ss.cert_left_label | default: ss.trust_left_label }}</span>
-          </div>
-          <div class="hero-new-v4__cert-col">
-            {%- if ss.cert_right_image != blank -%}
-              {{ ss.cert_right_image | image_url: width: 120 | image_tag: class: 'hero-new-v4__cert-logo', alt: '', loading: 'lazy' }}
-            {%- endif -%}
-            <span>{{ ss.cert_right_label | default: ss.trust_right_label }}</span>
-          </div>
+        <div class="m-cert-col">
+          {%- if ss.cert_right_image != blank -%}{{ ss.cert_right_image | image_url: width: 120 | image_tag: class: 'm-cert-logo', alt: '', loading: 'lazy' }}{%- endif -%}
+          <span>{{ ss.cert_right_label | default: ss.trust_right_label }}</span>
         </div>
-      {%- endif -%}
-
-    </div>
+      </div>
+    {%- endif -%}
   </div>
 </section>
 
@@ -305,20 +277,25 @@
     { "type": "range", "id": "star_count", "label": "Star count", "min": 0, "max": 5, "step": 1, "default": 5 },
     { "type": "text", "id": "star_label", "label": "Star label", "default": "Rated 4.8/5 by 1,200+ glove-wearers" },
 
-    { "type": "header", "content": "Primary CTA (solid white)" },
+    { "type": "header", "content": "Primary CTA (solid white — desktop left)" },
     { "type": "text", "id": "cta_primary_label", "label": "Small label", "default": "Order now" },
     { "type": "text", "id": "cta_primary_text", "label": "Button text", "default": "Order one DRYE layer →" },
     { "type": "url", "id": "cta_primary_url", "label": "Link" },
 
-    { "type": "header", "content": "Secondary CTA (ghost)" },
+    { "type": "header", "content": "Secondary CTA (ghost — desktop right)" },
     { "type": "text", "id": "cta_secondary_label", "label": "Small label", "default": "The evidence" },
     { "type": "text", "id": "cta_secondary_text", "label": "Button text", "default": "See the proof →" },
     { "type": "url", "id": "cta_secondary_url", "label": "Link" },
 
+    { "type": "header", "content": "Mobile CTA (single button)" },
+    { "type": "text", "id": "cta_mobile_label", "label": "Small label", "info": "Falls back to primary.", "default": "Order now" },
+    { "type": "text", "id": "cta_mobile_text", "label": "Button text", "info": "Falls back to primary.", "default": "Order DRYE liners here →" },
+    { "type": "url", "id": "cta_mobile_url", "label": "Link", "info": "Falls back to primary." },
+
     { "type": "header", "content": "Trust / credentials" },
     { "type": "text", "id": "trust_left_label", "label": "Trust label (left)", "default": "SKAPA Innovation Award" },
     { "type": "text", "id": "trust_right_label", "label": "Trust label (right)", "default": "Field-validated: EV workshops, Ukraine defense, elite hockey." },
-    { "type": "paragraph", "content": "Mobile cert strip (below CTA on phones). Optional logos + text override." },
+    { "type": "paragraph", "content": "Mobile cert strip (below CTA on phones)." },
     { "type": "image_picker", "id": "cert_left_image", "label": "Cert strip — left logo (optional)" },
     { "type": "text", "id": "cert_left_label", "label": "Cert strip — left text", "default": "SKAPA Innovation Award — in memory of the inventor Alfred Nobel" },
     { "type": "image_picker", "id": "cert_right_image", "label": "Cert strip — right logo (optional)" },
@@ -335,8 +312,7 @@
     { "type": "text", "id": "mobile_video_id", "label": "Mobile Cloudflare Stream video UID" },
 
     { "type": "header", "content": "Appearance" },
-    { "type": "select", "id": "text_position", "label": "Text position (desktop)", "options": [ { "value": "left", "label": "Left" }, { "value": "right", "label": "Right" } ], "default": "left" },
-    { "type": "range", "id": "scrim_opacity", "label": "Scrim opacity", "min": 0, "max": 100, "step": 1, "unit": "%", "default": 92 }
+    { "type": "range", "id": "scrim_opacity", "label": "Scrim opacity", "min": 0, "max": 100, "step": 1, "unit": "%", "default": 82 }
   ],
   "presets": [ { "name": "Hero New V4" } ]
 }
