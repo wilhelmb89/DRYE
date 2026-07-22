@@ -53,7 +53,11 @@
     position: relative;
     z-index: 2;
     width: 100%;
-    padding: 72px 56px;
+    /* Match the live theme's content container (dryeNEW-hero: 1120px, 20px pad)
+       so the heading/CTAs line up with the header and the rest of the page. */
+    max-width: 1120px;
+    margin-inline: auto;
+    padding: 72px 20px;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -102,14 +106,38 @@
   }
   #shopify-section-{{ section.id }} .drye-action__btns { display: flex; gap: 12px; width: 100%; }
 
-  /* CTAs reuse the site-wide .button / .button.secondary identity.
-     Only layout here — equal width, single centered line. */
-  #shopify-section-{{ section.id }} .drye-action__btns .button {
+  /* Self-contained CTAs (the live theme has no global .button rule) —
+     white primary + ghost secondary, equal width, single centered line. */
+  #shopify-section-{{ section.id }} .drye-cta {
     flex: 1;
-    max-width: none;
+    display: inline-flex;
+    align-items: center;
     justify-content: center;
+    gap: 8px;
+    font-family: var(--font-body-family, "Inter", sans-serif);
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 16px 24px;
+    border-radius: 0;
+    text-decoration: none;
+    text-align: center;
     white-space: nowrap;
+    background: #fff;
+    color: #0a1621;
+    border: 1px solid #fff;
+    cursor: pointer;
+    transition: background 0.15s ease, color 0.15s ease;
   }
+  #shopify-section-{{ section.id }} .drye-cta:hover { background: rgba(255, 255, 255, 0.88); }
+  #shopify-section-{{ section.id }} .drye-cta.ghost {
+    background: rgba(255, 255, 255, 0.07);
+    color: #fff;
+    border-color: rgba(255, 255, 255, 0.5);
+  }
+  #shopify-section-{{ section.id }} .drye-cta.ghost:hover { background: rgba(255, 255, 255, 0.14); }
+  #shopify-section-{{ section.id }} .drye-cta__arrow { font-size: 1.15em; line-height: 1; }
   #shopify-section-{{ section.id }} .drye-trust {
     display: flex;
     justify-content: space-between;
@@ -184,13 +212,27 @@
     #shopify-section-{{ section.id }} .m-sub strong { font-weight: 700; }
 
     #shopify-section-{{ section.id }} .m-cta-group { margin-bottom: 18px; }
-    /* Mobile CTA reuses the site-wide full-width button (.button.wide),
-       single centered line. */
-    #shopify-section-{{ section.id }} .m-cta-group .button {
-      max-width: none;
+    /* Self-contained full-width ghost CTA, single centered line. */
+    #shopify-section-{{ section.id }} .m-cta-path {
+      display: flex;
+      align-items: center;
       justify-content: center;
+      gap: 8px;
+      width: 100%;
+      padding: 14px 18px;
+      border-radius: 0;
+      text-decoration: none;
+      font-family: var(--font-body-family, "Inter", sans-serif);
+      font-weight: 600;
+      font-size: 13px;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
       white-space: nowrap;
+      color: #fff;
+      background: rgba(255, 255, 255, 0.07);
+      border: 1px solid rgba(255, 255, 255, 0.5);
     }
+    #shopify-section-{{ section.id }} .m-cta-path:hover { background: rgba(255, 255, 255, 0.14); }
 
     #shopify-section-{{ section.id }} .m-cred-strip {
       display: grid;
@@ -265,15 +307,13 @@
         {%- if ss.cta_primary_label != blank or ss.cta_secondary_label != blank -%}
           <div class="drye-action__btns">
             {%- if ss.cta_primary_label != blank -%}
-              <a href="{{ ss.cta_primary_url | default: '#' }}" class="button">
-                {{- ss.cta_primary_label -}}
-                {%- render 'icon', type: 'arrow-right' -%}
+              <a href="{{ ss.cta_primary_url | default: '#' }}" class="drye-cta">
+                {{- ss.cta_primary_label }} <span class="drye-cta__arrow" aria-hidden="true">→</span>
               </a>
             {%- endif -%}
             {%- if ss.cta_secondary_label != blank -%}
-              <a href="{{ ss.cta_secondary_url | default: '#' }}" class="button secondary">
-                {{- ss.cta_secondary_label -}}
-                {%- render 'icon', type: 'arrow-right', color: '#111111' -%}
+              <a href="{{ ss.cta_secondary_url | default: '#' }}" class="drye-cta ghost">
+                {{- ss.cta_secondary_label }} <span class="drye-cta__arrow" aria-hidden="true">→</span>
               </a>
             {%- endif -%}
           </div>
@@ -339,9 +379,8 @@
   {%- assign m_cta_url = ss.cta_mobile_url | default: ss.cta_primary_url -%}
   {%- if m_cta_label != blank -%}
     <div class="m-cta-group">
-      <a href="{{ m_cta_url | default: '#' }}" class="button wide">
-        {{- m_cta_label -}}
-        {%- render 'icon', type: 'arrow-right' -%}
+      <a href="{{ m_cta_url | default: '#' }}" class="m-cta-path">
+        {{- m_cta_label }} <span class="drye-cta__arrow" aria-hidden="true">→</span>
       </a>
     </div>
   {%- endif -%}
