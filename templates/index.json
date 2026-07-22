@@ -280,6 +280,47 @@
     "17830175964c62b62a": {
       "type": "apps",
       "settings": {}
+    },
+    "drye_liner_product_clarity_pengPG": {
+      "type": "drye-liner-product-clarity",
+      "blocks": {
+        "spec_Abrah7": {
+          "type": "spec",
+          "settings": {
+            "title": "Sweat.",
+            "description": "Stays dry for the full shift."
+          }
+        },
+        "spec_JUHgn8": {
+          "type": "spec",
+          "settings": {
+            "title": "Oil.",
+            "description": "Stays on the surface. Wipes off."
+          }
+        },
+        "spec_BfYbej": {
+          "type": "spec",
+          "settings": {
+            "title": "Tearing.",
+            "description": "Your nitriles go on dry, come off dry."
+          }
+        }
+      },
+      "block_order": [
+        "spec_Abrah7",
+        "spec_JUHgn8",
+        "spec_BfYbej"
+      ],
+      "disabled": true,
+      "name": "DRYE Product Clarity",
+      "settings": {
+        "section_id": "liner-product",
+        "heading": "DRYE goes",
+        "heading_emphasis": "under your existing glove.",
+        "body": "<p>Thin enough you forget it's there. Built for repeated shifts.</p>",
+        "before_label": "Without DRYE",
+        "after_label": "With DRYE"
+      }
     }
   },
   "order": [
@@ -290,6 +331,7 @@
     "drye_system_section_E9igMr",
     "drye_new_closing_cta_BkJmfN",
     "jens_linnea_section_FQgtPH",
-    "17830175964c62b62a"
+    "17830175964c62b62a",
+    "drye_liner_product_clarity_pengPG"
   ]
 }
