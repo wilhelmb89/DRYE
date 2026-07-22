@@ -435,6 +435,24 @@
         "video_caption": "Sealed gloves trap sweat. DRYE routes it outward."
       }
     },
+    "17820025558baba7f4": {
+      "type": "apps",
+      "blocks": {
+        "judge_me_reviews_review_widget_X7UeAd": {
+          "type": "shopify://apps/judge-me-reviews/blocks/review_widget/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
+          "settings": {
+            "review_data": "real_data",
+            "max_width": 1100,
+            "show_shop_reviews": false,
+            "empty_state": "empty_widget"
+          }
+        }
+      },
+      "block_order": [
+        "judge_me_reviews_review_widget_X7UeAd"
+      ],
+      "settings": {}
+    },
     "drye_research_study_breakdown_BzbdGT": {
       "type": "drye-research-study-breakdown",
       "blocks": {
@@ -800,26 +818,9 @@
         "guarantee_text": "60-Day Money Back Guarantee"
       }
     },
-    "17820025558baba7f4": {
-      "type": "apps",
-      "blocks": {
-        "judge_me_reviews_review_widget_X7UeAd": {
-          "type": "shopify://apps/judge-me-reviews/blocks/review_widget/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
-          "settings": {
-            "review_data": "real_data",
-            "max_width": 1100,
-            "show_shop_reviews": false,
-            "empty_state": "empty_widget"
-          }
-        }
-      },
-      "block_order": [
-        "judge_me_reviews_review_widget_X7UeAd"
-      ],
-      "settings": {}
-    },
     "drye_about_skapa_WFa9Bz": {
       "type": "drye-about-skapa",
+      "disabled": true,
       "name": "DRYE About SKAPA",
       "settings": {
         "award_label": "SKAPA Prize — 2020",
