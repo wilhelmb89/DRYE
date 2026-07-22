@@ -677,10 +677,85 @@
         "subheading": "Neither found the answer in a new material. What changed was the environment inside the glove.",
         "swipe_label": "Swipe"
       }
+    },
+    "featured_in_belowfold": {
+      "type": "drye-featured-in",
+      "settings": {}
+    },
+    "industry_cards_belowfold": {
+      "type": "drye-industry-cards",
+      "blocks": {
+        "card1": {
+          "type": "card",
+          "settings": {
+            "label": "Automotive / Industry"
+          }
+        },
+        "card2": {
+          "type": "card",
+          "settings": {
+            "label": "Elite Sports"
+          }
+        },
+        "card3": {
+          "type": "card",
+          "settings": {
+            "label": "Healthcare"
+          }
+        },
+        "card4": {
+          "type": "card",
+          "settings": {
+            "label": "Military"
+          }
+        }
+      },
+      "block_order": [
+        "card1",
+        "card2",
+        "card3",
+        "card4"
+      ],
+      "settings": {}
+    },
+    "product_clarity_belowfold": {
+      "type": "drye-liner-product-clarity",
+      "blocks": {
+        "spec1": {
+          "type": "spec",
+          "settings": {
+            "title": "Thin by design.",
+            "description": "Doesn't add bulk or reduce dexterity."
+          }
+        },
+        "spec2": {
+          "type": "spec",
+          "settings": {
+            "title": "Works under any glove.",
+            "description": "Nitrile, latex, rubber, HV."
+          }
+        },
+        "spec3": {
+          "type": "spec",
+          "settings": {
+            "title": "Stays in place.",
+            "description": "Between skin and glove. All shift."
+          }
+        }
+      },
+      "block_order": [
+        "spec1",
+        "spec2",
+        "spec3"
+      ],
+      "settings": {}
     }
   },
   "order": [
     "hero_new_v4_QAwLhk",
+    "featured_in_belowfold",
+    "industry_cards_belowfold",
+    "product_clarity_belowfold",
     "drye_new_hero_ddfGwJ",
     "drye_new_identification_frontpage_JzzzCA",
     "drye_mechanics_identification_gallery_BDmRCB",
