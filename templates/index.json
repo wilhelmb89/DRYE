@@ -23,7 +23,7 @@
         "cta_primary_url": "shopify://products/drye-moisture-routing-glove-liners",
         "cta_secondary_label": "The evidence",
         "cta_secondary_text": "See the proof →",
-        "cta_secondary_url": "",
+        "cta_secondary_url": "shopify://pages/research",
         "trust_left_label": "SKAPA Innovation Award",
         "trust_right_label": "Field-validated: EV workshops, Ukraine defense, elite hockey.",
         "cert_left_label": "SKAPA Innovation Award — in memory of the inventor Alfred Nobel",
@@ -35,6 +35,53 @@
         "mobile_image": "shopify://shop_images/Firefly.webp",
         "mobile_video_id": "",
         "scrim_opacity": 92
+      }
+    },
+    "drye_industry_cards_6iD7bq": {
+      "type": "drye-industry-cards",
+      "blocks": {
+        "card_Wxaw4H": {
+          "type": "card",
+          "settings": {
+            "image": "shopify://shop_images/Gemini_Generated_Image_een107een107een1_1.webp",
+            "label": "Automotive / Industry",
+            "link": ""
+          }
+        },
+        "card_Gw3493": {
+          "type": "card",
+          "settings": {
+            "image": "shopify://shop_images/Gemini_Generated_Image_ygd4x4ygd4x4ygd4.webp",
+            "label": "Elite Sports",
+            "link": ""
+          }
+        },
+        "card_F7YdDE": {
+          "type": "card",
+          "settings": {
+            "image": "shopify://shop_images/Gemini_Generated_Image_inubj5inubj5inub.webp",
+            "label": "Healthcare",
+            "link": ""
+          }
+        },
+        "card_Aqgzxc": {
+          "type": "card",
+          "settings": {
+            "image": "shopify://shop_images/Gemini_Generated_Image_snqdsjsnqdsjsnqd.webp",
+            "label": "Military",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "card_Wxaw4H",
+        "card_Gw3493",
+        "card_F7YdDE",
+        "card_Aqgzxc"
+      ],
+      "name": "DRYE Industry Cards",
+      "settings": {
+        "bg_color": "#ffffff"
       }
     },
     "drye_new_identification_frontpage_JzzzCA": {
@@ -604,6 +651,7 @@
   },
   "order": [
     "hero_new_v4_qJcY9y",
+    "drye_industry_cards_6iD7bq",
     "drye_new_identification_frontpage_JzzzCA",
     "drye_mechanics_identification_gallery_BDmRCB",
     "drye_product_reality_grid_QbtiwK",
