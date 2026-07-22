@@ -1,0 +1,172 @@
+{%- comment -%}
+  DRYE NEW Hero v3 — compact "Mars-style" hero. Left-aligned heading, product
+  image beside the copy on desktop / in the middle on mobile, proof-over-promise
+  box, star review, one CTA, two trust boxes + return-rate line. Shorter than the
+  full-height hero. Same identity (Clash Grotesk / DM Sans / teal, dark bg).
+  Own preset — add it in the theme editor as a new hero option.
+{%- endcomment -%}
+
+{%- assign uid = section.id -%}
+{%- assign cred = section.blocks | where: 'type', 'credibility_item' -%}
+{%- assign has_img = section.settings.product_image -%}
+{%- assign base = section.settings.bg_base | default: '#0a1621' -%}
+{%- assign mid = base | color_lighten: 7 -%}
+{%- assign glow = section.settings.bg_glow | default: '#0D9488' -%}
+
+<style>
+  #h3-{{ uid }} {
+    background:
+      radial-gradient(120% 92% at 79% 42%, {{ glow | color_modify: 'alpha', 0.32 }} 0%, {{ glow | color_modify: 'alpha', 0.09 }} 34%, {{ glow | color_modify: 'alpha', 0.0 }} 64%),
+      linear-gradient(140deg, {{ base }} 0%, {{ mid }} 52%, {{ base }} 100%);
+    color: #fff;
+    padding: {{ section.settings.pad_top | default: 56 }}px 20px {{ section.settings.pad_bottom | default: 56 }}px;
+  }
+  @media (max-width: 899px) {
+    #h3-{{ uid }} {
+      background:
+        radial-gradient(130% 52% at 50% 33%, {{ glow | color_modify: 'alpha', 0.30 }} 0%, {{ glow | color_modify: 'alpha', 0.07 }} 40%, {{ glow | color_modify: 'alpha', 0.0 }} 70%),
+        linear-gradient(165deg, {{ base }} 0%, {{ mid }} 50%, {{ base }} 100%);
+    }
+  }
+  #h3-{{ uid }} .h3__inner { max-width: 1120px; margin: 0 auto; display: grid; grid-template-columns: 1fr; gap: 20px 44px; align-items: center; }
+  #h3-{{ uid }} .h3__cred { font-family: var(--font-body,"DM Sans",sans-serif); font-size: 10px; letter-spacing: 0.05em; text-transform: uppercase; color: rgba(255,255,255,0.5); display: flex; flex-wrap: wrap; gap: 6px 16px; margin: 0 0 14px; }
+  #h3-{{ uid }} .h3__cred span { display: inline-flex; align-items: center; gap: 7px; }
+  #h3-{{ uid }} .h3__cred i { width: 5px; height: 5px; border-radius: 50%; background: #14b8a6; display: inline-block; }
+  #h3-{{ uid }} .h3__h { font-family: var(--font-display,"Clash Grotesk",sans-serif); font-weight: 600; font-size: clamp(30px, 4.2vw, 44px); line-height: 1.03; letter-spacing: -0.03em; margin: 0 0 12px; text-align: left; }
+  #h3-{{ uid }} .h3__h u { text-decoration: underline; }
+  #h3-{{ uid }} .h3__sub { font-family: var(--font-body,"DM Sans",sans-serif); font-size: 14px; font-weight: 500; line-height: 1.5; color: rgba(255,255,255,0.72); margin: 0 0 18px; max-width: 46ch; }
+  #h3-{{ uid }} .h3__sub b { color: #fff; font-weight: 600; }
+
+  #h3-{{ uid }} .h3__media { display: flex; align-items: center; justify-content: center; }
+  #h3-{{ uid }} .h3__media img {
+    width: 100%; max-width: 600px; display: block;
+    {% if section.settings.image_169 %}aspect-ratio: 16 / 9; object-fit: cover;{% else %}height: auto;{% endif %}
+    border-radius: 16px;
+    {% if section.settings.image_blend %}-webkit-mask-image: radial-gradient(118% 130% at 50% 48%, #000 50%, transparent 90%); mask-image: radial-gradient(118% 130% at 50% 48%, #000 50%, transparent 90%);{% endif %}
+  }
+
+  #h3-{{ uid }} .h3__proof { display: flex; align-items: flex-start; gap: 10px; margin: 2px 0 18px; padding: 14px 0 0; border-top: 1px solid rgba(255,255,255,0.12); max-width: 480px; }
+  #h3-{{ uid }} .h3__proof svg { width: 16px; height: 30px; color: #B08D57; flex: 0 0 16px; opacity: 0.85; }
+  #h3-{{ uid }} .h3__proof span { font-family: var(--font-editorial,"Playfair Display",Georgia,serif); font-style: italic; font-size: 15px; line-height: 1.45; color: rgba(255,255,255,0.82); }
+  #h3-{{ uid }} .h3__proof b { color: #fff; font-weight: 500; }
+
+  #h3-{{ uid }} .h3__review { display: flex; align-items: center; gap: 8px; margin: 0 0 14px; }
+  #h3-{{ uid }} .h3__stars { color: #F5B301; font-size: 15px; letter-spacing: 2px; }
+  #h3-{{ uid }} .h3__review span.t { font-family: var(--font-body,"DM Sans",sans-serif); font-size: 13px; color: rgba(255,255,255,0.85); }
+
+  #h3-{{ uid }} .h3__cta { display: inline-flex; align-items: center; justify-content: center; gap: 8px; background: #0D9488; color: #fff; font-family: var(--font-display,"Clash Grotesk",sans-serif); font-weight: 600; font-size: 16px; letter-spacing: -0.01em; padding: 16px 34px; border-radius: 11px; text-decoration: none; box-shadow: 0 8px 22px rgba(13,148,136,0.35); transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease; margin: 0 0 14px; }
+  #h3-{{ uid }} .h3__cta:hover, #h3-{{ uid }} .h3__cta:focus-visible { transform: translateY(-2px); background: #0fa89b; box-shadow: 0 12px 30px rgba(13,148,136,0.45); }
+
+  #h3-{{ uid }} .h3__trust { display: flex; gap: 8px; margin: 0 0 8px; max-width: 460px; }
+  #h3-{{ uid }} .h3__tbox { flex: 1; display: flex; align-items: center; gap: 7px; border: 1px solid rgba(255,255,255,0.14); border-radius: 10px; padding: 11px 12px; }
+  #h3-{{ uid }} .h3__tbox svg { width: 14px; height: 14px; color: #2dd4bf; flex: 0 0 14px; }
+  #h3-{{ uid }} .h3__tbox span { font-family: var(--font-body,"DM Sans",sans-serif); font-size: 11.5px; line-height: 1.2; color: rgba(255,255,255,0.82); }
+  #h3-{{ uid }} .h3__return { font-family: var(--font-body,"DM Sans",sans-serif); font-size: 11px; color: rgba(255,255,255,0.55); margin: 0; }
+
+  /* Desktop: text left (top + bottom), product image right, spanning */
+  @media (min-width: 900px) {
+    #h3-{{ uid }} .h3__inner { grid-template-columns: 1.05fr 0.95fr; grid-template-areas: "top media" "bottom media"; }
+    #h3-{{ uid }} .h3--noimg .h3__inner,
+    #h3-{{ uid }}.h3--noimg .h3__inner { grid-template-columns: 1fr; grid-template-areas: "top" "bottom"; }
+    #h3-{{ uid }} .h3__top { grid-area: top; align-self: end; }
+    #h3-{{ uid }} .h3__bottom { grid-area: bottom; align-self: start; }
+    #h3-{{ uid }} .h3__media { grid-area: media; }
+    #h3-{{ uid }} .h3__h { font-size: clamp(34px, 3.4vw, 46px); }
+  }
+
+  @media (max-width: 899px) {
+    #h3-{{ uid }} .h3__media { margin: 4px 0 16px; }
+    #h3-{{ uid }} .h3__cta { width: 100%; }
+    #h3-{{ uid }} .h3__trust { max-width: none; }
+  }
+</style>
+
+<section id="h3-{{ uid }}" class="dryehero3 {% unless has_img != blank %}h3--noimg{% endunless %}" data-section-id="{{ uid }}">
+  <div class="h3__inner">
+    <div class="h3__top">
+      {%- if cred.size > 0 -%}
+        <div class="h3__cred">
+          {%- for b in cred -%}<span><i></i>{{ b.settings.text }}</span>{%- endfor -%}
+        </div>
+      {%- endif -%}
+      {%- if section.settings.heading_line_1 != blank or section.settings.heading_line_2 != blank -%}
+        <h1 class="h3__h">{{ section.settings.heading_line_1 }}{% if section.settings.heading_line_2 != blank %} {{ section.settings.heading_line_2 }}{% endif %}</h1>
+      {%- endif -%}
+      {%- if section.settings.sub != blank -%}
+        <p class="h3__sub">{{ section.settings.sub }}{% if section.settings.sub_emphasis != blank %} <b>{{ section.settings.sub_emphasis }}</b>{% endif %}</p>
+      {%- endif -%}
+    </div>
+
+    {%- if has_img != blank -%}
+      <div class="h3__media">
+        <img src="{{ section.settings.product_image | image_url: width: 920 }}" alt="{{ section.settings.heading_line_1 | strip_html | escape }}" loading="eager" fetchpriority="high" width="{{ section.settings.product_image.width }}" height="{{ section.settings.product_image.height }}">
+      </div>
+    {%- endif -%}
+
+    <div class="h3__bottom">
+      {%- if section.settings.proof_line != blank -%}
+        <div class="h3__proof">
+          <svg viewBox="0 0 48 96" fill="currentColor" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="1.6" d="M40 6 C 16 22, 8 46, 15 72 C 18 84, 28 90, 37 92"/><path d="M39 9 c -7 -1 -12 2 -14 8 c 7 1 13 -2 14 -8 z"/><path d="M31 15 c -7 -1 -12 2 -14 8 c 7 1 13 -2 14 -8 z"/><path d="M24 24 c -7 -1 -12 3 -13 9 c 7 0 12 -3 13 -9 z"/><path d="M18 35 c -7 0 -11 3 -12 9 c 7 0 11 -3 12 -9 z"/><path d="M15 47 c -7 1 -10 5 -10 11 c 6 -1 11 -5 10 -11 z"/><path d="M16 60 c -6 2 -9 6 -8 12 c 6 -2 10 -6 8 -12 z"/><path d="M21 72 c -6 2 -8 7 -6 13 c 5 -2 9 -7 6 -13 z"/><path d="M28 82 c -6 3 -7 8 -4 13 c 5 -3 8 -8 4 -13 z"/></svg>
+          <span>{{ section.settings.proof_line }}</span>
+        </div>
+      {%- endif -%}
+      {%- if section.settings.review_text != blank -%}
+        <div class="h3__review"><span class="h3__stars" aria-hidden="true">★★★★★</span><span class="t">{{ section.settings.review_text }}</span></div>
+      {%- endif -%}
+      {%- if section.settings.cta_label != blank -%}
+        <a class="h3__cta" href="{{ section.settings.cta_link | default: '/products/drye-moisture-routing-glove-liners' }}">{{ section.settings.cta_label }}</a>
+      {%- endif -%}
+      {%- if section.settings.trust_1 != blank or section.settings.trust_2 != blank -%}
+        <div class="h3__trust">
+          {%- if section.settings.trust_1 != blank -%}<div class="h3__tbox"><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8.4l3 3 7-7.6" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg><span>{{ section.settings.trust_1 }}</span></div>{%- endif -%}
+          {%- if section.settings.trust_2 != blank -%}<div class="h3__tbox"><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8.4l3 3 7-7.6" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg><span>{{ section.settings.trust_2 }}</span></div>{%- endif -%}
+        </div>
+      {%- endif -%}
+      {%- if section.settings.return_line != blank -%}
+        <p class="h3__return">{{ section.settings.return_line }}</p>
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "DRYE NEW Hero v3",
+  "settings": [
+    { "type": "image_picker", "id": "product_image", "label": "Product image (16:9)", "info": "The liner used inside a nitrile glove — product in focus, dark/neutral background works best so it blends into the glow." },
+    { "type": "checkbox", "id": "image_169", "label": "Crop image to 16:9", "default": true },
+    { "type": "checkbox", "id": "image_blend", "label": "Fade image edges into the glow (Mars-style)", "default": true },
+    { "type": "color", "id": "bg_base", "label": "Background base", "default": "#0a1621" },
+    { "type": "color", "id": "bg_glow", "label": "Background glow (behind product)", "default": "#1E6FA8" },
+    { "type": "range", "id": "pad_top", "label": "Padding top", "min": 24, "max": 120, "step": 4, "unit": "px", "default": 56 },
+    { "type": "range", "id": "pad_bottom", "label": "Padding bottom", "min": 24, "max": 120, "step": 4, "unit": "px", "default": 56 },
+    { "type": "header", "content": "Copy" },
+    { "type": "inline_richtext", "id": "heading_line_1", "label": "Heading line 1", "default": "Add one <span style=\"text-decoration:underline\">dry layer</span>" },
+    { "type": "text", "id": "heading_line_2", "label": "Heading line 2", "default": "under your gloves." },
+    { "type": "text", "id": "sub", "label": "Subheading", "default": "0.4mm thin. Worn inside your existing glove — nitrile, latex, rubber or HV." },
+    { "type": "text", "id": "sub_emphasis", "label": "Subheading emphasis", "default": "What changes is what your skin sits against." },
+    { "type": "header", "content": "Proof over promise" },
+    { "type": "text", "id": "proof_line", "label": "Proof box", "default": "Validated by global EV manufacturers & the Ukraine military — in extreme environments." },
+    { "type": "header", "content": "Review + CTA + trust" },
+    { "type": "text", "id": "review_text", "label": "Review line", "default": "Rated 4.8/5 by 1,200+ glove-wearers" },
+    { "type": "text", "id": "cta_label", "label": "CTA button", "default": "Shop DRYE →" },
+    { "type": "url", "id": "cta_link", "label": "CTA link", "info": "Defaults to the product page." },
+    { "type": "text", "id": "trust_1", "label": "Trust box 1", "default": "60-day money-back guarantee" },
+    { "type": "text", "id": "trust_2", "label": "Trust box 2", "default": "Fast Shipping" },
+    { "type": "text", "id": "return_line", "label": "Return-rate line", "default": "0% return rate — last 90 days" }
+  ],
+  "blocks": [
+    { "type": "credibility_item", "name": "Credibility item", "settings": [ { "type": "text", "id": "text", "label": "Text", "default": "Uppsala University" } ] }
+  ],
+  "max_blocks": 6,
+  "presets": [
+    {
+      "name": "DRYE NEW Hero v3",
+      "blocks": [
+        { "type": "credibility_item", "settings": { "text": "SKAPA Prize — Nobel memory, 2020" } },
+        { "type": "credibility_item", "settings": { "text": "Patent pending" } }
+      ]
+    }
+  ]
+}
+{% endschema %}
