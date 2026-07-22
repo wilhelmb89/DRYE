@@ -2100,8 +2100,16 @@
    (accordion + tabs moved out of the narrow buy column)
    ========================================================================== */
 .hero .hero-below {
+  display: flex;
+  flex-direction: column;
   padding: 0 20px 8px;
 }
+
+/* Order under the buy zone: FAQ/What to Expect/Reviews first (right under
+   SKAPA), then the inline review slider, then the details accordion last. */
+.hero .hero-below .tabs-section { order: 1; }
+.hero .hero-below .pdp-review-slider-block { order: 2; }
+.hero .hero-below .acc-wrap { order: 3; }
 
 .hero .hero-below .acc-wrap {
   max-width: 720px;
