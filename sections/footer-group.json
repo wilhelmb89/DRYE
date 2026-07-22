@@ -11,6 +11,17 @@
   "name": "footer-group",
   "type": "footer",
   "sections": {
+    "drye_new_sticky_bar_nyJh7j": {
+      "type": "dryeNEW-sticky-bar",
+      "name": "DRYE NEW Sticky Bar",
+      "settings": {
+        "product_name": "DRYE Glove Liner",
+        "subtext": "30-day free trial",
+        "cta_label": "Try it free →",
+        "open_cart_drawer": true,
+        "cta_url": ""
+      }
+    },
     "drye_new_footer_LdQyQ9": {
       "type": "dryeNEW-footer",
       "name": "DRYE NEW Footer",
@@ -64,6 +75,7 @@
     }
   },
   "order": [
+    "drye_new_sticky_bar_nyJh7j",
     "drye_new_footer_LdQyQ9"
   ]
 }
