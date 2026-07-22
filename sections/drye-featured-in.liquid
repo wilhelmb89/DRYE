@@ -50,8 +50,15 @@
   #drye-featured-{{ uid }} .lg-gadget { font-size: 14px; font-weight: 700; letter-spacing: -0.01em; }
   @media (max-width: 749px) {
     {% if section.settings.hide_label_mobile %}#drye-featured-{{ uid }} .drye-featured__label { display: none; }{% endif %}
-    #drye-featured-{{ uid }} .drye-featured__row { gap: 14px 16px; flex-wrap: nowrap; }
-    #drye-featured-{{ uid }} .drye-featured__item { flex: 1; justify-content: center; }
+    #drye-featured-{{ uid }} { padding: 14px 12px; }
+    #drye-featured-{{ uid }} .drye-featured__row { gap: 0 8px; flex-wrap: nowrap; max-width: 100%; }
+    #drye-featured-{{ uid }} .drye-featured__item { flex: 1 1 0; min-width: 0; justify-content: center; text-align: center; }
+    #drye-featured-{{ uid }} .lg-bygg,
+    #drye-featured-{{ uid }} .lg-bygg small { font-size: 8px; line-height: 1.2; }
+    #drye-featured-{{ uid }} .lg-gnosjo { font-size: 8.5px; line-height: 1.2; }
+    #drye-featured-{{ uid }} .lg-smarta { font-size: 12px; }
+    #drye-featured-{{ uid }} .lg-gadget { font-size: 10px; }
+    #drye-featured-{{ uid }} .drye-featured__item img { height: 20px; max-width: 100%; }
   }
 </style>
 
