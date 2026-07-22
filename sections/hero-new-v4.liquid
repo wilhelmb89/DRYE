@@ -1,0 +1,546 @@
+{%- liquid
+  assign ss = section.settings
+  assign scrim = ss.scrim_opacity | default: 92 | divided_by: 100.0
+
+  assign text_class = ''
+  if ss.text_position == 'right'
+    assign text_class = ' text-right'
+  endif
+
+  assign needs_cf_script = false
+  if ss.desktop_media_type == 'video' and ss.desktop_video_id != blank
+    assign needs_cf_script = true
+  endif
+  if ss.mobile_media_type == 'video' and ss.mobile_video_id != blank
+    assign needs_cf_script = true
+  endif
+-%}
+
+<style>
+  #shopify-section-{{ section.id }} .drye-hero {
+    --scrim: {{ scrim }};
+    position: relative;
+    overflow: hidden;
+    color: #fff;
+    min-height: 560px;
+    display: flex;
+  }
+  #shopify-section-{{ section.id }} .drye-hero__media {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 0;
+  }
+  #shopify-section-{{ section.id }} .drye-hero.cover::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    background: linear-gradient(90deg,
+      rgba(10, 22, 33, var(--scrim)) 0%,
+      rgba(10, 22, 33, calc(var(--scrim) * 0.72)) 42%,
+      rgba(10, 22, 33, 0) 82%);
+  }
+  #shopify-section-{{ section.id }} .drye-hero.text-right.cover::before {
+    background: linear-gradient(270deg,
+      rgba(10, 22, 33, var(--scrim)) 0%,
+      rgba(10, 22, 33, calc(var(--scrim) * 0.72)) 42%,
+      rgba(10, 22, 33, 0) 82%);
+  }
+  #shopify-section-{{ section.id }} .drye-hero__inner {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    padding: 72px 56px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+  }
+  #shopify-section-{{ section.id }} .drye-hero__col {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    max-width: 620px;
+    width: 100%;
+  }
+  #shopify-section-{{ section.id }} .drye-hero.text-right .drye-hero__col { margin-left: auto; }
+  #shopify-section-{{ section.id }} .drye-hero h1 {
+    font-family: "ClashGrotesk-Variable", "Clash Grotesk", var(--font-heading-family, Inter), sans-serif;
+    font-weight: 600;
+    font-size: 48px;
+    line-height: 1.04;
+    letter-spacing: -0.02em;
+    margin: 0;
+    text-align: left;
+    color: #fff;
+  }
+  #shopify-section-{{ section.id }} .drye-hero h1 > * { margin: 0; font: inherit; color: inherit; letter-spacing: inherit; }
+  #shopify-section-{{ section.id }} .drye-sub {
+    font-size: 15.5px;
+    line-height: 1.55;
+    color: rgba(255, 255, 255, 0.82);
+    max-width: 46ch;
+    margin: 0;
+  }
+  #shopify-section-{{ section.id }} .drye-sub strong { color: #fff; font-weight: 600; }
+  #shopify-section-{{ section.id }} .drye-reviews {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  #shopify-section-{{ section.id }} .drye-reviews__stars { color: #F5B301; font-size: 15px; letter-spacing: 1px; line-height: 1; }
+  #shopify-section-{{ section.id }} .drye-reviews__text { font-size: 12.5px; color: rgba(255, 255, 255, 0.72); }
+  #shopify-section-{{ section.id }} .drye-action {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    align-self: flex-start;
+    width: 100%;
+  }
+  #shopify-section-{{ section.id }} .drye-action__btns { display: flex; gap: 12px; width: 100%; }
+
+  /* CTAs reuse the site-wide .button / .button.secondary identity.
+     Only layout here — equal width, single centered line. */
+  #shopify-section-{{ section.id }} .drye-action__btns .button {
+    flex: 1;
+    max-width: none;
+    justify-content: center;
+    white-space: nowrap;
+  }
+  #shopify-section-{{ section.id }} .drye-trust {
+    display: flex;
+    justify-content: space-between;
+    gap: 24px;
+    align-items: center;
+  }
+  #shopify-section-{{ section.id }} .drye-trust__item {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+    font-size: 13px;
+    color: rgba(255, 255, 255, 0.82);
+  }
+  #shopify-section-{{ section.id }} .drye-trust__icon { width: 16px; height: 16px; color: #14b8a6; flex: none; }
+
+  /* ── Mobile hero ────────────────────────────── */
+  #shopify-section-{{ section.id }} .m-hero { display: none; }
+
+  @media (max-width: 767px) {
+    #shopify-section-{{ section.id }} .drye-hero { display: none; }
+
+    #shopify-section-{{ section.id }} .m-hero {
+      position: relative;
+      min-height: 620px;
+      display: flex;
+      flex-direction: column;
+      padding: 24px 20px 28px;
+      color: #fff;
+      overflow: hidden;
+    }
+    #shopify-section-{{ section.id }} .m-hero__media {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center 20%;
+      z-index: 0;
+    }
+    #shopify-section-{{ section.id }} .m-hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      background: linear-gradient(180deg,
+        rgba(10, 22, 33, 0.64) 0%,
+        rgba(10, 22, 33, 0.34) 36%,
+        rgba(10, 22, 33, 0.46) 62%,
+        rgba(10, 22, 33, 0.92) 100%);
+    }
+    #shopify-section-{{ section.id }} .m-hero > *:not(.m-hero__media) { position: relative; z-index: 2; }
+
+    #shopify-section-{{ section.id }} .m-hero h1 {
+      font-family: "ClashGrotesk-Variable", "Clash Grotesk", var(--font-heading-family, Inter), sans-serif;
+      font-weight: 600;
+      font-size: 35px;
+      line-height: 1.08;
+      letter-spacing: -0.015em;
+      margin: 15% 0 0;
+      color: #fff;
+      text-shadow: 0 2px 16px rgba(0, 0, 0, 0.5);
+    }
+    #shopify-section-{{ section.id }} .m-hero h1 > * { margin: 0; font: inherit; color: inherit; letter-spacing: inherit; text-shadow: inherit; }
+    #shopify-section-{{ section.id }} .m-sub {
+      margin-top: auto;
+      font-size: 15px;
+      line-height: 1.55;
+      color: #fff;
+      margin-bottom: 16px;
+      text-shadow: 0 1px 10px rgba(0, 0, 0, 0.6);
+    }
+    #shopify-section-{{ section.id }} .m-sub strong { font-weight: 700; }
+
+    #shopify-section-{{ section.id }} .m-cta-group { margin-bottom: 18px; }
+    /* Mobile CTA reuses the site-wide full-width button (.button.wide),
+       single centered line. */
+    #shopify-section-{{ section.id }} .m-cta-group .button {
+      max-width: none;
+      justify-content: center;
+      white-space: nowrap;
+    }
+
+    #shopify-section-{{ section.id }} .m-cred-strip {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      margin-bottom: 22px;
+    }
+    #shopify-section-{{ section.id }} .m-cred-strip__col {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 12px 10px;
+      font-size: 8.5px;
+      font-weight: 500;
+      line-height: 1.4;
+      color: rgba(255, 255, 255, 0.92);
+    }
+    #shopify-section-{{ section.id }} .m-cred-strip__col:first-child {
+      border-right: 1px solid rgba(255, 255, 255, 0.18);
+    }
+  }
+</style>
+
+<section class="drye-hero cover{{ text_class }}">
+
+  {%- comment -%} ── Desktop background media ── {%- endcomment -%}
+  {%- if ss.desktop_media_type == 'video' and ss.desktop_video_id != blank -%}
+    <stream
+      src="{{ ss.desktop_video_id }}"
+      autoplay
+      muted
+      loop
+      playsinline
+      class="drye-hero__media"
+    ></stream>
+  {%- elsif ss.desktop_image != blank -%}
+    {{
+      ss.desktop_image
+      | image_url: width: 3200
+      | image_tag:
+        loading: 'eager',
+        fetchpriority: 'high',
+        sizes: '100vw',
+        widths: '750, 1100, 1500, 2000, 2600, 3200',
+        class: 'drye-hero__media',
+        alt: ''
+    }}
+  {%- endif -%}
+
+  <div class="drye-hero__inner">
+    <div class="drye-hero__col">
+
+      {%- if ss.heading != blank -%}
+        <h1>{{ ss.heading }}</h1>
+      {%- endif -%}
+
+      {%- if ss.subheading != blank -%}
+        <p class="drye-sub">{{ ss.subheading }}</p>
+      {%- endif -%}
+
+      {%- if ss.star_label != blank -%}
+        <div class="drye-reviews">
+          <span class="drye-reviews__stars" aria-hidden="true">
+            {%- assign star_total = ss.star_count | round -%}
+            {%- for i in (1..star_total) -%}★{%- endfor -%}
+          </span>
+          <span class="drye-reviews__text">{{ ss.star_label }}</span>
+        </div>
+      {%- endif -%}
+
+      <div class="drye-action">
+        {%- if ss.cta_primary_label != blank or ss.cta_secondary_label != blank -%}
+          <div class="drye-action__btns">
+            {%- if ss.cta_primary_label != blank -%}
+              <a href="{{ ss.cta_primary_url | default: '#' }}" class="button">
+                {{- ss.cta_primary_label -}}
+                {%- render 'icon', type: 'arrow-right' -%}
+              </a>
+            {%- endif -%}
+            {%- if ss.cta_secondary_label != blank -%}
+              <a href="{{ ss.cta_secondary_url | default: '#' }}" class="button secondary">
+                {{- ss.cta_secondary_label -}}
+                {%- render 'icon', type: 'arrow-right', color: '#111111' -%}
+              </a>
+            {%- endif -%}
+          </div>
+        {%- endif -%}
+
+        {%- if ss.trust_left_label != blank or ss.trust_right_label != blank -%}
+          <div class="drye-trust">
+            {%- if ss.trust_left_label != blank -%}
+              <span class="drye-trust__item">
+                <svg class="drye-trust__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></svg>
+                {{ ss.trust_left_label }}
+              </span>
+            {%- endif -%}
+            {%- if ss.trust_right_label != blank -%}
+              <span class="drye-trust__item">
+                <svg class="drye-trust__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></svg>
+                {{ ss.trust_right_label }}
+              </span>
+            {%- endif -%}
+          </div>
+        {%- endif -%}
+      </div>
+
+    </div>
+  </div>
+</section>
+
+{%- comment -%} ── Mobile hero (≤767px) ── {%- endcomment -%}
+<div class="m-hero">
+
+  {%- if ss.mobile_media_type == 'video' and ss.mobile_video_id != blank -%}
+    <stream
+      src="{{ ss.mobile_video_id }}"
+      autoplay
+      muted
+      loop
+      playsinline
+      class="m-hero__media"
+    ></stream>
+  {%- elsif ss.mobile_image != blank -%}
+    {{
+      ss.mobile_image
+      | image_url: width: 1200
+      | image_tag:
+        loading: 'eager',
+        fetchpriority: 'high',
+        sizes: '100vw',
+        widths: '480, 640, 800, 1000, 1200',
+        class: 'm-hero__media',
+        alt: ''
+    }}
+  {%- endif -%}
+
+  {%- if ss.heading != blank -%}
+    <h1>{{ ss.heading }}</h1>
+  {%- endif -%}
+
+  {%- if ss.subheading != blank -%}
+    <p class="m-sub">{{ ss.subheading }}</p>
+  {%- endif -%}
+
+  {%- assign m_cta_label = ss.cta_mobile_label | default: ss.cta_primary_label -%}
+  {%- assign m_cta_url = ss.cta_mobile_url | default: ss.cta_primary_url -%}
+  {%- if m_cta_label != blank -%}
+    <div class="m-cta-group">
+      <a href="{{ m_cta_url | default: '#' }}" class="button wide">
+        {{- m_cta_label -}}
+        {%- render 'icon', type: 'arrow-right' -%}
+      </a>
+    </div>
+  {%- endif -%}
+
+  {%- if ss.trust_left_label != blank or ss.trust_right_label != blank -%}
+    <div class="m-cred-strip">
+      <div class="m-cred-strip__col">{{ ss.trust_left_label }}</div>
+      <div class="m-cred-strip__col">{{ ss.trust_right_label }}</div>
+    </div>
+  {%- endif -%}
+
+</div>
+
+{%- if needs_cf_script -%}
+  <script defer src="https://embed.cloudflare.com/embed/r4.js"></script>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Hero New V4",
+  "tag": "section",
+  "class": "drye-hero-section hero-new-v4",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Content"
+    },
+    {
+      "type": "richtext",
+      "id": "heading",
+      "label": "Heading",
+      "default": "<p>Add one dry layer under your gloves</p>"
+    },
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "0.4 mm thin. Worn inside your existing glove - nitrile, latex, textile, rubber or HV. What changes is what your skin sits against."
+    },
+    {
+      "type": "header",
+      "content": "Reviews"
+    },
+    {
+      "type": "range",
+      "id": "star_count",
+      "label": "Star count",
+      "min": 0,
+      "max": 5,
+      "step": 1,
+      "default": 5
+    },
+    {
+      "type": "text",
+      "id": "star_label",
+      "label": "Star label",
+      "default": "Rated 4.8/5 by 1,200+ glove-wearers"
+    },
+    {
+      "type": "header",
+      "content": "Call to action — Desktop"
+    },
+    {
+      "type": "text",
+      "id": "cta_primary_label",
+      "label": "Primary button label",
+      "default": "Order one DRYE layer"
+    },
+    {
+      "type": "url",
+      "id": "cta_primary_url",
+      "label": "Primary button link"
+    },
+    {
+      "type": "text",
+      "id": "cta_secondary_label",
+      "label": "Secondary button label",
+      "default": "See the proof"
+    },
+    {
+      "type": "url",
+      "id": "cta_secondary_url",
+      "label": "Secondary button link"
+    },
+    {
+      "type": "header",
+      "content": "Call to action — Mobile"
+    },
+    {
+      "type": "text",
+      "id": "cta_mobile_label",
+      "label": "Mobile button label",
+      "info": "Falls back to the desktop primary label if left empty.",
+      "default": "Order DRYE liners here"
+    },
+    {
+      "type": "url",
+      "id": "cta_mobile_url",
+      "label": "Mobile button link",
+      "info": "Falls back to the desktop primary link if left empty."
+    },
+    {
+      "type": "header",
+      "content": "Trust / credentials"
+    },
+    {
+      "type": "text",
+      "id": "trust_left_label",
+      "label": "Trust label (left)",
+      "default": "SKAPA Innovation Award"
+    },
+    {
+      "type": "text",
+      "id": "trust_right_label",
+      "label": "Trust label (right)",
+      "default": "Field-validated: EV workshops, Ukraine defense, elite hockey."
+    },
+    {
+      "type": "header",
+      "content": "Background — Desktop"
+    },
+    {
+      "type": "select",
+      "id": "desktop_media_type",
+      "label": "Desktop media type",
+      "options": [
+        { "value": "image", "label": "Image" },
+        { "value": "video", "label": "Cloudflare Stream video" }
+      ],
+      "default": "image"
+    },
+    {
+      "type": "image_picker",
+      "id": "desktop_image",
+      "label": "Desktop image",
+      "info": "Used when media type is Image."
+    },
+    {
+      "type": "text",
+      "id": "desktop_video_id",
+      "label": "Desktop Cloudflare Stream video UID",
+      "info": "Used when media type is Video."
+    },
+    {
+      "type": "header",
+      "content": "Background — Mobile"
+    },
+    {
+      "type": "select",
+      "id": "mobile_media_type",
+      "label": "Mobile media type",
+      "options": [
+        { "value": "image", "label": "Image" },
+        { "value": "video", "label": "Cloudflare Stream video" }
+      ],
+      "default": "image"
+    },
+    {
+      "type": "image_picker",
+      "id": "mobile_image",
+      "label": "Mobile image",
+      "info": "Separate upload from desktop. Displayed with object-position center 20%."
+    },
+    {
+      "type": "text",
+      "id": "mobile_video_id",
+      "label": "Mobile Cloudflare Stream video UID",
+      "info": "Used when media type is Video."
+    },
+    {
+      "type": "header",
+      "content": "Appearance"
+    },
+    {
+      "type": "select",
+      "id": "text_position",
+      "label": "Text position (desktop)",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "right", "label": "Right" }
+      ],
+      "default": "left"
+    },
+    {
+      "type": "range",
+      "id": "scrim_opacity",
+      "label": "Desktop scrim opacity",
+      "info": "Darkens the side where the text sits. Mobile scrim is fixed.",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "%",
+      "default": 92
+    }
+  ],
+  "presets": [
+    {
+      "name": "Hero New V4"
+    }
+  ]
+}
+{% endschema %}
