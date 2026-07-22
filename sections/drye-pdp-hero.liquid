@@ -1906,8 +1906,25 @@ wteTimelines.forEach((timeline) => {
       pushViewItem(initialVariant);
     }
   })();
-</script>
 
+</script>
+<script>
+(function () {
+  document.addEventListener('click', function (e) {
+    var link = e.target.closest('a[href$="#drye-buy"]');
+    if (!link) return;
+    var atc = document.getElementById('drye-buy');
+    if (!atc) return;
+    e.preventDefault();
+    var offset = 130; // höjd på fast header + luft — justera vid behov
+    var y = atc.getBoundingClientRect().top + window.pageYOffset - offset;
+    window.scrollTo({ top: y, behavior: 'smooth' });
+    atc.style.transition = 'box-shadow .3s ease';
+    atc.style.boxShadow = '0 0 0 3px rgba(10,105,96,.55)';
+    setTimeout(function () { atc.style.boxShadow = ''; }, 1200);
+  }, false);
+})();
+</script>
 
 <script src="{{ 'drye-pdp-gallery.js' | asset_url }}" defer></script>
 
