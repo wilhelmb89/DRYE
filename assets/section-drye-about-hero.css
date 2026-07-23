@@ -25,6 +25,9 @@
   margin: 0 0 var(--space-20);
   color: var(--white-100);
   max-width: 720px;
+  font-size: 35px; /* match Hero V4 (mobile) */
+  line-height: 1;
+  letter-spacing: -0.03em;
 }
 
 .drye-about-hero__heading em {
@@ -117,6 +120,12 @@
 
 /* Desktop */
 @media (min-width: 768px) {
+  .drye-about-hero__heading {
+    font-size: 48px; /* match Hero V4 (desktop) */
+    line-height: 1.04;
+    letter-spacing: -0.02em;
+  }
+
   .drye-about-hero__grid {
     grid-template-columns: var(--grid-2-col-desktop);
     gap: var(--grid-gap-64);
