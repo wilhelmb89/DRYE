@@ -2,6 +2,7 @@
   background: var(--bg-ink);
   position: relative;
   overflow: hidden;
+  padding-top: 96px; /* match Hero V4 / HIW start height (mobile) */
 }
 
 .research-hero::before {
@@ -65,7 +66,7 @@
   margin: 0 0 var(--space-8);
   max-width: 700px;
   font-family: var(--font-display);
-  font-size: clamp(28px, 6vw, 48px);
+  font-size: 35px; /* match Hero V4 / HIW (mobile) */
   font-weight: var(--fw-semibold);
   letter-spacing: var(--ls-tight-display);
   line-height: 1.05;
@@ -116,7 +117,12 @@
 }
 
 @media (min-width: 768px) {
+  .research-hero {
+    padding-top: 112px; /* match Hero V4 / HIW start height (desktop) */
+  }
+
   .research-hero__title {
     max-width: 760px;
+    font-size: 48px; /* match Hero V4 / HIW (desktop) */
   }
 }
