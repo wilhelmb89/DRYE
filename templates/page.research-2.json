@@ -250,6 +250,47 @@
         "cta_url": ""
       }
     },
+    "drye_validation_L7FwQf": {
+      "type": "drye-validation",
+      "blocks": {
+        "institution_TfXkJX": {
+          "type": "institution",
+          "settings": {
+            "mark": "R",
+            "name": "RISE Research Institutes of Sweden",
+            "role": "Early-stage requirements & system development"
+          }
+        },
+        "institution_wdDVar": {
+          "type": "institution",
+          "settings": {
+            "mark": "U",
+            "name": "Uppsala University",
+            "role": "Clinical conditions & dermatological impact"
+          }
+        },
+        "institution_knwY67": {
+          "type": "institution",
+          "settings": {
+            "mark": "S",
+            "name": "Swedish School of Textiles",
+            "role": "Textile engineering & structural analysis"
+          }
+        }
+      },
+      "block_order": [
+        "institution_TfXkJX",
+        "institution_wdDVar",
+        "institution_knwY67"
+      ],
+      "name": "DRYE Validation",
+      "settings": {
+        "micro_label": "",
+        "heading_line_1": "Seven years solving one problem:",
+        "heading_line_2": "trapped sweat.",
+        "lead_text": "Seven years of R&D across three independent research institutions."
+      }
+    },
     "drye_research_partners_MVYV8y": {
       "type": "drye-research-partners",
       "blocks": {
@@ -676,6 +717,7 @@
     "drye_evidence_7HtrYK",
     "drye_textile_proof_videos_eM3Eei",
     "drye_liner_proof_F3THp9",
+    "drye_validation_L7FwQf",
     "drye_research_partners_MVYV8y",
     "drye_before_after_tW6tRQ",
     "drye_research_numbers_fAradc",
