@@ -46,6 +46,48 @@
         "cta_url": "shopify://pages/research"
       }
     },
+    "drye_liner_product_clarity_6GgYWe": {
+      "type": "drye-liner-product-clarity",
+      "blocks": {
+        "spec_dQt7VH": {
+          "type": "spec",
+          "settings": {
+            "title": "Sweat.",
+            "description": "Stays dry for the full shift."
+          }
+        },
+        "spec_te4bYb": {
+          "type": "spec",
+          "settings": {
+            "title": "Oil.",
+            "description": "Stays on the surface. Wipes off."
+          }
+        },
+        "spec_rh3aMr": {
+          "type": "spec",
+          "settings": {
+            "title": "Tearing.",
+            "description": "Your nitriles go on dry, come off dry."
+          }
+        }
+      },
+      "block_order": [
+        "spec_dQt7VH",
+        "spec_te4bYb",
+        "spec_rh3aMr"
+      ],
+      "name": "DRYE Product Clarity",
+      "settings": {
+        "section_id": "liner-product",
+        "heading": "DRYE goes",
+        "heading_emphasis": "under your existing glove.",
+        "body": "",
+        "before_image": "shopify://shop_images/5Y9A9324.webp",
+        "before_label": "Put on DRYE — 0.4 mm base layer",
+        "after_image": "shopify://shop_images/5Y9A9331_1_1.webp",
+        "after_label": "Put on your usual glove"
+      }
+    },
     "drye_mechanics_saturation_DzjNTn": {
       "type": "drye-mechanics-saturation",
       "blocks": {
@@ -132,48 +174,6 @@
         "cite": "Moisture regain references: Kadolph 2014 · ASTM D2654 · CN GB national standard. Transport mechanism independently verified at the Swedish School of Textiles, 2025."
       }
     },
-    "drye_liner_product_clarity_6GgYWe": {
-      "type": "drye-liner-product-clarity",
-      "blocks": {
-        "spec_dQt7VH": {
-          "type": "spec",
-          "settings": {
-            "title": "Sweat.",
-            "description": "Stays dry for the full shift."
-          }
-        },
-        "spec_te4bYb": {
-          "type": "spec",
-          "settings": {
-            "title": "Oil.",
-            "description": "Stays on the surface. Wipes off."
-          }
-        },
-        "spec_rh3aMr": {
-          "type": "spec",
-          "settings": {
-            "title": "Tearing.",
-            "description": "Your nitriles go on dry, come off dry."
-          }
-        }
-      },
-      "block_order": [
-        "spec_dQt7VH",
-        "spec_te4bYb",
-        "spec_rh3aMr"
-      ],
-      "name": "DRYE Product Clarity",
-      "settings": {
-        "section_id": "liner-product",
-        "heading": "DRYE goes",
-        "heading_emphasis": "under your existing glove.",
-        "body": "",
-        "before_image": "shopify://shop_images/5Y9A9324.webp",
-        "before_label": "Put on DRYE — 0.4 mm base layer",
-        "after_image": "shopify://shop_images/5Y9A9331_1_1.webp",
-        "after_label": "Put on your usual glove"
-      }
-    },
     "drye_liner_mechanism_KFWgjj": {
       "type": "drye-liner-mechanism",
       "name": "DRYE Liner Mechanism",
@@ -205,83 +205,6 @@
         "video_src_mobile": "https://customer-fqpngdzqcoky7qmz.cloudflarestream.com/ed9ad690d7f5c27060e215f05f9e4f8e/manifest/video.m3u8",
         "video_label": "Goes under any sealed glove.",
         "video_caption": "Sealed gloves trap sweat. DRYE routes it outward."
-      }
-    },
-    "drye_validation_xXeh7e": {
-      "type": "drye-validation",
-      "blocks": {
-        "institution_Gqg8AQ": {
-          "type": "institution",
-          "settings": {
-            "mark": "R",
-            "name": "RISE Research Institutes of Sweden",
-            "role": "Early-stage requirements & system development"
-          }
-        },
-        "institution_k7CbcG": {
-          "type": "institution",
-          "settings": {
-            "mark": "U",
-            "name": "Uppsala University",
-            "role": "Clinical conditions & dermatological impact"
-          }
-        },
-        "institution_4fCW8t": {
-          "type": "institution",
-          "settings": {
-            "mark": "S",
-            "name": "Swedish School of Textiles",
-            "role": "Textile engineering & structural analysis"
-          }
-        },
-        "proof_weEfR7": {
-          "type": "proof",
-          "settings": {
-            "number": "52",
-            "unit": "×",
-            "description": "Bacteria increase on eczema skin\nafter 4h occlusive glove use"
-          }
-        },
-        "proof_UQWqKx": {
-          "type": "proof",
-          "settings": {
-            "number": "5–7",
-            "unit": "min",
-            "description": "Humidity inside sealed gloves exceeds 90%"
-          }
-        },
-        "proof_6hQyfa": {
-          "type": "proof",
-          "settings": {
-            "number": "3",
-            "unit": "×",
-            "description": "Outer skin barrier swelling after prolonged occlusion"
-          }
-        },
-        "proof_izYqA6": {
-          "type": "proof",
-          "settings": {
-            "number": "0",
-            "unit": "%",
-            "description": "Dexterity compromise. 0.4mm."
-          }
-        }
-      },
-      "block_order": [
-        "institution_Gqg8AQ",
-        "institution_k7CbcG",
-        "institution_4fCW8t",
-        "proof_weEfR7",
-        "proof_UQWqKx",
-        "proof_6hQyfa",
-        "proof_izYqA6"
-      ],
-      "name": "DRYE Validation",
-      "settings": {
-        "micro_label": "",
-        "heading_line_1": "Seven years solving one problem:",
-        "heading_line_2": "trapped sweat.",
-        "lead_text": "Seven years of R&D across three independent research institutions."
       }
     },
     "drye_section_06_faq_8w34Ye": {
@@ -358,7 +281,6 @@
     "drye_mechanics_saturation_DzjNTn",
     "drye_liner_mechanism_KFWgjj",
     "drye_research_video_full_rftE34",
-    "drye_validation_xXeh7e",
     "drye_section_06_faq_8w34Ye",
     "drye_about_cta_eei9qN"
   ]
