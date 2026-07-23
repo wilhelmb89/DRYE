@@ -23,71 +23,6 @@
         "subtext": "<p>DRYE is a patent-pending textile construction developed for closed glove environments — where standard wicking materials fail.</p>"
       }
     },
-    "drye_liner_product_clarity_6GgYWe": {
-      "type": "drye-liner-product-clarity",
-      "blocks": {
-        "spec_dQt7VH": {
-          "type": "spec",
-          "settings": {
-            "title": "Sweat.",
-            "description": "Stays dry for the full shift."
-          }
-        },
-        "spec_te4bYb": {
-          "type": "spec",
-          "settings": {
-            "title": "Oil.",
-            "description": "Stays on the surface. Wipes off."
-          }
-        },
-        "spec_rh3aMr": {
-          "type": "spec",
-          "settings": {
-            "title": "Tearing.",
-            "description": "Your nitriles go on dry, come off dry."
-          }
-        }
-      },
-      "block_order": [
-        "spec_dQt7VH",
-        "spec_te4bYb",
-        "spec_rh3aMr"
-      ],
-      "name": "DRYE Product Clarity",
-      "settings": {
-        "section_id": "liner-product",
-        "heading": "DRYE goes",
-        "heading_emphasis": "under your existing glove.",
-        "body": "",
-        "before_image": "shopify://shop_images/5Y9A9324.webp",
-        "before_label": "Put on DRYE — 0.4 mm base layer",
-        "after_image": "shopify://shop_images/5Y9A9331_1_1.webp",
-        "after_label": "Put on your usual glove"
-      }
-    },
-    "drye_liner_mechanism_KFWgjj": {
-      "type": "drye-liner-mechanism",
-      "name": "DRYE Liner Mechanism",
-      "settings": {
-        "section_id": "liner-mechanism",
-        "eyebrow": "02",
-        "heading": "Cotton absorbs.",
-        "heading_emphasis": "DRYE routes.",
-        "body": "See what happens when sweat meets fabric.",
-        "vs_label": "Cotton · DRYE",
-        "cotton_name": "Cotton",
-        "cotton_description": "Water sits on the surface. Sweat stays trapped against your skin.",
-        "drye_name": "DRYE Liner",
-        "drye_description": "Water is pulled through and spread outward. Skin side stays dry.",
-        "diagram_label": "",
-        "step_1_label": "",
-        "step_1_title": "",
-        "step_1_body": "",
-        "step_2_label": "",
-        "step_2_title": "",
-        "step_2_body": ""
-      }
-    },
     "drye_mechanics_saturation_DzjNTn": {
       "type": "drye-mechanics-saturation",
       "blocks": {
@@ -163,7 +98,7 @@
       "name": "DRYE Saturation Point",
       "settings": {
         "section_id": "mechanics-saturation",
-        "eyebrow": "The invention",
+        "eyebrow": "03",
         "heading_line_1": "Every other liner saturates.",
         "heading_echo": "Ours physically can't.",
         "subheading": "Every fibre that's ever been inside your glove fills up with sweat. Then it stops moving. The rest of the shift, it sits against your hand.",
@@ -174,152 +109,69 @@
         "cite": "Moisture regain references: Kadolph 2014 · ASTM D2654 · CN GB national standard. Transport mechanism independently verified at the Swedish School of Textiles, 2025."
       }
     },
-    "drye_mechanics_mechanism_tytKVw": {
-      "type": "drye-mechanics-mechanism",
+    "drye_liner_product_clarity_6GgYWe": {
+      "type": "drye-liner-product-clarity",
       "blocks": {
-        "old_step_CgtaVt": {
-          "type": "old_step",
+        "spec_dQt7VH": {
+          "type": "spec",
           "settings": {
-            "icon": "✕",
-            "text": "Sweat enters the fabric and stays"
+            "title": "Sweat.",
+            "description": "Stays dry for the full shift."
           }
         },
-        "old_step_FDUK4D": {
-          "type": "old_step",
+        "spec_te4bYb": {
+          "type": "spec",
           "settings": {
-            "icon": "✕",
-            "text": "At saturation, moisture sits on skin"
+            "title": "Oil.",
+            "description": "Stays on the surface. Wipes off."
           }
         },
-        "old_step_KQBFkD": {
-          "type": "old_step",
+        "spec_rh3aMr": {
+          "type": "spec",
           "settings": {
-            "icon": "✕",
-            "text": "Sealed glove traps heat and humidity"
-          }
-        },
-        "old_step_CaEXYL": {
-          "type": "old_step",
-          "settings": {
-            "icon": "✕",
-            "text": "Heat and humidity trap inside the glove"
-          }
-        },
-        "old_step_Uh6iR3": {
-          "type": "old_step",
-          "settings": {
-            "icon": "✕",
-            "text": "Same wet glove on shift 1 as shift 8"
-          }
-        },
-        "drye_step_CeAEMb": {
-          "type": "drye_step",
-          "settings": {
-            "icon": "→",
-            "text": "Skin side repels - sweat cannot sit there"
-          }
-        },
-        "drye_step_QzPME6": {
-          "type": "drye_step",
-          "settings": {
-            "icon": "→",
-            "text": "Outer side pulls moisture toward it"
-          }
-        },
-        "drye_step_RKVq69": {
-          "type": "drye_step",
-          "settings": {
-            "icon": "→",
-            "text": "Continuous transport, no saturation point"
-          }
-        },
-        "drye_step_NkMrQi": {
-          "type": "drye_step",
-          "settings": {
-            "icon": "→",
-            "text": "One principle. Patent filed March 2026."
-          }
-        },
-        "property_3y6emC": {
-          "type": "property",
-          "disabled": true,
-          "settings": {
-            "label": "Property 01",
-            "title": "Works under compression",
-            "body": "The gradient functions regardless of external pressure. Compression makes the transport faster, not weaker."
-          }
-        },
-        "property_kVPcBp": {
-          "type": "property",
-          "disabled": true,
-          "settings": {
-            "label": "Property 02",
-            "title": "No saturation point",
-            "body": "Transport is continuous. There is no maximum capacity after which function stops. Cotton has one. DRYE does not."
-          }
-        },
-        "property_jtyrWB": {
-          "type": "property",
-          "disabled": true,
-          "settings": {
-            "label": "Property 03",
-            "title": "Stays dry on the skin side",
-            "body": "The inner surface does not work like a towel. It is engineered to avoid moisture retention directly against the hand."
+            "title": "Tearing.",
+            "description": "Your nitriles go on dry, come off dry."
           }
         }
       },
       "block_order": [
-        "old_step_CgtaVt",
-        "old_step_FDUK4D",
-        "old_step_KQBFkD",
-        "old_step_CaEXYL",
-        "old_step_Uh6iR3",
-        "drye_step_CeAEMb",
-        "drye_step_QzPME6",
-        "drye_step_RKVq69",
-        "drye_step_NkMrQi",
-        "property_3y6emC",
-        "property_kVPcBp",
-        "property_jtyrWB"
+        "spec_dQt7VH",
+        "spec_te4bYb",
+        "spec_rh3aMr"
       ],
-      "custom_css": [
-        ".mech-mechanism {padding-bottom: 0px !important;}",
-        ".occlusion-bridge {padding-top: 16px !important;}"
-      ],
-      "name": "DRYE Mechanics Mechanism",
+      "name": "DRYE Product Clarity",
       "settings": {
-        "eyebrow": "The mechanism",
-        "heading_line_1": "Moisture doesn't need to be absorbed.",
-        "heading_emphasis": "It needs a route out.",
+        "section_id": "liner-product",
+        "heading": "DRYE goes",
+        "heading_emphasis": "under your existing glove.",
         "body": "",
-        "old_label": "Every liner before DRYE",
-        "old_title": "Absorb and hold",
-        "old_desc": "<p>Cotton, silk, merino, polyester wicking. All fill with moisture until saturated - then<strong> hold it against your skin</strong> for the rest of the shift.</p>",
-        "drye_label": "DRYE · ASYMMETRIC LAYERING",
-        "drye_title": "Repel. Pull. No saturation.",
-        "drye_desc": "<p>Two fibers, one fabric. The skin side is hydrophobic - water cannot bond to it. The outer side pulls moisture toward it. <strong>The skin side repels. The outer side pulls. Sweat exits — it doesn't pool..</strong></p>"
+        "before_image": "shopify://shop_images/5Y9A9324.webp",
+        "before_label": "Put on DRYE — 0.4 mm base layer",
+        "after_image": "shopify://shop_images/5Y9A9331_1_1.webp",
+        "after_label": "Put on your usual glove"
       }
     },
-    "drye_mechanics_82x_proof_RMpC4d": {
-      "type": "drye-mechanics-82x-proof",
-      "name": "DRYE Mechanics 82x Proof",
+    "drye_liner_mechanism_KFWgjj": {
+      "type": "drye-liner-mechanism",
+      "name": "DRYE Liner Mechanism",
       "settings": {
-        "eyebrow": "Independent verification · 2026",
-        "heading_line_1": "Same family of knit. Different construction.",
-        "heading_emphasis": "82× further moisture transport.",
-        "subheading": "The innovation is not just the fibre blend. It is how the knit is built to move moisture away from the skin side.",
-        "left_image": "shopify://shop_images/IMG_0797_2.webp",
-        "left_image_alt": "DRYE textile sample showing large wicking area after Wickview test.",
-        "left_label": "DRYE · ASYMMETRIC LAYERING",
-        "left_value": "8,111",
-        "left_unit": "mm² wicking area",
-        "vs_label": "vs",
-        "right_image": "shopify://shop_images/IMG_0798.webp",
-        "right_image_alt": "Control textile sample with same fibres but different knit, showing minimal wicking area.",
-        "right_label": "CONVENTIONAL LAYERING",
-        "right_value": "99",
-        "right_unit": "mm² wicking area",
-        "citation": "Wickview AATCC 195 · Borås, Sweden · Jenny Tran, MSc thesis 2025"
+        "section_id": "liner-mechanism",
+        "eyebrow": "02",
+        "heading": "Cotton absorbs.",
+        "heading_emphasis": "DRYE routes.",
+        "body": "See what happens when sweat meets fabric.",
+        "vs_label": "Cotton · DRYE",
+        "cotton_name": "Cotton",
+        "cotton_description": "Water sits on the surface. Sweat stays trapped against your skin.",
+        "drye_name": "DRYE Liner",
+        "drye_description": "Water is pulled through and spread outward. Skin side stays dry.",
+        "diagram_label": "",
+        "step_1_label": "",
+        "step_1_title": "",
+        "step_1_body": "",
+        "step_2_label": "",
+        "step_2_title": "",
+        "step_2_body": ""
       }
     },
     "occlusion_bridge_TzT7tH": {
@@ -568,11 +420,9 @@
   },
   "order": [
     "drye_how_it_works_hero_LiYY94",
+    "drye_mechanics_saturation_DzjNTn",
     "drye_liner_product_clarity_6GgYWe",
     "drye_liner_mechanism_KFWgjj",
-    "drye_mechanics_saturation_DzjNTn",
-    "drye_mechanics_mechanism_tytKVw",
-    "drye_mechanics_82x_proof_RMpC4d",
     "occlusion_bridge_TzT7tH",
     "drye_research_numbers_PQibDi",
     "drye_research_video_full_rftE34",
