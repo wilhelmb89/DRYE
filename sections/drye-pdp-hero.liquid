@@ -726,7 +726,7 @@ assign review_count = section.settings.review_count_fallback
       <div class="drye-guarantee">
         <div class="drye-seal__wrap">
           <span class="drye-seal__laurel-box drye-seal__laurel-box--l">{{ drye_laurel }}</span>
-          <p class="drye-seal__guarantee">60 shifts. If your hands aren't dry at lunch, keep the liners and get your money back.</p>
+          <p class="drye-seal__guarantee">{{ section.settings.proof_stamp_line }}</p>
           <span class="drye-seal__laurel-box drye-seal__laurel-box--r">{{ drye_laurel }}</span>
         </div>
       </div>
@@ -2049,7 +2049,7 @@ wteTimelines.forEach((timeline) => {
       "type": "text",
       "id": "proof_stamp_line",
       "label": "Guarantee stamp (below ticker)",
-      "info": "Framed with laurels under the comment ticker. Leave blank to hide. (Display text is fixed to 60 shifts in the layout.)",
+      "info": "Framed with laurels under the comment ticker. Leave blank to hide. Edit this text freely.",
       "default": "60 shifts. If your hands aren't dry at lunch, keep the liners and get your money back."
     },
     {
