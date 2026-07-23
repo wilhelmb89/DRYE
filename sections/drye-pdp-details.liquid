@@ -348,12 +348,16 @@
     });
   }
 
-  // 2. Default: open "Why It Matters"
+  // 2. Default state
   function fireRadio(id) {
     var r = document.getElementById(id);
     if (r) { r.checked = true; r.dispatchEvent(new Event('change', { bubbles: true })); }
   }
-  fireRadio('r-det-why');
+  // On desktop, open "Why It Matters" so the contextual right panel isn't empty.
+  // On mobile (no right panel), start fully collapsed.
+  if (window.matchMedia('(min-width: 768px)').matches) {
+    fireRadio('r-det-why');
+  }
 
   // 3. Accordion click → check radio
   var btns = accRoot.querySelectorAll('[data-radio-id]');
