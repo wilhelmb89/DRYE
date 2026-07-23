@@ -23,15 +23,17 @@
   gap: 0;
 }
 
-/* Mobile: hide right panel */
+/* Mobile: right panel shown below accordions */
 @media (max-width: 767px) {
-  .pdp-det__right { display: none; }
+  .pdp-det__right { display: block; margin-top: 32px; }
+  .pdp-det__maker-img { display: block; }
 }
 
 @media (min-width: 768px) {
   .drye-pdp-details { padding-block: var(--section-pad-y); }
-  .pdp-det__layout { grid-template-columns: 1fr 480px; gap: 48px; align-items: start; }
-  .pdp-det__right { display: block; position: sticky; top: 32px; }
+  .pdp-det__layout { grid-template-columns: 1fr 480px; gap: 48px; align-items: stretch; }
+  .pdp-det__right { display: block; position: sticky; top: 32px; height: 100%; }
+  .pdp-det__right-inner { height: 100%; min-height: 480px; }
 }
 
 /* ── CSS radio switching ── */
@@ -61,7 +63,7 @@
 #r-det-fit:checked   ~ .pdp-det__layout #vis-det-fit,
 #r-det-specs:checked ~ .pdp-det__layout #vis-det-specs,
 #r-det-ship:checked  ~ .pdp-det__layout #vis-det-ship,
-#r-det-who:checked   ~ .pdp-det__layout #vis-det-who { display: flex; }
+#r-det-who:checked   ~ .pdp-det__layout #vis-det-who { display: flex; flex: 1; min-height: 100%; }
 
 #r-det-why:checked   ~ .pdp-det__layout .pdp-det__cap span[data-for="why"],
 #r-det-how:checked   ~ .pdp-det__layout .pdp-det__cap span[data-for="how"],
@@ -141,6 +143,8 @@
 .pdp-det__right-inner {
   border: 1px solid var(--border);
   background: var(--bg);
+  display: flex;
+  flex-direction: column;
 }
 
 .pdp-det__vis {
