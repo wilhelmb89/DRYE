@@ -36,7 +36,29 @@
   assign m_label = ss.cta_mobile_label | default: ss.cta_primary_label
   assign m_text = ss.cta_mobile_text | default: ss.cta_primary_text
   assign m_url = ss.cta_mobile_url | default: ss.cta_primary_url
+
+  assign cred_has = false
+  if ss.cred_row_1 != blank or ss.cred_row_2 != blank
+    assign cred_has = true
+  endif
 -%}
+
+{%- capture cred_bar -%}
+  <div class="hero-cred">
+    {%- if ss.cred_row_1 != blank -%}
+      <div class="hero-cred__row">
+        {%- assign cred_items_1 = ss.cred_row_1 | split: '|' -%}
+        {%- for it in cred_items_1 -%}<span class="hero-cred__item"><i class="hero-cred__dot"></i>{{ it | strip }}</span>{%- endfor -%}
+      </div>
+    {%- endif -%}
+    {%- if ss.cred_row_2 != blank -%}
+      <div class="hero-cred__row">
+        {%- assign cred_items_2 = ss.cred_row_2 | split: '|' -%}
+        {%- for it in cred_items_2 -%}<span class="hero-cred__item"><i class="hero-cred__dot"></i>{{ it | strip }}</span>{%- endfor -%}
+      </div>
+    {%- endif -%}
+  </div>
+{%- endcapture -%}
 
 <style>
   /* ============ DESKTOP HERO ============ */
@@ -77,6 +99,14 @@
     font-size: 48px; line-height: 1.04; letter-spacing: -0.02em;
     margin: 0; text-align: left; color: #fff;
   }
+  /* Italic in the heading -> Playfair editorial (like the rest of the site) */
+  #shopify-section-{{ section.id }} h1 em,
+  #shopify-section-{{ section.id }} h1 i {
+    font-family: var(--font-editorial);
+    font-style: italic;
+    font-weight: 400;
+    letter-spacing: -0.01em;
+  }
   #shopify-section-{{ section.id }} .drye-sub {
     font-family: var(--font-body);
     font-size: 15px; font-weight: var(--fw-medium);
@@ -98,16 +128,15 @@
   #shopify-section-{{ section.id }} .drye-action__btns .dryeNEW-cta-path {
     flex: 1 1 0; max-width: none; min-height: 0;
   }
-  #shopify-section-{{ section.id }} .drye-trust {
-    display: flex; flex-flow: row nowrap; justify-content: space-between;
-    gap: var(--space-24); align-items: center;
+  /* Green-dot credibility bar (from the old DRYE NEW Hero) */
+  #shopify-section-{{ section.id }} .hero-cred { display: flex; flex-direction: column; gap: var(--space-8); }
+  #shopify-section-{{ section.id }} .hero-cred__row { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-8) var(--space-18); }
+  #shopify-section-{{ section.id }} .hero-cred__item {
+    display: inline-flex; align-items: center; gap: var(--space-7);
+    font-family: var(--font-body); font-size: var(--fs-micro-3); font-weight: var(--fw-medium);
+    letter-spacing: 0.08em; text-transform: uppercase; color: var(--white-050); white-space: nowrap;
   }
-  #shopify-section-{{ section.id }} .drye-trust__item {
-    display: inline-flex; align-items: center; gap: var(--space-9);
-    font-family: var(--font-body); font-size: var(--fs-caption);
-    color: var(--white-075); white-space: nowrap;
-  }
-  #shopify-section-{{ section.id }} .drye-trust__icon { width: 16px; height: 16px; color: #14b8a6; flex: none; }
+  #shopify-section-{{ section.id }} .hero-cred__dot { width: 5px; height: 5px; border-radius: 50%; background: #14b8a6; flex: none; }
 
   /* ============ MOBILE HERO ============ */
   #shopify-section-{{ section.id }} .m-hero { display: none; }
@@ -148,18 +177,9 @@
       width: 100%; max-width: none; min-height: 0;
     }
 
-    #shopify-section-{{ section.id }} .m-cert-strip {
-      display: grid; grid-template-columns: 1fr 1fr; margin-bottom: 22px;
-      border-top: 1px solid var(--white-015);
-    }
-    #shopify-section-{{ section.id }} .m-cert-col {
-      display: flex; flex-direction: column; align-items: center; justify-content: flex-start;
-      gap: var(--space-6); text-align: center; padding: var(--space-12) var(--space-10);
-      font-family: var(--font-body); font-size: var(--fs-micro-1); font-weight: var(--fw-medium);
-      line-height: 1.4; color: var(--white-080);
-    }
-    #shopify-section-{{ section.id }} .m-cert-col:first-child { border-right: 1px solid var(--white-015); }
-    #shopify-section-{{ section.id }} .m-cert-logo { height: 30px; width: auto; }
+    #shopify-section-{{ section.id }} .m-hero .hero-cred { margin-bottom: 22px; gap: var(--space-6); }
+    #shopify-section-{{ section.id }} .m-hero .hero-cred__row { gap: var(--space-6) var(--space-12); }
+    #shopify-section-{{ section.id }} .m-hero .hero-cred__item { font-size: var(--fs-micro-2); letter-spacing: 0.06em; }
   }
 </style>
 
@@ -214,21 +234,8 @@
             {%- endif -%}
           </div>
 
-          {%- if ss.trust_left_label != blank or ss.trust_right_label != blank -%}
-            <div class="drye-trust">
-              {%- if ss.trust_left_label != blank -%}
-                <span class="drye-trust__item">
-                  <svg class="drye-trust__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></svg>
-                  {{ ss.trust_left_label }}
-                </span>
-              {%- endif -%}
-              {%- if ss.trust_right_label != blank -%}
-                <span class="drye-trust__item">
-                  <svg class="drye-trust__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></svg>
-                  {{ ss.trust_right_label }}
-                </span>
-              {%- endif -%}
-            </div>
+          {%- if cred_has -%}
+            {{ cred_bar }}
           {%- endif -%}
         </div>
       </div>
@@ -263,17 +270,8 @@
       </div>
     {%- endif -%}
 
-    {%- if ss.trust_left_label != blank or ss.trust_right_label != blank -%}
-      <div class="m-cert-strip">
-        <div class="m-cert-col">
-          {%- if ss.cert_left_image != blank -%}{{ ss.cert_left_image | image_url: width: 120 | image_tag: class: 'm-cert-logo', alt: '', loading: 'lazy' }}{%- endif -%}
-          <span>{{ ss.cert_left_label | default: ss.trust_left_label }}</span>
-        </div>
-        <div class="m-cert-col">
-          {%- if ss.cert_right_image != blank -%}{{ ss.cert_right_image | image_url: width: 120 | image_tag: class: 'm-cert-logo', alt: '', loading: 'lazy' }}{%- endif -%}
-          <span>{{ ss.cert_right_label | default: ss.trust_right_label }}</span>
-        </div>
-      </div>
+    {%- if cred_has -%}
+      {{ cred_bar }}
     {%- endif -%}
   </div>
 </section>
@@ -328,8 +326,8 @@
   "class": "hero-new-v4-section",
   "settings": [
     { "type": "header", "content": "Heading" },
-    { "type": "text", "id": "heading_line_1", "label": "Heading line 1", "default": "Add one dry layer" },
-    { "type": "text", "id": "heading_line_2", "label": "Heading line 2", "default": "under your gloves" },
+    { "type": "inline_richtext", "id": "heading_line_1", "label": "Heading line 1", "info": "Use the italic button for Playfair editorial style.", "default": "Add one dry layer" },
+    { "type": "inline_richtext", "id": "heading_line_2", "label": "Heading line 2", "info": "Use the italic button for Playfair editorial style.", "default": "under your gloves" },
     { "type": "textarea", "id": "subheading", "label": "Subheading", "default": "0.4 mm thin. Worn inside your existing glove — nitrile, latex, textile, rubber or HV." },
     { "type": "text", "id": "subheading_emphasis", "label": "Subheading — bold sentence", "info": "Shown bold/white after the subheading.", "default": "What changes is what your skin sits against." },
 
@@ -352,14 +350,10 @@
     { "type": "text", "id": "cta_mobile_text", "label": "Button text", "info": "Falls back to primary.", "default": "Order DRYE liners here →" },
     { "type": "url", "id": "cta_mobile_url", "label": "Link", "info": "Falls back to primary." },
 
-    { "type": "header", "content": "Trust / credentials" },
-    { "type": "text", "id": "trust_left_label", "label": "Trust label (left)", "default": "SKAPA Innovation Award" },
-    { "type": "text", "id": "trust_right_label", "label": "Trust label (right)", "default": "Field-validated: EV workshops, Ukraine defense, elite hockey." },
-    { "type": "paragraph", "content": "Mobile cert strip (below CTA on phones)." },
-    { "type": "image_picker", "id": "cert_left_image", "label": "Cert strip — left logo (optional)" },
-    { "type": "text", "id": "cert_left_label", "label": "Cert strip — left text", "default": "SKAPA Innovation Award — in memory of the inventor Alfred Nobel" },
-    { "type": "image_picker", "id": "cert_right_image", "label": "Cert strip — right logo (optional)" },
-    { "type": "text", "id": "cert_right_label", "label": "Cert strip — right text", "default": "Field-validated: EV workshops, Ukraine defense, elite hockey." },
+    { "type": "header", "content": "Credibility bar (green dots)" },
+    { "type": "paragraph", "content": "Two rows of dotted items. Separate items with a | (pipe)." },
+    { "type": "text", "id": "cred_row_1", "label": "Row 1", "default": "EV workshops | National Guard, Ukraine | 27 US states" },
+    { "type": "text", "id": "cred_row_2", "label": "Row 2", "default": "SKAPA Innovation Award, in memory of Alfred Nobel" },
 
     { "type": "header", "content": "Cloudflare video" },
     { "type": "text", "id": "cf_subdomain", "label": "Cloudflare customer subdomain", "info": "e.g. customer-fqpngdzqcoky7qmz — used to build the .m3u8 URL from a video UID.", "default": "customer-fqpngdzqcoky7qmz" },
