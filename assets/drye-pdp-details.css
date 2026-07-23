@@ -23,15 +23,16 @@
   gap: 0;
 }
 
+/* Mobile: hide right panel */
+@media (max-width: 767px) {
+  .pdp-det__right { display: none; }
+}
+
 @media (min-width: 768px) {
   .drye-pdp-details { padding-block: var(--section-pad-y); }
   .pdp-det__layout { grid-template-columns: 1fr 400px; gap: 48px; align-items: start; }
-  .pdp-det__right { position: sticky; top: 32px; }
-  .pdp-det__right { display: block; }
+  .pdp-det__right { display: block; position: sticky; top: 32px; }
 }
-
-/* Mobile: hide right panel */
-.pdp-det__right { display: none; }
 
 /* ── CSS radio switching ── */
 #r-det-why:checked   ~ .pdp-det__layout .pdp-det__acc[data-acc="why"]   .pdp-det__btn,
