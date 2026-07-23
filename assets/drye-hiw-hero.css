@@ -97,7 +97,7 @@
   max-width: 760px;
   margin: 0 0 8px;
   font-family: var(--font-display);
-  font-size: clamp(32px, 9vw, 64px);
+  font-size: 35px; /* match Hero V4 (mobile) */
   font-weight: 600;
   letter-spacing: -0.03em;
   line-height: 1;
@@ -169,5 +169,10 @@
 @media (min-width: 768px) {
   .drye-hiw-hero {
     padding: 112px 0 72px;
+  }
+  .drye-hiw-hero__heading {
+    font-size: 48px; /* match Hero V4 (desktop) */
+    line-height: 1.04;
+    letter-spacing: -0.02em;
   }
 }
