@@ -1054,74 +1054,7 @@ assign review_count = section.settings.review_count_fallback
     data-panel="rev"
     role="tabpanel"
   >
-    {%- assign rev_max = section.settings.reviews_visible_max | default: 3 -%}
-    {%- assign shown_reviews = 0 -%}
-    <div class="testi-grid">
-      {% for i in (1..9) %}
-        {% liquid
-          assign quote_key = 'review_' | append: i | append: '_quote'
-          assign name_key = 'review_' | append: i | append: '_name'
-          assign location_key = 'review_' | append: i | append: '_location'
-          assign label_key = 'review_' | append: i | append: '_label'
-          assign stars_key = 'review_' | append: i | append: '_stars'
-          assign badge_key = 'review_' | append: i | append: '_badge_text'
-          assign attribution_key = 'review_' | append: i | append: '_attribution'
-          assign show_b2b_key = 'review_' | append: i | append: '_show_as_b2b'
-
-          assign rev_quote = review_block.settings[quote_key]
-          assign rev_name = review_block.settings[name_key]
-          assign rev_location = review_block.settings[location_key]
-          assign rev_label = review_block.settings[label_key]
-          assign rev_stars = review_block.settings[stars_key] | default: 5 | plus: 0
-          assign rev_badge = review_block.settings[badge_key]
-          assign rev_attribution = review_block.settings[attribution_key]
-          assign rev_show_b2b = review_block.settings[show_b2b_key]
-        %}
-
-        {% if rev_quote != blank and shown_reviews < rev_max %}
-          {%- assign shown_reviews = shown_reviews | plus: 1 -%}
-          <div class="testi-card">
-            {% if rev_show_b2b %}
-              <div class="testi-detail">
-                {{ rev_badge | default: 'Verified' }}
-              </div>
-            {% else %}
-              <div class="testi-stars" aria-label="{{ rev_stars }} out of 5 stars">
-                {% for s in (1..rev_stars) %}
-                  <svg viewBox="0 0 11 11" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                    <path d="M5.5 0L6.7 3.8h4L7.5 6.2 8.7 10 5.5 7.6 2.3 10l1.2-3.8L.3 3.8h4L5.5 0z" fill="#5F8A8B"/>
-                  </svg>
-                {% endfor %}
-              </div>
-            {% endif %}
-
-            <p class="testi-quote">
-              “{{ rev_quote | escape }}”
-            </p>
-
-            <div class="testi-meta">
-              {% if rev_name != blank %}
-                <span class="testi-name">{{ rev_name | escape }}</span>
-              {% endif %}
-
-              {% if rev_label != blank or rev_location != blank %}
-                <span class="testi-role">
-                  {{ rev_label | escape }}{% if rev_label != blank and rev_location != blank %} · {% endif %}{{ rev_location | escape }}
-                </span>
-              {% endif %}
-            </div>
-
-            <span class="testi-detail">
-              <svg viewBox="0 0 8 10" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                <path d="M3.94 9.65C2.83 9.35 1.85 8.7 1.14 7.79.43 6.89.03 5.78 0 4.63V1.21L3.94 0l3.94 1.21v3.42c-.03 1.15-.43 2.26-1.14 3.16-.71.91-1.69 1.56-2.8 1.86z" fill="#9CA3AF"/>
-                <path d="M3.3 5.27L2.16 4.22l-.57.53 1.14 1.05.57.53.57-.53 2.28-2.1-.57-.52-2.28 2.1z" fill="#fff"/>
-              </svg>
-              {{ rev_attribution | default: 'Verified buyer' }}
-            </span>
-          </div>
-        {% endif %}
-      {% endfor %}
-    </div>
+    {% render 'drye-review-slider-inline', block: review_block %}
 
     <div class="tabs-cta-wrap">
       <a href="{{ review_anchor }}" class="tabs-cta">
