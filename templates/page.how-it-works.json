@@ -9,98 +9,6 @@
  */
 {
   "sections": {
-    "drye_new_identification_frontpage_jHiRCh": {
-      "type": "dryeNEW-identification-frontpage",
-      "blocks": {
-        "profession_item_bV3y8y": {
-          "type": "profession_item",
-          "settings": {
-            "image": "shopify://shop_images/1626932025968271001.webp",
-            "image_url": "",
-            "fallback_color": "#1E3A4C",
-            "label": "Cotton"
-          }
-        },
-        "profession_item_cbe3Ed": {
-          "type": "profession_item",
-          "settings": {
-            "image": "shopify://shop_images/Screenshot_29.webp",
-            "image_url": "",
-            "fallback_color": "#1E3A4C",
-            "label": "Bamboo"
-          }
-        },
-        "profession_item_UUMfPc": {
-          "type": "profession_item",
-          "settings": {
-            "image": "shopify://shop_images/Screenshot_21.webp",
-            "image_url": "",
-            "fallback_color": "#1E3A4C",
-            "label": "Nylon"
-          }
-        },
-        "profession_item_mNMwBt": {
-          "type": "profession_item",
-          "settings": {
-            "image": "shopify://shop_images/Screenshot_22.webp",
-            "image_url": "",
-            "fallback_color": "#1E3A4C",
-            "label": "Polyester"
-          }
-        },
-        "profession_item_7qMMtG": {
-          "type": "profession_item",
-          "settings": {
-            "image": "shopify://shop_images/Screenshot_26_4c9e936b-10db-4cf4-b8e8-9feb4e919c47.webp",
-            "image_url": "",
-            "fallback_color": "#1E3A4C",
-            "label": "Lycra"
-          }
-        },
-        "occlusion_step_cEbNmk": {
-          "type": "occlusion_step",
-          "settings": {
-            "step_number": "01",
-            "title": "20 minutes in",
-            "body": "<p>Moisture saturates inside sealed equipment. Skin has nowhere to breathe.</p>"
-          }
-        },
-        "occlusion_step_yXNFKh": {
-          "type": "occlusion_step",
-          "settings": {
-            "step_number": "02",
-            "title": "Trapped moisture",
-            "body": "<p>The barrier softens. Chemicals and bacteria move through. This is called occlusion.</p>"
-          }
-        },
-        "occlusion_step_mLwdHb": {
-          "type": "occlusion_step",
-          "settings": {
-            "step_number": "03",
-            "title": "The cycle repeats",
-            "body": "<p>Weekend recovery. Monday relapse. no glove, liner, or cream on the market stops it.</p>"
-          }
-        }
-      },
-      "block_order": [
-        "profession_item_bV3y8y",
-        "profession_item_cbe3Ed",
-        "profession_item_UUMfPc",
-        "profession_item_mNMwBt",
-        "profession_item_7qMMtG",
-        "occlusion_step_cEbNmk",
-        "occlusion_step_yXNFKh",
-        "occlusion_step_mLwdHb"
-      ],
-      "name": "DRYE Identification2",
-      "settings": {
-        "section_id": "identification",
-        "eyebrow": "",
-        "heading": "You've tried everything.",
-        "heading_echo": "Nothing worked.",
-        "body": ""
-      }
-    },
     "drye_liner_product_clarity_6GgYWe": {
       "type": "drye-liner-product-clarity",
       "blocks": {
@@ -632,7 +540,6 @@
     }
   },
   "order": [
-    "drye_new_identification_frontpage_jHiRCh",
     "drye_liner_product_clarity_6GgYWe",
     "drye_mechanics_saturation_DzjNTn",
     "drye_mechanics_mechanism_tytKVw",
