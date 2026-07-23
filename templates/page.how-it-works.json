@@ -9,6 +9,20 @@
  */
 {
   "sections": {
+    "drye_how_it_works_hero_LiYY94": {
+      "type": "drye-how-it-works-hero",
+      "name": "DRYE HIW Hero",
+      "settings": {
+        "show_breadcrumb": false,
+        "breadcrumb_home_label": "Home",
+        "breadcrumb_home_url": "",
+        "breadcrumb_current_label": "How it works",
+        "eyebrow": "The physics behind DRYE",
+        "heading_before": "The problem isn't that nothing works.",
+        "heading_em": "It's that nothing works under compression.",
+        "subtext": "<p>Every liner you've tried — cotton, silk, synthetic wicking — was engineered assuming airflow. Inside a sealed glove, that assumption fails. <strong>DRYE is the first material built for the only environment that actually matters.</strong></p>"
+      }
+    },
     "drye_liner_product_clarity_6GgYWe": {
       "type": "drye-liner-product-clarity",
       "blocks": {
@@ -530,6 +544,7 @@
     }
   },
   "order": [
+    "drye_how_it_works_hero_LiYY94",
     "drye_liner_product_clarity_6GgYWe",
     "drye_mechanics_saturation_DzjNTn",
     "drye_mechanics_mechanism_tytKVw",
