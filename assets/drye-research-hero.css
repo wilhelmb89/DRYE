@@ -2,7 +2,7 @@
   background: var(--bg-ink);
   position: relative;
   overflow: hidden;
-  padding-top: 96px; /* match Hero V4 / HIW start height (mobile) */
+  padding-top: var(--hero-pad-top); /* base.css single source of truth */
 }
 
 .research-hero::before {
@@ -117,10 +117,6 @@
 }
 
 @media (min-width: 768px) {
-  .research-hero {
-    padding-top: 112px; /* match Hero V4 / HIW start height (desktop) */
-  }
-
   .research-hero__title {
     max-width: 760px;
     font-size: 48px; /* match Hero V4 / HIW (desktop) */

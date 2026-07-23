@@ -7,7 +7,7 @@
   position: relative;
   overflow: hidden;
   background: var(--bg-ink);
-  padding: 96px 0 64px;
+  padding: var(--hero-pad-top) 0 64px; /* top from base.css single source of truth */
 }
 
 .drye-hiw-hero::before {
@@ -168,7 +168,7 @@
 
 @media (min-width: 768px) {
   .drye-hiw-hero {
-    padding: 112px 0 72px;
+    padding: var(--hero-pad-top) 0 72px; /* top from base.css single source of truth */
   }
   .drye-hiw-hero__heading {
     font-size: 48px; /* match Hero V4 (desktop) */

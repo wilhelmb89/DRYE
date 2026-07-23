@@ -109,6 +109,11 @@
   --section-pad-x: 20px;
   --stack-gap: 16px;
 
+  /* Hero top spacing — single source of truth for all hero sections
+     (research / about / how-it-works / blog). Change here to move every
+     hero's eyebrow start height together. */
+  --hero-pad-top: 146px;
+
   /* Card spacing */
   --card-pad-y: 20px;
   --card-pad-x: 16px;
@@ -220,6 +225,7 @@
     --page-pad: 40px;
     --section-pad-x: 40px;
     --section-pad-y: 88px;
+    --hero-pad-top: 162px;
 
     --card-pad-y: 28px;
     --card-pad-x: 24px;

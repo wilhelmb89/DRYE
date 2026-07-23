@@ -8,24 +8,6 @@
 >
   <div class="drye-hiw-hero__inner dryeNEW-container">
 
-    {% if section.settings.show_breadcrumb %}
-      <nav class="drye-hiw-hero__breadcrumb drye-hiw-hero__reveal drye-hiw-hero__rd1" aria-label="Breadcrumb">
-        {% if section.settings.breadcrumb_home_label != blank %}
-          <a href="{{ section.settings.breadcrumb_home_url | default: '/' }}">
-            {{ section.settings.breadcrumb_home_label }}
-          </a>
-        {% endif %}
-
-        <span class="drye-hiw-hero__breadcrumb-sep">/</span>
-
-        {% if section.settings.breadcrumb_current_label != blank %}
-          <span class="drye-hiw-hero__breadcrumb-current">
-            {{ section.settings.breadcrumb_current_label }}
-          </span>
-        {% endif %}
-      </nav>
-    {% endif %}
-
     {% if section.settings.eyebrow != blank %}
       <span class="drye-hiw-hero__micro drye-hiw-hero__reveal drye-hiw-hero__rd1">
         {{ section.settings.eyebrow }}

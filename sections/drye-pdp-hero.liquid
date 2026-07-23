@@ -479,11 +479,11 @@ assign review_count = section.settings.review_count_fallback
       {% endif %}
 
       <div class="stepbar">
-        <button type="button" class="stepbar__btn" aria-expanded="false" aria-controls="step1panel-{{ section.id }}" id="step1btn-{{ section.id }}">
+        <button type="button" class="stepbar__btn" aria-expanded="true" aria-controls="step1panel-{{ section.id }}" id="step1btn-{{ section.id }}">
           {{ section.settings.compare_principle | default: 'Step 1: Change the environment' }}
           <svg class="stepbar__chev" viewBox="0 0 10 6" fill="none"><path d="M0 0l5 6 5-6z" fill="currentColor"/></svg>
         </button>
-        <div class="stepbar__panel" id="step1panel-{{ section.id }}"><div class="stepbar__inner">
+        <div class="stepbar__panel open" id="step1panel-{{ section.id }}"><div class="stepbar__inner">
           <div class="value-card__grid">
             <div class="value-card__col value-card__col--loop">
               <p class="value-card__eyebrow value-card__eyebrow--loop">The workaround loop</p>

@@ -1,7 +1,7 @@
 .drye-about-hero {
   background: var(--bg-ink);
   overflow: hidden;
-  padding-top: 96px; /* match Hero V4 / HIW start height (mobile) */
+  padding-top: var(--hero-pad-top); /* base.css single source of truth */
 }
 
 /* Layout */
@@ -121,10 +121,6 @@
 
 /* Desktop */
 @media (min-width: 768px) {
-  .drye-about-hero {
-    padding-top: 112px; /* match Hero V4 / HIW start height (desktop) */
-  }
-
   .drye-about-hero__heading {
     font-size: 48px; /* match Hero V4 (desktop) */
     line-height: 1.04;
