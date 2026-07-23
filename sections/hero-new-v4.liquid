@@ -99,6 +99,14 @@
     font-size: 48px; line-height: 1.04; letter-spacing: -0.02em;
     margin: 0; text-align: left; color: #fff;
   }
+  /* Italic in the heading -> Playfair editorial (like the rest of the site) */
+  #shopify-section-{{ section.id }} h1 em,
+  #shopify-section-{{ section.id }} h1 i {
+    font-family: var(--font-editorial);
+    font-style: italic;
+    font-weight: 400;
+    letter-spacing: -0.01em;
+  }
   #shopify-section-{{ section.id }} .drye-sub {
     font-family: var(--font-body);
     font-size: 15px; font-weight: var(--fw-medium);
@@ -318,8 +326,8 @@
   "class": "hero-new-v4-section",
   "settings": [
     { "type": "header", "content": "Heading" },
-    { "type": "text", "id": "heading_line_1", "label": "Heading line 1", "default": "Add one dry layer" },
-    { "type": "text", "id": "heading_line_2", "label": "Heading line 2", "default": "under your gloves" },
+    { "type": "inline_richtext", "id": "heading_line_1", "label": "Heading line 1", "info": "Use the italic button for Playfair editorial style.", "default": "Add one dry layer" },
+    { "type": "inline_richtext", "id": "heading_line_2", "label": "Heading line 2", "info": "Use the italic button for Playfair editorial style.", "default": "under your gloves" },
     { "type": "textarea", "id": "subheading", "label": "Subheading", "default": "0.4 mm thin. Worn inside your existing glove — nitrile, latex, textile, rubber or HV." },
     { "type": "text", "id": "subheading_emphasis", "label": "Subheading — bold sentence", "info": "Shown bold/white after the subheading.", "default": "What changes is what your skin sits against." },
 
