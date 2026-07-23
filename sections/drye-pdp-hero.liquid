@@ -732,6 +732,7 @@ assign review_count = section.settings.review_count_fallback
       </div>
     {% endif %}
 
+    {% if section.settings.show_seen_in %}
     <div class="drye-press">
       <span class="drye-press__label">{{ section.settings.seen_in_label | default: 'Seen in' }}</span>
       <div class="drye-press__logos">
@@ -757,6 +758,7 @@ assign review_count = section.settings.review_count_fallback
         {% endif %}
       </div>
     </div>
+    {% endif %}
 
     {% if section.settings.skapa_line != blank or section.settings.skapa_logo != blank %}
       {%- capture skapa_inner -%}
@@ -2133,6 +2135,12 @@ wteTimelines.forEach((timeline) => {
       "type": "url",
       "id": "skapa_url",
       "label": "Award link (optional)"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_seen_in",
+      "label": "Show \"Seen in\" press row",
+      "default": true
     },
     {
       "type": "text",
