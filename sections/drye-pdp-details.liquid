@@ -123,13 +123,13 @@
               <path d="M0 0l5 6 5-6z" fill="currentColor"/>
             </svg>
           </button>
-          {%- if section.settings.maker_image != blank -%}
-            <div class="pdp-det__maker-img">
-              {{ section.settings.maker_image | image_url: width: 900 | image_tag: loading: 'lazy', alt: 'Granqvists Gloves factory' }}
-            </div>
-          {%- endif -%}
           <div class="pdp-det__panel" id="pdp-det-p-who-{{ section.id }}">
             <div class="pdp-det__inner"><div class="pdp-det__body" style="padding-top:12px;">
+              {%- if section.settings.maker_image != blank -%}
+                <div class="pdp-det__maker-img">
+                  {{ section.settings.maker_image | image_url: width: 900 | image_tag: loading: 'lazy', alt: 'Granqvists Gloves factory' }}
+                </div>
+              {%- endif -%}
               <ul class="pdp-det__list">
                 <li><strong>Granqvists Gloves AB, Karlstad, Sweden</strong> — glove manufacturer since 1984. The same factory supplies ~80% of military gloves to the Swedish, Norwegian and Finnish armed forces.</li>
                 <li>Fabric knitted by Trikåby, Sweden. Sewn in the EU. ISO 9001 / ISO 14001 / OEKO-TEX® Standard 100.</li>
@@ -274,35 +274,23 @@
 
           {%- comment -%}--- VIS: SPECIFICATIONS ---{%- endcomment -%}
           <div class="pdp-det__vis pdp-det__vis--pad" id="vis-det-specs">
-            <div class="pdp-det__vis-micro">Fabric construction</div>
-            <div class="pdp-det__layer">
-              <div>
-                <div class="pdp-det__layer-name">Outer layer</div>
-                <div class="pdp-det__layer-sub">Lyocell (Tencel) — hydrophilic</div>
-              </div>
-              <div class="pdp-det__layer-pct pdp-det__layer-pct--em">45%</div>
-            </div>
-            <div class="pdp-det__layer">
-              <div>
-                <div class="pdp-det__layer-name">Skin layer</div>
-                <div class="pdp-det__layer-sub">Polypropylene — hydrophobic</div>
-              </div>
-              <div class="pdp-det__layer-pct">55%</div>
-            </div>
-            <div class="pdp-det__tiles">
-              <div class="pdp-det__tile">
-                <div class="pdp-det__tile-num">0.4<span class="pdp-det__tile-unit">mm</span></div>
-                <div class="pdp-det__tile-lbl">Thickness</div>
-              </div>
-              <div class="pdp-det__tile">
-                <div class="pdp-det__tile-num">40<span class="pdp-det__tile-unit">g</span></div>
-                <div class="pdp-det__tile-lbl">Per pair</div>
-              </div>
-              <div class="pdp-det__tile">
-                <div class="pdp-det__tile-num pdp-det__tile-num--em">28<span class="pdp-det__tile-unit">%</span></div>
-                <div class="pdp-det__tile-lbl">Asymmetry</div>
-              </div>
-            </div>
+            <div class="pdp-det__vis-micro">Specifications</div>
+            <table class="pdp-det__ds" style="margin-top:4px;">
+              <tbody>
+                <tr><td class="k">Construction</td><td class="v">Single jersey, plated</td></tr>
+                <tr><td class="k">Skin side</td><td class="v">55% PP — hydrophobic</td></tr>
+                <tr><td class="k">Outer side</td><td class="v">45% lyocell — hydrophilic</td></tr>
+                <tr><td class="k">Thickness</td><td class="v">0.4 mm</td></tr>
+                <tr><td class="k">Weight</td><td class="v">40 g per pair</td></tr>
+                <tr><td class="k">Moisture asymmetry</td><td class="v">28% higher outer side</td></tr>
+                <tr><td class="k">Air permeability</td><td class="v">1800–1850 mm/s</td></tr>
+                <tr><td class="k">Wash</td><td class="v">140–195°F / 60–90°C</td></tr>
+                <tr><td class="k">Lifespan</td><td class="v">6–12 months</td></tr>
+                <tr><td class="k">Sizes</td><td class="v">5–12</td></tr>
+                <tr><td class="k">Certification</td><td class="v">OEKO-TEX® Standard 100</td></tr>
+                <tr><td class="k">Patent</td><td class="v">Pending · SE 2615359-3</td></tr>
+              </tbody>
+            </table>
           </div>
 
           {%- comment -%}--- VIS: SHIPPING AND RETURNS ---{%- endcomment -%}

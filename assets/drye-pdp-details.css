@@ -1,427 +1,283 @@
-{{ 'drye-pdp-details.css' | asset_url | stylesheet_tag }}
+/* ==========================================================================
+   DRYE — PDP Details Section
+   Relies on tokens from base.css. Does NOT redefine them.
+   ========================================================================== */
 
-<section class="dryeNEW-section drye-pdp-details" id="drye-pdp-details-{{ section.id }}" data-drye-section data-section-name="pdp-details">
-  <div class="dryeNEW-container" id="pdp-det-container-{{ section.id }}">
-    <div class="pdp-det__layout">
-
-      {%- comment -%} COL 1 — Accordions {%- endcomment -%}
-      <div class="pdp-det__left" id="pdp-det-acc-{{ section.id }}">
-
-        {%- comment -%}--- WHY IT MATTERS ---{%- endcomment -%}
-        <div class="pdp-det__acc" data-acc="why">
-          <button class="pdp-det__btn" type="button" data-radio-id="r-det-why">
-            {{ section.settings.acc_why_label | default: 'Why It Matters' }}
-            <svg class="pdp-det__chev" viewBox="0 0 10 6" fill="none">
-              <path d="M0 0l5 6 5-6z" fill="currentColor"/>
-            </svg>
-          </button>
-          <div class="pdp-det__panel" id="pdp-det-p-why-{{ section.id }}">
-            <div class="pdp-det__inner"><div class="pdp-det__body">
-              <ul class="pdp-det__list">
-                <li>Sealed gloves reach <strong>~90% RH within 5–7 minutes.</strong></li>
-                <li>Wet skin can become more permeable; drier skin feels better over a shift.</li>
-                <li>DRYE keeps the skin side drier. <a href="/pages/research">Evidence →</a></li>
-              </ul>
-              <p class="pdp-det__source">Park &amp; Lee 2025 · TRGS 401 · Hikima &amp; Maibach 2006</p>
-            </div></div>
-          </div>
-        </div>
-
-        {%- comment -%}--- HOW IT WORKS ---{%- endcomment -%}
-        <div class="pdp-det__acc" data-acc="how">
-          <button class="pdp-det__btn" type="button" data-radio-id="r-det-how">
-            {{ section.settings.acc_how_label | default: 'How It Works' }}
-            <svg class="pdp-det__chev" viewBox="0 0 10 6" fill="none">
-              <path d="M0 0l5 6 5-6z" fill="currentColor"/>
-            </svg>
-          </button>
-          <div class="pdp-det__panel" id="pdp-det-p-how-{{ section.id }}">
-            <div class="pdp-det__inner"><div class="pdp-det__body">
-              <ul class="pdp-det__list">
-                <li><strong>Asymmetric Layering:</strong> skin side 55% PP (hydrophobic), outer 45% lyocell (hydrophilic).</li>
-                <li>Transports moisture outward; no coatings or membranes.</li>
-                <li><strong>0.4 mm</strong> — worn under your existing glove.</li>
-              </ul>
-            </div></div>
-          </div>
-        </div>
-
-        {%- comment -%}--- FIT AND CARE ---{%- endcomment -%}
-        <div class="pdp-det__acc" data-acc="fit">
-          <button class="pdp-det__btn" type="button" data-radio-id="r-det-fit">
-            {{ section.settings.acc_fit_label | default: 'Fit and Care' }}
-            <svg class="pdp-det__chev" viewBox="0 0 10 6" fill="none">
-              <path d="M0 0l5 6 5-6z" fill="currentColor"/>
-            </svg>
-          </button>
-          <div class="pdp-det__panel" id="pdp-det-p-fit-{{ section.id }}">
-            <div class="pdp-det__inner"><div class="pdp-det__body">
-              <ul class="pdp-det__list">
-                <li><strong>Fit:</strong> snug, second-skin.</li>
-                <li><strong>On/off:</strong> slow, finger-by-finger.</li>
-                <li><strong>Wash:</strong> 140–195°F (60–90°C). Expected life: 6–12 months.</li>
-              </ul>
-            </div></div>
-          </div>
-        </div>
-
-        {%- comment -%}--- SPECIFICATIONS ---{%- endcomment -%}
-        <div class="pdp-det__acc" data-acc="specs">
-          <button class="pdp-det__btn" type="button" data-radio-id="r-det-specs">
-            {{ section.settings.acc_specs_label | default: 'Specifications' }}
-            <svg class="pdp-det__chev" viewBox="0 0 10 6" fill="none">
-              <path d="M0 0l5 6 5-6z" fill="currentColor"/>
-            </svg>
-          </button>
-          <div class="pdp-det__panel" id="pdp-det-p-specs-{{ section.id }}">
-            <div class="pdp-det__inner"><div class="pdp-det__body">
-              <ul class="pdp-det__list">
-                <li>Single-jersey (plated) · 0.4 mm · 40 g per pair · sizes 5–12.</li>
-                <li>OEKO-TEX® Standard 100 · Patent pending.</li>
-                <li>Not designed for: without outer glove · cut protection · touchscreen use.</li>
-              </ul>
-              <table class="pdp-det__ds">
-                <tbody>
-                  <tr><td class="k">Skin side</td><td class="v">55% polypropylene — hydrophobic</td></tr>
-                  <tr><td class="k">Outer side</td><td class="v">45% lyocell (Tencel) — hydrophilic</td></tr>
-                  <tr><td class="k">Weight</td><td class="v">40 g per pair</td></tr>
-                  <tr><td class="k">Wash</td><td class="v">140–195°F / 60–90°C</td></tr>
-                  <tr><td class="k">Air permeability</td><td class="v">1800–1850 mm/s (ISO 9237)</td></tr>
-                  <tr><td class="k">Moisture asymmetry</td><td class="v">28% higher outer side</td></tr>
-                  <tr><td class="k">Certification</td><td class="v">OEKO-TEX® Standard 100</td></tr>
-                  <tr><td class="k">Patent</td><td class="v">Pending · SE 2615359-3</td></tr>
-                </tbody>
-              </table>
-            </div></div>
-          </div>
-        </div>
-
-        {%- comment -%}--- SHIPPING AND RETURNS ---{%- endcomment -%}
-        <div class="pdp-det__acc" data-acc="ship">
-          <button class="pdp-det__btn" type="button" data-radio-id="r-det-ship">
-            {{ section.settings.acc_ship_label | default: 'Shipping and Returns' }}
-            <svg class="pdp-det__chev" viewBox="0 0 10 6" fill="none">
-              <path d="M0 0l5 6 5-6z" fill="currentColor"/>
-            </svg>
-          </button>
-          <div class="pdp-det__panel" id="pdp-det-p-ship-{{ section.id }}">
-            <div class="pdp-det__inner"><div class="pdp-det__body">
-              <ul class="pdp-det__list">
-                <li><strong>USA PostNord:</strong> import prepaid (0 USD at door). <strong>UPS:</strong> import fees to recipient.</li>
-                <li><strong>Canada:</strong> tax + carrier fees may apply.</li>
-                <li>30-day money-back guarantee. <a href="/pages/policy">Full policy →</a></li>
-              </ul>
-            </div></div>
-          </div>
-        </div>
-
-        {%- comment -%}--- WHO MAKES THIS ---{%- endcomment -%}
-        <div class="pdp-det__acc" data-acc="who">
-          <button class="pdp-det__btn" type="button" data-radio-id="r-det-who">
-            {{ section.settings.acc_who_label | default: 'Who Makes This' }}
-            <svg class="pdp-det__chev" viewBox="0 0 10 6" fill="none">
-              <path d="M0 0l5 6 5-6z" fill="currentColor"/>
-            </svg>
-          </button>
-          <div class="pdp-det__panel" id="pdp-det-p-who-{{ section.id }}">
-            <div class="pdp-det__inner"><div class="pdp-det__body" style="padding-top:12px;">
-              {%- if section.settings.maker_image != blank -%}
-                <div class="pdp-det__maker-img">
-                  {{ section.settings.maker_image | image_url: width: 900 | image_tag: loading: 'lazy', alt: 'Granqvists Gloves factory' }}
-                </div>
-              {%- endif -%}
-              <ul class="pdp-det__list">
-                <li><strong>Granqvists Gloves AB, Karlstad, Sweden</strong> — glove manufacturer since 1984. The same factory supplies ~80% of military gloves to the Swedish, Norwegian and Finnish armed forces.</li>
-                <li>Fabric knitted by Trikåby, Sweden. Sewn in the EU. ISO 9001 / ISO 14001 / OEKO-TEX® Standard 100.</li>
-              </ul>
-              <div class="pdp-det__partners">
-                <span class="pdp-det__partners-label">Developed &amp; validated with</span>
-                <div class="pdp-det__partners-logos">
-                  {%- if section.settings.partner_logo_1 != blank -%}
-                    <span class="uppsala">
-                      {{ section.settings.partner_logo_1 | image_url: width: 200 | image_tag: loading: 'lazy', alt: section.settings.partner_logo_1_alt | default: 'Research partner' }}
-                    </span>
-                  {%- endif -%}
-                  {%- if section.settings.partner_logo_2 != blank -%}
-                    <span class="boras">
-                      {{ section.settings.partner_logo_2 | image_url: width: 300 | image_tag: loading: 'lazy', alt: section.settings.partner_logo_2_alt | default: 'Research partner' }}
-                    </span>
-                  {%- endif -%}
-                  {%- if section.settings.partner_logo_3 != blank -%}
-                    <span>
-                      {{ section.settings.partner_logo_3 | image_url: width: 200 | image_tag: loading: 'lazy', alt: section.settings.partner_logo_3_alt | default: 'Research partner' }}
-                    </span>
-                  {%- endif -%}
-                </div>
-              </div>
-            </div></div>
-          </div>
-        </div>
-
-      </div>
-
-      {%- comment -%} COL 2 — Contextual right panel (desktop only) {%- endcomment -%}
-      <div class="pdp-det__right">
-        <div class="pdp-det__right-inner">
-
-          {%- comment -%}--- VIS: WHY IT MATTERS ---{%- endcomment -%}
-          <div class="pdp-det__vis pdp-det__vis--pad" id="vis-det-why">
-            <div class="pdp-det__vis-micro">Relative humidity — sealed glove</div>
-            <div class="pdp-det__stat">90<span class="pdp-det__stat-suf">%</span></div>
-            <div class="pdp-det__stat-sub">Within 5–7 minutes of donning</div>
-            <div class="pdp-det__row">
-              <div class="pdp-det__row-lbl">Open glove</div>
-              <div style="display:flex;align-items:center;gap:10px;width:100%;">
-                <div class="pdp-det__row-track"><div class="pdp-det__row-fill" style="width:32%; background:var(--border);"></div></div>
-                <div class="pdp-det__row-val">~32%</div>
-              </div>
-            </div>
-            <div class="pdp-det__row">
-              <div class="pdp-det__row-lbl">Sealed glove — no liner</div>
-              <div style="display:flex;align-items:center;gap:10px;width:100%;">
-                <div class="pdp-det__row-track"><div class="pdp-det__row-fill" style="width:90%;"></div></div>
-                <div class="pdp-det__row-val">&gt;90%</div>
-              </div>
-            </div>
-            <div class="pdp-det__row">
-              <div class="pdp-det__row-lbl">Sealed glove — with DRYE</div>
-              <div style="display:flex;align-items:center;gap:10px;width:100%;">
-                <div class="pdp-det__row-track"><div class="pdp-det__row-fill pdp-det__row-fill--em" style="width:52%;"></div></div>
-                <div class="pdp-det__row-val">Lower</div>
-              </div>
-            </div>
-            <p class="pdp-det__source-sm">Park &amp; Lee 2025</p>
-          </div>
-
-          {%- comment -%}--- VIS: HOW IT WORKS (mechanism diagram) ---{%- endcomment -%}
-          <div class="pdp-det__vis pdp-det__vis--pad pdp-det__vis--dark" id="vis-det-how">
-            <div class="pdp-det__vis-micro" style="color:rgba(95,138,139,0.9); text-align:center; margin-bottom:20px;">Cotton · DRYE</div>
-            <div class="pdp-det__mech-grid">
-              <div class="pdp-det__mech-card">
-                <div class="pdp-det__mech-media">
-                  <svg viewBox="0 0 100 80" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                    <rect x="6" y="8" width="88" height="8" fill="#1E3A4C"/>
-                    <line x1="8" y1="16" x2="8" y2="70" stroke="#E5E7EB" stroke-width="1"/>
-                    <line x1="92" y1="16" x2="92" y2="70" stroke="#E5E7EB" stroke-width="1"/>
-                    <rect x="8" y="62" width="84" height="8" fill="#A8B5BC"/>
-                    <path d="M25 60 L25 22 M22 27 L25 22 L28 27" stroke="#0D9488" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-                    <path d="M50 60 L50 22 M47 27 L50 22 L53 27" stroke="#0D9488" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-                    <path d="M75 60 L75 22 M72 27 L75 22 L78 27" stroke="#0D9488" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-                    <path d="M45 4 L55 14 M55 4 L45 14" stroke="#EF4444" stroke-width="1.6" stroke-linecap="round"/>
-                    <line x1="8" y1="70" x2="92" y2="70" stroke="#1E3A4C" stroke-width="1.5"/>
-                  </svg>
-                </div>
-                <div class="pdp-det__mech-body">
-                  <div class="pdp-det__mech-name">Cotton</div>
-                  <p class="pdp-det__mech-desc">Sweat stays trapped against your skin.</p>
-                </div>
-              </div>
-              <div class="pdp-det__mech-card pdp-det__mech-card--drye">
-                <div class="pdp-det__mech-media">
-                  <svg viewBox="0 0 100 80" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                    <rect x="6" y="0" width="88" height="4" fill="#1E3A4C"/>
-                    <rect x="6" y="4" width="88" height="4" fill="#DDE9E9"/>
-                    <rect x="6" y="8" width="88" height="4" fill="#E8EFEF"/>
-                    <line x1="8" y1="12" x2="92" y2="12" stroke="#9CA3AF" stroke-width="1" stroke-dasharray="3 3"/>
-                    <line x1="8" y1="12" x2="8" y2="70" stroke="#E5E7EB" stroke-width="1"/>
-                    <line x1="92" y1="12" x2="92" y2="70" stroke="#E5E7EB" stroke-width="1"/>
-                    <rect x="8" y="62" width="84" height="8" fill="#E5E7EB"/>
-                    <ellipse cx="37" cy="60" rx="1.5" ry="2.2" fill="rgba(80,160,240,0.8)" opacity="0">
-                      <animate attributeName="cy" values="60;30;12;6" keyTimes="0;0.5;0.85;1" dur="4.5s" begin="0s" repeatCount="indefinite"/>
-                      <animate attributeName="opacity" values="0;0.75;0.75;0.4;0" keyTimes="0;0.08;0.6;0.9;1" dur="4.5s" begin="0s" repeatCount="indefinite"/>
-                    </ellipse>
-                    <ellipse cx="62" cy="60" rx="1.5" ry="2.2" fill="rgba(80,160,240,0.8)" opacity="0">
-                      <animate attributeName="cy" values="60;30;12;6" keyTimes="0;0.5;0.85;1" dur="4.5s" begin="1.5s" repeatCount="indefinite"/>
-                      <animate attributeName="opacity" values="0;0.75;0.75;0.4;0" keyTimes="0;0.08;0.6;0.9;1" dur="4.5s" begin="1.5s" repeatCount="indefinite"/>
-                    </ellipse>
-                    <path d="M25 60 L25 5 M22 10 L25 5 L28 10" stroke="#1E3A4C" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-                    <path d="M50 60 L50 5 M47 10 L50 5 L53 10" stroke="#1E3A4C" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-                    <path d="M75 60 L75 5 M72 10 L75 5 L78 10" stroke="#1E3A4C" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-                    <line x1="8" y1="70" x2="92" y2="70" stroke="#1E3A4C" stroke-width="1.5"/>
-                  </svg>
-                </div>
-                <div class="pdp-det__mech-body">
-                  <div class="pdp-det__mech-name">DRYE Liner</div>
-                  <p class="pdp-det__mech-desc">Water is pulled through and spread outward. Skin stays dry.</p>
-                </div>
-              </div>
-            </div>
-            <p class="pdp-det__mech-foot">Asymmetric Layering — one fabric, one direction</p>
-          </div>
-
-          {%- comment -%}--- VIS: FIT AND CARE (size guide) ---{%- endcomment -%}
-          <div class="pdp-det__vis pdp-det__vis--pad" id="vis-det-fit">
-            <div class="pdp-det__vis-micro">Size guide</div>
-            <div class="pdp-det__sizetoggle" id="pdp-det-size-toggle-{{ section.id }}">
-              <button class="is-active" type="button" data-unit="mm">MM</button>
-              <button type="button" data-unit="in">INCHES</button>
-            </div>
-            <div class="pdp-det__sizegrid">
-              <span class="pdp-det__sizegrid-th">Size</span>
-              <span class="pdp-det__sizegrid-th">EU</span>
-              <span class="pdp-det__sizegrid-th">Hand circ.</span>
-              <div class="pdp-det__sizegrid-row"><span>5</span><span>XXS</span><span class="pdp-det__sz" data-mm="150–162 mm" data-in='5.9–6.4"'>150–162 mm</span></div>
-              <div class="pdp-det__sizegrid-row"><span>6</span><span>XS</span><span class="pdp-det__sz" data-mm="163–172 mm" data-in='6.4–6.8"'>163–172 mm</span></div>
-              <div class="pdp-det__sizegrid-row"><span>7</span><span>S</span><span class="pdp-det__sz" data-mm="172–181 mm" data-in='6.8–7.1"'>172–181 mm</span></div>
-              <div class="pdp-det__sizegrid-row"><span>8</span><span>M</span><span class="pdp-det__sz" data-mm="182–193 mm" data-in='7.2–7.6"'>182–193 mm</span></div>
-              <div class="pdp-det__sizegrid-row"><span>9</span><span>L</span><span class="pdp-det__sz" data-mm="194–205 mm" data-in='7.6–8.1"'>194–205 mm</span></div>
-              <div class="pdp-det__sizegrid-row"><span>10</span><span>XL</span><span class="pdp-det__sz" data-mm="206–216 mm" data-in='8.1–8.5"'>206–216 mm</span></div>
-              <div class="pdp-det__sizegrid-row"><span>11</span><span>XXL</span><span class="pdp-det__sz" data-mm="217–226 mm" data-in='8.5–8.9"'>217–226 mm</span></div>
-              <div class="pdp-det__sizegrid-row"><span>12</span><span>XXXL</span><span class="pdp-det__sz" data-mm="227–236 mm" data-in='8.9–9.3"'>227–236 mm</span></div>
-            </div>
-            <p style="font-size:9px; color:var(--caption); margin-top:10px; letter-spacing:0.06em;">Measure at widest point — knuckles, not finger length.</p>
-          </div>
-
-          {%- comment -%}--- VIS: SPECIFICATIONS ---{%- endcomment -%}
-          <div class="pdp-det__vis pdp-det__vis--pad" id="vis-det-specs">
-            <div class="pdp-det__vis-micro">Specifications</div>
-            <table class="pdp-det__ds" style="margin-top:4px;">
-              <tbody>
-                <tr><td class="k">Construction</td><td class="v">Single jersey, plated</td></tr>
-                <tr><td class="k">Skin side</td><td class="v">55% PP — hydrophobic</td></tr>
-                <tr><td class="k">Outer side</td><td class="v">45% lyocell — hydrophilic</td></tr>
-                <tr><td class="k">Thickness</td><td class="v">0.4 mm</td></tr>
-                <tr><td class="k">Weight</td><td class="v">40 g per pair</td></tr>
-                <tr><td class="k">Moisture asymmetry</td><td class="v">28% higher outer side</td></tr>
-                <tr><td class="k">Air permeability</td><td class="v">1800–1850 mm/s</td></tr>
-                <tr><td class="k">Wash</td><td class="v">140–195°F / 60–90°C</td></tr>
-                <tr><td class="k">Lifespan</td><td class="v">6–12 months</td></tr>
-                <tr><td class="k">Sizes</td><td class="v">5–12</td></tr>
-                <tr><td class="k">Certification</td><td class="v">OEKO-TEX® Standard 100</td></tr>
-                <tr><td class="k">Patent</td><td class="v">Pending · SE 2615359-3</td></tr>
-              </tbody>
-            </table>
-          </div>
-
-          {%- comment -%}--- VIS: SHIPPING AND RETURNS ---{%- endcomment -%}
-          <div class="pdp-det__vis pdp-det__vis--pad pdp-det__vis--dark" id="vis-det-ship">
-            <div class="pdp-det__guar-micro">The Glove-Off Test</div>
-            <div class="pdp-det__guar-num">30 <span>day guarantee</span></div>
-            <div class="pdp-det__guar-body">Wear one full shift. If your skin isn't drier when the glove comes off — full refund. No forms, no return shipping.</div>
-            <div style="margin-top:20px; border-top:1px solid rgba(255,255,255,0.1); padding-top:16px;">
-              <div class="pdp-det__ship-row">
-                <span class="pdp-det__ship-dest">USA — PostNord</span>
-                <span class="pdp-det__ship-note">Duties prepaid · 5–10 days</span>
-              </div>
-              <div class="pdp-det__ship-row">
-                <span class="pdp-det__ship-dest">USA — UPS</span>
-                <span class="pdp-det__ship-note">Duties on delivery · 1–3 days</span>
-              </div>
-              <div class="pdp-det__ship-row">
-                <span class="pdp-det__ship-dest">Canada</span>
-                <span class="pdp-det__ship-note">Tax + fees may apply · 4–6 days</span>
-              </div>
-            </div>
-          </div>
-
-          {%- comment -%}--- VIS: WHO MAKES THIS ---{%- endcomment -%}
-          <div class="pdp-det__vis pdp-det__vis--who" id="vis-det-who">
-            {%- if section.settings.maker_image != blank -%}
-              {{ section.settings.maker_image | image_url: width: 900 | image_tag:
-                loading: 'lazy',
-                alt: 'Granqvists Gloves factory',
-                style: 'width:100%;height:100%;object-fit:cover;object-position:center 20%;display:block;'
-              }}
-            {%- endif -%}
-          </div>
-
-        </div>
-
-        <div class="pdp-det__cap">
-          <span data-for="why">Humidity levels inside sealed protective gloves — internal study data</span>
-          <span data-for="how">One fabric. Two surfaces. One direction.</span>
-          <span data-for="fit">Circumference decides — not finger length.</span>
-          <span data-for="specs">Single jersey, plated knit — 0.4 mm total thickness</span>
-          <span data-for="ship">Full refund if skin isn't drier after one shift.</span>
-          <span data-for="who">Granqvists Gloves AB — Karlstad, Sweden. Since 1984.</span>
-        </div>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-<script>
-(function() {
-  var container = document.getElementById('pdp-det-container-{{ section.id }}');
-  var accRoot   = document.getElementById('pdp-det-acc-{{ section.id }}');
-  if (!container || !accRoot) return;
-
-  // 1. Inject hidden radio inputs before .pdp-det__layout
-  var layout = container.querySelector('.pdp-det__layout');
-  if (!document.getElementById('r-det-why')) {
-    ['why','how','fit','specs','ship','who'].forEach(function(key, i) {
-      var inp = document.createElement('input');
-      inp.className = 'pdp-det-r';
-      inp.type      = 'radio';
-      inp.name      = 'pdp-det-acc-{{ section.id }}';
-      inp.id        = 'r-det-' + key;
-      container.insertBefore(inp, layout);
-    });
-  }
-
-  // 2. Default: open "Why It Matters"
-  function fireRadio(id) {
-    var r = document.getElementById(id);
-    if (r) { r.checked = true; r.dispatchEvent(new Event('change', { bubbles: true })); }
-  }
-  fireRadio('r-det-why');
-
-  // 3. Accordion click → check radio
-  var btns = accRoot.querySelectorAll('[data-radio-id]');
-  btns.forEach(function(btn) {
-    btn.addEventListener('click', function() {
-      fireRadio(btn.getAttribute('data-radio-id'));
-    });
-  });
-
-  // 4. MM / Inches toggle
-  var toggle = document.getElementById('pdp-det-size-toggle-{{ section.id }}');
-  if (toggle) {
-    toggle.querySelectorAll('button').forEach(function(btn) {
-      btn.addEventListener('click', function() {
-        var unit = btn.getAttribute('data-unit');
-        toggle.querySelectorAll('button').forEach(function(b) { b.classList.remove('is-active'); });
-        btn.classList.add('is-active');
-        document.querySelectorAll('.pdp-det__sz').forEach(function(el) {
-          el.textContent = unit === 'mm' ? el.getAttribute('data-mm') : el.getAttribute('data-in');
-        });
-      });
-    });
-  }
-})();
-</script>
-
-{% schema %}
-{
-  "name": "PDP Details",
-  "tag": "section",
-  "class": "shopify-section",
-  "settings": [
-    {
-      "type": "header",
-      "content": "Accordion labels"
-    },
-    { "type": "text", "id": "acc_why_label",   "label": "Why It Matters label",       "default": "Why It Matters" },
-    { "type": "text", "id": "acc_how_label",   "label": "How It Works label",          "default": "How It Works" },
-    { "type": "text", "id": "acc_fit_label",   "label": "Fit and Care label",          "default": "Fit and Care" },
-    { "type": "text", "id": "acc_specs_label", "label": "Specifications label",        "default": "Specifications" },
-    { "type": "text", "id": "acc_ship_label",  "label": "Shipping and Returns label",  "default": "Shipping and Returns" },
-    { "type": "text", "id": "acc_who_label",   "label": "Who Makes This label",        "default": "Who Makes This" },
-    {
-      "type": "header",
-      "content": "Who Makes This — images"
-    },
-    { "type": "image_picker", "id": "maker_image",       "label": "Maker factory image" },
-    { "type": "image_picker", "id": "partner_logo_1",    "label": "Partner logo 1 (Uppsala)" },
-    { "type": "text",         "id": "partner_logo_1_alt","label": "Partner 1 alt text", "default": "Uppsala University" },
-    { "type": "image_picker", "id": "partner_logo_2",    "label": "Partner logo 2 (Borås)" },
-    { "type": "text",         "id": "partner_logo_2_alt","label": "Partner 2 alt text", "default": "Swedish School of Textiles, Borås" },
-    { "type": "image_picker", "id": "partner_logo_3",    "label": "Partner logo 3" },
-    { "type": "text",         "id": "partner_logo_3_alt","label": "Partner 3 alt text", "default": "Wargön Innovation" }
-  ],
-  "presets": [
-    { "name": "PDP Details" }
-  ]
+/* ── Hidden radio inputs (injected by JS for CSS switching) ── */
+.pdp-det-r {
+  position: fixed; top: -9999px; left: -9999px;
+  width: 0; height: 0; opacity: 0; pointer-events: none;
 }
-{% endschema %}
+
+/* ── Section wrapper ── */
+.drye-pdp-details {
+  border-top: 1px solid var(--border);
+  padding-block: 56px;
+  background: var(--bg-soft);
+}
+
+/* ── Two-column layout ── */
+.pdp-det__layout {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0;
+}
+
+/* Mobile: right panel shown below accordions */
+@media (max-width: 767px) {
+  .pdp-det__right { display: block; margin-top: 32px; }
+  .pdp-det__maker-img { display: block; }
+}
+
+@media (min-width: 768px) {
+  .drye-pdp-details { padding-block: var(--section-pad-y); }
+  .pdp-det__layout { grid-template-columns: 1fr 480px; gap: 48px; align-items: stretch; }
+  .pdp-det__right { display: block; position: sticky; top: 32px; height: 100%; }
+  .pdp-det__right-inner { height: 100%; min-height: 480px; }
+}
+
+/* ── CSS radio switching ── */
+#r-det-why:checked   ~ .pdp-det__layout .pdp-det__acc[data-acc="why"]   .pdp-det__btn,
+#r-det-how:checked   ~ .pdp-det__layout .pdp-det__acc[data-acc="how"]   .pdp-det__btn,
+#r-det-fit:checked   ~ .pdp-det__layout .pdp-det__acc[data-acc="fit"]   .pdp-det__btn,
+#r-det-specs:checked ~ .pdp-det__layout .pdp-det__acc[data-acc="specs"] .pdp-det__btn,
+#r-det-ship:checked  ~ .pdp-det__layout .pdp-det__acc[data-acc="ship"]  .pdp-det__btn,
+#r-det-who:checked   ~ .pdp-det__layout .pdp-det__acc[data-acc="who"]   .pdp-det__btn { color: var(--emerald); }
+
+#r-det-why:checked   ~ .pdp-det__layout .pdp-det__acc[data-acc="why"]   .pdp-det__chev,
+#r-det-how:checked   ~ .pdp-det__layout .pdp-det__acc[data-acc="how"]   .pdp-det__chev,
+#r-det-fit:checked   ~ .pdp-det__layout .pdp-det__acc[data-acc="fit"]   .pdp-det__chev,
+#r-det-specs:checked ~ .pdp-det__layout .pdp-det__acc[data-acc="specs"] .pdp-det__chev,
+#r-det-ship:checked  ~ .pdp-det__layout .pdp-det__acc[data-acc="ship"]  .pdp-det__chev,
+#r-det-who:checked   ~ .pdp-det__layout .pdp-det__acc[data-acc="who"]   .pdp-det__chev { transform: rotate(180deg); }
+
+#r-det-why:checked   ~ .pdp-det__layout .pdp-det__acc[data-acc="why"]   .pdp-det__panel,
+#r-det-how:checked   ~ .pdp-det__layout .pdp-det__acc[data-acc="how"]   .pdp-det__panel,
+#r-det-fit:checked   ~ .pdp-det__layout .pdp-det__acc[data-acc="fit"]   .pdp-det__panel,
+#r-det-specs:checked ~ .pdp-det__layout .pdp-det__acc[data-acc="specs"] .pdp-det__panel,
+#r-det-ship:checked  ~ .pdp-det__layout .pdp-det__acc[data-acc="ship"]  .pdp-det__panel,
+#r-det-who:checked   ~ .pdp-det__layout .pdp-det__acc[data-acc="who"]   .pdp-det__panel { grid-template-rows: 1fr; }
+
+#r-det-why:checked   ~ .pdp-det__layout #vis-det-why,
+#r-det-how:checked   ~ .pdp-det__layout #vis-det-how,
+#r-det-fit:checked   ~ .pdp-det__layout #vis-det-fit,
+#r-det-specs:checked ~ .pdp-det__layout #vis-det-specs,
+#r-det-ship:checked  ~ .pdp-det__layout #vis-det-ship,
+#r-det-who:checked   ~ .pdp-det__layout #vis-det-who { display: flex; flex: 1; min-height: 100%; }
+
+#r-det-why:checked   ~ .pdp-det__layout .pdp-det__cap span[data-for="why"],
+#r-det-how:checked   ~ .pdp-det__layout .pdp-det__cap span[data-for="how"],
+#r-det-fit:checked   ~ .pdp-det__layout .pdp-det__cap span[data-for="fit"],
+#r-det-specs:checked ~ .pdp-det__layout .pdp-det__cap span[data-for="specs"],
+#r-det-ship:checked  ~ .pdp-det__layout .pdp-det__cap span[data-for="ship"],
+#r-det-who:checked   ~ .pdp-det__layout .pdp-det__cap span[data-for="who"] { display: inline; }
+
+/* ── Accordion ── */
+.pdp-det__acc { border-bottom: 1px solid var(--border); }
+.pdp-det__acc:first-child { border-top: 1px solid var(--border); }
+
+.pdp-det__btn {
+  width: 100%; display: flex; align-items: center; justify-content: space-between;
+  gap: 12px; padding: 16px 0; border: 0; background: none; text-align: left;
+  font-family: var(--font-body); font-size: 15px; font-weight: var(--fw-semibold);
+  letter-spacing: 0.04em; text-transform: uppercase; color: var(--deep); cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.pdp-det__chev {
+  flex: 0 0 auto; width: 10px; height: 6px;
+  color: var(--caption); transition: transform 0.28s ease;
+}
+
+.pdp-det__panel {
+  display: grid; grid-template-rows: 0fr;
+  transition: grid-template-rows 0.3s ease;
+}
+
+.pdp-det__inner { overflow: hidden; }
+.pdp-det__body { padding: 0 0 18px; }
+
+/* Bullets */
+.pdp-det__list {
+  margin: 0; padding: 0 0 0 16px; list-style: disc outside;
+}
+.pdp-det__list li {
+  font-family: var(--font-body); font-size: var(--fs-body-sm);
+  line-height: 1.55; color: var(--muted);
+  padding: 6px 0; border-bottom: 1px solid var(--border);
+}
+.pdp-det__list li:last-child { border-bottom: none; }
+.pdp-det__list li::marker { color: var(--caption); }
+.pdp-det__list li strong { color: var(--deep); font-weight: var(--fw-semibold); }
+.pdp-det__list a { color: var(--emerald); text-decoration: none; font-weight: var(--fw-medium); }
+
+.pdp-det__source {
+  margin-top: 8px; font-family: var(--font-body); font-size: var(--fs-micro-2);
+  font-weight: var(--fw-semibold); letter-spacing: var(--ls-micro);
+  text-transform: uppercase; color: var(--caption);
+}
+
+/* Spec table */
+.pdp-det__ds { width: 100%; border-collapse: collapse; font-size: var(--fs-body-sm); margin-top: 10px; }
+.pdp-det__ds td { padding: 7px 0; border-bottom: 1px solid var(--border); line-height: 1.4; }
+.pdp-det__ds tr:last-child td { border-bottom: none; }
+.pdp-det__ds .k { color: var(--muted); white-space: nowrap; padding-right: 12px; }
+.pdp-det__ds .v { color: var(--deep); text-align: right; }
+
+/* Partners */
+.pdp-det__partners { margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--border); }
+.pdp-det__partners-label {
+  display: block; margin-bottom: 10px; font-family: var(--font-body);
+  font-size: var(--fs-micro-2); font-weight: var(--fw-semibold);
+  letter-spacing: var(--ls-micro); text-transform: uppercase; color: var(--caption);
+}
+.pdp-det__partners-logos { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 18px; }
+.pdp-det__partners-logos img {
+  height: 20px; width: auto; max-width: 80px;
+  object-fit: contain; opacity: 0.5; filter: grayscale(1);
+}
+.pdp-det__partners-logos .boras img { height: 46px; max-width: 130px; }
+.pdp-det__partners-logos .uppsala img { height: 24px; }
+
+/* ── Right contextual panel ── */
+.pdp-det__right-inner {
+  border: 1px solid var(--border);
+  background: var(--bg);
+  display: flex;
+  flex-direction: column;
+}
+
+.pdp-det__vis {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+}
+.pdp-det__vis img,
+.pdp-det__vis video { width: 100%; height: 100%; object-fit: cover; display: block; }
+.pdp-det__vis--who { min-height: 420px; }
+.pdp-det__vis--pad { padding: 32px 28px; }
+
+/* Caption */
+.pdp-det__cap {
+  font-family: var(--font-body); font-size: var(--fs-micro-2);
+  color: var(--caption); letter-spacing: var(--ls-micro); text-transform: uppercase; margin-top: 8px;
+}
+.pdp-det__cap span { display: none; }
+
+/* Why It Matters — stat */
+.pdp-det__stat {
+  font-family: var(--font-display); font-size: 64px; font-weight: var(--fw-semibold);
+  letter-spacing: -0.03em; line-height: 0.95; color: var(--deep);
+  display: flex; align-items: baseline; gap: 4px; margin-bottom: 4px;
+}
+.pdp-det__stat-suf { font-size: 16px; font-weight: var(--fw-medium); color: var(--accent); }
+.pdp-det__stat-sub {
+  font-family: var(--font-body); font-size: var(--fs-micro-3); font-weight: var(--fw-semibold);
+  letter-spacing: var(--ls-micro); text-transform: uppercase; color: var(--caption); margin-bottom: 20px;
+}
+.pdp-det__vis-micro {
+  font-family: var(--font-body); font-size: var(--fs-micro-2); font-weight: var(--fw-semibold);
+  letter-spacing: var(--ls-micro); text-transform: uppercase; color: var(--sage); margin-bottom: 8px;
+}
+
+/* Bar rows */
+.pdp-det__row { display: flex; align-items: center; gap: 10px; padding: 8px 0; border-top: 1px solid var(--border); flex-wrap: wrap; }
+.pdp-det__row-lbl { width: 100%; font-size: 12px; color: var(--muted); }
+.pdp-det__row-track { flex: 1; height: 3px; background: var(--border); }
+.pdp-det__row-fill { height: 100%; background: var(--deep); }
+.pdp-det__row-fill--em { background: var(--emerald); }
+.pdp-det__row-val { font-family: var(--font-display); font-size: 13px; font-weight: var(--fw-semibold); color: var(--deep); }
+.pdp-det__source-sm { font-size: var(--fs-micro-2); color: var(--caption); margin-top: 10px; letter-spacing: 0.06em; }
+
+/* Specs */
+.pdp-det__layer { display: flex; justify-content: space-between; align-items: center; padding: 12px 0; border-top: 1px solid var(--border); }
+.pdp-det__layer:last-of-type { border-bottom: 1px solid var(--border); }
+.pdp-det__layer-name { font-size: 13px; font-weight: var(--fw-semibold); color: var(--deep); }
+.pdp-det__layer-sub { font-size: 11px; color: var(--muted); margin-top: 2px; }
+.pdp-det__layer-pct { font-family: var(--font-display); font-size: 22px; font-weight: var(--fw-semibold); letter-spacing: -0.03em; color: var(--deep); }
+.pdp-det__layer-pct--em { color: var(--emerald); }
+.pdp-det__tiles { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1px; background: var(--border); border: 1px solid var(--border); margin-top: 20px; }
+.pdp-det__tile { background: var(--bg); padding: 12px 8px; text-align: center; }
+.pdp-det__tile-num { font-family: var(--font-display); font-size: 20px; font-weight: var(--fw-semibold); letter-spacing: -0.03em; color: var(--deep); }
+.pdp-det__tile-num--em { color: var(--emerald); }
+.pdp-det__tile-unit { font-size: 11px; }
+.pdp-det__tile-lbl { font-size: var(--fs-micro-2); font-weight: var(--fw-semibold); letter-spacing: var(--ls-micro); text-transform: uppercase; color: var(--caption); margin-top: 4px; }
+
+/* Size guide */
+.pdp-det__sizetoggle { display: flex; margin-bottom: 16px; }
+.pdp-det__sizetoggle button {
+  font-family: var(--font-body); font-size: var(--fs-micro-2); font-weight: var(--fw-semibold);
+  letter-spacing: var(--ls-micro); text-transform: uppercase; padding: 5px 10px;
+  border: 1px solid var(--border); background: none; color: var(--caption); cursor: pointer;
+}
+.pdp-det__sizetoggle button:first-child { border-right: none; }
+.pdp-det__sizetoggle button.is-active { background: var(--deep); color: #fff; border-color: var(--deep); }
+.pdp-det__sizegrid { display: grid; grid-template-columns: 36px 48px 1fr; width: 100%; }
+.pdp-det__sizegrid-th {
+  font-size: var(--fs-micro-2); font-weight: var(--fw-semibold);
+  letter-spacing: var(--ls-micro); text-transform: uppercase; color: var(--caption); padding: 0 0 8px;
+}
+.pdp-det__sizegrid-th:last-child { text-align: right; }
+.pdp-det__sizegrid-row { display: contents; }
+.pdp-det__sizegrid-row > span { font-size: 13px; color: var(--deep); padding: 8px 0; border-top: 1px solid var(--border); }
+.pdp-det__sizegrid-row > span:last-child { text-align: right; }
+.pdp-det__sizegrid-row:last-child > span { border-bottom: 1px solid var(--border); }
+
+/* Shipping/guarantee — dark */
+.pdp-det__vis--dark { background: var(--bg-ink); }
+.pdp-det__guar-micro {
+  font-family: var(--font-body); font-size: var(--fs-micro-2); font-weight: var(--fw-semibold);
+  letter-spacing: var(--ls-micro); text-transform: uppercase; color: rgba(95,138,139,0.9); margin-bottom: 8px;
+}
+.pdp-det__guar-num {
+  font-family: var(--font-display); font-size: 72px; font-weight: var(--fw-semibold);
+  letter-spacing: -0.03em; line-height: 0.9; color: #fff;
+  display: flex; align-items: baseline; gap: 6px; margin-bottom: 4px;
+}
+.pdp-det__guar-num span { font-family: var(--font-body); font-size: 15px; font-weight: var(--fw-medium); color: rgba(95,138,139,0.9); }
+.pdp-det__guar-body {
+  font-size: var(--fs-body-sm); line-height: 1.6; color: rgba(255,255,255,0.6);
+  border-top: 1px solid rgba(255,255,255,0.1); padding-top: 14px; margin-top: 14px;
+}
+.pdp-det__ship-row {
+  display: flex; align-items: center; gap: 10px;
+  padding: 7px 0; border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+.pdp-det__ship-row:last-child { border-bottom: none; }
+.pdp-det__ship-dest { font-size: 12px; font-weight: var(--fw-semibold); color: rgba(255,255,255,0.8); width: 120px; flex-shrink: 0; }
+.pdp-det__ship-note { font-size: 12px; color: rgba(255,255,255,0.45); }
+
+/* How it works — mechanism diagram */
+.pdp-det__mech-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.pdp-det__mech-card { border: 1px solid rgba(255,255,255,0.12); overflow: hidden; }
+.pdp-det__mech-card--drye { border-color: rgba(13,148,136,0.5); }
+.pdp-det__mech-media { background: #FAFAFA; padding: 16px; }
+.pdp-det__mech-media svg { width: 100%; height: auto; display: block; }
+.pdp-det__mech-body { padding: 12px; background: rgba(255,255,255,0.03); }
+.pdp-det__mech-name {
+  font-family: var(--font-display); font-size: 10px; font-weight: var(--fw-semibold);
+  letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.45); margin-bottom: 5px;
+}
+.pdp-det__mech-card--drye .pdp-det__mech-name { color: var(--emerald); }
+.pdp-det__mech-desc { margin: 0; font-size: 12px; line-height: 1.4; color: rgba(255,255,255,0.7); }
+.pdp-det__mech-card--drye .pdp-det__mech-desc { color: rgba(255,255,255,0.85); font-weight: var(--fw-medium); }
+.pdp-det__mech-foot {
+  margin: 16px 0 0; font-size: 10px; color: rgba(255,255,255,0.3);
+  text-align: center; letter-spacing: 0.08em; text-transform: uppercase;
+}
+
+/* Who Makes This — maker image */
+.pdp-det__vis--who { background: #e8e4dd; }
+
+/* Mobile: image below acc */
+@media (max-width: 767px) {
+  .pdp-det__maker-img {
+    width: 100%; height: 200px; overflow: hidden; background: var(--bg-soft);
+  }
+  .pdp-det__maker-img img {
+    width: 100%; height: 100%; object-fit: cover; object-position: center 20%; display: block;
+  }
+}
+@media (min-width: 768px) {
+  .pdp-det__maker-img { display: none; }
+}
