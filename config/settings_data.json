@@ -83,7 +83,9 @@
               "length_min_mm": 163,
               "length_max_mm": 169,
               "circ_min_mm": 183,
-              "circ_max_mm": 189
+              "circ_max_mm": 189,
+              "nitrile_val": "",
+              "hv_val": ""
             }
           },
           "size_row_6": {
@@ -94,7 +96,9 @@
               "length_min_mm": 169,
               "length_max_mm": 176,
               "circ_min_mm": 189,
-              "circ_max_mm": 196
+              "circ_max_mm": 196,
+              "nitrile_val": "",
+              "hv_val": ""
             }
           },
           "size_row_7": {
@@ -105,7 +109,9 @@
               "length_min_mm": 176,
               "length_max_mm": 185,
               "circ_min_mm": 196,
-              "circ_max_mm": 205
+              "circ_max_mm": 205,
+              "nitrile_val": "",
+              "hv_val": ""
             }
           },
           "size_row_8": {
@@ -116,7 +122,9 @@
               "length_min_mm": 185,
               "length_max_mm": 194,
               "circ_min_mm": 205,
-              "circ_max_mm": 214
+              "circ_max_mm": 214,
+              "nitrile_val": "",
+              "hv_val": ""
             }
           },
           "size_row_9": {
@@ -127,7 +135,9 @@
               "length_min_mm": 194,
               "length_max_mm": 203,
               "circ_min_mm": 214,
-              "circ_max_mm": 223
+              "circ_max_mm": 223,
+              "nitrile_val": "",
+              "hv_val": ""
             }
           },
           "size_row_10": {
@@ -138,7 +148,9 @@
               "length_min_mm": 203,
               "length_max_mm": 212,
               "circ_min_mm": 223,
-              "circ_max_mm": 232
+              "circ_max_mm": 232,
+              "nitrile_val": "",
+              "hv_val": ""
             }
           },
           "size_row_11": {
@@ -149,7 +161,9 @@
               "length_min_mm": 212,
               "length_max_mm": 219,
               "circ_min_mm": 232,
-              "circ_max_mm": 241
+              "circ_max_mm": 241,
+              "nitrile_val": "",
+              "hv_val": ""
             }
           },
           "size_row_12": {
@@ -160,7 +174,9 @@
               "length_min_mm": 219,
               "length_max_mm": 226,
               "circ_min_mm": 241,
-              "circ_max_mm": 250
+              "circ_max_mm": 250,
+              "nitrile_val": "",
+              "hv_val": ""
             }
           }
         },
@@ -186,10 +202,19 @@
           "length_desc": "Wrist crease to tip of middle finger",
           "circ_label": "Circumference",
           "circ_desc": "Around the hand, just below the knuckles",
+          "size_word": "Size",
+          "shortcut_nitrile": "Most people order the same number as their nitrile.",
+          "shortcut_hv": "HV gloves run loose. Order one size up from your HV size.",
+          "guarantee_text": "<p>Wrong size? If you measured against our guide and it still doesn’t fit, we ship the correct size at no cost.</p>",
+          "glove_q": "Which gloves do you wear?",
+          "glove_nitrile_label": "Nitrile",
+          "glove_hv_label": "HV / Class 0",
+          "glove_head_nitrile": "Your nitrile",
+          "glove_head_hv": "Your HV glove",
+          "glove_provisional": false,
           "unit_mm_label": "mm",
           "unit_in_label": "inches",
           "table_heading_size": "Size",
-          "table_heading_length": "Length",
           "table_heading_circ": "Circumference",
           "tip_html": "<p><strong>Between sizes?</strong> The liner is thin and stretchable. Hand circumference is typically the best guide for a comfortable fit — size up if unsure.</p>",
           "footer_label": "Still unsure? We'll help —",
