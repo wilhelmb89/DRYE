@@ -662,8 +662,8 @@ body {
 
 .drye-nt { font-family: var(--font-body); color: var(--body); background: var(--bg); }
 .drye-nt img { display: block; max-width: 100%; }
-.drye-nt a { color: var(--emerald); text-decoration: none; }
-.drye-nt a:hover { color: var(--deep); }
+.drye-nt a:not(.dryeNEW-btn) { color: var(--emerald); }
+.drye-nt a:not(.dryeNEW-btn):hover { color: var(--deep); }
 
 .lp-wrap {
   width: 100%;
