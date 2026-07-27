@@ -1,42 +1,40 @@
 {{ 'section-drye-about-cta.css' | asset_url | stylesheet_tag }}
 
-<section class="drye-about-cta" id="drye-about-cta-{{ section.id }}" data-drye-section data-section-index="13" data-section-name="mid_cta">
-    {% if section.settings.eyebrow != blank %}
+<section class="drye-about-cta" id="drye-about-cta-{{ section.id }}" data-section-id="{{ section.id }}" data-drye-section data-section-name="mid_cta">
+  <div class="drye-about-cta__inner">
+    {%- if section.settings.eyebrow != blank -%}
       <span class="drye-about-cta__eyebrow">{{ section.settings.eyebrow }}</span>
-    {% endif %}
+    {%- endif -%}
 
-    {% if section.settings.heading_line_1 != blank or section.settings.heading_line_2 != blank %}
+    {%- if section.settings.heading_line_1 != blank or section.settings.heading_line_2 != blank -%}
       <h2 class="drye-about-cta__heading">
-        {{ section.settings.heading_line_1 }}
-        {% if section.settings.heading_line_2 != blank %}
-          <em>{{ section.settings.heading_line_2 }}</em>
-        {% endif %}
+        {%- if section.settings.heading_line_1 != blank -%}{{ section.settings.heading_line_1 }} {% endif -%}
+        {%- if section.settings.heading_line_2 != blank -%}
+          <span class="dryeNEW-editorial">{{ section.settings.heading_line_2 }}</span>
+        {%- endif -%}
       </h2>
-    {% endif %}
+    {%- endif -%}
 
-    {% if section.settings.subtext != blank %}
+    {%- if section.settings.subtext != blank -%}
       <p class="drye-about-cta__sub">{{ section.settings.subtext }}</p>
-    {% endif %}
+    {%- endif -%}
 
-    <div class="drye-about-cta__actions">
-      {% if section.settings.primary_label != blank %}
-        <a
-          href="{{ section.settings.primary_url | default: '#' }}"
-          class="drye-about-cta__btn drye-about-cta__btn--primary"
-        >
-          {{ section.settings.primary_label }}
-        </a>
-      {% endif %}
-
-      {% if section.settings.secondary_label != blank %}
-        <a
-          href="{{ section.settings.secondary_url | default: '#' }}"
-          class="drye-about-cta__btn drye-about-cta__btn--secondary"
-        >
-          {{ section.settings.secondary_label }}
-        </a>
-      {% endif %}
-    </div>
+    {%- if section.settings.primary_label != blank or section.settings.secondary_label != blank -%}
+      <div class="drye-about-cta__actions">
+        <div class="dryeNEW-btn-row">
+          {%- if section.settings.primary_label != blank -%}
+            <a href="{{ section.settings.primary_url | default: '#' }}" class="dryeNEW-btn dryeNEW-btn--primary dryeNEW-btn--block">
+              {{ section.settings.primary_label }} <span aria-hidden="true">&rarr;</span>
+            </a>
+          {%- endif -%}
+          {%- if section.settings.secondary_label != blank -%}
+            <a href="{{ section.settings.secondary_url | default: '#' }}" class="dryeNEW-btn dryeNEW-btn--ghost dryeNEW-btn--block">
+              {{ section.settings.secondary_label }}
+            </a>
+          {%- endif -%}
+        </div>
+      </div>
+    {%- endif -%}
   </div>
 </section>
 
