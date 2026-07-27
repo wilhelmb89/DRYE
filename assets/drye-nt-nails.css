@@ -1,8 +1,71 @@
-/* drye-nt-nails.css */
+/* drye-nt-nails.css — type scale from drye-nt-base.css */
 .drye-nt-nails { border-top: 1px solid var(--border); }
-.nail-grid { display: grid; grid-template-columns: 1fr; gap: 32px; margin-top: 36px; }
-.nail-ico { margin-bottom: 22px; }
-.nail-ico svg { display: block; }
+
+.nail-sub {
+  margin: 10px 0 0;
+  font-size: 17px;
+  line-height: 1.55;
+  color: var(--body);
+  text-wrap: pretty;
+}
+
+/* Mobile: two hairline rows, icon left — compact */
+.nail-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  margin-top: 24px;
+  border-top: 1px solid var(--border);
+}
+
+.nail-item {
+  display: grid;
+  grid-template-columns: 44px 1fr;
+  column-gap: 16px;
+  align-items: start;
+  padding: 18px 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.nail-ico { margin: 0; }
+.nail-ico svg { display: block; width: 44px; height: 44px; }
+.nail-ico svg g { stroke-width: 2; }
+
+.nail-copy { display: flex; flex-direction: column; min-width: 0; }
+.nail-copy .lp-head-eyebrow { margin-bottom: 6px; font-size: 11px; letter-spacing: 0.16em; }
+.nail-copy .lp-head-title { margin: 0; }
+
+.nail-sum {
+  margin: 6px 0 0;
+  font-size: 17px;
+  line-height: 1.5;
+  color: var(--body);
+  text-wrap: pretty;
+}
+
+.nail-grid .cmp-list { display: none; }
+
+/* Desktop: original two-column layout with bullet lists */
 @media (min-width: 760px) {
-  .nail-grid { grid-template-columns: 1fr 1fr; gap: 56px; margin-top: 48px; }
+  .nail-sub { font-size: 20px; margin-top: 14px; }
+
+  .nail-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 56px;
+    margin-top: 48px;
+    border-top: 0;
+  }
+
+  .nail-item {
+    display: block;
+    padding: 0;
+    border-bottom: 0;
+  }
+
+  .nail-ico { margin-bottom: 22px; }
+  .nail-ico svg { width: 52px; height: 52px; }
+  .nail-ico svg g { stroke-width: 1.6; }
+
+  .nail-copy { display: block; }
+  .nail-sum { display: none; }
+  .nail-grid .cmp-list { display: block; }
 }
