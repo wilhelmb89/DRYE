@@ -1,6 +1,13 @@
 {{ 'drye-liner-risk-reversal.css' | asset_url | stylesheet_tag }}
 
-<section class="dryeNEW-section drye-liner-risk-reversal" id="{{ section.settings.section_id | default: 'liner-risk' }}" data-section-id="{{ section.id }}" data-drye-section data-section-name="risk_reversal" data-section-type="drye-liner-risk-reversal">
+<section
+  class="drye-liner-risk-reversal"
+  id="{{ section.settings.section_id | default: 'liner-risk' }}-{{ section.id }}"
+  data-section-id="{{ section.id }}"
+  data-drye-section
+  data-section-name="risk_reversal"
+  data-section-type="drye-liner-risk-reversal"
+>
   <div class="dryeNEW-container drye-liner-risk-reversal__inner">
     <div class="drye-liner-risk-reversal__wrap">
       {%- if section.settings.days_number != blank -%}
@@ -24,7 +31,7 @@
 
     {%- if section.settings.cta_label != blank -%}
       <div class="drye-liner-risk-reversal__cta-wrap">
-        <a class="dryeNEW-button drye-liner-risk-reversal__cta" href="{{ section.settings.cta_url | default: '#' }}">
+        <a class="dryeNEW-btn dryeNEW-btn--primary" href="{{ section.settings.cta_url | default: '#' }}">
           {{ section.settings.cta_label }}
         </a>
       </div>
