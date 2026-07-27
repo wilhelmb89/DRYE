@@ -101,29 +101,6 @@
         "bg_color": "#ffffff"
       }
     },
-    "drye_nt_barrier_choice_YhHyMK": {
-      "type": "drye-nt-barrier-choice",
-      "settings": {
-        "chapter": "04",
-        "heading": "Why your skin and nails get worse inside gloves over time.",
-        "pick_label": "Choose your starting point",
-        "btn_healthy": "My skin feels fine",
-        "btn_damaged": "My skin is already irritated",
-        "exposure": "Under glove 6 hours/day",
-        "risk_label": "Maceration risk rises",
-        "chart_alt": "Stylised overhydration in the skin across two weeks of daily glove occlusion",
-        "day_1": "Day 1",
-        "day_2": "Day 3",
-        "day_3": "Day 7",
-        "day_4": "Day 14",
-        "aud_healthy": "Healthy skin",
-        "healthy_d3": "No significant barrier change",
-        "healthy_d14": "Significant barrier impairment",
-        "aud_damaged": "Already irritated skin",
-        "damaged_d3": "Significant barrier impairment",
-        "source": "Sources: Ramsing & Agner, Contact Dermatitis, 1996 — short- and long-term experimental glove occlusion."
-      }
-    },
     "drye_new_identification_frontpage_BBTghm": {
       "type": "dryeNEW-identification-frontpage",
       "blocks": {
@@ -214,6 +191,29 @@
         "heading": "You've tried everything.",
         "heading_echo": "Nothing worked.",
         "body": ""
+      }
+    },
+    "drye_nt_barrier_choice_YhHyMK": {
+      "type": "drye-nt-barrier-choice",
+      "settings": {
+        "chapter": "04",
+        "heading": "Why your skin and nails get worse inside gloves over time.",
+        "pick_label": "Choose your starting point",
+        "btn_healthy": "My skin feels fine",
+        "btn_damaged": "My skin is already irritated",
+        "exposure": "Under glove 6 hours/day",
+        "risk_label": "Maceration risk rises",
+        "chart_alt": "Stylised overhydration in the skin across two weeks of daily glove occlusion",
+        "day_1": "Day 1",
+        "day_2": "Day 3",
+        "day_3": "Day 7",
+        "day_4": "Day 14",
+        "aud_healthy": "Healthy skin",
+        "healthy_d3": "No significant barrier change",
+        "healthy_d14": "Significant barrier impairment",
+        "aud_damaged": "Already irritated skin",
+        "damaged_d3": "Significant barrier impairment",
+        "source": "Sources: Ramsing & Agner, Contact Dermatitis, 1996 — short- and long-term experimental glove occlusion."
       }
     },
     "drye_research_video_full_6CBbAA": {
@@ -336,8 +336,8 @@
       "name": "DRYE Blog CTA Strip",
       "settings": {
         "eyebrow": "",
-        "heading": "Sealed gloves trap sweat.<br>",
-        "heading_emphasis": "DRYE routes it outward.",
+        "heading": "Sealed gloves trap sweat. DRYE routes it outward.",
+        "heading_emphasis": "",
         "subtext": "Same outer glove. Different skin environment.",
         "primary_label": "Work dry, all shift →",
         "primary_url": "shopify://products/drye-moisture-routing-glove-liners",
