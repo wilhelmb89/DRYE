@@ -3,8 +3,8 @@
 
 .nail-sub {
   margin: 10px 0 0;
-  font-size: 17px;
-  line-height: 1.55;
+  font-size: var(--fs-body);      /* var: 17px → 16px */
+  line-height: var(--lh-body);    /* var: 1.55 → 1.5 */
   color: var(--body);
   text-wrap: pretty;
 }
@@ -36,9 +36,9 @@
 
 .nail-sum {
   margin: 6px 0 0;
-  font-size: 17px;
-  line-height: 1.5;
-  color: var(--body);
+  font-size: var(--fs-body-sm);   /* var: 17px → 14px */
+  line-height: var(--lh-body);
+  color: var(--muted);            /* var: var(--body) */
   text-wrap: pretty;
 }
 
