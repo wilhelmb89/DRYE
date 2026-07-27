@@ -371,6 +371,58 @@
         "drye_steps": "Skin side repels — sweat cannot sit there\nOuter side pulls moisture toward it\nContinuous transport, no saturation point"
       }
     },
+    "drye_proof_wall_DPHfDt": {
+      "type": "drye-proof-wall",
+      "blocks": {
+        "media_KrVQr3": {
+          "type": "media",
+          "settings": {
+            "media_type": "image",
+            "label": "Field user",
+            "sublabel": "Add photo or video"
+          }
+        },
+        "media_EQMbDH": {
+          "type": "media",
+          "settings": {
+            "media_type": "image",
+            "label": "Field user",
+            "sublabel": "Add photo or video"
+          }
+        },
+        "media_7t7JiP": {
+          "type": "media",
+          "settings": {
+            "media_type": "image",
+            "label": "Field user",
+            "sublabel": "Add photo or video"
+          }
+        },
+        "media_zzBRm7": {
+          "type": "media",
+          "settings": {
+            "media_type": "image",
+            "label": "Field user",
+            "sublabel": "Add photo or video"
+          }
+        }
+      },
+      "block_order": [
+        "media_KrVQr3",
+        "media_EQMbDH",
+        "media_7t7JiP",
+        "media_zzBRm7"
+      ],
+      "name": "DRYE Proof Wall",
+      "settings": {
+        "eyebrow": "Workers who kept them",
+        "heading": "Real reviews from people who wear gloves all day.",
+        "subheading": "",
+        "show_media_row": true,
+        "all_reviews_url": "",
+        "all_reviews_label": "Read all reviews →"
+      }
+    },
     "drye_functional_benefits_KptgNd": {
       "type": "drye-functional-benefits",
       "name": "DRYE Functional Benefits",
@@ -455,6 +507,7 @@
         "result_card_CURWdU",
         "cta_card_TiWmBM"
       ],
+      "disabled": true,
       "name": "DRYE Documented Results",
       "settings": {
         "eyebrow": "Documented results",
@@ -539,6 +592,7 @@
     "drye_mechanics_time_promise_863fPX",
     "nt_cotton_q",
     "nt_mechanism",
+    "drye_proof_wall_DPHfDt",
     "drye_functional_benefits_KptgNd",
     "drye_documented_results_6nDfVB",
     "nt_reviews",
