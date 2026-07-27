@@ -70,10 +70,10 @@
   --fw-medium: 500;
   --fw-semibold: 600;
 
-  /* Global type scale */
-  --fs-hero-h1: clamp(34px, 9vw, 52px);
-  --fs-section-h2: clamp(22px, 6vw, 32px);
-  --fs-sub-h3: 17px;
+  /* Global type scale — mobile */
+  --fs-hero-h1: 35px;
+  --fs-section-h2: 31px;
+  --fs-sub-h3: 21px;
   --fs-h4: 14px;
 
   --fs-body: 16px;
@@ -84,21 +84,23 @@
   --fs-micro-1: 8px;
   --fs-micro-2: 9px;
   --fs-micro-3: 10px;
+  --fs-micro-4: 11px;
 
   --fs-stat-sm: 22px;
   --fs-stat-lg: 28px;
 
   --ls-tight-display: -0.03em;
-  --ls-tight-h2: -0.03em;
-  --ls-tight-h3: -0.02em;
+  --ls-tight-h2: -0.025em;
+  --ls-tight-h3: -0.015em;
   --ls-micro: 0.18em;
+  --ls-micro-wide: 0.16em;
 
   --lh-display: 1;
-  --lh-heading: 1.1;
-  --lh-heading-tight: 1.2;
+  --lh-heading: 1.12;
+  --lh-heading-tight: 1.25;
   --lh-body-tight: 1.55;
   --lh-body-mid: 1.6;
-  --lh-body: 1.75;
+  --lh-body: 1.5;
 
   /* Layout */
   --page-pad: 20px;
@@ -230,9 +232,9 @@
     --card-pad-y: 28px;
     --card-pad-x: 24px;
 
-    --fs-hero-h1: clamp(36px, 5.5vw, 68px);
-    --fs-section-h2: clamp(22px, 3.1vw, 32px);
-    --fs-sub-h3: 18px;
+    --fs-hero-h1: 48px;
+    --fs-section-h2: 40px;
+    --fs-sub-h3: 21px;
     --fs-h4: 17px;
     --fs-body: 16px;
 
@@ -649,4 +651,207 @@ body {
   .dryeNEW-grid--5 {
     grid-template-columns: var(--grid-5-col-desktop);
   }
+}
+
+/* ==========================================================================
+   10. LANDING-PAGE PRIMITIVES  (merged from drye-nt-base.css)
+   Long-form landing pages (nail-tech, mechanics). All sizes read the
+   tokens above — never hardcode a font-size in here.
+   ========================================================================== */
+
+.drye-nt { font-family: var(--font-body); color: var(--body); background: var(--bg); }
+.drye-nt img { display: block; max-width: 100%; }
+.drye-nt a { color: var(--emerald); text-decoration: none; }
+.drye-nt a:hover { color: var(--deep); }
+
+.lp-wrap {
+  width: 100%;
+  max-width: 620px;
+  margin-inline: auto;
+  padding-inline: 22px;
+}
+
+.lp-block {
+  padding-top: 60px;
+  padding-bottom: 60px;
+}
+
+/* --- type --- */
+.chapno {
+  display: block;
+  margin: 0 0 14px;
+  font-family: var(--font-display);
+  font-size: var(--fs-caption);
+  font-weight: var(--fw-semibold);
+  letter-spacing: 0.14em;
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
+}
+
+.lp-lead {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: var(--fs-section-h2);
+  font-weight: var(--fw-semibold);
+  letter-spacing: var(--ls-tight-h2);
+  line-height: var(--lh-heading);
+  color: var(--deep);
+  text-wrap: pretty;
+}
+
+.lp-body {
+  margin: 18px 0 0;
+  font-size: var(--fs-body);
+  line-height: var(--lh-body);
+  color: var(--body);
+  text-wrap: pretty;
+}
+
+.lp-sub {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: var(--fs-sub-h3);
+  font-weight: var(--fw-medium);
+  letter-spacing: var(--ls-tight-h3);
+  line-height: var(--lh-heading-tight);
+  color: var(--deep);
+  text-wrap: pretty;
+}
+
+.lp-tag,
+.lp-head-eyebrow {
+  display: block;
+  margin: 0 0 8px;
+  font-size: var(--fs-micro-4);
+  font-weight: var(--fw-semibold);
+  letter-spacing: var(--ls-micro-wide);
+  text-transform: uppercase;
+}
+
+.lp-head-title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: var(--fs-sub-h3);
+  font-weight: var(--fw-semibold);
+  letter-spacing: var(--ls-tight-h3);
+  line-height: var(--lh-heading-tight);
+  text-wrap: pretty;
+}
+
+/* --- comparison lists --- */
+.cmp-img {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  background: var(--bg-soft);
+  margin-bottom: 20px;
+  overflow: hidden;
+}
+
+.cmp-img img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.cmp-list {
+  list-style: none;
+  margin: 18px 0 0;
+  padding: 18px 0 0;
+  border-top: var(--border-base);
+  display: flex;
+  flex-direction: column;
+  gap: 13px;
+}
+
+.cmp-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 13px;
+  font-size: var(--fs-body);
+  line-height: var(--lh-body);
+}
+
+.lp-mark {
+  flex: 0 0 auto;
+  width: 15px;
+  font-size: var(--fs-body);
+  font-weight: 700;
+  line-height: var(--lh-body);
+}
+
+/* --- "keep reading" cue --- */
+.keep-row { display: flex; justify-content: center; margin-top: 36px; }
+
+.keep {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 7px;
+  padding: 6px 12px 4px;
+  font-size: var(--fs-micro-3);
+  font-weight: var(--fw-semibold);
+  letter-spacing: var(--ls-micro-wide);
+  text-transform: uppercase;
+  color: var(--muted);
+  text-decoration: none;
+}
+
+.keep:hover { color: var(--deep); }
+.keep svg { animation: keep-bob 1.9s ease-in-out infinite; }
+
+@keyframes keep-bob {
+  0%, 100% { transform: translateY(-3px); opacity: 0.55; }
+  50% { transform: translateY(4px); opacity: 1; }
+}
+
+/* --- swipe hint (mobile carousels) --- */
+.swipe-hint { display: flex; align-items: center; gap: 10px; margin-top: 14px; }
+
+.swipe-hint__label {
+  font-size: var(--fs-micro-3);
+  font-weight: var(--fw-semibold);
+  letter-spacing: var(--ls-micro-wide);
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.swipe-hint__track { position: relative; width: 62px; height: 1px; background: var(--border); }
+
+.swipe-hint__dot {
+  position: absolute;
+  top: -3px;
+  left: 0;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--emerald);
+  animation: swipe-travel 2.8s cubic-bezier(0.45, 0, 0.2, 1) infinite;
+}
+
+@keyframes swipe-travel {
+  0% { transform: translateX(0); opacity: 0; }
+  14% { opacity: 1; }
+  62% { transform: translateX(55px); opacity: 1; }
+  82%, 100% { transform: translateX(55px); opacity: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .keep svg,
+  .swipe-hint__dot { animation: none !important; }
+  html { scroll-behavior: auto; }
+}
+
+@media (min-width: 768px) {
+  .lp-wrap {
+    max-width: calc(var(--max-width) + (var(--page-pad) * 2));
+    padding-inline: var(--page-pad);
+  }
+
+  .lp-block { padding-top: 108px; padding-bottom: 108px; }
+  .lp-narrow { max-width: 620px; }
+  .cmp-img { aspect-ratio: 4 / 3; }
+  .swipe-hint { display: none; }
 }
