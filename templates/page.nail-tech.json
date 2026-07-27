@@ -289,40 +289,46 @@
         "source": "Sources: Ramsing & Agner, Contact Dermatitis, 1996 — short- and long-term experimental glove occlusion."
       }
     },
-    "nt_inside": {
-      "type": "drye-nt-inside",
+    "drye_liner_product_clarity_XJWLK4": {
+      "type": "drye-liner-product-clarity",
       "blocks": {
-        "c1": {
-          "type": "column",
+        "spec_iBxXVW": {
+          "type": "spec",
           "settings": {
-            "image": "shopify://shop_images/Gemini_Generated_Image_rmvlijrmvlijrmvl.webp",
-            "image_alt": "Bare hand in a black nitrile glove, mid-shift",
-            "tone": "negative",
-            "eyebrow": "Nitrile alone",
-            "title": "Protection outside. Trapped moisture inside.",
-            "items": "Heat and sweat remain against the skin\nDirect skin-to-glove contact\nWet hands make glove changes harder"
+            "title": "Sweat.",
+            "description": "Stays dry for the full shift."
           }
         },
-        "c2": {
-          "type": "column",
+        "spec_NWeJeR": {
+          "type": "spec",
           "settings": {
-            "image": "shopify://shop_images/5Y9A9331_1.webp",
-            "image_alt": "DRYE liner visible at the cuff under a nitrile glove",
-            "tone": "positive",
-            "eyebrow": "Nitrile + DRYE",
-            "title": "The same outer glove. A better-managed inside.",
-            "items": "The same protective nitrile glove outside\nA textile layer between skin and nitrile\nMoisture routed away from the skin-facing layer\nDrier-feeling hands and easier glove changes"
+            "title": "Oil.",
+            "description": "Stays on the surface. Wipes off."
+          }
+        },
+        "spec_UpLB8h": {
+          "type": "spec",
+          "settings": {
+            "title": "Tearing.",
+            "description": "Your nitriles go on dry, come off dry."
           }
         }
       },
       "block_order": [
-        "c1",
-        "c2"
+        "spec_iBxXVW",
+        "spec_NWeJeR",
+        "spec_UpLB8h"
       ],
+      "name": "DRYE Product Clarity",
       "settings": {
-        "chapter": "05",
-        "heading": "Keep the protection. Change what happens inside it.",
-        "body": "DRYE adds a 0.4 mm textile layer between your skin and the same protective glove."
+        "section_id": "liner-product",
+        "heading": "DRYE goes",
+        "heading_emphasis": "under your existing glove.",
+        "body": "",
+        "before_image": "shopify://shop_images/5Y9A9324.webp",
+        "before_label": "Put on DRYE — 0.4 mm base layer",
+        "after_image": "shopify://shop_images/5Y9A9331_1_1.webp",
+        "after_label": "Put on your usual glove"
       }
     },
     "drye_mechanics_time_promise_zewxMB": {
@@ -592,7 +598,7 @@
     "nt_tradeoff",
     "nt_loop",
     "nt_barrier",
-    "nt_inside",
+    "drye_liner_product_clarity_XJWLK4",
     "drye_mechanics_time_promise_zewxMB",
     "nt_nails",
     "drye_mechanics_time_promise_863fPX",
