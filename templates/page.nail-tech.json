@@ -267,23 +267,8 @@
       }
     },
     "nt_barrier": {
-      "type": "drye-nt-barrier",
-      "settings": {
-        "chapter": "04",
-        "heading": "Why trapped moisture ruins your skin and nails over time.",
-        "row_1_label": "No significant barrier change",
-        "row_1_sub": "Healthy skin · day 3",
-        "row_2_label": "Significant barrier impairment",
-        "row_2_sub": "Healthy skin · day 14",
-        "row_3_label": "Significant barrier impairment",
-        "row_3_sub": "Already irritated skin · day 3",
-        "risk_label": "Maceration risk rises",
-        "day_1": "Day 1",
-        "day_2": "Day 3",
-        "day_3": "Day 7",
-        "day_4": "Day 14",
-        "source": "Source: Ramsing & Agner, Contact Dermatitis 1996 — occlusive glove use, 6 h/day; and Tiedemann et al., Contact Dermatitis 2016 — occlusion on experimentally irritated skin."
-      }
+      "type": "drye-nt-barrier-choice",
+      "settings": {}
     },
     "nt_inside": {
       "type": "drye-nt-inside",
