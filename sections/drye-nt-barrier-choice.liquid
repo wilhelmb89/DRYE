@@ -128,6 +128,19 @@
               </span>
               <span class="bch-bar"><i style="left: 66%"></i></span>
             </div>
+            <div class="bch-card">
+              <p class="bch-card-aud">{{ section.settings.aud_healthy }}</p>
+              <div class="bch-card-track">
+                <span class="bch-card-flag" style="left: 66%">
+                  <b>{{ section.settings.day_4 }}</b><i></i>
+                </span>
+                <span class="bch-card-bar"><i style="left: 66%"></i></span>
+              </div>
+              <ul class="bch-card-rows">
+                <li><b>{{ section.settings.day_2 }}</b><span>{{ section.settings.healthy_d3 }}</span></li>
+                <li class="is-red"><b>{{ section.settings.day_4 }}</b><span>{{ section.settings.healthy_d14 }}</span></li>
+              </ul>
+            </div>
           </div>
         </div>
 
@@ -140,6 +153,18 @@
                 <b>{{ section.settings.damaged_d3 }}<em>{{ section.settings.day_2 }}</em></b><i></i>
               </span>
               <span class="bch-bar"><i style="left: 25%"></i></span>
+            </div>
+            <div class="bch-card bch-card--alert">
+              <p class="bch-card-aud">{{ section.settings.aud_damaged }}</p>
+              <div class="bch-card-track">
+                <span class="bch-card-flag is-red" style="left: 25%">
+                  <b>{{ section.settings.day_2 }}</b><i></i>
+                </span>
+                <span class="bch-card-bar"><i style="left: 25%"></i></span>
+              </div>
+              <ul class="bch-card-rows">
+                <li class="is-red"><b>{{ section.settings.day_2 }}</b><span>{{ section.settings.damaged_d3 }}</span></li>
+              </ul>
             </div>
           </div>
         </div>

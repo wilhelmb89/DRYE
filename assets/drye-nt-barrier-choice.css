@@ -90,6 +90,24 @@
   .bch-track, .bch-drop, .bch-curve { transition: none; }
 }
 
+/* ---------- mobile card layout (6a) ---------- */
+.bch-card { display: none; }
+.bch-card-aud { margin: 0 0 34px; font-family: var(--font-display); font-size: 15px; font-weight: 600; color: #fff; }
+.bch-card-track { position: relative; }
+.bch-card-flag { position: absolute; bottom: 7px; display: flex; flex-direction: column; align-items: flex-start; gap: 3px; padding-bottom: 3px; }
+.bch-card-flag b { order: -1; font-family: var(--font-body); font-size: 9px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: rgba(255,255,255,.85); white-space: nowrap; }
+.bch-card-flag i { width: 1px; height: 13px; background: rgba(255,255,255,.5); }
+.bch-card-flag.is-red b { color: var(--red); }
+.bch-card-flag.is-red i { background: var(--red); }
+.bch-card-bar { position: relative; display: block; height: 7px; background: rgba(255,255,255,.16); overflow: hidden; }
+.bch-card-bar i { position: absolute; top: 0; bottom: 0; right: 0; background: var(--red); }
+.bch-card-rows { list-style: none; margin: 12px 0 0; padding: 0; display: flex; flex-direction: column; gap: 9px; }
+.bch-card-rows li { display: grid; grid-template-columns: 46px 1fr; column-gap: 12px; align-items: baseline; }
+.bch-card-rows b { font-family: var(--font-body); font-size: 9px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: rgba(255,255,255,.5); }
+.bch-card-rows span { font-family: var(--font-body); font-size: 12px; font-weight: 600; letter-spacing: .08em; line-height: 1.35; text-transform: uppercase; color: rgba(255,255,255,.9); text-wrap: pretty; }
+.bch-card-rows li.is-red b,
+.bch-card-rows li.is-red span { color: var(--red); }
+
 /* ---------- mobile (6a) ---------- */
 @media (max-width: 749px) {
   .bch-chap { font-size: 12px; margin-bottom: 16px; }
@@ -101,11 +119,15 @@
   .bch-mz { left: 38px; font-size: 10px; }
   .bch-days { margin-left: 30px; }
   .bch-days > span { font-size: 11px; letter-spacing: .1em; }
-  .bch-track-in { padding: 20px 0 26px; }
-  .bch-aud { margin-bottom: 54px; font-size: 16px; }
-  .bch-flag b { font-size: 10px; letter-spacing: .08em; white-space: normal; text-align: center; }
-  .bch-flag--end b { text-align: right; }
-  .bch-flag em { display: block; margin: 3px 0 0; }
-  .bch.is-marked .bch-drop { height: 96px; }
-  .bch-note { font-size: 9px; }
+
+  /* 6a swaps the desktop rail for the bordered card */
+  .bch-rail { display: none; }
+  .bch-card { display: block; border: 1px solid rgba(255,255,255,.14); background: rgba(255,255,255,.03); padding: 14px 16px 12px; }
+  .bch-card--alert { border-color: rgba(239,68,68,.34); background: rgba(239,68,68,.06); }
+  .bch-track-in { border-top: 0; background: none; padding: 26px 0 4px; }
+  .bch-track--damaged .bch-track-in { border-top: 0; background: none; }
+  .bch-aud { display: none; }
+  .bch[data-pick="healthy"] .bch-track--healthy,
+  .bch[data-pick="damaged"] .bch-track--damaged { max-height: 320px; }
+  .bch-note { font-size: 9px; margin-top: 18px; }
 }
