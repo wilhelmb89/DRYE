@@ -17,11 +17,14 @@
 .drye-liner-product-clarity__image { order: 2; }
 .drye-liner-product-clarity__specs { order: 3; }
 
+/* Heading: inherits the global h2 token (31px mobile / 40px desktop).
+   Do not hardcode a font-size here. */
 .drye-liner-product-clarity__heading {
-  font-size: clamp(20px, 5.5vw, 26px);
+  font-family: var(--font-display);
+  font-size: var(--fs-section-h2);
   font-weight: var(--fw-semibold);
-  letter-spacing: -0.03em;
-  line-height: 1.06;
+  letter-spacing: var(--ls-tight-h2);
+  line-height: var(--lh-heading);
   color: var(--deep);
   margin-bottom: var(--space-10);
 }
@@ -69,11 +72,13 @@
 
 .drye-liner-product-clarity__placeholder span {
   font-family: var(--font-body);
-  font-size: 9px;
+  font-size: 11px;
+  font-weight: var(--fw-semibold);
   color: var(--caption);
-  letter-spacing: 0.08em;
+  letter-spacing: 0.16em;
   text-transform: uppercase;
   text-align: center;
+  line-height: 1.5;
   padding: 0 20px;
 }
 
@@ -93,12 +98,13 @@
 
 .drye-liner-product-clarity__ba-label {
   font-family: var(--font-body);
-  font-size: 9px;
-  font-weight: 700;
-  letter-spacing: 0.14em;
+  font-size: 11px;
+  font-weight: var(--fw-semibold);
+  letter-spacing: 0.16em;
   text-transform: uppercase;
   color: var(--caption);
   text-align: center;
+  line-height: 1.4;
 }
 
 .drye-liner-product-clarity__ba-img {
@@ -128,11 +134,11 @@
 .drye-liner-product-clarity__spec {
   display: grid;
   grid-template-columns: 20px 1fr;
-  gap: var(--space-10);
-  padding: var(--space-10) 0;
+  gap: var(--space-12);
+  padding: var(--space-12) 0;
   border-bottom: 1px solid var(--border);
   font-family: var(--font-body);
-  font-size: 13px;
+  font-size: var(--fs-body);
   color: var(--muted);
   line-height: 1.5;
 }
@@ -144,17 +150,13 @@
 
 .drye-liner-product-clarity__spec svg {
   color: var(--emerald);
-  margin-top: 2px;
+  margin-top: 3px;
 }
 
 @media (min-width: 768px) {
   .drye-liner-product-clarity {
     padding-top: var(--section-pad-y);
     padding-bottom: var(--section-pad-y);
-  }
-
-  .drye-liner-product-clarity__heading {
-    font-size: var(--fs-section-h2);
   }
 
   .drye-liner-product-clarity__inner {
@@ -187,10 +189,6 @@
 
   .drye-liner-product-clarity__ba-arrow {
     font-size: 28px;
-  }
-
-  .drye-liner-product-clarity__ba-label {
-    font-size: 10px;
   }
 }
 
