@@ -1,0 +1,8 @@
+/* drye-nt-nails.css */
+.drye-nt-nails { border-top: 1px solid var(--border); }
+.nail-grid { display: grid; grid-template-columns: 1fr; gap: 32px; margin-top: 36px; }
+.nail-ico { margin-bottom: 22px; }
+.nail-ico svg { display: block; }
+@media (min-width: 760px) {
+  .nail-grid { grid-template-columns: 1fr 1fr; gap: 56px; margin-top: 48px; }
+}

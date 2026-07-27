@@ -1,146 +1,330 @@
-/*
- * ------------------------------------------------------------
- * IMPORTANT: The contents of this file are auto-generated.
- *
- * This file may be updated by the Shopify admin theme editor
- * or related systems. Please exercise caution as any changes
- * made to this file may be overwritten.
- * ------------------------------------------------------------
- */
 {
   "sections": {
-    "drye_mechanics_herov2_738J64": {
-      "type": "drye-mechanics-herov2",
-      "name": "DRYE Mechanics Hero",
-      "settings": {
-        "section_id": "mechanics-hero",
-        "image_desktop": "shopify://shop_images/Gemini_Generated_Image_x4acmfx4acmfx4ac.webp",
-        "image_mobile": "shopify://shop_images/Gemini_Generated_Image_cymm33cymm33cymm_1.webp",
-        "eyebrow": "",
-        "heading_line_1": "You already know",
-        "heading_emphasis": "how the shift ends.",
-        "show_rule": true,
-        "subheading": "<p>Hands that drip inside the glove by 9am. Gloves that tear on every other bolt. The smell when you peel them off. Same gloves waiting Monday.</p>",
-        "scroll_text": "Keep reading",
-        "scroll_target": "#gallery",
-        "quote_1": "\"my hands literally drip sweat\"",
-        "quote_2": "\"I can't feel the bolt anymore\"",
-        "quote_3": "\"knuckles split by Thursday\"",
-        "quote_4": "“oil’s a chemical — I need them on”"
-      }
-    },
-    "drye_liner_objection_reviews_yktLhW": {
-      "type": "drye-liner-objection-reviews",
+    "nt_hero": {
+      "type": "drye-nt-hero",
       "blocks": {
-        "review_R6hcWg": {
+        "r1": {
           "type": "review",
           "settings": {
-            "question": "What about hot shops and summer heat?",
-            "quote": "<i>\"Terrible sweat issues during summer wearing nitrile gloves. Wearing these, I'm no longer dripping sweat on my paint jobs and my hands feel better.\"</i>",
-            "name": "Chad W., Phoenix, AZ ",
-            "role": "Automotive painter"
+            "quote": "“Even with sweat on the DRYE, my hands stayed dry all day.”",
+            "author": "PN · US"
           }
         },
-        "review_QgJRw9": {
+        "r2": {
           "type": "review",
           "settings": {
-            "question": "Will it kill my grip?",
-            "quote": "<i>\"The slim thickness gives great dexterity. They do a great job keeping sweat off my hands.\"</i>",
-            "name": "Shoujun S., Rosemead, CA",
-            "role": "Car detailing"
+            "quote": "“They keep the sweat and extra heat off my palms.”",
+            "author": "Jon · GB"
           }
         },
-        "review_zX89KY": {
+        "r3": {
           "type": "review",
           "settings": {
-            "question": "What happens if oil gets on them?",
-            "quote": "<i>\"When I get oil on the liners, I just wipe them off with electrical contact cleaner and a dry paper towel. Wipes right off.\"</i>",
-            "name": "Brian Jee ",
-            "role": "Automotive repair"
+            "quote": "“They alleviate irritation and itching from sweat really well.”",
+            "author": "Alric · CA"
           }
         },
-        "review_BxeFDV": {
+        "r4": {
           "type": "review",
           "settings": {
-            "question": "Is this just cotton?",
-            "quote": "<i>“These are incredible, nearly no more sweat in nitrile gloves, plus being so thin I barely notice them.”</i>",
-            "name": "@fordbodytech811",
-            "role": "Automotive repair"
-          }
-        },
-        "review_hVipxq": {
-          "type": "review",
-          "settings": {
-            "question": "What if I take gloves off all day?",
-            "quote": "<i>“I take gloves on and off 9 times an hour. After two weeks with the lining gloves, my hands felt less itchy, less dry, and less rough.”</i>",
-            "name": "Independent field study",
-            "role": "Automotive repair"
-          }
-        },
-        "review_ULBUQY": {
-          "type": "review",
-          "settings": {
-            "question": "Does it work under EV safety gloves?",
-            "quote": "<i>No impact on fingertip sensitivity in electric safety gloves. Increased comfort and reduced the need to air the hand.</i>",
-            "name": "Simon V., Scania CV AB",
-            "role": "PPE-Coordinator"
-          }
-        },
-        "review_9Q9YRi": {
-          "type": "review",
-          "settings": {
-            "question": "How much time does it save?",
-            "quote": "<i>Without the lining gloves I had to remove my EV gloves, wash and dry my hands, then go to the computer. With the lining gloves, I could remove the EV gloves and go straight to the computer.</i>",
-            "name": "EV Mechanic",
-            "role": "BMW Bilia"
-          }
-        },
-        "review_fJbdMx": {
-          "type": "review",
-          "settings": {
-            "question": "Why put anything under nitrile?",
-            "quote": "<i>My hands get so itchy I can't work without a layer between my skin and the glove. The lining gloves stay drier than cotton — I've been using them continuously.</i>",
-            "name": "Field study / SCANIA, Gothenburg, Sweden",
-            "role": "Heavy vehicle mechanic"
+            "quote": "“Coming up on a year — still comfortable, hands stay dry.”",
+            "author": "Athena · SE"
           }
         }
       },
       "block_order": [
-        "review_R6hcWg",
-        "review_QgJRw9",
-        "review_zX89KY",
-        "review_BxeFDV",
-        "review_hVipxq",
-        "review_ULBUQY",
-        "review_9Q9YRi",
-        "review_fJbdMx"
+        "r1",
+        "r2",
+        "r3",
+        "r4"
       ],
-      "disabled": true,
-      "name": "DRYE Liner Objection",
+      "settings": {}
+    },
+    "nt_desk": {
+      "type": "drye-nt-desk",
+      "blocks": {
+        "s1": {
+          "type": "shot",
+          "settings": {
+            "caption": "\"By client four, my gloves normally feel soaked.\"",
+            "image_alt": "Nail tech changing a nitrile glove between clients"
+          }
+        },
+        "s2": {
+          "type": "shot",
+          "settings": {
+            "caption": "\"I can change nitrile gloves without fighting wet hands.\"",
+            "image_alt": "Her hands after several clients, gloves off"
+          }
+        },
+        "s3": {
+          "type": "shot",
+          "settings": {
+            "caption": "\"Thin enough to work in.\"",
+            "image_alt": "DRYE under the glove during real work at the desk"
+          }
+        }
+      },
+      "block_order": [
+        "s1",
+        "s2",
+        "s3"
+      ],
+      "settings": {}
+    },
+    "nt_trapped": {
+      "type": "drye-nt-trapped",
+      "settings": {}
+    },
+    "nt_tradeoff": {
+      "type": "drye-nt-tradeoff",
+      "blocks": {
+        "w1": {
+          "type": "word",
+          "settings": {
+            "word": "Trapped sweat",
+            "size": "1"
+          }
+        },
+        "w2": {
+          "type": "word",
+          "settings": {
+            "word": "Ripping nitriles",
+            "size": "2"
+          }
+        },
+        "w3": {
+          "type": "word",
+          "settings": {
+            "word": "Smell",
+            "size": "1"
+          }
+        },
+        "w4": {
+          "type": "word",
+          "settings": {
+            "word": "24/7 washing",
+            "size": "2"
+          }
+        },
+        "w5": {
+          "type": "word",
+          "settings": {
+            "word": "Discomfort",
+            "size": "3"
+          }
+        },
+        "w6": {
+          "type": "word",
+          "settings": {
+            "word": "Soft, splitting nails",
+            "size": "1"
+          }
+        },
+        "w7": {
+          "type": "word",
+          "settings": {
+            "word": "Dry, cracked hands",
+            "size": "2"
+          }
+        },
+        "w8": {
+          "type": "word",
+          "settings": {
+            "word": "Itching",
+            "size": "3"
+          }
+        },
+        "w9": {
+          "type": "word",
+          "settings": {
+            "word": "Dermatitis",
+            "size": "2"
+          }
+        },
+        "w10": {
+          "type": "word",
+          "settings": {
+            "word": "Rashes",
+            "size": "3"
+          }
+        },
+        "w11": {
+          "type": "word",
+          "settings": {
+            "word": "Wet hands",
+            "size": "3"
+          }
+        }
+      },
+      "block_order": [
+        "w1",
+        "w2",
+        "w3",
+        "w4",
+        "w5",
+        "w6",
+        "w7",
+        "w8",
+        "w9",
+        "w10",
+        "w11"
+      ],
+      "settings": {}
+    },
+    "nt_loop": {
+      "type": "drye-nt-loop",
+      "blocks": {
+        "q1": {
+          "type": "qa",
+          "settings": {
+            "question": "“I’ve got dermatitis. What should I do?”",
+            "answer": "— Use thicker mils."
+          }
+        },
+        "q2": {
+          "type": "qa",
+          "settings": {
+            "question": "“My hands smell disgusting by the end of the day. What do I do?”",
+            "answer": "— Use powder."
+          }
+        },
+        "q3": {
+          "type": "qa",
+          "settings": {
+            "question": "“I have problems with eczema. What should I do?”",
+            "answer": "— Use cortisone."
+          }
+        },
+        "q4": {
+          "type": "qa",
+          "settings": {
+            "question": "“I hate my sweaty gloves in summer. They keep splitting.”",
+            "answer": "— Buy cheaper ones."
+          }
+        }
+      },
+      "block_order": [
+        "q1",
+        "q2",
+        "q3",
+        "q4"
+      ],
+      "settings": {}
+    },
+    "nt_barrier": {
+      "type": "drye-nt-barrier",
+      "settings": {}
+    },
+    "nt_inside": {
+      "type": "drye-nt-inside",
+      "blocks": {
+        "c1": {
+          "type": "column",
+          "settings": {
+            "tone": "negative",
+            "eyebrow": "Nitrile alone",
+            "image_alt": "Bare hand in a black nitrile glove, mid-shift",
+            "title": "Protection outside. Trapped moisture inside.",
+            "items": "Heat and sweat remain against the skin\nDirect skin-to-glove contact\nWet hands make glove changes harder"
+          }
+        },
+        "c2": {
+          "type": "column",
+          "settings": {
+            "tone": "positive",
+            "eyebrow": "Nitrile + DRYE",
+            "image_alt": "DRYE liner visible at the cuff under a nitrile glove",
+            "title": "The same outer glove. A better-managed inside.",
+            "items": "The same protective nitrile glove outside\nA textile layer between skin and nitrile\nMoisture routed away from the skin-facing layer\nDrier-feeling hands and easier glove changes"
+          }
+        }
+      },
+      "block_order": [
+        "c1",
+        "c2"
+      ],
+      "settings": {}
+    },
+    "nt_nails": {
+      "type": "drye-nt-nails",
+      "settings": {}
+    },
+    "nt_cotton_q": {
+      "type": "drye-nt-cotton-q",
+      "settings": {}
+    },
+    "nt_mechanism": {
+      "type": "drye-nt-mechanism",
+      "settings": {}
+    },
+    "nt_reviews": {
+      "type": "drye-nt-reviews",
+      "blocks": {
+        "v1": {
+          "type": "review",
+          "settings": {
+            "quote": "I have eczema and these liners have been the best things I bought for my hands. I wear latex gloves all day for work — every hour I’d change gloves and liners, and even with sweat on the DRYE, my hands stayed dry.",
+            "author": "PN · US"
+          }
+        },
+        "v2": {
+          "type": "review",
+          "settings": {
+            "quote": "My son’s hands were bright pink and raw from wearing work gloves. Within a few days of wearing the liners, his hands were drastically improved — within two weeks, completely healed.",
+            "author": "Debby Fields · US"
+          }
+        },
+        "v3": {
+          "type": "review",
+          "settings": {
+            "quote": "Excellent fit, quick delivery, and they do as the site describes. They keep the sweat and extra heat off my palms — one of my triggers. If you’ve tried everything else, give these a try.",
+            "author": "Jon · GB"
+          }
+        },
+        "v4": {
+          "type": "review",
+          "settings": {
+            "quote": "I’ve worn them under vinyl gloves, hockey gloves, and a wrist support — they alleviate irritation and itching from sweat really well. One developed a small hole, but customer service replaced it immediately. That alone earns 5 stars.",
+            "author": "Alric · CA"
+          }
+        },
+        "v5": {
+          "type": "review",
+          "settings": {
+            "quote": "Coming up on a year with these liners — still comfortable, keep my hands dry, and no signs of wear. They do what they’re supposed to.",
+            "author": "Athena · SE"
+          }
+        }
+      },
+      "block_order": [
+        "v1",
+        "v2",
+        "v3",
+        "v4",
+        "v5"
+      ],
       "settings": {
-        "section_id": "liner-objections",
-        "eyebrow": "",
-        "heading": "What mechanics ask first.",
-        "rating_score": "4.85/5",
-        "rating_count_text": "47 reviews",
-        "rating_count_url": "shopify://products/drye-moisture-routing-glove-liners"
+        "cta_url": "https://se.trustpilot.com/review/hudsverige.se"
       }
     },
-    "drye_mechanism_nav_n73TxK": {
-      "type": "drye-mechanism-nav",
-      "disabled": true,
-      "name": "DRYE Mechanism Nav",
-      "settings": {
-        "step_1_label": "Saturation",
-        "step_2_label": "Routing",
-        "step_3_label": "How it works",
-        "aria_label": "Asymmetric Layering — the invention"
-      }
+    "nt_close": {
+      "type": "drye-nt-close",
+      "settings": {}
     }
   },
   "order": [
-    "drye_mechanics_herov2_738J64",
-    "drye_liner_objection_reviews_yktLhW",
-    "drye_mechanism_nav_n73TxK"
+    "nt_hero",
+    "nt_desk",
+    "nt_trapped",
+    "nt_tradeoff",
+    "nt_loop",
+    "nt_barrier",
+    "nt_inside",
+    "nt_nails",
+    "nt_cotton_q",
+    "nt_mechanism",
+    "nt_reviews",
+    "nt_close"
   ]
 }

@@ -1,0 +1,102 @@
+{{ 'drye-nt-base.css' | asset_url | stylesheet_tag }}
+{{ 'drye-nt-chart.css' | asset_url | stylesheet_tag }}
+
+<section
+  class="drye-nt lp-block drye-nt-barrier"
+  id="drye-nt-barrier"
+  style="background: var(--deep); border-top: 1px solid rgba(255,255,255,0.12)"
+  data-section-id="{{ section.id }}"
+  data-drye-section
+  data-section-name="nt_barrier"
+>
+  <div class="lp-wrap">
+    {%- if section.settings.chapter != blank -%}
+      <span class="chapno" style="color: rgba(255,255,255,0.55)">{{ section.settings.chapter }}</span>
+    {%- endif -%}
+
+    <div class="mech-grid">
+      <div class="mech-full mech-lead">
+        {%- if section.settings.heading != blank -%}
+          <p class="mech-stmt">{{ section.settings.heading }}</p>
+        {%- endif -%}
+      </div>
+
+      <div class="mech-full">
+        <div class="gann">
+          <div class="ga ga--start" style="left: var(--x-d3)"><i class="ga-arw"><svg viewBox="0 0 28 15" width="24" height="13" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 7.5 H23"></path><path d="M18 3 L24 7.5 L18 12"></path></svg></i><div class="ga-txt"><span>{{ section.settings.row_1_label }}</span>{{ section.settings.row_1_sub }}</div></div>
+          <div class="ga ga--end" style="left: var(--x-d14)"><i class="ga-arw" style="color: var(--red)"><svg viewBox="0 0 28 15" width="24" height="13" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 7.5 H23"></path><path d="M18 3 L24 7.5 L18 12"></path></svg></i><div class="ga-txt"><span style="color: var(--red)">{{ section.settings.row_2_label }}</span>{{ section.settings.row_2_sub }}</div></div>
+          <div class="ga" style="left: var(--x-d3)"><i class="ga-arw" style="color: var(--red)"><svg viewBox="0 0 28 15" width="24" height="13" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 7.5 H23"></path><path d="M18 3 L24 7.5 L18 12"></path></svg></i><div class="ga-txt"><span style="color: var(--red)">{{ section.settings.row_3_label }}</span>{{ section.settings.row_3_sub }}</div></div>
+        </div>
+
+        <div class="dch dch--axis">
+          <span class="dch-y" style="top: 16.7%">100%</span>
+          <span class="dch-y" style="top: 53.2%">50%</span>
+          <span class="dch-y" style="top: 89.7%">0%</span>
+          <span class="dch-mz">{{ section.settings.risk_label }}</span>
+          <svg viewBox="36 0 444 156" role="img" aria-label="Overhydration in the skin climbing across two weeks of daily glove occlusion" style="display: block; width: 100%; height: auto">
+            <defs>
+              <clipPath id="ntWipeB-{{ section.id }}"><rect class="g-wipe" x="40" y="0" width="430" height="160"></rect></clipPath>
+              <linearGradient id="ntSkinStroke-{{ section.id }}" x1="40" y1="0" x2="468" y2="0" gradientUnits="userSpaceOnUse">
+                <stop offset="0.50" stop-color="#ffffff"></stop><stop offset="0.66" stop-color="#EF4444"></stop><stop offset="1" stop-color="#EF4444"></stop>
+              </linearGradient>
+              <linearGradient id="ntSkinFill-{{ section.id }}" x1="40" y1="0" x2="468" y2="0" gradientUnits="userSpaceOnUse">
+                <stop offset="0.50" stop-color="rgba(255,255,255,0.13)"></stop><stop offset="0.66" stop-color="rgba(239,68,68,0.26)"></stop><stop offset="1" stop-color="rgba(239,68,68,0.26)"></stop>
+              </linearGradient>
+            </defs>
+            <rect x="40" y="16" width="428" height="46" fill="rgba(239,68,68,0.10)"></rect>
+            <path d="M40 62 L468 62" stroke="rgba(239,68,68,0.42)" stroke-width="0.85" stroke-dasharray="3 5"></path>
+            <g stroke="rgba(255,255,255,0.085)" stroke-width="0.75" stroke-dasharray="2 5"><path d="M40 26 L468 26"></path><path d="M40 83 L468 83"></path></g>
+            <path d="M40 140 L468 140" stroke="rgba(255,255,255,0.16)" stroke-width="0.85"></path>
+            <g stroke="rgba(255,255,255,0.075)" stroke-width="0.75" stroke-dasharray="2 5"><path d="M254 16 L254 140"></path><path d="M361 16 L361 140"></path></g>
+            <g stroke="rgba(255,255,255,0.2)" stroke-width="0.85" stroke-dasharray="3 5"><path d="M147 12 L147 140"></path><path d="M467 12 L467 140"></path></g>
+            <g clip-path="url(#ntWipeB-{{ section.id }})">
+              <path d="M40 140 L88 88 L143 80 L149 95 L198 76 L253 67 L259 81 L308 61 L360 53 L366 66 L414 45 L468 33 L468 140 L40 140 Z" fill="url(#ntSkinFill-{{ section.id }})"></path>
+              <path d="M40 140 L88 88 L143 80 L149 95 L198 76 L253 67 L259 81 L308 61 L360 53 L366 66 L414 45 L468 33" fill="none" stroke="url(#ntSkinStroke-{{ section.id }})" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"></path>
+              <circle cx="143" cy="80" r="3.4" fill="#ffffff"></circle>
+              <circle cx="259" cy="81" r="3.4" fill="#ffffff"></circle>
+              <circle cx="414" cy="45" r="3.4" fill="#EF4444"></circle>
+            </g>
+          </svg>
+        </div>
+
+        <div class="dday">
+          <span style="left: var(--x-d1); align-items: flex-start; transform: none">{{ section.settings.day_1 }}</span>
+          <span style="left: var(--x-d3)">{{ section.settings.day_2 }}</span>
+          <span style="left: var(--x-d7)">{{ section.settings.day_3 }}</span>
+          <span style="left: var(--x-d14); align-items: flex-end; transform: translateX(-100%); color: var(--red)">{{ section.settings.day_4 }}</span>
+        </div>
+
+        {%- if section.settings.source != blank -%}
+          <p class="mech-note">{{ section.settings.source }}</p>
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "DRYE NT — Barrier",
+  "tag": "section",
+  "class": "shopify-section-drye-nt-barrier",
+  "settings": [
+    { "type": "text", "id": "chapter", "label": "Chapter number", "default": "04" },
+    { "type": "textarea", "id": "heading", "label": "Heading", "default": "Why trapped moisture ruins your skin and nails over time." },
+    { "type": "header", "content": "Annotation rows" },
+    { "type": "text", "id": "row_1_label", "label": "Row 1 label", "default": "No significant barrier change" },
+    { "type": "text", "id": "row_1_sub", "label": "Row 1 sub", "default": "Healthy skin · day 3" },
+    { "type": "text", "id": "row_2_label", "label": "Row 2 label", "default": "Significant barrier impairment" },
+    { "type": "text", "id": "row_2_sub", "label": "Row 2 sub", "default": "Healthy skin · day 14" },
+    { "type": "text", "id": "row_3_label", "label": "Row 3 label", "default": "Significant barrier impairment" },
+    { "type": "text", "id": "row_3_sub", "label": "Row 3 sub", "default": "Already irritated skin · day 3" },
+    { "type": "header", "content": "Chart" },
+    { "type": "text", "id": "risk_label", "label": "Risk band label", "default": "Maceration risk rises" },
+    { "type": "text", "id": "day_1", "label": "Day label 1", "default": "Day 1" },
+    { "type": "text", "id": "day_2", "label": "Day label 2", "default": "Day 3" },
+    { "type": "text", "id": "day_3", "label": "Day label 3", "default": "Day 7" },
+    { "type": "text", "id": "day_4", "label": "Day label 4", "default": "Day 14" },
+    { "type": "textarea", "id": "source", "label": "Source line", "default": "Source: Ramsing & Agner, Contact Dermatitis 1996 — occlusive glove use, 6 h/day; and Tiedemann et al., Contact Dermatitis 2016 — occlusion on experimentally irritated skin." }
+  ],
+  "presets": [{ "name": "DRYE NT — Barrier" }]
+}
+{% endschema %}

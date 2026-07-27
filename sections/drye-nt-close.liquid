@@ -1,0 +1,40 @@
+{{ 'drye-nt-base.css' | asset_url | stylesheet_tag }}
+{{ 'drye-nt-close.css' | asset_url | stylesheet_tag }}
+
+<section
+  class="drye-nt lp-block drye-nt-close"
+  id="drye-nt-close-{{ section.id }}"
+  data-section-id="{{ section.id }}"
+  data-drye-section
+  data-section-name="nt_close"
+>
+  <div class="lp-wrap">
+    <div class="lp-narrow">
+      {%- if section.settings.cta_label != blank -%}
+        <a href="{{ section.settings.cta_url | default: '#' }}" class="lp-cta">{{ section.settings.cta_label }}</a>
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+{%- if section.settings.sources != blank -%}
+  <div class="drye-nt drye-nt-sources">
+    <div class="lp-wrap">
+      <p>{{ section.settings.sources }}</p>
+    </div>
+  </div>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "DRYE NT — Close",
+  "tag": "section",
+  "class": "shopify-section-drye-nt-close",
+  "settings": [
+    { "type": "text", "id": "cta_label", "label": "CTA label", "default": "See what it's made of" },
+    { "type": "url", "id": "cta_url", "label": "CTA link" },
+    { "type": "textarea", "id": "sources", "label": "Source line", "default": "Park & Lee 2025 · Warner, Stone & Boissy, J Invest Dermatol 2003 · Gunt & Kasting, Int J Pharm 2007 · Nogueira et al., Thermochim Acta 2009 · Repeated-occlusion reference pending verification" }
+  ],
+  "presets": [{ "name": "DRYE NT — Close" }]
+}
+{% endschema %}

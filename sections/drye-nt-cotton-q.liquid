@@ -1,0 +1,26 @@
+{{ 'drye-nt-base.css' | asset_url | stylesheet_tag }}
+{{ 'drye-nt-cotton-q.css' | asset_url | stylesheet_tag }}
+
+<section
+  class="drye-nt drye-nt-cotton-q"
+  id="drye-nt-cotton-q-{{ section.id }}"
+  data-section-id="{{ section.id }}"
+  data-drye-section
+  data-section-name="nt_cotton_q"
+>
+  <div class="lp-wrap">
+    <p class="cloud-q">{{ section.settings.quote }}</p>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "DRYE NT — Cotton question",
+  "tag": "section",
+  "class": "shopify-section-drye-nt-cotton-q",
+  "settings": [
+    { "type": "textarea", "id": "quote", "label": "Pull quote", "default": "\u201cI tried cotton, but it gets wet very fast — is this cotton?\u201d" }
+  ],
+  "presets": [{ "name": "DRYE NT — Cotton question" }]
+}
+{% endschema %}

@@ -1,0 +1,102 @@
+{{ 'drye-nt-base.css' | asset_url | stylesheet_tag }}
+{{ 'drye-nt-inside.css' | asset_url | stylesheet_tag }}
+
+<section
+  class="drye-nt lp-block drye-nt-inside"
+  id="drye-nt-inside-{{ section.id }}"
+  data-section-id="{{ section.id }}"
+  data-drye-section
+  data-section-name="nt_inside"
+>
+  <div class="lp-wrap">
+    <div class="lp-narrow">
+      {%- if section.settings.chapter != blank -%}
+        <span class="chapno">{{ section.settings.chapter }}</span>
+      {%- endif -%}
+      {%- if section.settings.heading != blank -%}
+        <h2 class="lp-lead">{{ section.settings.heading }}</h2>
+      {%- endif -%}
+      {%- if section.settings.body != blank -%}
+        <p class="lp-body">{{ section.settings.body }}</p>
+      {%- endif -%}
+    </div>
+
+    <div class="cmp-grid">
+      {%- for block in section.blocks -%}
+        {%- assign is_drye = block.settings.tone | default: 'negative' -%}
+        <div {{ block.shopify_attributes }}>
+          <div class="cmp-img">
+            {%- if block.settings.image != blank -%}
+              {{ block.settings.image | image_url: width: 1200 | image_tag:
+                 loading: 'lazy', widths: '600,900,1200', sizes: '(min-width: 760px) 50vw, 100vw',
+                 alt: block.settings.image_alt | escape }}
+            {%- endif -%}
+          </div>
+          <span class="lp-head-eyebrow" style="color: {% if is_drye == 'positive' %}var(--emerald){% else %}var(--muted){% endif %}">{{ block.settings.eyebrow }}</span>
+          <h3 class="lp-head-title" style="color: var(--deep)">{{ block.settings.title }}</h3>
+          <ul class="cmp-list">
+            {%- assign items = block.settings.items | newline_to_br | split: '<br />' -%}
+            {%- for item in items -%}
+              {%- assign line = item | strip -%}
+              {%- if line != blank -%}
+                <li>
+                  <span class="lp-mark" style="color: {% if is_drye == 'positive' %}var(--emerald){% else %}var(--red){% endif %}">{% if is_drye == 'positive' %}&#8594;{% else %}&#10005;{% endif %}</span>
+                  <span style="color: var(--body); text-wrap: pretty">{{ line }}</span>
+                </li>
+              {%- endif -%}
+            {%- endfor -%}
+          </ul>
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "DRYE NT — Inside the glove",
+  "tag": "section",
+  "class": "shopify-section-drye-nt-inside",
+  "settings": [
+    { "type": "text", "id": "chapter", "label": "Chapter number", "default": "05" },
+    { "type": "textarea", "id": "heading", "label": "Heading", "default": "Keep the protection. Change what happens inside it." },
+    { "type": "textarea", "id": "body", "label": "Body", "default": "DRYE adds a 0.4 mm textile layer between your skin and the same protective glove." }
+  ],
+  "blocks": [
+    {
+      "type": "column",
+      "name": "Column",
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "Image" },
+        { "type": "text", "id": "image_alt", "label": "Image alt text" },
+        { "type": "select", "id": "tone", "label": "Tone", "default": "negative",
+          "options": [
+            { "value": "negative", "label": "Negative (red crosses)" },
+            { "value": "positive", "label": "Positive (emerald arrows)" }
+          ] },
+        { "type": "text", "id": "eyebrow", "label": "Eyebrow" },
+        { "type": "textarea", "id": "title", "label": "Title" },
+        { "type": "textarea", "id": "items", "label": "List items", "info": "One per line." }
+      ]
+    }
+  ],
+  "max_blocks": 2,
+  "presets": [
+    {
+      "name": "DRYE NT — Inside the glove",
+      "blocks": [
+        { "type": "column", "settings": {
+          "tone": "negative", "eyebrow": "Nitrile alone",
+          "image_alt": "Bare hand in a black nitrile glove, mid-shift",
+          "title": "Protection outside. Trapped moisture inside.",
+          "items": "Heat and sweat remain against the skin\nDirect skin-to-glove contact\nWet hands make glove changes harder" } },
+        { "type": "column", "settings": {
+          "tone": "positive", "eyebrow": "Nitrile + DRYE",
+          "image_alt": "DRYE liner visible at the cuff under a nitrile glove",
+          "title": "The same outer glove. A better-managed inside.",
+          "items": "The same protective nitrile glove outside\nA textile layer between skin and nitrile\nMoisture routed away from the skin-facing layer\nDrier-feeling hands and easier glove changes" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

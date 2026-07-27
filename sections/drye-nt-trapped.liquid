@@ -1,0 +1,138 @@
+{{ 'drye-nt-base.css' | asset_url | stylesheet_tag }}
+{{ 'drye-nt-chart.css' | asset_url | stylesheet_tag }}
+
+<section
+  class="drye-nt lp-block drye-nt-trapped"
+  id="drye-nt-trapped"
+  style="background: var(--deep)"
+  data-section-id="{{ section.id }}"
+  data-drye-section
+  data-section-name="nt_trapped"
+>
+  <div class="lp-wrap">
+    {%- if section.settings.chapter != blank -%}
+      <span class="chapno" style="color: rgba(255,255,255,0.55)">{{ section.settings.chapter }}</span>
+    {%- endif -%}
+
+    <div class="mech-grid">
+      <div style="position: relative">
+        {%- if section.settings.glove_anno != blank -%}
+          <div class="anno anno--glove">
+            <span class="anno__txt">{{ section.settings.glove_anno }}</span>
+            <svg viewBox="0 0 160 100" width="150" height="94" fill="none" stroke="rgba(255,255,255,0.9)" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M154 4 C142 26, 110 52, 66 70 C48 78, 30 86, 15 90"></path><path d="M34 93 L14 90 L28 76"></path></svg>
+          </div>
+        {%- endif -%}
+
+        <div class="mech-glove" style="margin-left: auto; margin-right: auto">
+          <svg viewBox="0 56 250 336" role="img" aria-label="Cutaway of a nitrile glove filling with moisture">
+            <defs>
+              <clipPath id="ntGloveClip-{{ section.id }}"><path d="M78 378 C69 378 64 372 64 362 L64 338 C64 330 68 325 76 322 C66 314 61 300 61 284 C61 270 61 259 59 250 C53 236 44 226 36 215 C28 204 27 193 34 186 A12 12 0 0 1 55 190 C61 199 67 209 74 217 C77 210 78 202 78 194 C76 160 80 112 84 88 A11.5 11.5 0 0 1 107 86 C109 112 109 150 111 177 C113 172 115 170 118 170 C119 140 122 92 125 67 A11.5 11.5 0 0 1 148 67 C150 97 151 147 153 173 C155 169 157 167 160 168 C160 141 163 101 166 85 A11 11 0 0 1 188 87 C189 111 190 157 191 187 C193 183 195 182 198 183 C199 163 202 138 205 130 A10 10 0 0 1 224 134 C224 154 221 181 219 201 C217 237 213 277 207 300 C203 315 195 322 183 322 C190 325 194 330 194 338 L194 362 C194 372 189 378 180 378 Z"></path></clipPath>
+            </defs>
+            <g clip-path="url(#ntGloveClip-{{ section.id }})">
+              <rect x="0" y="0" width="250" height="400" fill="rgba(255,255,255,0.10)"></rect>
+              <rect class="g-fill" x="0" y="0" width="250" height="400" fill="rgba(13,148,136,0.55)"></rect>
+            </g>
+            <path d="M78 378 C69 378 64 372 64 362 L64 338 C64 330 68 325 76 322 C66 314 61 300 61 284 C61 270 61 259 59 250 C53 236 44 226 36 215 C28 204 27 193 34 186 A12 12 0 0 1 55 190 C61 199 67 209 74 217 C77 210 78 202 78 194 C76 160 80 112 84 88 A11.5 11.5 0 0 1 107 86 C109 112 109 150 111 177 C113 172 115 170 118 170 C119 140 122 92 125 67 A11.5 11.5 0 0 1 148 67 C150 97 151 147 153 173 C155 169 157 167 160 168 C160 141 163 101 166 85 A11 11 0 0 1 188 87 C189 111 190 157 191 187 C193 183 195 182 198 183 C199 163 202 138 205 130 A10 10 0 0 1 224 134 C224 154 221 181 219 201 C217 237 213 277 207 300 C203 315 195 322 183 322 C190 325 194 330 194 338 L194 362 C194 372 189 378 180 378 Z" fill="none" stroke="rgba(255,255,255,0.6)" stroke-width="1.4" stroke-linejoin="round"></path>
+            <g fill="none" stroke="rgba(255,255,255,0.26)" stroke-width="1.2" stroke-linecap="round">
+              <path d="M84 196 C110 203 158 203 196 194"></path>
+              <path d="M74 300 C110 309 158 309 200 299"></path>
+              <path d="M70 340 C110 349 152 349 190 339"></path>
+            </g>
+          </svg>
+        </div>
+
+        <p class="mech-trio"><span>{{ section.settings.trio_1 }}</span><span>{{ section.settings.trio_2 }}</span><span>{{ section.settings.trio_3 }}</span></p>
+        {%- if section.settings.heading != blank -%}
+          <h2 class="lp-lead mech-head" style="color: #ffffff; margin: 14px auto 0; text-align: center; text-transform: uppercase; font-size: clamp(24px, 7vw, 30px)">{{ section.settings.heading }}</h2>
+        {%- endif -%}
+      </div>
+
+      <div style="position: relative; padding-top: 78px">
+        {%- if section.settings.chart_anno != blank -%}
+          <div class="anno anno--chart">
+            <span class="anno__txt">{{ section.settings.chart_anno }}</span>
+            <svg viewBox="0 0 34 48" width="30" height="42" fill="none" stroke="rgba(255,255,255,0.9)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M28 3 C30 16, 26 27, 14 36 C11 38, 9 40, 7 42"></path><path d="M14 40 L6 44 L7 34"></path></svg>
+          </div>
+        {%- endif -%}
+
+        <p class="trk-title"><span class="trk-dot" style="background: #5FCFC1"></span><span class="trk-chain" style="background-image: linear-gradient(90deg, #8FEEE0, #12907F)">{{ section.settings.chart_title }}</span></p>
+
+        <div class="dch dch--axis">
+          <span class="dch-y" style="top: 16.7%">100%</span>
+          <span class="dch-y" style="top: 53.2%">50%</span>
+          <span class="dch-y" style="top: 89.7%">0%</span>
+          <svg viewBox="36 0 444 156" role="img" aria-label="Relative humidity of the air inside the glove, resetting at every glove change" style="display: block; width: 100%; height: auto">
+            <defs><clipPath id="ntWipeA-{{ section.id }}"><rect class="g-wipe" x="40" y="0" width="430" height="160"></rect></clipPath></defs>
+            <g stroke="rgba(255,255,255,0.085)" stroke-width="0.75" stroke-dasharray="2 5"><path d="M40 26 L468 26"></path><path d="M40 83 L468 83"></path></g>
+            <path d="M40 140 L468 140" stroke="rgba(255,255,255,0.16)" stroke-width="0.85"></path>
+            <g stroke="rgba(255,255,255,0.075)" stroke-width="0.75" stroke-dasharray="2 5"><path d="M147 16 L147 140"></path><path d="M254 16 L254 140"></path><path d="M361 16 L361 140"></path></g>
+            <g clip-path="url(#ntWipeA-{{ section.id }})">
+              <path d="M40 140 C51 62, 66 34, 90 30 L143 26 L143 140 Z" fill="rgba(13,148,136,0.5)"></path>
+              <path d="M147 140 C158 62, 173 34, 197 30 L250 26 L250 140 Z" fill="rgba(13,148,136,0.5)"></path>
+              <path d="M254 140 C265 62, 280 34, 304 30 L357 26 L357 140 Z" fill="rgba(13,148,136,0.5)"></path>
+              <path d="M361 140 C372 62, 387 34, 411 30 L464 26 L464 140 Z" fill="rgba(13,148,136,0.5)"></path>
+              <path d="M40 140 C51 62, 66 34, 90 30 L143 26" fill="none" stroke="#5FCFC1" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"></path>
+              <path d="M143 26 L143 140" stroke="#5FCFC1" stroke-width="2"></path>
+              <path d="M147 140 C158 62, 173 34, 197 30 L250 26" fill="none" stroke="#5FCFC1" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"></path>
+              <path d="M250 26 L250 140" stroke="#5FCFC1" stroke-width="2"></path>
+              <path d="M254 140 C265 62, 280 34, 304 30 L357 26" fill="none" stroke="#5FCFC1" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"></path>
+              <path d="M357 26 L357 140" stroke="#5FCFC1" stroke-width="2"></path>
+              <path d="M361 140 C372 62, 387 34, 411 30 L464 26" fill="none" stroke="#5FCFC1" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"></path>
+              <path d="M464 26 L464 140" stroke="#5FCFC1" stroke-width="2"></path>
+            </g>
+          </svg>
+        </div>
+
+        <div class="hr-times" aria-hidden="true"><span>{{ section.settings.time_1 }}</span><span></span><span>{{ section.settings.time_2 }}</span><span></span><span>{{ section.settings.time_3 }}</span><span></span><span>{{ section.settings.time_4 }}</span></div>
+
+        <div class="day-row">
+            <div class="day-cell"><span class="day-mark"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="rgba(255,255,255,0.72)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="3.4"></circle><path d="M5.5 19.5c0-3.3 2.9-5.6 6.5-5.6s6.5 2.3 6.5 5.6"></path></svg></span><span class="day-lbl">{{ section.settings.client_1_label }}</span></div>
+            {%- if 1 < 4 -%}
+              <div class="day-sep"><span class="day-lbl">{{ section.settings.new_glove_label }}</span></div>
+            {%- endif -%}
+            <div class="day-cell"><span class="day-mark"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="rgba(255,255,255,0.72)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="3.4"></circle><path d="M5.5 19.5c0-3.3 2.9-5.6 6.5-5.6s6.5 2.3 6.5 5.6"></path></svg></span><span class="day-lbl">{{ section.settings.client_2_label }}</span></div>
+            {%- if 2 < 4 -%}
+              <div class="day-sep"><span class="day-lbl">{{ section.settings.new_glove_label }}</span></div>
+            {%- endif -%}
+            <div class="day-cell"><span class="day-mark"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="rgba(255,255,255,0.72)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="3.4"></circle><path d="M5.5 19.5c0-3.3 2.9-5.6 6.5-5.6s6.5 2.3 6.5 5.6"></path></svg></span><span class="day-lbl">{{ section.settings.client_3_label }}</span></div>
+            {%- if 3 < 4 -%}
+              <div class="day-sep"><span class="day-lbl">{{ section.settings.new_glove_label }}</span></div>
+            {%- endif -%}
+            <div class="day-cell"><span class="day-mark"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="rgba(255,255,255,0.72)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="3.4"></circle><path d="M5.5 19.5c0-3.3 2.9-5.6 6.5-5.6s6.5 2.3 6.5 5.6"></path></svg></span><span class="day-lbl">{{ section.settings.client_4_label }}</span></div>
+            {%- if 4 < 4 -%}
+              <div class="day-sep"><span class="day-lbl">{{ section.settings.new_glove_label }}</span></div>
+            {%- endif -%}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "DRYE NT — Trapped",
+  "tag": "section",
+  "class": "shopify-section-drye-nt-trapped",
+  "settings": [
+    { "type": "text", "id": "chapter", "label": "Chapter number", "default": "02" },
+    { "type": "text", "id": "glove_anno", "label": "Glove annotation", "default": "Your nitrile glove" },
+    { "type": "text", "id": "trio_1", "label": "Trio word 1", "default": "Heat" },
+    { "type": "text", "id": "trio_2", "label": "Trio word 2", "default": "Sweat" },
+    { "type": "text", "id": "trio_3", "label": "Trio word 3", "default": "Bacteria" },
+    { "type": "text", "id": "heading", "label": "Heading under the glove", "default": "All trapped" },
+    { "type": "header", "content": "Humidity chart" },
+    { "type": "text", "id": "chart_anno", "label": "Chart annotation", "default": "Monday morning" },
+    { "type": "text", "id": "chart_title", "label": "Chart title", "default": "Humidity arises" },
+    { "type": "text", "id": "new_glove_label", "label": "Glove-change label", "default": "New glove" },
+    { "type": "text", "id": "client_1_label", "label": "Client 1", "default": "Client 1" },
+    { "type": "text", "id": "client_2_label", "label": "Client 2", "default": "Client 2" },
+    { "type": "text", "id": "client_3_label", "label": "Client 3", "default": "Client 3" },
+    { "type": "text", "id": "client_4_label", "label": "Client 4", "default": "Client 4" },
+    { "type": "text", "id": "time_1", "label": "Time 1", "default": "09:00" },
+    { "type": "text", "id": "time_2", "label": "Time 2", "default": "10:30" },
+    { "type": "text", "id": "time_3", "label": "Time 3", "default": "12:00" },
+    { "type": "text", "id": "time_4", "label": "Time 4", "default": "13:30" }
+  ],
+  "presets": [{ "name": "DRYE NT — Trapped" }]
+}
+{% endschema %}
