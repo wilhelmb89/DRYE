@@ -268,7 +268,26 @@
     },
     "nt_barrier": {
       "type": "drye-nt-barrier-choice",
-      "settings": {}
+      "settings": {
+        "chapter": "04",
+        "heading": "Why your skin and nails get worse inside gloves over time.",
+        "pick_label": "Choose your starting point",
+        "btn_healthy": "My skin feels fine",
+        "btn_damaged": "My skin is already irritated",
+        "exposure": "Under glove 6 hours/day",
+        "risk_label": "Maceration risk rises",
+        "chart_alt": "Stylised overhydration in the skin across two weeks of daily glove occlusion",
+        "day_1": "Day 1",
+        "day_2": "Day 3",
+        "day_3": "Day 7",
+        "day_4": "Day 14",
+        "aud_healthy": "Healthy skin",
+        "healthy_d3": "No significant barrier change",
+        "healthy_d14": "Significant barrier impairment",
+        "aud_damaged": "Already irritated skin",
+        "damaged_d3": "Significant barrier impairment",
+        "source": "Sources: Ramsing & Agner, Contact Dermatitis, 1996 — short- and long-term experimental glove occlusion."
+      }
     },
     "nt_inside": {
       "type": "drye-nt-inside",
@@ -398,6 +417,7 @@
         "media_7t7JiP",
         "media_zzBRm7"
       ],
+      "disabled": true,
       "name": "DRYE Proof Wall",
       "settings": {
         "eyebrow": "Workers who kept them",
@@ -410,6 +430,7 @@
     },
     "drye_functional_benefits_KptgNd": {
       "type": "drye-functional-benefits",
+      "disabled": true,
       "name": "DRYE Functional Benefits",
       "settings": {
         "eyebrow": "",
