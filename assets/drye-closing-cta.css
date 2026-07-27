@@ -1,82 +1,109 @@
-/* dryeNEW-closing-cta.css — layout only. Type + buttons come from base.css. */
+/* ==========================================================================
+   DRYE — Closing CTA
+   Source-aligned to HTML prototype
+   ========================================================================== */
 
-.dryeNEW-closing-cta {
+.cta-sec {
   background: var(--bg-ink);
-  padding-top: var(--dryeNEW-closing-cta-pt-mobile, var(--space-40));
-  padding-bottom: var(--dryeNEW-closing-cta-pb-mobile, var(--space-40));
-}
-
-.dryeNEW-closing-cta__container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: var(--space-6);
-  max-width: 560px;
+  padding: 56px var(--page-pad);
   text-align: center;
 }
 
-.dryeNEW-closing-cta__micro {
-  margin: 0 0 var(--space-4);
-  font-size: var(--fs-micro-4);
-  letter-spacing: var(--ls-micro-wide);
-  color: var(--sage);
+.cta-in {
+  max-width: 520px;
+  margin: 0 auto;
 }
 
-.dryeNEW-closing-cta__heading {
-  margin: 0;
-  font-family: var(--font-display);
-  font-size: var(--fs-section-h2);
-  font-weight: var(--fw-semibold);
-  letter-spacing: var(--ls-tight-h2);
-  line-height: var(--lh-heading);
-  color: var(--white-100);
-  text-wrap: pretty;
+.cta-sec .micro {
+  text-align: center;
 }
 
-.dryeNEW-closing-cta__heading-em {
+.micro-w {
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.cta-h {
+  font-family: "Clash Grotesk", sans-serif;
+  font-size: clamp(24px, 6vw, 40px);
+  font-weight: 600;
+  letter-spacing: -0.03em;
+  color: white;
+  line-height: 1.1;
+  margin-bottom: 12px;
+}
+
+.cta-h em {
+  font-family: "Playfair Display", serif;
+  font-style: italic;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.3);
+  font-size: 0.8em;
   display: block;
-  margin-top: var(--space-4);
-  color: var(--sage);
+  margin-top: 6px;
 }
 
-.dryeNEW-closing-cta__body {
-  max-width: 42ch;
-  font-family: var(--font-body);
-  font-size: var(--fs-body-sm);
-  line-height: var(--lh-body);
-  color: var(--white-055);
-  text-wrap: pretty;
+.cta-sub {
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.4);
+  line-height: 1.7;
+  max-width: 380px;
+  margin: 0 auto 26px;
 }
 
-.dryeNEW-closing-cta__body p { margin: 0; }
+.cta-btns {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
 
-.dryeNEW-closing-cta__actions {
+.btn-main {
   width: 100%;
-  margin-top: var(--space-14);
+  max-width: 300px;
+  background: var(--emerald);
+  border: none;
+  cursor: pointer;
+  font-family: "DM Sans", sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: white;
+  padding: 16px 32px;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.dryeNEW-closing-cta__meta {
-  margin: var(--space-14) 0 0;
-  font-family: var(--font-body);
-  font-size: var(--fs-micro-4);
+.btn-ghost {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 11px;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.35);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+  padding-bottom: 2px;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.cta-fine {
+  margin-top: 18px;
+  font-size: 10px;
+  color: rgba(255, 255, 255, 0.2);
   letter-spacing: 0.05em;
-  line-height: 1.6;
-  color: var(--white-040);
 }
 
-@media (min-width: 768px) {
-  .dryeNEW-closing-cta {
-    padding-top: var(--dryeNEW-closing-cta-pt-desktop, var(--space-56));
-    padding-bottom: var(--dryeNEW-closing-cta-pb-desktop, var(--space-56));
+@media (max-width: 767px) {
+  .cta-sec {
+    padding: 48px var(--page-pad);
   }
 
-  .dryeNEW-closing-cta__container { gap: var(--space-8); }
-  .dryeNEW-closing-cta__body { font-size: var(--fs-body); }
-
-  .dryeNEW-closing-cta__actions {
-    width: auto;
-    margin-top: var(--space-20);
+  .btn-main {
+    max-width: 100%;
   }
-
-  .dryeNEW-closing-cta__actions .dryeNEW-btn { min-width: 300px; }
 }
