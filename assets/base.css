@@ -927,3 +927,18 @@ body {
     min-height: 48px;
   }
 }
+/* base.css — add to section 12 (buttons), after the --secondary rules.
+   Secondary buttons on dark fields: --secondary uses --border (#E5E7EB
+   hairline) and --deep text, which is invisible on navy. */
+
+.dryeNEW-btn--ghost {
+  background: transparent;
+  border-color: var(--white-015);
+  color: var(--white-075);
+}
+
+.dryeNEW-btn--ghost:hover {
+  border-color: var(--white-040);
+  color: var(--white-100);
+}
+
