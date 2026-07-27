@@ -1,0 +1,82 @@
+/* drye-nt-chart.css — shared chart/mechanism primitives
+   Used by drye-nt-trapped.liquid and drye-nt-barrier.liquid. */
+
+.mech-grid { display: flex; flex-direction: column; gap: 40px; --axis: 30px; --mark: 34px; }
+.mech-full { --x-d1: 0%; --x-d3: 25%; --x-d7: 50%; --x-d14: 100%; --y-d3: 51.3%; --y-d14: 21.2%; display: flex; flex-direction: column; }
+.mech-lead { margin-bottom: clamp(24px, 5vw, 40px); }
+.mech-head { max-width: 18ch; margin-bottom: clamp(28px, 6vw, 56px); }
+.mech-stmt { font-family: var(--font-display); font-weight: 600; letter-spacing: -0.025em; line-height: 1.12; font-size: clamp(27px, 8vw, 34px); color: #ffffff; margin: 0 0 12px; max-width: 30ch; text-wrap: pretty; }
+.mech-sub { font-family: var(--font-display); font-weight: 500; font-size: 15px; line-height: 1.45; letter-spacing: -0.005em; color: rgba(255,255,255,0.78); margin: 0; text-wrap: pretty; }
+.mech-note { margin: 16px 0 0; font-size: 9px; line-height: 1.5; letter-spacing: 0.02em; color: rgba(255,255,255,0.4); max-width: 74ch; }
+.mech-trio { display: flex; flex-wrap: nowrap; justify-content: center; gap: 14px; margin: 20px auto 0; max-width: none; text-align: center; font-size: 12px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(255,255,255,0.55); }
+.mech-trio span:first-child { color: #5FCFC1; }
+.mech-glove svg { display: block; width: 100%; max-width: clamp(156px, 40vw, 260px); height: auto; }
+
+/* hand-drawn annotations */
+.anno { position: absolute; display: flex; align-items: center; gap: 7px; pointer-events: none; z-index: 2; }
+.anno__txt { font-size: 10px; font-weight: 600; letter-spacing: 0.12em; line-height: 1.35; text-transform: uppercase; color: rgba(255,255,255,0.9); text-wrap: balance; }
+.anno svg { flex: 0 0 auto; }
+.anno--glove { flex-direction: column; align-items: flex-end; gap: 2px; top: 0; right: 30px; max-width: none; text-align: right; }
+.anno--glove .anno__txt { max-width: 110px; }
+.anno--chart { flex-direction: column; align-items: flex-start; gap: 2px; top: 18px; right: 6px; }
+
+/* plot */
+.dch { position: relative; }
+.dch--axis { padding-left: var(--axis); }
+.dch-y { position: absolute; left: 0; width: calc(var(--axis) - 8px); text-align: right; transform: translateY(-50%); font-size: 12px; font-weight: 500; color: rgba(255,255,255,0.55); }
+.dch-mz { position: absolute; left: calc(var(--axis) + 8px); top: 29.5%; transform: translateY(-50%); font-size: 11px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(239,68,68,0.95); }
+.trk-title { display: flex; align-items: center; gap: 9px; margin: 0 0 8px; font-size: 13px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(255,255,255,0.78); }
+.trk-dot { width: 8px; height: 8px; border-radius: 50%; flex: 0 0 auto; }
+.trk-chain { display: inline-flex; flex-wrap: wrap; align-items: center; gap: 8px; -webkit-background-clip: text; background-clip: text; color: transparent; }
+
+/* client timeline under the humidity chart */
+.hr-times { display: grid; grid-template-columns: repeat(7, 1fr); gap: 4px; margin-top: 6px; }
+.hr-times span { text-align: center; font-size: clamp(8.5px, 2.4vw, 10px); font-weight: 600; letter-spacing: 0.08em; color: rgba(255,255,255,0.45); font-variant-numeric: tabular-nums; }
+.day-row { position: relative; display: grid; grid-template-columns: repeat(7, 1fr); align-items: start; gap: 4px; margin-top: 22px; }
+.day-cell, .day-sep { position: relative; display: flex; flex-direction: column; align-items: center; gap: 8px; }
+.day-cell::before, .day-sep::before { content: ""; position: absolute; top: calc(var(--mark) / 2); left: calc(-50% + var(--mark) / 2 + 4px); width: calc(100% - var(--mark) - 8px); border-top: 1px dashed rgba(255,255,255,0.28); }
+.day-cell:first-child::before, .day-sep:first-child::before { content: none; }
+.day-mark { position: relative; overflow: hidden; width: var(--mark); height: var(--mark); border-radius: 50%; background: var(--deep); border: 1px solid rgba(255,255,255,0.34); display: flex; align-items: center; justify-content: center; }
+.day-lbl { max-width: 100%; font-size: clamp(8.5px, 2.4vw, 10px); font-weight: 600; letter-spacing: 0.08em; line-height: 1.25; text-transform: uppercase; text-align: center; color: rgba(255,255,255,0.6); overflow-wrap: break-word; }
+.day-sep { min-height: var(--mark); }
+.day-sep .day-mark { display: none; }
+.day-sep .day-lbl { display: block; position: absolute; left: 0; right: 0; top: calc(var(--mark) / 2); transform: translateY(-50%); padding: 2px 5px; background: var(--deep); color: #5FCFC1; letter-spacing: 0.04em; font-size: 8px; }
+
+/* day axis under the barrier chart */
+.dday { position: relative; min-height: 30px; padding-top: 12px; margin-left: var(--axis); }
+.dday span { position: absolute; top: 12px; white-space: nowrap; transform: translateX(-50%); display: flex; flex-direction: column; align-items: center; gap: 8px; font-size: clamp(8.5px, 2vw, 10px); font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.62); }
+.dday span::before { content: ""; width: 1px; height: 8px; background: rgba(255,255,255,0.28); }
+
+/* barrier annotations */
+.gann { display: flex; flex-direction: column; gap: 12px; margin: 0 0 18px; padding-left: var(--axis); }
+.ga { display: grid; grid-template-columns: auto 1fr; column-gap: 9px; align-items: start; font-size: 16px; line-height: 1.4; color: rgba(255,255,255,0.6); }
+.ga span { display: block; font-size: 13px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.9); }
+.ga-arw { display: block; margin-top: 4px; color: rgba(255,255,255,0.5); }
+
+@keyframes g-fill { 0%, 4% { transform: translateY(376px); } 52%, 100% { transform: translateY(52px); } }
+@keyframes g-wipe { 0%, 4% { transform: scaleX(0); } 52%, 100% { transform: scaleX(1); } }
+.g-fill { animation: g-fill 7s ease-in-out infinite; }
+.g-wipe { transform-box: fill-box; transform-origin: left center; animation: g-wipe 7s ease-in-out infinite; }
+
+@media (prefers-reduced-motion: reduce) {
+  .g-fill, .g-wipe { animation: none !important; }
+  .g-wipe { transform: scaleX(1) !important; }
+  .g-fill { transform: translateY(52px) !important; }
+}
+
+@media (min-width: 760px) {
+  .mech-grid { display: grid; grid-template-columns: 0.78fr 1.22fr; column-gap: 56px; row-gap: 0; align-items: start; --axis: 42px; --mark: 52px; }
+  .mech-full { grid-column: 1 / -1; }
+  .mech-glove svg { margin-inline: auto; }
+  .mech-trio { max-width: clamp(156px, 40vw, 260px); margin-inline: auto; }
+  .mech-sub { font-size: 16px; }
+  .anno--glove { right: -6px; }
+  .anno--glove svg { width: 92px; height: 58px; }
+  .day-sep .day-lbl { display: block; font-size: clamp(8.5px, 2.4vw, 10px); letter-spacing: 0.06em; }
+  .gann { position: relative; display: block; min-height: 52px; margin-bottom: 14px; }
+  .ga-arw { display: none; }
+  .ga { display: block; position: absolute; bottom: 0; max-width: calc(var(--x-d14) - var(--x-d3) - 20px); }
+  .gann > .ga:nth-child(2) { padding-left: 14px; }
+  .ga--start { max-width: calc(var(--x-d3) - 14px); transform: translateX(-100%); padding-right: 14px; text-align: right; }
+  .ga--end { width: 26ch; max-width: 30ch; transform: translateX(-100%); text-align: right; }
+}

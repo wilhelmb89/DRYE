@@ -1,0 +1,134 @@
+{{ 'drye-nt-base.css' | asset_url | stylesheet_tag }}
+{{ 'drye-nt-hero.css' | asset_url | stylesheet_tag }}
+
+<header
+  class="drye-nt drye-nt-hero"
+  id="drye-nt-hero-{{ section.id }}"
+  data-section-id="{{ section.id }}"
+  data-drye-section
+  data-section-name="nt_hero"
+>
+  <div class="lp-wrap drye-nt-hero__bar">
+    <span class="drye-nt-hero__logo">{{ section.settings.logo_text }}</span>
+  </div>
+
+  <div class="lp-shot lp-hero">
+    {%- if section.settings.hero_image != blank -%}
+      {{ section.settings.hero_image | image_url: width: 2200 | image_tag:
+         loading: 'eager', fetchpriority: 'high', sizes: '100vw',
+         widths: '600,900,1200,1600,2200',
+         alt: section.settings.hero_image_alt | escape }}
+    {%- endif -%}
+    <div class="hero-scrim">
+      <div class="lp-wrap">
+        <div class="hero-copy">
+          {%- if section.settings.heading != blank -%}
+            <h1 class="hero-h1">{{ section.settings.heading }}</h1>
+          {%- endif -%}
+          {%- if section.settings.subheading != blank -%}
+            <p class="hero-sub">{{ section.settings.subheading }}</p>
+          {%- endif -%}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="lp-wrap">
+    <div class="rev-bar" data-rev-rotator>
+      <span class="stars" aria-hidden="true">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+      <span class="rev-score">{{ section.settings.rating_label }}</span>
+
+      <div class="rev-rot">
+        {%- for block in section.blocks -%}
+          <span class="rev-slide" data-rev-slide data-on="{% if forloop.first %}1{% else %}0{% endif %}" {{ block.shopify_attributes }}>
+            {{ block.settings.quote }}<b>{{ block.settings.author }}</b>
+          </span>
+        {%- endfor -%}
+      </div>
+
+      <div class="rev-dots">
+        {%- for block in section.blocks -%}
+          <button class="rev-dot" type="button" data-rev-dot data-index="{{ forloop.index0 }}"
+            aria-label="Review {{ forloop.index }}" data-on="{% if forloop.first %}1{% else %}0{% endif %}"></button>
+        {%- endfor -%}
+      </div>
+    </div>
+  </div>
+</header>
+
+<script>
+  (function () {
+    var root = document.querySelector('#drye-nt-hero-{{ section.id }} [data-rev-rotator]');
+    if (!root) return;
+    var slides = root.querySelectorAll('[data-rev-slide]');
+    var dots = root.querySelectorAll('[data-rev-dot]');
+    if (slides.length < 2) return;
+
+    var i = 0, paused = false, timer = null;
+    var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    function paint() {
+      for (var n = 0; n < slides.length; n++) slides[n].setAttribute('data-on', n === i ? '1' : '0');
+      for (var d = 0; d < dots.length; d++) dots[d].setAttribute('data-on', d === i ? '1' : '0');
+    }
+    function start() {
+      if (reduce || timer) return;
+      timer = setInterval(function () {
+        if (paused) return;
+        i = (i + 1) % slides.length;
+        paint();
+      }, 6500);
+    }
+
+    for (var d = 0; d < dots.length; d++) {
+      dots[d].addEventListener('click', function (e) {
+        i = parseInt(e.currentTarget.getAttribute('data-index'), 10) || 0;
+        paused = true;
+        paint();
+      });
+    }
+    root.addEventListener('mouseenter', function () { paused = true; });
+    root.addEventListener('mouseleave', function () { paused = false; });
+
+    paint();
+    start();
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "DRYE NT — Hero",
+  "tag": "section",
+  "class": "shopify-section-drye-nt-hero",
+  "settings": [
+    { "type": "text", "id": "logo_text", "label": "Wordmark", "default": "DRYE" },
+    { "type": "image_picker", "id": "hero_image", "label": "Hero image (1:1 mobile / 21:9 desktop)" },
+    { "type": "text", "id": "hero_image_alt", "label": "Hero image alt text", "default": "Nail tech at her desk wearing black nitrile gloves over DRYE liners" },
+    { "type": "textarea", "id": "heading", "label": "Heading", "default": "Your nails are fine on Sunday. By Thursday they're splitting." },
+    { "type": "textarea", "id": "subheading", "label": "Subheading", "default": "Same nails. Same hands. The only variable is the four days in between." },
+    { "type": "text", "id": "rating_label", "label": "Rating label", "default": "4.4/5 · Trustpilot" }
+  ],
+  "blocks": [
+    {
+      "type": "review",
+      "name": "Rotating review",
+      "settings": [
+        { "type": "textarea", "id": "quote", "label": "Quote", "default": "\u201cThey keep the sweat and extra heat off my palms.\u201d" },
+        { "type": "text", "id": "author", "label": "Author", "default": "Jon · GB" }
+      ]
+    }
+  ],
+  "max_blocks": 6,
+  "presets": [
+    {
+      "name": "DRYE NT — Hero",
+      "blocks": [
+        { "type": "review", "settings": { "quote": "\u201cEven with sweat on the DRYE, my hands stayed dry all day.\u201d", "author": "PN · US" } },
+        { "type": "review", "settings": { "quote": "\u201cThey keep the sweat and extra heat off my palms.\u201d", "author": "Jon · GB" } },
+        { "type": "review", "settings": { "quote": "\u201cThey alleviate irritation and itching from sweat really well.\u201d", "author": "Alric · CA" } },
+        { "type": "review", "settings": { "quote": "\u201cComing up on a year — still comfortable, hands stay dry.\u201d", "author": "Athena · SE" } }
+      ]
+    }
+  ]
+}
+{% endschema %}
