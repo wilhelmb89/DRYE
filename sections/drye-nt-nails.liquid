@@ -13,37 +13,50 @@
       {%- if section.settings.heading != blank -%}
         <h2 class="lp-lead">{{ section.settings.heading }}</h2>
       {%- endif -%}
+      {%- if section.settings.sub != blank -%}
+        <p class="nail-sub">{{ section.settings.sub }}</p>
+      {%- endif -%}
     </div>
 
     <div class="nail-grid">
-      <div>
-        <div class="nail-ico"><svg viewBox="0 0 64 64" width="52" height="52" role="img" aria-label="Short to moderate almond nail"><g fill="none" stroke="#0D9488" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M22 56 L22 32 C22 24 26 20 32 20 C38 20 42 24 42 32 L42 56"></path><path d="M25 34 C25 24 27 12 32 12 C37 12 39 24 39 34 C39 37 36 38.5 32 38.5 C28 38.5 25 37 25 34 Z"></path><path d="M26.5 36.5 C28.5 38.5 35.5 38.5 37.5 36.5"></path><path d="M22 46 L42 46"></path></g></svg></div>
-        <span class="lp-head-eyebrow" style="color: var(--emerald)">{{ section.settings.ok_eyebrow }}</span>
-        <h3 class="lp-head-title" style="color: var(--deep)">{{ section.settings.ok_title }}</h3>
-        <ul class="cmp-list">
-          {%- assign ok_items = section.settings.ok_items | newline_to_br | split: '<br />' -%}
-          {%- for item in ok_items -%}
-            {%- assign line = item | strip -%}
-            {%- if line != blank -%}
-              <li><span class="lp-mark" style="color: var(--emerald)">&#8594;</span><span style="color: var(--body); text-wrap: pretty">{{ line }}</span></li>
-            {%- endif -%}
-          {%- endfor -%}
-        </ul>
+      <div class="nail-item">
+        <div class="nail-ico"><svg viewBox="0 0 64 64" role="img" aria-label="Short to moderate almond nail"><g fill="none" stroke="#0D9488" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M22 56 L22 32 C22 24 26 20 32 20 C38 20 42 24 42 32 L42 56"></path><path d="M25 34 C25 24 27 12 32 12 C37 12 39 24 39 34 C39 37 36 38.5 32 38.5 C28 38.5 25 37 25 34 Z"></path><path d="M26.5 36.5 C28.5 38.5 35.5 38.5 37.5 36.5"></path><path d="M22 46 L42 46"></path></g></svg></div>
+        <div class="nail-copy">
+          <span class="lp-head-eyebrow" style="color: var(--emerald)">{{ section.settings.ok_eyebrow }}</span>
+          <h3 class="lp-head-title" style="color: var(--deep)">{{ section.settings.ok_title }}</h3>
+          {%- if section.settings.ok_summary != blank -%}
+            <p class="nail-sum">{{ section.settings.ok_summary }}</p>
+          {%- endif -%}
+          <ul class="cmp-list">
+            {%- assign ok_items = section.settings.ok_items | newline_to_br | split: '<br />' -%}
+            {%- for item in ok_items -%}
+              {%- assign line = item | strip -%}
+              {%- if line != blank -%}
+                <li><span class="lp-mark" style="color: var(--emerald)">&#8594;</span><span style="color: var(--body); text-wrap: pretty">{{ line }}</span></li>
+              {%- endif -%}
+            {%- endfor -%}
+          </ul>
+        </div>
       </div>
 
-      <div>
-        <div class="nail-ico"><svg viewBox="0 0 64 64" width="52" height="52" role="img" aria-label="Long pointed nail"><g fill="none" stroke="#EF4444" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M22 56 L22 30 C22 22 27 18 32 18 C37 18 42 22 42 30 L42 56"></path><path d="M26 26 L32 4 L38 26 C38 30 36 32 32 32 C28 32 26 30 26 26 Z"></path><path d="M22 44 L42 44"></path><path d="M46 14 L52 10"></path><path d="M48 22 L55 21"></path></g></svg></div>
-        <span class="lp-head-eyebrow" style="color: var(--red)">{{ section.settings.no_eyebrow }}</span>
-        <h3 class="lp-head-title" style="color: var(--deep)">{{ section.settings.no_title }}</h3>
-        <ul class="cmp-list">
-          {%- assign no_items = section.settings.no_items | newline_to_br | split: '<br />' -%}
-          {%- for item in no_items -%}
-            {%- assign line = item | strip -%}
-            {%- if line != blank -%}
-              <li><span class="lp-mark" style="color: var(--red)">&#10005;</span><span style="color: var(--body); text-wrap: pretty">{{ line }}</span></li>
-            {%- endif -%}
-          {%- endfor -%}
-        </ul>
+      <div class="nail-item">
+        <div class="nail-ico"><svg viewBox="0 0 64 64" role="img" aria-label="Long pointed nail"><g fill="none" stroke="#EF4444" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M22 56 L22 30 C22 22 27 18 32 18 C37 18 42 22 42 30 L42 56"></path><path d="M26 26 L32 4 L38 26 C38 30 36 32 32 32 C28 32 26 30 26 26 Z"></path><path d="M22 44 L42 44"></path><path d="M46 14 L52 10"></path><path d="M48 22 L55 21"></path></g></svg></div>
+        <div class="nail-copy">
+          <span class="lp-head-eyebrow" style="color: var(--red)">{{ section.settings.no_eyebrow }}</span>
+          <h3 class="lp-head-title" style="color: var(--deep)">{{ section.settings.no_title }}</h3>
+          {%- if section.settings.no_summary != blank -%}
+            <p class="nail-sum">{{ section.settings.no_summary }}</p>
+          {%- endif -%}
+          <ul class="cmp-list">
+            {%- assign no_items = section.settings.no_items | newline_to_br | split: '<br />' -%}
+            {%- for item in no_items -%}
+              {%- assign line = item | strip -%}
+              {%- if line != blank -%}
+                <li><span class="lp-mark" style="color: var(--red)">&#10005;</span><span style="color: var(--body); text-wrap: pretty">{{ line }}</span></li>
+              {%- endif -%}
+            {%- endfor -%}
+          </ul>
+        </div>
       </div>
     </div>
   </div>
@@ -56,14 +69,17 @@
   "class": "shopify-section-drye-nt-nails",
   "settings": [
     { "type": "text", "id": "heading", "label": "Heading", "default": "Who it's not for." },
+    { "type": "text", "id": "sub", "label": "Sub line", "default": "The liner has to sit over the nail without tension." },
     { "type": "header", "content": "Recommended" },
     { "type": "text", "id": "ok_eyebrow", "label": "Eyebrow", "default": "Recommended" },
     { "type": "text", "id": "ok_title", "label": "Title", "default": "Short to moderate nails." },
-    { "type": "textarea", "id": "ok_items", "label": "List items", "info": "One per line.", "default": "Best match for DRYE\nLower concentrated pressure at the fingertips\nDesigned for normal working nail lengths" },
+    { "type": "text", "id": "ok_summary", "label": "Mobile summary", "info": "Shown instead of the list on mobile.", "default": "Best match for DRYE — less concentrated pressure at the fingertips." },
+    { "type": "textarea", "id": "ok_items", "label": "List items (desktop)", "info": "One per line.", "default": "Best match for DRYE\nLower concentrated pressure at the fingertips\nDesigned for normal working nail lengths" },
     { "type": "header", "content": "Not recommended" },
     { "type": "text", "id": "no_eyebrow", "label": "Eyebrow", "default": "Not recommended" },
     { "type": "text", "id": "no_title", "label": "Title", "default": "Long or sharply pointed nails." },
-    { "type": "textarea", "id": "no_items", "label": "List items", "info": "One per line.", "default": "Higher risk of puncturing or tearing the liner\nNot recommended for very long or sharply pointed nails\nChoose DRYE only if the liner can sit without tension over the nail" }
+    { "type": "text", "id": "no_summary", "label": "Mobile summary", "info": "Shown instead of the list on mobile.", "default": "Higher risk of puncturing or tearing the liner." },
+    { "type": "textarea", "id": "no_items", "label": "List items (desktop)", "info": "One per line.", "default": "Higher risk of puncturing or tearing the liner\nNot recommended for very long or sharply pointed nails\nChoose DRYE only if the liner can sit without tension over the nail" }
   ],
   "presets": [{ "name": "DRYE NT — Nail length" }]
 }
