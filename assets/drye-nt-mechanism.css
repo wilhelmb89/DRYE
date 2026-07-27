@@ -1,52 +1,54 @@
-/* DRYE Liner — Mechanism (DARK, bg-ink, reversed text). Scoped under .drye-liner-mechanism */
+/* DRYE NT — Mechanism (dark, reversed text). Scoped under .drye-liner-mechanism.
+   Type + colour tokens come from base.css. Never hardcode a font-size here. */
 
 .drye-liner-mechanism {
-  background: var(--bg-ink);
-  color: #C8D4DA;
+  background: var(--deep);
+  color: var(--white-075);
   padding-block: 40px;
+  border-top: 1px solid var(--white-010);
 }
 
 .drye-liner-mechanism__eyebrow {
-  font-size: var(--fs-micro-2);
-  font-weight: 700;
-  letter-spacing: 0.16em;
+  font-size: var(--fs-micro-4);
+  font-weight: var(--fw-semibold);
+  letter-spacing: var(--ls-micro-wide);
   text-transform: uppercase;
   color: var(--sage);
   margin-bottom: var(--space-8);
 }
 
-.drye-liner-mechanism__heading { text-align: center;
-  font-size: clamp(20px, 5.5vw, 26px);
+.drye-liner-mechanism__heading {
+  text-align: center;
+  font-family: var(--font-display);
+  font-size: var(--fs-section-h2);
   font-weight: var(--fw-semibold);
-  letter-spacing: -0.03em;
-  line-height: 1.06;
+  letter-spacing: var(--ls-tight-h2);
+  line-height: var(--lh-heading);
   color: var(--white-100);
   margin-bottom: var(--space-10);
 }
 
 .drye-liner-mechanism__body {
   font-size: var(--fs-body);
-  line-height: 1.6;
-  color: #C8D4DA;
+  line-height: var(--lh-body);
+  color: var(--white-075);
   margin-bottom: var(--space-16);
 }
 
-/* Cotton vs DRYE comparison */
+/* ---------- Cotton vs DRYE comparison ---------- */
 
-.drye-liner-mechanism__vs-block {
-  margin-top: var(--space-20);
-}
+.drye-liner-mechanism__vs-block { margin-top: var(--space-20); }
 
 .drye-liner-mechanism__vs-label {
+  position: relative;
   text-align: center;
   font-family: var(--font-body);
-  font-size: var(--fs-micro-2);
-  font-weight: 700;
+  font-size: var(--fs-micro-3);
+  font-weight: var(--fw-semibold);
   letter-spacing: 0.24em;
   text-transform: uppercase;
   color: var(--sage);
   margin-bottom: var(--space-14);
-  position: relative;
 }
 
 .drye-liner-mechanism__vs-label::before,
@@ -59,13 +61,8 @@
   background: var(--white-015);
 }
 
-.drye-liner-mechanism__vs-label::before {
-  left: 0;
-}
-
-.drye-liner-mechanism__vs-label::after {
-  right: 0;
-}
+.drye-liner-mechanism__vs-label::before { left: 0; }
+.drye-liner-mechanism__vs-label::after { right: 0; }
 
 .drye-liner-mechanism__vs-grid {
   display: grid;
@@ -74,20 +71,22 @@
 }
 
 .drye-liner-mechanism__vs-card {
-  border: 1px solid var(--white-015);
-  overflow: hidden;
   display: flex;
   flex-direction: column;
+  border: 1px solid var(--white-015);
+  border-left: 2px solid var(--red);
+  overflow: hidden;
 }
 
 .drye-liner-mechanism__vs-card--drye {
-  border-color: rgba(13, 148, 136, 0.5);
+  border-color: var(--white-015);
+  border-left-color: var(--emerald);
 }
 
 .drye-liner-mechanism__media {
+  position: relative;
   aspect-ratio: 1 / 1;
   background: #FAFAFA;
-  position: relative;
   overflow: hidden;
 }
 
@@ -100,52 +99,74 @@
 }
 
 .drye-liner-mechanism__media-inner svg {
+  display: block;
   width: 100%;
   height: auto;
   max-height: 100%;
-  display: block;
 }
 
 .drye-liner-mechanism__vs-body {
   padding: var(--space-12);
-  background: rgba(255, 255, 255, 0.02);
+  background: var(--white-003);
 }
 
 .drye-liner-mechanism__vs-name {
   font-family: var(--font-display);
-  font-size: var(--fs-caption);
+  font-size: var(--fs-micro-4);
   font-weight: var(--fw-semibold);
   letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--white-050);
-  margin-bottom: var(--space-6);
+  margin-bottom: var(--space-10);
 }
 
 .drye-liner-mechanism__vs-card--drye .drye-liner-mechanism__vs-name {
   color: var(--emerald);
 }
 
-.drye-liner-mechanism__vs-desc {
+/* ---------- step lists (the markup the liquid actually renders) ---------- */
+
+.drye-liner-mechanism__steps {
+  list-style: none;
   margin: 0;
-  font-family: var(--font-body);
-  font-size: 12px;
-  line-height: 1.4;
-  color: var(--white-075);
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-10);
 }
 
-.drye-liner-mechanism__vs-card--drye .drye-liner-mechanism__vs-desc {
-  color: rgba(255, 255, 255, 0.85);
-  font-weight: var(--fw-medium);
+.drye-liner-mechanism__step {
+  display: grid;
+  grid-template-columns: 14px 1fr;
+  column-gap: var(--space-8);
+  align-items: start;
+}
+
+.drye-liner-mechanism__step-icon {
+  font-size: var(--fs-body-sm);
+  font-weight: 700;
+  line-height: 1.45;
+  color: var(--red);
+}
+
+.drye-liner-mechanism__vs-card--drye .drye-liner-mechanism__step-icon {
+  color: var(--emerald);
+}
+
+.drye-liner-mechanism__step-text {
+  font-family: var(--font-body);
+  font-size: var(--fs-body-sm);
+  line-height: 1.45;
+  color: var(--white-075);
+  text-wrap: pretty;
+}
+
+.drye-liner-mechanism__vs-card--drye .drye-liner-mechanism__step-text {
+  color: var(--white-100);
 }
 
 @media (min-width: 768px) {
-  .drye-liner-mechanism {
-    padding-block: 88px;
-  }
-
-  .drye-liner-mechanism__heading { text-align: center;
-    font-size: var(--fs-section-h2);
-  }
+  .drye-liner-mechanism { padding-block: var(--section-pad-y); }
 
   .drye-liner-mechanism__inner {
     max-width: 900px;
@@ -168,11 +189,7 @@
     text-align: left;
   }
 
-  .drye-liner-mechanism__vs-grid {
-    gap: 16px;
-  }
-
-  .drye-liner-mechanism__vs-body {
-    padding: 20px;
-  }
+  .drye-liner-mechanism__vs-grid { gap: 16px; }
+  .drye-liner-mechanism__vs-body { padding: 20px; }
+  .drye-liner-mechanism__steps { gap: var(--space-12); }
 }
