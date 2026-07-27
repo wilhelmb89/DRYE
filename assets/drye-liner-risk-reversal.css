@@ -1,10 +1,11 @@
-/* DRYE Liner — Risk Reversal section (all rules scoped under .drye-liner-risk-reversal) */
+/* DRYE Liner — Risk Reversal. Type + buttons come from base.css.
+   All rules scoped under .drye-liner-risk-reversal. */
 
 .drye-liner-risk-reversal {
   background: var(--bg);
   color: var(--body);
-  border-top: 1px solid var(--border);
-  padding-block: 40px;
+  border-top: var(--border-base);
+  padding-block: var(--space-40);
 }
 
 .drye-liner-risk-reversal__wrap {
@@ -18,7 +19,8 @@
 .drye-liner-risk-reversal__badge {
   width: 68px;
   height: 68px;
-  border: 1.5px solid var(--deep);
+  flex: none;
+  border: var(--border-width-strong) solid var(--deep);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -27,76 +29,69 @@
 
 .drye-liner-risk-reversal__num {
   font-family: var(--font-display);
-  font-size: 22px;
+  font-size: var(--fs-stat-sm);
   font-weight: var(--fw-semibold);
+  letter-spacing: var(--ls-tight-h3);
   line-height: 1;
   color: var(--deep);
-  letter-spacing: -0.02em;
 }
 
 .drye-liner-risk-reversal__word {
-  font-size: 8.5px;
-  font-weight: 700;
-  letter-spacing: 0.14em;
+  margin-top: 2px;
+  font-family: var(--font-body);
+  font-size: var(--fs-micro-3);
+  font-weight: var(--fw-semibold);
+  letter-spacing: var(--ls-micro-wide);
   text-transform: uppercase;
   color: var(--deep);
-  margin-top: 2px;
 }
 
 .drye-liner-risk-reversal__copy h3 {
+  margin: 0 0 var(--space-4);
   font-family: var(--font-display);
-  font-size: 18px;
+  font-size: var(--fs-sub-h3);
   font-weight: var(--fw-semibold);
-  letter-spacing: -0.02em;
+  letter-spacing: var(--ls-tight-h3);
+  line-height: var(--lh-heading-tight);
   color: var(--deep);
-  margin: 0 0 4px;
-  line-height: 1.15;
+  text-wrap: pretty;
 }
 
 .drye-liner-risk-reversal__copy p {
-  font-size: 12px;
-  color: var(--muted);
-  line-height: 1.5;
   margin: 0;
+  max-width: 42ch;
+  font-family: var(--font-body);
+  font-size: var(--fs-body-sm);
+  line-height: var(--lh-body);
+  color: var(--muted);
+  text-wrap: pretty;
 }
 
 .drye-liner-risk-reversal__cta-wrap {
-  margin-top: var(--space-4);
+  display: flex;
+  justify-content: center;
+  margin-top: var(--space-14);
 }
 
-.drye-liner-risk-reversal__cta {
+/* full width on mobile, but never the stretched-out tablet button */
+.drye-liner-risk-reversal__cta-wrap .dryeNEW-btn {
   width: 100%;
-  background: var(--emerald);
-  border: 1.5px solid var(--emerald);
-  color: #fff;
-  font-family: var(--font-body);
-  font-size: 13px;
-  font-weight: var(--fw-semibold);
-  letter-spacing: 0.02em;
-  padding: 14px 24px;
-  text-decoration: none;
-  cursor: pointer;
-}
-
-.drye-liner-risk-reversal__cta:hover {
-  background: var(--deep);
-  border-color: var(--deep);
+  max-width: 420px;
 }
 
 .drye-liner-risk-reversal__guarantee {
-  text-align: center;
-  font-size: 9px;
-  color: var(--caption);
-  letter-spacing: 0.1em;
   margin-top: var(--space-10);
+  text-align: center;
+  font-family: var(--font-body);
+  font-size: var(--fs-micro-4);
+  font-weight: var(--fw-semibold);
+  letter-spacing: var(--ls-micro-wide);
   text-transform: uppercase;
-  font-weight: 700;
+  color: var(--caption);
 }
 
 @media (min-width: 768px) {
-  .drye-liner-risk-reversal {
-    padding-block: 88px;
-  }
+  .drye-liner-risk-reversal { padding-block: var(--space-56); }
 
   .drye-liner-risk-reversal__inner {
     max-width: 640px;
@@ -107,13 +102,17 @@
   .drye-liner-risk-reversal__inner .drye-liner-risk-reversal__wrap {
     display: inline-grid;
     grid-template-columns: 68px auto;
-    gap: 16px;
+    gap: var(--space-16);
     text-align: left;
-    margin-bottom: 32px;
+    margin-bottom: var(--space-32);
   }
 
-  .drye-liner-risk-reversal__cta {
+  .drye-liner-risk-reversal__copy p { font-size: var(--fs-body); }
+
+  .drye-liner-risk-reversal__cta-wrap { margin-top: var(--space-20); }
+
+  .drye-liner-risk-reversal__cta-wrap .dryeNEW-btn {
     width: auto;
-    min-width: 240px;
+    min-width: 300px;
   }
 }
