@@ -61,6 +61,7 @@
 
 @media (min-width: 768px) {
   .cta-strip { padding: var(--space-56) var(--page-pad); }
+  .cta-strip__heading { font-size: 24px; }
   .cta-strip__inner { gap: var(--space-8); }
   .cta-strip__sub { font-size: var(--fs-body); }
 
