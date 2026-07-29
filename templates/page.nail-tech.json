@@ -392,6 +392,24 @@
     "drye_proof_wall_DPHfDt": {
       "type": "drye-proof-wall",
       "blocks": {
+        "media_Ui9i7C": {
+          "type": "media",
+          "settings": {
+            "media_type": "video",
+            "video": "shopify://files/videos/IMG_0591_3.mp4",
+            "label": "",
+            "sublabel": ""
+          }
+        },
+        "media_DkkDTG": {
+          "type": "media",
+          "settings": {
+            "media_type": "image",
+            "video": "shopify://files/videos/IMG_0591_6.mp4",
+            "label": "",
+            "sublabel": ""
+          }
+        },
         "media_9mEkJC": {
           "type": "media",
           "settings": {
@@ -446,15 +464,6 @@
             "sublabel": "Add photo or video"
           }
         },
-        "media_EQMbDH": {
-          "type": "media",
-          "settings": {
-            "media_type": "image",
-            "image": "shopify://shop_images/Screenshot_6.webp",
-            "label": "Field user",
-            "sublabel": "Add photo or video"
-          }
-        },
         "media_7t7JiP": {
           "type": "media",
           "settings": {
@@ -463,37 +472,18 @@
             "label": "Field user",
             "sublabel": "Add photo or video"
           }
-        },
-        "media_zzBRm7": {
-          "type": "media",
-          "settings": {
-            "media_type": "image",
-            "image": "shopify://shop_images/Screenshot_8.jpg",
-            "label": "Field user",
-            "sublabel": "Add photo or video"
-          }
-        },
-        "media_9nHigy": {
-          "type": "media",
-          "settings": {
-            "media_type": "image",
-            "video": "shopify://files/videos/IMG_0591_1.mp4",
-            "label": "",
-            "sublabel": ""
-          }
         }
       },
       "block_order": [
+        "media_Ui9i7C",
+        "media_DkkDTG",
         "media_9mEkJC",
         "media_MCbBPC",
         "media_933dtq",
         "media_4pdaGw",
         "media_4TRD7G",
         "media_KrVQr3",
-        "media_EQMbDH",
-        "media_7t7JiP",
-        "media_zzBRm7",
-        "media_9nHigy"
+        "media_7t7JiP"
       ],
       "name": "DRYE Proof Wall",
       "settings": {
