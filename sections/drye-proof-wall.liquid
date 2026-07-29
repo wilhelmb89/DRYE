@@ -1,8 +1,8 @@
 {% comment %}
   DRYE Proof Wall — full-width below-the-fold review section.
-  - Media row : full-bleed CSS marquee, auto right -> left (content duplicated
-                in Liquid for a seamless loop; no JS needed for motion).
-                Pauses on hover/touch.
+  - Media row: one DOM node per photo/video. Native swipe plus JS auto-scroll.
+               JS reorders existing cards for a continuous loop; nothing is cloned.
+               Pauses on interaction, video playback and reduced motion.
   - Review row: large verified-review cards (baked in, never reset), manual
                 swipe + brand prev/next arrows.
   DRYE system: white / light grey, navy text, thin borders, teal accent.
@@ -31,48 +31,56 @@
   {% assign media_blocks = section.blocks | where: 'type', 'media' %}
 
   {% if section.settings.show_media_row and media_blocks.size > 0 %}
-    {% comment %} Build the card set once, then output it twice so the CSS
-       marquee (translateX -50%) loops seamlessly. {% endcomment %}
-    {% capture dpw_media_cards %}
-      {% for block in media_blocks %}
-        <div class="dpw__media">
-          <div class="dpw__media-frame">
-            {% if block.settings.media_type == 'video' and block.settings.video != blank %}
-              {{ block.settings.video | video_tag: image_size: '900x', controls: true, loop: false, muted: false, preload: 'none' }}
-            {% elsif block.settings.image != blank %}
-              {%- assign dpw_img = block.settings.image -%}
-              <img
-                class="dpw__media-img"
-                src="{{ dpw_img | image_url: width: 470 }}"
-                srcset="{{ dpw_img | image_url: width: 235 }} 235w, {{ dpw_img | image_url: width: 470 }} 470w, {{ dpw_img | image_url: width: 705 }} 705w, {{ dpw_img | image_url: width: 940 }} 940w"
-                sizes="235px"
-                width="{{ dpw_img.width }}"
-                height="{{ dpw_img.height }}"
-                loading="lazy"
-                alt="{{ block.settings.label | escape }}"
-                {% if dpw_img.presentation.focal_point %}style="object-position: {{ dpw_img.presentation.focal_point }};"{% endif %}
-              >
-            {% else %}
-              <div class="dpw__media-todo">
-                <span>Add photo or video</span>
-                <small>Customizer &rarr; this block &rarr; Photo or Video</small>
-              </div>
-            {% endif %}
-            {% if block.settings.label != blank or block.settings.sublabel != blank %}
-              <div class="dpw__media-cap">
-                {% if block.settings.label != blank %}<span class="dpw__media-label">{{ block.settings.label }}</span>{% endif %}
-                {% if block.settings.sublabel != blank %}<span class="dpw__media-sub">{{ block.settings.sublabel }}</span>{% endif %}
-              </div>
-            {% endif %}
-          </div>
-        </div>
-      {% endfor %}
-    {% endcapture %}
-
-    <div class="dpw__row dpw__row--media" data-dpw-autoscroll data-dpw-speed="0.5">
+    <div
+      class="dpw__row dpw__row--media"
+      data-dpw-autoscroll
+      data-dpw-speed="0.5"
+      aria-label="Customer photos and videos"
+    >
       <div class="dpw__marquee" data-dpw-marquee>
-        {{ dpw_media_cards }}
-        <span class="dpw__marquee-dup" aria-hidden="true">{{ dpw_media_cards }}</span>
+        {% for block in media_blocks %}
+          <div class="dpw__media" {{ block.shopify_attributes }}>
+            <div class="dpw__media-frame">
+              {% if block.settings.media_type == 'video' and block.settings.video != blank %}
+                {{ block.settings.video | video_tag:
+                  class: 'dpw__media-video',
+                  image_size: '470x',
+                  controls: true,
+                  loop: false,
+                  muted: false,
+                  playsinline: true,
+                  preload: 'none'
+                }}
+              {% elsif block.settings.image != blank %}
+                {%- assign dpw_img = block.settings.image -%}
+                <img
+                  class="dpw__media-img"
+                  src="{{ dpw_img | image_url: width: 470 }}"
+                  srcset="{{ dpw_img | image_url: width: 235 }} 235w, {{ dpw_img | image_url: width: 470 }} 470w, {{ dpw_img | image_url: width: 705 }} 705w"
+                  sizes="235px"
+                  width="{{ dpw_img.width }}"
+                  height="{{ dpw_img.height }}"
+                  loading="lazy"
+                  decoding="async"
+                  alt="{{ block.settings.label | escape }}"
+                  {% if dpw_img.presentation.focal_point %}style="object-position: {{ dpw_img.presentation.focal_point }};"{% endif %}
+                >
+              {% else %}
+                <div class="dpw__media-todo">
+                  <span>Add photo or video</span>
+                  <small>Customizer &rarr; this block &rarr; Photo or Video</small>
+                </div>
+              {% endif %}
+
+              {% if block.settings.label != blank or block.settings.sublabel != blank %}
+                <div class="dpw__media-cap">
+                  {% if block.settings.label != blank %}<span class="dpw__media-label">{{ block.settings.label }}</span>{% endif %}
+                  {% if block.settings.sublabel != blank %}<span class="dpw__media-sub">{{ block.settings.sublabel }}</span>{% endif %}
+                </div>
+              {% endif %}
+            </div>
+          </div>
+        {% endfor %}
       </div>
     </div>
   {% endif %}
@@ -189,8 +197,6 @@
   </div>
 </section>
 
-<script src="{{ 'drye-proof-wall.js' | asset_url }}" defer></script>
-
 {% stylesheet %}
 .dpw {
   background: #fff;
@@ -216,25 +222,24 @@
 }
 .dpw__sub { margin: 0; font-size: 15px; line-height: 1.6; color: #4B5563; max-width: 52ch; }
 
-/* ---- Media row: full-bleed CSS marquee (auto right -> left) ----------- */
-/* Media row: a real scroll container (swipeable) that JS also auto-scrolls. */
+/* ---- Media row: native swipe + JS circular auto-scroll ---------------- */
 .dpw__row--media {
   margin-top: 22px;
   overflow-x: auto;
   -webkit-overflow-scrolling: touch;
   scrollbar-width: none;
+  overscroll-behavior-x: contain;
 }
 .dpw__row--media::-webkit-scrollbar { display: none; }
 .dpw__marquee {
   display: flex;
+  gap: 14px;
   width: max-content;
 }
-.dpw__marquee-dup { display: inline-flex; }
 
 .dpw__media {
   flex: 0 0 235px;
   max-width: 235px;
-  margin-right: 14px;
 }
 
 .dpw__media-frame {
@@ -244,11 +249,18 @@
   border: 1px solid #E5E7EB;
   border-radius: 4px;
   background: #F8FAFC;
+  contain: layout paint;
 }
 .dpw__media-frame img,
 .dpw__media-frame video {
-  position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block;
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
 }
+.dpw__media-frame video { background: #0F2230; }
 .dpw__media-todo {
   position: absolute; inset: 0;
   display: flex; flex-direction: column; align-items: center; justify-content: center;
@@ -259,6 +271,7 @@
 .dpw__media-cap {
   position: absolute; left: 0; right: 0; bottom: 0; padding: 30px 14px 12px;
   background: linear-gradient(to top, rgba(15,34,48,0.82) 0%, rgba(15,34,48,0) 100%);
+  pointer-events: none;
 }
 .dpw__media-label { display: block; font-size: 9px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: #fff; }
 .dpw__media-sub { display: block; margin-top: 2px; font-size: 11.5px; color: rgba(255,255,255,0.82); }
@@ -333,6 +346,8 @@
 }
 
 {% endstylesheet %}
+
+<script src="{{ 'drye-proof-wall.js' | asset_url }}" defer></script>
 
 {% schema %}
 {
