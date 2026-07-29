@@ -405,6 +405,80 @@
         "notify_success": "Done. We'll email you."
       }
     },
+    "drye_liner_product_clarity_anRGnT": {
+      "type": "drye-liner-product-clarity",
+      "blocks": {
+        "spec_iYm4eg": {
+          "type": "spec",
+          "settings": {
+            "title": "Sweat",
+            "description": "New asymmetric textile invention, 97% reported dry hands after use."
+          }
+        },
+        "spec_UCNmnW": {
+          "type": "spec",
+          "settings": {
+            "title": "Dexterity",
+            "description": "0.4 mm base layer. No bulky second glove feel."
+          }
+        },
+        "spec_XpHy49": {
+          "type": "spec",
+          "settings": {
+            "title": "No glove fighting ",
+            "description": "Slides under nitrile, latex, and rubber gloves."
+          }
+        },
+        "spec_wq6LWW": {
+          "type": "spec",
+          "settings": {
+            "title": "Hand resets",
+            "description": "Fewer stops to dry hands, change gloves, or reach for cream."
+          }
+        },
+        "spec_DKFJL6": {
+          "type": "spec",
+          "settings": {
+            "title": "Oil & grease",
+            "description": "The liner adds a washable layer between your skin and glove contamination."
+          }
+        },
+        "spec_NPd7b8": {
+          "type": "spec",
+          "settings": {
+            "title": "Tearing",
+            "description": "Dryer skin contact means less friction when your nitrile goes on and off."
+          }
+        },
+        "spec_PtHdCH": {
+          "type": "spec",
+          "settings": {
+            "title": "Long use",
+            "description": "Built for months of glove work, not single‑shift disposal."
+          }
+        }
+      },
+      "block_order": [
+        "spec_iYm4eg",
+        "spec_UCNmnW",
+        "spec_XpHy49",
+        "spec_wq6LWW",
+        "spec_DKFJL6",
+        "spec_NPd7b8",
+        "spec_PtHdCH"
+      ],
+      "name": "DRYE Product Clarity",
+      "settings": {
+        "section_id": "liner-product",
+        "heading": "DRYE goes",
+        "heading_emphasis": "under your existing glove.",
+        "body": "<p>A liner built for sealed gloves - not open air. Built for people who wear gloves for hours.</p>",
+        "media_type": "video",
+        "video": "shopify://files/videos/IMG_0591.mp4",
+        "before_label": "Put on DRYE — 0.4 mm base layer",
+        "after_label": "Put on your usual glove"
+      }
+    },
     "drye_pdp_details_8L9w7F": {
       "type": "drye-pdp-details",
       "name": "DRYE PDP Details",
@@ -1024,6 +1098,7 @@
   },
   "order": [
     "drye_product_page_new_9ibHgd",
+    "drye_liner_product_clarity_anRGnT",
     "drye_pdp_details_8L9w7F",
     "drye_proof_wall_WRiftY",
     "drye_mechanics_time_promise_gYTiq8",
