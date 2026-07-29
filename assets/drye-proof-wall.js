@@ -1,108 +1,402 @@
-/* DRYE Proof Wall — interaction.
-   - Media row: a real scroll container that ALSO auto-scrolls right -> left.
-     Auto-scroll uses a float accumulator (setting scrollLeft += <1px directly
-     rounds to 0 and never moves), pauses on touch/hover/wheel so the user can
-     swipe, and loops seamlessly because the cards are duplicated in Liquid.
-     With reduce-motion it simply doesn't auto-scroll, but stays swipeable.
-   - Review row: prev/next arrows.
-   Binds on load and on Shopify section load. */
+/* DRYE Proof Wall
+   Stable, duplication-free media autoscroll for Shopify.
+
+   - Does not clone or reorder media cards.
+   - Keeps native touch/swipe scrolling.
+   - Scrolls back and forth between the two ends of the row.
+   - Runs only while the media row is visible.
+   - Pauses during touch, hover, wheel use and video playback.
+   - Respects prefers-reduced-motion.
+   - Review arrows move one review card at a time.
+*/
 (function () {
-  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  'use strict';
 
-  function autoScroll(scroller) {
-    if (!scroller || scroller.dataset.dpwAuto) return;
-    scroller.dataset.dpwAuto = '1';
+  var reduceMotionQuery = window.matchMedia
+    ? window.matchMedia('(prefers-reduced-motion: reduce)')
+    : null;
 
-    var speed = parseFloat(scroller.getAttribute('data-dpw-speed')) || 0.5;
-    var acc = scroller.scrollLeft || 0;
-    var paused = false;
-    var resumeTO = null;
-    var rafId = null;
+  function prefersReducedMotion() {
+    return !!(reduceMotionQuery && reduceMotionQuery.matches);
+  }
+
+  function setupAutoScroll(scroller) {
+    if (!scroller || scroller.dataset.dpwAutoBound === 'true') return;
+    scroller.dataset.dpwAutoBound = 'true';
+
+    var track = scroller.querySelector('[data-dpw-marquee]');
+    if (!track || track.children.length < 2) return;
+
+    /*
+      Existing Liquid uses data-dpw-speed="0.5".
+      Treat that as pixels per frame at 60 fps:
+      0.5 × 60 = 30 pixels per second.
+    */
+    var configuredSpeed = parseFloat(
+      scroller.getAttribute('data-dpw-speed')
+    );
+
+    var pixelsPerSecond = Number.isFinite(configuredSpeed)
+      ? Math.max(6, configuredSpeed * 60)
+      : 30;
+
+    var direction = 1;
     var inView = false;
+    var userPaused = false;
+    var playingVideos = 0;
+    var rafId = null;
+    var resumeTimer = null;
+    var lastTimestamp = 0;
+    var position = scroller.scrollLeft || 0;
 
-    function loopPoint() { return scroller.scrollWidth / 2; } // content is duplicated
-    function eligible() {
-      // Only animate while the row is on screen AND the tab is in the foreground.
-      // Previously the rAF loop changed scrollLeft ~60x/sec forever (even off-screen
-      // or in a background tab), which floods session recorders like Microsoft Clarity
-      // with scroll events and makes them exceed their per-session cap and drop the
-      // recording. Gating the loop keeps the visual behaviour but stops the flood.
-      return inView && !reduce && document.visibilityState === 'visible';
-    }
-    function start() { if (rafId == null && eligible()) { rafId = requestAnimationFrame(frame); } }
-    function stop() { if (rafId != null) { cancelAnimationFrame(rafId); rafId = null; } }
-    function pause() { paused = true; if (resumeTO) { clearTimeout(resumeTO); } }
-    function resumeSoon() {
-      if (resumeTO) { clearTimeout(resumeTO); }
-      resumeTO = setTimeout(function () { acc = scroller.scrollLeft; paused = false; }, 1100);
+    function maxScrollLeft() {
+      return Math.max(
+        0,
+        scroller.scrollWidth - scroller.clientWidth
+      );
     }
 
-    scroller.addEventListener('pointerenter', pause);
-    scroller.addEventListener('pointerleave', resumeSoon);
-    scroller.addEventListener('touchstart', pause, { passive: true });
-    scroller.addEventListener('touchend', resumeSoon, { passive: true });
-    scroller.addEventListener('touchcancel', resumeSoon, { passive: true });
-    scroller.addEventListener('wheel', function () { pause(); resumeSoon(); }, { passive: true });
-    // Keep the accumulator in sync while the user is dragging.
-    scroller.addEventListener('scroll', function () { if (paused) { acc = scroller.scrollLeft; } }, { passive: true });
+    function canRun() {
+      return (
+        inView &&
+        !userPaused &&
+        playingVideos === 0 &&
+        !prefersReducedMotion() &&
+        document.visibilityState === 'visible' &&
+        maxScrollLeft() > 2
+      );
+    }
 
-    function frame() {
-      rafId = null;
-      if (!eligible()) { return; } // stop the loop; observers below will restart it
-      if (!paused) {
-        acc += speed;
-        var half = loopPoint();
-        if (half > 0 && acc >= half) { acc -= half; }
-        // Round to whole pixels: a fractional scrollLeft re-rasterises text glyphs
-        // on the sub-pixel grid every frame, which makes the overlay labels appear
-        // to shimmer/wobble horizontally. Integer scroll positions render crisply.
-        scroller.scrollLeft = Math.round(acc);
+    function stop() {
+      if (rafId !== null) {
+        window.cancelAnimationFrame(rafId);
+        rafId = null;
       }
-      rafId = requestAnimationFrame(frame);
+
+      lastTimestamp = 0;
     }
 
-    // Run only while the row is visible in the viewport.
+    function start() {
+      if (rafId === null && canRun()) {
+        position = scroller.scrollLeft;
+        rafId = window.requestAnimationFrame(frame);
+      }
+    }
+
+    function pauseForUser() {
+      userPaused = true;
+
+      if (resumeTimer !== null) {
+        window.clearTimeout(resumeTimer);
+        resumeTimer = null;
+      }
+
+      stop();
+    }
+
+    function resumeAfterDelay() {
+      if (resumeTimer !== null) {
+        window.clearTimeout(resumeTimer);
+      }
+
+      resumeTimer = window.setTimeout(function () {
+        resumeTimer = null;
+        position = scroller.scrollLeft;
+        userPaused = false;
+        start();
+      }, 1200);
+    }
+
+    function frame(timestamp) {
+      rafId = null;
+
+      if (!canRun()) {
+        lastTimestamp = 0;
+        return;
+      }
+
+      if (!lastTimestamp) {
+        lastTimestamp = timestamp;
+      }
+
+      var elapsedSeconds = Math.min(
+        (timestamp - lastTimestamp) / 1000,
+        0.05
+      );
+
+      lastTimestamp = timestamp;
+
+      var max = maxScrollLeft();
+
+      position += (
+        direction *
+        pixelsPerSecond *
+        elapsedSeconds
+      );
+
+      if (position >= max) {
+        position = max;
+        direction = -1;
+      } else if (position <= 0) {
+        position = 0;
+        direction = 1;
+      }
+
+      scroller.scrollLeft = Math.round(position);
+
+      rafId = window.requestAnimationFrame(frame);
+    }
+
+    scroller.addEventListener(
+      'pointerenter',
+      pauseForUser
+    );
+
+    scroller.addEventListener(
+      'pointerleave',
+      resumeAfterDelay
+    );
+
+    scroller.addEventListener(
+      'touchstart',
+      pauseForUser,
+      { passive: true }
+    );
+
+    scroller.addEventListener(
+      'touchend',
+      resumeAfterDelay,
+      { passive: true }
+    );
+
+    scroller.addEventListener(
+      'touchcancel',
+      resumeAfterDelay,
+      { passive: true }
+    );
+
+    scroller.addEventListener(
+      'wheel',
+      function () {
+        pauseForUser();
+        resumeAfterDelay();
+      },
+      { passive: true }
+    );
+
+    scroller.addEventListener(
+      'scroll',
+      function () {
+        if (userPaused || rafId === null) {
+          position = scroller.scrollLeft;
+        }
+      },
+      { passive: true }
+    );
+
+    track.querySelectorAll('video').forEach(
+      function (video) {
+        var countedAsPlaying = false;
+
+        function onPlay() {
+          if (!countedAsPlaying) {
+            countedAsPlaying = true;
+            playingVideos += 1;
+          }
+
+          stop();
+        }
+
+        function onStop() {
+          if (countedAsPlaying) {
+            countedAsPlaying = false;
+            playingVideos = Math.max(
+              0,
+              playingVideos - 1
+            );
+          }
+
+          position = scroller.scrollLeft;
+          start();
+        }
+
+        video.addEventListener('play', onPlay);
+        video.addEventListener('pause', onStop);
+        video.addEventListener('ended', onStop);
+        video.addEventListener('emptied', onStop);
+      }
+    );
+
     if ('IntersectionObserver' in window) {
-      new IntersectionObserver(function (entries) {
-        inView = entries[0].isIntersecting;
-        if (inView) { acc = scroller.scrollLeft; start(); } else { stop(); }
-      }, { threshold: 0 }).observe(scroller);
+      var observer = new IntersectionObserver(
+        function (entries) {
+          inView = !!entries[0].isIntersecting;
+
+          if (inView) {
+            position = scroller.scrollLeft;
+            start();
+          } else {
+            stop();
+          }
+        },
+        {
+          threshold: 0.01
+        }
+      );
+
+      observer.observe(scroller);
     } else {
       inView = true;
       start();
     }
 
-    // Pause when the tab goes to the background, resume when it returns.
-    document.addEventListener('visibilitychange', function () {
-      if (document.visibilityState === 'visible') { acc = scroller.scrollLeft; start(); } else { stop(); }
-    });
+    document.addEventListener(
+      'visibilitychange',
+      function () {
+        if (document.visibilityState === 'visible') {
+          position = scroller.scrollLeft;
+          start();
+        } else {
+          stop();
+        }
+      }
+    );
+
+    if (
+      reduceMotionQuery &&
+      typeof reduceMotionQuery.addEventListener === 'function'
+    ) {
+      reduceMotionQuery.addEventListener(
+        'change',
+        function () {
+          if (prefersReducedMotion()) {
+            stop();
+          } else {
+            start();
+          }
+        }
+      );
+    }
+
+    window.addEventListener(
+      'resize',
+      function () {
+        var max = maxScrollLeft();
+
+        position = Math.min(
+          scroller.scrollLeft,
+          max
+        );
+
+        scroller.scrollLeft = position;
+        start();
+      },
+      { passive: true }
+    );
   }
 
-  function setup(sec) {
-    if (!sec || sec.dataset.dpwBound) return;
-    sec.dataset.dpwBound = '1';
-
-    sec.querySelectorAll('[data-dpw-autoscroll]').forEach(autoScroll);
-
-    // Review row: prev / next arrows scroll one card at a time.
-    var track = sec.querySelector('.dpw__row--reviews');
-    var prev = sec.querySelector('[data-dpw-prev]');
-    var next = sec.querySelector('[data-dpw-next]');
-    function step(dir) {
-      if (!track) { return; }
-      var card = track.querySelector('.dpw__review');
-      var amount = card ? (card.getBoundingClientRect().width + 14) : Math.round(track.clientWidth * 0.85);
-      track.scrollBy({ left: dir * amount, behavior: 'smooth' });
+  function setupSection(section) {
+    if (
+      !section ||
+      section.dataset.dpwBound === 'true'
+    ) {
+      return;
     }
-    if (prev) { prev.addEventListener('click', function () { step(-1); }); }
-    if (next) { next.addEventListener('click', function () { step(1); }); }
+
+    section.dataset.dpwBound = 'true';
+
+    section
+      .querySelectorAll('[data-dpw-autoscroll]')
+      .forEach(setupAutoScroll);
+
+    var reviewTrack = section.querySelector(
+      '.dpw__row--reviews'
+    );
+
+    var previousButton = section.querySelector(
+      '[data-dpw-prev]'
+    );
+
+    var nextButton = section.querySelector(
+      '[data-dpw-next]'
+    );
+
+    function reviewStep(direction) {
+      if (!reviewTrack) return;
+
+      var card = reviewTrack.querySelector(
+        '.dpw__review'
+      );
+
+      var styles = window.getComputedStyle(
+        reviewTrack
+      );
+
+      var gap = parseFloat(
+        styles.columnGap || styles.gap
+      ) || 14;
+
+      var distance = card
+        ? card.getBoundingClientRect().width + gap
+        : Math.round(reviewTrack.clientWidth * 0.85);
+
+      reviewTrack.scrollBy({
+        left: direction * distance,
+        behavior: prefersReducedMotion()
+          ? 'auto'
+          : 'smooth'
+      });
+    }
+
+    if (previousButton) {
+      previousButton.addEventListener(
+        'click',
+        function () {
+          reviewStep(-1);
+        }
+      );
+    }
+
+    if (nextButton) {
+      nextButton.addEventListener(
+        'click',
+        function () {
+          reviewStep(1);
+        }
+      );
+    }
   }
 
   function initAll(root) {
-    (root || document).querySelectorAll('[data-dpw]').forEach(setup);
+    var scope = root || document;
+
+    if (
+      scope.matches &&
+      scope.matches('[data-dpw]')
+    ) {
+      setupSection(scope);
+    }
+
+    scope
+      .querySelectorAll('[data-dpw]')
+      .forEach(setupSection);
   }
 
-  if (document.readyState !== 'loading') { initAll(); }
-  else { document.addEventListener('DOMContentLoaded', function () { initAll(); }); }
-  document.addEventListener('shopify:section:load', function (e) { initAll(e.target); });
+  if (document.readyState === 'loading') {
+    document.addEventListener(
+      'DOMContentLoaded',
+      function () {
+        initAll(document);
+      }
+    );
+  } else {
+    initAll(document);
+  }
+
+  document.addEventListener(
+    'shopify:section:load',
+    function (event) {
+      initAll(event.target);
+    }
+  );
 })();
