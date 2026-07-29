@@ -17,8 +17,6 @@
 .drye-liner-product-clarity__image { order: 2; }
 .drye-liner-product-clarity__specs { order: 3; }
 
-/* Heading: inherits the global h2 token (31px mobile / 40px desktop).
-   Do not hardcode a font-size here. */
 .drye-liner-product-clarity__heading {
   font-family: var(--font-display);
   font-size: var(--fs-section-h2);
@@ -55,10 +53,17 @@
   overflow: visible;
 }
 
-.drye-liner-product-clarity__img {
+.drye-liner-product-clarity__img,
+.drye-liner-product-clarity__video {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  display: block;
+}
+
+.drye-liner-product-clarity__video {
+  object-position: center;
+  background: var(--bg-soft);
 }
 
 .drye-liner-product-clarity__placeholder {
