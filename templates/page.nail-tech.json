@@ -102,6 +102,8 @@
         "chapter": "01",
         "heading": "This is what it looks like at the desk.",
         "swipe_label": "Swipa",
+        "prev_label": "Previous photos",
+        "next_label": "More photos",
         "keep_label": "Keep reading",
         "keep_target": "#drye-nt-trapped"
       }
@@ -390,10 +392,29 @@
     "drye_proof_wall_DPHfDt": {
       "type": "drye-proof-wall",
       "blocks": {
+        "media_9mEkJC": {
+          "type": "media",
+          "settings": {
+            "media_type": "video",
+            "video": "shopify://files/videos/IMG_0591.mp4",
+            "label": "",
+            "sublabel": ""
+          }
+        },
+        "media_MCbBPC": {
+          "type": "media",
+          "settings": {
+            "media_type": "video",
+            "video": "shopify://files/videos/IMG_0591_7.mp4",
+            "label": "",
+            "sublabel": ""
+          }
+        },
         "media_933dtq": {
           "type": "media",
           "settings": {
             "media_type": "image",
+            "video": "shopify://files/videos/IMG_0591_4.mp4",
             "label": "",
             "sublabel": ""
           }
@@ -402,6 +423,7 @@
           "type": "media",
           "settings": {
             "media_type": "image",
+            "video": "shopify://files/videos/IMG_0591_2.mp4",
             "label": "",
             "sublabel": ""
           }
@@ -410,6 +432,7 @@
           "type": "media",
           "settings": {
             "media_type": "image",
+            "video": "shopify://files/videos/IMG_0591_5.mp4",
             "label": "",
             "sublabel": ""
           }
@@ -454,12 +477,15 @@
           "type": "media",
           "settings": {
             "media_type": "image",
+            "video": "shopify://files/videos/IMG_0591_1.mp4",
             "label": "",
             "sublabel": ""
           }
         }
       },
       "block_order": [
+        "media_9mEkJC",
+        "media_MCbBPC",
         "media_933dtq",
         "media_4pdaGw",
         "media_4TRD7G",
