@@ -2,45 +2,27 @@
 
 {%- liquid
   assign ss = section.settings
-  assign has_ba = false
-  if ss.before_image != blank or ss.after_image != blank
-    assign has_ba = true
+
+  assign use_video = false
+  if ss.media_type == 'video' and ss.video != blank
+    assign use_video = true
   endif
+
+  assign has_ba = false
+  unless use_video
+    if ss.before_image != blank or ss.after_image != blank
+      assign has_ba = true
+    endif
+  endunless
+
   assign before_img = ss.before_image | default: ss.image
   assign after_img = ss.after_image | default: ss.image | default: ss.before_image
 -%}
 
-{%- if has_ba -%}
-  <style>
-    #shopify-section-{{ section.id }} .drye-liner-product-clarity__ba {
-      display: flex; align-items: center; gap: var(--space-12);
-    }
-    #shopify-section-{{ section.id }} .drye-liner-product-clarity__ba-item {
-      flex: 1; min-width: 0; display: flex; flex-direction: column; gap: var(--space-8);
-    }
-    #shopify-section-{{ section.id }} .drye-liner-product-clarity__ba-label {
-      font-family: var(--font-body); font-size: var(--fs-micro-2); font-weight: 700;
-      letter-spacing: 0.14em; text-transform: uppercase; color: var(--caption); text-align: center;
-    }
-    #shopify-section-{{ section.id }} .drye-liner-product-clarity__ba-img {
-      width: 100%; aspect-ratio: 2 / 3; object-fit: cover; object-position: 13% 79%; display: block;
-    }
-    #shopify-section-{{ section.id }} .drye-liner-product-clarity__ba-img--before { filter: grayscale(0.4); }
-    #shopify-section-{{ section.id }} .drye-liner-product-clarity__ba-arrow {
-      font-size: 22px; line-height: 1; color: var(--emerald); flex: none;
-    }
-    @media (min-width: 768px) {
-      #shopify-section-{{ section.id }} .drye-liner-product-clarity.has-ba .drye-liner-product-clarity__inner {
-        grid-template-columns: minmax(0, 400px) 1fr;
-      }
-      #shopify-section-{{ section.id }} .drye-liner-product-clarity__ba-arrow { font-size: 28px; }
-    }
-  </style>
-{%- endif -%}
-
 <section
-  class="dryeNEW-section drye-liner-product-clarity{% if has_ba %} has-ba{% endif %}"
+  class="dryeNEW-section drye-liner-product-clarity{% if has_ba %} has-ba{% endif %}{% if use_video %} has-video{% endif %}"
   id="{{ ss.section_id | default: 'liner-product' }}"
+  data-drye-clarity-section
   data-section-id="{{ section.id }}"
 >
   <div class="dryeNEW-container">
@@ -69,7 +51,9 @@
               {%- for block in section.blocks -%}
                 {%- if block.type == 'spec' -%}
                   <li class="drye-liner-product-clarity__spec" {{ block.shopify_attributes }}>
-                    <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 7l3 3 5-6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+                      <path d="M3 7l3 3 5-6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
                     <span>
                       {% if block.settings.title != blank %}
                         <strong>{{ block.settings.title }}</strong>
@@ -86,22 +70,63 @@
         {% endif %}
       </div>
 
-      <div class="drye-liner-product-clarity__image">
-        {%- if has_ba -%}
+      <div class="drye-liner-product-clarity__image{% if use_video %} drye-liner-product-clarity__image--video{% endif %}">
+        {%- if use_video -%}
+          <video
+            class="drye-liner-product-clarity__video"
+            data-drye-clarity-video
+            muted
+            loop
+            playsinline
+            preload="none"
+            aria-label="{{ ss.heading | escape }}"
+            {% if ss.video.preview_image != blank %}
+              data-poster="{{ ss.video.preview_image | image_url: width: 900 }}"
+            {% endif %}
+          >
+            {%- for source in ss.video.sources -%}
+              <source data-src="{{ source.url | escape }}" type="{{ source.mime_type | escape }}">
+            {%- endfor -%}
+          </video>
+        {%- elsif has_ba -%}
           <div class="drye-liner-product-clarity__ba">
             <div class="drye-liner-product-clarity__ba-item">
-              {%- if ss.before_label != blank -%}<span class="drye-liner-product-clarity__ba-label">{{ ss.before_label }}</span>{%- endif -%}
+              {%- if ss.before_label != blank -%}
+                <span class="drye-liner-product-clarity__ba-label">{{ ss.before_label }}</span>
+              {%- endif -%}
+
               {% if before_img != blank %}
-                {{ before_img | image_url: width: 700 | image_tag: class: 'drye-liner-product-clarity__ba-img drye-liner-product-clarity__ba-img--before', loading: 'lazy', sizes: '(min-width: 768px) 300px, 45vw', alt: ss.before_label }}
+                {{
+                  before_img
+                  | image_url: width: 700
+                  | image_tag:
+                    class: 'drye-liner-product-clarity__ba-img drye-liner-product-clarity__ba-img--before',
+                    loading: 'lazy',
+                    sizes: '(min-width: 768px) 300px, 45vw',
+                    alt: ss.before_label
+                }}
               {% else %}
                 <div class="drye-liner-product-clarity__placeholder"><span>Without DRYE</span></div>
               {% endif %}
             </div>
+
             <span class="drye-liner-product-clarity__ba-arrow" aria-hidden="true">→</span>
+
             <div class="drye-liner-product-clarity__ba-item">
-              {%- if ss.after_label != blank -%}<span class="drye-liner-product-clarity__ba-label">{{ ss.after_label }}</span>{%- endif -%}
+              {%- if ss.after_label != blank -%}
+                <span class="drye-liner-product-clarity__ba-label">{{ ss.after_label }}</span>
+              {%- endif -%}
+
               {% if after_img != blank %}
-                {{ after_img | image_url: width: 700 | image_tag: class: 'drye-liner-product-clarity__ba-img', loading: 'lazy', sizes: '(min-width: 768px) 300px, 45vw', alt: ss.after_label }}
+                {{
+                  after_img
+                  | image_url: width: 700
+                  | image_tag:
+                    class: 'drye-liner-product-clarity__ba-img',
+                    loading: 'lazy',
+                    sizes: '(min-width: 768px) 300px, 45vw',
+                    alt: ss.after_label
+                }}
               {% else %}
                 <div class="drye-liner-product-clarity__placeholder"><span>With DRYE</span></div>
               {% endif %}
@@ -120,13 +145,121 @@
           }}
         {%- else -%}
           <div class="drye-liner-product-clarity__placeholder">
-            <span>Product photo — mechanic's hand wearing DRYE liner under work glove, 2:3 crop</span>
+            <span>Product photo or video — mechanic wearing DRYE under a work glove</span>
           </div>
         {%- endif -%}
       </div>
     </div>
   </div>
 </section>
+
+<script>
+  (function () {
+    if (!window.DRYEClarityVideo) {
+      window.DRYEClarityVideo = {
+        setup: function (root) {
+          if (!root || root.dataset.dryeClarityBound === '1') return;
+
+          var video = root.querySelector('[data-drye-clarity-video]');
+          if (!video) return;
+
+          root.dataset.dryeClarityBound = '1';
+
+          var loaded = false;
+          var visibleEnough = false;
+          var reduceMotion = window.matchMedia &&
+            window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+          function loadVideo() {
+            if (loaded) return;
+
+            if (video.dataset.poster) {
+              video.poster = video.dataset.poster;
+            }
+
+            video.querySelectorAll('source[data-src]').forEach(function (source) {
+              source.src = source.dataset.src;
+              source.removeAttribute('data-src');
+            });
+
+            video.muted = true;
+            video.load();
+            loaded = true;
+          }
+
+          function playVideo() {
+            if (reduceMotion || document.hidden) return;
+
+            loadVideo();
+
+            var promise = video.play();
+            if (promise && typeof promise.catch === 'function') {
+              promise.catch(function () {});
+            }
+          }
+
+          if ('IntersectionObserver' in window) {
+            var loadObserver = new IntersectionObserver(function (entries) {
+              if (!entries[0].isIntersecting) return;
+              loadVideo();
+              loadObserver.disconnect();
+            }, {
+              rootMargin: '500px 0px',
+              threshold: 0
+            });
+
+            var playObserver = new IntersectionObserver(function (entries) {
+              var entry = entries[0];
+              visibleEnough = entry.isIntersecting && entry.intersectionRatio >= 0.35;
+
+              if (visibleEnough) {
+                playVideo();
+              } else {
+                video.pause();
+              }
+            }, {
+              threshold: [0, 0.35, 0.75]
+            });
+
+            loadObserver.observe(video);
+            playObserver.observe(video);
+          } else {
+            loadVideo();
+            playVideo();
+          }
+
+          document.addEventListener('visibilitychange', function () {
+            if (document.hidden) {
+              video.pause();
+            } else if (visibleEnough) {
+              playVideo();
+            }
+          });
+        },
+
+        init: function (scope) {
+          var target = scope || document;
+
+          if (target.matches && target.matches('[data-drye-clarity-section]')) {
+            this.setup(target);
+          }
+
+          target.querySelectorAll('[data-drye-clarity-section]').forEach(
+            this.setup.bind(this)
+          );
+        }
+      };
+
+      document.addEventListener('shopify:section:load', function (event) {
+        window.DRYEClarityVideo.init(event.target);
+      });
+    }
+
+    window.DRYEClarityVideo.init(
+      document.getElementById('shopify-section-{{ section.id }}')
+    );
+  })();
+</script>
 
 {% schema %}
 {
@@ -138,13 +271,28 @@
     { "type": "text", "id": "heading", "label": "Heading", "default": "DRYE goes" },
     { "type": "text", "id": "heading_emphasis", "label": "Heading emphasis", "default": "under your existing glove." },
     { "type": "richtext", "id": "body", "label": "Body", "default": "<p>Thin enough you forget it's there. Built for repeated shifts.</p>" },
-    { "type": "header", "content": "Before / After (two images)" },
-    { "type": "paragraph", "content": "Set both to show the two-image before/after. If left empty, the single Product image below is used." },
+
+    { "type": "header", "content": "Primary media" },
+    {
+      "type": "radio",
+      "id": "media_type",
+      "label": "Media type",
+      "default": "image",
+      "options": [
+        { "value": "image", "label": "Image" },
+        { "value": "video", "label": "Video" }
+      ]
+    },
+    { "type": "video", "id": "video", "label": "Product video" },
+
+    { "type": "header", "content": "Before / After (image mode)" },
+    { "type": "paragraph", "content": "Set one or both images to show the before/after layout. These are ignored when Video is selected." },
     { "type": "image_picker", "id": "before_image", "label": "Before image (2:3)" },
     { "type": "text", "id": "before_label", "label": "Before label", "default": "Without DRYE" },
     { "type": "image_picker", "id": "after_image", "label": "After image (2:3)" },
     { "type": "text", "id": "after_label", "label": "After label", "default": "With DRYE" },
-    { "type": "header", "content": "Single image (fallback)" },
+
+    { "type": "header", "content": "Single image fallback" },
     { "type": "image_picker", "id": "image", "label": "Product image (2:3)" }
   ],
   "blocks": [
