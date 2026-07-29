@@ -1,4 +1,9 @@
-/* drye-nt-desk.css */
+/* drye-nt-desk.css — self-contained: UGC row, mobile swipe hint, desktop click-arrows.
+   Needs from your base.css: .lp-block, .lp-wrap, .lp-narrow, .chapno, .lp-lead, .keep-row/.keep
+   and the tokens --deep --muted --border --bg --bg-soft. Nothing else. */
+
+.ugc-scroll { position: relative; }
+
 .ugc-row { display: grid; grid-auto-flow: column; grid-auto-columns: 72%; gap: 12px; overflow-x: auto; overflow-y: hidden; scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; overscroll-behavior-x: contain; scrollbar-width: none; -ms-overflow-style: none; margin: 32px 0 0; padding: 0; }
 .ugc-row::-webkit-scrollbar { display: none; height: 0; width: 0; }
 .ugc-row > figure { scroll-snap-align: start; margin: 0; }
@@ -6,6 +11,38 @@
 .ugc-img img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
 .ugc-cap { margin-top: 12px; font-size: 16px; line-height: 1.5; color: var(--deep); text-wrap: pretty; }
 
+/* Mobile: swipe hint (fades out on first touch) */
+.swipe-hint { display: flex; align-items: center; gap: 10px; margin-top: 14px; transition: opacity 240ms ease; }
+.swipe-hint.is-hidden { opacity: 0; }
+.swipe-hint__label { font-size: 10px; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted); }
+.swipe-hint__track { position: relative; width: 62px; height: 1px; background: var(--border); }
+.swipe-hint__dot { position: absolute; top: -2px; left: 0; width: 5px; height: 5px; border-radius: 50%; background: var(--deep); animation: ugc-swipe 1.9s ease-in-out infinite; }
+
+@keyframes ugc-swipe {
+  0%, 100% { left: 0; opacity: 0.5; }
+  50% { left: 57px; opacity: 1; }
+}
+
+/* Desktop: click-arrows */
+.ugc-nav { display: none; }
+.ugc-arrow { position: absolute; top: 50%; transform: translateY(-50%); display: inline-flex; align-items: center; justify-content: center; width: 44px; height: 44px; padding: 0; background: var(--bg); border: 1px solid var(--border); color: var(--deep); cursor: pointer; transition: opacity 180ms ease, background-color 180ms ease, color 180ms ease, border-color 180ms ease; }
+.ugc-arrow:hover { background: var(--deep); border-color: var(--deep); color: #fff; }
+.ugc-arrow:focus-visible { outline: 2px solid var(--deep); outline-offset: 2px; }
+.ugc-arrow--prev { left: -22px; }
+.ugc-arrow--next { right: -22px; }
+.ugc-arrow.is-off { opacity: 0; pointer-events: none; }
+
 @media (min-width: 760px) {
-  .ugc-row { grid-auto-flow: row; grid-template-columns: repeat(3, 1fr); grid-auto-columns: auto; overflow: visible; margin: 44px 0 0; padding: 0; gap: 20px; }
+  .ugc-scroll { margin-top: 44px; }
+  .ugc-row { grid-auto-columns: calc((100% - 40px) / 3); margin: 0; gap: 20px; }
+  .swipe-hint { display: none; }
+  /* height comes from padding-% (resolves against WIDTH), so the arrows land dead-centre
+     on the 4:5 image regardless of container width */
+  .ugc-nav { position: absolute; top: 0; left: 0; width: 100%; height: 0; padding-bottom: calc((100% - 40px) / 3 * 1.25); display: block; pointer-events: none; z-index: 2; }
+  .ugc-arrow { pointer-events: auto; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .swipe-hint__dot { animation: none; }
+  .ugc-row { scroll-behavior: auto; }
 }
