@@ -13,6 +13,9 @@
             {{ section.settings.acc_why_label | default: 'Why It Matters' }}
             <span class="pdp-det__icon" aria-hidden="true"></span>
           </button>
+          <div class="pdp-det__panel pdp-det__panel--vis">
+            <div class="pdp-det__inner"><div class="pdp-det__mount" data-mount="why"></div></div>
+          </div>
         </div>
 
         {%- comment -%}--- HOW IT WORKS ---{%- endcomment -%}
@@ -21,6 +24,9 @@
             {{ section.settings.acc_how_label | default: 'How It Works' }}
             <span class="pdp-det__icon" aria-hidden="true"></span>
           </button>
+          <div class="pdp-det__panel pdp-det__panel--vis">
+            <div class="pdp-det__inner"><div class="pdp-det__mount" data-mount="how"></div></div>
+          </div>
         </div>
 
         {%- comment -%}--- FIT AND CARE ---{%- endcomment -%}
@@ -29,6 +35,9 @@
             {{ section.settings.acc_fit_label | default: 'Fit and Care' }}
             <span class="pdp-det__icon" aria-hidden="true"></span>
           </button>
+          <div class="pdp-det__panel pdp-det__panel--vis">
+            <div class="pdp-det__inner"><div class="pdp-det__mount" data-mount="fit"></div></div>
+          </div>
         </div>
 
         {%- comment -%}--- SPECIFICATIONS ---{%- endcomment -%}
@@ -37,6 +46,9 @@
             {{ section.settings.acc_specs_label | default: 'Specifications' }}
             <span class="pdp-det__icon" aria-hidden="true"></span>
           </button>
+          <div class="pdp-det__panel pdp-det__panel--vis">
+            <div class="pdp-det__inner"><div class="pdp-det__mount" data-mount="specs"></div></div>
+          </div>
         </div>
 
         {%- comment -%}--- SHIPPING AND RETURNS ---{%- endcomment -%}
@@ -45,6 +57,9 @@
             {{ section.settings.acc_ship_label | default: 'Shipping and Returns' }}
             <span class="pdp-det__icon" aria-hidden="true"></span>
           </button>
+          <div class="pdp-det__panel pdp-det__panel--vis">
+            <div class="pdp-det__inner"><div class="pdp-det__mount" data-mount="ship"></div></div>
+          </div>
         </div>
 
         {%- comment -%}--- WHO MAKES THIS ---{%- endcomment -%}
@@ -55,6 +70,7 @@
           </button>
           <div class="pdp-det__panel" id="pdp-det-p-who-{{ section.id }}">
             <div class="pdp-det__inner"><div class="pdp-det__body" style="padding-top:12px;">
+              <div class="pdp-det__mount pdp-det__mount--who" data-mount="who"></div>
               <ul class="pdp-det__list">
                 <li><strong>Granqvists Gloves AB, Karlstad, Sweden</strong> — glove manufacturer since 1984. The same factory supplies ~80% of military gloves to the Swedish, Norwegian and Finnish armed forces.</li>
                 <li>Fabric knitted by Trikåby, Sweden. Sewn in the EU. ISO 9001 / ISO 14001 / OEKO-TEX® Standard 100.</li>
@@ -303,6 +319,35 @@
       fireRadio(btn.getAttribute('data-radio-id'));
     });
   });
+
+  // 3b. Relocate the contextual visuals.
+  //   Desktop  → sticky right column (.pdp-det__right-inner)
+  //   Mobile   → inside each accordion's dropdown panel (.pdp-det__mount)
+  var keys       = ['why','how','fit','specs','ship','who'];
+  var rightInner = container.querySelector('.pdp-det__right-inner');
+  var mqMobile   = window.matchMedia('(max-width: 767px)');
+  var visEls     = {};
+  keys.forEach(function(k) { visEls[k] = document.getElementById('vis-det-' + k); });
+
+  function placeVisuals() {
+    var mobile = mqMobile.matches;
+    keys.forEach(function(k) {
+      var vis = visEls[k];
+      if (!vis) return;
+      if (mobile) {
+        var mount = accRoot.querySelector('.pdp-det__mount[data-mount="' + k + '"]');
+        if (mount && vis.parentNode !== mount) mount.appendChild(vis);
+      } else if (rightInner && vis.parentNode !== rightInner) {
+        rightInner.appendChild(vis);
+      }
+    });
+  }
+  placeVisuals();
+  if (mqMobile.addEventListener) {
+    mqMobile.addEventListener('change', placeVisuals);
+  } else if (mqMobile.addListener) {
+    mqMobile.addListener(placeVisuals); // Safari < 14
+  }
 
   // 4. MM / Inches toggle
   var toggle = document.getElementById('pdp-det-size-toggle-{{ section.id }}');

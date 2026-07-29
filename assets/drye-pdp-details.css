@@ -16,6 +16,21 @@
   background: var(--bg-soft);
 }
 
+/* Match the site's global .container width so the accordions line up with the
+   FAQ section above (theme rule: section .container → max-width 1534 / 64-48-20 pad). */
+.drye-pdp-details .dryeNEW-container {
+  width: 100%;
+  max-width: 1534px;
+  margin-inline: auto;
+  padding-inline: 64px;
+}
+@media (max-width: 1024px) {
+  .drye-pdp-details .dryeNEW-container { padding-inline: 48px; }
+}
+@media (max-width: 767px) {
+  .drye-pdp-details .dryeNEW-container { padding-inline: 20px; }
+}
+
 /* ── Two-column layout ── */
 .pdp-det__layout {
   display: grid;
@@ -23,17 +38,35 @@
   gap: 0;
 }
 
-/* Mobile: right panel shown below accordions */
+/* Mobile: the contextual visual is moved (via JS) INTO each accordion's
+   dropdown panel, so the separate right column is not needed. */
 @media (max-width: 767px) {
-  .pdp-det__right { display: block; margin-top: 32px; }
-  .pdp-det__maker-img { display: block; }
+  .pdp-det__right { display: none; }
+  .pdp-det__cap   { display: none; }
+
+  /* The mobile dropdown panel that hosts the visual */
+  .pdp-det__mount { padding-bottom: 20px; }
+
+  /* Let the visual break out past the accordion text toward the edges. */
+  .pdp-det__mount .pdp-det__vis {
+    min-height: 0 !important;
+    border: 1px solid var(--border);
+    background: var(--bg);
+    margin-inline: -10px;   /* wider than the text — closer to the screen edges */
+  }
+  .pdp-det__mount .pdp-det__vis--pad  { padding: 24px 20px; }
+  .pdp-det__mount .pdp-det__vis--dark { background: var(--bg-ink); border-color: transparent; }
+  .pdp-det__mount--who .pdp-det__vis--who,
+  .pdp-det__mount .pdp-det__vis--who  { min-height: 220px; border: none; margin-top: 4px; }
 }
 
+/* The mobile vis-panels never render on desktop (right column is used instead). */
 @media (min-width: 768px) {
   .drye-pdp-details { padding-block: var(--section-pad-y); }
   .pdp-det__layout { grid-template-columns: 1fr 480px; gap: 48px; align-items: stretch; }
   .pdp-det__right { display: block; position: sticky; top: 32px; height: 100%; }
   .pdp-det__right-inner { height: 100%; min-height: 480px; }
+  .pdp-det__panel--vis { display: none; }
 }
 
 /* ── CSS radio switching ── */
