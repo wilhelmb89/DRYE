@@ -44,12 +44,12 @@
 #r-det-ship:checked  ~ .pdp-det__layout .pdp-det__acc[data-acc="ship"]  .pdp-det__btn,
 #r-det-who:checked   ~ .pdp-det__layout .pdp-det__acc[data-acc="who"]   .pdp-det__btn { color: var(--emerald); }
 
-#r-det-why:checked   ~ .pdp-det__layout .pdp-det__acc[data-acc="why"]   .pdp-det__chev,
-#r-det-how:checked   ~ .pdp-det__layout .pdp-det__acc[data-acc="how"]   .pdp-det__chev,
-#r-det-fit:checked   ~ .pdp-det__layout .pdp-det__acc[data-acc="fit"]   .pdp-det__chev,
-#r-det-specs:checked ~ .pdp-det__layout .pdp-det__acc[data-acc="specs"] .pdp-det__chev,
-#r-det-ship:checked  ~ .pdp-det__layout .pdp-det__acc[data-acc="ship"]  .pdp-det__chev,
-#r-det-who:checked   ~ .pdp-det__layout .pdp-det__acc[data-acc="who"]   .pdp-det__chev { transform: rotate(180deg); }
+#r-det-why:checked   ~ .pdp-det__layout .pdp-det__acc[data-acc="why"]   .pdp-det__icon::after,
+#r-det-how:checked   ~ .pdp-det__layout .pdp-det__acc[data-acc="how"]   .pdp-det__icon::after,
+#r-det-fit:checked   ~ .pdp-det__layout .pdp-det__acc[data-acc="fit"]   .pdp-det__icon::after,
+#r-det-specs:checked ~ .pdp-det__layout .pdp-det__acc[data-acc="specs"] .pdp-det__icon::after,
+#r-det-ship:checked  ~ .pdp-det__layout .pdp-det__acc[data-acc="ship"]  .pdp-det__icon::after,
+#r-det-who:checked   ~ .pdp-det__layout .pdp-det__acc[data-acc="who"]   .pdp-det__icon::after { transform: rotate(90deg); opacity: 0; }
 
 #r-det-why:checked   ~ .pdp-det__layout .pdp-det__acc[data-acc="why"]   .pdp-det__panel,
 #r-det-how:checked   ~ .pdp-det__layout .pdp-det__acc[data-acc="how"]   .pdp-det__panel,
@@ -78,16 +78,23 @@
 
 .pdp-det__btn {
   width: 100%; display: flex; align-items: center; justify-content: space-between;
-  gap: 12px; padding: 16px 0; border: 0; background: none; text-align: left;
-  font-family: var(--font-body); font-size: 15px; font-weight: var(--fw-semibold);
-  letter-spacing: 0.04em; text-transform: uppercase; color: var(--deep); cursor: pointer;
+  gap: 12px; padding: 20px 0; border: 0; background: none; text-align: left;
+  font-family: var(--font-display); font-size: 16px; font-weight: var(--fw-semibold);
+  letter-spacing: -0.02em; text-transform: none; color: var(--deep); cursor: pointer;
   transition: color 0.2s ease;
 }
 
-.pdp-det__chev {
-  flex: 0 0 auto; width: 10px; height: 6px;
-  color: var(--caption); transition: transform 0.28s ease;
+.pdp-det__icon {
+  flex: 0 0 auto; width: 20px; height: 20px; position: relative;
+  display: flex; align-items: center; justify-content: center;
 }
+.pdp-det__icon::before,
+.pdp-det__icon::after {
+  content: ''; position: absolute; background: var(--muted);
+  transition: transform 0.25s ease, opacity 0.25s ease;
+}
+.pdp-det__icon::before { width: 11px; height: 1px; }
+.pdp-det__icon::after  { width: 1px; height: 11px; }
 
 .pdp-det__panel {
   display: grid; grid-template-rows: 0fr;
