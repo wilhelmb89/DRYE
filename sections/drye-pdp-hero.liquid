@@ -14,6 +14,7 @@ assign review_count = section.settings.review_count_fallback
 {{ 'drye-pdp-hero.css' | asset_url | stylesheet_tag }}
 {{ 'drye-review-slider.css' | asset_url | stylesheet_tag }}
 {{ 'drye-worker-proof.css' | asset_url | stylesheet_tag }}
+{{ 'drye-pdp-buyzone.css' | asset_url | stylesheet_tag }}
 
 <section
   class="hero"
@@ -243,21 +244,45 @@ assign review_count = section.settings.review_count_fallback
   {% endfor %}
 
   <div class="hero-info">
-    <div class="stars-row" data-review-scroll role="link" tabindex="0" aria-label="Read customer reviews">
-      <span class="stars" aria-hidden="true">★★★★★</span>
-      <span class="stars-lbl">
-        {{ review_rating }}/5 · <a href="{{ review_anchor }}">{{ review_count }} reviews</a>
-      </span>
-    </div>
-
     <h1 class="h-title">
       {{ section.settings.heading_line_1 }}<br>
-      {{ section.settings.heading_line_2 | escape | replace: '. ', '.<br>' }}
+      {{ section.settings.heading_line_2 }}
     </h1>
 
-    <div class="h-sub">
-      <p>Add one <span style="text-decoration:underline">dry layer</span> under your gloves.<br>Cotton absorbs. DRYE routes it out.</p>
+    <div class="stars-row" data-review-scroll role="link" tabindex="0" aria-label="Read customer reviews">
+      <span class="stars" aria-hidden="true">★★★★★</span>
+      <span class="stars-lbl">{{ review_rating }}/5 · <a href="{{ review_anchor }}">{{ review_count }} reviews</a></span>
     </div>
+
+    <div class="pdp-intro">
+      {% if section.settings.intro_text != blank %}
+        <p class="pdp-intro__lede">{{ section.settings.intro_text }}</p>
+      {% endif %}
+      <ul class="pdp-intro__list">
+        {% if section.settings.bullet_1 != blank %}
+          <li><span class="pdp-intro__dot"><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8.4l3 3 7-7.6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span>{{ section.settings.bullet_1 }}</span></li>
+        {% endif %}
+        {% if section.settings.bullet_2 != blank %}
+          <li><span class="pdp-intro__dot"><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8.4l3 3 7-7.6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span>{{ section.settings.bullet_2 }}</span></li>
+        {% endif %}
+        {% if section.settings.bullet_3 != blank %}
+          <li><span class="pdp-intro__dot"><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8.4l3 3 7-7.6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span>{{ section.settings.bullet_3 }}</span></li>
+        {% endif %}
+        {% if section.settings.bullet_4 != blank %}
+          <li><span class="pdp-intro__dot"><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8.4l3 3 7-7.6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span>{{ section.settings.bullet_4 }}</span></li>
+        {% endif %}
+      </ul>
+    </div>
+
+    {% if section.settings.guarantee_text != blank %}
+      <div class="drye-trust">
+        <div class="drye-guarantee">
+          <div class="drye-seal__wrap">
+            <p class="drye-seal__guarantee">{{ section.settings.guarantee_text }}</p>
+          </div>
+        </div>
+      </div>
+    {% endif %}
 
     {% assign size_option_position = blank %}
     {% for option in current_product.options_with_values %}
@@ -275,11 +300,14 @@ assign review_count = section.settings.review_count_fallback
 
       <div class="buy-block">
         <div class="form-lbl">
-          <span>{{ section.settings.option_label }}</span>
-          <button type="button" class="size-guide-link js-open-size-guide">
-            {{ section.settings.size_guide_label }}
-          </button>
+          <span>Step 1 · {{ section.settings.option_label }}</span>
         </div>
+
+        <button type="button" class="size-guide-cta js-open-size-guide">
+          <svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><rect x="2" y="7" width="16" height="6" rx="1" stroke="currentColor" stroke-width="1.6"/><path d="M5 7v2.4M8.5 7v2.4M12 7v2.4M15.5 7v2.4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+          <span>{{ section.settings.size_guide_label | default: 'Not sure of your size? Check the size guide' }}</span>
+          <svg class="size-guide-cta__arrow" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M6 4l4 4-4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
 
         {% if size_option_position != blank %}
           {% assign size_option_index = size_option_position | minus: 1 %}
@@ -437,118 +465,69 @@ assign review_count = section.settings.review_count_fallback
         {% endif %}
       </div>
 
-<div class="qty-block">
-  <div class="form-lbl">
-    <span>{{ section.settings.quantity_label }}</span>
-  </div>
+      <div class="packsel" data-packsel>
+        <div class="packsel__lbl">
+          <span>Step 2 · {{ section.settings.pack_label | default: 'Choose your pack' }}</span>
+        </div>
 
-  <div class="qty-wrap">
-    <button
-      type="button"
-      class="qty-btn"
-      data-qty-minus
-      aria-label="Decrease quantity"
-    >
-      −
-    </button>
+        {% assign pack_blocks_present = false %}
+        {% for block in section.blocks %}
+          {% if block.type == 'pack_tier' %}
+            {% assign pack_blocks_present = true %}
+            {% assign is_first = false %}
+            {% if forloop.first %}{% assign is_first = true %}{% endif %}
+            <div class="pack{% if is_first %} is-selected{% endif %}" data-pack data-pairs="{{ block.settings.pairs }}" data-cta="{{ block.settings.cta_label }}" {{ block.shopify_attributes }}>
+              <button type="button" class="pack__btn">
+                <span class="pack__radio" aria-hidden="true"></span>
+                <span>
+                  <span class="pack__name">{{ block.settings.name }}{% if block.settings.badge != blank %} <span class="pack__badge">{{ block.settings.badge }}</span>{% endif %}</span>
+                  <span class="pack__desc">{{ block.settings.subtitle }}</span>
+                </span>
+                <span class="pack__price">
+                  {% if block.settings.save_label != blank %}<span class="pack__save-inline">{{ block.settings.save_label }}</span>{% endif %}
+                  <span class="pack__total">{{ block.settings.total_price }}</span>
+                  <span class="pack__unit">{{ block.settings.unit_price }}</span>
+                </span>
+              </button>
+              <div class="pack__panel"><div class="pack__inner">
+                {% assign feature_lines = block.settings.features | newline_to_br | split: '<br />' %}
+                <ul class="pack__list">
+                  {% for line in feature_lines %}
+                    {% assign line_text = line | strip %}
+                    {% if line_text != blank %}<li>{{ line_text }}</li>{% endif %}
+                  {% endfor %}
+                </ul>
+                {% if block.settings.foot_headline != blank or block.settings.foot_note != blank %}
+                  <div class="pack__foot">
+                    {% if block.settings.foot_headline != blank %}<div class="pack__foot-headline">{{ block.settings.foot_headline }}</div>{% endif %}
+                    {% if block.settings.foot_note != blank %}<span class="pack__foot-note">{{ block.settings.foot_note }}</span>{% endif %}
+                  </div>
+                {% endif %}
+              </div></div>
+            </div>
+          {% endif %}
+        {% endfor %}
 
-    <input
-      class="qty-val"
-      id="qty-{{ section.id }}"
-      name="quantity"
-      type="text"
-      value="1"
-      inputmode="numeric"
-      readonly
-    >
+        {% unless pack_blocks_present %}
+          <div class="pack is-selected" data-pack data-pairs="1" data-cta="{{ atc_button_label }}">
+            <button type="button" class="pack__btn">
+              <span class="pack__radio" aria-hidden="true"></span>
+              <span>
+                <span class="pack__name">1 Pair</span>
+              </span>
+              <span class="pack__price"><span class="pack__total">{{ selected_variant.price | money_with_currency }}</span></span>
+            </button>
+          </div>
+        {% endunless %}
+      </div>
 
-    <button
-      type="button"
-      class="qty-btn"
-      data-qty-plus
-      aria-label="Increase quantity"
-    >
-      +
-    </button>
-  </div>
-</div>
+      <input class="qty-val" id="qty-{{ section.id }}" name="quantity" type="hidden" value="1">
 
       {% assign selected_variant_preorder = false %}
       {% if selected_variant.inventory_policy == 'continue' and selected_variant.inventory_quantity <= 0 %}
         {% assign selected_variant_preorder = true %}
       {% endif %}
 
-      <div class="stepbar">
-        <button type="button" class="stepbar__btn" aria-expanded="true" aria-controls="step1panel-{{ section.id }}" id="step1btn-{{ section.id }}">
-          {{ section.settings.compare_principle | default: 'Step 1: Change the environment' }}
-          <svg class="stepbar__chev" viewBox="0 0 10 6" fill="none"><path d="M0 0l5 6 5-6z" fill="currentColor"/></svg>
-        </button>
-        <div class="stepbar__panel open" id="step1panel-{{ section.id }}"><div class="stepbar__inner">
-          <div class="value-card__grid">
-            <div class="value-card__col value-card__col--loop">
-              <p class="value-card__eyebrow value-card__eyebrow--loop">The workaround loop</p>
-              <div class="value-card__items">
-                <div class="value-card__item"><span class="value-card__x">✕</span><span>Soaked liners</span></div>
-                <div class="value-card__item"><span class="value-card__x">✕</span><span>Glove-stick</span></div>
-                <div class="value-card__item"><span class="value-card__x">✕</span><span>Constant hand resets</span></div>
-                <div class="value-card__item"><span class="value-card__x">✕</span><span>Wet, irritated skin</span></div>
-                <div class="value-card__item"><span class="value-card__x">✕</span><span>Cream after every shift</span></div>
-              </div>
-            </div>
-            <div class="value-card__div" aria-hidden="true"></div>
-            <div class="value-card__col value-card__col--base">
-              <p class="value-card__eyebrow value-card__eyebrow--base">One base layer</p>
-              <div class="value-card__items">
-                <div class="value-card__item"><span class="value-card__arrow">→</span><span>Dryer hands all shift</span></div>
-                <div class="value-card__item"><span class="value-card__arrow">→</span><span>No sticky glove changes</span></div>
-                <div class="value-card__item"><span class="value-card__arrow">→</span><span>Oil and grime hit the liner, not your skin</span></div>
-                <div class="value-card__item"><span class="value-card__arrow">→</span><span>Machine washable</span></div>
-                <div class="value-card__item"><span class="value-card__arrow">→</span><span>Fits under any sealed glove</span></div>
-              </div>
-            </div>
-          </div>
-        </div></div>
-      </div>
-
-      <div class="stepbar">
-        <button type="button" class="stepbar__btn" aria-expanded="false" aria-controls="step2panel-{{ section.id }}" id="step2btn-{{ section.id }}">
-          {{ section.settings.step2_label | default: 'Step 2: Notice the difference after 5 min' }}
-          <svg class="stepbar__chev" viewBox="0 0 10 6" fill="none"><path d="M0 0l5 6 5-6z" fill="currentColor"/></svg>
-        </button>
-        <div class="stepbar__panel" id="step2panel-{{ section.id }}"><div class="stepbar__inner">
-          <div class="vtl">
-            {% assign timeline_rows = section.blocks | where: 'type', 'timeline_row' %}
-            {% if timeline_rows.size > 0 %}
-              {% for block in timeline_rows %}<div class="vtl__row" {{ block.shopify_attributes }}><span class="vtl__mark">{{ block.settings.marker }}</span><span class="vtl__out">{{ block.settings.outcome }}</span></div>{% endfor %}
-            {% else %}
-              <div class="vtl__row"><span class="vtl__mark">Day 1</span><span class="vtl__out">Peel the glove at lunch. Hands dry.</span></div>
-              <div class="vtl__row"><span class="vtl__mark">Week 1</span><span class="vtl__out">Nitriles stop tearing. Fewer glove changes.</span></div>
-              <div class="vtl__row"><span class="vtl__mark">Month 1</span><span class="vtl__out">The cream tube stops emptying.</span></div>
-              <div class="vtl__row"><span class="vtl__mark">Month 6–12</span><span class="vtl__out">Still the same pair.</span></div>
-            {% endif %}
-          </div>
-        </div></div>
-      </div>
-
-      <div class="price-row" data-price-row>
-        <span class="price" data-price>{{ selected_variant.price | money }}</span>
-        {% if price_note != blank %}
-          <span class="price-note">{{ price_note }}</span>
-        {% endif %}
-        {%- comment -%} Market-correct money format sample — read by JS so it never guesses currency/separators {%- endcomment -%}
-        <span class="dryeNEW-visually-hidden" data-money-sample aria-hidden="true">{{ 123456789 | money }}</span>
-      </div>
-
-      {% if section.settings.cpm_enabled %}
-        {%- assign cpm_low = section.settings.cpm_months_low | default: 6 -%}
-        {%- assign cpm_high = section.settings.cpm_months_high | default: 12 -%}
-        {%- assign cpm_suffix = section.settings.cpm_month_suffix | default: 'mo' -%}
-        {%- assign cpm_note_low = section.settings.cpm_note_low -%}
-        {%- assign cpm_note_high = section.settings.cpm_note_high -%}
-        <div class="permo" data-cpm hidden>
-          <p class="permo-line">Heavy shop: <span data-cpm-price="{{ cpm_low }}"></span>/mo over {{ cpm_low }} months · Light shop: <span data-cpm-price="{{ cpm_high }}"></span>/mo over {{ cpm_high }} months</p>
-        </div>
-      {% endif %}
 
       <button
         type="submit"
@@ -1862,6 +1841,7 @@ wteTimelines.forEach((timeline) => {
 </script>
 
 <script src="{{ 'drye-pdp-gallery.js' | asset_url }}" defer></script>
+<script src="{{ 'drye-pdp-buyzone.js' | asset_url }}" defer></script>
 
 {% schema %}
 {
@@ -2323,6 +2303,30 @@ wteTimelines.forEach((timeline) => {
       "default": "Lasts 4–12 months — machine washable, no chemicals to wear off"
     },
     {
+      "type": "textarea",
+      "id": "intro_text",
+      "label": "Intro paragraph",
+      "default": "Dry hands, the whole shift — even under sealed gloves. DRYE, a Swedish 0.4mm liner, moves sweat away from skin instead of soaking it up."
+    },
+    {
+      "type": "text",
+      "id": "bullet_4",
+      "label": "Bullet 4",
+      "default": "Oil & grease hit the liner first"
+    },
+    {
+      "type": "text",
+      "id": "guarantee_text",
+      "label": "Guarantee band text",
+      "default": "60 shifts. If your hands aren't dry at lunch, keep the liners and get your money back."
+    },
+    {
+      "type": "text",
+      "id": "pack_label",
+      "label": "Pack step label",
+      "default": "Choose your pack"
+    },
+    {
       "type": "text",
       "id": "trust_text_1",
       "label": "Trust text 1",
@@ -2545,6 +2549,23 @@ wteTimelines.forEach((timeline) => {
     }
   ],
   "blocks": [
+    {
+      "type": "pack_tier",
+      "name": "Pack tier",
+      "settings": [
+        { "type": "number", "id": "pairs", "label": "Pairs (quantity added to cart)", "default": 1 },
+        { "type": "text", "id": "name", "label": "Name", "default": "1 Pair · Starter Pair" },
+        { "type": "text", "id": "subtitle", "label": "Subtitle", "default": "Try DRYE for one full shift" },
+        { "type": "text", "id": "badge", "label": "Badge (optional)", "default": "" },
+        { "type": "text", "id": "total_price", "label": "Total price (display)", "default": "349 kr" },
+        { "type": "text", "id": "unit_price", "label": "Unit price (display)", "default": "349 kr / pair" },
+        { "type": "text", "id": "save_label", "label": "Save label (optional)", "default": "" },
+        { "type": "textarea", "id": "features", "label": "Feature list (one per line)", "default": "Test under your own gloves\nEconomy delivery: 10–20 business days\nDuties & taxes included\n30-day money-back guarantee" },
+        { "type": "text", "id": "foot_headline", "label": "Footer band headline", "default": "Prove it on your next shift" },
+        { "type": "text", "id": "foot_note", "label": "Footer band note", "default": "One pair. One real workday. Your own gloves." },
+        { "type": "text", "id": "cta_label", "label": "ATC button label when selected", "default": "Add Starter Pair" }
+      ]
+    },
     {
       "type": "description",
       "name": "Description",
