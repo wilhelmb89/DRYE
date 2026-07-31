@@ -1,0 +1,62 @@
+[33mcommit e0d3ae3b3de8a307637ab7d1534e0e37e6101210[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32msection-tracking-normalize[m[33m)[m
+Author: Claude <noreply@anthropic.com>
+Date:   Sat Jun 27 22:24:29 2026 +0000
+
+    Normalize section-tracking attributes on live page sections
+    
+    Remove hardcoded data-section-index so the section tracker derives DOM
+    order itself (a fixed index competed with that count and reported the
+    same section under different indexes for different visitors, corrupting
+    drop-off data).
+    
+    Add data-drye-section + a stable, unique snake_case data-section-name to
+    sections that lacked one. Existing data-section-name values, data-section-id,
+    element ids and script blocks are left untouched.
+    
+    Scope: sections rendered on the product page, how-it-works, why-drye,
+    research, field-reports blog, contact, and policy pages (47 files).
+    
+    Co-Authored-By: Claude Opus 4.8 <noreply@anthropic.com>
+    Claude-Session: https://claude.ai/code/session_0187tQaWGiGGvfpnM6vyGZok
+
+ sections/drye-about-cta.liquid                 | 2 [32m+[m[31m-[m
+ sections/drye-about-founder-story.liquid       | 2 [32m+[m[31m-[m
+ sections/drye-about-hero.liquid                | 2 [32m+[m[31m-[m
+ sections/drye-about-origin-strip.liquid        | 2 [32m+[m[31m-[m
+ sections/drye-about-skapa.liquid               | 2 [32m+[m[31m-[m
+ sections/drye-about-team.liquid                | 2 [32m+[m[31m-[m
+ sections/drye-about-validation-timeline.liquid | 2 [32m+[m[31m-[m
+ sections/drye-about-why.liquid                 | 2 [32m+[m[31m-[m
+ sections/drye-blog-cta-strip.liquid            | 2 [32m+[m[31m-[m
+ sections/drye-blog-featured-post.liquid        | 2 [32m+[m[31m-[m
+ sections/drye-blog-filter.liquid               | 2 [32m+[m[31m-[m
+ sections/drye-blog-grid.liquid                 | 2 [32m+[m[31m-[m
+ sections/drye-blog-hero.liquid                 | 2 [32m+[m[31m-[m
+ sections/drye-blog-science-callout.liquid      | 2 [32m+[m[31m-[m
+ sections/drye-contact-section-1.liquid         | 2 [32m+[m[31m-[m
+ sections/drye-contact-section-2.liquid         | 2 [32m+[m[31m-[m
+ sections/drye-contact-section-3.liquid         | 2 [32m+[m[31m-[m
+ sections/drye-evidence.liquid                  | 2 [32m+[m[31m-[m
+ sections/drye-letters.liquid                   | 2 [32m+[m[31m-[m
+ sections/drye-mechanics-82x-proof.liquid       | 2 [32m+[m[31m-[m
+ sections/drye-mechanics-mechanism.liquid       | 1 [31m-[m
+ sections/drye-mechanics-saturation.liquid      | 1 [31m-[m
+ sections/drye-mechanism-nav.liquid             | 2 [32m+[m[31m-[m
+ sections/drye-pdp-hero.liquid                  | 2 [32m+[m[31m-[m
+ sections/drye-policy-hero.liquid               | 2 [32m+[m[31m-[m
+ sections/drye-policy-layout.liquid             | 2 [32m+[m[31m-[m
+ sections/drye-policy-tab-bar.liquid            | 2 [32m+[m[31m-[m
+ sections/drye-professions.liquid               | 2 [32m+[m[31m-[m
+ sections/drye-research-hero.liquid             | 2 [32m+[m[31m-[m
+ sections/drye-research-numbers.liquid          | 2 [32m+[m[31m-[m
+ sections/drye-research-partners.liquid         | 2 [32m+[m[31m-[m
+ sections/drye-research-study-breakdown.liquid  | 2 [32m+[m[31m-[m
+ sections/drye-reviews-mars-api.liquid          | 2 [32m+[m[31m-[m
+ sections/drye-section-06-faq.liquid            | 1 [31m-[m
+ sections/drye-slide1-problem.liquid            | 2 [32m+[m[31m-[m
+ sections/drye-system-section.liquid            | 2 [32m+[m[31m-[m
+ sections/drye-textile-proof-videos.liquid      | 2 [32m+[m[31m-[m
+ sections/drye-validation.liquid                | 2 [32m+[m[31m-[m
+ sections/dryeNEW-closing-cta.liquid            | 1 [31m-[m
+ sections/occlusion-bridge.liquid               | 2 [32m+[m[31m-[m
+ 40 files changed, 36 insertions(+), 40 deletions(-)

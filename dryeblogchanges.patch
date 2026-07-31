@@ -1,0 +1,422 @@
+From 734a1b94149aabf88ca243a8db9aa7d959295c94 Mon Sep 17 00:00:00 2001
+From: Claude <noreply@anthropic.com>
+Date: Thu, 25 Jun 2026 13:13:39 +0000
+Subject: [PATCH] Blog: pinning, auto-filled featured post, smaller mobile
+ breadcrumb
+
+- Blog grid: render articles tagged 'pinned' first (configurable tag in
+  the theme editor). Card markup extracted to snippets/drye-blog-card.liquid
+  to avoid duplication.
+- Featured post: remove the 'Field Report' schema defaults on the override
+  fields so the existing fallback to the selected article's own title, date,
+  excerpt, read time and badge actually triggers. Overrides remain optional.
+- Article hero: shrink the breadcrumb on mobile (kept in DOM for SEO).
+
+Co-Authored-By: Claude Opus 4.8 <noreply@anthropic.com>
+Claude-Session: https://claude.ai/code/session_011s6BWVwQWLYmzktxBdwnCn
+---
+ assets/section-drye-article-hero.css    |  15 ++
+ sections/drye-blog-featured-post.liquid |  27 ++--
+ sections/drye-blog-grid.liquid          | 191 +++++-------------------
+ snippets/drye-blog-card.liquid          |  80 ++++++++++
+ 4 files changed, 140 insertions(+), 173 deletions(-)
+ create mode 100644 snippets/drye-blog-card.liquid
+
+diff --git a/assets/section-drye-article-hero.css b/assets/section-drye-article-hero.css
+index 4fb34e5..fbee029 100644
+--- a/assets/section-drye-article-hero.css
++++ b/assets/section-drye-article-hero.css
+@@ -50,6 +50,21 @@
+   color: rgba(255, 255, 255, 0.55);
+ }
+ 
++/* Mindre brödsmula på mobil – texten finns kvar för SEO men tar mindre plats */
++@media (max-width: 767px) {
++  .breadcrumb {
++    gap: 5px;
++    margin-bottom: 18px;
++  }
++
++  .breadcrumb a,
++  .breadcrumb span,
++  .breadcrumb-sep {
++    font-size: 8px;
++    letter-spacing: 0.05em;
++  }
++}
++
+ .article-cat {
+   font-size: 8px;
+   font-weight: 600;
+diff --git a/sections/drye-blog-featured-post.liquid b/sections/drye-blog-featured-post.liquid
+index a311fc9..59d3b6c 100644
+--- a/sections/drye-blog-featured-post.liquid
++++ b/sections/drye-blog-featured-post.liquid
+@@ -145,26 +145,22 @@
+ {
+   "type": "text",
+   "id": "image_badge",
+-  "label": "Image badge override",
+-  "default": "Field Report"
++  "label": "Image badge override"
+ },
+     {
+       "type": "text",
+       "id": "image_title_line_1",
+-      "label": "Image title line 1 override",
+-      "default": "Field Report"
++      "label": "Image title line 1 override"
+     },
+     {
+       "type": "text",
+       "id": "image_title_line_2",
+-      "label": "Image title line 2 override",
+-      "default": "Field Report"
++      "label": "Image title line 2 override"
+     },
+     {
+       "type": "text",
+       "id": "image_title_line_3",
+-      "label": "Image title line 3 override",
+-      "default": "Field Report"
++      "label": "Image title line 3 override"
+     },
+     {
+       "type": "text",
+@@ -175,32 +171,27 @@
+     {
+       "type": "text",
+       "id": "heading",
+-      "label": "Heading override",
+-      "default": "Field Report"
++      "label": "Heading override"
+     },
+     {
+       "type": "textarea",
+       "id": "excerpt",
+-      "label": "Excerpt override",
+-      "default": "Field Report"
++      "label": "Excerpt override"
+     },
+     {
+       "type": "text",
+       "id": "meta_date",
+-      "label": "Meta date override",
+-      "default": "Field Report"
++      "label": "Meta date override"
+     },
+     {
+       "type": "text",
+       "id": "meta_type",
+-      "label": "Meta type override",
+-      "default": "Field Report"
++      "label": "Meta type override"
+     },
+     {
+       "type": "text",
+       "id": "meta_read_time",
+-      "label": "Meta read time override",
+-      "default": "Field Report"
++      "label": "Meta read time override"
+     },
+     {
+       "type": "text",
+diff --git a/sections/drye-blog-grid.liquid b/sections/drye-blog-grid.liquid
+index 2f35a1b..aea0aac 100644
+--- a/sections/drye-blog-grid.liquid
++++ b/sections/drye-blog-grid.liquid
+@@ -17,162 +17,36 @@
+       </span>
+     </div>
+ 
+-    <div class="post-grid" id="post-grid">
+-      {% if section.settings.exclude_first_post %}
+-        {% for article in blog.articles limit: max_posts offset: 1 %}
+-          {% liquid
+-            assign category_handle = 'science'
+-            assign category_label = 'Science'
+-            assign placeholder_class = 'ph-science'
+-            assign placeholder_symbol = '⬡'
+-
+-            if article.tags contains 'Field Report'
+-              assign category_handle = 'field'
+-              assign category_label = 'Field Report'
+-              assign placeholder_class = 'ph-mining'
+-              assign placeholder_symbol = '⬤'
+-            elsif article.tags contains 'User Story'
+-              assign category_handle = 'stories'
+-              assign category_label = 'User Story'
+-              assign placeholder_class = 'ph-hockey'
+-              assign placeholder_symbol = '❄'
+-            elsif article.tags contains 'Science'
+-              assign category_handle = 'science'
+-              assign category_label = 'Science'
+-              assign placeholder_class = 'ph-science'
+-              assign placeholder_symbol = '⬡'
+-            endif
+-
+-            assign word_count = article.content | strip_html | split: ' ' | size
+-            assign read_time = word_count | plus: 199 | divided_by: 200
+-            if read_time < 1
+-              assign read_time = 1
+-            endif
+-
+-            assign excerpt_text = article.excerpt_or_content | strip_html | truncatewords: 24
+-          %}
+-
+-          <article
+-            class="post-card rev{% if forloop.index == 1 %} rd1{% elsif forloop.index == 2 %} rd2{% elsif forloop.index == 3 %} rd3{% elsif forloop.index == 4 %} rd4{% elsif forloop.index == 5 %} rd5{% endif %}"
+-            data-cat="{{ category_handle }}"
+-          >
+-            <a href="{{ article.url }}" class="post-card__link" aria-label="{{ article.title | escape }}">
+-              <div class="pc-img">
+-                {% if article.image != blank %}
+-                  <div class="pc-img-inner">
+-                    {{
+-                      article.image
+-                      | image_url: width: 1200
+-                      | image_tag:
+-                        loading: 'lazy',
+-                        widths: '400, 600, 800, 1200',
+-                        sizes: '(min-width: 900px) 33vw, (min-width: 600px) 50vw, 100vw',
+-                        alt: article.title
+-                    }}
+-                  </div>
+-                {% else %}
+-                  <div class="pc-img-inner ph {{ placeholder_class }}">
+-                    <span>{{ placeholder_symbol }}</span>
+-                  </div>
+-                {% endif %}
+-              </div>
+-
+-              <div class="pc-body">
+-                <span class="pc-cat">
+-                  <span class="pc-cat-dot"></span>{{ category_label }}
+-                </span>
+-
+-                <h3 class="pc-h">{{ article.title }}</h3>
+-
+-                <p class="pc-excerpt">{{ excerpt_text }}</p>
+-
+-                <div class="pc-footer">
+-                  <span class="pc-date">{{ article.published_at | date: "%b %Y" }}</span>
+-                  <span class="pc-read">{{ read_time }} min</span>
+-                  <span class="pc-arrow">→</span>
+-                </div>
+-              </div>
+-            </a>
+-          </article>
+-        {% endfor %}
+-      {% else %}
+-        {% for article in blog.articles limit: max_posts %}
+-          {% liquid
+-            assign category_handle = 'science'
+-            assign category_label = 'Science'
+-            assign placeholder_class = 'ph-science'
+-            assign placeholder_symbol = '⬡'
+-
+-            if article.tags contains 'Field Report'
+-              assign category_handle = 'field'
+-              assign category_label = 'Field Report'
+-              assign placeholder_class = 'ph-mining'
+-              assign placeholder_symbol = '⬤'
+-            elsif article.tags contains 'User Story'
+-              assign category_handle = 'stories'
+-              assign category_label = 'User Story'
+-              assign placeholder_class = 'ph-hockey'
+-              assign placeholder_symbol = '❄'
+-            elsif article.tags contains 'Science'
+-              assign category_handle = 'science'
+-              assign category_label = 'Science'
+-              assign placeholder_class = 'ph-science'
+-              assign placeholder_symbol = '⬡'
+-            endif
++    {% assign pin_tag = section.settings.pin_tag | default: 'pinned' %}
++    {% liquid
++      assign exclude_id = ''
++      if section.settings.exclude_first_post and blog.articles.size > 0
++        assign exclude_id = blog.articles.first.id
++      endif
++      assign shown = 0
++      assign card_index = 0
++    %}
+ 
+-            assign word_count = article.content | strip_html | split: ' ' | size
+-            assign read_time = word_count | plus: 199 | divided_by: 200
+-            if read_time < 1
+-              assign read_time = 1
+-            endif
+-
+-            assign excerpt_text = article.excerpt_or_content | strip_html | truncatewords: 24
+-          %}
+-
+-          <article
+-            class="post-card rev{% if forloop.index == 1 %} rd1{% elsif forloop.index == 2 %} rd2{% elsif forloop.index == 3 %} rd3{% elsif forloop.index == 4 %} rd4{% elsif forloop.index == 5 %} rd5{% endif %}"
+-            data-cat="{{ category_handle }}"
+-          >
+-            <a href="{{ article.url }}" class="post-card__link" aria-label="{{ article.title | escape }}">
+-              <div class="pc-img">
+-                {% if article.image != blank %}
+-                  <div class="pc-img-inner">
+-                    {{
+-                      article.image
+-                      | image_url: width: 1200
+-                      | image_tag:
+-                        loading: 'lazy',
+-                        widths: '400, 600, 800, 1200',
+-                        sizes: '(min-width: 900px) 33vw, (min-width: 600px) 50vw, 100vw',
+-                        alt: article.title
+-                    }}
+-                  </div>
+-                {% else %}
+-                  <div class="pc-img-inner ph {{ placeholder_class }}">
+-                    <span>{{ placeholder_symbol }}</span>
+-                  </div>
+-                {% endif %}
+-              </div>
+-
+-              <div class="pc-body">
+-                <span class="pc-cat">
+-                  <span class="pc-cat-dot"></span>{{ category_label }}
+-                </span>
+-
+-                <h3 class="pc-h">{{ article.title }}</h3>
+-
+-                <p class="pc-excerpt">{{ excerpt_text }}</p>
+-
+-                <div class="pc-footer">
+-                  <span class="pc-date">{{ article.published_at | date: "%b %Y" }}</span>
+-                  <span class="pc-read">{{ read_time }} min</span>
+-                  <span class="pc-arrow">→</span>
+-                </div>
+-              </div>
+-            </a>
+-          </article>
+-        {% endfor %}
+-      {% endif %}
++    <div class="post-grid" id="post-grid">
++      {%- comment -%} Pinned posts first (any article tagged with the pin tag) {%- endcomment -%}
++      {% for article in blog.articles %}
++        {% if shown >= max_posts %}{% break %}{% endif %}
++        {% unless article.tags contains pin_tag %}{% continue %}{% endunless %}
++        {% if exclude_id != '' and article.id == exclude_id %}{% continue %}{% endif %}
++        {% assign card_index = card_index | plus: 1 %}
++        {% render 'drye-blog-card', article: article, card_index: card_index %}
++        {% assign shown = shown | plus: 1 %}
++      {% endfor %}
++
++      {%- comment -%} Then the remaining posts in normal (newest-first) order {%- endcomment -%}
++      {% for article in blog.articles %}
++        {% if shown >= max_posts %}{% break %}{% endif %}
++        {% if article.tags contains pin_tag %}{% continue %}{% endif %}
++        {% if exclude_id != '' and article.id == exclude_id %}{% continue %}{% endif %}
++        {% assign card_index = card_index | plus: 1 %}
++        {% render 'drye-blog-card', article: article, card_index: card_index %}
++        {% assign shown = shown | plus: 1 %}
++      {% endfor %}
+     </div>
+   </div>
+ </section>
+@@ -202,6 +76,13 @@
+       "label": "Exclude first post from grid",
+       "default": true,
+       "info": "Use this if the newest post is already shown in the featured section above."
++    },
++    {
++      "type": "text",
++      "id": "pin_tag",
++      "label": "Pin tag",
++      "default": "pinned",
++      "info": "Articles with this tag are shown first in the grid. Add the tag to a blog post in the admin to pin it to the top."
+     }
+   ],
+   "presets": [
+diff --git a/snippets/drye-blog-card.liquid b/snippets/drye-blog-card.liquid
+new file mode 100644
+index 0000000..2346bd6
+--- /dev/null
++++ b/snippets/drye-blog-card.liquid
+@@ -0,0 +1,80 @@
++{%- comment -%}
++  Renders one blog post card for the DRYE Blog Grid.
++  Accepts:
++    - article    {object}  the article to render
++    - card_index {number}  1-based position in the grid (drives the rd1..rd5 reveal stagger)
++{%- endcomment -%}
++{% liquid
++  assign category_handle = 'science'
++  assign category_label = 'Science'
++  assign placeholder_class = 'ph-science'
++  assign placeholder_symbol = '⬡'
++
++  if article.tags contains 'Field Report'
++    assign category_handle = 'field'
++    assign category_label = 'Field Report'
++    assign placeholder_class = 'ph-mining'
++    assign placeholder_symbol = '⬤'
++  elsif article.tags contains 'User Story'
++    assign category_handle = 'stories'
++    assign category_label = 'User Story'
++    assign placeholder_class = 'ph-hockey'
++    assign placeholder_symbol = '❄'
++  elsif article.tags contains 'Science'
++    assign category_handle = 'science'
++    assign category_label = 'Science'
++    assign placeholder_class = 'ph-science'
++    assign placeholder_symbol = '⬡'
++  endif
++
++  assign word_count = article.content | strip_html | split: ' ' | size
++  assign read_time = word_count | plus: 199 | divided_by: 200
++  if read_time < 1
++    assign read_time = 1
++  endif
++
++  assign excerpt_text = article.excerpt_or_content | strip_html | truncatewords: 24
++%}
++
++<article
++  class="post-card rev{% if card_index == 1 %} rd1{% elsif card_index == 2 %} rd2{% elsif card_index == 3 %} rd3{% elsif card_index == 4 %} rd4{% elsif card_index == 5 %} rd5{% endif %}"
++  data-cat="{{ category_handle }}"
++>
++  <a href="{{ article.url }}" class="post-card__link" aria-label="{{ article.title | escape }}">
++    <div class="pc-img">
++      {% if article.image != blank %}
++        <div class="pc-img-inner">
++          {{
++            article.image
++            | image_url: width: 1200
++            | image_tag:
++              loading: 'lazy',
++              widths: '400, 600, 800, 1200',
++              sizes: '(min-width: 900px) 33vw, (min-width: 600px) 50vw, 100vw',
++              alt: article.title
++          }}
++        </div>
++      {% else %}
++        <div class="pc-img-inner ph {{ placeholder_class }}">
++          <span>{{ placeholder_symbol }}</span>
++        </div>
++      {% endif %}
++    </div>
++
++    <div class="pc-body">
++      <span class="pc-cat">
++        <span class="pc-cat-dot"></span>{{ category_label }}
++      </span>
++
++      <h3 class="pc-h">{{ article.title }}</h3>
++
++      <p class="pc-excerpt">{{ excerpt_text }}</p>
++
++      <div class="pc-footer">
++        <span class="pc-date">{{ article.published_at | date: "%b %Y" }}</span>
++        <span class="pc-read">{{ read_time }} min</span>
++        <span class="pc-arrow">→</span>
++      </div>
++    </div>
++  </a>
++</article>
+-- 
+2.43.0
+
