@@ -188,6 +188,8 @@
   .hero .hero-gallery-arrow[disabled] { opacity: 0.35; }
 
   /* make room for the arrows on each side + show exactly 5 thumbs */
-  .hero .hero-gallery-thumbs { padding-left: 44px; padding-right: 44px; }
+  /* strip lives BETWEEN the arrows and clips at its own edges, so thumbs
+     never slide behind the buttons */
+  .hero .hero-gallery-thumbs { left: 44px; right: 44px; padding-left: 0; padding-right: 0; }
   .hero .hero-gallery-thumb  { width: calc((100% - 16px) / 5); height: 52px; }
 }
