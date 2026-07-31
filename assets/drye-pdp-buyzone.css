@@ -193,3 +193,15 @@
   .hero .hero-gallery-thumbs { left: 44px; right: 44px; padding-left: 0; padding-right: 0; }
   .hero .hero-gallery-thumb  { width: calc((100% - 16px) / 5); height: 52px; }
 }
+
+/* ==========================================================================
+   Best-value pack tier — navy border + corner ribbon (always-on merit label)
+   ========================================================================== */
+.hero .pack--best { border: 1.5px solid var(--deep); position: relative; }
+.hero .pack--best .pack__btn { padding-top: 20px; }
+.hero .pack__ribbon {
+  position: absolute; top: 0; right: 0; z-index: 2;
+  background: var(--deep); color: #fff;
+  font-family: "DM Sans", sans-serif; font-size: 10px; font-weight: 700;
+  letter-spacing: 0.08em; text-transform: uppercase; padding: 3px 8px;
+}

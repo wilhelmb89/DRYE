@@ -31,6 +31,14 @@
 
   var sizeVariantsEl = document.getElementById('drye-size-variants');
   var SIZE_VARIANTS = sizeVariantsEl ? JSON.parse(sizeVariantsEl.textContent) : {};
+  var SIZE_ORDER = Object.keys(SIZE_VARIANTS); // actual option values in variant order (e.g. "XS (6)")
+  var LAST_PAIRS = 0;
+  var busy = false;
+  function guard(fn) {
+    if (busy) return;            // ignore rapid clicks while a cart op is in flight
+    busy = true;
+    Promise.resolve().then(fn).catch(function () {}).then(function () { busy = false; });
+  }
 
   var overlay = document.querySelector('[data-drye-cart-overlay]');
   var drawer = document.querySelector('[data-drye-cart-drawer]');
@@ -86,7 +94,7 @@
           '<span class="drye-cart-pair__label">Pair ' + (i + 1) + '</span>' +
           '<div class="drye-cart-pair__stepper">' +
             '<button type="button" data-drye-pair-size-step="-1" data-drye-pair-key="' + line.key + '">−</button>' +
-            '<div class="drye-cart-pair__size">' + sz + ' (' + code + ')</div>' +
+            '<div class="drye-cart-pair__size">' + sz + '</div>' +
             '<button type="button" data-drye-pair-size-step="1" data-drye-pair-key="' + line.key + '">+</button>' +
           '</div>' +
         '</div>';
@@ -96,6 +104,7 @@
   function renderCart(cart) {
     var lines = drueLines(cart);
     var pairs = lines.reduce(function (n, l) { return n + l.quantity; }, 0);
+    LAST_PAIRS = pairs;
     var countEl = document.querySelector('[data-drye-cart-count]');
     if (countEl) countEl.textContent = pairs + ' ' + (pairs === 1 ? 'item' : 'items');
 
@@ -197,8 +206,10 @@
     var lines = drueLines(cart);
     var pairs = lines.reduce(function (n, l) { return n + l.quantity; }, 0);
     if (target > pairs) {
-      var defaultVariant = SIZE_VARIANTS[DEFAULT_SIZE];
-      if (defaultVariant) await addVariant(defaultVariant, target - pairs);
+      var addVar = (lines.length && lines[lines.length - 1].variant_id) ||
+                   SIZE_VARIANTS[DEFAULT_SIZE] ||
+                   (SIZE_ORDER.length ? SIZE_VARIANTS[SIZE_ORDER[0]] : null);
+      if (addVar) await addVariant(addVar, target - pairs);
     } else if (target < pairs) {
       var toRemove = pairs - target;
       // remove from the end of the line list first
@@ -212,9 +223,8 @@
   }
 
   async function stepPackSize(dir) {
-    var cart = await fetchCart();
-    var pairs = drueLines(cart).reduce(function (n, l) { return n + l.quantity; }, 0);
-    var next = Math.max(1, Math.min(6, pairs + dir));
+    var next = Math.max(1, Math.min(6, LAST_PAIRS + dir));
+    if (next === LAST_PAIRS) return;
     await setPackSize(next);
   }
 
@@ -223,8 +233,9 @@
     var line = cart.items.find(function (l) { return l.key === key; });
     if (!line) return;
     var current = sizeFromLine(line);
-    var idx = SIZE_KEYS.indexOf(current);
-    var next = SIZE_KEYS[Math.max(0, Math.min(SIZE_KEYS.length - 1, idx + dir))];
+    var idx = SIZE_ORDER.indexOf(current);
+    if (idx === -1) return;
+    var next = SIZE_ORDER[Math.max(0, Math.min(SIZE_ORDER.length - 1, idx + dir))];
     if (next === current) return;
     var nextVariant = SIZE_VARIANTS[next];
     if (!nextVariant) return;
@@ -238,10 +249,10 @@
     if (e.target.closest('[data-drye-cart-close]') || e.target === overlay) { closeDrawer(); return; }
 
     var packStep = e.target.closest('[data-drye-cart-pack-step]');
-    if (packStep) { stepPackSize(Number(packStep.dataset.dryeCartPackStep)); return; }
+    if (packStep) { guard(function () { return stepPackSize(Number(packStep.dataset.dryeCartPackStep)); }); return; }
 
     var setPairs = e.target.closest('[data-drye-cart-set-pairs]');
-    if (setPairs) { setPackSize(Number(setPairs.dataset.dryeCartSetPairs)); return; }
+    if (setPairs) { guard(function () { return setPackSize(Number(setPairs.dataset.dryeCartSetPairs)); }); return; }
 
     var sizesToggle = e.target.closest('[data-drye-cart-sizes-toggle]');
     if (sizesToggle) {
@@ -252,7 +263,7 @@
     }
 
     var pairStep = e.target.closest('[data-drye-pair-size-step]');
-    if (pairStep) { stepPairSize(pairStep.dataset.dryePairKey, Number(pairStep.dataset.dryePairSizeStep)); return; }
+    if (pairStep) { guard(function () { return stepPairSize(pairStep.dataset.dryePairKey, Number(pairStep.dataset.dryePairSizeStep)); }); return; }
   });
 
   // Intercept the PDP add-to-cart form so it Ajax-adds and opens THIS drawer
