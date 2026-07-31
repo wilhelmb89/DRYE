@@ -1,140 +1,181 @@
 /* ==========================================================================
-   DRYE Cart Drawer — handoff JS (additive, cart-driven)
+   DRYE Cart Drawer — cart-driven, optimistic UI
    Talks to Shopify's Ajax Cart API only (/cart.js, /cart/add.js,
    /cart/change.js). Never computes discounted prices itself — every kr
-   value rendered comes straight from cart.js so it always matches
-   checkout. Copy (pack name / "what's included" checklist) is static,
-   keyed by pair count, matching the approved design.
+   value rendered comes straight from cart.js so it always matches checkout.
 
    MODEL: each pair = one cart line, quantity 1, so each pair can carry its
-   own size variant (Shopify can't split one line's quantity across
-   variants). The pack stepper adds/removes whole pair-lines. The per-pair
-   size stepper removes that pair's line and re-adds the neighbouring size
-   variant — two Ajax calls, see setPairSize().
+   own size variant. The UI keeps an OPTIMISTIC array of size labels
+   (`pairs`) that updates instantly on every tap; a single debounced sync()
+   reconciles the server cart to that array (minimal add/remove/change), so
+   rapid taps coalesce into ONE round of Ajax calls and no tap is ever
+   dropped. Prices come from the authoritative cart returned by that sync.
    ========================================================================== */
 (function () {
-  var DRYE_PRODUCT_HANDLE = 'drye-moisture-routing-glove-liners'; // must match the liquid snippet's setting
-  var FREE_SHIPPING_THRESHOLD_CENTS = 3 * 55000; // 3 pairs @ 550kr — adjust to your real free-shipping threshold
-  var SIZE_KEYS = ['XXS', 'XS', 'S', 'M', 'L', 'XL', 'XXL', 'XXXL'];
-  var SIZE_CODES = { XXS: 5, XS: 6, S: 7, M: 8, L: 9, XL: 10, XXL: 11, XXXL: 12 };
-  var DEFAULT_SIZE = 'M';
+  var DRYE_PRODUCT_HANDLE = 'drye-moisture-routing-glove-liners';
+  var FREE_SHIPPING_THRESHOLD_CENTS = 3 * 55000; // 3 pairs @ 550kr — adjust to your real threshold
+  var SYNC_DEBOUNCE_MS = 220;
 
   // Static display copy per pair count — pricing itself always comes from cart.js.
   var COPY = {
-    1: { name: 'Starter Pair', benefit: null, includes: ['Test under your own gloves', 'Economy delivery: 10–20 business days', 'Duties & taxes included', '30-day money-back guarantee'] },
-    2: { name: 'Work Rotation', benefit: 'One on. One drying.', includes: ['One on. One drying.', 'Economy delivery: 10–20 business days (Tracked)', 'Duties & taxes included', '30-day money-back guarantee'] },
-    3: { name: 'Express Workweek Pack', benefit: 'Full week rotation · Express delivery · No surprise fees', includes: ['3 pairs for full workweek rotation', 'UPS Express: 2–3 business days', 'No brokerage fee on delivery', 'Wrong size guarantee included', 'Free shipping', 'Duties & taxes included', '30-day money-back guarantee'] },
-    4: { name: 'Extra Rotation', benefit: null, includes: ['Full week rotation + spare pair', 'UPS Express: 2–3 business days', 'No brokerage fee on delivery', 'Wrong size guarantee included', 'Free shipping', 'Duties & taxes included', '30-day money-back guarantee'] },
-    5: { name: 'Team Starter', benefit: null, includes: ['Team starter rotation', 'UPS Express: 2–3 business days', 'No brokerage fee on delivery', 'Wrong size guarantee included', 'Free shipping', 'Duties & taxes included', '30-day money-back guarantee'] },
-    6: { name: 'Team Rotation', benefit: null, includes: ['Full team rotation', 'UPS Express: 2–3 business days', 'No brokerage fee on delivery', 'Wrong size guarantee included', 'Free shipping', 'Duties & taxes included', '30-day money-back guarantee'] }
+    1: { name: 'Starter Pair', benefit: 'Test under your own gloves' },
+    2: { name: 'Work Rotation', benefit: 'One on. One drying.' },
+    3: { name: 'Express Workweek Pack', benefit: 'Full week rotation · Express delivery · No surprise fees' },
+    4: { name: 'Extra Rotation', benefit: 'Full week rotation + spare pair · Express delivery · No surprise fees' },
+    5: { name: 'Team Starter', benefit: 'Team starter rotation · Express delivery · No surprise fees' },
+    6: { name: 'Team Rotation', benefit: 'Full team rotation · Express delivery · No surprise fees' }
   };
+
+  var CHEVRON = '<svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4 10l4-4 4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
 
   var sizeVariantsEl = document.getElementById('drye-size-variants');
   var SIZE_VARIANTS = sizeVariantsEl ? JSON.parse(sizeVariantsEl.textContent) : {};
-  var SIZE_ORDER = Object.keys(SIZE_VARIANTS); // actual option values in variant order (e.g. "XS (6)")
-  var LAST_PAIRS = 0;
-  var busy = false;
-  function guard(fn) {
-    if (busy) return;            // ignore rapid clicks while a cart op is in flight
-    busy = true;
-    Promise.resolve().then(fn).catch(function () {}).then(function () { busy = false; });
-  }
+  var SIZE_ORDER = Object.keys(SIZE_VARIANTS); // actual option values in variant order (e.g. "M (8)")
+  var PRODUCT_IMAGE = (typeof window !== 'undefined' && window.DRYE_PRODUCT_IMAGE) ? window.DRYE_PRODUCT_IMAGE : '';
 
-  var overlay = document.querySelector('[data-drye-cart-overlay]');
-  var drawer = document.querySelector('[data-drye-cart-drawer]');
-  var body = document.querySelector('[data-drye-cart-body]');
-  var openBtn = document.querySelector('[data-drye-cart-open]');
-  var sizesOpenState = false;
+  function pickDefaultSize() {
+    for (var i = 0; i < SIZE_ORDER.length; i++) { if (/\(8\)/.test(SIZE_ORDER[i]) || /^M\b/.test(SIZE_ORDER[i])) return SIZE_ORDER[i]; }
+    return SIZE_ORDER[Math.floor(SIZE_ORDER.length / 2)] || SIZE_ORDER[0] || '';
+  }
+  var DEFAULT_SIZE = pickDefaultSize();
+
+  // ---- DOM ----
+  function qs(s) { return document.querySelector(s); }
+  var overlay = qs('[data-drye-cart-overlay]');
+  var drawer = qs('[data-drye-cart-drawer]');
+  var body = qs('[data-drye-cart-body]');
+  var openBtn = qs('[data-drye-cart-open]');
+
+  // ---- state ----
+  var pairs = [];        // optimistic array of size labels, one per pair
+  var priceCart = null;  // last authoritative cart.js (source of truth for prices)
+  var sizesOpen = true;  // "Adjust your sizes" open by default
+  var syncing = false;
+  var syncTimer = null;
 
   function money(cents) {
-    // Swap for your theme's Shopify.formatMoney(cents, money_format) if available.
-    return (cents / 100).toLocaleString('sv-SE') + ' kr';
+    return (Math.round(cents) / 100).toLocaleString('sv-SE') + ' kr';
   }
-
-  function openDrawer() {
-    overlay.classList.add('is-open');
-    drawer.classList.add('is-open');
-    if (openBtn) openBtn.hidden = true;
-  }
-  function closeDrawer() {
-    overlay.classList.remove('is-open');
-    drawer.classList.remove('is-open');
-    if (openBtn) openBtn.hidden = false;
-  }
-
-  function drueLines(cart) {
-    return cart.items.filter(function (i) { return i.handle === DRYE_PRODUCT_HANDLE; });
-  }
-
+  function byHandle(l) { return l.handle === DRYE_PRODUCT_HANDLE; }
   function sizeFromLine(line) {
-    // Assumes Size is variant option1 — adjust to option2/3 if it sits elsewhere.
-    return line.options_with_values && line.options_with_values[0]
+    return (line.options_with_values && line.options_with_values[0])
       ? line.options_with_values[0].value
       : (line.variant_title || DEFAULT_SIZE);
   }
-
-  async function fetchCart() {
-    var res = await fetch('/cart.js');
-    return res.json();
+  function pairCountOf(cart) {
+    if (!cart || !cart.items) return 0;
+    return cart.items.filter(byHandle).reduce(function (n, l) { return n + l.quantity; }, 0);
   }
 
-  function renderIncludes(list) {
-    return list.map(function (t) {
-      return '<div class="drye-cart-includes__row"><span class="drye-cart-includes__check">✓</span><span class="drye-cart-includes__text">' + t + '</span></div>';
-    }).join('');
+  // ---- open / close ----
+  function openDrawer() { if (overlay) overlay.classList.add('is-open'); if (drawer) drawer.classList.add('is-open'); if (openBtn) openBtn.hidden = true; }
+  function closeDrawer() { if (overlay) overlay.classList.remove('is-open'); if (drawer) drawer.classList.remove('is-open'); if (openBtn) openBtn.hidden = false; }
+
+  // ---- Ajax ----
+  async function fetchCart() { var r = await fetch('/cart.js', { headers: { 'Accept': 'application/json' } }); return r.json(); }
+  async function changeLineQty(key, qty) {
+    var r = await fetch('/cart/change.js', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ id: key, quantity: qty }) });
+    return r.json();
+  }
+  var pairSeq = 0;
+  function pairProps() { return { _pair: String(Date.now()) + '-' + (++pairSeq) }; }
+  async function addPairs(variantId, count) {
+    var items = [];
+    for (var i = 0; i < count; i++) items.push({ id: variantId, quantity: 1, properties: pairProps() });
+    var r = await fetch('/cart/add.js', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ items: items }) });
+    return r.json();
   }
 
-  function renderPairRows(lines) {
-    return lines.map(function (line, i) {
-      var sz = sizeFromLine(line);
-      var code = SIZE_CODES[sz] || '';
+  // ---- render ----
+  function packHtml(n, copy, total, disc, pending) {
+    return '' +
+      '<div class="drye-cart-pack">' +
+        '<span class="drye-cart-pack__tag">Your pack</span>' +
+        '<div class="drye-cart-pack__title">' + n + (n === 1 ? ' Pair' : ' Pairs') + ' · ' + copy.name + '</div>' +
+        '<div class="drye-cart-pack__price' + (pending ? ' is-pending' : '') + '">' + (total != null ? money(total) : '…') + '</div>' +
+        (!pending && disc > 0 ? '<div class="drye-cart-pack__save"><strong>Save ' + money(disc) + '</strong></div>' : '') +
+        (copy.benefit ? '<div class="drye-cart-pack__benefit">' + copy.benefit + '</div>' : '') +
+        '<div class="drye-cart-stepper-row">' +
+          '<div class="drye-cart-stepper">' +
+            '<button type="button" data-drye-cart-pack-step="-1"' + (n <= 1 ? ' disabled' : '') + '>−</button>' +
+            '<div class="drye-cart-stepper__val">' + n + '</div>' +
+            '<button type="button" data-drye-cart-pack-step="1"' + (n >= 6 ? ' disabled' : '') + '>+</button>' +
+          '</div>' +
+          '<div class="drye-cart-tiers">' + [1, 2, 3, 4, 5, 6].map(function (k) { return '<div class="drye-cart-tiers__seg' + (k <= n ? ' is-filled' : '') + '"></div>'; }).join('') + '</div>' +
+        '</div>' +
+      '</div>';
+  }
+
+  function pairRowsHtml() {
+    return pairs.map(function (sz, i) {
+      var idx = SIZE_ORDER.indexOf(sz);
       return '' +
-        '<div class="drye-cart-pair" data-drye-pair-key="' + line.key + '">' +
-          '<img class="drye-cart-pair__img" src="' + (line.image || '') + '" alt="" />' +
-          '<span class="drye-cart-pair__label">Pair ' + (i + 1) + '</span>' +
+        '<div class="drye-cart-pair">' +
+          (PRODUCT_IMAGE ? '<img class="drye-cart-pair__img" src="' + PRODUCT_IMAGE + '" alt="DRYE glove liner" />' : '<span class="drye-cart-pair__img"></span>') +
           '<div class="drye-cart-pair__stepper">' +
-            '<button type="button" data-drye-pair-size-step="-1" data-drye-pair-key="' + line.key + '">−</button>' +
+            '<button type="button" data-drye-pair-size-step="-1" data-drye-pair-index="' + i + '"' + (idx <= 0 ? ' disabled' : '') + '>−</button>' +
             '<div class="drye-cart-pair__size">' + sz + '</div>' +
-            '<button type="button" data-drye-pair-size-step="1" data-drye-pair-key="' + line.key + '">+</button>' +
+            '<button type="button" data-drye-pair-size-step="1" data-drye-pair-index="' + i + '"' + (idx >= SIZE_ORDER.length - 1 ? ' disabled' : '') + '>+</button>' +
           '</div>' +
         '</div>';
     }).join('');
   }
 
-  function renderCart(cart) {
-    var lines = drueLines(cart);
-    var pairs = lines.reduce(function (n, l) { return n + l.quantity; }, 0);
-    LAST_PAIRS = pairs;
-    var countEl = document.querySelector('[data-drye-cart-count]');
-    if (countEl) countEl.textContent = pairs + ' ' + (pairs === 1 ? 'item' : 'items');
+  function sizesHtml() {
+    return '' +
+      '<div class="drye-cart-sizes' + (sizesOpen ? ' is-open' : '') + '" data-drye-cart-sizes>' +
+        '<button type="button" class="drye-cart-sizes__toggle" data-drye-cart-sizes-toggle>' +
+          '<span class="drye-cart-sizes__title">Adjust your sizes</span>' +
+          '<span class="drye-cart-sizes__chevron" aria-hidden="true">' + CHEVRON + '</span>' +
+        '</button>' +
+        '<div class="drye-cart-sizes__panel">' +
+          pairRowsHtml() +
+          '<div class="drye-cart-sizeguide-link">Unsure of your size? <a href="/pages/size-guide">See size guide</a></div>' +
+        '</div>' +
+      '</div>';
+  }
 
-    // free shipping bar
-    var shipMsg = document.querySelector('[data-drye-cart-ship-msg]');
-    var shipFill = document.querySelector('[data-drye-cart-ship-fill]');
-    var qualifies = cart.total_price >= FREE_SHIPPING_THRESHOLD_CENTS;
-    if (shipMsg) {
-      shipMsg.innerHTML = qualifies
+  function setVal(sel, text, pending) {
+    var el = qs(sel);
+    if (!el) return;
+    el.textContent = text;
+    el.classList.toggle('is-pending', !!pending);
+  }
+
+  function updateChrome(pending) {
+    var total = priceCart ? priceCart.total_price : null;
+    var original = priceCart ? priceCart.original_total_price : null;
+    var disc = (original != null && total != null) ? (original - total) : 0;
+
+    var countEl = qs('[data-drye-cart-count]');
+    if (countEl) countEl.textContent = pairs.length + ' ' + (pairs.length === 1 ? 'item' : 'items');
+
+    var shipMsg = qs('[data-drye-cart-ship-msg]');
+    var shipFill = qs('[data-drye-cart-ship-fill]');
+    if (total != null && shipMsg) {
+      shipMsg.innerHTML = total >= FREE_SHIPPING_THRESHOLD_CENTS
         ? '<span class="drye-cart-ship__msg--qualified">You qualify for free shipping</span>'
-        : 'Add <strong>' + money(Math.max(0, FREE_SHIPPING_THRESHOLD_CENTS - cart.total_price)) + '</strong> more for free shipping';
+        : 'Add <strong>' + money(Math.max(0, FREE_SHIPPING_THRESHOLD_CENTS - total)) + '</strong> more for free shipping';
     }
-    if (shipFill) shipFill.style.width = Math.min(100, Math.round((cart.total_price / FREE_SHIPPING_THRESHOLD_CENTS) * 100)) + '%';
+    if (total != null && shipFill) shipFill.style.width = Math.min(100, Math.round((total / FREE_SHIPPING_THRESHOLD_CENTS) * 100)) + '%';
 
-    // summary
-    var subtotalEl = document.querySelector('[data-drye-cart-subtotal]');
-    var discountRow = document.querySelector('[data-drye-cart-discount-row]');
-    var discountEl = document.querySelector('[data-drye-cart-discount]');
-    var totalEl = document.querySelector('[data-drye-cart-total]');
-    if (subtotalEl) subtotalEl.textContent = money(cart.original_total_price);
-    if (totalEl) totalEl.textContent = money(cart.total_price);
-    var discount = cart.original_total_price - cart.total_price;
-    if (discountRow) discountRow.hidden = discount <= 0;
-    if (discountEl) discountEl.textContent = '−' + money(discount);
+    setVal('[data-drye-cart-subtotal]', original != null ? money(original) : '…', pending);
+    var dRow = qs('[data-drye-cart-discount-row]');
+    if (dRow) dRow.hidden = !(disc > 0) || pending;
+    setVal('[data-drye-cart-discount]', '−' + money(disc), pending);
+    setVal('[data-drye-cart-total]', total != null ? money(total) : '…', pending);
 
-    var upsell = document.querySelector('[data-drye-cart-upsell]');
-    if (upsell) upsell.hidden = pairs === 0;
+    var upsell = qs('[data-drye-cart-upsell]');
+    if (upsell) upsell.hidden = pairs.length === 0;
+  }
+
+  function render() {
+    var n = pairs.length;
+    var pending = syncing || priceCart == null || pairCountOf(priceCart) !== n;
+    updateChrome(pending);
 
     if (!body) return;
-    if (pairs === 0) {
+    if (n === 0) {
       body.innerHTML =
         '<div class="drye-cart-empty">' +
           '<div class="drye-cart-empty__icon">🛒</div>' +
@@ -144,144 +185,164 @@
         '</div>';
       return;
     }
-
-    var copy = COPY[Math.min(6, pairs)] || COPY[6];
-    body.innerHTML =
-      '<div class="drye-cart-pack">' +
-        '<div class="drye-cart-pack__title">' + pairs + (pairs === 1 ? ' Pair' : ' Pairs') + ' · ' + copy.name + '</div>' +
-        '<div class="drye-cart-pack__price">' + money(cart.total_price) + '</div>' +
-        (discount > 0 ? '<div class="drye-cart-pack__save"><strong>Save ' + money(discount) + '</strong></div>' : '') +
-        (copy.benefit ? '<div class="drye-cart-pack__benefit">' + copy.benefit + '</div>' : '') +
-        '<div class="drye-cart-includes">' + renderIncludes(copy.includes) + '</div>' +
-        '<div class="drye-cart-stepper-row">' +
-          '<div class="drye-cart-stepper">' +
-            '<button type="button" data-drye-cart-pack-step="-1">−</button>' +
-            '<div class="drye-cart-stepper__val">' + pairs + '</div>' +
-            '<button type="button" data-drye-cart-pack-step="1">+</button>' +
-          '</div>' +
-          '<div class="drye-cart-tiers">' + [1,2,3,4,5,6].map(function (n) { return '<div class="drye-cart-tiers__seg' + (n <= pairs ? ' is-filled' : '') + '"></div>'; }).join('') + '</div>' +
-        '</div>' +
-      '</div>' +
-      '<div class="drye-cart-sizes" data-drye-cart-sizes>' +
-        '<button type="button" class="drye-cart-sizes__toggle" data-drye-cart-sizes-toggle>' +
-          '<span><span class="drye-cart-sizes__title">Adjust your sizes</span>' +
-          '<span class="drye-cart-sizes__summary">' + pairs + ' ' + (pairs === 1 ? 'pair' : 'pairs') + ': ' + lines.map(sizeFromLine).join(', ') + '</span></span>' +
-          '<span class="drye-cart-sizes__chevron">⌄</span>' +
-        '</button>' +
-        '<div class="drye-cart-sizes__panel">' + renderPairRows(lines) +
-          '<div class="drye-cart-sizeguide-link">Unsure of your size? <a href="/pages/size-guide">See size guide</a></div>' +
-        '</div>' +
-      '</div>';
-
-    var sizesBlock = document.querySelector('[data-drye-cart-sizes]');
-    if (sizesBlock) sizesBlock.classList.toggle('is-open', sizesOpenState);
+    var copy = COPY[Math.min(6, n)] || COPY[6];
+    var total = priceCart ? priceCart.total_price : null;
+    var original = priceCart ? priceCart.original_total_price : null;
+    var disc = (original != null && total != null) ? (original - total) : 0;
+    body.innerHTML = packHtml(n, copy, total, disc, pending) + sizesHtml();
   }
 
-  async function changeLineQty(key, qty) {
-    var res = await fetch('/cart/change.js', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ id: key, quantity: qty })
-    });
-    return res.json();
+  // ---- optimistic mutations ----
+  function stepPack(dir) {
+    if (dir > 0) { if (pairs.length >= 6) return; pairs.push(DEFAULT_SIZE); }
+    else { if (pairs.length <= 1) return; pairs.pop(); }
+    render(); scheduleSync();
+  }
+  function setPack(target) {
+    target = Math.max(1, Math.min(6, target));
+    while (pairs.length < target) pairs.push(DEFAULT_SIZE);
+    while (pairs.length > target) pairs.pop();
+    render(); scheduleSync();
+  }
+  function stepPairSize(index, dir) {
+    var cur = pairs[index];
+    var i = SIZE_ORDER.indexOf(cur);
+    if (i === -1) return;
+    var ni = Math.max(0, Math.min(SIZE_ORDER.length - 1, i + dir));
+    if (ni === i) return;
+    pairs[index] = SIZE_ORDER[ni];
+    render(); scheduleSync();
   }
 
-  async function addVariant(variantId, qty) {
-    var res = await fetch('/cart/add.js', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ id: variantId, quantity: qty || 1 })
-    });
-    return res.json();
+  // ---- sync: reconcile server cart to the optimistic `pairs` multiset ----
+  function scheduleSync() {
+    if (syncTimer) clearTimeout(syncTimer);
+    syncTimer = setTimeout(runSync, SYNC_DEBOUNCE_MS);
   }
+  async function runSync() {
+    syncTimer = null;
+    if (syncing) { scheduleSync(); return; } // a sync is mid-flight — retry after it settles
+    syncing = true;
 
-  var pairSeq = 0;
-  function pairProps() {
-    return { _pair: String(Date.now()) + '-' + (++pairSeq) + '-' + Math.floor(Math.random() * 1e6) };
-  }
-  async function addPairs(variantId, count) {
-    var items = [];
-    for (var i = 0; i < count; i++) items.push({ id: variantId, quantity: 1, properties: pairProps() });
-    var res = await fetch('/cart/add.js', {
-      method: 'POST', headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ items: items })
-    });
-    return res.json();
-  }
+    try {
+      var target = {}; // variantId -> desired count
+      pairs.forEach(function (sz) { var v = SIZE_VARIANTS[sz]; if (v) target[v] = (target[v] || 0) + 1; });
 
-  async function refresh() {
-    var cart = await fetchCart();
-    renderCart(cart);
-    return cart;
-  }
+      var cart = await fetchCart();
+      var current = {}; // variantId -> [lines]
+      cart.items.filter(byHandle).forEach(function (l) { (current[l.variant_id] = current[l.variant_id] || []).push(l); });
 
-  async function setPackSize(target) {
-    var cart = await fetchCart();
-    var lines = drueLines(cart);
-    var pairs = lines.reduce(function (n, l) { return n + l.quantity; }, 0);
-    if (target > pairs) {
-      var addVar = (lines.length && lines[lines.length - 1].variant_id) ||
-                   SIZE_VARIANTS[DEFAULT_SIZE] ||
-                   (SIZE_ORDER.length ? SIZE_VARIANTS[SIZE_ORDER[0]] : null);
-      if (addVar) await addPairs(addVar, target - pairs);
-    } else if (target < pairs) {
-      var toRemove = pairs - target;
-      // remove from the end of the line list first
-      for (var i = lines.length - 1; i >= 0 && toRemove > 0; i--) {
-        var take = Math.min(lines[i].quantity, toRemove);
-        await changeLineQty(lines[i].key, lines[i].quantity - take);
-        toRemove -= take;
+      // removals first (frees identical variants), then additions
+      var vId;
+      for (vId in current) {
+        var have = current[vId].length;
+        var want = target[vId] || 0;
+        for (var k = have - 1; k >= want; k--) { await changeLineQty(current[vId][k].key, 0); }
       }
+      for (vId in target) {
+        var have2 = current[vId] ? current[vId].length : 0;
+        if (target[vId] > have2) { await addPairs(Number(vId), target[vId] - have2); }
+      }
+
+      priceCart = await fetchCart();
+      reconcilePairs(priceCart);
+    } catch (e) {
+      console.warn('[DRYE cart sync]', e);
     }
-    await refresh();
+    syncing = false;
+    render();
+    // taps that landed during the sync may have changed `pairs` again
+    if (pairCountOf(priceCart) !== pairs.length) scheduleSync();
   }
 
-  async function stepPackSize(dir) {
-    var next = Math.max(1, Math.min(6, LAST_PAIRS + dir));
-    if (next === LAST_PAIRS) return;
-    await setPackSize(next);
+  function sameMultiset(a, b) {
+    if (a.length !== b.length) return false;
+    var m = {};
+    a.forEach(function (x) { m[x] = (m[x] || 0) + 1; });
+    for (var i = 0; i < b.length; i++) { if (!m[b[i]]) return false; m[b[i]]--; }
+    return true;
+  }
+  function reconcilePairs(cart) {
+    var sizes = [];
+    cart.items.filter(byHandle).forEach(function (l) { var s = sizeFromLine(l); for (var i = 0; i < l.quantity; i++) sizes.push(s); });
+    if (!sameMultiset(sizes, pairs)) pairs = sizes;
   }
 
-  async function stepPairSize(key, dir) {
-    var cart = await fetchCart();
-    var line = cart.items.find(function (l) { return l.key === key; });
-    if (!line) return;
-    var current = sizeFromLine(line);
-    var idx = SIZE_ORDER.indexOf(current);
-    if (idx === -1) return;
-    var next = SIZE_ORDER[Math.max(0, Math.min(SIZE_ORDER.length - 1, idx + dir))];
-    if (next === current) return;
-    var nextVariant = SIZE_VARIANTS[next];
-    if (!nextVariant) return;
-    await changeLineQty(key, 0); // drop this pair's line
-    await addPairs(nextVariant, 1); // re-add as a fresh unique line at the new size
-    await refresh();
+  // ---- GA4 (ported from the previous drawer) ----
+  function pushBeginCheckout() {
+    try {
+      if (!priceCart || !priceCart.items) return;
+      var items = priceCart.items.map(function (item) {
+        return {
+          item_id: String(item.sku || item.variant_id),
+          item_name: item.product_title,
+          item_brand: 'DRYE',
+          item_variant: item.variant_title || '',
+          price: item.final_price / 100,
+          quantity: item.quantity
+        };
+      });
+      window.dataLayer = window.dataLayer || [];
+      window.dataLayer.push({
+        event: 'begin_checkout',
+        event_source: 'drye_cart_drawer',
+        ecommerce: { currency: priceCart.currency || 'SEK', value: priceCart.total_price / 100, items: items }
+      });
+    } catch (e) { console.warn('[DRYE begin_checkout skipped]', e); }
+  }
+  async function pushAddToCart(variantId, qty) {
+    try {
+      var cart = await fetchCart();
+      var added = cart.items.find(function (i) { return Number(i.variant_id) === Number(variantId); });
+      if (!added) return;
+      var unit = Number(added.final_price) / 100;
+      window.dataLayer = window.dataLayer || [];
+      window.dataLayer.push({
+        event: 'add_to_cart',
+        event_source: 'drye_cart_drawer',
+        ecommerce: {
+          currency: cart.currency || 'SEK',
+          value: unit * qty,
+          items: [{
+            item_id: String(added.sku || added.variant_id),
+            item_name: added.product_title,
+            item_brand: 'DRYE',
+            item_variant: added.variant_title || '',
+            price: unit,
+            quantity: qty
+          }]
+        }
+      });
+    } catch (e) { console.warn('[DRYE add_to_cart skipped]', e); }
   }
 
+  // ---- events ----
   document.addEventListener('click', function (e) {
     if (e.target.closest('[data-drye-cart-open], [data-cart-open]')) { e.preventDefault(); openDrawer(); return; }
     if (e.target.closest('[data-drye-cart-close]') || e.target === overlay) { closeDrawer(); return; }
 
     var packStep = e.target.closest('[data-drye-cart-pack-step]');
-    if (packStep) { guard(function () { return stepPackSize(Number(packStep.dataset.dryeCartPackStep)); }); return; }
+    if (packStep) { stepPack(Number(packStep.getAttribute('data-drye-cart-pack-step'))); return; }
 
-    var setPairs = e.target.closest('[data-drye-cart-set-pairs]');
-    if (setPairs) { guard(function () { return setPackSize(Number(setPairs.dataset.dryeCartSetPairs)); }); return; }
+    var setPairsBtn = e.target.closest('[data-drye-cart-set-pairs]');
+    if (setPairsBtn) { setPack(Number(setPairsBtn.getAttribute('data-drye-cart-set-pairs'))); return; }
 
     var sizesToggle = e.target.closest('[data-drye-cart-sizes-toggle]');
     if (sizesToggle) {
-      sizesOpenState = !sizesOpenState;
+      sizesOpen = !sizesOpen;
       var block = sizesToggle.closest('[data-drye-cart-sizes]');
-      if (block) block.classList.toggle('is-open', sizesOpenState);
+      if (block) block.classList.toggle('is-open', sizesOpen);
       return;
     }
 
     var pairStep = e.target.closest('[data-drye-pair-size-step]');
-    if (pairStep) { guard(function () { return stepPairSize(pairStep.dataset.dryePairKey, Number(pairStep.dataset.dryePairSizeStep)); }); return; }
+    if (pairStep) { stepPairSize(Number(pairStep.getAttribute('data-drye-pair-index')), Number(pairStep.getAttribute('data-drye-pair-size-step'))); return; }
+
+    var checkout = e.target.closest('.drye-cart-checkout');
+    if (checkout) { pushBeginCheckout(); return; } // navigation proceeds normally
   });
 
-  // Intercept the PDP add-to-cart form so it Ajax-adds and opens THIS drawer
-  // instead of doing a full-page submit to /cart (parity with the old drawer).
+  // Intercept the PDP add-to-cart form so it Ajax-adds and opens THIS drawer.
   document.addEventListener('submit', function (e) {
     var form = e.target;
     if (!form || form.nodeName !== 'FORM') return;
@@ -302,13 +363,23 @@
     addPairs(variantId, addQty)
       .then(function () {
         if (submitter) submitter.removeAttribute('disabled');
+        pushAddToCart(variantId, addQty);
         document.dispatchEvent(new CustomEvent('drye:cart:added'));
       })
       .catch(function () { if (submitter) submitter.removeAttribute('disabled'); form.submit(); });
   }, true);
 
-  // Open automatically after add-to-cart resolves.
-  document.addEventListener('drye:cart:added', function () { refresh().then(openDrawer); });
+  document.addEventListener('drye:cart:added', function () { init().then(openDrawer); });
 
-  refresh();
+  async function init() {
+    try {
+      var cart = await fetchCart();
+      priceCart = cart;
+      pairs = [];
+      cart.items.filter(byHandle).forEach(function (l) { var s = sizeFromLine(l); for (var i = 0; i < l.quantity; i++) pairs.push(s); });
+    } catch (e) { console.warn('[DRYE cart init]', e); }
+    render();
+  }
+
+  init();
 })();

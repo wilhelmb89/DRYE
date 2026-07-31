@@ -33,6 +33,9 @@
   }
 </script>
 
+{% comment %} Product image for the per-pair thumbnail in "Adjust your sizes" (drye-cart-drawer.js uses it as the row image). {% endcomment %}
+<script>window.DRYE_PRODUCT_IMAGE = {{ drye_product.featured_image | image_url: width: 160 | json }};</script>
+
 <div class="drye-cart-overlay" data-drye-cart-overlay></div>
 
 <aside class="drye-cart-drawer" role="dialog" aria-modal="true" aria-label="Your cart" data-drye-cart-drawer>

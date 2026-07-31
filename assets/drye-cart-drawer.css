@@ -137,3 +137,58 @@
 @media (max-width: 767px) {
   .drye-cart-upsell { display: none; }
 }
+
+/* ==========================================================================
+   Redesign overrides — framed pack, gradient collapsible, glove thumbnail.
+   Appended AFTER the base rules so the live type scale above stays intact.
+   ========================================================================== */
+
+/* dim prices while the optimistic UI waits for the authoritative cart */
+.is-pending { opacity: .45; transition: opacity .15s ease; }
+
+/* framed pack card so it reads as one package */
+.drye-cart-pack {
+  position: relative;
+  margin: 16px 20px;
+  padding: 15px 15px 13px;
+  border: 1.5px solid #1E3A4C;
+  border-radius: 6px;
+}
+.drye-cart-pack__tag {
+  position: absolute; top: -9px; left: 14px;
+  background: #1E3A4C; color: #fff;
+  font-family: 'DM Sans', sans-serif; font-size: 9px; font-weight: 700;
+  letter-spacing: .09em; text-transform: uppercase;
+  padding: 3px 8px; border-radius: 2px;
+}
+
+/* "Adjust your sizes" — gradient collapsible box with a clear round chevron */
+.drye-cart-sizes {
+  margin: 0 20px 16px;
+  padding: 0;
+  border: 1px solid #E5E7EB;
+  border-radius: 8px;
+  overflow: hidden;
+}
+.drye-cart-sizes__toggle {
+  padding: 13px 14px;
+  background: linear-gradient(180deg, #F2F6F5 0%, #E9F1F0 100%);
+}
+.drye-cart-sizes__chevron {
+  flex: 0 0 auto; width: 30px; height: 30px; border-radius: 50%;
+  background: #1E3A4C; color: #fff;
+  display: grid; place-items: center;
+  font-size: 0; /* neutralise the base text chevron */
+  transition: transform .28s ease;
+}
+.drye-cart-sizes__chevron svg { width: 14px; height: 14px; }
+.drye-cart-sizes__panel { padding: 4px 14px 8px; }
+
+/* glove thumbnail replaces the "Pair N" label; stepper stays right */
+.drye-cart-pair { padding: 12px 0; }
+.drye-cart-pair:first-child { border-top: 1px solid #E5E7EB; }
+.drye-cart-pair__img {
+  width: 46px; height: 46px; border-radius: 6px;
+  border: 1px solid #E5E7EB; background: #F8FAFC;
+  object-fit: cover; flex-shrink: 0;
+}
