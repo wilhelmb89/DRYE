@@ -491,7 +491,8 @@ assign review_count = section.settings.review_count_fallback
             {% assign pack_blocks_present = true %}
             {% assign is_first = false %}
             {% if forloop.first %}{% assign is_first = true %}{% endif %}
-            <div class="pack{% if is_first %} is-selected{% endif %}" data-pack data-pairs="{{ block.settings.pairs }}" data-cta="{{ block.settings.cta_label }}" {{ block.shopify_attributes }}>
+            <div class="pack{% if is_first %} is-selected{% endif %}{% if block.settings.is_best_value %} pack--best{% endif %}" data-pack data-pairs="{{ block.settings.pairs }}" data-cta="{{ block.settings.cta_label }}" {{ block.shopify_attributes }}>
+              {% if block.settings.is_best_value %}<span class="pack__ribbon">Best value</span>{% endif %}
               <button type="button" class="pack__btn">
                 <span class="pack__radio" aria-hidden="true"></span>
                 <span>
@@ -2570,7 +2571,8 @@ wteTimelines.forEach((timeline) => {
         { "type": "textarea", "id": "features", "label": "Feature list (one per line)", "default": "Test under your own gloves\nEconomy delivery: 10–20 business days\nDuties & taxes included\n30-day money-back guarantee" },
         { "type": "text", "id": "foot_headline", "label": "Footer band headline", "default": "Prove it on your next shift" },
         { "type": "text", "id": "foot_note", "label": "Footer band note", "default": "One pair. One real workday. Your own gloves." },
-        { "type": "text", "id": "cta_label", "label": "ATC button label when selected", "default": "Add Starter Pair" }
+        { "type": "text", "id": "cta_label", "label": "ATC button label when selected", "default": "Add Starter Pair" },
+        { "type": "checkbox", "id": "is_best_value", "label": "Highlight as Best Value (navy border + ribbon)", "default": false }
       ]
     },
     {
