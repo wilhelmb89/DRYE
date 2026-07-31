@@ -102,6 +102,7 @@
     {{ 'base.css' | asset_url | stylesheet_tag }}
     {{ 'components-buttons.css' | asset_url | stylesheet_tag }}
     {{ 'header-new.css' | asset_url | stylesheet_tag }}
+    {{ 'drye-cart-drawer.css' | asset_url | stylesheet_tag }}
 
     {% if request.design_mode %}
       {{ 'editor-guard.css' | asset_url | stylesheet_tag }}
@@ -147,11 +148,12 @@
     {%- render 'theme-variables-script' -%}
 
     <!-- Drawers / body-end sections -->
-    {% section 'drye-cart-drawer' %}
+    {% render 'drye-cart-drawer' %}
     {% section 'drye-size-guide-drawer' %}
 
     <!-- DRYE section tracker (drop-off measurement) -->
     {% render 'drye-section-tracker' %}
+    <script src="{{ 'drye-cart-drawer.js' | asset_url }}" defer></script>
 
   </body>
 </html>

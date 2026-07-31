@@ -1,0 +1,131 @@
+/* ==========================================================================
+   DRYE Cart Drawer — handoff CSS
+   Same drawer serves mobile and desktop: fixed panel, right edge,
+   width:100% capped at max-width 400px. Full-bleed on phones, a 400px
+   flyout on desktop. No separate breakpoint markup needed.
+   ========================================================================== */
+
+.drye-cart-overlay {
+  position: fixed; inset: 0; z-index: 1200;
+  background: rgba(15, 34, 48, 0.6);
+  opacity: 0; pointer-events: none;
+  transition: opacity .3s ease;
+}
+.drye-cart-overlay.is-open { opacity: 1; pointer-events: all; }
+
+.drye-cart-drawer {
+  position: fixed; top: 0; right: 0; bottom: 0; z-index: 1201;
+  width: 100%; max-width: 400px;
+  background: #fff;
+  transform: translateX(100%);
+  transition: transform .38s cubic-bezier(.4,0,.2,1);
+  display: flex; flex-direction: column; overflow: hidden;
+  box-shadow: -4px 0 24px rgba(0,0,0,0.08);
+  font-family: 'DM Sans', sans-serif;
+}
+.drye-cart-drawer.is-open { transform: translateX(0); }
+
+/* header */
+.drye-cart-head {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 14px 20px; border-bottom: 1px solid #E5E7EB; flex-shrink: 0;
+}
+.drye-cart-head__title-wrap { display: flex; align-items: baseline; gap: 10px; min-width: 0; }
+.drye-cart-head__title { font-family: 'Clash Grotesk', sans-serif; font-size: 20px; font-weight: 600; letter-spacing: -0.01em; color: #1E3A4C; white-space: nowrap; }
+.drye-cart-head__count { font-size: 17px; font-weight: 500; color: #9CA3AF; white-space: nowrap; }
+.drye-cart-head__actions { display: flex; align-items: center; gap: 8px; min-width: 0; flex-shrink: 0; }
+.drye-cart-currency { min-width: 72px; height: 30px; padding: 0 10px; border: 1.5px solid #E5E7EB; background: rgba(30,58,76,0.04); color: #4B5563; font-family: 'DM Sans', sans-serif; font-size: 10px; font-weight: 600; letter-spacing: 0.04em; line-height: 28px; text-align: center; white-space: nowrap; }
+.drye-cart-close { width: 30px; height: 30px; background: none; border: 1.5px solid #E5E7EB; cursor: pointer; display: flex; align-items: center; justify-content: center; color: #4B5563; font-size: 14px; flex-shrink: 0; }
+.drye-cart-close:hover { border-color: #1E3A4C; color: #1E3A4C; }
+
+.drye-cart-region { font-size: 12px; color: #9CA3AF; padding: 7px 20px; background: rgba(30,58,76,0.04); border-bottom: 1px solid #E5E7EB; display: flex; align-items: center; gap: 6px; flex-shrink: 0; }
+.drye-cart-region__flag { font-size: 13px; }
+
+/* free shipping bar */
+.drye-cart-ship { padding: 8px 20px; background: rgba(30,58,76,0.04); border-bottom: 1px solid #E5E7EB; flex-shrink: 0; }
+.drye-cart-ship__msg { font-size: 13px; color: #4B5563; margin-bottom: 5px; }
+.drye-cart-ship__msg--qualified { color: #0D9488; font-weight: 600; }
+.drye-cart-ship__msg strong { font-weight: 600; color: #1E3A4C; }
+.drye-cart-ship__track { height: 2px; background: #E5E7EB; }
+.drye-cart-ship__fill { height: 2px; background: #0D9488; transition: width .35s ease; }
+
+/* scroll body */
+.drye-cart-body { flex: 1; overflow-y: auto; min-height: 180px; }
+
+.drye-cart-pack { padding: 12px 20px; border-bottom: 1px solid #E5E7EB; }
+.drye-cart-pack__title { font-family: 'Clash Grotesk', sans-serif; font-size: 16px; font-weight: 600; letter-spacing: -0.01em; color: #1E3A4C; margin-bottom: 6px; }
+.drye-cart-pack__price { font-family: 'Clash Grotesk', sans-serif; font-size: 20px; font-weight: 600; color: #1E3A4C; margin-bottom: 2px; }
+.drye-cart-pack__save { font-size: 14px; color: #9CA3AF; margin-bottom: 6px; }
+.drye-cart-pack__save strong { color: #0D9488; font-weight: 600; }
+.drye-cart-pack__benefit { font-size: 11px; color: #4B5563; margin-bottom: 10px; }
+
+.drye-cart-includes { border: 1px solid #E5E7EB; background: rgba(30,58,76,0.03); padding: 8px 10px; margin-bottom: 6px; }
+.drye-cart-includes__row { display: flex; align-items: flex-start; gap: 6px; padding: 2px 0; }
+.drye-cart-includes__check { color: #0D9488; font-size: 11px; line-height: 1.5; flex-shrink: 0; }
+.drye-cart-includes__text { font-size: 13px; color: #4B5563; line-height: 1.5; }
+
+.drye-cart-stepper-row { display: flex; align-items: center; gap: 10px; margin-top: 6px; }
+.drye-cart-stepper { display: flex; align-items: center; border: 1.5px solid #E5E7EB; flex-shrink: 0; }
+.drye-cart-stepper button { width: 30px; height: 30px; background: none; border: none; cursor: pointer; font-size: 16px; color: #4B5563; }
+.drye-cart-stepper__val { min-width: 64px; height: 30px; font-size: 16px; font-weight: 600; color: #1E3A4C; display: flex; align-items: center; justify-content: center; border-left: 1.5px solid #E5E7EB; border-right: 1.5px solid #E5E7EB; padding: 0 8px; white-space: nowrap; }
+.drye-cart-tiers { flex: 1; display: flex; gap: 3px; }
+.drye-cart-tiers__seg { flex: 1; height: 6px; background: #E5E7EB; }
+.drye-cart-tiers__seg.is-filled { background: #0D9488; }
+
+/* adjust sizes */
+.drye-cart-sizes { padding: 12px 20px; border-bottom: 1px solid #E5E7EB; }
+.drye-cart-sizes__toggle { width: 100%; display: flex; align-items: center; justify-content: space-between; background: none; border: none; padding: 0; cursor: pointer; text-align: left; }
+.drye-cart-sizes__title { display: block; font-family: 'Clash Grotesk', sans-serif; font-size: 16px; font-weight: 600; color: #1E3A4C; }
+.drye-cart-sizes__summary { display: block; font-size: 14px; font-family: 'DM Sans', sans-serif; color: #4B5563; margin-top: 2px; }
+.drye-cart-sizes__chevron { display: inline-block; color: #4B5563; font-size: 14px; transition: transform .2s ease; }
+.drye-cart-sizes.is-open .drye-cart-sizes__chevron { transform: rotate(180deg); }
+.drye-cart-sizes__panel { padding-top: 10px; display: none; }
+.drye-cart-sizes.is-open .drye-cart-sizes__panel { display: block; }
+
+.drye-cart-pair { display: flex; align-items: center; gap: 10px; padding: 6px 0; border-bottom: 1px solid #F3F4F6; }
+.drye-cart-pair__img { width: 38px; height: 46px; flex-shrink: 0; object-fit: cover; background: #F3F4F6; }
+.drye-cart-pair__label { font-size: 12px; font-weight: 600; color: #1E3A4C; flex-shrink: 0; width: 44px; }
+.drye-cart-pair__stepper { display: flex; align-items: center; border: 1.5px solid #E5E7EB; flex-shrink: 0; margin-left: auto; }
+.drye-cart-pair__stepper button { width: 34px; height: 34px; background: none; border: none; cursor: pointer; font-size: 16px; color: #4B5563; }
+.drye-cart-pair__size { min-width: 78px; height: 34px; font-size: 12px; font-weight: 600; color: #1E3A4C; display: flex; align-items: center; justify-content: center; border-left: 1.5px solid #E5E7EB; border-right: 1.5px solid #E5E7EB; white-space: nowrap; padding: 0 4px; }
+.drye-cart-sizeguide-link { padding-top: 10px; font-size: 16px; color: #4B5563; }
+.drye-cart-sizeguide-link a { color: #0D9488; font-weight: 600; }
+
+/* empty state */
+.drye-cart-empty { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 40px 24px; text-align: center; }
+.drye-cart-empty__icon { font-size: 32px; margin-bottom: 16px; opacity: 0.3; }
+.drye-cart-empty__title { font-family: 'Clash Grotesk', sans-serif; font-size: 15px; font-weight: 600; letter-spacing: -0.01em; color: #1E3A4C; margin-bottom: 6px; }
+.drye-cart-empty__sub { font-size: 12px; color: #9CA3AF; line-height: 1.6; margin-bottom: 20px; }
+.drye-cart-empty__cta { font-size: 11px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: #fff; background: #1E3A4C; padding: 12px 24px; border: none; font-family: 'DM Sans', sans-serif; display: inline-block; text-decoration: none; }
+
+/* upsell */
+.drye-cart-upsell { padding: 8px 20px; border-top: 1px solid #E5E7EB; background: rgba(30,58,76,0.03); flex-shrink: 0; }
+.drye-cart-upsell__title { font-family: 'Clash Grotesk', sans-serif; font-size: 16px; font-weight: 600; color: #1E3A4C; margin-bottom: 1px; }
+.drye-cart-upsell__sub { font-size: 12px; color: #4B5563; line-height: 1.3; margin-bottom: 6px; }
+.drye-cart-upsell__cards { display: flex; gap: 8px; }
+.drye-cart-upsell__card { flex: 1; border: 1.5px solid #E5E7EB; background: #fff; padding: 12px; position: relative; }
+.drye-cart-upsell__card--best { border-color: #1E3A4C; }
+.drye-cart-upsell__badge { position: absolute; top: -9px; right: 8px; background: #1E3A4C; color: #fff; font-size: 8px; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; padding: 3px 6px; }
+.drye-cart-upsell__name { font-family: 'Clash Grotesk', sans-serif; font-size: 13px; font-weight: 600; color: #1E3A4C; }
+.drye-cart-upsell__price { font-size: 12px; color: #4B5563; margin: 3px 0 8px; }
+.drye-cart-upsell__btn { width: 100%; background: none; border: 1.5px solid #1E3A4C; color: #1E3A4C; font-family: 'DM Sans', sans-serif; font-size: 11px; font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase; padding: 9px; cursor: pointer; }
+.drye-cart-upsell__btn:hover { background: #1E3A4C; color: #fff; }
+.drye-cart-upsell__btn--solid { background: #1E3A4C; color: #fff; }
+.drye-cart-upsell__btn--solid:hover { background: #16303e; }
+
+/* footer / summary */
+.drye-cart-summary { padding: 10px 20px; border-top: 1px solid #E5E7EB; background: #fff; flex-shrink: 0; }
+.drye-cart-summary__row { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 3px; }
+.drye-cart-summary__label { font-size: 13px; color: #9CA3AF; }
+.drye-cart-summary__value { font-size: 13px; color: #4B5563; }
+.drye-cart-summary__value--discount { color: #0D9488; font-weight: 600; }
+.drye-cart-summary__total { display: flex; justify-content: space-between; align-items: baseline; padding-top: 8px; margin-top: 4px; margin-bottom: 10px; border-top: 1px solid #E5E7EB; }
+.drye-cart-summary__total-label { font-size: 12px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: #1E3A4C; }
+.drye-cart-summary__total-value { font-family: 'Clash Grotesk', sans-serif; font-size: 24px; font-weight: 600; letter-spacing: -0.03em; color: #1E3A4C; }
+
+.drye-cart-checkout { display: flex; align-items: center; justify-content: center; gap: 8px; width: 100%; background: #0D9488; border: none; cursor: pointer; font-family: 'DM Sans', sans-serif; font-size: 17px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: #fff; padding: 16px; text-align: center; box-sizing: border-box; text-decoration: none; }
+.drye-cart-checkout:hover { background: #0b837b; }
+.drye-cart-continue { display: block; width: 100%; background: none; border: none; cursor: pointer; font-family: 'DM Sans', sans-serif; font-size: 11px; font-weight: 500; color: #9CA3AF; padding: 10px; text-align: center; margin-top: 2px; }
+.drye-cart-continue:hover { color: #1E3A4C; }
+
+.drye-cart-open-btn { position: fixed; z-index: 190; background: #1E3A4C; color: #fff; border: none; padding: 12px 20px; font-family: 'DM Sans', sans-serif; font-size: 12px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; cursor: pointer; }
