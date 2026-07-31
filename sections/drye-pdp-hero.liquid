@@ -274,11 +274,26 @@ assign review_count = section.settings.review_count_fallback
       </ul>
     </div>
 
-    {% if section.settings.guarantee_text != blank %}
+    {%- capture drye_laurel_top -%}
+      <svg class="drye-seal__laurel" viewBox="0 0 48 96" fill="currentColor" aria-hidden="true">
+        <path fill="none" stroke="currentColor" stroke-width="1.6" d="M40 6 C 16 22, 8 46, 15 72 C 18 84, 28 90, 37 92"/>
+        <path d="M39 9 c -7 -1 -12 2 -14 8 c 7 1 13 -2 14 -8 z"/>
+        <path d="M31 15 c -7 -1 -12 2 -14 8 c 7 1 13 -2 14 -8 z"/>
+        <path d="M24 24 c -7 -1 -12 3 -13 9 c 7 0 12 -3 13 -9 z"/>
+        <path d="M18 35 c -7 0 -11 3 -12 9 c 7 0 11 -3 12 -9 z"/>
+        <path d="M15 47 c -7 1 -10 5 -10 11 c 6 -1 11 -5 10 -11 z"/>
+        <path d="M16 60 c -6 2 -9 6 -8 12 c 6 -2 10 -6 8 -12 z"/>
+        <path d="M21 72 c -6 2 -8 7 -6 13 c 5 -2 9 -7 6 -13 z"/>
+        <path d="M28 82 c -6 3 -7 8 -4 13 c 5 -3 8 -8 4 -13 z"/>
+      </svg>
+    {%- endcapture -%}
+    {% if section.settings.proof_stamp_line != blank %}
       <div class="drye-trust">
         <div class="drye-guarantee">
           <div class="drye-seal__wrap">
-            <p class="drye-seal__guarantee">{{ section.settings.guarantee_text }}</p>
+            <span class="drye-seal__laurel-box drye-seal__laurel-box--l">{{ drye_laurel_top }}</span>
+            <p class="drye-seal__guarantee">{{ section.settings.proof_stamp_line }}</p>
+            <span class="drye-seal__laurel-box drye-seal__laurel-box--r">{{ drye_laurel_top }}</span>
           </div>
         </div>
       </div>
@@ -701,15 +716,7 @@ assign review_count = section.settings.review_count_fallback
   {%- comment -%} Seen in — press row (frameless, below the proof card) {%- endcomment -%}
   {% assign press_logos = section.blocks | where: 'type', 'press_logo' %}
   <div class="drye-trust">
-    {% if section.settings.proof_stamp_line != blank %}
-      <div class="drye-guarantee">
-        <div class="drye-seal__wrap">
-          <span class="drye-seal__laurel-box drye-seal__laurel-box--l">{{ drye_laurel }}</span>
-          <p class="drye-seal__guarantee">{{ section.settings.proof_stamp_line }}</p>
-          <span class="drye-seal__laurel-box drye-seal__laurel-box--r">{{ drye_laurel }}</span>
-        </div>
-      </div>
-    {% endif %}
+    {%- comment -%} Guarantee laurel band moved up under the checklist {%- endcomment -%}
 
     {% if section.settings.show_seen_in %}
     <div class="drye-press">
@@ -2556,10 +2563,10 @@ wteTimelines.forEach((timeline) => {
         { "type": "number", "id": "pairs", "label": "Pairs (quantity added to cart)", "default": 1 },
         { "type": "text", "id": "name", "label": "Name", "default": "1 Pair · Starter Pair" },
         { "type": "text", "id": "subtitle", "label": "Subtitle", "default": "Try DRYE for one full shift" },
-        { "type": "text", "id": "badge", "label": "Badge (optional)" },
+        { "type": "text", "id": "badge", "label": "Badge (optional)", "default": "" },
         { "type": "text", "id": "total_price", "label": "Total price (display)", "default": "349 kr" },
         { "type": "text", "id": "unit_price", "label": "Unit price (display)", "default": "349 kr / pair" },
-        { "type": "text", "id": "save_label", "label": "Save label (optional)" },
+        { "type": "text", "id": "save_label", "label": "Save label (optional)", "default": "" },
         { "type": "textarea", "id": "features", "label": "Feature list (one per line)", "default": "Test under your own gloves\nEconomy delivery: 10–20 business days\nDuties & taxes included\n30-day money-back guarantee" },
         { "type": "text", "id": "foot_headline", "label": "Footer band headline", "default": "Prove it on your next shift" },
         { "type": "text", "id": "foot_note", "label": "Footer band note", "default": "One pair. One real workday. Your own gloves." },
