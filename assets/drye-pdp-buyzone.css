@@ -56,14 +56,14 @@
 .hero .size-guide-cta {
   display: flex; align-items: center; gap: 8px; width: 100%;
   margin-bottom: 10px; padding: 10px 12px;
-  border: 1px solid var(--emerald); border-radius: 0; background: rgba(13, 148, 136, 0.06);
-  font-family: "DM Sans", sans-serif; font-size: 15px; font-weight: 600; color: var(--emerald);
+  border: 1px solid var(--border); border-radius: 0; background: #fff;
+  font-family: "DM Sans", sans-serif; font-size: 15px; font-weight: 600; color: var(--deep);
   cursor: pointer; text-align: left;
 }
-.hero .size-guide-cta svg { flex: 0 0 auto; width: 18px; height: 18px; color: var(--emerald); }
+.hero .size-guide-cta svg { flex: 0 0 auto; width: 18px; height: 18px; color: var(--muted); }
 .hero .size-guide-cta span { flex: 1 1 auto; }
 .hero .size-guide-cta__arrow { width: 14px; height: 14px; }
-.hero .size-guide-cta:hover { background: rgba(13, 148, 136, 0.12); }
+.hero .size-guide-cta:hover { background: #F8FAFC; }
 
 /* ---- Size dropdown (unchanged behavior, sizing bump only) ---- */
 .hero .sz-dd-trigger { width: 100%; height: 58px; padding: 0 14px; font-family: "DM Sans", sans-serif; font-size: 15px; color: var(--body); border: 1px solid var(--border); background: #fff; appearance: none; -webkit-appearance: none; cursor: pointer; display: flex; align-items: center; justify-content: space-between; box-sizing: border-box; }
@@ -98,7 +98,7 @@
 .hero .pack__badge {
   padding: 2px 6px; background: rgba(13, 148, 136, 0.1); color: var(--emerald);
   font-family: "DM Sans", sans-serif;
-  font-size: 14px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase;
+  font-size: 12px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase;
   white-space: normal; width: 100%; box-sizing: border-box; flex: 0 0 100%;
 }
 .hero .pack__price { text-align: right; }
@@ -107,7 +107,7 @@
 .hero .pack__unit { display: block; margin-top: 1px; font-family: "DM Sans", sans-serif; font-size: 10px; color: var(--caption); white-space: nowrap; }
 
 .hero .pack__panel { display: grid; grid-template-rows: 0fr; transition: grid-template-rows 0.3s ease; }
-.hero .pack.is-selected .pack__panel { grid-template-rows: 1fr; }
+.hero .pack.is-open .pack__panel { grid-template-rows: 1fr; }
 .hero .pack__inner { overflow: hidden; }
 .hero .pack__list { list-style: none; margin: 0; padding: 11px 12px 12px; border-top: 1px solid var(--border); display: flex; flex-direction: column; gap: 7px; }
 .hero .pack__list li { display: flex; gap: 7px; align-items: flex-start; font-family: "DM Sans", sans-serif; font-size: 15px; font-weight: 400; line-height: 1.4; color: var(--body); }
@@ -131,7 +131,7 @@
 @media (max-width: 767px) {
   /* #3 review bar */
   .hero .stars,
-  .hero .stars-lbl { font-size: 14px; }
+  .hero .stars-lbl { font-size: 16px; }
 
   /* #4 intro paragraph + checklist */
   .hero .pdp-intro__lede,
@@ -152,8 +152,8 @@
    Gallery + proof-strip refinements (<=767px)
    ========================================================================== */
 @media (max-width: 767px) {
-  /* G1 taller gallery on mobile (+100px) */
-  .hero .hero-media { height: 600px; }
+  /* G1 taller gallery on mobile */
+  .hero .hero-media { height: 550px; }
 
   /* G2 white backing behind the thumbnail strip */
   .hero .hero-gallery-thumbs { background: #fff; }
@@ -176,22 +176,21 @@
     top: auto;
     bottom: 15px;
     transform: none;
-    width: 38px;
+    width: 40px;
     height: 38px;
     z-index: 7;
     pointer-events: auto;
     background: #fff;
     color: var(--deep);
-    border: 1px solid var(--border);
+    border: 1px solid #111;
   }
-  .hero .hero-gallery-arrow--prev { left: 2px; }
-  .hero .hero-gallery-arrow--next { right: 2px; }
+  .hero .hero-gallery-arrow--prev { left: 0; }
+  .hero .hero-gallery-arrow--next { right: 0; }
   .hero .hero-gallery-arrow[disabled] { opacity: 0.35; }
 
-  /* make room for the arrows on each side + show exactly 5 thumbs */
-  /* strip lives BETWEEN the arrows and clips at its own edges, so thumbs
-     never slide behind the buttons */
-  .hero .hero-gallery-thumbs { left: 44px; right: 44px; padding-left: 0; padding-right: 0; }
+  /* full-width white strip; thumbnails inset via padding so the opaque
+     edge buttons (40px, at left:0 / right:0) sit ON the white on each side */
+  .hero .hero-gallery-thumbs { left: 0; right: 0; padding-left: 40px; padding-right: 40px; }
   .hero .hero-gallery-thumb  { width: calc((100% - 16px) / 5); height: 52px; }
 }
 

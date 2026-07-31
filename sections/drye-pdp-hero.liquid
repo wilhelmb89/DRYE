@@ -501,8 +501,8 @@ assign review_count = section.settings.review_count_fallback
                 </span>
                 <span class="pack__price">
                   {% if block.settings.save_label != blank %}<span class="pack__save-inline">{{ block.settings.save_label }}</span>{% endif %}
-                  <span class="pack__total">{{ block.settings.total_price }}</span>
-                  <span class="pack__unit">{{ block.settings.unit_price }}</span>
+                  <span class="pack__total">{% if block.settings.total_price != blank %}{{ block.settings.total_price }}{% else %}{{ selected_variant.price | times: block.settings.pairs | money }}{% endif %}</span>
+                  <span class="pack__unit">{% if block.settings.unit_price != blank %}{{ block.settings.unit_price }}{% else %}{{ selected_variant.price | money }} / pair{% endif %}</span>
                 </span>
               </button>
               <div class="pack__panel"><div class="pack__inner">

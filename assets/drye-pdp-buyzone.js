@@ -37,10 +37,16 @@
     packs.forEach(function (p) {
       var btn = p.querySelector('.pack__btn');
       if (btn) {
-        btn.addEventListener('click', function () { selectPack(p); });
+        btn.addEventListener('click', function () {
+          // open the clicked pack, collapse the rest, and select it for ATC
+          packs.forEach(function (x) { x.classList.toggle('is-open', x === p); });
+          selectPack(p);
+        });
       }
     });
 
+    // Select the first pack for ATC / quantity, but leave every panel
+    // COLLAPSED on load — a pack only expands once the user clicks it.
     var initial = packs.filter(function (p) { return p.classList.contains('is-selected'); })[0] || packs[0];
     if (initial) selectPack(initial);
   }
