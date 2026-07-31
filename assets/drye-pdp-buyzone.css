@@ -1,0 +1,125 @@
+/* ==========================================================================
+   DRYE PDP — Buy Zone patch CSS
+   Append to drye-pdp-hero.css (or load as its own asset right after it).
+   Scope: title → stars → intro → guarantee band → size step → pack step →
+   ATC button. Does NOT touch .drye-proof / worker-proof or the FAQ tabs —
+   those stylesheets are already live, untouched.
+   ========================================================================== */
+
+.hero .h-title {
+  font-family: "Clash Grotesk", sans-serif;
+  font-size: 26px;
+  font-weight: 600;
+  letter-spacing: -0.025em;
+  line-height: 1.1;
+  color: var(--deep);
+  margin-bottom: 10px;
+}
+@container (min-width: 768px) {
+  .hero .h-title { font-size: clamp(32px, 3.2vw, 40px); }
+}
+
+.hero .stars-row { display: flex; align-items: center; gap: 8px; margin-bottom: 4px; }
+.hero .stars { color: #f59e0b; font-size: 20px; letter-spacing: 1px; line-height: 1; }
+.hero .stars-lbl { font-family: "DM Sans", sans-serif; font-size: 20px; color: var(--muted); }
+.hero .stars-lbl a { color: var(--emerald); font-weight: 600; text-decoration: none; }
+
+/* ---- Intro paragraph + checklist ---- */
+.hero .pdp-intro { margin: 0 0 18px; }
+.hero .pdp-intro__lede { margin: 0 0 14px; font-family: "DM Sans", sans-serif; font-size: 17px; line-height: 1.6; color: var(--body); }
+.hero .pdp-intro__list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 9px; }
+.hero .pdp-intro__list li { display: flex; align-items: flex-start; gap: 8px; font-family: "DM Sans", sans-serif; font-size: 17px; font-weight: 400; line-height: 1.4; color: var(--body); }
+.hero .pdp-intro__dot { display: flex; align-items: center; justify-content: center; width: 18px; height: 18px; border-radius: 50%; background: var(--emerald); flex: 0 0 auto; margin-top: 1px; }
+.hero .pdp-intro__list li .pdp-intro__dot svg { width: 10px; height: 10px; margin-top: 0; color: #fff; }
+
+/* ---- Guarantee band (dark gradient, italic serif) ---- */
+.hero .drye-trust { margin-top: 18px; margin-bottom: 18px; }
+.hero .drye-guarantee { text-align: center; }
+.hero .drye-seal__wrap {
+  display: flex; align-items: center; justify-content: center; gap: 10px;
+  width: 100%; padding: 18px 20px; border-radius: 10px;
+  background: linear-gradient(120deg, #0b3d33, var(--emerald));
+}
+.hero .drye-seal__guarantee {
+  margin: 0; max-width: none; flex: 1 1 auto;
+  font-family: "Playfair Display", Georgia, serif; font-style: italic;
+  font-size: 16px; font-weight: 500; line-height: 1.4; color: #fff; text-align: center;
+}
+
+/* ---- Step labels + size-guide CTA ---- */
+.hero .form-lbl {
+  font-family: "DM Sans", sans-serif; font-size: 10px; font-weight: 600;
+  letter-spacing: 0.14em; text-transform: uppercase; color: var(--caption);
+  margin-bottom: 8px; display: flex; justify-content: space-between; align-items: center;
+}
+.hero .buy-block { margin-bottom: 12px; }
+.hero .size-guide-cta {
+  display: flex; align-items: center; gap: 8px; width: 100%;
+  margin-bottom: 10px; padding: 10px 12px;
+  border: 1px solid var(--emerald); border-radius: 0; background: rgba(13, 148, 136, 0.06);
+  font-family: "DM Sans", sans-serif; font-size: 15px; font-weight: 600; color: var(--emerald);
+  cursor: pointer; text-align: left;
+}
+.hero .size-guide-cta svg { flex: 0 0 auto; width: 18px; height: 18px; color: var(--emerald); }
+.hero .size-guide-cta span { flex: 1 1 auto; }
+.hero .size-guide-cta__arrow { width: 14px; height: 14px; }
+.hero .size-guide-cta:hover { background: rgba(13, 148, 136, 0.12); }
+
+/* ---- Size dropdown (unchanged behavior, sizing bump only) ---- */
+.hero .sz-dd-trigger { width: 100%; height: 58px; padding: 0 14px; font-family: "DM Sans", sans-serif; font-size: 15px; color: var(--body); border: 1px solid var(--border); background: #fff; appearance: none; -webkit-appearance: none; cursor: pointer; display: flex; align-items: center; justify-content: space-between; box-sizing: border-box; }
+.hero .sz-dd-size { white-space: nowrap; font-size: 15px; }
+.hero .sz-dd-fit { font-size: 12px; line-height: 1.3; color: var(--muted); letter-spacing: 0.01em; }
+
+/* ---- Pack tier selector (Step 2) ---- */
+.hero .packsel { margin: 22px 0 12px; }
+.hero .packsel__lbl {
+  display: flex; align-items: center; justify-content: space-between; gap: 10px;
+  margin-bottom: 8px;
+  font-family: "DM Sans", sans-serif; font-size: 10px; font-weight: 600;
+  letter-spacing: 0.14em; text-transform: uppercase; color: var(--caption);
+}
+
+.hero .pack { border: 1px solid var(--border); background: #fff; margin-bottom: 8px; }
+.hero .pack.is-selected { border-color: var(--deep); }
+.hero .pack__btn {
+  width: 100%; display: grid; grid-template-columns: 16px minmax(0, 1fr) auto;
+  align-items: center; gap: 10px; padding: 12px; border: 0; background: #fff;
+  text-align: left; cursor: pointer;
+}
+.hero .pack__radio { width: 16px; height: 16px; border: 1px solid var(--caption); border-radius: 50%; position: relative; }
+.hero .pack.is-selected .pack__radio { border-color: var(--emerald); }
+.hero .pack.is-selected .pack__radio::after { content: ""; position: absolute; inset: 3px; border-radius: 50%; background: var(--emerald); }
+.hero .pack__name {
+  display: flex; align-items: center; flex-wrap: wrap; gap: 6px; min-width: 0;
+  font-family: "Clash Grotesk", sans-serif; font-size: 15px; font-weight: 600;
+  letter-spacing: 0.08em; text-transform: uppercase; color: var(--deep);
+}
+.hero .pack__desc { display: block; margin-top: 3px; font-family: "DM Sans", sans-serif; font-size: 13px; line-height: 1.3; color: var(--caption); }
+.hero .pack__badge {
+  padding: 2px 6px; background: rgba(13, 148, 136, 0.1); color: var(--emerald);
+  font-size: 14px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase;
+  white-space: normal; width: 100%; box-sizing: border-box; flex: 0 0 100%;
+}
+.hero .pack__price { text-align: right; }
+.hero .pack__save-inline { display: block; font-family: "DM Sans", sans-serif; font-size: 11px; font-weight: 600; color: var(--emerald); white-space: nowrap; }
+.hero .pack__total { display: block; font-family: "Clash Grotesk", sans-serif; font-size: 22px; font-weight: 600; letter-spacing: -0.02em; color: var(--deep); white-space: nowrap; }
+.hero .pack__unit { display: block; margin-top: 1px; font-family: "DM Sans", sans-serif; font-size: 10px; color: var(--caption); white-space: nowrap; }
+
+.hero .pack__panel { display: grid; grid-template-rows: 0fr; transition: grid-template-rows 0.3s ease; }
+.hero .pack.is-selected .pack__panel { grid-template-rows: 1fr; }
+.hero .pack__inner { overflow: hidden; }
+.hero .pack__list { list-style: none; margin: 0; padding: 11px 12px 12px; border-top: 1px solid var(--border); display: flex; flex-direction: column; gap: 7px; }
+.hero .pack__list li { display: flex; gap: 7px; align-items: flex-start; font-family: "DM Sans", sans-serif; font-size: 15px; font-weight: 400; line-height: 1.4; color: var(--body); }
+.hero .pack__list li::before { content: "\2713"; color: var(--emerald); font-size: 11px; font-weight: 700; line-height: 1.55; flex: 0 0 auto; }
+.hero .pack__foot { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px; padding: 10px 12px; border-top: 1px solid var(--border); background: var(--bg-soft); }
+.hero .pack__foot-headline { font-family: "DM Sans", sans-serif; font-size: 11px; font-weight: 700; letter-spacing: 0.06em; line-height: 1.3; text-align: center; text-transform: uppercase; color: var(--deep); }
+.hero .pack__foot-note { font-family: "DM Sans", sans-serif; font-size: 12px; line-height: 1.35; color: var(--muted); text-align: center; }
+
+/* ---- ATC button (unchanged from current file, included for completeness) ---- */
+.hero .atc-btn-full {
+  width: 100%; background: var(--emerald); border: none; cursor: pointer;
+  font-family: "DM Sans", sans-serif; font-size: 12px; font-weight: 600;
+  letter-spacing: 0.08em; text-transform: uppercase; color: white; padding: 16px;
+  margin-bottom: 6px; transition: background 0.15s ease, box-shadow 0.2s ease;
+}
+.hero .atc-btn-full:hover { background: #0b837b; box-shadow: 0 0 14px rgba(16, 185, 129, 0.35); }
