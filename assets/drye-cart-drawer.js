@@ -255,9 +255,33 @@
     if (pairStep) { stepPairSize(pairStep.dataset.dryePairKey, Number(pairStep.dataset.dryePairSizeStep)); return; }
   });
 
-  // Open automatically after your existing add-to-cart handler resolves —
-  // e.g. document.addEventListener('drye:cart:added', openDrawer) if you
-  // dispatch that event from the PDP's add-to-cart submit handler.
+  // Intercept the PDP add-to-cart form so it Ajax-adds and opens THIS drawer
+  // instead of doing a full-page submit to /cart (parity with the old drawer).
+  document.addEventListener('submit', function (e) {
+    var form = e.target;
+    if (!form || form.nodeName !== 'FORM') return;
+    var action = form.getAttribute('action') || '';
+    var isProductForm =
+      form.hasAttribute('data-product-form') ||
+      action.indexOf('/cart/add') !== -1 ||
+      (form.matches && form.matches('product-form form'));
+    if (!isProductForm) return;
+    var submitter = e.submitter || form.querySelector('[type="submit"]');
+    if (submitter && submitter.name === 'checkout') return; // let dynamic "Buy now" pass through
+    e.preventDefault();
+    var fd = new FormData(form);
+    if (submitter) submitter.setAttribute('disabled', 'disabled');
+    fetch('/cart/add.js', { method: 'POST', headers: { Accept: 'application/json' }, body: fd })
+      .then(function (r) { return r.json().then(function (d) { return { ok: r.ok, data: d }; }); })
+      .then(function (res) {
+        if (submitter) submitter.removeAttribute('disabled');
+        if (!res.ok) { form.submit(); return; } // fall back to normal submit on error
+        document.dispatchEvent(new CustomEvent('drye:cart:added'));
+      })
+      .catch(function () { if (submitter) submitter.removeAttribute('disabled'); form.submit(); });
+  }, true);
+
+  // Open automatically after add-to-cart resolves.
   document.addEventListener('drye:cart:added', function () { refresh().then(openDrawer); });
 
   refresh();
