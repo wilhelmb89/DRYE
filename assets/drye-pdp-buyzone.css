@@ -33,6 +33,9 @@
 .hero .pdp-intro__list li .pdp-intro__dot svg { width: 10px; height: 10px; margin-top: 0; color: #fff; }
 
 /* ---- Guarantee band (dark gradient, italic serif) ---- */
+/* Hidden per request — the "30 shifts…" band. To bring it back, delete this
+   one line (or clear the "Guarantee stamp (below ticker)" setting to blank). */
+.hero .drye-trust { display: none; }
 .hero .drye-trust { margin-top: 18px; margin-bottom: 18px; }
 .hero .drye-guarantee { text-align: center; }
 .hero .drye-seal__wrap {
