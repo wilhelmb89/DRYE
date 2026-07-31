@@ -15,13 +15,13 @@
   color: var(--deep);
   margin-bottom: 10px;
 }
-@container (min-width: 768px) {
-  .hero .h-title { font-size: clamp(32px, 3.2vw, 40px); }
+@media (min-width: 768px) {
+  .hero .h-title { font-size: 2.625rem; }
 }
 
 .hero .stars-row { display: flex; align-items: center; gap: 8px; margin-bottom: 4px; }
-.hero .stars { color: #f59e0b; font-size: 20px; letter-spacing: 1px; line-height: 1; }
-.hero .stars-lbl { font-family: "DM Sans", sans-serif; font-size: 20px; color: var(--muted); }
+.hero .stars { color: #f59e0b; font-size: 17px; letter-spacing: 1px; line-height: 1; }
+.hero .stars-lbl { font-family: "DM Sans", sans-serif; font-size: 17px; color: var(--muted); }
 .hero .stars-lbl a { color: var(--emerald); font-weight: 600; text-decoration: none; }
 
 /* ---- Intro paragraph + checklist ---- */
@@ -158,6 +158,36 @@
   .hero .hero-gallery-thumbs { background: #fff; }
 
   /* G4 order-count line + state list */
-  .hero .hero-proof-strip__label { font-size: 14px; }
+  .hero .hero-proof-strip__label { font-size: 12px; }
   .hero .hero-proof-strip__item  { font-size: 12px; }
+}
+
+/* ==========================================================================
+   G3 (mobile) — gallery arrows flank the thumbnail strip, 5 thumbs in view
+   ========================================================================== */
+@media (max-width: 767px) {
+  /* lift the nav above the z-index:6 thumbnail strip; clicks still pass through
+     the empty nav area to the thumbs (nav keeps pointer-events:none) */
+  .hero .hero-gallery-nav { z-index: 7; }
+
+  /* move the arrows from the image centre down onto the thumbnail strip */
+  .hero .hero-gallery-arrow {
+    top: auto;
+    bottom: 15px;
+    transform: none;
+    width: 38px;
+    height: 38px;
+    z-index: 7;
+    pointer-events: auto;
+    background: #fff;
+    color: var(--deep);
+    border: 1px solid var(--border);
+  }
+  .hero .hero-gallery-arrow--prev { left: 2px; }
+  .hero .hero-gallery-arrow--next { right: 2px; }
+  .hero .hero-gallery-arrow[disabled] { opacity: 0.35; }
+
+  /* make room for the arrows on each side + show exactly 5 thumbs */
+  .hero .hero-gallery-thumbs { padding-left: 44px; padding-right: 44px; }
+  .hero .hero-gallery-thumb  { width: calc((100% - 16px) / 5); height: 52px; }
 }
