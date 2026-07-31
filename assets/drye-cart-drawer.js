@@ -195,6 +195,20 @@
     return res.json();
   }
 
+  var pairSeq = 0;
+  function pairProps() {
+    return { _pair: String(Date.now()) + '-' + (++pairSeq) + '-' + Math.floor(Math.random() * 1e6) };
+  }
+  async function addPairs(variantId, count) {
+    var items = [];
+    for (var i = 0; i < count; i++) items.push({ id: variantId, quantity: 1, properties: pairProps() });
+    var res = await fetch('/cart/add.js', {
+      method: 'POST', headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ items: items })
+    });
+    return res.json();
+  }
+
   async function refresh() {
     var cart = await fetchCart();
     renderCart(cart);
@@ -209,7 +223,7 @@
       var addVar = (lines.length && lines[lines.length - 1].variant_id) ||
                    SIZE_VARIANTS[DEFAULT_SIZE] ||
                    (SIZE_ORDER.length ? SIZE_VARIANTS[SIZE_ORDER[0]] : null);
-      if (addVar) await addVariant(addVar, target - pairs);
+      if (addVar) await addPairs(addVar, target - pairs);
     } else if (target < pairs) {
       var toRemove = pairs - target;
       // remove from the end of the line list first
@@ -240,7 +254,7 @@
     var nextVariant = SIZE_VARIANTS[next];
     if (!nextVariant) return;
     await changeLineQty(key, 0); // drop this pair's line
-    await addVariant(nextVariant, 1); // re-add as a new line at the new size
+    await addPairs(nextVariant, 1); // re-add as a fresh unique line at the new size
     await refresh();
   }
 
@@ -281,12 +295,13 @@
     if (submitter && submitter.name === 'checkout') return; // let dynamic "Buy now" pass through
     e.preventDefault();
     var fd = new FormData(form);
+    var variantId = fd.get('id');
+    var addQty = parseInt(fd.get('quantity'), 10) || 1;
+    if (!variantId) { form.submit(); return; }
     if (submitter) submitter.setAttribute('disabled', 'disabled');
-    fetch('/cart/add.js', { method: 'POST', headers: { Accept: 'application/json' }, body: fd })
-      .then(function (r) { return r.json().then(function (d) { return { ok: r.ok, data: d }; }); })
-      .then(function (res) {
+    addPairs(variantId, addQty)
+      .then(function () {
         if (submitter) submitter.removeAttribute('disabled');
-        if (!res.ok) { form.submit(); return; } // fall back to normal submit on error
         document.dispatchEvent(new CustomEvent('drye:cart:added'));
       })
       .catch(function () { if (submitter) submitter.removeAttribute('disabled'); form.submit(); });

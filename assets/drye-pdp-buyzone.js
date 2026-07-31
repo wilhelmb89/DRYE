@@ -19,32 +19,30 @@
     var qtyInput = scope.querySelector('.qty-val');
     var mainAtc = scope.querySelector('[data-main-atc]');
 
-    function setPairs(pairs) {
-      packs.forEach(function (p) {
-        p.classList.toggle('is-selected', Number(p.dataset.pairs) === pairs);
-      });
+    // Select by CARD (element) so equal-pairs cards don't all open; ATC label
+    // is computed from the pack so it always reflects the choice.
+    function selectPack(pack) {
+      packs.forEach(function (p) { p.classList.toggle('is-selected', p === pack); });
+      var pairs = Number(pack.dataset.pairs) || 1;
       if (qtyInput) {
         qtyInput.value = pairs;
         qtyInput.dispatchEvent(new Event('input', { bubbles: true }));
         qtyInput.dispatchEvent(new Event('change', { bubbles: true }));
       }
       if (mainAtc && !mainAtc.disabled) {
-        var sel = packs.find(function (p) { return Number(p.dataset.pairs) === pairs; });
-        if (sel && sel.dataset.cta) mainAtc.textContent = sel.dataset.cta;
+        mainAtc.textContent = 'Add ' + pairs + (pairs === 1 ? ' Pair' : ' Pairs');
       }
     }
 
     packs.forEach(function (p) {
       var btn = p.querySelector('.pack__btn');
       if (btn) {
-        btn.addEventListener('click', function () {
-          setPairs(Number(p.dataset.pairs));
-        });
+        btn.addEventListener('click', function () { selectPack(p); });
       }
     });
 
-    var initial = packs.find(function (p) { return p.classList.contains('is-selected'); }) || packs[0];
-    if (initial) setPairs(Number(initial.dataset.pairs));
+    var initial = packs.filter(function (p) { return p.classList.contains('is-selected'); })[0] || packs[0];
+    if (initial) selectPack(initial);
   }
 
   document.querySelectorAll('.hero[data-product-section]:not([data-packsel-bound])').forEach(function (scope) {

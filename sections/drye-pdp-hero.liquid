@@ -501,8 +501,8 @@ assign review_count = section.settings.review_count_fallback
                 </span>
                 <span class="pack__price">
                   {% if block.settings.save_label != blank %}<span class="pack__save-inline">{{ block.settings.save_label }}</span>{% endif %}
-                  <span class="pack__total">{{ selected_variant.price | times: block.settings.pairs | money }}</span>
-                  <span class="pack__unit">{{ selected_variant.price | money }} / pair</span>
+                  <span class="pack__total">{{ block.settings.total_price }}</span>
+                  <span class="pack__unit">{{ block.settings.unit_price }}</span>
                 </span>
               </button>
               <div class="pack__panel"><div class="pack__inner">
@@ -1295,7 +1295,13 @@ const shopifyRoot = (window.Shopify && window.Shopify.routes && window.Shopify.r
 
       if (mainAtc) {
         mainAtc.disabled = !canBuy;
-        mainAtc.textContent = canBuy ? {{ atc_button_label | json }} : 'Sold out';
+        if (canBuy) {
+          const selPack = sectionEl.querySelector('[data-pack].is-selected');
+          const packPairs = selPack ? (Number(selPack.dataset.pairs) || 1) : (parseInt(qtyInput && qtyInput.value, 10) || 1);
+          mainAtc.textContent = 'Add ' + packPairs + (packPairs === 1 ? ' Pair' : ' Pairs');
+        } else {
+          mainAtc.textContent = 'Sold out';
+        }
       }
 
       if (stickySubmit) {
@@ -2565,6 +2571,8 @@ wteTimelines.forEach((timeline) => {
         { "type": "text", "id": "name", "label": "Name", "default": "1 Pair · Starter Pair" },
         { "type": "text", "id": "subtitle", "label": "Subtitle", "default": "Try DRYE for one full shift" },
         { "type": "text", "id": "badge", "label": "Badge (optional)" },
+        { "type": "text", "id": "total_price", "label": "Total price (display)", "default": "349 kr" },
+        { "type": "text", "id": "unit_price", "label": "Unit price (display)", "default": "349 kr / pair" },
         { "type": "text", "id": "save_label", "label": "Save label (optional)" },
         { "type": "textarea", "id": "features", "label": "Feature list (one per line)", "default": "Test under your own gloves\nEconomy delivery: 10–20 business days\nDuties & taxes included\n30-day money-back guarantee" },
         { "type": "text", "id": "foot_headline", "label": "Footer band headline", "default": "Prove it on your next shift" },
