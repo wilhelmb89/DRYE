@@ -97,7 +97,8 @@
 .hero .pack__desc { display: block; margin-top: 3px; font-family: "DM Sans", sans-serif; font-size: 13px; line-height: 1.3; color: var(--caption); }
 .hero .pack__badge {
   padding: 2px 6px; background: rgba(13, 148, 136, 0.1); color: var(--emerald);
-  font-size: 14px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase;
+  font-family: "DM Sans", sans-serif;
+  font-size: 14px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase;
   white-space: normal; width: 100%; box-sizing: border-box; flex: 0 0 100%;
 }
 .hero .pack__price { text-align: right; }
@@ -111,7 +112,7 @@
 .hero .pack__list { list-style: none; margin: 0; padding: 11px 12px 12px; border-top: 1px solid var(--border); display: flex; flex-direction: column; gap: 7px; }
 .hero .pack__list li { display: flex; gap: 7px; align-items: flex-start; font-family: "DM Sans", sans-serif; font-size: 15px; font-weight: 400; line-height: 1.4; color: var(--body); }
 .hero .pack__list li::before { content: "\2713"; color: var(--emerald); font-size: 11px; font-weight: 700; line-height: 1.55; flex: 0 0 auto; }
-.hero .pack__foot { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px; padding: 10px 12px; border-top: 1px solid var(--border); background: var(--bg-soft); }
+.hero .pack__foot { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px; padding: 10px 12px; border-top: 1px solid var(--border); background: #FDE68A; }
 .hero .pack__foot-headline { font-family: "DM Sans", sans-serif; font-size: 11px; font-weight: 700; letter-spacing: 0.06em; line-height: 1.3; text-align: center; text-transform: uppercase; color: var(--deep); }
 .hero .pack__foot-note { font-family: "DM Sans", sans-serif; font-size: 12px; line-height: 1.35; color: var(--muted); text-align: center; }
 
@@ -204,4 +205,9 @@
   background: var(--deep); color: #fff;
   font-family: "DM Sans", sans-serif; font-size: 10px; font-weight: 700;
   letter-spacing: 0.08em; text-transform: uppercase; padding: 3px 8px;
+}
+
+/* "Recommended" badge — smaller on mobile */
+@media (max-width: 767px) {
+  .hero .pack__badge { font-size: 12px; }
 }

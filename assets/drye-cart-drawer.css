@@ -129,3 +129,11 @@
 .drye-cart-continue:hover { color: #1E3A4C; }
 
 .drye-cart-open-btn { position: fixed; z-index: 190; background: #1E3A4C; color: #fff; border: none; padding: 12px 20px; font-family: 'DM Sans', sans-serif; font-size: 12px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; cursor: pointer; }
+
+/* ── Trim ── */
+/* Remove the redundant "Prices shown in X" row (currency is in the header). */
+.drye-cart-region { display: none; }
+/* Hide the "Add more pairs" upsell on mobile (keep it on desktop). */
+@media (max-width: 767px) {
+  .drye-cart-upsell { display: none; }
+}
