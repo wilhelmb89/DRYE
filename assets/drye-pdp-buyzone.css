@@ -123,3 +123,41 @@
   margin-bottom: 6px; transition: background 0.15s ease, box-shadow 0.2s ease;
 }
 .hero .atc-btn-full:hover { background: #0b837b; box-shadow: 0 0 14px rgba(16, 185, 129, 0.35); }
+
+/* ==========================================================================
+   Mobile type refinements (<=767px)
+   ========================================================================== */
+@media (max-width: 767px) {
+  /* #3 review bar */
+  .hero .stars,
+  .hero .stars-lbl { font-size: 14px; }
+
+  /* #4 intro paragraph + checklist */
+  .hero .pdp-intro__lede,
+  .hero .pdp-intro__list li { font-size: 16px; }
+
+  /* #5 pack price */
+  .hero .pack__total { font-size: 18px; }
+
+  /* #6 trust row (secure checkout / refund / free shipping) */
+  .hero .trust-item { font-size: 12px !important; }
+
+  /* #7 worker-proof headline + drop the green check */
+  .hero .drye-proof__returns { font-size: 16px; }
+  .hero .drye-proof__check { display: none; }
+}
+
+/* ==========================================================================
+   Gallery + proof-strip refinements (<=767px)
+   ========================================================================== */
+@media (max-width: 767px) {
+  /* G1 taller gallery on mobile (+100px) */
+  .hero .hero-media { height: 600px; }
+
+  /* G2 white backing behind the thumbnail strip */
+  .hero .hero-gallery-thumbs { background: #fff; }
+
+  /* G4 order-count line + state list */
+  .hero .hero-proof-strip__label { font-size: 14px; }
+  .hero .hero-proof-strip__item  { font-size: 12px; }
+}
