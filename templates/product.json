@@ -513,6 +513,45 @@
         "after_label": "Put on your usual glove"
       }
     },
+    "drye_nt_trust_badges_7MQcTF": {
+      "type": "drye-nt-trust-badges",
+      "blocks": {
+        "trustpilot_PPJA3t": {
+          "type": "trustpilot",
+          "settings": {
+            "logo": "shopify://shop_images/trustpilot-logo-trimmed.png",
+            "score": "4.4/5",
+            "count": "10 reviews",
+            "url": "https://se.trustpilot.com/review/hudsverige.se",
+            "cta_label": "See all reviews on Trustpilot"
+          }
+        },
+        "award_YTEXrt": {
+          "type": "award",
+          "settings": {
+            "emblem": "shopify://shop_images/skapa-emblem-small.png",
+            "name": "SKAPA",
+            "caption": "Innovation Award — in memory of the inventor Alfred Nobel"
+          }
+        },
+        "stars_g4PLyf": {
+          "type": "stars",
+          "settings": {
+            "score": "4.85/5",
+            "count": "47 reviews",
+            "url": "shopify://products/drye-moisture-routing-glove-liners",
+            "cta_label": "See all our reviews"
+          }
+        }
+      },
+      "block_order": [
+        "trustpilot_PPJA3t",
+        "award_YTEXrt",
+        "stars_g4PLyf"
+      ],
+      "name": "DRYE NT — Trust badges",
+      "settings": {}
+    },
     "drye_mechanics_time_promise_gYTiq8": {
       "type": "drye-mechanics-time-promise",
       "name": "DRYE Mechanics Time",
@@ -888,50 +927,12 @@
         "padding_top_desktop": 80,
         "padding_bottom_desktop": 80
       }
-    },
-    "drye_nt_trust_badges_7MQcTF": {
-      "type": "drye-nt-trust-badges",
-      "blocks": {
-        "trustpilot_PPJA3t": {
-          "type": "trustpilot",
-          "settings": {
-            "logo": "shopify://shop_images/trustpilot-logo-trimmed.png",
-            "score": "4.4/5",
-            "count": "10 reviews",
-            "url": "https://se.trustpilot.com/review/hudsverige.se",
-            "cta_label": "See all reviews on Trustpilot"
-          }
-        },
-        "award_YTEXrt": {
-          "type": "award",
-          "settings": {
-            "emblem": "shopify://shop_images/skapa-emblem-small.png",
-            "name": "SKAPA",
-            "caption": "Innovation Award — in memory of the inventor Alfred Nobel"
-          }
-        },
-        "stars_g4PLyf": {
-          "type": "stars",
-          "settings": {
-            "score": "4.85/5",
-            "count": "47 reviews",
-            "url": "",
-            "cta_label": "See all our reviews"
-          }
-        }
-      },
-      "block_order": [
-        "trustpilot_PPJA3t",
-        "award_YTEXrt",
-        "stars_g4PLyf"
-      ],
-      "name": "DRYE NT — Trust badges",
-      "settings": {}
     }
   },
   "order": [
     "drye_product_page_new_9ibHgd",
     "drye_liner_product_clarity_anRGnT",
+    "drye_nt_trust_badges_7MQcTF",
     "drye_mechanics_time_promise_gYTiq8",
     "drye_research_video_full_VPtXGb",
     "17820025558baba7f4",
@@ -940,7 +941,6 @@
     "jens_linnea_section_A3xynd",
     "drye_mechanics_cta_7CEriW",
     "drye_documented_results_xcxYYr",
-    "drye_new_closing_cta_ETinWV",
-    "drye_nt_trust_badges_7MQcTF"
+    "drye_new_closing_cta_ETinWV"
   ]
 }
