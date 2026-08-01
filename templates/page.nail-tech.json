@@ -1,12 +1,3 @@
-/*
- * ------------------------------------------------------------
- * IMPORTANT: The contents of this file are auto-generated.
- *
- * This file may be updated by the Shopify admin theme editor
- * or related systems. Please exercise caution as any changes
- * made to this file may be overwritten.
- * ------------------------------------------------------------
- */
 {
   "sections": {
     "nt_hero": {
@@ -440,6 +431,214 @@
         "heading": "Keep the protection. Change what happens inside it.",
         "body": "DRYE adds a 0.4 mm textile layer between your skin and the same protective glove."
       }
+    },
+    "nt_pro_reviews": {
+      "type": "drye-nt-pro-reviews",
+      "blocks": {
+        "prorev_1": {
+          "type": "review",
+          "settings": {
+            "name": "Elin R",
+            "role": "Nail Tech · Stockholm",
+            "quote": "By client four my hands still feel dry. I'm not fighting wet gloves anymore."
+          }
+        },
+        "prorev_2": {
+          "type": "review",
+          "settings": {
+            "name": "Marcus T",
+            "role": "Barber · Malmö",
+            "quote": "Clippers running non-stop, eight cuts a day. My palms used to be soaked by lunch."
+          }
+        },
+        "prorev_3": {
+          "type": "review",
+          "settings": {
+            "name": "Ayesha K",
+            "role": "Colorist · Gothenburg",
+            "quote": "Hours in gloves mixing color. DRYE is thin enough that I still feel what I'm doing."
+          }
+        },
+        "prorev_4": {
+          "type": "review",
+          "settings": {
+            "name": "Nadia S",
+            "role": "Nail Tech & Salon Owner · Copenhagen",
+            "quote": "I recommend it to every tech in my salon now. Fewer breaks just to dry off."
+          }
+        },
+        "prorev_5": {
+          "type": "review",
+          "settings": {
+            "name": "Oskar L",
+            "role": "Hairstylist · Oslo",
+            "quote": "Gloves used to split by the third client. Haven't had one tear since I switched."
+          }
+        },
+        "prorev_6": {
+          "type": "review",
+          "settings": {
+            "name": "Priya M",
+            "role": "Nail Tech · London",
+            "quote": "My hands used to smell by 5pm. That's just gone now."
+          }
+        },
+        "prorev_7": {
+          "type": "review",
+          "settings": {
+            "name": "Freja B",
+            "role": "Session Stylist · Stockholm",
+            "quote": "Long days on set, gloves on the whole time. First liner that doesn't just get soggy."
+          }
+        }
+      },
+      "block_order": [
+        "prorev_1",
+        "prorev_2",
+        "prorev_3",
+        "prorev_4",
+        "prorev_5",
+        "prorev_6",
+        "prorev_7"
+      ],
+      "settings": {}
+    },
+    "nt_trust_badges": {
+      "type": "drye-nt-trust-badges",
+      "blocks": {
+        "trust_1": {
+          "type": "trustpilot",
+          "settings": {
+            "score": "4.4/5",
+            "count": "10 reviews"
+          }
+        },
+        "trust_2": {
+          "type": "award"
+        },
+        "trust_3": {
+          "type": "stars",
+          "settings": {
+            "score": "4.85/5",
+            "count": "47 reviews"
+          }
+        }
+      },
+      "block_order": [
+        "trust_1",
+        "trust_2",
+        "trust_3"
+      ],
+      "settings": {}
+    },
+    "nt_validation": {
+      "type": "drye-nt-validation",
+      "blocks": {
+        "valid_1": {
+          "type": "institution",
+          "settings": {
+            "initial": "R",
+            "name": "RISE Research Institutes of Sweden",
+            "role": "Independent materials & textile validation"
+          }
+        },
+        "valid_2": {
+          "type": "institution",
+          "settings": {
+            "initial": "U",
+            "name": "Uppsala University",
+            "role": "Clinical conditions & dermatological impact"
+          }
+        },
+        "valid_3": {
+          "type": "institution",
+          "settings": {
+            "initial": "S",
+            "name": "Swedish School of Textiles",
+            "role": "Textile engineering & structural analysis"
+          }
+        },
+        "valid_4": {
+          "type": "logo",
+          "settings": {
+            "name": "Almi"
+          }
+        },
+        "valid_5": {
+          "type": "logo",
+          "settings": {
+            "name": "Borås INK"
+          }
+        },
+        "valid_6": {
+          "type": "logo",
+          "settings": {
+            "name": "Skånes universitetssjukhus",
+            "large": true
+          }
+        },
+        "valid_7": {
+          "type": "logo",
+          "settings": {
+            "name": "Wargön Innovation"
+          }
+        },
+        "valid_8": {
+          "type": "logo",
+          "settings": {
+            "name": "Södertälje Science Park"
+          }
+        },
+        "valid_9": {
+          "type": "logo",
+          "settings": {
+            "name": "The Swedish School of Textiles",
+            "large": true
+          }
+        },
+        "valid_10": {
+          "type": "logo",
+          "settings": {
+            "name": "Uminova Innovation"
+          }
+        },
+        "valid_11": {
+          "type": "logo",
+          "settings": {
+            "name": "Vinnova"
+          }
+        },
+        "valid_12": {
+          "type": "logo",
+          "settings": {
+            "name": "Uppsala Innovation Centre",
+            "large": true
+          }
+        },
+        "valid_13": {
+          "type": "logo",
+          "settings": {
+            "name": "Uppsala Universitet",
+            "large": true
+          }
+        }
+      },
+      "block_order": [
+        "valid_1",
+        "valid_2",
+        "valid_3",
+        "valid_4",
+        "valid_5",
+        "valid_6",
+        "valid_7",
+        "valid_8",
+        "valid_9",
+        "valid_10",
+        "valid_11",
+        "valid_12",
+        "valid_13"
+      ],
+      "settings": {}
     }
   },
   "order": [
@@ -449,11 +648,14 @@
     "nt_tradeoff",
     "nt_loop",
     "nt_barrier",
+    "drye_nt_inside_h6WiEP",
     "nt_nails",
     "nt_cotton_q",
     "nt_mechanism",
     "nt_reviews",
-    "nt_close",
-    "drye_nt_inside_h6WiEP"
+    "nt_pro_reviews",
+    "nt_trust_badges",
+    "nt_validation",
+    "nt_close"
   ]
 }
