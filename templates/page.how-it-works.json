@@ -188,6 +188,66 @@
         "drye_steps": "Skin side repels — sweat cannot sit there\nOuter side pulls moisture toward it\nContinuous transport, no saturation point"
       }
     },
+    "drye_research_video_full_rftE34": {
+      "type": "drye-research-video-full",
+      "name": "DRYE Research Video Full",
+      "settings": {
+        "video_src_desktop": "https://customer-fqpngdzqcoky7qmz.cloudflarestream.com/453bb4cae9bd147b7a10fc6213e64b12/manifest/video.m3u8",
+        "video_src_mobile": "https://customer-fqpngdzqcoky7qmz.cloudflarestream.com/ed9ad690d7f5c27060e215f05f9e4f8e/manifest/video.m3u8",
+        "video_label": "Goes under any sealed glove.",
+        "video_caption": "Sealed gloves trap sweat. DRYE routes it outward."
+      }
+    },
+    "drye_liner_product_clarity_Kx873m": {
+      "type": "drye-liner-product-clarity",
+      "blocks": {
+        "spec_GUhrPx": {
+          "type": "spec",
+          "settings": {
+            "title": "Stays dry at skin contact",
+            "description": "no hand resets"
+          }
+        },
+        "spec_FRngHp": {
+          "type": "spec",
+          "settings": {
+            "title": "No glove fighting ",
+            "description": "easier on/off, less tearing"
+          }
+        },
+        "spec_cat6Wd": {
+          "type": "spec",
+          "settings": {
+            "title": "Dexterity/feel",
+            "description": "thin 0.4 mm layer"
+          }
+        },
+        "spec_cAjWhm": {
+          "type": "spec",
+          "settings": {
+            "title": "Machine‑washable",
+            "description": "built for months of glove work"
+          }
+        }
+      },
+      "block_order": [
+        "spec_GUhrPx",
+        "spec_FRngHp",
+        "spec_cat6Wd",
+        "spec_cAjWhm"
+      ],
+      "name": "DRYE Product Clarity",
+      "settings": {
+        "section_id": "liner-product",
+        "heading": "DRYE goes",
+        "heading_emphasis": "under your existing glove.",
+        "body": "<p>0.4 mm base layer routes moisture away from skin contact under sealed gloves.</p>",
+        "media_type": "video",
+        "video": "shopify://files/videos/IMG_0591.mp4",
+        "before_label": "Put on DRYE — 0.4 mm base layer",
+        "after_label": "Put on your usual glove"
+      }
+    },
     "drye_liner_proof_fVmEKL": {
       "type": "drye-liner-proof",
       "name": "DRYE Liner Proof",
@@ -311,30 +371,6 @@
         "cite": "Moisture regain references: Kadolph 2014 · ASTM D2654 · CN GB national standard. Transport mechanism independently verified at the Swedish School of Textiles, 2025."
       }
     },
-    "drye_liner_mechanism_KFWgjj": {
-      "type": "drye-liner-mechanism",
-      "name": "DRYE Liner Mechanism",
-      "settings": {
-        "section_id": "liner-mechanism",
-        "heading": "Every shift, your skin gets more permeable.",
-        "heading_emphasis": "DRYE moves the moisture out.",
-        "vs_label": "Cotton · DRYE",
-        "cotton_name": "Cotton",
-        "cotton_steps": "Sweat enters the fabric and stays\nAt saturation, moisture sits on skin\nSame wet glove on shift 1 as shift 8",
-        "drye_name": "DRYE Liner",
-        "drye_steps": "Skin side repels — sweat cannot sit there\nOuter side pulls moisture toward it\nContinuous transport, no saturation point"
-      }
-    },
-    "drye_research_video_full_rftE34": {
-      "type": "drye-research-video-full",
-      "name": "DRYE Research Video Full",
-      "settings": {
-        "video_src_desktop": "https://customer-fqpngdzqcoky7qmz.cloudflarestream.com/453bb4cae9bd147b7a10fc6213e64b12/manifest/video.m3u8",
-        "video_src_mobile": "https://customer-fqpngdzqcoky7qmz.cloudflarestream.com/ed9ad690d7f5c27060e215f05f9e4f8e/manifest/video.m3u8",
-        "video_label": "Goes under any sealed glove.",
-        "video_caption": "Sealed gloves trap sweat. DRYE routes it outward."
-      }
-    },
     "drye_section_06_faq_8w34Ye": {
       "type": "drye-section-06-faq",
       "blocks": {
@@ -392,10 +428,10 @@
       "name": "DRYE About CTA",
       "settings": {
         "eyebrow": "",
-        "heading_line_1": "Every other liner has a saturation point.<br>",
+        "heading_line_1": "Every other liner has a saturation point.",
         "heading_line_2": "Ours physically can't.",
         "subtext": "",
-        "primary_label": "TAKE ME TO THE PRODUCT →",
+        "primary_label": "TAKE ME TO THE PRODUCT",
         "primary_url": "shopify://products/drye-moisture-routing-glove-liners",
         "secondary_label": "See the Research",
         "secondary_url": "shopify://pages/research"
@@ -409,11 +445,11 @@
     "drye_nt_barrier_choice_E6DK3t",
     "drye_nt_cotton_q_pRB48M",
     "drye_liner_mechanism_pEYe7W",
+    "drye_research_video_full_rftE34",
+    "drye_liner_product_clarity_Kx873m",
     "drye_liner_proof_fVmEKL",
     "drye_liner_risk_reversal_8phaia",
     "drye_mechanics_saturation_DzjNTn",
-    "drye_liner_mechanism_KFWgjj",
-    "drye_research_video_full_rftE34",
     "drye_section_06_faq_8w34Ye",
     "drye_about_cta_eei9qN"
   ]
