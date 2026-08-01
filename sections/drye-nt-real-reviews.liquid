@@ -30,10 +30,29 @@
             {%- if block.settings.date != blank -%}<span class="tp3-date">{{ block.settings.date }}</span>{%- endif -%}
           </div>
         {%- elsif block.type == 'video_review' -%}
+          {%- assign mg_url = block.settings.video_url | strip -%}
+          {%- assign mg_id = '' -%}
+          {%- if mg_url != blank -%}
+            {%- if mg_url contains 'shorts/' -%}
+              {%- assign mg_id = mg_url | split: 'shorts/' | last | split: '?' | first | split: '/' | first -%}
+            {%- elsif mg_url contains 'youtu.be/' -%}
+              {%- assign mg_id = mg_url | split: 'youtu.be/' | last | split: '?' | first | split: '/' | first -%}
+            {%- elsif mg_url contains 'embed/' -%}
+              {%- assign mg_id = mg_url | split: 'embed/' | last | split: '?' | first | split: '/' | first -%}
+            {%- elsif mg_url contains 'v=' -%}
+              {%- assign mg_id = mg_url | split: 'v=' | last | split: '&' | first -%}
+            {%- else -%}
+              {%- assign mg_id = mg_url | split: '/' | last | split: '?' | first -%}
+            {%- endif -%}
+          {%- endif -%}
           <div class="tp3-card tp3-card--video" {{ block.shopify_attributes }}>
-            <div class="tp3-video">
-              {%- if block.settings.video != blank -%}
-                {{ block.settings.video | video_tag: autoplay: true, loop: true, muted: true, controls: false, image_size: '800x' }}
+            <div class="tp3-video"{% if mg_id != blank %} data-tp3-video="{{ mg_id }}"{% endif %}>
+              {%- if mg_id != blank -%}
+                <img class="tp3-video-thumb" src="https://i.ytimg.com/vi/{{ mg_id }}/hqdefault.jpg" alt="{{ block.settings.name | escape }} video review" loading="lazy" width="480" height="360">
+                <div class="tp3-video-overlay" aria-hidden="true"></div>
+                <button type="button" class="tp3-play" aria-label="{{ block.settings.video_play_label | default: 'Play video' }}">
+                  <svg viewBox="0 0 24 24" width="20" height="20"><path d="M8 5v14l11-7z" fill="#ffffff"></path></svg>
+                </button>
               {%- endif -%}
               <div class="tp3-video-cap">
                 <div class="tp3-head" style="margin-bottom: 8px">
@@ -54,6 +73,7 @@
 (function () {
   var root = document.getElementById('drye-nt-real-reviews-{{ section.id }}');
   if (!root) return;
+
   root.querySelectorAll('[data-tp3-toggle]').forEach(function (btn) {
     var body = btn.parentElement.querySelector('[data-tp3-body]');
     if (!body) return;
@@ -61,6 +81,22 @@
       var open = body.classList.toggle('tp3-body--open');
       btn.textContent = open ? 'Read less' : 'Read more';
     });
+  });
+
+  root.addEventListener('click', function (e) {
+    var btn = e.target.closest('.tp3-play');
+    if (!btn) return;
+    var box = btn.closest('[data-tp3-video]');
+    if (!box) return;
+    var id = box.getAttribute('data-tp3-video');
+    if (!id) return;
+    var frame = document.createElement('div');
+    frame.className = 'tp3-video-frame';
+    frame.innerHTML =
+      '<iframe src="https://www.youtube.com/embed/' + encodeURIComponent(id) +
+      '?autoplay=1&rel=0&playsinline=1" title="Video" frameborder="0" ' +
+      'allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>';
+    box.appendChild(frame);
   });
 })();
 </script>
@@ -92,7 +128,8 @@
       "type": "video_review",
       "name": "Video review card",
       "settings": [
-        { "type": "video", "id": "video", "label": "Video" },
+        { "type": "text", "id": "video_url", "label": "YouTube link", "info": "Paste any YouTube link — Shorts, youtu.be or watch links all work. A thumbnail + play button appear; visitors click to load the video." },
+        { "type": "text", "id": "video_play_label", "label": "Play button label (accessibility)", "default": "Play video" },
         { "type": "text", "id": "initials", "label": "Avatar initials", "default": "DF" },
         { "type": "color", "id": "avatar_color", "label": "Avatar color", "default": "#F7D2A8" },
         { "type": "text", "id": "name", "label": "Name" },
@@ -105,9 +142,7 @@
     {
       "name": "DRYE NT — Real reviews",
       "blocks": [
-        { "type": "review", "settings": { "initials": "PN", "avatar_color": "#BFE9DD", "name": "PN", "meta": "US · 2 reviews", "title": "Great liners that work!", "date": "Jun 15, 2025", "quote": "I have eczema and these liners have been the best things I bought for my hands. I have to wear latex gloves all day for work. I'd wear the DRYE liners then the latex gloves on top. Every hour, I would change my gloves (and liners) and notice the sweat on my DRYE — but my hands remain dried. When my skin is dried and cracked, I would wear just the DRYE at home and my hands feel better. Thank you so much for making these! I have seven pairs to rotate. Have been wearing them for a few months now. Machine wash every other day (laid to dry under sunlight in between washes). Still great condition." } },
-        { "type": "review", "settings": { "initials": "DF", "avatar_color": "#F7D2A8", "name": "Debby Fields", "meta": "US · 3 reviews", "title": "Incredible difference! Worth every penny!", "date": "Aug 17, 2025", "quote": "My son's hands were bright pink and raw with all of the skin peeling off from wearing work gloves. I researched the best solutions and DRYE liners were considered the best. Within a few days of wearing the liners, his hands were drastically improved. Within two weeks, they are completely healed and back to normal. I cannot believe the difference! I also bought a rack to dry the gloves and have now purchased multiple pairs to allow for more washing and rotation to prevent reoccurrence, but these liners made a tremendous difference! Additionally, I was unsure of the best size and customer service was prompt and amazingly helpful. I highly recommend! Worth every penny!" } },
-        { "type": "review", "settings": { "initials": "JO", "avatar_color": "#F6C7DC", "name": "Jon", "meta": "GB · 1 review", "title": "Gloves have performed really very well so far", "date": "May 1, 2025", "quote": "Gloves have performed very well so far, excellent fit, quick delivery and they do as the site describes. They keep the sweat and some extra heat from my palms which are one of my triggers. I'd recommend if like me you've tried everything and it doesn't work — give these a try." } },
+        { "type": "review", "settings": { "initials": "PN", "avatar_color": "#BFE9DD", "name": "PN", "meta": "US · 2 reviews", "title": "Great liners that work!", "date": "Jun 15, 2025", "quote": "I have eczema and these liners have been the best things I bought for my hands." } },
         { "type": "video_review", "settings": { "initials": "DF", "avatar_color": "#F7D2A8", "name": "Debby Fields", "meta": "US · 3 reviews" } }
       ]
     }
