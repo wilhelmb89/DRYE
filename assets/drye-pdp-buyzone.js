@@ -30,7 +30,9 @@
         qtyInput.dispatchEvent(new Event('change', { bubbles: true }));
       }
       if (mainAtc && !mainAtc.disabled) {
-        mainAtc.textContent = 'Add ' + pairs + (pairs === 1 ? ' Pair' : ' Pairs');
+        mainAtc.textContent = mainAtc.dataset.mode === 'preorder'
+          ? 'Pre-order now'
+          : 'Add ' + pairs + (pairs === 1 ? ' Pair' : ' Pairs');
       }
     }
 

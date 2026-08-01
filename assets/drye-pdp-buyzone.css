@@ -122,6 +122,13 @@
 .hero .pack__foot-headline { font-family: "DM Sans", sans-serif; font-size: 11px; font-weight: 700; letter-spacing: 0.06em; line-height: 1.3; text-align: center; text-transform: uppercase; color: #1E3A4C; }
 .hero .pack__foot-note { font-family: "DM Sans", sans-serif; font-size: 12px; line-height: 1.35; color: #4B5563; text-align: center; }
 
+/* Pre-order banner for sold-out sizes — same beige band as the pack foot */
+.hero .sz-panel-soldout-banner {
+  background: #F4F1EB; color: #1E3A4C;
+  font-family: "DM Sans", sans-serif; font-size: 14px; font-weight: 500; line-height: 1.45;
+  padding: 12px 14px; border: 1px solid var(--border); border-radius: 0; text-align: left;
+}
+
 /* ---- ATC button (unchanged from current file, included for completeness) ---- */
 .hero .atc-btn-full {
   width: 100%; background: var(--emerald); border: none; cursor: pointer;
@@ -161,8 +168,13 @@
   /* G1 taller gallery on mobile */
   .hero .hero-media { height: 550px; }
 
-  /* G2 white backing behind the thumbnail strip */
-  .hero .hero-gallery-thumbs { background: #fff; }
+  /* G2 white thumbnail strip, INSET between the arrows so exactly 5 thumbs
+     show and none can peek behind the (opaque, full-height) arrow buttons */
+  .hero .hero-gallery-thumbs {
+    left: 44px; right: 44px; bottom: 0; height: 68px;
+    padding: 8px 0; gap: 4px; align-items: center;
+    background: #fff;
+  }
 
   /* G4 order-count line + state list */
   .hero .hero-proof-strip__label { font-size: 12px; }
@@ -177,13 +189,15 @@
      the empty nav area to the thumbs (nav keeps pointer-events:none) */
   .hero .hero-gallery-nav { z-index: 7; }
 
-  /* move the arrows from the image centre down onto the thumbnail strip */
+  /* arrows: elongated buttons the SAME height as the strip (68px), solid
+     white, at the very edges — they flank the inset strip so nothing can
+     peek around them, even mid-navigation */
   .hero .hero-gallery-arrow {
     top: auto;
-    bottom: 15px;
+    bottom: 0;
     transform: none;
-    width: 40px;
-    height: 38px;
+    width: 44px;
+    height: 68px;
     z-index: 7;
     pointer-events: auto;
     background: #fff;
@@ -194,9 +208,7 @@
   .hero .hero-gallery-arrow--next { right: 0; }
   .hero .hero-gallery-arrow[disabled] { opacity: 0.35; }
 
-  /* full-width white strip; thumbnails inset via padding so the opaque
-     edge buttons (40px, at left:0 / right:0) sit ON the white on each side */
-  .hero .hero-gallery-thumbs { left: 0; right: 0; padding-left: 40px; padding-right: 40px; }
+  /* exactly 5 thumbnails across the inset strip (4 gaps x 4px = 16px) */
   .hero .hero-gallery-thumb  { width: calc((100% - 16px) / 5); height: 52px; }
 }
 

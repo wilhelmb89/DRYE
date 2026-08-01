@@ -464,6 +464,11 @@ assign review_count = section.settings.review_count_fallback
               </p>
             </div>
 
+            {% comment %} Pre-order banner — JS shows this (and hides the preorder + notify blocks) for pre-order sizes {% endcomment %}
+            <div class="sz-panel-soldout-banner" data-panel-soldout-banner hidden>
+              {{ section.settings.soldout_banner_text | default: 'This size is sold out and will be delivered in mid-September. All customers who pre-order get an extra pair free of charge.' }}
+            </div>
+
           </div>
         {% else %}
           <select class="variant-select-fallback" name="id">
@@ -1296,22 +1301,26 @@ const shopifyRoot = (window.Shopify && window.Shopify.routes && window.Shopify.r
     }
 
     function syncButtonStates(selectedVariant) {
-      const canBuy = !!(selectedVariant && (selectedVariant.available || isVariantPreorder(selectedVariant)));
+      const preorder = isVariantPreorder(selectedVariant);
+      const canBuy = !!(selectedVariant && (selectedVariant.available || preorder));
 
       if (mainAtc) {
         mainAtc.disabled = !canBuy;
-        if (canBuy) {
+        mainAtc.dataset.mode = preorder ? 'preorder' : 'buy';
+        if (!canBuy) {
+          mainAtc.textContent = 'Sold out';
+        } else if (preorder) {
+          mainAtc.textContent = 'Pre-order now';
+        } else {
           const selPack = sectionEl.querySelector('[data-pack].is-selected');
           const packPairs = selPack ? (Number(selPack.dataset.pairs) || 1) : (parseInt(qtyInput && qtyInput.value, 10) || 1);
           mainAtc.textContent = 'Add ' + packPairs + (packPairs === 1 ? ' Pair' : ' Pairs');
-        } else {
-          mainAtc.textContent = 'Sold out';
         }
       }
 
       if (stickySubmit) {
         stickySubmit.disabled = !canBuy;
-        stickySubmit.textContent = canBuy ? {{ sticky_button_label | json }} : 'Sold out';
+        stickySubmit.textContent = !canBuy ? 'Sold out' : (preorder ? 'Pre-order now' : {{ sticky_button_label | json }});
       }
     }
 
@@ -1503,57 +1512,33 @@ if (pushEvent && !(window.Shopify && window.Shopify.designMode)) {
       const preorderBlock = panelEl.querySelector('[data-panel-preorder]');
       const divider = panelEl.querySelector('[data-panel-divider]');
       const notifyBlock = panelEl.querySelector('[data-panel-notify]');
+      const banner = panelEl.querySelector('[data-panel-soldout-banner]');
 
-      if (preorderBlock) {
-        preorderBlock.hidden = !isPreorder;
-        if (isPreorder) {
-          const headingEl = preorderBlock.querySelector('[data-panel-preorder-heading]');
-          const shipsEl = preorderBlock.querySelector('[data-panel-ships-badge]');
-          const origEl = preorderBlock.querySelector('[data-panel-price-orig]');
-          const saleEl = preorderBlock.querySelector('[data-panel-price-sale]');
-          const discEl = preorderBlock.querySelector('[data-panel-discount]');
-          const priceRow = preorderBlock.querySelector('.sz-panel-price-row');
-          const cutoffEl = preorderBlock.querySelector('[data-panel-cutoff]');
-          const btnEl = preorderBlock.querySelector('[data-panel-preorder-btn]');
+      // The old 15%-off preorder block + divider are no longer shown.
+      if (preorderBlock) preorderBlock.hidden = true;
+      if (divider) divider.hidden = true;
 
-          const pct = PANEL_CFG.discountPercent;
-          if (headingEl) headingEl.textContent = 'Reserve your ' + size + ' now';
-          if (shipsEl) shipsEl.textContent = 'Ships ' + PANEL_CFG.shippingDate;
-          // Show only the discount chip (no struck/sale price). The real discount
-          // is applied by the code at cart time; this just advertises it.
-          if (origEl) origEl.textContent = '';
-          if (saleEl) saleEl.textContent = '';
-          if (discEl) discEl.textContent = pct + '% OFF';
-          if (priceRow) priceRow.hidden = !(pct > 0);
-          if (cutoffEl) cutoffEl.textContent = String(PANEL_CFG.cutoffText)
-            .replace(/\{date\}/g, PANEL_CFG.shippingDate)
-            .replace(/\{cutoff\}/g, PANEL_CFG.cutoffDate)
-            .replace(/\{percent\}/g, pct)
-            .replace(/\{month\}/g, PANEL_CFG.shippingMonth);
-          if (btnEl) {
-            btnEl.textContent = pct > 0
-              ? 'PREORDER — ' + pct + '% OFF'
-              : 'PREORDER — SHIPS ' + String(PANEL_CFG.shippingDate).toUpperCase();
-            btnEl.disabled = false;
-            btnEl.style.background = '';
-          }
+      if (isPreorder) {
+        // Pre-order sizes: show only the banner (ships date + free extra pair).
+        if (notifyBlock) notifyBlock.hidden = true;
+        if (banner) banner.hidden = false;
+      } else {
+        // Truly sold-out (deny policy): keep the notify-me email flow.
+        if (banner) banner.hidden = true;
+        if (notifyBlock) {
+          notifyBlock.hidden = false;
+          const notifyHeadingEl = notifyBlock.querySelector('[data-panel-notify-heading]');
+          if (notifyHeadingEl) notifyHeadingEl.textContent =
+            'Not ready to wait? Get an email the second ' + size + ' is back.';
+          const formEl = notifyBlock.querySelector('[data-notify-form]');
+          const emailEl = notifyBlock.querySelector('[data-notify-email]');
+          const errEl = notifyBlock.querySelector('[data-notify-err]');
+          const successEl = notifyBlock.querySelector('[data-notify-success]');
+          if (formEl) formEl.hidden = false;
+          if (emailEl) emailEl.value = '';
+          if (errEl) errEl.hidden = true;
+          if (successEl) successEl.hidden = true;
         }
-      }
-
-      if (divider) divider.hidden = !isPreorder;
-
-      if (notifyBlock) {
-        const notifyHeadingEl = notifyBlock.querySelector('[data-panel-notify-heading]');
-        if (notifyHeadingEl) notifyHeadingEl.textContent =
-          'Not ready to wait? Get an email the second ' + size + ' is back.';
-        const formEl = notifyBlock.querySelector('[data-notify-form]');
-        const emailEl = notifyBlock.querySelector('[data-notify-email]');
-        const errEl = notifyBlock.querySelector('[data-notify-err]');
-        const successEl = notifyBlock.querySelector('[data-notify-success]');
-        if (formEl) formEl.hidden = false;
-        if (emailEl) emailEl.value = '';
-        if (errEl) errEl.hidden = true;
-        if (successEl) successEl.hidden = true;
       }
 
       panelEl.hidden = false;
@@ -1595,15 +1580,15 @@ if (pushEvent && !(window.Shopify && window.Shopify.designMode)) {
           } else if (isPreorder) {
             pushDL('size_soldout_click', { size: value, variant_id: variantId });
             openPanel(option);
-            // Preorder is bought ONLY via the panel button (single path + discount),
-            // so force the main ATC + sticky submit disabled.
+            // Pre-order: the main ATC buys the pre-order variant directly.
             if (mainAtc) {
-              mainAtc.disabled = true;
-              mainAtc.textContent = PREORDER_MAIN_LABEL;
+              mainAtc.disabled = false;
+              mainAtc.dataset.mode = 'preorder';
+              mainAtc.textContent = 'Pre-order now';
             }
             if (stickySubmit) {
-              stickySubmit.disabled = true;
-              stickySubmit.textContent = PREORDER_MAIN_LABEL;
+              stickySubmit.disabled = false;
+              stickySubmit.textContent = 'Pre-order now';
             }
           } else {
             closePanel();
@@ -2535,6 +2520,13 @@ wteTimelines.forEach((timeline) => {
       "id": "preorder_main_atc_label",
       "label": "Main ATC label (preorder size selected)",
       "default": "Preorder below ↓"
+    },
+    {
+      "type": "textarea",
+      "id": "soldout_banner_text",
+      "label": "Pre-order banner (sold-out sizes)",
+      "info": "Shown instead of the 15% preorder panel when a pre-order (continue-selling, 0 stock) size is picked.",
+      "default": "This size is sold out and will be delivered in mid-September. All customers who pre-order get an extra pair free of charge."
     },
     {
       "type": "text",
