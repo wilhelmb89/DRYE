@@ -256,6 +256,46 @@
         "stats_note": "Post-purchase feedback from verified DRYE customers. Results vary by glove type, heat, and shift length."
       }
     },
+    "drye_nt_trust_badges_6d9hBz": {
+      "type": "drye-nt-trust-badges",
+      "blocks": {
+        "trustpilot_f6kP7T": {
+          "type": "trustpilot",
+          "settings": {
+            "logo": "shopify://shop_images/trustpilot-logo-trimmed.png",
+            "score": "4.4/5",
+            "count": "10 reviews",
+            "url": "https://se.trustpilot.com/review/hudsverige.se",
+            "cta_label": "See all reviews on Trustpilot"
+          }
+        },
+        "award_fYRNMg": {
+          "type": "award",
+          "settings": {
+            "emblem": "shopify://shop_images/skapa-emblem-small.png",
+            "name": "SKAPA",
+            "caption": "Innovation Award — in memory of the inventor Alfred Nobel"
+          }
+        },
+        "stars_3QffQM": {
+          "type": "stars",
+          "settings": {
+            "score": "4.85/5",
+            "count": "47 reviews",
+            "url": "shopify://products/drye-moisture-routing-glove-liners",
+            "cta_label": "See all our reviews"
+          }
+        }
+      },
+      "block_order": [
+        "trustpilot_f6kP7T",
+        "award_fYRNMg",
+        "stars_3QffQM"
+      ],
+      "custom_css": [],
+      "name": "DRYE NT — Trust badges",
+      "settings": {}
+    },
     "drye_nt_real_reviews_P837F8": {
       "type": "drye-nt-real-reviews",
       "blocks": {
@@ -608,6 +648,7 @@
     "drye_nt_barrier_choice_YhHyMK",
     "drye_research_video_full_VtWgze",
     "drye_nt_pro_reviews_ykrpQz",
+    "drye_nt_trust_badges_6d9hBz",
     "drye_nt_real_reviews_P837F8",
     "drye_blog_cta_strip_DzayyA",
     "drye_mechanics_identification_gallery_rmW6fA",
