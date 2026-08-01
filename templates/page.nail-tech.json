@@ -310,6 +310,48 @@
         "source": "Sources: Ramsing & Agner, Contact Dermatitis, 1996 — short- and long-term experimental glove occlusion."
       }
     },
+    "drye_nt_inside_9eaNVa": {
+      "type": "drye-nt-inside",
+      "blocks": {
+        "column_Ynwjdi": {
+          "type": "column",
+          "settings": {
+            "image": "shopify://shop_images/21bpgpk7boif1.webp",
+            "image_alt": "Bare hand in a black nitrile glove, mid-shift",
+            "eyebrow": "Nitrile alone",
+            "title": "Protection outside. Trapped moisture inside.",
+            "items": "Heat and sweat remain against the skin\nDirect skin-to-glove contact\nWet hands make glove changes harder"
+          }
+        },
+        "column_HUGMxR": {
+          "type": "column",
+          "settings": {
+            "image_alt": "DRYE liner visible at the cuff under a nitrile glove",
+            "video": "shopify://files/videos/IMG_0591.mp4",
+            "eyebrow": "Nitrile + DRYE",
+            "title": "The same outer glove. A better-managed inside.",
+            "items": "The same protective nitrile glove outside\nA textile layer between skin and nitrile\nMoisture routed away from the skin-facing layer\nDrier-feeling hands and easier glove changes"
+          }
+        }
+      },
+      "block_order": [
+        "column_Ynwjdi",
+        "column_HUGMxR"
+      ],
+      "name": "DRYE NT — Inside glove",
+      "settings": {
+        "chapter": "05",
+        "heading": "Keep the protection. Change what happens inside it.",
+        "body": "DRYE adds a 0.4 mm textile layer between your skin and the same protective glove.",
+        "rr_days": "30",
+        "rr_days_label": "Days",
+        "rr_heading": "Try it risk-free.",
+        "rr_body": "If DRYE Liner doesn't change your shift, full refund. No hassle.",
+        "rr_cta_label": "Shop the DRYE Liner",
+        "rr_cta_url": "",
+        "rr_guarantee": "0.4mm washable liner · Engineered in Sweden · 30-day refund"
+      }
+    },
     "nt_nails": {
       "type": "drye-nt-nails",
       "settings": {
@@ -408,42 +450,6 @@
         "cta_url": "",
         "guarantee": "30-Day Money Back Guarantee",
         "sources": "Park & Lee 2025 · Warner, Stone & Boissy, J Invest Dermatol 2003 · Gunt & Kasting, Int J Pharm 2007 · Nogueira et al., Thermochim Acta 2009 · Repeated-occlusion reference pending verification"
-      }
-    },
-    "drye_nt_inside_9eaNVa": {
-      "type": "drye-nt-inside",
-      "blocks": {
-        "column_Ynwjdi": {
-          "type": "column",
-          "settings": {
-            "image": "shopify://shop_images/21bpgpk7boif1.webp",
-            "image_alt": "Bare hand in a black nitrile glove, mid-shift",
-            "tone": "negative",
-            "eyebrow": "Nitrile alone",
-            "title": "Protection outside. Trapped moisture inside.",
-            "items": "Heat and sweat remain against the skin\nDirect skin-to-glove contact\nWet hands make glove changes harder"
-          }
-        },
-        "column_HUGMxR": {
-          "type": "column",
-          "settings": {
-            "image_alt": "DRYE liner visible at the cuff under a nitrile glove",
-            "tone": "positive",
-            "eyebrow": "Nitrile + DRYE",
-            "title": "The same outer glove. A better-managed inside.",
-            "items": "The same protective nitrile glove outside\nA textile layer between skin and nitrile\nMoisture routed away from the skin-facing layer\nDrier-feeling hands and easier glove changes"
-          }
-        }
-      },
-      "block_order": [
-        "column_Ynwjdi",
-        "column_HUGMxR"
-      ],
-      "name": "DRYE NT — Inside glove",
-      "settings": {
-        "chapter": "05",
-        "heading": "Keep the protection. Change what happens inside it.",
-        "body": "DRYE adds a 0.4 mm textile layer between your skin and the same protective glove."
       }
     }
   },
