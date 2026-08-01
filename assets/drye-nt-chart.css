@@ -48,10 +48,57 @@
 .dday span::before { content: ""; width: 1px; height: 8px; background: rgba(255,255,255,0.28); }
 
 /* barrier annotations */
-.gann { display: flex; flex-direction: column; gap: 12px; margin: 0 0 18px; padding-left: var(--axis); }
+.gann { display: none; flex-direction: column; gap: 12px; margin: 0 0 18px; padding-left: var(--axis); }
 .ga { display: grid; grid-template-columns: auto 1fr; column-gap: 9px; align-items: start; font-size: 16px; line-height: 1.4; color: rgba(255,255,255,0.6); }
 .ga span { display: block; font-size: 13px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.9); }
 .ga-arw { display: block; margin-top: 4px; color: rgba(255,255,255,0.5); }
+
+/* audience split — two timeline bars on the chart's own day scale.
+   Mobile: bordered cards, onset flag only, findings listed below the bar.
+   Desktop: full-width rows aligned to the chart axis, findings in the flags. */
+.drye-nt-barrier .mech-lead { display: none; }
+.drye-nt-barrier .gann { display: none; }
+.bsp { display: flex; flex-direction: column; gap: 14px; margin: 0 0 26px; }
+.bsp-card { border: 1px solid rgba(255,255,255,0.14); background: rgba(255,255,255,0.03); padding: 14px 16px 12px; }
+.bsp-card--alert { border-color: rgba(239,68,68,0.34); background: rgba(239,68,68,0.06); }
+.bsp-head { margin: 0 0 34px; }
+.bsp-aud { margin: 0; font-family: var(--font-display); font-size: 15px; font-weight: 600; letter-spacing: -0.005em; color: #ffffff; }
+.bsp-sum { display: none; margin: 0; font-size: 12px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.5); }
+.bsp-card--alert .bsp-sum { color: var(--red); }
+.bsp-track { position: relative; }
+.bsp-bar { position: relative; display: block; height: 7px; background: rgba(255,255,255,0.16); overflow: hidden; }
+.bsp-bar-red { position: absolute; top: 0; bottom: 0; right: 0; background: var(--red); }
+.bsp-flag { position: absolute; bottom: 7px; width: 0; display: flex; flex-direction: column; align-items: center; gap: 3px; padding-bottom: 3px; }
+.bsp-flag b { font-size: 9px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(255,255,255,0.85); white-space: nowrap; }
+.bsp-flag em { display: none; font-style: normal; }
+.bsp-flag i { width: 1px; height: 13px; background: rgba(255,255,255,0.5); }
+.bsp-flag--red b { color: var(--red); }
+.bsp-flag--red i { background: var(--red); }
+.bsp-flag--end { left: 100%; align-items: flex-start; }
+.bsp-flag--end b { transform: translateX(-100%); }
+.bsp-flag--sec { display: none; }
+.bsp-rows { list-style: none; margin: 12px 0 0; padding: 0; display: flex; flex-direction: column; gap: 9px; }
+.bsp-rows li { display: grid; grid-template-columns: 46px 1fr; column-gap: 12px; align-items: baseline; }
+.bsp-rows b { font-size: 9px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.5); font-variant-numeric: tabular-nums; }
+.bsp-rows span { font-size: 12px; font-weight: 600; letter-spacing: 0.08em; line-height: 1.35; text-transform: uppercase; color: rgba(255,255,255,0.9); text-wrap: pretty; }
+.bsp-rows .is-red span, .bsp-rows .is-red b { color: var(--red); }
+/* in-plot audience callouts — desktop only (no room at phone width) */
+.bplot { position: relative; }
+.bcall { display: none; position: absolute; width: 0; flex-direction: column; }
+.bcall i { width: 1px; background: rgba(255,255,255,0.45); }
+.bcall-txt { padding-top: 10px; border-top: 1px solid rgba(255,255,255,0.45); }
+.bcall-aud { margin: 0 0 4px; font-family: var(--font-display); font-size: 17px; font-weight: 600; color: #ffffff; white-space: nowrap; }
+.bcall-sub { margin: 0; font-size: 11px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.72); white-space: nowrap; }
+.bcall--irr { align-items: flex-start; }
+.bcall--irr i { height: 74px; background: rgba(239,68,68,0.55); }
+.bcall--irr .bcall-txt { min-width: 260px; border-top-color: rgba(239,68,68,0.55); }
+.bcall--irr .bcall-aud { color: var(--red); }
+.bcall--ok { align-items: flex-end; }
+.bcall--ok i { height: 112px; }
+.bcall--ok .bcall-txt { min-width: 300px; text-align: right; }
+
+.bsp-stmt { margin: 26px 0 0; font-family: var(--font-display); font-weight: 500; font-size: 15px; line-height: 1.45; letter-spacing: -0.005em; color: rgba(255,255,255,0.78); text-wrap: pretty; }
+.bsp-stmt + .mech-note { margin-top: 14px; }
 
 @keyframes g-fill { 0%, 4% { transform: translateY(376px); } 52%, 100% { transform: translateY(52px); } }
 @keyframes g-wipe { 0%, 4% { transform: scaleX(0); } 52%, 100% { transform: scaleX(1); } }
@@ -65,6 +112,9 @@
 }
 
 @media (min-width: 760px) {
+  .bsp { display: none; }
+  .bcall { display: flex; }
+  .bsp-stmt { font-size: 16px; margin-top: 30px; max-width: 60ch; }
   .mech-grid { display: grid; grid-template-columns: 0.78fr 1.22fr; column-gap: 56px; row-gap: 0; align-items: start; --axis: 42px; --mark: 52px; }
   .mech-full { grid-column: 1 / -1; }
   .mech-glove svg { margin-inline: auto; }
@@ -73,10 +123,10 @@
   .anno--glove { right: -6px; }
   .anno--glove svg { width: 92px; height: 58px; }
   .day-sep .day-lbl { display: block; font-size: clamp(8.5px, 2.4vw, 10px); letter-spacing: 0.06em; }
-  .gann { position: relative; display: block; min-height: 52px; margin-bottom: 14px; }
+  .gann { display: block; position: relative; min-height: 52px; margin-bottom: 14px; }
   .ga-arw { display: none; }
   .ga { display: block; position: absolute; bottom: 0; max-width: calc(var(--x-d14) - var(--x-d3) - 20px); }
-  .gann > .ga:nth-child(2) { padding-left: 14px; }
+  .gann > .ga--end { padding-left: 14px; }
   .ga--start { max-width: calc(var(--x-d3) - 14px); transform: translateX(-100%); padding-right: 14px; text-align: right; }
   .ga--end { width: 26ch; max-width: 30ch; transform: translateX(-100%); text-align: right; }
 }

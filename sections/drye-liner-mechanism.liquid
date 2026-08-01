@@ -1,3 +1,4 @@
+{{ 'drye-nt-base.css' | asset_url | stylesheet_tag }}
 {{ 'drye-liner-mechanism.css' | asset_url | stylesheet_tag }}
 
 <section
@@ -9,10 +10,6 @@
 >
   <div class="dryeNEW-container">
     <div class="drye-liner-mechanism__inner">
-      {%- if section.settings.eyebrow != blank -%}
-        <span class="dryeNEW-micro drye-liner-mechanism__eyebrow">{{ section.settings.eyebrow }}</span>
-      {%- endif -%}
-
       {%- if section.settings.heading != blank or section.settings.heading_emphasis != blank -%}
         <h2 class="dryeNEW-h2 drye-liner-mechanism__heading">
           {%- if section.settings.heading != blank -%}
@@ -22,10 +19,6 @@
             <span class="dryeNEW-editorial drye-liner-mechanism__heading-em">{{ section.settings.heading_emphasis }}</span>
           {%- endif -%}
         </h2>
-      {%- endif -%}
-
-      {%- if section.settings.body != blank -%}
-        <p class="dryeNEW-body drye-liner-mechanism__body">{{ section.settings.body }}</p>
       {%- endif -%}
 
       <div class="drye-liner-mechanism__vs-block">
@@ -54,9 +47,15 @@
               {%- if section.settings.cotton_name != blank -%}
                 <div class="drye-liner-mechanism__vs-name">{{ section.settings.cotton_name }}</div>
               {%- endif -%}
-              {%- if section.settings.cotton_description != blank -%}
-                <p class="drye-liner-mechanism__vs-desc">{{ section.settings.cotton_description }}</p>
-              {%- endif -%}
+                <ul class="drye-liner-mechanism__steps" role="list">
+                  {%- assign cotton_steps = section.settings.cotton_steps | newline_to_br | split: '<br />' -%}
+                  {%- for step in cotton_steps -%}
+                    {%- assign line = step | strip -%}
+                    {%- if line != blank -%}
+                      <li class="drye-liner-mechanism__step"><span class="drye-liner-mechanism__step-icon" aria-hidden="true">&#10005;</span><span class="drye-liner-mechanism__step-text">{{ line }}</span></li>
+                    {%- endif -%}
+                  {%- endfor -%}
+                </ul>
             </div>
           </div>
 
@@ -102,43 +101,17 @@
               {%- if section.settings.drye_name != blank -%}
                 <div class="drye-liner-mechanism__vs-name">{{ section.settings.drye_name }}</div>
               {%- endif -%}
-              {%- if section.settings.drye_description != blank -%}
-                <p class="drye-liner-mechanism__vs-desc">{{ section.settings.drye_description }}</p>
-              {%- endif -%}
+                <ul class="drye-liner-mechanism__steps" role="list">
+                  {%- assign drye_steps = section.settings.drye_steps | newline_to_br | split: '<br />' -%}
+                  {%- for step in drye_steps -%}
+                    {%- assign line = step | strip -%}
+                    {%- if line != blank -%}
+                      <li class="drye-liner-mechanism__step"><span class="drye-liner-mechanism__step-icon" aria-hidden="true">&#8594;</span><span class="drye-liner-mechanism__step-text">{{ line }}</span></li>
+                    {%- endif -%}
+                  {%- endfor -%}
+                </ul>
             </div>
           </div>
-        </div>
-      </div>
-
-      <div class="drye-liner-mechanism__diagram">
-        {%- if section.settings.diagram_label != blank -%}
-          <div class="drye-liner-mechanism__diagram-label">{{ section.settings.diagram_label }}</div>
-        {%- endif -%}
-
-        <div class="drye-liner-mechanism__step">
-          {%- if section.settings.step_1_label != blank -%}
-            <div class="drye-liner-mechanism__step-label">{{ section.settings.step_1_label }}</div>
-          {%- endif -%}
-          {%- if section.settings.step_1_title != blank -%}
-            <div class="drye-liner-mechanism__step-title">{{ section.settings.step_1_title }}</div>
-          {%- endif -%}
-          {%- if section.settings.step_1_body != blank -%}
-            <p class="drye-liner-mechanism__step-body">{{ section.settings.step_1_body }}</p>
-          {%- endif -%}
-        </div>
-
-        <div class="drye-liner-mechanism__arrow" aria-hidden="true">&#8595;</div>
-
-        <div class="drye-liner-mechanism__step">
-          {%- if section.settings.step_2_label != blank -%}
-            <div class="drye-liner-mechanism__step-label">{{ section.settings.step_2_label }}</div>
-          {%- endif -%}
-          {%- if section.settings.step_2_title != blank -%}
-            <div class="drye-liner-mechanism__step-title">{{ section.settings.step_2_title }}</div>
-          {%- endif -%}
-          {%- if section.settings.step_2_body != blank -%}
-            <p class="drye-liner-mechanism__step-body">{{ section.settings.step_2_body }}</p>
-          {%- endif -%}
         </div>
       </div>
     </div>
@@ -159,15 +132,9 @@
     },
     {
       "type": "text",
-      "id": "eyebrow",
-      "label": "Eyebrow",
-      "default": "The difference"
-    },
-    {
-      "type": "text",
       "id": "heading",
       "label": "Heading",
-      "default": "Most liners absorb. DRYE"
+      "default": "Every other liner saturates. DRYE"
     },
     {
       "type": "text",
@@ -177,15 +144,9 @@
     },
     {
       "type": "text",
-      "id": "body",
-      "label": "Body",
-      "default": "See what happens when sweat meets fabric."
-    },
-    {
-      "type": "text",
       "id": "vs_label",
       "label": "Comparison label",
-      "default": "Cotton · DRYE"
+      "default": "Cotton \u00b7 DRYE"
     },
     {
       "type": "text",
@@ -194,10 +155,11 @@
       "default": "Cotton"
     },
     {
-      "type": "text",
-      "id": "cotton_description",
-      "label": "Cotton description",
-      "default": "Water sits on the surface. Sweat stays trapped against your skin."
+      "type": "textarea",
+      "id": "cotton_steps",
+      "label": "Cotton steps",
+      "info": "One per line.",
+      "default": "Sweat enters the fabric and stays\nAt saturation, moisture sits on skin\nSame wet glove on shift 1 as shift 8"
     },
     {
       "type": "text",
@@ -206,52 +168,11 @@
       "default": "DRYE Liner"
     },
     {
-      "type": "text",
-      "id": "drye_description",
-      "label": "DRYE description",
-      "default": "Water is pulled through and spread outward. Skin side stays dry."
-    },
-    {
-      "type": "text",
-      "id": "diagram_label",
-      "label": "Diagram label",
-      "default": "Asymmetric Layering — one layer, one direction"
-    },
-    {
-      "type": "text",
-      "id": "step_1_label",
-      "label": "Step 1 label",
-      "default": "Skin side — hydrophobic"
-    },
-    {
-      "type": "text",
-      "id": "step_1_title",
-      "label": "Step 1 title",
-      "default": "Repels sweat."
-    },
-    {
-      "type": "text",
-      "id": "step_1_body",
-      "label": "Step 1 body",
-      "default": "The surface touching your skin doesn't absorb. It pushes moisture away immediately."
-    },
-    {
-      "type": "text",
-      "id": "step_2_label",
-      "label": "Step 2 label",
-      "default": "Outer side — hydrophilic"
-    },
-    {
-      "type": "text",
-      "id": "step_2_title",
-      "label": "Step 2 title",
-      "default": "Pulls moisture out."
-    },
-    {
-      "type": "text",
-      "id": "step_2_body",
-      "label": "Step 2 body",
-      "default": "The outer layer draws moisture through and spreads it toward the glove — where it can evaporate."
+      "type": "textarea",
+      "id": "drye_steps",
+      "label": "DRYE steps",
+      "info": "One per line.",
+      "default": "Skin side repels \u2014 sweat cannot sit there\nOuter side pulls moisture toward it\nContinuous transport, no saturation point"
     }
   ],
   "presets": [

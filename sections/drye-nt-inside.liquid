@@ -1,6 +1,15 @@
 {{ 'drye-nt-base.css' | asset_url | stylesheet_tag }}
 {{ 'drye-nt-inside.css' | asset_url | stylesheet_tag }}
 
+{%- comment -%}
+  DRYE NT — Inside the glove
+  Two blocks (negative/positive). Desktop pairs each image with its own column
+  (image on top, text below); a chevron sits between the columns and a tinted
+  panel bleeds up behind the "positive" image. Mobile stacks both images side
+  by side, then both text blocks full-width underneath.
+  A risk-reversal CTA (30-day badge + Shop button) closes the section.
+{%- endcomment -%}
+
 <section
   class="drye-nt lp-block drye-nt-inside"
   id="drye-nt-inside-{{ section.id }}"
@@ -23,16 +32,33 @@
 
     <div class="cmp-grid">
       {%- for block in section.blocks -%}
-        {%- assign is_drye = block.settings.tone | default: 'negative' -%}
-        <div {{ block.shopify_attributes }}>
+        {%- assign is_b = false -%}
+        {%- if forloop.index == 2 -%}{%- assign is_b = true -%}{%- endif -%}
+        <div class="{% if is_b %}cmp-b-img{% else %}cmp-a-img{% endif %}" {{ block.shopify_attributes }}>
           <div class="cmp-img">
             {%- if block.settings.image != blank -%}
               {{ block.settings.image | image_url: width: 1200 | image_tag:
-                 loading: 'lazy', widths: '600,900,1200', sizes: '(min-width: 760px) 50vw, 100vw',
+                 loading: 'lazy', widths: '600,900,1200', sizes: '(min-width: 760px) 33vw, 45vw',
                  alt: block.settings.image_alt | escape }}
             {%- endif -%}
           </div>
-          <span class="lp-head-eyebrow" style="color: {% if is_drye == 'positive' %}var(--emerald){% else %}var(--muted){% endif %}">{{ block.settings.eyebrow }}</span>
+        </div>
+        {%- if forloop.index == 1 -%}
+          <div class="cmp-arrow-mid" aria-hidden="true">
+            <svg viewBox="0 0 40 200" preserveAspectRatio="none" style="display: block; width: 100%; height: 100%">
+              <defs><linearGradient id="cmpArrowFade-{{ section.id }}" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="var(--deep)" stop-opacity="0"></stop><stop offset="0.5" stop-color="var(--deep)" stop-opacity="0.9"></stop><stop offset="1" stop-color="var(--deep)" stop-opacity="0"></stop></linearGradient></defs>
+              <path d="M8 18 L34 100 L8 182 Z" fill="url(#cmpArrowFade-{{ section.id }})"></path>
+            </svg>
+          </div>
+          <div class="cmp-b-tint" aria-hidden="true"></div>
+        {%- endif -%}
+      {%- endfor -%}
+
+      {%- for block in section.blocks -%}
+        {%- assign is_b = false -%}
+        {%- if forloop.index == 2 -%}{%- assign is_b = true -%}{%- endif -%}
+        <div class="{% if is_b %}cmp-b-body{% else %}cmp-a-body{% endif %}">
+          <span class="lp-head-eyebrow" style="color: {% if is_b %}var(--emerald){% else %}var(--muted){% endif %}">{{ block.settings.eyebrow }}</span>
           <h3 class="lp-head-title" style="color: var(--deep)">{{ block.settings.title }}</h3>
           <ul class="cmp-list">
             {%- assign items = block.settings.items | newline_to_br | split: '<br />' -%}
@@ -40,7 +66,11 @@
               {%- assign line = item | strip -%}
               {%- if line != blank -%}
                 <li>
-                  <span class="lp-mark" style="color: {% if is_drye == 'positive' %}var(--emerald){% else %}var(--red){% endif %}">{% if is_drye == 'positive' %}&#8594;{% else %}&#10005;{% endif %}</span>
+                  {%- if is_b -%}
+                    <span class="cmp-check">&#10003;</span>
+                  {%- else -%}
+                    <span class="lp-mark" style="color: var(--red)">&#10005;</span>
+                  {%- endif -%}
                   <span style="color: var(--body); text-wrap: pretty">{{ line }}</span>
                 </li>
               {%- endif -%}
@@ -49,31 +79,54 @@
         </div>
       {%- endfor -%}
     </div>
+
+    {%- if section.settings.rr_heading != blank -%}
+      <div class="cmp-risk-reversal">
+        <div class="cmp-risk-reversal__inner">
+          <div class="cmp-risk-reversal__wrap">
+            <div class="cmp-risk-reversal__badge"><span class="cmp-risk-reversal__num">{{ section.settings.rr_days }}</span><span class="cmp-risk-reversal__word">{{ section.settings.rr_days_label }}</span></div>
+            <div class="cmp-risk-reversal__copy">
+              <h3>{{ section.settings.rr_heading }}</h3>
+              <p>{{ section.settings.rr_body }}</p>
+            </div>
+          </div>
+          <div class="cmp-risk-reversal__cta-wrap">
+            <a class="dryeNEW-btn dryeNEW-btn--primary" href="{{ section.settings.rr_cta_url | default: '#' }}">{{ section.settings.rr_cta_label }}</a>
+          </div>
+          {%- if section.settings.rr_guarantee != blank -%}
+            <p class="cmp-risk-reversal__guarantee">{{ section.settings.rr_guarantee }}</p>
+          {%- endif -%}
+        </div>
+      </div>
+    {%- endif -%}
   </div>
 </section>
 
 {% schema %}
 {
-  "name": "DRYE NT — Inside glove",
+  "name": "DRYE NT — Inside the glove",
   "tag": "section",
   "class": "shopify-section-drye-nt-inside",
   "settings": [
     { "type": "text", "id": "chapter", "label": "Chapter number", "default": "05" },
     { "type": "textarea", "id": "heading", "label": "Heading", "default": "Keep the protection. Change what happens inside it." },
-    { "type": "textarea", "id": "body", "label": "Body", "default": "DRYE adds a 0.4 mm textile layer between your skin and the same protective glove." }
+    { "type": "textarea", "id": "body", "label": "Body", "default": "DRYE adds a 0.4 mm textile layer between your skin and the same protective glove." },
+    { "type": "header", "content": "Risk-reversal CTA" },
+    { "type": "text", "id": "rr_days", "label": "Badge number", "default": "30" },
+    { "type": "text", "id": "rr_days_label", "label": "Badge word", "default": "Days" },
+    { "type": "text", "id": "rr_heading", "label": "Heading", "default": "Try it risk-free." },
+    { "type": "textarea", "id": "rr_body", "label": "Body", "default": "If DRYE Liner doesn't change your shift, full refund. No hassle." },
+    { "type": "text", "id": "rr_cta_label", "label": "Button label", "default": "Shop the DRYE Liner" },
+    { "type": "url", "id": "rr_cta_url", "label": "Button link" },
+    { "type": "text", "id": "rr_guarantee", "label": "Guarantee line", "default": "0.4mm washable liner · Engineered in Sweden · 30-day refund" }
   ],
   "blocks": [
     {
       "type": "column",
       "name": "Column",
       "settings": [
-        { "type": "image_picker", "id": "image", "label": "Image" },
+        { "type": "image_picker", "id": "image", "label": "Image (portrait, ~9:16)" },
         { "type": "text", "id": "image_alt", "label": "Image alt text" },
-        { "type": "select", "id": "tone", "label": "Tone", "default": "negative",
-          "options": [
-            { "value": "negative", "label": "Negative (red crosses)" },
-            { "value": "positive", "label": "Positive (emerald arrows)" }
-          ] },
         { "type": "text", "id": "eyebrow", "label": "Eyebrow" },
         { "type": "textarea", "id": "title", "label": "Title" },
         { "type": "textarea", "id": "items", "label": "List items", "info": "One per line." }
@@ -83,15 +136,15 @@
   "max_blocks": 2,
   "presets": [
     {
-      "name": "DRYE NT — Inside glove",
+      "name": "DRYE NT — Inside the glove",
       "blocks": [
         { "type": "column", "settings": {
-          "tone": "negative", "eyebrow": "Nitrile alone",
+          "eyebrow": "Nitrile alone",
           "image_alt": "Bare hand in a black nitrile glove, mid-shift",
           "title": "Protection outside. Trapped moisture inside.",
           "items": "Heat and sweat remain against the skin\nDirect skin-to-glove contact\nWet hands make glove changes harder" } },
         { "type": "column", "settings": {
-          "tone": "positive", "eyebrow": "Nitrile + DRYE",
+          "eyebrow": "Nitrile + DRYE",
           "image_alt": "DRYE liner visible at the cuff under a nitrile glove",
           "title": "The same outer glove. A better-managed inside.",
           "items": "The same protective nitrile glove outside\nA textile layer between skin and nitrile\nMoisture routed away from the skin-facing layer\nDrier-feeling hands and easier glove changes" } }

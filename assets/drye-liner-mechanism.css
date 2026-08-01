@@ -15,7 +15,7 @@
   margin-bottom: var(--space-8);
 }
 
-.drye-liner-mechanism__heading {
+.drye-liner-mechanism__heading { text-align: center;
   font-size: clamp(20px, 5.5vw, 26px);
   font-weight: var(--fw-semibold);
   letter-spacing: -0.03em;
@@ -35,7 +35,6 @@
 
 .drye-liner-mechanism__vs-block {
   margin-top: var(--space-20);
-  margin-bottom: var(--space-24);
 }
 
 .drye-liner-mechanism__vs-label {
@@ -135,66 +134,8 @@
 }
 
 .drye-liner-mechanism__vs-card--drye .drye-liner-mechanism__vs-desc {
-  color: var(--white-085);
+  color: rgba(255, 255, 255, 0.85);
   font-weight: var(--fw-medium);
-}
-
-/* Asymmetric layering explainer */
-
-.drye-liner-mechanism__diagram {
-  border-top: 1px solid var(--white-008);
-  padding-top: var(--space-24);
-  margin-top: var(--space-8);
-}
-
-.drye-liner-mechanism__diagram-label {
-  font-family: var(--font-body);
-  font-size: var(--fs-micro-2);
-  font-weight: 700;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  color: var(--sage);
-  margin-bottom: var(--space-12);
-  text-align: center;
-}
-
-.drye-liner-mechanism__step {
-  padding: var(--space-14) 0;
-}
-
-.drye-liner-mechanism__step-label {
-  font-family: var(--font-body);
-  font-size: var(--fs-micro-2);
-  font-weight: 700;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--sage);
-  margin-bottom: var(--space-4);
-}
-
-.drye-liner-mechanism__step-title {
-  font-family: var(--font-display);
-  font-size: 17px;
-  font-weight: var(--fw-semibold);
-  color: var(--white-100);
-  letter-spacing: -0.02em;
-  margin-bottom: var(--space-4);
-}
-
-.drye-liner-mechanism__step-body {
-  margin: 0;
-  font-family: var(--font-body);
-  font-size: 13px;
-  color: #C8D4DA;
-  line-height: 1.5;
-}
-
-.drye-liner-mechanism__arrow {
-  text-align: center;
-  color: var(--emerald);
-  font-size: 20px;
-  padding: var(--space-6) 0;
-  opacity: 0.7;
 }
 
 @media (min-width: 768px) {
@@ -202,12 +143,8 @@
     padding-block: 88px;
   }
 
-  .drye-liner-mechanism__heading {
+  .drye-liner-mechanism__heading { text-align: center;
     font-size: var(--fs-section-h2);
-  }
-
-  .drye-liner-mechanism__step-title {
-    font-size: var(--fs-sub-h3);
   }
 
   .drye-liner-mechanism__inner {
@@ -238,19 +175,40 @@
   .drye-liner-mechanism__vs-body {
     padding: 20px;
   }
+}
 
-  .drye-liner-mechanism__diagram {
-    max-width: 640px;
-    margin: 24px auto 0;
-    padding-top: 32px;
-    text-align: left;
-  }
-
-  .drye-liner-mechanism__diagram-label {
-    text-align: center;
-  }
-
-  .drye-liner-mechanism__step {
-    padding: 20px 0;
-  }
+/* --- comparison step lists ---------------------------------------------- */
+.drye-liner-mechanism__steps {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.drye-liner-mechanism__step {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  font-family: var(--font-body);
+  font-size: 15px;
+  line-height: 1.5;
+}
+.drye-liner-mechanism__step-icon {
+  flex: 0 0 auto;
+  width: 15px;
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 1.5;
+  color: var(--red);
+}
+.drye-liner-mechanism__vs-card--drye .drye-liner-mechanism__step-icon {
+  color: var(--emerald);
+}
+.drye-liner-mechanism__step-text {
+  color: rgba(255, 255, 255, 0.82);
+  text-wrap: pretty;
+}
+.drye-liner-mechanism__vs-card--drye .drye-liner-mechanism__step-text {
+  color: rgba(255, 255, 255, 0.92);
 }

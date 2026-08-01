@@ -10,13 +10,13 @@
 .hero-h1 { margin: 0 0 12px; font-family: var(--font-display); font-weight: 600; font-size: clamp(27px, 8vw, 34px); letter-spacing: -0.025em; line-height: 1.12; color: #ffffff; text-wrap: pretty; }
 .hero-sub { margin: 0; font-size: clamp(15px, 3.9vw, 19px); line-height: 1.5; color: rgba(255,255,255,0.86); text-wrap: pretty; }
 
-.rev-bar { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 14px; padding: 16px 0; border-bottom: 1px solid var(--border); }
+.rev-bar { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 14px; padding: 16px 0; border-bottom: 1px solid var(--border); }
 .stars { color: var(--emerald); font-size: 13px; letter-spacing: 2px; }
 .rev-score { font-size: 14px; font-weight: 600; color: var(--deep); white-space: nowrap; }
-.rev-rot { position: relative; flex: 1 1 260px; min-height: 44px; }
-.rev-slide { position: absolute; inset: 0; display: flex; align-items: center; justify-content: flex-start; font-size: 14px; line-height: 1.45; color: var(--muted); opacity: 0; transition: opacity 0.5s ease; }
+.rev-rot { position: relative; flex: 1 1 260px; min-height: 74px; }
+.rev-slide { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: flex-start; justify-content: center; gap: 2px; font-size: 14px; line-height: 1.45; color: var(--muted); opacity: 0; transition: opacity 0.5s ease; }
 .rev-slide[data-on="1"] { opacity: 1; }
-.rev-slide b { flex: 0 0 auto; margin-left: 8px; font-weight: 600; color: var(--deep); white-space: nowrap; }
+.rev-slide b { flex: 0 0 auto; margin-left: 0; font-weight: 600; color: var(--deep); white-space: nowrap; }
 .rev-dots { display: flex; gap: 7px; align-items: center; }
 .rev-dot { width: 7px; height: 7px; padding: 0; border: 0; border-radius: 50%; background: var(--border); cursor: pointer; }
 .rev-dot[data-on="1"] { background: var(--emerald); }

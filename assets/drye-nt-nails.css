@@ -1,71 +1,15 @@
-/* drye-nt-nails.css — type scale from drye-nt-base.css */
+/* drye-nt-nails.css */
 .drye-nt-nails { border-top: 1px solid var(--border); }
-
-.nail-sub {
-  margin: 10px 0 0;
-  font-size: var(--fs-body);      /* var: 17px → 16px */
-  line-height: var(--lh-body);    /* var: 1.55 → 1.5 */
-  color: var(--body);
-  text-wrap: pretty;
-}
-
-/* Mobile: two hairline rows, icon left — compact */
-.nail-grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  margin-top: 24px;
-  border-top: 1px solid var(--border);
-}
-
-.nail-item {
-  display: grid;
-  grid-template-columns: 44px 1fr;
-  column-gap: 16px;
-  align-items: start;
-  padding: 18px 0;
-  border-bottom: 1px solid var(--border);
-}
-
-.nail-ico { margin: 0; }
-.nail-ico svg { display: block; width: 44px; height: 44px; }
-.nail-ico svg g { stroke-width: 2; }
-
-.nail-copy { display: flex; flex-direction: column; min-width: 0; }
-.nail-copy .lp-head-eyebrow { margin-bottom: 6px; font-size: 11px; letter-spacing: 0.16em; }
-.nail-copy .lp-head-title { margin: 0; }
-
-.nail-sum {
-  margin: 6px 0 0;
-  font-size: var(--fs-body-sm);   /* var: 17px → 14px */
-  line-height: var(--lh-body);
-  color: var(--muted);            /* var: var(--body) */
-  text-wrap: pretty;
-}
-
-.nail-grid .cmp-list { display: none; }
-
-/* Desktop: original two-column layout with bullet lists */
+.nail-rows { margin-top: 28px; border-top: 1px solid var(--border); }
+.nail-row { display: grid; grid-template-columns: 40px 1fr; column-gap: 16px; align-items: center; padding: 20px 0; border-bottom: 1px solid var(--border); }
+.nail-row svg { display: block; }
+.nail-row-tag { display: block; margin-bottom: 4px; font-size: 11px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; }
+.nail-row-title { margin: 0; font-family: var(--font-display); font-size: 17px; font-weight: 600; letter-spacing: -0.01em; line-height: 1.25; color: var(--deep); }
+.nail-row-desc { margin: 4px 0 0; font-size: 15px; line-height: 1.5; color: var(--muted); text-wrap: pretty; }
 @media (min-width: 760px) {
-  .nail-sub { font-size: 20px; margin-top: 14px; }
-
-  .nail-grid {
-    grid-template-columns: 1fr 1fr;
-    gap: 56px;
-    margin-top: 48px;
-    border-top: 0;
-  }
-
-  .nail-item {
-    display: block;
-    padding: 0;
-    border-bottom: 0;
-  }
-
-  .nail-ico { margin-bottom: 22px; }
-  .nail-ico svg { width: 52px; height: 52px; }
-  .nail-ico svg g { stroke-width: 1.6; }
-
-  .nail-copy { display: block; }
-  .nail-sum { display: none; }
-  .nail-grid .cmp-list { display: block; }
+  .nail-rows { display: grid; grid-template-columns: 1fr 1fr; column-gap: 56px; row-gap: 0; margin-top: 48px; border-top: none; }
+  .nail-row { display: flex; flex-direction: column; align-items: flex-start; gap: 14px; padding: 0; border-bottom: none; }
+  .nail-row svg { width: 52px; height: 52px; }
+  .nail-row-title { font-size: 20px; }
+  .nail-row-desc { font-size: 16px; }
 }

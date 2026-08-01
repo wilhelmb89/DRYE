@@ -22,10 +22,38 @@
       </div>
 
       <div class="mech-full">
-        <div class="gann">
-          <div class="ga ga--start" style="left: var(--x-d3)"><i class="ga-arw"><svg viewBox="0 0 28 15" width="24" height="13" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 7.5 H23"></path><path d="M18 3 L24 7.5 L18 12"></path></svg></i><div class="ga-txt"><span>{{ section.settings.row_1_label }}</span>{{ section.settings.row_1_sub }}</div></div>
-          <div class="ga ga--end" style="left: var(--x-d14)"><i class="ga-arw" style="color: var(--red)"><svg viewBox="0 0 28 15" width="24" height="13" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 7.5 H23"></path><path d="M18 3 L24 7.5 L18 12"></path></svg></i><div class="ga-txt"><span style="color: var(--red)">{{ section.settings.row_2_label }}</span>{{ section.settings.row_2_sub }}</div></div>
-          <div class="ga" style="left: var(--x-d3)"><i class="ga-arw" style="color: var(--red)"><svg viewBox="0 0 28 15" width="24" height="13" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 7.5 H23"></path><path d="M18 3 L24 7.5 L18 12"></path></svg></i><div class="ga-txt"><span style="color: var(--red)">{{ section.settings.row_3_label }}</span>{{ section.settings.row_3_sub }}</div></div>
+        <div class="bsp">
+          {%- assign s1 = section.settings.row_1_sub | split: '·' -%}
+          {%- assign s2 = section.settings.row_2_sub | split: '·' -%}
+          {%- assign s3 = section.settings.row_3_sub | split: '·' -%}
+          <div class="bsp-card">
+            <div class="bsp-head">
+              <p class="bsp-aud">{{ section.settings.aud_1 }}</p>
+              <p class="bsp-sum">{{ section.settings.sum_1 }}</p>
+            </div>
+            <div class="bsp-track">
+              <span class="bsp-flag bsp-flag--sec" style="left: 25%"><b>{{ s1.last | strip }}<em> &middot; {{ section.settings.row_1_label }}</em></b><i></i></span>
+              <span class="bsp-flag bsp-flag--red bsp-flag--end"><b>{{ s2.last | strip }}<em> &middot; {{ section.settings.row_2_label }}</em></b><i></i></span>
+              <span class="bsp-bar"><i class="bsp-bar-red" style="left: 66%"></i></span>
+            </div>
+            <ul class="bsp-rows">
+              <li><b>{{ s1.last | strip }}</b><span>{{ section.settings.row_1_label }}</span></li>
+              <li class="is-red"><b>{{ s2.last | strip }}</b><span>{{ section.settings.row_2_label }}</span></li>
+            </ul>
+          </div>
+          <div class="bsp-card bsp-card--alert">
+            <div class="bsp-head">
+              <p class="bsp-aud">{{ section.settings.aud_2 }}</p>
+              <p class="bsp-sum">{{ section.settings.sum_2 }}</p>
+            </div>
+            <div class="bsp-track">
+              <span class="bsp-flag bsp-flag--red" style="left: 25%"><b>{{ s3.last | strip }}<em> &middot; {{ section.settings.row_3_label }}</em></b><i></i></span>
+              <span class="bsp-bar"><i class="bsp-bar-red" style="left: 25%"></i></span>
+            </div>
+            <ul class="bsp-rows">
+              <li class="is-red"><b>{{ s3.last | strip }}</b><span>{{ section.settings.row_3_label }}</span></li>
+            </ul>
+          </div>
         </div>
 
         <div class="dch dch--axis">
@@ -33,7 +61,8 @@
           <span class="dch-y" style="top: 53.2%">50%</span>
           <span class="dch-y" style="top: 89.7%">0%</span>
           <span class="dch-mz">{{ section.settings.risk_label }}</span>
-          <svg viewBox="36 0 444 156" role="img" aria-label="Overhydration in the skin climbing across two weeks of daily glove occlusion" style="display: block; width: 100%; height: auto">
+          <div class="bplot">
+          <svg viewBox="40 0 428 156" role="img" aria-label="Overhydration in the skin climbing across two weeks of daily glove occlusion" style="display: block; width: 100%; height: auto">
             <defs>
               <clipPath id="ntWipeB-{{ section.id }}"><rect class="g-wipe" x="40" y="0" width="430" height="160"></rect></clipPath>
               <linearGradient id="ntSkinStroke-{{ section.id }}" x1="40" y1="0" x2="468" y2="0" gradientUnits="userSpaceOnUse">
@@ -57,6 +86,23 @@
               <circle cx="414" cy="45" r="3.4" fill="#EF4444"></circle>
             </g>
           </svg>
+
+            <div class="bcall bcall--irr" style="left: 24.1%; top: 51.3%">
+              <i></i>
+              <div class="bcall-txt">
+                <p class="bcall-aud">{{ section.settings.aud_2 }}</p>
+                <p class="bcall-sub">{{ section.settings.call_2 }}</p>
+              </div>
+            </div>
+
+            <div class="bcall bcall--ok" style="left: 87.4%; top: 28.8%">
+              <i></i>
+              <div class="bcall-txt">
+                <p class="bcall-aud">{{ section.settings.aud_1 }}</p>
+                <p class="bcall-sub">{{ section.settings.call_1 }}</p>
+              </div>
+            </div>
+          </div>
         </div>
 
         <div class="dday">
@@ -65,6 +111,10 @@
           <span style="left: var(--x-d7)">{{ section.settings.day_3 }}</span>
           <span style="left: var(--x-d14); align-items: flex-end; transform: translateX(-100%); color: var(--red)">{{ section.settings.day_4 }}</span>
         </div>
+
+        {%- if section.settings.heading != blank -%}
+          <p class="bsp-stmt">{{ section.settings.heading }}</p>
+        {%- endif -%}
 
         {%- if section.settings.source != blank -%}
           <p class="mech-note">{{ section.settings.source }}</p>
@@ -83,6 +133,12 @@
     { "type": "text", "id": "chapter", "label": "Chapter number", "default": "04" },
     { "type": "textarea", "id": "heading", "label": "Heading", "default": "Why trapped moisture ruins your skin and nails over time." },
     { "type": "header", "content": "Annotation rows" },
+    { "type": "text", "id": "aud_1", "label": "Audience 1", "default": "Healthy skin" },
+    { "type": "text", "id": "aud_2", "label": "Audience 2", "default": "Already irritated skin" },
+    { "type": "text", "id": "sum_1", "label": "Audience 1 verdict (desktop)", "default": "Holds, then gives way" },
+    { "type": "text", "id": "sum_2", "label": "Audience 2 verdict (desktop)", "default": "Gone by day 3" },
+    { "type": "text", "id": "call_1", "label": "Audience 1 in-chart line", "default": "No change at day 3 — impairment by day 14" },
+    { "type": "text", "id": "call_2", "label": "Audience 2 in-chart line", "default": "Significant barrier impairment — day 3" },
     { "type": "text", "id": "row_1_label", "label": "Row 1 label", "default": "No significant barrier change" },
     { "type": "text", "id": "row_1_sub", "label": "Row 1 sub", "default": "Healthy skin · day 3" },
     { "type": "text", "id": "row_2_label", "label": "Row 2 label", "default": "Significant barrier impairment" },
