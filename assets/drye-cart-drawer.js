@@ -52,6 +52,7 @@
   var sizesOpen = true;  // "Adjust your sizes" open by default
   var syncing = false;
   var syncTimer = null;
+  var dirty = 0; // bumps on every user action; guards the sync from clobbering newer intent
 
   function money(cents) {
     // Market-aware: format in the CART's currency (cart.js `currency`), never
@@ -209,13 +210,13 @@
   function stepPack(dir) {
     if (dir > 0) { if (pairs.length >= 6) return; pairs.push(DEFAULT_SIZE); }
     else { if (pairs.length <= 1) return; pairs.pop(); }
-    render(); scheduleSync();
+    dirty++; render(); scheduleSync();
   }
   function setPack(target) {
     target = Math.max(1, Math.min(6, target));
     while (pairs.length < target) pairs.push(DEFAULT_SIZE);
     while (pairs.length > target) pairs.pop();
-    render(); scheduleSync();
+    dirty++; render(); scheduleSync();
   }
   function stepPairSize(index, dir) {
     var cur = pairs[index];
@@ -224,7 +225,7 @@
     var ni = Math.max(0, Math.min(SIZE_ORDER.length - 1, i + dir));
     if (ni === i) return;
     pairs[index] = SIZE_ORDER[ni];
-    render(); scheduleSync();
+    dirty++; render(); scheduleSync();
   }
 
   // ---- sync: reconcile server cart to the optimistic `pairs` multiset ----
@@ -236,6 +237,7 @@
     syncTimer = null;
     if (syncing) { scheduleSync(); return; } // a sync is mid-flight — retry after it settles
     syncing = true;
+    var startDirty = dirty; // snapshot: did the user change anything WHILE we synced?
 
     try {
       var target = {}; // variantId -> desired count
@@ -258,14 +260,18 @@
       }
 
       priceCart = await fetchCart();
-      reconcilePairs(priceCart);
+      // Only adopt the server's pair list if the user did NOT tap during the
+      // sync. Otherwise `pairs` already holds newer intent — don't clobber it
+      // (this was the "can't go backward" bug: a slow sync overwrote a fresh −).
+      if (dirty === startDirty) reconcilePairs(priceCart);
     } catch (e) {
       console.warn('[DRYE cart sync]', e);
     }
     syncing = false;
     render();
-    // taps that landed during the sync may have changed `pairs` again
-    if (pairCountOf(priceCart) !== pairs.length) scheduleSync();
+    // Re-sync if the user changed things mid-flight, or the server still
+    // doesn't match the desired pair count.
+    if (dirty !== startDirty || pairCountOf(priceCart) !== pairs.length) scheduleSync();
   }
 
   function sameMultiset(a, b) {

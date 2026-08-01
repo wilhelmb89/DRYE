@@ -504,12 +504,16 @@ assign review_count = section.settings.review_count_fallback
                   <span class="pack__name">{{ block.settings.name }}</span>
                   <span class="pack__desc">{{ block.settings.subtitle }}</span>
                 </span>
+                {%- assign pack_full = selected_variant.price | times: block.settings.pairs -%}
+                {%- assign pack_keep = 100 | minus: block.settings.discount_percent -%}
+                {%- assign pack_total = pack_full | times: pack_keep | divided_by: 100 -%}
+                {%- assign pack_saved = pack_full | minus: pack_total -%}
                 <span class="pack__price">
-                  <span class="pack__total">{% if block.settings.total_price != blank %}{{ block.settings.total_price }}{% else %}{{ selected_variant.price | times: block.settings.pairs | money }}{% endif %}</span>
+                  <span class="pack__total">{% if block.settings.total_price != blank %}{{ block.settings.total_price }}{% else %}{{ pack_total | money }}{% endif %}</span>
                   {%- if block.settings.save_label != blank -%}
                     <span class="pack__save-inline">{{ block.settings.save_label }}</span>
-                  {%- elsif block.settings.discount_percent > 0 -%}
-                    <span class="pack__save-inline">Save {{ selected_variant.price | times: block.settings.pairs | times: block.settings.discount_percent | divided_by: 100 | money }}</span>
+                  {%- elsif pack_saved > 0 -%}
+                    <span class="pack__save-inline">Save {{ pack_saved | money }}</span>
                   {%- endif -%}
                 </span>
                 {% if block.settings.badge != blank %}<span class="pack__badge">{{ block.settings.badge }}</span>{% endif %}
