@@ -83,9 +83,17 @@
   function closeDrawer() { if (overlay) overlay.classList.remove('is-open'); if (drawer) drawer.classList.remove('is-open'); if (openBtn) openBtn.hidden = false; }
 
   // ---- Ajax ----
-  async function fetchCart() { var r = await fetch('/cart.js', { headers: { 'Accept': 'application/json' } }); return r.json(); }
+  // Prefix every cart route with Shopify.routes.root so operations hit the
+  // BUYER'S MARKET cart (e.g. /en-us/cart.js), not the default-market cart —
+  // that mismatch made a US buyer's drawer show SEK while the PDP showed USD.
+  function cartUrl(path) {
+    var root = (window.Shopify && window.Shopify.routes && window.Shopify.routes.root) || '/';
+    if (root.charAt(root.length - 1) !== '/') root += '/';
+    return root + String(path).replace(/^\/+/, '');
+  }
+  async function fetchCart() { var r = await fetch(cartUrl('cart.js'), { headers: { 'Accept': 'application/json' } }); return r.json(); }
   async function changeLineQty(key, qty) {
-    var r = await fetch('/cart/change.js', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ id: key, quantity: qty }) });
+    var r = await fetch(cartUrl('cart/change.js'), { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ id: key, quantity: qty }) });
     return r.json();
   }
   var pairSeq = 0;
@@ -93,7 +101,7 @@
   async function addPairs(variantId, count) {
     var items = [];
     for (var i = 0; i < count; i++) items.push({ id: variantId, quantity: 1, properties: pairProps() });
-    var r = await fetch('/cart/add.js', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ items: items }) });
+    var r = await fetch(cartUrl('cart/add.js'), { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ items: items }) });
     return r.json();
   }
 
