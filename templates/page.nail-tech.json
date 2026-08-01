@@ -1,3 +1,12 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "nt_hero": {
@@ -277,29 +286,28 @@
         "heading": "POV: You're stuck in the nail tech advice loop."
       }
     },
-    "nt_barrier": {
-      "type": "drye-nt-barrier",
+    "drye_nt_barrier_choice_g6KFyg": {
+      "type": "drye-nt-barrier-choice",
+      "name": "DRYE NT — Barrier choice",
       "settings": {
         "chapter": "04",
-        "heading": "Why trapped moisture ruins your skin and nails over time.",
-        "aud_1": "Healthy skin",
-        "aud_2": "Already irritated skin",
-        "sum_1": "Holds, then gives way",
-        "sum_2": "Gone by day 3",
-        "call_1": "No change at day 3 — impairment by day 14",
-        "call_2": "Significant barrier impairment — day 3",
-        "row_1_label": "No significant barrier change",
-        "row_1_sub": "Healthy skin · day 3",
-        "row_2_label": "Significant barrier impairment",
-        "row_2_sub": "Healthy skin · day 14",
-        "row_3_label": "Significant barrier impairment",
-        "row_3_sub": "Already irritated skin · day 3",
+        "heading": "Why your skin and nails get worse inside gloves over time.",
+        "pick_label": "Choose your starting point",
+        "btn_healthy": "My skin feels fine",
+        "btn_damaged": "My skin is already irritated",
+        "exposure": "Under glove 6 hours/day",
         "risk_label": "Maceration risk rises",
+        "chart_alt": "Stylised overhydration in the skin across two weeks of daily glove occlusion",
         "day_1": "Day 1",
         "day_2": "Day 3",
         "day_3": "Day 7",
         "day_4": "Day 14",
-        "source": "Source: Ramsing & Agner, Contact Dermatitis 1996 — occlusive glove use, 6 h/day; and Tiedemann et al., Contact Dermatitis 2016 — occlusion on experimentally irritated skin."
+        "aud_healthy": "Healthy skin",
+        "healthy_d3": "No significant barrier change",
+        "healthy_d14": "Significant barrier impairment",
+        "aud_damaged": "Already irritated skin",
+        "damaged_d3": "Significant barrier impairment",
+        "source": "Sources: Ramsing & Agner, Contact Dermatitis, 1996 — short- and long-term experimental glove occlusion."
       }
     },
     "nt_nails": {
@@ -392,8 +400,13 @@
     "nt_close": {
       "type": "drye-nt-close",
       "settings": {
+        "days": "30",
+        "days_label": "Days",
+        "heading": "Try it risk-free.",
+        "body": "If DRYE Liner doesn't change your shift, full refund. No hassle.",
         "cta_label": "See what it's made of",
         "cta_url": "",
+        "guarantee": "30-Day Money Back Guarantee",
         "sources": "Park & Lee 2025 · Warner, Stone & Boissy, J Invest Dermatol 2003 · Gunt & Kasting, Int J Pharm 2007 · Nogueira et al., Thermochim Acta 2009 · Repeated-occlusion reference pending verification"
       }
     },
@@ -431,214 +444,6 @@
         "heading": "Keep the protection. Change what happens inside it.",
         "body": "DRYE adds a 0.4 mm textile layer between your skin and the same protective glove."
       }
-    },
-    "nt_pro_reviews": {
-      "type": "drye-nt-pro-reviews",
-      "blocks": {
-        "prorev_1": {
-          "type": "review",
-          "settings": {
-            "name": "Elin R",
-            "role": "Nail Tech · Stockholm",
-            "quote": "By client four my hands still feel dry. I'm not fighting wet gloves anymore."
-          }
-        },
-        "prorev_2": {
-          "type": "review",
-          "settings": {
-            "name": "Marcus T",
-            "role": "Barber · Malmö",
-            "quote": "Clippers running non-stop, eight cuts a day. My palms used to be soaked by lunch."
-          }
-        },
-        "prorev_3": {
-          "type": "review",
-          "settings": {
-            "name": "Ayesha K",
-            "role": "Colorist · Gothenburg",
-            "quote": "Hours in gloves mixing color. DRYE is thin enough that I still feel what I'm doing."
-          }
-        },
-        "prorev_4": {
-          "type": "review",
-          "settings": {
-            "name": "Nadia S",
-            "role": "Nail Tech & Salon Owner · Copenhagen",
-            "quote": "I recommend it to every tech in my salon now. Fewer breaks just to dry off."
-          }
-        },
-        "prorev_5": {
-          "type": "review",
-          "settings": {
-            "name": "Oskar L",
-            "role": "Hairstylist · Oslo",
-            "quote": "Gloves used to split by the third client. Haven't had one tear since I switched."
-          }
-        },
-        "prorev_6": {
-          "type": "review",
-          "settings": {
-            "name": "Priya M",
-            "role": "Nail Tech · London",
-            "quote": "My hands used to smell by 5pm. That's just gone now."
-          }
-        },
-        "prorev_7": {
-          "type": "review",
-          "settings": {
-            "name": "Freja B",
-            "role": "Session Stylist · Stockholm",
-            "quote": "Long days on set, gloves on the whole time. First liner that doesn't just get soggy."
-          }
-        }
-      },
-      "block_order": [
-        "prorev_1",
-        "prorev_2",
-        "prorev_3",
-        "prorev_4",
-        "prorev_5",
-        "prorev_6",
-        "prorev_7"
-      ],
-      "settings": {}
-    },
-    "nt_trust_badges": {
-      "type": "drye-nt-trust-badges",
-      "blocks": {
-        "trust_1": {
-          "type": "trustpilot",
-          "settings": {
-            "score": "4.4/5",
-            "count": "10 reviews"
-          }
-        },
-        "trust_2": {
-          "type": "award"
-        },
-        "trust_3": {
-          "type": "stars",
-          "settings": {
-            "score": "4.85/5",
-            "count": "47 reviews"
-          }
-        }
-      },
-      "block_order": [
-        "trust_1",
-        "trust_2",
-        "trust_3"
-      ],
-      "settings": {}
-    },
-    "nt_validation": {
-      "type": "drye-nt-validation",
-      "blocks": {
-        "valid_1": {
-          "type": "institution",
-          "settings": {
-            "initial": "R",
-            "name": "RISE Research Institutes of Sweden",
-            "role": "Independent materials & textile validation"
-          }
-        },
-        "valid_2": {
-          "type": "institution",
-          "settings": {
-            "initial": "U",
-            "name": "Uppsala University",
-            "role": "Clinical conditions & dermatological impact"
-          }
-        },
-        "valid_3": {
-          "type": "institution",
-          "settings": {
-            "initial": "S",
-            "name": "Swedish School of Textiles",
-            "role": "Textile engineering & structural analysis"
-          }
-        },
-        "valid_4": {
-          "type": "logo",
-          "settings": {
-            "name": "Almi"
-          }
-        },
-        "valid_5": {
-          "type": "logo",
-          "settings": {
-            "name": "Borås INK"
-          }
-        },
-        "valid_6": {
-          "type": "logo",
-          "settings": {
-            "name": "Skånes universitetssjukhus",
-            "large": true
-          }
-        },
-        "valid_7": {
-          "type": "logo",
-          "settings": {
-            "name": "Wargön Innovation"
-          }
-        },
-        "valid_8": {
-          "type": "logo",
-          "settings": {
-            "name": "Södertälje Science Park"
-          }
-        },
-        "valid_9": {
-          "type": "logo",
-          "settings": {
-            "name": "The Swedish School of Textiles",
-            "large": true
-          }
-        },
-        "valid_10": {
-          "type": "logo",
-          "settings": {
-            "name": "Uminova Innovation"
-          }
-        },
-        "valid_11": {
-          "type": "logo",
-          "settings": {
-            "name": "Vinnova"
-          }
-        },
-        "valid_12": {
-          "type": "logo",
-          "settings": {
-            "name": "Uppsala Innovation Centre",
-            "large": true
-          }
-        },
-        "valid_13": {
-          "type": "logo",
-          "settings": {
-            "name": "Uppsala Universitet",
-            "large": true
-          }
-        }
-      },
-      "block_order": [
-        "valid_1",
-        "valid_2",
-        "valid_3",
-        "valid_4",
-        "valid_5",
-        "valid_6",
-        "valid_7",
-        "valid_8",
-        "valid_9",
-        "valid_10",
-        "valid_11",
-        "valid_12",
-        "valid_13"
-      ],
-      "settings": {}
     }
   },
   "order": [
@@ -647,15 +452,12 @@
     "nt_trapped",
     "nt_tradeoff",
     "nt_loop",
-    "nt_barrier",
-    "drye_nt_inside_h6WiEP",
+    "drye_nt_barrier_choice_g6KFyg",
     "nt_nails",
     "nt_cotton_q",
     "nt_mechanism",
     "nt_reviews",
-    "nt_pro_reviews",
-    "nt_trust_badges",
-    "nt_validation",
-    "nt_close"
+    "nt_close",
+    "drye_nt_inside_h6WiEP"
   ]
 }
