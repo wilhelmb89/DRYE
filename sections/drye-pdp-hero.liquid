@@ -495,15 +495,19 @@ assign review_count = section.settings.review_count_fallback
               {% if block.settings.is_best_value %}<span class="pack__ribbon">Best value</span>{% endif %}
               <button type="button" class="pack__btn">
                 <span class="pack__radio" aria-hidden="true"></span>
-                <span>
-                  <span class="pack__name">{{ block.settings.name }}{% if block.settings.badge != blank %} <span class="pack__badge">{{ block.settings.badge }}</span>{% endif %}</span>
+                <span class="pack__id">
+                  <span class="pack__name">{{ block.settings.name }}</span>
                   <span class="pack__desc">{{ block.settings.subtitle }}</span>
                 </span>
                 <span class="pack__price">
-                  {% if block.settings.save_label != blank %}<span class="pack__save-inline">{{ block.settings.save_label }}</span>{% endif %}
                   <span class="pack__total">{% if block.settings.total_price != blank %}{{ block.settings.total_price }}{% else %}{{ selected_variant.price | times: block.settings.pairs | money }}{% endif %}</span>
-                  <span class="pack__unit">{% if block.settings.unit_price != blank %}{{ block.settings.unit_price }}{% else %}{{ selected_variant.price | money }} / pair{% endif %}</span>
+                  {%- if block.settings.save_label != blank -%}
+                    <span class="pack__save-inline">{{ block.settings.save_label }}</span>
+                  {%- elsif block.settings.discount_percent > 0 -%}
+                    <span class="pack__save-inline">Save {{ selected_variant.price | times: block.settings.pairs | times: block.settings.discount_percent | divided_by: 100 | money }}</span>
+                  {%- endif -%}
                 </span>
+                {% if block.settings.badge != blank %}<span class="pack__badge">{{ block.settings.badge }}</span>{% endif %}
               </button>
               <div class="pack__panel"><div class="pack__inner">
                 {% assign feature_lines = block.settings.features | newline_to_br | split: '<br />' %}
@@ -594,6 +598,19 @@ assign review_count = section.settings.review_count_fallback
         <span>{{ section.settings.trust_text_3 }}</span>
       </div>
     </div>
+
+    {% comment %} Innovation award emblem (SKAPA) — sits between the trust row and the worker-proof ticker {% endcomment %}
+    {% if section.settings.skapa_line != blank or section.settings.skapa_logo != blank %}
+      {%- capture skapa_inner -%}
+        {% if section.settings.skapa_logo != blank %}<img class="drye-seal__skapa-logo" src="{{ section.settings.skapa_logo | image_url: width: 260 }}" alt="SKAPA" loading="lazy" width="{{ section.settings.skapa_logo.width }}" height="{{ section.settings.skapa_logo.height }}">{% else %}<img class="drye-seal__skapa-logo" src="https://cdn.shopify.com/s/files/1/0686/9581/8505/files/stiftelsen_skapa_cover.jpg?v=1784673270" alt="SKAPA" loading="lazy">{% endif %}
+        {% if section.settings.skapa_line != blank %}<span class="drye-seal__skapa-t">{{ section.settings.skapa_line }}</span>{% endif %}
+      {%- endcapture -%}
+      {% if section.settings.skapa_url != blank %}
+        <a class="drye-seal__skapa drye-skapa" href="{{ section.settings.skapa_url }}" target="_blank" rel="noopener">{{ skapa_inner }}</a>
+      {% else %}
+        <div class="drye-seal__skapa drye-skapa">{{ skapa_inner }}</div>
+      {% endif %}
+    {% endif %}
 
 
 {% comment %} Worker Proof — compact green proof line + sliding/expandable comment ticker {% endcomment %}
@@ -745,18 +762,6 @@ assign review_count = section.settings.review_count_fallback
         {% endif %}
       </div>
     </div>
-    {% endif %}
-
-    {% if section.settings.skapa_line != blank or section.settings.skapa_logo != blank %}
-      {%- capture skapa_inner -%}
-        {% if section.settings.skapa_logo != blank %}<img class="drye-seal__skapa-logo" src="{{ section.settings.skapa_logo | image_url: width: 260 }}" alt="SKAPA" loading="lazy" width="{{ section.settings.skapa_logo.width }}" height="{{ section.settings.skapa_logo.height }}">{% else %}<img class="drye-seal__skapa-logo" src="https://cdn.shopify.com/s/files/1/0686/9581/8505/files/stiftelsen_skapa_cover.jpg?v=1784673270" alt="SKAPA" loading="lazy">{% endif %}
-        {% if section.settings.skapa_line != blank %}<span class="drye-seal__skapa-t">{{ section.settings.skapa_line }}</span>{% endif %}
-      {%- endcapture -%}
-      {% if section.settings.skapa_url != blank %}
-        <a class="drye-seal__skapa drye-skapa" href="{{ section.settings.skapa_url }}" target="_blank" rel="noopener">{{ skapa_inner }}</a>
-      {% else %}
-        <div class="drye-seal__skapa drye-skapa">{{ skapa_inner }}</div>
-      {% endif %}
     {% endif %}
   </div>
 
@@ -2565,9 +2570,9 @@ wteTimelines.forEach((timeline) => {
         { "type": "text", "id": "name", "label": "Name", "default": "1 Pair · Starter Pair" },
         { "type": "text", "id": "subtitle", "label": "Subtitle", "default": "Try DRYE for one full shift" },
         { "type": "text", "id": "badge", "label": "Badge (optional)" },
-        { "type": "text", "id": "total_price", "label": "Total price (display)", "default": "349 kr" },
-        { "type": "text", "id": "unit_price", "label": "Unit price (display)", "default": "349 kr / pair" },
-        { "type": "text", "id": "save_label", "label": "Save label (optional)" },
+        { "type": "text", "id": "total_price", "label": "Total price override (blank = auto from variant price)" },
+        { "type": "number", "id": "discount_percent", "label": "Discount % (match your Shopify automatic discount)", "default": 0 },
+        { "type": "text", "id": "save_label", "label": "Save label override (blank = auto from Discount %)" },
         { "type": "textarea", "id": "features", "label": "Feature list (one per line)", "default": "Test under your own gloves\nEconomy delivery: 10–20 business days\nDuties & taxes included\n30-day money-back guarantee" },
         { "type": "text", "id": "foot_headline", "label": "Footer band headline", "default": "Prove it on your next shift" },
         { "type": "text", "id": "foot_note", "label": "Footer band note", "default": "One pair. One real workday. Your own gloves." },
