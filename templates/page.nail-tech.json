@@ -1,3 +1,12 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "nt_hero": {
@@ -38,7 +47,14 @@
         "r3",
         "r4"
       ],
-      "settings": {}
+      "settings": {
+        "logo_text": "DRYE",
+        "hero_image": "shopify://shop_images/Gemini_Generated_Image_x4acmfx4acmfx4ac.webp",
+        "hero_image_alt": "Nail tech at her desk wearing black nitrile gloves over DRYE liners",
+        "heading": "Your nails are fine on Sunday. By Thursday they're splitting.",
+        "subheading": "Same nails. Same hands. The only variable is the four days in between.",
+        "rating_label": "4.4/5 · Trustpilot"
+      }
     },
     "nt_desk": {
       "type": "drye-nt-desk",
@@ -46,35 +62,82 @@
         "s1": {
           "type": "shot",
           "settings": {
-            "caption": "\"By client four, my gloves normally feel soaked.\"",
-            "image_alt": "Nail tech changing a nitrile glove between clients"
+            "image": "shopify://shop_images/Gemini_Generated_Image_i9zs57i9zs57i9zs.webp",
+            "image_alt": "Nail tech changing a nitrile glove between clients",
+            "caption": "\"By client four, my gloves normally feel soaked.\""
           }
         },
         "s2": {
           "type": "shot",
           "settings": {
-            "caption": "\"I can change nitrile gloves without fighting wet hands.\"",
-            "image_alt": "Her hands after several clients, gloves off"
+            "image": "shopify://shop_images/Gemini_Generated_Image_jrzu94jrzu94jrzu.webp",
+            "image_alt": "Her hands after several clients, gloves off",
+            "caption": "\"I can change nitrile gloves without fighting wet hands.\""
           }
         },
         "s3": {
           "type": "shot",
           "settings": {
-            "caption": "\"Thin enough to work in.\"",
-            "image_alt": "DRYE under the glove during real work at the desk"
+            "image": "shopify://shop_images/Gemini_Generated_Image_qcox7xqcox7xqcox.webp",
+            "image_alt": "DRYE under the glove during real work at the desk",
+            "caption": "\"Thin enough to work in.\""
+          }
+        },
+        "shot_nYDRpD": {
+          "type": "shot",
+          "settings": {
+            "image": "shopify://shop_images/Gemini_Generated_Image_u5lromu5lromu5lr.webp",
+            "image_alt": "Nail tech at work",
+            "caption": ""
+          }
+        },
+        "shot_wPDMne": {
+          "type": "shot",
+          "settings": {
+            "image": "shopify://shop_images/Gemini_Generated_Image_4kecos4kecos4kec.webp",
+            "image_alt": "Nail tech at work",
+            "caption": ""
           }
         }
       },
       "block_order": [
         "s1",
         "s2",
-        "s3"
+        "s3",
+        "shot_nYDRpD",
+        "shot_wPDMne"
       ],
-      "settings": {}
+      "settings": {
+        "chapter": "01",
+        "heading": "This is what it looks like at the desk.",
+        "swipe_label": "Swipa",
+        "prev_label": "Previous photos",
+        "next_label": "More photos",
+        "keep_label": "Keep reading",
+        "keep_target": "#drye-nt-trapped"
+      }
     },
     "nt_trapped": {
       "type": "drye-nt-trapped",
-      "settings": {}
+      "settings": {
+        "chapter": "02",
+        "glove_anno": "Your nitrile glove",
+        "trio_1": "Heat",
+        "trio_2": "Sweat",
+        "trio_3": "Bacteria",
+        "heading": "All trapped",
+        "chart_anno": "Monday morning",
+        "chart_title": "Humidity arises",
+        "new_glove_label": "New glove",
+        "client_1_label": "Client 1",
+        "client_2_label": "Client 2",
+        "client_3_label": "Client 3",
+        "client_4_label": "Client 4",
+        "time_1": "09:00",
+        "time_2": "10:30",
+        "time_3": "12:00",
+        "time_4": "13:30"
+      }
     },
     "nt_tradeoff": {
       "type": "drye-nt-tradeoff",
@@ -170,7 +233,10 @@
         "w10",
         "w11"
       ],
-      "settings": {}
+      "settings": {
+        "eyebrow": "One glove. Too many tradeoffs.",
+        "footer": "Keep the protection. Lose the tradeoff."
+      }
     },
     "nt_loop": {
       "type": "drye-nt-loop",
@@ -178,6 +244,7 @@
         "q1": {
           "type": "qa",
           "settings": {
+            "avatar": "shopify://shop_images/drye-avatar-1.webp",
             "question": "“I’ve got dermatitis. What should I do?”",
             "answer": "— Use thicker mils."
           }
@@ -185,6 +252,7 @@
         "q2": {
           "type": "qa",
           "settings": {
+            "avatar": "shopify://shop_images/drye-avatar-2.webp",
             "question": "“My hands smell disgusting by the end of the day. What do I do?”",
             "answer": "— Use powder."
           }
@@ -192,6 +260,7 @@
         "q3": {
           "type": "qa",
           "settings": {
+            "avatar": "shopify://shop_images/drye-avatar-4.webp",
             "question": "“I have problems with eczema. What should I do?”",
             "answer": "— Use cortisone."
           }
@@ -199,6 +268,7 @@
         "q4": {
           "type": "qa",
           "settings": {
+            "avatar": "shopify://shop_images/drye-avatar-3.webp",
             "question": "“I hate my sweaty gloves in summer. They keep splitting.”",
             "answer": "— Buy cheaper ones."
           }
@@ -210,53 +280,68 @@
         "q3",
         "q4"
       ],
-      "settings": {}
+      "settings": {
+        "chapter": "03",
+        "eyebrow": "The never-ending loop",
+        "heading": "POV: You're stuck in the nail tech advice loop."
+      }
     },
     "nt_barrier": {
       "type": "drye-nt-barrier",
-      "settings": {}
-    },
-    "nt_inside": {
-      "type": "drye-nt-inside",
-      "blocks": {
-        "c1": {
-          "type": "column",
-          "settings": {
-            "tone": "negative",
-            "eyebrow": "Nitrile alone",
-            "image_alt": "Bare hand in a black nitrile glove, mid-shift",
-            "title": "Protection outside. Trapped moisture inside.",
-            "items": "Heat and sweat remain against the skin\nDirect skin-to-glove contact\nWet hands make glove changes harder"
-          }
-        },
-        "c2": {
-          "type": "column",
-          "settings": {
-            "tone": "positive",
-            "eyebrow": "Nitrile + DRYE",
-            "image_alt": "DRYE liner visible at the cuff under a nitrile glove",
-            "title": "The same outer glove. A better-managed inside.",
-            "items": "The same protective nitrile glove outside\nA textile layer between skin and nitrile\nMoisture routed away from the skin-facing layer\nDrier-feeling hands and easier glove changes"
-          }
-        }
-      },
-      "block_order": [
-        "c1",
-        "c2"
-      ],
-      "settings": {}
+      "settings": {
+        "chapter": "04",
+        "heading": "Why trapped moisture ruins your skin and nails over time.",
+        "aud_1": "Healthy skin",
+        "aud_2": "Already irritated skin",
+        "sum_1": "Holds, then gives way",
+        "sum_2": "Gone by day 3",
+        "call_1": "No change at day 3 — impairment by day 14",
+        "call_2": "Significant barrier impairment — day 3",
+        "row_1_label": "No significant barrier change",
+        "row_1_sub": "Healthy skin · day 3",
+        "row_2_label": "Significant barrier impairment",
+        "row_2_sub": "Healthy skin · day 14",
+        "row_3_label": "Significant barrier impairment",
+        "row_3_sub": "Already irritated skin · day 3",
+        "risk_label": "Maceration risk rises",
+        "day_1": "Day 1",
+        "day_2": "Day 3",
+        "day_3": "Day 7",
+        "day_4": "Day 14",
+        "source": "Source: Ramsing & Agner, Contact Dermatitis 1996 — occlusive glove use, 6 h/day; and Tiedemann et al., Contact Dermatitis 2016 — occlusion on experimentally irritated skin."
+      }
     },
     "nt_nails": {
       "type": "drye-nt-nails",
-      "settings": {}
+      "settings": {
+        "heading": "Who it's not for.",
+        "body": "The liner has to sit over the nail without tension.",
+        "ok_tag": "Recommended",
+        "ok_title": "Short to moderate nails.",
+        "ok_desc": "Best match for DRYE — less concentrated pressure at the fingertips.",
+        "no_tag": "Not recommended",
+        "no_title": "Long or sharply pointed nails.",
+        "no_desc": "Higher risk of puncturing or tearing the liner."
+      }
     },
     "nt_cotton_q": {
       "type": "drye-nt-cotton-q",
-      "settings": {}
+      "settings": {
+        "quote": "“I tried cotton, but it gets wet very fast — is this cotton?”"
+      }
     },
     "nt_mechanism": {
       "type": "drye-liner-mechanism",
-      "settings": {}
+      "settings": {
+        "section_id": "liner-mechanism",
+        "heading": "Every other liner saturates. DRYE",
+        "heading_emphasis": "routes.",
+        "vs_label": "Cotton · DRYE",
+        "cotton_name": "Cotton",
+        "cotton_steps": "Sweat enters the fabric and stays\nAt saturation, moisture sits on skin\nSame wet glove on shift 1 as shift 8",
+        "drye_name": "DRYE Liner",
+        "drye_steps": "Skin side repels — sweat cannot sit there\nOuter side pulls moisture toward it\nContinuous transport, no saturation point"
+      }
     },
     "nt_reviews": {
       "type": "drye-liner-more-reviews",
@@ -305,12 +390,56 @@
         "v5"
       ],
       "settings": {
+        "eyebrow": "More feedback",
+        "heading": "From real customers.",
+        "score": "4.4",
+        "score_source": "10 reviews via Trustpilot",
+        "cta_label": "See all reviews on Trustpilot",
         "cta_url": "https://se.trustpilot.com/review/hudsverige.se"
       }
     },
     "nt_close": {
       "type": "drye-nt-close",
-      "settings": {}
+      "settings": {
+        "cta_label": "See what it's made of",
+        "cta_url": "",
+        "sources": "Park & Lee 2025 · Warner, Stone & Boissy, J Invest Dermatol 2003 · Gunt & Kasting, Int J Pharm 2007 · Nogueira et al., Thermochim Acta 2009 · Repeated-occlusion reference pending verification"
+      }
+    },
+    "drye_nt_inside_h6WiEP": {
+      "type": "drye-nt-inside",
+      "blocks": {
+        "column_8Lq4af": {
+          "type": "column",
+          "settings": {
+            "image_alt": "Bare hand in a black nitrile glove, mid-shift",
+            "tone": "negative",
+            "eyebrow": "Nitrile alone",
+            "title": "Protection outside. Trapped moisture inside.",
+            "items": "Heat and sweat remain against the skin\nDirect skin-to-glove contact\nWet hands make glove changes harder"
+          }
+        },
+        "column_hzxxVF": {
+          "type": "column",
+          "settings": {
+            "image_alt": "DRYE liner visible at the cuff under a nitrile glove",
+            "tone": "positive",
+            "eyebrow": "Nitrile + DRYE",
+            "title": "The same outer glove. A better-managed inside.",
+            "items": "The same protective nitrile glove outside\nA textile layer between skin and nitrile\nMoisture routed away from the skin-facing layer\nDrier-feeling hands and easier glove changes"
+          }
+        }
+      },
+      "block_order": [
+        "column_8Lq4af",
+        "column_hzxxVF"
+      ],
+      "name": "DRYE NT — Inside glove",
+      "settings": {
+        "chapter": "05",
+        "heading": "Keep the protection. Change what happens inside it.",
+        "body": "DRYE adds a 0.4 mm textile layer between your skin and the same protective glove."
+      }
     }
   },
   "order": [
@@ -320,11 +449,11 @@
     "nt_tradeoff",
     "nt_loop",
     "nt_barrier",
-    "nt_inside",
     "nt_nails",
     "nt_cotton_q",
     "nt_mechanism",
     "nt_reviews",
-    "nt_close"
+    "nt_close",
+    "drye_nt_inside_h6WiEP"
   ]
 }
