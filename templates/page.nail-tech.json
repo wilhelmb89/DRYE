@@ -384,19 +384,6 @@
         "drye_steps": "Skin side repels — sweat cannot sit there\nOuter side pulls moisture toward it\nContinuous transport, no saturation point"
       }
     },
-    "nt_close": {
-      "type": "drye-nt-close",
-      "settings": {
-        "days": "30",
-        "days_label": "Days",
-        "heading": "Try it risk-free.",
-        "body": "If DRYE Liner doesn't change your shift, full refund. No hassle.",
-        "cta_label": "See what it's made of",
-        "cta_url": "",
-        "guarantee": "30-Day Money Back Guarantee",
-        "sources": "Park & Lee 2025 · Warner, Stone & Boissy, J Invest Dermatol 2003 · Gunt & Kasting, Int J Pharm 2007 · Nogueira et al., Thermochim Acta 2009 · Repeated-occlusion reference pending verification"
-      }
-    },
     "drye_nt_pro_reviews_xHQ6BX": {
       "type": "drye-nt-pro-reviews",
       "blocks": {
@@ -433,7 +420,7 @@
             "avatar": "shopify://shop_images/Screenshot_36.png",
             "name": "Phuong T",
             "role": "Nail Tech & Salon Owner · Tampa FL",
-            "quote": "I have eczema and these gloves have been the best things I bought for my hands. I have to wear latex gloves all day for work. I wear the DRYE gloves then the latex gloves on top. Every hour, I would change my gloves and notice the sweat on my DRYE - but my hands remain dried. When my skin is dried and cracked, I would wear just the DRYE at home and my hands feel better. Thank you so much for making these!"
+            "quote": "I have eczema and these gloves have been the best things I bought for my hands.  Every hour, I would change my gloves and notice the sweat on my DRYE - but my hands remain dried. Thank you so much for making these!"
           }
         },
         "review_tfG4PC": {
@@ -483,6 +470,44 @@
         "stats_title": "Verified survey of 500+ glove wearers",
         "stats_note": "Post-purchase feedback from verified DRYE customers. Results vary by glove type, heat, and shift length."
       }
+    },
+    "drye_nt_trust_badges_t8dXtb": {
+      "type": "drye-nt-trust-badges",
+      "blocks": {
+        "trustpilot_7TdJeH": {
+          "type": "trustpilot",
+          "settings": {
+            "logo": "shopify://shop_images/trustpilot-stars9095.webp",
+            "score": "4.4/5",
+            "count": "10 reviews",
+            "url": "",
+            "cta_label": "See all reviews on Trustpilot"
+          }
+        },
+        "award_jKmGn4": {
+          "type": "award",
+          "settings": {
+            "name": "SKAPA",
+            "caption": "Innovation Award — in memory of the inventor Alfred Nobel"
+          }
+        },
+        "stars_HtABXQ": {
+          "type": "stars",
+          "settings": {
+            "score": "4.85/5",
+            "count": "47 reviews",
+            "url": "",
+            "cta_label": "See all our reviews"
+          }
+        }
+      },
+      "block_order": [
+        "trustpilot_7TdJeH",
+        "award_jKmGn4",
+        "stars_HtABXQ"
+      ],
+      "name": "DRYE NT — Trust badges",
+      "settings": {}
     },
     "drye_nt_validation_Ep7qKR": {
       "type": "drye-nt-validation",
@@ -615,6 +640,19 @@
         "lead": "Seven years of R&D across three independent research institutions. The claims on this page are not based on the manufacturer's internal testing.",
         "logos_label": "In collaboration with"
       }
+    },
+    "nt_close": {
+      "type": "drye-nt-close",
+      "settings": {
+        "days": "30",
+        "days_label": "Days",
+        "heading": "Try it risk-free.",
+        "body": "If DRYE Liner doesn't change your shift, full refund. No hassle.",
+        "cta_label": "See what it's made of",
+        "cta_url": "",
+        "guarantee": "30-Day Money Back Guarantee",
+        "sources": "Park & Lee 2025 · Warner, Stone & Boissy, J Invest Dermatol 2003 · Gunt & Kasting, Int J Pharm 2007 · Nogueira et al., Thermochim Acta 2009 · Repeated-occlusion reference pending verification"
+      }
     }
   },
   "order": [
@@ -629,6 +667,7 @@
     "nt_cotton_q",
     "nt_mechanism",
     "drye_nt_pro_reviews_xHQ6BX",
+    "drye_nt_trust_badges_t8dXtb",
     "drye_nt_validation_Ep7qKR",
     "nt_close"
   ]
