@@ -14,6 +14,8 @@
 .dryeNEW-btn { display: inline-flex; align-items: center; justify-content: center; min-height: 56px; padding: 0 32px; font-family: var(--font-body); font-size: 13px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; text-decoration: none; }
 .dryeNEW-btn--primary { background: var(--emerald); color: #ffffff; }
 .dryeNEW-btn--primary:hover { background: var(--deep); color: #ffffff; }
+.drye-nt-sources { border-top: 1px solid var(--border); padding: 24px 0 56px; }
+.drye-nt-sources p { margin: 0; font-family: var(--font-body); font-size: 11px; line-height: 1.7; color: var(--muted); }
 @media (min-width: 768px) {
   .drye-liner-risk-reversal { padding-block: 56px; }
   .drye-liner-risk-reversal__inner { max-width: 640px; margin-inline: auto; text-align: center; }
