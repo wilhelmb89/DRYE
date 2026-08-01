@@ -314,6 +314,30 @@
     "drye_mechanics_identification_gallery_rmW6fA": {
       "type": "drye-mechanics-identification-gallery",
       "blocks": {
+        "panel_48k74G": {
+          "type": "panel",
+          "settings": {
+            "image": "shopify://shop_images/preview.webp",
+            "image_alt": "Worker wearing DRYE glove liners",
+            "video_url": "",
+            "video_play_label": "Play video",
+            "label": "Warehouse worker",
+            "quote": "In two weeks, completely healed. I can't believe the difference.\"",
+            "source": "— Debby Fields, Craig's mother."
+          }
+        },
+        "panel_WDhUjp": {
+          "type": "panel",
+          "settings": {
+            "image": "shopify://shop_images/Screenshot_7.webp",
+            "image_alt": "Worker wearing DRYE glove liners",
+            "video_url": "",
+            "video_play_label": "Play video",
+            "label": "Automotive",
+            "quote": "\"Dry hands at lunch. First time in years.\"",
+            "source": "Automotive mechanic"
+          }
+        },
         "panel_TgW7PV": {
           "type": "panel",
           "settings": {
@@ -336,18 +360,6 @@
             "label": "EV mechanic",
             "quote": "",
             "source": "Kevin Parra · Santa Maria, CA"
-          }
-        },
-        "panel_WDhUjp": {
-          "type": "panel",
-          "settings": {
-            "image": "shopify://shop_images/Screenshot_7.webp",
-            "image_alt": "Worker wearing DRYE glove liners",
-            "video_url": "",
-            "video_play_label": "Play video",
-            "label": "Automotive",
-            "quote": "\"Dry hands at lunch. First time in years.\"",
-            "source": "Automotive mechanic"
           }
         },
         "panel_aTrMnF": {
@@ -444,24 +456,13 @@
             "quote": "\"Color all day, hands aren't wrecked anymore\"",
             "source": "Ali Alahaman ·  Salon owner Troy · Kalmar"
           }
-        },
-        "panel_48k74G": {
-          "type": "panel",
-          "settings": {
-            "image": "shopify://shop_images/preview.webp",
-            "image_alt": "Worker wearing DRYE glove liners",
-            "video_url": "",
-            "video_play_label": "Play video",
-            "label": "Warehouse worker",
-            "quote": "In two weeks, completely healed. I can't believe the difference.\"",
-            "source": "— Debby Fields, Craig's mother."
-          }
         }
       },
       "block_order": [
+        "panel_48k74G",
+        "panel_WDhUjp",
         "panel_TgW7PV",
         "panel_n9Nhih",
-        "panel_WDhUjp",
         "panel_aTrMnF",
         "panel_DPXqNr",
         "panel_E69nqw",
@@ -469,8 +470,7 @@
         "panel_aMfg77",
         "panel_e4BKaC",
         "panel_4fGj6Y",
-        "panel_WJfJ6K",
-        "panel_48k74G"
+        "panel_WJfJ6K"
       ],
       "name": "DRYE Mechanics Gallery",
       "settings": {
