@@ -13,7 +13,7 @@
    ========================================================================== */
 (function () {
   var DRYE_PRODUCT_HANDLE = 'drye-moisture-routing-glove-liners';
-  var FREE_SHIPPING_THRESHOLD_CENTS = 3 * 55000; // 3 pairs @ 550kr — adjust to your real threshold
+  var FREE_SHIPPING_PAIRS = 3; // free shipping on 3+ pairs (quantity-based, market-agnostic)
   var SYNC_DEBOUNCE_MS = 220;
 
   // Static display copy per pair count — pricing itself always comes from cart.js.
@@ -54,7 +54,17 @@
   var syncTimer = null;
 
   function money(cents) {
-    return (Math.round(cents) / 100).toLocaleString('sv-SE') + ' kr';
+    // Market-aware: format in the CART's currency (cart.js `currency`), never
+    // a hardcoded "kr". Falls back to Shopify's active currency, then SEK.
+    var cur = (priceCart && priceCart.currency)
+      || (window.Shopify && window.Shopify.currency && window.Shopify.currency.active)
+      || 'SEK';
+    var amount = Math.round(cents) / 100;
+    try {
+      return new Intl.NumberFormat(undefined, { style: 'currency', currency: cur }).format(amount);
+    } catch (e) {
+      return amount.toLocaleString() + ' ' + cur;
+    }
   }
   function byHandle(l) { return l.handle === DRYE_PRODUCT_HANDLE; }
   function sizeFromLine(line) {
@@ -150,14 +160,17 @@
     var countEl = qs('[data-drye-cart-count]');
     if (countEl) countEl.textContent = pairs.length + ' ' + (pairs.length === 1 ? 'item' : 'items');
 
+    // Free shipping is quantity-based ("3+ pairs"), so drive the bar off the
+    // pair count — market-agnostic, no currency involved.
     var shipMsg = qs('[data-drye-cart-ship-msg]');
     var shipFill = qs('[data-drye-cart-ship-fill]');
-    if (total != null && shipMsg) {
-      shipMsg.innerHTML = total >= FREE_SHIPPING_THRESHOLD_CENTS
+    var need = Math.max(0, FREE_SHIPPING_PAIRS - pairs.length);
+    if (shipMsg) {
+      shipMsg.innerHTML = need === 0
         ? '<span class="drye-cart-ship__msg--qualified">You qualify for free shipping</span>'
-        : 'Add <strong>' + money(Math.max(0, FREE_SHIPPING_THRESHOLD_CENTS - total)) + '</strong> more for free shipping';
+        : 'Add <strong>' + need + ' more ' + (need === 1 ? 'pair' : 'pairs') + '</strong> for free shipping';
     }
-    if (total != null && shipFill) shipFill.style.width = Math.min(100, Math.round((total / FREE_SHIPPING_THRESHOLD_CENTS) * 100)) + '%';
+    if (shipFill) shipFill.style.width = Math.min(100, Math.round((pairs.length / FREE_SHIPPING_PAIRS) * 100)) + '%';
 
     setVal('[data-drye-cart-subtotal]', original != null ? money(original) : '…', pending);
     var dRow = qs('[data-drye-cart-discount-row]');
