@@ -32,7 +32,7 @@
   .pro-reviews__marquee { overflow-x: auto; -webkit-overflow-scrolling: touch; }
 }
 @media (min-width: 768px) {
-  .pro-reviews { padding-block: 88px; }
+  .pro-reviews { padding-top: 88px; padding-bottom: 0; }
   .pro-reviews__marquee { margin-top: 44px; }
   .pro-card { flex: 0 0 320px; padding: 24px; }
   .pro-card__avatar { width: 56px; height: 56px; }
