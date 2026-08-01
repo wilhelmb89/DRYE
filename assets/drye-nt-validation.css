@@ -24,6 +24,7 @@
 }
 @media (min-width: 768px) {
   .validation { padding: 64px 40px; }
+  .validation h2 { font-size: 46px; }
   .institutions { flex-direction: row; align-items: stretch; }
   .institution { flex: 1; padding: 18px 20px; }
   .validation-logos-viewport { overflow: visible; -webkit-mask-image: none; mask-image: none; }
