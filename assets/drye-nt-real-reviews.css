@@ -1,0 +1,30 @@
+/* DRYE NT — Real reviews (3 text cards + 1 video card, Trustpilot-style)
+   Depends on drye-nt-base.css for --deep / --border / --bg-soft / --emerald and font vars. */
+
+.tp3-logo { display: block; height: 52px; width: auto; margin: 14px auto 0; }
+.tp3-grid { display: grid; grid-template-columns: 1fr; gap: 20px; margin-top: 32px; }
+.tp3-card--video { padding: 0; overflow: hidden; }
+.tp3-video { position: relative; width: 100%; aspect-ratio: 3 / 4; background: var(--bg-soft); }
+.tp3-video video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.tp3-video-cap { position: absolute; left: 0; right: 0; top: 0; z-index: 2; padding: 16px 16px 14px; background: linear-gradient(to bottom, rgba(255,255,255,0.97), rgba(255,255,255,0.85) 65%, transparent); }
+.tp3-video-cap .tp3-head { margin-bottom: 8px; }
+.tp3-video-cap .tp3-stars { margin-bottom: 0; }
+.tp3-card { border: 1px solid var(--border); background: var(--bg-soft); padding: 24px; display: flex; flex-direction: column; }
+.tp3-head { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
+.tp3-avatar { width: 40px; height: 40px; border-radius: 50%; flex: 0 0 auto; display: flex; align-items: center; justify-content: center; font-family: var(--font-display); font-weight: 600; font-size: 13px; color: var(--deep); }
+.tp3-name { display: block; font-family: var(--font-display); font-weight: 600; font-size: 15px; color: var(--deep); }
+.tp3-meta { display: block; font-size: 12px; color: var(--muted); margin-top: 1px; }
+.tp3-stars { display: flex; gap: 2px; margin-bottom: 12px; }
+.tp3-stars span { display: inline-flex; align-items: center; justify-content: center; width: 20px; height: 20px; background: #00B67A; color: #ffffff; font-size: 12px; }
+.tp3-title { margin: 0 0 10px; font-family: var(--font-display); font-weight: 600; font-size: 16px; color: var(--deep); }
+.tp3-body { margin: 0; font-size: 14px; line-height: 1.6; color: var(--body); text-wrap: pretty; flex: 1; display: -webkit-box; -webkit-box-orient: vertical; overflow: hidden; -webkit-line-clamp: 4; }
+.tp3-body--open { -webkit-line-clamp: unset; overflow: visible; }
+.tp3-more { align-self: flex-start; margin-top: 8px; padding: 0; border: 0; background: none; appearance: none; cursor: pointer; font-family: var(--font-body); font-size: 13px; font-weight: 600; color: var(--emerald); }
+.tp3-more:hover { color: var(--deep); }
+.tp3-date { display: block; margin-top: 16px; font-size: 12px; color: var(--muted); }
+@media (min-width: 768px) {
+  .tp3-logo { height: 60px; }
+  .tp3-grid { grid-template-columns: repeat(4, 1fr); gap: 24px; margin-top: 44px; }
+  .tp3-video { aspect-ratio: unset; height: 100%; }
+  .tp3-card { padding: 28px; }
+}
