@@ -1,3 +1,6 @@
 /* drye-nt-cotton-q.css */
 .drye-nt-cotton-q { border-top: 1px solid var(--border); padding-top: 64px; padding-bottom: 64px; }
-.cloud-q { max-width: 26ch; margin: 0 auto; text-align: center; font-family: var(--font-display); font-weight: 600; letter-spacing: -0.02em; line-height: 1.08; font-size: clamp(28px, 6.6vw, 52px); color: var(--deep); text-wrap: balance; }
+.cloud-q { max-width: 26ch; margin: 0 auto; text-align: center; font-family: var(--font-display); font-weight: 600; letter-spacing: -0.02em; line-height: 1.08; font-size: clamp(22px, 6vw, 32px); color: var(--deep); text-wrap: balance; }
+@media (min-width: 760px) {
+  .cloud-q { font-size: 46px; }
+}
