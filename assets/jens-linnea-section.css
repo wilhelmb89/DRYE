@@ -80,10 +80,10 @@
   padding: 0;
   border: none;
   border-radius: 50%;
-  background: rgba(15, 34, 48, 0.78);
+  background: rgba(30, 58, 76, 0.78);
   -webkit-backdrop-filter: blur(4px);
   backdrop-filter: blur(4px);
-  box-shadow: 0 8px 24px rgba(15, 34, 48, 0.28);
+  box-shadow: 0 8px 24px rgba(30, 58, 76, 0.28);
   cursor: pointer;
   transition: transform 0.2s ease, background 0.2s ease;
 }
@@ -221,7 +221,7 @@
   gap: var(--space-8);
   padding: var(--space-8) var(--space-14);
 
-  background: rgba(15, 34, 48, 0.82);
+  background: rgba(30, 58, 76, 0.82);
   backdrop-filter: blur(6px);
   color: var(--bg);
 
@@ -281,11 +281,11 @@
 @keyframes jens-linnea-pill-pulse {
   0%,
   100% {
-    box-shadow: 0 0 0 0 rgba(15, 34, 48, 0.35);
+    box-shadow: 0 0 0 0 rgba(30, 58, 76, 0.35);
   }
 
   50% {
-    box-shadow: 0 0 0 6px rgba(15, 34, 48, 0);
+    box-shadow: 0 0 0 6px rgba(30, 58, 76, 0);
   }
 }
 

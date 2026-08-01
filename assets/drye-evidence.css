@@ -182,13 +182,13 @@
 
 /* ─── MECHANISM BRIDGE CARD ─────────────── */
 .evidence__card--bridge {
-  background: var(--bg-ink);
-  border-color: var(--bg-ink);
+  background: var(--deep);
+  border-color: var(--deep);
   color: #FFFFFF;
 }
 
 .evidence__card--bridge:hover {
-  border-color: var(--bg-ink);
+  border-color: var(--deep);
 }
 
 .evidence__card--bridge .evidence__card-label {

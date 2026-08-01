@@ -78,7 +78,7 @@
   right: 0;
   bottom: 0;
   padding: var(--space-5) var(--space-7) var(--space-4);
-  background: rgba(15, 34, 48, 0.82);
+  background: rgba(30, 58, 76, 0.82);
   color: var(--white-080);
   font-size: var(--fs-micro-1);
   font-weight: var(--fw-semibold);
@@ -110,7 +110,7 @@
 .documented-results__cta {
   display: flex;
   min-height: 320px;
-  background: var(--bg-ink);
+  background: var(--deep);
 }
 
 .documented-results__cta-inner {
@@ -152,7 +152,7 @@
   gap: var(--space-8);
 
   padding: var(--space-8) var(--space-14);
-  background: rgba(15, 34, 48, 0.82);
+  background: rgba(30, 58, 76, 0.82);
   backdrop-filter: blur(6px);
   color: var(--bg);
 
@@ -212,11 +212,11 @@
 @keyframes documented-results-pill-pulse {
   0%,
   100% {
-    box-shadow: 0 0 0 0 rgba(15, 34, 48, 0.35);
+    box-shadow: 0 0 0 0 rgba(30, 58, 76, 0.35);
   }
 
   50% {
-    box-shadow: 0 0 0 6px rgba(15, 34, 48, 0);
+    box-shadow: 0 0 0 6px rgba(30, 58, 76, 0);
   }
 }
 

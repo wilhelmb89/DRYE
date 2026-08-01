@@ -5,7 +5,7 @@
 .lp-shot { position: relative; width: 100%; background: var(--bg-soft); overflow: hidden; }
 .lp-shot img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
 .lp-hero { aspect-ratio: 1 / 1; }
-.hero-scrim { position: absolute; inset: 0; pointer-events: none; display: flex; align-items: center; background: linear-gradient(to right, rgba(15,34,48,0.80) 0%, rgba(15,34,48,0.52) 58%, rgba(15,34,48,0.26) 100%); }
+.hero-scrim { position: absolute; inset: 0; pointer-events: none; display: flex; align-items: center; background: linear-gradient(to right, rgba(30, 58, 76,0.80) 0%, rgba(30, 58, 76,0.52) 58%, rgba(30, 58, 76,0.26) 100%); }
 .hero-copy { max-width: 34ch; }
 .hero-h1 { margin: 0 0 12px; font-family: var(--font-display); font-weight: 600; font-size: clamp(27px, 8vw, 34px); letter-spacing: -0.025em; line-height: 1.12; color: #ffffff; text-wrap: pretty; }
 .hero-sub { margin: 0; font-size: clamp(15px, 3.9vw, 19px); line-height: 1.5; color: rgba(255,255,255,0.86); text-wrap: pretty; }
@@ -23,7 +23,7 @@
 
 @media (min-width: 760px) {
   .lp-hero { aspect-ratio: 21 / 9; }
-  .hero-scrim { background: linear-gradient(to right, rgba(15,34,48,0.74) 0%, rgba(15,34,48,0.36) 46%, rgba(15,34,48,0.04) 80%); }
+  .hero-scrim { background: linear-gradient(to right, rgba(30, 58, 76,0.74) 0%, rgba(30, 58, 76,0.36) 46%, rgba(30, 58, 76,0.04) 80%); }
   .hero-copy { max-width: 620px; }
   .hero-h1 { font-size: 46px; }
 }

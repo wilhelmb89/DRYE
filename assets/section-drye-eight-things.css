@@ -161,7 +161,7 @@
     gap: var(--space-8);
 
     padding: var(--space-8) var(--space-14);
-    background: rgba(15, 34, 48, 0.82);
+    background: rgba(30, 58, 76, 0.82);
     backdrop-filter: blur(6px);
     color: var(--bg);
 
@@ -230,11 +230,11 @@
   @keyframes eight-things-pill-pulse {
     0%,
     100% {
-      box-shadow: 0 0 0 0 rgba(15, 34, 48, 0.35);
+      box-shadow: 0 0 0 0 rgba(30, 58, 76, 0.35);
     }
 
     50% {
-      box-shadow: 0 0 0 6px rgba(15, 34, 48, 0);
+      box-shadow: 0 0 0 6px rgba(30, 58, 76, 0);
     }
   }
 }

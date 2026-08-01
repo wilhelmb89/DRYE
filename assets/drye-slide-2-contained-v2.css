@@ -1,5 +1,5 @@
 .dryeNEW-slide2-contained-fixed {
-  background: var(--bg-ink);
+  background: var(--deep);
   color: var(--white-100);
   margin-top: var(--slide2-mt-mobile, 0);
   margin-bottom: var(--slide2-mb-mobile, 0);
@@ -73,7 +73,7 @@
   min-height: 420px;
   overflow: hidden;
   border: var(--border-white-010);
-  background: var(--bg-ink);
+  background: var(--deep);
 }
 
 .dryeNEW-slide2-contained-fixed__panel-bg,
@@ -93,9 +93,9 @@
   background:
     linear-gradient(
       180deg,
-      rgba(15, 34, 48, 0.20) 0%,
-      rgba(15, 34, 48, 0.48) 42%,
-      rgba(15, 34, 48, 0.82) 100%
+      rgba(30, 58, 76, 0.20) 0%,
+      rgba(30, 58, 76, 0.48) 42%,
+      rgba(30, 58, 76, 0.82) 100%
     );
 }
 

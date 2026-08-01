@@ -55,7 +55,7 @@
     margin-inline: -10px;   /* wider than the text — closer to the screen edges */
   }
   .pdp-det__mount .pdp-det__vis--pad  { padding: 24px 20px; }
-  .pdp-det__mount .pdp-det__vis--dark { background: var(--bg-ink); border-color: transparent; }
+  .pdp-det__mount .pdp-det__vis--dark { background: var(--deep); border-color: transparent; }
   .pdp-det__mount--who .pdp-det__vis--who,
   .pdp-det__mount .pdp-det__vis--who  { min-height: 220px; border: none; margin-top: 4px; }
 }
@@ -264,7 +264,7 @@
 .pdp-det__sizegrid-row:last-child > span { border-bottom: 1px solid var(--border); }
 
 /* Shipping/guarantee — dark */
-.pdp-det__vis--dark { background: var(--bg-ink); }
+.pdp-det__vis--dark { background: var(--deep); }
 .pdp-det__guar-micro {
   font-family: var(--font-body); font-size: var(--fs-micro-2); font-weight: var(--fw-semibold);
   letter-spacing: var(--ls-micro); text-transform: uppercase; color: rgba(95,138,139,0.9); margin-bottom: 8px;

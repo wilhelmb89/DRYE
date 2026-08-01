@@ -8,7 +8,7 @@
   position: relative;
   isolation: isolate;
   overflow: hidden;
-  background: var(--bg-ink);
+  background: var(--deep);
   color: var(--white-100);
   min-height: 64vh;
   padding-top: var(--nav-height);
@@ -47,9 +47,9 @@
   z-index: 1;
   background: linear-gradient(
     180deg,
-    rgba(15, 34, 48, 0.16) 0%,
-    rgba(15, 34, 48, 0.28) 34%,
-    rgba(15, 34, 48, 0.60) 100%
+    rgba(30, 58, 76, 0.16) 0%,
+    rgba(30, 58, 76, 0.28) 34%,
+    rgba(30, 58, 76, 0.60) 100%
   );
 }
 
@@ -84,7 +84,7 @@
   margin-top: var(--space-10);
   margin-left: calc(var(--space-16) * -1);
   padding: 0 var(--space-16) var(--space-4) var(--space-16);
-  background: rgba(15, 34, 48, 0.55);
+  background: rgba(30, 58, 76, 0.55);
   color: var(--white-100);
   font-size: var(--fs-hero-h1);
   line-height: 1;
@@ -119,7 +119,7 @@
   position: relative;
   display: flex;
   align-items: center;
-  background: rgba(15, 34, 48, 0.47);
+  background: rgba(30, 58, 76, 0.47);
   padding: 12px 20px 11px;
 }
 

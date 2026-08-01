@@ -299,8 +299,8 @@
 }
 
 .drye-stretch__stop--final {
-  background: var(--bg-ink);
-  border-color: var(--bg-ink);
+  background: var(--deep);
+  border-color: var(--deep);
 }
 
 .drye-stretch__stop--final::before {
@@ -308,8 +308,8 @@
 }
 
 .drye-stretch__stop--final.is-open {
-  background: var(--bg-ink);
-  border-color: var(--bg-ink);
+  background: var(--deep);
+  border-color: var(--deep);
 }
 
 .drye-stretch__stop--final .drye-stretch__clock {
@@ -321,7 +321,7 @@
 .drye-stretch__stop--final.is-open .drye-stretch__clock {
   background: var(--emerald);
   border-color: var(--emerald);
-  color: var(--bg-ink);
+  color: var(--deep);
 }
 
 .drye-stretch__stop--final .drye-stretch__trigger:hover {
@@ -410,7 +410,7 @@
   padding-inline: var(--space-28) var(--space-20);
 
   color: var(--white-100);
-  background: var(--bg-ink);
+  background: var(--deep);
 
   clip-path: polygon(
     28px 0,
@@ -441,7 +441,7 @@
 
 .drye-stretch__stop--final.is-guided .drye-stretch__click-cue {
   background: var(--emerald);
-  color: var(--bg-ink);
+  color: var(--deep);
 }
 
 .drye-stretch__click-cue-label {

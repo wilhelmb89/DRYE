@@ -5,7 +5,7 @@
    ========================================================================== */
 
 .dryeNEW-problem-beat-1 {
-  background: var(--bg-ink);
+  background: var(--deep);
 }
 
 /* ==========================================================================
@@ -75,7 +75,7 @@
   min-width: 86%;
   min-height: 100%;
   padding: var(--space-20);
-  background: var(--bg-ink);
+  background: var(--deep);
   border-right: var(--border-white-006);
   scroll-snap-align: start;
 }
@@ -138,8 +138,8 @@
     pointer-events: none;
     background: linear-gradient(
       to right,
-      rgba(15, 34, 48, 0),
-      rgba(15, 34, 48, 0.96)
+      rgba(30, 58, 76, 0),
+      rgba(30, 58, 76, 0.96)
     );
   }
 

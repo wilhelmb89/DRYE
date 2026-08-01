@@ -15,12 +15,12 @@
 /* ─── OVERLAY ─────────────────────────────────────────────── */
 .overlay{
   position:fixed;inset:0;z-index:300;
-  background:rgba(15,34,48,0);
+  background:rgba(30, 58, 76,0);
   pointer-events:none;
   transition:background .3s ease;
 }
 .overlay.open{
-  background:rgba(15,34,48,.55);
+  background:rgba(30, 58, 76,.55);
   pointer-events:all;
 }
 

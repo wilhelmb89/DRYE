@@ -2,7 +2,7 @@
 /* Reference: FACIT dark full-bleed proof. Mobile = stacked dark; desktop = 2-col. */
 
 .drye-liner-proof {
-  background: var(--bg-ink);
+  background: var(--deep);
   color: var(--white-085);
   padding-block: 40px;
   border-top: none;
@@ -36,7 +36,7 @@
 .drye-liner-proof__media {
   position: relative;
   aspect-ratio: 4 / 5;
-  background: var(--bg-ink);
+  background: var(--deep);
   overflow: hidden;
 }
 
@@ -68,7 +68,7 @@
   flex-direction: column;
   justify-content: flex-end;
   padding: var(--space-16);
-  background: linear-gradient(to top, rgba(15, 34, 48, 0.92) 0%, rgba(15, 34, 48, 0.45) 45%, transparent 100%);
+  background: linear-gradient(to top, rgba(30, 58, 76, 0.92) 0%, rgba(30, 58, 76, 0.45) 45%, transparent 100%);
   pointer-events: none;
   z-index: 1;
 }
@@ -94,7 +94,7 @@
   position: absolute;
   top: 12px;
   left: 12px;
-  background: rgba(15, 34, 48, 0.7);
+  background: rgba(30, 58, 76, 0.7);
   backdrop-filter: blur(4px);
   border: 1px solid var(--white-015);
   padding: 6px 10px;
@@ -108,7 +108,7 @@
 
 /* Big stat block — dark, reads as one continuous dark block with the section. */
 .drye-liner-proof__stat {
-  background: var(--bg-ink);
+  background: var(--deep);
   color: #fff;
   padding: var(--space-24) var(--space-20);
   margin: 0 calc(-1 * var(--page-pad));
@@ -189,7 +189,7 @@
 
 .drye-liner-proof__cta:hover {
   background: #fff;
-  color: var(--bg-ink);
+  color: var(--deep);
   border-color: #fff;
 }
 
