@@ -502,6 +502,85 @@
       "name": "DRYE NT — Trust badges",
       "settings": {}
     },
+    "drye_nt_pro_reviews_yLLm7J": {
+      "type": "drye-nt-pro-reviews",
+      "blocks": {
+        "review_FJPgX9": {
+          "type": "review",
+          "settings": {
+            "avatar": "shopify://shop_images/troy.jpg",
+            "name": "Ali Alahaman",
+            "role": "Salon owner Troy ·  Kalmar",
+            "quote": "They add an extra layer under my nitrile gloves when I work with chemicals, and my hands stay much drier and don’t get nearly as sweaty."
+          }
+        },
+        "review_bfqQCx": {
+          "type": "review",
+          "settings": {
+            "avatar": "shopify://shop_images/Sofia_halvarsson_b0bc166c-062d-4bc6-b119-2dc6bc7f2696.jpg",
+            "name": "Sofia Halvarsson",
+            "role": "Hairdresser Nikita Hair· Stockholm",
+            "quote": "They are nice to use. While it can get warm under nitrile gloves, my hands don’t feel sweaty."
+          }
+        },
+        "review_TxLVxC": {
+          "type": "review",
+          "settings": {
+            "avatar": "shopify://shop_images/2.jpg",
+            "name": "Emilia Asplund",
+            "role": "Pastry chef · Stockholm",
+            "quote": "They keep my hands dry and comfortable. It took a little getting used to, but now they’re just part of my routine."
+          }
+        },
+        "review_w9dqgM": {
+          "type": "review",
+          "settings": {
+            "avatar": "shopify://shop_images/1.jpg",
+            "name": "Sofia Malmberg",
+            "role": "Hairdresser Nikita Hair · Gothenburg",
+            "quote": "They’re comfortable to wear, and my hands feel less dry and irritated now. Definitely an improvement."
+          }
+        },
+        "review_EAtnLw": {
+          "type": "review",
+          "settings": {
+            "avatar": "shopify://shop_images/Screenshot_36.png",
+            "name": "Phuong T",
+            "role": "Nail Tech & Salon Owner · Tampa FL",
+            "quote": "I have eczema and these gloves have been the best things I bought for my hands.  Every hour, I would change my gloves and notice the sweat on my DRYE - but my hands remain dried. Thank you so much for making these!"
+          }
+        },
+        "review_DW9ydy": {
+          "type": "review",
+          "settings": {
+            "avatar": "shopify://shop_images/download_9dfd04eb-ae39-4076-b793-7a2558d1fd70.jpg",
+            "name": "Linn Bäckström",
+            "role": "Pastry chef · Stockholm",
+            "quote": "I have hand eczema, and these gloves have helped me a lot in my daily life."
+          }
+        }
+      },
+      "block_order": [
+        "review_FJPgX9",
+        "review_bfqQCx",
+        "review_TxLVxC",
+        "review_w9dqgM",
+        "review_EAtnLw",
+        "review_DW9ydy"
+      ],
+      "custom_css": [],
+      "name": "DRYE NT — Pro reviews",
+      "settings": {
+        "eyebrow": "Used on shift",
+        "heading": "When precision and touch matter, trapped sweat gets in the way.",
+        "stat1_num": "97%",
+        "stat1_desc": "reported dry hands after 3+ hours on the job",
+        "stat2_num": "86%",
+        "stat2_desc": "noticed significant skin difference after only two weeks",
+        "stats_title": "Verified survey of 500+ glove wearers",
+        "stats_note": "Post-purchase feedback from verified DRYE customers. Results vary by glove type, heat, and shift length."
+      }
+    },
     "drye_liner_product_clarity_anRGnT": {
       "type": "drye-liner-product-clarity",
       "blocks": {
@@ -509,20 +588,20 @@
           "type": "spec",
           "settings": {
             "title": "Stays dry at skin contact",
-            "description": "No hand resets"
+            "description": "no hand resets"
           }
         },
         "spec_XpHy49": {
           "type": "spec",
           "settings": {
             "title": "No glove fighting ",
-            "description": "Easier on/off, less tearing"
+            "description": "easier on/off, less tearing"
           }
         },
         "spec_UCNmnW": {
           "type": "spec",
           "settings": {
-            "title": "Full feel/dexterity",
+            "title": "Dexterity/feel",
             "description": "thin 0.4 mm layer"
           }
         },
@@ -762,6 +841,7 @@
   },
   "order": [
     "drye_product_page_new_9ibHgd",
+    "drye_nt_pro_reviews_yLLm7J",
     "drye_nt_trust_badges_7MQcTF",
     "drye_liner_product_clarity_anRGnT",
     "drye_mechanics_time_promise_gYTiq8",
