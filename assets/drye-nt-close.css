@@ -1,11 +1,24 @@
-/* drye-nt-close.css */
-.drye-nt-close { padding-bottom: 72px; }
-.drye-nt .lp-cta { color: #ffffff; }
-.lp-cta { display: flex; width: 100%; justify-content: center; align-items: center; min-height: 56px; padding: 0 32px; background: var(--deep); color: #ffffff; font-family: var(--font-display); font-size: 17px; font-weight: 600; letter-spacing: -0.01em; transition: background 0.2s ease; }
-.drye-nt .lp-cta:hover { background: var(--emerald); color: #ffffff; }
-.drye-nt-sources { border-top: 1px solid var(--border); padding: 24px 0 56px; }
-.drye-nt-sources p { margin: 0; font-size: 11px; line-height: 1.7; color: var(--muted); }
-@media (min-width: 760px) {
-  .drye-nt-close .lp-narrow { display: flex; justify-content: center; }
-  .lp-cta { display: inline-flex; width: auto; min-width: 320px; min-height: 60px; font-size: 18px; }
+/* DRYE NT — Close (30-day risk-reversal + CTA button)
+   Depends on drye-nt-base.css for --bg / --deep / --emerald / spacing + type tokens. */
+
+.drye-liner-risk-reversal { background: var(--bg); color: var(--body); border-top: 1px solid var(--border); padding-block: 40px; }
+.drye-liner-risk-reversal__wrap { display: grid; grid-template-columns: 68px 1fr; gap: 16px; align-items: center; margin-bottom: 18px; }
+.drye-liner-risk-reversal__badge { width: 68px; height: 68px; flex: none; border: 2px solid var(--deep); display: flex; flex-direction: column; align-items: center; justify-content: center; }
+.drye-liner-risk-reversal__num { font-family: var(--font-display); font-size: 22px; font-weight: 600; line-height: 1; color: var(--deep); }
+.drye-liner-risk-reversal__word { margin-top: 2px; font-family: var(--font-body); font-size: 10px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--deep); }
+.drye-liner-risk-reversal__copy h3 { margin: 0 0 4px; font-family: var(--font-display); font-size: 19px; font-weight: 600; line-height: 1.2; color: var(--deep); text-wrap: pretty; }
+.drye-liner-risk-reversal__copy p { margin: 0; max-width: 42ch; font-family: var(--font-body); font-size: 14px; line-height: 1.5; color: var(--muted); text-wrap: pretty; }
+.drye-liner-risk-reversal__cta-wrap { display: flex; justify-content: center; margin-top: 14px; }
+.drye-liner-risk-reversal__cta-wrap .dryeNEW-btn { width: 100%; max-width: 420px; }
+.drye-liner-risk-reversal__guarantee { margin-top: 10px; text-align: center; font-family: var(--font-body); font-size: 13px; font-weight: 400; color: var(--caption, var(--muted)); }
+.dryeNEW-btn { display: inline-flex; align-items: center; justify-content: center; min-height: 56px; padding: 0 32px; font-family: var(--font-body); font-size: 13px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; text-decoration: none; }
+.dryeNEW-btn--primary { background: var(--emerald); color: #ffffff; }
+.dryeNEW-btn--primary:hover { background: var(--deep); color: #ffffff; }
+@media (min-width: 768px) {
+  .drye-liner-risk-reversal { padding-block: 56px; }
+  .drye-liner-risk-reversal__inner { max-width: 640px; margin-inline: auto; text-align: center; }
+  .drye-liner-risk-reversal__inner .drye-liner-risk-reversal__wrap { display: inline-grid; grid-template-columns: 68px auto; gap: 16px; text-align: left; margin-bottom: 32px; }
+  .drye-liner-risk-reversal__copy p { font-size: 16px; }
+  .drye-liner-risk-reversal__cta-wrap { margin-top: 20px; }
+  .drye-liner-risk-reversal__cta-wrap .dryeNEW-btn { width: auto; min-width: 300px; }
 }

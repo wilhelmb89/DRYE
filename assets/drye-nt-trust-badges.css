@@ -1,0 +1,19 @@
+/* DRYE NT — Trust badges (Trustpilot / award / reviews)
+   Depends on drye-nt-base.css for --deep / --border / --bg-soft and font vars. */
+
+.pro-reviews__badges { display: grid; grid-template-columns: 1fr; gap: 16px; padding: 40px var(--page-pad, 20px); }
+.pro-reviews__badge { display: flex; flex-direction: column; align-items: center; text-align: center; gap: 10px; padding: 20px; border: 1px solid var(--border); background: var(--bg-soft); }
+.pro-reviews__tp-logo { display: block; width: 102px; height: auto; }
+.pro-reviews__badge-emblem { display: block; width: 100%; max-width: 90px; height: auto; margin: 0 auto 2px; }
+.pro-reviews__badge-skapa { font-family: var(--font-display); font-size: 16px; font-weight: 600; letter-spacing: 0.02em; color: var(--deep); }
+.pro-reviews__badge--tight { gap: 4px; }
+.pro-reviews__badge-caption { font-size: 13px; line-height: 1.5; color: var(--muted); max-width: 30ch; }
+.pro-reviews__rating { display: flex; flex-direction: column; align-items: center; gap: 4px; }
+.pro-reviews__rating-stars { color: #F5B301; font-size: 15px; letter-spacing: 1.5px; }
+.pro-reviews__rating-score { font-family: var(--font-display); font-weight: 600; font-size: 14px; color: var(--deep); }
+.pro-reviews__rating-source { font-size: 12px; color: var(--muted); }
+.pro-reviews__cta { display: inline-block; font-family: var(--font-body); font-size: 10px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--deep); border-bottom: 1px solid var(--deep); padding-bottom: 2px; }
+@media (min-width: 768px) {
+  .pro-reviews__badges { grid-template-columns: repeat(3, 1fr); gap: 20px; padding: 56px 40px; }
+  .pro-reviews__badge-emblem { max-width: 110px; }
+}

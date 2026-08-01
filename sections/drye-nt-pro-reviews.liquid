@@ -1,0 +1,113 @@
+{{ 'drye-nt-base.css' | asset_url | stylesheet_tag }}
+{{ 'drye-nt-pro-reviews.css' | asset_url | stylesheet_tag }}
+
+<section
+  class="drye-nt pro-reviews"
+  id="drye-nt-pro-reviews-{{ section.id }}"
+  data-section-id="{{ section.id }}"
+  data-drye-section
+  data-section-name="nt_pro_reviews"
+>
+  <div class="lp-wrap">
+    <div class="lp-narrow">
+      {%- if section.settings.eyebrow != blank -%}<span class="dryeNEW-micro" style="color: var(--emerald); margin-bottom: 8px">{{ section.settings.eyebrow }}</span>{%- endif -%}
+      {%- if section.settings.heading != blank -%}<h2 class="lp-lead">{{ section.settings.heading }}</h2>{%- endif -%}
+    </div>
+  </div>
+
+  {%- assign cards = section.blocks | where: 'type', 'review' -%}
+  {%- if cards.size > 0 -%}
+    <div class="pro-reviews__marquee">
+      <div class="pro-reviews__track">
+        {%- for block in cards -%}
+          <div class="pro-card" {{ block.shopify_attributes }}>
+            <div class="pro-card__top">
+              <div class="pro-card__avatar">{%- if block.settings.avatar != blank -%}{{ block.settings.avatar | image_url: width: 120 | image_tag: loading: 'lazy', alt: block.settings.name | escape }}{%- endif -%}</div>
+              <div class="pro-card__id"><span class="pro-card__name">{{ block.settings.name }}</span><span class="pro-card__role">{{ block.settings.role }}</span></div>
+            </div>
+            <div class="pro-card__stars" aria-hidden="true">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+            <p class="pro-card__quote">{{ block.settings.quote }}</p>
+            <div class="pro-card__meta"><span class="pro-card__verified" aria-hidden="true">&#10003;</span>Verified customer</div>
+          </div>
+        {%- endfor -%}
+        <div style="display: contents" aria-hidden="true">
+          {%- for block in cards -%}
+            <div class="pro-card">
+              <div class="pro-card__top">
+                <div class="pro-card__avatar">{%- if block.settings.avatar != blank -%}{{ block.settings.avatar | image_url: width: 120 | image_tag: loading: 'lazy', alt: '' }}{%- endif -%}</div>
+                <div class="pro-card__id"><span class="pro-card__name">{{ block.settings.name }}</span><span class="pro-card__role">{{ block.settings.role }}</span></div>
+              </div>
+              <div class="pro-card__stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+              <p class="pro-card__quote">{{ block.settings.quote }}</p>
+              <div class="pro-card__meta"><span class="pro-card__verified" aria-hidden="true">&#10003;</span>Verified customer</div>
+            </div>
+          {%- endfor -%}
+        </div>
+      </div>
+    </div>
+  {%- endif -%}
+
+  <div class="lp-wrap">
+    {%- if section.settings.stat1_num != blank or section.settings.stat2_num != blank -%}
+      <div class="pro-stats">
+        {%- if section.settings.stat1_num != blank -%}
+          <div class="pro-stat"><div class="pro-stat-num">{{ section.settings.stat1_num }}</div><p class="pro-stat-desc">{{ section.settings.stat1_desc }}</p></div>
+        {%- endif -%}
+        {%- if section.settings.stat2_num != blank -%}
+          <div class="pro-stat"><div class="pro-stat-num">{{ section.settings.stat2_num }}</div><p class="pro-stat-desc">{{ section.settings.stat2_desc }}</p></div>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+    {%- if section.settings.stats_title != blank -%}
+      <div class="pro-stats-foot">
+        <div class="pro-stats-foot-title">{{ section.settings.stats_title }}</div>
+        <p class="pro-stats-foot-note">{{ section.settings.stats_note }}</p>
+      </div>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "DRYE NT — Pro reviews",
+  "tag": "section",
+  "class": "shopify-section-drye-nt-pro-reviews",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Used on shift" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Nail techs and stylists on DRYE." },
+    { "type": "header", "content": "Stats" },
+    { "type": "text", "id": "stat1_num", "label": "Stat 1 number", "default": "97%" },
+    { "type": "text", "id": "stat1_desc", "label": "Stat 1 description", "default": "reported dry hands after 3+ hours on the job" },
+    { "type": "text", "id": "stat2_num", "label": "Stat 2 number", "default": "86%" },
+    { "type": "text", "id": "stat2_desc", "label": "Stat 2 description", "default": "noticed significant skin difference after only two weeks" },
+    { "type": "text", "id": "stats_title", "label": "Stats title", "default": "Verified survey of 500+ glove wearers" },
+    { "type": "textarea", "id": "stats_note", "label": "Stats note", "default": "Post-purchase feedback from verified DRYE customers. Results vary by glove type, heat, and shift length." }
+  ],
+  "blocks": [
+    {
+      "type": "review",
+      "name": "Review card",
+      "settings": [
+        { "type": "image_picker", "id": "avatar", "label": "Portrait" },
+        { "type": "text", "id": "name", "label": "Name" },
+        { "type": "text", "id": "role", "label": "Role" },
+        { "type": "textarea", "id": "quote", "label": "Quote" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "DRYE NT — Pro reviews",
+      "blocks": [
+        { "type": "review", "settings": { "name": "Elin R", "role": "Nail Tech · Stockholm", "quote": "By client four my hands still feel dry. I'm not fighting wet gloves anymore." } },
+        { "type": "review", "settings": { "name": "Marcus T", "role": "Barber · Malmö", "quote": "Clippers running non-stop, eight cuts a day. My palms used to be soaked by lunch." } },
+        { "type": "review", "settings": { "name": "Ayesha K", "role": "Colorist · Gothenburg", "quote": "Hours in gloves mixing color. DRYE is thin enough that I still feel what I'm doing." } },
+        { "type": "review", "settings": { "name": "Nadia S", "role": "Nail Tech & Salon Owner · Copenhagen", "quote": "I recommend it to every tech in my salon now. Fewer breaks just to dry off." } },
+        { "type": "review", "settings": { "name": "Oskar L", "role": "Hairstylist · Oslo", "quote": "Gloves used to split by the third client. Haven't had one tear since I switched." } },
+        { "type": "review", "settings": { "name": "Priya M", "role": "Nail Tech · London", "quote": "My hands used to smell by 5pm. That's just gone now." } },
+        { "type": "review", "settings": { "name": "Freja B", "role": "Session Stylist · Stockholm", "quote": "Long days on set, gloves on the whole time. First liner that doesn't just get soggy." } }
+      ]
+    }
+  ]
+}
+{% endschema %}

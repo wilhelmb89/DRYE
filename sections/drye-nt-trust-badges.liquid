@@ -1,0 +1,91 @@
+{{ 'drye-nt-base.css' | asset_url | stylesheet_tag }}
+{{ 'drye-nt-trust-badges.css' | asset_url | stylesheet_tag }}
+
+<section
+  class="drye-nt"
+  id="drye-nt-trust-badges-{{ section.id }}"
+  data-section-id="{{ section.id }}"
+  data-drye-section
+  data-section-name="nt_trust_badges"
+>
+  <div class="lp-wrap">
+    <div class="pro-reviews__badges">
+      {%- for block in section.blocks -%}
+        {%- case block.type -%}
+          {%- when 'trustpilot' -%}
+            <div class="pro-reviews__badge" {{ block.shopify_attributes }}>
+              {%- if block.settings.logo != blank -%}{{ block.settings.logo | image_url: width: 220 | image_tag: loading: 'lazy', alt: 'Trustpilot', class: 'pro-reviews__tp-logo' }}{%- endif -%}
+              <div class="pro-reviews__rating">
+                <span><span class="pro-reviews__rating-score">{{ block.settings.score }}</span> <span class="pro-reviews__rating-source">&middot; {{ block.settings.count }}</span></span>
+              </div>
+              {%- if block.settings.url != blank -%}<a href="{{ block.settings.url }}" class="pro-reviews__cta">{{ block.settings.cta_label }}</a>{%- endif -%}
+            </div>
+          {%- when 'award' -%}
+            <div class="pro-reviews__badge pro-reviews__badge--tight" {{ block.shopify_attributes }}>
+              {%- if block.settings.emblem != blank -%}{{ block.settings.emblem | image_url: width: 220 | image_tag: loading: 'lazy', alt: block.settings.name | escape, class: 'pro-reviews__badge-emblem' }}{%- endif -%}
+              <span class="pro-reviews__badge-skapa">{{ block.settings.name }}</span>
+              <span class="pro-reviews__badge-caption">{{ block.settings.caption }}</span>
+            </div>
+          {%- when 'stars' -%}
+            <div class="pro-reviews__badge" {{ block.shopify_attributes }}>
+              <div class="pro-reviews__rating">
+                <span class="pro-reviews__rating-stars" aria-hidden="true">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+                <span><span class="pro-reviews__rating-score">{{ block.settings.score }}</span> <span class="pro-reviews__rating-source">&middot; {{ block.settings.count }}</span></span>
+              </div>
+              {%- if block.settings.url != blank -%}<a href="{{ block.settings.url }}" class="pro-reviews__cta">{{ block.settings.cta_label }}</a>{%- endif -%}
+            </div>
+        {%- endcase -%}
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "DRYE NT — Trust badges",
+  "tag": "section",
+  "class": "shopify-section-drye-nt-trust-badges",
+  "blocks": [
+    {
+      "type": "trustpilot",
+      "name": "Trustpilot badge",
+      "settings": [
+        { "type": "image_picker", "id": "logo", "label": "Trustpilot logo/stars image" },
+        { "type": "text", "id": "score", "label": "Score", "default": "4.4/5" },
+        { "type": "text", "id": "count", "label": "Review count label", "default": "10 reviews" },
+        { "type": "url", "id": "url", "label": "Link" },
+        { "type": "text", "id": "cta_label", "label": "CTA label", "default": "See all reviews on Trustpilot" }
+      ]
+    },
+    {
+      "type": "award",
+      "name": "Award badge",
+      "settings": [
+        { "type": "image_picker", "id": "emblem", "label": "Emblem" },
+        { "type": "text", "id": "name", "label": "Name", "default": "SKAPA" },
+        { "type": "textarea", "id": "caption", "label": "Caption", "default": "Innovation Award — in memory of the inventor Alfred Nobel" }
+      ]
+    },
+    {
+      "type": "stars",
+      "name": "Star-rating badge",
+      "settings": [
+        { "type": "text", "id": "score", "label": "Score", "default": "4.85/5" },
+        { "type": "text", "id": "count", "label": "Review count label", "default": "47 reviews" },
+        { "type": "url", "id": "url", "label": "Link" },
+        { "type": "text", "id": "cta_label", "label": "CTA label", "default": "See all our reviews" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "DRYE NT — Trust badges",
+      "blocks": [
+        { "type": "trustpilot", "settings": { "score": "4.4/5", "count": "10 reviews" } },
+        { "type": "award" },
+        { "type": "stars", "settings": { "score": "4.85/5", "count": "47 reviews" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

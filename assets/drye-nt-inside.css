@@ -27,7 +27,7 @@
 
 .dryeNEW-btn { display: inline-flex; align-items: center; justify-content: center; min-height: 56px; padding: 0 32px; font-family: var(--font-body); font-size: 13px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; text-decoration: none; }
 .dryeNEW-btn--primary { background: var(--emerald); color: #ffffff; }
-.dryeNEW-btn--primary:hover { background: var(--deep); }
+.dryeNEW-btn--primary:hover { background: var(--deep); color: #ffffff; }
 
 @media (min-width: 760px) {
   .drye-nt-inside .cmp-grid { grid-template-columns: 1fr 64px 1fr; column-gap: 16px; row-gap: 48px; margin-top: 48px; }
