@@ -33,8 +33,8 @@
   }
 </script>
 
-{% comment %} Product image for the per-pair thumbnail in "Adjust your sizes" (drye-cart-drawer.js uses it as the row image). {% endcomment %}
-<script>window.DRYE_PRODUCT_IMAGE = {{ drye_product.featured_image | image_url: width: 160 | json }};</script>
+{% comment %} Per-pair thumbnail in the cart drawer — the dedicated cart-drawer image (last gallery image / Shopify Files). Swap the URL to change it. {% endcomment %}
+<script>window.DRYE_PRODUCT_IMAGE = "{{ drye_product.images.last | image_url: width: 160 }}";</script>
 
 <div class="drye-cart-overlay" data-drye-cart-overlay></div>
 

@@ -1,7 +1,7 @@
-﻿/* ==========================================================================
-   DRYE Cart Drawer â€” cart-driven, optimistic UI
+/* ==========================================================================
+   DRYE Cart Drawer — cart-driven, optimistic UI
    Talks to Shopify's Ajax Cart API only (/cart.js, /cart/add.js,
-   /cart/change.js). Never computes discounted prices itself â€” every kr
+   /cart/change.js). Never computes discounted prices itself — every kr
    value rendered comes straight from cart.js so it always matches checkout.
 
    MODEL: each pair = one cart line, quantity 1, so each pair can carry its
@@ -16,14 +16,14 @@
   var FREE_SHIPPING_PAIRS = 3; // free shipping on 3+ pairs (quantity-based, market-agnostic)
   var SYNC_DEBOUNCE_MS = 220;
 
-  // Static display copy per pair count â€” pricing itself always comes from cart.js.
+  // Static display copy per pair count — pricing itself always comes from cart.js.
   var COPY = {
     1: { name: 'Starter Pair', benefit: 'Test under your own gloves' },
     2: { name: 'Work Rotation', benefit: 'One on. One drying.' },
-    3: { name: 'Express Workweek Pack', benefit: 'Full week rotation Â· Express delivery Â· No surprise fees' },
-    4: { name: 'Extra Rotation', benefit: 'Full week rotation + spare pair Â· Express delivery Â· No surprise fees' },
-    5: { name: 'Team Starter', benefit: 'Team starter rotation Â· Express delivery Â· No surprise fees' },
-    6: { name: 'Team Rotation', benefit: 'Full team rotation Â· Express delivery Â· No surprise fees' }
+    3: { name: 'Express Workweek Pack', benefit: 'Full week rotation · Express delivery · No surprise fees' },
+    4: { name: 'Extra Rotation', benefit: 'Full week rotation + spare pair · Express delivery · No surprise fees' },
+    5: { name: 'Team Starter', benefit: 'Team starter rotation · Express delivery · No surprise fees' },
+    6: { name: 'Team Rotation', benefit: 'Full team rotation · Express delivery · No surprise fees' }
   };
 
   var CHEVRON = '<svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4 10l4-4 4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
@@ -84,7 +84,7 @@
 
   // ---- Ajax ----
   // Prefix every cart route with Shopify.routes.root so operations hit the
-  // BUYER'S MARKET cart (e.g. /en-us/cart.js), not the default-market cart â€”
+  // BUYER'S MARKET cart (e.g. /en-us/cart.js), not the default-market cart —
   // that mismatch made a US buyer's drawer show SEK while the PDP showed USD.
   function cartUrl(path) {
     var root = (window.Shopify && window.Shopify.routes && window.Shopify.routes.root) || '/';
@@ -116,13 +116,13 @@
     return '' +
       '<div class="drye-cart-pack">' +
         '<span class="drye-cart-pack__tag">Your pack</span>' +
-        '<div class="drye-cart-pack__title">' + n + (n === 1 ? ' Pair' : ' Pairs') + ' Â· ' + copy.name + '</div>' +
-        '<div class="drye-cart-pack__price' + (pending ? ' is-pending' : '') + '">' + (total != null ? money(total) : 'â€¦') + '</div>' +
+        '<div class="drye-cart-pack__title">' + n + (n === 1 ? ' Pair' : ' Pairs') + ' · ' + copy.name + '</div>' +
+        '<div class="drye-cart-pack__price' + (pending ? ' is-pending' : '') + '">' + (total != null ? money(total) : '…') + '</div>' +
         (!pending && disc > 0 ? '<div class="drye-cart-pack__save"><strong>Save ' + money(disc) + '</strong></div>' : '') +
         (copy.benefit ? '<div class="drye-cart-pack__benefit">' + copy.benefit + '</div>' : '') +
         '<div class="drye-cart-stepper-row">' +
           '<div class="drye-cart-stepper">' +
-            '<button type="button" data-drye-cart-pack-step="-1"' + (n <= 1 ? ' disabled' : '') + '>âˆ’</button>' +
+            '<button type="button" data-drye-cart-pack-step="-1"' + (n <= 1 ? ' disabled' : '') + '>−</button>' +
             '<div class="drye-cart-stepper__val">' + n + '</div>' +
             '<button type="button" data-drye-cart-pack-step="1"' + (n >= 6 ? ' disabled' : '') + '>+</button>' +
           '</div>' +
@@ -138,7 +138,7 @@
         '<div class="drye-cart-pair">' +
           (PRODUCT_IMAGE ? '<img class="drye-cart-pair__img" src="' + PRODUCT_IMAGE + '" alt="DRYE glove liner" />' : '<span class="drye-cart-pair__img"></span>') +
           '<div class="drye-cart-pair__stepper">' +
-            '<button type="button" data-drye-pair-size-step="-1" data-drye-pair-index="' + i + '"' + (idx <= 0 ? ' disabled' : '') + '>âˆ’</button>' +
+            '<button type="button" data-drye-pair-size-step="-1" data-drye-pair-index="' + i + '"' + (idx <= 0 ? ' disabled' : '') + '>−</button>' +
             '<div class="drye-cart-pair__size">' + sz + '</div>' +
             '<button type="button" data-drye-pair-size-step="1" data-drye-pair-index="' + i + '"' + (idx >= SIZE_ORDER.length - 1 ? ' disabled' : '') + '>+</button>' +
           '</div>' +
@@ -176,7 +176,7 @@
     if (countEl) countEl.textContent = pairs.length + ' ' + (pairs.length === 1 ? 'item' : 'items');
 
     // Free shipping is quantity-based ("3+ pairs"), so drive the bar off the
-    // pair count â€” market-agnostic, no currency involved.
+    // pair count — market-agnostic, no currency involved.
     var shipMsg = qs('[data-drye-cart-ship-msg]');
     var shipFill = qs('[data-drye-cart-ship-fill]');
     var need = Math.max(0, FREE_SHIPPING_PAIRS - pairs.length);
@@ -187,11 +187,11 @@
     }
     if (shipFill) shipFill.style.width = Math.min(100, Math.round((pairs.length / FREE_SHIPPING_PAIRS) * 100)) + '%';
 
-    setVal('[data-drye-cart-subtotal]', original != null ? money(original) : 'â€¦', pending);
+    setVal('[data-drye-cart-subtotal]', original != null ? money(original) : '…', pending);
     var dRow = qs('[data-drye-cart-discount-row]');
     if (dRow) dRow.hidden = !(disc > 0) || pending;
-    setVal('[data-drye-cart-discount]', 'âˆ’' + money(disc), pending);
-    setVal('[data-drye-cart-total]', total != null ? money(total) : 'â€¦', pending);
+    setVal('[data-drye-cart-discount]', '−' + money(disc), pending);
+    setVal('[data-drye-cart-total]', total != null ? money(total) : '…', pending);
 
     var upsell = qs('[data-drye-cart-upsell]');
     if (upsell) upsell.hidden = pairs.length === 0;
@@ -206,7 +206,7 @@
     if (n === 0) {
       body.innerHTML =
         '<div class="drye-cart-empty">' +
-          '<div class="drye-cart-empty__icon">ðŸ›’</div>' +
+          '<div class="drye-cart-empty__icon">🛒</div>' +
           '<div class="drye-cart-empty__title">Your cart is empty</div>' +
           '<div class="drye-cart-empty__sub">Add a pair to continue.</div>' +
           '<a href="/collections/all" class="drye-cart-empty__cta">Shop now</a>' +
@@ -249,7 +249,7 @@
   }
   async function runSync() {
     syncTimer = null;
-    if (syncing) { scheduleSync(); return; } // a sync is mid-flight â€” retry after it settles
+    if (syncing) { scheduleSync(); return; } // a sync is mid-flight — retry after it settles
     syncing = true;
     var startDirty = dirty; // snapshot: did the user change anything WHILE we synced?
 
@@ -275,8 +275,8 @@
 
       priceCart = await fetchCart();
       // Only adopt the server's pair list if the user did NOT tap during the
-      // sync. Otherwise `pairs` already holds newer intent â€” don't clobber it
-      // (this was the "can't go backward" bug: a slow sync overwrote a fresh âˆ’).
+      // sync. Otherwise `pairs` already holds newer intent — don't clobber it
+      // (this was the "can't go backward" bug: a slow sync overwrote a fresh −).
       if (dirty === startDirty) reconcilePairs(priceCart);
     } catch (e) {
       console.warn('[DRYE cart sync]', e);
