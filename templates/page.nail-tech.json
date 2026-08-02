@@ -59,6 +59,22 @@
     "nt_desk": {
       "type": "drye-nt-desk",
       "blocks": {
+        "shot_nYDRpD": {
+          "type": "shot",
+          "settings": {
+            "image": "shopify://shop_images/Gemini_Generated_Image_bu7jycbu7jycbu7j.webp",
+            "image_alt": "Nail tech at work",
+            "caption": "“gloves and a mask are non-negotiable”"
+          }
+        },
+        "shot_wPDMne": {
+          "type": "shot",
+          "settings": {
+            "image": "shopify://shop_images/Gemini_Generated_Image_i2l4n6i2l4n6i2l4.webp",
+            "image_alt": "Nail tech at work",
+            "caption": ""
+          }
+        },
         "s1": {
           "type": "shot",
           "settings": {
@@ -75,14 +91,6 @@
             "caption": "“WHY are my hands so wet”"
           }
         },
-        "shot_nYDRpD": {
-          "type": "shot",
-          "settings": {
-            "image": "shopify://shop_images/Gemini_Generated_Image_bu7jycbu7jycbu7j.webp",
-            "image_alt": "Nail tech at work",
-            "caption": "“gloves and a mask are non-negotiable”"
-          }
-        },
         "s3": {
           "type": "shot",
           "settings": {
@@ -90,22 +98,14 @@
             "image_alt": "DRYE under the glove during real work at the desk",
             "caption": "“trying to peel gloves off sweaty hands is the worst”"
           }
-        },
-        "shot_wPDMne": {
-          "type": "shot",
-          "settings": {
-            "image": "shopify://shop_images/Gemini_Generated_Image_4kecos4kecos4kec.webp",
-            "image_alt": "Nail tech at work",
-            "caption": ""
-          }
         }
       },
       "block_order": [
+        "shot_nYDRpD",
+        "shot_wPDMne",
         "s1",
         "s2",
-        "shot_nYDRpD",
-        "s3",
-        "shot_wPDMne"
+        "s3"
       ],
       "settings": {
         "chapter": "01",
