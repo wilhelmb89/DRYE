@@ -158,12 +158,10 @@
         <table class="size-table">
           <thead><tr><th>{{ head_size }}</th><th>{{ head_circ }}</th></tr></thead>
           <tbody>
+            {% comment %} No-JS fallback: show the number only (the canonical letter/audience is applied by JS from the size number, so we avoid printing any per-block label that may be out of sync). {% endcomment %}
             {% for block in section.blocks %}
               <tr>
-                <td class="st-size">
-                  <span class="st-size__main">{% if block.settings.label != blank %}{{ block.settings.label }} ({{ block.settings.size }}){% else %}{{ size_word }} {{ block.settings.size }}{% endif %}</span>
-                  {% if block.settings.audience != blank %}<span class="st-size__aud">{{ block.settings.audience }}</span>{% endif %}
-                </td>
+                <td class="st-size"><span class="st-size__main">{{ size_word }} {{ block.settings.size }}</span></td>
                 <td class="st-circ">{{ block.settings.circ_min_mm }}–{{ block.settings.circ_max_mm }} mm</td>
               </tr>
             {% endfor %}
@@ -238,8 +236,12 @@
           if (!h) { const num = parseInt(s.size, 10); h = isNaN(num) ? '' : String(num - 1); }
         }
         const key = String(s.size).trim();
-        const label = (s.label || '').trim() || LBL_FALLBACK[key] || '';
-        const audience = (s.audience || '').trim() || AUD_FALLBACK[key] || '';
+        // The DRYE size→letter/audience mapping is CANONICAL (must match the size
+        // selector: 5=XXS … 12=XXXL). It wins over any per-row label/audience so a
+        // stale/shifted value stored on a block can never desync the table from the
+        // selector. Per-row settings only apply to sizes outside the standard 5–12.
+        const label = LBL_FALLBACK[key] || (s.label || '').trim() || '';
+        const audience = AUD_FALLBACK[key] || (s.audience || '').trim() || '';
         return { size: s.size, label: label, audience: audience, circMM: s.circMM, nitrile: n, hv: h };
       });
     },
