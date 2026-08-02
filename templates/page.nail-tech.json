@@ -75,14 +75,6 @@
             "caption": ""
           }
         },
-        "s1": {
-          "type": "shot",
-          "settings": {
-            "image": "shopify://shop_images/Gemini_Generated_Image_i9zs57i9zs57i9zs.webp",
-            "image_alt": "Nail tech changing a nitrile glove between clients",
-            "caption": "“my hands smell like feet”"
-          }
-        },
         "s2": {
           "type": "shot",
           "settings": {
@@ -98,14 +90,22 @@
             "image_alt": "DRYE under the glove during real work at the desk",
             "caption": "“trying to peel gloves off sweaty hands is the worst”"
           }
+        },
+        "s1": {
+          "type": "shot",
+          "settings": {
+            "image": "shopify://shop_images/Gemini_Generated_Image_i9zs57i9zs57i9zs.webp",
+            "image_alt": "Nail tech changing a nitrile glove between clients",
+            "caption": "“my hands smell like feet”"
+          }
         }
       },
       "block_order": [
         "shot_nYDRpD",
         "shot_wPDMne",
-        "s1",
         "s2",
-        "s3"
+        "s3",
+        "s1"
       ],
       "settings": {
         "chapter": "01",
