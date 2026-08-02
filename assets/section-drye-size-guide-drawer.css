@@ -217,6 +217,8 @@
 .size-table th.h-glove,
 .size-table td.st-glove{text-align:left;}
 .size-table td.st-size{text-align:left;color:var(--deep);font-weight:600;white-space:nowrap;}
+.size-table td.st-size .st-size__main{display:block;color:var(--deep);font-weight:600;}
+.size-table td.st-size .st-size__aud{display:block;margin-top:2px;color:var(--muted);font-weight:500;font-size:0.82em;white-space:nowrap;}
 .size-table td.st-glove{color:var(--body);}
 .size-table td.st-glove.empty{color:var(--caption);}
 .size-table td.st-circ{text-align:right;color:var(--muted);white-space:nowrap;}

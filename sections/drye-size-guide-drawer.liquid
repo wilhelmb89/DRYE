@@ -12,7 +12,7 @@
 
   assign default_shortcut_nitrile = 'Most people order the same number as their nitrile.'
   assign default_shortcut_hv = 'HV gloves run loose. Order one size up from your HV size.'
-  assign default_guarantee = 'Wrong size? If you measured against our guide and it still doesn’t fit, we ship the correct size at no cost.'
+  assign default_guarantee = 
   assign default_glove_q = 'Which gloves do you wear?'
   assign default_glove_nitrile = 'Nitrile'
   assign default_glove_hv = 'HV / Class 0'
@@ -160,7 +160,10 @@
           <tbody>
             {% for block in section.blocks %}
               <tr>
-                <td class="st-size">{{ size_word }} {{ block.settings.size }}</td>
+                <td class="st-size">
+                  <span class="st-size__main">{% if block.settings.label != blank %}{{ block.settings.label }} ({{ block.settings.size }}){% else %}{{ size_word }} {{ block.settings.size }}{% endif %}</span>
+                  {% if block.settings.audience != blank %}<span class="st-size__aud">{{ block.settings.audience }}</span>{% endif %}
+                </td>
                 <td class="st-circ">{{ block.settings.circ_min_mm }}–{{ block.settings.circ_max_mm }} mm</td>
               </tr>
             {% endfor %}
@@ -207,6 +210,8 @@
           {% for block in section.blocks %}
             {
               size: {{ block.settings.size | json }},
+              label: {{ block.settings.label | default: '' | json }},
+              audience: {{ block.settings.audience | default: '' | json }},
               circMM: [{{ block.settings.circ_min_mm | default: 0 }}, {{ block.settings.circ_max_mm | default: 0 }}],
               nitrile: {{ block.settings.nitrile_val | default: '' | json }},
               hv: {{ block.settings.hv_val | default: '' | json }}
@@ -216,6 +221,11 @@
       };
 
       const raw = sizeMap[sectionId] || [];
+      // Canonical DRYE size mapping — used as a fallback so the table shows the
+      // same letter label + audience as the size selector even before those
+      // fields are filled in per row. Per-row settings always win when present.
+      const LBL_FALLBACK = { '5': 'XXS', '6': 'XS', '7': 'S', '8': 'M', '9': 'L', '10': 'XL', '11': 'XXL', '12': 'XXXL' };
+      const AUD_FALLBACK = { '5': 'Child', '6': 'Child / Woman', '7': 'Child / Woman', '8': 'Man / Woman', '9': 'Man / Woman', '10': 'Man', '11': 'Man', '12': 'Man' };
       // Provisional mapping: until real glove sizes are entered per row, derive them from
       // the copy rule — nitrile = same number as the DRYE size, HV = one size up.
       const drawer = document.getElementById(sectionId + '-drawer');
@@ -227,7 +237,10 @@
           if (!n) { n = s.size; }
           if (!h) { const num = parseInt(s.size, 10); h = isNaN(num) ? '' : String(num - 1); }
         }
-        return { size: s.size, circMM: s.circMM, nitrile: n, hv: h };
+        const key = String(s.size).trim();
+        const label = (s.label || '').trim() || LBL_FALLBACK[key] || '';
+        const audience = (s.audience || '').trim() || AUD_FALLBACK[key] || '';
+        return { size: s.size, label: label, audience: audience, circMM: s.circMM, nitrile: n, hv: h };
       });
     },
 
@@ -289,7 +302,12 @@
           const v = ((gkey === 'hv' ? s.hv : s.nitrile) || '').trim();
           cells += '<td class="st-glove' + (v ? '' : ' empty') + '">' + (v || '—') + '</td>';
         }
-        cells += '<td class="st-size">' + sizeWord + ' ' + s.size + '</td>' +
+        // DRYE Size cell — mirror the selector: "XXS (5)" with a Child / Woman / Man sub-line.
+        const main = s.label ? s.label + ' (' + s.size + ')' : sizeWord + ' ' + s.size;
+        cells += '<td class="st-size">' +
+                   '<span class="st-size__main">' + main + '</span>' +
+                   (s.audience ? '<span class="st-size__aud">' + s.audience + '</span>' : '') +
+                 '</td>' +
                  '<td class="st-circ">' + c + '</td>';
         return '<tr>' + cells + '</tr>';
       }).join('');
@@ -600,7 +618,15 @@
           "type": "text",
           "id": "label",
           "label": "Size label",
+          "info": "Letter shown before the number, e.g. \"M\" → renders as \"M (8)\".",
           "default": "M"
+        },
+        {
+          "type": "text",
+          "id": "audience",
+          "label": "Audience sub-line",
+          "info": "Shown under the size, e.g. \"Man / Woman\". Matches the size selector. Leave blank to auto-fill from the standard DRYE mapping.",
+          "default": "Man / Woman"
         },
         {
           "type": "number",
@@ -646,14 +672,14 @@
     {
       "name": "DRYE Size Guide Drawer",
       "blocks": [
-        { "type": "size_row", "settings": { "size": "5", "label": "XXS", "length_min_mm": 163, "length_max_mm": 171, "circ_min_mm": 183, "circ_max_mm": 189 } },
-        { "type": "size_row", "settings": { "size": "6", "label": "XS", "length_min_mm": 171, "length_max_mm": 179, "circ_min_mm": 189, "circ_max_mm": 196 } },
-        { "type": "size_row", "settings": { "size": "7", "label": "S", "length_min_mm": 176, "length_max_mm": 185, "circ_min_mm": 196, "circ_max_mm": 205 } },
-        { "type": "size_row", "settings": { "size": "8", "label": "M", "length_min_mm": 185, "length_max_mm": 194, "circ_min_mm": 205, "circ_max_mm": 214 } },
-        { "type": "size_row", "settings": { "size": "9", "label": "L", "length_min_mm": 194, "length_max_mm": 203, "circ_min_mm": 214, "circ_max_mm": 223 } },
-        { "type": "size_row", "settings": { "size": "10", "label": "XL", "length_min_mm": 203, "length_max_mm": 212, "circ_min_mm": 223, "circ_max_mm": 232 } },
-        { "type": "size_row", "settings": { "size": "11", "label": "XXL", "length_min_mm": 212, "length_max_mm": 219, "circ_min_mm": 232, "circ_max_mm": 241 } },
-        { "type": "size_row", "settings": { "size": "12", "label": "XXXL", "length_min_mm": 219, "length_max_mm": 226, "circ_min_mm": 241, "circ_max_mm": 250 } }
+        { "type": "size_row", "settings": { "size": "5", "label": "XXS", "audience": "Child", "length_min_mm": 163, "length_max_mm": 171, "circ_min_mm": 183, "circ_max_mm": 189 } },
+        { "type": "size_row", "settings": { "size": "6", "label": "XS", "audience": "Child / Woman", "length_min_mm": 171, "length_max_mm": 179, "circ_min_mm": 189, "circ_max_mm": 196 } },
+        { "type": "size_row", "settings": { "size": "7", "label": "S", "audience": "Child / Woman", "length_min_mm": 176, "length_max_mm": 185, "circ_min_mm": 196, "circ_max_mm": 205 } },
+        { "type": "size_row", "settings": { "size": "8", "label": "M", "audience": "Man / Woman", "length_min_mm": 185, "length_max_mm": 194, "circ_min_mm": 205, "circ_max_mm": 214 } },
+        { "type": "size_row", "settings": { "size": "9", "label": "L", "audience": "Man / Woman", "length_min_mm": 194, "length_max_mm": 203, "circ_min_mm": 214, "circ_max_mm": 223 } },
+        { "type": "size_row", "settings": { "size": "10", "label": "XL", "audience": "Man", "length_min_mm": 203, "length_max_mm": 212, "circ_min_mm": 223, "circ_max_mm": 232 } },
+        { "type": "size_row", "settings": { "size": "11", "label": "XXL", "audience": "Man", "length_min_mm": 212, "length_max_mm": 219, "circ_min_mm": 232, "circ_max_mm": 241 } },
+        { "type": "size_row", "settings": { "size": "12", "label": "XXXL", "audience": "Man", "length_min_mm": 219, "length_max_mm": 226, "circ_min_mm": 241, "circ_max_mm": 250 } }
       ]
     }
   ]
