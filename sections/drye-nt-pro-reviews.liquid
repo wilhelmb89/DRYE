@@ -1,6 +1,17 @@
 {{ 'drye-nt-base.css' | asset_url | stylesheet_tag }}
 {{ 'drye-nt-pro-reviews.css' | asset_url | stylesheet_tag }}
 
+{%- comment -%}
+  DRYE NT — Pro reviews
+  IMPORTANT: this section is a LOOPING MARQUEE. The review cards must be output TWICE
+  in the same .pro-reviews__track (original set + aria-hidden duplicate set) so the
+  CSS keyframe `pro-marquee` (translateX 0 → -50%) can loop seamlessly. Do not remove
+  the duplicate loop below — without it the cards run out when the user scrolls.
+  Both sets are DIRECT children of .pro-reviews__track (no display:contents wrapper) —
+  that wrapper can be dropped in some Shopify render passes, collapsing the duplicate
+  into one flex item and breaking the -50% loop (blank box after the last card).
+{%- endcomment -%}
+
 <section
   class="drye-nt pro-reviews"
   id="drye-nt-pro-reviews-{{ section.id }}"
@@ -30,19 +41,18 @@
             <div class="pro-card__meta"><span class="pro-card__verified" aria-hidden="true">&#10003;</span>Verified customer</div>
           </div>
         {%- endfor -%}
-        <div style="display: contents" aria-hidden="true">
-          {%- for block in cards -%}
-            <div class="pro-card">
-              <div class="pro-card__top">
-                <div class="pro-card__avatar">{%- if block.settings.avatar != blank -%}{{ block.settings.avatar | image_url: width: 120 | image_tag: loading: 'lazy', alt: '' }}{%- endif -%}</div>
-                <div class="pro-card__id"><span class="pro-card__name">{{ block.settings.name }}</span><span class="pro-card__role">{{ block.settings.role }}</span></div>
-              </div>
-              <div class="pro-card__stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-              <p class="pro-card__quote">{{ block.settings.quote }}</p>
-              <div class="pro-card__meta"><span class="pro-card__verified" aria-hidden="true">&#10003;</span>Verified customer</div>
+        {%- comment -%} Duplicate set — required for seamless marquee loop. Do not remove. {%- endcomment -%}
+        {%- for block in cards -%}
+          <div class="pro-card" aria-hidden="true">
+            <div class="pro-card__top">
+              <div class="pro-card__avatar">{%- if block.settings.avatar != blank -%}{{ block.settings.avatar | image_url: width: 120 | image_tag: loading: 'lazy', alt: '' }}{%- endif -%}</div>
+              <div class="pro-card__id"><span class="pro-card__name">{{ block.settings.name }}</span><span class="pro-card__role">{{ block.settings.role }}</span></div>
             </div>
-          {%- endfor -%}
-        </div>
+            <div class="pro-card__stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+            <p class="pro-card__quote">{{ block.settings.quote }}</p>
+            <div class="pro-card__meta"><span class="pro-card__verified" aria-hidden="true">&#10003;</span>Verified customer</div>
+          </div>
+        {%- endfor -%}
       </div>
     </div>
   {%- endif -%}

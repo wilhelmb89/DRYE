@@ -1,13 +1,24 @@
 
 /* DRYE NT — Pro reviews marquee + stats
-   Depends on drye-nt-base.css for --deep / --border / --bg-soft and font vars. */
+   Depends on drye-nt-base.css for --deep / --border / --bg-soft and font vars.
+
+   INFINITE LOOP CONTRACT (see the matching .liquid): the review cards are output
+   TWICE as DIRECT children of .pro-reviews__track. The keyframe animates
+   translateX 0 → -50%, so at the end of one cycle card N+1 sits exactly where
+   card 1 started and the loop is seamless — it never runs out or leaves a blank
+   box after the last card.
+   Spacing uses per-card `margin-right` (NOT flex `gap`): gap would leave the
+   final card of each set without trailing space, so -50% would land half a gap
+   short and the loop would visibly jump. margin-right gives every card its own
+   trailing space, making each set width exactly N*(card + 16px) and -50% land
+   perfectly. Do not swap this back to `gap`. */
 
 .pro-reviews { padding-top: 56px; padding-bottom: 0; border-top: 1px solid var(--border); overflow: hidden; }
 .pro-reviews__marquee { position: relative; margin-top: 32px; -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 32px, #000 calc(100% - 32px), transparent 100%); mask-image: linear-gradient(90deg, transparent 0, #000 32px, #000 calc(100% - 32px), transparent 100%); }
-.pro-reviews__track { display: flex; gap: 16px; width: max-content; animation: pro-marquee 46s linear infinite; }
+.pro-reviews__track { display: flex; width: max-content; animation: pro-marquee 46s linear infinite; }
 .pro-reviews__marquee:hover .pro-reviews__track, .pro-reviews__marquee:focus-within .pro-reviews__track { animation-play-state: paused; }
 @keyframes pro-marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
-.pro-card { flex: 0 0 260px; display: flex; flex-direction: column; padding: 20px; background: var(--bg-soft); border: 1px solid var(--border); }
+.pro-card { flex: 0 0 260px; margin-right: 16px; display: flex; flex-direction: column; padding: 20px; background: var(--bg-soft); border: 1px solid var(--border); }
 .pro-card__top { display: flex; align-items: center; gap: 12px; margin-bottom: 14px; }
 .pro-card__avatar { position: relative; width: 48px; height: 48px; border-radius: 50%; overflow: hidden; flex: 0 0 auto; background: var(--border); }
 .pro-card__avatar img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }

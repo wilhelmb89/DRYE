@@ -9,6 +9,10 @@
  */
 {
   "sections": {
+    "nt_hide_chrome": {
+      "type": "drye-nt-hide-chrome",
+      "settings": {}
+    },
     "nt_hero": {
       "type": "drye-nt-hero",
       "blocks": {
@@ -714,6 +718,7 @@
     }
   },
   "order": [
+    "nt_hide_chrome",
     "nt_hero",
     "nt_desk",
     "nt_trapped",

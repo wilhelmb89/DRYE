@@ -1,0 +1,63 @@
+{%- comment -%}
+  DRYE NT — Hide theme chrome on the nail-tech landing page
+  --------------------------------------------------------------------
+  Renders NOTHING visible. Emits only a <style> block that hides the
+  DRYE header + announcement bar on THIS template only. Because this
+  section's markup (the <style> below) is printed inside
+  content_for_layout, it ships ONLY on pages that load
+  templates/page.nail-tech.json — so it never leaks to the rest of
+  the store. Keep it FIRST in that template's order.
+
+  WHY: /pages/nail-tech is a paid-traffic conversion funnel. The
+  global header (logo + About / How it works / Research / Field
+  reports + cart) gives visitors exits out of the funnel before they
+  reach the CTA. We strip the header so the only path forward is the
+  page's own CTAs. The DRYE wordmark still shows inside the hero.
+
+  SELECTORS ARE THEME-SPECIFIC — verified against this theme:
+    • Header group section .......... sections/dryeNEW-header.liquid
+        stable hooks: .dryeNEW-header-shell  /  [data-drye-header]
+        (position:fixed, so removing it needs no padding fix)
+    • Announcement bar .............. sections/drye-announcement-bar.liquid
+        stable hook:  .dryeNEW-annbar-section
+        (its inner .dryeNEW-annbar-spacer reserves the fixed stack's
+         height; hiding the whole section reclaims that space)
+  The #shopify-section-* ids below are the current header-group keys —
+  belt-and-suspenders only. If the theme editor regenerates those keys,
+  the class hooks above still do the job. Do NOT remove the `!important`.
+{%- endcomment -%}
+
+<style>
+  /* DRYE header (fixed) — stable class hooks + current group id */
+  .dryeNEW-header-shell,
+  [data-drye-header],
+  #shopify-section-drye_new_header_gjmpwp,
+  /* DRYE announcement bar (fixed + spacer) */
+  .dryeNEW-annbar-section,
+  #shopify-section-drye_announcement_bar_JtqhNN,
+  /* mobile menu overlay, if ever opened */
+  .dryeNEW-header__mob-overlay {
+    display: none !important;
+    visibility: hidden !important;
+    height: 0 !important;
+    max-height: 0 !important;
+    overflow: hidden !important;
+    pointer-events: none !important;
+  }
+
+  /* No fixed header/announcement bar left to offset for. */
+  body { padding-top: 0 !important; margin-top: 0 !important; }
+  html { scroll-padding-top: 0 !important; }
+</style>
+
+{% schema %}
+{
+  "name": "DRYE NT — Hide chrome",
+  "tag": "section",
+  "class": "shopify-section-drye-nt-hide-chrome",
+  "settings": [],
+  "presets": [
+    { "name": "DRYE NT — Hide chrome" }
+  ]
+}
+{% endschema %}
