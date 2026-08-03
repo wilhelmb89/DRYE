@@ -93,22 +93,18 @@
             assign pack_benefit = 'Team starter rotation · Express delivery · No surprise fees'
         endcase
         if n >= 3
-          assign ship_method = 'Express'
-          assign ship_min = 2
-          assign ship_max = 3
+          assign ship_method = 'Express delivery'
+          assign ship_tracked = ''
         else
           assign ship_method = 'Economy'
-          assign ship_min = 6
-          assign ship_max = 10
+          assign ship_tracked = 'Tracked'
         endif
       -%}
       <div class="drye-cart-pack">
         <span class="drye-cart-pack__tag">Your pack</span>
-        <div class="drye-cart-ship-badge" data-drye-ship-min="{{ ship_min }}" data-drye-ship-max="{{ ship_max }}">
-          <span class="drye-cart-ship-badge__label">Shipping time</span>
-          <span class="drye-cart-ship-badge__eta" data-drye-ship-eta>…</span>
+        <div class="drye-cart-ship-badge">
           <span class="drye-cart-ship-badge__method">{{ ship_method }}</span>
-          <span class="drye-cart-ship-badge__tracked">Tracked</span>
+          {%- if ship_tracked != blank -%}<span class="drye-cart-ship-badge__tracked">{{ ship_tracked }}</span>{%- endif -%}
         </div>
         <div class="drye-cart-pack__title">{{ n }} {% if n == 1 %}Pair{% else %}Pairs{% endif %} · {{ pack_name }}</div>
         <div class="drye-cart-pack__price">{{ cart.total_price | money_with_currency }}</div>
@@ -195,9 +191,8 @@
         <span class="drye-cart-summary__total-label">Total</span>
         <span class="drye-cart-summary__total-value">{{ cart.total_price | money_with_currency }}</span>
       </div>
-      <a href="{{ routes.root }}checkout" class="drye-cart-checkout" data-drye-checkout>
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M12 2l7 3v6c0 4.5-3 8.2-7 9-4-.8-7-4.5-7-9V5l7-3z" stroke="white" stroke-width="1.5" stroke-linejoin="round"/><path d="M9 12l2 2 4-4" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        Secure checkout →
+      <a href="{{ routes.root }}checkout" class="drye-cart-checkout" data-drye-checkout style="font-size:13px;">
+        Checkout →
       </a>
       <button type="button" class="drye-cart-continue" data-drye-cart-close>Continue shopping</button>
     </div>
