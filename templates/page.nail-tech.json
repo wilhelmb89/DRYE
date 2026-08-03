@@ -59,14 +59,6 @@
     "nt_desk": {
       "type": "drye-nt-desk",
       "blocks": {
-        "shot_m8VgNV": {
-          "type": "shot",
-          "settings": {
-            "image": "shopify://shop_images/Gemini_Generated_Image_u5lromu5lromu5lr.webp",
-            "image_alt": "Nail tech at work",
-            "caption": "\"it does run from the middle of my arm all the way up to my knuckles\""
-          }
-        },
         "shot_nYDRpD": {
           "type": "shot",
           "settings": {
@@ -91,6 +83,14 @@
             "caption": "“WHY are my hands so wet”"
           }
         },
+        "shot_m8VgNV": {
+          "type": "shot",
+          "settings": {
+            "image": "shopify://shop_images/Gemini_Generated_Image_u5lromu5lromu5lr.webp",
+            "image_alt": "Nail tech at work",
+            "caption": "\"it does run from the middle of my arm all the way up to my knuckles\""
+          }
+        },
         "s1": {
           "type": "shot",
           "settings": {
@@ -101,10 +101,10 @@
         }
       },
       "block_order": [
-        "shot_m8VgNV",
         "shot_nYDRpD",
         "s2",
         "s3",
+        "shot_m8VgNV",
         "s1"
       ],
       "settings": {
