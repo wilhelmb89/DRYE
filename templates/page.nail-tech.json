@@ -163,6 +163,49 @@
         "body": "<p><em>\"After 6 hours under rubber gloves, my hands felt wet inside. Took the gloves off — completely dry. Such a mindfuck.\"</em><br/><br/></p>"
       }
     },
+    "drye_liner_product_clarity_PqAH9K": {
+      "type": "drye-liner-product-clarity",
+      "blocks": {
+        "spec_qnWDJ9": {
+          "type": "spec",
+          "settings": {
+            "title": "Sweat.",
+            "description": "Stays dry for the full shift."
+          }
+        },
+        "spec_kpAAHJ": {
+          "type": "spec",
+          "settings": {
+            "title": "Oil.",
+            "description": "Stays on the surface. Wipes off."
+          }
+        },
+        "spec_T3z9ef": {
+          "type": "spec",
+          "settings": {
+            "title": "Tearing.",
+            "description": "Your nitriles go on dry, come off dry."
+          }
+        }
+      },
+      "block_order": [
+        "spec_qnWDJ9",
+        "spec_kpAAHJ",
+        "spec_T3z9ef"
+      ],
+      "name": "DRYE Product Clarity",
+      "settings": {
+        "section_id": "liner-product",
+        "heading": "DRYE goes",
+        "heading_emphasis": "under your existing glove.",
+        "body": "<p>0.4 mm thin. Built to work under nitrile, not replace it.</p>",
+        "media_type": "image",
+        "before_image": "shopify://shop_images/Gemini_Generated_Image_4kecos4kecos4kec.webp",
+        "before_label": "Without DRYE",
+        "after_image": "shopify://shop_images/5Y9A9293.webp",
+        "after_label": "With DRYE"
+      }
+    },
     "nt_mechanism": {
       "type": "drye-liner-mechanism",
       "settings": {
@@ -185,6 +228,46 @@
         "video_label": "Goes under any sealed glove.",
         "video_caption": "Routes sweat from skin to outer fabric. No saturation point."
       }
+    },
+    "drye_nt_trust_badges_t8dXtb": {
+      "type": "drye-nt-trust-badges",
+      "blocks": {
+        "trustpilot_7TdJeH": {
+          "type": "trustpilot",
+          "settings": {
+            "logo": "shopify://shop_images/trustpilot-logo-trimmed.png",
+            "score": "4.4/5",
+            "count": "10 reviews",
+            "url": "https://se.trustpilot.com/review/hudsverige.se",
+            "cta_label": "See all reviews on Trustpilot"
+          }
+        },
+        "award_jKmGn4": {
+          "type": "award",
+          "settings": {
+            "emblem": "shopify://shop_images/skapa-emblem-small.png",
+            "name": "SKAPA",
+            "caption": "Innovation Award — in memory of the inventor Alfred Nobel"
+          }
+        },
+        "stars_HtABXQ": {
+          "type": "stars",
+          "settings": {
+            "score": "4.85/5",
+            "count": "47 reviews",
+            "url": "shopify://products/drye-moisture-routing-glove-liners",
+            "cta_label": "See all our reviews"
+          }
+        }
+      },
+      "block_order": [
+        "trustpilot_7TdJeH",
+        "award_jKmGn4",
+        "stars_HtABXQ"
+      ],
+      "custom_css": [],
+      "name": "DRYE NT — Trust badges",
+      "settings": {}
     },
     "nt_loop": {
       "type": "drye-nt-loop",
@@ -399,46 +482,6 @@
         "rr_cta_url": "shopify://products/drye-moisture-routing-glove-liners",
         "rr_guarantee": "0.4mm washable liner · Engineered in Sweden · 30-day refund"
       }
-    },
-    "drye_nt_trust_badges_t8dXtb": {
-      "type": "drye-nt-trust-badges",
-      "blocks": {
-        "trustpilot_7TdJeH": {
-          "type": "trustpilot",
-          "settings": {
-            "logo": "shopify://shop_images/trustpilot-logo-trimmed.png",
-            "score": "4.4/5",
-            "count": "10 reviews",
-            "url": "https://se.trustpilot.com/review/hudsverige.se",
-            "cta_label": "See all reviews on Trustpilot"
-          }
-        },
-        "award_jKmGn4": {
-          "type": "award",
-          "settings": {
-            "emblem": "shopify://shop_images/skapa-emblem-small.png",
-            "name": "SKAPA",
-            "caption": "Innovation Award — in memory of the inventor Alfred Nobel"
-          }
-        },
-        "stars_HtABXQ": {
-          "type": "stars",
-          "settings": {
-            "score": "4.85/5",
-            "count": "47 reviews",
-            "url": "shopify://products/drye-moisture-routing-glove-liners",
-            "cta_label": "See all our reviews"
-          }
-        }
-      },
-      "block_order": [
-        "trustpilot_7TdJeH",
-        "award_jKmGn4",
-        "stars_HtABXQ"
-      ],
-      "custom_css": [],
-      "name": "DRYE NT — Trust badges",
-      "settings": {}
     },
     "drye_nt_pro_reviews_xHQ6BX": {
       "type": "drye-nt-pro-reviews",
@@ -727,6 +770,19 @@
         "logos_label": "Research and development partners"
       }
     },
+    "drye_nt_close_ByEU4J": {
+      "type": "drye-nt-close",
+      "settings": {
+        "days": "30",
+        "days_label": "Days",
+        "heading": "Try it risk-free.",
+        "body": "If DRYE Liner doesn't change your shift, full refund. No hassle.",
+        "cta_label": "Get DRYE Liner",
+        "cta_url": "shopify://products/drye-moisture-routing-glove-liners",
+        "guarantee": "30-Day Money Back Guarantee",
+        "sources": ""
+      }
+    },
     "nt_close": {
       "type": "drye-nt-close",
       "settings": {
@@ -747,17 +803,19 @@
     "nt_desk",
     "drye_nt_barrier_choice_g6KFyg",
     "drye_mechanics_time_promise_JFkP3K",
+    "drye_liner_product_clarity_PqAH9K",
     "nt_mechanism",
     "drye_research_video_full_bi4hwc",
+    "drye_nt_trust_badges_t8dXtb",
     "nt_loop",
     "nt_tradeoff",
     "nt_trapped",
     "drye_nt_inside_9eaNVa",
-    "drye_nt_trust_badges_t8dXtb",
     "drye_nt_pro_reviews_xHQ6BX",
     "nt_nails",
     "drye_nt_real_reviews_dHDWiM",
     "drye_nt_validation_Ep7qKR",
+    "drye_nt_close_ByEU4J",
     "nt_close"
   ]
 }
