@@ -256,6 +256,19 @@
         "drye_steps": "Skin side repels — sweat cannot sit there\nOuter side pulls moisture toward it\nContinuous transport, no saturation point"
       }
     },
+    "drye_nt_close_d36WWJ": {
+      "type": "drye-nt-close",
+      "settings": {
+        "days": "30",
+        "days_label": "Days",
+        "heading": "Try it risk-free.",
+        "body": "If DRYE Liner doesn't change your shift, full refund. No hassle.",
+        "cta_label": "Get DRYE Liner",
+        "cta_url": "shopify://products/drye-moisture-routing-glove-liners",
+        "guarantee": "Secure checkout · 4.88/5 on 47 reviews",
+        "sources": ""
+      }
+    },
     "drye_nt_pro_reviews_xHQ6BX": {
       "type": "drye-nt-pro-reviews",
       "blocks": {
@@ -335,6 +348,46 @@
         "stats_note": "Post-purchase feedback from verified DRYE customers. Results vary by glove type, heat, and shift length."
       }
     },
+    "drye_nt_trust_badges_t8dXtb": {
+      "type": "drye-nt-trust-badges",
+      "blocks": {
+        "trustpilot_7TdJeH": {
+          "type": "trustpilot",
+          "settings": {
+            "logo": "shopify://shop_images/trustpilot-logo-trimmed.png",
+            "score": "4.4/5",
+            "count": "10 reviews",
+            "url": "https://se.trustpilot.com/review/hudsverige.se",
+            "cta_label": "See all reviews on Trustpilot"
+          }
+        },
+        "award_jKmGn4": {
+          "type": "award",
+          "settings": {
+            "emblem": "shopify://shop_images/skapa-emblem-small.png",
+            "name": "SKAPA",
+            "caption": "Innovation Award — in memory of the inventor Alfred Nobel"
+          }
+        },
+        "stars_HtABXQ": {
+          "type": "stars",
+          "settings": {
+            "score": "4.85/5",
+            "count": "47 reviews",
+            "url": "shopify://products/drye-moisture-routing-glove-liners",
+            "cta_label": "See all our reviews"
+          }
+        }
+      },
+      "block_order": [
+        "trustpilot_7TdJeH",
+        "award_jKmGn4",
+        "stars_HtABXQ"
+      ],
+      "custom_css": [],
+      "name": "DRYE NT — Trust badges",
+      "settings": {}
+    },
     "drye_documented_results_J3xN6N": {
       "type": "drye-documented-results",
       "blocks": {
@@ -393,58 +446,96 @@
         "subheading": "Sealed gloves over time cause <strong>skin barrier breakdown. </strong>No cream, powder, or steroid on earth can solve that."
       }
     },
-    "drye_nt_close_d36WWJ": {
-      "type": "drye-nt-close",
-      "settings": {
-        "days": "30",
-        "days_label": "Days",
-        "heading": "Try it risk-free.",
-        "body": "If DRYE Liner doesn't change your shift, full refund. No hassle.",
-        "cta_label": "Get DRYE Liner",
-        "cta_url": "shopify://products/drye-moisture-routing-glove-liners",
-        "guarantee": "30-Day Money Back Guarantee",
-        "sources": ""
-      }
-    },
-    "drye_nt_trust_badges_t8dXtb": {
-      "type": "drye-nt-trust-badges",
+    "drye_evidence_EKtYeR": {
+      "type": "drye-evidence",
       "blocks": {
-        "trustpilot_7TdJeH": {
-          "type": "trustpilot",
+        "card_iNU37T": {
+          "type": "card",
           "settings": {
-            "logo": "shopify://shop_images/trustpilot-logo-trimmed.png",
-            "score": "4.4/5",
-            "count": "10 reviews",
-            "url": "https://se.trustpilot.com/review/hudsverige.se",
-            "cta_label": "See all reviews on Trustpilot"
+            "label": "exposure threshold",
+            "stat_prefix": "",
+            "stat": "5–7",
+            "stat_suffix": "min",
+            "stat_qualitative": false,
+            "body": "<strong>In a sealed glove: </strong>relative humidity hits 90% within 5–7 minutes. Skin temperature climbs to 95°F.",
+            "source": "Park & Lee 2025"
           }
         },
-        "award_jKmGn4": {
-          "type": "award",
+        "card_g6fx67": {
+          "type": "card",
           "settings": {
-            "emblem": "shopify://shop_images/skapa-emblem-small.png",
-            "name": "SKAPA",
-            "caption": "Innovation Award — in memory of the inventor Alfred Nobel"
+            "label": "WET SKIN SOFTENS",
+            "stat_prefix": "",
+            "stat": "27",
+            "stat_suffix": "min",
+            "stat_qualitative": false,
+            "body": "<strong>After 27 minutes: </strong>skin damage risk doubles in women, 55 minutes in men. Most shifts run 3-6 hours - 8x the threshold.",
+            "source": "Lund 2020, Scand J Work Environ Health"
           }
         },
-        "stars_HtABXQ": {
-          "type": "stars",
+        "card_fMftcw": {
+          "type": "card",
           "settings": {
-            "score": "4.85/5",
-            "count": "47 reviews",
-            "url": "shopify://products/drye-moisture-routing-glove-liners",
-            "cta_label": "See all our reviews"
+            "label": "maceration",
+            "stat_prefix": "",
+            "stat": "3",
+            "stat_suffix": "x swelling",
+            "stat_qualitative": false,
+            "body": "<strong>after 4 hours:</strong> your outer skin barrier swells 3x thicker. Solvents and chemicals soak in deeper - into skin that can't fight back.",
+            "source": "Bouwstra 2003, J invest Dermatol"
+          }
+        },
+        "card_dGJJGr": {
+          "type": "card",
+          "settings": {
+            "label": "Wet skin lets more through",
+            "stat_prefix": "",
+            "stat": "3,6",
+            "stat_suffix": "x faster",
+            "stat_qualitative": false,
+            "body": "Hydrated human skin allowed some fat-soluble model compounds to <strong>penetrate up to 3.6× more in vitro.</strong>",
+            "source": "Hikima & Maibach, Biol Pharm Bull, 2006."
+          }
+        },
+        "card_Aa9wH9": {
+          "type": "card",
+          "disabled": true,
+          "settings": {
+            "label": "Workforce cost",
+            "stat_prefix": "",
+            "stat": "57",
+            "stat_suffix": "% sick leave",
+            "stat_qualitative": false,
+            "body": "<strong>In chronic cases</strong> 57% take sick leave. 1 in 4 change or leave their trade. Direct healthcare costs run thousands per case, year after year.",
+            "source": "Armstrong 2022, DIepgen"
+          }
+        },
+        "bridge_9nwDKk": {
+          "type": "bridge",
+          "settings": {
+            "label": "The mechanism",
+            "paradigm": "Every glove, liner, barrier cream and powder fails on the physics.",
+            "mechanism": "DRYE routes sweat from skin to outer fabric. One-directional gradient. We call it <span style=\"color: #fff; font-weight: 700;\">Asymmetric layering.</span>",
+            "cta_label": "See how it works",
+            "cta_link": "shopify://pages/how-it-works"
           }
         }
       },
       "block_order": [
-        "trustpilot_7TdJeH",
-        "award_jKmGn4",
-        "stars_HtABXQ"
+        "card_iNU37T",
+        "card_g6fx67",
+        "card_fMftcw",
+        "card_dGJJGr",
+        "card_Aa9wH9",
+        "bridge_9nwDKk"
       ],
-      "custom_css": [],
-      "name": "DRYE NT — Trust badges",
-      "settings": {}
+      "name": "DRYE Evidence",
+      "settings": {
+        "eyebrow": "",
+        "heading": "Why every nail tech should care.\n<em class=\"dryeNEW-em\"><br>Wet skin lets more through.</em>",
+        "body": "Not from the outside. <strong>From what happens inside your gloves.</strong>",
+        "swipe_label": "Swipe"
+      }
     },
     "drye_nt_validation_Ep7qKR": {
       "type": "drye-nt-validation",
@@ -839,6 +930,7 @@
     "drye_nt_pro_reviews_xHQ6BX",
     "drye_nt_trust_badges_t8dXtb",
     "drye_documented_results_J3xN6N",
+    "drye_evidence_EKtYeR",
     "drye_nt_validation_Ep7qKR",
     "nt_nails",
     "nt_desk",
