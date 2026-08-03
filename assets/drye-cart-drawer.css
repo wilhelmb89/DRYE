@@ -162,6 +162,21 @@
   padding: 3px 8px; border-radius: 2px;
 }
 
+/* green shipping-time badge, top-right inside the pack card */
+.drye-cart-ship-badge {
+  position: absolute; top: 12px; right: 12px; z-index: 2;
+  display: flex; flex-direction: column; align-items: flex-end; gap: 1px;
+  width: 118px; padding: 7px 9px;
+  background: #E7F6F1; border: 1px solid #0D9488; border-radius: 7px;
+  text-align: right;
+}
+.drye-cart-ship-badge__label { font-family: 'DM Sans', sans-serif; font-size: 8.5px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: #0B7A70; }
+.drye-cart-ship-badge__eta { font-family: 'Clash Grotesk', sans-serif; font-size: 13px; font-weight: 700; line-height: 1.15; color: #0A4A44; margin-top: 1px; }
+.drye-cart-ship-badge__method { font-family: 'DM Sans', sans-serif; font-size: 9.5px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: #0D9488; margin-top: 3px; }
+.drye-cart-ship-badge__tracked { font-family: 'DM Sans', sans-serif; font-size: 9.5px; font-weight: 600; letter-spacing: .04em; color: #0B7A70; }
+/* reserve room so the pack title/price don't slide under the badge */
+.drye-cart-pack__title, .drye-cart-pack__price, .drye-cart-pack__save { padding-right: 126px; }
+
 /* "Adjust your sizes" — gradient collapsible box with a clear round chevron */
 .drye-cart-sizes {
   margin: 0 20px 16px;

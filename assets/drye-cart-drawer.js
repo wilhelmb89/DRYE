@@ -28,6 +28,31 @@
 
   var CHEVRON = '<svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4 10l4-4 4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
 
+  // Shipping estimate shown in the green badge on the pack card. Method + transit
+  // window mirror the Buy Zone offer: 3+ pairs ship Express (2–3 business days,
+  // matches "UPS Express: 2–3 business days"); 1–2 pairs ship Economy. Adjust the
+  // day windows here if the offer copy changes. All orders are tracked.
+  var SHIP = {
+    express: { method: 'Express', minDays: 2, maxDays: 3 },
+    economy: { method: 'Economy', minDays: 6, maxDays: 10 }
+  };
+  function shipTierFor(n) { return n >= 3 ? SHIP.express : SHIP.economy; }
+  function addBusinessDays(date, days) {
+    var d = new Date(date.getTime()), added = 0;
+    while (added < days) { d.setDate(d.getDate() + 1); var wd = d.getDay(); if (wd !== 0 && wd !== 6) added++; }
+    return d;
+  }
+  function fmtShipDate(d) {
+    try { return d.toLocaleDateString(undefined, { month: 'short', day: 'numeric' }); }
+    catch (e) { return (d.getMonth() + 1) + '/' + d.getDate(); }
+  }
+  function shipEtaText(n) {
+    var t = shipTierFor(n), now = new Date();
+    var loS = fmtShipDate(addBusinessDays(now, t.minDays));
+    var hiS = fmtShipDate(addBusinessDays(now, t.maxDays));
+    return loS === hiS ? loS : (loS + ' – ' + hiS);
+  }
+
   var sizeVariantsEl = document.getElementById('drye-size-variants');
   var SIZE_VARIANTS = sizeVariantsEl ? JSON.parse(sizeVariantsEl.textContent) : {};
   var SIZE_ORDER = Object.keys(SIZE_VARIANTS); // actual option values in variant order (e.g. "M (8)")
@@ -116,6 +141,12 @@
     return '' +
       '<div class="drye-cart-pack">' +
         '<span class="drye-cart-pack__tag">Your pack</span>' +
+        '<div class="drye-cart-ship-badge">' +
+          '<span class="drye-cart-ship-badge__label">Shipping time</span>' +
+          '<span class="drye-cart-ship-badge__eta">' + shipEtaText(n) + '</span>' +
+          '<span class="drye-cart-ship-badge__method">' + shipTierFor(n).method + '</span>' +
+          '<span class="drye-cart-ship-badge__tracked">Tracked</span>' +
+        '</div>' +
         '<div class="drye-cart-pack__title">' + n + (n === 1 ? ' Pair' : ' Pairs') + ' · ' + copy.name + '</div>' +
         '<div class="drye-cart-pack__price' + (pending ? ' is-pending' : '') + '">' + (total != null ? money(total) : '…') + '</div>' +
         (!pending && disc > 0 ? '<div class="drye-cart-pack__save"><strong>Save ' + money(disc) + '</strong></div>' : '') +
@@ -376,6 +407,12 @@
   });
 
   // Intercept the PDP add-to-cart form so it Ajax-adds and opens THIS drawer.
+  // submitInFlight makes the add IDEMPOTENT: setCartToPack already SETS the cart
+  // to exactly `count` (clear-then-add), but a duplicate submit event or a second
+  // submit handler could still fire a parallel add and leave stacked pairs
+  // (the "select 3 → 5 in cart" bug). We stop other submit handlers for THIS
+  // form and ignore re-entrant submits so a pair is added exactly once.
+  var submitInFlight = false;
   document.addEventListener('submit', function (e) {
     var form = e.target;
     if (!form || form.nodeName !== 'FORM') return;
@@ -387,19 +424,25 @@
     if (!isProductForm) return;
     var submitter = e.submitter || form.querySelector('[type="submit"]');
     if (submitter && submitter.name === 'checkout') return; // let dynamic "Buy now" pass through
+    // We own this submit — stop the native submit AND any other (e.g. theme
+    // product-form) submit handler so the pair can't be added twice.
     e.preventDefault();
+    e.stopImmediatePropagation();
+    if (submitInFlight) return; // a previous add is still settling — drop the dupe
     var fd = new FormData(form);
     var variantId = fd.get('id');
     var addQty = parseInt(fd.get('quantity'), 10) || 1;
     if (!variantId) { form.submit(); return; }
+    submitInFlight = true;
     if (submitter) submitter.setAttribute('disabled', 'disabled');
     setCartToPack(variantId, addQty)
       .then(function () {
+        submitInFlight = false;
         if (submitter) submitter.removeAttribute('disabled');
         pushAddToCart(variantId, addQty);
         document.dispatchEvent(new CustomEvent('drye:cart:added'));
       })
-      .catch(function () { if (submitter) submitter.removeAttribute('disabled'); form.submit(); });
+      .catch(function () { submitInFlight = false; if (submitter) submitter.removeAttribute('disabled'); form.submit(); });
   }, true);
 
   document.addEventListener('drye:cart:added', function () { init().then(openDrawer); });
