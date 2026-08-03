@@ -1,32 +1,40 @@
-{{ 'drye-cart-drawer.css' | asset_url | stylesheet_tag }}
-<script src="{{ 'drye-cart-drawer.js' | asset_url }}" defer></script>
+{% comment %}
+  ============================================================================
+  DRYE Cart Drawer — handoff snippet
+  Render once in theme.liquid (end of <body>): {% render 'drye-cart-drawer' %}
+  The drawer is populated from the live Shopify cart via cart.js — this
+  Liquid pass only renders the FIRST-PAINT state (no flash before JS boots).
+  drye-cart-drawer.js re-renders it on every add/change/remove.
 
-{%- comment -%}
-  DRYE Cart Drawer — SECTION (Section Rendering pattern).
-  Every price is server-rendered Liquid (money_with_currency), so the currency
-  is ALWAYS the buyer's market currency (page localization context) — USD for
-  /en-us/, CAD for /en-ca/, etc. drye-cart-drawer.js mutates the cart then
-  re-renders THIS section via ?section_id= and injects the HTML. It never
-  formats prices client-side (that was the SEK bug). Model: one cart line per
-  pair (qty 1) so each pair carries its own size variant.
-{%- endcomment -%}
+  ARCHITECTURE NOTE — read before wiring:
+  The prototype's "pack tiers" (1–6 pairs, tiered % off) are a single
+  product's line items grouped together, one line item PER PAIR so each
+  pair can carry its own size (Shopify's cart can't split one line's
+  quantity across variants). Pack quantity = sum of those lines' quantities.
+  Pricing (the tier discount, and the flat-rate "out of stock size" rate)
+  is intentionally NOT computed client-side here — it must come from your
+  real quantity-break discount setup (Shopify Function / native volume
+  pricing / discount app), same as the PDP buy-zone patch. This snippet and
+  its JS only DISPLAY whatever cart.js returns (cart.items, cart.total_price,
+  cart.original_total_price, cart.cart_level_discount_applications). Wire
+  drye_pairs_product below to your liner product/handle.
+  ============================================================================
+{% endcomment %}
 
-{%- liquid
-  assign drye_handle = section.settings.pairs_product_handle | default: 'drye-moisture-routing-glove-liners'
-  assign drye_product = all_products[drye_handle]
-  assign n = cart.item_count
-  assign free_ship_pairs = 3
-  assign disc = cart.original_total_price | minus: cart.total_price
--%}
+{% assign drye_pairs_product = section.settings.pairs_product_handle | default: 'drye-moisture-routing-glove-liners' %}
+{% assign drye_product = all_products[drye_pairs_product] %}
 
+{% comment %} Expose variant-id lookup by size label, for the JS size-stepper to swap variants via /cart/change.js + /cart/add.js. Adjust the option index (option1/2/3) to match where "Size" sits in your product's options. {% endcomment %}
 <script type="application/json" id="drye-size-variants">
-{ {% for variant in drye_product.variants %}"{{ variant.option1 | escape }}": {{ variant.id }}{% unless forloop.last %},{% endunless %}{% endfor %} }
+  {
+    {% for variant in drye_product.variants %}
+      "{{ variant.option1 | escape }}": {{ variant.id }}{% unless forloop.last %},{% endunless %}
+    {% endfor %}
+  }
 </script>
-<script>
-  window.DRYE_PRODUCT_IMAGE = {{ drye_product.images.last | image_url: width: 160 | json }};
-  window.DRYE_DEFAULT_VARIANT = {{ drye_product.selected_or_first_available_variant.id | json }};
-  window.DRYE_CART_HANDLE = {{ drye_handle | json }};
-</script>
+
+{% comment %} Per-pair thumbnail in the cart drawer — the dedicated cart-drawer image (last gallery image / Shopify Files). Swap the URL to change it. {% endcomment %}
+<script>window.DRYE_PRODUCT_IMAGE = "{{ drye_product.images.last | image_url: width: 160 }}";</script>
 
 <div class="drye-cart-overlay" data-drye-cart-overlay></div>
 
@@ -35,7 +43,7 @@
   <div class="drye-cart-head">
     <div class="drye-cart-head__title-wrap">
       <span class="drye-cart-head__title">Your cart</span>
-      <span class="drye-cart-head__count" data-drye-cart-count>{{ n }} {% if n == 1 %}item{% else %}items{% endif %}</span>
+      <span class="drye-cart-head__count" data-drye-cart-count>{{ cart.item_count }} items</span>
     </div>
     <div class="drye-cart-head__actions">
       <div class="drye-cart-currency">{{ cart.currency.iso_code }}</div>
@@ -48,172 +56,69 @@
     <span>Prices shown in {{ cart.currency.iso_code }}</span>
   </div>
 
-  {%- if n > 0 -%}
-    {%- liquid
-      assign need = free_ship_pairs | minus: n
-      assign pct = n | times: 100 | divided_by: free_ship_pairs
-      if pct > 100
-        assign pct = 100
-      endif
-    -%}
-    <div class="drye-cart-ship">
-      <div class="drye-cart-ship__msg" data-drye-cart-ship-msg>
-        {%- if need <= 0 -%}
-          <span class="drye-cart-ship__msg--qualified">You qualify for free shipping</span>
-        {%- else -%}
-          Add <strong>{{ need }} more {% if need == 1 %}pair{% else %}pairs{% endif %}</strong> for free shipping
-        {%- endif -%}
-      </div>
-      <div class="drye-cart-ship__track">
-        <div class="drye-cart-ship__fill" data-drye-cart-ship-fill style="width: {{ pct }}%;"></div>
-      </div>
+  <div class="drye-cart-ship">
+    <div class="drye-cart-ship__msg" data-drye-cart-ship-msg>
+      {% comment %} JS overwrites this on every cart update against your real free-shipping threshold {% endcomment %}
     </div>
-  {%- endif -%}
+    <div class="drye-cart-ship__track">
+      <div class="drye-cart-ship__fill" data-drye-cart-ship-fill style="width: 0%;"></div>
+    </div>
+  </div>
 
-  <div class="drye-cart-body">
-    {%- if n > 0 -%}
-      {%- liquid
-        assign pack_name = 'Team Rotation'
-        assign pack_benefit = 'Full team rotation · Express delivery · No surprise fees'
-        case n
-          when 1
-            assign pack_name = 'Starter Pair'
-            assign pack_benefit = 'Test under your own gloves'
-          when 2
-            assign pack_name = 'Work Rotation'
-            assign pack_benefit = 'One on. One drying.'
-          when 3
-            assign pack_name = 'Express Workweek Pack'
-            assign pack_benefit = 'Full week rotation · Express delivery · No surprise fees'
-          when 4
-            assign pack_name = 'Extra Rotation'
-            assign pack_benefit = 'Full week rotation + spare pair · Express delivery · No surprise fees'
-          when 5
-            assign pack_name = 'Team Starter'
-            assign pack_benefit = 'Team starter rotation · Express delivery · No surprise fees'
-        endcase
-        if n >= 3
-          assign ship_method = 'Express'
-          assign ship_min = 2
-          assign ship_max = 3
-        else
-          assign ship_method = 'Economy'
-          assign ship_min = 6
-          assign ship_max = 10
-        endif
-      -%}
+  <div class="drye-cart-body" data-drye-cart-body>
+    {% comment %} Server-rendered first paint; JS replaces this innerHTML after fetch('/cart.js') resolves. See drye-cart-drawer.js renderCart(). {% endcomment %}
+    {% if cart.item_count > 0 %}
       <div class="drye-cart-pack">
-        <span class="drye-cart-pack__tag">Your pack</span>
-        <div class="drye-cart-ship-badge" data-drye-ship-min="{{ ship_min }}" data-drye-ship-max="{{ ship_max }}">
-          <span class="drye-cart-ship-badge__label">Shipping time</span>
-          <span class="drye-cart-ship-badge__eta" data-drye-ship-eta>…</span>
-          <span class="drye-cart-ship-badge__method">{{ ship_method }}</span>
-          <span class="drye-cart-ship-badge__tracked">Tracked</span>
-        </div>
-        <div class="drye-cart-pack__title">{{ n }} {% if n == 1 %}Pair{% else %}Pairs{% endif %} · {{ pack_name }}</div>
-        <div class="drye-cart-pack__price">{{ cart.total_price | money_with_currency }}</div>
-        {%- if disc > 0 -%}
-          <div class="drye-cart-pack__save"><strong>Save {{ disc | money_with_currency }}</strong></div>
-        {%- endif -%}
-        {%- if pack_benefit != blank -%}
-          <div class="drye-cart-pack__benefit">{{ pack_benefit }}</div>
-        {%- endif -%}
-        <div class="drye-cart-stepper-row">
-          <div class="drye-cart-stepper">
-            <button type="button" data-drye-cart-pack-step="-1"{% if n <= 1 %} disabled{% endif %}>−</button>
-            <div class="drye-cart-stepper__val">{{ n }}</div>
-            <button type="button" data-drye-cart-pack-step="1"{% if n >= 6 %} disabled{% endif %}>+</button>
-          </div>
-          <div class="drye-cart-tiers">
-            {%- for k in (1..6) -%}<div class="drye-cart-tiers__seg{% if k <= n %} is-filled{% endif %}"></div>{%- endfor -%}
-          </div>
-        </div>
+        <div class="drye-cart-pack__title">{{ cart.item_count }} {% if cart.item_count == 1 %}Pair{% else %}Pairs{% endif %}</div>
+        <div class="drye-cart-pack__price">{{ cart.total_price | money }}</div>
       </div>
-
-      <div class="drye-cart-sizes is-open" data-drye-cart-sizes>
-        <button type="button" class="drye-cart-sizes__toggle" data-drye-cart-sizes-toggle>
-          <span class="drye-cart-sizes__title">Adjust your sizes</span>
-          <span class="drye-cart-sizes__chevron" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none"><path d="M4 10l4-4 4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-        </button>
-        <div class="drye-cart-sizes__panel">
-          {%- for item in cart.items -%}
-            <div class="drye-cart-pair" data-drye-pair-key="{{ item.key }}" data-drye-pair-size="{{ item.variant.title | escape }}">
-              {%- if item.image -%}
-                {{ item.image | image_url: width: 120 | image_tag: class: 'drye-cart-pair__img', alt: item.product.title | escape, loading: 'lazy' }}
-              {%- else -%}
-                <span class="drye-cart-pair__img"></span>
-              {%- endif -%}
-              <div class="drye-cart-pair__stepper">
-                <button type="button" data-drye-pair-size-step="-1" data-drye-pair-key="{{ item.key }}" aria-label="Smaller size">−</button>
-                <div class="drye-cart-pair__size">{{ item.variant.title }}</div>
-                <button type="button" data-drye-pair-size-step="1" data-drye-pair-key="{{ item.key }}" aria-label="Larger size">+</button>
-              </div>
-            </div>
-          {%- endfor -%}
-          <div class="drye-cart-sizeguide-link">Unsure of your size? <a href="{{ routes.root }}pages/size-guide">See size guide</a></div>
-        </div>
-      </div>
-    {%- else -%}
+    {% else %}
       <div class="drye-cart-empty">
         <div class="drye-cart-empty__icon">🛒</div>
         <div class="drye-cart-empty__title">Your cart is empty</div>
         <div class="drye-cart-empty__sub">Add a pair to continue.</div>
         <a href="{{ drye_product.url | default: '/collections/all' }}" class="drye-cart-empty__cta">Shop now</a>
       </div>
-    {%- endif -%}
+    {% endif %}
   </div>
 
-  {%- if n > 0 -%}
-    <div class="drye-cart-upsell" data-drye-cart-upsell>
-      <div class="drye-cart-upsell__title">Add more pairs</div>
-      <div class="drye-cart-upsell__sub">Keep extra dry liners ready for rotation, backup, or your team.</div>
-      <div class="drye-cart-upsell__cards">
-        <div class="drye-cart-upsell__card">
-          <div class="drye-cart-upsell__name">4 pairs · Extra rotation</div>
-          <button type="button" class="drye-cart-upsell__btn" data-drye-cart-set-pairs="4">Upgrade to 4 pairs</button>
-        </div>
-        <div class="drye-cart-upsell__card drye-cart-upsell__card--best">
-          <div class="drye-cart-upsell__badge">Best team value</div>
-          <div class="drye-cart-upsell__name">6 pairs · Team rotation</div>
-          <button type="button" class="drye-cart-upsell__btn drye-cart-upsell__btn--solid" data-drye-cart-set-pairs="6">Upgrade to 6 pairs</button>
-        </div>
+  <div class="drye-cart-upsell" data-drye-cart-upsell hidden>
+    <div class="drye-cart-upsell__title">Add more pairs</div>
+    <div class="drye-cart-upsell__sub">Keep extra dry liners ready for rotation, backup, or your team.</div>
+    <div class="drye-cart-upsell__cards">
+      <div class="drye-cart-upsell__card">
+        <div class="drye-cart-upsell__name">4 pairs · Extra rotation</div>
+        <div class="drye-cart-upsell__price" data-drye-upsell-price="4"></div>
+        <button type="button" class="drye-cart-upsell__btn" data-drye-cart-set-pairs="4">Upgrade to 4 pairs</button>
+      </div>
+      <div class="drye-cart-upsell__card drye-cart-upsell__card--best">
+        <div class="drye-cart-upsell__badge">Best team value</div>
+        <div class="drye-cart-upsell__name">6 pairs · Team rotation</div>
+        <div class="drye-cart-upsell__price" data-drye-upsell-price="6"></div>
+        <button type="button" class="drye-cart-upsell__btn drye-cart-upsell__btn--solid" data-drye-cart-set-pairs="6">Upgrade to 6 pairs</button>
       </div>
     </div>
+  </div>
 
-    <div class="drye-cart-summary">
-      <div class="drye-cart-summary__row">
-        <span class="drye-cart-summary__label">Subtotal</span>
-        <span class="drye-cart-summary__value">{{ cart.original_total_price | money_with_currency }}</span>
-      </div>
-      {%- if disc > 0 -%}
-        <div class="drye-cart-summary__row">
-          <span class="drye-cart-summary__label">Pack discount</span>
-          <span class="drye-cart-summary__value drye-cart-summary__value--discount">−{{ disc | money_with_currency }}</span>
-        </div>
-      {%- endif -%}
-      <div class="drye-cart-summary__total">
-        <span class="drye-cart-summary__total-label">Total</span>
-        <span class="drye-cart-summary__total-value">{{ cart.total_price | money_with_currency }}</span>
-      </div>
-      <a href="{{ routes.root }}checkout" class="drye-cart-checkout" data-drye-checkout>
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M12 2l7 3v6c0 4.5-3 8.2-7 9-4-.8-7-4.5-7-9V5l7-3z" stroke="white" stroke-width="1.5" stroke-linejoin="round"/><path d="M9 12l2 2 4-4" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        Secure checkout →
-      </a>
-      <button type="button" class="drye-cart-continue" data-drye-cart-close>Continue shopping</button>
+  <div class="drye-cart-summary">
+    <div class="drye-cart-summary__row">
+      <span class="drye-cart-summary__label">Subtotal</span>
+      <span class="drye-cart-summary__value" data-drye-cart-subtotal>{{ cart.original_total_price | money }}</span>
     </div>
-  {%- endif -%}
+    <div class="drye-cart-summary__row" data-drye-cart-discount-row hidden>
+      <span class="drye-cart-summary__label">Pack discount</span>
+      <span class="drye-cart-summary__value drye-cart-summary__value--discount" data-drye-cart-discount>−{{ cart.total_discount | money }}</span>
+    </div>
+    <div class="drye-cart-summary__total">
+      <span class="drye-cart-summary__total-label">Total</span>
+      <span class="drye-cart-summary__total-value" data-drye-cart-total>{{ cart.total_price | money }}</span>
+    </div>
+    <a href="{{ routes.cart_url }}" class="drye-cart-checkout">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M12 2l7 3v6c0 4.5-3 8.2-7 9-4-.8-7-4.5-7-9V5l7-3z" stroke="white" stroke-width="1.5" stroke-linejoin="round"/><path d="M9 12l2 2 4-4" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      Secure checkout →
+    </a>
+    <button type="button" class="drye-cart-continue" data-drye-cart-close>Continue shopping</button>
+  </div>
 </aside>
 
-<button type="button" class="drye-cart-open-btn" data-drye-cart-open hidden aria-label="Open cart"></button>
-
-{% schema %}
-{
-  "name": "DRYE Cart Drawer",
-  "settings": [
-    { "type": "text", "id": "pairs_product_handle", "label": "Liner product handle", "default": "drye-moisture-routing-glove-liners" }
-  ],
-  "presets": [{ "name": "DRYE Cart Drawer" }]
-}
-{% endschema %}
-
-{%- comment -%} resync 2026-08-03T23:44:44.9779923+02:00 {%- endcomment -%}
+<button type="button" class="drye-cart-open-btn" data-drye-cart-open style="top: 20px; left: 20px;" hidden>Open cart</button>
