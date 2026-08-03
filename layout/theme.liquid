@@ -134,7 +134,22 @@
     <!-- End Google Tag Manager (noscript) -->
 
     <!-- Header -->
-    {%- sections 'header-group' -%}
+    {%- comment -%}
+      Nail-tech is a cold-traffic conversion funnel (/pages/nail-tech). We do NOT
+      render the theme header + announcement bar there, so visitors can't click
+      out of the funnel via the nav before reaching the CTA. Handled here in the
+      layout (not the page template) because the theme editor rewrites template
+      JSON and strips any in-template hide section; a layout file is never
+      clobbered. Matches on template suffix OR page handle, so it holds under any
+      market prefix (e.g. /en-us/pages/nail-tech).
+    {%- endcomment -%}
+    {%- assign hide_chrome = false -%}
+    {%- if template.suffix == 'nail-tech' or page.handle == 'nail-tech' -%}
+      {%- assign hide_chrome = true -%}
+    {%- endif -%}
+    {%- unless hide_chrome -%}
+      {%- sections 'header-group' -%}
+    {%- endunless -%}
 
     <!-- Main content -->
     {{ content_for_layout }}
