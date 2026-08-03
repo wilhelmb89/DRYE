@@ -271,6 +271,9 @@ assign review_count = section.settings.review_count_fallback
         {% if section.settings.bullet_4 != blank %}
           <li><span class="pdp-intro__dot"><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8.4l3 3 7-7.6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span>{{ section.settings.bullet_4 }}</span></li>
         {% endif %}
+        {% if section.settings.bullet_5 != blank %}
+          <li><span class="pdp-intro__dot"><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8.4l3 3 7-7.6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span>{{ section.settings.bullet_5 }}</span></li>
+        {% endif %}
       </ul>
     </div>
 
@@ -1919,6 +1922,12 @@ wteTimelines.forEach((timeline) => {
       "id": "bullet_4",
       "label": "Checklist item 4",
       "default": "Oil & grease hit the liner first"
+    },
+    {
+      "type": "text",
+      "id": "bullet_5",
+      "label": "Checklist item 5",
+      "default": "Adds a physical layer between skin and nitrile contact"
     },
     {
       "type": "text",
