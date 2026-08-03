@@ -166,7 +166,10 @@
   async function stepPairSize(key, dir) {
     var order = sizeOrder(), vars = sizeVariants();
     if (!order.length) return;
-    var row = document.querySelector('.drye-cart-pair[data-drye-pair-key="' + (window.CSS && CSS.escape ? CSS.escape(key) : key) + '"]');
+    // Match by raw key in a quoted attribute selector — cart line keys are
+    // "<digits>:<hex>", safe unquoted; CSS.escape would wrongly escape the ':'.
+    var row = null, rows = document.querySelectorAll('.drye-cart-pair[data-drye-pair-key]');
+    for (var r = 0; r < rows.length; r++) { if (rows[r].getAttribute('data-drye-pair-key') === key) { row = rows[r]; break; } }
     var curSize = row ? row.getAttribute('data-drye-pair-size') : null;
     var i = order.indexOf(curSize);
     if (i === -1) return;
@@ -253,17 +256,15 @@
 
   document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && isOpen()) close(); });
 
-  // ---- intercept the PDP add-to-cart form (idempotent SET) ----
-  document.addEventListener('submit', function (e) {
-    var form = e.target;
-    if (!form || form.nodeName !== 'FORM') return;
+  // ---- add-to-cart from the PDP product form (idempotent SET → open drawer) ----
+  function isProductForm(form) {
+    if (!form || form.nodeName !== 'FORM') return false;
     var action = form.getAttribute('action') || '';
-    var isProductForm = form.hasAttribute('data-product-form') || action.indexOf('/cart/add') !== -1 || (form.matches && form.matches('product-form form'));
-    if (!isProductForm) return;
-    var submitter = e.submitter || form.querySelector('[type="submit"]');
-    if (submitter && submitter.name === 'checkout') return; // Buy now passthrough
-    e.preventDefault();
-    e.stopImmediatePropagation();
+    return form.hasAttribute('data-product-form') ||
+           action.indexOf('/cart/add') !== -1 ||
+           (form.matches && form.matches('product-form form'));
+  }
+  function runProductAdd(form, submitter) {
     if (busy) return;
     var fd = new FormData(form);
     var variantId = fd.get('id');
@@ -276,6 +277,31 @@
       .then(function () { pushAddToCart(variantId, addQty); })
       .catch(function (err) { console.warn('[DRYE cart] add failed', err); })
       .then(function () { busy = false; if (submitter) submitter.removeAttribute('disabled'); });
+  }
+
+  // Primary guard — intercept the CLICK on the submit button in capture phase.
+  // This stops the browser from ever starting the native POST → /cart redirect
+  // (what sent buyers to the bare /cart page), independent of the submit event.
+  document.addEventListener('click', function (e) {
+    var btn = e.target.closest && e.target.closest('button[type="submit"], input[type="submit"]');
+    if (!btn || btn.name === 'checkout') return;               // Buy now passthrough
+    var form = btn.form || (btn.closest && btn.closest('form'));
+    if (!isProductForm(form)) return;
+    e.preventDefault();
+    e.stopImmediatePropagation();
+    runProductAdd(form, btn);
+  }, true);
+
+  // Fallback guard — programmatic requestSubmit() (e.g. the sticky bar) fires a
+  // submit event without a button click, so we catch that path too.
+  document.addEventListener('submit', function (e) {
+    var form = e.target;
+    if (!isProductForm(form)) return;
+    var submitter = e.submitter || form.querySelector('[type="submit"]');
+    if (submitter && submitter.name === 'checkout') return;    // Buy now passthrough
+    e.preventDefault();
+    e.stopImmediatePropagation();
+    runProductAdd(form, submitter);
   }, true);
 
   // ---- external refresh hook (e.g. currency-sync re-add) ----
