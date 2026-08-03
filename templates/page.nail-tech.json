@@ -69,30 +69,6 @@
         "quote_4": "“Nitrile still gave me a rash.”"
       }
     },
-    "drye_nt_barrier_choice_g6KFyg": {
-      "type": "drye-nt-barrier-choice",
-      "name": "DRYE NT — Barrier choice",
-      "settings": {
-        "chapter": "04",
-        "heading": "Why your skin and nails get worse inside gloves over time.",
-        "pick_label": "Choose your starting point",
-        "btn_healthy": "My skin feels fine",
-        "btn_damaged": "My skin is already irritated",
-        "exposure": "Under glove 6 hours/day",
-        "risk_label": "Maceration risk rises",
-        "chart_alt": "Stylised overhydration in the skin across two weeks of daily glove occlusion",
-        "day_1": "Day 1",
-        "day_2": "Day 3",
-        "day_3": "Day 7",
-        "day_4": "Day 14",
-        "aud_healthy": "Healthy skin",
-        "healthy_d3": "No significant barrier change",
-        "healthy_d14": "Significant barrier impairment",
-        "aud_damaged": "Already irritated skin",
-        "damaged_d3": "Significant barrier impairment",
-        "source": "Sources: Ramsing & Agner, Contact Dermatitis, 1996 — short- and long-term experimental glove occlusion."
-      }
-    },
     "nt_desk": {
       "type": "drye-nt-desk",
       "blocks": {
@@ -152,6 +128,39 @@
         "next_label": "More photos",
         "keep_label": "Keep reading",
         "keep_target": "#drye-nt-trapped"
+      }
+    },
+    "drye_nt_barrier_choice_g6KFyg": {
+      "type": "drye-nt-barrier-choice",
+      "name": "DRYE NT — Barrier choice",
+      "settings": {
+        "chapter": "04",
+        "heading": "Why your skin and nails get worse inside gloves over time.",
+        "pick_label": "Choose your starting point",
+        "btn_healthy": "My skin feels fine",
+        "btn_damaged": "My skin is already irritated",
+        "exposure": "Under glove 6 hours/day",
+        "risk_label": "Maceration risk rises",
+        "chart_alt": "Stylised overhydration in the skin across two weeks of daily glove occlusion",
+        "day_1": "Day 1",
+        "day_2": "Day 3",
+        "day_3": "Day 7",
+        "day_4": "Day 14",
+        "aud_healthy": "Healthy skin",
+        "healthy_d3": "No significant barrier change",
+        "healthy_d14": "Significant barrier impairment",
+        "aud_damaged": "Already irritated skin",
+        "damaged_d3": "Significant barrier impairment",
+        "source": "Sources: Ramsing & Agner, Contact Dermatitis, 1996 — short- and long-term experimental glove occlusion."
+      }
+    },
+    "drye_mechanics_time_promise_JFkP3K": {
+      "type": "drye-mechanics-time-promise",
+      "name": "DRYE Mechanics Time",
+      "settings": {
+        "eyebrow": "— A. Riahi",
+        "heading": "Eight hours in. The glove is humid. Your skin is dry.",
+        "body": "<p><em>\"After 6 hours under rubber gloves, my hands felt wet inside. Took the gloves off — completely dry. Such a mindfuck.\"</em><br/><br/></p>"
       }
     },
     "nt_mechanism": {
@@ -737,6 +746,7 @@
     "drye_mechanics_herov2_ajTaTf",
     "nt_desk",
     "drye_nt_barrier_choice_g6KFyg",
+    "drye_mechanics_time_promise_JFkP3K",
     "nt_mechanism",
     "drye_research_video_full_bi4hwc",
     "nt_loop",
