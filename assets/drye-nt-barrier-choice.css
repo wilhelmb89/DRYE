@@ -11,7 +11,7 @@
 
 /* ---------- head ---------- */
 .bch-chap { display: block; margin-bottom: 22px; font-family: var(--font-body); font-size: 13px; font-weight: 700; letter-spacing: .18em; color: rgba(255,255,255,.55); }
-.bch-h1 { margin: 0 0 36px; font-family: var(--font-display); font-weight: 600; font-size: 34px; line-height: 1.2; letter-spacing: -.02em; color: #fff; text-wrap: pretty; }
+.bch-h1 { margin: 0 0 36px; font-family: var(--font-display); font-weight: var(--fw-semibold); font-size: var(--fs-section-h2); line-height: 1.1; letter-spacing: -.03em; color: #fff; text-align: center; text-wrap: pretty; }
 
 /* ---------- split CTA ---------- */
 .bch-pick { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 18px; }
@@ -111,7 +111,7 @@
 /* ---------- mobile (6a) ---------- */
 @media (max-width: 749px) {
   .bch-chap { font-size: 12px; margin-bottom: 16px; }
-  .bch-h1 { margin-bottom: 26px; max-width: none; font-size: 22px; font-weight: 500; line-height: 1.32; letter-spacing: -.005em; text-align: center; }
+  .bch-h1 { margin-bottom: 26px; max-width: none; font-size: clamp(20px, 5.5vw, 26px); font-weight: var(--fw-semibold); line-height: 1.1; letter-spacing: -.03em; text-align: center; }
   .bch-pick { grid-template-columns: 1fr; gap: 8px; }
   .bch-exposure { margin-bottom: 24px; }
   .bch-plot { padding-left: 30px; }
