@@ -42,6 +42,26 @@
     });
     return res.json();
   }
+  async function clearCart() {
+    // Atomic empty in ONE request. Per-line cart/change.js loops were 400ing
+    // (Bad Request) because third-party fetch wrappers (pixel listener / market
+    // app) race the rapid sequential change calls, leaving old pairs un-removed
+    // → stacking / off-by-one. clear.js takes no line id, so it can't race a key.
+    var res = await fetch(cartUrl('cart/clear.js'), {
+      method: 'POST', headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      cache: 'no-store', credentials: 'same-origin'
+    });
+    return res.json();
+  }
+  async function updateByKeys(updates) {
+    // Atomic multi-line quantity set in ONE request (keyed by line-item key) —
+    // replaces the 400-prone per-line cart/change.js loop for removals/reductions.
+    var res = await fetch(cartUrl('cart/update.js'), {
+      method: 'POST', headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      cache: 'no-store', credentials: 'same-origin', body: JSON.stringify({ updates: updates })
+    });
+    return res.json();
+  }
   function pairProps() { return { _pair: String(Date.now()) + '-' + (++pairSeq) }; }
   function dryeLines(cart) {
     return (cart.items || []).filter(function (l) { return !HANDLE || l.handle === HANDLE; });
@@ -122,9 +142,7 @@
 
   // ---- mutations ----
   async function setCartToPack(variantId, count) {   // PDP add: idempotent replace
-    var cart = await fetchCart();
-    var lines = dryeLines(cart);
-    for (var i = 0; i < lines.length; i++) { await changeByKey(lines[i].key, 0); }
+    await clearCart();                                // atomic empty — no 400-prone per-line loop
     var items = [];
     for (var j = 0; j < count; j++) items.push({ id: Number(variantId), quantity: 1, properties: pairProps() });
     return addItems(items);
@@ -142,7 +160,8 @@
     var lines = dryeLines(cart);
     if (dryeCount(cart) <= 1 || !lines.length) return;
     var last = lines[lines.length - 1];
-    await changeByKey(last.key, last.quantity - 1);
+    var upd = {}; upd[last.key] = last.quantity - 1;
+    await updateByKeys(upd);
   }
   async function setPairs(target) {
     target = Math.max(1, Math.min(6, target));
@@ -155,12 +174,13 @@
       for (var i = 0; i < target - cur; i++) items.push({ id: Number(v), quantity: 1, properties: pairProps() });
       await addItems(items);
     } else if (target < cur) {
-      var toRemove = cur - target;
+      var toRemove = cur - target, upd = {};
       for (var k = lines.length - 1; k >= 0 && toRemove > 0; k--) {
         var take = Math.min(lines[k].quantity, toRemove);
-        await changeByKey(lines[k].key, lines[k].quantity - take);
+        upd[lines[k].key] = lines[k].quantity - take;
         toRemove -= take;
       }
+      await updateByKeys(upd);
     }
   }
   async function stepPairSize(key, dir) {
@@ -177,7 +197,8 @@
     if (ni === i) return;
     var newVariant = vars[order[ni]];
     if (!newVariant) return;
-    await changeByKey(key, 0);                                   // drop the old-size line
+    var upd = {}; upd[key] = 0;
+    await updateByKeys(upd);                                     // drop the old-size line (atomic)
     await addItems([{ id: Number(newVariant), quantity: 1, properties: pairProps() }]); // add the new size
   }
 
