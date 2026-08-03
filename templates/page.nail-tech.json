@@ -12,13 +12,6 @@
     "nt_hero": {
       "type": "drye-nt-hero",
       "blocks": {
-        "r1": {
-          "type": "review",
-          "settings": {
-            "quote": "“Even with sweat on the DRYE, my hands stayed dry all day.”",
-            "author": "PN · US"
-          }
-        },
         "r2": {
           "type": "review",
           "settings": {
@@ -42,11 +35,11 @@
         }
       },
       "block_order": [
-        "r1",
         "r2",
         "r3",
         "r4"
       ],
+      "disabled": true,
       "settings": {
         "logo_text": "DRYE",
         "hero_image": "shopify://shop_images/Gemini_Generated_Image_x4acmfx4acmfx4ac.webp",
@@ -56,17 +49,29 @@
         "rating_label": "4.4/5 · Trustpilot"
       }
     },
+    "drye_mechanics_herov2_ajTaTf": {
+      "type": "drye-mechanics-herov2",
+      "name": "DRYE Mechanics Hero",
+      "settings": {
+        "section_id": "mechanics-hero",
+        "image_desktop": "shopify://shop_images/Gemini_Generated_Image_x4acmfx4acmfx4ac.webp",
+        "image_mobile": "shopify://shop_images/Gemini_Generated_Image_clq2a5clq2a5clq2.webp",
+        "eyebrow": "",
+        "heading_line_1": "You already dread",
+        "heading_emphasis": "taking the gloves off.",
+        "show_rule": true,
+        "subheading": "<p>Sweaty hands by the fourth client. Gloves that fight you between sets. The smell when they finally come off. <strong>And you have to do it again tomorrow.</strong></p>",
+        "scroll_text": "Keep reading",
+        "scroll_target": "#gallery",
+        "quote_1": "“I can’t get my gloves on.”",
+        "quote_2": "“Every nail tech knows dermatitis.”",
+        "quote_3": "“I can’t do nails full time.”",
+        "quote_4": "“Nitrile still gave me a rash.”"
+      }
+    },
     "nt_desk": {
       "type": "drye-nt-desk",
       "blocks": {
-        "shot_m8VgNV": {
-          "type": "shot",
-          "settings": {
-            "image": "shopify://shop_images/Gemini_Generated_Image_u5lromu5lromu5lr.webp",
-            "image_alt": "Nail tech at work",
-            "caption": "\"it does run from the middle of my arm all the way up to my knuckles\""
-          }
-        },
         "shot_nYDRpD": {
           "type": "shot",
           "settings": {
@@ -88,7 +93,15 @@
           "settings": {
             "image": "shopify://shop_images/Gemini_Generated_Image_clq2a5clq2a5clq2.webp",
             "image_alt": "DRYE under the glove during real work at the desk",
-            "caption": "“WHY are my hands so wet”"
+            "caption": "“Taking my gloves off after a long appointment.”"
+          }
+        },
+        "shot_m8VgNV": {
+          "type": "shot",
+          "settings": {
+            "image": "shopify://shop_images/Gemini_Generated_Image_u5lromu5lromu5lr.webp",
+            "image_alt": "Nail tech at work",
+            "caption": "“Every nail tech knows dermatitis.”"
           }
         },
         "s1": {
@@ -101,15 +114,15 @@
         }
       },
       "block_order": [
-        "shot_m8VgNV",
         "shot_nYDRpD",
         "s2",
         "s3",
+        "shot_m8VgNV",
         "s1"
       ],
       "settings": {
         "chapter": "01",
-        "heading": "Heat, allergies, sweat, and friction under nitrile gloves",
+        "heading": "One of these is your Tuesday afternoon",
         "swipe_label": "Swipa",
         "prev_label": "Previous photos",
         "next_label": "More photos",
@@ -117,26 +130,192 @@
         "keep_target": "#drye-nt-trapped"
       }
     },
-    "nt_trapped": {
-      "type": "drye-nt-trapped",
+    "drye_nt_barrier_choice_g6KFyg": {
+      "type": "drye-nt-barrier-choice",
+      "name": "DRYE NT — Barrier choice",
       "settings": {
-        "chapter": "02",
-        "glove_anno": "Your nitrile glove",
-        "trio_1": "Heat",
-        "trio_2": "Sweat",
-        "trio_3": "Bacteria",
-        "heading": "All trapped",
-        "chart_anno": "Monday morning",
-        "chart_title": "Humidity arises",
-        "new_glove_label": "New glove",
-        "client_1_label": "Client 1",
-        "client_2_label": "Client 2",
-        "client_3_label": "Client 3",
-        "client_4_label": "Client 4",
-        "time_1": "09:00",
-        "time_2": "10:30",
-        "time_3": "12:00",
-        "time_4": "13:30"
+        "chapter": "04",
+        "heading": "Why your skin and nails get worse inside gloves over time.",
+        "pick_label": "Choose your starting point",
+        "btn_healthy": "My skin feels fine",
+        "btn_damaged": "My skin is already irritated",
+        "exposure": "Under glove 6 hours/day",
+        "risk_label": "Maceration risk rises",
+        "chart_alt": "Stylised overhydration in the skin across two weeks of daily glove occlusion",
+        "day_1": "Day 1",
+        "day_2": "Day 3",
+        "day_3": "Day 7",
+        "day_4": "Day 14",
+        "aud_healthy": "Healthy skin",
+        "healthy_d3": "No significant barrier change",
+        "healthy_d14": "Significant barrier impairment",
+        "aud_damaged": "Already irritated skin",
+        "damaged_d3": "Significant barrier impairment",
+        "source": "Sources: Ramsing & Agner, Contact Dermatitis, 1996 — short- and long-term experimental glove occlusion."
+      }
+    },
+    "drye_mechanics_time_promise_JFkP3K": {
+      "type": "drye-mechanics-time-promise",
+      "name": "DRYE Mechanics Time",
+      "settings": {
+        "eyebrow": "— A. Riahi",
+        "heading": "Eight hours in. The glove is humid. Your skin is dry.",
+        "body": "<p><em>\"After 6 hours under rubber gloves, my hands felt wet inside. Took the gloves off — completely dry. Such a mindfuck.\"</em><br/><br/></p>"
+      }
+    },
+    "drye_liner_product_clarity_PqAH9K": {
+      "type": "drye-liner-product-clarity",
+      "blocks": {
+        "spec_qnWDJ9": {
+          "type": "spec",
+          "settings": {
+            "title": "Sweat.",
+            "description": "Stays dry for the full shift."
+          }
+        },
+        "spec_kpAAHJ": {
+          "type": "spec",
+          "settings": {
+            "title": "Oil.",
+            "description": "Stays on the surface. Wipes off."
+          }
+        },
+        "spec_T3z9ef": {
+          "type": "spec",
+          "settings": {
+            "title": "Tearing.",
+            "description": "Your nitriles go on dry, come off dry."
+          }
+        }
+      },
+      "block_order": [
+        "spec_qnWDJ9",
+        "spec_kpAAHJ",
+        "spec_T3z9ef"
+      ],
+      "name": "DRYE Product Clarity",
+      "settings": {
+        "section_id": "liner-product",
+        "heading": "DRYE goes",
+        "heading_emphasis": "under your existing glove.",
+        "body": "<p>0.4 mm thin. Built to work under nitrile, not replace it.</p>",
+        "media_type": "image",
+        "before_image": "shopify://shop_images/Gemini_Generated_Image_4kecos4kecos4kec.webp",
+        "before_label": "Without DRYE",
+        "after_image": "shopify://shop_images/5Y9A9293.webp",
+        "after_label": "With DRYE"
+      }
+    },
+    "nt_mechanism": {
+      "type": "drye-liner-mechanism",
+      "settings": {
+        "section_id": "liner-mechanism",
+        "heading": "Cotton holds the sweat.",
+        "heading_emphasis": "DRYE moves it off your skin.",
+        "vs_label": "Cotton · DRYE",
+        "cotton_name": "Cotton",
+        "cotton_steps": "Sweat enters the fabric and stays\nAt saturation, moisture sits on skin\nSame wet glove on shift 1 as shift 8",
+        "drye_name": "DRYE Liner",
+        "drye_steps": "Skin side repels — sweat cannot sit there\nOuter side pulls moisture toward it\nContinuous transport, no saturation point"
+      }
+    },
+    "drye_research_video_full_bi4hwc": {
+      "type": "drye-research-video-full",
+      "name": "DRYE Research Video Full",
+      "settings": {
+        "video_src_desktop": "https://customer-fqpngdzqcoky7qmz.cloudflarestream.com/453bb4cae9bd147b7a10fc6213e64b12/manifest/video.m3u8",
+        "video_src_mobile": "https://customer-fqpngdzqcoky7qmz.cloudflarestream.com/ed9ad690d7f5c27060e215f05f9e4f8e/manifest/video.m3u8",
+        "video_label": "Goes under any sealed glove.",
+        "video_caption": "Routes sweat from skin to outer fabric. No saturation point."
+      }
+    },
+    "drye_nt_trust_badges_t8dXtb": {
+      "type": "drye-nt-trust-badges",
+      "blocks": {
+        "trustpilot_7TdJeH": {
+          "type": "trustpilot",
+          "settings": {
+            "logo": "shopify://shop_images/trustpilot-logo-trimmed.png",
+            "score": "4.4/5",
+            "count": "10 reviews",
+            "url": "https://se.trustpilot.com/review/hudsverige.se",
+            "cta_label": "See all reviews on Trustpilot"
+          }
+        },
+        "award_jKmGn4": {
+          "type": "award",
+          "settings": {
+            "emblem": "shopify://shop_images/skapa-emblem-small.png",
+            "name": "SKAPA",
+            "caption": "Innovation Award — in memory of the inventor Alfred Nobel"
+          }
+        },
+        "stars_HtABXQ": {
+          "type": "stars",
+          "settings": {
+            "score": "4.85/5",
+            "count": "47 reviews",
+            "url": "shopify://products/drye-moisture-routing-glove-liners",
+            "cta_label": "See all our reviews"
+          }
+        }
+      },
+      "block_order": [
+        "trustpilot_7TdJeH",
+        "award_jKmGn4",
+        "stars_HtABXQ"
+      ],
+      "custom_css": [],
+      "name": "DRYE NT — Trust badges",
+      "settings": {}
+    },
+    "nt_loop": {
+      "type": "drye-nt-loop",
+      "blocks": {
+        "q1": {
+          "type": "qa",
+          "settings": {
+            "avatar": "shopify://shop_images/drye-avatar-1.webp",
+            "question": "“I’ve got dermatitis. What should I do?”",
+            "answer": "— Use thicker mils"
+          }
+        },
+        "q2": {
+          "type": "qa",
+          "settings": {
+            "avatar": "shopify://shop_images/drye-avatar-2.webp",
+            "question": "“My hands smell disgusting by the end of the day. What do I do?”",
+            "answer": "— Use powder"
+          }
+        },
+        "q3": {
+          "type": "qa",
+          "settings": {
+            "avatar": "shopify://shop_images/drye-avatar-4.webp",
+            "question": "“cotton liners make my hands sweaty after 30 min.”",
+            "answer": "— Double up"
+          }
+        },
+        "q4": {
+          "type": "qa",
+          "settings": {
+            "avatar": "shopify://shop_images/drye-avatar-3.webp",
+            "question": "“I hate my sweaty gloves in summer. They keep splitting.”",
+            "answer": "— Buy cheaper ones"
+          }
+        }
+      },
+      "block_order": [
+        "q1",
+        "q2",
+        "q3",
+        "q4"
+      ],
+      "disabled": true,
+      "settings": {
+        "chapter": "03",
+        "eyebrow": "The never-ending loop",
+        "heading": ""
       }
     },
     "nt_tradeoff": {
@@ -233,81 +412,33 @@
         "w10",
         "w11"
       ],
+      "disabled": true,
       "settings": {
         "eyebrow": "One glove. Too many tradeoffs.",
         "footer": "Keep the protection. Lose the tradeoff."
       }
     },
-    "nt_loop": {
-      "type": "drye-nt-loop",
-      "blocks": {
-        "q1": {
-          "type": "qa",
-          "settings": {
-            "avatar": "shopify://shop_images/drye-avatar-1.webp",
-            "question": "“I’ve got dermatitis. What should I do?”",
-            "answer": "— Use thicker mils"
-          }
-        },
-        "q2": {
-          "type": "qa",
-          "settings": {
-            "avatar": "shopify://shop_images/drye-avatar-2.webp",
-            "question": "“My hands smell disgusting by the end of the day. What do I do?”",
-            "answer": "— Use powder"
-          }
-        },
-        "q3": {
-          "type": "qa",
-          "settings": {
-            "avatar": "shopify://shop_images/drye-avatar-4.webp",
-            "question": "“cotton liners make my hands sweaty after 30 min.”",
-            "answer": "— Double up"
-          }
-        },
-        "q4": {
-          "type": "qa",
-          "settings": {
-            "avatar": "shopify://shop_images/drye-avatar-3.webp",
-            "question": "“I hate my sweaty gloves in summer. They keep splitting.”",
-            "answer": "— Buy cheaper ones"
-          }
-        }
-      },
-      "block_order": [
-        "q1",
-        "q2",
-        "q3",
-        "q4"
-      ],
+    "nt_trapped": {
+      "type": "drye-nt-trapped",
+      "disabled": true,
       "settings": {
-        "chapter": "03",
-        "eyebrow": "The never-ending loop",
-        "heading": "POV: You're stuck in the nail tech advice loop."
-      }
-    },
-    "drye_nt_barrier_choice_g6KFyg": {
-      "type": "drye-nt-barrier-choice",
-      "name": "DRYE NT — Barrier choice",
-      "settings": {
-        "chapter": "04",
-        "heading": "Why your skin and nails get worse inside gloves over time.",
-        "pick_label": "Choose your starting point",
-        "btn_healthy": "My skin feels fine",
-        "btn_damaged": "My skin is already irritated",
-        "exposure": "Under glove 6 hours/day",
-        "risk_label": "Maceration risk rises",
-        "chart_alt": "Stylised overhydration in the skin across two weeks of daily glove occlusion",
-        "day_1": "Day 1",
-        "day_2": "Day 3",
-        "day_3": "Day 7",
-        "day_4": "Day 14",
-        "aud_healthy": "Healthy skin",
-        "healthy_d3": "No significant barrier change",
-        "healthy_d14": "Significant barrier impairment",
-        "aud_damaged": "Already irritated skin",
-        "damaged_d3": "Significant barrier impairment",
-        "source": "Sources: Ramsing & Agner, Contact Dermatitis, 1996 — short- and long-term experimental glove occlusion."
+        "chapter": "02",
+        "glove_anno": "Your nitrile glove",
+        "trio_1": "Heat",
+        "trio_2": "Sweat",
+        "trio_3": "Bacteria",
+        "heading": "All trapped",
+        "chart_anno": "Monday morning",
+        "chart_title": "Humidity arises",
+        "new_glove_label": "New glove",
+        "client_1_label": "Client 1",
+        "client_2_label": "Client 2",
+        "client_3_label": "Client 3",
+        "client_4_label": "Client 4",
+        "time_1": "09:00",
+        "time_2": "10:30",
+        "time_3": "12:00",
+        "time_4": "13:30"
       }
     },
     "drye_nt_inside_9eaNVa": {
@@ -350,39 +481,6 @@
         "rr_cta_label": "Shop the DRYE Liner",
         "rr_cta_url": "shopify://products/drye-moisture-routing-glove-liners",
         "rr_guarantee": "0.4mm washable liner · Engineered in Sweden · 30-day refund"
-      }
-    },
-    "nt_nails": {
-      "type": "drye-nt-nails",
-      "settings": {
-        "heading": "Who it's not for.",
-        "body": "The liner has to sit over the nail without tension.",
-        "ok_tag": "Recommended",
-        "ok_title": "Short to moderate nails.",
-        "ok_desc": "Best match for DRYE — less concentrated pressure at the fingertips.",
-        "no_tag": "Not recommended",
-        "no_title": "Long or sharply pointed nails.",
-        "no_desc": "Higher risk of puncturing or tearing the liner."
-      }
-    },
-    "nt_cotton_q": {
-      "type": "drye-nt-cotton-q",
-      "custom_css": [],
-      "settings": {
-        "quote": "“I’ve tried cotton, but it gets wet very quickly. Is this cotton?”"
-      }
-    },
-    "nt_mechanism": {
-      "type": "drye-liner-mechanism",
-      "settings": {
-        "section_id": "liner-mechanism",
-        "heading": "Every other liner saturates. DRYE",
-        "heading_emphasis": "routes.",
-        "vs_label": "Cotton · DRYE",
-        "cotton_name": "Cotton",
-        "cotton_steps": "Sweat enters the fabric and stays\nAt saturation, moisture sits on skin\nSame wet glove on shift 1 as shift 8",
-        "drye_name": "DRYE Liner",
-        "drye_steps": "Skin side repels — sweat cannot sit there\nOuter side pulls moisture toward it\nContinuous transport, no saturation point"
       }
     },
     "drye_nt_pro_reviews_xHQ6BX": {
@@ -464,45 +562,18 @@
         "stats_note": "Post-purchase feedback from verified DRYE customers. Results vary by glove type, heat, and shift length."
       }
     },
-    "drye_nt_trust_badges_t8dXtb": {
-      "type": "drye-nt-trust-badges",
-      "blocks": {
-        "trustpilot_7TdJeH": {
-          "type": "trustpilot",
-          "settings": {
-            "logo": "shopify://shop_images/trustpilot-logo-trimmed.png",
-            "score": "4.4/5",
-            "count": "10 reviews",
-            "url": "https://se.trustpilot.com/review/hudsverige.se",
-            "cta_label": "See all reviews on Trustpilot"
-          }
-        },
-        "award_jKmGn4": {
-          "type": "award",
-          "settings": {
-            "emblem": "shopify://shop_images/skapa-emblem-small.png",
-            "name": "SKAPA",
-            "caption": "Innovation Award — in memory of the inventor Alfred Nobel"
-          }
-        },
-        "stars_HtABXQ": {
-          "type": "stars",
-          "settings": {
-            "score": "4.85/5",
-            "count": "47 reviews",
-            "url": "shopify://products/drye-moisture-routing-glove-liners",
-            "cta_label": "See all our reviews"
-          }
-        }
-      },
-      "block_order": [
-        "trustpilot_7TdJeH",
-        "award_jKmGn4",
-        "stars_HtABXQ"
-      ],
-      "custom_css": [],
-      "name": "DRYE NT — Trust badges",
-      "settings": {}
+    "nt_nails": {
+      "type": "drye-nt-nails",
+      "settings": {
+        "heading": "Who it's not for.",
+        "body": "The liner has to sit over the nail without tension.",
+        "ok_tag": "Recommended",
+        "ok_title": "Short to moderate nails.",
+        "ok_desc": "Best match for DRYE — less concentrated pressure at the fingertips.",
+        "no_tag": "Not recommended",
+        "no_title": "Long or sharply pointed nails.",
+        "no_desc": "Higher risk of puncturing or tearing the liner."
+      }
     },
     "drye_nt_real_reviews_dHDWiM": {
       "type": "drye-nt-real-reviews",
@@ -699,6 +770,19 @@
         "logos_label": "Research and development partners"
       }
     },
+    "drye_nt_close_ByEU4J": {
+      "type": "drye-nt-close",
+      "settings": {
+        "days": "30",
+        "days_label": "Days",
+        "heading": "Try it risk-free.",
+        "body": "If DRYE Liner doesn't change your shift, full refund. No hassle.",
+        "cta_label": "Get DRYE Liner",
+        "cta_url": "shopify://products/drye-moisture-routing-glove-liners",
+        "guarantee": "30-Day Money Back Guarantee",
+        "sources": ""
+      }
+    },
     "nt_close": {
       "type": "drye-nt-close",
       "settings": {
@@ -715,19 +799,23 @@
   },
   "order": [
     "nt_hero",
+    "drye_mechanics_herov2_ajTaTf",
     "nt_desk",
-    "nt_trapped",
-    "nt_tradeoff",
-    "nt_loop",
     "drye_nt_barrier_choice_g6KFyg",
-    "drye_nt_inside_9eaNVa",
-    "nt_nails",
-    "nt_cotton_q",
+    "drye_mechanics_time_promise_JFkP3K",
+    "drye_liner_product_clarity_PqAH9K",
     "nt_mechanism",
-    "drye_nt_pro_reviews_xHQ6BX",
+    "drye_research_video_full_bi4hwc",
     "drye_nt_trust_badges_t8dXtb",
+    "nt_loop",
+    "nt_tradeoff",
+    "nt_trapped",
+    "drye_nt_inside_9eaNVa",
+    "drye_nt_pro_reviews_xHQ6BX",
+    "nt_nails",
     "drye_nt_real_reviews_dHDWiM",
     "drye_nt_validation_Ep7qKR",
+    "drye_nt_close_ByEU4J",
     "nt_close"
   ]
 }
