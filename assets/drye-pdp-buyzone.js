@@ -47,10 +47,14 @@
       }
     });
 
-    // Select the first pack for ATC / quantity, but leave every panel
-    // COLLAPSED on load — a pack only expands once the user clicks it.
+    // Select the first pack for ATC / quantity AND open its panel on load, so
+    // new visitors can see a pack is expandable and realise the 2- and 3-pack
+    // tiers are clickable. Clicking any pack still collapses the rest.
     var initial = packs.filter(function (p) { return p.classList.contains('is-selected'); })[0] || packs[0];
-    if (initial) selectPack(initial);
+    if (initial) {
+      packs.forEach(function (x) { x.classList.toggle('is-open', x === initial); });
+      selectPack(initial);
+    }
   }
 
   document.querySelectorAll('.hero[data-product-section]:not([data-packsel-bound])').forEach(function (scope) {
