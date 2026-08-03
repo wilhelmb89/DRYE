@@ -139,13 +139,154 @@
       "type": "drye-liner-mechanism",
       "settings": {
         "section_id": "liner-mechanism",
-        "heading": "Cotton holds the sweat. <br>",
+        "heading": "Cotton holds the sweat.",
         "heading_emphasis": "DRYE moves it off your skin.",
         "vs_label": "Cotton · DRYE",
         "cotton_name": "Cotton",
         "cotton_steps": "Sweat enters the fabric and stays\nAt saturation, moisture sits on skin\nSame wet glove on shift 1 as shift 8",
         "drye_name": "DRYE Liner",
         "drye_steps": "Skin side repels — sweat cannot sit there\nOuter side pulls moisture toward it\nContinuous transport, no saturation point"
+      }
+    },
+    "drye_mechanics_time_promise_JFkP3K": {
+      "type": "drye-mechanics-time-promise",
+      "name": "DRYE Mechanics Time",
+      "settings": {
+        "eyebrow": "— A. Riahi",
+        "heading": "Eight hours in. The glove is humid. Your skin is dry.",
+        "body": "<p><em>\"After 6 hours under rubber gloves, my hands felt wet inside. Took the gloves off — completely dry. Such a mindfuck.\"</em><br/><br/></p>"
+      }
+    },
+    "drye_nt_validation_Ep7qKR": {
+      "type": "drye-nt-validation",
+      "blocks": {
+        "institution_CzaatN": {
+          "type": "institution",
+          "settings": {
+            "initial": "R",
+            "name": "RISE Research Institutes of Sweden",
+            "role": "Test spec & independent validation."
+          }
+        },
+        "institution_GqjyXw": {
+          "type": "institution",
+          "settings": {
+            "initial": "U",
+            "name": "Uppsala University",
+            "role": "Research collaboration on sweat movement."
+          }
+        },
+        "institution_MdYdYx": {
+          "type": "institution",
+          "settings": {
+            "initial": "S",
+            "name": "Swedish School of Textiles",
+            "role": "Textile engineering & structural analysis"
+          }
+        },
+        "logo_jTrNdg": {
+          "type": "logo",
+          "settings": {
+            "logo": "shopify://shop_images/swedish-school-of-textiles-white.png",
+            "name": "Almi",
+            "large": true
+          }
+        },
+        "logo_YcWUMK": {
+          "type": "logo",
+          "settings": {
+            "logo": "shopify://shop_images/uppsala-universitet-white.png",
+            "name": "Borås INK",
+            "large": true
+          }
+        },
+        "logo_Pac7Aq": {
+          "type": "logo",
+          "settings": {
+            "logo": "shopify://shop_images/uminova-innovation-white.png",
+            "name": "Skånes universitetssjukhus",
+            "large": true
+          }
+        },
+        "logo_UktXb3": {
+          "type": "logo",
+          "settings": {
+            "logo": "shopify://shop_images/uppsala-innovation-centre-white.png",
+            "name": "Wargön Innovation",
+            "large": true
+          }
+        },
+        "logo_GVXC77": {
+          "type": "logo",
+          "settings": {
+            "logo": "shopify://shop_images/sodertalje-science-park-white.png",
+            "name": "Södertälje Science Park",
+            "large": false
+          }
+        },
+        "logo_9CykHf": {
+          "type": "logo",
+          "settings": {
+            "logo": "shopify://shop_images/boras-ink-white.png",
+            "name": "The Swedish School of Textiles",
+            "large": true
+          }
+        },
+        "logo_z9kTyt": {
+          "type": "logo",
+          "settings": {
+            "logo": "shopify://shop_images/almi-white.png",
+            "name": "Uminova Innovation",
+            "large": false
+          }
+        },
+        "logo_NVBB6M": {
+          "type": "logo",
+          "settings": {
+            "logo": "shopify://shop_images/vinnova-white.png",
+            "name": "Vinnova",
+            "large": false
+          }
+        },
+        "logo_MigQ6T": {
+          "type": "logo",
+          "settings": {
+            "logo": "shopify://shop_images/skanes-universitetssjukhus-white.png",
+            "name": "Uppsala Innovation Centre",
+            "large": true
+          }
+        },
+        "logo_jEKzFm": {
+          "type": "logo",
+          "settings": {
+            "logo": "shopify://shop_images/wargon-innovation-white.png",
+            "name": "Uppsala Universitet",
+            "large": true
+          }
+        }
+      },
+      "block_order": [
+        "institution_CzaatN",
+        "institution_GqjyXw",
+        "institution_MdYdYx",
+        "logo_jTrNdg",
+        "logo_YcWUMK",
+        "logo_Pac7Aq",
+        "logo_UktXb3",
+        "logo_GVXC77",
+        "logo_9CykHf",
+        "logo_z9kTyt",
+        "logo_NVBB6M",
+        "logo_MigQ6T",
+        "logo_jEKzFm"
+      ],
+      "name": "DRYE NT — External",
+      "settings": {
+        "eyebrow": "External validation",
+        "heading": "Developed over 7 years with  100+",
+        "heading_em": "external experts and industry users.",
+        "lead": "One textile built for life under gloves.",
+        "logos_label": "Research and development partners"
       }
     },
     "nt_nails": {
@@ -159,15 +300,6 @@
         "no_tag": "Not recommended",
         "no_title": "Long or sharply pointed nails.",
         "no_desc": "Higher risk of puncturing or tearing the liner."
-      }
-    },
-    "drye_mechanics_time_promise_JFkP3K": {
-      "type": "drye-mechanics-time-promise",
-      "name": "DRYE Mechanics Time",
-      "settings": {
-        "eyebrow": "— A. Riahi",
-        "heading": "Eight hours in. The glove is humid. Your skin is dry.",
-        "body": "<p><em>\"After 6 hours under rubber gloves, my hands felt wet inside. Took the gloves off — completely dry. Such a mindfuck.\"</em><br/><br/></p>"
       }
     },
     "drye_nt_close_ByEU4J": {
@@ -426,138 +558,6 @@
         "video_caption": "Routes sweat from skin to outer fabric. No saturation point."
       }
     },
-    "drye_nt_validation_Ep7qKR": {
-      "type": "drye-nt-validation",
-      "blocks": {
-        "institution_CzaatN": {
-          "type": "institution",
-          "settings": {
-            "initial": "R",
-            "name": "RISE Research Institutes of Sweden",
-            "role": "Test spec & independent validation."
-          }
-        },
-        "institution_GqjyXw": {
-          "type": "institution",
-          "settings": {
-            "initial": "U",
-            "name": "Uppsala University",
-            "role": "Research collaboration on sweat movement."
-          }
-        },
-        "institution_MdYdYx": {
-          "type": "institution",
-          "settings": {
-            "initial": "S",
-            "name": "Swedish School of Textiles",
-            "role": "Textile engineering & structural analysis"
-          }
-        },
-        "logo_jTrNdg": {
-          "type": "logo",
-          "settings": {
-            "logo": "shopify://shop_images/swedish-school-of-textiles-white.png",
-            "name": "Almi",
-            "large": true
-          }
-        },
-        "logo_YcWUMK": {
-          "type": "logo",
-          "settings": {
-            "logo": "shopify://shop_images/uppsala-universitet-white.png",
-            "name": "Borås INK",
-            "large": true
-          }
-        },
-        "logo_Pac7Aq": {
-          "type": "logo",
-          "settings": {
-            "logo": "shopify://shop_images/uminova-innovation-white.png",
-            "name": "Skånes universitetssjukhus",
-            "large": true
-          }
-        },
-        "logo_UktXb3": {
-          "type": "logo",
-          "settings": {
-            "logo": "shopify://shop_images/uppsala-innovation-centre-white.png",
-            "name": "Wargön Innovation",
-            "large": true
-          }
-        },
-        "logo_GVXC77": {
-          "type": "logo",
-          "settings": {
-            "logo": "shopify://shop_images/sodertalje-science-park-white.png",
-            "name": "Södertälje Science Park",
-            "large": false
-          }
-        },
-        "logo_9CykHf": {
-          "type": "logo",
-          "settings": {
-            "logo": "shopify://shop_images/boras-ink-white.png",
-            "name": "The Swedish School of Textiles",
-            "large": true
-          }
-        },
-        "logo_z9kTyt": {
-          "type": "logo",
-          "settings": {
-            "logo": "shopify://shop_images/almi-white.png",
-            "name": "Uminova Innovation",
-            "large": false
-          }
-        },
-        "logo_NVBB6M": {
-          "type": "logo",
-          "settings": {
-            "logo": "shopify://shop_images/vinnova-white.png",
-            "name": "Vinnova",
-            "large": false
-          }
-        },
-        "logo_MigQ6T": {
-          "type": "logo",
-          "settings": {
-            "logo": "shopify://shop_images/skanes-universitetssjukhus-white.png",
-            "name": "Uppsala Innovation Centre",
-            "large": true
-          }
-        },
-        "logo_jEKzFm": {
-          "type": "logo",
-          "settings": {
-            "logo": "shopify://shop_images/wargon-innovation-white.png",
-            "name": "Uppsala Universitet",
-            "large": true
-          }
-        }
-      },
-      "block_order": [
-        "institution_CzaatN",
-        "institution_GqjyXw",
-        "institution_MdYdYx",
-        "logo_jTrNdg",
-        "logo_YcWUMK",
-        "logo_Pac7Aq",
-        "logo_UktXb3",
-        "logo_GVXC77",
-        "logo_9CykHf",
-        "logo_z9kTyt",
-        "logo_NVBB6M",
-        "logo_MigQ6T",
-        "logo_jEKzFm"
-      ],
-      "name": "DRYE NT — External",
-      "settings": {
-        "eyebrow": "External validation",
-        "heading": "Developed over 7 years with  100+",
-        "heading_em": "external experts and industry users.",
-        "lead": "One textile built for life under gloves.",
-        "logos_label": "Research and development partners"
-      }
-    },
     "nt_loop": {
       "type": "drye-nt-loop",
       "blocks": {
@@ -813,15 +813,15 @@
     "drye_nt_barrier_choice_g6KFyg",
     "drye_nt_inside_9eaNVa",
     "nt_mechanism",
-    "nt_nails",
     "drye_mechanics_time_promise_JFkP3K",
+    "drye_nt_validation_Ep7qKR",
+    "nt_nails",
     "drye_nt_close_ByEU4J",
     "drye_nt_pro_reviews_xHQ6BX",
     "nt_desk",
     "drye_nt_trust_badges_t8dXtb",
     "drye_liner_product_clarity_PqAH9K",
     "drye_research_video_full_bi4hwc",
-    "drye_nt_validation_Ep7qKR",
     "nt_loop",
     "nt_tradeoff",
     "nt_trapped",
