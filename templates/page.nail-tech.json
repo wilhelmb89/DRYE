@@ -69,15 +69,24 @@
         "quote_4": "“Nitrile still gave me a rash.”"
       }
     },
+    "drye_mechanics_time_promise_y7hWTc": {
+      "type": "drye-mechanics-time-promise",
+      "name": "DRYE Mechanics Time",
+      "settings": {
+        "eyebrow": "",
+        "heading": "Nitrile protects you from the outside <br><em class=\"dryeNEW-em\">But occlusion is what weakens skin and nails over time.</em>",
+        "body": "<p>No powder, cream, or thicker glove fixes that. See how trapped sweat impacts your skin over time below </p>"
+      }
+    },
     "drye_nt_barrier_choice_g6KFyg": {
       "type": "drye-nt-barrier-choice",
       "name": "DRYE NT — Barrier choice",
       "settings": {
         "chapter": "",
-        "heading": "Nitrile protects you from the outside. But occlusion is what weakens skin and nails over time.  No powder, cream, or thicker glove fixes that.",
+        "heading": "",
         "pick_label": "Choose your starting point",
-        "btn_healthy": "My skin feels fine",
-        "btn_damaged": "My skin is already irritated",
+        "btn_healthy": "I’M TRYING TO AVOID THIS",
+        "btn_damaged": " I’M ALREADY DEALING WITH IT",
         "exposure": "Under glove 6 hours/day",
         "risk_label": "Maceration risk rises",
         "chart_alt": "Stylised overhydration in the skin across two weeks of daily glove occlusion",
@@ -150,12 +159,147 @@
     },
     "drye_mechanics_time_promise_JFkP3K": {
       "type": "drye-mechanics-time-promise",
+      "disabled": true,
       "name": "DRYE Mechanics Time",
       "settings": {
         "eyebrow": "— A. Riahi",
         "heading": "Eight hours in. The glove is humid. Your skin is dry.",
         "body": "<p><em>\"After 6 hours under rubber gloves, my hands felt wet inside. Took the gloves off — completely dry. Such a mindfuck.\"</em><br/><br/></p>"
       }
+    },
+    "drye_mechanics_cta_KQaVwL": {
+      "type": "drye-mechanics-cta",
+      "name": "DRYE Mechanics CTA",
+      "settings": {
+        "eyebrow": "",
+        "heading_line_1": "Either your shift feels different",
+        "heading_emphasis": "or it doesn’t.",
+        "body": "<p>Full refund within 30 days. No forms. No conditions. </p>",
+        "button_label": "order now",
+        "button_link": "shopify://products/drye-moisture-routing-glove-liners",
+        "meta": "One layer changes the whole shift.",
+        "secondary_label": "",
+        "secondary_link": "shopify://blogs/insights/automotive-mechanics-field-study"
+      }
+    },
+    "drye_nt_pro_reviews_xHQ6BX": {
+      "type": "drye-nt-pro-reviews",
+      "blocks": {
+        "review_kLqrhR": {
+          "type": "review",
+          "settings": {
+            "avatar": "shopify://shop_images/troy.jpg",
+            "name": "Ali Alahaman",
+            "role": "Salon owner Troy ·  Kalmar",
+            "quote": "They add an extra layer under my nitrile gloves when I work with chemicals, and my hands stay much drier and don’t get nearly as sweaty."
+          }
+        },
+        "review_dpET79": {
+          "type": "review",
+          "settings": {
+            "avatar": "shopify://shop_images/Sofia_halvarsson_b0bc166c-062d-4bc6-b119-2dc6bc7f2696.jpg",
+            "name": "Sofia Halvarsson",
+            "role": "Hairdresser Nikita Hair· Stockholm",
+            "quote": "They are nice to use. While it can get warm under nitrile gloves, my hands don’t feel sweaty."
+          }
+        },
+        "review_FYdiNq": {
+          "type": "review",
+          "settings": {
+            "avatar": "shopify://shop_images/2.jpg",
+            "name": "Emilia Asplund",
+            "role": "Pastry chef · Stockholm",
+            "quote": "They keep my hands dry and comfortable. It took a little getting used to, but now they’re just part of my routine."
+          }
+        },
+        "review_8MPMiU": {
+          "type": "review",
+          "settings": {
+            "avatar": "shopify://shop_images/1.jpg",
+            "name": "Sofia Malmberg",
+            "role": "Hairdresser Nikita Hair · Gothenburg",
+            "quote": "They’re comfortable to wear, and my hands feel less dry and irritated now. Definitely an improvement."
+          }
+        },
+        "review_mMtwmr": {
+          "type": "review",
+          "settings": {
+            "avatar": "shopify://shop_images/Screenshot_36.png",
+            "name": "Phuong T",
+            "role": "Nail Tech & Salon Owner · Tampa FL",
+            "quote": "I have eczema and these gloves have been the best things I bought for my hands.  Every hour, I would change my gloves and notice the sweat on my DRYE - but my hands remain dried. Thank you so much for making these!"
+          }
+        },
+        "review_tfG4PC": {
+          "type": "review",
+          "settings": {
+            "avatar": "shopify://shop_images/download_9dfd04eb-ae39-4076-b793-7a2558d1fd70.jpg",
+            "name": "Linn Bäckström",
+            "role": "Pastry chef · Stockholm",
+            "quote": "I have dyshidrosis, and these gloves have helped me a lot in my daily life."
+          }
+        }
+      },
+      "block_order": [
+        "review_kLqrhR",
+        "review_dpET79",
+        "review_FYdiNq",
+        "review_8MPMiU",
+        "review_mMtwmr",
+        "review_tfG4PC"
+      ],
+      "custom_css": [],
+      "name": "DRYE NT — Pro reviews",
+      "settings": {
+        "eyebrow": "Used on shift",
+        "heading": "When precision and touch matter, trapped sweat gets in the way.",
+        "stat1_num": "97%",
+        "stat1_desc": "reported dry hands after 3+ hours on the job",
+        "stat2_num": "86%",
+        "stat2_desc": "noticed significant skin difference after only two weeks",
+        "stats_title": "Verified survey of 500+ glove wearers",
+        "stats_note": "Post-purchase feedback from verified DRYE customers. Results vary by glove type, heat, and shift length."
+      }
+    },
+    "drye_nt_trust_badges_t8dXtb": {
+      "type": "drye-nt-trust-badges",
+      "blocks": {
+        "trustpilot_7TdJeH": {
+          "type": "trustpilot",
+          "settings": {
+            "logo": "shopify://shop_images/trustpilot-logo-trimmed.png",
+            "score": "4.4/5",
+            "count": "10 reviews",
+            "url": "https://se.trustpilot.com/review/hudsverige.se",
+            "cta_label": "See all reviews on Trustpilot"
+          }
+        },
+        "award_jKmGn4": {
+          "type": "award",
+          "settings": {
+            "emblem": "shopify://shop_images/skapa-emblem-small.png",
+            "name": "SKAPA",
+            "caption": "Innovation Award — in memory of the inventor Alfred Nobel"
+          }
+        },
+        "stars_HtABXQ": {
+          "type": "stars",
+          "settings": {
+            "score": "4.85/5",
+            "count": "47 reviews",
+            "url": "shopify://products/drye-moisture-routing-glove-liners",
+            "cta_label": "See all our reviews"
+          }
+        }
+      },
+      "block_order": [
+        "trustpilot_7TdJeH",
+        "award_jKmGn4",
+        "stars_HtABXQ"
+      ],
+      "custom_css": [],
+      "name": "DRYE NT — Trust badges",
+      "settings": {}
     },
     "drye_nt_validation_Ep7qKR": {
       "type": "drye-nt-validation",
@@ -302,21 +446,6 @@
         "no_desc": "Higher risk of puncturing or tearing the liner."
       }
     },
-    "drye_mechanics_cta_KQaVwL": {
-      "type": "drye-mechanics-cta",
-      "name": "DRYE Mechanics CTA",
-      "settings": {
-        "eyebrow": "",
-        "heading_line_1": "Either your shift feels different",
-        "heading_emphasis": "or it doesn’t.",
-        "body": "<p>Full refund within 30 days. No forms. No conditions. </p>",
-        "button_label": "order now",
-        "button_link": "shopify://products/drye-moisture-routing-glove-liners",
-        "meta": "One layer changes the whole shift.",
-        "secondary_label": "",
-        "secondary_link": "shopify://blogs/insights/automotive-mechanics-field-study"
-      }
-    },
     "drye_nt_close_ByEU4J": {
       "type": "drye-nt-close",
       "disabled": true,
@@ -329,85 +458,6 @@
         "cta_url": "shopify://products/drye-moisture-routing-glove-liners",
         "guarantee": "30-Day Money Back Guarantee",
         "sources": ""
-      }
-    },
-    "drye_nt_pro_reviews_xHQ6BX": {
-      "type": "drye-nt-pro-reviews",
-      "blocks": {
-        "review_kLqrhR": {
-          "type": "review",
-          "settings": {
-            "avatar": "shopify://shop_images/troy.jpg",
-            "name": "Ali Alahaman",
-            "role": "Salon owner Troy ·  Kalmar",
-            "quote": "They add an extra layer under my nitrile gloves when I work with chemicals, and my hands stay much drier and don’t get nearly as sweaty."
-          }
-        },
-        "review_dpET79": {
-          "type": "review",
-          "settings": {
-            "avatar": "shopify://shop_images/Sofia_halvarsson_b0bc166c-062d-4bc6-b119-2dc6bc7f2696.jpg",
-            "name": "Sofia Halvarsson",
-            "role": "Hairdresser Nikita Hair· Stockholm",
-            "quote": "They are nice to use. While it can get warm under nitrile gloves, my hands don’t feel sweaty."
-          }
-        },
-        "review_FYdiNq": {
-          "type": "review",
-          "settings": {
-            "avatar": "shopify://shop_images/2.jpg",
-            "name": "Emilia Asplund",
-            "role": "Pastry chef · Stockholm",
-            "quote": "They keep my hands dry and comfortable. It took a little getting used to, but now they’re just part of my routine."
-          }
-        },
-        "review_8MPMiU": {
-          "type": "review",
-          "settings": {
-            "avatar": "shopify://shop_images/1.jpg",
-            "name": "Sofia Malmberg",
-            "role": "Hairdresser Nikita Hair · Gothenburg",
-            "quote": "They’re comfortable to wear, and my hands feel less dry and irritated now. Definitely an improvement."
-          }
-        },
-        "review_mMtwmr": {
-          "type": "review",
-          "settings": {
-            "avatar": "shopify://shop_images/Screenshot_36.png",
-            "name": "Phuong T",
-            "role": "Nail Tech & Salon Owner · Tampa FL",
-            "quote": "I have eczema and these gloves have been the best things I bought for my hands.  Every hour, I would change my gloves and notice the sweat on my DRYE - but my hands remain dried. Thank you so much for making these!"
-          }
-        },
-        "review_tfG4PC": {
-          "type": "review",
-          "settings": {
-            "avatar": "shopify://shop_images/download_9dfd04eb-ae39-4076-b793-7a2558d1fd70.jpg",
-            "name": "Linn Bäckström",
-            "role": "Pastry chef · Stockholm",
-            "quote": "I have dyshidrosis, and these gloves have helped me a lot in my daily life."
-          }
-        }
-      },
-      "block_order": [
-        "review_kLqrhR",
-        "review_dpET79",
-        "review_FYdiNq",
-        "review_8MPMiU",
-        "review_mMtwmr",
-        "review_tfG4PC"
-      ],
-      "custom_css": [],
-      "name": "DRYE NT — Pro reviews",
-      "settings": {
-        "eyebrow": "Used on shift",
-        "heading": "When precision and touch matter, trapped sweat gets in the way.",
-        "stat1_num": "97%",
-        "stat1_desc": "reported dry hands after 3+ hours on the job",
-        "stat2_num": "86%",
-        "stat2_desc": "noticed significant skin difference after only two weeks",
-        "stats_title": "Verified survey of 500+ glove wearers",
-        "stats_note": "Post-purchase feedback from verified DRYE customers. Results vary by glove type, heat, and shift length."
       }
     },
     "nt_desk": {
@@ -471,46 +521,6 @@
         "keep_label": "Keep reading",
         "keep_target": "#drye-nt-trapped"
       }
-    },
-    "drye_nt_trust_badges_t8dXtb": {
-      "type": "drye-nt-trust-badges",
-      "blocks": {
-        "trustpilot_7TdJeH": {
-          "type": "trustpilot",
-          "settings": {
-            "logo": "shopify://shop_images/trustpilot-logo-trimmed.png",
-            "score": "4.4/5",
-            "count": "10 reviews",
-            "url": "https://se.trustpilot.com/review/hudsverige.se",
-            "cta_label": "See all reviews on Trustpilot"
-          }
-        },
-        "award_jKmGn4": {
-          "type": "award",
-          "settings": {
-            "emblem": "shopify://shop_images/skapa-emblem-small.png",
-            "name": "SKAPA",
-            "caption": "Innovation Award — in memory of the inventor Alfred Nobel"
-          }
-        },
-        "stars_HtABXQ": {
-          "type": "stars",
-          "settings": {
-            "score": "4.85/5",
-            "count": "47 reviews",
-            "url": "shopify://products/drye-moisture-routing-glove-liners",
-            "cta_label": "See all our reviews"
-          }
-        }
-      },
-      "block_order": [
-        "trustpilot_7TdJeH",
-        "award_jKmGn4",
-        "stars_HtABXQ"
-      ],
-      "custom_css": [],
-      "name": "DRYE NT — Trust badges",
-      "settings": {}
     },
     "drye_mechanics_cta_2_EkyEpt": {
       "type": "drye-mechanics-cta-2",
@@ -789,17 +799,18 @@
   "order": [
     "nt_hero",
     "drye_mechanics_herov2_ajTaTf",
+    "drye_mechanics_time_promise_y7hWTc",
     "drye_nt_barrier_choice_g6KFyg",
     "drye_nt_inside_9eaNVa",
     "nt_mechanism",
     "drye_mechanics_time_promise_JFkP3K",
+    "drye_mechanics_cta_KQaVwL",
+    "drye_nt_pro_reviews_xHQ6BX",
+    "drye_nt_trust_badges_t8dXtb",
     "drye_nt_validation_Ep7qKR",
     "nt_nails",
-    "drye_mechanics_cta_KQaVwL",
     "drye_nt_close_ByEU4J",
-    "drye_nt_pro_reviews_xHQ6BX",
     "nt_desk",
-    "drye_nt_trust_badges_t8dXtb",
     "drye_mechanics_cta_2_EkyEpt",
     "drye_research_video_full_bi4hwc",
     "nt_loop",
