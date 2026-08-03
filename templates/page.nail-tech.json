@@ -139,13 +139,26 @@
       "type": "drye-liner-mechanism",
       "settings": {
         "section_id": "liner-mechanism",
-        "heading": "Cotton holds the sweat.",
+        "heading": "Cotton holds the sweat. <br>",
         "heading_emphasis": "DRYE moves it off your skin.",
         "vs_label": "Cotton · DRYE",
         "cotton_name": "Cotton",
         "cotton_steps": "Sweat enters the fabric and stays\nAt saturation, moisture sits on skin\nSame wet glove on shift 1 as shift 8",
         "drye_name": "DRYE Liner",
         "drye_steps": "Skin side repels — sweat cannot sit there\nOuter side pulls moisture toward it\nContinuous transport, no saturation point"
+      }
+    },
+    "nt_nails": {
+      "type": "drye-nt-nails",
+      "settings": {
+        "heading": "Who it's not for.",
+        "body": "",
+        "ok_tag": "Recommended",
+        "ok_title": "Short to moderate nails.",
+        "ok_desc": "Best match for DRYE — less concentrated pressure at the fingertips.",
+        "no_tag": "Not recommended",
+        "no_title": "Long or sharply pointed nails.",
+        "no_desc": "Higher risk of puncturing or tearing the liner."
       }
     },
     "drye_mechanics_time_promise_JFkP3K": {
@@ -411,19 +424,6 @@
         "video_src_mobile": "https://customer-fqpngdzqcoky7qmz.cloudflarestream.com/ed9ad690d7f5c27060e215f05f9e4f8e/manifest/video.m3u8",
         "video_label": "Goes under any sealed glove.",
         "video_caption": "Routes sweat from skin to outer fabric. No saturation point."
-      }
-    },
-    "nt_nails": {
-      "type": "drye-nt-nails",
-      "settings": {
-        "heading": "Who it's not for.",
-        "body": "The liner has to sit over the nail without tension.",
-        "ok_tag": "Recommended",
-        "ok_title": "Short to moderate nails.",
-        "ok_desc": "Best match for DRYE — less concentrated pressure at the fingertips.",
-        "no_tag": "Not recommended",
-        "no_title": "Long or sharply pointed nails.",
-        "no_desc": "Higher risk of puncturing or tearing the liner."
       }
     },
     "drye_nt_validation_Ep7qKR": {
@@ -813,6 +813,7 @@
     "drye_nt_barrier_choice_g6KFyg",
     "drye_nt_inside_9eaNVa",
     "nt_mechanism",
+    "nt_nails",
     "drye_mechanics_time_promise_JFkP3K",
     "drye_nt_close_ByEU4J",
     "drye_nt_pro_reviews_xHQ6BX",
@@ -820,7 +821,6 @@
     "drye_nt_trust_badges_t8dXtb",
     "drye_liner_product_clarity_PqAH9K",
     "drye_research_video_full_bi4hwc",
-    "nt_nails",
     "drye_nt_validation_Ep7qKR",
     "nt_loop",
     "nt_tradeoff",
