@@ -69,6 +69,30 @@
         "quote_4": "“Nitrile still gave me a rash.”"
       }
     },
+    "drye_nt_barrier_choice_g6KFyg": {
+      "type": "drye-nt-barrier-choice",
+      "name": "DRYE NT — Barrier choice",
+      "settings": {
+        "chapter": "04",
+        "heading": "Why your skin and nails get worse inside gloves over time.",
+        "pick_label": "Choose your starting point",
+        "btn_healthy": "My skin feels fine",
+        "btn_damaged": "My skin is already irritated",
+        "exposure": "Under glove 6 hours/day",
+        "risk_label": "Maceration risk rises",
+        "chart_alt": "Stylised overhydration in the skin across two weeks of daily glove occlusion",
+        "day_1": "Day 1",
+        "day_2": "Day 3",
+        "day_3": "Day 7",
+        "day_4": "Day 14",
+        "aud_healthy": "Healthy skin",
+        "healthy_d3": "No significant barrier change",
+        "healthy_d14": "Significant barrier impairment",
+        "aud_damaged": "Already irritated skin",
+        "damaged_d3": "Significant barrier impairment",
+        "source": "Sources: Ramsing & Agner, Contact Dermatitis, 1996 — short- and long-term experimental glove occlusion."
+      }
+    },
     "drye_nt_inside_9eaNVa": {
       "type": "drye-nt-inside",
       "blocks": {
@@ -100,7 +124,7 @@
       "name": "DRYE NT — Inside glove",
       "settings": {
         "chapter": "",
-        "heading": "DRYE goes <em> under your existing glove.</em>",
+        "heading": "DRYE goes <em class=\"dryeNEW-em\">under your existing glove.</em>",
         "body": "",
         "rr_days": "",
         "rr_days_label": "",
@@ -122,6 +146,107 @@
         "cotton_steps": "Sweat enters the fabric and stays\nAt saturation, moisture sits on skin\nSame wet glove on shift 1 as shift 8",
         "drye_name": "DRYE Liner",
         "drye_steps": "Skin side repels — sweat cannot sit there\nOuter side pulls moisture toward it\nContinuous transport, no saturation point"
+      }
+    },
+    "drye_mechanics_time_promise_JFkP3K": {
+      "type": "drye-mechanics-time-promise",
+      "name": "DRYE Mechanics Time",
+      "settings": {
+        "eyebrow": "— A. Riahi",
+        "heading": "Eight hours in. The glove is humid. Your skin is dry.",
+        "body": "<p><em>\"After 6 hours under rubber gloves, my hands felt wet inside. Took the gloves off — completely dry. Such a mindfuck.\"</em><br/><br/></p>"
+      }
+    },
+    "drye_nt_close_ByEU4J": {
+      "type": "drye-nt-close",
+      "settings": {
+        "days": "30",
+        "days_label": "Days",
+        "heading": "Try it risk-free.",
+        "body": "If DRYE Liner doesn't change your shift, full refund. No hassle.",
+        "cta_label": "Get DRYE Liner",
+        "cta_url": "shopify://products/drye-moisture-routing-glove-liners",
+        "guarantee": "30-Day Money Back Guarantee",
+        "sources": ""
+      }
+    },
+    "drye_nt_pro_reviews_xHQ6BX": {
+      "type": "drye-nt-pro-reviews",
+      "blocks": {
+        "review_kLqrhR": {
+          "type": "review",
+          "settings": {
+            "avatar": "shopify://shop_images/troy.jpg",
+            "name": "Ali Alahaman",
+            "role": "Salon owner Troy ·  Kalmar",
+            "quote": "They add an extra layer under my nitrile gloves when I work with chemicals, and my hands stay much drier and don’t get nearly as sweaty."
+          }
+        },
+        "review_dpET79": {
+          "type": "review",
+          "settings": {
+            "avatar": "shopify://shop_images/Sofia_halvarsson_b0bc166c-062d-4bc6-b119-2dc6bc7f2696.jpg",
+            "name": "Sofia Halvarsson",
+            "role": "Hairdresser Nikita Hair· Stockholm",
+            "quote": "They are nice to use. While it can get warm under nitrile gloves, my hands don’t feel sweaty."
+          }
+        },
+        "review_FYdiNq": {
+          "type": "review",
+          "settings": {
+            "avatar": "shopify://shop_images/2.jpg",
+            "name": "Emilia Asplund",
+            "role": "Pastry chef · Stockholm",
+            "quote": "They keep my hands dry and comfortable. It took a little getting used to, but now they’re just part of my routine."
+          }
+        },
+        "review_8MPMiU": {
+          "type": "review",
+          "settings": {
+            "avatar": "shopify://shop_images/1.jpg",
+            "name": "Sofia Malmberg",
+            "role": "Hairdresser Nikita Hair · Gothenburg",
+            "quote": "They’re comfortable to wear, and my hands feel less dry and irritated now. Definitely an improvement."
+          }
+        },
+        "review_mMtwmr": {
+          "type": "review",
+          "settings": {
+            "avatar": "shopify://shop_images/Screenshot_36.png",
+            "name": "Phuong T",
+            "role": "Nail Tech & Salon Owner · Tampa FL",
+            "quote": "I have eczema and these gloves have been the best things I bought for my hands.  Every hour, I would change my gloves and notice the sweat on my DRYE - but my hands remain dried. Thank you so much for making these!"
+          }
+        },
+        "review_tfG4PC": {
+          "type": "review",
+          "settings": {
+            "avatar": "shopify://shop_images/download_9dfd04eb-ae39-4076-b793-7a2558d1fd70.jpg",
+            "name": "Linn Bäckström",
+            "role": "Pastry chef · Stockholm",
+            "quote": "I have dyshidrosis, and these gloves have helped me a lot in my daily life."
+          }
+        }
+      },
+      "block_order": [
+        "review_kLqrhR",
+        "review_dpET79",
+        "review_FYdiNq",
+        "review_8MPMiU",
+        "review_mMtwmr",
+        "review_tfG4PC"
+      ],
+      "custom_css": [],
+      "name": "DRYE NT — Pro reviews",
+      "settings": {
+        "eyebrow": "Used on shift",
+        "heading": "When precision and touch matter, trapped sweat gets in the way.",
+        "stat1_num": "97%",
+        "stat1_desc": "reported dry hands after 3+ hours on the job",
+        "stat2_num": "86%",
+        "stat2_desc": "noticed significant skin difference after only two weeks",
+        "stats_title": "Verified survey of 500+ glove wearers",
+        "stats_note": "Post-purchase feedback from verified DRYE customers. Results vary by glove type, heat, and shift length."
       }
     },
     "nt_desk": {
@@ -186,38 +311,45 @@
         "keep_target": "#drye-nt-trapped"
       }
     },
-    "drye_nt_barrier_choice_g6KFyg": {
-      "type": "drye-nt-barrier-choice",
-      "name": "DRYE NT — Barrier choice",
-      "settings": {
-        "chapter": "04",
-        "heading": "Why your skin and nails get worse inside gloves over time.",
-        "pick_label": "Choose your starting point",
-        "btn_healthy": "My skin feels fine",
-        "btn_damaged": "My skin is already irritated",
-        "exposure": "Under glove 6 hours/day",
-        "risk_label": "Maceration risk rises",
-        "chart_alt": "Stylised overhydration in the skin across two weeks of daily glove occlusion",
-        "day_1": "Day 1",
-        "day_2": "Day 3",
-        "day_3": "Day 7",
-        "day_4": "Day 14",
-        "aud_healthy": "Healthy skin",
-        "healthy_d3": "No significant barrier change",
-        "healthy_d14": "Significant barrier impairment",
-        "aud_damaged": "Already irritated skin",
-        "damaged_d3": "Significant barrier impairment",
-        "source": "Sources: Ramsing & Agner, Contact Dermatitis, 1996 — short- and long-term experimental glove occlusion."
-      }
-    },
-    "drye_mechanics_time_promise_JFkP3K": {
-      "type": "drye-mechanics-time-promise",
-      "name": "DRYE Mechanics Time",
-      "settings": {
-        "eyebrow": "— A. Riahi",
-        "heading": "Eight hours in. The glove is humid. Your skin is dry.",
-        "body": "<p><em>\"After 6 hours under rubber gloves, my hands felt wet inside. Took the gloves off — completely dry. Such a mindfuck.\"</em><br/><br/></p>"
-      }
+    "drye_nt_trust_badges_t8dXtb": {
+      "type": "drye-nt-trust-badges",
+      "blocks": {
+        "trustpilot_7TdJeH": {
+          "type": "trustpilot",
+          "settings": {
+            "logo": "shopify://shop_images/trustpilot-logo-trimmed.png",
+            "score": "4.4/5",
+            "count": "10 reviews",
+            "url": "https://se.trustpilot.com/review/hudsverige.se",
+            "cta_label": "See all reviews on Trustpilot"
+          }
+        },
+        "award_jKmGn4": {
+          "type": "award",
+          "settings": {
+            "emblem": "shopify://shop_images/skapa-emblem-small.png",
+            "name": "SKAPA",
+            "caption": "Innovation Award — in memory of the inventor Alfred Nobel"
+          }
+        },
+        "stars_HtABXQ": {
+          "type": "stars",
+          "settings": {
+            "score": "4.85/5",
+            "count": "47 reviews",
+            "url": "shopify://products/drye-moisture-routing-glove-liners",
+            "cta_label": "See all our reviews"
+          }
+        }
+      },
+      "block_order": [
+        "trustpilot_7TdJeH",
+        "award_jKmGn4",
+        "stars_HtABXQ"
+      ],
+      "custom_css": [],
+      "name": "DRYE NT — Trust badges",
+      "settings": {}
     },
     "drye_liner_product_clarity_PqAH9K": {
       "type": "drye-liner-product-clarity",
@@ -281,45 +413,150 @@
         "video_caption": "Routes sweat from skin to outer fabric. No saturation point."
       }
     },
-    "drye_nt_trust_badges_t8dXtb": {
-      "type": "drye-nt-trust-badges",
+    "nt_nails": {
+      "type": "drye-nt-nails",
+      "settings": {
+        "heading": "Who it's not for.",
+        "body": "The liner has to sit over the nail without tension.",
+        "ok_tag": "Recommended",
+        "ok_title": "Short to moderate nails.",
+        "ok_desc": "Best match for DRYE — less concentrated pressure at the fingertips.",
+        "no_tag": "Not recommended",
+        "no_title": "Long or sharply pointed nails.",
+        "no_desc": "Higher risk of puncturing or tearing the liner."
+      }
+    },
+    "drye_nt_validation_Ep7qKR": {
+      "type": "drye-nt-validation",
       "blocks": {
-        "trustpilot_7TdJeH": {
-          "type": "trustpilot",
+        "institution_CzaatN": {
+          "type": "institution",
           "settings": {
-            "logo": "shopify://shop_images/trustpilot-logo-trimmed.png",
-            "score": "4.4/5",
-            "count": "10 reviews",
-            "url": "https://se.trustpilot.com/review/hudsverige.se",
-            "cta_label": "See all reviews on Trustpilot"
+            "initial": "R",
+            "name": "RISE Research Institutes of Sweden",
+            "role": "Test spec & independent validation."
           }
         },
-        "award_jKmGn4": {
-          "type": "award",
+        "institution_GqjyXw": {
+          "type": "institution",
           "settings": {
-            "emblem": "shopify://shop_images/skapa-emblem-small.png",
-            "name": "SKAPA",
-            "caption": "Innovation Award — in memory of the inventor Alfred Nobel"
+            "initial": "U",
+            "name": "Uppsala University",
+            "role": "Research collaboration on sweat movement."
           }
         },
-        "stars_HtABXQ": {
-          "type": "stars",
+        "institution_MdYdYx": {
+          "type": "institution",
           "settings": {
-            "score": "4.85/5",
-            "count": "47 reviews",
-            "url": "shopify://products/drye-moisture-routing-glove-liners",
-            "cta_label": "See all our reviews"
+            "initial": "S",
+            "name": "Swedish School of Textiles",
+            "role": "Textile engineering & structural analysis"
+          }
+        },
+        "logo_jTrNdg": {
+          "type": "logo",
+          "settings": {
+            "logo": "shopify://shop_images/swedish-school-of-textiles-white.png",
+            "name": "Almi",
+            "large": true
+          }
+        },
+        "logo_YcWUMK": {
+          "type": "logo",
+          "settings": {
+            "logo": "shopify://shop_images/uppsala-universitet-white.png",
+            "name": "Borås INK",
+            "large": true
+          }
+        },
+        "logo_Pac7Aq": {
+          "type": "logo",
+          "settings": {
+            "logo": "shopify://shop_images/uminova-innovation-white.png",
+            "name": "Skånes universitetssjukhus",
+            "large": true
+          }
+        },
+        "logo_UktXb3": {
+          "type": "logo",
+          "settings": {
+            "logo": "shopify://shop_images/uppsala-innovation-centre-white.png",
+            "name": "Wargön Innovation",
+            "large": true
+          }
+        },
+        "logo_GVXC77": {
+          "type": "logo",
+          "settings": {
+            "logo": "shopify://shop_images/sodertalje-science-park-white.png",
+            "name": "Södertälje Science Park",
+            "large": false
+          }
+        },
+        "logo_9CykHf": {
+          "type": "logo",
+          "settings": {
+            "logo": "shopify://shop_images/boras-ink-white.png",
+            "name": "The Swedish School of Textiles",
+            "large": true
+          }
+        },
+        "logo_z9kTyt": {
+          "type": "logo",
+          "settings": {
+            "logo": "shopify://shop_images/almi-white.png",
+            "name": "Uminova Innovation",
+            "large": false
+          }
+        },
+        "logo_NVBB6M": {
+          "type": "logo",
+          "settings": {
+            "logo": "shopify://shop_images/vinnova-white.png",
+            "name": "Vinnova",
+            "large": false
+          }
+        },
+        "logo_MigQ6T": {
+          "type": "logo",
+          "settings": {
+            "logo": "shopify://shop_images/skanes-universitetssjukhus-white.png",
+            "name": "Uppsala Innovation Centre",
+            "large": true
+          }
+        },
+        "logo_jEKzFm": {
+          "type": "logo",
+          "settings": {
+            "logo": "shopify://shop_images/wargon-innovation-white.png",
+            "name": "Uppsala Universitet",
+            "large": true
           }
         }
       },
       "block_order": [
-        "trustpilot_7TdJeH",
-        "award_jKmGn4",
-        "stars_HtABXQ"
+        "institution_CzaatN",
+        "institution_GqjyXw",
+        "institution_MdYdYx",
+        "logo_jTrNdg",
+        "logo_YcWUMK",
+        "logo_Pac7Aq",
+        "logo_UktXb3",
+        "logo_GVXC77",
+        "logo_9CykHf",
+        "logo_z9kTyt",
+        "logo_NVBB6M",
+        "logo_MigQ6T",
+        "logo_jEKzFm"
       ],
-      "custom_css": [],
-      "name": "DRYE NT — Trust badges",
-      "settings": {}
+      "name": "DRYE NT — External",
+      "settings": {
+        "eyebrow": "External validation",
+        "heading": "Developed over 7 years with  100+",
+        "heading_em": "external experts and industry users.",
+        "lead": "7 years of R&D. 100+ external experts and industry users. One textile built for life under gloves.",
+        "logos_label": "Research and development partners"
+      }
     },
     "nt_loop": {
       "type": "drye-nt-loop",
@@ -493,98 +730,6 @@
         "time_4": "13:30"
       }
     },
-    "drye_nt_pro_reviews_xHQ6BX": {
-      "type": "drye-nt-pro-reviews",
-      "blocks": {
-        "review_kLqrhR": {
-          "type": "review",
-          "settings": {
-            "avatar": "shopify://shop_images/troy.jpg",
-            "name": "Ali Alahaman",
-            "role": "Salon owner Troy ·  Kalmar",
-            "quote": "They add an extra layer under my nitrile gloves when I work with chemicals, and my hands stay much drier and don’t get nearly as sweaty."
-          }
-        },
-        "review_dpET79": {
-          "type": "review",
-          "settings": {
-            "avatar": "shopify://shop_images/Sofia_halvarsson_b0bc166c-062d-4bc6-b119-2dc6bc7f2696.jpg",
-            "name": "Sofia Halvarsson",
-            "role": "Hairdresser Nikita Hair· Stockholm",
-            "quote": "They are nice to use. While it can get warm under nitrile gloves, my hands don’t feel sweaty."
-          }
-        },
-        "review_FYdiNq": {
-          "type": "review",
-          "settings": {
-            "avatar": "shopify://shop_images/2.jpg",
-            "name": "Emilia Asplund",
-            "role": "Pastry chef · Stockholm",
-            "quote": "They keep my hands dry and comfortable. It took a little getting used to, but now they’re just part of my routine."
-          }
-        },
-        "review_8MPMiU": {
-          "type": "review",
-          "settings": {
-            "avatar": "shopify://shop_images/1.jpg",
-            "name": "Sofia Malmberg",
-            "role": "Hairdresser Nikita Hair · Gothenburg",
-            "quote": "They’re comfortable to wear, and my hands feel less dry and irritated now. Definitely an improvement."
-          }
-        },
-        "review_mMtwmr": {
-          "type": "review",
-          "settings": {
-            "avatar": "shopify://shop_images/Screenshot_36.png",
-            "name": "Phuong T",
-            "role": "Nail Tech & Salon Owner · Tampa FL",
-            "quote": "I have eczema and these gloves have been the best things I bought for my hands.  Every hour, I would change my gloves and notice the sweat on my DRYE - but my hands remain dried. Thank you so much for making these!"
-          }
-        },
-        "review_tfG4PC": {
-          "type": "review",
-          "settings": {
-            "avatar": "shopify://shop_images/download_9dfd04eb-ae39-4076-b793-7a2558d1fd70.jpg",
-            "name": "Linn Bäckström",
-            "role": "Pastry chef · Stockholm",
-            "quote": "I have dyshidrosis, and these gloves have helped me a lot in my daily life."
-          }
-        }
-      },
-      "block_order": [
-        "review_kLqrhR",
-        "review_dpET79",
-        "review_FYdiNq",
-        "review_8MPMiU",
-        "review_mMtwmr",
-        "review_tfG4PC"
-      ],
-      "custom_css": [],
-      "name": "DRYE NT — Pro reviews",
-      "settings": {
-        "eyebrow": "Used on shift",
-        "heading": "When precision and touch matter, trapped sweat gets in the way.",
-        "stat1_num": "97%",
-        "stat1_desc": "reported dry hands after 3+ hours on the job",
-        "stat2_num": "86%",
-        "stat2_desc": "noticed significant skin difference after only two weeks",
-        "stats_title": "Verified survey of 500+ glove wearers",
-        "stats_note": "Post-purchase feedback from verified DRYE customers. Results vary by glove type, heat, and shift length."
-      }
-    },
-    "nt_nails": {
-      "type": "drye-nt-nails",
-      "settings": {
-        "heading": "Who it's not for.",
-        "body": "The liner has to sit over the nail without tension.",
-        "ok_tag": "Recommended",
-        "ok_title": "Short to moderate nails.",
-        "ok_desc": "Best match for DRYE — less concentrated pressure at the fingertips.",
-        "no_tag": "Not recommended",
-        "no_title": "Long or sharply pointed nails.",
-        "no_desc": "Higher risk of puncturing or tearing the liner."
-      }
-    },
     "drye_nt_real_reviews_dHDWiM": {
       "type": "drye-nt-real-reviews",
       "blocks": {
@@ -648,151 +793,6 @@
         "trustpilot_logo": "shopify://shop_images/trustpilot-logo-trimmed.png"
       }
     },
-    "drye_nt_validation_Ep7qKR": {
-      "type": "drye-nt-validation",
-      "blocks": {
-        "institution_CzaatN": {
-          "type": "institution",
-          "settings": {
-            "initial": "R",
-            "name": "RISE Research Institutes of Sweden",
-            "role": "Test spec & independent validation."
-          }
-        },
-        "institution_GqjyXw": {
-          "type": "institution",
-          "settings": {
-            "initial": "U",
-            "name": "Uppsala University",
-            "role": "Research collaboration on sweat movement."
-          }
-        },
-        "institution_MdYdYx": {
-          "type": "institution",
-          "settings": {
-            "initial": "S",
-            "name": "Swedish School of Textiles",
-            "role": "Textile engineering & structural analysis"
-          }
-        },
-        "logo_jTrNdg": {
-          "type": "logo",
-          "settings": {
-            "logo": "shopify://shop_images/swedish-school-of-textiles-white.png",
-            "name": "Almi",
-            "large": true
-          }
-        },
-        "logo_YcWUMK": {
-          "type": "logo",
-          "settings": {
-            "logo": "shopify://shop_images/uppsala-universitet-white.png",
-            "name": "Borås INK",
-            "large": true
-          }
-        },
-        "logo_Pac7Aq": {
-          "type": "logo",
-          "settings": {
-            "logo": "shopify://shop_images/uminova-innovation-white.png",
-            "name": "Skånes universitetssjukhus",
-            "large": true
-          }
-        },
-        "logo_UktXb3": {
-          "type": "logo",
-          "settings": {
-            "logo": "shopify://shop_images/uppsala-innovation-centre-white.png",
-            "name": "Wargön Innovation",
-            "large": true
-          }
-        },
-        "logo_GVXC77": {
-          "type": "logo",
-          "settings": {
-            "logo": "shopify://shop_images/sodertalje-science-park-white.png",
-            "name": "Södertälje Science Park",
-            "large": false
-          }
-        },
-        "logo_9CykHf": {
-          "type": "logo",
-          "settings": {
-            "logo": "shopify://shop_images/boras-ink-white.png",
-            "name": "The Swedish School of Textiles",
-            "large": true
-          }
-        },
-        "logo_z9kTyt": {
-          "type": "logo",
-          "settings": {
-            "logo": "shopify://shop_images/almi-white.png",
-            "name": "Uminova Innovation",
-            "large": false
-          }
-        },
-        "logo_NVBB6M": {
-          "type": "logo",
-          "settings": {
-            "logo": "shopify://shop_images/vinnova-white.png",
-            "name": "Vinnova",
-            "large": false
-          }
-        },
-        "logo_MigQ6T": {
-          "type": "logo",
-          "settings": {
-            "logo": "shopify://shop_images/skanes-universitetssjukhus-white.png",
-            "name": "Uppsala Innovation Centre",
-            "large": true
-          }
-        },
-        "logo_jEKzFm": {
-          "type": "logo",
-          "settings": {
-            "logo": "shopify://shop_images/wargon-innovation-white.png",
-            "name": "Uppsala Universitet",
-            "large": true
-          }
-        }
-      },
-      "block_order": [
-        "institution_CzaatN",
-        "institution_GqjyXw",
-        "institution_MdYdYx",
-        "logo_jTrNdg",
-        "logo_YcWUMK",
-        "logo_Pac7Aq",
-        "logo_UktXb3",
-        "logo_GVXC77",
-        "logo_9CykHf",
-        "logo_z9kTyt",
-        "logo_NVBB6M",
-        "logo_MigQ6T",
-        "logo_jEKzFm"
-      ],
-      "name": "DRYE NT — External",
-      "settings": {
-        "eyebrow": "External validation",
-        "heading": "Developed over 7 years with  100+",
-        "heading_em": "external experts and industry users.",
-        "lead": "7 years of R&D. 100+ external experts and industry users. One textile built for life under gloves.",
-        "logos_label": "Research and development partners"
-      }
-    },
-    "drye_nt_close_ByEU4J": {
-      "type": "drye-nt-close",
-      "settings": {
-        "days": "30",
-        "days_label": "Days",
-        "heading": "Try it risk-free.",
-        "body": "If DRYE Liner doesn't change your shift, full refund. No hassle.",
-        "cta_label": "Get DRYE Liner",
-        "cta_url": "shopify://products/drye-moisture-routing-glove-liners",
-        "guarantee": "30-Day Money Back Guarantee",
-        "sources": ""
-      }
-    },
     "nt_close": {
       "type": "drye-nt-close",
       "settings": {
@@ -810,13 +810,14 @@
   "order": [
     "nt_hero",
     "drye_mechanics_herov2_ajTaTf",
+    "drye_nt_barrier_choice_g6KFyg",
     "drye_nt_inside_9eaNVa",
     "nt_mechanism",
     "drye_mechanics_time_promise_JFkP3K",
+    "drye_nt_close_ByEU4J",
     "drye_nt_pro_reviews_xHQ6BX",
     "nt_desk",
     "drye_nt_trust_badges_t8dXtb",
-    "drye_nt_barrier_choice_g6KFyg",
     "drye_liner_product_clarity_PqAH9K",
     "drye_research_video_full_bi4hwc",
     "nt_nails",
@@ -825,7 +826,6 @@
     "nt_tradeoff",
     "nt_trapped",
     "drye_nt_real_reviews_dHDWiM",
-    "drye_nt_close_ByEU4J",
     "nt_close"
   ]
 }
