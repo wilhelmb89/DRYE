@@ -123,6 +123,23 @@
     {% if template.name == 'blog' and current_tags %}
       <meta name="robots" content="noindex, follow">
     {% endif %}
+
+    {%- comment -%}
+      Shopify Markets currency sync. __marketIntent exposes the market's INTENDED
+      currency (from the URL-prefix localization context) so drye-market-currency-sync.js
+      can compare it to the cart's ACTUAL currency and, on mismatch, set the country
+      context via /localization — keeping the Ajax drawer + checkout in the buyer's
+      currency instead of the SEK store default. Must load before the cart drawer JS.
+    {%- endcomment -%}
+    <script>
+      window.__marketIntent = {
+        country:  {{ localization.country.iso_code | json }},
+        currency: {{ localization.country.currency.iso_code | json }},
+        language: {{ localization.language.iso_code | json }},
+        root:     {{ routes.root | json }}
+      };
+    </script>
+    <script src="{{ 'drye-market-currency-sync.js' | asset_url }}" defer></script>
   </head>
 
   <body class="template-{{ template.name }} page-type-{{ request.page_type }}{% if page.template_suffix != blank %} {{ page.template_suffix }}__page{% endif %}">
@@ -163,12 +180,14 @@
     {%- render 'theme-variables-script' -%}
 
     <!-- Drawers / body-end sections -->
-    {% render 'drye-cart-drawer' %}
+    {% comment %} Cart drawer is a SECTION so it can re-render via the Section
+       Rendering API (?section_id=), keeping prices server-rendered in the
+       buyer's market currency. It loads its own CSS + JS. {% endcomment %}
+    {% section 'drye-cart-drawer' %}
     {% section 'drye-size-guide-drawer' %}
 
     <!-- DRYE section tracker (drop-off measurement) -->
     {% render 'drye-section-tracker' %}
-    <script src="{{ 'drye-cart-drawer.js' | asset_url }}" defer></script>
 
   </body>
 </html>
