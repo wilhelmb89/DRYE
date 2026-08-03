@@ -20,13 +20,13 @@
 }
 
 .hero .stars-row { display: flex; align-items: center; gap: 8px; margin-bottom: 4px; }
-.hero .stars { color: #f59e0b; font-size: 16px; letter-spacing: 1px; line-height: 1; }
-.hero .stars-lbl { font-family: "DM Sans", sans-serif; font-size: 16px; color: var(--muted); }
+.hero .stars { color: #f59e0b; font-size: 15px; letter-spacing: 1px; line-height: 1; }
+.hero .stars-lbl { font-family: "DM Sans", sans-serif; font-size: 15px; color: var(--muted); }
 .hero .stars-lbl a { color: var(--emerald); font-weight: 600; text-decoration: none; }
 
 /* ---- Intro paragraph + checklist ---- */
 .hero .pdp-intro { margin: 0 0 18px; }
-.hero .pdp-intro__lede { margin: 0 0 14px; font-family: "DM Sans", sans-serif; font-size: 16px; line-height: 1.6; color: var(--body); }
+.hero .pdp-intro__lede { margin: 0 0 14px; font-family: "DM Sans", sans-serif; font-size: 15px; line-height: 1.6; color: var(--body); }
 .hero .pdp-intro__list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 9px; }
 .hero .pdp-intro__list li { display: flex; align-items: flex-start; gap: 8px; font-family: "DM Sans", sans-serif; font-size: 16px; font-weight: 400; line-height: 1.4; color: var(--body); }
 .hero .pdp-intro__dot { display: flex; align-items: center; justify-content: center; width: 18px; height: 18px; border-radius: 50%; background: var(--emerald); flex: 0 0 auto; margin-top: 1px; }
@@ -144,10 +144,10 @@
 @media (max-width: 767px) {
   /* #3 review bar */
   .hero .stars,
-  .hero .stars-lbl { font-size: 16px; }
+  .hero .stars-lbl { font-size: 15px; }
 
-  /* #4 intro paragraph + checklist */
-  .hero .pdp-intro__lede,
+  /* #4 intro paragraph (15px) + checklist (16px) */
+  .hero .pdp-intro__lede { font-size: 15px; }
   .hero .pdp-intro__list li { font-size: 16px; }
 
   /* #5 pack price */
