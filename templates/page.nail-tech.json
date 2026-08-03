@@ -12,13 +12,6 @@
     "nt_hero": {
       "type": "drye-nt-hero",
       "blocks": {
-        "r1": {
-          "type": "review",
-          "settings": {
-            "quote": "“Even with sweat on the DRYE, my hands stayed dry all day.”",
-            "author": "PN · US"
-          }
-        },
         "r2": {
           "type": "review",
           "settings": {
@@ -42,11 +35,11 @@
         }
       },
       "block_order": [
-        "r1",
         "r2",
         "r3",
         "r4"
       ],
+      "disabled": true,
       "settings": {
         "logo_text": "DRYE",
         "hero_image": "shopify://shop_images/Gemini_Generated_Image_x4acmfx4acmfx4ac.webp",
@@ -54,6 +47,26 @@
         "heading": "Your nails are fine on Sunday.  \n By Thursday they’re splitting.",
         "subheading": "DRYE adds a 0.4 mm routing layer under your glove so sweat moves off the skin side — not cotton, not double‑gloving",
         "rating_label": "4.4/5 · Trustpilot"
+      }
+    },
+    "drye_mechanics_herov2_ajTaTf": {
+      "type": "drye-mechanics-herov2",
+      "name": "DRYE Mechanics Hero",
+      "settings": {
+        "section_id": "mechanics-hero",
+        "image_desktop": "shopify://shop_images/Gemini_Generated_Image_x4acmfx4acmfx4ac.webp",
+        "image_mobile": "shopify://shop_images/Gemini_Generated_Image_clq2a5clq2a5clq2.webp",
+        "eyebrow": "",
+        "heading_line_1": "You already know",
+        "heading_emphasis": "how the shift ends.",
+        "show_rule": true,
+        "subheading": "<p>Sweaty hands by the fourth client. Gloves that fight you between sets. The smell when they finally come off. Same nitrile tomorrow.</p>",
+        "scroll_text": "Keep reading",
+        "scroll_target": "#gallery",
+        "quote_1": "“Trying to get gloves onto sweaty hands.” ",
+        "quote_2": "“My hands smell like feet.” ",
+        "quote_3": "",
+        "quote_4": ""
       }
     },
     "nt_desk": {
@@ -109,7 +122,7 @@
       ],
       "settings": {
         "chapter": "01",
-        "heading": "Heat, allergies, sweat, and friction under nitrile gloves",
+        "heading": "One of these is your Tuesday afternoon",
         "swipe_label": "Swipa",
         "prev_label": "Previous photos",
         "next_label": "More photos",
@@ -715,6 +728,7 @@
   },
   "order": [
     "nt_hero",
+    "drye_mechanics_herov2_ajTaTf",
     "nt_desk",
     "nt_trapped",
     "nt_tradeoff",
