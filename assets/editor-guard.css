@@ -1,0 +1,41 @@
+/* ==========================================================================
+   editor-guard.css
+   Loaded ONLY inside the Shopify theme editor — layout/theme.liquid wraps it in
+   {% if request.design_mode %}. It is NEVER served to real customers, so nothing
+   in this file can affect the live storefront. Its only job is to stop the
+   editor preview from jumping (bouncing up/down and snapping to the very bottom
+   of the page) every time you click around while editing.
+
+   Why the jump happens (diagnosed, not guessed):
+   - No DRYE script scrolls the page on load; the jump is Shopify's OWN
+     "scroll the selected section into view" behaviour.
+   - The size-guide drawer is rendered as a whole <section> AFTER the footer
+     (theme.liquid: {% section 'drye-size-guide-drawer' %}), so it is the very
+     last node in the DOM. When the editor touches it, "scroll into view" = scroll
+     to the bottom of the page.
+   - Several click-only elements are position:fixed (cart drawer + overlay, the
+     mobile sticky add-to-cart bar). They are invisible when closed but still add
+     fixed/bottom layout the editor fights with.
+   - Smooth scrolling animates every one of those jumps, making it worse.
+
+   Fix: in the editor only, make scrolling instant and remove those closed,
+   click-only, fixed/bottom elements from the layout so there is nothing to jump
+   to. They all still work normally on the live site (this file isn't loaded there).
+   ========================================================================== */
+
+/* Instant scrolling so the editor's native scroll-to-section can't visibly throw the page. */
+html { scroll-behavior: auto !important; }
+
+/* Closed, click-only, fixed/bottom elements — take them out of the editor layout.
+   - #shopify-section-drye-size-guide-drawer: the bottom-of-DOM section that the
+     editor was scrolling to.
+   - cart drawer + overlay and the sticky ATC bar: position:fixed, only ever opened
+     by a real click, invisible when closed. */
+#shopify-section-drye-size-guide-drawer,
+.drye-cart-overlay,
+[data-drye-cart-overlay],
+.drye-cart-drawer,
+[data-drye-cart-drawer],
+.sticky-atc {
+  display: none !important;
+}

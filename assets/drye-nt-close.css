@@ -1,5 +1,5 @@
 /* DRYE NT — Close (30-day risk-reversal + CTA button)
-   Depends on drye-nt-base.css for --bg / --deep / --emerald / spacing + type tokens. */
+   Depends on base.css for --bg / --deep / --emerald / spacing + type tokens. */
 
 .drye-liner-risk-reversal { background: var(--bg); color: var(--body); border-top: 1px solid var(--border); padding-block: 40px; }
 .drye-liner-risk-reversal__wrap { display: grid; grid-template-columns: 68px 1fr; gap: 16px; align-items: center; margin-bottom: 18px; }

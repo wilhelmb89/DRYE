@@ -1,8 +1,8 @@
 
 /* DRYE NT — Pro reviews marquee + stats
-   Tokens come from base.css (loaded globally); every var() below carries a
-   hard fallback so the cards are ALWAYS visible even if a token or the
-   optional drye-nt-base.css is missing — no more invisible/white cards.
+   Tokens come from base.css (the single global base); every var() below carries
+   a hard fallback so the cards are ALWAYS visible even if a token is missing —
+   no more invisible/white cards.
 
    INFINITE LOOP CONTRACT (see the matching .liquid): the cards live in TWO
    identical .pro-reviews__group flex wrappers inside .pro-reviews__track. The
