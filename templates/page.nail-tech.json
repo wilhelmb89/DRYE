@@ -256,6 +256,19 @@
         "drye_steps": "Skin side repels — sweat cannot sit there\nOuter side pulls moisture toward it\nContinuous transport, no saturation point"
       }
     },
+    "drye_nt_close_d36WWJ": {
+      "type": "drye-nt-close",
+      "settings": {
+        "days": "30",
+        "days_label": "Days",
+        "heading": "Try it risk-free.",
+        "body": "If DRYE Liner doesn't change your shift, full refund. No hassle.",
+        "cta_label": "Get DRYE Liner",
+        "cta_url": "shopify://products/drye-moisture-routing-glove-liners",
+        "guarantee": "Secure checkout · 4.88/5 on 47 reviews",
+        "sources": ""
+      }
+    },
     "drye_nt_pro_reviews_xHQ6BX": {
       "type": "drye-nt-pro-reviews",
       "blocks": {
@@ -335,6 +348,46 @@
         "stats_note": "Post-purchase feedback from verified DRYE customers. Results vary by glove type, heat, and shift length."
       }
     },
+    "drye_nt_trust_badges_t8dXtb": {
+      "type": "drye-nt-trust-badges",
+      "blocks": {
+        "trustpilot_7TdJeH": {
+          "type": "trustpilot",
+          "settings": {
+            "logo": "shopify://shop_images/trustpilot-logo-trimmed.png",
+            "score": "4.4/5",
+            "count": "10 reviews",
+            "url": "https://se.trustpilot.com/review/hudsverige.se",
+            "cta_label": "See all reviews on Trustpilot"
+          }
+        },
+        "award_jKmGn4": {
+          "type": "award",
+          "settings": {
+            "emblem": "shopify://shop_images/skapa-emblem-small.png",
+            "name": "SKAPA",
+            "caption": "Innovation Award — in memory of the inventor Alfred Nobel"
+          }
+        },
+        "stars_HtABXQ": {
+          "type": "stars",
+          "settings": {
+            "score": "4.85/5",
+            "count": "47 reviews",
+            "url": "shopify://products/drye-moisture-routing-glove-liners",
+            "cta_label": "See all our reviews"
+          }
+        }
+      },
+      "block_order": [
+        "trustpilot_7TdJeH",
+        "award_jKmGn4",
+        "stars_HtABXQ"
+      ],
+      "custom_css": [],
+      "name": "DRYE NT — Trust badges",
+      "settings": {}
+    },
     "drye_documented_results_J3xN6N": {
       "type": "drye-documented-results",
       "blocks": {
@@ -392,59 +445,6 @@
         "heading": "Why millions of tradespeople thought cream was the answer",
         "subheading": "Sealed gloves over time cause <strong>skin barrier breakdown. </strong>No cream, powder, or steroid on earth can solve that."
       }
-    },
-    "drye_nt_close_d36WWJ": {
-      "type": "drye-nt-close",
-      "settings": {
-        "days": "30",
-        "days_label": "Days",
-        "heading": "Try it risk-free.",
-        "body": "If DRYE Liner doesn't change your shift, full refund. No hassle.",
-        "cta_label": "Get DRYE Liner",
-        "cta_url": "shopify://products/drye-moisture-routing-glove-liners",
-        "guarantee": "30-Day Money Back Guarantee",
-        "sources": ""
-      }
-    },
-    "drye_nt_trust_badges_t8dXtb": {
-      "type": "drye-nt-trust-badges",
-      "blocks": {
-        "trustpilot_7TdJeH": {
-          "type": "trustpilot",
-          "settings": {
-            "logo": "shopify://shop_images/trustpilot-logo-trimmed.png",
-            "score": "4.4/5",
-            "count": "10 reviews",
-            "url": "https://se.trustpilot.com/review/hudsverige.se",
-            "cta_label": "See all reviews on Trustpilot"
-          }
-        },
-        "award_jKmGn4": {
-          "type": "award",
-          "settings": {
-            "emblem": "shopify://shop_images/skapa-emblem-small.png",
-            "name": "SKAPA",
-            "caption": "Innovation Award — in memory of the inventor Alfred Nobel"
-          }
-        },
-        "stars_HtABXQ": {
-          "type": "stars",
-          "settings": {
-            "score": "4.85/5",
-            "count": "47 reviews",
-            "url": "shopify://products/drye-moisture-routing-glove-liners",
-            "cta_label": "See all our reviews"
-          }
-        }
-      },
-      "block_order": [
-        "trustpilot_7TdJeH",
-        "award_jKmGn4",
-        "stars_HtABXQ"
-      ],
-      "custom_css": [],
-      "name": "DRYE NT — Trust badges",
-      "settings": {}
     },
     "drye_nt_validation_Ep7qKR": {
       "type": "drye-nt-validation",
