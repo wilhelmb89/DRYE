@@ -111,6 +111,19 @@
         "rr_guarantee": ""
       }
     },
+    "nt_mechanism": {
+      "type": "drye-liner-mechanism",
+      "settings": {
+        "section_id": "liner-mechanism",
+        "heading": "Cotton holds the sweat.",
+        "heading_emphasis": "DRYE moves it off your skin.",
+        "vs_label": "Cotton · DRYE",
+        "cotton_name": "Cotton",
+        "cotton_steps": "Sweat enters the fabric and stays\nAt saturation, moisture sits on skin\nSame wet glove on shift 1 as shift 8",
+        "drye_name": "DRYE Liner",
+        "drye_steps": "Skin side repels — sweat cannot sit there\nOuter side pulls moisture toward it\nContinuous transport, no saturation point"
+      }
+    },
     "nt_desk": {
       "type": "drye-nt-desk",
       "blocks": {
@@ -244,6 +257,7 @@
         "spec_kpAAHJ",
         "spec_xhPAae"
       ],
+      "disabled": true,
       "name": "DRYE Product Clarity",
       "settings": {
         "section_id": "liner-product",
@@ -255,19 +269,6 @@
         "before_label": "Without DRYE",
         "after_image": "shopify://shop_images/5Y9A9293.webp",
         "after_label": "With DRYE"
-      }
-    },
-    "nt_mechanism": {
-      "type": "drye-liner-mechanism",
-      "settings": {
-        "section_id": "liner-mechanism",
-        "heading": "Cotton holds the sweat.",
-        "heading_emphasis": "DRYE moves it off your skin.",
-        "vs_label": "Cotton · DRYE",
-        "cotton_name": "Cotton",
-        "cotton_steps": "Sweat enters the fabric and stays\nAt saturation, moisture sits on skin\nSame wet glove on shift 1 as shift 8",
-        "drye_name": "DRYE Liner",
-        "drye_steps": "Skin side repels — sweat cannot sit there\nOuter side pulls moisture toward it\nContinuous transport, no saturation point"
       }
     },
     "drye_research_video_full_bi4hwc": {
@@ -810,20 +811,20 @@
     "nt_hero",
     "drye_mechanics_herov2_ajTaTf",
     "drye_nt_inside_9eaNVa",
-    "nt_desk",
-    "drye_nt_barrier_choice_g6KFyg",
-    "drye_mechanics_time_promise_JFkP3K",
-    "drye_liner_product_clarity_PqAH9K",
     "nt_mechanism",
-    "drye_research_video_full_bi4hwc",
+    "drye_mechanics_time_promise_JFkP3K",
+    "drye_nt_pro_reviews_xHQ6BX",
+    "nt_desk",
     "drye_nt_trust_badges_t8dXtb",
+    "drye_nt_barrier_choice_g6KFyg",
+    "drye_liner_product_clarity_PqAH9K",
+    "drye_research_video_full_bi4hwc",
+    "nt_nails",
+    "drye_nt_validation_Ep7qKR",
     "nt_loop",
     "nt_tradeoff",
     "nt_trapped",
-    "drye_nt_pro_reviews_xHQ6BX",
-    "nt_nails",
     "drye_nt_real_reviews_dHDWiM",
-    "drye_nt_validation_Ep7qKR",
     "drye_nt_close_ByEU4J",
     "nt_close"
   ]
