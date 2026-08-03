@@ -258,11 +258,33 @@ assign review_count = section.settings.review_count_fallback
       <span class="stars-lbl">{{ review_rating }}/5 · <a href="{{ review_anchor }}">{{ review_count }} reviews</a></span>
     </div>
 
+    <style>
+      /* Read-more: collapsed shows only the first 2 lines of the lede, then a
+         bold "Read more"; expanding reveals the rest of the lede + the checklist. */
+      [data-pdp-intro] .pdp-intro__lede {
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 2;
+        overflow: hidden;
+      }
+      [data-pdp-intro].is-open .pdp-intro__lede {
+        display: block;
+        -webkit-line-clamp: unset;
+        overflow: visible;
+      }
+      [data-pdp-intro] .pdp-intro__body { display: none; }
+      [data-pdp-intro].is-open .pdp-intro__body { display: block; }
+      [data-pdp-intro] .pdp-intro__toggle-label { font-weight: 700; }
+    </style>
     <div class="pdp-intro" data-pdp-intro>
-      <div class="pdp-intro__body" data-pdp-intro-body>
       {% if section.settings.intro_text != blank %}
         <p class="pdp-intro__lede">{{ section.settings.intro_text }}</p>
       {% endif %}
+      <button type="button" class="pdp-intro__toggle" data-pdp-intro-toggle aria-expanded="false">
+        <span class="pdp-intro__toggle-label">Read more</span>
+        <svg class="pdp-intro__toggle-chevron" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+      <div class="pdp-intro__body" data-pdp-intro-body>
       <ul class="pdp-intro__list">
         {% if section.settings.bullet_1 != blank %}
           <li><span class="pdp-intro__dot"><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8.4l3 3 7-7.6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span>{{ section.settings.bullet_1 }}</span></li>
@@ -281,10 +303,6 @@ assign review_count = section.settings.review_count_fallback
         {% endif %}
       </ul>
       </div>
-      <button type="button" class="pdp-intro__toggle" data-pdp-intro-toggle aria-expanded="false">
-        <span class="pdp-intro__toggle-label">Read more</span>
-        <svg class="pdp-intro__toggle-chevron" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
-      </button>
     </div>
 
     <script>
