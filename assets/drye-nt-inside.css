@@ -11,7 +11,9 @@
 .drye-nt-inside .cmp-list { list-style: none; margin: 12px 0 0; padding: 12px 0 0; border-top: 1px solid var(--border); display: flex; flex-direction: column; gap: 7px; }
 .drye-nt-inside .cmp-list li { display: flex; align-items: flex-start; gap: 10px; font-size: 15px; line-height: 1.4; }
 .drye-nt-inside .lp-mark { flex: 0 0 auto; width: 15px; font-size: 15px; font-weight: 700; line-height: 1.5; }
-.drye-nt-inside .cmp-check { display: inline-flex; align-items: center; justify-content: center; width: 16px; height: 16px; border-radius: 50%; background: var(--emerald); color: #ffffff; font-size: 10px; flex: 0 0 auto; }
+.drye-nt-inside .cmp-check { display: inline-flex; align-items: flex-start; justify-content: center; width: 15px; color: var(--emerald); flex: 0 0 auto; margin-top: 2px; }
+.drye-nt-inside .cmp-check svg { display: block; width: 14px; height: 14px; }
+.drye-nt-inside .cmp-media-label { display: block; margin-bottom: 8px; font-family: var(--font-body); font-size: 11px; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; color: var(--caption); text-align: center; line-height: 1.4; }
 
 /* risk-reversal CTA, embedded at the end of this section */
 .cmp-risk-reversal { padding-top: 44px; }

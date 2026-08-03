@@ -84,6 +84,35 @@
   </div>
 </section>
 
+<script>
+  (function () {
+    var root = document.getElementById('drye-nt-pro-reviews-{{ section.id }}');
+    if (!root) return;
+    var marquee = root.querySelector('.pro-reviews__marquee');
+    if (!marquee) return;
+
+    var mqMobile = window.matchMedia('(max-width: 767px)');
+    var mqReduce = window.matchMedia('(prefers-reduced-motion: reduce)');
+    var hinted = false;
+
+    function hint() {
+      if (hinted || !mqMobile.matches || mqReduce.matches) return;
+      hinted = true;
+      marquee.classList.add('is-hinting');
+      setTimeout(function () { marquee.classList.remove('is-hinting'); }, 2300);
+    }
+
+    if ('IntersectionObserver' in window) {
+      var io = new IntersectionObserver(function (entries) {
+        if (entries[0].isIntersecting) { hint(); io.disconnect(); }
+      }, { threshold: 0.4 });
+      io.observe(marquee);
+    } else {
+      hint();
+    }
+  })();
+</script>
+
 {% schema %}
 {
   "name": "DRYE NT — Pro reviews",

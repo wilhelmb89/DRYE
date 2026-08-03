@@ -34,6 +34,13 @@
         {%- assign is_b = false -%}
         {%- if forloop.index == 2 -%}{%- assign is_b = true -%}{%- endif -%}
         <div class="{% if is_b %}cmp-b-img{% else %}cmp-a-img{% endif %}" {{ block.shopify_attributes }}>
+          {%- assign media_label = block.settings.media_label -%}
+          {%- if media_label == blank -%}
+            {%- if is_b -%}{%- assign media_label = 'With DRYE' -%}{%- else -%}{%- assign media_label = 'Without DRYE' -%}{%- endif -%}
+          {%- endif -%}
+          {%- if media_label != blank -%}
+            <span class="cmp-media-label">{{ media_label }}</span>
+          {%- endif -%}
           <div class="cmp-img">
             {%- if block.settings.video != blank -%}
               {{ block.settings.video | video_tag: autoplay: true, loop: true, muted: true, controls: false, image_size: '1200x' }}
@@ -68,7 +75,7 @@
               {%- if line != blank -%}
                 <li>
                   {%- if is_b -%}
-                    <span class="cmp-check">&#10003;</span>
+                    <span class="cmp-check" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 7l3 3 5-6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path></svg></span>
                   {%- else -%}
                     <span class="lp-mark" style="color: var(--red)">&#10005;</span>
                   {%- endif -%}
@@ -128,6 +135,7 @@
       "settings": [
         { "type": "image_picker", "id": "image", "label": "Image (portrait, ~9:16)" },
         { "type": "text", "id": "image_alt", "label": "Image alt text" },
+        { "type": "text", "id": "media_label", "label": "Label above image", "info": "Defaults to Without DRYE / With DRYE by position if left blank." },
         { "type": "video", "id": "video", "label": "Looping video (optional)", "info": "Pick a video uploaded to this theme. Overrides the image — used for the DRYE (second) column." },
         { "type": "text", "id": "eyebrow", "label": "Eyebrow" },
         { "type": "textarea", "id": "title", "label": "Title" },

@@ -41,6 +41,19 @@
   .pro-reviews__track { animation: none !important; }
   .pro-reviews__marquee { overflow-x: auto; -webkit-overflow-scrolling: touch; }
 }
+
+/* Mobile: real swipeable carousel (auto-marquee off, one card set, snap points).
+   A one-time nudge (.is-hinting, added by the inline script when the section
+   scrolls into view) tells the user the cards can be swiped. */
+@media (max-width: 767px) {
+  .pro-reviews__marquee { margin-top: 24px; overflow-x: auto; scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; scroll-padding-left: 16px; padding: 0 16px 4px; -webkit-mask-image: none; mask-image: none; scrollbar-width: none; }
+  .pro-reviews__marquee::-webkit-scrollbar { display: none; }
+  .pro-reviews__track { animation: none; width: max-content; }
+  .pro-reviews__group[aria-hidden="true"] { display: none; }
+  .pro-card { scroll-snap-align: start; }
+  .pro-reviews__marquee.is-hinting .pro-reviews__track { animation: pro-swipe-hint 1.05s ease-in-out 2; }
+}
+@keyframes pro-swipe-hint { 0%, 100% { transform: translateX(0); } 28% { transform: translateX(-34px); } 56% { transform: translateX(0); } }
 @media (min-width: 768px) {
   .pro-reviews { padding-top: 88px; padding-bottom: 0; }
   .pro-reviews__marquee { margin-top: 44px; }

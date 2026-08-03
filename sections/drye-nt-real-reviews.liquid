@@ -74,6 +74,32 @@
   var root = document.getElementById('drye-nt-real-reviews-{{ section.id }}');
   if (!root) return;
 
+  // Swipe hint: nudge the carousel once when it scrolls into view (mobile only).
+  var grid = root.querySelector('.tp3-grid');
+  if (grid) {
+    var mqMobile = window.matchMedia('(max-width: 767px)');
+    var mqReduce = window.matchMedia('(prefers-reduced-motion: reduce)');
+    var hinted = false;
+    var nudge = function () {
+      if (hinted || !mqMobile.matches || mqReduce.matches) return;
+      hinted = true;
+      try {
+        grid.scrollBy({ left: 44, behavior: 'smooth' });
+        setTimeout(function () { grid.scrollBy({ left: -44, behavior: 'smooth' }); }, 450);
+        setTimeout(function () { grid.scrollBy({ left: 44, behavior: 'smooth' }); }, 950);
+        setTimeout(function () { grid.scrollBy({ left: -44, behavior: 'smooth' }); }, 1400);
+      } catch (e) {}
+    };
+    if ('IntersectionObserver' in window) {
+      var io = new IntersectionObserver(function (entries) {
+        if (entries[0].isIntersecting) { nudge(); io.disconnect(); }
+      }, { threshold: 0.4 });
+      io.observe(grid);
+    } else {
+      nudge();
+    }
+  }
+
   root.querySelectorAll('[data-tp3-toggle]').forEach(function (btn) {
     var body = btn.parentElement.querySelector('[data-tp3-body]');
     if (!body) return;
