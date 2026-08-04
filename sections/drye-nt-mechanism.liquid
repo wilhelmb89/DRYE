@@ -20,6 +20,10 @@
         </h2>
       {%- endif -%}
 
+      {%- if section.settings.heading_source != blank -%}
+        <p class="drye-liner-mechanism__heading-source">{{ section.settings.heading_source }}</p>
+      {%- endif -%}
+
       <div class="drye-liner-mechanism__vs-block">
         {%- if section.settings.vs_label != blank -%}
           <div class="drye-liner-mechanism__vs-label">{{ section.settings.vs_label }}</div>
@@ -139,13 +143,20 @@
       "type": "text",
       "id": "heading",
       "label": "Heading",
-      "default": "Cotton under an occlusive glove"
+      "default": "Every other liner saturates. DRYE"
     },
     {
       "type": "text",
       "id": "heading_emphasis",
       "label": "Heading emphasis (italic)",
-      "default": "did not prevent barrier change."
+      "default": "routes."
+    },
+    {
+      "type": "text",
+      "id": "heading_source",
+      "label": "Heading source line",
+      "info": "Small italic grey citation under the heading.",
+      "default": "Ramsing & Agner, Contact Dermatitis, 1996"
     },
     {
       "type": "text",
