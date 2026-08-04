@@ -256,49 +256,50 @@
     "nt_loop": {
       "type": "drye-nt-loop",
       "blocks": {
-        "q1": {
-          "type": "qa",
-          "settings": {
-            "avatar": "shopify://shop_images/drye-avatar-1.webp",
-            "question": "\"am I doomed to this for the rest of my career?\"",
-            "answer": "— Use thicker mils"
-          }
-        },
-        "q2": {
-          "type": "qa",
+        "quote_n6cLRY": {
+          "type": "quote",
           "settings": {
             "avatar": "shopify://shop_images/drye-avatar-2.webp",
-            "question": "\"I wore gloves even though I got a contact allergy every time\"",
-            "answer": "— Use Gloves in a Bottle"
+            "quote": "\"am I doomed to this for the rest of my career?\"",
+            "advice": "Use thicker mils"
           }
         },
-        "q3": {
-          "type": "qa",
+        "quote_kijJrL": {
+          "type": "quote",
+          "settings": {
+            "avatar": "shopify://shop_images/drye-avatar-1.webp",
+            "quote": "\"I wore gloves even though I got a contact allergy every time\"",
+            "advice": "Use Gloves in a Bottle"
+          }
+        },
+        "quote_tyJDzg": {
+          "type": "quote",
           "settings": {
             "avatar": "shopify://shop_images/drye-avatar-4.webp",
-            "question": "“cotton liners make my hands sweaty after 30 min.”",
-            "answer": "— Double up"
+            "quote": "\"cotton liners make my hands sweaty after 30 min.\"",
+            "advice": "Double up"
           }
         },
-        "q4": {
-          "type": "qa",
+        "quote_mrBGxc": {
+          "type": "quote",
           "settings": {
             "avatar": "shopify://shop_images/drye-avatar-3.webp",
-            "question": "“I hate my sweaty gloves in summer. They keep splitting.”",
-            "answer": "— Cut the fingertips off"
+            "quote": "\"I hate my sweaty gloves in summer. They keep splitting.\"",
+            "advice": "Cut the fingertips off"
           }
         }
       },
       "block_order": [
-        "q1",
-        "q2",
-        "q3",
-        "q4"
+        "quote_n6cLRY",
+        "quote_kijJrL",
+        "quote_tyJDzg",
+        "quote_mrBGxc"
       ],
       "settings": {
-        "chapter": "",
+        "chap_no": "03",
         "eyebrow": "The never-ending loop",
-        "heading": ""
+        "title": "POV: You’re stuck in the nail tech advice loop.",
+        "aria_label": "Common advice nail techs hear"
       }
     },
     "drye_nt_barrier_choice_g6KFyg": {
