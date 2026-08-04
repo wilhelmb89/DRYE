@@ -46,6 +46,9 @@
               {%- if section.settings.cotton_name != blank -%}
                 <div class="drye-liner-mechanism__vs-name">{{ section.settings.cotton_name }}</div>
               {%- endif -%}
+              {%- if section.settings.cotton_physics != blank -%}
+                <p class="drye-liner-mechanism__vs-physics">{{ section.settings.cotton_physics }}</p>
+              {%- endif -%}
                 <ul class="drye-liner-mechanism__steps" role="list">
                   {%- assign cotton_steps = section.settings.cotton_steps | newline_to_br | split: '<br />' -%}
                   {%- for step in cotton_steps -%}
@@ -100,12 +103,15 @@
               {%- if section.settings.drye_name != blank -%}
                 <div class="drye-liner-mechanism__vs-name">{{ section.settings.drye_name }}</div>
               {%- endif -%}
+              {%- if section.settings.drye_physics != blank -%}
+                <p class="drye-liner-mechanism__vs-physics">{{ section.settings.drye_physics }}</p>
+              {%- endif -%}
                 <ul class="drye-liner-mechanism__steps" role="list">
                   {%- assign drye_steps = section.settings.drye_steps | newline_to_br | split: '<br />' -%}
                   {%- for step in drye_steps -%}
                     {%- assign line = step | strip -%}
                     {%- if line != blank -%}
-                      <li class="drye-liner-mechanism__step"><span class="drye-liner-mechanism__step-icon" aria-hidden="true">&#8594;</span><span class="drye-liner-mechanism__step-text">{{ line }}</span></li>
+                      <li class="drye-liner-mechanism__step"><span class="drye-liner-mechanism__step-icon" aria-hidden="true">&#10003;</span><span class="drye-liner-mechanism__step-text">{{ line }}</span></li>
                     {%- endif -%}
                   {%- endfor -%}
                 </ul>
@@ -133,19 +139,19 @@
       "type": "text",
       "id": "heading",
       "label": "Heading",
-      "default": "Every other liner saturates. DRYE"
+      "default": "Cotton under an occlusive glove"
     },
     {
       "type": "text",
       "id": "heading_emphasis",
       "label": "Heading emphasis (italic)",
-      "default": "routes."
+      "default": "did not prevent barrier change."
     },
     {
       "type": "text",
       "id": "vs_label",
       "label": "Comparison label",
-      "default": "Cotton \u00b7 DRYE"
+      "default": "Cotton · DRYE"
     },
     {
       "type": "text",
@@ -154,11 +160,17 @@
       "default": "Cotton"
     },
     {
+      "type": "text",
+      "id": "cotton_physics",
+      "label": "Cotton physics line",
+      "default": "An absorbent. Holds sweat — doesn't move it."
+    },
+    {
       "type": "textarea",
       "id": "cotton_steps",
       "label": "Cotton steps",
       "info": "One per line.",
-      "default": "Sweat enters the fabric and stays\nAt saturation, moisture sits on skin\nSame wet glove on shift 1 as shift 8"
+      "default": "Saturates in ~20 min under occlusion\nThen sits wet against the skin"
     },
     {
       "type": "text",
@@ -167,11 +179,17 @@
       "default": "DRYE Liner"
     },
     {
+      "type": "text",
+      "id": "drye_physics",
+      "label": "DRYE physics line",
+      "default": "Asymmetric construction. Directional transport, not absorption."
+    },
+    {
       "type": "textarea",
       "id": "drye_steps",
       "label": "DRYE steps",
       "info": "One per line.",
-      "default": "Skin side repels \u2014 sweat cannot sit there\nOuter side pulls moisture toward it\nContinuous transport, no saturation point"
+      "default": "Skin-side (PP): repels & transports sweat — no saturation against skin\nOuter-side (Lyocell): locks moisture into fibre pockets, away from skin"
     }
   ],
   "presets": [
