@@ -278,6 +278,29 @@
         "body": "<p>No powder, cream, or thicker glove changes that environment. <br/></p>"
       }
     },
+    "nt_trapped": {
+      "type": "drye-nt-trapped",
+      "settings": {
+        "chapter": "02",
+        "glove_anno": "Your nitrile glove",
+        "trio_1": "Heat",
+        "trio_2": "Sweat",
+        "trio_3": "Bacteria",
+        "heading": "All trapped",
+        "occlusion_label": "What is occlusion?",
+        "chart_anno": "Monday morning",
+        "chart_title": "Humidity arises",
+        "new_glove_label": "New glove",
+        "client_1_label": "Client 1",
+        "client_2_label": "Client 2",
+        "client_3_label": "Client 3",
+        "client_4_label": "Client 4",
+        "time_1": "09:00",
+        "time_2": "10:30",
+        "time_3": "12:00",
+        "time_4": "13:30"
+      }
+    },
     "drye_nt_barrier_choice_g6KFyg": {
       "type": "drye-nt-barrier-choice",
       "name": "DRYE NT — Barrier choice",
@@ -444,29 +467,6 @@
         "rr_cta_label": "",
         "rr_cta_url": "",
         "rr_guarantee": ""
-      }
-    },
-    "nt_trapped": {
-      "type": "drye-nt-trapped",
-      "settings": {
-        "chapter": "02",
-        "glove_anno": "Your nitrile glove",
-        "trio_1": "Heat",
-        "trio_2": "Sweat",
-        "trio_3": "Bacteria",
-        "heading": "All trapped",
-        "occlusion_label": "What is occlusion?",
-        "chart_anno": "Monday morning",
-        "chart_title": "Humidity arises",
-        "new_glove_label": "New glove",
-        "client_1_label": "Client 1",
-        "client_2_label": "Client 2",
-        "client_3_label": "Client 3",
-        "client_4_label": "Client 4",
-        "time_1": "09:00",
-        "time_2": "10:30",
-        "time_3": "12:00",
-        "time_4": "13:30"
       }
     },
     "nt_mechanism": {
@@ -670,97 +670,6 @@
         "eyebrow": "",
         "heading": "Why millions of tradespeople thought cream was the answer",
         "subheading": "Sealed gloves over time cause <strong>skin barrier breakdown. </strong>No cream, powder, or steroid on earth can solve that."
-      }
-    },
-    "drye_evidence_EKtYeR": {
-      "type": "drye-evidence",
-      "blocks": {
-        "card_iNU37T": {
-          "type": "card",
-          "settings": {
-            "label": "exposure threshold",
-            "stat_prefix": "",
-            "stat": "5–7",
-            "stat_suffix": "min",
-            "stat_qualitative": false,
-            "body": "<strong>In a sealed glove: </strong>relative humidity hits 90% within 5–7 minutes. Skin temperature climbs to 95°F.",
-            "source": "Park & Lee 2025"
-          }
-        },
-        "card_g6fx67": {
-          "type": "card",
-          "settings": {
-            "label": "WET SKIN SOFTENS",
-            "stat_prefix": "",
-            "stat": "27",
-            "stat_suffix": "min",
-            "stat_qualitative": false,
-            "body": "<strong>After 27 minutes: </strong>skin damage risk doubles in women, 55 minutes in men. Most shifts run 3-6 hours - 8x the threshold.",
-            "source": "Lund 2020, Scand J Work Environ Health"
-          }
-        },
-        "card_fMftcw": {
-          "type": "card",
-          "settings": {
-            "label": "maceration",
-            "stat_prefix": "",
-            "stat": "3",
-            "stat_suffix": "x swelling",
-            "stat_qualitative": false,
-            "body": "<strong>after 4 hours:</strong> your outer skin barrier swells 3x thicker. Solvents and chemicals soak in deeper - into skin that can't fight back.",
-            "source": "Bouwstra 2003, J invest Dermatol"
-          }
-        },
-        "card_dGJJGr": {
-          "type": "card",
-          "settings": {
-            "label": "Wet skin lets more through",
-            "stat_prefix": "",
-            "stat": "3,6",
-            "stat_suffix": "x faster",
-            "stat_qualitative": false,
-            "body": "Hydrated human skin allowed some fat-soluble model compounds to <strong>penetrate up to 3.6× more in vitro.</strong>",
-            "source": "Hikima & Maibach, Biol Pharm Bull, 2006."
-          }
-        },
-        "card_Aa9wH9": {
-          "type": "card",
-          "disabled": true,
-          "settings": {
-            "label": "Workforce cost",
-            "stat_prefix": "",
-            "stat": "57",
-            "stat_suffix": "% sick leave",
-            "stat_qualitative": false,
-            "body": "<strong>In chronic cases</strong> 57% take sick leave. 1 in 4 change or leave their trade. Direct healthcare costs run thousands per case, year after year.",
-            "source": "Armstrong 2022, DIepgen"
-          }
-        },
-        "bridge_9nwDKk": {
-          "type": "bridge",
-          "settings": {
-            "label": "The mechanism",
-            "paradigm": "Every glove, liner, barrier cream and powder fails on the physics.",
-            "mechanism": "DRYE routes sweat from skin to outer fabric. One-directional gradient. We call it <span style=\"color: #fff; font-weight: 700;\">Asymmetric layering.</span>",
-            "cta_label": "See how it works",
-            "cta_link": "shopify://pages/how-it-works"
-          }
-        }
-      },
-      "block_order": [
-        "card_iNU37T",
-        "card_g6fx67",
-        "card_fMftcw",
-        "card_dGJJGr",
-        "card_Aa9wH9",
-        "bridge_9nwDKk"
-      ],
-      "name": "DRYE Evidence",
-      "settings": {
-        "eyebrow": "",
-        "heading": "Why every nail tech should care.\n<em class=\"dryeNEW-em\"><br>Wet skin lets more through.</em>",
-        "body": "Not from the outside. <strong>From what happens inside your gloves.</strong>",
-        "swipe_label": "Swipe"
       }
     },
     "drye_nt_validation_Ep7qKR": {
@@ -1026,7 +935,6 @@
     "drye_nt_pro_reviews_xHQ6BX",
     "drye_nt_trust_badges_t8dXtb",
     "drye_documented_results_J3xN6N",
-    "drye_evidence_EKtYeR",
     "drye_nt_validation_Ep7qKR",
     "nt_nails",
     "drye_mechanics_cta_KQaVwL",
