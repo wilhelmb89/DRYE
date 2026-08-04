@@ -1,5 +1,68 @@
 {{ 'drye-nt-chart.css' | asset_url | stylesheet_tag }}
 
+<style>
+  /* Chapter 02 — "What is occlusion?" headline + causal-chain tabs + fold. */
+  #drye-nt-trapped .mech-alltrapped { margin: 24px 0 0; text-align: left; }
+  #drye-nt-trapped .mech-alltrapped span {
+    display: inline-block; font-family: var(--font-display); font-size: 18px;
+    font-weight: 800; letter-spacing: 0.02em; line-height: 1; color: #fff; text-transform: uppercase;
+  }
+  #drye-nt-trapped .mech-tabs {
+    display: flex; flex-wrap: nowrap; justify-content: flex-start; align-items: center;
+    gap: 0; margin: 12px 0 0;
+  }
+  #drye-nt-trapped .mech-tab {
+    background: none; border: 0; padding: 0 0 5px; cursor: pointer; position: relative;
+    font-family: var(--font-body); font-size: 12px; font-weight: 600; letter-spacing: 0.14em;
+    text-transform: uppercase; color: rgba(255,255,255,0.55); transition: color 0.15s;
+  }
+  #drye-nt-trapped .mech-tab[data-on="true"] { color: #5FCFC1; }
+  #drye-nt-trapped .mech-tab[data-on="true"]::after {
+    content: ''; position: absolute; left: 0; right: 0; bottom: 0; height: 2px; background: #5FCFC1;
+  }
+  #drye-nt-trapped .mech-tab-sep {
+    color: rgba(255,255,255,0.4); font-size: 14px; font-weight: 600; line-height: 1;
+    padding: 0 8px; user-select: none; pointer-events: none;
+  }
+  #drye-nt-trapped .mech-fold { margin-top: 18px; text-align: left; }
+  #drye-nt-trapped .mech-fold__fig { margin: 0; line-height: 0.9; }
+  #drye-nt-trapped .mech-fold__fig b {
+    font-family: var(--font-display); font-size: clamp(48px, 12vw, 72px); font-weight: 800;
+    color: #fff; letter-spacing: -0.02em;
+  }
+  #drye-nt-trapped .mech-fold__fig i {
+    font-style: normal; font-size: 14px; font-weight: 600; color: rgba(255,255,255,0.6); margin-left: 6px;
+  }
+  #drye-nt-trapped .mech-fold__body {
+    margin: 12px 0 0; font-family: var(--font-body); font-size: 15px; line-height: 1.55;
+    color: rgba(255,255,255,0.85); max-width: 42ch;
+  }
+  #drye-nt-trapped .mech-fold__body b { color: #fff; font-weight: 700; }
+  #drye-nt-trapped .mech-fold__src {
+    margin: 16px 0 0; padding-top: 12px; border-top: 1px solid rgba(255,255,255,0.12);
+    font-family: var(--font-body); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase;
+    color: rgba(255,255,255,0.45);
+  }
+  /* Mobile-only Read-more pill; desktop keeps the fold always visible. */
+  #drye-nt-trapped .anno--readmore {
+    position: static; display: none; flex-direction: column; align-items: flex-start; gap: 2px;
+    margin: 12px 0 -14px 6px; background: transparent; border: 0; padding: 0; cursor: pointer;
+    color: rgba(255,255,255,0.9); font-family: var(--font-body);
+  }
+  #drye-nt-trapped .anno--readmore .anno__txt { color: inherit; font-size: 13px; font-weight: 600; }
+  #drye-nt-trapped .anno--readmore:hover .anno__txt { color: #fff; }
+  #drye-nt-trapped .anno--readmore svg { margin-left: 22px; }
+  #drye-nt-trapped .mech-chart-col { padding-top: 36px; }
+  @media (min-width: 760px) {
+    #drye-nt-trapped .mech-chart-col { padding-top: 78px; }
+  }
+  @media (max-width: 759px) {
+    #drye-nt-trapped .anno--readmore[data-open="false"] { display: inline-flex; }
+    #drye-nt-trapped .mech-fold[data-open="false"] { display: none; }
+    #drye-nt-trapped .mech-chart-col .dch svg { max-height: 110px; }
+  }
+</style>
+
 <section
   class="drye-nt lp-block drye-nt-trapped"
   id="drye-nt-trapped"
@@ -40,13 +103,72 @@
           </svg>
         </div>
 
-        <p class="mech-trio"><span>{{ section.settings.trio_1 }}</span><span>{{ section.settings.trio_2 }}</span><span>{{ section.settings.trio_3 }}</span></p>
-        {%- if section.settings.heading != blank -%}
-          <h2 class="lp-lead mech-head" style="color: #ffffff; margin: 14px auto 0; text-align: center; text-transform: uppercase; font-size: clamp(24px, 7vw, 30px)">{{ section.settings.heading }}</h2>
-        {%- endif -%}
+        {%- comment -%} Chapter 02 — occlusion headline + causal-chain tabs + fold (design handoff Nov04). Glove + chart are unchanged; this replaces the old trio + "All trapped" heading. {%- endcomment -%}
+        <p class="mech-alltrapped"><span>{{ section.settings.occlusion_label | default: 'What is occlusion?' }}</span></p>
+
+        <button type="button" class="anno anno--readmore" data-open="false" data-mech-toggle aria-expanded="false">
+          <span class="anno__txt">Read more</span>
+          <svg viewBox="0 0 34 48" width="30" height="42" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3 C4 16, 8 27, 20 36 C23 38, 25 40, 27 42"></path><path d="M20 40 L28 44 L27 34"></path></svg>
+        </button>
+
+        <div class="mech-tabs" role="tablist" aria-label="What happens inside a sealed glove">
+          {%- assign nt_tabs = 'Heat,Sweat,Bacteria,Chemicals' | split: ',' -%}
+          {%- for t in nt_tabs -%}
+            <button type="button" class="mech-tab" role="tab" data-mech-pick="{{ forloop.index }}" data-on="{% if forloop.first %}true{% else %}false{% endif %}" aria-selected="{% if forloop.first %}true{% else %}false{% endif %}">{{ t }}</button>
+            {%- unless forloop.last -%}<span class="mech-tab-sep" aria-hidden="true">&rsaquo;</span>{%- endunless -%}
+          {%- endfor -%}
+        </div>
+
+        <div class="mech-fold" role="tabpanel" data-mech-fold data-open="false">
+          <p class="mech-fold__fig"><b data-mech-fig>5–7</b><i data-mech-unit>min</i></p>
+          <p class="mech-fold__body"><b data-mech-lead>In a sealed glove:</b> <span data-mech-body>relative humidity hits 90% within 5–7 minutes. Skin temperature climbs to 35°C / 95°F.</span></p>
+          <p class="mech-fold__src" data-mech-src>Park &amp; Lee, 2025</p>
+        </div>
+
+        <script type="application/json" data-mech-cards>
+        {
+          "1": { "fig": "5–7", "unit": "min", "lead": "In a sealed glove:", "body": "relative humidity hits 90% within 5–7 minutes. Skin temperature climbs to 35°C / 95°F.", "src": "Park & Lee, 2025" },
+          "2": { "fig": "27", "unit": "min", "lead": "After 27 minutes of sealed sweat:", "body": "skin damage risk doubles in women, 55 minutes in men. Most shifts run 3–6 hours — 8× the threshold.", "src": "Lund, 2020 · Scand J Work Environ Health" },
+          "3": { "fig": "3×", "unit": "swelling", "lead": "After 4 hours:", "body": "the outer skin barrier swells 3× thicker. It can't hold its normal shape or defence against what sits against it. On that softened barrier, S. aureus counts under occlusive gloves run 1.72× higher than on unoccluded skin — the same warm, damp climate bacteria are grown in.", "src": "Bouwstra, 2003 · Acta Dermato-Venereologica, 2021" },
+          "4": { "fig": "13", "unit": "studies", "lead": "Reviewed across 13 human studies:", "body": "overhydrated skin under gloves can become more permeable to irritants — especially when combined with soap, detergents or already-compromised skin. Your hands are never dry inside a nitrile.", "src": "Tiedemann, 2016 · Contact Dermatitis (review of 13 studies)" }
+        }
+        </script>
+
+        <script>
+        (function () {
+          var s = document.currentScript.closest('.drye-nt-trapped');
+          if (!s || s.dataset.mechBound === '1') return;
+          s.dataset.mechBound = '1';
+          var fold = s.querySelector('[data-mech-fold]');
+          var toggle = s.querySelector('[data-mech-toggle]');
+          var tabs = s.querySelectorAll('[data-mech-pick]');
+          var dataEl = s.querySelector('[data-mech-cards]');
+          if (!fold || !dataEl) return;
+          var data = JSON.parse(dataEl.textContent);
+          function setOpen(open) {
+            fold.setAttribute('data-open', open);
+            if (toggle) { toggle.setAttribute('data-open', open); toggle.setAttribute('aria-expanded', open); }
+          }
+          function pick(n) {
+            tabs.forEach(function (t) {
+              var on = t.getAttribute('data-mech-pick') === String(n);
+              t.setAttribute('data-on', on); t.setAttribute('aria-selected', on);
+            });
+            var d = data[String(n)]; if (!d) return;
+            s.querySelector('[data-mech-fig]').textContent = d.fig;
+            s.querySelector('[data-mech-unit]').textContent = d.unit;
+            s.querySelector('[data-mech-lead]').textContent = d.lead;
+            s.querySelector('[data-mech-body]').textContent = d.body;
+            s.querySelector('[data-mech-src]').textContent = d.src;
+            setOpen(true);
+          }
+          if (toggle) { toggle.addEventListener('click', function () { setOpen(true); }); }
+          tabs.forEach(function (t) { t.addEventListener('click', function () { pick(t.getAttribute('data-mech-pick')); }); });
+        })();
+        </script>
       </div>
 
-      <div style="position: relative; padding-top: 78px">
+      <div class="mech-chart-col" style="position: relative">
         {%- if section.settings.chart_anno != blank -%}
           <div class="anno anno--chart">
             <span class="anno__txt">{{ section.settings.chart_anno }}</span>
@@ -118,7 +240,8 @@
     { "type": "text", "id": "trio_1", "label": "Trio word 1", "default": "Heat" },
     { "type": "text", "id": "trio_2", "label": "Trio word 2", "default": "Sweat" },
     { "type": "text", "id": "trio_3", "label": "Trio word 3", "default": "Bacteria" },
-    { "type": "text", "id": "heading", "label": "Heading under the glove", "default": "All trapped" },
+    { "type": "text", "id": "heading", "label": "Heading under the glove (legacy, unused)", "default": "All trapped" },
+    { "type": "text", "id": "occlusion_label", "label": "Occlusion headline", "default": "What is occlusion?" },
     { "type": "header", "content": "Humidity chart" },
     { "type": "text", "id": "chart_anno", "label": "Chart annotation", "default": "Monday morning" },
     { "type": "text", "id": "chart_title", "label": "Chart title", "default": "Humidity arises" },
