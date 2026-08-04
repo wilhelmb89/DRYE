@@ -1,69 +1,98 @@
 {{ 'drye-nt-loop.css' | asset_url | stylesheet_tag }}
 
 <section
-  class="drye-nt lp-block drye-nt-loop"
-  id="drye-nt-loop-{{ section.id }}"
+  class="dryeNEW-section drye-nt-loop"
   data-section-id="{{ section.id }}"
   data-drye-section
-  data-section-name="nt_loop"
+  data-section-name="advice-loop"
+  data-section-type="drye-nt-loop"
 >
-  <div class="lp-wrap">
-    <div class="loop-head">
-      {%- if section.settings.chapter != blank -%}
-        <span class="chapno">{{ section.settings.chapter }}</span>
+  <div class="dryeNEW-container">
+
+    <div class="drye-nt-loop__head">
+      {%- if section.settings.chap_no != blank -%}
+        <span class="drye-nt-loop__chapno">{{ section.settings.chap_no }}</span>
       {%- endif -%}
       {%- if section.settings.eyebrow != blank -%}
-        <p class="loop-eyebrow">{{ section.settings.eyebrow }}</p>
+        <p class="drye-nt-loop__eyebrow">{{ section.settings.eyebrow }}</p>
       {%- endif -%}
-      {%- if section.settings.heading != blank -%}
-        <h2 class="loop-title">{{ section.settings.heading }}</h2>
+      {%- if section.settings.title != blank -%}
+        <h2 class="dryeNEW-h2 drye-nt-loop__title">{{ section.settings.title }}</h2>
       {%- endif -%}
     </div>
 
-    <div class="loop-grid">
-      {%- for block in section.blocks -%}
-        <div class="loop-item" {{ block.shopify_attributes }}>
-          {%- if block.settings.avatar != blank -%}
-            {{ block.settings.avatar | image_url: width: 320 | image_tag: loading: 'lazy', class: 'loop-av', alt: '' }}
-          {%- endif -%}
-          <p class="loop-q">{{ block.settings.question }}</p>
-          <p class="loop-a">{{ block.settings.answer }}</p>
-        </div>
-      {%- endfor -%}
+    <div class="drye-nt-loop__grid" aria-label="{{ section.settings.aria_label | default: 'Common advice nail techs hear' }}">
+      <div class="drye-nt-loop__track">
+
+        {%- comment -%} First pass — real content {%- endcomment -%}
+        {%- for block in section.blocks -%}
+          <div class="drye-nt-loop__item" {{ block.shopify_attributes }}>
+            {%- if block.settings.avatar != blank -%}
+              <img
+                class="drye-nt-loop__avatar"
+                src="{{ block.settings.avatar | image_url: width: 200 }}"
+                width="200" height="200"
+                alt=""
+                loading="lazy">
+            {%- endif -%}
+            <p class="drye-nt-loop__quote">&ldquo;{{ block.settings.quote }}&rdquo;</p>
+            <p class="drye-nt-loop__advice">&mdash; {{ block.settings.advice }}</p>
+          </div>
+        {%- endfor -%}
+
+        {%- comment -%} Second pass — duplicate for seamless marquee (aria-hidden) {%- endcomment -%}
+        {%- for block in section.blocks -%}
+          <div class="drye-nt-loop__item" aria-hidden="true">
+            {%- if block.settings.avatar != blank -%}
+              <img
+                class="drye-nt-loop__avatar"
+                src="{{ block.settings.avatar | image_url: width: 200 }}"
+                width="200" height="200"
+                alt=""
+                loading="lazy">
+            {%- endif -%}
+            <p class="drye-nt-loop__quote">&ldquo;{{ block.settings.quote }}&rdquo;</p>
+            <p class="drye-nt-loop__advice">&mdash; {{ block.settings.advice }}</p>
+          </div>
+        {%- endfor -%}
+
+      </div>
     </div>
+
   </div>
 </section>
 
 {% schema %}
 {
-  "name": "DRYE NT — Advice loop",
+  "name": "DRYE NT — Advice Loop",
   "tag": "section",
-  "class": "shopify-section-drye-nt-loop",
+  "class": "shopify-section",
   "settings": [
-    { "type": "text", "id": "chapter", "label": "Chapter number", "default": "03" },
-    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "The never-ending loop" },
-    { "type": "text", "id": "heading", "label": "Heading", "default": "POV: You're stuck in the nail tech advice loop." }
+    { "type": "text",     "id": "chap_no",    "label": "Chapter number",          "default": "03" },
+    { "type": "text",     "id": "eyebrow",    "label": "Eyebrow",                 "default": "The never-ending loop" },
+    { "type": "textarea", "id": "title",      "label": "Title",                   "default": "POV: You’re stuck in the nail tech advice loop." },
+    { "type": "text",     "id": "aria_label", "label": "Accessible region label", "default": "Common advice nail techs hear" }
   ],
   "blocks": [
     {
-      "type": "qa",
-      "name": "Question / answer",
+      "type": "quote",
+      "name": "Advice quote",
       "settings": [
-        { "type": "image_picker", "id": "avatar", "label": "Avatar" },
-        { "type": "textarea", "id": "question", "label": "Question" },
-        { "type": "text", "id": "answer", "label": "Answer" }
+        { "type": "image_picker", "id": "avatar", "label": "Avatar (silhouette)" },
+        { "type": "textarea",     "id": "quote",  "label": "Nail tech quote" },
+        { "type": "text",         "id": "advice", "label": "Advice given" }
       ]
     }
   ],
-  "max_blocks": 8,
+  "max_blocks": 12,
   "presets": [
     {
-      "name": "DRYE NT — Advice loop",
+      "name": "DRYE NT — Advice Loop",
       "blocks": [
-        { "type": "qa", "settings": { "question": "\u201cI've got dermatitis. What should I do?\u201d", "answer": "— Use thicker mils." } },
-        { "type": "qa", "settings": { "question": "\u201cMy hands smell disgusting by the end of the day. What do I do?\u201d", "answer": "— Use powder." } },
-        { "type": "qa", "settings": { "question": "\u201cI have problems with eczema. What should I do?\u201d", "answer": "— Use cortisone." } },
-        { "type": "qa", "settings": { "question": "\u201cI hate my sweaty gloves in summer. They keep splitting.\u201d", "answer": "— Buy cheaper ones." } }
+        { "type": "quote", "settings": { "quote": "am I doomed to this for the rest of my career?",          "advice": "Use thicker mils" }},
+        { "type": "quote", "settings": { "quote": "I wore gloves even though I got a contact allergy every time", "advice": "Use Gloves in a Bottle" }},
+        { "type": "quote", "settings": { "quote": "cotton liners make my hands sweaty after 30 min.",       "advice": "Double up" }},
+        { "type": "quote", "settings": { "quote": "I hate my sweaty gloves in summer. They keep splitting.","advice": "Cut the fingertips off" }}
       ]
     }
   ]
