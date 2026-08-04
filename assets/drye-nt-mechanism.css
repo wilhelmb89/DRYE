@@ -212,3 +212,8 @@
   .drye-liner-mechanism__step-icon,
   .drye-liner-mechanism__step-text { font-size: var(--fs-body-sm); }
 }
+.drye-liner-mechanism__steps {
+  padding: var(--space-12) 0 0;
+  border-top: 1px solid var(--white-015);
+  ...
+}
