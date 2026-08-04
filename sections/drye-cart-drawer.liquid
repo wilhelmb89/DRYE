@@ -17,6 +17,13 @@
   assign n = cart.item_count
   assign free_ship_pairs = 3
   assign disc = cart.original_total_price | minus: cart.total_price
+  comment
+    routes.root (no _url) is NOT a valid Liquid property — it renders empty, so
+    "{{ routes.root }}checkout" became the RELATIVE href "checkout" → /products/
+    checkout → 404. Build a market-safe root (leading + trailing slash) from the
+    valid routes.root_url so /checkout and /en-us/checkout both resolve.
+  endcomment
+  assign shop_root = routes.root_url | append: '/' | replace: '//', '/'
 -%}
 
 <script type="application/json" id="drye-size-variants">
@@ -146,7 +153,7 @@
               </div>
             </div>
           {%- endfor -%}
-          <div class="drye-cart-sizeguide-link">Unsure of your size? <a href="{{ routes.root }}pages/size-guide">See size guide</a></div>
+          <div class="drye-cart-sizeguide-link">Unsure of your size? <a href="{{ shop_root }}pages/size-guide">See size guide</a></div>
         </div>
       </div>
     {%- else -%}
@@ -191,7 +198,7 @@
         <span class="drye-cart-summary__total-label">Total</span>
         <span class="drye-cart-summary__total-value">{{ cart.total_price | money_with_currency }}</span>
       </div>
-      <a href="{{ routes.root }}checkout" class="drye-cart-checkout" data-drye-checkout style="font-size:13px;">
+      <a href="{{ shop_root }}checkout" class="drye-cart-checkout" data-drye-checkout style="font-size:12px;">
         Checkout →
       </a>
       <button type="button" class="drye-cart-continue" data-drye-cart-close>Continue shopping</button>

@@ -136,7 +136,7 @@
         country:  {{ localization.country.iso_code | json }},
         currency: {{ localization.country.currency.iso_code | json }},
         language: {{ localization.language.iso_code | json }},
-        root:     {{ routes.root | json }}
+        root:     {{ routes.root_url | json }}
       };
     </script>
     <script src="{{ 'drye-market-currency-sync.js' | asset_url }}" defer></script>
