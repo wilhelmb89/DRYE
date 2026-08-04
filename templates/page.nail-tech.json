@@ -78,6 +78,54 @@
         "body": "<p>No powder, cream, or thicker glove changes that environment. <br/><strong>Pick your next step.</strong></p>"
       }
     },
+    "nt_loop": {
+      "type": "drye-nt-loop",
+      "blocks": {
+        "q1": {
+          "type": "qa",
+          "settings": {
+            "avatar": "shopify://shop_images/drye-avatar-1.webp",
+            "question": "“I’ve got dermatitis. What should I do?”",
+            "answer": "— Use thicker mils"
+          }
+        },
+        "q2": {
+          "type": "qa",
+          "settings": {
+            "avatar": "shopify://shop_images/drye-avatar-2.webp",
+            "question": "“My hands smell disgusting by the end of the day. What do I do?”",
+            "answer": "— Use powder"
+          }
+        },
+        "q3": {
+          "type": "qa",
+          "settings": {
+            "avatar": "shopify://shop_images/drye-avatar-4.webp",
+            "question": "“cotton liners make my hands sweaty after 30 min.”",
+            "answer": "— Double up"
+          }
+        },
+        "q4": {
+          "type": "qa",
+          "settings": {
+            "avatar": "shopify://shop_images/drye-avatar-3.webp",
+            "question": "“I hate my sweaty gloves in summer. They keep splitting.”",
+            "answer": "— Buy cheaper ones"
+          }
+        }
+      },
+      "block_order": [
+        "q1",
+        "q2",
+        "q3",
+        "q4"
+      ],
+      "settings": {
+        "chapter": "",
+        "eyebrow": "The never-ending loop",
+        "heading": ""
+      }
+    },
     "nt_desk": {
       "type": "drye-nt-desk",
       "blocks": {
@@ -137,54 +185,6 @@
         "next_label": "More photos",
         "keep_label": "Keep reading",
         "keep_target": "#drye-nt-trapped"
-      }
-    },
-    "nt_loop": {
-      "type": "drye-nt-loop",
-      "blocks": {
-        "q1": {
-          "type": "qa",
-          "settings": {
-            "avatar": "shopify://shop_images/drye-avatar-1.webp",
-            "question": "“I’ve got dermatitis. What should I do?”",
-            "answer": "— Use thicker mils"
-          }
-        },
-        "q2": {
-          "type": "qa",
-          "settings": {
-            "avatar": "shopify://shop_images/drye-avatar-2.webp",
-            "question": "“My hands smell disgusting by the end of the day. What do I do?”",
-            "answer": "— Use powder"
-          }
-        },
-        "q3": {
-          "type": "qa",
-          "settings": {
-            "avatar": "shopify://shop_images/drye-avatar-4.webp",
-            "question": "“cotton liners make my hands sweaty after 30 min.”",
-            "answer": "— Double up"
-          }
-        },
-        "q4": {
-          "type": "qa",
-          "settings": {
-            "avatar": "shopify://shop_images/drye-avatar-3.webp",
-            "question": "“I hate my sweaty gloves in summer. They keep splitting.”",
-            "answer": "— Buy cheaper ones"
-          }
-        }
-      },
-      "block_order": [
-        "q1",
-        "q2",
-        "q3",
-        "q4"
-      ],
-      "settings": {
-        "chapter": "",
-        "eyebrow": "The never-ending loop",
-        "heading": ""
       }
     },
     "drye_nt_barrier_choice_g6KFyg": {
@@ -922,9 +922,9 @@
   "order": [
     "nt_hero",
     "drye_mechanics_herov2_ajTaTf",
-    "drye_mechanics_time_promise_y7hWTc",
     "nt_desk",
     "nt_loop",
+    "drye_mechanics_time_promise_y7hWTc",
     "drye_nt_barrier_choice_g6KFyg",
     "nt_tradeoff",
     "drye_nt_inside_9eaNVa",
