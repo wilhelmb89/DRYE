@@ -1,15 +1,18 @@
 /* drye-nt-inside.css */
-.drye-nt-inside .cmp-grid { display: grid; grid-template-columns: 1fr 40px 1fr; column-gap: 6px; row-gap: 18px; margin-top: 28px; }
+/* MOBILE — two columns: each body sits directly under its own image */
+.drye-nt-inside .cmp-grid { display: grid; grid-template-columns: 1fr 1fr; column-gap: 10px; row-gap: 18px; margin-top: 28px; }
 .drye-nt-inside .cmp-a-img { grid-column: 1; grid-row: 1; }
-.drye-nt-inside .cmp-arrow-mid { grid-column: 2; grid-row: 1; display: flex; align-items: stretch; justify-content: center; }
-.drye-nt-inside .cmp-b-img { grid-column: 3; grid-row: 1; }
-.drye-nt-inside .cmp-a-body { grid-column: 1 / -1; grid-row: 2; }
-.drye-nt-inside .cmp-b-body { grid-column: 1 / -1; grid-row: 3; padding-top: 4px; }
+.drye-nt-inside .cmp-b-img { grid-column: 2; grid-row: 1; }
+.drye-nt-inside .cmp-arrow-mid { display: none; }
+.drye-nt-inside .cmp-a-body { grid-column: 1; grid-row: 2; border-left: 3px solid var(--red); padding: 10px 12px 16px; }
+.drye-nt-inside .cmp-b-body { grid-column: 2; grid-row: 2; border-left: 3px solid var(--emerald); background: color-mix(in oklch, var(--emerald) 7%, white); padding: 10px 12px 16px; }
 .drye-nt-inside .cmp-b-tint { display: none; }
 .drye-nt-inside .cmp-img { position: relative; width: 100%; aspect-ratio: 9 / 16; background: var(--bg-soft); margin-bottom: 14px; overflow: hidden; }
 .drye-nt-inside .cmp-img img, .drye-nt-inside .cmp-img video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 1; }
-.drye-nt-inside .cmp-list { list-style: none; margin: 12px 0 0; padding: 12px 0 0; border-top: 1px solid var(--border); display: flex; flex-direction: column; gap: 7px; }
-.drye-nt-inside .cmp-list li { display: flex; align-items: flex-start; gap: 10px; font-size: 15px; line-height: 1.4; }
+.drye-nt-inside .cmp-list { list-style: none; margin: 12px 0 0; padding: 12px 0 0; border-top: 1px solid var(--border); display: flex; flex-direction: column; gap: 10px; }
+.drye-nt-inside .cmp-list li { display: flex; align-items: flex-start; gap: 8px; font-size: 13px; line-height: 1.45; }
+.drye-nt-inside .cmp-a-body .lp-head-title, .drye-nt-inside .cmp-b-body .lp-head-title { font-size: 15px; line-height: 1.25; text-wrap: pretty; }
+.drye-nt-inside .cmp-a-body .lp-head-eyebrow, .drye-nt-inside .cmp-b-body .lp-head-eyebrow { font-size: 10px; }
 .drye-nt-inside .lp-mark { flex: 0 0 auto; width: 15px; font-size: 15px; font-weight: 700; line-height: 1.5; }
 .drye-nt-inside .cmp-check { display: inline-flex; align-items: flex-start; justify-content: center; width: 15px; color: var(--emerald); flex: 0 0 auto; margin-top: 2px; }
 .drye-nt-inside .cmp-check svg { display: block; width: 14px; height: 14px; }
@@ -33,11 +36,14 @@
 
 @media (min-width: 760px) {
   .drye-nt-inside .cmp-grid { grid-template-columns: 1fr 64px 1fr; column-gap: 16px; row-gap: 48px; margin-top: 48px; }
-  .drye-nt-inside .cmp-a-body { grid-column: 1; grid-row: 2; }
-  .drye-nt-inside .cmp-b-img { position: relative; z-index: 2; }
+  .drye-nt-inside .cmp-arrow-mid { display: flex; grid-column: 2; grid-row: 1; align-items: stretch; justify-content: center; }
+  .drye-nt-inside .cmp-a-img { grid-column: 1; grid-row: 1; }
+  .drye-nt-inside .cmp-a-body { grid-column: 1; grid-row: 2; padding: 10px 16px 20px; }
+  .drye-nt-inside .cmp-b-img { grid-column: 3; grid-row: 1; position: relative; z-index: 2; }
   .drye-nt-inside .cmp-b-tint { display: none; }
-  .drye-nt-inside .cmp-b-body { grid-column: 3; grid-row: 2; position: relative; z-index: 1; border-left: none; background: none; margin: 0; padding: 0; }
+  .drye-nt-inside .cmp-b-body { grid-column: 3; grid-row: 2; border-left: 3px solid var(--emerald); background: color-mix(in oklch, var(--emerald) 7%, white); padding: 10px 16px 20px; margin: 0; position: relative; z-index: 1; }
   .drye-nt-inside .cmp-list li { font-size: 18px; }
+  .drye-nt-inside .cmp-a-body .lp-head-title, .drye-nt-inside .cmp-b-body .lp-head-title { font-size: 28px; line-height: 1.2; }
   .drye-nt-inside .cmp-img { aspect-ratio: 4 / 3.45; }
 
   .cmp-risk-reversal { padding-top: var(--space-56); }
