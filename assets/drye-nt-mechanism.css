@@ -124,6 +124,20 @@
   color: var(--emerald);
 }
 
+/* NEW: physics/sub-title line between name and step list */
+.drye-liner-mechanism__vs-physics {
+  margin: 0 0 var(--space-10);
+  font-family: var(--font-body);
+  font-size: var(--fs-caption);
+  line-height: 1.4;
+  font-weight: var(--fw-medium);
+  color: var(--white-085);
+  text-wrap: pretty;
+}
+.drye-liner-mechanism__vs-card--drye .drye-liner-mechanism__vs-physics {
+  color: var(--white-100);
+}
+
 /* ---------- step lists (the markup the liquid actually renders) ---------- */
 
 .drye-liner-mechanism__steps {
@@ -143,7 +157,7 @@
 }
 
 .drye-liner-mechanism__step-icon {
-  font-size: var(--fs-body-sm);
+  font-size: var(--fs-caption);
   font-weight: 700;
   line-height: 1.45;
   color: var(--red);
@@ -155,7 +169,7 @@
 
 .drye-liner-mechanism__step-text {
   font-family: var(--font-body);
-  font-size: var(--fs-body-sm);
+  font-size: var(--fs-caption);
   line-height: 1.45;
   color: var(--white-075);
   text-wrap: pretty;
@@ -192,4 +206,9 @@
   .drye-liner-mechanism__vs-grid { gap: 16px; }
   .drye-liner-mechanism__vs-body { padding: 20px; }
   .drye-liner-mechanism__steps { gap: var(--space-12); }
+  .drye-liner-mechanism__vs-physics { font-size: var(--fs-body-sm); }
+
+  /* wide columns — step copy goes up one step */
+  .drye-liner-mechanism__step-icon,
+  .drye-liner-mechanism__step-text { font-size: var(--fs-body-sm); }
 }
