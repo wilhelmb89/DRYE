@@ -1,21 +1,147 @@
-/* drye-nt-loop.css */
-.drye-nt-loop { border-top: 1px solid var(--border); }
-.loop-head { text-align: center; }
-.loop-head .chapno { text-align: left; }
-.loop-eyebrow { margin: 0 0 10px; font-size: 12px; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted); }
-.loop-title { margin: 0 auto 10px; max-width: 20ch; font-family: var(--font-display); font-weight: 600; letter-spacing: -0.025em; line-height: 1.12; font-size: clamp(27px, 8vw, 34px); text-transform: uppercase; color: var(--deep); text-wrap: pretty; }
-/* MOBILE — horizontal swipe carousel (scroll-snap); desktop restores the 4-col grid */
-.loop-grid { display: flex; gap: 16px; margin-top: clamp(34px, 7vw, 56px); overflow-x: auto; scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; scroll-padding-inline: 20px; padding-bottom: 6px; scrollbar-width: none; }
-.loop-grid::-webkit-scrollbar { display: none; }
-.loop-item { display: flex; flex-direction: column; align-items: center; gap: 14px; flex: 0 0 74%; max-width: 300px; scroll-snap-align: center; }
-.loop-av { width: 74px; height: 74px; object-fit: contain; opacity: 0.9; }
-.loop-q { position: relative; margin: 0; padding: 14px 16px; font-size: 14px; border: 1px solid var(--border); border-radius: 20px; background: #ffffff; line-height: 1.45; color: var(--deep); text-align: center; text-wrap: pretty; }
-.loop-q::after { content: ""; position: absolute; top: -7px; left: 50%; width: 12px; height: 12px; background: #ffffff; border-left: 1px solid var(--border); border-top: 1px solid var(--border); transform: translateX(-50%) rotate(45deg); }
-.loop-a { margin: 0; font-size: 14px; font-weight: 600; letter-spacing: 0.02em; color: #C1544D; text-align: center; }
+/* DRYE NT — Advice Loop (marquee). Scoped under .drye-nt-loop.
+   Auto-scrolls right-to-left; pauses on hover; degrades to a
+   scrollable rail under prefers-reduced-motion. */
+
+.drye-nt-loop {
+  background: var(--paper, #FFFFFF);
+  padding-block: var(--section-pad-y);
+  border-top: 1px solid var(--border);
+}
+
+.drye-nt-loop__head {
+  display: grid;
+  grid-template-columns: 1fr;
+  row-gap: var(--space-6);
+  text-align: center;
+}
+
+.drye-nt-loop__chapno {
+  font-family: var(--font-body);
+  font-size: var(--fs-micro-4);
+  font-weight: var(--fw-semibold);
+  letter-spacing: var(--ls-micro-wide);
+  text-transform: uppercase;
+  color: var(--muted);
+  text-align: left;
+}
+
+.drye-nt-loop__eyebrow {
+  margin: 0 auto;
+  font-family: var(--font-body);
+  font-size: var(--fs-micro-3);
+  font-weight: var(--fw-semibold);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.drye-nt-loop__title {
+  margin: var(--space-4) 0 0;
+  text-align: center;
+  font-family: var(--font-display);
+  font-size: clamp(22px, 5vw, var(--fs-section-h2));
+  font-weight: var(--fw-bold);
+  letter-spacing: var(--ls-tight-h2);
+  line-height: var(--lh-heading);
+  color: var(--deep);
+  text-transform: uppercase;
+  text-wrap: balance;
+}
+
+/* --------------- Marquee --------------- */
+
+.drye-nt-loop__grid {
+  position: relative;
+  margin-top: clamp(28px, 6vw, 56px);
+  overflow: hidden;
+  mask-image:         linear-gradient(90deg, transparent 0, #000 40px, #000 calc(100% - 40px), transparent 100%);
+  -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 40px, #000 calc(100% - 40px), transparent 100%);
+}
+
+.drye-nt-loop__track {
+  display: flex;
+  gap: 16px;
+  width: max-content;
+  animation: drye-nt-loop-scroll 32s linear infinite;
+}
+.drye-nt-loop__grid:hover .drye-nt-loop__track {
+  animation-play-state: paused;
+}
+
+@keyframes drye-nt-loop-scroll {
+  from { transform: translateX(0); }
+  to   { transform: translateX(calc(-50% - 8px)); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .drye-nt-loop__track { animation: none; }
+  .drye-nt-loop__grid {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    mask-image: none;
+    -webkit-mask-image: none;
+  }
+}
+
+/* --------------- Item --------------- */
+
+.drye-nt-loop__item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  flex: 0 0 240px;
+  width: 240px;
+}
+
+.drye-nt-loop__avatar {
+  width: 74px;
+  height: 74px;
+  object-fit: contain;
+  opacity: 0.9;
+}
+
+.drye-nt-loop__quote {
+  position: relative;
+  margin: 0;
+  padding: 14px 16px;
+  font-family: var(--font-body);
+  font-size: var(--fs-body-sm);
+  line-height: 1.45;
+  color: var(--deep);
+  background: #FFFFFF;
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  text-align: center;
+  text-wrap: pretty;
+}
+
+.drye-nt-loop__quote::after {
+  content: "";
+  position: absolute;
+  top: -7px;
+  left: 50%;
+  width: 12px;
+  height: 12px;
+  background: #FFFFFF;
+  border-left: 1px solid var(--border);
+  border-top:  1px solid var(--border);
+  transform: translateX(-50%) rotate(45deg);
+}
+
+.drye-nt-loop__advice {
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: var(--fs-body-sm);
+  font-weight: var(--fw-semibold);
+  letter-spacing: 0.02em;
+  color: var(--red);
+  text-align: center;
+}
 
 @media (min-width: 860px) {
-  .loop-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 28px; overflow: visible; scroll-snap-type: none; }
-  .loop-item { flex: none; max-width: none; }
-  .loop-av { width: 112px; height: 112px; }
-  .loop-q { padding: 16px 20px; font-size: 15px; }
+  .drye-nt-loop__item   { flex: 0 0 260px; width: 260px; }
+  .drye-nt-loop__avatar { width: 96px; height: 96px; }
+  .drye-nt-loop__quote  { padding: 16px 20px; font-size: var(--fs-body); }
+  .drye-nt-loop__advice { font-size: var(--fs-body); }
 }
