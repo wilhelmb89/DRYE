@@ -69,13 +69,65 @@
         "quote_4": "“Nitrile still gave me a rash.”"
       }
     },
-    "drye_mechanics_time_promise_y7hWTc": {
-      "type": "drye-mechanics-time-promise",
-      "name": "DRYE Mechanics Time",
+    "nt_desk": {
+      "type": "drye-nt-desk",
+      "blocks": {
+        "shot_nYDRpD": {
+          "type": "shot",
+          "settings": {
+            "image": "shopify://shop_images/Gemini_Generated_Image_bu7jycbu7jycbu7j.webp",
+            "image_alt": "Nail tech at work",
+            "caption": "“got a gel allergy. gloves on. mask on. every client.”"
+          }
+        },
+        "s2": {
+          "type": "shot",
+          "settings": {
+            "image": "shopify://shop_images/Gemini_Generated_Image_jrzu94jrzu94jrzu.webp",
+            "image_alt": "Her hands after several clients, gloves off",
+            "caption": "“sweaty hands, melting builder gel, and another client waiting.”"
+          }
+        },
+        "s3": {
+          "type": "shot",
+          "settings": {
+            "image": "shopify://shop_images/Gemini_Generated_Image_clq2a5clq2a5clq2.webp",
+            "image_alt": "DRYE under the glove during real work at the desk",
+            "caption": "“taking my gloves off after a long appointment is disgusting.”"
+          }
+        },
+        "shot_m8VgNV": {
+          "type": "shot",
+          "settings": {
+            "image": "shopify://shop_images/Gemini_Generated_Image_cymm33cymm33cymm_1.webp",
+            "image_alt": "Nail tech at work",
+            "caption": "“Every nail tech knows dermatitis.”"
+          }
+        },
+        "s1": {
+          "type": "shot",
+          "settings": {
+            "image": "shopify://shop_images/Gemini_Generated_Image_i9zs57i9zs57i9zs.webp",
+            "image_alt": "Nail tech changing a nitrile glove between clients",
+            "caption": "“my hands smell like feet”"
+          }
+        }
+      },
+      "block_order": [
+        "shot_nYDRpD",
+        "s2",
+        "s3",
+        "shot_m8VgNV",
+        "s1"
+      ],
       "settings": {
-        "eyebrow": "",
-        "heading": "Nitrile protects you from the outside <br><em class=\"dryeNEW-em\">But glove occlusion is what weakens skin and nails over time.</em>",
-        "body": "<p>No powder, cream, or thicker glove changes that environment. <br/><strong>Pick your next step.</strong></p>"
+        "chapter": "",
+        "heading": "One of these is your Tuesday afternoon",
+        "swipe_label": "Swipa",
+        "prev_label": "Previous photos",
+        "next_label": "More photos",
+        "keep_label": "Keep reading",
+        "keep_target": "#drye-nt-trapped"
       }
     },
     "nt_loop": {
@@ -126,65 +178,13 @@
         "heading": ""
       }
     },
-    "nt_desk": {
-      "type": "drye-nt-desk",
-      "blocks": {
-        "shot_nYDRpD": {
-          "type": "shot",
-          "settings": {
-            "image": "shopify://shop_images/Gemini_Generated_Image_bu7jycbu7jycbu7j.webp",
-            "image_alt": "Nail tech at work",
-            "caption": "“got a gel allergy. gloves on. mask on. every client.”"
-          }
-        },
-        "s2": {
-          "type": "shot",
-          "settings": {
-            "image": "shopify://shop_images/Gemini_Generated_Image_jrzu94jrzu94jrzu.webp",
-            "image_alt": "Her hands after several clients, gloves off",
-            "caption": "“sweaty hands, melting builder gel, and another client waiting.”"
-          }
-        },
-        "s3": {
-          "type": "shot",
-          "settings": {
-            "image": "shopify://shop_images/Gemini_Generated_Image_clq2a5clq2a5clq2.webp",
-            "image_alt": "DRYE under the glove during real work at the desk",
-            "caption": "“taking my gloves off after a long appointment is disgusting.”"
-          }
-        },
-        "shot_m8VgNV": {
-          "type": "shot",
-          "settings": {
-            "image": "shopify://shop_images/Gemini_Generated_Image_i2l4n6i2l4n6i2l4.webp",
-            "image_alt": "Nail tech at work",
-            "caption": "“Every nail tech knows dermatitis.”"
-          }
-        },
-        "s1": {
-          "type": "shot",
-          "settings": {
-            "image": "shopify://shop_images/Gemini_Generated_Image_i9zs57i9zs57i9zs.webp",
-            "image_alt": "Nail tech changing a nitrile glove between clients",
-            "caption": "“my hands smell like feet”"
-          }
-        }
-      },
-      "block_order": [
-        "shot_nYDRpD",
-        "s2",
-        "s3",
-        "shot_m8VgNV",
-        "s1"
-      ],
+    "drye_mechanics_time_promise_y7hWTc": {
+      "type": "drye-mechanics-time-promise",
+      "name": "DRYE Mechanics Time",
       "settings": {
-        "chapter": "",
-        "heading": "One of these is your Tuesday afternoon",
-        "swipe_label": "Swipa",
-        "prev_label": "Previous photos",
-        "next_label": "More photos",
-        "keep_label": "Keep reading",
-        "keep_target": "#drye-nt-trapped"
+        "eyebrow": "",
+        "heading": "Nitrile protects you from the outside <br><em class=\"dryeNEW-em\">But glove occlusion is what weakens skin and nails over time.</em>",
+        "body": "<p>No powder, cream, or thicker glove changes that environment. <br/><strong>Pick your next step.</strong></p>"
       }
     },
     "drye_nt_barrier_choice_g6KFyg": {
