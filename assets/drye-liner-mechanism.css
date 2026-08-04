@@ -212,3 +212,28 @@
 .drye-liner-mechanism__vs-card--drye .drye-liner-mechanism__step-text {
   color: rgba(255, 255, 255, 0.92);
 }
+
+/* Physics subtitle under the card name (Nov04 handoff) */
+.drye-liner-mechanism__vs-physics {
+  margin: 8px 0 0;
+  font-family: var(--font-body);
+  font-size: 13px;
+  line-height: 1.4;
+  color: rgba(255, 255, 255, 0.85);
+  font-weight: 500;
+}
+.drye-liner-mechanism__vs-card--drye .drye-liner-mechanism__vs-physics {
+  color: rgba(255, 255, 255, 0.92);
+}
+/* Section-footer citation — centered under both cards */
+.drye-liner-mechanism .mech-note {
+  margin: 20px 0 0;
+  font-family: var(--font-body);
+  font-size: 11px;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.5);
+  text-align: center;
+}
+@media (min-width: 768px) {
+  .drye-liner-mechanism__vs-physics { font-size: 14px; }
+}
