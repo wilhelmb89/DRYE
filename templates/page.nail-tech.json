@@ -221,28 +221,36 @@
         "keep_target": "#drye-nt-trapped"
       }
     },
-    "drye_nt_barrier_choice_g6KFyg": {
-      "type": "drye-nt-barrier-choice",
-      "name": "DRYE NT — Barrier choice",
+    "drye_mechanics_time_promise_y7hWTc": {
+      "type": "drye-mechanics-time-promise",
+      "name": "DRYE Mechanics Time",
       "settings": {
-        "chapter": "",
-        "heading": "",
-        "pick_label": "Choose your starting point",
-        "btn_healthy": "I have healthy skin",
-        "btn_damaged": " I’M ALREADY DEALING WITH IT",
-        "exposure": "Under glove 6 hours/day",
-        "risk_label": "Skin degradation rises",
-        "chart_alt": "Stylised overhydration in the skin across two weeks of daily glove occlusion",
-        "day_1": "Day 1",
-        "day_2": "Day 3",
-        "day_3": "Day 7",
-        "day_4": "Day 14",
-        "aud_healthy": "Healthy skin",
-        "healthy_d3": "No significant barrier change",
-        "healthy_d14": "Significant barrier impairment",
-        "aud_damaged": "Already irritated skin",
-        "damaged_d3": "Significant barrier impairment",
-        "source": "Sources: Ramsing & Agner, Contact Dermatitis, 1996 — short- and long-term experimental glove occlusion."
+        "eyebrow": "",
+        "heading": "Nitrile protects you from the outside <br><em class=\"dryeNEW-em\">But glove occlusion is what weakens skin and nails over time.</em>",
+        "body": "<p>No powder, cream, or thicker glove changes that environment. <br/></p>"
+      }
+    },
+    "nt_trapped": {
+      "type": "drye-nt-trapped",
+      "settings": {
+        "chapter": "02",
+        "glove_anno": "Your nitrile glove",
+        "trio_1": "Heat",
+        "trio_2": "Sweat",
+        "trio_3": "Bacteria",
+        "heading": "All trapped",
+        "occlusion_label": "What is occlusion?",
+        "chart_anno": "Monday morning",
+        "chart_title": "Humidity arises",
+        "new_glove_label": "New glove",
+        "client_1_label": "Client 1",
+        "client_2_label": "Client 2",
+        "client_3_label": "Client 3",
+        "client_4_label": "Client 4",
+        "time_1": "09:00",
+        "time_2": "10:30",
+        "time_3": "12:00",
+        "time_4": "13:30"
       }
     },
     "nt_loop": {
@@ -293,36 +301,28 @@
         "heading": ""
       }
     },
-    "drye_mechanics_time_promise_y7hWTc": {
-      "type": "drye-mechanics-time-promise",
-      "name": "DRYE Mechanics Time",
+    "drye_nt_barrier_choice_g6KFyg": {
+      "type": "drye-nt-barrier-choice",
+      "name": "DRYE NT — Barrier choice",
       "settings": {
-        "eyebrow": "",
-        "heading": "Nitrile protects you from the outside <br><em class=\"dryeNEW-em\">But glove occlusion is what weakens skin and nails over time.</em>",
-        "body": "<p>No powder, cream, or thicker glove changes that environment. <br/></p>"
-      }
-    },
-    "nt_trapped": {
-      "type": "drye-nt-trapped",
-      "settings": {
-        "chapter": "02",
-        "glove_anno": "Your nitrile glove",
-        "trio_1": "Heat",
-        "trio_2": "Sweat",
-        "trio_3": "Bacteria",
-        "heading": "All trapped",
-        "occlusion_label": "What is occlusion?",
-        "chart_anno": "Monday morning",
-        "chart_title": "Humidity arises",
-        "new_glove_label": "New glove",
-        "client_1_label": "Client 1",
-        "client_2_label": "Client 2",
-        "client_3_label": "Client 3",
-        "client_4_label": "Client 4",
-        "time_1": "09:00",
-        "time_2": "10:30",
-        "time_3": "12:00",
-        "time_4": "13:30"
+        "chapter": "",
+        "heading": "",
+        "pick_label": "Choose your starting point",
+        "btn_healthy": "I have healthy skin",
+        "btn_damaged": " I’M ALREADY DEALING WITH IT",
+        "exposure": "Under glove 6 hours/day",
+        "risk_label": "Skin degradation rises",
+        "chart_alt": "Stylised overhydration in the skin across two weeks of daily glove occlusion",
+        "day_1": "Day 1",
+        "day_2": "Day 3",
+        "day_3": "Day 7",
+        "day_4": "Day 14",
+        "aud_healthy": "Healthy skin",
+        "healthy_d3": "No significant barrier change",
+        "healthy_d14": "Significant barrier impairment",
+        "aud_damaged": "Already irritated skin",
+        "damaged_d3": "Significant barrier impairment",
+        "source": "Sources: Ramsing & Agner, Contact Dermatitis, 1996 — short- and long-term experimental glove occlusion."
       }
     },
     "nt_tradeoff": {
@@ -477,9 +477,12 @@
         "heading_emphasis": "DRYE moves it off your skin.",
         "vs_label": "Cotton · DRYE",
         "cotton_name": "Cotton",
+        "cotton_physics": "An absorbent. Holds sweat — doesn't move it.",
         "cotton_steps": "Sweat enters the fabric and stays\nAt saturation, moisture sits on skin\nSame wet glove on shift 1 as shift 8",
         "drye_name": "DRYE Liner",
-        "drye_steps": "Skin side repels — sweat cannot sit there\nOuter side pulls moisture toward it\nContinuous transport, no saturation point"
+        "drye_physics": "Asymmetric construction. Directional transport, not absorption.",
+        "drye_steps": "Skin side repels — sweat cannot sit there\nOuter side pulls moisture toward it\nContinuous transport, no saturation point",
+        "mech_note": "Sources: Ramsing & Agner, Contact Dermatitis, 1996 — short- and long-term experimental glove occlusion."
       }
     },
     "drye_nt_close_d36WWJ": {
@@ -923,9 +926,9 @@
     "nt_hero",
     "drye_mechanics_herov2_ajTaTf",
     "drye_worker_grid_eg69pw",
+    "nt_desk",
     "drye_mechanics_time_promise_y7hWTc",
     "nt_trapped",
-    "nt_desk",
     "nt_loop",
     "drye_nt_barrier_choice_g6KFyg",
     "nt_tradeoff",
