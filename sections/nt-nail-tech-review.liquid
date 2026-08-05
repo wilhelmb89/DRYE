@@ -1,0 +1,87 @@
+{{ 'nt-nail-tech-review.css' | asset_url | stylesheet_tag }}
+
+<section
+  class="fr drye-nt"
+  id="nt-nail-tech-review-{{ section.id }}"
+  data-section-id="{{ section.id }}"
+  data-drye-section
+  data-section-name="nt_nail_tech_review"
+>
+  <article class="fr-card">
+    <div class="fr-card__portrait">
+      {%- if section.settings.portrait != blank -%}
+        {{ section.settings.portrait | image_url: width: 320 | image_tag:
+             loading: 'lazy',
+             widths: '176, 256, 320',
+             sizes: '(min-width: 700px) 128px, 88px',
+             alt: section.settings.portrait_alt | default: section.settings.name }}
+      {%- else -%}
+        <span class="fr-card__portrait-fallback" aria-hidden="true">{{ section.settings.name | slice: 0, 1 }}</span>
+      {%- endif -%}
+    </div>
+
+    <div class="fr-card__body">
+      <div class="fr-card__id">
+        {%- if section.settings.name != blank -%}
+          <span class="fr-card__name">{{ section.settings.name }}</span>
+        {%- endif -%}
+        {%- if section.settings.date_label != blank -%}
+          <span class="fr-card__date">{{ section.settings.date_label }}</span>
+        {%- endif -%}
+      </div>
+
+      {%- if section.settings.role != blank or section.settings.location != blank -%}
+        <p class="fr-card__role">
+          {%- if section.settings.role != blank -%}<strong>{{ section.settings.role }}</strong>{%- endif -%}
+          {%- if section.settings.role != blank and section.settings.location != blank -%} &middot; {%- endif -%}
+          {%- if section.settings.location != blank -%}{{ section.settings.location }}{%- endif -%}
+        </p>
+      {%- endif -%}
+
+      {%- if section.settings.show_stars -%}
+        <div class="fr-card__stars" aria-label="{{ section.settings.rating | default: 5 }} out of 5">
+          {%- assign stars = section.settings.rating | default: 5 | plus: 0 -%}
+          {%- for i in (1..stars) -%}&#9733;{%- endfor -%}
+        </div>
+      {%- endif -%}
+
+      {%- if section.settings.title != blank -%}
+        <h3 class="fr-card__title">{{ section.settings.title }}</h3>
+      {%- endif -%}
+
+      {%- if section.settings.body != blank -%}
+        <p class="fr-card__body-text">{{ section.settings.body }}</p>
+      {%- endif -%}
+
+      {%- if section.settings.verified_label != blank -%}
+        <div class="fr-card__verified">
+          <span class="fr-card__verified-dot" aria-hidden="true">&#10003;</span>{{ section.settings.verified_label }}
+        </div>
+      {%- endif -%}
+    </div>
+  </article>
+</section>
+
+{% schema %}
+{
+  "name": "DRYE NT — Nail review",
+  "tag": "section",
+  "class": "shopify-section-nt-nail-tech-review",
+  "settings": [
+    { "type": "image_picker", "id": "portrait", "label": "Portrait" },
+    { "type": "text", "id": "portrait_alt", "label": "Portrait alt text" },
+    { "type": "text", "id": "name", "label": "Name", "default": "Nadia S" },
+    { "type": "text", "id": "date_label", "label": "Right of name", "default": "Verified customer" },
+    { "type": "text", "id": "role", "label": "Role", "default": "Nail Tech & Salon Owner" },
+    { "type": "text", "id": "location", "label": "Location", "default": "Copenhagen, DK" },
+    { "type": "checkbox", "id": "show_stars", "label": "Show stars", "default": true },
+    { "type": "range", "id": "rating", "label": "Rating", "min": 1, "max": 5, "step": 1, "default": 5 },
+    { "type": "text", "id": "title", "label": "Headline", "default": "\"I recommend it to every tech in my salon now.\"" },
+    { "type": "textarea", "id": "body", "label": "Body", "default": "Fewer breaks just to dry off. My techs stay on the chair longer, hands stay clean, and I stopped losing appointments to hand fatigue." },
+    { "type": "text", "id": "verified_label", "label": "Verified label", "default": "Verified customer" }
+  ],
+  "presets": [
+    { "name": "DRYE NT — Nail review" }
+  ]
+}
+{% endschema %}
