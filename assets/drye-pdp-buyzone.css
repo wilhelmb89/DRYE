@@ -214,12 +214,16 @@
     z-index: 7;
     pointer-events: auto;
     background: #fff;
-    color: var(--deep);
-    border: 1px solid #111;
+    color: #111;
+    border: none;
+    font-size: 34px;
+    font-weight: 700;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.14);
   }
   .hero .hero-gallery-arrow--prev { left: 0; }
   .hero .hero-gallery-arrow--next { right: 0; }
-  .hero .hero-gallery-arrow[disabled] { opacity: 0.35; }
+  /* keep the box white on both sides; only the glyph dims when disabled */
+  .hero .hero-gallery-arrow[disabled] { opacity: 1; color: #c8cdd1; }
 
   /* exactly 5 thumbnails across the inset strip (4 gaps x 4px = 16px) */
   .hero .hero-gallery-thumb  { width: calc((100% - 16px) / 5); height: 52px; }
