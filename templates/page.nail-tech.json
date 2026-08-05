@@ -255,6 +255,55 @@
         "source": "Sources: Ramsing & Agner, Contact Dermatitis, 1996 — short- and long-term experimental glove occlusion."
       }
     },
+    "nt_loop": {
+      "type": "drye-nt-loop",
+      "blocks": {
+        "quote_n6cLRY": {
+          "type": "quote",
+          "settings": {
+            "avatar": "shopify://shop_images/drye-avatar-2.webp",
+            "quote": "\"am I doomed to this for the rest of my career?\"",
+            "advice": "Use powder"
+          }
+        },
+        "quote_kijJrL": {
+          "type": "quote",
+          "settings": {
+            "avatar": "shopify://shop_images/drye-avatar-1.webp",
+            "quote": "\"I wore gloves even though I got a contact allergy every time\"",
+            "advice": "Use Gloves in a Bottle"
+          }
+        },
+        "quote_tyJDzg": {
+          "type": "quote",
+          "settings": {
+            "avatar": "shopify://shop_images/drye-avatar-4.webp",
+            "quote": "\"cotton liners make my hands sweaty after 30 min.\"",
+            "advice": "Double up"
+          }
+        },
+        "quote_mrBGxc": {
+          "type": "quote",
+          "settings": {
+            "avatar": "shopify://shop_images/drye-avatar-3.webp",
+            "quote": "\"I hate my sweaty gloves in summer. They keep splitting.\"",
+            "advice": "Use thicker mils"
+          }
+        }
+      },
+      "block_order": [
+        "quote_n6cLRY",
+        "quote_kijJrL",
+        "quote_tyJDzg",
+        "quote_mrBGxc"
+      ],
+      "settings": {
+        "chap_no": "03",
+        "eyebrow": "The never-ending loop",
+        "title": "",
+        "aria_label": "Common advice nail techs hear"
+      }
+    },
     "nt_tradeoff": {
       "type": "drye-nt-tradeoff",
       "blocks": {
@@ -375,56 +424,6 @@
         "time_2": "10:30",
         "time_3": "12:00",
         "time_4": "13:30"
-      }
-    },
-    "nt_loop": {
-      "type": "drye-nt-loop",
-      "blocks": {
-        "quote_n6cLRY": {
-          "type": "quote",
-          "settings": {
-            "avatar": "shopify://shop_images/drye-avatar-2.webp",
-            "quote": "\"am I doomed to this for the rest of my career?\"",
-            "advice": "Use powder"
-          }
-        },
-        "quote_kijJrL": {
-          "type": "quote",
-          "settings": {
-            "avatar": "shopify://shop_images/drye-avatar-1.webp",
-            "quote": "\"I wore gloves even though I got a contact allergy every time\"",
-            "advice": "Use Gloves in a Bottle"
-          }
-        },
-        "quote_tyJDzg": {
-          "type": "quote",
-          "settings": {
-            "avatar": "shopify://shop_images/drye-avatar-4.webp",
-            "quote": "\"cotton liners make my hands sweaty after 30 min.\"",
-            "advice": "Double up"
-          }
-        },
-        "quote_mrBGxc": {
-          "type": "quote",
-          "settings": {
-            "avatar": "shopify://shop_images/drye-avatar-3.webp",
-            "quote": "\"I hate my sweaty gloves in summer. They keep splitting.\"",
-            "advice": "Use thicker mils"
-          }
-        }
-      },
-      "block_order": [
-        "quote_n6cLRY",
-        "quote_kijJrL",
-        "quote_tyJDzg",
-        "quote_mrBGxc"
-      ],
-      "disabled": true,
-      "settings": {
-        "chap_no": "03",
-        "eyebrow": "The never-ending loop",
-        "title": "POV: You’re stuck in the nail tech advice loop",
-        "aria_label": "Common advice nail techs hear"
       }
     },
     "drye_nt_inside_9eaNVa": {
@@ -667,7 +666,7 @@
             "stat_suffix": "%",
             "stat_qualitative": false,
             "body": "Among European nail techs diagnosed with acrylate allergy, <strong>65% developed it during their first year in the profession </strong>— \n      and at least 11.7% had to leave the job. It isn't about how sensitive you are. It's about exposure.",
-            "source": "Gonçalo et al., Contact Dermatitis, 2014"
+            "source": "Gonçalo et al., Contact Dermatitis, 2018 (EECDRG, 11 clinics)"
           }
         },
         "card_VDPHg8": {
@@ -1022,9 +1021,9 @@
     "nt_desk",
     "drye_mechanics_time_promise_y7hWTc",
     "drye_nt_barrier_choice_g6KFyg",
+    "nt_loop",
     "nt_tradeoff",
     "nt_trapped",
-    "nt_loop",
     "drye_nt_inside_9eaNVa",
     "drye_nt_mechanism_kJBdAT",
     "drye_nt_close_d36WWJ",
