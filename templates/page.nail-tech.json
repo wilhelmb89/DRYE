@@ -620,6 +620,97 @@
       "name": "DRYE NT — Trust badges",
       "settings": {}
     },
+    "drye_evidence_AeNMWN": {
+      "type": "drye-evidence",
+      "blocks": {
+        "card_NDNwyK": {
+          "type": "card",
+          "settings": {
+            "label": "exposure threshold",
+            "stat_prefix": "",
+            "stat": "5–7",
+            "stat_suffix": "min",
+            "stat_qualitative": false,
+            "body": "<strong>In a sealed glove: </strong>relative humidity hits 90% within 5–7 minutes. Skin temperature climbs to 95°F.",
+            "source": "Park & Lee 2025"
+          }
+        },
+        "card_cqkPC4": {
+          "type": "card",
+          "settings": {
+            "label": "WET SKIN SOFTENS",
+            "stat_prefix": "",
+            "stat": "27",
+            "stat_suffix": "min",
+            "stat_qualitative": false,
+            "body": "<strong>After 27 minutes: </strong>skin damage risk doubles in women, 55 minutes in men. Most shifts run 3-6 hours - 8x the threshold.",
+            "source": "Lund 2020, Scand J Work Environ Health"
+          }
+        },
+        "card_qVabFc": {
+          "type": "card",
+          "settings": {
+            "label": "maceration",
+            "stat_prefix": "",
+            "stat": "3",
+            "stat_suffix": "x swelling",
+            "stat_qualitative": false,
+            "body": "<strong>after 4 hours:</strong> your outer skin barrier swells 3x thicker. Oil, solvents and chemicals soak in deeper - into skin that can't fight back.",
+            "source": "Bouwstra 2003, J invest Dermatol"
+          }
+        },
+        "card_bRnArN": {
+          "type": "card",
+          "settings": {
+            "label": "Wet skin lets more through",
+            "stat_prefix": "",
+            "stat": "3,6",
+            "stat_suffix": "x faster",
+            "stat_qualitative": false,
+            "body": "Hydrated human skin allowed some fat-soluble model compounds to <strong>penetrate up to 3.6× more in vitro.</strong>",
+            "source": "Hikima & Maibach, Biol Pharm Bull, 2006."
+          }
+        },
+        "card_VDPHg8": {
+          "type": "card",
+          "disabled": true,
+          "settings": {
+            "label": "Workforce cost",
+            "stat_prefix": "",
+            "stat": "57",
+            "stat_suffix": "% sick leave",
+            "stat_qualitative": false,
+            "body": "<strong>In chronic cases</strong> 57% take sick leave. 1 in 4 change or leave their trade. Direct healthcare costs run thousands per case, year after year.",
+            "source": "Armstrong 2022, DIepgen"
+          }
+        },
+        "bridge_YqEtNN": {
+          "type": "bridge",
+          "settings": {
+            "label": "The mechanism",
+            "paradigm": "Every glove, liner, barrier cream and powder fails on the physics.",
+            "mechanism": "DRYE routes sweat from skin to outer fabric. One-directional gradient. We call it <span style=\"color: #fff; font-weight: 700;\">Asymmetric layering.</span>",
+            "cta_label": "See how it works",
+            "cta_link": "shopify://pages/how-it-works"
+          }
+        }
+      },
+      "block_order": [
+        "card_NDNwyK",
+        "card_cqkPC4",
+        "card_qVabFc",
+        "card_bRnArN",
+        "card_VDPHg8",
+        "bridge_YqEtNN"
+      ],
+      "name": "DRYE Evidence",
+      "settings": {
+        "eyebrow": "",
+        "heading": "Why every nail tech should care.\n<em class=\"dryeNEW-em\"><br>Wet skin lets more through.</em>",
+        "body": "Not from the outside. <strong>From what happens inside your gloves.</strong>",
+        "swipe_label": "Swipe"
+      }
+    },
     "drye_documented_results_J3xN6N": {
       "type": "drye-documented-results",
       "blocks": {
@@ -940,6 +1031,7 @@
     "drye_nt_close_d36WWJ",
     "drye_nt_pro_reviews_xHQ6BX",
     "drye_nt_trust_badges_t8dXtb",
+    "drye_evidence_AeNMWN",
     "drye_documented_results_J3xN6N",
     "drye_nt_validation_Ep7qKR",
     "nt_nails",
