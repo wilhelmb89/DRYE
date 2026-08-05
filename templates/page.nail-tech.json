@@ -623,18 +623,6 @@
     "drye_evidence_AeNMWN": {
       "type": "drye-evidence",
       "blocks": {
-        "card_NDNwyK": {
-          "type": "card",
-          "settings": {
-            "label": "NOT SENSITIVE SKIN",
-            "stat_prefix": "",
-            "stat": "90",
-            "stat_suffix": "%",
-            "stat_qualitative": false,
-            "body": "hen nail techs develop methacrylate allergy, <strong>HEMA tests positive in 90% of cases</strong> — and nail technicians make up around 80% of all occupational cases. It follows one signature, regardless of brand.",
-            "source": "Gonçalo et al., Contact Dermatitis, 2014"
-          }
-        },
         "card_cqkPC4": {
           "type": "card",
           "settings": {
@@ -671,6 +659,18 @@
             "source": "Hikima & Maibach, Biol Pharm Bull, 2006."
           }
         },
+        "card_NDNwyK": {
+          "type": "card",
+          "settings": {
+            "label": "NOT SENSITIVE SKIN",
+            "stat_prefix": "",
+            "stat": "90",
+            "stat_suffix": "%",
+            "stat_qualitative": false,
+            "body": "When nail techs develop methacrylate allergy, <strong>HEMA tests positive in 90% of cases</strong> — and nail technicians make up around 80% of all occupational cases. It follows one signature, regardless of brand.",
+            "source": "Gonçalo et al., Contact Dermatitis, 2014"
+          }
+        },
         "card_VDPHg8": {
           "type": "card",
           "disabled": true,
@@ -696,10 +696,10 @@
         }
       },
       "block_order": [
-        "card_NDNwyK",
         "card_cqkPC4",
         "card_qVabFc",
         "card_bRnArN",
+        "card_NDNwyK",
         "card_VDPHg8",
         "bridge_YqEtNN"
       ],
