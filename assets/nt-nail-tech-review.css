@@ -1,0 +1,22 @@
+.fr { border-top: 1px solid var(--border); padding-block: 40px; }
+.fr-card { display: flex; flex-direction: column; align-items: flex-start; gap: 20px; max-width: 720px; margin: 0 auto; padding: 0 var(--page-pad); }
+.fr-card__portrait { flex: 0 0 auto; width: 88px; height: 88px; border-radius: 50%; overflow: hidden; border: 1px solid var(--border); position: relative; background: var(--bg-soft); }
+.fr-card__portrait img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.fr-card__portrait-fallback { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-family: var(--font-display); font-weight: 600; font-size: 32px; color: var(--muted); }
+.fr-card__body { flex: 1 1 auto; min-width: 0; }
+.fr-card__id { display: flex; align-items: baseline; flex-wrap: wrap; gap: 6px 10px; margin-bottom: 2px; }
+.fr-card__name { font-family: var(--font-display); font-weight: 600; font-size: 17px; color: var(--deep); letter-spacing: -.01em; }
+.fr-card__date { font-size: 11px; color: var(--muted); letter-spacing: .04em; text-transform: uppercase; }
+.fr-card__role { font-size: 13px; color: var(--muted); margin: 0 0 10px; }
+.fr-card__role strong { color: var(--body); font-weight: 500; }
+.fr-card__stars { color: #00B67A; font-size: 13px; letter-spacing: 2px; margin-bottom: 10px; }
+.fr-card__title { font-family: var(--font-display); font-weight: 600; font-size: 20px; line-height: 1.2; color: var(--deep); margin: 0 0 8px; letter-spacing: -.015em; }
+.fr-card__body-text { font-size: 15px; line-height: 1.5; color: var(--body); margin: 0 0 12px; }
+.fr-card__verified { display: inline-flex; align-items: center; gap: 6px; font-size: 12px; color: var(--muted); }
+.fr-card__verified-dot { display: inline-flex; align-items: center; justify-content: center; width: 14px; height: 14px; border-radius: 50%; background: var(--emerald); color: #fff; font-size: 9px; }
+
+@media (min-width: 700px) {
+  .fr { padding-block: 64px; }
+  .fr-card { flex-direction: row; align-items: flex-start; gap: 28px; }
+  .fr-card__portrait { width: 128px; height: 128px; }
+}
