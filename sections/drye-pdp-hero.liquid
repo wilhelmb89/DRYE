@@ -249,41 +249,52 @@ assign review_count = section.settings.review_count_fallback
       {{ section.settings.heading_line_2 }}
     </h1>
 
-    {% if section.settings.subheading != blank %}
-      <p class="pdp-subhead">{{ section.settings.subheading }}</p>
-    {% endif %}
-
     <div class="stars-row" data-review-scroll role="link" tabindex="0" aria-label="Read customer reviews">
       <span class="stars" aria-hidden="true">★★★★★</span>
       <span class="stars-lbl">{{ review_rating }}/5 · <a href="{{ review_anchor }}">{{ review_count }} reviews</a></span>
     </div>
 
+    {% if section.settings.subheading != blank %}
+      <p class="pdp-subhead">{{ section.settings.subheading }}</p>
+    {% endif %}
+
     <style>
-      /* Read-more: collapsed shows only the first 2 lines of the lede, then a
-         bold "Read more"; expanding reveals the rest of the lede + the checklist. */
+      /* Read-more: collapsed shows the first 2 lines of the description + a bold
+         "Read more". Clicking reveals the rest of the description + the checklist
+         in place, then removes the button — one-way, no "Read less", no chevron. */
       [data-pdp-intro] .pdp-intro__lede {
         display: -webkit-box;
         -webkit-box-orient: vertical;
         -webkit-line-clamp: 2;
         overflow: hidden;
+        margin: 0;
       }
       [data-pdp-intro].is-open .pdp-intro__lede {
         display: block;
         -webkit-line-clamp: unset;
         overflow: visible;
       }
+      [data-pdp-intro] .pdp-intro__toggle {
+        display: inline-block;
+        margin: 8px 0 0;
+        padding: 0;
+        background: none;
+        border: 0;
+        cursor: pointer;
+        font-family: inherit;
+        font-size: 15px;
+        font-weight: 700;
+        color: var(--emerald, #0D9488);
+      }
+      [data-pdp-intro].is-open .pdp-intro__toggle { display: none; }
       [data-pdp-intro] .pdp-intro__body { display: none; }
-      [data-pdp-intro].is-open .pdp-intro__body { display: block; }
-      [data-pdp-intro] .pdp-intro__toggle-label { font-weight: 700; }
+      [data-pdp-intro].is-open .pdp-intro__body { display: block; margin-top: 12px; }
     </style>
     <div class="pdp-intro" data-pdp-intro>
       {% if section.settings.intro_text != blank %}
         <p class="pdp-intro__lede">{{ section.settings.intro_text }}</p>
       {% endif %}
-      <button type="button" class="pdp-intro__toggle" data-pdp-intro-toggle aria-expanded="false">
-        <span class="pdp-intro__toggle-label">Read more</span>
-        <svg class="pdp-intro__toggle-chevron" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
-      </button>
+      <button type="button" class="pdp-intro__toggle" data-pdp-intro-toggle aria-expanded="false">Read more</button>
       <div class="pdp-intro__body" data-pdp-intro-body>
       <ul class="pdp-intro__list">
         {% if section.settings.bullet_1 != blank %}
@@ -314,10 +325,8 @@ assign review_count = section.settings.review_count_fallback
           if (!btn) return;
           var wrap = btn.closest('[data-pdp-intro]');
           if (!wrap) return;
-          var open = wrap.classList.toggle('is-open');
-          btn.setAttribute('aria-expanded', open ? 'true' : 'false');
-          var lbl = btn.querySelector('.pdp-intro__toggle-label');
-          if (lbl) lbl.textContent = open ? 'Read less' : 'Read more';
+          wrap.classList.add('is-open');            // one-way reveal; the button hides via CSS
+          btn.setAttribute('aria-expanded', 'true');
         });
       })();
     </script>

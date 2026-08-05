@@ -216,11 +216,13 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  background: rgba(255, 255, 255, 0.92);
-  color: var(--deep);
-  font-size: 28px;
+  background: #ffffff;
+  color: #111111;
+  font-size: 36px;
+  font-weight: 700;
   line-height: 1;
-  border: 1px solid rgba(30, 58, 76, 0.08);
+  border: none;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.16);
   cursor: pointer;
   pointer-events: auto;
   z-index: 5;
@@ -235,7 +237,7 @@
 }
 
 .hero .hero-gallery-arrow[disabled] {
-  opacity: 0.45;
+  color: #c8cdd1;
   cursor: not-allowed;
 }
 
@@ -1563,9 +1565,9 @@
   }
 
   .hero .hero-gallery-arrow {
-    width: 42px;
-    height: 42px;
-    font-size: 26px;
+    width: 44px;
+    height: 44px;
+    font-size: 34px;
   }
 
   .hero .hero-gallery-arrow--prev {
