@@ -634,6 +634,109 @@
         "after_label": "Put on your usual glove"
       }
     },
+    "drye_objection_cards_nrXP4P": {
+      "type": "drye-objection-cards",
+      "blocks": {
+        "card_W3mQFX": {
+          "type": "card",
+          "settings": {
+            "profession": "Automotive repair",
+            "question": "Is this just cotton?",
+            "quote": "<i>“These are incredible, nearly no more sweat in nitrile gloves, plus being so thin I barely notice them.”</i>",
+            "name": "@fordbodytech811",
+            "meta": "Automotive repair"
+          }
+        },
+        "card_9a4aaj": {
+          "type": "card",
+          "settings": {
+            "profession": "Car detailing",
+            "question": "Will it kill my grip?",
+            "quote": "<i>\"The slim thickness gives great dexterity. They do a great job keeping sweat off my hands.\"</i><br>\n<br>",
+            "name": "Shoujun S.",
+            "meta": "Car detailing, Rosemead, CA"
+          }
+        },
+        "card_fYUCB4": {
+          "type": "card",
+          "settings": {
+            "profession": "Automotive repair",
+            "question": "What happens if oil gets on them?",
+            "quote": "<i>\"When I get oil on the liners, I just wipe them off with electrical contact cleaner and a dry paper towel. Wipes right off.\"</i>",
+            "name": "Brian Jee",
+            "meta": "Automotive repair,  San Francisco, CA."
+          }
+        },
+        "card_QLA7kx": {
+          "type": "card",
+          "settings": {
+            "profession": "Automotive repair",
+            "question": "How much time does it save?",
+            "quote": "<i> “Without the lining gloves I had to remove my EV gloves, wash and dry my hands, then go to the computer. With the lining gloves, I could remove the EV gloves and go straight to the computer.” </i>",
+            "name": "Field study / BMW",
+            "meta": "EV service technician, Gothenburg, Sweden"
+          }
+        },
+        "card_mxzbrh": {
+          "type": "card",
+          "settings": {
+            "profession": "Automotive repair",
+            "question": "What if I take gloves off all day?",
+            "quote": "<i> “I take gloves on and off 9 times an hour. After two weeks with the lining gloves, my hands felt less itchy, less dry, and less rough.” </i>",
+            "name": "Independent field study",
+            "meta": "Vehicle inspection technician, Gothenburg, Sweden"
+          }
+        },
+        "card_aMW4GU": {
+          "type": "card",
+          "settings": {
+            "profession": "Automotive painter",
+            "question": "What about hot shops and summer heat?",
+            "quote": "<i>\"Terrible sweat issues during summer wearing nitrile gloves. Wearing these, I'm no longer dripping sweat on my paint jobs and my hands feel better.\"</i>",
+            "name": "Chad W.",
+            "meta": "Automotive painter, Phoenix, AZ"
+          }
+        },
+        "card_wd43xw": {
+          "type": "card",
+          "settings": {
+            "profession": "AUTOMOTIVE · SCANIA BATTERY FACTORY",
+            "question": "Does it work under EV safety gloves?",
+            "quote": "<i>\"Did not appear to affect fingertip sensitivity in electric safety gloves. Raised comfort and reduced the need to air the hand.\"</i>",
+            "name": "Simon Vicini",
+            "meta": "PPE-Coordinator, Scania CV AB"
+          }
+        },
+        "card_xKE3LU": {
+          "type": "card",
+          "settings": {
+            "profession": "Automotive repair",
+            "question": "Why put anything under nitrile?",
+            "quote": "<i> “My hands get so itchy I can’t work without a layer between my skin and the glove. The lining gloves stay drier than cotton — I’ve been using them continuously.” </i>",
+            "name": "Field study / SCANIA",
+            "meta": "Heavy vehicle mechanic, Gothenburg, Sweden"
+          }
+        }
+      },
+      "block_order": [
+        "card_W3mQFX",
+        "card_9a4aaj",
+        "card_fYUCB4",
+        "card_QLA7kx",
+        "card_mxzbrh",
+        "card_aMW4GU",
+        "card_wd43xw",
+        "card_xKE3LU"
+      ],
+      "custom_css": [],
+      "name": "DRYE Objection Cards",
+      "settings": {
+        "eyebrow": "",
+        "heading": "Will this actually work under my gloves?",
+        "heading_emphasis": "",
+        "body": ""
+      }
+    },
     "drye_mechanics_time_promise_gYTiq8": {
       "type": "drye-mechanics-time-promise",
       "disabled": true,
@@ -728,6 +831,30 @@
     "drye_mechanics_identification_gallery_XGdCcn": {
       "type": "drye-mechanics-identification-gallery",
       "blocks": {
+        "panel_c3p4DL": {
+          "type": "panel",
+          "settings": {
+            "image": "shopify://shop_images/Screenshot_7.webp",
+            "image_alt": "Worker wearing DRYE glove liners",
+            "video_url": "",
+            "video_play_label": "Play video",
+            "label": "Automotive",
+            "quote": "\"Dry hands at lunch. First time in years.\"",
+            "source": "Automotive mechanic"
+          }
+        },
+        "panel_z4ak9X": {
+          "type": "panel",
+          "settings": {
+            "image": "shopify://shop_images/Screenshot_4.webp",
+            "image_alt": "Worker wearing DRYE glove liners",
+            "video_url": "",
+            "video_play_label": "Play video",
+            "label": "Automotive",
+            "quote": "\"Off the gloves, straight to the laptop.\"",
+            "source": "EV technician"
+          }
+        },
         "panel_n4GEna": {
           "type": "panel",
           "settings": {
@@ -761,18 +888,6 @@
             "label": "Elite hockey",
             "quote": "\"One practice without them. The redness came right back.\"",
             "source": "Elite Hockey Player · Frölunda HC · 2025 SDHL Championship Winner"
-          }
-        },
-        "panel_c3p4DL": {
-          "type": "panel",
-          "settings": {
-            "image": "shopify://shop_images/Screenshot_7.webp",
-            "image_alt": "Worker wearing DRYE glove liners",
-            "video_url": "",
-            "video_play_label": "Play video",
-            "label": "Automotive",
-            "quote": "\"Dry hands at lunch. First time in years.\"",
-            "source": "Automotive mechanic"
           }
         },
         "panel_6BpGxJ": {
@@ -823,18 +938,6 @@
             "source": "EV technician"
           }
         },
-        "panel_z4ak9X": {
-          "type": "panel",
-          "settings": {
-            "image": "shopify://shop_images/Screenshot_4.webp",
-            "image_alt": "Worker wearing DRYE glove liners",
-            "video_url": "",
-            "video_play_label": "Play video",
-            "label": "Automotive",
-            "quote": "\"Off the gloves, straight to the laptop.\"",
-            "source": "EV technician"
-          }
-        },
         "panel_bn38ig": {
           "type": "panel",
           "settings": {
@@ -873,15 +976,15 @@
         }
       },
       "block_order": [
+        "panel_c3p4DL",
+        "panel_z4ak9X",
         "panel_n4GEna",
         "panel_txqrhy",
         "panel_UmAWf8",
-        "panel_c3p4DL",
         "panel_6BpGxJ",
         "panel_Yk7w4q",
         "panel_TpByWm",
         "panel_fQ6PBx",
-        "panel_z4ak9X",
         "panel_bn38ig",
         "panel_gpgpiW",
         "panel_8fWHjL"
@@ -999,6 +1102,7 @@
     "drye_nt_pro_reviews_yLLm7J",
     "drye_nt_trust_badges_7MQcTF",
     "drye_liner_product_clarity_anRGnT",
+    "drye_objection_cards_nrXP4P",
     "drye_mechanics_time_promise_gYTiq8",
     "drye_documented_results_xcxYYr",
     "drye_research_video_full_VPtXGb",
