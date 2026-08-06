@@ -37,11 +37,22 @@
         "ednote_link_label": "See how it works →",
         "ednote_link": "shopify://pages/how-it-works"
       }
+    },
+    "drye_article_related_X7E3KE": {
+      "type": "drye-article-related",
+      "name": "DRYE Article Related",
+      "settings": {
+        "heading": "Also worth reading",
+        "posts_limit": 3,
+        "link_label": "Read article",
+        "placeholder_symbol": "⬡"
+      }
     }
   },
   "order": [
     "hero",
     "drye_article_hero_image_r7ezQ9",
-    "drye_article_body_HJPFm7"
+    "drye_article_body_HJPFm7",
+    "drye_article_related_X7E3KE"
   ]
 }
