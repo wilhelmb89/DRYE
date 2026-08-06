@@ -178,7 +178,7 @@
 
 <script>
   (function () {
-    var root = document.querySelector('#drye-nt-barrier-choice-{{ section.id }} [data-bch]');
+    var root = document.querySelector('[data-section-id="{{ section.id }}"] [data-bch]');
     if (!root || root.dataset.bchReady) return;
     root.dataset.bchReady = '1';
     var timer;
