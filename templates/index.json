@@ -329,6 +329,23 @@
         "stats_note": "Post-purchase feedback from verified DRYE customers. Results vary by glove type, heat, and shift length."
       }
     },
+    "drye_nt_mechanism_Ew9VQ8": {
+      "type": "drye-nt-mechanism",
+      "name": "DRYE NT — Mechanism",
+      "settings": {
+        "section_id": "liner-mechanism",
+        "heading": "Cotton under an occlusive glove ",
+        "heading_emphasis": "did not prevent barrier change.",
+        "heading_source": "Ramsing & Agner, Contact Dermatitis, 1996",
+        "vs_label": "Cotton · DRYE",
+        "cotton_name": "Cotton",
+        "cotton_physics": "An absorbent.",
+        "cotton_steps": "Holds sweat — doesn't move it.\nAt saturation, moisture sits on skin\nSame wet glove on shift 1 as shift 8",
+        "drye_name": "DRYE Liner",
+        "drye_physics": "Asymmetric layering",
+        "drye_steps": "Skin-side: repels & transports sweat — no saturation against skin\nOuter-side: locks moisture into fibre pockets, away from skin"
+      }
+    },
     "drye_liner_product_clarity_pRDYHG": {
       "type": "drye-liner-product-clarity",
       "blocks": {
@@ -370,23 +387,6 @@
         "before_label": "Without DRYE",
         "after_image": "shopify://shop_images/5Y9A9331_1_1.webp",
         "after_label": "With DRYE"
-      }
-    },
-    "drye_nt_mechanism_Ew9VQ8": {
-      "type": "drye-nt-mechanism",
-      "name": "DRYE NT — Mechanism",
-      "settings": {
-        "section_id": "liner-mechanism",
-        "heading": "Cotton under an occlusive glove ",
-        "heading_emphasis": "did not prevent barrier change.",
-        "heading_source": "Ramsing & Agner, Contact Dermatitis, 1996",
-        "vs_label": "Cotton · DRYE",
-        "cotton_name": "Cotton",
-        "cotton_physics": "An absorbent.",
-        "cotton_steps": "Holds sweat — doesn't move it.\nAt saturation, moisture sits on skin\nSame wet glove on shift 1 as shift 8",
-        "drye_name": "DRYE Liner",
-        "drye_physics": "Asymmetric layering",
-        "drye_steps": "Skin-side: repels & transports sweat — no saturation against skin\nOuter-side: locks moisture into fibre pockets, away from skin"
       }
     },
     "drye_mechanics_identification_gallery_NU83UP": {
@@ -553,7 +553,7 @@
       "name": "DRYE Mechanics Gallery",
       "settings": {
         "eyebrow": "DIFFERENT GLOVES. SAME PROBLEM.",
-        "heading": "One dry layer under gloves <br>wherever hands get trapped.",
+        "heading": "One dry layer under gloves wherever hands get trapped.",
         "body": "",
         "swipe_label": "Swipe"
       }
