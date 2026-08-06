@@ -9,6 +9,52 @@
  */
 {
   "sections": {
+    "drye_textile_proof_videos_eM3Eei": {
+      "type": "drye-textile-proof-videos",
+      "blocks": {
+        "proof_video_TijVgE": {
+          "type": "proof_video",
+          "settings": {
+            "stream_uid": "0770e5abb06bfecc0f1db246b7311573",
+            "label": "01 / ORIGIN",
+            "title": "Built on rare textile machinery",
+            "body": "<p>Developed on advanced industrial textile machinery — not generic liner fabric. Engineered, not improvised.</p>"
+          }
+        },
+        "proof_video_iCiTbF": {
+          "type": "proof_video",
+          "settings": {
+            "stream_uid": "3cffb0beaaf008c92f5cafa9ce995c73",
+            "label": "02 / DURABILITY",
+            "title": "Knitted for repeated use",
+            "body": "<p>Built for repeated wear, washing and friction inside sealed gloves — designed to hold its shape shift after shift.</p>"
+          }
+        },
+        "proof_video_mwBCmL": {
+          "type": "proof_video",
+          "settings": {
+            "stream_uid": "4f5786539a9cfae762b3918360c76968",
+            "label": "03 / DRYNESS",
+            "title": "Layered to stay dry longer",
+            "body": "<p>Asymmetric layering moves moisture away from the skin-facing side, helping the hand side stay drier for longer inside sealed gloves.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "proof_video_TijVgE",
+        "proof_video_iCiTbF",
+        "proof_video_mwBCmL"
+      ],
+      "name": "DRYE textile proof videos",
+      "settings": {
+        "eyebrow": "BUILT DIFFERENTLY",
+        "heading": "Not another liner.",
+        "heading_italic": "Built to behave differently.",
+        "body": "<p>Most liners fail because they get wet or wear out. DRYE was engineered to avoid both.</p>",
+        "cf_subdomain": "customer-fqpngdzqcoky7qmz.cloudflarestream.com",
+        "footer_note": ""
+      }
+    },
     "drye_research_hero_nKJ99W": {
       "type": "drye-research-hero",
       "blocks": {
@@ -50,6 +96,7 @@
         "claim_erKwhL",
         "claim_7WCMhP"
       ],
+      "disabled": true,
       "name": "DRYE Research Hero",
       "settings": {
         "breadcrumb_link": "",
@@ -160,6 +207,7 @@
         "card_mUkeHb",
         "bridge_qwDknX"
       ],
+      "disabled": true,
       "name": "DRYE Evidence",
       "settings": {
         "eyebrow": "The evidence",
@@ -170,6 +218,7 @@
     },
     "drye_blog_science_callout_rUW3zN": {
       "type": "drye-blog-science-callout",
+      "disabled": true,
       "name": "DRYE Blog Science Callout",
       "settings": {
         "label": "",
@@ -185,52 +234,6 @@
         "stat_3_value": "7",
         "stat_3_suffix": "yr",
         "stat_3_label": "R&D across 4 institutions before first commercial pair shipped"
-      }
-    },
-    "drye_textile_proof_videos_eM3Eei": {
-      "type": "drye-textile-proof-videos",
-      "blocks": {
-        "proof_video_TijVgE": {
-          "type": "proof_video",
-          "settings": {
-            "stream_uid": "0770e5abb06bfecc0f1db246b7311573",
-            "label": "01 / ORIGIN",
-            "title": "Built on rare textile machinery",
-            "body": "<p>Developed on advanced industrial textile machinery — not generic liner fabric. Engineered, not improvised.</p>"
-          }
-        },
-        "proof_video_iCiTbF": {
-          "type": "proof_video",
-          "settings": {
-            "stream_uid": "3cffb0beaaf008c92f5cafa9ce995c73",
-            "label": "02 / DURABILITY",
-            "title": "Knitted for repeated use",
-            "body": "<p>Built for repeated wear, washing and friction inside sealed gloves — designed to hold its shape shift after shift.</p>"
-          }
-        },
-        "proof_video_mwBCmL": {
-          "type": "proof_video",
-          "settings": {
-            "stream_uid": "4f5786539a9cfae762b3918360c76968",
-            "label": "03 / DRYNESS",
-            "title": "Layered to stay dry longer",
-            "body": "<p>Asymmetric layering moves moisture away from the skin-facing side, helping the hand side stay drier for longer inside sealed gloves.</p>"
-          }
-        }
-      },
-      "block_order": [
-        "proof_video_TijVgE",
-        "proof_video_iCiTbF",
-        "proof_video_mwBCmL"
-      ],
-      "name": "DRYE textile proof videos",
-      "settings": {
-        "eyebrow": "BUILT DIFFERENTLY",
-        "heading": "Not another liner.",
-        "heading_italic": "Built to behave differently.",
-        "body": "<p>Most liners fail because they get wet or wear out. DRYE was engineered to avoid both.</p>",
-        "cf_subdomain": "customer-fqpngdzqcoky7qmz.cloudflarestream.com",
-        "footer_note": ""
       }
     },
     "drye_nt_validation_Wyqjpz": {
@@ -629,15 +632,15 @@
     }
   },
   "order": [
+    "drye_textile_proof_videos_eM3Eei",
     "drye_research_hero_nKJ99W",
     "drye_evidence_7HtrYK",
     "drye_blog_science_callout_rUW3zN",
-    "drye_textile_proof_videos_eM3Eei",
     "drye_nt_validation_Wyqjpz",
+    "drye_research_study_breakdown_bC3XJc",
     "drye_before_after_tW6tRQ",
     "drye_liner_proof_F3THp9",
     "drye_liner_risk_reversal_iKhqyG",
-    "drye_research_study_breakdown_bC3XJc",
     "drye_about_skapa_TiDRR6",
     "drye_research_video_full_PXFyE8",
     "drye_section_06_faq_Wdy8J6",
