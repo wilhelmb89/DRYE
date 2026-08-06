@@ -329,6 +329,49 @@
       "name": "DRYE NT — Trust badges",
       "settings": {}
     },
+    "drye_liner_product_clarity_pRDYHG": {
+      "type": "drye-liner-product-clarity",
+      "blocks": {
+        "spec_deq84d": {
+          "type": "spec",
+          "settings": {
+            "title": "Sweat.",
+            "description": "Stays dry for the full shift."
+          }
+        },
+        "spec_L9HA3B": {
+          "type": "spec",
+          "settings": {
+            "title": "Oil.",
+            "description": "Stays on the surface. Wipes off."
+          }
+        },
+        "spec_amf6rH": {
+          "type": "spec",
+          "settings": {
+            "title": "Tearing.",
+            "description": "Your nitriles go on dry, come off dry."
+          }
+        }
+      },
+      "block_order": [
+        "spec_deq84d",
+        "spec_L9HA3B",
+        "spec_amf6rH"
+      ],
+      "name": "DRYE Product Clarity",
+      "settings": {
+        "section_id": "liner-product",
+        "heading": "DRYE goes",
+        "heading_emphasis": "under your existing glove.",
+        "body": "<p>Thin enough you forget it's there. Built for repeated shifts.</p>",
+        "media_type": "image",
+        "before_image": "shopify://shop_images/5Y9A9324.webp",
+        "before_label": "Without DRYE",
+        "after_image": "shopify://shop_images/5Y9A9331_1_1.webp",
+        "after_label": "With DRYE"
+      }
+    },
     "drye_mechanics_identification_gallery_NU83UP": {
       "type": "drye-mechanics-identification-gallery",
       "blocks": {
@@ -615,11 +658,12 @@
   "order": [
     "hero_new_v4_qJcY9y",
     "drye_featured_in_GDPJ49",
+    "drye_nt_trust_badges_hBjUbn",
     "drye_industry_cards_6iD7bq",
     "drye_new_identification_gYdATm",
     "drye_research_video_full_VtWgze",
     "drye_nt_pro_reviews_ykrpQz",
-    "drye_nt_trust_badges_hBjUbn",
+    "drye_liner_product_clarity_pRDYHG",
     "drye_mechanics_identification_gallery_NU83UP",
     "drye_nt_mechanism_Ew9VQ8",
     "drye_blog_cta_strip_DzayyA",
