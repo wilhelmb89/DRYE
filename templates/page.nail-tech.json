@@ -443,6 +443,56 @@
         "verified_label": "Verified customer"
       }
     },
+    "drye_liner_product_clarity_aeRDUU": {
+      "type": "drye-liner-product-clarity",
+      "blocks": {
+        "spec_V99icj": {
+          "type": "spec",
+          "settings": {
+            "title": "Stays dry at skin contact",
+            "description": "no hand resets"
+          }
+        },
+        "spec_mqR9mx": {
+          "type": "spec",
+          "settings": {
+            "title": "No glove fighting",
+            "description": "easier on/off, less tearing"
+          }
+        },
+        "spec_WPMkmb": {
+          "type": "spec",
+          "settings": {
+            "title": "Dexterity/feel",
+            "description": "thin 0.4 mm layer"
+          }
+        },
+        "spec_FMzBCR": {
+          "type": "spec",
+          "settings": {
+            "title": "Machine‑washable",
+            "description": "built for months of glove work"
+          }
+        }
+      },
+      "block_order": [
+        "spec_V99icj",
+        "spec_mqR9mx",
+        "spec_WPMkmb",
+        "spec_FMzBCR"
+      ],
+      "name": "DRYE Product Clarity",
+      "settings": {
+        "section_id": "liner-product",
+        "heading": "DRYE goes",
+        "heading_emphasis": "under your existing glove.",
+        "body": "<p>0.4 mm base layer routes moisture away from skin contact under sealed gloves.</p>",
+        "media_type": "video",
+        "video": "shopify://files/videos/IMG_0591.mp4",
+        "before_label": "Put on DRYE — 0.4 mm base layer",
+        "after_label": "Put on your usual glove"
+      }
+    },
     "drye_nt_inside_9eaNVa": {
       "type": "drye-nt-inside",
       "blocks": {
@@ -473,6 +523,7 @@
         "column_Ynwjdi",
         "column_HUGMxR"
       ],
+      "disabled": true,
       "name": "DRYE NT — Inside glove",
       "settings": {
         "chapter": "",
@@ -984,6 +1035,7 @@
     "nt_tradeoff",
     "nt_trapped",
     "nt_nail_tech_review_c9KUkA",
+    "drye_liner_product_clarity_aeRDUU",
     "drye_nt_inside_9eaNVa",
     "drye_nt_mechanism_kJBdAT",
     "drye_nt_close_d36WWJ",
