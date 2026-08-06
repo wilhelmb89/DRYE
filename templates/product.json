@@ -235,14 +235,6 @@
             "video": "shopify://files/videos/Hemsida textilvideo.mp4"
           }
         },
-        "faq_mKhyiL": {
-          "type": "faq",
-          "settings": {
-            "question": "Is nitrile and latex allergenic to my skin?",
-            "answer": "Yes – both can cause skin reactions, but for different reasons.\n\n— Latex contains natural proteins that can trigger immediate (Type I) allergies.\n\n— Nitrile is latex-free, but most nitrile gloves contain rubber accelerators (such as thiurams, dithiocarbamates, and diphenylguanidine). These chemicals are used to manufacture the gloves and are a common cause of delayed allergic contact dermatitis (Type IV) — leading to irritated skin.",
-            "open_by_default": false
-          }
-        },
         "faq_YPHreL": {
           "type": "faq",
           "settings": {
@@ -315,6 +307,15 @@
             "open_by_default": false
           }
         },
+        "faq_mKhyiL": {
+          "type": "faq",
+          "disabled": true,
+          "settings": {
+            "question": "Is nitrile and latex allergenic to my skin?",
+            "answer": "Yes – both can cause skin reactions, but for different reasons.\n\n— Latex contains natural proteins that can trigger immediate (Type I) allergies.\n\n— Nitrile is latex-free, but most nitrile gloves contain rubber accelerators (such as thiurams, dithiocarbamates, and diphenylguanidine). These chemicals are used to manufacture the gloves and are a common cause of delayed allergic contact dermatitis (Type IV) — leading to irritated skin.",
+            "open_by_default": false
+          }
+        },
         "faq_cR9VYK": {
           "type": "faq",
           "settings": {
@@ -336,7 +337,6 @@
         "htab_wte_stage_DBKHUh",
         "review_slider_RbnVba",
         "desc_media_7MaHMX",
-        "faq_mKhyiL",
         "faq_YPHreL",
         "faq_wCzg8J",
         "faq_8BwAyY",
@@ -346,6 +346,7 @@
         "faq_fKYhkJ",
         "faq_aqPJyd",
         "faq_ae8QL9",
+        "faq_mKhyiL",
         "faq_cR9VYK"
       ],
       "settings": {
@@ -634,6 +635,16 @@
         "after_label": "Put on your usual glove"
       }
     },
+    "drye_research_video_full_VPtXGb": {
+      "type": "drye-research-video-full",
+      "name": "DRYE Research Video Full",
+      "settings": {
+        "video_src_desktop": "https://customer-fqpngdzqcoky7qmz.cloudflarestream.com/185c3cc572aed972a6c8762985a24636/manifest/video.m3u8",
+        "video_src_mobile": "https://customer-fqpngdzqcoky7qmz.cloudflarestream.com/cf8f8f5652452682aa46f9d34b599ebe/manifest/video.m3u8",
+        "video_label": "THE SEALED-GLOVE LINER",
+        "video_caption": "Sealed gloves trap sweat. DRYE routes it outward."
+      }
+    },
     "drye_objection_cards_nrXP4P": {
       "type": "drye-objection-cards",
       "blocks": {
@@ -737,6 +748,24 @@
         "body": ""
       }
     },
+    "17820025558baba7f4": {
+      "type": "apps",
+      "blocks": {
+        "judge_me_reviews_review_widget_X7UeAd": {
+          "type": "shopify://apps/judge-me-reviews/blocks/review_widget/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
+          "settings": {
+            "review_data": "real_data",
+            "max_width": 1100,
+            "show_shop_reviews": false,
+            "empty_state": "empty_widget"
+          }
+        }
+      },
+      "block_order": [
+        "judge_me_reviews_review_widget_X7UeAd"
+      ],
+      "settings": {}
+    },
     "drye_mechanics_time_promise_gYTiq8": {
       "type": "drye-mechanics-time-promise",
       "disabled": true,
@@ -816,34 +845,6 @@
         "heading": "Why millions of tradespeople thought cream was the answer",
         "subheading": "Sealed gloves over time cause <strong>skin barrier breakdown. </strong>No cream, powder, or steroid on earth can solve that."
       }
-    },
-    "drye_research_video_full_VPtXGb": {
-      "type": "drye-research-video-full",
-      "name": "DRYE Research Video Full",
-      "settings": {
-        "video_src_desktop": "https://customer-fqpngdzqcoky7qmz.cloudflarestream.com/185c3cc572aed972a6c8762985a24636/manifest/video.m3u8",
-        "video_src_mobile": "https://customer-fqpngdzqcoky7qmz.cloudflarestream.com/cf8f8f5652452682aa46f9d34b599ebe/manifest/video.m3u8",
-        "video_label": "THE SEALED-GLOVE LINER",
-        "video_caption": "Sealed gloves trap sweat. DRYE routes it outward."
-      }
-    },
-    "17820025558baba7f4": {
-      "type": "apps",
-      "blocks": {
-        "judge_me_reviews_review_widget_X7UeAd": {
-          "type": "shopify://apps/judge-me-reviews/blocks/review_widget/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
-          "settings": {
-            "review_data": "real_data",
-            "max_width": 1100,
-            "show_shop_reviews": false,
-            "empty_state": "empty_widget"
-          }
-        }
-      },
-      "block_order": [
-        "judge_me_reviews_review_widget_X7UeAd"
-      ],
-      "settings": {}
     },
     "drye_mechanics_identification_gallery_XGdCcn": {
       "type": "drye-mechanics-identification-gallery",
