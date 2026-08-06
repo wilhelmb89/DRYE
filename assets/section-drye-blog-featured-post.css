@@ -1,7 +1,7 @@
 /* DRYE Blog Featured Post — editorial lead story (paper, plain photo, no dark overlay) */
 
 .featured-wrap {
-  background: #F7F6F3;
+  background: #FFFFFF;
   padding: 0 var(--page-pad) 40px;
   border-bottom: 1px solid var(--border);
 }
@@ -69,7 +69,7 @@
   letter-spacing: 0.14em;
   text-transform: uppercase;
   color: var(--deep);
-  background: #F7F6F3;
+  background: #FFFFFF;
   border: 1px solid var(--border);
   padding: 5px 10px;
 }
@@ -98,7 +98,7 @@
 }
 
 .fp-h {
-  font-family: var(--font-editorial);
+  font-family: var(--font-body);
   font-weight: 700;
   font-size: clamp(1.5rem, 3.6vw, 2.1rem);
   letter-spacing: -0.012em;
