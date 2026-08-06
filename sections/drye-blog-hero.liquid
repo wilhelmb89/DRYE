@@ -1,39 +1,34 @@
+{{ 'section-drye-blog-hero.css' | asset_url | stylesheet_tag }}
 
-  {{ 'section-drye-blog-hero.css' | asset_url | stylesheet_tag }}
+{%- comment -%}
+  DRYE Blog Hero — editorial masthead + standfirst. No dark full-bleed hero;
+  reads like a publication's front page, not a product landing section.
+{%- endcomment -%}
 
-<section
-  class="dryeNEW-section blog-hero"
-  id="drye-blog-hero-{{ section.id }}"
-  data-section-id="{{ section.id }}"
->
-  <div class="dryeNEW-container">
-    <div class="blog-hero-top">
-      <div>
-        {% if section.settings.eyebrow != blank %}
-          <span class="dryeNEW-micro blog-hero-eye dryeNEW-reveal">
-            {{ section.settings.eyebrow }}
-          </span>
-        {% endif %}
-
-        {% if section.settings.heading != blank or section.settings.heading_emphasis != blank %}
-          <h1 class="dryeNEW-h2 blog-hero-h dryeNEW-reveal dryeNEW-rd1">
-            {% if section.settings.heading != blank %}
-              {{ section.settings.heading }}
-            {% endif %}
-
-            {% if section.settings.heading_emphasis != blank %}
-              <em>{{ section.settings.heading_emphasis }}</em>
-            {% endif %}
-          </h1>
-        {% endif %}
-      </div>
-
-      {% if section.settings.description != blank %}
-        <div class="dryeNEW-body--sm blog-hero-desc dryeNEW-reveal dryeNEW-rd2">
-          <p>{{ section.settings.description }}</p>
-        </div>
-      {% endif %}
+<header class="blog-masthead">
+  <div class="blog-masthead__row">
+    <div class="blog-masthead__brand">
+      <span class="blog-masthead__mark">DRYE</span>
+      <span class="blog-masthead__div" aria-hidden="true"></span>
+      <span class="blog-masthead__section">{{ section.settings.eyebrow | default: 'Insights' }}</span>
     </div>
+    {% if section.settings.description != blank %}
+      <p class="blog-masthead__meta">{{ section.settings.description | strip_html | truncatewords: 8 }}</p>
+    {% endif %}
+  </div>
+</header>
+
+<section class="blog-standfirst" id="drye-blog-hero-{{ section.id }}" data-section-id="{{ section.id }}">
+  <div class="blog-standfirst__in">
+    {% if section.settings.heading != blank or section.settings.heading_emphasis != blank %}
+      <h1 class="blog-standfirst__h">
+        {% if section.settings.heading != blank %}{{ section.settings.heading }}{% endif %}
+        {% if section.settings.heading_emphasis != blank %}<em>{{ section.settings.heading_emphasis }}</em>{% endif %}
+      </h1>
+    {% endif %}
+    {% if section.settings.description != blank %}
+      <p class="blog-standfirst__p">{{ section.settings.description }}</p>
+    {% endif %}
   </div>
 </section>
 
@@ -46,8 +41,8 @@
     {
       "type": "text",
       "id": "eyebrow",
-      "label": "Eyebrow",
-      "default": "Field Reports & Science"
+      "label": "Masthead section label",
+      "default": "Insights"
     },
     {
       "type": "text",
@@ -59,7 +54,7 @@
       "type": "text",
       "id": "heading_emphasis",
       "label": "Heading emphasis",
-      "default": "What the data actually shows."
+      "default": ""
     },
     {
       "type": "textarea",

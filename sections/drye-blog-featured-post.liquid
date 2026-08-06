@@ -47,25 +47,13 @@
               }}
             {% endif %}
 
-            <div class="fp-img-overlay">
-              <span class="fp-cat-badge">
-                {% if section.settings.image_badge != blank %}
-                  {{ section.settings.image_badge }}
-                {% else %}
-                  {{ badge_label }}
-                {% endif %}
-              </span>
-
-              <p class="fp-img-title">
-                {% if section.settings.image_title_line_1 != blank %}
-                  {{ section.settings.image_title_line_1 }}<br>
-                  {{ section.settings.image_title_line_2 }}<br>
-                  {{ section.settings.image_title_line_3 }}
-                {% else %}
-                  {{ featured_article.title }}
-                {% endif %}
-              </p>
-            </div>
+            <span class="fp-cat-badge">
+              {% if section.settings.image_badge != blank %}
+                {{ section.settings.image_badge }}
+              {% else %}
+                {{ badge_label }}
+              {% endif %}
+            </span>
           </div>
 
           <div class="fp-body">
