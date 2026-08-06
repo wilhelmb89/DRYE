@@ -9,6 +9,99 @@
  */
 {
   "sections": {
+    "drye_new_hero_4KPGzf": {
+      "type": "dryeNEW-hero",
+      "blocks": {
+        "credibility_item_z3Lciw": {
+          "type": "credibility_item",
+          "settings": {
+            "text": "SKAPA Prize — Nobel memory, 2020"
+          }
+        },
+        "credibility_item_9jLLzr": {
+          "type": "credibility_item",
+          "settings": {
+            "text": "Swedish School of Textiles"
+          }
+        },
+        "credibility_item_DNDdkj": {
+          "type": "credibility_item",
+          "settings": {
+            "text": "Uppsala University"
+          }
+        },
+        "credibility_item_zNXAwy": {
+          "type": "credibility_item",
+          "settings": {
+            "text": "Patent pending"
+          }
+        },
+        "stat_item_w6fmXT": {
+          "type": "stat_item",
+          "settings": {
+            "value": "8h+",
+            "label_line_1": "Tested under nitrile",
+            "label_line_2": "by healthcare workers"
+          }
+        },
+        "stat_item_f6NVUB": {
+          "type": "stat_item",
+          "settings": {
+            "value": "7 yr",
+            "label_line_1": "R&D before",
+            "label_line_2": "first unit shipped"
+          }
+        },
+        "stat_item_6RQ8eK": {
+          "type": "stat_item",
+          "settings": {
+            "value": "30",
+            "label_line_1": "Day full refund",
+            "label_line_2": "if it doesn't work"
+          }
+        },
+        "stat_item_aE4jqd": {
+          "type": "stat_item",
+          "settings": {
+            "value": "0.4mm",
+            "label_line_1": "Thin enough that",
+            "label_line_2": "dexterity is unchanged"
+          }
+        }
+      },
+      "block_order": [
+        "credibility_item_z3Lciw",
+        "credibility_item_9jLLzr",
+        "credibility_item_DNDdkj",
+        "credibility_item_zNXAwy",
+        "stat_item_w6fmXT",
+        "stat_item_f6NVUB",
+        "stat_item_6RQ8eK",
+        "stat_item_aE4jqd"
+      ],
+      "name": "DRYE NEW Hero",
+      "settings": {
+        "section_id": "hero",
+        "poster_image_desktop": "shopify://shop_images/Gemini_Generated_Image_2rtxik2rtxik2rtx.webp",
+        "poster_image_mobile": "shopify://shop_images/5Y9A9331_1.webp",
+        "video_hls_url_desktop": "",
+        "video_hls_url_mobile": "",
+        "heading_line_1": "Every day you",
+        "heading_line_2": "put gloves on.",
+        "heading_echo": "Every day your hands pay for it.",
+        "subheading_line_1": "It's not the brand. It's not the material.",
+        "subheading_line_2": "It's not how much you sweat.",
+        "subheading_emphasis": "It's physics.",
+        "path_1_label": "",
+        "path_1_text_line_1": "Order DRYE Liner →",
+        "path_1_text_line_2": "",
+        "path_1_link": "",
+        "path_2_label": "If you already know",
+        "path_2_text_line_1": "I know it's the gloves.",
+        "path_2_text_line_2": "Nothing fixes it →",
+        "path_2_link": ""
+      }
+    },
     "hero_new_v4_qJcY9y": {
       "type": "hero-new-v4",
       "name": "Hero New V4",
@@ -656,6 +749,7 @@
     }
   },
   "order": [
+    "drye_new_hero_4KPGzf",
     "hero_new_v4_qJcY9y",
     "drye_featured_in_GDPJ49",
     "drye_nt_trust_badges_hBjUbn",
