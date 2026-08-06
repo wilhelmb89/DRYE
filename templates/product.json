@@ -819,7 +819,6 @@
     },
     "drye_research_video_full_VPtXGb": {
       "type": "drye-research-video-full",
-      "disabled": true,
       "name": "DRYE Research Video Full",
       "settings": {
         "video_src_desktop": "https://customer-fqpngdzqcoky7qmz.cloudflarestream.com/185c3cc572aed972a6c8762985a24636/manifest/video.m3u8",
@@ -827,6 +826,24 @@
         "video_label": "THE SEALED-GLOVE LINER",
         "video_caption": "Sealed gloves trap sweat. DRYE routes it outward."
       }
+    },
+    "17820025558baba7f4": {
+      "type": "apps",
+      "blocks": {
+        "judge_me_reviews_review_widget_X7UeAd": {
+          "type": "shopify://apps/judge-me-reviews/blocks/review_widget/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
+          "settings": {
+            "review_data": "real_data",
+            "max_width": 1100,
+            "show_shop_reviews": false,
+            "empty_state": "empty_widget"
+          }
+        }
+      },
+      "block_order": [
+        "judge_me_reviews_review_widget_X7UeAd"
+      ],
+      "settings": {}
     },
     "drye_mechanics_identification_gallery_XGdCcn": {
       "type": "drye-mechanics-identification-gallery",
@@ -997,24 +1014,6 @@
         "swipe_label": "Swipe"
       }
     },
-    "17820025558baba7f4": {
-      "type": "apps",
-      "blocks": {
-        "judge_me_reviews_review_widget_X7UeAd": {
-          "type": "shopify://apps/judge-me-reviews/blocks/review_widget/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
-          "settings": {
-            "review_data": "real_data",
-            "max_width": 1100,
-            "show_shop_reviews": false,
-            "empty_state": "empty_widget"
-          }
-        }
-      },
-      "block_order": [
-        "judge_me_reviews_review_widget_X7UeAd"
-      ],
-      "settings": {}
-    },
     "drye_liner_risk_reversal_U93N3T": {
       "type": "drye-liner-risk-reversal",
       "name": "DRYE Liner Risk Reversal",
@@ -1102,12 +1101,12 @@
     "drye_nt_pro_reviews_yLLm7J",
     "drye_nt_trust_badges_7MQcTF",
     "drye_liner_product_clarity_anRGnT",
+    "drye_research_video_full_VPtXGb",
     "drye_objection_cards_nrXP4P",
+    "17820025558baba7f4",
     "drye_mechanics_time_promise_gYTiq8",
     "drye_documented_results_xcxYYr",
-    "drye_research_video_full_VPtXGb",
     "drye_mechanics_identification_gallery_XGdCcn",
-    "17820025558baba7f4",
     "drye_liner_risk_reversal_U93N3T",
     "jens_linnea_section_A3xynd",
     "drye_mechanics_cta_7CEriW"
