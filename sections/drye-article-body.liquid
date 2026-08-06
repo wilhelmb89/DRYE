@@ -32,6 +32,17 @@
         {% endfor %}
       </div>
     {% endif %}
+
+    {%- if section.settings.about_text != blank -%}
+      <div class="article-about">
+        <p class="article-about__label">{{ section.settings.about_label }}</p>
+        <p class="article-about__body">{{ section.settings.about_text }}
+          {%- if section.settings.about_link_label != blank -%}
+            <a href="{{ section.settings.about_link | default: '#' }}">{{ section.settings.about_link_label }}</a>
+          {%- endif -%}
+        </p>
+      </div>
+    {%- endif -%}
   </article>
 </div>
 
@@ -96,6 +107,33 @@
     {
       "type": "url",
       "id": "ednote_link",
+      "label": "Link"
+    },
+    {
+      "type": "header",
+      "content": "About DRYE (quiet brand box, end of article)"
+    },
+    {
+      "type": "text",
+      "id": "about_label",
+      "label": "Label",
+      "default": "DRYE"
+    },
+    {
+      "type": "textarea",
+      "id": "about_text",
+      "label": "Text",
+      "default": "DRYE Insights is the field-notes desk of DRYE, a Swedish maker of moisture-routing glove liners. We publish what the research says about hands and work — and cite it."
+    },
+    {
+      "type": "text",
+      "id": "about_link_label",
+      "label": "Link label",
+      "default": "About the desk →"
+    },
+    {
+      "type": "url",
+      "id": "about_link",
       "label": "Link"
     }
   ],
