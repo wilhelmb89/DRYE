@@ -1095,6 +1095,49 @@
         "secondary_label": "",
         "secondary_link": "shopify://blogs/insights/automotive-mechanics-field-study"
       }
+    },
+    "drye_liner_product_clarity_R3hL3t": {
+      "type": "drye-liner-product-clarity",
+      "blocks": {
+        "spec_PYCmpy": {
+          "type": "spec",
+          "settings": {
+            "title": "Sweat.",
+            "description": "Stays dry for the full shift."
+          }
+        },
+        "spec_T47Yq6": {
+          "type": "spec",
+          "settings": {
+            "title": "Oil.",
+            "description": "Stays on the surface. Wipes off."
+          }
+        },
+        "spec_8eVbci": {
+          "type": "spec",
+          "settings": {
+            "title": "Tearing.",
+            "description": "Your nitriles go on dry, come off dry."
+          }
+        }
+      },
+      "block_order": [
+        "spec_PYCmpy",
+        "spec_T47Yq6",
+        "spec_8eVbci"
+      ],
+      "name": "DRYE Product Clarity",
+      "settings": {
+        "section_id": "liner-product",
+        "heading": "DRYE goes",
+        "heading_emphasis": "under your existing glove.",
+        "body": "<p>Thin enough you forget it's there. Built for repeated shifts.</p>",
+        "media_type": "image",
+        "before_image": "shopify://shop_images/5Y9A9324.webp",
+        "before_label": "Without DRYE",
+        "after_image": "shopify://shop_images/5Y9A9331_1_1.webp",
+        "after_label": "With DRYE"
+      }
     }
   },
   "order": [
@@ -1110,6 +1153,7 @@
     "drye_mechanics_identification_gallery_XGdCcn",
     "drye_liner_risk_reversal_U93N3T",
     "jens_linnea_section_A3xynd",
-    "drye_mechanics_cta_7CEriW"
+    "drye_mechanics_cta_7CEriW",
+    "drye_liner_product_clarity_R3hL3t"
   ]
 }
