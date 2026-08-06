@@ -297,6 +297,7 @@
         "quote_tyJDzg",
         "quote_mrBGxc"
       ],
+      "disabled": true,
       "settings": {
         "chap_no": "03",
         "eyebrow": "The never-ending loop",
@@ -491,6 +492,82 @@
         "video": "shopify://files/videos/IMG_0591.mp4",
         "before_label": "Put on DRYE — 0.4 mm base layer",
         "after_label": "Put on your usual glove"
+      }
+    },
+    "drye_section_06_faq_h937Hc": {
+      "type": "drye-section-06-faq",
+      "blocks": {
+        "faq_item_3kyJxA": {
+          "type": "faq_item",
+          "settings": {
+            "question": "What if I have long or sharp nails?",
+            "answer": "Long, sharp nails can wear through the fingertip fabric over time. If that happens, DRYE can still function as a moisture-routing layer under your nitrile glove, but the nail tip itself will not be covered by the textile.\n\nSome users choose to trim a small opening at the fingertip as a workaround. It is not the cleanest look, and it does not protect the nail area, but the liner can still work for the rest of the hand."
+          }
+        },
+        "faq_item_P8tAUf": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Does it work under nitrile gloves specifically?",
+            "answer": "Yes. DRYE is made to be worn under nitrile gloves. It is 0.4 mm thin, so it fits under standard gloves without changing your outer glove."
+          }
+        },
+        "faq_item_JpnHYA": {
+          "type": "faq_item",
+          "settings": {
+            "question": "What if it doesn't work for me?",
+            "answer": "You have 30 days to try it. If it doesn’t improve your shift, you get a refund."
+          }
+        },
+        "faq_item_zB3hk8": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Can I wash it? How?",
+            "answer": "Yes. Machine wash cold or warm. No fabric softener. Air dry flat. Wash after each shift."
+          }
+        },
+        "faq_item_aWcXAV": {
+          "type": "faq_item",
+          "settings": {
+            "question": "How long does it last? ",
+            "answer": "With regular use and washing, most users should expect 6–12 months. The function is built into the textile structure, not a coating that washes out."
+          }
+        },
+        "faq_item_P863DU": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Who it’s not for ",
+            "answer": "DRYE works best when gloves stay on for longer periods. If you remove gloves every few minutes, the liner may not have enough time to help. Non-sterile use only."
+          }
+        }
+      },
+      "block_order": [
+        "faq_item_3kyJxA",
+        "faq_item_P8tAUf",
+        "faq_item_JpnHYA",
+        "faq_item_zB3hk8",
+        "faq_item_aWcXAV",
+        "faq_item_P863DU"
+      ],
+      "custom_css": [
+        "& > div,& > div > div {padding-top: 0 !important; margin-top: 0 !important;}"
+      ],
+      "name": "DRYE Section 06 — FAQ",
+      "settings": {
+        "eyebrow": "",
+        "heading": ""
+      }
+    },
+    "nt_nails": {
+      "type": "drye-nt-nails",
+      "settings": {
+        "heading": "Who it's not for.",
+        "body": "",
+        "ok_tag": "Recommended",
+        "ok_title": "Short to moderate nails.",
+        "ok_desc": "Best match for DRYE — less concentrated pressure at the fingertips.",
+        "no_tag": "Not recommended",
+        "no_title": "Long or sharply pointed nails.",
+        "no_desc": "Higher risk of puncturing or tearing the liner."
       }
     },
     "drye_nt_inside_9eaNVa": {
@@ -909,19 +986,6 @@
         "logos_label": "Research and development partners"
       }
     },
-    "nt_nails": {
-      "type": "drye-nt-nails",
-      "settings": {
-        "heading": "Who it's not for.",
-        "body": "",
-        "ok_tag": "Recommended",
-        "ok_title": "Short to moderate nails.",
-        "ok_desc": "Best match for DRYE — less concentrated pressure at the fingertips.",
-        "no_tag": "Not recommended",
-        "no_title": "Long or sharply pointed nails.",
-        "no_desc": "Higher risk of puncturing or tearing the liner."
-      }
-    },
     "drye_mechanics_cta_KQaVwL": {
       "type": "drye-mechanics-cta",
       "name": "DRYE Mechanics CTA",
@@ -1036,6 +1100,8 @@
     "nt_trapped",
     "nt_nail_tech_review_c9KUkA",
     "drye_liner_product_clarity_aeRDUU",
+    "drye_section_06_faq_h937Hc",
+    "nt_nails",
     "drye_nt_inside_9eaNVa",
     "drye_nt_mechanism_kJBdAT",
     "drye_nt_close_d36WWJ",
@@ -1043,7 +1109,6 @@
     "drye_nt_trust_badges_BN6wbM",
     "drye_evidence_AeNMWN",
     "drye_nt_validation_Ep7qKR",
-    "nt_nails",
     "drye_mechanics_cta_KQaVwL",
     "drye_research_video_full_bi4hwc",
     "drye_nt_real_reviews_dHDWiM",
