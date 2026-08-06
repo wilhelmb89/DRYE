@@ -792,16 +792,6 @@
     "drye_nt_trust_badges_BN6wbM": {
       "type": "drye-nt-trust-badges",
       "blocks": {
-        "trustpilot_NDw9iN": {
-          "type": "trustpilot",
-          "settings": {
-            "logo": "shopify://shop_images/trustpilot-logo-trimmed.png",
-            "score": "4.4/5",
-            "count": "10 reviews",
-            "url": "https://se.trustpilot.com/review/hudsverige.se",
-            "cta_label": "See all reviews on Trustpilot"
-          }
-        },
         "award_RpcpD7": {
           "type": "award",
           "settings": {
@@ -809,21 +799,10 @@
             "name": "SKAPA",
             "caption": "Innovation Award — in memory of the inventor Alfred Nobel"
           }
-        },
-        "stars_b9kxhV": {
-          "type": "stars",
-          "settings": {
-            "score": "4.8/5",
-            "count": "59 reviews",
-            "url": "shopify://products/drye-moisture-routing-glove-liners",
-            "cta_label": "See all our reviews"
-          }
         }
       },
       "block_order": [
-        "trustpilot_NDw9iN",
-        "award_RpcpD7",
-        "stars_b9kxhV"
+        "award_RpcpD7"
       ],
       "name": "DRYE NT — Trust badges",
       "settings": {}
