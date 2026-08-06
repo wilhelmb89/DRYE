@@ -33,16 +33,27 @@
         "ednote_text": "DRYE, which publishes Insights, makes a thin under-glove liner built to route sweat off the skin rather than absorb it.",
         "ednote_link_label": "See how it works →",
         "ednote_link": "",
-        "about_label": "DRYE",
-        "about_text": "DRYE Insights is the field-notes desk of DRYE, a Swedish maker of moisture-routing glove liners. We publish what the research says about hands and work — and cite it.",
-        "about_link_label": "About the desk →",
+        "about_label": "",
+        "about_text": "",
+        "about_link_label": "",
         "about_link": ""
+      }
+    },
+    "drye_article_related_bVkDET": {
+      "type": "drye-article-related",
+      "name": "DRYE Article Related",
+      "settings": {
+        "heading": "Also worth reading",
+        "posts_limit": 3,
+        "link_label": "Read article",
+        "placeholder_symbol": "⬡"
       }
     }
   },
   "order": [
     "hero",
     "drye_article_hero_image_x8BAwh",
-    "drye_article_body_cLwn6k"
+    "drye_article_body_cLwn6k",
+    "drye_article_related_bVkDET"
   ]
 }
