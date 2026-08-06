@@ -18,9 +18,20 @@
     </div>
 
     {% assign pin_tag = section.settings.pin_tag | default: 'pinned' %}
+    {%- comment -%}
+      exclude_id must match whatever the featured-post section actually shows,
+      not blindly "the newest post" — the featured section can pin a SPECIFIC
+      article (its own "featured_article" setting) that isn't the newest one.
+      Excluding blog.articles.first in that case removes the wrong article and
+      lets the pinned featured article reappear as the grid's first card
+      (visible duplicate). Mirror the same handle here; leave blank to fall
+      back to "exclude the newest post" (the old default behaviour).
+    {%- endcomment -%}
     {% liquid
       assign exclude_id = ''
-      if section.settings.exclude_first_post and blog.articles.size > 0
+      if section.settings.featured_article != blank
+        assign exclude_id = section.settings.featured_article.id
+      elsif section.settings.exclude_first_post and blog.articles.size > 0
         assign exclude_id = blog.articles.first.id
       endif
       assign shown = 0
@@ -71,11 +82,17 @@
       "default": 12
     },
     {
+      "type": "article",
+      "id": "featured_article",
+      "label": "Featured article (shown above)",
+      "info": "Set this to the SAME article picked in the Blog Featured Post section — it will be excluded from this grid so it doesn't appear twice. Leave blank to fall back to \"exclude the newest post\" below."
+    },
+    {
       "type": "checkbox",
       "id": "exclude_first_post",
-      "label": "Exclude first post from grid",
+      "label": "Exclude first post from grid (fallback)",
       "default": true,
-      "info": "Use this if the newest post is already shown in the featured section above."
+      "info": "Only used when \"Featured article\" above is left blank. Use this if the newest post is already shown in the featured section above."
     },
     {
       "type": "text",
