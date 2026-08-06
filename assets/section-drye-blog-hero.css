@@ -1,7 +1,7 @@
 /* DRYE Blog Hero — editorial masthead + standfirst (paper, no dark hero) */
 
 .blog-masthead {
-  background: #F7F6F3;
+  background: #FFFFFF;
   border-bottom: 1px solid var(--border);
 }
 .blog-masthead__row {
@@ -44,7 +44,7 @@
 }
 @media (max-width: 640px) { .blog-masthead__meta { display: none; } }
 
-.blog-standfirst { background: #F7F6F3; }
+.blog-standfirst { background: #FFFFFF; }
 .blog-standfirst__in {
   max-width: var(--max-width);
   margin: 0 auto;
