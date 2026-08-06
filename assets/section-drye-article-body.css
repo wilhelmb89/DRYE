@@ -71,7 +71,10 @@
   color: var(--body);
 }
 
+.article-body ul { list-style: disc; }
+.article-body ol { list-style: decimal; }
 .article-body li { margin-bottom: 0.4em; }
+.article-body li::marker { color: var(--deep); }
 
 .article-body a { color: var(--deep); text-decoration-color: rgba(30,58,76,0.35); text-underline-offset: 2px; }
 .article-body a:hover { text-decoration-color: var(--deep); }
