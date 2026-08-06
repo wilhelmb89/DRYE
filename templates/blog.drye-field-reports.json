@@ -56,12 +56,14 @@
       "settings": {
         "heading": "All Reports",
         "max_posts": 10,
+        "featured_article": "",
         "exclude_first_post": false,
         "pin_tag": "Pinned"
       }
     },
     "drye_blog_science_callout_ex4dTF": {
       "type": "drye-blog-science-callout",
+      "disabled": true,
       "name": "DRYE Blog Science Callout",
       "settings": {
         "label": "",
@@ -81,11 +83,13 @@
     },
     "drye_blog_cta_strip_WaBL3H": {
       "type": "drye-blog-cta-strip",
+      "disabled": true,
       "name": "DRYE Blog CTA Strip",
       "settings": {
         "eyebrow": "",
-        "heading": "Either it changes your shift<br>",
+        "heading": "Either it changes your shift",
         "heading_emphasis": "Or it doesn't. 30-day. Full refund.",
+        "heading_size": "compact",
         "subtext": "Full refund if it doesn't work. No forms. No questions.",
         "primary_label": "Order DRYE Liners →",
         "primary_url": "shopify://products/drye-moisture-routing-glove-liners",
