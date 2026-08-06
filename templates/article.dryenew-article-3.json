@@ -11,16 +11,38 @@
   "sections": {
     "hero": {
       "type": "drye-article-hero",
-      "disabled": true,
       "settings": {
         "author": "DRYE Insights",
         "meta_read_time": "6 min read",
         "meta_location": "National Guard of Ukraine · 2nd Corps",
         "meta_study": "Field Study · n=10"
       }
+    },
+    "drye_article_hero_image_x8BAwh": {
+      "type": "drye-article-hero-image",
+      "name": "DRYE Article Hero Image",
+      "settings": {
+        "hero_caption": "National Guard of Ukraine, 2nd Corps (\"Khartiya\"). 10 soldiers, structured questionnaire, signed personally by the Chaplain of 2nd Corps. 2025."
+      }
+    },
+    "drye_article_body_cLwn6k": {
+      "type": "drye-article-body",
+      "name": "DRYE Article Body",
+      "settings": {
+        "ednote_label": "Editor's note",
+        "ednote_text": "DRYE, which publishes Insights, makes a thin under-glove liner built to route sweat off the skin rather than absorb it.",
+        "ednote_link_label": "See how it works →",
+        "ednote_link": "",
+        "about_label": "DRYE",
+        "about_text": "DRYE Insights is the field-notes desk of DRYE, a Swedish maker of moisture-routing glove liners. We publish what the research says about hands and work — and cite it.",
+        "about_link_label": "About the desk →",
+        "about_link": ""
+      }
     }
   },
   "order": [
-    "hero"
+    "hero",
+    "drye_article_hero_image_x8BAwh",
+    "drye_article_body_cLwn6k"
   ]
 }
