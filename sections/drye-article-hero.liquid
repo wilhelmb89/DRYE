@@ -1,39 +1,45 @@
-
 {{ 'section-drye-article-hero.css' | asset_url | stylesheet_tag }}
+
+{%- comment -%}
+  DRYE Article Hero — editorial. Value-first: kicker -> Playfair headline -> deck
+  (article excerpt) -> byline. No blue product bar, no product image. The featured
+  image is rendered separately (drye-article-hero-image) below this.
+{%- endcomment -%}
 
 <section class="article-hero">
   <div class="article-hero-in">
     <nav class="breadcrumb" aria-label="breadcrumb">
       <a href="{{ blog.url }}">{{ blog.title }}</a>
-      <span class="breadcrumb-sep">›</span>
-      <span>{{ article.title }}</span>
+      <span class="breadcrumb-sep">/</span>
+      <span>{{ article.title | truncate: 48 }}</span>
     </nav>
 
     {% if article.tags.size > 0 %}
-      <span class="article-cat rev">{{ article.tags.first }}</span>
+      <p class="article-kicker">{{ article.tags.first }}</p>
     {% endif %}
 
-    <h1 class="article-h rev rd1">
-      {{ article.title }}
-    </h1>
+    <h1 class="article-h">{{ article.title }}</h1>
 
-    <div class="article-meta rev rd2">
-      <span class="meta-item">{{ article.published_at | date: "%B %Y" }}</span>
+    {% if article.excerpt != blank %}
+      <p class="article-deck">{{ article.excerpt | strip_html }}</p>
+    {% endif %}
 
-      {% if section.settings.meta_location != blank %}
-        <span class="meta-sep"></span>
-        <span class="meta-item">{{ section.settings.meta_location }}</span>
-      {% endif %}
-
-      {% if section.settings.meta_study != blank %}
-        <span class="meta-sep"></span>
-        <span class="meta-item">{{ section.settings.meta_study }}</span>
-      {% endif %}
-
+    <div class="article-byline">
+      <span class="byline-by">By <strong>{{ section.settings.author | default: 'DRYE Insights' }}</strong></span>
       {% if section.settings.meta_read_time != blank %}
-        <span class="meta-sep"></span>
-        <span class="meta-item">{{ section.settings.meta_read_time }}</span>
+        <span class="byline-dot"></span>
+        <span>{{ section.settings.meta_read_time }}</span>
       {% endif %}
+      {% if section.settings.meta_location != blank %}
+        <span class="byline-dot"></span>
+        <span>{{ section.settings.meta_location }}</span>
+      {% endif %}
+      {% if section.settings.meta_study != blank %}
+        <span class="byline-dot"></span>
+        <span>{{ section.settings.meta_study }}</span>
+      {% endif %}
+      <span class="byline-dot"></span>
+      <span>{{ article.published_at | date: "%B %-d, %Y" }}</span>
     </div>
   </div>
 </section>
@@ -46,21 +52,27 @@
   "settings": [
     {
       "type": "text",
-      "id": "meta_location",
-      "label": "Meta location",
-      "default": "National Guard of Ukraine · 2nd Corps"
-    },
-    {
-      "type": "text",
-      "id": "meta_study",
-      "label": "Meta study",
-      "default": "Field Study · n=10"
+      "id": "author",
+      "label": "Byline (author / desk)",
+      "default": "DRYE Insights"
     },
     {
       "type": "text",
       "id": "meta_read_time",
-      "label": "Meta read time",
+      "label": "Read time",
       "default": "6 min read"
+    },
+    {
+      "type": "text",
+      "id": "meta_location",
+      "label": "Byline detail — location (optional)",
+      "default": ""
+    },
+    {
+      "type": "text",
+      "id": "meta_study",
+      "label": "Byline detail — study / sources (optional)",
+      "default": ""
     }
   ]
 }
