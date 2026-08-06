@@ -11,6 +11,10 @@
 .article-hero-in {
   max-width: 720px;
   margin: 0 auto;
+  padding: 0 24px;
+}
+@media (min-width: 768px) {
+  .article-hero-in { padding: 0 40px; }
 }
 
 /* Breadcrumb — quiet, on paper */
