@@ -4,6 +4,14 @@
   z-index: 100;
   background: var(--deep);
   border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+  /* Forces its own GPU compositing layer — fixes an iOS Safari bug where
+     position:sticky elements visually collapse/detach during rubber-band
+     overscroll (pulling down past the top of the page). */
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  will-change: transform;
 }
 
 .drye-policy-tab-bar__inner {
