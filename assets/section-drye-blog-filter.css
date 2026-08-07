@@ -25,6 +25,11 @@
   overflow-x: auto;
   -webkit-overflow-scrolling: touch;
   scrollbar-width: none;
+  /* Isolates the horizontal swipe gesture from the page's own scroll/sticky
+     handling — without this, iOS Safari sometimes visually warps this row
+     during a sideways swipe ("bends like a banana"). */
+  touch-action: pan-x;
+  overscroll-behavior-x: contain;
 }
 
 .filter-in::-webkit-scrollbar { display: none; }

@@ -58,6 +58,11 @@
   gap:0;
   overflow-x:auto;
   scrollbar-width:none;
+  /* Isolates the horizontal swipe gesture from the page's own scroll
+     handling — without this, iOS Safari sometimes visually warps this row
+     during a sideways swipe ("bends like a banana"). */
+  touch-action:pan-x;
+  overscroll-behavior-x:contain;
 }
 
 .track-in::-webkit-scrollbar{
