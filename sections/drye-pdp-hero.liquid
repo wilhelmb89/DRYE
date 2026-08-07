@@ -304,10 +304,13 @@ assign review_count = section.settings.review_count_fallback
       <div class="buy-block">
         <div class="form-lbl">
           <span>{{ section.settings.option_label }}</span>
-          <button type="button" class="size-guide-link js-open-size-guide">
-            {{ section.settings.size_guide_label }}
-          </button>
         </div>
+
+        <button type="button" class="size-guide-cta js-open-size-guide">
+          <svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><rect x="2" y="7" width="16" height="6" rx="1" stroke="currentColor" stroke-width="1.6"/><path d="M5 7v2.4M8.5 7v2.4M12 7v2.4M15.5 7v2.4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+          <span>{{ section.settings.size_guide_label | default: 'Not sure of your size? Check the size guide' }}</span>
+          <svg class="size-guide-cta__arrow" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M6 4l4 4-4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
 
         {% if size_option_position != blank %}
           {% assign size_option_index = size_option_position | minus: 1 %}

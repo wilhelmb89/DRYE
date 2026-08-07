@@ -657,6 +657,28 @@
   margin-bottom: 12px;
 }
 
+.hero .size-guide-cta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  margin-bottom: 10px;
+  padding: 10px 12px;
+  border: 1px solid var(--border);
+  border-radius: 0;
+  background: #fff;
+  font-family: "DM Sans", sans-serif;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--deep);
+  cursor: pointer;
+  text-align: left;
+}
+.hero .size-guide-cta svg { flex: 0 0 auto; width: 18px; height: 18px; color: var(--muted); }
+.hero .size-guide-cta span { flex: 1 1 auto; }
+.hero .size-guide-cta__arrow { width: 14px; height: 14px; }
+.hero .size-guide-cta:hover { background: #F8FAFC; }
+
 .hero .sz-dd {
   position: relative;
   z-index: 50;
