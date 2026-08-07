@@ -62,6 +62,85 @@
       "name": "DRYE About Origin Strip",
       "settings": {}
     },
+    "drye_about_why_TwBW89": {
+      "type": "drye-about-why",
+      "blocks": {
+        "fail_point_cJfPTq": {
+          "type": "fail_point",
+          "settings": {
+            "title": "Cotton liners",
+            "body": "Absorb until saturation — then hold a wet layer against the skin for the rest of the shift."
+          }
+        },
+        "fail_point_HMiHz6": {
+          "type": "fail_point",
+          "settings": {
+            "title": "Barrier creams",
+            "body": "Effective for 20–40 minutes. Irrelevant by hour two of a shift."
+          }
+        },
+        "fail_point_UrEJDk": {
+          "type": "fail_point",
+          "settings": {
+            "title": "DWR coatings",
+            "body": "Degrade with washing and treat the symptom — not the environment that causes it."
+          }
+        },
+        "fail_point_6Erzny": {
+          "type": "fail_point",
+          "settings": {
+            "title": "Steroid creams",
+            "body": "Treat the damage after it's done. The moisture environment that caused it stays unchanged."
+          }
+        },
+        "drye_point_8GHbPX": {
+          "type": "drye_point",
+          "settings": {
+            "title": "No absorption ceiling",
+            "body": "DRYE routes moisture through fibre geometry — capillary action and structural gradient. No saturation point because there is no saturation mechanism."
+          }
+        },
+        "drye_point_7RULRV": {
+          "type": "drye_point",
+          "settings": {
+            "title": "Continuous transport",
+            "body": "The mechanism is active for the full duration of wear — and doesn't degrade after washing."
+          }
+        },
+        "drye_point_PEFjmp": {
+          "type": "drye_point",
+          "settings": {
+            "title": "No chemical inputs",
+            "body": "Entirely structural. No coatings, no treatments, nothing that degrades or transfers to skin."
+          }
+        },
+        "drye_point_XpawCn": {
+          "type": "drye_point",
+          "settings": {
+            "title": "0.4mm — no dexterity compromise",
+            "body": "Fits inside any standard glove. Verified across automotive and military field testing."
+          }
+        }
+      },
+      "block_order": [
+        "fail_point_cJfPTq",
+        "fail_point_HMiHz6",
+        "fail_point_UrEJDk",
+        "fail_point_6Erzny",
+        "drye_point_8GHbPX",
+        "drye_point_7RULRV",
+        "drye_point_PEFjmp",
+        "drye_point_XpawCn"
+      ],
+      "name": "DRYE About Why",
+      "settings": {
+        "eyebrow": "The structural argument",
+        "heading": "Every conventional solution absorbs moisture.<br>Absorption has a ceiling. It saturates.",
+        "subtext": "That is not a product flaw. That is a physics constraint. Once a material is saturated, it holds moisture against the skin — permanently, for the rest of the shift. No cotton liner, barrier cream, or DWR coating can change that.",
+        "fail_label": "Why absorption fails",
+        "drye_label": "How routing works differently"
+      }
+    },
     "drye_about_founder_story_yhLDQL": {
       "type": "drye-about-founder-story",
       "name": "DRYE About Founder Story",
@@ -362,6 +441,7 @@
         "letter_qF4AGt",
         "letter_hXx8An"
       ],
+      "disabled": true,
       "name": "DRYE Letters",
       "settings": {
         "eyebrow": "",
@@ -386,6 +466,7 @@
   "order": [
     "drye_about_hero_8pRjDq",
     "drye_about_origin_strip_BRNcxX",
+    "drye_about_why_TwBW89",
     "drye_about_founder_story_yhLDQL",
     "drye_liner_risk_reversal_FNczQV",
     "drye_about_validation_timeline_pTJqXQ",
