@@ -92,13 +92,13 @@
         "subheading_line_1": "It's not the brand. It's not the material.",
         "subheading_line_2": "It's not how much you sweat.",
         "subheading_emphasis": "It's physics.",
-        "path_1_label": "If you're not sure why",
-        "path_1_text_line_1": "I've noticed my hands",
-        "path_1_text_line_2": "getting worse →",
+        "path_1_label": "IF YOUR GLOVES FEEL WET",
+        "path_1_text_line_1": "Show me what changes ↓",
+        "path_1_text_line_2": "",
         "path_1_link": "#drye-nt-barrier-choice",
-        "path_2_label": "If you already know",
-        "path_2_text_line_1": "I know it's the gloves.",
-        "path_2_text_line_2": "Nothing fixes it →",
+        "path_2_label": "IF YOU WANT THE PROOF",
+        "path_2_text_line_1": "See why it works ↓",
+        "path_2_text_line_2": "",
         "path_2_link": "#drye-mechanism-step-3"
       }
     },
@@ -286,6 +286,69 @@
         "swipe_label": "Swipe"
       }
     },
+    "drye_new_problem_beat_1_bzhyED": {
+      "type": "dryeNEW-problem-beat-1",
+      "blocks": {
+        "strike_card_Gra6Qi": {
+          "type": "strike_card",
+          "settings": {
+            "title": "Cotton liners",
+            "body": "<p>Absorb moisture — then hold it against your skin. Inside a sealed glove, <strong>a wet cloth pressed against damaged skin.</strong> Hydrophilic fibres are the wrong material for this environment.</p>"
+          }
+        },
+        "strike_card_9wcyWE": {
+          "type": "strike_card",
+          "settings": {
+            "title": "Silk liners",
+            "body": "<p>Feel better initially. Saturate faster. <strong>By midday, the same wet-layer effect.</strong> Different texture, identical physics.</p>"
+          }
+        },
+        "strike_card_DUGTrC": {
+          "type": "strike_card",
+          "settings": {
+            "title": "Barrier creams",
+            "body": "<p>Effective <em>after</em> a flare-up. <strong>None of them stop moisture from building up</strong> during your next 8-hour shift. You treat at night. It starts again Monday.</p>"
+          }
+        },
+        "strike_card_Ry6keX": {
+          "type": "strike_card",
+          "settings": {
+            "title": "Switching glove brands",
+            "body": "<p>Nitrile, latex, vinyl, neoprene — they all occlude. <strong>Switching changes the feel. Not the physics.</strong></p>"
+          }
+        },
+        "strike_card_j7AGmK": {
+          "type": "strike_card",
+          "settings": {
+            "title": "Moisturising before shifts",
+            "body": "<p>Standard advice. Assumes moisture can evaporate. <strong>Inside a sealed glove, it can't.</strong></p>"
+          }
+        },
+        "strike_card_bXWmq9": {
+          "type": "strike_card",
+          "settings": {
+            "title": "Powder-free gloves",
+            "body": "<p>Removes one irritant. The core environment — <strong>sealed, occluded, compressed</strong> — remains completely unchanged.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "strike_card_Gra6Qi",
+        "strike_card_9wcyWE",
+        "strike_card_DUGTrC",
+        "strike_card_Ry6keX",
+        "strike_card_j7AGmK",
+        "strike_card_bXWmq9"
+      ],
+      "name": "DRYE NEW Problem Beat 1",
+      "settings": {
+        "section_id": "problem",
+        "eyebrow": "Every solution you tried",
+        "heading_before": "It's not that you bought",
+        "heading_em": "the wrong product.",
+        "lead": ""
+      }
+    },
     "drye_nt_trust_badges_hBjUbn": {
       "type": "drye-nt-trust-badges",
       "blocks": {
@@ -462,6 +525,7 @@
         "occlusion_step_e4yP9z",
         "occlusion_step_NYU4pV"
       ],
+      "disabled": true,
       "name": "DRYE NEW Identification",
       "settings": {
         "section_id": "identification",
@@ -503,69 +567,6 @@
         "aud_damaged": "Already irritated skin",
         "damaged_d3": "Significant barrier impairment",
         "source": "Sources: Ramsing & Agner, Contact Dermatitis, 1996 — short- and long-term experimental glove occlusion."
-      }
-    },
-    "drye_new_problem_beat_1_bzhyED": {
-      "type": "dryeNEW-problem-beat-1",
-      "blocks": {
-        "strike_card_Gra6Qi": {
-          "type": "strike_card",
-          "settings": {
-            "title": "Cotton liners",
-            "body": "<p>Absorb moisture — then hold it against your skin. Inside a sealed glove, <strong>a wet cloth pressed against damaged skin.</strong> Hydrophilic fibres are the wrong material for this environment.</p>"
-          }
-        },
-        "strike_card_9wcyWE": {
-          "type": "strike_card",
-          "settings": {
-            "title": "Silk liners",
-            "body": "<p>Feel better initially. Saturate faster. <strong>By midday, the same wet-layer effect.</strong> Different texture, identical physics.</p>"
-          }
-        },
-        "strike_card_DUGTrC": {
-          "type": "strike_card",
-          "settings": {
-            "title": "Barrier creams",
-            "body": "<p>Effective <em>after</em> a flare-up. <strong>None of them stop moisture from building up</strong> during your next 8-hour shift. You treat at night. It starts again Monday.</p>"
-          }
-        },
-        "strike_card_Ry6keX": {
-          "type": "strike_card",
-          "settings": {
-            "title": "Switching glove brands",
-            "body": "<p>Nitrile, latex, vinyl, neoprene — they all occlude. <strong>Switching changes the feel. Not the physics.</strong></p>"
-          }
-        },
-        "strike_card_j7AGmK": {
-          "type": "strike_card",
-          "settings": {
-            "title": "Moisturising before shifts",
-            "body": "<p>Standard advice. Assumes moisture can evaporate. <strong>Inside a sealed glove, it can't.</strong></p>"
-          }
-        },
-        "strike_card_bXWmq9": {
-          "type": "strike_card",
-          "settings": {
-            "title": "Powder-free gloves",
-            "body": "<p>Removes one irritant. The core environment — <strong>sealed, occluded, compressed</strong> — remains completely unchanged.</p>"
-          }
-        }
-      },
-      "block_order": [
-        "strike_card_Gra6Qi",
-        "strike_card_9wcyWE",
-        "strike_card_DUGTrC",
-        "strike_card_Ry6keX",
-        "strike_card_j7AGmK",
-        "strike_card_bXWmq9"
-      ],
-      "name": "DRYE NEW Problem Beat 1",
-      "settings": {
-        "section_id": "problem",
-        "eyebrow": "Every solution you tried",
-        "heading_before": "It's not that you bought",
-        "heading_em": "the wrong product.",
-        "lead": ""
       }
     },
     "drye_blog_cta_strip_DzayyA": {
@@ -820,12 +821,12 @@
     "drye_new_hero_4KPGzf",
     "drye_featured_in_GDPJ49",
     "drye_mechanics_identification_gallery_NU83UP",
+    "drye_new_problem_beat_1_bzhyED",
     "drye_nt_trust_badges_hBjUbn",
     "drye_industry_cards_6iD7bq",
     "drye_new_identification_gYdATm",
     "drye_mechanics_time_promise_FtqFVg",
     "drye_nt_barrier_choice_P4fAM3",
-    "drye_new_problem_beat_1_bzhyED",
     "drye_blog_cta_strip_DzayyA",
     "drye_research_video_full_VtWgze",
     "drye_nt_pro_reviews_ykrpQz",
