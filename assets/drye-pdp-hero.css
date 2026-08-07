@@ -668,15 +668,15 @@
   border-radius: 0;
   background: #fff;
   font-family: "DM Sans", sans-serif;
-  font-size: 15px;
-  font-weight: 600;
-  color: var(--deep);
+  font-size: 13px;
+  font-weight: 400;
+  color: var(--body);
   cursor: pointer;
   text-align: left;
 }
-.hero .size-guide-cta svg { flex: 0 0 auto; width: 18px; height: 18px; color: var(--muted); }
+.hero .size-guide-cta svg { flex: 0 0 auto; width: 18px; height: 18px; color: #9CA3AF; }
 .hero .size-guide-cta span { flex: 1 1 auto; }
-.hero .size-guide-cta__arrow { width: 14px; height: 14px; }
+.hero .size-guide-cta__arrow { width: 14px; height: 14px; color: #9CA3AF; }
 .hero .size-guide-cta:hover { background: #F8FAFC; }
 
 .hero .sz-dd {
