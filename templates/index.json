@@ -342,6 +342,40 @@
         "next_image_label": "Next image"
       }
     },
+    "drye_nt_barrier_choice_P4fAM3": {
+      "type": "drye-nt-barrier-choice",
+      "name": "DRYE NT — Barrier choice",
+      "settings": {
+        "chapter": "",
+        "heading": "",
+        "pick_label": "Choose your starting point",
+        "btn_healthy": "My skin feels fine",
+        "btn_damaged": "My skin is already irritated",
+        "exposure": "Under glove 6 hours/day",
+        "risk_label": "Maceration risk rises",
+        "chart_alt": "Stylised overhydration in the skin across two weeks of daily glove occlusion",
+        "day_1": "Day 1",
+        "day_2": "Day 3",
+        "day_3": "Day 7",
+        "day_4": "Day 14",
+        "aud_healthy": "Healthy skin",
+        "healthy_d3": "No significant barrier change",
+        "healthy_d14": "Significant barrier impairment",
+        "aud_damaged": "Already irritated skin",
+        "damaged_d3": "Significant barrier impairment",
+        "source": "Sources: Ramsing & Agner, Contact Dermatitis, 1996 — short- and long-term experimental glove occlusion."
+      }
+    },
+    "drye_system_section_KQqcUj": {
+      "type": "drye-system-section",
+      "name": "DRYE System Section",
+      "settings": {
+        "eyebrow": "How the system works",
+        "heading_before": "A different physical",
+        "heading_em": "principle entirely.",
+        "body": "One tries to absorb moisture. One moves it. Under compression inside a sealed glove, only one of those approaches still works."
+      }
+    },
     "drye_new_problem_beat_1_DFLVjf": {
       "type": "dryeNEW-problem-beat-1",
       "blocks": {
@@ -645,28 +679,56 @@
         "heading": "Frequently asked questions"
       }
     },
-    "drye_nt_barrier_choice_P4fAM3": {
-      "type": "drye-nt-barrier-choice",
-      "name": "DRYE NT — Barrier choice",
+    "jens_linnea_section_LejVBx": {
+      "type": "jens-linnea-section",
+      "blocks": {
+        "story_Y3rfct": {
+          "type": "story",
+          "settings": {
+            "image": "shopify://shop_images/1677852306136.jpg",
+            "image_alt": "Jens Stålnacke, LKAB Kiruna",
+            "video_url": "https://www.youtube.com/watch?v=byFSAZZSsl4",
+            "video_play_label": "Play interview",
+            "pill_text": "2 years later",
+            "before_label": "Before",
+            "before_text": "\"Some creams did nothing. My hands got worse every shift. Open wounds. I dealt with the damage for months.\"",
+            "after_label": "After",
+            "after_text": "\"My hands are honestly normal now. Without a doubt, those liners gave my hands a real chance.\"",
+            "name": "Jens Stålnacke",
+            "role": "Mine worker, Luleå",
+            "read_more_url": "shopify://blogs/insights/jens-cracked-dry-hands-glove-irritation",
+            "read_more_text": "Read Jens' case →"
+          }
+        },
+        "story_BA4ggt": {
+          "type": "story",
+          "settings": {
+            "image": "shopify://shop_images/0tlIYshLXnDaL_JrVPb4wo5T5UCo-REGULAR_6e73652e-f7b0-4985-9351-a952ed05c270_1_1.jpg",
+            "image_alt": "Linnea Pettersson Dove, Frölunda HC",
+            "video_url": "https://www.youtube.com/watch?v=m2ExQxZqynE",
+            "video_play_label": "Play interview",
+            "pill_text": "One season",
+            "before_label": "Before",
+            "before_text": "\"Redness and cracking after every practice. Cotton liners helped briefly — then the same cycle returned.\"",
+            "after_label": "After",
+            "after_text": "\"My grip was better, my hands stayed drier, and my skin started doing better. Now it feels weird not to wear them.\"",
+            "name": "Linnéa Pettersson Dove",
+            "role": "SDHL Swedish Champion 2025, Frölunda HC",
+            "read_more_url": "shopify://blogs/insights/hockey-pro-relieves-eczema-completely-with-drye-glove-liner",
+            "read_more_text": "Read Linnea's case →"
+          }
+        }
+      },
+      "block_order": [
+        "story_Y3rfct",
+        "story_BA4ggt"
+      ],
+      "name": "Jens + Linnea",
       "settings": {
-        "chapter": "",
-        "heading": "",
-        "pick_label": "Choose your starting point",
-        "btn_healthy": "My skin feels fine",
-        "btn_damaged": "My skin is already irritated",
-        "exposure": "Under glove 6 hours/day",
-        "risk_label": "Maceration risk rises",
-        "chart_alt": "Stylised overhydration in the skin across two weeks of daily glove occlusion",
-        "day_1": "Day 1",
-        "day_2": "Day 3",
-        "day_3": "Day 7",
-        "day_4": "Day 14",
-        "aud_healthy": "Healthy skin",
-        "healthy_d3": "No significant barrier change",
-        "healthy_d14": "Significant barrier impairment",
-        "aud_damaged": "Already irritated skin",
-        "damaged_d3": "Significant barrier impairment",
-        "source": "Sources: Ramsing & Agner, Contact Dermatitis, 1996 — short- and long-term experimental glove occlusion."
+        "micro_text": "Real users",
+        "heading": "This is what changes.",
+        "subheading": "The outer glove didn't change. The cream didn't change. What changed was what happened between skin and glove.",
+        "swipe_label": "Swipe"
       }
     },
     "drye_blog_cta_strip_DzayyA": {
@@ -775,58 +837,6 @@
         "stats_note": "Post-purchase feedback from verified DRYE customers. Results vary by glove type, heat, and shift length."
       }
     },
-    "jens_linnea_section_LejVBx": {
-      "type": "jens-linnea-section",
-      "blocks": {
-        "story_Y3rfct": {
-          "type": "story",
-          "settings": {
-            "image": "shopify://shop_images/1677852306136.jpg",
-            "image_alt": "Jens Stålnacke, LKAB Kiruna",
-            "video_url": "https://www.youtube.com/watch?v=byFSAZZSsl4",
-            "video_play_label": "Play interview",
-            "pill_text": "2 years later",
-            "before_label": "Before",
-            "before_text": "\"Some creams did nothing. My hands got worse every shift. Open wounds. I dealt with the damage for months.\"",
-            "after_label": "After",
-            "after_text": "\"My hands are honestly normal now. Without a doubt, those liners gave my hands a real chance.\"",
-            "name": "Jens Stålnacke",
-            "role": "Mine worker, Luleå",
-            "read_more_url": "shopify://blogs/insights/jens-cracked-dry-hands-glove-irritation",
-            "read_more_text": "Read Jens' case →"
-          }
-        },
-        "story_BA4ggt": {
-          "type": "story",
-          "settings": {
-            "image": "shopify://shop_images/0tlIYshLXnDaL_JrVPb4wo5T5UCo-REGULAR_6e73652e-f7b0-4985-9351-a952ed05c270_1_1.jpg",
-            "image_alt": "Linnea Pettersson Dove, Frölunda HC",
-            "video_url": "https://www.youtube.com/watch?v=m2ExQxZqynE",
-            "video_play_label": "Play interview",
-            "pill_text": "One season",
-            "before_label": "Before",
-            "before_text": "\"Redness and cracking after every practice. Cotton liners helped briefly — then the same cycle returned.\"",
-            "after_label": "After",
-            "after_text": "\"My grip was better, my hands stayed drier, and my skin started doing better. Now it feels weird not to wear them.\"",
-            "name": "Linnéa Pettersson Dove",
-            "role": "SDHL Swedish Champion 2025, Frölunda HC",
-            "read_more_url": "shopify://blogs/insights/hockey-pro-relieves-eczema-completely-with-drye-glove-liner",
-            "read_more_text": "Read Linnea's case →"
-          }
-        }
-      },
-      "block_order": [
-        "story_Y3rfct",
-        "story_BA4ggt"
-      ],
-      "name": "Jens + Linnea",
-      "settings": {
-        "micro_text": "Real users",
-        "heading": "This is what changes.",
-        "subheading": "The outer glove didn't change. The cream didn't change. What changed was what happened between skin and glove.",
-        "swipe_label": "Swipe"
-      }
-    },
     "drye_liner_more_reviews_gyTGNF": {
       "type": "drye-liner-more-reviews",
       "blocks": {
@@ -907,16 +917,6 @@
         "padding_top_desktop": 72,
         "padding_bottom_desktop": 72
       }
-    },
-    "drye_system_section_KQqcUj": {
-      "type": "drye-system-section",
-      "name": "DRYE System Section",
-      "settings": {
-        "eyebrow": "How the system works",
-        "heading_before": "A different physical<br>",
-        "heading_em": "principle entirely.",
-        "body": "One tries to absorb moisture. One moves it. Under compression inside a sealed glove, only one of those approaches still works."
-      }
     }
   },
   "order": [
@@ -924,20 +924,20 @@
     "drye_featured_in_GDPJ49",
     "drye_mechanics_identification_gallery_b99Ezp",
     "drye_product_reality_grid_pgX4xi",
+    "drye_nt_barrier_choice_P4fAM3",
+    "drye_system_section_KQqcUj",
     "drye_new_problem_beat_1_DFLVjf",
     "drye_nt_trust_badges_hBjUbn",
     "drye_industry_cards_6iD7bq",
     "drye_new_identification_gYdATm",
     "drye_mechanics_time_promise_FtqFVg",
     "drye_section_06_faq_HN8GcF",
-    "drye_nt_barrier_choice_P4fAM3",
+    "jens_linnea_section_LejVBx",
     "drye_blog_cta_strip_DzayyA",
     "drye_research_video_full_VtWgze",
     "drye_nt_pro_reviews_ykrpQz",
-    "jens_linnea_section_LejVBx",
     "drye_liner_more_reviews_gyTGNF",
     "17830175964c62b62a",
-    "drye_new_closing_cta_BkJmfN",
-    "drye_system_section_KQqcUj"
+    "drye_new_closing_cta_BkJmfN"
   ]
 }
