@@ -1,219 +1,355 @@
-{{ 'drye-cart-drawer.css' | asset_url | stylesheet_tag }}
-<script src="{{ 'drye-cart-drawer.js' | asset_url }}" defer></script>
+{{ 'section-drye-cart-drawer.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'section-drye-cart-drawer.js' | asset_url }}" defer></script>
 
-{%- comment -%}
-  DRYE Cart Drawer — SECTION (Section Rendering pattern).
-  Every price is server-rendered Liquid (money_with_currency), so the currency
-  is ALWAYS the buyer's market currency (page localization context) — USD for
-  /en-us/, CAD for /en-ca/, etc. drye-cart-drawer.js mutates the cart then
-  re-renders THIS section via ?section_id= and injects the HTML. It never
-  formats prices client-side (that was the SEK bug). Model: one cart line per
-  pair (qty 1) so each pair carries its own size variant.
-{%- endcomment -%}
+{% liquid
+  assign pair_count = cart.item_count
 
-{%- liquid
-  assign drye_handle = section.settings.pairs_product_handle | default: 'drye-moisture-routing-glove-liners'
-  assign drye_product = all_products[drye_handle]
-  assign n = cart.item_count
-  assign free_ship_pairs = 3
-  assign disc = cart.original_total_price | minus: cart.total_price
-  comment
-    routes.root (no _url) is NOT a valid Liquid property — it renders empty, so
-    "{{ routes.root }}checkout" became the RELATIVE href "checkout" → /products/
-    checkout → 404. Build a market-safe root (leading + trailing slash) from the
-    valid routes.root_url so /checkout and /en-us/checkout both resolve.
-  endcomment
-  assign shop_root = routes.root_url | append: '/' | replace: '//', '/'
--%}
+  if pair_count >= 3
+    assign qualifies_for_free_shipping = true
+    assign pairs_remaining_for_free_shipping = 0
+    assign free_shipping_progress = 100
+  else
+    assign qualifies_for_free_shipping = false
+    assign pairs_remaining_for_free_shipping = 3 | minus: pair_count
+    assign free_shipping_progress = pair_count | times: 100 | divided_by: 3
+  endif
 
-<script type="application/json" id="drye-size-variants">
-{ {% for variant in drye_product.variants %}"{{ variant.option1 | escape }}": {{ variant.id }}{% unless forloop.last %},{% endunless %}{% endfor %} }
-</script>
-<script>
-  window.DRYE_PRODUCT_IMAGE = {{ drye_product.images.last | image_url: width: 160 | json }};
-  window.DRYE_DEFAULT_VARIANT = {{ drye_product.selected_or_first_available_variant.id | json }};
-  window.DRYE_CART_HANDLE = {{ drye_handle | json }};
-</script>
+  assign upsell_variant_id = section.settings.upsell_variant_id | strip
 
-<div class="drye-cart-overlay" data-drye-cart-overlay></div>
+  if upsell_variant_id == blank or upsell_variant_id == '0'
+    if cart.item_count > 0 and cart.items.first.variant_id != blank
+      assign upsell_variant_id = cart.items.first.variant_id | append: ''
+    else
+      assign upsell_variant_id = '0'
+    endif
+  endif
 
-<aside class="drye-cart-drawer" role="dialog" aria-modal="true" aria-label="Your cart" data-drye-cart-drawer>
+  assign total_discount_amount = cart.original_total_price | minus: cart.total_price
+%}
 
-  <div class="drye-cart-head">
-    <div class="drye-cart-head__title-wrap">
-      <span class="drye-cart-head__title">Your cart</span>
-      <span class="drye-cart-head__count" data-drye-cart-count>{{ n }} {% if n == 1 %}item{% else %}items{% endif %}</span>
+<div class="overlay" id="overlay"></div>
+
+<div
+  class="cart-drawer"
+  id="cart-drawer"
+  role="dialog"
+  aria-modal="true"
+  aria-label="Your cart"
+  aria-hidden="true"
+>
+  <div class="cart-header">
+    <div class="cart-header-left">
+      <span class="cart-title">{{ section.settings.cart_title }}</span>
+
+      <span
+        class="cart-item-count"
+        id="header-count"
+        aria-live="polite"
+        aria-atomic="true"
+      >
+        {{ cart.item_count }}
+        {% if cart.item_count == 1 %}item{% else %}items{% endif %}
+      </span>
     </div>
-    <div class="drye-cart-head__actions">
-      <div class="drye-cart-currency">{{ cart.currency.iso_code }}</div>
-      <button type="button" class="drye-cart-close" data-drye-cart-close aria-label="Close cart">✕</button>
+
+    <div class="cart-header-right">
+      <div class="cart-currency-pill" aria-live="polite" aria-atomic="true">
+        {{ cart.currency.iso_code }}
+      </div>
+
+      <button
+        class="cart-close"
+        id="cart-close"
+        type="button"
+        aria-label="Close cart"
+      >
+        ✕
+      </button>
     </div>
   </div>
 
-  <div class="drye-cart-region">
-    <span class="drye-cart-region__flag">🌍</span>
+  <div
+    class="currency-notice"
+    data-cart-currency-notice
+    aria-live="polite"
+    aria-atomic="true"
+  >
+    <span class="flag" aria-hidden="true">🌍</span>
     <span>Prices shown in {{ cart.currency.iso_code }}</span>
   </div>
 
-  {%- if n > 0 -%}
-    {%- liquid
-      assign need = free_ship_pairs | minus: n
-      assign pct = n | times: 100 | divided_by: free_ship_pairs
-      if pct > 100
-        assign pct = 100
-      endif
-    -%}
-    <div class="drye-cart-ship">
-      <div class="drye-cart-ship__msg" data-drye-cart-ship-msg>
-        {%- if need <= 0 -%}
-          <span class="drye-cart-ship__msg--qualified">You qualify for free shipping</span>
-        {%- else -%}
-          Add <strong>{{ need }} more {% if need == 1 %}pair{% else %}pairs{% endif %}</strong> for free shipping
-        {%- endif -%}
-      </div>
-      <div class="drye-cart-ship__track">
-        <div class="drye-cart-ship__fill" data-drye-cart-ship-fill style="width: {{ pct }}%;"></div>
-      </div>
+  <div class="shipping-bar">
+    <div class="shipping-bar-text">
+      {% if qualifies_for_free_shipping %}
+        <span class="threshold unlocked">You qualify for free shipping</span>
+      {% else %}
+        Add
+        <span class="threshold" id="shipping-threshold">
+          {{ pairs_remaining_for_free_shipping }}
+          {% if pairs_remaining_for_free_shipping == 1 %}pair{% else %}pairs{% endif %}
+        </span>
+        more for free shipping
+      {% endif %}
     </div>
-  {%- endif -%}
 
-  <div class="drye-cart-body">
-    {%- if n > 0 -%}
-      {%- liquid
-        assign pack_name = 'Team Rotation'
-        assign pack_benefit = 'Full team rotation · Express delivery · No surprise fees'
-        case n
-          when 1
-            assign pack_name = 'Starter Pair'
-            assign pack_benefit = 'Test under your own gloves'
-          when 2
-            assign pack_name = 'Work Rotation'
-            assign pack_benefit = 'One on. One drying.'
-          when 3
-            assign pack_name = 'Express Workweek Pack'
-            assign pack_benefit = 'Full week rotation · Express delivery · No surprise fees'
-          when 4
-            assign pack_name = 'Extra Rotation'
-            assign pack_benefit = 'Full week rotation + spare pair · Express delivery · No surprise fees'
-          when 5
-            assign pack_name = 'Team Starter'
-            assign pack_benefit = 'Team starter rotation · Express delivery · No surprise fees'
-        endcase
-        if n >= 3
-          assign ship_method = 'Express delivery'
-          assign ship_tracked = ''
-        else
-          assign ship_method = 'Economy'
-          assign ship_tracked = 'Tracked'
-        endif
-      -%}
-      <div class="drye-cart-pack">
-        <span class="drye-cart-pack__tag">Your pack</span>
-        <div class="drye-cart-ship-badge">
-          <span class="drye-cart-ship-badge__method">{{ ship_method }}</span>
-          {%- if ship_tracked != blank -%}<span class="drye-cart-ship-badge__tracked">{{ ship_tracked }}</span>{%- endif -%}
-        </div>
-        <div class="drye-cart-pack__title">{{ n }} {% if n == 1 %}Pair{% else %}Pairs{% endif %} · {{ pack_name }}</div>
-        <div class="drye-cart-pack__price">{{ cart.total_price | money_with_currency }}</div>
-        {%- if disc > 0 -%}
-          <div class="drye-cart-pack__save"><strong>Save {{ disc | money_with_currency }}</strong></div>
-        {%- endif -%}
-        {%- if pack_benefit != blank -%}
-          <div class="drye-cart-pack__benefit">{{ pack_benefit }}</div>
-        {%- endif -%}
-        <div class="drye-cart-stepper-row">
-          <div class="drye-cart-stepper">
-            <button type="button" data-drye-cart-pack-step="-1"{% if n <= 1 %} disabled{% endif %}>−</button>
-            <div class="drye-cart-stepper__val">{{ n }}</div>
-            <button type="button" data-drye-cart-pack-step="1"{% if n >= 6 %} disabled{% endif %}>+</button>
-          </div>
-          <div class="drye-cart-tiers">
-            {%- for k in (1..6) -%}<div class="drye-cart-tiers__seg{% if k <= n %} is-filled{% endif %}"></div>{%- endfor -%}
-          </div>
-        </div>
-      </div>
-
-      <div class="drye-cart-sizes is-open" data-drye-cart-sizes>
-        <button type="button" class="drye-cart-sizes__toggle" data-drye-cart-sizes-toggle>
-          <span class="drye-cart-sizes__title">Adjust your sizes</span>
-          <span class="drye-cart-sizes__chevron" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none"><path d="M4 10l4-4 4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-        </button>
-        <div class="drye-cart-sizes__panel">
-          {%- for item in cart.items -%}
-            <div class="drye-cart-pair" data-drye-pair-key="{{ item.key }}" data-drye-pair-size="{{ item.variant.title | escape }}">
-              {%- if item.image -%}
-                {{ item.image | image_url: width: 120 | image_tag: class: 'drye-cart-pair__img', alt: item.product.title, loading: 'lazy' }}
-              {%- else -%}
-                <span class="drye-cart-pair__img"></span>
-              {%- endif -%}
-              <div class="drye-cart-pair__stepper">
-                <button type="button" data-drye-pair-size-step="-1" data-drye-pair-key="{{ item.key }}" aria-label="Smaller size">−</button>
-                <div class="drye-cart-pair__size">{{ item.variant.title }}</div>
-                <button type="button" data-drye-pair-size-step="1" data-drye-pair-key="{{ item.key }}" aria-label="Larger size">+</button>
-              </div>
-            </div>
-          {%- endfor -%}
-          <div class="drye-cart-sizeguide-link">Unsure of your size? <a href="{{ shop_root }}pages/size-guide">See size guide</a></div>
-        </div>
-      </div>
-    {%- else -%}
-      <div class="drye-cart-empty">
-        <div class="drye-cart-empty__icon">🛒</div>
-        <div class="drye-cart-empty__title">Your cart is empty</div>
-        <div class="drye-cart-empty__sub">Add a pair to continue.</div>
-        <a href="{{ drye_product.url | default: '/collections/all' }}" class="drye-cart-empty__cta">Shop now</a>
-      </div>
-    {%- endif -%}
+    <div class="bar-track" aria-hidden="true">
+      <div
+        class="bar-fill"
+        id="bar-fill"
+        style="width: {{ free_shipping_progress }}%;"
+      ></div>
+    </div>
   </div>
 
-  {%- if n > 0 -%}
-    <div class="drye-cart-upsell" data-drye-cart-upsell>
-      <div class="drye-cart-upsell__title">Add more pairs</div>
-      <div class="drye-cart-upsell__sub">Keep extra dry liners ready for rotation, backup, or your team.</div>
-      <div class="drye-cart-upsell__cards">
-        <div class="drye-cart-upsell__card">
-          <div class="drye-cart-upsell__name">4 pairs · Extra rotation</div>
-          <button type="button" class="drye-cart-upsell__btn" data-drye-cart-set-pairs="4">Upgrade to 4 pairs</button>
+  <div
+    class="cart-items"
+    id="cart-items"
+    aria-live="polite"
+    aria-atomic="false"
+  >
+    {% if cart.item_count > 0 %}
+      {% for item in cart.items %}
+        {% liquid
+          assign line_discount_amount = item.original_line_price | minus: item.final_line_price
+          assign item_variant_title = item.variant.title | default: ''
+        %}
+
+        <div
+          class="cart-item"
+          data-current-qty="{{ item.quantity }}"
+          data-line-index="{{ forloop.index }}"
+          data-variant-id="{{ item.variant_id }}"
+        >
+          <div class="item-img">
+            {% if item.image %}
+              {{
+                item.image
+                | image_url: width: 160
+                | image_tag:
+                  alt: item.product.title,
+                  loading: 'lazy'
+              }}
+            {% else %}
+              <div class="item-img-ph">No image</div>
+            {% endif %}
+          </div>
+
+          <div class="item-info">
+            <div class="item-name">{{ item.product.title }}</div>
+
+            {% unless item_variant_title == blank or item_variant_title == 'Default Title' %}
+              <div class="item-variant">{{ item_variant_title }}</div>
+            {% endunless %}
+
+            <div class="item-qty">
+              <button
+                class="qty-btn"
+                type="button"
+                data-qty-change="-1"
+                data-line="{{ forloop.index }}"
+                aria-label="Decrease quantity"
+              >
+                −
+              </button>
+
+              <div class="qty-num" data-qty-num>{{ item.quantity }}</div>
+
+              <button
+                class="qty-btn"
+                type="button"
+                data-qty-change="1"
+                data-line="{{ forloop.index }}"
+                aria-label="Increase quantity"
+              >
+                +
+              </button>
+            </div>
+          </div>
+
+          <div class="item-price-col">
+            <div class="item-price">{{ item.final_line_price | money_with_currency }}</div>
+
+            {% if item.original_line_price > item.final_line_price %}
+              <div class="item-price-orig">{{ item.original_line_price | money_with_currency }}</div>
+              <div class="item-discount-amount">-{{ line_discount_amount | money_with_currency }}</div>
+            {% endif %}
+
+            <button
+              class="item-remove"
+              type="button"
+              data-remove
+              data-line="{{ forloop.index }}"
+              aria-label="Remove item"
+            >
+              Remove
+            </button>
+          </div>
         </div>
-        <div class="drye-cart-upsell__card drye-cart-upsell__card--best">
-          <div class="drye-cart-upsell__badge">Best team value</div>
-          <div class="drye-cart-upsell__name">6 pairs · Team rotation</div>
-          <button type="button" class="drye-cart-upsell__btn drye-cart-upsell__btn--solid" data-drye-cart-set-pairs="6">Upgrade to 6 pairs</button>
-        </div>
+      {% endfor %}
+    {% else %}
+      <div class="cart-empty">
+        <div class="cart-empty-icon" aria-hidden="true">🛒</div>
+        <div class="cart-empty-title">Your cart is empty</div>
+        <div class="cart-empty-sub">Add a pair to continue.</div>
+        <a href="/products/drye-glove-liners" class="btn-shop-empty">Shop now</a>
       </div>
+    {% endif %}
+  </div>
+
+  {% if cart.item_count > 0 and upsell_variant_id != blank and upsell_variant_id != '0' %}
+    <div class="upsell-strip">
+      <div class="upsell-text">
+        <strong>{{ section.settings.upsell_title }}</strong>
+        {{ section.settings.upsell_text }}
+      </div>
+
+      <button
+        class="upsell-add"
+        id="upsell-add"
+        type="button"
+        data-upsell-variant-id="{{ upsell_variant_id }}"
+      >
+        {{ section.settings.upsell_button }}
+      </button>
+    </div>
+  {% endif %}
+
+  <div class="trust-row">
+    {% if section.settings.trust_label_1 != blank %}
+      <div class="trust-item">
+        <div class="trust-label">{{ section.settings.trust_label_1 }}</div>
+      </div>
+    {% endif %}
+
+    {% if section.settings.trust_label_2 != blank %}
+      <div class="trust-item">
+        <div class="trust-label">{{ section.settings.trust_label_2 }}</div>
+      </div>
+    {% endif %}
+
+    {% if section.settings.trust_label_3 != blank %}
+      <div class="trust-item">
+        <div class="trust-label">{{ section.settings.trust_label_3 }}</div>
+      </div>
+    {% endif %}
+  </div>
+
+  <div class="cart-footer">
+    <div class="subtotal-row">
+      <span class="subtotal-label">{{ section.settings.subtotal_label }}</span>
+      <span
+        class="subtotal-amount"
+        id="subtotal"
+        data-cart-subtotal
+        aria-live="polite"
+        aria-atomic="true"
+      >
+        {{ cart.total_price | money_with_currency }}
+      </span>
     </div>
 
-    <div class="drye-cart-summary">
-      <div class="drye-cart-summary__row">
-        <span class="drye-cart-summary__label">Subtotal</span>
-        <span class="drye-cart-summary__value">{{ cart.original_total_price | money_with_currency }}</span>
+    {% if total_discount_amount > 0 %}
+      <div class="subtotal-discount-inline">
+        Discount applied: <span>-{{ total_discount_amount | money_with_currency }}</span>
       </div>
-      {%- if disc > 0 -%}
-        <div class="drye-cart-summary__row">
-          <span class="drye-cart-summary__label">Pack discount</span>
-          <span class="drye-cart-summary__value drye-cart-summary__value--discount">−{{ disc | money_with_currency }}</span>
-        </div>
-      {%- endif -%}
-      <div class="drye-cart-summary__total">
-        <span class="drye-cart-summary__total-label">Total</span>
-        <span class="drye-cart-summary__total-value">{{ cart.total_price | money_with_currency }}</span>
-      </div>
-      <a href="{{ shop_root }}checkout" class="drye-cart-checkout" data-drye-checkout style="font-size:12px;">
-        Checkout →
-      </a>
-      <button type="button" class="drye-cart-continue" data-drye-cart-close>Continue shopping</button>
-    </div>
-  {%- endif -%}
-</aside>
+    {% endif %}
 
-<button type="button" class="drye-cart-open-btn" data-drye-cart-open hidden aria-label="Open cart"></button>
+<div class="subtotal-note">{{ section.settings.subtotal_note }}</div>
+
+<a
+href="/checkout"
+class="btn-checkout"
+data-begin-checkout
+>
+{{ section.settings.checkout_label }}
+</a>
+    <button class="btn-continue" id="continue-shopping" type="button">
+      {{ section.settings.continue_label }}
+    </button>
+  </div>
+</div>
 
 {% schema %}
 {
   "name": "DRYE Cart Drawer",
   "settings": [
-    { "type": "text", "id": "pairs_product_handle", "label": "Liner product handle", "default": "drye-moisture-routing-glove-liners" }
+    {
+      "type": "text",
+      "id": "cart_title",
+      "label": "Cart title",
+      "default": "Your cart"
+    },
+    {
+      "type": "text",
+      "id": "upsell_title",
+      "label": "Upsell title",
+      "default": "Save 12% on 3+ pairs"
+    },
+    {
+      "type": "text",
+      "id": "upsell_text",
+      "label": "Upsell text",
+      "default": "Add one more pair — discount applies automatically"
+    },
+    {
+      "type": "text",
+      "id": "upsell_button",
+      "label": "Upsell button",
+      "default": "+ Add pair"
+    },
+    {
+      "type": "text",
+      "id": "upsell_variant_id",
+      "label": "Upsell variant ID",
+      "default": "0"
+    },
+    {
+      "type": "text",
+      "id": "trust_label_1",
+      "label": "Trust label 1",
+      "default": "30-day full refund"
+    },
+    {
+      "type": "text",
+      "id": "trust_label_2",
+      "label": "Trust label 2",
+      "default": "Ships in 24 hours"
+    },
+    {
+      "type": "text",
+      "id": "trust_label_3",
+      "label": "Trust label 3",
+      "default": "Machine washable"
+    },
+    {
+      "type": "text",
+      "id": "subtotal_label",
+      "label": "Subtotal label",
+      "default": "Subtotal"
+    },
+    {
+      "type": "text",
+      "id": "subtotal_note",
+      "label": "Subtotal note",
+      "default": "Shipping & taxes calculated at checkout"
+    },
+    {
+      "type": "text",
+      "id": "checkout_label",
+      "label": "Checkout label",
+      "default": "Check out →"
+    },
+    {
+      "type": "text",
+      "id": "continue_label",
+      "label": "Continue label",
+      "default": "Continue shopping"
+    }
   ],
-  "presets": [{ "name": "DRYE Cart Drawer" }]
+  "presets": [
+    {
+      "name": "DRYE Cart Drawer"
+    }
+  ]
 }
 {% endschema %}

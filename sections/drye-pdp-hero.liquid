@@ -14,7 +14,6 @@ assign review_count = section.settings.review_count_fallback
 {{ 'drye-pdp-hero.css' | asset_url | stylesheet_tag }}
 {{ 'drye-review-slider.css' | asset_url | stylesheet_tag }}
 {{ 'drye-worker-proof.css' | asset_url | stylesheet_tag }}
-{{ 'drye-pdp-buyzone.css' | asset_url | stylesheet_tag }}
 
 <section
   class="hero"
@@ -244,116 +243,48 @@ assign review_count = section.settings.review_count_fallback
   {% endfor %}
 
   <div class="hero-info">
+    <div class="stars-row" data-review-scroll role="link" tabindex="0" aria-label="Read customer reviews">
+      <span class="stars" aria-hidden="true">★★★★★</span>
+      <span class="stars-lbl">
+        {{ review_rating }}/5 · <a href="{{ review_anchor }}">{{ review_count }} reviews</a>
+      </span>
+    </div>
+
     <h1 class="h-title">
       {{ section.settings.heading_line_1 }}<br>
       {{ section.settings.heading_line_2 }}
     </h1>
 
-    <div class="stars-row" data-review-scroll role="link" tabindex="0" aria-label="Read customer reviews">
-      <span class="stars" aria-hidden="true">★★★★★</span>
-      <span class="stars-lbl">{{ review_rating }}/5 · <a href="{{ review_anchor }}">{{ review_count }} reviews</a></span>
+    <div class="h-sub">
+      {{ section.settings.subtext }}
     </div>
 
-    {% if section.settings.subheading != blank %}
-      <p class="pdp-subhead">{{ section.settings.subheading }}</p>
-    {% endif %}
-
-    <style>
-      /* Read-more: collapsed shows the first 2 lines of the description + a bold
-         "Read more". Clicking reveals the rest of the description + the checklist
-         in place, then removes the button — one-way, no "Read less", no chevron. */
-      [data-pdp-intro] .pdp-intro__lede {
-        display: -webkit-box;
-        -webkit-box-orient: vertical;
-        -webkit-line-clamp: 2;
-        overflow: hidden;
-        margin: 0;
-      }
-      [data-pdp-intro].is-open .pdp-intro__lede {
-        display: block;
-        -webkit-line-clamp: unset;
-        overflow: visible;
-      }
-      [data-pdp-intro] .pdp-intro__toggle {
-        display: inline-block;
-        margin: 8px 0 0;
-        padding: 0;
-        background: none;
-        border: 0;
-        cursor: pointer;
-        font-family: inherit;
-        font-size: 15px;
-        font-weight: 700;
-        color: var(--emerald, #0D9488);
-      }
-      [data-pdp-intro].is-open .pdp-intro__toggle { display: none; }
-      [data-pdp-intro] .pdp-intro__body { display: none; }
-      [data-pdp-intro].is-open .pdp-intro__body { display: block; margin-top: 12px; }
-    </style>
-    <div class="pdp-intro" data-pdp-intro>
-      {% if section.settings.intro_text != blank %}
-        <p class="pdp-intro__lede">{{ section.settings.intro_text }}</p>
-      {% endif %}
-      <button type="button" class="pdp-intro__toggle" data-pdp-intro-toggle aria-expanded="false">Read more</button>
-      <div class="pdp-intro__body" data-pdp-intro-body>
-      <ul class="pdp-intro__list">
-        {% if section.settings.bullet_1 != blank %}
-          <li><span class="pdp-intro__dot"><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8.4l3 3 7-7.6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span>{{ section.settings.bullet_1 }}</span></li>
-        {% endif %}
-        {% if section.settings.bullet_2 != blank %}
-          <li><span class="pdp-intro__dot"><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8.4l3 3 7-7.6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span>{{ section.settings.bullet_2 }}</span></li>
-        {% endif %}
-        {% if section.settings.bullet_3 != blank %}
-          <li><span class="pdp-intro__dot"><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8.4l3 3 7-7.6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span>{{ section.settings.bullet_3 }}</span></li>
-        {% endif %}
-        {% if section.settings.bullet_4 != blank %}
-          <li><span class="pdp-intro__dot"><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8.4l3 3 7-7.6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span>{{ section.settings.bullet_4 }}</span></li>
-        {% endif %}
-        {% if section.settings.bullet_5 != blank %}
-          <li><span class="pdp-intro__dot"><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8.4l3 3 7-7.6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span>{{ section.settings.bullet_5 }}</span></li>
-        {% endif %}
-      </ul>
-      </div>
-    </div>
-
-    <script>
-      (function () {
-        if (window.__dryePdpIntroToggle) return;
-        window.__dryePdpIntroToggle = true;
-        document.addEventListener('click', function (e) {
-          var btn = e.target.closest('[data-pdp-intro-toggle]');
-          if (!btn) return;
-          var wrap = btn.closest('[data-pdp-intro]');
-          if (!wrap) return;
-          wrap.classList.add('is-open');            // one-way reveal; the button hides via CSS
-          btn.setAttribute('aria-expanded', 'true');
-        });
-      })();
-    </script>
-
-    {%- capture drye_laurel_top -%}
-      <svg class="drye-seal__laurel" viewBox="0 0 48 96" fill="currentColor" aria-hidden="true">
-        <path fill="none" stroke="currentColor" stroke-width="1.6" d="M40 6 C 16 22, 8 46, 15 72 C 18 84, 28 90, 37 92"/>
-        <path d="M39 9 c -7 -1 -12 2 -14 8 c 7 1 13 -2 14 -8 z"/>
-        <path d="M31 15 c -7 -1 -12 2 -14 8 c 7 1 13 -2 14 -8 z"/>
-        <path d="M24 24 c -7 -1 -12 3 -13 9 c 7 0 12 -3 13 -9 z"/>
-        <path d="M18 35 c -7 0 -11 3 -12 9 c 7 0 11 -3 12 -9 z"/>
-        <path d="M15 47 c -7 1 -10 5 -10 11 c 6 -1 11 -5 10 -11 z"/>
-        <path d="M16 60 c -6 2 -9 6 -8 12 c 6 -2 10 -6 8 -12 z"/>
-        <path d="M21 72 c -6 2 -8 7 -6 13 c 5 -2 9 -7 6 -13 z"/>
-        <path d="M28 82 c -6 3 -7 8 -4 13 c 5 -3 8 -8 4 -13 z"/>
-      </svg>
-    {%- endcapture -%}
-    {% if section.settings.proof_stamp_line != blank %}
-      <div class="drye-trust">
-        <div class="drye-guarantee">
-          <div class="drye-seal__wrap">
-            <span class="drye-seal__laurel-box drye-seal__laurel-box--l">{{ drye_laurel_top }}</span>
-            <p class="drye-seal__guarantee">{{ section.settings.proof_stamp_line }}</p>
-            <span class="drye-seal__laurel-box drye-seal__laurel-box--r">{{ drye_laurel_top }}</span>
-          </div>
+    {% if found_description_block %}
+      <button type="button" class="pdp-readmore" data-pdp-toggle>Read more <span class="pdp-readmore__arrow" data-pdp-arrow aria-hidden="true">↓</span></button>
+      <div class="pdp-readmore__body" data-pdp-more hidden>
+        <div class="pdp-richtext">
+          {{ rendered_desc }}
         </div>
       </div>
+
+      <script>
+        (function () {
+          var root = document.querySelector('[data-section-id="{{ section.id }}"] [data-pdp-toggle]');
+          if (!root || root.dataset.pdpReadmoreBound === 'true') return;
+          root.dataset.pdpReadmoreBound = 'true';
+          var body = document.querySelector('[data-section-id="{{ section.id }}"] [data-pdp-more]');
+          var arrow = root.querySelector('[data-pdp-arrow]');
+          root.addEventListener('click', function () {
+            var isOpen = body && body.hasAttribute('hidden');
+            if (body) {
+              if (isOpen) { body.removeAttribute('hidden'); } else { body.setAttribute('hidden', ''); }
+            }
+            root.classList.toggle('is-open', isOpen);
+            if (arrow) { arrow.style.transform = isOpen ? 'rotate(180deg)' : 'rotate(0deg)'; }
+            root.firstChild.nodeValue = isOpen ? 'Read less ' : 'Read more ';
+          });
+        })();
+      </script>
     {% endif %}
 
     {% assign size_option_position = blank %}
@@ -372,14 +303,11 @@ assign review_count = section.settings.review_count_fallback
 
       <div class="buy-block">
         <div class="form-lbl">
-          <span>Step 1 · {{ section.settings.option_label }}</span>
+          <span>{{ section.settings.option_label }}</span>
+          <button type="button" class="size-guide-link js-open-size-guide">
+            {{ section.settings.size_guide_label }}
+          </button>
         </div>
-
-        <button type="button" class="size-guide-cta js-open-size-guide">
-          <svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><rect x="2" y="7" width="16" height="6" rx="1" stroke="currentColor" stroke-width="1.6"/><path d="M5 7v2.4M8.5 7v2.4M12 7v2.4M15.5 7v2.4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
-          <span>{{ section.settings.size_guide_label | default: 'Not sure of your size? Check the size guide' }}</span>
-          <svg class="size-guide-cta__arrow" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M6 4l4 4-4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </button>
 
         {% if size_option_position != blank %}
           {% assign size_option_index = size_option_position | minus: 1 %}
@@ -388,18 +316,32 @@ assign review_count = section.settings.review_count_fallback
           <div class="sz-dd" data-size-dropdown>
             <button
               type="button"
-              class="sz-dd-trigger"
+              class="sz-dd-trigger{% if selected_variant.options[size_option_index] != blank %} has-val{% endif %}"
               data-size-trigger
               aria-expanded="false"
               aria-haspopup="listbox"
             >
-              <span data-size-label>{{ section.settings.size_placeholder }}</span>
+              <span data-size-label>
+                {% if selected_variant.options[size_option_index] != blank %}
+                  {{ selected_variant.options[size_option_index] }}
+                {% else %}
+                  {{ section.settings.size_placeholder }}
+                {% endif %}
+              </span>
               <svg class="sz-dd-arrow" viewBox="0 0 10 6" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                 <path d="M0 0l5 6 5-6z" fill="#9CA3AF"/>
               </svg>
             </button>
 
 <div class="sz-dd-list" data-size-list role="listbox" aria-label="{{ size_option.name }}">
+
+<button
+  type="button"
+  class="sz-dd-help dryeNEW-body--caption js-open-size-guide"
+>
+  <span>Unsure of your size? Click here</span>
+  <span class="sz-dd-help__arrow" aria-hidden="true">→</span>
+</button>
 
 {% for value in size_option.values %}
   {% liquid
@@ -432,24 +374,6 @@ assign review_count = section.settings.review_count_fallback
     if matched_variant != blank and matched_variant.available and is_preorder == false
       assign is_in_stock = true
     endif
-
-    if matched_variant.inventory_management == 'shopify'
-      assign variant_policy = matched_variant.inventory_policy
-    else
-      assign variant_policy = 'deny'
-    endif
-    assign variant_qty = matched_variant.inventory_quantity
-
-    assign fit_note = ''
-    assign fit_lines = section.settings.size_fit_notes | newline_to_br | split: '<br />'
-    for fit_line in fit_lines
-      assign fit_parts = fit_line | strip | split: '='
-      assign fit_key = fit_parts[0] | strip
-      if fit_key == value and fit_parts.size > 1
-        assign fit_note = fit_parts[1] | strip
-        break
-      endif
-    endfor
   %}
   <button
     type="button"
@@ -459,73 +383,14 @@ assign review_count = section.settings.review_count_fallback
     data-option-value="{{ value | escape }}"
     data-available="{% if is_available %}true{% else %}false{% endif %}"
     data-preorder="{% if is_preorder %}true{% else %}false{% endif %}"
-    data-policy="{% if matched_variant.inventory_management == 'shopify' %}{{ matched_variant.inventory_policy }}{% else %}deny{% endif %}"
-    data-qty="{{ matched_variant.inventory_quantity }}"
-    data-variant-id="{{ matched_variant.id }}"
     role="option"
     aria-selected="{% if is_selected %}true{% else %}false{% endif %}"
+    {% unless is_available %}disabled{% endunless %}
   >
-    <span class="sz-dd-main"><span class="sz-dd-size">{{ value }}</span>{% if fit_note != blank %}<span class="sz-dd-fit">{{ fit_note }}</span>{% endif %}</span>{% if matched_variant != blank %}{% if variant_policy == 'continue' and variant_qty <= 0 %}<span class="sz-dd-note sz-dd-note--low">{{ section.settings.preorder_dropdown_label | default: 'Low stock' }}</span>{% elsif variant_policy == 'deny' and variant_qty <= 0 %}<span class="sz-dd-note sz-dd-note--soldout">Sold out · Notify me →</span>{% elsif variant_qty > 0 and variant_qty <= section.settings.low_stock_threshold %}<span class="sz-dd-note sz-dd-note--low">Only {{ variant_qty }} left</span>{% else %}<span class="sz-dd-note">In stock</span>{% endif %}{% endif %}
+    {{ value }}{% if is_preorder %} — {{ preorder_note }}{% elsif is_in_stock %} — {{ in_stock_note }}{% elsif is_available == false %} — Sold out{% endif %}
   </button>
 {% endfor %}
-
-<button
-  type="button"
-  class="sz-dd-help js-open-size-guide"
->
-  <span class="sz-dd-help__text">{{ section.settings.size_help_label | default: 'Unsure of your size?' }}</span>
-  <span class="sz-dd-help__arrow" aria-hidden="true">→</span>
-</button>
             </div>
-          </div>
-
-          <div class="sz-inline-panel" data-size-panel hidden>
-
-            {% comment %} Preorder block — hidden by default, JS shows it for preorder sizes {% endcomment %}
-            <div class="sz-panel-preorder" data-panel-preorder hidden>
-              <div class="sz-panel-preorder-head">
-                <p class="sz-panel-heading" data-panel-preorder-heading></p>
-                <span class="sz-panel-ships-badge" data-panel-ships-badge></span>
-              </div>
-              <div class="sz-panel-price-row">
-                <s class="sz-panel-price-orig" data-panel-price-orig></s>
-                <span class="sz-panel-price-sale" data-panel-price-sale></span>
-                <span class="sz-panel-discount" data-panel-discount></span>
-              </div>
-              <p class="sz-panel-cutoff" data-panel-cutoff></p>
-              <button type="button" class="sz-panel-preorder-btn" data-panel-preorder-btn></button>
-              <p class="sz-panel-micro">{{ section.settings.preorder_micro }}</p>
-            </div>
-
-            {% comment %} Divider — visible only when preorder block is shown {% endcomment %}
-            <div class="sz-panel-divider" data-panel-divider hidden></div>
-
-            {% comment %} Notify me block — always shown in panel {% endcomment %}
-            <div class="sz-panel-notify" data-panel-notify>
-              <p class="sz-panel-notify-heading" data-panel-notify-heading></p>
-              <div data-notify-form>
-                <div class="sz-panel-form-row">
-                  <input type="email" class="sz-panel-email" data-notify-email
-                         placeholder="{{ section.settings.notify_placeholder }}"
-                         autocomplete="email">
-                  <button type="button" class="sz-panel-notify-btn" data-notify-submit>
-                    {{ section.settings.notify_cta }}
-                  </button>
-                </div>
-                <p class="sz-panel-email-err" data-notify-err hidden>
-                  {{ section.settings.notify_email_error }}
-                </p>
-              </div>
-              <p class="sz-panel-success" data-notify-success hidden>
-                {{ section.settings.notify_success }}
-              </p>
-            </div>
-
-            {% comment %} Pre-order banner — JS shows this (and hides the preorder + notify blocks) for pre-order sizes {% endcomment %}
-            <div class="sz-panel-soldout-banner" data-panel-soldout-banner hidden>
-              {{ section.settings.soldout_banner_text | default: 'This size is sold out and will be delivered in mid-September. All customers who pre-order get an extra pair free of charge.' }}
-            </div>
-
           </div>
         {% else %}
           <select class="variant-select-fallback" name="id">
@@ -542,83 +407,83 @@ assign review_count = section.settings.review_count_fallback
         {% endif %}
       </div>
 
-      <div class="packsel" data-packsel>
-        <div class="packsel__lbl">
-          <span>Step 2 · {{ section.settings.pack_label | default: 'Choose your pack' }}</span>
-        </div>
+<div class="qty-block">
+  <div class="form-lbl">
+    <span>{{ section.settings.quantity_label }}</span>
+  </div>
 
-        {% assign pack_blocks_present = false %}
-        {% for block in section.blocks %}
-          {% if block.type == 'pack_tier' %}
-            {% assign pack_blocks_present = true %}
-            {% assign is_first = false %}
-            {% if forloop.first %}{% assign is_first = true %}{% endif %}
-            <div class="pack{% if is_first %} is-selected{% endif %}{% if block.settings.is_best_value %} pack--best{% endif %}" data-pack data-pairs="{{ block.settings.pairs }}" data-cta="{{ block.settings.cta_label }}" {{ block.shopify_attributes }}>
-              {% if block.settings.is_best_value %}<span class="pack__ribbon">Best value</span>{% endif %}
-              <button type="button" class="pack__btn">
-                <span class="pack__radio" aria-hidden="true"></span>
-                <span class="pack__id">
-                  <span class="pack__name">{{ block.settings.name }}</span>
-                  <span class="pack__desc">{{ block.settings.subtitle }}</span>
-                </span>
-                {%- assign pack_full = selected_variant.price | times: block.settings.pairs -%}
-                {%- assign pack_keep = 100 | minus: block.settings.discount_percent -%}
-                {%- assign pack_total = pack_full | times: pack_keep | divided_by: 100 -%}
-                {%- assign pack_saved = pack_full | minus: pack_total -%}
-                <span class="pack__price">
-                  <span class="pack__total">{% if block.settings.total_price != blank %}{{ block.settings.total_price }}{% else %}{{ pack_total | money }}{% endif %}</span>
-                  {%- if block.settings.save_label != blank -%}
-                    <span class="pack__save-inline">{{ block.settings.save_label }}</span>
-                  {%- elsif pack_saved > 0 -%}
-                    <span class="pack__save-inline">Save {{ pack_saved | money }}</span>
-                  {%- endif -%}
-                </span>
-                {% if block.settings.badge != blank %}<span class="pack__badge">{{ block.settings.badge }}</span>{% endif %}
-              </button>
-              <div class="pack__panel"><div class="pack__inner">
-                {% assign feature_lines = block.settings.features | newline_to_br | split: '<br />' %}
-                <ul class="pack__list">
-                  {% for line in feature_lines %}
-                    {% assign line_text = line | strip %}
-                    {% if line_text != blank %}<li>{{ line_text }}</li>{% endif %}
-                  {% endfor %}
-                </ul>
-                {% if block.settings.foot_headline != blank or block.settings.foot_note != blank %}
-                  <div class="pack__foot">
-                    {% if block.settings.foot_headline != blank %}<div class="pack__foot-headline">{{ block.settings.foot_headline }}</div>{% endif %}
-                    {% if block.settings.foot_note != blank %}<span class="pack__foot-note">{{ block.settings.foot_note }}</span>{% endif %}
-                  </div>
-                {% endif %}
-              </div></div>
-            </div>
-          {% endif %}
-        {% endfor %}
+  <div class="qty-wrap">
+    <button
+      type="button"
+      class="qty-btn"
+      data-qty-minus
+      aria-label="Decrease quantity"
+    >
+      −
+    </button>
 
-        {% unless pack_blocks_present %}
-          <div class="pack is-selected" data-pack data-pairs="1" data-cta="{{ atc_button_label }}">
-            <button type="button" class="pack__btn">
-              <span class="pack__radio" aria-hidden="true"></span>
-              <span>
-                <span class="pack__name">1 Pair</span>
-              </span>
-              <span class="pack__price"><span class="pack__total">{{ selected_variant.price | money_with_currency }}</span></span>
-            </button>
-          </div>
-        {% endunless %}
-      </div>
+    <input
+      class="qty-val"
+      id="qty-{{ section.id }}"
+      name="quantity"
+      type="text"
+      value="1"
+      inputmode="numeric"
+      readonly
+    >
 
-      <input class="qty-val" id="qty-{{ section.id }}" name="quantity" type="hidden" value="1">
+    <button
+      type="button"
+      class="qty-btn"
+      data-qty-plus
+      aria-label="Increase quantity"
+    >
+      +
+    </button>
+  </div>
+</div>
 
       {% assign selected_variant_preorder = false %}
       {% if selected_variant.inventory_policy == 'continue' and selected_variant.inventory_quantity <= 0 %}
         {% assign selected_variant_preorder = true %}
       {% endif %}
 
+      <div class="value-card">
+        <div class="value-card__grid">
+          <div class="value-card__col value-card__col--loop">
+            <p class="value-card__eyebrow value-card__eyebrow--loop">The workaround loop</p>
+            <div class="value-card__items">
+              <div class="value-card__item"><span class="value-card__x">✕</span><span>Soaked liners</span></div>
+              <div class="value-card__item"><span class="value-card__x">✕</span><span>Glove-stick</span></div>
+              <div class="value-card__item"><span class="value-card__x">✕</span><span>Constant hand resets</span></div>
+              <div class="value-card__item"><span class="value-card__x">✕</span><span>Wet, irritated skin</span></div>
+              <div class="value-card__item"><span class="value-card__x">✕</span><span>Cream after every shift</span></div>
+            </div>
+          </div>
+          <div class="value-card__div" aria-hidden="true"></div>
+          <div class="value-card__col value-card__col--base">
+            <p class="value-card__eyebrow value-card__eyebrow--base">One base layer</p>
+            <div class="value-card__items">
+              <div class="value-card__item"><span class="value-card__arrow">→</span><span>Dryer hands all shift</span></div>
+              <div class="value-card__item"><span class="value-card__arrow">→</span><span>No sticky glove changes</span></div>
+              <div class="value-card__item"><span class="value-card__arrow">→</span><span>No washing or drying</span></div>
+              <div class="value-card__item"><span class="value-card__arrow">→</span><span>Skin stays dry</span></div>
+              <div class="value-card__item"><span class="value-card__arrow">→</span><span>Lasts 6–12 months</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="price-row" data-price-row>
+        <span class="price" data-price>{{ selected_variant.price | money_with_currency }}</span>
+        {% if price_note != blank %}
+          <span class="price-note">{{ price_note }}</span>
+        {% endif %}
+      </div>
 
       <button
         type="submit"
         class="atc-btn-full"
-         id="drye-buy"
         data-main-atc
         {% unless selected_variant.available or selected_variant_preorder %}disabled{% endunless %}
       >
@@ -664,20 +529,6 @@ assign review_count = section.settings.review_count_fallback
         <span>{{ section.settings.trust_text_3 }}</span>
       </div>
     </div>
-
-    {% comment %} Innovation award emblem (SKAPA) — sits between the trust row and the worker-proof ticker {% endcomment %}
-    {% if section.settings.skapa_line != blank or section.settings.skapa_logo != blank %}
-      {%- capture skapa_inner -%}
-        {% if section.settings.skapa_logo != blank %}<img class="drye-seal__skapa-logo" src="{{ section.settings.skapa_logo | image_url: width: 260 }}" alt="SKAPA" loading="lazy" width="{{ section.settings.skapa_logo.width }}" height="{{ section.settings.skapa_logo.height }}">{% else %}<img class="drye-seal__skapa-logo" src="https://cdn.shopify.com/s/files/1/0686/9581/8505/files/stiftelsen_skapa_cover.jpg?v=1784673270" alt="SKAPA" loading="lazy">{% endif %}
-        {% if section.settings.skapa_line != blank %}<span class="drye-seal__skapa-t">{{ section.settings.skapa_line }}</span>{% endif %}
-      {%- endcapture -%}
-      {% if section.settings.skapa_url != blank %}
-        <a class="drye-seal__skapa drye-skapa" href="{{ section.settings.skapa_url }}" target="_blank" rel="noopener">{{ skapa_inner }}</a>
-      {% else %}
-        <div class="drye-seal__skapa drye-skapa">{{ skapa_inner }}</div>
-      {% endif %}
-    {% endif %}
-
 
 {% comment %} Worker Proof — compact green proof line + sliding/expandable comment ticker {% endcomment %}
 {% if section.settings.proof_enabled %}
@@ -781,55 +632,7 @@ assign review_count = section.settings.review_count_fallback
         </ul>
       </div>
     {% endif %}
-
-    {%- capture drye_laurel -%}
-      <svg class="drye-seal__laurel" viewBox="0 0 48 96" fill="currentColor" aria-hidden="true">
-        <path fill="none" stroke="currentColor" stroke-width="1.6" d="M40 6 C 16 22, 8 46, 15 72 C 18 84, 28 90, 37 92"/>
-        <path d="M39 9 c -7 -1 -12 2 -14 8 c 7 1 13 -2 14 -8 z"/>
-        <path d="M31 15 c -7 -1 -12 2 -14 8 c 7 1 13 -2 14 -8 z"/>
-        <path d="M24 24 c -7 -1 -12 3 -13 9 c 7 0 12 -3 13 -9 z"/>
-        <path d="M18 35 c -7 0 -11 3 -12 9 c 7 0 11 -3 12 -9 z"/>
-        <path d="M15 47 c -7 1 -10 5 -10 11 c 6 -1 11 -5 10 -11 z"/>
-        <path d="M16 60 c -6 2 -9 6 -8 12 c 6 -2 10 -6 8 -12 z"/>
-        <path d="M21 72 c -6 2 -8 7 -6 13 c 5 -2 9 -7 6 -13 z"/>
-        <path d="M28 82 c -6 3 -7 8 -4 13 c 5 -3 8 -8 4 -13 z"/>
-      </svg>
-    {%- endcapture -%}
   </section>
-
-  {%- comment -%} Seen in — press row (frameless, below the proof card) {%- endcomment -%}
-  {% assign press_logos = section.blocks | where: 'type', 'press_logo' %}
-  <div class="drye-trust">
-    {%- comment -%} Guarantee laurel band moved up under the checklist {%- endcomment -%}
-
-    {% if section.settings.show_seen_in %}
-    <div class="drye-press">
-      <span class="drye-press__label">{{ section.settings.seen_in_label | default: 'Seen in' }}</span>
-      <div class="drye-press__logos">
-        {% if press_logos.size > 0 %}
-          {% for block in press_logos %}
-            {% if block.settings.image != blank %}
-              {% if block.settings.url != blank %}
-                <a class="drye-press__logo" href="{{ block.settings.url }}" target="_blank" rel="noopener" {{ block.shopify_attributes }}>
-                  <img src="{{ block.settings.image | image_url: width: 320 }}" alt="{{ block.settings.name | escape }}" loading="lazy" width="{{ block.settings.image.width }}" height="{{ block.settings.image.height }}">
-                </a>
-              {% else %}
-                <span class="drye-press__logo" {{ block.shopify_attributes }}>
-                  <img src="{{ block.settings.image | image_url: width: 320 }}" alt="{{ block.settings.name | escape }}" loading="lazy" width="{{ block.settings.image.width }}" height="{{ block.settings.image.height }}">
-                </span>
-              {% endif %}
-            {% endif %}
-          {% endfor %}
-        {% else %}
-          <a class="drye-press__logo drye-press__logo--text" href="{{ section.settings.seen_bygg_url | default: 'https://byggkatalogen.byggtjanst.se/nyheter/torra-hander-i-handskarna/37639' }}" target="_blank" rel="noopener"><span class="lg-bygg">SVENSK<small>BYGGTJÄNST</small></span></a>
-          <a class="drye-press__logo drye-press__logo--text" href="{{ section.settings.seen_gnosjo_url | default: 'https://www.svarvning.nu/personlig-kamp-mot-hudproblem-resulterar-i-innovativa-handskar/' }}" target="_blank" rel="noopener"><span class="lg-gnosjo">GNOSJÖ<br>SVARVNING</span></a>
-          <span class="drye-press__logo drye-press__logo--text"><span class="lg-smarta">smartasaker</span></span>
-          <a class="drye-press__logo drye-press__logo--text" href="https://thegadgetflow.com/blog/drye-liner-review-glove-liner/" target="_blank" rel="noopener"><span class="lg-gadget">Gadget&nbsp;Flow</span></a>
-        {% endif %}
-      </div>
-    </div>
-    {% endif %}
-  </div>
 
   <script>
     (function () {
@@ -926,7 +729,6 @@ assign review_count = section.settings.review_count_fallback
 
 
 
-
 {% if section.settings.show_inline_review_slider %}
   {% for block in section.blocks %}
     {% if block.type == 'review_slider' %}
@@ -947,7 +749,7 @@ assign review_count = section.settings.review_count_fallback
 {% assign review_block = section.blocks | where: 'type', 'review_slider' | first %}
 
 {% if faq_blocks.size > 0 or wte_blocks.size > 0 or review_block %}
-  <section class="tabs-section" id="drye-faq" data-drye-tabs>
+  <section class="tabs-section" data-drye-tabs>
     <div class="inner">
 
       <div class="tab-nav" role="tablist">
@@ -1112,7 +914,71 @@ assign review_count = section.settings.review_count_fallback
     data-panel="rev"
     role="tabpanel"
   >
-    {% render 'drye-review-slider-inline', block: review_block %}
+    <div class="testi-grid">
+      {% for i in (1..9) %}
+        {% liquid
+          assign quote_key = 'review_' | append: i | append: '_quote'
+          assign name_key = 'review_' | append: i | append: '_name'
+          assign location_key = 'review_' | append: i | append: '_location'
+          assign label_key = 'review_' | append: i | append: '_label'
+          assign stars_key = 'review_' | append: i | append: '_stars'
+          assign badge_key = 'review_' | append: i | append: '_badge_text'
+          assign attribution_key = 'review_' | append: i | append: '_attribution'
+          assign show_b2b_key = 'review_' | append: i | append: '_show_as_b2b'
+
+          assign rev_quote = review_block.settings[quote_key]
+          assign rev_name = review_block.settings[name_key]
+          assign rev_location = review_block.settings[location_key]
+          assign rev_label = review_block.settings[label_key]
+          assign rev_stars = review_block.settings[stars_key] | default: 5 | plus: 0
+          assign rev_badge = review_block.settings[badge_key]
+          assign rev_attribution = review_block.settings[attribution_key]
+          assign rev_show_b2b = review_block.settings[show_b2b_key]
+        %}
+
+        {% if rev_quote != blank %}
+          <div class="testi-card">
+            {% if rev_show_b2b %}
+              <div class="testi-detail">
+                {{ rev_badge | default: 'Verified' }}
+              </div>
+            {% else %}
+              <div class="testi-stars" aria-label="{{ rev_stars }} out of 5 stars">
+                {% for s in (1..rev_stars) %}
+                  <svg viewBox="0 0 11 11" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                    <path d="M5.5 0L6.7 3.8h4L7.5 6.2 8.7 10 5.5 7.6 2.3 10l1.2-3.8L.3 3.8h4L5.5 0z" fill="#5F8A8B"/>
+                  </svg>
+                {% endfor %}
+              </div>
+            {% endif %}
+
+            <p class="testi-quote">
+              “{{ rev_quote | escape }}”
+            </p>
+
+            <div class="testi-meta">
+              {% if rev_name != blank %}
+                <span class="testi-name">{{ rev_name | escape }}</span>
+              {% endif %}
+
+              {% if rev_label != blank or rev_location != blank %}
+                <span class="testi-role">
+                  {{ rev_label | escape }}{% if rev_label != blank and rev_location != blank %} · {% endif %}{{ rev_location | escape }}
+                </span>
+              {% endif %}
+            </div>
+
+            <span class="testi-detail">
+              <svg viewBox="0 0 8 10" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <path d="M3.94 9.65C2.83 9.35 1.85 8.7 1.14 7.79.43 6.89.03 5.78 0 4.63V1.21L3.94 0l3.94 1.21v3.42c-.03 1.15-.43 2.26-1.14 3.16-.71.91-1.69 1.56-2.8 1.86z" fill="#9CA3AF"/>
+                <path d="M3.3 5.27L2.16 4.22l-.57.53 1.14 1.05.57.53.57-.53 2.28-2.1-.57-.52-2.28 2.1z" fill="#fff"/>
+              </svg>
+              {{ rev_attribution | default: 'Verified buyer' }}
+            </span>
+          </div>
+        {% endif %}
+      {% endfor %}
+    </div>
 
     <div class="tabs-cta-wrap">
       <a href="{{ review_anchor }}" class="tabs-cta">
@@ -1130,60 +996,6 @@ assign review_count = section.settings.review_count_fallback
       {{ current_product | json }}
     </script>
   </div>
-
-
-    <script>
-      (function () {
-        var sectionEl = document.querySelector('[data-section-id="{{ section.id }}"][data-product-section]');
-        if (!sectionEl || sectionEl.dataset.dryeAccBound === 'true') return;
-        sectionEl.dataset.dryeAccBound = 'true';
-
-        // Step 1 + Step 2 collapsible bars (each toggles independently)
-        var stepBtns = Array.prototype.slice.call(sectionEl.querySelectorAll('.stepbar__btn'));
-        stepBtns.forEach(function (btn) {
-          btn.addEventListener('click', function () {
-            var panel = sectionEl.querySelector('#' + btn.getAttribute('aria-controls'));
-            var open = btn.getAttribute('aria-expanded') === 'true';
-            btn.setAttribute('aria-expanded', open ? 'false' : 'true');
-            if (panel) { panel.classList.toggle('open', !open); }
-          });
-        });
-
-        // Bottom accordion — one open at a time
-        var accBtns = Array.prototype.slice.call(sectionEl.querySelectorAll('.acc__btn'));
-        accBtns.forEach(function (btn) {
-          btn.addEventListener('click', function () {
-            var panel = sectionEl.querySelector('#' + btn.getAttribute('aria-controls'));
-            var open = btn.getAttribute('aria-expanded') === 'true';
-            accBtns.forEach(function (b) {
-              b.setAttribute('aria-expanded', 'false');
-              var p = sectionEl.querySelector('#' + b.getAttribute('aria-controls'));
-              if (p) { p.classList.remove('open'); }
-            });
-            if (!open) {
-              btn.setAttribute('aria-expanded', 'true');
-              if (panel) { panel.classList.add('open'); }
-            }
-          });
-        });
-
-        // "See the FAQ below" links inside the accordion — scroll DOWN to the FAQ tabs
-        sectionEl.addEventListener('click', function (e) {
-          var link = e.target.closest ? e.target.closest('.acc__body a') : null;
-          if (!link) { return; }
-          var href = link.getAttribute('href') || '';
-          var wantsFaq = href.indexOf('#drye-faq') !== -1 || (href === '#' && /faq/i.test(link.textContent || ''));
-          if (!wantsFaq) { return; }
-          var faqSection = document.getElementById('drye-faq');
-          if (!faqSection) { return; }
-          e.preventDefault();
-          // Make sure the FAQ tab is the one showing before we land there
-          var faqTab = faqSection.querySelector('.tab-btn[data-tab="faq"]');
-          if (faqTab && faqTab.getAttribute('aria-selected') !== 'true') { faqTab.click(); }
-          faqSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        });
-      })();
-    </script>
 </section>
 
 {% if review_rating != blank and review_count != blank %}
@@ -1223,92 +1035,10 @@ assign review_count = section.settings.review_count_fallback
     const qtyInput = sectionEl.querySelector('.qty-val');
     const qtyMinus = sectionEl.querySelector('[data-qty-minus]');
     const qtyPlus = sectionEl.querySelector('[data-qty-plus]');
-
-    // ── Live price (unit × quantity) + cost-per-month timeline ──
-    const cpmWrap = sectionEl.querySelector('[data-cpm]');
-    const cpmRows = cpmWrap ? Array.from(cpmWrap.querySelectorAll('[data-cpm-price]')) : [];
-    const moneySampleEl = sectionEl.querySelector('[data-money-sample]');
-
-    function parseMoneyParts(str) {
-      if (!str) return null;
-      const first = str.search(/\d/);
-      if (first === -1) return null;
-      let last = first;
-      for (let i = str.length - 1; i >= 0; i--) { if (/\d/.test(str.charAt(i))) { last = i; break; } }
-      const prefix = str.slice(0, first);
-      const suffix = str.slice(last + 1);
-      const numStr = str.slice(first, last + 1);
-      const hasDot = numStr.indexOf('.') !== -1;
-      const hasComma = numStr.indexOf(',') !== -1;
-      let decSep = '', grpSep = '';
-      if (hasDot && hasComma) {
-        decSep = numStr.lastIndexOf('.') > numStr.lastIndexOf(',') ? '.' : ',';
-        grpSep = decSep === '.' ? ',' : '.';
-      } else if (hasDot || hasComma) {
-        const sep = hasDot ? '.' : ',';
-        const afterLen = numStr.length - numStr.lastIndexOf(sep) - 1;
-        const count = numStr.split(sep).length - 1;
-        if (count === 1 && afterLen >= 1 && afterLen <= 2) { decSep = sep; grpSep = sep === '.' ? ',' : '.'; }
-        else { grpSep = sep; decSep = sep === '.' ? ',' : '.'; }
-      }
-      let dec = 0;
-      if (decSep) {
-        const afterLen = numStr.length - numStr.lastIndexOf(decSep) - 1;
-        if (afterLen >= 1 && afterLen <= 2) { dec = afterLen; } else { grpSep = grpSep || decSep; decSep = ''; }
-      }
-      var wsMatch = numStr.match(/\d(\s)\d/);
-      if (wsMatch) grpSep = wsMatch[1];
-      let clean = numStr.replace(/[\s ]/g, '');
-      if (grpSep) clean = clean.split(grpSep).join('');
-      if (decSep) clean = clean.replace(decSep, '.');
-      const value = parseFloat(clean);
-      if (isNaN(value)) return null;
-      return { prefix: prefix, suffix: suffix, value: value, dec: dec, decSep: decSep || '.', grpSep: grpSep || ',' };
-    }
-
-    function formatMoneyTpl(value, tpl, decOverride) {
-      const d = (decOverride == null) ? tpl.dec : decOverride;
-      const factor = Math.pow(10, d);
-      const fixed = (Math.round(value * factor) / factor).toFixed(d);
-      const parts = fixed.split('.');
-      parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, tpl.grpSep);
-      const num = (d > 0 && parts[1] != null) ? parts[0] + tpl.decSep + parts[1] : parts[0];
-      return tpl.prefix + num + tpl.suffix;
-    }
-
-    // Market-correct format template from Shopify's own money output; base unit amount from the rendered price.
-    const cpmMoneyTpl = parseMoneyParts(moneySampleEl ? moneySampleEl.textContent : (priceEl ? priceEl.textContent : ''));
-    const cpmBaseUnit = priceEl ? parseMoneyParts(priceEl.textContent) : null;
-    const cpmBaseAmount = cpmBaseUnit ? cpmBaseUnit.value : null;
-    const cpmInitCents = (productData.selected_or_first_available_variant && productData.selected_or_first_available_variant.price)
-      || (productData.variants && productData.variants[0] && productData.variants[0].price) || 0;
-
-    function renderPriceCPM() {
-      if (!priceEl || !cpmMoneyTpl || cpmBaseAmount == null) return;
-      const qty = Math.max(1, Math.min(10, parseInt(qtyInput && qtyInput.value, 10) || 1));
-      const variant = (typeof getVariantFromOptions === 'function' && getVariantFromOptions())
-        || productData.selected_or_first_available_variant;
-      let unit = cpmBaseAmount;
-      if (variant && variant.price && cpmInitCents) unit = cpmBaseAmount * (Number(variant.price) / Number(cpmInitCents));
-      const total = unit * qty;
-      const mainDec = (Math.round(total * 100) % 100 === 0) ? 0 : cpmMoneyTpl.dec;
-      const totalStr = formatMoneyTpl(total, cpmMoneyTpl, mainDec);
-      priceEl.textContent = totalStr;
-      if (stickyPriceEl) stickyPriceEl.textContent = totalStr;
-      if (cpmWrap && cpmRows.length) {
-        cpmRows.forEach(function (el) {
-          const months = parseInt(el.getAttribute('data-cpm-price'), 10) || 1;
-          el.textContent = formatMoneyTpl(total / months, cpmMoneyTpl, 0);
-        });
-        cpmWrap.hidden = false;
-      }
-    }
-
     const sizeTrigger = sectionEl.querySelector('[data-size-trigger]');
     const sizeList = sectionEl.querySelector('[data-size-list]');
     const sizeLabel = sectionEl.querySelector('[data-size-label]');
     const sizeOptions = Array.from(sectionEl.querySelectorAll('[data-size-option]'));
-    const panelEl = sectionEl.querySelector('[data-size-panel]');
     const tabButtons = Array.from(sectionEl.querySelectorAll('[data-drye-tabs] .tab-btn'));
 const faqButtons = Array.from(sectionEl.querySelectorAll('[data-drye-tabs] .faq-q'));
 const reviewScrollRows = Array.from(sectionEl.querySelectorAll('[data-review-scroll]'));
@@ -1351,37 +1081,22 @@ const shopifyRoot = (window.Shopify && window.Shopify.routes && window.Shopify.r
       ? [...productData.selected_or_first_available_variant.options]
       : (productData.variants[0] ? [...productData.variants[0].options] : []);
 
-    // Trigger shows "Choose your size" until the shopper actually picks one.
-    // currentOptions still holds a real variant under the hood, so price / ATC /
-    // cart-drawer / market coupling all stay intact — only the visible label waits.
-    let userHasPickedSize = false;
-
     function isVariantPreorder(variant) {
       if (!variant) return false;
       return variant.inventory_policy === 'continue' && Number(variant.inventory_quantity) <= 0;
     }
 
     function syncButtonStates(selectedVariant) {
-      const preorder = isVariantPreorder(selectedVariant);
-      const canBuy = !!(selectedVariant && (selectedVariant.available || preorder));
+      const canBuy = !!(selectedVariant && (selectedVariant.available || isVariantPreorder(selectedVariant)));
 
       if (mainAtc) {
         mainAtc.disabled = !canBuy;
-        mainAtc.dataset.mode = preorder ? 'preorder' : 'buy';
-        if (!canBuy) {
-          mainAtc.textContent = 'Sold out';
-        } else if (preorder) {
-          mainAtc.textContent = 'Pre-order now';
-        } else {
-          const selPack = sectionEl.querySelector('[data-pack].is-selected');
-          const packPairs = selPack ? (Number(selPack.dataset.pairs) || 1) : (parseInt(qtyInput && qtyInput.value, 10) || 1);
-          mainAtc.textContent = 'Add ' + packPairs + (packPairs === 1 ? ' Pair' : ' Pairs');
-        }
+        mainAtc.textContent = canBuy ? {{ atc_button_label | json }} : 'Sold out';
       }
 
       if (stickySubmit) {
         stickySubmit.disabled = !canBuy;
-        stickySubmit.textContent = !canBuy ? 'Sold out' : (preorder ? 'Pre-order now' : {{ sticky_button_label | json }});
+        stickySubmit.textContent = canBuy ? {{ sticky_button_label | json }} : 'Sold out';
       }
     }
 
@@ -1392,12 +1107,11 @@ const shopifyRoot = (window.Shopify && window.Shopify.routes && window.Shopify.r
       sizeOptions.forEach((option) => {
         const position = Number(option.dataset.optionPosition) - 1;
         const isSelected = currentOptions[position] === option.dataset.optionValue;
-        const showSelected = isSelected && userHasPickedSize;
 
-        option.classList.toggle('selected', showSelected);
-        option.setAttribute('aria-selected', showSelected ? 'true' : 'false');
+        option.classList.toggle('selected', isSelected);
+        option.setAttribute('aria-selected', isSelected ? 'true' : 'false');
 
-        if (showSelected) {
+        if (isSelected) {
           sizeLabel.textContent = option.dataset.optionValue;
           sizeTrigger.classList.add('has-val');
         }
@@ -1535,80 +1249,7 @@ if (pushEvent && !(window.Shopify && window.Shopify.designMode)) {
   pushViewItem(selectedVariant);
 }
       }
-
-      renderPriceCPM();
     }
-
-    // ── Sold-out & Preorder size panel ──
-    const PREORDER_MAIN_LABEL = {{ section.settings.preorder_main_atc_label | default: 'Preorder below ↓' | json }};
-
-    const PANEL_CFG = {
-      lowStockThreshold : {{ section.settings.low_stock_threshold | default: 10 }},
-      shippingDate      : {{ section.settings.shipping_date | default: 'TBD' | json }},
-      shippingMonth     : {{ section.settings.shipping_month | default: 'TBD' | json }},
-      cutoffDate        : {{ section.settings.cutoff_date | default: 'TBD' | json }},
-      regularPrice      : parseFloat(({{ product.price | money_without_currency | json }}).replace(/[^0-9.]/g, '')) || 0,
-      currency          : {{ cart.currency.iso_code | json }},
-      discountCode      : {{ section.settings.preorder_discount_code | default: 'PREORDER15' | json }},
-      discountPercent   : {{ section.settings.preorder_discount_percent | default: 15 }},
-      cutoffText        : {{ section.settings.preorder_cutoff_text | default: 'Your 15% preorder discount is applied automatically at checkout.' | json }}
-    };
-
-    const pushDL = (eventName, data) => {
-      window.dataLayer = window.dataLayer || [];
-      window.dataLayer.push(Object.assign({ event: eventName, event_source: 'drye_pdp_hero' }, data));
-    };
-
-    let currentPanelVariant = null;
-
-    const openPanel = (opt) => {
-      if (!panelEl) return;
-      const size = opt.dataset.optionValue;
-      const variantId = opt.dataset.variantId || '';
-      const policy = opt.dataset.policy || 'deny';
-      const qty = parseInt(opt.dataset.qty || '0', 10);
-      const isPreorder = policy === 'continue' && qty <= 0;
-      currentPanelVariant = { size, variantId };
-
-      const preorderBlock = panelEl.querySelector('[data-panel-preorder]');
-      const divider = panelEl.querySelector('[data-panel-divider]');
-      const notifyBlock = panelEl.querySelector('[data-panel-notify]');
-      const banner = panelEl.querySelector('[data-panel-soldout-banner]');
-
-      // The old 15%-off preorder block + divider are no longer shown.
-      if (preorderBlock) preorderBlock.hidden = true;
-      if (divider) divider.hidden = true;
-
-      if (isPreorder) {
-        // Pre-order sizes: show only the banner (ships date + free extra pair).
-        if (notifyBlock) notifyBlock.hidden = true;
-        if (banner) banner.hidden = false;
-      } else {
-        // Truly sold-out (deny policy): keep the notify-me email flow.
-        if (banner) banner.hidden = true;
-        if (notifyBlock) {
-          notifyBlock.hidden = false;
-          const notifyHeadingEl = notifyBlock.querySelector('[data-panel-notify-heading]');
-          if (notifyHeadingEl) notifyHeadingEl.textContent =
-            'Not ready to wait? Get an email the second ' + size + ' is back.';
-          const formEl = notifyBlock.querySelector('[data-notify-form]');
-          const emailEl = notifyBlock.querySelector('[data-notify-email]');
-          const errEl = notifyBlock.querySelector('[data-notify-err]');
-          const successEl = notifyBlock.querySelector('[data-notify-success]');
-          if (formEl) formEl.hidden = false;
-          if (emailEl) emailEl.value = '';
-          if (errEl) errEl.hidden = true;
-          if (successEl) successEl.hidden = true;
-        }
-      }
-
-      panelEl.hidden = false;
-    };
-
-    const closePanel = () => {
-      if (panelEl) panelEl.hidden = true;
-      currentPanelVariant = null;
-    };
 
     if (sizeTrigger && sizeList) {
       sizeTrigger.addEventListener('click', (event) => {
@@ -1621,170 +1262,20 @@ if (pushEvent && !(window.Shopify && window.Shopify.designMode)) {
       sizeOptions.forEach((option) => {
         option.addEventListener('click', (event) => {
           event.stopPropagation();
+          if (option.disabled) return;
 
           const position = Number(option.dataset.optionPosition) - 1;
-          const value = option.dataset.optionValue;
-          const variantId = option.dataset.variantId || '';
-          const policy = option.dataset.policy || 'deny';
-          const qty = parseInt(option.dataset.qty || '0', 10);
-          const isPreorder = policy === 'continue' && qty <= 0;
-          const isSoldOut = option.dataset.available === 'false' && policy === 'deny';
+          currentOptions[position] = option.dataset.optionValue;
 
-          currentOptions[position] = value;
-          userHasPickedSize = true;
           closeSizeDropdown();
           updateVariant(true);
-
-          if (isSoldOut) {
-            pushDL('size_soldout_click', { size: value, variant_id: variantId });
-            openPanel(option);
-          } else if (isPreorder) {
-            pushDL('size_soldout_click', { size: value, variant_id: variantId });
-            openPanel(option);
-            // Pre-order: the main ATC buys the pre-order variant directly.
-            if (mainAtc) {
-              mainAtc.disabled = false;
-              mainAtc.dataset.mode = 'preorder';
-              mainAtc.textContent = 'Pre-order now';
-            }
-            if (stickySubmit) {
-              stickySubmit.disabled = false;
-              stickySubmit.textContent = 'Pre-order now';
-            }
-          } else {
-            closePanel();
-          }
         });
       });
 
       document.addEventListener('click', (event) => {
-        if (!event.target.closest('[data-size-dropdown]') && !event.target.closest('[data-size-panel]')) {
+        if (!event.target.closest('[data-size-dropdown]')) {
           closeSizeDropdown();
         }
-      });
-    }
-
-    // Panel interactions
-    if (panelEl) {
-      const preorderBtn = panelEl.querySelector('[data-panel-preorder-btn]');
-
-      const keepPreorderMainDisabled = () => {
-        if (mainAtc) { mainAtc.disabled = true; mainAtc.textContent = PREORDER_MAIN_LABEL; }
-        if (stickySubmit) { stickySubmit.disabled = true; stickySubmit.textContent = PREORDER_MAIN_LABEL; }
-      };
-
-      const applyDiscountCode = () =>
-        fetch('/discount/' + encodeURIComponent(PANEL_CFG.discountCode), { credentials: 'same-origin' })
-          .then(() => {})
-          .catch(() => {});
-
-      const getCartDiscount = () =>
-        fetch(shopifyRoot + 'cart.js', { credentials: 'same-origin', headers: { Accept: 'application/json' } })
-          .then((r) => (r.ok ? r.json() : null))
-          .then((c) => (c ? (Number(c.original_total_price) - Number(c.total_price)) : 0))
-          .catch(() => 0);
-
-      if (preorderBtn) {
-        preorderBtn.addEventListener('click', async () => {
-          if (!currentPanelVariant || preorderBtn.disabled) return;
-          const { size, variantId } = currentPanelVariant;
-          const origText = preorderBtn.textContent;
-
-          pushDL('preorder_add_to_cart', { size, variant_id: variantId, currency: PANEL_CFG.currency });
-
-          preorderBtn.disabled = true;
-          preorderBtn.textContent = 'Adding…';
-
-          try {
-            // 1) Apply the preorder discount code first (sets the cart-level discount).
-            await applyDiscountCode();
-
-            // 2) Add the preorder variant directly so the Preorder line-item property
-            //    actually persists (the drawer's own add path forwards only id + quantity).
-            await fetch(shopifyRoot + 'cart/add.js', {
-              method: 'POST',
-              credentials: 'same-origin',
-              headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-              body: JSON.stringify({
-                id: variantId,
-                quantity: 1,
-                properties: { Preorder: 'Ships ' + PANEL_CFG.shippingDate }
-              })
-            });
-
-            // 3) Confirm the discount actually landed; if not, re-apply once and re-check.
-            let discount = await getCartDiscount();
-            if (discount <= 0) {
-              await applyDiscountCode();
-              discount = await getCartDiscount();
-            }
-
-            // 4) Open + refresh the drawer so it shows the discounted cart.
-            if (window.DRYE_CartDrawer && typeof window.DRYE_CartDrawer.refresh === 'function') {
-              window.DRYE_CartDrawer.refresh(true);
-            } else if (window.DRYE_CartDrawer && typeof window.DRYE_CartDrawer.open === 'function') {
-              window.DRYE_CartDrawer.open();
-            }
-
-            keepPreorderMainDisabled();
-
-            preorderBtn.textContent = 'Added ✓';
-            preorderBtn.style.background = '#0a6960';
-            setTimeout(() => {
-              preorderBtn.textContent = origText;
-              preorderBtn.style.background = '';
-              preorderBtn.disabled = false;
-            }, 3000);
-          } catch (err) {
-            preorderBtn.textContent = origText;
-            preorderBtn.disabled = false;
-          }
-        });
-      }
-
-      // The email input lives inside the product form; stop Enter from submitting it.
-      const notifyEmailInput = panelEl.querySelector('[data-notify-email]');
-      if (notifyEmailInput) {
-        notifyEmailInput.addEventListener('keydown', (event) => {
-          if (event.key === 'Enter') {
-            event.preventDefault();
-            const submitBtn = panelEl.querySelector('[data-notify-submit]');
-            if (submitBtn) submitBtn.click();
-          }
-        });
-      }
-
-      // Notify me — email capture
-      panelEl.addEventListener('click', (event) => {
-        if (!event.target.closest('[data-notify-submit]')) return;
-        if (!currentPanelVariant) return;
-        const emailEl = panelEl.querySelector('[data-notify-email]');
-        const errEl = panelEl.querySelector('[data-notify-err]');
-        const formEl = panelEl.querySelector('[data-notify-form]');
-        const successEl = panelEl.querySelector('[data-notify-success]');
-        const email = emailEl ? emailEl.value.trim() : '';
-        const valid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-        if (!valid) { if (errEl) errEl.hidden = false; return; }
-        if (errEl) errEl.hidden = true;
-        const { size, variantId } = currentPanelVariant;
-
-        const kl = window.klaviyo || window._learnq;
-        if (kl) {
-          kl.push(['identify', { '$email': email }]);
-          kl.push(['track', 'Back in Stock Requested', {
-            product: {{ product.title | json }}, variant_id: variantId, size
-          }]);
-        } else {
-          const fd = new FormData();
-          fd.append('form_type', 'customer');
-          fd.append('utf8', '✓');
-          fd.append('contact[email]', email);
-          fd.append('contact[tags]', 'backinstock-' + size);
-          fetch('/contact#contact_form', { method: 'POST', body: fd }).catch(() => {});
-        }
-        pushDL('notify_me_submit', { size, variant_id: variantId });
-        if (formEl) formEl.hidden = true;
-        if (successEl) successEl.hidden = false;
       });
     }
 
@@ -1792,7 +1283,6 @@ if (pushEvent && !(window.Shopify && window.Shopify.designMode)) {
       if (!qtyInput) return;
       const safeValue = Math.max(1, Math.min(10, Number(nextValue) || 1));
       qtyInput.value = safeValue;
-      renderPriceCPM();
     }
 
     if (qtyMinus) {
@@ -1885,28 +1375,10 @@ wteTimelines.forEach((timeline) => {
       pushViewItem(initialVariant);
     }
   })();
+</script>
 
-</script>
-<script>
-(function () {
-  document.addEventListener('click', function (e) {
-    var link = e.target.closest('a[href$="#drye-buy"]');
-    if (!link) return;
-    var atc = document.getElementById('drye-buy');
-    if (!atc) return;
-    e.preventDefault();
-    var offset = 130; // höjd på fast header + luft — justera vid behov
-    var y = atc.getBoundingClientRect().top + window.pageYOffset - offset;
-    window.scrollTo({ top: y, behavior: 'smooth' });
-    atc.style.transition = 'box-shadow .3s ease';
-    atc.style.boxShadow = '0 0 0 3px rgba(10,105,96,.55)';
-    setTimeout(function () { atc.style.boxShadow = ''; }, 1200);
-  }, false);
-})();
-</script>
 
 <script src="{{ 'drye-pdp-gallery.js' | asset_url }}" defer></script>
-<script src="{{ 'drye-pdp-buyzone.js' | asset_url }}" defer></script>
 
 {% schema %}
 {
@@ -1948,47 +1420,10 @@ wteTimelines.forEach((timeline) => {
       "default": "Inside any glove."
     },
     {
-      "type": "textarea",
-      "id": "subheading",
-      "label": "Subheading (under H1)",
-      "info": "Short hook shown right under the H1. HTML allowed (<u>, <strong>, <br>).",
-      "default": "Add one <u>dry layer</u> under your gloves.<br>You may <strong>never want skin-to-glove</strong> contact again."
-    },
-    {
-      "type": "textarea",
-      "id": "intro_text",
-      "label": "Description (under H1)",
-      "default": "Dry hands, the whole shift — even under sealed gloves. DRYE, a Swedish 0.4mm liner, moves sweat away from skin instead of soaking it up."
-    },
-    {
-      "type": "text",
-      "id": "bullet_1",
-      "label": "Checklist item 1",
-      "default": "Keeps hands dry inside sealed gloves — full shift, no reapplying"
-    },
-    {
-      "type": "text",
-      "id": "bullet_2",
-      "label": "Checklist item 2",
-      "default": "Works under nitrile, latex, and vinyl — no lost grip or dexterity"
-    },
-    {
-      "type": "text",
-      "id": "bullet_3",
-      "label": "Checklist item 3",
-      "default": "Lasts 4–12 months — machine washable, no chemicals to wear off"
-    },
-    {
-      "type": "text",
-      "id": "bullet_4",
-      "label": "Checklist item 4",
-      "default": "Oil & grease hit the liner first"
-    },
-    {
-      "type": "text",
-      "id": "bullet_5",
-      "label": "Checklist item 5",
-      "default": "Adds a physical layer between skin and nitrile contact"
+      "type": "richtext",
+      "id": "subtext",
+      "label": "Subtext",
+      "default": "<p>Stops skin breakdown in sealed gloves. No chemicals. No membranes. No coatings. No saturation point. <strong>0.4mm thin.</strong></p>"
     },
     {
       "type": "text",
@@ -2001,15 +1436,6 @@ wteTimelines.forEach((timeline) => {
       "id": "review_count_fallback",
       "label": "Fallback review count",
       "default": "43"
-    },
-    {
-      "type": "range",
-      "id": "reviews_visible_max",
-      "label": "Reviews shown in tab",
-      "min": 1,
-      "max": 9,
-      "step": 1,
-      "default": 3
     },
     {
       "type": "text",
@@ -2036,25 +1462,6 @@ wteTimelines.forEach((timeline) => {
       "default": "Choose your size"
     },
     {
-      "type": "textarea",
-      "id": "size_fit_notes",
-      "label": "Size fit notes",
-      "info": "One per line, format: Size value=Fit note (e.g. M (8)=Man / Woman). The size value must match the variant option exactly.",
-      "default": "XXS (5)=Child\nXS (6)=Child / Woman\nS (7)=Child / Woman\nM (8)=Man / Woman\nL (9)=Man / Woman\nXL (10)=Man\nXXL (11)=Man\nXXXL (12)=Man"
-    },
-    {
-      "type": "text",
-      "id": "size_help_label",
-      "label": "Unsure-of-size label",
-      "default": "Unsure of your size?"
-    },
-    {
-      "type": "text",
-      "id": "atc_undernote",
-      "label": "Under-ATC guarantee line",
-      "default": "30 shifts. If your hands aren't dry at lunch, keep the liners and get your money back."
-    },
-    {
       "type": "text",
       "id": "size_guide_label",
       "label": "Size guide label",
@@ -2065,43 +1472,6 @@ wteTimelines.forEach((timeline) => {
       "id": "quantity_label",
       "label": "Quantity label",
       "default": "QUANTITY"
-    },
-    {
-      "type": "checkbox",
-      "id": "cpm_enabled",
-      "label": "Show cost-per-month timeline",
-      "default": true,
-      "info": "Two timelines above Add to Cart. Amounts = price × quantity ÷ months, in the shopper's currency."
-    },
-    {
-      "type": "range",
-      "id": "cpm_months_low",
-      "label": "Timeline 1 — months (heavy use)",
-      "min": 1, "max": 18, "step": 1, "default": 6
-    },
-    {
-      "type": "range",
-      "id": "cpm_months_high",
-      "label": "Timeline 2 — months (everyday use)",
-      "min": 1, "max": 24, "step": 1, "default": 12
-    },
-    {
-      "type": "text",
-      "id": "cpm_month_suffix",
-      "label": "Month suffix",
-      "default": "mo"
-    },
-    {
-      "type": "text",
-      "id": "cpm_note_low",
-      "label": "Timeline 1 note",
-      "default": "Heavy shop use"
-    },
-    {
-      "type": "text",
-      "id": "cpm_note_high",
-      "label": "Timeline 2 note",
-      "default": "Regular shop use"
     },
     {
       "type": "text",
@@ -2119,59 +1489,13 @@ wteTimelines.forEach((timeline) => {
       "type": "text",
       "id": "proof_returns_line",
       "label": "Returns proof line (green)",
-      "default": "Mechanics aren't sending them back."
+      "default": "0 returns in the last 90 days"
     },
     {
       "type": "text",
       "id": "proof_keep_line",
       "label": "Keep line",
       "default": "Workers are keeping them."
-    },
-    {
-      "type": "text",
-      "id": "proof_stamp_line",
-      "label": "Guarantee stamp (below ticker)",
-      "info": "Framed with laurels under the comment ticker. Leave blank to hide. Edit this text freely.",
-      "default": "60 shifts. If your hands aren't dry at lunch, keep the liners and get your money back."
-    },
-    {
-      "type": "image_picker",
-      "id": "skapa_logo",
-      "label": "Award emblem (SKAPA)",
-      "info": "Upload the SKAPA emblem/logo. Shows under the guarantee stamp."
-    },
-    {
-      "type": "text",
-      "id": "skapa_line",
-      "label": "Award line",
-      "default": "SKAPA Innovation Award — in memory of the inventor Alfred Nobel"
-    },
-    {
-      "type": "url",
-      "id": "skapa_url",
-      "label": "Award link (optional)"
-    },
-    {
-      "type": "checkbox",
-      "id": "show_seen_in",
-      "label": "Show \"Seen in\" press row",
-      "default": true
-    },
-    {
-      "type": "text",
-      "id": "seen_in_label",
-      "label": "Press row label",
-      "default": "Seen in"
-    },
-    {
-      "type": "url",
-      "id": "seen_bygg_url",
-      "label": "Seen in — Svensk Byggtjänst link"
-    },
-    {
-      "type": "url",
-      "id": "seen_gnosjo_url",
-      "label": "Seen in — Gnosjö Svarvning link"
     },
     {
       "type": "text",
@@ -2388,15 +1712,21 @@ wteTimelines.forEach((timeline) => {
     },
     {
       "type": "text",
-      "id": "guarantee_text",
-      "label": "Guarantee band text",
-      "default": "60 shifts. If your hands aren't dry at lunch, keep the liners and get your money back."
+      "id": "bullet_1",
+      "label": "Bullet 1",
+      "default": "Keeps hands dry inside sealed gloves — full shift, no reapplying"
     },
     {
       "type": "text",
-      "id": "pack_label",
-      "label": "Pack step label",
-      "default": "Choose your pack"
+      "id": "bullet_2",
+      "label": "Bullet 2",
+      "default": "Works under nitrile, latex, and vinyl — no lost grip or dexterity"
+    },
+    {
+      "type": "text",
+      "id": "bullet_3",
+      "label": "Bullet 3",
+      "default": "Lasts 4–12 months — machine washable, no chemicals to wear off"
     },
     {
       "type": "text",
@@ -2421,231 +1751,9 @@ wteTimelines.forEach((timeline) => {
       "id": "description_toggle_closed",
       "label": "Description label",
       "default": "Product description"
-    },
-    {
-      "type": "header",
-      "content": "Buy-zone redesign (Step 1/2, accordion)"
-    },
-    {
-      "type": "text",
-      "id": "compare_principle",
-      "label": "Comparison — Step 1 principle",
-      "default": "Step 1: Change the environment"
-    },
-    {
-      "type": "text",
-      "id": "step2_label",
-      "label": "Timeline — Step 2 label",
-      "default": "Step 2: Notice the difference after 5 min"
-    },
-    {
-      "type": "text",
-      "id": "acc_why_label",
-      "label": "Accordion — Why It Matters label",
-      "default": "Why It Matters"
-    },
-    {
-      "type": "richtext",
-      "id": "acc_why_body",
-      "label": "Accordion — Why It Matters body",
-      "default": "<p>Inside a sealed glove, humidity passes 90% within minutes and skin temperature holds around 35°C for the rest of the shift.</p><p>German TRGS 401 classifies more than two hours a day in occlusive gloves as wet work — a recognised occupational hazard. EV and HV technicians run three to six hours per shift.</p><p>Skin that stays wet softens and swells. Wet skin is more permeable than dry skin.</p><p>DRYE keeps skin drier. That's the whole intervention.</p>"
-    },
-    {
-      "type": "text",
-      "id": "acc_specs_label",
-      "label": "Accordion — Specifications label",
-      "default": "Specifications"
-    },
-    {
-      "type": "text",
-      "id": "acc_maker_label",
-      "label": "Accordion — Who Makes This label",
-      "default": "Who Makes This"
-    },
-    {
-      "type": "image_picker",
-      "id": "maker_image",
-      "label": "Who Makes This — photo (seamstress)",
-      "info": "Shown above the maker text to add a human face."
-    },
-    {
-      "type": "richtext",
-      "id": "acc_maker_body",
-      "label": "Accordion — Who Makes This body",
-      "default": "<p>Made by Granqvists Gloves AB, Karlstad, Sweden — a glove manufacturer since 1984. The same production unit has supplied roughly 80% of military gloves to the Swedish, Norwegian and Finnish armed forces. ISO 9001 and ISO 14001 certified. Fabric knitted in Sweden by Trikåby. Sewn in the EU.</p>"
-    },
-    {
-      "type": "text",
-      "id": "acc_how_label",
-      "label": "Accordion — How It Works label",
-      "default": "How It Works"
-    },
-    {
-      "type": "richtext",
-      "id": "acc_how_body",
-      "label": "Accordion — How It Works body",
-      "default": "<p>Your glove still does the protecting. DRYE changes what touches your skin — a thin dry layer between your hand and the nitrile, latex, rubber or sealed work glove.</p><p>Every liner that absorbs has a saturation point. Once it fills, it becomes the wet layer against your skin. DRYE routes moisture outward instead. The skin side is built not to hold sweat, so it has no saturation point.</p><p>One fabric, knitted in one operation. Two surfaces. One direction. No coatings, no chemicals, no membranes.</p>"
-    },
-    {
-      "type": "text",
-      "id": "acc_sizing_label",
-      "label": "Accordion — Fit and care label",
-      "default": "Fit and care"
-    },
-    {
-      "type": "richtext",
-      "id": "acc_sizing_body",
-      "label": "Accordion — Fit and care body",
-      "default": "<h5>How it should feel</h5><p>Snug, like a second skin. You should feel the fabric, not the seams. If it's tight across the back of the hand, size up. Circumference decides — not finger length.</p><h5>Putting them on</h5><p>The fabric is 0.4 mm. Pull them on gently, finger by finger. Do not yank them on the way you would an outer glove — that puts all the load on the thumb and finger seams.</p><h5>Taking them off</h5><p>Go slow. Peel finger by finger rather than pulling from the cuff.</p><h5>Washing</h5><p>Machine wash up to 90 °C. Nothing washes out — there are no coatings or chemical finishes to lose, and they do not shrink. Air dry if you can. They dry fast. Tumble drying works but will make the surface pill over time.</p><h5>Daily wear</h5><p>If you wear them every shift, two or three pairs works best — one on, one drying, one in the bag. Same idea as work boots.</p>"
-    },
-    {
-      "type": "text",
-      "id": "acc_shipping_label",
-      "label": "Accordion — Shipping And Returns label",
-      "default": "Shipping And Returns"
-    },
-    {
-      "type": "richtext",
-      "id": "acc_shipping_body",
-      "label": "Accordion — Shipping And Returns body",
-      "default": "<h5>The Glove-Off Test — 30 days</h5><p>Wear them one full shift under your sealed glove. If your skin isn't drier when the glove comes off, keep the liners and we refund every dollar. Sending a worn pair back from the US costs more than the pair is worth. No forms, no return shipping.Ships from Sweden</h5><p>10–14 business days to the US with PostNord, no import charges at delivery. UPS is faster but the recipient pays brokerage and duty.</p><h5>Which shipping option should I choose?</h5><p><strong>United States</strong><br><strong>PostNord</strong> — 5–10 business days. Normally 4–6, currently slower due to US customs processing. Duties and taxes are included in the price you pay at checkout. Nothing to pay on delivery.<br><strong>UPS</strong> — 1–3 business days. Duties, taxes and a brokerage fee are billed to you by UPS on delivery.</p><p><strong>Canada</strong><br><strong>PostNord</strong> — 4–6 business days. No duty under CETA. Provincial tax and a CAD 9.95 handling fee are collected on delivery.<br><strong>UPS</strong> — 1–3 business days. Taxes and UPS import fees are billed to you on delivery.</p><p><a href=\"#drye-faq\">Full shipping and returns policy → See the FAQ below</a></p>"
-    },
-    {
-      "type": "header",
-      "content": "Sold-out & Preorder size panel"
-    },
-    {
-      "type": "range",
-      "id": "low_stock_threshold",
-      "label": "Low stock threshold",
-      "min": 1,
-      "max": 20,
-      "step": 1,
-      "default": 10,
-      "info": "At or below this qty, show 'Only N left' in the size dropdown"
-    },
-    {
-      "type": "text",
-      "id": "preorder_note",
-      "label": "Preorder label",
-      "default": "Preorder",
-      "info": "Fallback preorder label"
-    },
-    {
-      "type": "text",
-      "id": "preorder_dropdown_label",
-      "label": "Preorder size — dropdown label",
-      "default": "Low stock",
-      "info": "Shown in the size list for preorder sizes (FOMO). The preorder panel still opens on click."
-    },
-    {
-      "type": "text",
-      "id": "shipping_date",
-      "label": "Ships date",
-      "default": "Sept 15",
-      "info": "e.g. Sept 15 — shown in panel + preorder button"
-    },
-    {
-      "type": "text",
-      "id": "shipping_month",
-      "label": "Production month",
-      "default": "September",
-      "info": "Used in cutoff copy: 'to be in the [X] production run'"
-    },
-    {
-      "type": "text",
-      "id": "cutoff_date",
-      "label": "Order cutoff date",
-      "default": "Aug 31"
-    },
-    {
-      "type": "range",
-      "id": "preorder_discount_percent",
-      "label": "Preorder discount %",
-      "min": 0,
-      "max": 50,
-      "step": 1,
-      "unit": "%",
-      "default": 15,
-      "info": "Shown as the '15% OFF' chip + on the preorder button. The real discount comes from the matching Shopify discount code. Set to 0 to hide the discount messaging."
-    },
-    {
-      "type": "text",
-      "id": "preorder_cutoff_text",
-      "label": "Preorder — sub line",
-      "default": "Your 15% preorder discount is applied automatically at checkout.",
-      "info": "Line under the heading. Tokens: {percent} {date} {cutoff} {month}"
-    },
-    {
-      "type": "text",
-      "id": "preorder_micro",
-      "label": "Preorder microcopy",
-      "default": "Charged today. Cancel anytime before it ships."
-    },
-    {
-      "type": "text",
-      "id": "preorder_discount_code",
-      "label": "Preorder discount code",
-      "default": "PREORDER15",
-      "info": "Discount code applied at cart time when a preorder is placed via the panel"
-    },
-    {
-      "type": "text",
-      "id": "preorder_main_atc_label",
-      "label": "Main ATC label (preorder size selected)",
-      "default": "Preorder below ↓"
-    },
-    {
-      "type": "textarea",
-      "id": "soldout_banner_text",
-      "label": "Pre-order banner (sold-out sizes)",
-      "info": "Shown instead of the 15% preorder panel when a pre-order (continue-selling, 0 stock) size is picked.",
-      "default": "This size is sold out and will be delivered in mid-September. All customers who pre-order get an extra pair free of charge."
-    },
-    {
-      "type": "text",
-      "id": "notify_placeholder",
-      "label": "Email placeholder",
-      "default": "your@email.com"
-    },
-    {
-      "type": "text",
-      "id": "notify_cta",
-      "label": "Notify me button",
-      "default": "NOTIFY ME"
-    },
-    {
-      "type": "text",
-      "id": "notify_email_error",
-      "label": "Email validation error",
-      "default": "Please enter a valid email."
-    },
-    {
-      "type": "text",
-      "id": "notify_success",
-      "label": "Notify me success message",
-      "default": "Done. We'll email you."
     }
   ],
   "blocks": [
-    {
-      "type": "pack_tier",
-      "name": "Pack tier",
-      "settings": [
-        { "type": "number", "id": "pairs", "label": "Pairs (quantity added to cart)", "default": 1 },
-        { "type": "text", "id": "name", "label": "Name", "default": "1 Pair · Starter Pair" },
-        { "type": "text", "id": "subtitle", "label": "Subtitle", "default": "Try DRYE for one full shift" },
-        { "type": "text", "id": "badge", "label": "Badge (optional)" },
-        { "type": "text", "id": "total_price", "label": "Total price override (blank = auto from variant price)" },
-        { "type": "number", "id": "discount_percent", "label": "Discount % (match your Shopify automatic discount)", "default": 0 },
-        { "type": "text", "id": "save_label", "label": "Save label override (blank = auto from Discount %)" },
-        { "type": "textarea", "id": "features", "label": "Feature list (one per line)", "default": "Test under your own gloves\nEconomy delivery: 10–20 business days\nDuties & taxes included\n30-day money-back guarantee" },
-        { "type": "text", "id": "foot_headline", "label": "Footer band headline", "default": "Prove it on your next shift" },
-        { "type": "text", "id": "foot_note", "label": "Footer band note", "default": "One pair. One real workday. Your own gloves." },
-        { "type": "text", "id": "cta_label", "label": "ATC button label when selected", "default": "Add Starter Pair" },
-        { "type": "checkbox", "id": "is_best_value", "label": "Highlight as Best Value (navy border + ribbon)", "default": false }
-      ]
-    },
     {
       "type": "description",
       "name": "Description",
@@ -3293,45 +2401,6 @@ wteTimelines.forEach((timeline) => {
           "label": "Image (fallback)"
         }
       ]
-    },
-    {
-      "type": "press_logo",
-      "name": "Press logo (Seen in)",
-      "settings": [
-        {
-          "type": "image_picker",
-          "id": "image",
-          "label": "Logo"
-        },
-        {
-          "type": "url",
-          "id": "url",
-          "label": "Link (article/product)"
-        },
-        {
-          "type": "text",
-          "id": "name",
-          "label": "Name (alt text)"
-        }
-      ]
-    },
-    {
-      "type": "timeline_row",
-      "name": "Timeline row (Step 2)",
-      "settings": [
-        {
-          "type": "text",
-          "id": "marker",
-          "label": "Marker",
-          "default": "Day 1"
-        },
-        {
-          "type": "text",
-          "id": "outcome",
-          "label": "Outcome",
-          "default": "Peel the glove at lunch. Hands dry."
-        }
-      ]
     }
   ],
   "max_blocks": 24,
@@ -3410,34 +2479,6 @@ wteTimelines.forEach((timeline) => {
           "settings": {
             "question": "Shipping, Customs & Delivery",
             "answer": "Ships within 24 hours from Sweden. USA, Canada, UK delivery: 5–9 business days. Import duties may apply depending on destination."
-          }
-        },
-        {
-          "type": "timeline_row",
-          "settings": {
-            "marker": "Day 1",
-            "outcome": "Peel the glove at lunch. Hands dry."
-          }
-        },
-        {
-          "type": "timeline_row",
-          "settings": {
-            "marker": "Week 1",
-            "outcome": "Nitriles stop tearing. Fewer glove changes."
-          }
-        },
-        {
-          "type": "timeline_row",
-          "settings": {
-            "marker": "Month 1",
-            "outcome": "The cream tube stops emptying."
-          }
-        },
-        {
-          "type": "timeline_row",
-          "settings": {
-            "marker": "Month 6–12",
-            "outcome": "Still the same pair."
           }
         }
       ]

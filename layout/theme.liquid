@@ -102,7 +102,6 @@
     {{ 'base.css' | asset_url | stylesheet_tag }}
     {{ 'components-buttons.css' | asset_url | stylesheet_tag }}
     {{ 'header-new.css' | asset_url | stylesheet_tag }}
-    {{ 'drye-cart-drawer.css' | asset_url | stylesheet_tag }}
 
     {% if request.design_mode %}
       {{ 'editor-guard.css' | asset_url | stylesheet_tag }}
@@ -123,23 +122,6 @@
     {% if template.name == 'blog' and current_tags %}
       <meta name="robots" content="noindex, follow">
     {% endif %}
-
-    {%- comment -%}
-      Shopify Markets currency sync. __marketIntent exposes the market's INTENDED
-      currency (from the URL-prefix localization context) so drye-market-currency-sync.js
-      can compare it to the cart's ACTUAL currency and, on mismatch, set the country
-      context via /localization — keeping the Ajax drawer + checkout in the buyer's
-      currency instead of the SEK store default. Must load before the cart drawer JS.
-    {%- endcomment -%}
-    <script>
-      window.__marketIntent = {
-        country:  {{ localization.country.iso_code | json }},
-        currency: {{ localization.country.currency.iso_code | json }},
-        language: {{ localization.language.iso_code | json }},
-        root:     {{ routes.root_url | json }}
-      };
-    </script>
-    <script src="{{ 'drye-market-currency-sync.js' | asset_url }}" defer></script>
   </head>
 
   <body class="template-{{ template.name }} page-type-{{ request.page_type }}{% if page.template_suffix != blank %} {{ page.template_suffix }}__page{% endif %}">
@@ -151,22 +133,7 @@
     <!-- End Google Tag Manager (noscript) -->
 
     <!-- Header -->
-    {%- comment -%}
-      Nail-tech is a cold-traffic conversion funnel (/pages/nail-tech). We do NOT
-      render the theme header + announcement bar there, so visitors can't click
-      out of the funnel via the nav before reaching the CTA. Handled here in the
-      layout (not the page template) because the theme editor rewrites template
-      JSON and strips any in-template hide section; a layout file is never
-      clobbered. Matches on template suffix OR page handle, so it holds under any
-      market prefix (e.g. /en-us/pages/nail-tech).
-    {%- endcomment -%}
-    {%- assign hide_chrome = false -%}
-    {%- if template.suffix == 'nail-tech' or page.handle == 'nail-tech' -%}
-      {%- assign hide_chrome = true -%}
-    {%- endif -%}
-    {%- unless hide_chrome -%}
-      {%- sections 'header-group' -%}
-    {%- endunless -%}
+    {%- sections 'header-group' -%}
 
     <!-- Main content -->
     {{ content_for_layout }}
@@ -180,9 +147,6 @@
     {%- render 'theme-variables-script' -%}
 
     <!-- Drawers / body-end sections -->
-    {% comment %} Cart drawer is a SECTION so it can re-render via the Section
-       Rendering API (?section_id=), keeping prices server-rendered in the
-       buyer's market currency. It loads its own CSS + JS. {% endcomment %}
     {% section 'drye-cart-drawer' %}
     {% section 'drye-size-guide-drawer' %}
 

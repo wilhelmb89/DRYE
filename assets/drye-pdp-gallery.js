@@ -55,19 +55,7 @@
         Critical:
         Do NOT use scrollIntoView() here.
         It can scroll the whole page down to the PDP/gallery section.
-        Instead, scroll ONLY the thumb strip horizontally so the active
-        thumbnail stays in view (this never moves the page).
       */
-      var activeThumb = thumbs[index];
-      if (activeThumb && activeThumb.parentElement) {
-        var strip = activeThumb.parentElement;
-        if (strip.scrollWidth > strip.clientWidth + 1) {
-          var target =
-            activeThumb.offsetLeft -
-            (strip.clientWidth - activeThumb.offsetWidth) / 2;
-          strip.scrollLeft = Math.max(0, target);
-        }
-      }
     }
 
     function syncActiveMedia() {
