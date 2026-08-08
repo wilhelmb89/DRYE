@@ -319,14 +319,14 @@ assign review_count = section.settings.review_count_fallback
           <div class="sz-dd" data-size-dropdown>
             <button
               type="button"
-              class="sz-dd-trigger{% if product.selected_variant.options[size_option_index] != blank %} has-val{% endif %}"
+              class="sz-dd-trigger{% if selected_variant.options[size_option_index] != blank %} has-val{% endif %}"
               data-size-trigger
               aria-expanded="false"
               aria-haspopup="listbox"
             >
               <span data-size-label>
-                {% if product.selected_variant.options[size_option_index] != blank %}
-                  {{ product.selected_variant.options[size_option_index] }}
+                {% if selected_variant.options[size_option_index] != blank %}
+                  {{ selected_variant.options[size_option_index] }}
                 {% else %}
                   {{ section.settings.size_placeholder }}
                 {% endif %}
@@ -390,10 +390,18 @@ assign review_count = section.settings.review_count_fallback
     aria-selected="{% if is_selected %}true{% else %}false{% endif %}"
     {% unless is_available %}disabled{% endunless %}
   >
-    {{ value }}{% if is_preorder %} — {{ preorder_note }}{% elsif is_in_stock %} — {{ in_stock_note }}{% elsif is_available == false %} — Sold out{% endif %}
+    {{ value }}{% if is_preorder %} — Sold out{% elsif is_in_stock %} — {{ in_stock_note }}{% elsif is_available == false %} — Sold out{% endif %}
   </button>
 {% endfor %}
             </div>
+          </div>
+
+          <div class="sz-soldout-notice" data-soldout-notice hidden>
+            <p class="sz-soldout-notice__text">{{ section.settings.soldout_notice_text | default: "This size is sold out right now. You can still order it — we ship as soon as new stock arrives." }}</p>
+            <label class="sz-soldout-notice__check">
+              <input type="checkbox" data-soldout-ack>
+              <span>{{ section.settings.soldout_ack_label | default: "I understand and want to order anyway" }}</span>
+            </label>
           </div>
         {% else %}
           <select class="variant-select-fallback" name="id">
@@ -1041,6 +1049,8 @@ assign review_count = section.settings.review_count_fallback
     const sizeTrigger = sectionEl.querySelector('[data-size-trigger]');
     const sizeList = sectionEl.querySelector('[data-size-list]');
     const sizeLabel = sectionEl.querySelector('[data-size-label]');
+    const soldoutNotice = sectionEl.querySelector('[data-soldout-notice]');
+    const soldoutAck = sectionEl.querySelector('[data-soldout-ack]');
     const sizeOptions = Array.from(sectionEl.querySelectorAll('[data-size-option]'));
     const tabButtons = Array.from(sectionEl.querySelectorAll('[data-drye-tabs] .tab-btn'));
 const faqButtons = Array.from(sectionEl.querySelectorAll('[data-drye-tabs] .faq-q'));
@@ -1080,9 +1090,16 @@ reviewScrollRows.forEach((row) => {
 
 const shopifyRoot = (window.Shopify && window.Shopify.routes && window.Shopify.routes.root) || '/';
 
-    let currentOptions = (productData.selected_or_first_available_variant && productData.selected_or_first_available_variant.options)
-      ? [...productData.selected_or_first_available_variant.options]
-      : (productData.variants[0] ? [...productData.variants[0].options] : []);
+    // Only pre-fill from a variant the customer (or an incoming URL) actually
+    // chose — product.selected_variant is nil unless the URL has ?variant=.
+    // Falling back to selected_or_first_available_variant here is what made
+    // the size box show "XXS (5)" on load instead of the "Choose your size"
+    // placeholder.
+    const explicitVariantOptions = {{ product.selected_variant.options | json }};
+
+    let currentOptions = explicitVariantOptions
+      ? [...explicitVariantOptions]
+      : new Array(productData.variants[0] ? productData.variants[0].options.length : 1).fill(null);
 
     function isVariantPreorder(variant) {
       if (!variant) return false;
@@ -1090,17 +1107,34 @@ const shopifyRoot = (window.Shopify && window.Shopify.routes && window.Shopify.r
     }
 
     function syncButtonStates(selectedVariant) {
-      const canBuy = !!(selectedVariant && (selectedVariant.available || isVariantPreorder(selectedVariant)));
+      const isPreorder = isVariantPreorder(selectedVariant);
+
+      if (soldoutNotice) {
+        soldoutNotice.hidden = !isPreorder;
+        if (!isPreorder && soldoutAck) soldoutAck.checked = false;
+      }
+
+      const ackedSoldOut = isPreorder && !!(soldoutAck && soldoutAck.checked);
+      const canBuy = !!(selectedVariant && (selectedVariant.available && !isPreorder || ackedSoldOut));
+      // No size chosen yet is a different state from a chosen-but-sold-out
+      // variant — don't show "Sold out" for a simply-unselected size.
+      const noSizeChosen = !selectedVariant;
 
       if (mainAtc) {
         mainAtc.disabled = !canBuy;
-        mainAtc.textContent = canBuy ? {{ atc_button_label | json }} : 'Sold out';
+        mainAtc.textContent = canBuy ? {{ atc_button_label | json }} : (noSizeChosen ? {{ atc_button_label | json }} : 'Sold out');
       }
 
       if (stickySubmit) {
         stickySubmit.disabled = !canBuy;
-        stickySubmit.textContent = canBuy ? {{ sticky_button_label | json }} : 'Sold out';
+        stickySubmit.textContent = canBuy ? {{ sticky_button_label | json }} : (noSizeChosen ? {{ sticky_button_label | json }} : 'Sold out');
       }
+    }
+
+    if (soldoutAck) {
+      soldoutAck.addEventListener('change', () => {
+        syncButtonStates(getVariantFromOptions());
+      });
     }
 
 
@@ -1481,6 +1515,22 @@ wteTimelines.forEach((timeline) => {
       "id": "atc_button_label",
       "label": "Main ATC label",
       "default": "ADD TO CART"
+    },
+    {
+      "type": "header",
+      "content": "Sold-out order acknowledgment (backorderable sizes only)"
+    },
+    {
+      "type": "textarea",
+      "id": "soldout_notice_text",
+      "label": "Notice text",
+      "default": "This size is sold out right now. You can still order it — we ship as soon as new stock arrives."
+    },
+    {
+      "type": "text",
+      "id": "soldout_ack_label",
+      "label": "Checkbox label",
+      "default": "I understand and want to order anyway"
     },
     {
       "type": "checkbox",

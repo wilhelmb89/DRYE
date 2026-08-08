@@ -556,6 +556,12 @@
   margin-bottom: 14px;
 }
 
+@media (min-width: 768px) {
+  .hero .h-title {
+    font-size: 40px;
+  }
+}
+
 .hero .h-sub {
   font-size: 14px;
   color: var(--muted);
@@ -1714,15 +1720,8 @@
 }
 
 /* ==========================================================================
-   H1 sizing (B8) + buy-zone spacing (B9) — placed last to win source order
+   buy-zone spacing (B9) — placed last to win source order
    ========================================================================== */
-.hero .h-title {
-  font-size: 26px;
-  font-weight: 600;
-  letter-spacing: -0.025em;
-  line-height: 1.1;
-}
-
 .hero .stars-row { margin-bottom: 4px; }
 .hero .h-title { margin-bottom: 10px; }
 .hero .h-sub { margin-bottom: 12px; font-size: 13px; color: var(--muted); line-height: 1.65; }
