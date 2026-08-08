@@ -186,6 +186,54 @@
     },
     "costs": {
       "type": "drye-b2b-costs",
+      "blocks": {
+        "cost_hyCbD7": {
+          "type": "cost",
+          "settings": {
+            "label": "Production stoppages",
+            "value": "Daily",
+            "sub": "Airing out, changes, wait time.",
+            "tag": "",
+            "tag_sub": ""
+          }
+        },
+        "cost_97CWNx": {
+          "type": "cost",
+          "settings": {
+            "label": "Production stoppages",
+            "value": "Daily",
+            "sub": "Airing out, changes, wait time.",
+            "tag": "",
+            "tag_sub": ""
+          }
+        },
+        "cost_jML4jW": {
+          "type": "cost",
+          "settings": {
+            "label": "Production stoppages",
+            "value": "Daily",
+            "sub": "Airing out, changes, wait time.",
+            "tag": "",
+            "tag_sub": ""
+          }
+        },
+        "cost_DbJM9K": {
+          "type": "cost",
+          "settings": {
+            "label": "Production stoppages",
+            "value": "Daily",
+            "sub": "Airing out, changes, wait time.",
+            "tag": "",
+            "tag_sub": ""
+          }
+        }
+      },
+      "block_order": [
+        "cost_hyCbD7",
+        "cost_97CWNx",
+        "cost_jML4jW",
+        "cost_DbJM9K"
+      ],
       "settings": {
         "anchor_id": "costs",
         "eyebrow": "The cost of not acting",
@@ -253,6 +301,60 @@
     },
     "mechanism_3": {
       "type": "drye-b2b-mechanism-numbers",
+      "blocks": {
+        "regain_34CJ4T": {
+          "type": "regain",
+          "settings": {
+            "name": "",
+            "value": "",
+            "weight": 8,
+            "is_drye": false
+          }
+        },
+        "regain_kDwgHC": {
+          "type": "regain",
+          "settings": {
+            "name": "",
+            "value": "",
+            "weight": 8,
+            "is_drye": false
+          }
+        },
+        "regain_8EBXMF": {
+          "type": "regain",
+          "settings": {
+            "name": "",
+            "value": "",
+            "weight": 8,
+            "is_drye": false
+          }
+        },
+        "regain_cxCNXp": {
+          "type": "regain",
+          "settings": {
+            "name": "",
+            "value": "",
+            "weight": 8,
+            "is_drye": false
+          }
+        },
+        "regain_7Gw9cQ": {
+          "type": "regain",
+          "settings": {
+            "name": "",
+            "value": "",
+            "weight": 8,
+            "is_drye": false
+          }
+        }
+      },
+      "block_order": [
+        "regain_34CJ4T",
+        "regain_kDwgHC",
+        "regain_8EBXMF",
+        "regain_cxCNXp",
+        "regain_7Gw9cQ"
+      ],
       "settings": {
         "anchor_id": "science",
         "eyebrow": "In numbers",
@@ -272,6 +374,37 @@
     },
     "stats": {
       "type": "drye-b2b-stats",
+      "blocks": {
+        "stat_7nxjgD": {
+          "type": "stat",
+          "settings": {
+            "label": "",
+            "value": "",
+            "body": ""
+          }
+        },
+        "stat_eyqgmk": {
+          "type": "stat",
+          "settings": {
+            "label": "",
+            "value": "",
+            "body": ""
+          }
+        },
+        "stat_hTyN3H": {
+          "type": "stat",
+          "settings": {
+            "label": "",
+            "value": "",
+            "body": ""
+          }
+        }
+      },
+      "block_order": [
+        "stat_7nxjgD",
+        "stat_eyqgmk",
+        "stat_hTyN3H"
+      ],
       "settings": {
         "anchor_id": "why-now",
         "eyebrow": "Why now",
@@ -281,6 +414,34 @@
     },
     "in_service": {
       "type": "drye-b2b-tiles",
+      "blocks": {
+        "tile_P89chH": {
+          "type": "tile",
+          "settings": {
+            "label": "",
+            "sub": ""
+          }
+        },
+        "tile_zxgzRY": {
+          "type": "tile",
+          "settings": {
+            "label": "",
+            "sub": ""
+          }
+        },
+        "tile_H6qaBm": {
+          "type": "tile",
+          "settings": {
+            "label": "",
+            "sub": ""
+          }
+        }
+      },
+      "block_order": [
+        "tile_P89chH",
+        "tile_zxgzRY",
+        "tile_H6qaBm"
+      ],
       "settings": {
         "anchor_id": "customers",
         "eyebrow": "In service with",
@@ -289,6 +450,45 @@
     },
     "customer_logos": {
       "type": "drye-b2b-logo-grid",
+      "blocks": {
+        "logo_7XpLNB": {
+          "type": "logo",
+          "settings": {
+            "name": ""
+          }
+        },
+        "logo_PzhFfr": {
+          "type": "logo",
+          "settings": {
+            "name": ""
+          }
+        },
+        "logo_xVx6nd": {
+          "type": "logo",
+          "settings": {
+            "name": ""
+          }
+        },
+        "logo_RWRkMN": {
+          "type": "logo",
+          "settings": {
+            "name": ""
+          }
+        },
+        "logo_hVKpaA": {
+          "type": "logo",
+          "settings": {
+            "name": ""
+          }
+        }
+      },
+      "block_order": [
+        "logo_7XpLNB",
+        "logo_PzhFfr",
+        "logo_xVx6nd",
+        "logo_RWRkMN",
+        "logo_hVKpaA"
+      ],
       "settings": {
         "anchor_id": "customer-logos",
         "eyebrow": "Pilots and customers",
