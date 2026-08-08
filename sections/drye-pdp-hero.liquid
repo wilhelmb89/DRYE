@@ -319,14 +319,14 @@ assign review_count = section.settings.review_count_fallback
           <div class="sz-dd" data-size-dropdown>
             <button
               type="button"
-              class="sz-dd-trigger{% if selected_variant.options[size_option_index] != blank %} has-val{% endif %}"
+              class="sz-dd-trigger{% if product.selected_variant.options[size_option_index] != blank %} has-val{% endif %}"
               data-size-trigger
               aria-expanded="false"
               aria-haspopup="listbox"
             >
               <span data-size-label>
-                {% if selected_variant.options[size_option_index] != blank %}
-                  {{ selected_variant.options[size_option_index] }}
+                {% if product.selected_variant.options[size_option_index] != blank %}
+                  {{ product.selected_variant.options[size_option_index] }}
                 {% else %}
                   {{ section.settings.size_placeholder }}
                 {% endif %}
