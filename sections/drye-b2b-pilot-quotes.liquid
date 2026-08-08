@@ -1,0 +1,71 @@
+{{ 'drye-b2b-dark.css' | asset_url | stylesheet_tag }}
+
+{%- comment -%}
+  The track renders every block TWICE — the second pass is aria-hidden and is
+  what makes the -50% marquee loop seamless. On mobile the animation stops and
+  the scroller becomes a thumb-driven snap slider. Do not delete the duplicate.
+{%- endcomment -%}
+
+<section class="drye-b2b sec sec-dark" id="{{ section.settings.anchor_id | default: 'feedback' }}">
+  {%- if section.settings.eyebrow != blank -%}
+    <p class="eyebrow">{{ section.settings.eyebrow | escape }}</p>
+  {%- endif -%}
+  <h2 class="h2">{{ section.settings.heading }}</h2>
+  {%- if section.settings.subheading != blank -%}
+    <p class="body-mute">{{ section.settings.subheading }}</p>
+  {%- endif -%}
+
+  <div class="marquee">
+    <div class="marquee__track">
+      {%- for pass in (1..2) -%}
+        {%- for block in section.blocks -%}
+          <div class="pilot-card" {% if pass == 2 %}aria-hidden="true"{% endif %} {{ block.shopify_attributes }}>
+            <p class="q">{{ block.settings.quote }}</p>
+            <div class="meta">
+              <div>
+                <span class="who">{{ block.settings.who | escape }}</span>
+                <span class="role">{{ block.settings.role | escape }}</span>
+              </div>
+              <span class="co">{{ block.settings.company | escape }}</span>
+            </div>
+          </div>
+        {%- endfor -%}
+      {%- endfor -%}
+    </div>
+  </div>
+
+  {% render 'drye-b2b-swipe-hint' %}
+
+  {%- if section.settings.foot_text != blank -%}
+    <div class="m-foot">
+      <span>{{ section.settings.foot_text }}</span>
+      {%- if section.settings.foot_link_label != blank -%}
+        <a href="{{ section.settings.foot_link_url }}">{{ section.settings.foot_link_label | escape }} &rarr;</a>
+      {%- endif -%}
+    </div>
+  {%- endif -%}
+</section>
+
+{% schema %}
+{
+  "name": "drye-B2B Quotes",
+  "settings": [
+    { "type": "text", "id": "anchor_id", "label": "Anchor id", "default": "feedback" },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Pilot feedback" },
+    { "type": "html", "id": "heading", "label": "Headline", "default": "What the pilots wrote back." },
+    { "type": "html", "id": "subheading", "label": "Subheadline" },
+    { "type": "html", "id": "foot_text", "label": "Footer text" },
+    { "type": "text", "id": "foot_link_label", "label": "Footer link label" },
+    { "type": "url", "id": "foot_link_url", "label": "Footer link" }
+  ],
+  "blocks": [
+    { "type": "quote", "name": "Quote", "settings": [
+      { "type": "textarea", "id": "quote", "label": "Quote", "info": "Verbatim only." },
+      { "type": "text", "id": "who", "label": "Name" },
+      { "type": "text", "id": "role", "label": "Role" },
+      { "type": "text", "id": "company", "label": "Company" }
+    ]}
+  ],
+  "presets": [{ "name": "drye-B2B Quotes" }]
+}
+{% endschema %}

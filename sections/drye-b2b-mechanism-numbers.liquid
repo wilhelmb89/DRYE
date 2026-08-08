@@ -1,0 +1,105 @@
+{{ 'drye-b2b-mechanism.css' | asset_url | stylesheet_tag }}
+
+{%- comment -%}
+  Regain bar widths are computed from the block values against the largest
+  value, so the chart cannot drift from the numbers. The wetted-area panel
+  compares the TWO FACES OF THE SAME FABRIC — not a competitor. The
+  "not an occlusion test" disclaimer must stay.
+{%- endcomment -%}
+
+{%- assign regain_max = 0 -%}
+{%- for block in section.blocks -%}
+  {%- if block.type == 'regain' and block.settings.weight > regain_max -%}{%- assign regain_max = block.settings.weight -%}{%- endif -%}
+{%- endfor -%}
+
+<section class="drye-b2b sec" id="{{ section.settings.anchor_id | default: 'science' }}">
+  {%- if section.settings.eyebrow != blank -%}
+    <p class="eyebrow">{{ section.settings.eyebrow | escape }}</p>
+  {%- endif -%}
+  <h2 class="h2 h2--display" style="text-transform:none">{{ section.settings.heading }}</h2>
+
+  <div class="mech3-grid">
+    <div class="regain-card">
+      <p class="regain-eyebrow">{{ section.settings.regain_title | escape }}</p>
+      {%- for block in section.blocks -%}
+        {%- if block.type == 'regain' -%}
+          {%- assign pct = block.settings.weight | times: 100.0 | divided_by: regain_max -%}
+          <div class="regain-row{% if block.settings.is_drye %} regain-row--drye{% endif %}" {{ block.shopify_attributes }}>
+            <div class="regain-row__top">
+              <span class="regain-row__name">{{ block.settings.name | escape }}</span>
+              <span class="regain-row__val">{{ block.settings.value }}</span>
+            </div>
+            <div class="regain-row__track"><div class="regain-row__fill" style="width:{{ pct }}%"></div></div>
+          </div>
+        {%- endif -%}
+      {%- endfor -%}
+      {%- if section.settings.regain_source != blank -%}
+        <p class="regain-fine">{{ section.settings.regain_source }}</p>
+      {%- endif -%}
+    </div>
+
+    <div class="asym-card">
+      <p class="asym-eyebrow">{{ section.settings.asym_title | escape }}</p>
+      <div class="asym-cols">
+        <div class="asym-col asym-col--accent">
+          <span class="asym-col__lbl">{{ section.settings.outer_label | escape }}</span>
+          <span class="asym-col__val">{{ section.settings.outer_value | escape }}</span>
+          <div class="asym-col__bar" style="height:74px"></div>
+        </div>
+        <div class="asym-col">
+          <span class="asym-col__lbl">{{ section.settings.skin_label | escape }}</span>
+          <span class="asym-col__val">{{ section.settings.skin_value | escape }}</span>
+          <div class="asym-col__bar" style="height:40px"></div>
+        </div>
+        <div class="asym-callout">
+          <div class="asym-callout__val">{{ section.settings.delta | escape }}</div>
+          <div class="asym-callout__sub">{{ section.settings.delta_sub | escape }}</div>
+        </div>
+      </div>
+      {%- if section.settings.asym_source != blank -%}
+        <p class="asym-source">{{ section.settings.asym_source }}</p>
+      {%- endif -%}
+      {%- if section.settings.disclaimer != blank -%}
+        <div class="asym-disclaimer">
+          <span class="asym-disclaimer__dot" aria-hidden="true">
+            <svg width="8" height="6" viewBox="0 0 9 7"><polyline points="1,3.6 3.4,6 8,1" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></polyline></svg>
+          </span>
+          <span>{{ section.settings.disclaimer }}</span>
+        </div>
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "drye-B2B Mech 3",
+  "settings": [
+    { "type": "text", "id": "anchor_id", "label": "Anchor id", "default": "science" },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "In numbers" },
+    { "type": "html", "id": "heading", "label": "Headline", "default": "In numbers" },
+    { "type": "header", "content": "Moisture regain panel" },
+    { "type": "text", "id": "regain_title", "label": "Panel title", "default": "Moisture regain (%) · lower is drier" },
+    { "type": "html", "id": "regain_source", "label": "Source", "default": "Regain: Kadolph 2014 · ASTM D2654" },
+    { "type": "header", "content": "Wetted-area panel" },
+    { "type": "text", "id": "asym_title", "label": "Panel title", "default": "Wetted area (mm²) at 120 s" },
+    { "type": "text", "id": "outer_label", "label": "Outer label", "default": "Outer side" },
+    { "type": "text", "id": "outer_value", "label": "Outer value", "default": "8,111" },
+    { "type": "text", "id": "skin_label", "label": "Skin label", "default": "Skin side" },
+    { "type": "text", "id": "skin_value", "label": "Skin value", "default": "6,122" },
+    { "type": "text", "id": "delta", "label": "Delta", "default": "+28%" },
+    { "type": "text", "id": "delta_sub", "label": "Delta sub", "default": "larger wetted area on outer side" },
+    { "type": "html", "id": "asym_source", "label": "Source", "default": "Liquid applied on skin side · WickView · 120&nbsp;s · Swedish School of Textiles, 2025" },
+    { "type": "html", "id": "disclaimer", "label": "Disclaimer", "default": "Open-air fabric-level evidence — not an occlusion test." }
+  ],
+  "blocks": [
+    { "type": "regain", "name": "Regain row", "settings": [
+      { "type": "text", "id": "name", "label": "Material" },
+      { "type": "text", "id": "value", "label": "Displayed value" },
+      { "type": "number", "id": "weight", "label": "Bar weight", "info": "Numeric value used to size the bar.", "default": 8 },
+      { "type": "checkbox", "id": "is_drye", "label": "DRYE material (teal, boxed)", "default": false }
+    ]}
+  ],
+  "presets": [{ "name": "drye-B2B Mech 3" }]
+}
+{% endschema %}

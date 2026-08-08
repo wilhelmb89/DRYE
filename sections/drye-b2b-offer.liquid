@@ -1,0 +1,62 @@
+{{ 'drye-b2b-offer.css' | asset_url | stylesheet_tag }}
+
+<section class="drye-b2b sec" id="{{ section.settings.anchor_id | default: 'offer' }}">
+  {%- if section.settings.eyebrow != blank -%}
+    <p class="eyebrow">{{ section.settings.eyebrow | escape }}</p>
+  {%- endif -%}
+  <h2 class="h2">{{ section.settings.heading }}</h2>
+  {%- if section.settings.body != blank -%}<p class="body-mute">{{ section.settings.body }}</p>{%- endif -%}
+
+  <div class="tiers">
+    {%- for block in section.blocks -%}
+      <div class="tier{% if block.settings.recommended %} tier--reco{% endif %}" {{ block.shopify_attributes }}>
+        {%- if block.settings.recommended -%}
+          <span class="tier__badge">{{ block.settings.badge_label | default: 'Recommended' | escape }}</span>
+        {%- endif -%}
+        <p class="tier__eye">{{ block.settings.step | escape }}</p>
+        <p class="tier__name">{{ block.settings.name | escape }}</p>
+        <p class="tier__price">{{ block.settings.price }}</p>
+
+        <ul class="tier__list">
+          {%- assign lines = block.settings.features | newline_to_br | split: '<br />' -%}
+          {%- for line in lines -%}
+            {%- assign trimmed = line | strip -%}
+            {%- if trimmed != blank -%}<li>{{ trimmed }}</li>{%- endif -%}
+          {%- endfor -%}
+        </ul>
+
+        <div class="tier__cta">
+          <a href="{{ block.settings.cta_url }}" class="btn{% unless block.settings.recommended %} ghost{% endunless %}">{{ block.settings.cta_label | escape }} &rarr;</a>
+        </div>
+        {%- if block.settings.foot != blank -%}<p class="tier__foot">{{ block.settings.foot }}</p>{%- endif -%}
+      </div>
+    {%- endfor -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "drye-B2B Offer",
+  "settings": [
+    { "type": "text", "id": "anchor_id", "label": "Anchor id", "default": "offer" },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "The offer" },
+    { "type": "html", "id": "heading", "label": "Headline", "default": "Three ways in — pick the one that fits your scale." },
+    { "type": "html", "id": "body", "label": "Body" }
+  ],
+  "max_blocks": 3,
+  "blocks": [
+    { "type": "tier", "name": "Tier", "settings": [
+      { "type": "text", "id": "step", "label": "Step label" },
+      { "type": "text", "id": "name", "label": "Name" },
+      { "type": "html", "id": "price", "label": "Price line" },
+      { "type": "textarea", "id": "features", "label": "Features", "info": "One per line." },
+      { "type": "text", "id": "cta_label", "label": "CTA label" },
+      { "type": "url", "id": "cta_url", "label": "CTA link" },
+      { "type": "html", "id": "foot", "label": "Footnote" },
+      { "type": "checkbox", "id": "recommended", "label": "Recommended tier", "default": false },
+      { "type": "text", "id": "badge_label", "label": "Badge label", "default": "Recommended" }
+    ]}
+  ],
+  "presets": [{ "name": "drye-B2B Offer" }]
+}
+{% endschema %}

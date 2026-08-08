@@ -1,0 +1,72 @@
+{{ 'drye-b2b-fail.css' | asset_url | stylesheet_tag }}
+{{ 'drye-b2b-mechanism.css' | asset_url | stylesheet_tag }}
+
+<section class="drye-b2b sec" id="{{ section.settings.anchor_id | default: 'why-fail' }}">
+  <div class="split-layout">
+    <div class="split-copy">
+      <h2 class="h2 h2--display">{{ section.settings.heading }}</h2>
+      {%- if section.settings.body != blank -%}
+        <p class="body-mute" style="margin-top:12px">{{ section.settings.body }}</p>
+      {%- endif -%}
+    </div>
+
+    <div class="split-visual">
+      <div class="fail-diagrams">
+        <figure class="fail-panel">
+          <figcaption class="fail-panel__eyebrow">{{ section.settings.panel_a_label | escape }}</figcaption>
+          <div class="fail-panel__box">
+            <svg viewBox="0 0 120 100" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <line x1="10" y1="25" x2="110" y2="25" stroke="#D1D5DB" stroke-width="1" stroke-dasharray="3 3"></line>
+              <g stroke="#1E3A4C" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M35 85 L35 15 M31 20 L35 15 L39 20"></path>
+                <path d="M60 85 L60 15 M56 20 L60 15 L64 20"></path>
+                <path d="M85 85 L85 15 M81 20 L85 15 L89 20"></path>
+              </g>
+              <line x1="10" y1="85" x2="110" y2="85" stroke="#1E3A4C" stroke-width="1.4"></line>
+            </svg>
+          </div>
+          <figcaption class="fail-panel__caption">{{ section.settings.panel_a_caption }}</figcaption>
+        </figure>
+
+        <figure class="fail-panel">
+          <figcaption class="fail-panel__eyebrow">{{ section.settings.panel_b_label | escape }}</figcaption>
+          <div class="fail-panel__box">
+            <svg viewBox="0 0 120 100" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <pattern id="drye-hatch-{{ section.id }}" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+                <line x1="0" y1="0" x2="0" y2="6" stroke="#FFFFFF" stroke-width="1.4"></line>
+              </pattern>
+              <rect x="10" y="10" width="100" height="14" fill="#1E3A4C"></rect>
+              <rect x="10" y="10" width="100" height="14" fill="url(#drye-hatch-{{ section.id }})"></rect>
+              <rect x="10" y="76" width="100" height="10" fill="#E5E7EB"></rect>
+              <g stroke="#1E3A4C" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M35 76 L35 28 M31 33 L35 28 L39 33"></path>
+                <path d="M85 76 L85 28 M81 33 L85 28 L89 33"></path>
+              </g>
+              <g stroke="#0D9488" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M60 76 L60 30 M56 35 L60 30 L64 35"></path>
+              </g>
+              <path d="M55 12 L65 22 M65 12 L55 22" stroke="#0D9488" stroke-width="1.8" stroke-linecap="round"></path>
+            </svg>
+          </div>
+          <figcaption class="fail-panel__caption">{{ section.settings.panel_b_caption }}</figcaption>
+        </figure>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "drye-B2B Fail",
+  "settings": [
+    { "type": "text", "id": "anchor_id", "label": "Anchor id", "default": "why-fail" },
+    { "type": "html", "id": "heading", "label": "Headline", "default": "Why current gloves and liners fail" },
+    { "type": "html", "id": "body", "label": "Body", "default": "Absorption works in open air. It fails when evaporation disappears." },
+    { "type": "text", "id": "panel_a_label", "label": "Panel A label", "default": "Open air" },
+    { "type": "html", "id": "panel_a_caption", "label": "Panel A caption", "default": "Evaporation path outward" },
+    { "type": "text", "id": "panel_b_label", "label": "Panel B label", "default": "Sealed system" },
+    { "type": "html", "id": "panel_b_caption", "label": "Panel B caption", "default": "Evaporation blocked — <em>moisture remains inside.</em>" }
+  ],
+  "presets": [{ "name": "drye-B2B Fail" }]
+}
+{% endschema %}

@@ -1,0 +1,80 @@
+{{ 'drye-b2b-dark.css' | asset_url | stylesheet_tag }}
+
+{%- comment -%}
+  The track renders every block TWICE — the second pass is aria-hidden and is
+  what makes the -50% marquee loop seamless. On mobile the animation stops and
+  the scroller becomes a thumb-driven snap slider. Do not delete the duplicate.
+{%- endcomment -%}
+
+<section class="drye-b2b sec sec-dark" id="{{ section.settings.anchor_id | default: 'pilots' }}">
+  {%- if section.settings.eyebrow != blank -%}
+    <p class="eyebrow">{{ section.settings.eyebrow | escape }}</p>
+  {%- endif -%}
+  <h2 class="h2">{{ section.settings.heading }}</h2>
+  {%- if section.settings.subheading != blank -%}
+    <p class="body-mute">{{ section.settings.subheading }}</p>
+  {%- endif -%}
+
+  <div class="marquee">
+    <div class="marquee__track">
+      {%- for pass in (1..2) -%}
+        {%- for block in section.blocks -%}
+          <a class="case-card" href="{{ block.settings.url }}" {% if pass == 2 %}aria-hidden="true" tabindex="-1"{% endif %} {{ block.shopify_attributes }}>
+            <div class="case-card__media">
+              {%- if block.settings.image != blank -%}
+                {{ block.settings.image | image_url: width: 700 | image_tag: alt: block.settings.title, loading: 'lazy' }}
+              {%- endif -%}
+            </div>
+            <div class="case-card__body">
+              <p class="tag">{{ block.settings.tag | escape }}</p>
+              <p class="ttl">{{ block.settings.title | escape }}</p>
+              <p class="dek">{{ block.settings.excerpt | escape }}</p>
+              <div class="row">
+                <span class="co">{{ block.settings.company | escape }}</span>
+                <span class="go">{{ section.settings.link_label | escape }} &rarr;</span>
+              </div>
+            </div>
+          </a>
+        {%- endfor -%}
+      {%- endfor -%}
+    </div>
+  </div>
+
+  {% render 'drye-b2b-swipe-hint' %}
+
+  {%- if section.settings.foot_text != blank or section.settings.foot_link_label != blank -%}
+    <div class="m-foot">
+      <span>{{ section.settings.foot_text }}</span>
+      {%- if section.settings.foot_link_label != blank -%}
+        <a href="{{ section.settings.foot_link_url }}">{{ section.settings.foot_link_label | escape }} &rarr;</a>
+      {%- endif -%}
+    </div>
+  {%- endif -%}
+</section>
+
+{% schema %}
+{
+  "name": "drye-B2B Cases",
+  "settings": [
+    { "type": "text", "id": "anchor_id", "label": "Anchor id", "default": "pilots" },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Field case studies" },
+    { "type": "html", "id": "heading", "label": "Headline", "default": "Read what the pilots actually did." },
+    { "type": "html", "id": "subheading", "label": "Subheadline" },
+    { "type": "text", "id": "link_label", "label": "Card link label", "default": "Read the case" },
+    { "type": "html", "id": "foot_text", "label": "Footer text" },
+    { "type": "text", "id": "foot_link_label", "label": "Footer link label" },
+    { "type": "url", "id": "foot_link_url", "label": "Footer link" }
+  ],
+  "blocks": [
+    { "type": "case", "name": "Case study", "settings": [
+      { "type": "image_picker", "id": "image", "label": "Pilot photo" },
+      { "type": "text", "id": "tag", "label": "Sector tag" },
+      { "type": "text", "id": "title", "label": "Title" },
+      { "type": "textarea", "id": "excerpt", "label": "Excerpt" },
+      { "type": "text", "id": "company", "label": "Company", "info": "Needs archived written permission before publishing." },
+      { "type": "url", "id": "url", "label": "Link" }
+    ]}
+  ],
+  "presets": [{ "name": "drye-B2B Cases" }]
+}
+{% endschema %}

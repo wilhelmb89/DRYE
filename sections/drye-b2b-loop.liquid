@@ -1,0 +1,85 @@
+{{ 'drye-b2b-loop.css' | asset_url | stylesheet_tag }}
+
+{%- comment -%}
+  Icon-led four-step flow, used TWICE on this page:
+    1. "CPOs keep buying new brands" — meta = budget owner (variant: owner)
+    2. "Supply chain"                — meta = capability chip (variant: chip)
+  The grey 01–04 numbers are CSS counters on .loop-step, not markup.
+  On mobile the row becomes a horizontal snap slider + swipe hint.
+{%- endcomment -%}
+
+<section class="drye-b2b sec" id="{{ section.settings.anchor_id | default: 'loop' }}">
+  {%- if section.settings.eyebrow != blank -%}
+    <p class="eyebrow">{{ section.settings.eyebrow | escape }}</p>
+  {%- endif -%}
+  {%- if section.settings.heading != blank -%}
+    <h2 class="h2">{{ section.settings.heading }}</h2>
+  {%- endif -%}
+  {%- if section.settings.subheading != blank -%}
+    <p class="body-mute">{{ section.settings.subheading }}</p>
+  {%- endif -%}
+
+  <div class="loop">
+    {%- for block in section.blocks -%}
+      {%- unless forloop.first -%}<span class="loop-arrow" aria-hidden="true">&rarr;</span>{%- endunless -%}
+      <div class="loop-step{% if block.settings.highlight %} loop-step--end{% endif %}" {{ block.shopify_attributes }}>
+        <span class="loop-step__ico">{% render 'drye-b2b-icon', icon: block.settings.icon %}</span>
+        {%- if block.settings.step != blank -%}
+          <p class="loop-step__step">{{ block.settings.step | escape }}</p>
+        {%- endif -%}
+        <p class="loop-step__name">{{ block.settings.name | escape }}</p>
+        <span class="loop-step__rule"></span>
+        <p class="loop-step__line">{{ block.settings.line | escape }}</p>
+        {%- if block.settings.meta != blank -%}
+          {%- if section.settings.variant == 'chip' -%}
+            <span class="loop-step__chip">{{ block.settings.meta | escape }}</span>
+          {%- else -%}
+            <p class="loop-step__owner">{{ block.settings.meta | escape }}</p>
+          {%- endif -%}
+        {%- endif -%}
+      </div>
+    {%- endfor -%}
+  </div>
+
+  {% render 'drye-b2b-swipe-hint' %}
+
+  {%- if section.settings.footnote != blank -%}
+    <p class="prod-footnote"><span class="prod-footnote__dash"></span>{{ section.settings.footnote }}</p>
+  {%- endif -%}
+</section>
+
+{% schema %}
+{
+  "name": "drye-B2B Loop",
+  "settings": [
+    { "type": "text", "id": "anchor_id", "label": "Anchor id", "default": "loop" },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow" },
+    { "type": "html", "id": "heading", "label": "Headline" },
+    { "type": "html", "id": "subheading", "label": "Subheadline" },
+    { "type": "select", "id": "variant", "label": "Meta style", "default": "owner",
+      "options": [
+        { "value": "owner", "label": "Plain label — budget owner" },
+        { "value": "chip", "label": "Teal chip — capability" }
+      ] },
+    { "type": "html", "id": "footnote", "label": "Footnote" }
+  ],
+  "max_blocks": 4,
+  "blocks": [
+    { "type": "step", "name": "Step", "settings": [
+      { "type": "select", "id": "icon", "label": "Icon", "default": "box",
+        "options": [
+          { "value": "box", "label": "Box" }, { "value": "tube", "label": "Cream tube" },
+          { "value": "calendar", "label": "Calendar" }, { "value": "pause", "label": "Pause" },
+          { "value": "knit", "label": "Knitting" }, { "value": "drop", "label": "Droplet" },
+          { "value": "glove", "label": "Glove" }
+        ] },
+      { "type": "text", "id": "step", "label": "Step label", "info": "Supply-chain variant only, e.g. \"01 · Textile\"." },
+      { "type": "text", "id": "name", "label": "Name" },
+      { "type": "text", "id": "line", "label": "One line", "info": "Six words or fewer." },
+      { "type": "text", "id": "meta", "label": "Meta — owner or capability" },
+      { "type": "checkbox", "id": "highlight", "label": "Teal highlight (final step)", "default": false }
+    ]}
+  ],
+  "presets": [{ "name": "drye-B2B Loop" }]
+}
+{% endschema %}

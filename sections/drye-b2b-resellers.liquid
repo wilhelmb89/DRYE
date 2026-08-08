@@ -1,0 +1,44 @@
+{{ 'drye-b2b-resellers.css' | asset_url | stylesheet_tag }}
+
+<section class="drye-b2b sec" id="{{ section.settings.anchor_id | default: 'resellers' }}">
+  {%- if section.settings.eyebrow != blank -%}
+    <p class="eyebrow">{{ section.settings.eyebrow | escape }}</p>
+  {%- endif -%}
+  {%- if section.settings.heading != blank -%}<h2 class="h2">{{ section.settings.heading }}</h2>{%- endif -%}
+  {%- if section.settings.body != blank -%}<p class="body-mute">{{ section.settings.body }}</p>{%- endif -%}
+
+  <div class="retail-grid">
+    {%- for block in section.blocks -%}
+      <a class="retail-cell" href="{{ block.settings.url }}" aria-label="Buy via {{ block.settings.name | escape }}" {{ block.shopify_attributes }}>
+        {%- if block.settings.logo != blank -%}
+          {{ block.settings.logo | image_url: width: 400 | image_tag: alt: block.settings.name, loading: 'lazy' }}
+        {%- else -%}
+          <span class="retail-name">{{ block.settings.name | escape }}</span>
+        {%- endif -%}
+      </a>
+    {%- endfor -%}
+  </div>
+
+  {%- if section.settings.footnote != blank -%}<p class="footnote">{{ section.settings.footnote }}</p>{%- endif -%}
+</section>
+
+{% schema %}
+{
+  "name": "drye-B2B Sellers",
+  "settings": [
+    { "type": "text", "id": "anchor_id", "label": "Anchor id", "default": "resellers" },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Resellers" },
+    { "type": "html", "id": "heading", "label": "Headline" },
+    { "type": "html", "id": "body", "label": "Body" },
+    { "type": "html", "id": "footnote", "label": "Footnote" }
+  ],
+  "blocks": [
+    { "type": "reseller", "name": "Reseller", "settings": [
+      { "type": "image_picker", "id": "logo", "label": "Logo" },
+      { "type": "text", "id": "name", "label": "Name" },
+      { "type": "url", "id": "url", "label": "Link" }
+    ]}
+  ],
+  "presets": [{ "name": "drye-B2B Sellers" }]
+}
+{% endschema %}

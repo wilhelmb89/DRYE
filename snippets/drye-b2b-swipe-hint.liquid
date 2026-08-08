@@ -1,0 +1,8 @@
+{%- comment -%}
+  Mobile-only swipe cue. Sits directly after a horizontal snap slider.
+  Hidden above 820px by CSS.
+{%- endcomment -%}
+<div class="swipe-hint" aria-hidden="true">
+  <span class="swipe-hint__label">{{ label | default: 'Swipe' }}</span>
+  <span class="swipe-hint__track"><span class="swipe-hint__dot"></span></span>
+</div>

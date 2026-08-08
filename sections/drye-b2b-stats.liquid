@@ -1,0 +1,48 @@
+{{ 'drye-b2b-stats.css' | asset_url | stylesheet_tag }}
+
+<section class="drye-b2b sec" id="{{ section.settings.anchor_id | default: 'why-now' }}">
+  {%- if section.settings.eyebrow != blank -%}
+    <p class="eyebrow">{{ section.settings.eyebrow | escape }}</p>
+  {%- endif -%}
+  <h2 class="h2 h2--display">{{ section.settings.heading }}</h2>
+
+  <div class="grid-3 stat-cards" style="margin-top:20px">
+    {%- for block in section.blocks -%}
+      <div class="stat-card" {{ block.shopify_attributes }}>
+        {%- if block.settings.silhouette != blank -%}
+          {{ block.settings.silhouette | image_url: width: 300 | image_tag: class: 'stat-card__sil', alt: '', aria-hidden: 'true' }}
+        {%- endif -%}
+        <span class="stat-card__tick"></span>
+        <p class="stat-card__eye">{{ block.settings.label | escape }}</p>
+        <p class="stat-card__val">{{ block.settings.value | escape }}</p>
+        <p class="stat-card__body">{{ block.settings.body }}</p>
+      </div>
+    {%- endfor -%}
+  </div>
+
+  {%- if section.settings.sources != blank -%}
+    <p class="stat-sources">{{ section.settings.sources }}</p>
+  {%- endif -%}
+</section>
+
+{% schema %}
+{
+  "name": "drye-B2B Stats",
+  "settings": [
+    { "type": "text", "id": "anchor_id", "label": "Anchor id", "default": "why-now" },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Why now" },
+    { "type": "html", "id": "heading", "label": "Headline", "default": "Where DRYE is operating" },
+    { "type": "html", "id": "sources", "label": "Source line", "info": "Every figure needs source, cohort size and date." }
+  ],
+  "max_blocks": 3,
+  "blocks": [
+    { "type": "stat", "name": "Stat card", "settings": [
+      { "type": "image_picker", "id": "silhouette", "label": "Watermark silhouette" },
+      { "type": "text", "id": "label", "label": "Label" },
+      { "type": "text", "id": "value", "label": "Value" },
+      { "type": "html", "id": "body", "label": "Body" }
+    ]}
+  ],
+  "presets": [{ "name": "drye-B2B Stats" }]
+}
+{% endschema %}

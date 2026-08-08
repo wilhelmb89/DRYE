@@ -1,0 +1,72 @@
+{{ 'drye-b2b-team.css' | asset_url | stylesheet_tag }}
+
+<section class="drye-b2b sec" id="{{ section.settings.anchor_id | default: 'team' }}">
+  {%- if section.settings.eyebrow != blank -%}
+    <p class="eyebrow">{{ section.settings.eyebrow | escape }}</p>
+  {%- endif -%}
+
+  {%- assign leads = section.blocks | where: 'type', 'lead' -%}
+  {%- if leads.size > 0 -%}
+    <p class="team-label">{{ section.settings.lead_label | escape }}</p>
+    <div class="team-grid">
+      {%- for block in leads -%}
+        <div class="team-card" {{ block.shopify_attributes }}>
+          <div class="team-card__head">
+            <div class="team-avatar">
+              {%- if block.settings.photo != blank -%}
+                {{ block.settings.photo | image_url: width: 200 | image_tag: alt: block.settings.name, loading: 'lazy' }}
+              {%- endif -%}
+            </div>
+            <div>
+              <p class="team-card__name">{{ block.settings.name | escape }}</p>
+              <p class="team-card__role">{{ block.settings.role }}</p>
+            </div>
+          </div>
+          <p class="team-card__bio">{{ block.settings.bio }}</p>
+        </div>
+      {%- endfor -%}
+    </div>
+  {%- endif -%}
+
+  {%- assign investors = section.blocks | where: 'type', 'investor' -%}
+  {%- if investors.size > 0 -%}
+    <p class="team-label">{{ section.settings.investor_label | escape }}</p>
+    <div class="investors-grid">
+      {%- for block in investors -%}
+        <div class="team-person" {{ block.shopify_attributes }}>
+          <div class="team-avatar">
+            {%- if block.settings.photo != blank -%}
+              {{ block.settings.photo | image_url: width: 160 | image_tag: alt: block.settings.name, loading: 'lazy' }}
+            {%- endif -%}
+          </div>
+          <div><p class="team-person__name">{{ block.settings.name | escape }}</p></div>
+        </div>
+      {%- endfor -%}
+    </div>
+  {%- endif -%}
+</section>
+
+{% schema %}
+{
+  "name": "drye-B2B Team",
+  "settings": [
+    { "type": "text", "id": "anchor_id", "label": "Anchor id", "default": "team" },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Team & execution network" },
+    { "type": "text", "id": "lead_label", "label": "Team heading", "default": "Core operating team" },
+    { "type": "text", "id": "investor_label", "label": "Investor heading", "default": "Investors" }
+  ],
+  "blocks": [
+    { "type": "lead", "name": "Team member", "settings": [
+      { "type": "image_picker", "id": "photo", "label": "Photo" },
+      { "type": "text", "id": "name", "label": "Name" },
+      { "type": "html", "id": "role", "label": "Role" },
+      { "type": "textarea", "id": "bio", "label": "Bio" }
+    ]},
+    { "type": "investor", "name": "Investor", "settings": [
+      { "type": "image_picker", "id": "photo", "label": "Photo" },
+      { "type": "text", "id": "name", "label": "Name" }
+    ]}
+  ],
+  "presets": [{ "name": "drye-B2B Team" }]
+}
+{% endschema %}

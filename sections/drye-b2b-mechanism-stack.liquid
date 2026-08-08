@@ -1,0 +1,50 @@
+{{ 'drye-b2b-mechanism.css' | asset_url | stylesheet_tag }}
+
+<section class="drye-b2b sec" id="{{ section.settings.anchor_id | default: 'mechanism' }}">
+  {%- if section.settings.eyebrow != blank -%}
+    <p class="eyebrow">{{ section.settings.eyebrow | escape }}</p>
+  {%- endif -%}
+
+  <div class="split-layout">
+    <div class="split-copy">
+      <h2 class="h2">{{ section.settings.heading }}</h2>
+      {%- if section.settings.body != blank -%}
+        <p class="body-mute">{{ section.settings.body }}</p>
+      {%- endif -%}
+    </div>
+
+    <div class="split-visual">
+      <div class="stack-diagram" aria-label="Sealed protection stack with a missing internal control layer">
+        <div class="stack-box stack-box--sealed">{{ section.settings.layer_top | escape }}</div>
+        <div class="stack-arrows" aria-hidden="true"><span></span><span></span><span></span></div>
+        <div class="stack-box stack-box--missing">
+          <span class="stack-box__title">{{ section.settings.layer_mid | escape }}</span>
+          <span class="stack-box__sub">{{ section.settings.layer_mid_sub | escape }}</span>
+        </div>
+        <div class="stack-arrows" aria-hidden="true"><span></span><span></span><span></span></div>
+        <div class="stack-box stack-box--skin">
+          <span class="stack-box__title">{{ section.settings.layer_bottom | escape }}</span>
+          <span class="stack-box__sub">{{ section.settings.layer_bottom_sub | escape }}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "drye-B2B Mech 1",
+  "settings": [
+    { "type": "text", "id": "anchor_id", "label": "Anchor id", "default": "mechanism" },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "The mechanism" },
+    { "type": "html", "id": "heading", "label": "Headline", "default": "The missing layer — between the glove and the skin." },
+    { "type": "html", "id": "body", "label": "Body" },
+    { "type": "text", "id": "layer_top", "label": "Top layer", "default": "Sealed protection" },
+    { "type": "text", "id": "layer_mid", "label": "Middle layer", "default": "Missing internal control layer" },
+    { "type": "text", "id": "layer_mid_sub", "label": "Middle sub", "default": "Internal interface — unmanaged" },
+    { "type": "text", "id": "layer_bottom", "label": "Bottom layer", "default": "Skin" },
+    { "type": "text", "id": "layer_bottom_sub", "label": "Bottom sub", "default": "Where the shift's moisture is produced" }
+  ],
+  "presets": [{ "name": "drye-B2B Mech 1" }]
+}
+{% endschema %}

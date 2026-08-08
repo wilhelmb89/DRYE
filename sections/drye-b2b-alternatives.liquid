@@ -1,0 +1,46 @@
+{{ 'drye-b2b-alternatives.css' | asset_url | stylesheet_tag }}
+
+{%- comment -%}
+  Concentration section: each alternative already in place is dismantled and
+  replaced in the same row. Desktop = 4-column ledger; mobile = snap slider of
+  cards with ✕ / ✓ markers. Keep each line under ~8 words.
+{%- endcomment -%}
+
+<section class="drye-b2b sec" id="{{ section.settings.anchor_id | default: 'alternatives' }}">
+  {%- if section.settings.eyebrow != blank -%}
+    <p class="eyebrow">{{ section.settings.eyebrow | escape }}</p>
+  {%- endif -%}
+  <h2 class="h2">{{ section.settings.heading }}</h2>
+
+  <div class="conc-list">
+    {%- for block in section.blocks -%}
+      <div class="conc-row" {{ block.shopify_attributes }}>
+        <p class="conc-row__label">{{ block.settings.label | escape }}</p>
+        <p class="conc-row__fail">{{ block.settings.fail | escape }}</p>
+        <span class="conc-row__arrow" aria-hidden="true">&rarr;</span>
+        <p class="conc-row__fix">{{ block.settings.fix | escape }}</p>
+      </div>
+    {%- endfor -%}
+  </div>
+
+  {% render 'drye-b2b-swipe-hint' %}
+</section>
+
+{% schema %}
+{
+  "name": "drye-B2B Alts",
+  "settings": [
+    { "type": "text", "id": "anchor_id", "label": "Anchor id", "default": "alternatives" },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "What you already pay for" },
+    { "type": "html", "id": "heading", "label": "Headline", "default": "Five fixes already in place. None of them move the water." }
+  ],
+  "blocks": [
+    { "type": "row", "name": "Alternative", "settings": [
+      { "type": "text", "id": "label", "label": "What they use", "default": "Cotton liners" },
+      { "type": "text", "id": "fail", "label": "Why it fails", "default": "Soaks it up, holds it against the skin." },
+      { "type": "text", "id": "fix", "label": "What replaces it", "default": "DRYE routes it out." }
+    ]}
+  ],
+  "presets": [{ "name": "drye-B2B Alts" }]
+}
+{% endschema %}

@@ -1,0 +1,46 @@
+{{ 'drye-b2b-lp-base.css' | asset_url | stylesheet_tag }}
+{{ 'drye-b2b-header.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'drye-b2b-lp.js' | asset_url }}" defer></script>
+
+{%- comment -%}
+  Page-specific sticky header for the B2B one-pager. This REPLACES the theme
+  header on this template — do not render both. The pill follows whichever
+  section is in view; each nav block's "target" must equal that section's
+  Anchor id setting.
+{%- endcomment -%}
+
+<header class="drye-b2b site-header">
+  <a class="site-header__word" href="{{ section.settings.logo_url | default: '/' }}">{{ section.settings.wordmark | escape }}</a>
+
+  {%- if section.blocks.size > 0 -%}
+    <nav class="site-header__nav" id="site-nav" aria-label="Section navigation">
+      <span class="site-header__pill" id="site-nav-pill" aria-hidden="true"></span>
+      {%- for block in section.blocks -%}
+        <a href="#{{ block.settings.target }}" data-target="{{ block.settings.target }}" {{ block.shopify_attributes }}>{{ block.settings.label | escape }}</a>
+      {%- endfor -%}
+    </nav>
+  {%- endif -%}
+
+  {%- if section.settings.cta_label != blank -%}
+    <a class="site-header__cta" href="{{ section.settings.cta_url | default: '#form' }}">{{ section.settings.cta_label | escape }}</a>
+  {%- endif -%}
+</header>
+
+{% schema %}
+{
+  "name": "drye-B2B Header",
+  "settings": [
+    { "type": "text", "id": "wordmark", "label": "Wordmark", "default": "DRYE" },
+    { "type": "url", "id": "logo_url", "label": "Wordmark link" },
+    { "type": "text", "id": "cta_label", "label": "CTA label", "default": "Contact" },
+    { "type": "url", "id": "cta_url", "label": "CTA link" }
+  ],
+  "blocks": [
+    { "type": "nav_item", "name": "Nav item", "settings": [
+      { "type": "text", "id": "label", "label": "Label", "default": "Section" },
+      { "type": "text", "id": "target", "label": "Target anchor id (no #)", "info": "Must match the Anchor id of the section it points at." }
+    ]}
+  ],
+  "presets": [{ "name": "drye-B2B Header" }]
+}
+{% endschema %}

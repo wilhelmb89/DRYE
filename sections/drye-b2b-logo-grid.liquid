@@ -1,0 +1,51 @@
+{{ 'drye-b2b-logos.css' | asset_url | stylesheet_tag }}
+
+{%- comment -%}
+  Logo cells are transparent — the images blend into the warm canvas with
+  mix-blend-mode: multiply. A logo baked on a DARK tile will not blend; supply
+  a transparent PNG for those.
+{%- endcomment -%}
+
+<section class="drye-b2b sec" id="{{ section.settings.anchor_id | default: 'partners' }}">
+  {%- if section.settings.eyebrow != blank -%}
+    <p class="eyebrow">{{ section.settings.eyebrow | escape }}</p>
+  {%- endif -%}
+  {%- if section.settings.heading != blank -%}
+    <h2 class="h2">{{ section.settings.heading }}</h2>
+  {%- endif -%}
+
+  <div class="{% if section.settings.style == 'customer' %}customer-logo-grid{% else %}logo-grid{% endif %}">
+    {%- for block in section.blocks -%}
+      <div class="logo-cell" {{ block.shopify_attributes }}>
+        {%- if block.settings.logo != blank -%}
+          {{ block.settings.logo | image_url: width: 400 | image_tag: alt: block.settings.name, loading: 'lazy' }}
+        {%- else -%}
+          <span class="micro">{{ block.settings.name | escape }}</span>
+        {%- endif -%}
+      </div>
+    {%- endfor -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "drye-B2B Logos",
+  "settings": [
+    { "type": "text", "id": "anchor_id", "label": "Anchor id", "default": "partners" },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow" },
+    { "type": "html", "id": "heading", "label": "Headline" },
+    { "type": "select", "id": "style", "label": "Grid", "default": "partner",
+      "options": [
+        { "value": "customer", "label": "Customers — 3 up" },
+        { "value": "partner", "label": "Partners — 5 up with rule above" }
+      ] }
+  ],
+  "blocks": [
+    { "type": "logo", "name": "Logo", "settings": [
+      { "type": "image_picker", "id": "logo", "label": "Logo" },
+      { "type": "text", "id": "name", "label": "Name (alt text)" }
+    ]}
+  ],
+  "presets": [{ "name": "drye-B2B Logos" }]
+}
+{% endschema %}

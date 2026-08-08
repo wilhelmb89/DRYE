@@ -1,0 +1,58 @@
+{{ 'drye-b2b-trap.css' | asset_url | stylesheet_tag }}
+
+{%- comment -%}
+  The glove photo bleeds off the right edge of the section on desktop
+  (negative margin equal to the section padding) and is contained on mobile.
+  The desktop transform is reset inside the mobile breakpoint — keep both.
+{%- endcomment -%}
+
+<section class="drye-b2b sec" id="{{ section.settings.anchor_id | default: 'trap' }}">
+  {%- if section.settings.eyebrow != blank -%}
+    <p class="eyebrow">{{ section.settings.eyebrow | escape }}</p>
+  {%- endif -%}
+
+  <div class="trap-head">
+    <h2 class="h2 h2--display">{{ section.settings.heading }}</h2>
+    {%- if section.settings.source != blank -%}
+      <p class="trap-sub">{{ section.settings.source }}</p>
+    {%- endif -%}
+  </div>
+
+  <div class="trap-grid">
+    <ol class="trap-steps" role="list">
+      {%- for block in section.blocks -%}
+        <li class="trap-step" {{ block.shopify_attributes }}>
+          <span class="trap-step__num">{{ forloop.index }}</span>
+          <p class="trap-step__body">{{ block.settings.text }}</p>
+        </li>
+      {%- endfor -%}
+    </ol>
+
+    {%- if section.settings.image != blank -%}
+      <div class="trap-media">
+        {{ section.settings.image | image_url: width: 1400 | image_tag: alt: section.settings.image_alt, loading: 'lazy' }}
+      </div>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "drye-B2B Trap",
+  "settings": [
+    { "type": "text", "id": "anchor_id", "label": "Anchor id", "default": "trap" },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "What you might not know" },
+    { "type": "html", "id": "heading", "label": "Headline", "default": "Sealed gloves protect workers — but trap the problem inside." },
+    { "type": "html", "id": "source", "label": "Source line", "default": "Hydrated human skin showed higher penetration for certain fat-soluble model compounds in vitro. Hikima &amp; Maibach, <i>Biol Pharm Bull.</i>" },
+    { "type": "image_picker", "id": "image", "label": "Glove photo", "info": "Transparent or white-background PNG of a gloved hand." },
+    { "type": "text", "id": "image_alt", "label": "Photo alt text", "default": "Hand in a single-use nitrile glove" }
+  ],
+  "max_blocks": 4,
+  "blocks": [
+    { "type": "step", "name": "Numbered step", "settings": [
+      { "type": "html", "id": "text", "label": "Text" }
+    ]}
+  ],
+  "presets": [{ "name": "drye-B2B Trap" }]
+}
+{% endschema %}

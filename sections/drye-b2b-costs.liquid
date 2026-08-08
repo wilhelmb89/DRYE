@@ -1,0 +1,114 @@
+{{ 'drye-b2b-costs.css' | asset_url | stylesheet_tag }}
+
+{%- comment -%}
+  CRITICAL, do not "simplify":
+  * The arrow shape is a clip-path on the INNER .cost-bar__shape. The outline is
+    a drop-shadow FILTER on the OUTER .cost-bar__box. CSS applies filters before
+    clipping, so if both land on one element the arrow point loses its outline.
+  * .cost-bar__tag is a SIBLING of the box, not a child — a clip-path on an
+    ancestor would clip it away completely.
+  * Each body-map callout line computes its own width from its zone inset
+    (head 42.5%, body 34%, hands 2%, feet 16%), so every line touches its part
+    while all labels align in one column. Move a zone, recompute its line.
+{%- endcomment -%}
+
+<section class="drye-b2b sec" id="{{ section.settings.anchor_id | default: 'costs' }}">
+  {%- if section.settings.eyebrow != blank -%}
+    <p class="eyebrow cost-head">{{ section.settings.eyebrow | escape }}</p>
+  {%- endif -%}
+  <h2 class="h2 cost-head">{{ section.settings.heading }}</h2>
+  {%- if section.settings.subheading != blank -%}
+    <p class="body-mute">{{ section.settings.subheading }}</p>
+  {%- endif -%}
+
+  <div class="cost-converge">
+    <ol class="cost-bars" role="list">
+      {%- for block in section.blocks -%}
+        {%- if block.type == 'cost' -%}
+          <li class="cost-bar" {{ block.shopify_attributes }}>
+            <div class="cost-bar__box">
+              <div class="cost-bar__shape">
+                <span class="cost-bar__lbl">{{ block.settings.label | escape }}</span>
+                <span class="cost-bar__val">{{ block.settings.value | escape }}</span>
+                <span class="cost-bar__sub">{{ block.settings.sub | escape }}</span>
+              </div>
+            </div>
+            {%- if block.settings.tag != blank -%}
+              <span class="cost-bar__tag"><span class="cost-bar__tag-shape">{{ block.settings.tag | escape }}<span class="cost-bar__tag-sub">{{ block.settings.tag_sub | escape }}</span></span></span>
+            {%- endif -%}
+          </li>
+        {%- endif -%}
+      {%- endfor -%}
+    </ol>
+
+    <div class="body-map" aria-label="{{ section.settings.map_aria | escape }}">
+      <div class="body-map__row">
+        <div class="body-map__side"><b>{{ section.settings.side_left | escape }}</b><span>{{ section.settings.side_left_sub | escape }}</span></div>
+
+        <div class="body-map__figure" id="body-map-figure">
+          {%- if section.settings.silhouette != blank -%}
+            {{ section.settings.silhouette | image_url: width: 500 | image_tag: class: 'body-map__silhouette', alt: 'Worker silhouette', loading: 'lazy' }}
+          {%- endif -%}
+          <span class="body-map__zone body-map__zone--torso" aria-hidden="true"></span>
+          <span class="body-map__zone body-map__zone--head" aria-hidden="true"></span>
+          <span class="body-map__zone body-map__zone--hand-l" aria-hidden="true"></span>
+          <span class="body-map__zone body-map__zone--hand-r" aria-hidden="true"></span>
+          <span class="body-map__zone body-map__zone--foot-l" aria-hidden="true"></span>
+          <span class="body-map__zone body-map__zone--foot-r" aria-hidden="true"></span>
+
+          <span class="body-map__connector body-map__connector--head" aria-hidden="true"></span>
+          <span class="body-map__dot body-map__dot--head" aria-hidden="true"></span>
+          <div class="body-map__label body-map__label--head"><p class="body-map__title">{{ section.settings.label_head | escape }}</p></div>
+
+          <span class="body-map__connector body-map__connector--body" aria-hidden="true"></span>
+          <span class="body-map__dot body-map__dot--body" aria-hidden="true"></span>
+          <div class="body-map__label body-map__label--body"><p class="body-map__title">{{ section.settings.label_body | escape }}</p></div>
+
+          <span class="body-map__connector body-map__connector--hands" aria-hidden="true"></span>
+          <span class="body-map__dot body-map__dot--hands" aria-hidden="true"></span>
+          <div class="body-map__label body-map__label--hands"><p class="body-map__title">{{ section.settings.label_hands | escape }}</p></div>
+
+          <span class="body-map__connector body-map__connector--feet" aria-hidden="true"></span>
+          <span class="body-map__dot body-map__dot--feet" aria-hidden="true"></span>
+          <div class="body-map__label body-map__label--feet"><p class="body-map__title">{{ section.settings.label_feet | escape }}</p></div>
+        </div>
+
+        <div class="body-map__side"><b>{{ section.settings.side_right | escape }}</b><span>{{ section.settings.side_right_sub | escape }}</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "drye-B2B Costs",
+  "settings": [
+    { "type": "text", "id": "anchor_id", "label": "Anchor id", "default": "costs" },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "The cost of not acting", "info": "Eyebrow and headline are hidden on mobile by design (.cost-head)." },
+    { "type": "html", "id": "heading", "label": "Headline", "default": "Four things already costing you — that never show up in the purchasing budget." },
+    { "type": "html", "id": "subheading", "label": "Subheadline", "default": "Trapped moisture doesn't just hit the skin. It hits production, warmth, grip and retention." },
+    { "type": "header", "content": "Body map" },
+    { "type": "image_picker", "id": "silhouette", "label": "Worker silhouette" },
+    { "type": "text", "id": "map_aria", "label": "Diagram aria-label", "default": "Zones affected by trapped moisture" },
+    { "type": "text", "id": "label_head", "label": "Head label", "default": "Head" },
+    { "type": "text", "id": "label_body", "label": "Body label", "default": "Body" },
+    { "type": "text", "id": "label_hands", "label": "Hands label", "default": "Hands" },
+    { "type": "text", "id": "label_feet", "label": "Feet label", "default": "Feet" },
+    { "type": "header", "content": "Mobile-only labels beside the silhouette" },
+    { "type": "text", "id": "side_left", "label": "Left label", "default": "Heat" },
+    { "type": "text", "id": "side_left_sub", "label": "Left sub", "default": "Sweat builds up" },
+    { "type": "text", "id": "side_right", "label": "Right label", "default": "Cold" },
+    { "type": "text", "id": "side_right_sub", "label": "Right sub", "default": "Faster heat loss" }
+  ],
+  "blocks": [
+    { "type": "cost", "name": "Cost bar", "settings": [
+      { "type": "text", "id": "label", "label": "Label", "default": "Production stoppages" },
+      { "type": "text", "id": "value", "label": "Value", "default": "Daily" },
+      { "type": "text", "id": "sub", "label": "Sub", "default": "Airing out, changes, wait time." },
+      { "type": "text", "id": "tag", "label": "Season tag (desktop only)" },
+      { "type": "text", "id": "tag_sub", "label": "Season tag sub" }
+    ]}
+  ],
+  "presets": [{ "name": "drye-B2B Costs" }]
+}
+{% endschema %}

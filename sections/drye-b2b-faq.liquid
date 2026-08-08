@@ -1,0 +1,40 @@
+{{ 'drye-b2b-lp-base.css' | asset_url | stylesheet_tag }}
+
+{%- comment -%} Native <details> — opens without JS, keyboard accessible. {%- endcomment -%}
+
+<section class="drye-b2b sec" id="{{ section.settings.anchor_id | default: 'faq' }}">
+  {%- if section.settings.eyebrow != blank -%}
+    <p class="eyebrow">{{ section.settings.eyebrow | escape }}</p>
+  {%- endif -%}
+  {%- if section.settings.heading != blank -%}<h2 class="h2">{{ section.settings.heading }}</h2>{%- endif -%}
+
+  <div class="faq-list">
+    {%- for block in section.blocks -%}
+      <details class="faq-row" {{ block.shopify_attributes }}>
+        <summary>
+          <span>{{ block.settings.question | escape }}</span>
+          <span class="faq-row__icon" aria-hidden="true"></span>
+        </summary>
+        <div class="faq-row__answer">{{ block.settings.answer }}</div>
+      </details>
+    {%- endfor -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "drye-B2B FAQ",
+  "settings": [
+    { "type": "text", "id": "anchor_id", "label": "Anchor id", "default": "faq" },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "FAQ" },
+    { "type": "html", "id": "heading", "label": "Headline" }
+  ],
+  "blocks": [
+    { "type": "qa", "name": "Question", "settings": [
+      { "type": "text", "id": "question", "label": "Question" },
+      { "type": "richtext", "id": "answer", "label": "Answer" }
+    ]}
+  ],
+  "presets": [{ "name": "drye-B2B FAQ" }]
+}
+{% endschema %}

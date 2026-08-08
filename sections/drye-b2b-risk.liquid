@@ -1,0 +1,89 @@
+{{ 'drye-b2b-risk.css' | asset_url | stylesheet_tag }}
+
+{%- comment -%}
+  Never raise one of these questions without being able to answer it — an open
+  question you introduced yourself closes a procurement gate. The Documentation
+  box must not list documents that do not exist yet.
+{%- endcomment -%}
+
+<section class="drye-b2b sec" id="{{ section.settings.anchor_id | default: 'certification' }}">
+  <h2 class="h2">{{ section.settings.heading }}</h2>
+  {%- if section.settings.subheading != blank -%}
+    <p class="body-mute">{{ section.settings.subheading }}</p>
+  {%- endif -%}
+
+  <div class="risk-grid">
+    {%- for block in section.blocks -%}
+      <div class="risk" {{ block.shopify_attributes }}>
+        <div class="risk__ico-wrap"><span class="risk__ico">{% render 'drye-b2b-icon', icon: block.settings.icon %}</span></div>
+        <p class="risk__title">{{ block.settings.title }}</p>
+        <span class="risk__rule"></span>
+        <p class="risk__body">{{ block.settings.question | escape }}</p>
+      </div>
+    {%- endfor -%}
+  </div>
+
+  {% render 'drye-b2b-swipe-hint' %}
+
+  <div class="risk-foot">
+    <div class="risk-foot__box">
+      <span class="risk-foot__ico">{% render 'drye-b2b-icon', icon: 'shield' %}</span>
+      <div>
+        <p class="risk-foot__title">{{ section.settings.assurance_title | escape }}</p>
+        <ul class="risk-check">
+          {%- assign lines = section.settings.assurance_lines | newline_to_br | split: '<br />' -%}
+          {%- for line in lines -%}
+            {%- assign trimmed = line | strip -%}
+            {%- if trimmed != blank -%}
+              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"></circle><path d="M8.5 12.5l2 2 5-5"></path></svg>{{ trimmed }}</li>
+            {%- endif -%}
+          {%- endfor -%}
+        </ul>
+      </div>
+    </div>
+
+    <div class="risk-foot__box">
+      <span class="risk-foot__ico">{% render 'drye-b2b-icon', icon: 'doc' %}</span>
+      <div>
+        <p class="risk-foot__title">{{ section.settings.docs_title | escape }}</p>
+        <p class="risk-foot__note">{{ section.settings.docs_note }}</p>
+        {%- if section.settings.docs_cta_label != blank -%}
+          <a href="{{ section.settings.docs_cta_url | default: '#form' }}" class="risk-foot__cta">{{ section.settings.docs_cta_label | escape }} &rarr;</a>
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "drye-B2B Risk",
+  "settings": [
+    { "type": "text", "id": "anchor_id", "label": "Anchor id", "default": "certification" },
+    { "type": "html", "id": "heading", "label": "Headline", "default": "Built for the glove system you already use" },
+    { "type": "html", "id": "subheading", "label": "Subheadline", "default": "Designed to address the first questions every HSE manager asks before approving a glove liner." },
+    { "type": "header", "content": "Risk assurance box" },
+    { "type": "text", "id": "assurance_title", "label": "Title", "default": "Risk assurance" },
+    { "type": "textarea", "id": "assurance_lines", "label": "Lines", "info": "One per line.", "default": "Outer-glove fit and dexterity preserved\nExposure scenarios identified\nUse-case dependent compatibility" },
+    { "type": "header", "content": "Documentation box" },
+    { "type": "text", "id": "docs_title", "label": "Title", "default": "Documentation" },
+    { "type": "html", "id": "docs_note", "label": "Note", "default": "Data sheet, declarations and test reports available on request as testing completes." },
+    { "type": "text", "id": "docs_cta_label", "label": "CTA label", "default": "Request documentation" },
+    { "type": "url", "id": "docs_cta_url", "label": "CTA link" }
+  ],
+  "max_blocks": 5,
+  "blocks": [
+    { "type": "risk", "name": "Risk question", "settings": [
+      { "type": "select", "id": "icon", "label": "Icon", "default": "glove",
+        "options": [
+          { "value": "glove", "label": "Glove" }, { "value": "flask", "label": "Flask" },
+          { "value": "shield", "label": "Shield" }, { "value": "flame", "label": "Flame" },
+          { "value": "bolt", "label": "Bolt" }
+        ] },
+      { "type": "html", "id": "title", "label": "Title", "info": "A <br> keeps the two-line balance." },
+      { "type": "text", "id": "question", "label": "Buyer question" }
+    ]}
+  ],
+  "presets": [{ "name": "drye-B2B Risk" }]
+}
+{% endschema %}

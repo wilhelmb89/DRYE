@@ -1,0 +1,117 @@
+{{ 'drye-b2b-contact.css' | asset_url | stylesheet_tag }}
+
+{%- comment -%}
+  B2B enquiry form. Uses Shopify's native {% form 'contact' %}. The three
+  selects post as custom contact attributes and land in the notification email.
+  The card is centred on the page; the fields inside read left.
+{%- endcomment -%}
+
+<section class="drye-b2b sec" id="{{ section.settings.anchor_id | default: 'form' }}" style="text-align:center">
+  {%- if section.settings.eyebrow != blank -%}
+    <p class="eyebrow" style="text-align:center">{{ section.settings.eyebrow | escape }}</p>
+  {%- endif -%}
+  <h2 class="h2">{{ section.settings.heading }}</h2>
+  {%- if section.settings.body != blank -%}
+    <p class="body-mute" style="margin-inline:auto">{{ section.settings.body }}</p>
+  {%- endif -%}
+
+  {%- form 'contact', class: 'mail-form' -%}
+    {%- if form.posted_successfully? -%}
+      <p class="form-status form-status--success">{{ section.settings.success_message }}</p>
+    {%- elsif form.errors -%}
+      <p class="form-status form-status--error">{{ form.errors | default_errors }}</p>
+    {%- endif -%}
+
+    <div class="mail-form__row">
+      <div class="mail-form__field">
+        <label for="c-name-{{ section.id }}">Name *</label>
+        <input type="text" id="c-name-{{ section.id }}" name="contact[name]" placeholder="Your name" value="{{ form.name }}" required>
+      </div>
+      <div class="mail-form__field">
+        <label for="c-email-{{ section.id }}">Work email *</label>
+        <input type="email" id="c-email-{{ section.id }}" name="contact[email]" placeholder="you@company.com" value="{{ form.email }}" autocomplete="email" required>
+      </div>
+    </div>
+
+    <div class="mail-form__row">
+      <div class="mail-form__field">
+        <label for="c-company-{{ section.id }}">Company *</label>
+        <input type="text" id="c-company-{{ section.id }}" name="contact[Company]" placeholder="Company name" required>
+      </div>
+      <div class="mail-form__field">
+        <label for="c-role-{{ section.id }}">Role</label>
+        <input type="text" id="c-role-{{ section.id }}" name="contact[Role]" placeholder="EHS, procurement, production">
+      </div>
+    </div>
+
+    <div class="mail-form__row">
+      <div class="mail-form__field">
+        <label for="c-industry-{{ section.id }}">Industry</label>
+        <select id="c-industry-{{ section.id }}" name="contact[Industry]">
+          <option value="">Select industry</option>
+          {%- assign industries = section.settings.industries | newline_to_br | split: '<br />' -%}
+          {%- for i in industries -%}
+            {%- assign v = i | strip -%}
+            {%- if v != blank -%}<option>{{ v }}</option>{%- endif -%}
+          {%- endfor -%}
+        </select>
+      </div>
+      <div class="mail-form__field">
+        <label for="c-size-{{ section.id }}">Employees in gloves</label>
+        <select id="c-size-{{ section.id }}" name="contact[Employees in gloves]">
+          <option value="">Select range</option>
+          {%- assign sizes = section.settings.sizes | newline_to_br | split: '<br />' -%}
+          {%- for s in sizes -%}
+            {%- assign v = s | strip -%}
+            {%- if v != blank -%}<option>{{ v }}</option>{%- endif -%}
+          {%- endfor -%}
+        </select>
+      </div>
+    </div>
+
+    <div class="mail-form__field">
+      <label for="c-problem-{{ section.id }}">{{ section.settings.problem_label | escape }}</label>
+      <select id="c-problem-{{ section.id }}" name="contact[Main problem]">
+        <option value="">Select the closest match</option>
+        {%- assign problems = section.settings.problems | newline_to_br | split: '<br />' -%}
+        {%- for p in problems -%}
+          {%- assign v = p | strip -%}
+          {%- if v != blank -%}<option>{{ v }}</option>{%- endif -%}
+        {%- endfor -%}
+      </select>
+    </div>
+
+    <div class="mail-form__field">
+      <label for="c-body-{{ section.id }}">Message *</label>
+      <textarea id="c-body-{{ section.id }}" name="contact[body]" rows="5" placeholder="{{ section.settings.message_placeholder | escape }}" required>{{ form.body }}</textarea>
+    </div>
+
+    <div class="mail-form__foot">
+      <button class="btn" type="submit">{{ section.settings.submit_label | escape }}</button>
+      {%- if section.settings.reassurance != blank -%}<small>{{ section.settings.reassurance }}</small>{%- endif -%}
+    </div>
+  {%- endform -%}
+</section>
+
+{% schema %}
+{
+  "name": "drye-B2B Form",
+  "settings": [
+    { "type": "text", "id": "anchor_id", "label": "Anchor id", "default": "form" },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Contact" },
+    { "type": "html", "id": "heading", "label": "Headline", "default": "Tell us what your crew is running into" },
+    { "type": "html", "id": "body", "label": "Body", "default": "We respond within 24 hours on business days. The more you tell us, the more useful the first reply is." },
+    { "type": "header", "content": "Dropdowns" },
+    { "type": "textarea", "id": "industries", "label": "Industries", "info": "One per line.", "default": "Automotive & EV service\nManufacturing & assembly\nMining & heavy industry\nConstruction & infrastructure\nEnergy, offshore & utilities\nFood processing\nLab, pharma & cleanroom\nHealthcare\nLogistics & warehousing\nDefence\nOther" },
+    { "type": "textarea", "id": "sizes", "label": "Employee ranges", "info": "One per line.", "default": "1–25\n26–100\n101–250\n251–500\n501–1000\n1000+" },
+    { "type": "text", "id": "problem_label", "label": "Problem question", "default": "What is driving the enquiry?" },
+    { "type": "textarea", "id": "problems", "label": "Problem options", "info": "One per line.", "default": "Sweat inside the gloves\nSkin problems — cracking, eczema, maceration\nHeat loss in cold conditions\nHeat and discomfort in warm conditions\nProduction stops for airing out hands\nRepeated glove-brand switching without result\nGrip and dexterity complaints\nSomething else" },
+    { "type": "header", "content": "Copy" },
+    { "type": "text", "id": "message_placeholder", "label": "Message placeholder", "default": "Sites, shift patterns, which gloves you run today" },
+    { "type": "text", "id": "submit_label", "label": "Submit label", "default": "Send enquiry" },
+    { "type": "html", "id": "reassurance", "label": "Reassurance", "default": "We don't use ticketing systems. A person reads this." },
+    { "type": "html", "id": "success_message", "label": "Success message", "default": "Thanks — we'll be back within one business day." }
+  ],
+  "presets": [{ "name": "drye-B2B Form" }]
+}
+{% endschema %}

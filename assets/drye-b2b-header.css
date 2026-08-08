@@ -1,0 +1,16 @@
+.site-header{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.92);backdrop-filter:blur(6px);border-bottom:1px solid var(--rule);display:flex;align-items:center;justify-content:space-between;gap:20px;padding:14px var(--pad-outer)}
+.site-header__word{font-family:'Clash Grotesk','DM Sans',sans-serif;font-size:16px;font-weight:600;letter-spacing:.08em;color:var(--ink);text-decoration:none}
+.site-header__nav{display:flex;align-items:center;gap:16px;flex:1;justify-content:center;flex-wrap:wrap;position:relative}
+.site-header__nav a{font-family:'DM Sans',sans-serif;font-size:16px;font-weight:500;color:var(--ink-2);text-decoration:none;transition:color .15s ease;position:relative;z-index:1;padding:4px 2px}
+.site-header__nav a:hover,.site-header__nav a.is-active{color:var(--ink)}
+.site-header__pill{position:absolute;top:0;left:0;height:100%;background:var(--teal-tint,#E4EEEC);border:1px solid var(--teal);border-radius:4px;opacity:0;transition:transform .28s cubic-bezier(.4,0,.2,1),width .28s cubic-bezier(.4,0,.2,1),opacity .2s ease;pointer-events:none;z-index:0}
+.site-header__pill.is-visible{opacity:1}
+.site-header__cta{font-family:'DM Sans',sans-serif;font-size:16px;font-weight:500;background:var(--ink);color:#F4F1EB;padding:9px 16px;border-radius:3px;text-decoration:none;white-space:nowrap;transition:background .15s ease}
+.site-header__cta:hover{background:var(--teal-deep)}
+@media (max-width:900px){
+  .site-header__nav{display:none}
+}
+@media (max-width:520px){
+  .site-header{padding:12px 20px}
+  .site-header__cta{padding:8px 12px;font-size:16px}
+}

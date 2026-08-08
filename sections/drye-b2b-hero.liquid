@@ -1,0 +1,52 @@
+{{ 'drye-b2b-hero.css' | asset_url | stylesheet_tag }}
+
+{%- comment -%}
+  Dark full-bleed hero. The photo is covered by a navy gradient so white copy
+  stays legible; content is vertically centred on desktop and bottom-anchored
+  on mobile. No price, no percentages, no logos here by design.
+{%- endcomment -%}
+
+<section class="drye-b2b sec sec--hero" id="{{ section.settings.anchor_id | default: 'hero' }}">
+  {%- if section.settings.background != blank -%}
+    <div class="hero-bg" aria-hidden="true">
+      {{ section.settings.background | image_url: width: 2400 | image_tag: alt: '', loading: 'eager', fetchpriority: 'high', widths: '768,1200,1600,2400' }}
+    </div>
+  {%- endif -%}
+
+  <h1 class="hero-h1">{{ section.settings.heading }}</h1>
+
+  {%- if section.settings.mechanism != blank -%}
+    <p class="hero-mech">{{ section.settings.mechanism }}</p>
+  {%- endif -%}
+
+  {%- if section.settings.subheading != blank -%}
+    <p class="hero-sub">{{ section.settings.subheading }}</p>
+  {%- endif -%}
+
+  <div class="section-actions">
+    {%- if section.settings.cta_primary_label != blank -%}
+      <a href="{{ section.settings.cta_primary_url }}" class="btn">{{ section.settings.cta_primary_label | escape }}</a>
+    {%- endif -%}
+    {%- if section.settings.cta_secondary_label != blank -%}
+      <a href="{{ section.settings.cta_secondary_url }}" class="btn ghost">{{ section.settings.cta_secondary_label | escape }}</a>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "drye-B2B Hero",
+  "settings": [
+    { "type": "text", "id": "anchor_id", "label": "Anchor id", "default": "hero" },
+    { "type": "image_picker", "id": "background", "label": "Background photo", "info": "Subject right of centre; the gradient darkens the left where the copy sits." },
+    { "type": "html", "id": "heading", "label": "Headline", "default": "A dry hand inside the glove you already approved." },
+    { "type": "text", "id": "mechanism", "label": "Mechanism line", "default": "DRYE routes. Cotton soaks.", "info": "The named mechanism. Keep it verbatim — it carries the positioning." },
+    { "type": "html", "id": "subheading", "label": "Subheadline", "default": "One knit, one direction — moisture moves off the skin instead of sitting in it. Worn under the protective gloves your crew already wears." },
+    { "type": "text", "id": "cta_primary_label", "label": "Primary CTA", "default": "Order the test kit — no PO required" },
+    { "type": "url", "id": "cta_primary_url", "label": "Primary CTA link" },
+    { "type": "text", "id": "cta_secondary_label", "label": "Secondary CTA", "default": "Book 15 minutes" },
+    { "type": "url", "id": "cta_secondary_url", "label": "Secondary CTA link" }
+  ],
+  "presets": [{ "name": "drye-B2B Hero" }]
+}
+{% endschema %}

@@ -1,0 +1,34 @@
+<section class="drye-b2b sec" id="{{ section.settings.anchor_id | default: 'operations' }}">
+  {%- if section.settings.eyebrow != blank -%}
+    <p class="eyebrow">{{ section.settings.eyebrow | escape }}</p>
+  {%- endif -%}
+  {%- if section.settings.heading != blank -%}<h2 class="h2">{{ section.settings.heading }}</h2>{%- endif -%}
+
+  <div class="grid-3">
+    {%- for block in section.blocks -%}
+      <div class="tile-l svc" {{ block.shopify_attributes }}>
+        {% render 'drye-b2b-icon', icon: block.settings.icon %}
+        <p class="lbl">{{ block.settings.label }}</p>
+      </div>
+    {%- endfor -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "drye-B2B Ops",
+  "settings": [
+    { "type": "text", "id": "anchor_id", "label": "Anchor id", "default": "operations" },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "How it runs in operations" },
+    { "type": "html", "id": "heading", "label": "Headline" }
+  ],
+  "blocks": [
+    { "type": "item", "name": "Item", "settings": [
+      { "type": "select", "id": "icon", "label": "Icon", "default": "box",
+        "options": [ { "value": "box", "label": "Box" }, { "value": "drop", "label": "Droplet" }, { "value": "doc", "label": "Document" } ] },
+      { "type": "html", "id": "label", "label": "Label" }
+    ]}
+  ],
+  "presets": [{ "name": "drye-B2B Ops" }]
+}
+{% endschema %}

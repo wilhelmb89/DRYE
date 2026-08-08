@@ -1,0 +1,32 @@
+.team-intro{font-family:'DM Sans',sans-serif;font-size:19px;line-height:1.4;color:var(--ink);margin:10px 0 0;max-width:760px;text-wrap:pretty}
+.team-label{font-family:'DM Sans',sans-serif;font-size:12px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-3);margin:40px 0 20px;padding-bottom:12px;border-bottom:1px solid var(--rule)}
+.team-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:32px}
+.team-card{display:flex;flex-direction:column;gap:14px;padding:16px;border-radius:4px;transition:box-shadow .18s ease}
+.team-card:hover{box-shadow:0 8px 20px rgba(22,38,58,.06)}
+.team-card__head{display:flex;align-items:center;gap:12px}
+.team-avatar{width:56px;height:56px;border-radius:50%;overflow:hidden;flex:0 0 auto;background:var(--paper-sunken,#EFEBE2)}
+.team-avatar image-slot,.team-avatar img{object-fit:cover}
+.team-card__name{font-family:'DM Sans',sans-serif;font-size:18px;font-weight:600;letter-spacing:0;color:var(--ink);margin:0}
+.team-card__role{font-family:'DM Sans',sans-serif;font-size:12px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--teal-deep);margin:4px 0 0}
+.team-card__bio{font-family:'DM Sans',sans-serif;font-size:16px;line-height:1.6;color:var(--ink-2);margin:0;text-wrap:pretty}
+.team-cols{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;margin-top:20px}
+.team-col-head{font-family:'DM Sans',sans-serif;font-size:12px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3);margin:0 0 12px;padding-bottom:8px;border-bottom:1px solid var(--rule)}
+.team-person{display:flex;align-items:center;gap:14px;margin-bottom:18px}
+.team-person .team-avatar{width:44px;height:44px}
+.team-person__name{font-family:'DM Sans',sans-serif;font-size:16px;font-weight:600;color:var(--ink);margin:0}
+.team-person__sub{font-family:'DM Sans',sans-serif;font-size:16px;line-height:1.5;color:var(--ink-3);margin:2px 0 0}
+.team-plain{font-family:'DM Sans',sans-serif;font-size:16px;font-weight:500;color:var(--ink);margin:0 0 10px}
+.investors-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px 32px}
+@media (max-width:900px){
+  .investors-grid{grid-template-columns:repeat(2,1fr)}
+}
+@media (max-width:560px){
+  .investors-grid{grid-template-columns:1fr}
+}
+@media (max-width:900px){
+  .team-grid{grid-template-columns:1fr}
+  .team-cols{grid-template-columns:repeat(2,1fr)}
+}
+@media (max-width:520px){
+  .team-cols{grid-template-columns:1fr}
+}

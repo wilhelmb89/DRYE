@@ -1,0 +1,35 @@
+<section class="drye-b2b sec" id="{{ section.settings.anchor_id | default: 'customers' }}">
+  {%- if section.settings.eyebrow != blank -%}
+    <p class="eyebrow">{{ section.settings.eyebrow | escape }}</p>
+  {%- endif -%}
+  {%- if section.settings.heading != blank -%}
+    <h2 class="h2">{{ section.settings.heading }}</h2>
+  {%- endif -%}
+
+  <div class="grid-3">
+    {%- for block in section.blocks -%}
+      <div class="tile" {{ block.shopify_attributes }}>
+        <p class="lbl">{{ block.settings.label | escape }}</p>
+        {%- if block.settings.sub != blank -%}<p class="sub">{{ block.settings.sub | escape }}</p>{%- endif -%}
+      </div>
+    {%- endfor -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "drye-B2B Tiles",
+  "settings": [
+    { "type": "text", "id": "anchor_id", "label": "Anchor id", "default": "customers" },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "In service with" },
+    { "type": "html", "id": "heading", "label": "Headline" }
+  ],
+  "blocks": [
+    { "type": "tile", "name": "Tile", "settings": [
+      { "type": "text", "id": "label", "label": "Name" },
+      { "type": "text", "id": "sub", "label": "Status" }
+    ]}
+  ],
+  "presets": [{ "name": "drye-B2B Tiles" }]
+}
+{% endschema %}

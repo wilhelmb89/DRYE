@@ -1,0 +1,37 @@
+{{ 'drye-b2b-booking.css' | asset_url | stylesheet_tag }}
+
+{%- comment -%}
+  drye-b2b-lp.js lazy-loads the Cal.com embed when this section nears the
+  viewport. Do NOT also add Cal's own snippet to theme.liquid. On desktop the
+  widget owns its height; on mobile it is capped at 62vh with internal scroll
+  so the slot list does not eat the page scroll.
+{%- endcomment -%}
+
+<section class="drye-b2b sec sec--booking" id="{{ section.settings.anchor_id | default: 'booking' }}">
+  {%- if section.settings.eyebrow != blank -%}
+    <p class="eyebrow">{{ section.settings.eyebrow | escape }}</p>
+  {%- endif -%}
+  <h2 class="h2" style="margin-bottom:20px">{{ section.settings.heading }}</h2>
+
+  <p class="cal-scroll-note">{{ section.settings.scroll_note | escape }}</p>
+  <div id="cal-inline" data-cal-link="{{ section.settings.cal_link }}"></div>
+
+  {%- if section.settings.footnote != blank -%}
+    <p class="footnote" style="text-align:center">{{ section.settings.footnote }}</p>
+  {%- endif -%}
+</section>
+
+{% schema %}
+{
+  "name": "drye-B2B Booking",
+  "settings": [
+    { "type": "text", "id": "anchor_id", "label": "Anchor id", "default": "booking" },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Book a meeting" },
+    { "type": "html", "id": "heading", "label": "Headline", "default": "Pick a time that works for you." },
+    { "type": "text", "id": "cal_link", "label": "Cal.com link", "default": "wilhelm-backstrom-vo84vu/15min" },
+    { "type": "text", "id": "scroll_note", "label": "Mobile scroll cue", "default": "Scroll inside to pick a time" },
+    { "type": "html", "id": "footnote", "label": "Footnote", "default": "Booking runs via Cal.com — calendar invite lands in your inbox." }
+  ],
+  "presets": [{ "name": "drye-B2B Booking" }]
+}
+{% endschema %}
