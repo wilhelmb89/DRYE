@@ -338,14 +338,6 @@ assign review_count = section.settings.review_count_fallback
 
 <div class="sz-dd-list" data-size-list role="listbox" aria-label="{{ size_option.name }}">
 
-<button
-  type="button"
-  class="sz-dd-help dryeNEW-body--caption js-open-size-guide"
->
-  <span>Unsure of your size? Click here</span>
-  <span class="sz-dd-help__arrow" aria-hidden="true">→</span>
-</button>
-
 {% for value in size_option.values %}
   {% liquid
     assign matched_variant = blank
@@ -393,6 +385,14 @@ assign review_count = section.settings.review_count_fallback
     {{ value }}{% if is_preorder %} — Sold out{% elsif is_in_stock %} — {{ in_stock_note }}{% elsif is_available == false %} — Sold out{% endif %}
   </button>
 {% endfor %}
+
+<button
+  type="button"
+  class="sz-dd-help dryeNEW-body--caption js-open-size-guide"
+>
+  <span>Unsure of your size? Click here</span>
+  <span class="sz-dd-help__arrow" aria-hidden="true">→</span>
+</button>
             </div>
           </div>
 
