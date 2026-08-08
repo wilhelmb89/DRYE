@@ -319,16 +319,16 @@ assign review_count = section.settings.review_count_fallback
           <div class="sz-dd" data-size-dropdown>
             <button
               type="button"
-              class="sz-dd-trigger{% if selected_variant.options[size_option_index] != blank %} has-val{% endif %}"
+              class="sz-dd-trigger{% if current_product.selected_variant.options[size_option_index] != blank %} has-val{% endif %}"
               data-size-trigger
               aria-expanded="false"
               aria-haspopup="listbox"
             >
               <span data-size-label>
-                {% if selected_variant.options[size_option_index] != blank %}
-                  {{ selected_variant.options[size_option_index] }}
+                {% if current_product.selected_variant.options[size_option_index] != blank %}
+                  {{ current_product.selected_variant.options[size_option_index] }}
                 {% else %}
-                  {{ section.settings.size_placeholder }}
+                  {{ section.settings.size_placeholder | default: 'Choose your size' }}
                 {% endif %}
               </span>
               <svg class="sz-dd-arrow" viewBox="0 0 10 6" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
@@ -337,6 +337,16 @@ assign review_count = section.settings.review_count_fallback
             </button>
 
 <div class="sz-dd-list" data-size-list role="listbox" aria-label="{{ size_option.name }}">
+
+<button
+  type="button"
+  class="sz-dd-opt sz-dd-opt--placeholder{% if current_product.selected_variant == blank %} selected{% endif %}"
+  data-size-placeholder
+  role="option"
+  aria-selected="{% if current_product.selected_variant == blank %}true{% else %}false{% endif %}"
+>
+  {{ section.settings.size_placeholder | default: 'Choose your size' }}
+</button>
 
 {% for value in size_option.values %}
   {% liquid
@@ -1052,6 +1062,8 @@ assign review_count = section.settings.review_count_fallback
     const soldoutNotice = sectionEl.querySelector('[data-soldout-notice]');
     const soldoutAck = sectionEl.querySelector('[data-soldout-ack]');
     const sizeOptions = Array.from(sectionEl.querySelectorAll('[data-size-option]'));
+    const sizePlaceholderOpt = sectionEl.querySelector('[data-size-placeholder]');
+    const sizePlaceholderText = {{ section.settings.size_placeholder | default: 'Choose your size' | json }};
     const tabButtons = Array.from(sectionEl.querySelectorAll('[data-drye-tabs] .tab-btn'));
 const faqButtons = Array.from(sectionEl.querySelectorAll('[data-drye-tabs] .faq-q'));
 const reviewScrollRows = Array.from(sectionEl.querySelectorAll('[data-review-scroll]'));
@@ -1141,6 +1153,8 @@ const shopifyRoot = (window.Shopify && window.Shopify.routes && window.Shopify.r
     function syncSizeUI() {
       if (!sizeOptions.length || !sizeLabel || !sizeTrigger) return;
 
+      let anySelected = false;
+
       sizeOptions.forEach((option) => {
         const position = Number(option.dataset.optionPosition) - 1;
         const isSelected = currentOptions[position] === option.dataset.optionValue;
@@ -1149,10 +1163,21 @@ const shopifyRoot = (window.Shopify && window.Shopify.routes && window.Shopify.r
         option.setAttribute('aria-selected', isSelected ? 'true' : 'false');
 
         if (isSelected) {
+          anySelected = true;
           sizeLabel.textContent = option.dataset.optionValue;
           sizeTrigger.classList.add('has-val');
         }
       });
+
+      if (!anySelected) {
+        sizeLabel.textContent = sizePlaceholderText;
+        sizeTrigger.classList.remove('has-val');
+      }
+
+      if (sizePlaceholderOpt) {
+        sizePlaceholderOpt.classList.toggle('selected', !anySelected);
+        sizePlaceholderOpt.setAttribute('aria-selected', anySelected ? 'false' : 'true');
+      }
     }
 
     function closeSizeDropdown() {
@@ -1308,6 +1333,15 @@ if (pushEvent && !(window.Shopify && window.Shopify.designMode)) {
           updateVariant(true);
         });
       });
+
+      if (sizePlaceholderOpt) {
+        sizePlaceholderOpt.addEventListener('click', (event) => {
+          event.stopPropagation();
+          currentOptions = currentOptions.map(() => null);
+          closeSizeDropdown();
+          updateVariant();
+        });
+      }
 
       document.addEventListener('click', (event) => {
         if (!event.target.closest('[data-size-dropdown]')) {
