@@ -62,11 +62,12 @@
             "type": "size_row",
             "settings": {
               "size": "5",
-              "label": "XXXS",
+              "label": "XXS",
+              "audience": "Man / Woman",
               "length_min_mm": 163,
               "length_max_mm": 169,
-              "circ_min_mm": 183,
-              "circ_max_mm": 189,
+              "circ_min_mm": 130,
+              "circ_max_mm": 150,
               "nitrile_val": "",
               "hv_val": ""
             }
@@ -76,6 +77,7 @@
             "settings": {
               "size": "6",
               "label": "XXS",
+              "audience": "Man / Woman",
               "length_min_mm": 169,
               "length_max_mm": 176,
               "circ_min_mm": 189,
@@ -89,6 +91,7 @@
             "settings": {
               "size": "7",
               "label": "XS",
+              "audience": "Man / Woman",
               "length_min_mm": 176,
               "length_max_mm": 185,
               "circ_min_mm": 196,
@@ -102,6 +105,7 @@
             "settings": {
               "size": "8",
               "label": "S",
+              "audience": "Man / Woman",
               "length_min_mm": 185,
               "length_max_mm": 194,
               "circ_min_mm": 205,
@@ -115,6 +119,7 @@
             "settings": {
               "size": "9",
               "label": "M",
+              "audience": "Man / Woman",
               "length_min_mm": 194,
               "length_max_mm": 203,
               "circ_min_mm": 214,
@@ -128,6 +133,7 @@
             "settings": {
               "size": "10",
               "label": "L",
+              "audience": "Man / Woman",
               "length_min_mm": 203,
               "length_max_mm": 212,
               "circ_min_mm": 223,
@@ -141,6 +147,7 @@
             "settings": {
               "size": "11",
               "label": "XL",
+              "audience": "Man / Woman",
               "length_min_mm": 212,
               "length_max_mm": 219,
               "circ_min_mm": 232,
@@ -154,6 +161,7 @@
             "settings": {
               "size": "12",
               "label": "XXL",
+              "audience": "Man / Woman",
               "length_min_mm": 219,
               "length_max_mm": 226,
               "circ_min_mm": 241,
@@ -204,6 +212,23 @@
           "email": "info@drye.se",
           "cta_label": "Shop DRYE Liners →",
           "cta_link": "shopify://products/drye-moisture-routing-glove-liners"
+        }
+      },
+      "drye-cart-drawer": {
+        "type": "drye-cart-drawer",
+        "settings": {
+          "cart_title": "Your cart",
+          "upsell_title": "Save 12% on 3+ pairs",
+          "upsell_text": "Add one more pair — discount applies automatically",
+          "upsell_button": "+ Add pair",
+          "upsell_variant_id": "0",
+          "trust_label_1": "30-day full refund",
+          "trust_label_2": "Ships in 24 hours",
+          "trust_label_3": "Machine washable",
+          "subtotal_label": "Subtotal",
+          "subtotal_note": "Shipping & taxes calculated at checkout",
+          "checkout_label": "Check out →",
+          "continue_label": "Continue shopping"
         }
       }
     },
