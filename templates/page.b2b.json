@@ -498,6 +498,26 @@
     },
     "resellers": {
       "type": "drye-b2b-resellers",
+      "blocks": {
+        "reseller_wYTbtK": {
+          "type": "reseller",
+          "settings": {
+            "name": "",
+            "url": ""
+          }
+        },
+        "reseller_qEh8zx": {
+          "type": "reseller",
+          "settings": {
+            "name": "",
+            "url": ""
+          }
+        }
+      },
+      "block_order": [
+        "reseller_wYTbtK",
+        "reseller_qEh8zx"
+      ],
       "settings": {
         "anchor_id": "resellers",
         "eyebrow": "Resellers",
@@ -708,6 +728,100 @@
     },
     "pilot_quotes": {
       "type": "drye-b2b-pilot-quotes",
+      "blocks": {
+        "quote_pkmTgB": {
+          "type": "quote",
+          "settings": {
+            "quote": "",
+            "who": "",
+            "role": "",
+            "company": ""
+          }
+        },
+        "quote_AMJmXL": {
+          "type": "quote",
+          "settings": {
+            "quote": "",
+            "who": "",
+            "role": "",
+            "company": ""
+          }
+        },
+        "quote_KT9U7B": {
+          "type": "quote",
+          "settings": {
+            "quote": "",
+            "who": "",
+            "role": "",
+            "company": ""
+          }
+        },
+        "quote_pRV3VL": {
+          "type": "quote",
+          "settings": {
+            "quote": "",
+            "who": "",
+            "role": "",
+            "company": ""
+          }
+        },
+        "quote_zNB8aY": {
+          "type": "quote",
+          "settings": {
+            "quote": "",
+            "who": "",
+            "role": "",
+            "company": ""
+          }
+        },
+        "quote_QJcBDf": {
+          "type": "quote",
+          "settings": {
+            "quote": "",
+            "who": "",
+            "role": "",
+            "company": ""
+          }
+        },
+        "quote_D7yg9L": {
+          "type": "quote",
+          "settings": {
+            "quote": "",
+            "who": "",
+            "role": "",
+            "company": ""
+          }
+        },
+        "quote_tn3rCM": {
+          "type": "quote",
+          "settings": {
+            "quote": "",
+            "who": "",
+            "role": "",
+            "company": ""
+          }
+        },
+        "quote_YChfyL": {
+          "type": "quote",
+          "settings": {
+            "quote": "",
+            "who": "",
+            "role": "",
+            "company": ""
+          }
+        }
+      },
+      "block_order": [
+        "quote_pkmTgB",
+        "quote_AMJmXL",
+        "quote_KT9U7B",
+        "quote_pRV3VL",
+        "quote_zNB8aY",
+        "quote_QJcBDf",
+        "quote_D7yg9L",
+        "quote_tn3rCM",
+        "quote_YChfyL"
+      ],
       "settings": {
         "anchor_id": "feedback",
         "eyebrow": "Pilot feedback",
@@ -776,6 +890,37 @@
     },
     "team": {
       "type": "drye-b2b-team",
+      "blocks": {
+        "lead_geMXyB": {
+          "type": "lead",
+          "settings": {
+            "name": "",
+            "role": "",
+            "bio": ""
+          }
+        },
+        "lead_wFcKA7": {
+          "type": "lead",
+          "settings": {
+            "name": "",
+            "role": "",
+            "bio": ""
+          }
+        },
+        "lead_dR7rjJ": {
+          "type": "lead",
+          "settings": {
+            "name": "",
+            "role": "",
+            "bio": ""
+          }
+        }
+      },
+      "block_order": [
+        "lead_geMXyB",
+        "lead_wFcKA7",
+        "lead_dR7rjJ"
+      ],
       "settings": {
         "anchor_id": "team",
         "eyebrow": "Team & execution network",
