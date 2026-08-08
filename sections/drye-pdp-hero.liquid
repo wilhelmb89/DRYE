@@ -9,6 +9,8 @@ assign review_count = section.settings.review_count_fallback
   assign atc_button_label = section.settings.atc_button_label
   assign preorder_note = ''
   assign in_stock_note = 'In stock'
+  assign low_stock_note = 'Low on stock'
+  assign low_stock_threshold = section.settings.low_stock_threshold | default: 10
 %}
 
 {{ 'drye-pdp-hero.css' | asset_url | stylesheet_tag }}
@@ -379,6 +381,18 @@ assign review_count = section.settings.review_count_fallback
     if matched_variant != blank and matched_variant.available and is_preorder == false
       assign is_in_stock = true
     endif
+
+    comment
+      Low on stock covers two cases: a backorderable size that has run to zero
+      (inventory_policy 'continue'), and a size still in stock but at or under
+      the threshold. Both are buyable, so we never call them "Sold out".
+    endcomment
+    assign is_low_stock = false
+    if is_preorder
+      assign is_low_stock = true
+    elsif is_in_stock and low_stock_threshold > 0 and matched_variant.inventory_management != blank and matched_variant.inventory_quantity <= low_stock_threshold
+      assign is_low_stock = true
+    endif
   %}
   <button
     type="button"
@@ -392,7 +406,7 @@ assign review_count = section.settings.review_count_fallback
     aria-selected="{% if is_selected %}true{% else %}false{% endif %}"
     {% unless is_available %}disabled{% endunless %}
   >
-    {{ value }}{% if is_preorder %} — Sold out{% elsif is_in_stock %} — {{ in_stock_note }}{% elsif is_available == false %} — Sold out{% endif %}
+    {{ value }}{% if is_low_stock %} — <span class="sz-dd-low">{{ low_stock_note }}</span>{% elsif is_in_stock %} — {{ in_stock_note }}{% elsif is_available == false %} — Sold out{% endif %}
   </button>
 {% endfor %}
 
@@ -407,7 +421,7 @@ assign review_count = section.settings.review_count_fallback
           </div>
 
           <div class="sz-soldout-notice" data-soldout-notice hidden>
-            <p class="sz-soldout-notice__text">{{ section.settings.soldout_notice_text | default: "This size is sold out right now. You can still order it — we ship as soon as new stock arrives." }}</p>
+            <p class="sz-soldout-notice__text">{{ section.settings.soldout_notice_text | default: "This size is low on stock. You can still order it — we ship as soon as new stock arrives." }}</p>
             <label class="sz-soldout-notice__check">
               <input type="checkbox" data-soldout-ack>
               <span>{{ section.settings.soldout_ack_label | default: "I understand and want to order anyway" }}</span>
@@ -1113,9 +1127,25 @@ const shopifyRoot = (window.Shopify && window.Shopify.routes && window.Shopify.r
       ? [...explicitVariantOptions]
       : new Array(productData.variants[0] ? productData.variants[0].options.length : 1).fill(null);
 
+    // Shopify's `product | json` does NOT expose inventory_policy or
+    // inventory_quantity on variants, so reading them off productData always
+    // came back undefined and no variant ever counted as backorderable. Build
+    // the lookup in Liquid instead, where those fields are available.
+    const variantStockMeta = {
+      {%- for variant in current_product.variants -%}
+      "{{ variant.id }}": {
+        policy: {{ variant.inventory_policy | json }},
+        tracked: {% if variant.inventory_management != blank %}true{% else %}false{% endif %},
+        qty: {{ variant.inventory_quantity | default: 0 }}
+      }{% unless forloop.last %},{% endunless %}
+      {%- endfor -%}
+    };
+
     function isVariantPreorder(variant) {
       if (!variant) return false;
-      return variant.inventory_policy === 'continue' && Number(variant.inventory_quantity) <= 0;
+      const meta = variantStockMeta[String(variant.id)];
+      if (!meta) return false;
+      return meta.policy === 'continue' && meta.tracked && Number(meta.qty) <= 0;
     }
 
     function syncButtonStates(selectedVariant) {
@@ -1555,10 +1585,21 @@ wteTimelines.forEach((timeline) => {
       "content": "Sold-out order acknowledgment"
     },
     {
+      "type": "range",
+      "id": "low_stock_threshold",
+      "label": "Low on stock at or below",
+      "info": "Sizes at or under this quantity show 'Low on stock' in red. Set to 0 to only flag backordered sizes.",
+      "min": 0,
+      "max": 50,
+      "step": 1,
+      "unit": "st",
+      "default": 10
+    },
+    {
       "type": "textarea",
       "id": "soldout_notice_text",
       "label": "Notice text",
-      "default": "This size is sold out right now. You can still order it — we ship as soon as new stock arrives."
+      "default": "This size is low on stock. You can still order it — we ship as soon as new stock arrives."
     },
     {
       "type": "text",
