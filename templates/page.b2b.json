@@ -508,6 +508,55 @@
     },
     "alternatives": {
       "type": "drye-b2b-alternatives",
+      "blocks": {
+        "row_a88QEg": {
+          "type": "row",
+          "settings": {
+            "label": "Cotton liners",
+            "fail": "Soaks it up, holds it against the skin.",
+            "fix": "DRYE routes it out."
+          }
+        },
+        "row_gAKTr4": {
+          "type": "row",
+          "settings": {
+            "label": "Cotton liners",
+            "fail": "Soaks it up, holds it against the skin.",
+            "fix": "DRYE routes it out."
+          }
+        },
+        "row_aAGrxp": {
+          "type": "row",
+          "settings": {
+            "label": "Cotton liners",
+            "fail": "Soaks it up, holds it against the skin.",
+            "fix": "DRYE routes it out."
+          }
+        },
+        "row_NcQmxT": {
+          "type": "row",
+          "settings": {
+            "label": "Cotton liners",
+            "fail": "Soaks it up, holds it against the skin.",
+            "fix": "DRYE routes it out."
+          }
+        },
+        "row_jrfEtn": {
+          "type": "row",
+          "settings": {
+            "label": "Cotton liners",
+            "fail": "Soaks it up, holds it against the skin.",
+            "fix": "DRYE routes it out."
+          }
+        }
+      },
+      "block_order": [
+        "row_a88QEg",
+        "row_gAKTr4",
+        "row_aAGrxp",
+        "row_NcQmxT",
+        "row_jrfEtn"
+      ],
       "settings": {
         "anchor_id": "alternatives",
         "eyebrow": "What you already pay for",
@@ -516,6 +565,58 @@
     },
     "supply": {
       "type": "drye-b2b-loop",
+      "blocks": {
+        "step_cCMzGk": {
+          "type": "step",
+          "settings": {
+            "icon": "box",
+            "step": "",
+            "name": "",
+            "line": "",
+            "meta": "",
+            "highlight": false
+          }
+        },
+        "step_MBf8Ec": {
+          "type": "step",
+          "settings": {
+            "icon": "box",
+            "step": "",
+            "name": "",
+            "line": "",
+            "meta": "",
+            "highlight": false
+          }
+        },
+        "step_RQDeWz": {
+          "type": "step",
+          "settings": {
+            "icon": "box",
+            "step": "",
+            "name": "",
+            "line": "",
+            "meta": "",
+            "highlight": false
+          }
+        },
+        "step_b3Bn7m": {
+          "type": "step",
+          "settings": {
+            "icon": "box",
+            "step": "",
+            "name": "",
+            "line": "",
+            "meta": "",
+            "highlight": false
+          }
+        }
+      },
+      "block_order": [
+        "step_cCMzGk",
+        "step_MBf8Ec",
+        "step_RQDeWz",
+        "step_b3Bn7m"
+      ],
       "settings": {
         "anchor_id": "supply-chain",
         "eyebrow": "",
