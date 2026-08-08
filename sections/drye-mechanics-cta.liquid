@@ -1,4 +1,5 @@
 {{ 'drye-mechanics-cta.css' | asset_url | stylesheet_tag }}
+{{ 'drye-buyzone-cta.js' | asset_url | script_tag }}
 
 <section
   class="mech-cta"
@@ -27,7 +28,7 @@
 
     {%- if section.settings.button_label != blank -%}
       <div class="mech-cta__actions">
-        <a href="{{ section.settings.button_link | default: '#' }}" class="dryeNEW-btn dryeNEW-btn--primary dryeNEW-btn--block">
+        <a href="{{ section.settings.button_link | default: '#' }}" data-buyzone-cta class="dryeNEW-btn dryeNEW-btn--primary dryeNEW-btn--block">
           {{ section.settings.button_label }} <span aria-hidden="true">&rarr;</span>
         </a>
       </div>

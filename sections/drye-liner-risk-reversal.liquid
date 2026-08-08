@@ -1,4 +1,5 @@
 {{ 'drye-liner-risk-reversal.css' | asset_url | stylesheet_tag }}
+{{ 'drye-buyzone-cta.js' | asset_url | script_tag }}
 
 <section
   class="drye-liner-risk-reversal"
@@ -31,7 +32,7 @@
 
     {%- if section.settings.cta_label != blank -%}
       <div class="drye-liner-risk-reversal__cta-wrap">
-        <a class="dryeNEW-btn dryeNEW-btn--primary" href="{{ section.settings.cta_url | default: '#' }}">
+        <a class="dryeNEW-btn dryeNEW-btn--primary" data-buyzone-cta href="{{ section.settings.cta_url | default: '#' }}">
           {{ section.settings.cta_label }}
         </a>
       </div>

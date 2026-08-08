@@ -9,6 +9,18 @@
   --x-d14: 88%;
 }
 
+/* ---------- graph wipe (self-contained: travels with the section) ---------- */
+.g-wipe {
+  transform-box: fill-box;
+  transform-origin: left center;
+  animation: g-wipe 7s ease-in-out infinite;
+}
+
+@keyframes g-wipe {
+  0%, 4% { transform: scaleX(0); }
+  52%, 100% { transform: scaleX(1); }
+}
+
 /* ---------- head ---------- */
 .bch-chap { display: block; margin-bottom: 22px; font-family: var(--font-body); font-size: 13px; font-weight: 700; letter-spacing: .18em; color: rgba(255,255,255,.55); }
 .bch-h1 { margin: 0 0 36px; font-family: var(--font-display); font-weight: var(--fw-semibold); font-size: var(--fs-section-h2); line-height: 1.1; letter-spacing: -.03em; color: #fff; text-align: center; text-wrap: pretty; }
@@ -88,6 +100,7 @@
 
 @media (prefers-reduced-motion: reduce) {
   .bch-track, .bch-drop, .bch-curve { transition: none; }
+  .g-wipe { animation: none; transform: scaleX(1); }
 }
 
 /* ---------- mobile card layout (6a) ---------- */
