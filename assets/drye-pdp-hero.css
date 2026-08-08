@@ -854,8 +854,51 @@
 }
 
 .hero .sz-dd-low {
-  color: #C0392B;
-  font-weight: 600;
+  color: #c0392b;
+  font-weight: 500;
+}
+
+/* Matches the pre-rollback .sz-panel-soldout-banner: warm sand, navy text,
+   square corners, attached to the bottom edge of the size trigger. */
+.hero .sz-soldout-notice {
+  background: #F4F1EB;
+  color: #1E3A4C;
+  font-family: "DM Sans", sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.45;
+  padding: 12px 14px;
+  border: 1px solid var(--border);
+  border-top: none;
+  border-radius: 0;
+  text-align: left;
+}
+
+.hero .sz-soldout-notice[hidden] {
+  display: none;
+}
+
+.hero .sz-soldout-notice__text {
+  margin: 0;
+}
+
+.hero .sz-soldout-notice__check {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  margin-top: 10px;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.hero .sz-soldout-notice__check input[type="checkbox"] {
+  width: 16px;
+  height: 16px;
+  margin: 1px 0 0;
+  flex: none;
+  accent-color: var(--emerald);
+  cursor: pointer;
 }
 
 .hero .sz-dd-note {

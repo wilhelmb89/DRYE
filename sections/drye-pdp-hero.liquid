@@ -1160,16 +1160,19 @@ const shopifyRoot = (window.Shopify && window.Shopify.routes && window.Shopify.r
       const canBuy = !!(selectedVariant && (selectedVariant.available && !isPreorder || ackedSoldOut));
       // No size chosen yet is a different state from a chosen-but-sold-out
       // variant — don't show "Sold out" for a simply-unselected size.
-      const noSizeChosen = !selectedVariant;
+      // "Sold out" is reserved for sizes that genuinely cannot be bought.
+      // A backorderable size waiting on the acknowledgment checkbox keeps its
+      // normal label and is simply disabled — the notice above explains why.
+      const keepLabel = !selectedVariant || isPreorder;
 
       if (mainAtc) {
         mainAtc.disabled = !canBuy;
-        mainAtc.textContent = canBuy ? {{ atc_button_label | json }} : (noSizeChosen ? {{ atc_button_label | json }} : 'Sold out');
+        mainAtc.textContent = canBuy || keepLabel ? {{ atc_button_label | json }} : 'Sold out';
       }
 
       if (stickySubmit) {
         stickySubmit.disabled = !canBuy;
-        stickySubmit.textContent = canBuy ? {{ sticky_button_label | json }} : (noSizeChosen ? {{ sticky_button_label | json }} : 'Sold out');
+        stickySubmit.textContent = canBuy || keepLabel ? {{ sticky_button_label | json }} : 'Sold out';
       }
     }
 
