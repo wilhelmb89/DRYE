@@ -1,14 +1,79 @@
-<section class="drye-b2b sec" id="{{ section.settings.anchor_id | default: 'operations' }}">
-  {%- if section.settings.eyebrow != blank -%}
-    <p class="eyebrow">{{ section.settings.eyebrow | escape }}</p>
-  {%- endif -%}
-  {%- if section.settings.heading != blank -%}<h2 class="h2">{{ section.settings.heading }}</h2>{%- endif -%}
+{%- liquid
+  assign anchor = section.settings.anchor_id | default: 'operations'
+-%}
 
-  <div class="grid-3">
+<style>
+  #shopify-section-{{ section.id }} .ops-sec{
+    --ops-ink:var(--deep,#16263A);
+    --ops-ink-3:var(--muted,#6B7684);
+    --ops-teal:var(--emerald,#3C7B74);
+    --ops-rule:var(--border,#E4E0D8);
+    --ops-rule-strong:#C3BCAD;
+    --ops-paper:var(--bg,#FFFFFF);
+    --ops-pad-x:max(40px,calc((100% - 1200px) / 2));
+    padding:88px var(--ops-pad-x);
+  }
+  #shopify-section-{{ section.id }} .ops-eyebrow{
+    font-family:'DM Sans',sans-serif;font-size:12px;font-weight:600;letter-spacing:.16em;
+    text-transform:uppercase;color:var(--ops-ink-3);margin:0 0 14px;
+  }
+  #shopify-section-{{ section.id }} .ops-h2{
+    font-family:'Clash Grotesk','DM Sans',sans-serif;font-size:38px;font-weight:600;
+    letter-spacing:-.02em;line-height:1.1;color:var(--ops-ink);margin:0 0 28px;
+    max-width:780px;text-wrap:pretty;
+  }
+  #shopify-section-{{ section.id }} .ops-grid{
+    display:grid;grid-template-columns:repeat(3,1fr);gap:16px;
+  }
+  #shopify-section-{{ section.id }} .ops-item{
+    display:flex;align-items:center;gap:12px;
+    background:var(--ops-paper);border:1px solid var(--ops-rule);border-radius:4px;padding:16px;
+    transition:border-color .18s ease,box-shadow .18s ease;
+  }
+  #shopify-section-{{ section.id }} .ops-item:hover{
+    border-color:var(--ops-ink-3);box-shadow:0 6px 16px rgba(22,38,58,.06);
+  }
+  /* The fix: the icon needs an explicit size. Without it the SVG stretches to
+     fill the flex row and renders as a full-card graphic. */
+  #shopify-section-{{ section.id }} .ops-item__box{
+    flex:0 0 auto;width:38px;height:38px;border-radius:2px;
+    border:1px solid var(--ops-rule-strong);
+    display:flex;align-items:center;justify-content:center;
+  }
+  #shopify-section-{{ section.id }} .ops-item__ico{
+    width:20px;height:20px;stroke:var(--ops-ink);color:var(--ops-ink);
+  }
+  #shopify-section-{{ section.id }} .ops-item__lbl{
+    font-family:'DM Sans',sans-serif;font-size:16px;line-height:1.4;color:var(--ops-ink);margin:0;
+  }
+  @media (max-width:900px){
+    #shopify-section-{{ section.id }} .ops-sec{--ops-pad-x:20px;padding:88px 20px;}
+    #shopify-section-{{ section.id }} .ops-h2{font-size:28px}
+    #shopify-section-{{ section.id }} .ops-grid{grid-template-columns:1fr;gap:12px}
+  }
+</style>
+
+<section class="drye-b2b ops-sec" id="{{ anchor }}">
+  {%- if section.settings.eyebrow != blank -%}
+    <p class="ops-eyebrow">{{ section.settings.eyebrow | escape }}</p>
+  {%- endif -%}
+  {%- if section.settings.heading != blank -%}
+    <h2 class="ops-h2">{{ section.settings.heading }}</h2>
+  {%- endif -%}
+
+  <div class="ops-grid">
     {%- for block in section.blocks -%}
-      <div class="tile-l svc" {{ block.shopify_attributes }}>
-        {% render 'drye-b2b-icon', icon: block.settings.icon %}
-        <p class="lbl">{{ block.settings.label }}</p>
+      <div class="ops-item" {{ block.shopify_attributes }}>
+        <span class="ops-item__box">
+        <svg class="ops-item__ico" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          {%- case block.settings.icon -%}
+            {%- when 'drop' -%}<path d="M12 3s6 6 6 11a6 6 0 01-12 0c0-5 6-11 6-11z"></path>
+            {%- when 'doc' -%}<path d="M6 3h9l3 3v15H6z"></path><path d="M9 9h6M9 13h6M9 17h4"></path>
+            {%- else -%}<path d="M3 8l9-5 9 5-9 5-9-5z"></path><path d="M3 8v8l9 5 9-5V8"></path><path d="M12 13v8"></path>
+          {%- endcase -%}
+        </svg>
+        </span>
+        <p class="ops-item__lbl">{{ block.settings.label }}</p>
       </div>
     {%- endfor -%}
   </div>
@@ -25,10 +90,21 @@
   "blocks": [
     { "type": "item", "name": "Item", "settings": [
       { "type": "select", "id": "icon", "label": "Icon", "default": "box",
-        "options": [ { "value": "box", "label": "Box" }, { "value": "drop", "label": "Droplet" }, { "value": "doc", "label": "Document" } ] },
+        "options": [
+          { "value": "box", "label": "Box" },
+          { "value": "drop", "label": "Droplet" },
+          { "value": "doc", "label": "Document" }
+        ] },
       { "type": "html", "id": "label", "label": "Label" }
     ]}
   ],
-  "presets": [{ "name": "drye-B2B Ops" }]
+  "presets": [{
+    "name": "drye-B2B Ops",
+    "blocks": [
+      { "type": "item", "settings": { "icon": "drop", "label": "Machine wash. Two pairs per person in rotation." } },
+      { "type": "item", "settings": { "icon": "box", "label": "Sizing kit included in the trial" } },
+      { "type": "item", "settings": { "icon": "doc", "label": "Available via Elektroskandia. DDP delivery." } }
+    ]
+  }]
 }
 {% endschema %}
