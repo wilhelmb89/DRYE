@@ -1,3 +1,12 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "layout": "theme",
   "sections": {
@@ -66,10 +75,9 @@
       "type": "drye-b2b-hero",
       "settings": {
         "anchor_id": "hero",
-        "background": "shopify://shop_images/hero-b2b-mechanic.webp",
         "heading": "A dry hand inside the glove you already approved.",
         "mechanism": "DRYE routes. Cotton soaks.",
-        "subheading": "One knit, one direction &mdash; moisture moves off the skin instead of sitting in it. Worn under the protective gloves your crew already wears.",
+        "subheading": "One knit, one direction — moisture moves off the skin instead of sitting in it. Worn under the protective gloves your crew already wears.",
         "cta_primary_label": "Order the test kit — no PO required",
         "cta_primary_url": "#offer",
         "cta_secondary_label": "Book 15 minutes",
@@ -83,6 +91,7 @@
           "type": "step",
           "settings": {
             "icon": "box",
+            "step": "",
             "name": "New brand",
             "line": "Same hand, different glove.",
             "meta": "Purchasing",
@@ -93,6 +102,7 @@
           "type": "step",
           "settings": {
             "icon": "tube",
+            "step": "",
             "name": "Creams",
             "line": "Applied after the damage.",
             "meta": "Skin-care budget",
@@ -103,6 +113,7 @@
           "type": "step",
           "settings": {
             "icon": "calendar",
+            "step": "",
             "name": "Sick leave",
             "line": "Days away, case opened.",
             "meta": "HR",
@@ -113,6 +124,7 @@
           "type": "step",
           "settings": {
             "icon": "pause",
+            "step": "",
             "name": "Production stops",
             "line": "The line waits, every shift.",
             "meta": "Operations",
@@ -128,9 +140,10 @@
       ],
       "settings": {
         "anchor_id": "spend",
-        "variant": "owner",
         "eyebrow": "The spend that never fixes it",
         "heading": "CPOs keep buying new brands. The problem stays.",
+        "subheading": "",
+        "variant": "owner",
         "footnote": "Four budget lines, one unmanaged layer — <span class=\"prod-footnote__em\">the one between the glove and the skin.</span>"
       }
     },
@@ -152,7 +165,7 @@
         "t3": {
           "type": "step",
           "settings": {
-            "text": "Wet skin can allow up to <b>3.6&times;</b> higher penetration"
+            "text": "Wet skin can allow up to <b>3.6×</b> higher penetration"
           }
         }
       },
@@ -164,9 +177,8 @@
       "settings": {
         "anchor_id": "trap",
         "eyebrow": "What you might not know",
-        "heading": "Sealed gloves protect workers &mdash; but trap the problem inside.",
+        "heading": "Sealed gloves protect workers — but trap the problem inside.",
         "source": "Hydrated human skin showed higher penetration for certain fat-soluble model compounds in vitro. Hikima &amp; Maibach, <i>Biol Pharm Bull.</i>",
-        "image": "shopify://shop_images/nitrile-glove-hand.webp",
         "image_alt": "Hand in a single-use nitrile glove"
       }
     },
@@ -178,7 +190,9 @@
           "settings": {
             "label": "Production stoppages",
             "value": "Daily",
-            "sub": "Airing out, changes, wait time."
+            "sub": "Airing out, changes, wait time.",
+            "tag": "",
+            "tag_sub": ""
           }
         },
         "c2": {
@@ -222,8 +236,7 @@
         "anchor_id": "costs",
         "eyebrow": "The cost of not acting",
         "heading": "Four things already costing you — that never show up in the purchasing budget.",
-        "subheading": "Trapped moisture doesn&rsquo;t just hit the skin. It hits production, warmth, grip and retention.",
-        "silhouette": "shopify://shop_images/drye_silhouette.webp",
+        "subheading": "Trapped moisture doesn’t just hit the skin. It hits production, warmth, grip and retention.",
         "map_aria": "Hands under nitrile glove",
         "label_head": "Head",
         "label_body": "Body",
@@ -241,7 +254,6 @@
         "k1": {
           "type": "case",
           "settings": {
-            "image": "",
             "tag": "Automotive manufacturing",
             "title": "Tesla Sweden: from airing-out breaks to uninterrupted assembly pace.",
             "excerpt": "Shop floor, 12 technicians, 6 weeks. Production stoppages from sweaty hands eliminated.",
@@ -252,7 +264,7 @@
         "k2": {
           "type": "case",
           "settings": {
-            "image": "",
+            "image": "shopify://shop_images/Screenshot_6.png",
             "tag": "Mining",
             "title": "LKAB: “I’ve got my own hands as proof.”",
             "excerpt": "Miner since 2016. Chronic skin cracking under the nitrile glove — gone after 4 weeks.",
@@ -263,18 +275,17 @@
         "k3": {
           "type": "case",
           "settings": {
-            "image": "",
+            "image": "shopify://shop_images/unnamed_3.webp",
             "tag": "Road & infrastructure",
-            "title": "Svevia CV AB: fingertip feel kept, need to air hands gone.",
+            "title": "SCANIA CV AB: fingertip feel kept, need to air hands gone.",
             "excerpt": "PPE coordinator documented increased comfort and preserved dexterity across an 8-week evaluation.",
-            "company": "Svevia CV AB",
+            "company": "SCANIA CV AB",
             "url": "/blogs/pilots/svevia"
           }
         },
         "k4": {
           "type": "case",
           "settings": {
-            "image": "",
             "tag": "Hockey / performance",
             "title": "Fribords HC: cracks, redness, eczema — gone.",
             "excerpt": "EHS Champion 2019 followed a team across a full season. Drier hands, better grip, skin held up.",
@@ -285,7 +296,6 @@
         "k5": {
           "type": "case",
           "settings": {
-            "image": "",
             "tag": "Motorsport",
             "title": "Team Sondics: the pilots bought the test gloves themselves.",
             "excerpt": "Site EHS Specialist reported positive feedback and check-outs on used units.",
@@ -296,7 +306,6 @@
         "k6": {
           "type": "case",
           "settings": {
-            "image": "",
             "tag": "Automotive repair",
             "title": "BR Automotive: the nitrile stopped tearing, the oil wiped off.",
             "excerpt": "Mechanic in the US — gloves slid on and off dry skin, oil on the liner wiped clean.",
@@ -317,7 +326,7 @@
         "anchor_id": "pilots",
         "eyebrow": "Field case studies",
         "heading": "Read what the pilots actually did.",
-        "subheading": "Six documented pilot installations &mdash; setup, measurement, results.",
+        "subheading": "Six documented pilot installations — setup, measurement, results.",
         "link_label": "Read the case",
         "foot_text": "",
         "foot_link_label": "See all case studies",
@@ -342,7 +351,7 @@
         "anchor_id": "mechanism",
         "eyebrow": "The mechanism",
         "heading": "The missing layer — between the glove and the skin.",
-        "body": "Nothing sits between \"sealed protection\" and the skin today. That&rsquo;s where the moisture gets stuck — and where DRYE lives.",
+        "body": "Nothing sits between \"sealed protection\" and the skin today. That’s where the moisture gets stuck — and where DRYE lives.",
         "layer_top": "Sealed protection",
         "layer_mid": "Missing internal control layer",
         "layer_mid_sub": "Internal interface — unmanaged",
@@ -356,7 +365,7 @@
         "anchor_id": "knit",
         "eyebrow": "Moisture routing in sealed environments",
         "heading": "Moisture routing in sealed environments",
-        "body": "Low-regain PP on the skin side, lyocell on the outer side &mdash; one unitary plated knit, no bonded layers.",
+        "body": "Low-regain PP on the skin side, lyocell on the outer side — one unitary plated knit, no bonded layers.",
         "caption": "Directional moisture routing"
       }
     },
@@ -411,7 +420,7 @@
         "eyebrow": "In numbers",
         "heading": "In numbers",
         "regain_title": "Moisture regain (%) · lower is drier",
-        "regain_source": "Regain: Kadolph 2014 &middot; ASTM D2654",
+        "regain_source": "Regain: Kadolph 2014 · ASTM D2654",
         "asym_title": "Wetted area (mm²) at 120 s",
         "outer_label": "Outer side",
         "outer_value": "8,111",
@@ -419,8 +428,8 @@
         "skin_value": "6,122",
         "delta": "+28%",
         "delta_sub": "larger wetted area on outer side",
-        "asym_source": "Liquid applied on skin side &middot; WickView &middot; 120&nbsp;s &middot; Swedish School of Textiles, 2025",
-        "disclaimer": "Open-air fabric-level evidence &mdash; not an occlusion test."
+        "asym_source": "Liquid applied on skin side · WickView · 120 s · Swedish School of Textiles, 2025",
+        "disclaimer": "Open-air fabric-level evidence — not an occlusion test."
       }
     },
     "stats": {
@@ -429,28 +438,25 @@
         "st1": {
           "type": "stat",
           "settings": {
-            "silhouette": "shopify://shop_images/sil-scientist.webp",
             "label": "PPE market by 2033",
             "value": "$160B",
-            "body": "More sealed equipment means more trapped moisture &mdash; the problem scales with the market."
+            "body": "More sealed equipment means more trapped moisture — the problem scales with the market."
           }
         },
         "st2": {
           "type": "stat",
           "settings": {
-            "silhouette": "shopify://shop_images/sil-mechanics.webp",
             "label": "EVs sold in 2024",
             "value": "17M",
-            "body": "Class 0 insulating gloves &mdash; a sealed-glove workforce that didn&rsquo;t exist 30 years ago."
+            "body": "Class 0 insulating gloves — a sealed-glove workforce that didn’t exist 30 years ago."
           }
         },
         "st3": {
           "type": "stat",
           "settings": {
-            "silhouette": "shopify://shop_images/sil-soldiers.webp",
             "label": "Active military, globally",
             "value": "24M",
-            "body": "~58M with reserves &mdash; most operating in boots, gloves and base layers where trapped sweat becomes a readiness problem."
+            "body": "~58M with reserves — most operating in boots, gloves and base layers where trapped sweat becomes a readiness problem."
           }
         }
       },
@@ -463,7 +469,7 @@
         "anchor_id": "why-now",
         "eyebrow": "Why now",
         "heading": "Where DRYE is operating",
-        "sources": "Grand View Research &middot; IEA Global EV Outlook 2025 &middot; Annals of Medicine 2023"
+        "sources": "Grand View Research · IEA Global EV Outlook 2025 · Annals of Medicine 2023"
       }
     },
     "in_service": {
@@ -508,42 +514,36 @@
         "cl1": {
           "type": "logo",
           "settings": {
-            "logo": "shopify://shop_images/scania.webp",
             "name": "Scania"
           }
         },
         "cl2": {
           "type": "logo",
           "settings": {
-            "logo": "shopify://shop_images/frolunda.webp",
             "name": "Frölunda Hockey Club"
           }
         },
         "cl3": {
           "type": "logo",
           "settings": {
-            "logo": "shopify://shop_images/shl.webp",
             "name": "SHL"
           }
         },
         "cl4": {
           "type": "logo",
           "settings": {
-            "logo": "shopify://shop_images/sts.webp",
             "name": "STS"
           }
         },
         "cl5": {
           "type": "logo",
           "settings": {
-            "logo": "shopify://shop_images/sico.webp",
             "name": "SICO"
           }
         },
         "cl6": {
           "type": "logo",
           "settings": {
-            "logo": "shopify://shop_images/min-bil.webp",
             "name": "Min Bil"
           }
         }
@@ -558,9 +558,9 @@
       ],
       "settings": {
         "anchor_id": "customer-logos",
-        "style": "customer",
         "eyebrow": "Pilots and customers",
-        "heading": ""
+        "heading": "",
+        "style": "customer"
       }
     },
     "resellers": {
@@ -569,7 +569,6 @@
         "rs1": {
           "type": "reseller",
           "settings": {
-            "logo": "shopify://shop_images/sonepar.webp",
             "name": "Sonepar",
             "url": ""
           }
@@ -577,7 +576,6 @@
         "rs2": {
           "type": "reseller",
           "settings": {
-            "logo": "shopify://shop_images/smarta-saker.webp",
             "name": "Smarta Saker",
             "url": ""
           }
@@ -708,10 +706,10 @@
       ],
       "settings": {
         "anchor_id": "supply-chain",
-        "variant": "chip",
         "eyebrow": "",
         "heading": "Supply chain",
         "subheading": "",
+        "variant": "chip",
         "footnote": ""
       }
     },
@@ -809,7 +807,7 @@
           "type": "credential",
           "settings": {
             "icon": "layers",
-            "title": "0.4&nbsp;mm base layer",
+            "title": "0.4 mm base layer",
             "sub": "Patent pending"
           }
         },
@@ -964,12 +962,13 @@
           "settings": {
             "step": "Step 1",
             "name": "Testkit",
-            "price": "<b>15,000&nbsp;SEK</b> &middot; no PO required",
+            "price": "<b>15,000 SEK</b> · no PO required",
             "features": "10 pairs across mixed sizes\nOne shift crew, 2 weeks\nShort protocol, feedback form\nWritten debrief within 3 days\nCost credited against pilot or rollout",
             "cta_label": "Order test kit",
             "cta_url": "#form",
             "foot": "For a first read on what you already run today.",
-            "recommended": false
+            "recommended": false,
+            "badge_label": "Recommended"
           }
         },
         "tr2": {
@@ -977,7 +976,7 @@
           "settings": {
             "step": "Step 2",
             "name": "Pilot",
-            "price": "From <b>45,000&nbsp;SEK</b> &middot; 4–6 weeks",
+            "price": "From <b>45,000 SEK</b> · 4–6 weeks",
             "features": "50–100 pairs, whole department\nBaseline + endline: skin condition, comfort, production stoppages\nSizing kit and swaps included\nWritten report with KPI data\nStraight discount on rollout if you move forward",
             "cta_label": "Book a pilot",
             "cta_url": "#form",
@@ -991,12 +990,13 @@
           "settings": {
             "step": "Step 3",
             "name": "Rollout &amp; framework",
-            "price": "<b>Request quote</b> &middot; 500+ pairs/year",
+            "price": "<b>Request quote</b> · 500+ pairs/year",
             "features": "Annual volume with consignment stock\nDelivered via Elektroskandia, Ahlsell or direct\nFramework agreement with indexed price list\nSLA on wash-cycle replacements and size swaps\nESRS-S1 / ISO 45001 documentation on request",
             "cta_label": "Request quote",
             "cta_url": "#form",
             "foot": "For procurement scaling across multiple units or sites.",
-            "recommended": false
+            "recommended": false,
+            "badge_label": "Recommended"
           }
         }
       },
@@ -1029,25 +1029,22 @@
         "l1": {
           "type": "lead",
           "settings": {
-            "photo": "shopify://shop_images/team-wilhelm.webp",
             "name": "Wilhelm Bäckström",
-            "role": "CEO &mdash; B2B Sales",
+            "role": "CEO — B2B Sales",
             "bio": "18 yrs B2B sales across enterprise, public sector and startups. From HP, Dell EMC and early-stage commercial advisory."
           }
         },
         "l2": {
           "type": "lead",
           "settings": {
-            "photo": "shopify://shop_images/team-andrew.webp",
             "name": "Andrew Brathwaite",
-            "role": "COO &mdash; Product &amp; deep-tech",
+            "role": "COO — Product &amp; deep-tech",
             "bio": "7 yrs at Tesla Northern EMEA. Ex-Global Technical Service Manager at CAKE. Now Head of Electrical Safety, Komatsu Forest."
           }
         },
         "l3": {
           "type": "lead",
           "settings": {
-            "photo": "shopify://shop_images/team-adam.webp",
             "name": "Adam Engström",
             "role": "Commercial lead",
             "bio": "Serial entrepreneur across commerce and brand-building. Co-founded a Nordic consumer brand acquired by Kavli."
@@ -1056,35 +1053,30 @@
         "v1": {
           "type": "investor",
           "settings": {
-            "photo": "shopify://shop_images/team-viktor.webp",
             "name": "Viktor Sylvan"
           }
         },
         "v2": {
           "type": "investor",
           "settings": {
-            "photo": "shopify://shop_images/team-kim.webp",
             "name": "Kim Westin"
           }
         },
         "v3": {
           "type": "investor",
           "settings": {
-            "photo": "shopify://shop_images/team-per.webp",
             "name": "Per Järnebrink"
           }
         },
         "v4": {
           "type": "investor",
           "settings": {
-            "photo": "shopify://shop_images/team-fredrik.webp",
             "name": "Fredrik Posse"
           }
         },
         "v5": {
           "type": "investor",
           "settings": {
-            "photo": "shopify://shop_images/team-magnus.webp",
             "name": "Magnus Gruenberg"
           }
         }
@@ -1171,7 +1163,7 @@
         "problems": "Sweat inside the gloves\nSkin problems — cracking, eczema, maceration\nHeat loss in cold conditions\nHeat and discomfort in warm conditions\nProduction stops for airing out hands\nRepeated glove-brand switching without result\nGrip and dexterity complaints\nSomething else",
         "message_placeholder": "Sites, shift patterns, which gloves you run today",
         "submit_label": "Send enquiry",
-        "reassurance": "We don&rsquo;t use ticketing systems. A person reads this.",
+        "reassurance": "We don’t use ticketing systems. A person reads this.",
         "success_message": "Thanks — we'll be back within one business day."
       }
     }
