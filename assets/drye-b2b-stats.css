@@ -1,10 +1,22 @@
 .stat-card{background:var(--paper);border:1px solid var(--rule);border-radius:4px;padding:16px 16px 18px;position:relative;overflow:hidden;transition:border-color .18s ease,box-shadow .18s ease}
 .stat-card:hover{border-color:var(--rule-strong);box-shadow:0 8px 20px rgba(22,38,58,.06)}
-.stat-card__sil{position:absolute;top:14px;right:14px;height:64px;opacity:.16;filter:grayscale(1)}
+
+/* Shopify's image_tag writes width/height attributes onto the <img>, and most
+   themes also ship a global img{width:100%}. Height alone is not enough — the
+   attribute width wins and the silhouette stretches across the card behind the
+   copy. width:auto + max-width caps it; the design file had no such attributes,
+   which is why it only breaks in the theme. */
+.stat-card__sil{
+  position:absolute;top:14px;right:14px;
+  width:auto;height:64px;max-width:45%;
+  object-fit:contain;object-position:top right;
+  opacity:.16;filter:grayscale(1);
+  pointer-events:none;
+}
 .stat-card__tick{display:block;width:20px;height:2px;background:var(--teal);margin-bottom:14px}
-.stat-card__eye{font-family:'DM Sans',sans-serif;font-size:12px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-3);margin:0 0 8px}
-.stat-card__val{font-family:'Clash Grotesk','DM Sans',sans-serif;font-size:38px;font-weight:600;letter-spacing:-.02em;color:var(--ink);line-height:1;margin:0 0 10px;font-variant-numeric:tabular-nums}
-.stat-card__body{font-family:'DM Sans',sans-serif;font-size:16px;line-height:1.45;color:var(--ink-2);margin:0;text-wrap:pretty}
+.stat-card__eye{font-family:'DM Sans',sans-serif;font-size:12px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-3);margin:0 0 8px;position:relative}
+.stat-card__val{font-family:'Clash Grotesk','DM Sans',sans-serif;font-size:38px;font-weight:600;letter-spacing:-.02em;color:var(--ink);line-height:1;margin:0 0 10px;font-variant-numeric:tabular-nums;position:relative}
+.stat-card__body{font-family:'DM Sans',sans-serif;font-size:16px;line-height:1.45;color:var(--ink-2);margin:0;text-wrap:pretty;position:relative}
 .stat-sources{font-family:'DM Sans',sans-serif;font-size:12px;color:var(--ink-3);opacity:.75;margin:12px 0 0}
 .stat-summary{font-family:'DM Sans',sans-serif;font-size:16px;color:var(--ink);margin:16px 0 0;padding-left:16px;position:relative}
 .stat-summary::before{content:"";position:absolute;left:0;top:9px;width:10px;height:1.5px;background:var(--teal)}
@@ -12,4 +24,5 @@
 .stat-summary em{color:var(--teal-deep);font-style:normal;font-weight:500}
 @media (max-width:700px){
   .stat-cards{grid-template-columns:1fr}
+  .stat-card__sil{height:52px;max-width:38%}
 }
