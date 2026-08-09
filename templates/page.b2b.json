@@ -68,7 +68,13 @@
         "wordmark": "DRYE",
         "logo_url": "/",
         "cta_label": "Contact",
-        "cta_url": "#form"
+        "cta_url": "#form",
+        "height": 68,
+        "menu_label": "Section navigation",
+        "home_label": "← dryeliner.com",
+        "hide_theme_header": true,
+        "hide_selectors": "#shopify-section-group-header-group, .shopify-section-group-header-group, .header-wrapper, .section-header",
+        "skip_font": false
       }
     },
     "hero": {
@@ -997,6 +1003,7 @@
         "o2",
         "o3"
       ],
+      "disabled": true,
       "settings": {
         "anchor_id": "operations",
         "eyebrow": "How it runs in operations",
