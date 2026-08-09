@@ -517,6 +517,24 @@
     "customer_logos": {
       "type": "drye-b2b-logo-grid",
       "blocks": {
+        "logo_xETmaR": {
+          "type": "logo",
+          "settings": {
+            "name": "Boliden"
+          }
+        },
+        "logo_TzRgrn": {
+          "type": "logo",
+          "settings": {
+            "name": "ISS"
+          }
+        },
+        "logo_haRjzU": {
+          "type": "logo",
+          "settings": {
+            "name": "Arriva"
+          }
+        },
         "cl1": {
           "type": "logo",
           "settings": {
@@ -561,6 +579,9 @@
         }
       },
       "block_order": [
+        "logo_xETmaR",
+        "logo_TzRgrn",
+        "logo_haRjzU",
         "cl1",
         "cl2",
         "cl3",
