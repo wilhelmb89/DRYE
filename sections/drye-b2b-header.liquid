@@ -1,20 +1,158 @@
-{{ 'drye-b2b-lp-base.css' | asset_url | stylesheet_tag }}
-{{ 'drye-b2b-header.css' | asset_url | stylesheet_tag }}
-<script src="{{ 'drye-b2b-lp.js' | asset_url }}" defer></script>
-
 {%- comment -%}
-  Page-specific sticky header for the B2B one-pager. This REPLACES the theme
-  header on this template — do not render both. The pill follows whichever
-  section is in view; each nav block's "target" must equal that section's
-  Anchor id setting.
+  DRYE B2B one-pager header.
+
+  Replaces the theme header on this template only. Self-contained: all CSS and
+  JS live in this file, scoped to #shopify-section-{{ section.id }}.
+
+  WHY THE THEME HEADER IS HIDDEN WITH CSS
+  The theme header renders from the `header-group` section group, which Shopify
+  renders on every template. A page template's JSON cannot remove a section
+  group. Hiding it from the section that replaces it keeps the change scoped to
+  this page and reversible from the theme editor — no theme.liquid edit needed.
+  See HEADER-HANDOFF.md before touching theme.liquid.
+
+  Each nav block's "target" must equal the Anchor id of the section it points at.
 {%- endcomment -%}
 
-<header class="drye-b2b site-header">
-  <a class="site-header__word" href="{{ section.settings.logo_url | default: '/' }}">{{ section.settings.wordmark | escape }}</a>
+{%- liquid
+  assign hide = section.settings.hide_selectors
+  assign h = section.settings.height | default: 68
+  assign hm = 56
+-%}
+
+{%- unless section.settings.skip_font -%}
+  <link rel="preconnect" href="https://api.fontshare.com" crossorigin>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=clash-grotesk@400,500,600,700&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600&display=swap">
+{%- endunless -%}
+
+<style>
+  {%- if section.settings.hide_theme_header and hide != blank -%}
+    {{ hide }}{ display:none !important; }
+  {%- endif -%}
+
+  #shopify-section-{{ section.id }}{
+    position:sticky;top:0;z-index:60;
+  }
+
+  .b2b-hdr{
+    --hdr-ink:#16263A;
+    --hdr-mute:#6E7882;
+    --hdr-teal:#3C7B74;
+    --hdr-rule:#E4E0D8;
+    --hdr-wash:#F4F1EB;
+    --hdr-pad-x:max(28px,calc((100% - 1200px) / 2));
+    height:{{ h }}px;
+    display:flex;align-items:center;gap:24px;
+    padding:0 var(--hdr-pad-x);
+    background:rgba(255,255,255,.94);
+    backdrop-filter:saturate(180%) blur(12px);
+    -webkit-backdrop-filter:saturate(180%) blur(12px);
+    border-bottom:1px solid var(--hdr-rule);
+    font-family:'DM Sans',sans-serif;
+  }
+
+  .b2b-hdr__word{
+    font-family:'Clash Grotesk','DM Sans',sans-serif;font-size:19px;font-weight:600;
+    letter-spacing:.22em;color:var(--hdr-ink);text-decoration:none;flex:0 0 auto;
+  }
+
+  .b2b-hdr__nav{position:relative;display:flex;align-items:center;gap:2px;margin:0 auto;min-width:0}
+  .b2b-hdr__nav a{
+    position:relative;z-index:1;
+    font-size:14px;font-weight:500;color:var(--hdr-mute);
+    text-decoration:none;white-space:nowrap;padding:7px 13px;border-radius:100px;
+    transition:color .18s ease;
+  }
+  .b2b-hdr__nav a:hover,.b2b-hdr__nav a.is-active{color:var(--hdr-ink)}
+
+  /* drye-b2b-lp.js drives this: it sets width + transform:translateX() and
+     toggles .is-visible. Do not add a transform of your own here — it would be
+     overwritten on the first scroll event. */
+  .b2b-hdr__pill{
+    position:absolute;z-index:0;left:0;top:calc(50% - 16px);
+    height:32px;width:0;background:var(--hdr-wash);border-radius:100px;
+    opacity:0;pointer-events:none;
+    transition:transform .28s cubic-bezier(.4,0,.2,1),width .28s cubic-bezier(.4,0,.2,1),opacity .2s ease;
+  }
+  .b2b-hdr__pill.is-visible{opacity:1}
+
+  .b2b-hdr__cta{
+    flex:0 0 auto;font-size:14px;font-weight:600;
+    color:#fff;background:var(--hdr-ink);text-decoration:none;
+    padding:10px 18px;border-radius:3px;white-space:nowrap;
+    transition:background .18s ease;
+  }
+  .b2b-hdr__cta:hover{background:var(--hdr-teal)}
+
+  .b2b-hdr__burger{display:none}
+
+  /* The panel is a sibling inside the sticky wrapper, so opening it expands the
+     sticky element and pushes the hero down rather than overlaying it. */
+  .b2b-hdr-panel{
+    display:none;background:#fff;border-bottom:1px solid var(--hdr-rule);
+    font-family:'DM Sans',sans-serif;
+  }
+  .b2b-hdr-panel.is-open{display:block}
+  .b2b-hdr-panel__link{
+    display:flex;align-items:center;justify-content:space-between;gap:10px;
+    padding:14px 20px;font-size:16px;font-weight:500;color:var(--hdr-ink);
+    text-decoration:none;border-bottom:1px solid var(--hdr-wash);min-height:48px;
+  }
+  .b2b-hdr-panel__num{font-size:11px;letter-spacing:.14em;color:#C3BCAD}
+  .b2b-hdr-panel__cta{
+    display:block;margin:14px 20px 0;text-align:center;
+    font-size:15px;font-weight:600;color:#fff;background:var(--hdr-ink);
+    text-decoration:none;padding:14px 18px;border-radius:3px;
+  }
+  .b2b-hdr-panel__home{
+    display:block;text-align:center;padding:14px 20px 16px;
+    font-size:13px;letter-spacing:.06em;color:var(--hdr-mute);text-decoration:none;
+  }
+  .b2b-hdr-panel__home:hover{color:var(--hdr-ink)}
+
+  .drye-b2b[id]{scroll-margin-top:{{ h | plus: 12 }}px}
+
+  @media (max-width:1080px){
+    .b2b-hdr__nav a{font-size:13px;padding:7px 10px}
+  }
+
+  @media (max-width:900px){
+    .b2b-hdr{height:{{ hm }}px;--hdr-pad-x:0px;gap:0;justify-content:center}
+    .b2b-hdr__nav,.b2b-hdr__word,.b2b-hdr__cta{display:none}
+    .b2b-hdr__burger{
+      display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;
+      width:48px;height:48px;background:none;border:0;padding:0;cursor:pointer;
+      -webkit-tap-highlight-color:transparent;
+    }
+    .b2b-hdr__burger span{
+      display:block;width:22px;height:1.8px;background:var(--hdr-ink);border-radius:2px;
+      transition:width .2s ease,transform .2s ease,opacity .15s ease;
+    }
+    .b2b-hdr__burger span:nth-child(3){width:14px}
+    .b2b-hdr__burger[aria-expanded="true"] span:nth-child(1){transform:translateY(6.8px) rotate(45deg)}
+    .b2b-hdr__burger[aria-expanded="true"] span:nth-child(2){opacity:0}
+    .b2b-hdr__burger[aria-expanded="true"] span:nth-child(3){width:22px;transform:translateY(-6.8px) rotate(-45deg)}
+    .drye-b2b[id]{scroll-margin-top:{{ hm | plus: 8 }}px}
+  }
+
+  @media (min-width:901px){
+    .b2b-hdr-panel{display:none !important}
+  }
+
+  @media (prefers-reduced-motion:reduce){
+    .b2b-hdr__pill,.b2b-hdr__burger span{transition:none}
+  }
+</style>
+
+<header class="drye-b2b b2b-hdr">
+  <a class="b2b-hdr__word" href="{{ section.settings.logo_url | default: '/' }}">{{ section.settings.wordmark | escape }}</a>
 
   {%- if section.blocks.size > 0 -%}
-    <nav class="site-header__nav" id="site-nav" aria-label="Section navigation">
-      <span class="site-header__pill" id="site-nav-pill" aria-hidden="true"></span>
+    <nav class="b2b-hdr__nav" id="site-nav" aria-label="Section navigation">
+      <span class="b2b-hdr__pill" id="site-nav-pill" aria-hidden="true"></span>
       {%- for block in section.blocks -%}
         <a href="#{{ block.settings.target }}" data-target="{{ block.settings.target }}" {{ block.shopify_attributes }}>{{ block.settings.label | escape }}</a>
       {%- endfor -%}
@@ -22,9 +160,93 @@
   {%- endif -%}
 
   {%- if section.settings.cta_label != blank -%}
-    <a class="site-header__cta" href="{{ section.settings.cta_url | default: '#form' }}">{{ section.settings.cta_label | escape }}</a>
+    <a class="b2b-hdr__cta" href="{{ section.settings.cta_url | default: '#form' }}">{{ section.settings.cta_label | escape }}</a>
   {%- endif -%}
+
+  <button class="b2b-hdr__burger" type="button"
+          id="b2b-burger-{{ section.id }}"
+          aria-expanded="false"
+          aria-controls="b2b-panel-{{ section.id }}"
+          aria-label="{{ section.settings.menu_label | default: 'Section navigation' | escape }}">
+    <span></span><span></span><span></span>
+  </button>
 </header>
+
+<div class="b2b-hdr-panel" id="b2b-panel-{{ section.id }}">
+  {%- for block in section.blocks -%}
+    <a class="b2b-hdr-panel__link" href="#{{ block.settings.target }}">
+      <span>{{ block.settings.label | escape }}</span>
+      <span class="b2b-hdr-panel__num">{{ forloop.index | prepend: '0' | slice: -2, 2 }}</span>
+    </a>
+  {%- endfor -%}
+  {%- if section.settings.cta_label != blank -%}
+    <a class="b2b-hdr-panel__cta" href="{{ section.settings.cta_url | default: '#form' }}">{{ section.settings.cta_label | escape }}</a>
+  {%- endif -%}
+  {%- if section.settings.home_label != blank -%}
+    <a class="b2b-hdr-panel__home" href="{{ section.settings.logo_url | default: '/' }}">{{ section.settings.home_label | escape }}</a>
+  {%- endif -%}
+</div>
+
+<script>
+  (function(){
+    var burger = document.getElementById('b2b-burger-{{ section.id }}');
+    var panel  = document.getElementById('b2b-panel-{{ section.id }}');
+    if (!burger || !panel) return;
+
+    function setOpen(open){
+      burger.setAttribute('aria-expanded', open ? 'true' : 'false');
+      panel.classList.toggle('is-open', open);
+    }
+    burger.addEventListener('click', function(){
+      setOpen(burger.getAttribute('aria-expanded') !== 'true');
+    });
+    panel.addEventListener('click', function(e){
+      if (e.target.closest('a')) setOpen(false);
+    });
+    document.addEventListener('keydown', function(e){
+      if (e.key === 'Escape') setOpen(false);
+    });
+    // Leaving mobile width with the panel open would strand it open on desktop.
+    window.matchMedia('(min-width:901px)').addEventListener('change', function(e){
+      if (e.matches) setOpen(false);
+    });
+  })();
+
+  /* Active-section pill. This lived in drye-b2b-lp.js, which the header no
+     longer loads — keeping it here is what makes the section self-contained. */
+  (function(){
+    var nav  = document.getElementById('site-nav');
+    var pill = document.getElementById('site-nav-pill');
+    if (!nav || !pill) return;
+
+    var links = Array.prototype.slice.call(nav.querySelectorAll('a[data-target]'));
+    if (!links.length) return;
+
+    function movePill(link){
+      if (!link) { pill.classList.remove('is-visible'); return; }
+      var lr = link.getBoundingClientRect(), nr = nav.getBoundingClientRect();
+      pill.style.width = lr.width + 'px';
+      pill.style.transform = 'translateX(' + (lr.left - nr.left) + 'px)';
+      pill.classList.add('is-visible');
+      links.forEach(function(a){ a.classList.toggle('is-active', a === link); });
+    }
+
+    function onScroll(){
+      var best = null, bestTop = Number.NEGATIVE_INFINITY;
+      links.forEach(function(a){
+        var sec = document.getElementById(a.dataset.target);
+        if (!sec) return;
+        var top = sec.getBoundingClientRect().top;
+        if (140 >= top && top > bestTop) { bestTop = top; best = a; }
+      });
+      if (best) movePill(best);
+    }
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll);
+    onScroll();
+  })();
+</script>
 
 {% schema %}
 {
@@ -33,7 +255,21 @@
     { "type": "text", "id": "wordmark", "label": "Wordmark", "default": "DRYE" },
     { "type": "url", "id": "logo_url", "label": "Wordmark link" },
     { "type": "text", "id": "cta_label", "label": "CTA label", "default": "Contact" },
-    { "type": "url", "id": "cta_url", "label": "CTA link" }
+    { "type": "url", "id": "cta_url", "label": "CTA link" },
+    { "type": "range", "id": "height", "label": "Header height (desktop)", "min": 56, "max": 88, "step": 2, "unit": "px", "default": 68 },
+    { "type": "header", "content": "Mobile" },
+    { "type": "text", "id": "menu_label", "label": "Menu button label (screen readers)", "default": "Section navigation" },
+    { "type": "text", "id": "home_label", "label": "Back-to-site link", "default": "← dryeliner.com",
+      "info": "Sits at the foot of the open panel. The wordmark is hidden on mobile, so without this there is no way back to the main site. Clear it to remove." },
+    { "type": "header", "content": "Theme header" },
+    { "type": "checkbox", "id": "hide_theme_header", "label": "Hide the theme header on this page", "default": true,
+      "info": "The theme header renders from a section group and cannot be removed per template. This hides it with CSS, scoped to this page." },
+    { "type": "textarea", "id": "hide_selectors", "label": "Selectors to hide",
+      "default": "#shopify-section-group-header-group, .shopify-section-group-header-group, .header-wrapper, .section-header",
+      "info": "Comma separated. If the theme header is still visible, inspect it and add its outermost selector. See HEADER-HANDOFF.md." },
+    { "type": "header", "content": "Advanced" },
+    { "type": "checkbox", "id": "skip_font", "label": "Skip the webfont links", "default": false,
+      "info": "Tick if Clash Grotesk and DM Sans are already loaded in theme.liquid — avoids duplicate requests. Clash Grotesk comes from Fontshare (api.fontshare.com), not Google Fonts." }
   ],
   "blocks": [
     { "type": "nav_item", "name": "Nav item", "settings": [
@@ -41,6 +277,16 @@
       { "type": "text", "id": "target", "label": "Target anchor id (no #)", "info": "Must match the Anchor id of the section it points at." }
     ]}
   ],
-  "presets": [{ "name": "drye-B2B Header" }]
+  "presets": [{
+    "name": "drye-B2B Header",
+    "blocks": [
+      { "type": "nav_item", "settings": { "label": "Costs", "target": "costs" } },
+      { "type": "nav_item", "settings": { "label": "Pilots", "target": "pilots" } },
+      { "type": "nav_item", "settings": { "label": "Mechanism", "target": "mechanism" } },
+      { "type": "nav_item", "settings": { "label": "Science", "target": "science" } },
+      { "type": "nav_item", "settings": { "label": "Supply chain", "target": "supply-chain" } },
+      { "type": "nav_item", "settings": { "label": "Offer", "target": "offer" } }
+    ]
+  }]
 }
 {% endschema %}

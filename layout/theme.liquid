@@ -107,6 +107,16 @@
       {{ 'editor-guard.css' | asset_url | stylesheet_tag }}
     {% endif %}
 
+    {%- comment -%}
+      B2B landing page: its layout classes and shared script are page-wide, so
+      they load here in the head rather than from whichever section happened to
+      reference them. The header section itself is fully self-contained.
+    {%- endcomment -%}
+    {%- if template.suffix == 'b2b' -%}
+      {{ 'drye-b2b-lp-base.css' | asset_url | stylesheet_tag }}
+      <script src="{{ 'drye-b2b-lp.js' | asset_url }}" defer></script>
+    {%- endif -%}
+
     <!-- Microsoft Clarity -->
     <script type="text/javascript">
       (function(c,l,a,r,i,t,y){
@@ -133,7 +143,14 @@
     <!-- End Google Tag Manager (noscript) -->
 
     <!-- Header -->
-    {%- sections 'header-group' -%}
+    {%- comment -%}
+      The b2b template renders its own header section (drye-b2b-header), which
+      replaces the theme header and announcement bar rather than stacking under
+      them. Every other template is untouched.
+    {%- endcomment -%}
+    {%- unless template.suffix == 'b2b' -%}
+      {%- sections 'header-group' -%}
+    {%- endunless -%}
 
     <!-- Main content -->
     {{ content_for_layout }}
