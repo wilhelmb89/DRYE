@@ -81,7 +81,8 @@
         "cta_primary_label": "Order the test kit — no PO required",
         "cta_primary_url": "#offer",
         "cta_secondary_label": "Book 15 minutes",
-        "cta_secondary_url": "#booking"
+        "cta_secondary_url": "#booking",
+        "background": "shopify://shop_images/hero-b2b-mechanic.webp"
       }
     },
     "spend": {
@@ -179,7 +180,8 @@
         "eyebrow": "What you might not know",
         "heading": "Sealed gloves protect workers — but trap the problem inside.",
         "source": "Hydrated human skin showed higher penetration for certain fat-soluble model compounds in vitro. Hikima &amp; Maibach, <i>Biol Pharm Bull.</i>",
-        "image_alt": "Hand in a single-use nitrile glove"
+        "image_alt": "Hand in a single-use nitrile glove",
+        "image": "shopify://shop_images/nitrile-glove-hand.webp"
       }
     },
     "costs": {
@@ -245,7 +247,8 @@
         "side_left": "Heat",
         "side_left_sub": "Sweat builds up",
         "side_right": "Cold",
-        "side_right_sub": "Faster heat loss"
+        "side_right_sub": "Faster heat loss",
+        "silhouette": "shopify://shop_images/drye_silhouette.webp"
       }
     },
     "case_studies": {
@@ -298,8 +301,8 @@
         "k5": {
           "type": "case",
           "settings": {
-            "tag": "Sports / PERformance",
-            "title": "SHL: the pilots bought the test gloves themselves.",
+            "tag": "Motorsport",
+            "title": "Team Sondics: the pilots bought the test gloves themselves.",
             "excerpt": "Site EHS Specialist reported positive feedback and check-outs on used units.",
             "company": "Team Sondics",
             "url": "/blogs/pilots/team-sondics"
@@ -443,7 +446,8 @@
           "settings": {
             "label": "PPE market by 2033",
             "value": "$160B",
-            "body": "More sealed equipment means more trapped moisture — the problem scales with the market."
+            "body": "More sealed equipment means more trapped moisture — the problem scales with the market.",
+            "silhouette": "shopify://shop_images/sil-scientist.webp"
           }
         },
         "st2": {
@@ -451,7 +455,8 @@
           "settings": {
             "label": "EVs sold in 2024",
             "value": "17M",
-            "body": "Class 0 insulating gloves — a sealed-glove workforce that didn’t exist 30 years ago."
+            "body": "Class 0 insulating gloves — a sealed-glove workforce that didn’t exist 30 years ago.",
+            "silhouette": "shopify://shop_images/sil-mechanics.webp"
           }
         },
         "st3": {
@@ -459,7 +464,8 @@
           "settings": {
             "label": "Active military, globally",
             "value": "24M",
-            "body": "~58M with reserves — most operating in boots, gloves and base layers where trapped sweat becomes a readiness problem."
+            "body": "~58M with reserves — most operating in boots, gloves and base layers where trapped sweat becomes a readiness problem.",
+            "silhouette": "shopify://shop_images/sil-soldiers.webp"
           }
         }
       },
@@ -517,37 +523,43 @@
         "cl1": {
           "type": "logo",
           "settings": {
-            "name": "Scania"
+            "name": "Scania",
+            "logo": "shopify://shop_images/scania.webp"
           }
         },
         "cl2": {
           "type": "logo",
           "settings": {
-            "name": "Frölunda Hockey Club"
+            "name": "Frölunda Hockey Club",
+            "logo": "shopify://shop_images/frolunda.webp"
           }
         },
         "cl3": {
           "type": "logo",
           "settings": {
-            "name": "SHL"
+            "name": "SHL",
+            "logo": "shopify://shop_images/shl.webp"
           }
         },
         "cl4": {
           "type": "logo",
           "settings": {
-            "name": "STS"
+            "name": "STS",
+            "logo": "shopify://shop_images/sts.webp"
           }
         },
         "cl5": {
           "type": "logo",
           "settings": {
-            "name": "SICO"
+            "name": "SICO",
+            "logo": "shopify://shop_images/sico.webp"
           }
         },
         "cl6": {
           "type": "logo",
           "settings": {
-            "name": "Min Bil"
+            "name": "Min Bil",
+            "logo": "shopify://shop_images/min-bil.webp"
           }
         }
       },
@@ -573,14 +585,16 @@
           "type": "reseller",
           "settings": {
             "name": "Sonepar",
-            "url": ""
+            "url": "",
+            "logo": "shopify://shop_images/sonepar.webp"
           }
         },
         "rs2": {
           "type": "reseller",
           "settings": {
             "name": "Smarta Saker",
-            "url": ""
+            "url": "",
+            "logo": "shopify://shop_images/smarta-saker.webp"
           }
         }
       },
@@ -1034,7 +1048,8 @@
           "settings": {
             "name": "Wilhelm Bäckström",
             "role": "CEO — B2B Sales",
-            "bio": "18 yrs B2B sales across enterprise, public sector and startups. From HP, Dell EMC and early-stage commercial advisory."
+            "bio": "18 yrs B2B sales across enterprise, public sector and startups. From HP, Dell EMC and early-stage commercial advisory.",
+            "photo": "shopify://shop_images/team-wilhelm.webp"
           }
         },
         "l2": {
@@ -1042,7 +1057,8 @@
           "settings": {
             "name": "Andrew Brathwaite",
             "role": "COO — Product &amp; deep-tech",
-            "bio": "7 yrs at Tesla Northern EMEA. Ex-Global Technical Service Manager at CAKE. Now Head of Electrical Safety, Komatsu Forest."
+            "bio": "7 yrs at Tesla Northern EMEA. Ex-Global Technical Service Manager at CAKE. Now Head of Electrical Safety, Komatsu Forest.",
+            "photo": "shopify://shop_images/team-andrew.webp"
           }
         },
         "l3": {
@@ -1050,37 +1066,43 @@
           "settings": {
             "name": "Adam Engström",
             "role": "Commercial lead",
-            "bio": "Serial entrepreneur across commerce and brand-building. Co-founded a Nordic consumer brand acquired by Kavli."
+            "bio": "Serial entrepreneur across commerce and brand-building. Co-founded a Nordic consumer brand acquired by Kavli.",
+            "photo": "shopify://shop_images/team-adam.webp"
           }
         },
         "v1": {
           "type": "investor",
           "settings": {
-            "name": "Viktor Sylvan"
+            "name": "Viktor Sylvan",
+            "photo": "shopify://shop_images/team-viktor.webp"
           }
         },
         "v2": {
           "type": "investor",
           "settings": {
-            "name": "Kim Westin"
+            "name": "Kim Westin",
+            "photo": "shopify://shop_images/team-kim.webp"
           }
         },
         "v3": {
           "type": "investor",
           "settings": {
-            "name": "Per Järnebrink"
+            "name": "Per Järnebrink",
+            "photo": "shopify://shop_images/team-per.webp"
           }
         },
         "v4": {
           "type": "investor",
           "settings": {
-            "name": "Fredrik Posse"
+            "name": "Fredrik Posse",
+            "photo": "shopify://shop_images/team-fredrik.webp"
           }
         },
         "v5": {
           "type": "investor",
           "settings": {
-            "name": "Magnus Gruenberg"
+            "name": "Magnus Gruenberg",
+            "photo": "shopify://shop_images/team-magnus.webp"
           }
         }
       },
