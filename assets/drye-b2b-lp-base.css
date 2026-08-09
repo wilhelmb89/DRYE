@@ -86,7 +86,7 @@ a:hover{color:var(--teal-deep)}
 .form input::placeholder{color:var(--ink-3)}
 .form input:focus{border-color:var(--teal)}
 .svc{display:flex;align-items:flex-start;gap:10px}
-.svc svg{flex:0 0 auto;stroke:var(--teal);color:var(--teal)}
+.svc svg{flex:0 0 auto;width:26px;height:26px;stroke:var(--teal);color:var(--teal)}
 .svc .lbl{font-family:'DM Sans',sans-serif;font-size:16px;line-height:1.4;color:var(--ink);margin:0}
 .trust{font-family:'DM Sans',sans-serif;font-size:16px;color:var(--ink-3);font-variant-numeric:tabular-nums;margin-top:14px;letter-spacing:.02em}
 .footnote{font-family:'DM Sans',sans-serif;font-size:12px;color:var(--ink-3);opacity:.75;margin-top:14px;line-height:1.5}
