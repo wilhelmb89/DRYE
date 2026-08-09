@@ -1,37 +1,134 @@
-{{ 'drye-b2b-dark.css' | asset_url | stylesheet_tag }}
+{%- liquid
+  assign anchor = section.settings.anchor_id | default: 'pilots'
+-%}
 
 {%- comment -%}
   The track renders every block TWICE — the second pass is aria-hidden and is
   what makes the -50% marquee loop seamless. On mobile the animation stops and
   the scroller becomes a thumb-driven snap slider. Do not delete the duplicate.
+
+  The media box is a fixed 16:10 frame and the photo fills it with object-fit:
+  cover. Without that rule the image renders at its own aspect ratio and leaves
+  dark space under short photos. Blocks with no photo skip the frame entirely.
 {%- endcomment -%}
 
-<section class="drye-b2b sec sec-dark" id="{{ section.settings.anchor_id | default: 'pilots' }}">
+<style>
+  #shopify-section-{{ section.id }} .cs-sec{
+    --cs-pad-x:max(40px,calc((100% - 1200px) / 2));
+    background:#16263A;color:#E5EAF0;padding:88px var(--cs-pad-x);
+  }
+  #shopify-section-{{ section.id }} .cs-eyebrow{
+    font-family:'DM Sans',sans-serif;font-size:12px;font-weight:600;letter-spacing:.16em;
+    text-transform:uppercase;color:#7A8FA0;margin:0 0 14px;
+  }
+  #shopify-section-{{ section.id }} .cs-h2{
+    font-family:'Clash Grotesk','DM Sans',sans-serif;font-size:38px;font-weight:600;
+    letter-spacing:-.02em;line-height:1.1;color:#fff;margin:0 0 10px;max-width:820px;text-wrap:pretty;
+  }
+  #shopify-section-{{ section.id }} .cs-sub{
+    font-family:'DM Sans',sans-serif;font-size:16px;line-height:1.5;color:#B7C4CE;margin:0 0 28px;max-width:640px;
+  }
+
+  #shopify-section-{{ section.id }} .cs-marquee{overflow:hidden}
+  #shopify-section-{{ section.id }} .cs-track{
+    display:flex;gap:14px;width:max-content;animation:cs-mq-{{ section.id }} 60s linear infinite;
+  }
+  #shopify-section-{{ section.id }} .cs-marquee:hover .cs-track,
+  #shopify-section-{{ section.id }} .cs-marquee:focus-within .cs-track{animation-play-state:paused}
+  @keyframes cs-mq-{{ section.id }}{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+  #shopify-section-{{ section.id }} .cs-card{
+    flex:0 0 320px;display:flex;flex-direction:column;padding:0;background:#16283C;
+    border:1px solid #223448;border-radius:4px;color:#E5EAF0;text-decoration:none;overflow:hidden;
+    transition:transform .18s ease,border-color .18s ease,background .18s ease;
+  }
+  #shopify-section-{{ section.id }} .cs-card:hover{border-color:#3C7B74;background:#182D42;transform:translateY(-2px)}
+
+  /* The fix — fixed frame, photo covers it, no letterboxing. */
+  #shopify-section-{{ section.id }} .cs-media{
+    aspect-ratio:16/10;background:#0F1E2E;border-bottom:1px solid #223448;
+    position:relative;overflow:hidden;
+  }
+  #shopify-section-{{ section.id }} .cs-media img{
+    position:absolute;inset:0;display:block;width:100%;height:100%;
+    object-fit:cover;object-position:center;
+  }
+
+  #shopify-section-{{ section.id }} .cs-body{display:flex;flex-direction:column;padding:16px 18px 18px;flex:1}
+  #shopify-section-{{ section.id }} .cs-tag{
+    font-family:'DM Sans',sans-serif;font-size:12px;font-weight:600;letter-spacing:.2em;
+    text-transform:uppercase;color:#7CB2AB;margin:0 0 8px;
+  }
+  #shopify-section-{{ section.id }} .cs-ttl{
+    font-family:'DM Sans',sans-serif;font-size:17px;line-height:1.35;font-weight:600;
+    color:#fff;margin:0 0 8px;text-wrap:pretty;
+  }
+  #shopify-section-{{ section.id }} .cs-dek{
+    font-family:'DM Sans',sans-serif;font-size:16px;line-height:1.5;color:#B7C4CE;margin:0 0 16px;text-wrap:pretty;
+  }
+  #shopify-section-{{ section.id }} .cs-row{
+    margin-top:auto;padding-top:12px;border-top:1px solid #223448;
+    display:flex;justify-content:space-between;align-items:center;gap:10px;
+  }
+  #shopify-section-{{ section.id }} .cs-co{
+    font-family:'DM Sans',sans-serif;font-size:12px;font-weight:600;letter-spacing:.2em;
+    text-transform:uppercase;color:#8FCFC7;
+  }
+  #shopify-section-{{ section.id }} .cs-go{font-family:'DM Sans',sans-serif;font-size:16px;color:#8FCFC7;white-space:nowrap}
+  #shopify-section-{{ section.id }} .cs-card:hover .cs-go{color:#fff}
+
+  #shopify-section-{{ section.id }} .cs-foot{
+    display:flex;justify-content:space-between;align-items:center;gap:16px;
+    margin-top:26px;padding-top:16px;border-top:1px solid #223448;
+    font-family:'DM Sans',sans-serif;font-size:16px;color:#B7C4CE;
+  }
+  #shopify-section-{{ section.id }} .cs-foot a{color:#8FCFC7;text-decoration:underline;text-underline-offset:4px}
+  #shopify-section-{{ section.id }} .cs-foot a:hover{color:#fff}
+
+  @media (prefers-reduced-motion:reduce){
+    #shopify-section-{{ section.id }} .cs-track{animation:none}
+  }
+  @media (max-width:900px){
+    #shopify-section-{{ section.id }} .cs-sec{--cs-pad-x:20px;padding:88px 20px}
+    #shopify-section-{{ section.id }} .cs-h2{font-size:28px}
+    #shopify-section-{{ section.id }} .cs-marquee{
+      overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;
+    }
+    #shopify-section-{{ section.id }} .cs-marquee::-webkit-scrollbar{display:none}
+    #shopify-section-{{ section.id }} .cs-track{animation:none;gap:12px}
+    #shopify-section-{{ section.id }} .cs-card{flex:0 0 80vw;max-width:320px}
+    #shopify-section-{{ section.id }} .cs-foot{flex-direction:column;align-items:flex-start;gap:10px}
+  }
+</style>
+
+<section class="drye-b2b cs-sec" id="{{ anchor }}">
   {%- if section.settings.eyebrow != blank -%}
-    <p class="eyebrow">{{ section.settings.eyebrow | escape }}</p>
+    <p class="cs-eyebrow">{{ section.settings.eyebrow | escape }}</p>
   {%- endif -%}
-  <h2 class="h2">{{ section.settings.heading }}</h2>
+  {%- if section.settings.heading != blank -%}
+    <h2 class="cs-h2">{{ section.settings.heading }}</h2>
+  {%- endif -%}
   {%- if section.settings.subheading != blank -%}
-    <p class="body-mute">{{ section.settings.subheading }}</p>
+    <p class="cs-sub">{{ section.settings.subheading }}</p>
   {%- endif -%}
 
-  <div class="marquee">
-    <div class="marquee__track">
+  <div class="cs-marquee">
+    <div class="cs-track">
       {%- for pass in (1..2) -%}
         {%- for block in section.blocks -%}
-          <a class="case-card" href="{{ block.settings.url }}" {% if pass == 2 %}aria-hidden="true" tabindex="-1"{% endif %} {{ block.shopify_attributes }}>
-            <div class="case-card__media">
-              {%- if block.settings.image != blank -%}
+          <a class="cs-card" href="{{ block.settings.url }}" {% if pass == 2 %}aria-hidden="true" tabindex="-1"{% endif %} {{ block.shopify_attributes }}>
+            {%- if block.settings.image != blank -%}
+              <div class="cs-media">
                 {{ block.settings.image | image_url: width: 700 | image_tag: alt: block.settings.title, loading: 'lazy' }}
-              {%- endif -%}
-            </div>
-            <div class="case-card__body">
-              <p class="tag">{{ block.settings.tag | escape }}</p>
-              <p class="ttl">{{ block.settings.title | escape }}</p>
-              <p class="dek">{{ block.settings.excerpt | escape }}</p>
-              <div class="row">
-                <span class="co">{{ block.settings.company | escape }}</span>
-                <span class="go">{{ section.settings.link_label | escape }} &rarr;</span>
+              </div>
+            {%- endif -%}
+            <div class="cs-body">
+              {%- if block.settings.tag != blank -%}<p class="cs-tag">{{ block.settings.tag | escape }}</p>{%- endif -%}
+              <p class="cs-ttl">{{ block.settings.title | escape }}</p>
+              <p class="cs-dek">{{ block.settings.excerpt | escape }}</p>
+              <div class="cs-row">
+                <span class="cs-co">{{ block.settings.company | escape }}</span>
+                <span class="cs-go">{{ section.settings.link_label | escape }} &rarr;</span>
               </div>
             </div>
           </a>
@@ -40,10 +137,8 @@
     </div>
   </div>
 
-  {% render 'drye-b2b-swipe-hint' %}
-
   {%- if section.settings.foot_text != blank or section.settings.foot_link_label != blank -%}
-    <div class="m-foot">
+    <div class="cs-foot">
       <span>{{ section.settings.foot_text }}</span>
       {%- if section.settings.foot_link_label != blank -%}
         <a href="{{ section.settings.foot_link_url }}">{{ section.settings.foot_link_label | escape }} &rarr;</a>
@@ -67,7 +162,7 @@
   ],
   "blocks": [
     { "type": "case", "name": "Case study", "settings": [
-      { "type": "image_picker", "id": "image", "label": "Pilot photo" },
+      { "type": "image_picker", "id": "image", "label": "Pilot photo", "info": "Cropped to 16:10, centred. Any aspect ratio works." },
       { "type": "text", "id": "tag", "label": "Sector tag" },
       { "type": "text", "id": "title", "label": "Title" },
       { "type": "textarea", "id": "excerpt", "label": "Excerpt" },
