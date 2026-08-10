@@ -9,46 +9,6 @@
  */
 {
   "sections": {
-    "nt_hero": {
-      "type": "drye-nt-hero",
-      "blocks": {
-        "r2": {
-          "type": "review",
-          "settings": {
-            "quote": "“They keep the sweat and extra heat off my palms.”",
-            "author": "Jon · GB"
-          }
-        },
-        "r3": {
-          "type": "review",
-          "settings": {
-            "quote": "“They alleviate irritation and itching from sweat really well.”",
-            "author": "Alric · CA"
-          }
-        },
-        "r4": {
-          "type": "review",
-          "settings": {
-            "quote": "“Coming up on a year — still comfortable, hands stay dry.”",
-            "author": "Athena · SE"
-          }
-        }
-      },
-      "block_order": [
-        "r2",
-        "r3",
-        "r4"
-      ],
-      "disabled": true,
-      "settings": {
-        "logo_text": "DRYE",
-        "hero_image": "shopify://shop_images/Gemini_Generated_Image_x4acmfx4acmfx4ac.webp",
-        "hero_image_alt": "Nail tech at her desk wearing black nitrile gloves over DRYE liners",
-        "heading": "Your nails are fine on Sunday.  \n By Thursday they’re splitting.",
-        "subheading": "DRYE adds a 0.4 mm routing layer under your glove so sweat moves off the skin side — not cotton, not double‑gloving",
-        "rating_label": "4.4/5 · Trustpilot"
-      }
-    },
     "drye_mechanics_herov2_ajTaTf": {
       "type": "drye-mechanics-herov2",
       "name": "DRYE Mechanics Hero",
@@ -221,16 +181,6 @@
         "keep_target": "#drye-nt-trapped"
       }
     },
-    "drye_mechanics_time_promise_y7hWTc": {
-      "type": "drye-mechanics-time-promise",
-      "disabled": true,
-      "name": "DRYE Mechanics Time",
-      "settings": {
-        "eyebrow": "",
-        "heading": "Nitrile protects you from the outside <br><em class=\"dryeNEW-em\">But glove occlusion is what weakens skin and nails over time.</em>",
-        "body": "<p>No powder, cream, or thicker glove changes that environment. <br/></p>"
-      }
-    },
     "drye_nt_barrier_choice_g6KFyg": {
       "type": "drye-nt-barrier-choice",
       "name": "DRYE NT — Barrier choice",
@@ -253,56 +203,6 @@
         "aud_damaged": "Already irritated skin",
         "damaged_d3": "Significant barrier impairment",
         "source": "Sources: Ramsing & Agner, Contact Dermatitis, 1996 — short- and long-term experimental glove occlusion."
-      }
-    },
-    "nt_loop": {
-      "type": "drye-nt-loop",
-      "blocks": {
-        "quote_n6cLRY": {
-          "type": "quote",
-          "settings": {
-            "avatar": "shopify://shop_images/drye-avatar-2.webp",
-            "quote": "am I doomed to this for the rest of my career?",
-            "advice": "Use powder"
-          }
-        },
-        "quote_kijJrL": {
-          "type": "quote",
-          "settings": {
-            "avatar": "shopify://shop_images/drye-avatar-1.webp",
-            "quote": "I wore gloves even though I got a contact allergy every time",
-            "advice": "Use Gloves in a Bottle"
-          }
-        },
-        "quote_tyJDzg": {
-          "type": "quote",
-          "settings": {
-            "avatar": "shopify://shop_images/drye-avatar-4.webp",
-            "quote": "cotton liners make my hands sweaty after 30 min.",
-            "advice": "Double up"
-          }
-        },
-        "quote_mrBGxc": {
-          "type": "quote",
-          "settings": {
-            "avatar": "shopify://shop_images/drye-avatar-3.webp",
-            "quote": "\"I hate my sweaty gloves in summer. They keep splitting.\"",
-            "advice": "Use thicker mils"
-          }
-        }
-      },
-      "block_order": [
-        "quote_n6cLRY",
-        "quote_kijJrL",
-        "quote_tyJDzg",
-        "quote_mrBGxc"
-      ],
-      "disabled": true,
-      "settings": {
-        "chap_no": "03",
-        "eyebrow": "The never-ending loop",
-        "title": "",
-        "aria_label": "Common advice nail techs hear"
       }
     },
     "nt_tradeoff": {
@@ -877,65 +777,6 @@
       "name": "DRYE NT — Trust badges",
       "settings": {}
     },
-    "nt_nails": {
-      "type": "drye-nt-nails",
-      "disabled": true,
-      "settings": {
-        "heading": "Who it's not for.",
-        "body": "",
-        "ok_tag": "Recommended",
-        "ok_title": "Short to moderate nails.",
-        "ok_desc": "Best match for DRYE — less concentrated pressure at the fingertips.",
-        "no_tag": "Not recommended",
-        "no_title": "Long or sharply pointed nails.",
-        "no_desc": "Higher risk of puncturing or tearing the liner."
-      }
-    },
-    "drye_nt_inside_9eaNVa": {
-      "type": "drye-nt-inside",
-      "blocks": {
-        "column_Ynwjdi": {
-          "type": "column",
-          "settings": {
-            "image": "shopify://shop_images/21bpgpk7boif1.webp",
-            "image_alt": "Bare hand in a black nitrile glove, mid-shift",
-            "media_label": "",
-            "eyebrow": "Nitrile alone",
-            "title": "Protects outside. Traps sweat inside.",
-            "items": "Sweat sits against your skin\nHands feel wet and sticky\nGloves fight you between clients\nMore pulling, more tearing\nMore washing to get the smell off"
-          }
-        },
-        "column_HUGMxR": {
-          "type": "column",
-          "settings": {
-            "image_alt": "DRYE liner visible at the cuff under a nitrile glove",
-            "media_label": "",
-            "video": "shopify://files/videos/IMG_0591.mp4",
-            "eyebrow": "Nitrile + DRYE",
-            "title": "Same glove. Sweat routed off the skin side.",
-            "items": "Dry hands inside sealed gloves\nLess reliance on powder, creams and hand resets\n0.4 mm layer underneath\nFresh gloves slide on without the fight\nReusable for 6–12 months"
-          }
-        }
-      },
-      "block_order": [
-        "column_Ynwjdi",
-        "column_HUGMxR"
-      ],
-      "disabled": true,
-      "name": "DRYE NT — Inside glove",
-      "settings": {
-        "chapter": "",
-        "heading": "DRYE goes <em class=\"dryeNEW-em\">under your existing glove.</em>",
-        "body": "",
-        "rr_days": "",
-        "rr_days_label": "",
-        "rr_heading": "",
-        "rr_body": "",
-        "rr_cta_label": "",
-        "rr_cta_url": "",
-        "rr_guarantee": ""
-      }
-    },
     "drye_nt_mechanism_kJBdAT": {
       "type": "drye-nt-mechanism",
       "name": "DRYE NT — Mechanism",
@@ -964,98 +805,6 @@
         "cta_url": "shopify://products/drye-moisture-routing-glove-liners",
         "guarantee": "Secure checkout · 4.8/5 on 59 reviews",
         "sources": ""
-      }
-    },
-    "drye_evidence_AeNMWN": {
-      "type": "drye-evidence",
-      "blocks": {
-        "card_cqkPC4": {
-          "type": "card",
-          "settings": {
-            "label": "THE THRESHOLD",
-            "stat_prefix": "",
-            "stat": "27",
-            "stat_suffix": "min",
-            "stat_qualitative": false,
-            "body": "<strong>After 27 minutes of glove wear: </strong>the odds of work-related hand eczema double in women — 55 minutes in men. A single client sits right on that line.",
-            "source": "Lund et al., Scand J Work Environ Health, 2020"
-          }
-        },
-        "card_qVabFc": {
-          "type": "card",
-          "settings": {
-            "label": "maceration",
-            "stat_prefix": "",
-            "stat": "3",
-            "stat_suffix": "x swelling",
-            "stat_qualitative": false,
-            "body": "<strong>after 4 hours:</strong> your outer skin barrier swells 3x thicker. Oil, solvents and chemicals soak in deeper - into skin that can't fight back.",
-            "source": "Bouwstra 2003, J invest Dermatol"
-          }
-        },
-        "card_bRnArN": {
-          "type": "card",
-          "settings": {
-            "label": "Wet skin lets more through",
-            "stat_prefix": "",
-            "stat": "3,6",
-            "stat_suffix": "x faster",
-            "stat_qualitative": false,
-            "body": "Hydrated human skin allowed some fat-soluble model compounds to <strong>penetrate up to 3.6× more in vitro.</strong>(range 0.7–3.6, average 1.9). More open door, same chemicals.",
-            "source": "Hikima & Maibach, Biol Pharm Bull, 2006."
-          }
-        },
-        "card_NDNwyK": {
-          "type": "card",
-          "settings": {
-            "label": "NOT SENSITIVE SKIN",
-            "stat_prefix": "",
-            "stat": "65",
-            "stat_suffix": "%",
-            "stat_qualitative": false,
-            "body": "Among European nail techs diagnosed with acrylate allergy, <strong>65% developed it during their first year in the profession </strong>— \n      and at least 11.7% had to leave the job. It isn't about how sensitive you are. It's about exposure.",
-            "source": "Gonçalo et al., Contact Dermatitis, 2018 (EECDRG, 11 clinics)"
-          }
-        },
-        "card_VDPHg8": {
-          "type": "card",
-          "disabled": true,
-          "settings": {
-            "label": "Workforce cost",
-            "stat_prefix": "",
-            "stat": "57",
-            "stat_suffix": "% sick leave",
-            "stat_qualitative": false,
-            "body": "<strong>In chronic cases</strong> 57% take sick leave. 1 in 4 change or leave their trade. Direct healthcare costs run thousands per case, year after year.",
-            "source": "Armstrong 2022, DIepgen"
-          }
-        },
-        "bridge_YqEtNN": {
-          "type": "bridge",
-          "settings": {
-            "label": "The mechanism",
-            "paradigm": "Every glove, liner, barrier cream and powder fails on the physics.",
-            "mechanism": "DRYE routes sweat from skin to outer fabric. One-directional gradient. We call it <span style=\"color: #fff; font-weight: 700;\">Asymmetric layering.</span>",
-            "cta_label": "See how it works",
-            "cta_link": "shopify://pages/how-it-works"
-          }
-        }
-      },
-      "block_order": [
-        "card_cqkPC4",
-        "card_qVabFc",
-        "card_bRnArN",
-        "card_NDNwyK",
-        "card_VDPHg8",
-        "bridge_YqEtNN"
-      ],
-      "disabled": true,
-      "name": "DRYE Evidence",
-      "settings": {
-        "eyebrow": "",
-        "heading": "Why every nail tech should care.\n<em class=\"dryeNEW-em\"><br>Wet skin lets more through.</em>",
-        "body": "Not from the outside. <strong>From what happens inside your gloves.</strong>",
-        "swipe_label": "Swipe"
       }
     },
     "drye_nt_validation_Ep7qKR": {
@@ -1283,13 +1032,10 @@
     }
   },
   "order": [
-    "nt_hero",
     "drye_mechanics_herov2_ajTaTf",
     "drye_worker_grid_eg69pw",
     "nt_desk",
-    "drye_mechanics_time_promise_y7hWTc",
     "drye_nt_barrier_choice_g6KFyg",
-    "nt_loop",
     "nt_tradeoff",
     "nt_trapped",
     "drye_liner_product_clarity_aeRDUU",
@@ -1299,11 +1045,8 @@
     "drye_mechanics_identification_gallery_f8x9Jg",
     "drye_section_06_faq_h937Hc",
     "drye_nt_trust_badges_mMcfLN",
-    "nt_nails",
-    "drye_nt_inside_9eaNVa",
     "drye_nt_mechanism_kJBdAT",
     "drye_nt_close_d36WWJ",
-    "drye_evidence_AeNMWN",
     "drye_nt_validation_Ep7qKR",
     "drye_mechanics_cta_KQaVwL",
     "drye_nt_real_reviews_dHDWiM",
