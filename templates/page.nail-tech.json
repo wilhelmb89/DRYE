@@ -427,16 +427,6 @@
         "time_4": "13:30"
       }
     },
-    "drye_research_video_full_bi4hwc": {
-      "type": "drye-research-video-full",
-      "name": "DRYE Research Video Full",
-      "settings": {
-        "video_src_desktop": "https://customer-fqpngdzqcoky7qmz.cloudflarestream.com/453bb4cae9bd147b7a10fc6213e64b12/manifest/video.m3u8",
-        "video_src_mobile": "https://customer-fqpngdzqcoky7qmz.cloudflarestream.com/ed9ad690d7f5c27060e215f05f9e4f8e/manifest/video.m3u8",
-        "video_label": "Goes under any sealed glove.",
-        "video_caption": "Routes sweat from skin to outer fabric. No saturation point."
-      }
-    },
     "drye_liner_product_clarity_aeRDUU": {
       "type": "drye-liner-product-clarity",
       "blocks": {
@@ -485,6 +475,19 @@
         "video": "shopify://files/videos/IMG_0591.mp4",
         "before_label": "Put on DRYE — 0.4 mm base layer",
         "after_label": "Put on your usual glove"
+      }
+    },
+    "drye_research_video_full_bi4hwc": {
+      "type": "drye-research-video-full",
+      "custom_css": [
+        "@media screen and (max-width: 749px) {h1, h2, h3 {font-size: 24px !important; line-height: 1.08 !important; }}"
+      ],
+      "name": "DRYE Research Video Full",
+      "settings": {
+        "video_src_desktop": "https://customer-fqpngdzqcoky7qmz.cloudflarestream.com/453bb4cae9bd147b7a10fc6213e64b12/manifest/video.m3u8",
+        "video_src_mobile": "https://customer-fqpngdzqcoky7qmz.cloudflarestream.com/ed9ad690d7f5c27060e215f05f9e4f8e/manifest/video.m3u8",
+        "video_label": "Goes under any sealed glove.",
+        "video_caption": "Routes sweat from skin to outer fabric. No saturation point."
       }
     },
     "nt_nail_tech_review_c9KUkA": {
