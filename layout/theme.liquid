@@ -144,11 +144,26 @@
 
     <!-- Header -->
     {%- comment -%}
-      The b2b template renders its own header section (drye-b2b-header), which
-      replaces the theme header and announcement bar rather than stacking under
-      them. Every other template is untouched.
+      Two templates render without the theme header + announcement bar.
+
+      Nail-tech (/pages/nail-tech) is a cold-traffic conversion funnel: visitors
+      must not be able to click out through the nav before reaching the CTA.
+      B2B ships its own self-contained header section (drye-b2b-header), which
+      replaces the theme header rather than stacking under it.
+
+      Handled here in the layout rather than in the page templates because the
+      theme editor rewrites template JSON and strips any in-template hide; a
+      layout file is never clobbered. Nail-tech matches on template suffix OR
+      page handle so it holds under any market prefix (/en-us/pages/nail-tech).
     {%- endcomment -%}
-    {%- unless template.suffix == 'b2b' -%}
+    {%- assign hide_chrome = false -%}
+    {%- if template.suffix == 'nail-tech' or page.handle == 'nail-tech' -%}
+      {%- assign hide_chrome = true -%}
+    {%- endif -%}
+    {%- if template.suffix == 'b2b' -%}
+      {%- assign hide_chrome = true -%}
+    {%- endif -%}
+    {%- unless hide_chrome -%}
       {%- sections 'header-group' -%}
     {%- endunless -%}
 
