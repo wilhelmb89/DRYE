@@ -1,3 +1,11 @@
+{%- comment -%}
+  Loads the shared tokens and layout primitives this section's own CSS
+  builds on (--ink, --teal, --sec-pad-x, .sec, .tile-l, .grid-3 ...).
+  Without it the section renders unstyled anywhere outside the b2b page.
+  Repeat loads of the same URL are deduped by the browser.
+{%- endcomment -%}
+{{ 'drye-b2b-lp-base.css' | asset_url | stylesheet_tag }}
+
 {{ 'drye-b2b-mechanism.css' | asset_url | stylesheet_tag }}
 
 <section class="drye-b2b sec" id="{{ section.settings.anchor_id | default: 'knit' }}">
