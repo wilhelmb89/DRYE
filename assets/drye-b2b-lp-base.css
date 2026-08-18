@@ -19,6 +19,14 @@
   --rule:var(--border,#E5E7EB);
   --rule-strong:#D1D5DB;
   --pad-outer:var(--page-pad,40px);
+
+  /* The warm canvas is painted on the wrapper every section carries, not
+     only on <body>. The body rule below still applies, but it depends on
+     this stylesheet outranking the theme's own body background — which it
+     only does while it loads later. Painting the wrapper too makes the
+     background hold regardless of load order or which page a section
+     sits on. .sec--hero and .sec-dark override it further down. */
+  background:var(--canvas);
 }
 
 :root{
