@@ -1,6 +1,5 @@
-{{ 'drye-b2b-lp-base.css' | asset_url | stylesheet_tag }}
+{{ 'base.css' | asset_url | stylesheet_tag }}
 
-{{ 'drye-hockey-shared.css' | asset_url | stylesheet_tag }}
 {{ 'drye-hockey-lp.js' | asset_url | script_tag }}
 {{ 'drye-hockey-objections.css' | asset_url | stylesheet_tag }}
 
@@ -23,8 +22,8 @@
     <h2 class="dryeNEW-h2 drye-hockey-obj__title">{{ section.settings.heading }}</h2>
   </div>
 
-  <div class="drye-hockey-rail drye-hockey-obj__rail" data-drye-rail>
-    <div class="drye-hockey-rail__track" data-drye-rail-track>
+  <div class="dryeNEW-rail drye-hockey-obj__rail" data-drye-rail>
+    <div class="dryeNEW-rail__track" data-drye-rail-track>
       {%- for block in section.blocks -%}
         <article class="drye-hockey-obj__card" {{ block.shopify_attributes }}>
           {%- if block.settings.profile != blank -%}
@@ -44,8 +43,8 @@
       {%- endfor -%}
     </div>
 
-    <button type="button" class="drye-hockey-nav drye-hockey-nav--prev" data-drye-rail-prev aria-label="Previous questions">&larr;</button>
-    <button type="button" class="drye-hockey-nav drye-hockey-nav--next" data-drye-rail-next aria-label="Next questions">&rarr;</button>
+    <button type="button" class="dryeNEW-nav dryeNEW-nav--prev" data-drye-rail-prev aria-label="Previous questions">&larr;</button>
+    <button type="button" class="dryeNEW-nav dryeNEW-nav--next" data-drye-rail-next aria-label="Next questions">&rarr;</button>
   </div>
 
   <div class="dryeNEW-container">{% render 'drye-hockey-swipe-hint' %}</div>

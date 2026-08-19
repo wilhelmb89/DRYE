@@ -942,3 +942,56 @@ body {
   color: var(--white-100);
 }
 
+/* ==========================================================================
+   13. HORIZONTAL RAIL + NAV (global — swipe on mobile, arrows from 768px)
+   Used by any section that scrolls cards sideways.
+   ========================================================================== */
+
+.dryeNEW-rail {
+  position: relative;
+  max-width: calc(var(--max-width) + (var(--page-pad) * 2) + 148px);
+  margin-inline: auto;
+}
+
+.dryeNEW-rail__track {
+  display: flex;
+  align-items: stretch;
+  gap: var(--grid-gap-14);
+  padding-inline: var(--page-pad);
+  scroll-padding-inline: var(--page-pad);
+  overflow-x: auto;
+  scroll-snap-type: x proximity;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+
+.dryeNEW-rail__track::-webkit-scrollbar { display: none; }
+.dryeNEW-rail__track > * { scroll-snap-align: start; flex: 0 0 auto; }
+
+/* Solid navy chrome with a halo, so cards scrolling under it stay readable. */
+.dryeNEW-nav {
+  display: none;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 3;
+  width: 44px;
+  height: 44px;
+  align-items: center;
+  justify-content: center;
+  background: var(--deep);
+  color: var(--white-100);
+  font-size: 16px;
+  line-height: 1;
+  box-shadow: 0 0 0 6px var(--bg-soft);
+  transition: background var(--dur-fast) var(--ease-standard);
+}
+
+.dryeNEW-nav:hover { background: var(--bg-ink); }
+.dryeNEW-nav--prev { left: 12px; }
+.dryeNEW-nav--next { right: 12px; }
+
+@media (min-width: 768px) {
+  .dryeNEW-nav { display: inline-flex; }
+  .dryeNEW-rail__track { padding-inline: 74px; scroll-padding-inline: 74px; }
+}

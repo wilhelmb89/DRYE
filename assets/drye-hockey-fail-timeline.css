@@ -33,7 +33,7 @@
   align-items: flex-end;
   gap: var(--grid-gap-16);
   padding-bottom: var(--space-10);
-  border-bottom: var(--border-width) solid #16263A;
+  border-bottom: var(--border-width) solid var(--bg-ink);
 }
 
 .drye-hockey-fail__spacer { display: none; }
@@ -110,7 +110,7 @@
 .drye-hockey-fail.is-visible .drye-hockey-fail__bar { animation-play-state: running; }
 
 /* the DRYE row */
-.drye-hockey-fail__row--drye { position: relative; padding: var(--space-22) 0 var(--space-4); border-top: var(--border-width) solid #16263A; border-bottom: 0; }
+.drye-hockey-fail__row--drye { position: relative; padding: var(--space-22) 0 var(--space-4); border-top: var(--border-width) solid var(--bg-ink); border-bottom: 0; }
 .drye-hockey-fail__row--drye .drye-hockey-fail__label { font-size: var(--fs-sub-h3); color: var(--emerald); }
 .drye-hockey-fail__row--drye .drye-hockey-fail__track { height: 12px; }
 .drye-hockey-fail__row--drye .drye-hockey-fail__bar { background: var(--emerald); }

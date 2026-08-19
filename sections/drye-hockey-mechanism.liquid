@@ -1,6 +1,5 @@
-{{ 'drye-b2b-lp-base.css' | asset_url | stylesheet_tag }}
+{{ 'base.css' | asset_url | stylesheet_tag }}
 
-{{ 'drye-hockey-shared.css' | asset_url | stylesheet_tag }}
 {{ 'drye-hockey-lp.js' | asset_url | script_tag }}
 {{ 'drye-hockey-mechanism.css' | asset_url | stylesheet_tag }}
 
@@ -25,7 +24,7 @@
   <div class="dryeNEW-container">
     <div class="drye-hockey-mech__grid">
       <div class="drye-hockey-mech__stagewrap">
-        <div class="drye-hockey-mech__stage">
+        <div class="drye-hockey-mech__stage" style="--shift: {{ ss.stage_shift }}%">
           {%- if ss.hand != blank -%}
             <div class="drye-hockey-mech__handbox">
               {{ ss.hand | image_url: width: 1200 | image_tag: class: 'drye-hockey-mech__hand', loading: 'lazy', alt: ss.hand_alt }}
@@ -62,12 +61,6 @@
             {{ ss.glove | image_url: width: 1200 | image_tag: class: 'drye-hockey-mech__glove', loading: 'lazy', alt: ss.glove_alt }}
           {%- endif -%}
 
-          <div class="drye-hockey-mech__legend" aria-hidden="true">
-            <span><i style="background:#D6422A"></i>{{ ss.legend_1 | escape }}</span>
-            <span><i style="background:#2CA6E0"></i>{{ ss.legend_2 | escape }}</span>
-            <span><i style="background:#9DBF25"></i>{{ ss.legend_3 | escape }}</span>
-          </div>
-
           {%- if ss.callout != blank -%}
             <div class="drye-hockey-mech__callout" aria-hidden="true">
               <span>{{ ss.callout | escape }}</span>
@@ -84,6 +77,13 @@
             <span class="drye-hockey-mech__period" data-drye-clock-period>{{ ss.period_word | escape }} 1 {{ ss.period_of | escape }} {{ ss.period_count }}</span>
           </div>
         </div>
+
+        <div class="drye-hockey-mech__legend" aria-hidden="true">
+          <span><i style="background:#D6422A"></i>{{ ss.legend_1 | escape }}</span>
+          <span><i style="background:#2CA6E0"></i>{{ ss.legend_2 | escape }}</span>
+          <span><i style="background:#9DBF25"></i>{{ ss.legend_3 | escape }}</span>
+        </div>
+
       </div>
 
       <div class="drye-hockey-mech__copy">
@@ -101,7 +101,8 @@
               <span class="drye-hockey-mech__plus" aria-hidden="true">+</span>
             </summary>
             {%- if block.settings.lead != blank -%}
-              <p class="dryeNEW-body drye-hockey-mech__lead">{{ block.settings.lead }}</p>
+              {%- comment -%} div, not p: richtext outputs its own <p>, and a nested <p> leaves an empty line box. {%- endcomment -%}
+              <div class="dryeNEW-body drye-hockey-mech__lead">{{ block.settings.lead }}</div>
             {%- endif -%}
           </details>
         {%- endfor -%}
@@ -123,6 +124,7 @@
     { "type": "image_picker", "id": "glove", "label": "Glove outline" },
     { "type": "text", "id": "glove_alt", "label": "Glove alt", "default": "Outline of a hockey glove" },
     { "type": "image_picker", "id": "glove_mask", "label": "Glove fill mask (solid silhouette)" },
+    { "type": "range", "id": "stage_shift", "label": "Nudge glove + hand sideways", "min": -10, "max": 30, "step": 1, "unit": "%", "default": 0 },
     { "type": "header", "content": "Labels" },
     { "type": "text", "id": "callout", "label": "Glove callout", "default": "Hockey glove" },
     { "type": "text", "id": "legend_1", "label": "Legend 1 (red)", "default": "Heat" },

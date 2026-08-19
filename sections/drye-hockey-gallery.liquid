@@ -1,6 +1,5 @@
-{{ 'drye-b2b-lp-base.css' | asset_url | stylesheet_tag }}
+{{ 'base.css' | asset_url | stylesheet_tag }}
 
-{{ 'drye-hockey-shared.css' | asset_url | stylesheet_tag }}
 {{ 'drye-hockey-lp.js' | asset_url | script_tag }}
 {{ 'drye-hockey-gallery.css' | asset_url | stylesheet_tag }}
 
@@ -15,8 +14,8 @@
     {%- endif -%}
   </div>
 
-  <div class="drye-hockey-rail drye-hockey-gallery__rail" data-drye-rail>
-    <div class="drye-hockey-rail__track" data-drye-rail-track>
+  <div class="dryeNEW-rail drye-hockey-gallery__rail" data-drye-rail>
+    <div class="dryeNEW-rail__track" data-drye-rail-track>
       {%- for block in section.blocks -%}
         <figure class="drye-hockey-gallery__fig" {{ block.shopify_attributes }}>
           {%- if block.settings.tag != blank -%}
@@ -32,8 +31,8 @@
       {%- endfor -%}
     </div>
 
-    <button type="button" class="drye-hockey-nav drye-hockey-nav--prev" data-drye-rail-prev aria-label="Previous photos">&larr;</button>
-    <button type="button" class="drye-hockey-nav drye-hockey-nav--next" data-drye-rail-next aria-label="Next photos">&rarr;</button>
+    <button type="button" class="dryeNEW-nav dryeNEW-nav--prev" data-drye-rail-prev aria-label="Previous photos">&larr;</button>
+    <button type="button" class="dryeNEW-nav dryeNEW-nav--next" data-drye-rail-next aria-label="Next photos">&rarr;</button>
   </div>
 
   <div class="dryeNEW-container">

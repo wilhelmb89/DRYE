@@ -75,7 +75,7 @@
 .drye-hockey-hiw__wet { position: absolute; left: 0; right: 0; height: 14%; background: rgba(44, 166, 224, 0.4); opacity: 0; }
 .drye-hockey-hiw__drop { position: absolute; border-radius: 52% 52% 60% 60%; background: rgba(44, 166, 224, 0.8); opacity: 0; }
 .drye-hockey-hiw__pool { position: absolute; left: 24%; right: 24%; top: 18%; height: 8px; border-radius: 40%; background: rgba(44, 166, 224, 0.6); opacity: 0; }
-.drye-hockey-hiw__dash { position: absolute; left: 0; right: 0; bottom: 15%; height: 14%; border-top: 1px dashed rgba(22, 38, 58, 0.22); border-bottom: 1px dashed rgba(22, 38, 58, 0.22); }
+.drye-hockey-hiw__dash { position: absolute; left: 0; right: 0; bottom: 15%; height: 14%; border-top: 1px dashed rgba(30, 58, 76, 0.22); border-bottom: 1px dashed rgba(30, 58, 76, 0.22); }
 
 .drye-hockey-hiw__mat {
   position: absolute;
@@ -189,56 +189,5 @@
   .drye-hockey-hiw__card:last-child {
     padding-right: var(--space-6);
     clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%, 22px 50%);
-  }
-}
-
-/* ==========================================================================
-   MOBILE: one step at a time.
-   Stacked, all three visible at once is three things competing for a first
-   read. So 02 and 03 start collapsed and unfold as the droplet reaches them —
-   a single pass, not a loop, or the page would reflow every 9 seconds.
-   ========================================================================== */
-
-@media (max-width: 767px) {
-  .drye-hockey-hiw__step--2,
-  .drye-hockey-hiw__step--3 {
-    overflow: hidden;
-    max-height: 0;
-    opacity: 0;
-  }
-
-  .drye-hockey-hiw.is-visible .drye-hockey-hiw__step--2 {
-    animation: drye-hiw-unfold 9s linear 1 forwards,
-               drye-hiw-lit2 9s linear infinite;
-    animation-delay: 3s, 0s;
-  }
-
-  .drye-hockey-hiw.is-visible .drye-hockey-hiw__step--3 {
-    animation: drye-hiw-unfold 9s linear 1 forwards,
-               drye-hiw-lit3 9s linear infinite;
-    animation-delay: 6s, 0s;
-  }
-
-  /* Once unfolded the dimming would hide a card the reader is looking at, so
-     mobile keeps every revealed figure at full strength. */
-  .drye-hockey-hiw.is-visible .drye-hockey-hiw__figure,
-  .drye-hockey-hiw.is-visible .drye-hockey-hiw__num {
-    animation: none !important;
-    opacity: 1 !important;
-  }
-}
-
-@keyframes drye-hiw-unfold {
-  0% { max-height: 0; opacity: 0; }
-  14% { opacity: 1; }
-  30%, 100% { max-height: 620px; opacity: 1; }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .drye-hockey-hiw__step--2,
-  .drye-hockey-hiw__step--3 {
-    max-height: none !important;
-    opacity: 1 !important;
-    animation: none !important;
   }
 }
