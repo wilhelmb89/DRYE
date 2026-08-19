@@ -75,7 +75,7 @@
 .drye-hockey-hiw__wet { position: absolute; left: 0; right: 0; height: 14%; background: rgba(44, 166, 224, 0.4); opacity: 0; }
 .drye-hockey-hiw__drop { position: absolute; border-radius: 52% 52% 60% 60%; background: rgba(44, 166, 224, 0.8); opacity: 0; }
 .drye-hockey-hiw__pool { position: absolute; left: 24%; right: 24%; top: 18%; height: 8px; border-radius: 40%; background: rgba(44, 166, 224, 0.6); opacity: 0; }
-.drye-hockey-hiw__dash { position: absolute; left: 0; right: 0; bottom: 15%; height: 14%; border-top: 1px dashed rgba(30, 58, 76, 0.22); border-bottom: 1px dashed rgba(30, 58, 76, 0.22); }
+.drye-hockey-hiw__dash { position: absolute; left: 0; right: 0; bottom: 15%; height: 14%; border-top: 1px dashed rgba(22, 38, 58, 0.22); border-bottom: 1px dashed rgba(22, 38, 58, 0.22); }
 
 .drye-hockey-hiw__mat {
   position: absolute;
@@ -200,11 +200,14 @@
    ========================================================================== */
 
 @media (max-width: 767px) {
+  /* Collapse with max-height ONLY. opacity is off limits here: the cards carry
+     .dryeNEW-reveal, and base's ".js .dryeNEW-reveal.is-visible { opacity: 1 }" is
+     three classes deep — it beat the single-class rule that used to sit here, so
+     the cards never collapsed. base never touches max-height. */
   .drye-hockey-hiw__step--2,
   .drye-hockey-hiw__step--3 {
     overflow: hidden;
     max-height: 0;
-    opacity: 0;
   }
 
   .drye-hockey-hiw.is-visible .drye-hockey-hiw__step--2 {
@@ -229,16 +232,14 @@
 }
 
 @keyframes drye-hiw-unfold {
-  0% { max-height: 0; opacity: 0; }
-  14% { opacity: 1; }
-  30%, 100% { max-height: 620px; opacity: 1; }
+  0% { max-height: 0; }
+  30%, 100% { max-height: 900px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
   .drye-hockey-hiw__step--2,
   .drye-hockey-hiw__step--3 {
     max-height: none !important;
-    opacity: 1 !important;
     animation: none !important;
   }
 }
