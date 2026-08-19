@@ -48,13 +48,25 @@
   max-width: 920px;
 }
 
-.drye-research-video-full__label {
+/* Two classes deep, deliberately. Both of these lose to base.css when base loads
+   after this file — .dryeNEW-h2 sets color: inherit and .dryeNEW-micro sets
+   color: var(--caption), each a single class, so a later declaration wins and the
+   copy falls back to body text colour. That is why the section rendered correctly
+   on the product page but went dark on the hockey page: same CSS, different load
+   order. A descendant selector wins either way. Colour values are unchanged. */
+.drye-research-video-full .drye-research-video-full__label {
   color: var(--sage);
 }
 
-.drye-research-video-full__caption {
+.drye-research-video-full .drye-research-video-full__caption {
   color: var(--white-100);
   max-width: 900px;
+}
+
+/* Belt and braces: anything else dropped into the overlay inherits white rather
+   than the document's dark body colour. */
+.drye-research-video-full__overlay {
+  color: var(--white-100);
 }
 
 @media (min-width: 768px) {
