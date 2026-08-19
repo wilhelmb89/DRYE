@@ -93,6 +93,31 @@
 .drye-hockey-hiw__meter { height: 2px; background: var(--border); }
 .drye-hockey-hiw__meter i { display: block; height: 2px; background: var(--emerald); transform-origin: left center; transform: scaleX(0); }
 
+/* ---- one card lit at a time, so the eye is told where the droplet is ---- */
+.drye-hockey-hiw__card { transition: background-color 0.4s var(--ease-standard); }
+.drye-hockey-hiw__figure,
+.drye-hockey-hiw__num { transition: opacity 0.4s var(--ease-standard); }
+
+.drye-hockey-hiw.is-visible .drye-hockey-hiw__step--1 { animation: drye-hiw-lit1 9s linear infinite; }
+.drye-hockey-hiw.is-visible .drye-hockey-hiw__step--2 { animation: drye-hiw-lit2 9s linear infinite; }
+.drye-hockey-hiw.is-visible .drye-hockey-hiw__step--3 { animation: drye-hiw-lit3 9s linear infinite; }
+
+.drye-hockey-hiw.is-visible .drye-hockey-hiw__step--1 .drye-hockey-hiw__figure,
+.drye-hockey-hiw.is-visible .drye-hockey-hiw__step--1 .drye-hockey-hiw__num { animation: drye-hiw-wake1 9s linear infinite; }
+.drye-hockey-hiw.is-visible .drye-hockey-hiw__step--2 .drye-hockey-hiw__figure,
+.drye-hockey-hiw.is-visible .drye-hockey-hiw__step--2 .drye-hockey-hiw__num { animation: drye-hiw-wake2 9s linear infinite; }
+.drye-hockey-hiw.is-visible .drye-hockey-hiw__step--3 .drye-hockey-hiw__figure,
+.drye-hockey-hiw.is-visible .drye-hockey-hiw__step--3 .drye-hockey-hiw__num { animation: drye-hiw-wake3 9s linear infinite; }
+
+/* Active window per card: 01 = 0-32%, 02 = 33-65%, 03 = 66-98%. */
+@keyframes drye-hiw-lit1 { 0%, 30% { background-color: #E3F0EE; } 38%, 100% { background-color: #F1F4F7; } }
+@keyframes drye-hiw-lit2 { 0%, 32% { background-color: #F1F4F7; } 36%, 63% { background-color: #E3F0EE; } 71%, 100% { background-color: #F1F4F7; } }
+@keyframes drye-hiw-lit3 { 0%, 65% { background-color: #F1F4F7; } 69%, 96% { background-color: #E3F0EE; } 100% { background-color: #F1F4F7; } }
+
+@keyframes drye-hiw-wake1 { 0%, 30% { opacity: 1; } 38%, 100% { opacity: 0.32; } }
+@keyframes drye-hiw-wake2 { 0%, 32% { opacity: 0.32; } 36%, 63% { opacity: 1; } 71%, 100% { opacity: 0.32; } }
+@keyframes drye-hiw-wake3 { 0%, 65% { opacity: 0.32; } 69%, 96% { opacity: 1; } 100% { opacity: 0.32; } }
+
 /* ---- the shared 9s loop. All three cards read the same clock, so the droplet
    that leaves card 01 is the one that arrives in card 02. ---- */
 .drye-hockey-hiw.is-visible .drye-hockey-hiw__knit { animation: drye-hiw-draw 9s ease-in-out infinite; }
@@ -133,6 +158,9 @@
   .drye-hockey-hiw__wet { animation: none !important; opacity: 0.6 !important; }
   .drye-hockey-hiw__fill { animation: none !important; width: 100% !important; }
   .drye-hockey-hiw__meter i { animation: none !important; transform: scaleX(1) !important; }
+  .drye-hockey-hiw__card,
+  .drye-hockey-hiw__figure,
+  .drye-hockey-hiw__num { animation: none !important; opacity: 1 !important; }
 }
 
 .drye-hockey-hiw__note {
