@@ -42,8 +42,11 @@
   position: relative;
   display: grid;
   grid-template-columns: 1fr 1fr;
+  /* A real 2px gap with the card showing through, not a line drawn on top of the
+     photos — an overlaid 1px rule disappears against a light subject. */
+  gap: 2px;
   aspect-ratio: 100 / 74;
-  background: #f3f4f6;
+  background: var(--bg);
 }
 
 .drye-ba-image-wrap {
@@ -84,35 +87,30 @@
   text-transform: uppercase;
 }
 
-.drye-ba-divider {
+/* Superseded by the grid gap above. Kept as a no-op so the existing markup and
+   any saved section content stay valid. */
+.drye-ba-divider { display: none; }
+
+/* Caption inside the photo, flush to its bottom edge — one per image, full width
+   of that image. Sitting outside the photo it reads as a UI row and leaves a seam
+   against the card; inside, it reads as a caption.
+
+   Two classes deep on purpose. base.css may load AFTER this file, and its
+   .dryeNEW-micro sets both color: var(--caption) and margin-bottom: 10px — which
+   would grey the label out and lift the bar off the bottom edge. A descendant
+   selector wins regardless of load order. */
+.drye-ba-image-wrap .drye-ba-label {
   position: absolute;
-  top: 0;
+  left: 0;
+  right: 0;
   bottom: 0;
-  left: 50%;
-  width: 1px;
-  transform: translateX(-0.5px);
-  background: rgba(255, 255, 255, 0.45);
-  pointer-events: none;
-}
-
-/* Label bar sits under the photos, one cell per image, so it can never land on
-   the subject and never crowds the quote. */
-.drye-ba-labels {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
+  z-index: 2;
+  margin: 0;
+  padding: var(--space-5) var(--space-8) var(--space-4);
   background: rgba(30, 58, 76, 0.82);
-}
-
-.drye-ba-label {
-  margin-bottom: 0;
-  padding: var(--space-6) var(--space-12) var(--space-5);
-  color: var(--white-080);
+  color: var(--white-100);
   letter-spacing: 0.14em;
   line-height: 1.2;
-}
-
-.drye-ba-label + .drye-ba-label {
-  box-shadow: inset 1px 0 0 rgba(255, 255, 255, 0.16);
 }
 
 .drye-ba-body {
