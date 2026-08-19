@@ -47,6 +47,7 @@
                   <span>{{ section.settings.before_label }}</span>
                 </div>
               {% endif %}
+              <div class="dryeNEW-micro drye-ba-image-label">{{ section.settings.before_label }}</div>
             </div>
 
             <div class="drye-ba-image-wrap">
@@ -64,18 +65,10 @@
                   <span>{{ section.settings.after_label }}</span>
                 </div>
               {% endif %}
+              <div class="dryeNEW-micro drye-ba-image-label">{{ section.settings.after_label }}</div>
             </div>
 
             <div class="drye-ba-divider" aria-hidden="true"></div>
-          </div>
-
-          {%- comment -%}
-            Labels moved out of the photos into their own bar. Inside the image they
-            landed on whatever happened to be there and crowded the copy box below.
-          {%- endcomment -%}
-          <div class="drye-ba-labels">
-            <span class="dryeNEW-micro drye-ba-label">{{ section.settings.before_label }}</span>
-            <span class="dryeNEW-micro drye-ba-label">{{ section.settings.after_label }}</span>
           </div>
 
           <div class="drye-ba-body">
@@ -93,12 +86,6 @@
               <div class="dryeNEW-body--caption drye-ba-attribution">
                 <p>{{ block.settings.attribution }}</p>
               </div>
-            {% endif %}
-
-            {% if block.settings.cta_label != blank %}
-              <a class="drye-ba-cta" href="{{ block.settings.cta_url | default: '#offer' }}">
-                {{ block.settings.cta_label }} <span aria-hidden="true">&rarr;</span>
-              </a>
             {% endif %}
           </div>
         </article>
@@ -119,28 +106,94 @@
   "tag": "section",
   "class": "shopify-section-drye-before-after",
   "settings": [
-    { "type": "text", "id": "micro_label", "label": "Micro label", "default": "Real Users — Real Results" },
-    { "type": "text", "id": "heading_line_1", "label": "Heading line 1", "default": "Before and after." },
-    { "type": "text", "id": "heading_line_2", "label": "Heading line 2", "default": "No filters. No staging." },
-    { "type": "textarea", "id": "intro", "label": "Intro text", "default": "These are unsolicited photos sent directly to us by users. We didn't ask for them. They sent them because the results were that visible." },
-    { "type": "text", "id": "before_label", "label": "Before label", "default": "Before" },
-    { "type": "text", "id": "after_label", "label": "After label", "default": "After" },
-    { "type": "text", "id": "note", "label": "Bottom note", "default": "asd" }
+    {
+      "type": "text",
+      "id": "micro_label",
+      "label": "Micro label",
+      "default": "Real Users — Real Results"
+    },
+    {
+      "type": "text",
+      "id": "heading_line_1",
+      "label": "Heading line 1",
+      "default": "Before and after."
+    },
+    {
+      "type": "text",
+      "id": "heading_line_2",
+      "label": "Heading line 2",
+      "default": "No filters. No staging."
+    },
+    {
+      "type": "textarea",
+      "id": "intro",
+      "label": "Intro text",
+      "default": "These are unsolicited photos sent directly to us by users. We didn't ask for them. They sent them because the results were that visible."
+    },
+    {
+      "type": "text",
+      "id": "before_label",
+      "label": "Before label",
+      "default": "Before"
+    },
+    {
+      "type": "text",
+      "id": "after_label",
+      "label": "After label",
+      "default": "After"
+    },
+    {
+      "type": "text",
+      "id": "note",
+      "label": "Bottom note",
+      "default": "Note: Placeholder images shown — replace with actual user-submitted photos."
+    }
   ],
   "blocks": [
     {
       "type": "case",
       "name": "Before / after card",
       "settings": [
-        { "type": "image_picker", "id": "before_image", "label": "Before image" },
-        { "type": "text", "id": "before_alt", "label": "Before image alt text", "default": "Before image" },
-        { "type": "image_picker", "id": "after_image", "label": "After image" },
-        { "type": "text", "id": "after_alt", "label": "After image alt text", "default": "After image" },
-        { "type": "text", "id": "timeline", "label": "Timeline", "default": "After 5 months" },
-        { "type": "textarea", "id": "quote", "label": "Quote", "default": "\"I had problems for years, and it just kept getting worse. I still moisturize sometimes — but my hands are honestly just normal now.\"" },
-        { "type": "text", "id": "attribution", "label": "Attribution", "default": "— Jens Stålnacke, Mine Worker, Luleå" },
-        { "type": "text", "id": "cta_label", "label": "CTA label", "default": "Read the story" },
-        { "type": "url", "id": "cta_url", "label": "CTA link" }
+        {
+          "type": "image_picker",
+          "id": "before_image",
+          "label": "Before image"
+        },
+        {
+          "type": "text",
+          "id": "before_alt",
+          "label": "Before image alt text",
+          "default": "Before image"
+        },
+        {
+          "type": "image_picker",
+          "id": "after_image",
+          "label": "After image"
+        },
+        {
+          "type": "text",
+          "id": "after_alt",
+          "label": "After image alt text",
+          "default": "After image"
+        },
+        {
+          "type": "text",
+          "id": "timeline",
+          "label": "Timeline",
+          "default": "After 5 months"
+        },
+        {
+          "type": "textarea",
+          "id": "quote",
+          "label": "Quote",
+          "default": "\"I had problems for years, and it just kept getting worse. I still moisturize sometimes — but my hands are honestly just normal now.\""
+        },
+        {
+          "type": "text",
+          "id": "attribution",
+          "label": "Attribution",
+          "default": "— Jens Stålnacke, Mine Worker, Luleå"
+        }
       ]
     }
   ],
@@ -149,9 +202,30 @@
     {
       "name": "DRYE Before / After",
       "blocks": [
-        { "type": "case", "settings": { "timeline": "After first use", "quote": "\"These gloves completely solved my contact dermatitis problems, and as a bonus my hands no longer smell bad after a game!\"", "attribution": "— Chris P., Fort Worth, Texas", "cta_label": "Read his story" } },
-        { "type": "case", "settings": { "timeline": "After one season", "quote": "\"Cracks all over my knuckles, redness and eczema. My hands stay drier, grip is better, skin holds up.\"", "attribution": "— Linnéa Pettersson Dove, SDHL Swedish Champion 2025, Frölunda HC", "cta_label": "Read her story" } },
-        { "type": "case", "settings": { "timeline": "After 5 months", "quote": "\"Real skin problems started in 2017 – pain, open scars and wounds. Nothing worked for years.\"", "attribution": "— Jens Stålnacke, Mine Worker, Luleå", "cta_label": "Read his story" } }
+        {
+          "type": "case",
+          "settings": {
+            "timeline": "After 5 months",
+            "quote": "\"I had problems for years, and it just kept getting worse. I still moisturize sometimes — but my hands are honestly just normal now.\"",
+            "attribution": "— Jens Stålnacke, Mine Worker, Luleå"
+          }
+        },
+        {
+          "type": "case",
+          "settings": {
+            "timeline": "After one season",
+            "quote": "\"I had cracks all over my knuckles, redness and eczema. My hands stay drier, my grip is better — and my skin holds up much better.\"",
+            "attribution": "— Linnea Pettersson Dove, Professional Hockey Player, Gothenburg"
+          }
+        },
+        {
+          "type": "case",
+          "settings": {
+            "timeline": "After first use",
+            "quote": "\"The irritation always came back. Since switching to the liners, my hands feel calmer after every game.\"",
+            "attribution": "— Chris P., Fort Worth, Texas"
+          }
+        }
       ]
     }
   ]
