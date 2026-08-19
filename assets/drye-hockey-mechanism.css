@@ -13,19 +13,11 @@
   min-width: 280px;
   max-width: 600px;
   display: flex;
-  flex-direction: column;
+  align-items: center;
   justify-content: center;
 }
 
-/* --shift moves the glove AND the sliding hand together, so the artwork can clear
-   the copy without breaking the hand's slide-in transform. Set per section. */
-.drye-hockey-mech__stage {
-  position: relative;
-  width: 100%;
-  max-width: 575px;
-  aspect-ratio: 1 / 1;
-  transform: translateX(var(--shift, 0));
-}
+.drye-hockey-mech__stage { position: relative; width: 100%; max-width: 575px; aspect-ratio: 1 / 1; }
 .drye-hockey-mech__handbox { position: absolute; left: 0; top: 0; bottom: 0; width: 30%; overflow: hidden; }
 /* max-width: none is required — base.css sets img { max-width: 100% }, which would
    clamp 278% to the handbox width and render a whole second hand outside the glove. */
@@ -58,14 +50,13 @@
 }
 
 /* --- legend --- */
-/* On mobile the legend sits under the figure — absolutely positioned it lands on
-   top of the glove once the stage is narrow. */
 .drye-hockey-mech__legend {
+  position: absolute;
+  left: 0;
+  bottom: 15%;
   display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  gap: var(--space-8) var(--space-16);
-  margin-top: var(--space-12);
+  flex-direction: column;
+  gap: var(--space-10);
   pointer-events: none;
 }
 
@@ -232,15 +223,6 @@
 }
 
 @media (min-width: 768px) {
-  .drye-hockey-mech__stagewrap { flex-direction: row; align-items: center; justify-content: center; }
-  .drye-hockey-mech__legend {
-    position: absolute;
-    left: 0;
-    bottom: 15%;
-    flex-direction: column;
-    gap: var(--space-10);
-    margin-top: 0;
-  }
   .drye-hockey-mech__grid { gap: var(--grid-gap-56); }
   .drye-hockey-mech__time { font-size: 42px; }
   .drye-hockey-mech__term { font-size: 32px; }
