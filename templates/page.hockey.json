@@ -277,51 +277,6 @@
         "after_label": "With DRYE"
       }
     },
-    "video": {
-      "type": "drye-textile-proof-videos",
-      "blocks": {
-        "proof_video_1": {
-          "type": "proof_video",
-          "settings": {
-            "stream_uid": "",
-            "label": "01 / ORIGIN",
-            "title": "Built on rare textile machinery",
-            "body": "<p>Developed on advanced industrial textile machinery — not generic liner fabric. Engineered, not improvised.</p>"
-          }
-        },
-        "proof_video_2": {
-          "type": "proof_video",
-          "settings": {
-            "stream_uid": "",
-            "label": "02 / DURABILITY",
-            "title": "Knitted for repeated use",
-            "body": "<p>Built for repeated wear, washing and friction inside sealed gloves — designed to hold its shape shift after shift.</p>"
-          }
-        },
-        "proof_video_3": {
-          "type": "proof_video",
-          "settings": {
-            "stream_uid": "",
-            "label": "03 / DRYNESS",
-            "title": "Layered to stay dry longer",
-            "body": "<p>Asymmetric layering moves moisture away from the skin-facing side, helping the hand side stay drier for longer inside sealed gloves.</p>"
-          }
-        }
-      },
-      "block_order": [
-        "proof_video_1",
-        "proof_video_2",
-        "proof_video_3"
-      ],
-      "settings": {
-        "eyebrow": "BUILT DIFFERENTLY",
-        "heading": "Not another liner.",
-        "heading_italic": "Built to behave differently.",
-        "body": "<p>Most liners fail because they get wet or wear out. DRYE was engineered to avoid both.</p>",
-        "cf_subdomain": "",
-        "footer_note": ""
-      }
-    },
     "hiw": {
       "type": "drye-hockey-how-it-works",
       "blocks": {
@@ -691,16 +646,6 @@
         "source": ""
       }
     },
-    "compare": {
-      "type": "drye-b2b-mechanism-knit",
-      "settings": {
-        "anchor_id": "knit",
-        "eyebrow": "Moisture routing in sealed environments",
-        "heading": "Moisture routing in sealed environments",
-        "body": "Low-regain PP on the skin side, lyocell on the outer side — one unitary plated knit, no bonded layers.",
-        "caption": "Directional moisture routing"
-      }
-    },
     "offer": {
       "type": "drye-hockey-offer",
       "settings": {
@@ -723,14 +668,12 @@
     "fails",
     "mech",
     "clarity",
-    "video",
     "hiw",
     "results",
     "objections",
     "stories",
     "timeline",
     "gallery",
-    "compare",
     "offer"
   ]
 }
