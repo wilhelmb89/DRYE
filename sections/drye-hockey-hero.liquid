@@ -6,7 +6,7 @@
   assign ss = section.settings
 -%}
 
-<section class="dryeNEW-section drye-hockey-hero" id="{{ ss.anchor_id | default: 'hero' }}" data-drye-section="hockey-hero">
+<section class="dryeNEW-section drye-hockey-hero" id="{{ ss.anchor_id | default: 'hero' }}" data-drye-section="hockey-hero" style="--hero-scrim: {{ ss.scrim | divided_by: 100.0 }}; --hero-scrim-mobile: {{ ss.scrim_mobile | divided_by: 100.0 }};">
   {%- if ss.image_desktop != blank -%}
     <div class="drye-hockey-hero__media drye-hockey-hero__media--desktop">
       {{ ss.image_desktop | image_url: width: 2400 | image_tag: sizes: '100vw', loading: 'eager', fetchpriority: 'high', alt: ss.image_alt }}
@@ -17,6 +17,11 @@
     <div class="drye-hockey-hero__media drye-hockey-hero__media--mobile">
       {{ ss.image_mobile | image_url: width: 1200 | image_tag: sizes: '100vw', loading: 'eager', fetchpriority: 'high', alt: ss.image_alt }}
     </div>
+  {%- endif -%}
+
+  {%- comment -%} Flat tint, not a gradient — sits over the photo, under the copy. {%- endcomment -%}
+  {%- if ss.scrim > 0 or ss.scrim_mobile > 0 -%}
+    <span class="drye-hockey-hero__scrim" aria-hidden="true"></span>
   {%- endif -%}
 
   <div class="dryeNEW-container drye-hockey-hero__inner">
@@ -82,6 +87,8 @@
     { "type": "image_picker", "id": "image_desktop", "label": "Desktop image (16:9)" },
     { "type": "image_picker", "id": "image_mobile", "label": "Mobile image (9:16)" },
     { "type": "text", "id": "image_alt", "label": "Image alt", "default": "A player pulling a hockey glove on over the DRYE liner" },
+    { "type": "range", "id": "scrim", "label": "Photo darkening \u2014 desktop", "min": 0, "max": 80, "step": 5, "unit": "%", "default": 30 },
+    { "type": "range", "id": "scrim_mobile", "label": "Photo darkening \u2014 mobile", "min": 0, "max": 80, "step": 5, "unit": "%", "default": 45 },
     { "type": "header", "content": "Layer stack" },
     { "type": "text", "id": "stack_alt", "label": "Diagram alt", "default": "The hockey glove seals; DRYE sits between the glove and the skin" },
     { "type": "text", "id": "layer_top", "label": "Top layer", "default": "Hockey glove — sealed" },

@@ -30,6 +30,21 @@
 
 /* On mobile the stack is a supporting note, not the anchor — the headline is.
    Roughly half the visual weight: shorter boxes, smaller labels, tighter arrows. */
+/* Flat tint over the photo, under the copy. Opacity comes from the section's
+   --hero-scrim (desktop) / --hero-scrim-mobile, both set per section in the editor. */
+.drye-hockey-hero__scrim {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: #16263A;
+  opacity: var(--hero-scrim, 0.3);
+  pointer-events: none;
+}
+
+@media (max-width: 767px) {
+  .drye-hockey-hero__scrim { opacity: var(--hero-scrim-mobile, 0.45); }
+}
+
 @media (max-width: 767px) {
   /* min-width: 0 is the point — flex-basis 360px with min-width 280px made the
      stack fill the screen at 390px wide, so max-width: 300px never applied and
