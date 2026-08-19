@@ -1,0 +1,66 @@
+{{ 'drye-b2b-lp-base.css' | asset_url | stylesheet_tag }}
+
+{{ 'drye-hockey-offer.css' | asset_url | stylesheet_tag }}
+
+{%- liquid
+  assign ss = section.settings
+-%}
+
+<section class="dryeNEW-section drye-hockey-offer" id="{{ ss.anchor_id | default: 'offer' }}" data-drye-section="hockey-offer">
+  <div class="dryeNEW-container">
+    <div class="drye-hockey-offer__grid">
+      <div class="drye-hockey-offer__copy">
+        <h2 class="dryeNEW-h2 drye-hockey-offer__title">{{ ss.heading }}</h2>
+        {%- if ss.body != blank -%}
+          <div class="dryeNEW-body drye-hockey-offer__body">{{ ss.body }}</div>
+        {%- endif -%}
+      </div>
+
+      <div class="drye-hockey-offer__card">
+        <div class="drye-hockey-offer__pricerow">
+          <span class="dryeNEW-stat-number drye-hockey-offer__price">{{ ss.price | escape }}</span>
+          <span class="drye-hockey-offer__unit">{{ ss.unit | escape }}</span>
+        </div>
+
+        {%- if ss.math != blank -%}
+          <div class="dryeNEW-body--sm drye-hockey-offer__math">{{ ss.math }}</div>
+        {%- endif -%}
+
+        {%- if ss.cta_label != blank -%}
+          <a class="dryeNEW-btn dryeNEW-btn--primary dryeNEW-btn--block drye-hockey-offer__cta" href="{{ ss.cta_url | default: routes.all_products_collection_url }}">
+            {{ ss.cta_label | escape }}
+          </a>
+        {%- endif -%}
+
+        {%- if ss.sizeguide != blank -%}
+          <details class="drye-hockey-offer__sizeguide">
+            <summary>{{ ss.sizeguide_label | escape }}<span aria-hidden="true">+</span></summary>
+            <div class="drye-hockey-offer__sizeguide-body">{{ ss.sizeguide }}</div>
+          </details>
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "drye-Hockey Offer",
+  "tag": "section",
+  "class": "shopify-section",
+  "settings": [
+    { "type": "text", "id": "anchor_id", "label": "Anchor id", "default": "offer" },
+    { "type": "html", "id": "heading", "label": "Headline", "default": "Thirty days. Full refund. No forms." },
+    { "type": "richtext", "id": "body", "label": "Body", "default": "<p>Six or seven skates is enough to know. If it isn't doing anything, email us and the money goes back. You don't ship the pair back and you don't get talked out of it.</p>" },
+    { "type": "header", "content": "Price card" },
+    { "type": "text", "id": "price", "label": "Price", "default": "$39" },
+    { "type": "text", "id": "unit", "label": "Unit line", "default": "one pair \u00b7 a season of regular use" },
+    { "type": "richtext", "id": "math", "label": "Per-skate math", "default": "<p>At 90 skates a season that's 43\u00a2 a skate. Machine washable, so it's the same pair every time.</p>" },
+    { "type": "text", "id": "cta_label", "label": "CTA label", "default": "Take me to the shop page" },
+    { "type": "url", "id": "cta_url", "label": "CTA link" },
+    { "type": "text", "id": "sizeguide_label", "label": "Size guide label", "default": "Size guide" },
+    { "type": "richtext", "id": "sizeguide", "label": "Size guide body" }
+  ],
+  "presets": [{ "name": "drye-Hockey Offer" }]
+}
+{% endschema %}

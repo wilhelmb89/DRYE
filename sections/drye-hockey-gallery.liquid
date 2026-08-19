@@ -1,0 +1,85 @@
+{{ 'drye-b2b-lp-base.css' | asset_url | stylesheet_tag }}
+
+{{ 'drye-hockey-shared.css' | asset_url | stylesheet_tag }}
+{{ 'drye-hockey-lp.js' | asset_url | script_tag }}
+{{ 'drye-hockey-gallery.css' | asset_url | stylesheet_tag }}
+
+<section class="dryeNEW-section drye-hockey-gallery" id="{{ section.settings.anchor_id | default: 'gallery' }}" data-drye-section="hockey-gallery">
+  <div class="dryeNEW-container">
+    {%- if section.settings.eyebrow != blank -%}
+      <span class="dryeNEW-micro drye-hockey-gallery__eyebrow">{{ section.settings.eyebrow | escape }}</span>
+    {%- endif -%}
+    <h2 class="dryeNEW-h2 drye-hockey-gallery__title">{{ section.settings.heading }}</h2>
+    {%- if section.settings.intro != blank -%}
+      <div class="dryeNEW-body drye-hockey-gallery__intro">{{ section.settings.intro }}</div>
+    {%- endif -%}
+  </div>
+
+  <div class="drye-hockey-rail drye-hockey-gallery__rail" data-drye-rail>
+    <div class="drye-hockey-rail__track" data-drye-rail-track>
+      {%- for block in section.blocks -%}
+        <figure class="drye-hockey-gallery__fig" {{ block.shopify_attributes }}>
+          {%- if block.settings.tag != blank -%}
+            <span class="drye-hockey-gallery__tag">{{ block.settings.tag | escape }}</span>
+          {%- endif -%}
+          {%- if block.settings.image != blank -%}
+            {{ block.settings.image | image_url: width: 600 | image_tag: loading: 'lazy', sizes: '232px', alt: block.settings.tag }}
+          {%- endif -%}
+          {%- if block.settings.quote != blank -%}
+            <figcaption class="drye-hockey-gallery__cap">{{ block.settings.quote }}</figcaption>
+          {%- endif -%}
+        </figure>
+      {%- endfor -%}
+    </div>
+
+    <button type="button" class="drye-hockey-nav drye-hockey-nav--prev" data-drye-rail-prev aria-label="Previous photos">&larr;</button>
+    <button type="button" class="drye-hockey-nav drye-hockey-nav--next" data-drye-rail-next aria-label="Next photos">&rarr;</button>
+  </div>
+
+  <div class="dryeNEW-container">
+    {% render 'drye-hockey-swipe-hint' %}
+    {%- if section.settings.source != blank -%}
+      <p class="dryeNEW-body--caption drye-hockey-gallery__src">{{ section.settings.source }}</p>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "drye-Hockey Gallery",
+  "tag": "section",
+  "class": "shopify-section",
+  "settings": [
+    { "type": "text", "id": "anchor_id", "label": "Anchor id", "default": "gallery" },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Fr\u00f6lunda HC \u00b7 SDHL champion 2025" },
+    { "type": "html", "id": "heading", "label": "Headline", "default": "An SDHL champion wears gloves inside her gloves." },
+    { "type": "richtext", "id": "intro", "label": "Intro" },
+    { "type": "richtext", "id": "source", "label": "Source line" }
+  ],
+  "blocks": [
+    {
+      "type": "frame",
+      "name": "Photo",
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "Photo (3:4)" },
+        { "type": "text", "id": "tag", "label": "Corner tag" },
+        { "type": "textarea", "id": "quote", "label": "Caption quote (verbatim)" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "drye-Hockey Gallery",
+      "blocks": [
+        { "type": "frame", "settings": { "tag": "Before", "quote": "\u201CI was fiery red. I had sores on my knuckles.\u201D" } },
+        { "type": "frame", "settings": { "tag": "Eczema", "quote": "\u201CIt\u2019s helped my eczema. Very, very much. It was far worse before.\u201D" } },
+        { "type": "frame", "settings": { "tag": "First two practices", "quote": "\u201CIt felt strange the first two practices. Now I can\u2019t be without them.\u201D" } },
+        { "type": "frame", "settings": { "tag": "Grip", "quote": "\u201CI get a better grip inside the glove than without them.\u201D" } },
+        { "type": "frame", "settings": { "tag": "One practice without", "quote": "\u201CI did one practice without them. I won\u2019t want to do that again.\u201D" } },
+        { "type": "frame", "settings": { "tag": "Smell", "quote": "\u201CIt doesn\u2019t stink as much in the glove afterwards.\u201D" } },
+        { "type": "frame", "settings": { "tag": "Her advice", "quote": "\u201CTry at least three practices. Don\u2019t judge it on the first one.\u201D" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

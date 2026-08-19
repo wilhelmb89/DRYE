@@ -1,0 +1,90 @@
+{{ 'drye-b2b-lp-base.css' | asset_url | stylesheet_tag }}
+
+{{ 'drye-hockey-shared.css' | asset_url | stylesheet_tag }}
+{{ 'drye-hockey-lp.js' | asset_url | script_tag }}
+{{ 'drye-hockey-objections.css' | asset_url | stylesheet_tag }}
+
+{%- comment -%}
+  Objection handling. Grip first — it is the deal-breaker. Every card carries proof
+  in a customer's own words; a card without proof is a claim, not an answer.
+{%- endcomment -%}
+
+<section class="dryeNEW-section drye-hockey-obj" id="{{ section.settings.anchor_id | default: 'objections' }}" data-drye-section="hockey-objections">
+  {%- if section.settings.background != blank -%}
+    <div class="drye-hockey-obj__bg" aria-hidden="true">
+      {{ section.settings.background | image_url: width: 2000 | image_tag: loading: 'lazy', sizes: '100vw', alt: '' }}
+      <span class="drye-hockey-obj__scrim drye-hockey-obj__scrim--ink"></span>
+      <span class="drye-hockey-obj__scrim drye-hockey-obj__scrim--top"></span>
+      <span class="drye-hockey-obj__scrim drye-hockey-obj__scrim--side"></span>
+    </div>
+  {%- endif -%}
+
+  <div class="dryeNEW-container drye-hockey-obj__head">
+    <h2 class="dryeNEW-h2 drye-hockey-obj__title">{{ section.settings.heading }}</h2>
+  </div>
+
+  <div class="drye-hockey-rail drye-hockey-obj__rail" data-drye-rail>
+    <div class="drye-hockey-rail__track" data-drye-rail-track>
+      {%- for block in section.blocks -%}
+        <article class="drye-hockey-obj__card" {{ block.shopify_attributes }}>
+          {%- if block.settings.profile != blank -%}
+            <span class="dryeNEW-micro drye-hockey-obj__prof">{{ block.settings.profile | escape }}</span>
+          {%- endif -%}
+          <h3 class="dryeNEW-h3 drye-hockey-obj__q">{{ block.settings.question }}</h3>
+          {%- if block.settings.answer != blank -%}
+            <div class="dryeNEW-body--sm drye-hockey-obj__a">{{ block.settings.answer }}</div>
+          {%- endif -%}
+          {%- if block.settings.proof != blank -%}
+            <p class="dryeNEW-body--sm drye-hockey-obj__proof">{{ block.settings.proof }}</p>
+          {%- endif -%}
+          {%- if block.settings.who != blank -%}
+            <p class="dryeNEW-body--caption drye-hockey-obj__who">{{ block.settings.who | escape }}</p>
+          {%- endif -%}
+        </article>
+      {%- endfor -%}
+    </div>
+
+    <button type="button" class="drye-hockey-nav drye-hockey-nav--prev" data-drye-rail-prev aria-label="Previous questions">&larr;</button>
+    <button type="button" class="drye-hockey-nav drye-hockey-nav--next" data-drye-rail-next aria-label="Next questions">&rarr;</button>
+  </div>
+
+  <div class="dryeNEW-container">{% render 'drye-hockey-swipe-hint' %}</div>
+</section>
+
+{% schema %}
+{
+  "name": "drye-Hockey Objs",
+  "tag": "section",
+  "class": "shopify-section",
+  "settings": [
+    { "type": "text", "id": "anchor_id", "label": "Anchor id", "default": "objections" },
+    { "type": "html", "id": "heading", "label": "Headline", "default": "What you'd ask another parent." },
+    { "type": "image_picker", "id": "background", "label": "Background photo (optional)" }
+  ],
+  "blocks": [
+    {
+      "type": "objection",
+      "name": "Question",
+      "settings": [
+        { "type": "text", "id": "profile", "label": "Eyebrow" },
+        { "type": "text", "id": "question", "label": "Question" },
+        { "type": "richtext", "id": "answer", "label": "Answer" },
+        { "type": "textarea", "id": "proof", "label": "Proof quote (verbatim)" },
+        { "type": "text", "id": "who", "label": "Attribution" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "drye-Hockey Objs",
+      "blocks": [
+        { "type": "objection", "settings": { "profile": "Grip", "question": "Will it affect their play?", "proof": "\u201CCotton liners made my daughter\u2019s hands slippery inside the glove and it affected her grip. DRYE fit tight and didn\u2019t slip.\u201D", "who": "Eric Dyke \u00B7 hockey parent" } },
+        { "type": "objection", "settings": { "profile": "Durability", "question": "Will the seams hold?", "proof": "\u201CSix ice times a week.\u201D", "who": "Eric Dyke \u00B7 hockey parent" } },
+        { "type": "objection", "settings": { "profile": "Timeline", "question": "How fast does anything change?", "proof": "\u201CNo cream or prescription helped for years. His hands cleared after three ice times.\u201D", "who": "Adam Todd \u00B7 hockey parent" } },
+        { "type": "objection", "settings": { "profile": "Fit", "question": "Does it fit a child\u2019s hand?", "proof": "\u201CTen years old, travel team, severe eczema. His hands healed completely.\u201D", "who": "Allison M. Goldberg \u00B7 hockey parent" } },
+        { "type": "objection", "settings": { "profile": "Price", "question": "Why does it cost more than cotton gloves?" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

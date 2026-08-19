@@ -1,0 +1,32 @@
+/* drye-hockey-offer.css — price, guarantee, CTA. */
+
+.drye-hockey-offer { background: var(--bg-ink); color: var(--white-100); border-top: var(--border-base); }
+.drye-hockey-offer__grid { display: flex; flex-wrap: wrap; align-items: flex-start; gap: 28px; }
+.drye-hockey-offer__copy { flex: 1 1 320px; min-width: 280px; max-width: 520px; }
+.drye-hockey-offer__title { color: var(--white-100); max-width: 22ch; text-wrap: pretty; }
+.drye-hockey-offer__body { margin-top: 20px; max-width: 46ch; color: var(--white-075); line-height: var(--lh-body-mid); text-wrap: pretty; }
+
+.drye-hockey-offer__card {
+  flex: 1 1 300px;
+  min-width: 280px;
+  max-width: 420px;
+  padding: var(--card-pad);
+  border: 1px solid var(--white-030);
+}
+
+.drye-hockey-offer__pricerow { display: flex; align-items: baseline; flex-wrap: wrap; gap: 10px 16px; }
+
+/* Size, family and tracking come from base's .dryeNEW-stat-number. */
+.drye-hockey-offer__price { font-variant-numeric: tabular-nums; }
+
+.drye-hockey-offer__unit { color: var(--white-070); font-size: var(--fs-body-sm); }
+.drye-hockey-offer__math { margin: 18px 0 0; padding-top: 16px; border-top: 1px solid var(--white-020); color: var(--white-075); line-height: var(--lh-body-mid); }
+.drye-hockey-offer__cta { margin-top: 22px; }
+.drye-hockey-offer__sizeguide { margin-top: 18px; padding-top: 14px; border-top: 1px solid var(--white-015); }
+.drye-hockey-offer__sizeguide summary { display: flex; align-items: center; justify-content: space-between; cursor: pointer; color: var(--sage); font-size: var(--fs-caption); font-weight: var(--fw-semibold); list-style: none; }
+.drye-hockey-offer__sizeguide summary::-webkit-details-marker { display: none; }
+.drye-hockey-offer__sizeguide-body { margin-top: 12px; color: var(--white-070); font-size: var(--fs-body-sm); line-height: var(--lh-body-mid); }
+
+@media (min-width: 768px) {
+  .drye-hockey-offer__grid { gap: var(--grid-gap-64); }
+}

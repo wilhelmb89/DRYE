@@ -1,0 +1,80 @@
+{{ 'drye-b2b-lp-base.css' | asset_url | stylesheet_tag }}
+
+{{ 'drye-hockey-shared.css' | asset_url | stylesheet_tag }}
+{{ 'drye-hockey-lp.js' | asset_url | script_tag }}
+{{ 'drye-hockey-how-it-works.css' | asset_url | stylesheet_tag }}
+
+{%- liquid
+  assign ss = section.settings
+-%}
+
+<section class="dryeNEW-section drye-hockey-hiw" id="{{ ss.anchor_id | default: 'how-it-works' }}" data-drye-section="hockey-hiw">
+  <div class="dryeNEW-container">
+    <div class="drye-hockey-hiw__head">
+      {%- if ss.eyebrow != blank -%}
+        <span class="dryeNEW-micro drye-hockey-hiw__eyebrow">{{ ss.eyebrow | escape }}</span>
+      {%- endif -%}
+      {%- if ss.patent != blank -%}
+        <span class="dryeNEW-micro drye-hockey-hiw__patent">{{ ss.patent | escape }}</span>
+      {%- endif -%}
+    </div>
+
+    <h2 class="dryeNEW-h2 drye-hockey-hiw__title">{{ ss.heading }}</h2>
+
+    <div class="drye-hockey-hiw__grid">
+      {%- for block in section.blocks -%}
+        <div class="drye-hockey-hiw__card dryeNEW-reveal dryeNEW-rd{{ forloop.index }}" {{ block.shopify_attributes }}>
+          <div class="drye-hockey-hiw__card-head">
+            <span class="drye-hockey-hiw__num">{{ forloop.index | prepend: '0' | slice: -2, 2 }}</span>
+            <span class="drye-hockey-hiw__step">{{ block.settings.step }}</span>
+          </div>
+
+          <div class="drye-hockey-hiw__figure">
+            {%- if block.settings.figure != blank -%}
+              {{ block.settings.figure | image_url: width: 900 | image_tag: loading: 'lazy', sizes: '(min-width: 768px) 33vw, 100vw', alt: block.settings.step }}
+            {%- endif -%}
+          </div>
+
+          {%- if block.settings.note != blank -%}
+            <p class="drye-hockey-hiw__note">{{ block.settings.note | escape }}</p>
+          {%- endif -%}
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "drye-Hockey Steps",
+  "tag": "section",
+  "class": "shopify-section",
+  "settings": [
+    { "type": "text", "id": "anchor_id", "label": "Anchor id", "default": "how-it-works" },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Asymmetric layering" },
+    { "type": "text", "id": "patent", "label": "Right-hand micro", "default": "Patent pending · SE 2615359-3" },
+    { "type": "html", "id": "heading", "label": "Headline", "default": "How it works" }
+  ],
+  "blocks": [
+    {
+      "type": "step",
+      "name": "Step",
+      "settings": [
+        { "type": "text", "id": "step", "label": "Step headline" },
+        { "type": "image_picker", "id": "figure", "label": "Figure (3:2, transparent PNG or SVG)" },
+        { "type": "text", "id": "note", "label": "Under-figure micro" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "drye-Hockey Steps",
+      "blocks": [
+        { "type": "step", "settings": { "step": "5\u201310 min after glove use", "note": "Inner \u00B7 polypropylene" } },
+        { "type": "step", "settings": { "step": "Material starts routing", "note": "Inner \u00B7 polypropylene" } },
+        { "type": "step", "settings": { "step": "Material starts storing sweat into small pockets", "note": "Outer \u00B7 lyocell" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

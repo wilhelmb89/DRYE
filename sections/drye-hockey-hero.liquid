@@ -1,0 +1,79 @@
+{{ 'drye-b2b-lp-base.css' | asset_url | stylesheet_tag }}
+
+{{ 'drye-hockey-hero.css' | asset_url | stylesheet_tag }}
+
+{%- liquid
+  assign ss = section.settings
+-%}
+
+<section class="dryeNEW-section drye-hockey-hero" id="{{ ss.anchor_id | default: 'hero' }}" data-drye-section="hockey-hero">
+  {%- if ss.image_desktop != blank -%}
+    <div class="drye-hockey-hero__media drye-hockey-hero__media--desktop">
+      {{ ss.image_desktop | image_url: width: 2400 | image_tag: sizes: '100vw', loading: 'eager', fetchpriority: 'high', alt: ss.image_alt }}
+    </div>
+  {%- endif -%}
+
+  {%- if ss.image_mobile != blank -%}
+    <div class="drye-hockey-hero__media drye-hockey-hero__media--mobile">
+      {{ ss.image_mobile | image_url: width: 1200 | image_tag: sizes: '100vw', loading: 'eager', fetchpriority: 'high', alt: ss.image_alt }}
+    </div>
+  {%- endif -%}
+
+  <div class="dryeNEW-container drye-hockey-hero__inner">
+    <div class="drye-hockey-hero__grid">
+      <div class="drye-hockey-hero__copy">
+        <h1 class="dryeNEW-h1 drye-hockey-hero__title">{{ ss.heading }}</h1>
+        {%- if ss.lead != blank -%}
+          <p class="dryeNEW-body drye-hockey-hero__lead">{{ ss.lead }}</p>
+        {%- endif -%}
+      </div>
+
+      <div class="drye-hockey-hero__stack">
+        <div role="img" aria-label="{{ ss.stack_alt | escape }}">
+          <div class="drye-hockey-hero__box">
+            <span class="drye-hockey-hero__label">{{ ss.layer_top | escape }}</span>
+          </div>
+
+          <span class="drye-hockey-hero__arrows" aria-hidden="true"><span></span><span></span><span></span></span>
+
+          <div class="drye-hockey-hero__box drye-hockey-hero__box--layer">
+            <span class="drye-hockey-hero__label drye-hockey-hero__label--layer">{{ ss.layer_mid | escape }}</span>
+            <span class="drye-hockey-hero__note drye-hockey-hero__note--layer">{{ ss.layer_mid_sub | escape }}</span>
+          </div>
+
+          <span class="drye-hockey-hero__arrows" aria-hidden="true"><span></span><span></span><span></span></span>
+
+          <div class="drye-hockey-hero__box">
+            <span class="drye-hockey-hero__label">{{ ss.layer_bottom | escape }}</span>
+            <span class="drye-hockey-hero__note">{{ ss.layer_bottom_sub | escape }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "drye-Hockey Hero",
+  "tag": "section",
+  "class": "shopify-section",
+  "settings": [
+    { "type": "text", "id": "anchor_id", "label": "Anchor id", "default": "hero" },
+    { "type": "html", "id": "heading", "label": "Headline", "default": "The sweat goes out through the layer." },
+    { "type": "html", "id": "lead", "label": "Sub line", "default": "Not back into their hands." },
+    { "type": "header", "content": "Photo" },
+    { "type": "image_picker", "id": "image_desktop", "label": "Desktop image (16:9)" },
+    { "type": "image_picker", "id": "image_mobile", "label": "Mobile image (9:16)" },
+    { "type": "text", "id": "image_alt", "label": "Image alt", "default": "A player pulling a hockey glove on over the DRYE liner" },
+    { "type": "header", "content": "Layer stack" },
+    { "type": "text", "id": "stack_alt", "label": "Diagram alt", "default": "The hockey glove seals; DRYE sits between the glove and the skin" },
+    { "type": "text", "id": "layer_top", "label": "Top layer", "default": "Hockey glove — sealed" },
+    { "type": "text", "id": "layer_mid", "label": "Middle layer", "default": "DRYE · Asymmetric layering" },
+    { "type": "text", "id": "layer_mid_sub", "label": "Middle sub", "default": "one layer, one direction — 0.4 mm" },
+    { "type": "text", "id": "layer_bottom", "label": "Bottom layer", "default": "Skin" },
+    { "type": "text", "id": "layer_bottom_sub", "label": "Bottom sub", "default": "— where the sweat starts" }
+  ],
+  "presets": [{ "name": "drye-Hockey Hero" }]
+}
+{% endschema %}

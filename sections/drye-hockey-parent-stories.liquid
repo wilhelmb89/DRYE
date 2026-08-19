@@ -1,0 +1,136 @@
+{{ 'drye-b2b-lp-base.css' | asset_url | stylesheet_tag }}
+
+{{ 'drye-hockey-shared.css' | asset_url | stylesheet_tag }}
+{{ 'drye-hockey-lp.js' | asset_url | script_tag }}
+{{ 'drye-hockey-parent-stories.css' | asset_url | stylesheet_tag }}
+
+{%- comment -%}
+  Verified parent stories. One slide per block. Quotes are verbatim with written
+  permission on file — never paraphrase them into DRYE's own voice.
+  The pendulum rows are RELATIVE positions, not measured values. The disclaimer
+  under it is required; do not remove it.
+{%- endcomment -%}
+
+<section class="dryeNEW-section drye-hockey-stories" id="{{ section.settings.anchor_id | default: 'parent-stories' }}" data-drye-section="hockey-stories">
+  <div class="dryeNEW-container">
+    <div class="drye-hockey-stories__wrap" data-drye-carousel>
+      <div class="drye-hockey-stories__view">
+        <div class="drye-hockey-stories__track" data-drye-carousel-track>
+          {%- for block in section.blocks -%}
+            {%- if block.type == 'story' -%}
+              <div class="drye-hockey-stories__slide" {{ block.shopify_attributes }}>
+                <div class="drye-hockey-stories__copy">
+                  {%- if block.settings.when != blank -%}
+                    <span class="dryeNEW-micro drye-hockey-stories__when">{{ block.settings.when | escape }}</span>
+                  {%- endif -%}
+                  <h2 class="dryeNEW-h2 drye-hockey-stories__head">{{ block.settings.head }}</h2>
+                  {%- if block.settings.body != blank -%}
+                    <div class="dryeNEW-body drye-hockey-stories__body">{{ block.settings.body }}</div>
+                  {%- endif -%}
+                  {%- if block.settings.punch != blank -%}
+                    <figure class="drye-hockey-stories__card">
+                      <blockquote class="dryeNEW-h3 drye-hockey-stories__punch">{{ block.settings.punch }}</blockquote>
+                      <figcaption class="dryeNEW-body--caption drye-hockey-stories__who">{{ block.settings.who | escape }}</figcaption>
+                    </figure>
+                  {%- endif -%}
+                </div>
+
+                <div class="drye-hockey-stories__media">
+                  {%- if block.settings.image != blank -%}
+                    {{ block.settings.image | image_url: width: 900 | image_tag: loading: 'lazy', sizes: '(min-width: 768px) 460px, 100vw', alt: block.settings.image_alt }}
+                  {%- endif -%}
+                </div>
+              </div>
+            {%- endif -%}
+          {%- endfor -%}
+        </div>
+      </div>
+
+      <button type="button" class="drye-hockey-nav drye-hockey-nav--prev" data-drye-carousel-prev aria-label="Previous story">&larr;</button>
+      <button type="button" class="drye-hockey-nav drye-hockey-nav--next" data-drye-carousel-next aria-label="Next story">&rarr;</button>
+    </div>
+
+    {% render 'drye-hockey-swipe-hint' %}
+
+    {%- assign pend_rows = section.blocks | where: 'type', 'pendulum' -%}
+    {%- if pend_rows.size > 0 -%}
+      <div class="drye-hockey-pend">
+        <div class="drye-hockey-pend__head">
+          <span class="drye-hockey-pend__title">{{ section.settings.pend_title | escape }}</span>
+          <span class="drye-hockey-pend__key">
+            <span class="drye-hockey-pend__key--wet"><i></i>{{ section.settings.pend_key_a | escape }}</span>
+            <span class="drye-hockey-pend__key--drye"><i></i>{{ section.settings.pend_key_b | escape }}</span>
+          </span>
+        </div>
+
+        {%- for block in pend_rows -%}
+          <div class="drye-hockey-pend__row" {{ block.shopify_attributes }}>
+            <span class="drye-hockey-pend__label">{{ block.settings.label | escape }}</span>
+            <span class="drye-hockey-pend__scale" role="img" aria-label="{{ block.settings.label | escape }}: wet glove {{ block.settings.wet }} percent, with DRYE {{ block.settings.drye }} percent, relative">
+              <span class="drye-hockey-pend__dot drye-hockey-pend__dot--wet" style="left: {{ block.settings.wet }}%"></span>
+              <span class="drye-hockey-pend__dot drye-hockey-pend__dot--drye" style="left: {{ block.settings.drye }}%"></span>
+            </span>
+          </div>
+        {%- endfor -%}
+
+        <p class="dryeNEW-body--caption drye-hockey-pend__note">{{ section.settings.pend_note }}</p>
+      </div>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "drye-Hockey Parents",
+  "tag": "section",
+  "class": "shopify-section",
+  "settings": [
+    { "type": "text", "id": "anchor_id", "label": "Anchor id", "default": "parent-stories" },
+    { "type": "header", "content": "Pendulum" },
+    { "type": "text", "id": "pend_title", "label": "Pendulum title", "default": "Same glove, same session" },
+    { "type": "text", "id": "pend_key_a", "label": "Key A", "default": "Wet glove" },
+    { "type": "text", "id": "pend_key_b", "label": "Key B", "default": "With DRYE" },
+    { "type": "richtext", "id": "pend_note", "label": "Disclaimer (required)", "default": "<p>Positions are relative, not measured values \u2014 based on what users describe in interviews and field studies.</p>" }
+  ],
+  "blocks": [
+    {
+      "type": "story",
+      "name": "Story",
+      "settings": [
+        { "type": "text", "id": "when", "label": "Eyebrow" },
+        { "type": "html", "id": "head", "label": "Headline (their quote)" },
+        { "type": "richtext", "id": "body", "label": "Body (their words)" },
+        { "type": "text", "id": "punch", "label": "Card quote" },
+        { "type": "text", "id": "who", "label": "Attribution" },
+        { "type": "image_picker", "id": "image", "label": "Photo (4:3)" },
+        { "type": "text", "id": "image_alt", "label": "Photo alt" }
+      ]
+    },
+    {
+      "type": "pendulum",
+      "name": "Pendulum row",
+      "settings": [
+        { "type": "text", "id": "label", "label": "Label" },
+        { "type": "range", "id": "wet", "label": "Wet glove position", "min": 0, "max": 100, "step": 1, "unit": "%", "default": 22 },
+        { "type": "range", "id": "drye", "label": "With DRYE position", "min": 0, "max": 100, "step": 1, "unit": "%", "default": 84 }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "drye-Hockey Parents",
+      "blocks": [
+        { "type": "story", "settings": { "when": "Hockey parent \u00B7 after 3 ice times", "head": "\u201CThree ice times, and his hands are completely cleared up.\u201D", "punch": "Absolute game changer.", "who": "Adam Todd \u00B7 hockey parent \u00B7 January 2026" } },
+        { "type": "story", "settings": { "when": "Hockey parent \u00B7 after 4 weeks", "head": "\u201CHe was embarrassed at school. His hands have completely healed.\u201D", "punch": "They have truly been a game changer.", "who": "Allison M. Goldberg \u00B7 hockey parent \u00B7 October 2025" } },
+        { "type": "story", "settings": { "when": "Hockey parent \u00B7 six times a week", "head": "\u201CShe wore the first pair out. That\u2019s why I ordered again.\u201D", "punch": "Thanks for making those.", "who": "Eric Dyke \u00B7 hockey parent \u00B7 February 2026" } },
+        { "type": "story", "settings": { "when": "Hockey parent \u00B7 one year on", "head": "\u201CThey have helped with the eczema quite a bit.\u201D", "punch": "Fit really well.", "who": "Siobhan Brown \u00B7 hockey parent \u00B7 March 2026" } },
+        { "type": "pendulum", "settings": { "label": "Grip", "wet": 26, "drye": 86 } },
+        { "type": "pendulum", "settings": { "label": "Comfort", "wet": 22, "drye": 80 } },
+        { "type": "pendulum", "settings": { "label": "Skin", "wet": 15, "drye": 72 } },
+        { "type": "pendulum", "settings": { "label": "Smell", "wet": 12, "drye": 70 } },
+        { "type": "pendulum", "settings": { "label": "Routine", "wet": 20, "drye": 88 } }
+      ]
+    }
+  ]
+}
+{% endschema %}

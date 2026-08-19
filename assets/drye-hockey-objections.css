@@ -1,0 +1,34 @@
+/* drye-hockey-objections.css — FAQ rail. Rail + nav live in drye-hockey-shared.css. */
+
+.drye-hockey-obj { position: relative; overflow: hidden; }
+.drye-hockey-obj__bg { position: absolute; inset: 0; }
+.drye-hockey-obj__bg img { width: 100%; height: 100%; object-fit: cover; }
+
+.drye-hockey-obj__scrim { position: absolute; inset: 0; }
+.drye-hockey-obj__scrim--ink { background: linear-gradient(to bottom, rgba(30,58,76,0.72) 0%, rgba(30,58,76,0.58) 45%, rgba(30,58,76,0.78) 100%); }
+.drye-hockey-obj__scrim--top { background: linear-gradient(to bottom, var(--bg) 0%, rgba(255,255,255,0.86) 8%, rgba(255,255,255,0.45) 20%, rgba(255,255,255,0) 44%); }
+.drye-hockey-obj__scrim--side { background: linear-gradient(to right, var(--bg) 0%, rgba(255,255,255,0.78) 28%, rgba(255,255,255,0.44) 56%, rgba(255,255,255,0) 86%); }
+
+.drye-hockey-obj__head { position: relative; text-align: center; }
+.drye-hockey-obj__title { color: var(--deep); max-width: 22ch; margin-inline: auto; text-wrap: pretty; }
+.drye-hockey-obj__rail { position: relative; z-index: var(--z-base); margin-top: var(--space-24); }
+
+.drye-hockey-obj__card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-12);
+  width: clamp(268px, 78vw, 320px);
+  padding: var(--card-pad);
+  background: var(--bg);
+  border: var(--border-base);
+}
+
+.drye-hockey-obj__prof { color: var(--emerald); }
+.drye-hockey-obj__q { color: var(--deep); text-wrap: pretty; }
+.drye-hockey-obj__a { color: var(--body); text-wrap: pretty; }
+.drye-hockey-obj__proof { font-style: italic; color: var(--muted); text-wrap: pretty; }
+.drye-hockey-obj__who { margin-top: auto; padding-top: var(--space-14); border-top: var(--border-base); color: var(--caption); }
+
+@media (min-width: 768px) {
+  .drye-hockey-obj__card { width: 320px; padding: 28px; }
+}

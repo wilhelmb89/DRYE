@@ -1,0 +1,60 @@
+{{ 'drye-b2b-lp-base.css' | asset_url | stylesheet_tag }}
+
+{{ 'drye-hockey-peer-voices.css' | asset_url | stylesheet_tag }}
+
+{%- comment -%}
+  Peer recognition, problem state. Blocks are quotes in the customer's own words —
+  never solution-state testimonials, and never a cohort other than hockey.
+{%- endcomment -%}
+
+<section class="drye-hockey-voices" data-drye-section="hockey-voices">
+  <div class="drye-hockey-voices__track">
+    {%- for pass in (1..2) -%}
+      <div class="drye-hockey-voices__run" {% if pass == 2 %}aria-hidden="true"{% endif %}>
+        {%- for block in section.blocks -%}
+          <blockquote class="drye-hockey-voices__item" {{ block.shopify_attributes }}>
+            <p class="dryeNEW-body drye-hockey-voices__quote">{{ block.settings.quote }}</p>
+            <span class="drye-hockey-voices__meta">
+              <cite class="drye-hockey-voices__who">{{ block.settings.name | escape }}</cite>
+              <span class="drye-hockey-voices__role">{{ block.settings.role | escape }}</span>
+            </span>
+          </blockquote>
+        {%- endfor -%}
+      </div>
+    {%- endfor -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "drye-Hockey Voices",
+  "tag": "section",
+  "class": "shopify-section",
+  "settings": [],
+  "blocks": [
+    {
+      "type": "voice",
+      "name": "Quote",
+      "settings": [
+        { "type": "textarea", "id": "quote", "label": "Quote (verbatim)" },
+        { "type": "text", "id": "name", "label": "Name" },
+        { "type": "text", "id": "role", "label": "Role", "default": "Hockey parent" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "drye-Hockey Voices",
+      "blocks": [
+        { "type": "voice", "settings": { "quote": "\u201CMy son has been struggling with severe dry hands because of his hockey gloves for the past few years. No cream or prescription has helped.\u201D", "name": "Adam Todd", "role": "Hockey parent" } },
+        { "type": "voice", "settings": { "quote": "\u201CHe was embarrassed at school and had trouble playing comfortably.\u201D", "name": "Allison M. Goldberg", "role": "Hockey parent" } },
+        { "type": "voice", "settings": { "quote": "\u201CMy daughter has severe eczema on her hands and plays a lot of ice hockey. She needed some relief from her hockey gloves.\u201D", "name": "Eric Dyke", "role": "Hockey parent" } },
+        { "type": "voice", "settings": { "quote": "\u201CHe loves to play hockey and lacrosse but the gloves make his eczema worse.\u201D", "name": "Siobhan Brown", "role": "Hockey parent" } },
+        { "type": "voice", "settings": { "quote": "\u201CMy hands typically get an inflamed rash after wearing hockey gloves. The dermatologist called it contact dermatitis.\u201D", "name": "Chris Pickett", "role": "Hockey player, Dallas" } },
+        { "type": "voice", "settings": { "quote": "\u201CMy 11-year-old daughter plays hockey and has bad eczema from the gloves.\u201D", "name": "Krista Seebaran", "role": "Hockey parent" } },
+        { "type": "voice", "settings": { "quote": "\u201CEczema mostly on the hands from the hockey gloves. The glove liners we tried affected his shot.\u201D", "name": "Iva Reid", "role": "Hockey parent" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,45 @@
+/* drye-hockey-gallery.css — portrait rail with corner tags. */
+
+.drye-hockey-gallery { background: var(--bg-soft); }
+.drye-hockey-gallery__eyebrow { color: var(--emerald); }
+.drye-hockey-gallery__title { color: var(--deep); max-width: 24ch; text-wrap: pretty; }
+.drye-hockey-gallery__intro { margin-top: var(--space-14); max-width: 52ch; color: var(--muted); line-height: var(--lh-body-mid); text-wrap: pretty; }
+.drye-hockey-gallery__rail { margin-top: var(--space-28); }
+
+.drye-hockey-gallery__fig {
+  position: relative;
+  width: clamp(196px, 62vw, 232px);
+  aspect-ratio: 3 / 4;
+  margin: 0;
+  overflow: hidden;
+  background: #E7EBEF;
+}
+
+.drye-hockey-gallery__fig img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+
+.drye-hockey-gallery__tag {
+  position: absolute;
+  left: var(--space-12);
+  top: var(--space-12);
+  z-index: 2;
+  padding: var(--space-5) var(--space-9);
+  background: rgba(30, 58, 76, 0.86);
+  font-size: var(--fs-micro-3);
+  font-weight: var(--fw-semibold);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--white-100);
+}
+
+.drye-hockey-gallery__cap {
+  position: absolute;
+  inset: auto 0 0 0;
+  padding: 44px 14px 14px;
+  background: linear-gradient(to top, rgba(30,58,76,0.92) 0%, rgba(30,58,76,0.66) 55%, rgba(30,58,76,0) 100%);
+  color: var(--white-100);
+  font-size: var(--fs-caption);
+  line-height: 1.45;
+  text-wrap: pretty;
+}
+
+.drye-hockey-gallery__src { margin-top: var(--space-14); color: var(--caption); }

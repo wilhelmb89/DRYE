@@ -1,0 +1,95 @@
+/* drye-hockey-how-it-works.css — three arrow-shaped steps.
+   Reveal is base.css .dryeNEW-reveal + .dryeNEW-rd1/2/3. Layout only here. */
+
+.drye-hockey-hiw__head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--space-16);
+  padding-bottom: var(--space-14);
+  border-bottom: var(--border-base);
+}
+
+.drye-hockey-hiw__eyebrow,
+.drye-hockey-hiw__patent { margin-bottom: 0; }
+.drye-hockey-hiw__eyebrow { color: var(--emerald); }
+.drye-hockey-hiw__title { margin-top: var(--space-28); color: var(--deep); }
+
+.drye-hockey-hiw__grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--space-6);
+  margin-top: var(--space-32);
+}
+
+.drye-hockey-hiw__card {
+  display: flex;
+  flex-direction: column;
+  padding-inline: var(--card-pad-x);
+  background: #F1F4F7;
+}
+
+.drye-hockey-hiw__card-head {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-10);
+  min-height: 72px;
+  padding: var(--space-14) var(--space-4) var(--space-10);
+}
+
+.drye-hockey-hiw__num {
+  font-family: var(--font-display);
+  font-size: var(--fs-stat-sm);
+  font-weight: var(--fw-semibold);
+  letter-spacing: -0.01em;
+  color: var(--emerald);
+}
+
+.drye-hockey-hiw__step {
+  font-family: var(--font-display);
+  font-size: var(--fs-sub-h3);
+  font-weight: var(--fw-semibold);
+  letter-spacing: var(--ls-tight-h3);
+  line-height: var(--lh-heading-tight);
+  color: var(--deep);
+  text-wrap: pretty;
+}
+
+.drye-hockey-hiw__figure {
+  position: relative;
+  aspect-ratio: 3 / 2;
+  margin-bottom: var(--space-16);
+  background: var(--bg-soft);
+  overflow: hidden;
+}
+
+.drye-hockey-hiw__figure img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; }
+
+.drye-hockey-hiw__note {
+  padding: 0 var(--space-4) var(--space-16);
+  font-size: var(--fs-micro-4);
+  font-weight: var(--fw-semibold);
+  letter-spacing: var(--ls-micro-wide);
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+@media (min-width: 768px) {
+  .drye-hockey-hiw__grid { grid-template-columns: repeat(auto-fit, minmax(248px, 1fr)); }
+
+  /* Arrow shape only when the cards sit side by side. */
+  .drye-hockey-hiw__card {
+    padding-inline: var(--card-pad-x);
+    clip-path: polygon(0 0, calc(100% - 22px) 0, 100% 50%, calc(100% - 22px) 100%, 0 100%, 22px 50%);
+  }
+
+  .drye-hockey-hiw__card:first-child {
+    padding-left: var(--space-6);
+    clip-path: polygon(0 0, calc(100% - 22px) 0, 100% 50%, calc(100% - 22px) 100%, 0 100%);
+  }
+
+  .drye-hockey-hiw__card:last-child {
+    padding-right: var(--space-6);
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%, 22px 50%);
+  }
+}

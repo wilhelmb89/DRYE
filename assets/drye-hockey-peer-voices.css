@@ -1,0 +1,56 @@
+/* drye-hockey-peer-voices.css — problem-state quote marquee. */
+
+.drye-hockey-voices {
+  padding-block: var(--space-28);
+  border-block: var(--border-base);
+  overflow: hidden;
+}
+
+.drye-hockey-voices__track {
+  display: flex;
+  width: max-content;
+  align-items: stretch;
+  animation: drye-hockey-marquee 34s linear infinite;
+}
+
+.drye-hockey-voices:hover .drye-hockey-voices__track { animation-play-state: paused; }
+
+.drye-hockey-voices__run { display: flex; align-items: stretch; flex: 0 0 auto; }
+
+.drye-hockey-voices__item {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: var(--space-18);
+  flex: 0 0 auto;
+  width: 70vw;
+  max-width: 290px;
+  padding-inline: var(--space-18);
+  border-right: var(--border-base);
+}
+
+.drye-hockey-voices__quote { color: var(--deep); line-height: var(--lh-body-tight); text-wrap: pretty; }
+.drye-hockey-voices__meta { display: flex; flex-direction: column; gap: var(--space-3); }
+.drye-hockey-voices__who { font-size: var(--fs-caption); font-weight: var(--fw-semibold); color: var(--emerald); }
+
+.drye-hockey-voices__role {
+  font-size: var(--fs-micro-3);
+  font-weight: var(--fw-semibold);
+  letter-spacing: var(--ls-micro-wide);
+  text-transform: uppercase;
+  color: var(--caption);
+}
+
+@media (min-width: 768px) {
+  .drye-hockey-voices { padding-block: var(--space-40); }
+  .drye-hockey-voices__item { width: 26vw; max-width: 360px; padding-inline: var(--space-28); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .drye-hockey-voices__track { animation: none !important; }
+}
+
+@keyframes drye-hockey-marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}

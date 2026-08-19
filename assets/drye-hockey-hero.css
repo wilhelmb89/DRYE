@@ -1,0 +1,100 @@
+/* drye-hockey-hero.css — hero photo + layer stack. Base handles type/tokens. */
+
+.drye-hockey-hero {
+  position: relative;
+  display: flex;
+  align-items: center;
+  min-height: 177vw;
+  padding-block: var(--section-pad-y);
+  background: var(--bg-ink);
+  overflow: hidden;
+}
+
+.drye-hockey-hero__media,
+.drye-hockey-hero__media img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.drye-hockey-hero__media--desktop { display: none; }
+.drye-hockey-hero__inner { position: relative; width: 100%; }
+
+.drye-hockey-hero__grid {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: var(--grid-gap-28);
+}
+
+.drye-hockey-hero__copy { flex: 1 1 460px; min-width: 300px; max-width: 640px; }
+.drye-hockey-hero__title { color: var(--white-100); text-wrap: balance; }
+
+.drye-hockey-hero__lead {
+  margin-top: var(--space-16);
+  max-width: 44ch;
+  color: var(--white-080);
+  line-height: var(--lh-body-tight);
+  text-wrap: pretty;
+}
+
+.drye-hockey-hero__stack { flex: 1 1 360px; min-width: 280px; max-width: 460px; }
+
+.drye-hockey-hero__box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-10);
+  flex-wrap: wrap;
+  min-height: 56px;
+  padding: var(--space-14) var(--space-18);
+  background: #16263A;
+  text-align: center;
+}
+
+.drye-hockey-hero__box--layer {
+  align-items: baseline;
+  min-height: 0;
+  padding: var(--space-10) var(--space-14);
+  background: transparent;
+  border: 1px dashed var(--sage);
+  column-gap: var(--space-10);
+  row-gap: var(--space-2);
+}
+
+.drye-hockey-hero__label {
+  font-size: var(--fs-micro-4);
+  font-weight: var(--fw-semibold);
+  letter-spacing: var(--ls-micro-wide);
+  text-transform: uppercase;
+  color: var(--white-100);
+}
+
+.drye-hockey-hero__label--layer { color: var(--sage); }
+.drye-hockey-hero__note { font-size: var(--fs-body-sm); line-height: 1.4; color: var(--white-080); }
+.drye-hockey-hero__note--layer { font-style: italic; }
+
+.drye-hockey-hero__arrows {
+  display: flex;
+  justify-content: center;
+  gap: var(--space-48);
+  padding-block: var(--space-9);
+}
+
+.drye-hockey-hero__arrows span {
+  width: 0;
+  height: 0;
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
+  border-bottom: 7px solid var(--sage);
+}
+
+@media (min-width: 768px) {
+  .drye-hockey-hero { min-height: 68vh; }
+  .drye-hockey-hero__media--desktop { display: block; }
+  .drye-hockey-hero__media--mobile { display: none; }
+  .drye-hockey-hero__grid { gap: var(--grid-gap-56); }
+  .drye-hockey-hero__arrows { gap: var(--space-80); }
+}

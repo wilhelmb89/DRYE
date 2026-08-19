@@ -1,0 +1,62 @@
+{{ 'drye-b2b-lp-base.css' | asset_url | stylesheet_tag }}
+
+{{ 'drye-hockey-timeline.css' | asset_url | stylesheet_tag }}
+
+<section class="dryeNEW-section drye-hockey-tl-section" id="{{ section.settings.anchor_id | default: 'timeline' }}" data-drye-section="hockey-timeline">
+  <div class="dryeNEW-container">
+    <div class="drye-hockey-tl__wrap">
+      <div class="drye-hockey-tl">
+        {%- if section.settings.silhouette != blank -%}
+          <span class="drye-hockey-tl__kid" aria-hidden="true">
+            {{ section.settings.silhouette | image_url: width: 700 | image_tag: loading: 'lazy', alt: '' }}
+          </span>
+        {%- endif -%}
+
+        {%- for block in section.blocks -%}
+          <span class="drye-hockey-tl__chev" aria-hidden="true">
+            <svg width="18" height="34" viewBox="0 0 18 34" fill="none">
+              <path d="M2 2 L14 17 L2 32" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </span>
+
+          <div class="drye-hockey-tl__item" {{ block.shopify_attributes }}>
+            <p class="drye-hockey-tl__when">{{ block.settings.when | escape }}</p>
+            <p class="dryeNEW-body drye-hockey-tl__txt">{{ block.settings.text }}</p>
+          </div>
+        {%- endfor -%}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "drye-Hockey Timeline",
+  "tag": "section",
+  "class": "shopify-section",
+  "settings": [
+    { "type": "text", "id": "anchor_id", "label": "Anchor id", "default": "timeline" },
+    { "type": "image_picker", "id": "silhouette", "label": "Silhouette (trimmed, transparent)" }
+  ],
+  "blocks": [
+    {
+      "type": "stage",
+      "name": "Stage",
+      "settings": [
+        { "type": "text", "id": "when", "label": "When" },
+        { "type": "richtext", "id": "text", "label": "What happens" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "drye-Hockey Timeline",
+      "blocks": [
+        { "type": "stage", "settings": { "when": "Week 1" } },
+        { "type": "stage", "settings": { "when": "Month 1" } },
+        { "type": "stage", "settings": { "when": "Season 1" } }
+      ]
+    }
+  ]
+}
+{% endschema %}
