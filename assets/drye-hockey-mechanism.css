@@ -12,12 +12,23 @@
   flex: 1 1 380px;
   min-width: 280px;
   max-width: 600px;
+  /* Column, because the legend is a sibling that follows the stage in the markup.
+     It used to be absolutely positioned inside the stage; as an outside sibling
+     that anchored it to the section instead and it landed on the copy column. */
   display: flex;
-  align-items: center;
+  flex-direction: column;
   justify-content: center;
 }
 
-.drye-hockey-mech__stage { position: relative; width: 100%; max-width: 575px; aspect-ratio: 1 / 1; }
+/* --shift moves the glove AND the sliding hand together, so the artwork can clear
+   the copy without breaking the hand's slide-in transform. Set per section. */
+.drye-hockey-mech__stage {
+  position: relative;
+  width: 100%;
+  max-width: 575px;
+  aspect-ratio: 1 / 1;
+  transform: translateX(var(--shift, 0));
+}
 .drye-hockey-mech__handbox { position: absolute; left: 0; top: 0; bottom: 0; width: 30%; overflow: hidden; }
 /* max-width: none is required — base.css sets img { max-width: 100% }, which would
    clamp 278% to the handbox width and render a whole second hand outside the glove. */
@@ -50,13 +61,14 @@
 }
 
 /* --- legend --- */
+/* Static flow under the figure at every width — no absolute positioning, so it
+   cannot drift onto the copy no matter where the markup puts it. */
 .drye-hockey-mech__legend {
-  position: absolute;
-  left: 0;
-  bottom: 15%;
   display: flex;
-  flex-direction: column;
-  gap: var(--space-10);
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: var(--space-8) var(--space-16);
+  margin-top: var(--space-14);
   pointer-events: none;
 }
 
@@ -223,6 +235,7 @@
 }
 
 @media (min-width: 768px) {
+  .drye-hockey-mech__legend { gap: var(--space-10) var(--space-20); margin-top: var(--space-18); }
   .drye-hockey-mech__grid { gap: var(--grid-gap-56); }
   .drye-hockey-mech__time { font-size: 42px; }
   .drye-hockey-mech__term { font-size: 32px; }
