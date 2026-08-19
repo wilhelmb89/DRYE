@@ -99,6 +99,76 @@
       ],
       "settings": {}
     },
+    "mech": {
+      "type": "drye-hockey-mechanism",
+      "blocks": {
+        "term_1": {
+          "type": "term",
+          "settings": {
+            "term": "1. Heat",
+            "lead": "<p>Sealed. Nothing carries it away.</p>",
+            "is_result": false
+          }
+        },
+        "term_2": {
+          "type": "term",
+          "settings": {
+            "term": "2. Trapped sweat",
+            "lead": "<p>Inside a sealed glove the space around the hand is saturated within the warm-up.</p>",
+            "is_result": false
+          }
+        },
+        "term_3": {
+          "type": "term",
+          "settings": {
+            "term": "3. Bacteria",
+            "lead": "<p>Warm and wet is the condition they do well in.</p>",
+            "is_result": false
+          }
+        },
+        "term_brRKin": {
+          "type": "term",
+          "settings": {
+            "term": "4. Friction",
+            "lead": "",
+            "is_result": false
+          }
+        },
+        "term_4": {
+          "type": "term",
+          "settings": {
+            "term": "Skin degradation",
+            "lead": "<p>It's called occlusion. Overhydrated. Soft, then raw.</p>",
+            "is_result": true
+          }
+        }
+      },
+      "block_order": [
+        "term_1",
+        "term_2",
+        "term_3",
+        "term_brRKin",
+        "term_4"
+      ],
+      "settings": {
+        "anchor_id": "mechanism",
+        "hand": "shopify://shop_images/hand-white.png",
+        "hand_alt": "A bare hand sliding into the glove",
+        "glove": "shopify://shop_images/hockey-glove-white.png",
+        "glove_alt": "Outline of a hockey glove",
+        "glove_mask": "shopify://shop_images/hockey-glove-fillmask.png",
+        "stage_shift": 0,
+        "callout": "Hockey glove",
+        "legend_1": "Heat",
+        "legend_2": "Trapped sweat",
+        "legend_3": "Bacteria",
+        "period_minutes": 20,
+        "period_count": 3,
+        "period_word": "Period",
+        "period_of": "of",
+        "eyebrow": "What occlusion is"
+      }
+    },
     "fails": {
       "type": "drye-hockey-fail-timeline",
       "blocks": {
@@ -181,76 +251,6 @@
         "mark_3": "2nd",
         "mark_4": "Horn",
         "build_caption": "Trapped sweat builds"
-      }
-    },
-    "mech": {
-      "type": "drye-hockey-mechanism",
-      "blocks": {
-        "term_1": {
-          "type": "term",
-          "settings": {
-            "term": "1. Heat",
-            "lead": "<p>Sealed. Nothing carries it away.</p>",
-            "is_result": false
-          }
-        },
-        "term_2": {
-          "type": "term",
-          "settings": {
-            "term": "2. Trapped sweat",
-            "lead": "<p>Inside a sealed glove the space around the hand is saturated within the warm-up.</p>",
-            "is_result": false
-          }
-        },
-        "term_3": {
-          "type": "term",
-          "settings": {
-            "term": "3. Bacteria",
-            "lead": "<p>Warm and wet is the condition they do well in.</p>",
-            "is_result": false
-          }
-        },
-        "term_brRKin": {
-          "type": "term",
-          "settings": {
-            "term": "4. Friction",
-            "lead": "",
-            "is_result": false
-          }
-        },
-        "term_4": {
-          "type": "term",
-          "settings": {
-            "term": "Skin degradation",
-            "lead": "<p>It's called occlusion. Overhydrated. Soft, then raw.</p>",
-            "is_result": true
-          }
-        }
-      },
-      "block_order": [
-        "term_1",
-        "term_2",
-        "term_3",
-        "term_brRKin",
-        "term_4"
-      ],
-      "settings": {
-        "anchor_id": "mechanism",
-        "hand": "shopify://shop_images/hand-white.png",
-        "hand_alt": "A bare hand sliding into the glove",
-        "glove": "shopify://shop_images/hockey-glove-white.png",
-        "glove_alt": "Outline of a hockey glove",
-        "glove_mask": "shopify://shop_images/hockey-glove-fillmask.png",
-        "stage_shift": 0,
-        "callout": "Hockey glove",
-        "legend_1": "Heat",
-        "legend_2": "Trapped sweat",
-        "legend_3": "Bacteria",
-        "period_minutes": 20,
-        "period_count": 3,
-        "period_word": "Period",
-        "period_of": "of",
-        "eyebrow": "What occlusion is"
       }
     },
     "clarity": {
@@ -745,8 +745,8 @@
   "order": [
     "hero",
     "voices",
-    "fails",
     "mech",
+    "fails",
     "clarity",
     "drye_research_video_full_76TKtF",
     "hiw",
