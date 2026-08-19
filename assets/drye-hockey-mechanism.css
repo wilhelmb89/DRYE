@@ -65,10 +65,10 @@
    cannot drift onto the copy no matter where the markup puts it. */
 .drye-hockey-mech__legend {
   display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  gap: var(--space-8) var(--space-16);
-  margin-top: var(--space-14);
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-10);
+  margin-top: var(--space-16);
   pointer-events: none;
 }
 
@@ -235,7 +235,7 @@
 }
 
 @media (min-width: 768px) {
-  .drye-hockey-mech__legend { gap: var(--space-10) var(--space-20); margin-top: var(--space-18); }
+  .drye-hockey-mech__legend { margin-top: var(--space-20); }
   .drye-hockey-mech__grid { gap: var(--grid-gap-56); }
   .drye-hockey-mech__time { font-size: 42px; }
   .drye-hockey-mech__term { font-size: 32px; }
