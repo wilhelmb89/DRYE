@@ -90,6 +90,14 @@
 
 .drye-hockey-mech__legend i { width: 8px; height: 8px; }
 
+/* Mobile: drop the legend clear of the glove and close the gap it left above the
+   copy column. bottom is measured from the stage, so a smaller value sits lower. */
+@media (max-width: 767px) {
+  .drye-hockey-mech__legend { bottom: 2%; }
+  .drye-hockey-mech__grid { gap: var(--space-8); }
+  .drye-hockey-mech { padding-bottom: var(--space-56); }
+}
+
 /* --- glove callout --- */
 .drye-hockey-mech__callout {
   position: absolute;
