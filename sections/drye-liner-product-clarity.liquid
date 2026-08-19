@@ -3,9 +3,17 @@
 {%- liquid
   assign ss = section.settings
 
+  # Video mode now has two states: one video, or a before/after pair. A pair needs
+  # both slots filled — a single video should stay full width, not sit next to a hole.
+  assign has_video_pair = false
   assign use_video = false
-  if ss.media_type == 'video' and ss.video != blank
-    assign use_video = true
+  if ss.media_type == 'video'
+    if ss.before_video != blank and ss.after_video != blank
+      assign has_video_pair = true
+      assign use_video = true
+    elsif ss.video != blank
+      assign use_video = true
+    endif
   endif
 
   assign has_ba = false
@@ -20,7 +28,7 @@
 -%}
 
 <section
-  class="dryeNEW-section drye-liner-product-clarity{% if has_ba %} has-ba{% endif %}{% if use_video %} has-video{% endif %}"
+  class="dryeNEW-section drye-liner-product-clarity{% if has_ba or has_video_pair %} has-ba{% endif %}{% if use_video %} has-video{% endif %}{% if has_video_pair %} has-video-pair{% endif %}"
   id="{{ ss.section_id | default: 'liner-product' }}"
   data-drye-clarity-section
   data-section-id="{{ section.id }}"
@@ -71,7 +79,59 @@
       </div>
 
       <div class="drye-liner-product-clarity__image{% if use_video %} drye-liner-product-clarity__image--video{% endif %}">
-        {%- if use_video -%}
+        {%- if has_video_pair -%}
+          {%- comment -%}
+            Same two-up frame as the image pair: label, media, arrow between. Each
+            video keeps its own lazy-load hooks so the JS below binds both.
+          {%- endcomment -%}
+          <div class="drye-liner-product-clarity__ba">
+            <div class="drye-liner-product-clarity__ba-item">
+              {%- if ss.before_label != blank -%}
+                <span class="drye-liner-product-clarity__ba-label">{{ ss.before_label }}</span>
+              {%- endif -%}
+              <video
+                class="drye-liner-product-clarity__ba-video drye-liner-product-clarity__ba-video--before"
+                data-drye-clarity-video
+                muted
+                loop
+                playsinline
+                preload="none"
+                aria-label="{{ ss.before_label | escape }}"
+                {% if ss.before_video.preview_image != blank %}
+                  data-poster="{{ ss.before_video.preview_image | image_url: width: 700 }}"
+                {% endif %}
+              >
+                {%- for source in ss.before_video.sources -%}
+                  <source data-src="{{ source.url | escape }}" type="{{ source.mime_type | escape }}">
+                {%- endfor -%}
+              </video>
+            </div>
+
+            <span class="drye-liner-product-clarity__ba-arrow" aria-hidden="true">&rarr;</span>
+
+            <div class="drye-liner-product-clarity__ba-item">
+              {%- if ss.after_label != blank -%}
+                <span class="drye-liner-product-clarity__ba-label">{{ ss.after_label }}</span>
+              {%- endif -%}
+              <video
+                class="drye-liner-product-clarity__ba-video"
+                data-drye-clarity-video
+                muted
+                loop
+                playsinline
+                preload="none"
+                aria-label="{{ ss.after_label | escape }}"
+                {% if ss.after_video.preview_image != blank %}
+                  data-poster="{{ ss.after_video.preview_image | image_url: width: 700 }}"
+                {% endif %}
+              >
+                {%- for source in ss.after_video.sources -%}
+                  <source data-src="{{ source.url | escape }}" type="{{ source.mime_type | escape }}">
+                {%- endfor -%}
+              </video>
+            </div>
+          </div>
+        {%- elsif use_video -%}
           <video
             class="drye-liner-product-clarity__video"
             data-drye-clarity-video
@@ -110,7 +170,7 @@
               {% endif %}
             </div>
 
-            <span class="drye-liner-product-clarity__ba-arrow" aria-hidden="true">→</span>
+            <span class="drye-liner-product-clarity__ba-arrow" aria-hidden="true">&rarr;</span>
 
             <div class="drye-liner-product-clarity__ba-item">
               {%- if ss.after_label != blank -%}
@@ -157,13 +217,12 @@
   (function () {
     if (!window.DRYEClarityVideo) {
       window.DRYEClarityVideo = {
-        setup: function (root) {
-          if (!root || root.dataset.dryeClarityBound === '1') return;
-
-          var video = root.querySelector('[data-drye-clarity-video]');
-          if (!video) return;
-
-          root.dataset.dryeClarityBound = '1';
+        /* One handler per <video>, so a section can hold a pair. Previously this
+           took the section and bound only its first video — that is why a second
+           video never loaded or played. */
+        setupVideo: function (video) {
+          if (!video || video.dataset.dryeClarityBound === '1') return;
+          video.dataset.dryeClarityBound = '1';
 
           var loaded = false;
           var visibleEnough = false;
@@ -237,16 +296,25 @@
           });
         },
 
+        setup: function (root) {
+          if (!root) return;
+          var self = this;
+          root.querySelectorAll('[data-drye-clarity-video]').forEach(function (video) {
+            self.setupVideo(video);
+          });
+        },
+
         init: function (scope) {
           var target = scope || document;
+          var self = this;
 
           if (target.matches && target.matches('[data-drye-clarity-section]')) {
             this.setup(target);
           }
 
-          target.querySelectorAll('[data-drye-clarity-section]').forEach(
-            this.setup.bind(this)
-          );
+          target.querySelectorAll('[data-drye-clarity-section]').forEach(function (section) {
+            self.setup(section);
+          });
         }
       };
 
@@ -283,14 +351,23 @@
         { "value": "video", "label": "Video" }
       ]
     },
+
+    { "type": "header", "content": "Two videos side by side (video mode)" },
+    { "type": "paragraph", "content": "Fill BOTH slots to get the two-up layout, same frame as the image pair. Leave either empty and the single video below is used full width." },
+    { "type": "video", "id": "before_video", "label": "Left video (2:3)" },
+    { "type": "video", "id": "after_video", "label": "Right video (2:3)" },
+
+    { "type": "header", "content": "Single video fallback" },
     { "type": "video", "id": "video", "label": "Product video" },
 
-    { "type": "header", "content": "Before / After (image mode)" },
+    { "type": "header", "content": "Labels (used by both pair modes)" },
+    { "type": "text", "id": "before_label", "label": "Left label", "default": "Without DRYE" },
+    { "type": "text", "id": "after_label", "label": "Right label", "default": "With DRYE" },
+
+    { "type": "header", "content": "Before / After images (image mode)" },
     { "type": "paragraph", "content": "Set one or both images to show the before/after layout. These are ignored when Video is selected." },
     { "type": "image_picker", "id": "before_image", "label": "Before image (2:3)" },
-    { "type": "text", "id": "before_label", "label": "Before label", "default": "Without DRYE" },
     { "type": "image_picker", "id": "after_image", "label": "After image (2:3)" },
-    { "type": "text", "id": "after_label", "label": "After label", "default": "With DRYE" },
 
     { "type": "header", "content": "Single image fallback" },
     { "type": "image_picker", "id": "image", "label": "Product image (2:3)" }
