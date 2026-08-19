@@ -10,8 +10,12 @@
   min-height: 177vw;
   padding-block: var(--section-pad-y);
   background: var(--bg-ink);
+  /* Set on the section, not just the title, so nothing inside can fall back to
+     the body colour if base.css happens to load after this file. */
+  color: var(--white-100);
   overflow: hidden;
 }
+
 
 .drye-hockey-hero__media,
 .drye-hockey-hero__media img {
@@ -23,7 +27,19 @@
 }
 
 .drye-hockey-hero__media--desktop { display: none; }
-.drye-hockey-hero__inner { position: relative; width: 100%; }
+
+/* On mobile the stack is a supporting note, not the anchor — the headline is.
+   Roughly half the visual weight: shorter boxes, smaller labels, tighter arrows. */
+@media (max-width: 767px) {
+  .drye-hockey-hero__stack { max-width: 300px; opacity: 0.92; }
+  .drye-hockey-hero__box { min-height: 34px; padding: var(--space-8) var(--space-12); }
+  .drye-hockey-hero__box--layer { padding: var(--space-6) var(--space-10); }
+  .drye-hockey-hero__label { font-size: var(--fs-micro-2); letter-spacing: 0.1em; }
+  .drye-hockey-hero__note { font-size: var(--fs-micro-4); }
+  .drye-hockey-hero__arrows { gap: var(--space-28); padding-block: var(--space-5); }
+  .drye-hockey-hero__arrows span { border-left-width: 4px; border-right-width: 4px; border-bottom-width: 5px; }
+}
+.drye-hockey-hero__inner { position: relative; z-index: 2; width: 100%; }
 
 .drye-hockey-hero__grid {
   display: flex;
@@ -33,15 +49,37 @@
 }
 
 .drye-hockey-hero__copy { flex: 1 1 460px; min-width: 300px; max-width: 640px; }
-.drye-hockey-hero__title { color: var(--white-100); text-wrap: balance; }
+.drye-hockey-hero__eyebrow { margin-bottom: 0; color: var(--white-035); }
 
-.drye-hockey-hero__lead {
-  margin-top: var(--space-16);
+.drye-hockey-hero__title {
+  max-width: 14ch;
+  margin-top: var(--space-12);
+  text-wrap: balance;
+}
+
+/* The italic line reads as the second half of the sentence, so it keeps the h1's
+   size and sits flush left with it despite its own padding. */
+.drye-hockey-hero__em {
+  display: inline-block;
+  margin-top: var(--space-10);
+  margin-left: calc(var(--space-16) * -1);
+  padding: 0 var(--space-16) var(--space-4);
+  background: rgba(30, 58, 76, 0.55);
+  color: var(--white-100);
+  font-size: var(--fs-hero-h1);
+  line-height: 1;
+}
+
+.drye-hockey-hero__lead,
+.drye-hockey-hero__lead p {
+  margin: 0;
   max-width: 44ch;
-  color: var(--white-080);
-  line-height: var(--lh-body-tight);
+  color: var(--white-100);
+  font-weight: var(--fw-medium);
   text-wrap: pretty;
 }
+
+.drye-hockey-hero__lead { margin-top: var(--space-24); }
 
 .drye-hockey-hero__stack { flex: 1 1 360px; min-width: 280px; max-width: 460px; }
 
@@ -99,5 +137,7 @@
   .drye-hockey-hero__media--desktop { display: block; }
   .drye-hockey-hero__media--mobile { display: none; }
   .drye-hockey-hero__grid { gap: var(--grid-gap-56); }
+  .drye-hockey-hero__lead,
+  .drye-hockey-hero__lead p { max-width: 52ch; font-size: 18px; line-height: 1.6; }
   .drye-hockey-hero__arrows { gap: var(--space-80); }
 }

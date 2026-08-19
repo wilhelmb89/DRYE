@@ -21,10 +21,24 @@
 
   <div class="dryeNEW-container drye-hockey-hero__inner">
     <div class="drye-hockey-hero__grid">
+      {%- comment -%}
+        Same hierarchy as drye-mechanics-herov2: eyebrow → heading → italic
+        emphasis → subheading. The emphasis line carries its own tint block so it
+        stays legible on the photo without a gradient over the whole hero.
+      {%- endcomment -%}
       <div class="drye-hockey-hero__copy">
+        {%- if ss.eyebrow != blank -%}
+          <p class="dryeNEW-micro drye-hockey-hero__eyebrow">{{ ss.eyebrow | escape }}</p>
+        {%- endif -%}
+
         <h1 class="dryeNEW-h1 drye-hockey-hero__title">{{ ss.heading }}</h1>
+
+        {%- if ss.heading_em != blank -%}
+          <div class="dryeNEW-editorial drye-hockey-hero__em">{{ ss.heading_em }}</div>
+        {%- endif -%}
+
         {%- if ss.lead != blank -%}
-          <p class="dryeNEW-body drye-hockey-hero__lead">{{ ss.lead }}</p>
+          <div class="dryeNEW-body--lg drye-hockey-hero__lead">{{ ss.lead }}</div>
         {%- endif -%}
       </div>
 
@@ -60,8 +74,10 @@
   "class": "shopify-section",
   "settings": [
     { "type": "text", "id": "anchor_id", "label": "Anchor id", "default": "hero" },
-    { "type": "html", "id": "heading", "label": "Headline", "default": "The sweat goes out through the layer." },
-    { "type": "html", "id": "lead", "label": "Sub line", "default": "Not back into their hands." },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "For hockey parents" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "The sweat goes out" },
+    { "type": "text", "id": "heading_em", "label": "Heading emphasis (italic)", "default": "through the layer." },
+    { "type": "richtext", "id": "lead", "label": "Subheading", "default": "<p>An hour under a sealed glove, three or four times a week. DRYE routes it off the skin instead of holding it there.</p>" },
     { "type": "header", "content": "Photo" },
     { "type": "image_picker", "id": "image_desktop", "label": "Desktop image (16:9)" },
     { "type": "image_picker", "id": "image_mobile", "label": "Mobile image (9:16)" },
