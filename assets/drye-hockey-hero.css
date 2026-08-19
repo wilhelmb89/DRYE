@@ -16,21 +16,6 @@
   overflow: hidden;
 }
 
-/* Scrim: the photo is bright in places, so the copy needs a floor under it.
-   Strong behind the text, gone by 78% so the player stays clean. */
-.drye-hockey-hero::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  z-index: 1;
-  background: linear-gradient(
-    to right,
-    rgba(22, 38, 58, 0.88) 0%,
-    rgba(22, 38, 58, 0.7) 26%,
-    rgba(22, 38, 58, 0.32) 54%,
-    rgba(22, 38, 58, 0) 78%
-  );
-}
 
 .drye-hockey-hero__media,
 .drye-hockey-hero__media img {
@@ -42,19 +27,6 @@
 }
 
 .drye-hockey-hero__media--desktop { display: none; }
-
-@media (max-width: 767px) {
-  .drye-hockey-hero { align-items: flex-end; }
-  .drye-hockey-hero::before {
-    background: linear-gradient(
-      to top,
-      rgba(22, 38, 58, 0.9) 0%,
-      rgba(22, 38, 58, 0.62) 34%,
-      rgba(22, 38, 58, 0.18) 62%,
-      rgba(22, 38, 58, 0) 88%
-    );
-  }
-}
 .drye-hockey-hero__inner { position: relative; z-index: 2; width: 100%; }
 
 .drye-hockey-hero__grid {
@@ -128,8 +100,6 @@
 
 @media (min-width: 768px) {
   .drye-hockey-hero { min-height: 68vh; }
-
-  /* On mobile the copy sits low, so the scrim runs bottom-up instead. */
   .drye-hockey-hero__media--desktop { display: block; }
   .drye-hockey-hero__media--mobile { display: none; }
   .drye-hockey-hero__grid { gap: var(--grid-gap-56); }
