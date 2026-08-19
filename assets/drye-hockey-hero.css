@@ -31,13 +31,17 @@
 /* On mobile the stack is a supporting note, not the anchor — the headline is.
    Roughly half the visual weight: shorter boxes, smaller labels, tighter arrows. */
 @media (max-width: 767px) {
-  .drye-hockey-hero__stack { max-width: 300px; opacity: 0.92; }
-  .drye-hockey-hero__box { min-height: 34px; padding: var(--space-8) var(--space-12); }
-  .drye-hockey-hero__box--layer { padding: var(--space-6) var(--space-10); }
-  .drye-hockey-hero__label { font-size: var(--fs-micro-2); letter-spacing: 0.1em; }
+  /* min-width: 0 is the point — flex-basis 360px with min-width 280px made the
+     stack fill the screen at 390px wide, so max-width: 300px never applied and
+     the diagram outweighed the headline. */
+  .drye-hockey-hero__stack { flex: 0 1 auto; min-width: 0; max-width: 262px; opacity: 0.9; }
+  .drye-hockey-hero__box { min-height: 30px; padding: var(--space-6) var(--space-10); }
+  .drye-hockey-hero__box--layer { padding: var(--space-5) var(--space-8); }
+  .drye-hockey-hero__label { font-size: var(--fs-micro-2); letter-spacing: 0.08em; }
   .drye-hockey-hero__note { font-size: var(--fs-micro-4); }
-  .drye-hockey-hero__arrows { gap: var(--space-28); padding-block: var(--space-5); }
+  .drye-hockey-hero__arrows { gap: var(--space-20); padding-block: var(--space-4); }
   .drye-hockey-hero__arrows span { border-left-width: 4px; border-right-width: 4px; border-bottom-width: 5px; }
+  .drye-hockey-hero__arrows span { --arrow-travel: -9px; }
 }
 .drye-hockey-hero__inner { position: relative; z-index: 2; width: 100%; }
 
@@ -91,7 +95,7 @@
   flex-wrap: wrap;
   min-height: 56px;
   padding: var(--space-14) var(--space-18);
-  background: var(--bg-ink);
+  background: #16263A;
   text-align: center;
 }
 
@@ -130,6 +134,29 @@
   border-left: 6px solid transparent;
   border-right: 6px solid transparent;
   border-bottom: 7px solid #5FCFC1;
+  --arrow-travel: -13px;
+}
+
+/* The arrows rise through their own gap and stop at the box above — for the lower
+   row that is the dashed DRYE edge, which is where the sweat is meant to arrive.
+   Travel is the gap height, so the motion never crosses a layer boundary. Staggered
+   left-to-right so it reads as flow rather than three separate blinks. */
+.drye-hockey-hero__arrows span {
+  animation: drye-hero-rise 2.2s cubic-bezier(0.4, 0, 0.45, 1) infinite;
+}
+
+.drye-hockey-hero__arrows span:nth-child(2) { animation-delay: 0.22s; }
+.drye-hockey-hero__arrows span:nth-child(3) { animation-delay: 0.44s; }
+
+@keyframes drye-hero-rise {
+  0% { transform: translateY(0); opacity: 0; }
+  18% { opacity: 1; }
+  62% { transform: translateY(var(--arrow-travel)); opacity: 1; }
+  78%, 100% { transform: translateY(var(--arrow-travel)); opacity: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .drye-hockey-hero__arrows span { animation: none; opacity: 1; transform: none; }
 }
 
 @media (min-width: 768px) {
