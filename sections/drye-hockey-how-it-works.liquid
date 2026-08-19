@@ -8,7 +8,7 @@
   assign ss = section.settings
 -%}
 
-<section class="dryeNEW-section drye-hockey-hiw" id="{{ ss.anchor_id | default: 'how-it-works' }}" data-drye-section="hockey-hiw">
+<section class="dryeNEW-section drye-hockey-hiw dryeNEW-reveal" data-x="" id="{{ ss.anchor_id | default: 'how-it-works' }}" data-drye-section="hockey-hiw">
   <div class="dryeNEW-container">
     <div class="drye-hockey-hiw__head">
       {%- if ss.eyebrow != blank -%}
@@ -23,16 +23,42 @@
 
     <div class="drye-hockey-hiw__grid">
       {%- for block in section.blocks -%}
-        <div class="drye-hockey-hiw__card dryeNEW-reveal dryeNEW-rd{{ forloop.index }}" {{ block.shopify_attributes }}>
+        <div class="drye-hockey-hiw__card drye-hockey-hiw__step--{{ forloop.index }} dryeNEW-reveal dryeNEW-rd{{ forloop.index }}" {{ block.shopify_attributes }}>
           <div class="drye-hockey-hiw__card-head">
             <span class="drye-hockey-hiw__num">{{ forloop.index | prepend: '0' | slice: -2, 2 }}</span>
             <span class="drye-hockey-hiw__step">{{ block.settings.step }}</span>
           </div>
 
-          <div class="drye-hockey-hiw__figure">
-            {%- if block.settings.figure != blank -%}
-              {{ block.settings.figure | image_url: width: 900 | image_tag: loading: 'lazy', sizes: '(min-width: 768px) 33vw, 100vw', alt: block.settings.step }}
-            {%- endif -%}
+          <span class="drye-hockey-hiw__meter" aria-hidden="true"><i></i></span>
+
+          <div class="drye-hockey-hiw__figure" aria-hidden="true">
+            {%- case block.settings.figure -%}
+              {%- when 'beads' -%}
+                <svg viewBox="0 0 300 178" fill="none" role="img" aria-label="Knitted structure with sweat beading on the inner layer" preserveAspectRatio="none">
+                  <rect x="0" y="26" width="300" height="18" fill="#CFE9E5"></rect>
+                  <rect x="0" y="138" width="300" height="18" fill="#E3E9EE"></rect>
+                  <path class="drye-hockey-hiw__knit" d="M 54,136 L 54,100 C 54,66 112,66 112,100 L 112,136 M 102,136 L 102,100 C 102,66 160,66 160,100 L 160,136 M 150,136 L 150,100 C 150,66 208,66 208,100 L 208,136 M 198,136 L 198,100 C 198,66 256,66 256,100 L 256,136" stroke="#16263A" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"></path>
+                  <path class="drye-hockey-hiw__knit" d="M 54,128 L 54,92 C 54,58 112,58 112,92 L 112,128 M 102,128 L 102,92 C 102,58 160,58 160,92 L 160,128 M 150,128 L 150,92 C 150,58 208,58 208,92 L 208,128 M 198,128 L 198,92 C 198,58 256,58 256,92 L 256,128" stroke="#0D9488" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"></path>
+                </svg>
+                <span class="drye-hockey-hiw__drop drye-hockey-hiw__drop--1" style="bottom:20%;width:9px;height:11px"></span>
+
+              {%- when 'routing' -%}
+                <span class="drye-hockey-hiw__band drye-hockey-hiw__band--outer"></span>
+                <span class="drye-hockey-hiw__band drye-hockey-hiw__band--inner"></span>
+                <span class="drye-hockey-hiw__wet drye-hockey-hiw__wet--2" style="bottom:15%"></span>
+                <span class="drye-hockey-hiw__drop drye-hockey-hiw__drop--2" style="width:10px;height:13px"></span>
+                <span class="drye-hockey-hiw__pool"></span>
+
+              {%- when 'stored' -%}
+                <span class="drye-hockey-hiw__band drye-hockey-hiw__band--outer"></span>
+                <span class="drye-hockey-hiw__band drye-hockey-hiw__band--inner"></span>
+                <span class="drye-hockey-hiw__wet drye-hockey-hiw__wet--3" style="bottom:15%"></span>
+                <span class="drye-hockey-hiw__fill"></span>
+                <span class="drye-hockey-hiw__dash"></span>
+                <span class="drye-hockey-hiw__mat drye-hockey-hiw__mat--outer">{{ section.settings.mat_outer | escape }}</span>
+                <span class="drye-hockey-hiw__mat drye-hockey-hiw__mat--inner">{{ section.settings.mat_inner | escape }}</span>
+                <span class="drye-hockey-hiw__mat drye-hockey-hiw__mat--clear">{{ section.settings.mat_clear | escape }}</span>
+            {%- endcase -%}
           </div>
 
           {%- if block.settings.note != blank -%}
@@ -53,7 +79,11 @@
     { "type": "text", "id": "anchor_id", "label": "Anchor id", "default": "how-it-works" },
     { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Asymmetric layering" },
     { "type": "text", "id": "patent", "label": "Right-hand micro", "default": "Patent pending · SE 2615359-3" },
-    { "type": "html", "id": "heading", "label": "Headline", "default": "How it works" }
+    { "type": "html", "id": "heading", "label": "Headline", "default": "How it works" },
+    { "type": "header", "content": "Figure labels (used by figure 03)" },
+    { "type": "text", "id": "mat_outer", "label": "Outer layer", "default": "Outer lyocell" },
+    { "type": "text", "id": "mat_inner", "label": "Inner layer", "default": "Inner \u00b7 polypropylene" },
+    { "type": "text", "id": "mat_clear", "label": "Inner-layer state", "default": "Stays clear" }
   ],
   "blocks": [
     {
@@ -61,7 +91,7 @@
       "name": "Step",
       "settings": [
         { "type": "text", "id": "step", "label": "Step headline" },
-        { "type": "image_picker", "id": "figure", "label": "Figure (3:2, transparent PNG or SVG)" },
+        { "type": "select", "id": "figure", "label": "Animated figure", "options": [ { "value": "beads", "label": "01 \u2014 sweat beads on the inner layer" }, { "value": "routing", "label": "02 \u2014 sweat routes up and out" }, { "value": "stored", "label": "03 \u2014 outer layer stores it" } ], "default": "beads" },
         { "type": "text", "id": "note", "label": "Under-figure micro" }
       ]
     }
@@ -70,9 +100,9 @@
     {
       "name": "drye-Hockey Steps",
       "blocks": [
-        { "type": "step", "settings": { "step": "5\u201310 min after glove use", "note": "Inner \u00B7 polypropylene" } },
-        { "type": "step", "settings": { "step": "Material starts routing", "note": "Inner \u00B7 polypropylene" } },
-        { "type": "step", "settings": { "step": "Material starts storing sweat into small pockets", "note": "Outer \u00B7 lyocell" } }
+        { "type": "step", "settings": { "step": "5\u201310 min after glove use", "figure": "beads", "note": "Inner \u00B7 polypropylene" } },
+        { "type": "step", "settings": { "step": "Material starts routing", "figure": "routing", "note": "Inner \u00B7 polypropylene" } },
+        { "type": "step", "settings": { "step": "Material starts storing sweat into small pockets", "figure": "stored", "note": "Outer \u00B7 lyocell" } }
       ]
     }
   ]

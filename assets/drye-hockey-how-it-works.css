@@ -1,5 +1,9 @@
 /* drye-hockey-how-it-works.css — three arrow-shaped steps.
-   Reveal is base.css .dryeNEW-reveal + .dryeNEW-rd1/2/3. Layout only here. */
+   Reveal is base.css .dryeNEW-reveal + .dryeNEW-rd1/2/3.
+
+   The three figures are INLINE SVG/DOM, not uploaded images — an <img> cannot
+   animate its own contents, so an uploaded SVG renders as a frozen frame. All three
+   share one 9s clock so the droplet reads as the same droplet moving between cards. */
 
 .drye-hockey-hiw__head {
   display: flex;
@@ -63,7 +67,73 @@
   overflow: hidden;
 }
 
-.drye-hockey-hiw__figure img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; }
+.drye-hockey-hiw__figure { background: var(--bg-soft); }
+.drye-hockey-hiw__figure svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+.drye-hockey-hiw__band { position: absolute; left: 0; right: 0; height: 14%; }
+.drye-hockey-hiw__band--outer { top: 15%; background: #CFE9E5; }
+.drye-hockey-hiw__band--inner { bottom: 15%; background: #E3E9EE; }
+.drye-hockey-hiw__wet { position: absolute; left: 0; right: 0; height: 14%; background: rgba(44, 166, 224, 0.4); opacity: 0; }
+.drye-hockey-hiw__drop { position: absolute; border-radius: 52% 52% 60% 60%; background: rgba(44, 166, 224, 0.8); opacity: 0; }
+.drye-hockey-hiw__pool { position: absolute; left: 24%; right: 24%; top: 18%; height: 8px; border-radius: 40%; background: rgba(44, 166, 224, 0.6); opacity: 0; }
+.drye-hockey-hiw__dash { position: absolute; left: 0; right: 0; bottom: 15%; height: 14%; border-top: 1px dashed rgba(22, 38, 58, 0.22); border-bottom: 1px dashed rgba(22, 38, 58, 0.22); }
+
+.drye-hockey-hiw__mat {
+  position: absolute;
+  font-size: var(--fs-micro-2);
+  font-weight: var(--fw-semibold);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.drye-hockey-hiw__mat--outer { left: 14px; top: 32%; color: #0B6E66; }
+.drye-hockey-hiw__mat--inner { left: 14px; bottom: 8px; color: var(--muted); }
+.drye-hockey-hiw__mat--clear { right: 14px; bottom: 15%; transform: translateY(-140%); color: var(--muted); }
+
+.drye-hockey-hiw__meter { height: 2px; background: var(--border); }
+.drye-hockey-hiw__meter i { display: block; height: 2px; background: var(--emerald); transform-origin: left center; transform: scaleX(0); }
+
+/* ---- the shared 9s loop. All three cards read the same clock, so the droplet
+   that leaves card 01 is the one that arrives in card 02. ---- */
+.drye-hockey-hiw.is-visible .drye-hockey-hiw__knit { animation: drye-hiw-draw 9s ease-in-out infinite; }
+.drye-hockey-hiw.is-visible .drye-hockey-hiw__drop--1 { animation: drye-hiw-cross 9s cubic-bezier(0.4, 0, 0.5, 1) infinite; }
+.drye-hockey-hiw.is-visible .drye-hockey-hiw__drop--2 { animation: drye-hiw-rise 9s cubic-bezier(0.4, 0, 0.5, 1) infinite; }
+.drye-hockey-hiw.is-visible .drye-hockey-hiw__pool { animation: drye-hiw-pool 9s cubic-bezier(0.3, 0, 0.4, 1) infinite; }
+.drye-hockey-hiw.is-visible .drye-hockey-hiw__wet--2 { animation: drye-hiw-wet2 9s ease-in-out infinite; }
+.drye-hockey-hiw.is-visible .drye-hockey-hiw__wet--3 { animation: drye-hiw-wet3 9s ease-in-out infinite; }
+.drye-hockey-hiw.is-visible .drye-hockey-hiw__fill { animation: drye-hiw-fill 9s linear infinite; }
+.drye-hockey-hiw.is-visible .drye-hockey-hiw__step--1 .drye-hockey-hiw__meter i { animation: drye-hiw-m1 9s linear infinite; }
+.drye-hockey-hiw.is-visible .drye-hockey-hiw__step--2 .drye-hockey-hiw__meter i { animation: drye-hiw-m2 9s linear infinite; }
+.drye-hockey-hiw.is-visible .drye-hockey-hiw__step--3 .drye-hockey-hiw__meter i { animation: drye-hiw-m3 9s linear infinite; }
+
+.drye-hockey-hiw__knit { stroke-dasharray: 640; stroke-dashoffset: 470; }
+.drye-hockey-hiw__fill { position: absolute; left: 0; top: 15%; height: 14%; width: 0; background: rgba(44, 166, 224, 0.5); }
+
+@keyframes drye-hiw-draw { 0% { stroke-dashoffset: 470; } 24% { stroke-dashoffset: 0; } 96% { stroke-dashoffset: 0; } 100% { stroke-dashoffset: 470; } }
+@keyframes drye-hiw-cross { 0% { left: -8%; opacity: 0; } 5% { opacity: 1; } 27% { left: 100%; opacity: 1; } 31%, 100% { left: 100%; opacity: 0; } }
+@keyframes drye-hiw-rise {
+  0%, 33% { left: 0%; bottom: 27%; opacity: 0; }
+  37% { opacity: 1; }
+  50% { left: 47%; bottom: 27%; opacity: 1; }
+  62% { left: 47%; bottom: 62%; opacity: 1; }
+  66%, 100% { left: 47%; bottom: 62%; opacity: 0; }
+}
+@keyframes drye-hiw-pool { 0%, 60% { transform: scaleX(0.1); opacity: 0; } 68% { transform: scaleX(1); opacity: 0.85; } 88% { opacity: 0.85; } 100% { transform: scaleX(1); opacity: 0; } }
+@keyframes drye-hiw-wet2 { 0%, 33% { opacity: 0; } 42%, 56% { opacity: 0.75; } 66%, 100% { opacity: 0; } }
+@keyframes drye-hiw-wet3 { 0%, 62% { opacity: 0; } 70%, 80% { opacity: 0.6; } 90%, 100% { opacity: 0; } }
+@keyframes drye-hiw-fill { 0%, 66% { width: 0%; } 96%, 100% { width: 100%; } }
+@keyframes drye-hiw-m1 { 0% { transform: scaleX(0); } 30%, 100% { transform: scaleX(1); } }
+@keyframes drye-hiw-m2 { 0%, 33% { transform: scaleX(0); } 63%, 100% { transform: scaleX(1); } }
+@keyframes drye-hiw-m3 { 0%, 66% { transform: scaleX(0); } 96%, 100% { transform: scaleX(1); } }
+
+@media (prefers-reduced-motion: reduce) {
+  .drye-hockey-hiw__knit { animation: none !important; stroke-dashoffset: 0 !important; }
+  .drye-hockey-hiw__drop,
+  .drye-hockey-hiw__pool,
+  .drye-hockey-hiw__wet { animation: none !important; opacity: 0.6 !important; }
+  .drye-hockey-hiw__fill { animation: none !important; width: 100% !important; }
+  .drye-hockey-hiw__meter i { animation: none !important; transform: scaleX(1) !important; }
+}
 
 .drye-hockey-hiw__note {
   padding: 0 var(--space-4) var(--space-16);

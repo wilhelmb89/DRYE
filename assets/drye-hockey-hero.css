@@ -1,3 +1,6 @@
+/* NOTE: #5FCFC1 is the on-navy accent. base.css --sage (#5F8A8B) is a muted
+   grey-teal that goes flat on a dark photo. Add #5FCFC1 to base as --mint and
+   swap the literals here. */
 /* drye-hockey-hero.css — hero photo + layer stack. Base handles type/tokens. */
 
 .drye-hockey-hero {
@@ -59,7 +62,7 @@
   min-height: 0;
   padding: var(--space-10) var(--space-14);
   background: transparent;
-  border: 1px dashed var(--sage);
+  border: 1px dashed #5FCFC1;
   column-gap: var(--space-10);
   row-gap: var(--space-2);
 }
@@ -72,7 +75,7 @@
   color: var(--white-100);
 }
 
-.drye-hockey-hero__label--layer { color: var(--sage); }
+.drye-hockey-hero__label--layer { color: #5FCFC1; }
 .drye-hockey-hero__note { font-size: var(--fs-body-sm); line-height: 1.4; color: var(--white-080); }
 .drye-hockey-hero__note--layer { font-style: italic; }
 
@@ -88,7 +91,7 @@
   height: 0;
   border-left: 6px solid transparent;
   border-right: 6px solid transparent;
-  border-bottom: 7px solid var(--sage);
+  border-bottom: 7px solid #5FCFC1;
 }
 
 @media (min-width: 768px) {

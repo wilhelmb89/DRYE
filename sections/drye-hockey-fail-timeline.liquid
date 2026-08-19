@@ -1,0 +1,124 @@
+{{ 'drye-b2b-lp-base.css' | asset_url | stylesheet_tag }}
+
+{{ 'drye-hockey-shared.css' | asset_url | stylesheet_tag }}
+{{ 'drye-hockey-lp.js' | asset_url | script_tag }}
+{{ 'drye-hockey-fail-timeline.css' | asset_url | stylesheet_tag }}
+
+{%- comment -%}
+  Sophistication-stage-3 move: retire every fix the parent has already tried,
+  in the order they tried them, before offering another one. Each row's bar
+  stops where that fix gives up during a single session.
+
+  "reach" = how far into the session the fix still helps, 0-100. A keyframe
+  percentage cannot be a CSS variable, so each block gets its own keyframe.
+{%- endcomment -%}
+
+<style>
+{%- for block in section.blocks -%}
+  {%- assign r = block.settings.reach -%}
+  @keyframes drye-hockey-fail-{{ block.id }} {
+    0% { transform: scaleX(0); opacity: 1; }
+    {{ r }}% { transform: scaleX({{ r | divided_by: 100.0 }}); }
+    93% { transform: scaleX({{ r | divided_by: 100.0 }}); opacity: 1; }
+    99%, 100% { transform: scaleX({{ r | divided_by: 100.0 }}); opacity: 0; }
+  }
+  #drye-fail-{{ block.id }} .drye-hockey-fail__bar { animation-name: drye-hockey-fail-{{ block.id }}; }
+{%- endfor -%}
+</style>
+
+<section class="dryeNEW-section drye-hockey-fail dryeNEW-reveal" id="{{ section.settings.anchor_id | default: 'what-fails' }}" data-drye-section="hockey-fail">
+  <div class="dryeNEW-container">
+    <div class="drye-hockey-fail__intro">
+      <h2 class="dryeNEW-h2 drye-hockey-fail__title">{{ section.settings.heading }}</h2>
+    </div>
+
+    <div class="drye-hockey-fail__layout">
+      {%- if section.settings.image != blank -%}
+        <div class="drye-hockey-fail__photo">
+          {{ section.settings.image | image_url: width: 900 | image_tag: loading: 'lazy', sizes: '(min-width: 768px) 36vw, 100vw', alt: section.settings.image_alt }}
+        </div>
+      {%- endif -%}
+
+      <div class="drye-hockey-fail__chart">
+        <div class="drye-hockey-fail__head">
+          <span class="drye-hockey-fail__spacer"></span>
+          <span class="drye-hockey-fail__periods">
+            <span>{{ section.settings.mark_1 | escape }}</span>
+            <span>{{ section.settings.mark_2 | escape }}</span>
+            <span>{{ section.settings.mark_3 | escape }}</span>
+            <span>{{ section.settings.mark_4 | escape }}</span>
+          </span>
+        </div>
+
+        {%- for block in section.blocks -%}
+          <div class="drye-hockey-fail__row{% if block.settings.is_drye %} drye-hockey-fail__row--drye{% endif %}" id="drye-fail-{{ block.id }}" {{ block.shopify_attributes }}>
+            {%- if block.settings.is_drye and section.settings.build_caption != blank -%}
+              <span class="drye-hockey-fail__cap" aria-hidden="true">{{ section.settings.build_caption | escape }}</span>
+            {%- endif -%}
+
+            <div class="drye-hockey-fail__name">
+              <p class="drye-hockey-fail__label">{{ block.settings.label | escape }}</p>
+              {%- if block.settings.note != blank -%}
+                <p class="drye-hockey-fail__note">{{ block.settings.note | escape }}</p>
+              {%- endif -%}
+            </div>
+
+            <div class="drye-hockey-fail__track" role="img" aria-label="{{ block.settings.label | escape }}: {{ block.settings.aria | default: block.settings.note | escape }}">
+              <span class="drye-hockey-fail__bar"></span>
+            </div>
+          </div>
+        {%- endfor -%}
+
+        <div class="drye-hockey-fail__sweepwrap" aria-hidden="true">
+          <span class="drye-hockey-fail__sweep"></span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "drye-Hockey Fails",
+  "tag": "section",
+  "class": "shopify-section",
+  "settings": [
+    { "type": "text", "id": "anchor_id", "label": "Anchor id", "default": "what-fails" },
+    { "type": "html", "id": "heading", "label": "Headline", "default": "You can't clean, cream, dry or line your way out of a glove that seals." },
+    { "type": "image_picker", "id": "image", "label": "Photo (4:3 on mobile, taller on desktop)" },
+    { "type": "text", "id": "image_alt", "label": "Photo alt", "default": "A kid in full gear sitting on his bag at the rink" },
+    { "type": "header", "content": "Time markers" },
+    { "type": "text", "id": "mark_1", "label": "Marker 1", "default": "Warm-up" },
+    { "type": "text", "id": "mark_2", "label": "Marker 2", "default": "1st" },
+    { "type": "text", "id": "mark_3", "label": "Marker 3", "default": "2nd" },
+    { "type": "text", "id": "mark_4", "label": "Marker 4", "default": "Horn" },
+    { "type": "text", "id": "build_caption", "label": "Caption above the DRYE row", "default": "Trapped sweat builds" }
+  ],
+  "blocks": [
+    {
+      "type": "fix",
+      "name": "Row",
+      "settings": [
+        { "type": "text", "id": "label", "label": "Name" },
+        { "type": "text", "id": "note", "label": "Note (optional)" },
+        { "type": "range", "id": "reach", "label": "Still helping until", "min": 1, "max": 100, "step": 1, "unit": "%", "default": 10 },
+        { "type": "text", "id": "aria", "label": "Screen-reader description" },
+        { "type": "checkbox", "id": "is_drye", "label": "This is the DRYE row", "default": false }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "drye-Hockey Fails",
+      "blocks": [
+        { "type": "fix", "settings": { "label": "Gear spray", "reach": 2 } },
+        { "type": "fix", "settings": { "label": "Cream", "reach": 3 } },
+        { "type": "fix", "settings": { "label": "Glove dryer", "reach": 9 } },
+        { "type": "fix", "settings": { "label": "Barrier film", "reach": 11 } },
+        { "type": "fix", "settings": { "label": "Cotton liner", "note": "Saturates, then holds the wet against the skin.", "reach": 27 } },
+        { "type": "fix", "settings": { "label": "DRYE", "note": "Routes instead of saturating.", "reach": 100, "is_drye": true } }
+      ]
+    }
+  ]
+}
+{% endschema %}

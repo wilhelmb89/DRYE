@@ -78,10 +78,47 @@
     });
   }
 
+  /* Period clock for drye-hockey-mechanism: counts one period, then the next. */
+  function clocks(scope) {
+    scope.querySelectorAll('[data-drye-clock]:not([data-drye-clock-bound])').forEach(function (root) {
+      root.setAttribute('data-drye-clock-bound', '1');
+      if (reduce) return;
+      var mins = parseInt(root.getAttribute('data-drye-clock-minutes'), 10) || 20;
+      var periods = parseInt(root.getAttribute('data-drye-clock-periods'), 10) || 3;
+      var timeEl = root.querySelector('[data-drye-clock-time]');
+      var meterEl = root.querySelector('[data-drye-clock-meter]');
+      var perEl = root.querySelector('[data-drye-clock-period]');
+      var words = perEl ? perEl.textContent.trim().split(/\s+/) : ['Period', '1', 'of'];
+      var word = words[0] || 'Period';
+      var of = words[2] || 'of';
+      var total = mins * 60;
+      var sec = 0;
+      var period = 1;
+      var running = !('IntersectionObserver' in window);
+
+      if ('IntersectionObserver' in window) {
+        new IntersectionObserver(function (entries) {
+          entries.forEach(function (e) { running = e.isIntersecting; });
+        }, { threshold: 0.2 }).observe(root);
+      }
+
+      setInterval(function () {
+        if (!running) return;
+        sec += 12;
+        if (sec >= total) { sec = 0; period = period % periods + 1; }
+        var m = Math.floor(sec / 60);
+        var s = sec % 60;
+        if (timeEl) timeEl.textContent = m + ':' + (s < 10 ? '0' : '') + s;
+        if (meterEl) meterEl.style.width = (sec / total * 100).toFixed(1) + '%';
+        if (perEl) perEl.textContent = word + ' ' + period + ' ' + of + ' ' + periods;
+      }, 220);
+    });
+  }
+
   window.DRYEHockey = {
     init: function (scope) {
       var t = scope || document;
-      reveal(t); rails(t); carousels(t);
+      reveal(t); rails(t); carousels(t); clocks(t);
     }
   };
 
