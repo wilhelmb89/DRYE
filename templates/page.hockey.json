@@ -415,6 +415,83 @@
         "background": "shopify://shop_images/Gemini_Generated_Image_t4kjkvt4kjkvt4kj_1.webp"
       }
     },
+    "gallery": {
+      "type": "drye-hockey-gallery",
+      "blocks": {
+        "frame_1": {
+          "type": "frame",
+          "settings": {
+            "image": "shopify://shop_images/3e76a13e-2476-4336-905c-232227259759.webp",
+            "tag": "Before",
+            "quote": "“I was fiery red. I had sores on my knuckles.”"
+          }
+        },
+        "frame_2": {
+          "type": "frame",
+          "settings": {
+            "image": "shopify://shop_images/7.webp",
+            "tag": "Eczema",
+            "quote": "“It’s helped my eczema. Very, very much. It was far worse before.”"
+          }
+        },
+        "frame_3": {
+          "type": "frame",
+          "settings": {
+            "image": "shopify://shop_images/5.webp",
+            "tag": "First two practices",
+            "quote": "“It felt strange the first two practices. Now I can’t be without them.”"
+          }
+        },
+        "frame_4": {
+          "type": "frame",
+          "settings": {
+            "image": "shopify://shop_images/9.webp",
+            "tag": "Grip",
+            "quote": "“I get a better grip inside the glove than without them.”"
+          }
+        },
+        "frame_5": {
+          "type": "frame",
+          "settings": {
+            "image": "shopify://shop_images/1.webp",
+            "tag": "One practice without",
+            "quote": "“I did one practice without them. I won’t want to do that again.”"
+          }
+        },
+        "frame_6": {
+          "type": "frame",
+          "settings": {
+            "image": "shopify://shop_images/8.webp",
+            "tag": "Smell",
+            "quote": "“It doesn’t stink as much in the glove afterwards.”"
+          }
+        },
+        "frame_7": {
+          "type": "frame",
+          "settings": {
+            "image": "shopify://shop_images/4.webp",
+            "tag": "Her advice",
+            "quote": "“Try at least three practices. Don’t judge it on the first one.”"
+          }
+        }
+      },
+      "block_order": [
+        "frame_1",
+        "frame_2",
+        "frame_3",
+        "frame_4",
+        "frame_5",
+        "frame_6",
+        "frame_7"
+      ],
+      "settings": {
+        "anchor_id": "gallery",
+        "eyebrow": "Frölunda HC · SDHL champion 2025",
+        "heading": "An SDHL champion wears gloves inside her gloves.",
+        "intro": "",
+        "source": ""
+      }
+    },
     "stories": {
       "type": "drye-hockey-parent-stories",
       "blocks": {
@@ -704,83 +781,6 @@
         "silhouette": "shopify://shop_images/hockey-kids-silhouette-trim.png"
       }
     },
-    "gallery": {
-      "type": "drye-hockey-gallery",
-      "blocks": {
-        "frame_1": {
-          "type": "frame",
-          "settings": {
-            "image": "shopify://shop_images/3e76a13e-2476-4336-905c-232227259759.webp",
-            "tag": "Before",
-            "quote": "“I was fiery red. I had sores on my knuckles.”"
-          }
-        },
-        "frame_2": {
-          "type": "frame",
-          "settings": {
-            "image": "shopify://shop_images/7.webp",
-            "tag": "Eczema",
-            "quote": "“It’s helped my eczema. Very, very much. It was far worse before.”"
-          }
-        },
-        "frame_3": {
-          "type": "frame",
-          "settings": {
-            "image": "shopify://shop_images/5.webp",
-            "tag": "First two practices",
-            "quote": "“It felt strange the first two practices. Now I can’t be without them.”"
-          }
-        },
-        "frame_4": {
-          "type": "frame",
-          "settings": {
-            "image": "shopify://shop_images/9.webp",
-            "tag": "Grip",
-            "quote": "“I get a better grip inside the glove than without them.”"
-          }
-        },
-        "frame_5": {
-          "type": "frame",
-          "settings": {
-            "image": "shopify://shop_images/1.webp",
-            "tag": "One practice without",
-            "quote": "“I did one practice without them. I won’t want to do that again.”"
-          }
-        },
-        "frame_6": {
-          "type": "frame",
-          "settings": {
-            "image": "shopify://shop_images/8.webp",
-            "tag": "Smell",
-            "quote": "“It doesn’t stink as much in the glove afterwards.”"
-          }
-        },
-        "frame_7": {
-          "type": "frame",
-          "settings": {
-            "image": "shopify://shop_images/4.webp",
-            "tag": "Her advice",
-            "quote": "“Try at least three practices. Don’t judge it on the first one.”"
-          }
-        }
-      },
-      "block_order": [
-        "frame_1",
-        "frame_2",
-        "frame_3",
-        "frame_4",
-        "frame_5",
-        "frame_6",
-        "frame_7"
-      ],
-      "settings": {
-        "anchor_id": "gallery",
-        "eyebrow": "Frölunda HC · SDHL champion 2025",
-        "heading": "An SDHL champion wears gloves inside her gloves.",
-        "intro": "",
-        "source": ""
-      }
-    },
     "offer": {
       "type": "drye-hockey-offer",
       "settings": {
@@ -806,12 +806,12 @@
     "drye_research_video_full_76TKtF",
     "hiw",
     "objections",
+    "gallery",
     "stories",
     "drye_nt_trust_badges_kmjhiL",
     "drye_mechanics_cta_jQNPXc",
     "drye_before_after_crcTXh",
     "timeline",
-    "gallery",
     "offer"
   ]
 }
