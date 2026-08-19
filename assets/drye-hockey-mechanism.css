@@ -19,8 +19,10 @@
 
 .drye-hockey-mech__stage { position: relative; width: 100%; max-width: 575px; aspect-ratio: 1 / 1; }
 .drye-hockey-mech__handbox { position: absolute; left: 0; top: 0; bottom: 0; width: 30%; overflow: hidden; }
-.drye-hockey-mech__hand { position: absolute; left: -4%; top: 41%; width: 278%; will-change: transform; }
-.drye-hockey-mech__inhand { position: absolute; left: -1.2%; top: 41%; width: 83.4%; }
+/* max-width: none is required — base.css sets img { max-width: 100% }, which would
+   clamp 278% to the handbox width and render a whole second hand outside the glove. */
+.drye-hockey-mech__hand { position: absolute; left: -4%; top: 41%; width: 278%; max-width: none; height: auto; will-change: transform; }
+.drye-hockey-mech__inhand { position: absolute; left: -1.2%; top: 41%; width: 83.4%; max-width: none; height: auto; }
 
 .drye-hockey-mech__fill,
 .drye-hockey-mech__edge,
@@ -33,7 +35,7 @@
 }
 
 .drye-hockey-mech__fill { overflow: hidden; }
-.drye-hockey-mech__glove { object-fit: contain; }
+.drye-hockey-mech__glove { object-fit: contain; max-width: none; }
 .drye-hockey-mech__edge { background: rgba(255, 255, 255, 0.92); }
 
 .drye-hockey-mech__halo,
