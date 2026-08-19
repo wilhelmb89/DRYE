@@ -5,18 +5,18 @@
    One 9s loop: hand slides in (0-22%), glove turns to outline (22-25%), the three
    states build in sequence (24-88%), reset (95-100%). */
 
-.drye-hockey-mech { background: var(--bg-ink); color: var(--white-100); }
+/* Literal, not var(--bg-ink): section-drye-cart-drawer.css declares a global
+   :root{} that loads after base.css and reset --bg-ink to #0F2230 sitewide. The
+   section must not be at the mercy of another section's stylesheet. */
+.drye-hockey-mech { background: #1E3A4C; color: var(--white-100); }
 .drye-hockey-mech__grid { display: flex; flex-wrap: wrap; gap: var(--grid-gap-28); }
 
 .drye-hockey-mech__stagewrap {
   flex: 1 1 380px;
   min-width: 280px;
   max-width: 600px;
-  /* Column, because the legend is a sibling that follows the stage in the markup.
-     It used to be absolutely positioned inside the stage; as an outside sibling
-     that anchored it to the section instead and it landed on the copy column. */
   display: flex;
-  flex-direction: column;
+  align-items: center;
   justify-content: center;
 }
 
@@ -31,13 +31,9 @@
 }
 .drye-hockey-mech__handbox { position: absolute; left: 0; top: 0; bottom: 0; width: 30%; overflow: hidden; }
 
-/* The glove art fills the lower part of a square stage, so a square box leaves a
-   band of transparent PNG below it that still costs scroll height. Shorter box on
-   mobile — the artwork scales to fit, the dead space goes. */
-@media (max-width: 767px) {
-  .drye-hockey-mech__stage { aspect-ratio: 1 / 0.72; }
-  .drye-hockey-mech__clock { top: 0; }
-}
+/* Do NOT change the stage's aspect-ratio: the glove fits by object-fit/contain
+   while the hand scales on width alone, so a non-square stage pulls them out of
+   registration. To cut height, shrink the whole square instead. */
 /* max-width: none is required — base.css sets img { max-width: 100% }, which would
    clamp 278% to the handbox width and render a whole second hand outside the glove. */
 .drye-hockey-mech__hand { position: absolute; left: -4%; top: 41%; width: 278%; max-width: none; height: auto; will-change: transform; }
@@ -69,14 +65,15 @@
 }
 
 /* --- legend --- */
-/* Static flow under the figure at every width — no absolute positioning, so it
-   cannot drift onto the copy no matter where the markup puts it. */
+/* Absolute inside .drye-hockey-mech__stage, exactly as it was before. It moves with
+   the artwork because --shift is applied to the stage. */
 .drye-hockey-mech__legend {
+  position: absolute;
+  left: 0;
+  bottom: 15%;
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
   gap: var(--space-10);
-  margin-top: var(--space-6);
   pointer-events: none;
 }
 
@@ -243,7 +240,6 @@
 }
 
 @media (min-width: 768px) {
-  .drye-hockey-mech__legend { margin-top: var(--space-12); }
   .drye-hockey-mech__grid { gap: var(--grid-gap-56); }
   .drye-hockey-mech__time { font-size: 42px; }
   .drye-hockey-mech__term { font-size: 32px; }
