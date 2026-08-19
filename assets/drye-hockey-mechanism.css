@@ -30,6 +30,14 @@
   transform: translateX(var(--shift, 0));
 }
 .drye-hockey-mech__handbox { position: absolute; left: 0; top: 0; bottom: 0; width: 30%; overflow: hidden; }
+
+/* The glove art fills the lower part of a square stage, so a square box leaves a
+   band of transparent PNG below it that still costs scroll height. Shorter box on
+   mobile — the artwork scales to fit, the dead space goes. */
+@media (max-width: 767px) {
+  .drye-hockey-mech__stage { aspect-ratio: 1 / 0.72; }
+  .drye-hockey-mech__clock { top: 0; }
+}
 /* max-width: none is required — base.css sets img { max-width: 100% }, which would
    clamp 278% to the handbox width and render a whole second hand outside the glove. */
 .drye-hockey-mech__hand { position: absolute; left: -4%; top: 41%; width: 278%; max-width: none; height: auto; will-change: transform; }
@@ -68,7 +76,7 @@
   flex-direction: column;
   align-items: flex-start;
   gap: var(--space-10);
-  margin-top: var(--space-16);
+  margin-top: var(--space-6);
   pointer-events: none;
 }
 
@@ -235,7 +243,7 @@
 }
 
 @media (min-width: 768px) {
-  .drye-hockey-mech__legend { margin-top: var(--space-20); }
+  .drye-hockey-mech__legend { margin-top: var(--space-12); }
   .drye-hockey-mech__grid { gap: var(--grid-gap-56); }
   .drye-hockey-mech__time { font-size: 42px; }
   .drye-hockey-mech__term { font-size: 32px; }
