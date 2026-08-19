@@ -1,8 +1,29 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "hero": {
       "type": "drye-hockey-hero",
-      "settings": {}
+      "settings": {
+        "anchor_id": "hero",
+        "heading": "The sweat goes out through the layer.",
+        "lead": "Not back into their hands.",
+        "image_desktop": "shopify://shop_images/Screenshot_1.webp",
+        "image_alt": "A player pulling a hockey glove on over the DRYE liner",
+        "stack_alt": "The hockey glove seals; DRYE sits between the glove and the skin",
+        "layer_top": "Hockey glove — sealed",
+        "layer_mid": "DRYE · Asymmetric layering",
+        "layer_mid_sub": "one layer, one direction — 0.4 mm",
+        "layer_bottom": "Skin",
+        "layer_bottom_sub": "— where the sweat starts"
+      }
     },
     "voices": {
       "type": "drye-hockey-peer-voices",
@@ -72,7 +93,8 @@
         "voice_5",
         "voice_6",
         "voice_7"
-      ]
+      ],
+      "settings": {}
     },
     "fails": {
       "type": "drye-hockey-fail-timeline",
@@ -81,28 +103,40 @@
           "type": "fix",
           "settings": {
             "label": "Gear spray",
-            "reach": 2
+            "note": "",
+            "reach": 2,
+            "aria": "",
+            "is_drye": false
           }
         },
         "fix_2": {
           "type": "fix",
           "settings": {
             "label": "Cream",
-            "reach": 3
+            "note": "",
+            "reach": 3,
+            "aria": "",
+            "is_drye": false
           }
         },
         "fix_3": {
           "type": "fix",
           "settings": {
             "label": "Glove dryer",
-            "reach": 9
+            "note": "",
+            "reach": 9,
+            "aria": "",
+            "is_drye": false
           }
         },
         "fix_4": {
           "type": "fix",
           "settings": {
             "label": "Barrier film",
-            "reach": 11
+            "note": "",
+            "reach": 11,
+            "aria": "",
+            "is_drye": false
           }
         },
         "fix_5": {
@@ -110,7 +144,9 @@
           "settings": {
             "label": "Cotton liner",
             "note": "Saturates, then holds the wet against the skin.",
-            "reach": 27
+            "reach": 27,
+            "aria": "",
+            "is_drye": false
           }
         },
         "fix_6": {
@@ -119,6 +155,7 @@
             "label": "DRYE",
             "note": "Routes instead of saturating.",
             "reach": 100,
+            "aria": "",
             "is_drye": true
           }
         }
@@ -130,7 +167,17 @@
         "fix_4",
         "fix_5",
         "fix_6"
-      ]
+      ],
+      "settings": {
+        "anchor_id": "what-fails",
+        "heading": "You can't clean, cream, dry or line your way out of a glove that seals.",
+        "image_alt": "A kid in full gear sitting on his bag at the rink",
+        "mark_1": "Warm-up",
+        "mark_2": "1st",
+        "mark_3": "2nd",
+        "mark_4": "Horn",
+        "build_caption": "Trapped sweat builds"
+      }
     },
     "mech": {
       "type": "drye-hockey-mechanism",
@@ -139,21 +186,24 @@
           "type": "term",
           "settings": {
             "term": "Heat",
-            "lead": "<p>Sealed. Nothing carries it away.</p>"
+            "lead": "<p>Sealed. Nothing carries it away.</p>",
+            "is_result": false
           }
         },
         "term_2": {
           "type": "term",
           "settings": {
             "term": "Trapped sweat",
-            "lead": "<p>Inside a sealed glove the space around the hand is saturated within the warm-up.</p>"
+            "lead": "<p>Inside a sealed glove the space around the hand is saturated within the warm-up.</p>",
+            "is_result": false
           }
         },
         "term_3": {
           "type": "term",
           "settings": {
             "term": "Bacteria",
-            "lead": "<p>Warm and wet is the condition they do well in.</p>"
+            "lead": "<p>Warm and wet is the condition they do well in.</p>",
+            "is_result": false
           }
         },
         "term_4": {
@@ -170,11 +220,24 @@
         "term_2",
         "term_3",
         "term_4"
-      ]
+      ],
+      "settings": {
+        "anchor_id": "mechanism",
+        "hand_alt": "A bare hand sliding into the glove",
+        "glove_alt": "Outline of a hockey glove",
+        "callout": "Hockey glove",
+        "legend_1": "Heat",
+        "legend_2": "Trapped sweat",
+        "legend_3": "Bacteria",
+        "period_minutes": 20,
+        "period_count": 3,
+        "period_word": "Period",
+        "period_of": "of",
+        "eyebrow": "What occlusion is"
+      }
     },
     "clarity": {
       "type": "drye-liner-product-clarity",
-      "settings": {},
       "blocks": {
         "spec_1": {
           "type": "spec",
@@ -202,15 +265,24 @@
         "spec_1",
         "spec_2",
         "spec_3"
-      ]
+      ],
+      "settings": {
+        "section_id": "liner-product",
+        "heading": "DRYE goes",
+        "heading_emphasis": "under your existing glove.",
+        "body": "<p>Thin enough you forget it's there. Built for repeated shifts.</p>",
+        "media_type": "image",
+        "before_label": "Without DRYE",
+        "after_label": "With DRYE"
+      }
     },
     "video": {
       "type": "drye-textile-proof-videos",
-      "settings": {},
       "blocks": {
         "proof_video_1": {
           "type": "proof_video",
           "settings": {
+            "stream_uid": "",
             "label": "01 / ORIGIN",
             "title": "Built on rare textile machinery",
             "body": "<p>Developed on advanced industrial textile machinery — not generic liner fabric. Engineered, not improvised.</p>"
@@ -219,6 +291,7 @@
         "proof_video_2": {
           "type": "proof_video",
           "settings": {
+            "stream_uid": "",
             "label": "02 / DURABILITY",
             "title": "Knitted for repeated use",
             "body": "<p>Built for repeated wear, washing and friction inside sealed gloves — designed to hold its shape shift after shift.</p>"
@@ -227,6 +300,7 @@
         "proof_video_3": {
           "type": "proof_video",
           "settings": {
+            "stream_uid": "",
             "label": "03 / DRYNESS",
             "title": "Layered to stay dry longer",
             "body": "<p>Asymmetric layering moves moisture away from the skin-facing side, helping the hand side stay drier for longer inside sealed gloves.</p>"
@@ -237,7 +311,15 @@
         "proof_video_1",
         "proof_video_2",
         "proof_video_3"
-      ]
+      ],
+      "settings": {
+        "eyebrow": "BUILT DIFFERENTLY",
+        "heading": "Not another liner.",
+        "heading_italic": "Built to behave differently.",
+        "body": "<p>Most liners fail because they get wet or wear out. DRYE was engineered to avoid both.</p>",
+        "cf_subdomain": "",
+        "footer_note": ""
+      }
     },
     "hiw": {
       "type": "drye-hockey-how-it-works",
@@ -271,15 +353,25 @@
         "step_1",
         "step_2",
         "step_3"
-      ]
+      ],
+      "settings": {
+        "anchor_id": "how-it-works",
+        "eyebrow": "Asymmetric layering",
+        "patent": "Patent pending · SE 2615359-3",
+        "heading": "How it works",
+        "mat_outer": "Outer lyocell",
+        "mat_inner": "Inner · polypropylene",
+        "mat_clear": "Stays clear"
+      }
     },
     "results": {
       "type": "drye-before-after",
-      "settings": {},
       "blocks": {
         "case_1": {
           "type": "case",
           "settings": {
+            "before_alt": "Before image",
+            "after_alt": "After image",
             "timeline": "After 5 months",
             "quote": "\"I had problems for years, and it just kept getting worse. I still moisturize sometimes — but my hands are honestly just normal now.\"",
             "attribution": "— Jens Stålnacke, Mine Worker, Luleå"
@@ -288,6 +380,8 @@
         "case_2": {
           "type": "case",
           "settings": {
+            "before_alt": "Before image",
+            "after_alt": "After image",
             "timeline": "After one season",
             "quote": "\"I had cracks all over my knuckles, redness and eczema. My hands stay drier, my grip is better — and my skin holds up much better.\"",
             "attribution": "— Linnea Pettersson Dove, Professional Hockey Player, Gothenburg"
@@ -296,6 +390,8 @@
         "case_3": {
           "type": "case",
           "settings": {
+            "before_alt": "Before image",
+            "after_alt": "After image",
             "timeline": "After first use",
             "quote": "\"The irritation always came back. Since switching to the liners, my hands feel calmer after every game.\"",
             "attribution": "— Chris P., Fort Worth, Texas"
@@ -306,7 +402,16 @@
         "case_1",
         "case_2",
         "case_3"
-      ]
+      ],
+      "settings": {
+        "micro_label": "Real Users — Real Results",
+        "heading_line_1": "Before and after.",
+        "heading_line_2": "No filters. No staging.",
+        "intro": "These are unsolicited photos sent directly to us by users. We didn't ask for them. They sent them because the results were that visible.",
+        "before_label": "Before",
+        "after_label": "After",
+        "note": "Note: Placeholder images shown — replace with actual user-submitted photos."
+      }
     },
     "objections": {
       "type": "drye-hockey-objections",
@@ -316,6 +421,7 @@
           "settings": {
             "profile": "Grip",
             "question": "Will it affect their play?",
+            "answer": "",
             "proof": "“Cotton liners made my daughter’s hands slippery inside the glove and it affected her grip. DRYE fit tight and didn’t slip.”",
             "who": "Eric Dyke · hockey parent"
           }
@@ -325,6 +431,7 @@
           "settings": {
             "profile": "Durability",
             "question": "Will the seams hold?",
+            "answer": "",
             "proof": "“Six ice times a week.”",
             "who": "Eric Dyke · hockey parent"
           }
@@ -334,6 +441,7 @@
           "settings": {
             "profile": "Timeline",
             "question": "How fast does anything change?",
+            "answer": "",
             "proof": "“No cream or prescription helped for years. His hands cleared after three ice times.”",
             "who": "Adam Todd · hockey parent"
           }
@@ -343,6 +451,7 @@
           "settings": {
             "profile": "Fit",
             "question": "Does it fit a child’s hand?",
+            "answer": "",
             "proof": "“Ten years old, travel team, severe eczema. His hands healed completely.”",
             "who": "Allison M. Goldberg · hockey parent"
           }
@@ -351,7 +460,10 @@
           "type": "objection",
           "settings": {
             "profile": "Price",
-            "question": "Why does it cost more than cotton gloves?"
+            "question": "Why does it cost more than cotton gloves?",
+            "answer": "",
+            "proof": "",
+            "who": ""
           }
         }
       },
@@ -361,7 +473,11 @@
         "objection_3",
         "objection_4",
         "objection_5"
-      ]
+      ],
+      "settings": {
+        "anchor_id": "objections",
+        "heading": "What you'd ask another parent."
+      }
     },
     "stories": {
       "type": "drye-hockey-parent-stories",
@@ -373,7 +489,8 @@
             "head": "“Three ice times, and his hands are completely cleared up.”",
             "body": "<p>“My son has been struggling with severe dry hands because of his hockey gloves for the past few years. No cream or prescription has helped.”</p>",
             "punch": "Absolute game changer.",
-            "who": "Adam Todd · hockey parent · January 2026"
+            "who": "Adam Todd · hockey parent · January 2026",
+            "image_alt": ""
           }
         },
         "story_2": {
@@ -383,7 +500,8 @@
             "head": "“He was embarrassed at school. His hands have completely healed.”",
             "body": "<p>“Ten years old, travel hockey, severe eczema on his hands. He was embarrassed at school and had trouble playing comfortably.” She ordered a second pair so there is always a dry one in the bag.</p>",
             "punch": "They have truly been a game changer.",
-            "who": "Allison M. Goldberg · hockey parent · October 2025"
+            "who": "Allison M. Goldberg · hockey parent · October 2025",
+            "image_alt": ""
           }
         },
         "story_3": {
@@ -393,7 +511,8 @@
             "head": "“She wore the first pair out. That’s why I ordered again.”",
             "body": "<p>“My daughter has severe eczema on her hands and plays a lot of ice hockey. The first pair I ordered helped significantly. She uses them something like six times a week — she destroyed the first pair, hence the order.”</p>",
             "punch": "Thanks for making those.",
-            "who": "Eric Dyke · hockey parent · February 2026"
+            "who": "Eric Dyke · hockey parent · February 2026",
+            "image_alt": ""
           }
         },
         "story_4": {
@@ -403,7 +522,8 @@
             "head": "“They have helped with the eczema quite a bit.”",
             "body": "<p>“I was looking for options for my son due to his eczema. He loves to play hockey and lacrosse, but the gloves make his eczema worse.” Size 7 was still too big, so 6.5 was made for him. A year later the gloves are still holding up.</p>",
             "punch": "Fit really well.",
-            "who": "Siobhan Brown · hockey parent · March 2026"
+            "who": "Siobhan Brown · hockey parent · March 2026",
+            "image_alt": ""
           }
         },
         "pendulum_5": {
@@ -457,7 +577,14 @@
         "pendulum_7",
         "pendulum_8",
         "pendulum_9"
-      ]
+      ],
+      "settings": {
+        "anchor_id": "parent-stories",
+        "pend_title": "Same glove, same session",
+        "pend_key_a": "Wet glove",
+        "pend_key_b": "With DRYE",
+        "pend_note": "<p>Positions are relative, not measured values — based on what users describe in interviews and field studies.</p>"
+      }
     },
     "timeline": {
       "type": "drye-hockey-timeline",
@@ -488,7 +615,10 @@
         "stage_1",
         "stage_2",
         "stage_3"
-      ]
+      ],
+      "settings": {
+        "anchor_id": "timeline"
+      }
     },
     "gallery": {
       "type": "drye-hockey-gallery",
@@ -551,15 +681,39 @@
         "frame_5",
         "frame_6",
         "frame_7"
-      ]
+      ],
+      "settings": {
+        "anchor_id": "gallery",
+        "eyebrow": "Frölunda HC · SDHL champion 2025",
+        "heading": "An SDHL champion wears gloves inside her gloves.",
+        "intro": "",
+        "source": ""
+      }
     },
     "compare": {
       "type": "drye-b2b-mechanism-knit",
-      "settings": {}
+      "settings": {
+        "anchor_id": "knit",
+        "eyebrow": "Moisture routing in sealed environments",
+        "heading": "Moisture routing in sealed environments",
+        "body": "Low-regain PP on the skin side, lyocell on the outer side — one unitary plated knit, no bonded layers.",
+        "caption": "Directional moisture routing"
+      }
     },
     "offer": {
       "type": "drye-hockey-offer",
-      "settings": {}
+      "settings": {
+        "anchor_id": "offer",
+        "heading": "Thirty days. Full refund. No forms.",
+        "body": "<p>Six or seven skates is enough to know. If it isn't doing anything, email us and the money goes back. You don't ship the pair back and you don't get talked out of it.</p>",
+        "price": "$39",
+        "unit": "one pair · a season of regular use",
+        "math": "<p>At 90 skates a season that's 43¢ a skate. Machine washable, so it's the same pair every time.</p>",
+        "cta_label": "Take me to the shop page",
+        "cta_url": "",
+        "sizeguide_label": "Size guide",
+        "sizeguide": ""
+      }
     }
   },
   "order": [
