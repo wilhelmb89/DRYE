@@ -29,15 +29,20 @@
 }
 
 .drye-ba-card {
+  display: flex;
+  flex-direction: column;
   background: var(--bg);
   border: var(--border-base);
 }
 
+/* A fixed ratio, not a min-height: the photos have different natural heights, so
+   without it the middle card runs taller than the other two. Everything crops
+   from the centre to the same box. */
 .drye-ba-images {
   position: relative;
   display: grid;
   grid-template-columns: 1fr 1fr;
-  min-height: 220px;
+  aspect-ratio: 100 / 74;
   background: #f3f4f6;
 }
 
@@ -52,7 +57,6 @@
   display: block;
   width: 100%;
   height: 100%;
-  min-height: 220px;
   object-fit: cover;
 }
 
@@ -91,22 +95,30 @@
   pointer-events: none;
 }
 
-.drye-ba-image-label {
-  position: absolute;
-  left: var(--space-12);
-  bottom: var(--space-8);
-  z-index: 2;
-  display: inline-flex;
-  align-items: center;
-  min-height: 18px;
+/* Label bar sits under the photos, one cell per image, so it can never land on
+   the subject and never crowds the quote. */
+.drye-ba-labels {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  background: rgba(30, 58, 76, 0.82);
+}
+
+.drye-ba-label {
   margin-bottom: 0;
-  padding: 0 var(--space-8);
-  background: rgba(55, 65, 81, 0.92);
-  color: var(--white-100);
-  line-height: 18px;
+  padding: var(--space-6) var(--space-12) var(--space-5);
+  color: var(--white-080);
+  letter-spacing: 0.14em;
+  line-height: 1.2;
+}
+
+.drye-ba-label + .drye-ba-label {
+  box-shadow: inset 1px 0 0 rgba(255, 255, 255, 0.16);
 }
 
 .drye-ba-body {
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 auto;
   padding: var(--space-16) var(--space-18) var(--space-18);
 }
 
@@ -133,6 +145,26 @@
   font-style: italic;
 }
 
+/* Pushed to the bottom by margin-top: auto, so the CTA lines up across all
+   three cards no matter how long the quote runs. */
+.drye-ba-cta {
+  align-self: flex-start;
+  margin-top: auto;
+  padding-top: var(--space-14);
+  padding-bottom: 3px;
+  font-size: 12px;
+  font-weight: var(--fw-semibold);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--emerald);
+  border-bottom: 1px solid currentColor;
+  transition: color var(--dur-fast) var(--ease-standard);
+}
+
+.drye-ba-cta:hover {
+  color: var(--emerald-deep);
+}
+
 .drye-ba-note {
   margin-top: var(--space-16);
   color: var(--deep);
@@ -147,11 +179,7 @@
   .drye-ba-grid {
     grid-template-columns: var(--grid-3-col-desktop);
     gap: var(--space-20);
-  }
-
-  .drye-ba-image-label {
-    left: var(--space-12);
-    bottom: var(--space-8);
+    align-items: stretch;
   }
 
   .drye-ba-body {
