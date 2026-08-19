@@ -4,8 +4,11 @@
 
   var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  /* base.css gates .dryeNEW-reveal behind .js so no-JS visitors see content. */
-  if (!reduce) document.documentElement.classList.add('js');
+  /* Deliberately NOT setting .js on <html>. base.css hides every .dryeNEW-reveal
+     element behind that class, which meant sections rendered blank and popped in
+     as you scrolled — the white flash. Nothing is hidden now; the observer below
+     still runs, so if the theme arms reveal elsewhere the sections are unhidden
+     early rather than late. */
 
   function reveal(scope) {
     var els = scope.querySelectorAll('.dryeNEW-reveal:not([data-drye-reveal-bound])');
@@ -24,9 +27,12 @@
     }, { threshold: narrow ? 0.4 : 0.18, rootMargin: narrow ? '0px 0px -22% 0px' : '0px 0px -8% 0px' });
     els.forEach(function (el) {
       el.setAttribute('data-drye-reveal-bound', '1');
-      /* Stagger comes from base's .dryeNEW-rd1/2/3 classes in the Liquid,
-         not from inline styles. On mobile the cards are stacked, so the
-         delay classes are dropped there. */
+      /* Anything already at or above the fold is shown at once — no first-paint
+         flash even if something else on the page arms the reveal. */
+      if (el.getBoundingClientRect().top < window.innerHeight) {
+        el.classList.add('is-visible');
+        return;
+      }
       if (narrow) el.classList.remove('dryeNEW-rd1', 'dryeNEW-rd2', 'dryeNEW-rd3');
       io.observe(el);
     });
