@@ -1,6 +1,7 @@
 /* drye-hockey-offer.css — price, guarantee, CTA. */
 
-.drye-hockey-offer { background: var(--bg-ink); color: var(--white-100); border-top: var(--border-base); }
+/* Literal for the same reason as the mechanism section — see the note there. */
+.drye-hockey-offer { background: #1E3A4C; color: var(--white-100); border-top: var(--border-base); }
 .drye-hockey-offer__grid { display: flex; flex-wrap: wrap; align-items: flex-start; gap: 28px; }
 .drye-hockey-offer__copy { flex: 1 1 320px; min-width: 280px; max-width: 520px; }
 .drye-hockey-offer__title { color: var(--white-100); max-width: 22ch; text-wrap: pretty; }
