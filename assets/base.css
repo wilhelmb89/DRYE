@@ -983,15 +983,14 @@ body {
   color: var(--white-100);
   font-size: 16px;
   line-height: 1;
-  box-shadow: 0 0 0 6px var(--bg-soft);
   transition: background var(--dur-fast) var(--ease-standard);
 }
 
 .dryeNEW-nav:hover { background: var(--bg-ink); }
-.dryeNEW-nav--prev { left: 12px; }
-.dryeNEW-nav--next { right: 12px; }
+.dryeNEW-nav--prev { left: 0px; }
+.dryeNEW-nav--next { right: 0px; }
 
 @media (min-width: 768px) {
   .dryeNEW-nav { display: inline-flex; }
-  .dryeNEW-rail__track { padding-inline: 74px; scroll-padding-inline: 74px; }
+  .dryeNEW-rail__track { padding-inline: 72px; scroll-padding-inline: 72px; }
 }
