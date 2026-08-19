@@ -47,6 +47,7 @@
                   <span>{{ section.settings.before_label }}</span>
                 </div>
               {% endif %}
+              <span class="dryeNEW-micro drye-ba-label">{{ section.settings.before_label }}</span>
             </div>
 
             <div class="drye-ba-image-wrap">
@@ -64,18 +65,10 @@
                   <span>{{ section.settings.after_label }}</span>
                 </div>
               {% endif %}
+              <span class="dryeNEW-micro drye-ba-label">{{ section.settings.after_label }}</span>
             </div>
 
             <div class="drye-ba-divider" aria-hidden="true"></div>
-          </div>
-
-          {%- comment -%}
-            Labels moved out of the photos into their own bar. Inside the image they
-            landed on whatever happened to be there and crowded the copy box below.
-          {%- endcomment -%}
-          <div class="drye-ba-labels">
-            <span class="dryeNEW-micro drye-ba-label">{{ section.settings.before_label }}</span>
-            <span class="dryeNEW-micro drye-ba-label">{{ section.settings.after_label }}</span>
           </div>
 
           <div class="drye-ba-body">
@@ -125,7 +118,7 @@
     { "type": "textarea", "id": "intro", "label": "Intro text", "default": "These are unsolicited photos sent directly to us by users. We didn't ask for them. They sent them because the results were that visible." },
     { "type": "text", "id": "before_label", "label": "Before label", "default": "Before" },
     { "type": "text", "id": "after_label", "label": "After label", "default": "After" },
-    { "type": "text", "id": "note", "label": "Bottom note", "default": "asd" }
+    { "type": "text", "id": "note", "label": "Bottom note", "default": "123" }
   ],
   "blocks": [
     {
