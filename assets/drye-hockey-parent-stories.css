@@ -120,7 +120,9 @@
 .drye-hockey-pend__note { margin-top: var(--space-14); color: var(--caption); }
 
 @media (min-width: 768px) {
-  .drye-hockey-stories__wrap { padding-inline: 56px; }
+  /* 72px, not 56: the button is 44px wide and sits at left: 0, so 56 left the copy
+     running under it. 72 gives the arrow its own column plus 28px of air. */
+  .drye-hockey-stories__wrap { padding-inline: 72px; }
   .drye-hockey-stories__slide { gap: var(--grid-gap-64); }
   .drye-hockey-stories__copy { order: 0; }
   .drye-hockey-stories__media { order: 0; }
