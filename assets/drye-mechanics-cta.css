@@ -5,6 +5,10 @@
 
 .mech-cta {
   background: var(--deep);
+  /* Own the text colour on the section, not just on the heading. base.css makes
+     every .dryeNEW-h* "color: inherit", so on a page with no dark wrapper the
+     heading fell back to body text colour and went dark. */
+  color: var(--white-100);
   padding-top: var(--space-40);
   padding-bottom: var(--space-40);
 }
@@ -18,20 +22,23 @@
   text-align: center;
 }
 
-.mech-cta__eyebrow {
+/* Two classes deep on purpose: base.css may load after this file, and
+   .dryeNEW-micro / .dryeNEW-h2 are single-class rules that would otherwise win
+   on load order alone. Colour values are unchanged. */
+.mech-cta .mech-cta__eyebrow {
   margin: 0 0 var(--space-4);
   font-size: var(--fs-micro-4);
   letter-spacing: var(--ls-micro-wide);
   color: var(--sage);
 }
 
-.mech-cta__heading {
+.mech-cta .mech-cta__heading {
   margin: 0;
   color: var(--white-100);
   text-wrap: pretty;
 }
 
-.mech-cta__heading .dryeNEW-em {
+.mech-cta .mech-cta__heading .dryeNEW-em {
   display: block;
   margin-top: var(--space-4);
   color: var(--sage);
