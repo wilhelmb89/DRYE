@@ -414,9 +414,15 @@
       /* Reduced motion: no drift, still a swipeable row. Nothing else to do. */
       if (reduce) return;
 
-      var speed = parseFloat(port.getAttribute('data-drye-marquee-speed')) || 26; // px/sec
+      /* Signed: positive drifts the cards right-to-left (scrollLeft grows, so the
+         viewport travels rightward through the content and the cards slide left,
+         entering from the right edge). Negative reverses it. */
+      var speed = parseFloat(port.getAttribute('data-drye-marquee-speed'));
+      if (isNaN(speed)) speed = 26;
+      if (!speed) return; // 0 = plain swipeable row, no drift
       var pos = 0;
       var last = 0;
+      var mine = -1;
       var frame = null;
       var onscreen = false;
       var held = false;
@@ -438,6 +444,7 @@
         /* Keep the float ourselves — scrollLeft rounds, and re-reading it every
            frame would make the drift stutter at sub-pixel speeds. */
         port.scrollLeft = pos;
+        mine = port.scrollLeft;
         frame = requestAnimationFrame(tick);
       }
 
@@ -468,6 +475,7 @@
           held = false;
           pos = port.scrollLeft;
           wrap();
+          mine = -1;
           start();
         }, delay);
       }
@@ -482,7 +490,11 @@
       /* Momentum scrolling on iOS fires no pointer event at all, so a raw scroll
          that we did not write also counts as the reader taking over. */
       port.addEventListener('scroll', function () {
-        if (frame && Math.abs(port.scrollLeft - pos) < 2) return;
+        /* Compare against the exact value WE last wrote, not against the rAF
+           state: a scroll event is queued, so it can land in a frame where
+           frame === null and be misread as the reader taking over — which would
+           stall the drift a beat after every wrap. */
+        if (Math.abs(port.scrollLeft - mine) < 2) return;
         hold();
         release(1600);
       }, { passive: true });
