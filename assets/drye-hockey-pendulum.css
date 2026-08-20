@@ -1,0 +1,80 @@
+/* drye-hockey-pendulum.css — relative-position pendulum. Split out of the
+   parent-stories section so the carousel owns nothing but its slides. */
+
+.drye-hockey-pend {
+  padding: var(--card-pad);
+  background: var(--bg);
+  border: var(--border-base);
+}
+
+.drye-hockey-pend__head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--space-12);
+  padding-bottom: var(--space-14);
+}
+
+.drye-hockey-pend__key { display: flex; gap: var(--space-18); }
+
+.drye-hockey-pend__key span,
+.drye-hockey-pend__title {
+  display: flex;
+  align-items: center;
+  gap: var(--space-7);
+  font-size: var(--fs-micro-4);
+  font-weight: var(--fw-semibold);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.drye-hockey-pend__title { color: var(--caption); letter-spacing: var(--ls-micro-wide); }
+.drye-hockey-pend__key i { width: 11px; height: 11px; font-style: normal; }
+.drye-hockey-pend__key--wet { color: #C0483A; }
+.drye-hockey-pend__key--wet i { background: #C0483A; }
+.drye-hockey-pend__key--drye { color: var(--emerald); }
+.drye-hockey-pend__key--drye i { background: var(--emerald); }
+
+.drye-hockey-pend__row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 12px;
+  padding: var(--space-16) 0;
+  border-top: var(--border-base);
+}
+
+.drye-hockey-pend__label {
+  flex: 1 1 100%;
+  font-size: var(--fs-micro-4);
+  font-weight: var(--fw-semibold);
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  color: var(--deep);
+}
+
+.drye-hockey-pend__scale {
+  position: relative;
+  flex: 1 1 auto;
+  height: 3px;
+  background: linear-gradient(to right, rgba(30, 58, 76, 0.16) 0%, rgba(30, 58, 76, 0.1) 40%, rgba(13, 148, 136, 0.22) 72%, rgba(13, 148, 136, 0.4) 100%);
+}
+
+.drye-hockey-pend__dot {
+  position: absolute;
+  top: -7px;
+  width: 15px;
+  height: 15px;
+  transform: translateX(-50%);
+}
+
+.drye-hockey-pend__dot--wet { background: #C0483A; }
+.drye-hockey-pend__dot--drye { background: var(--emerald); }
+.drye-hockey-pend__note { margin-top: var(--space-14); color: var(--caption); }
+
+@media (min-width: 768px) {
+  .drye-hockey-pend { padding: 36px 32px; }
+  .drye-hockey-pend__label { flex: 0 0 104px; }
+  .drye-hockey-pend__row { gap: var(--grid-gap-20); }
+}
