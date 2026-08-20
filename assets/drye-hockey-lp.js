@@ -64,6 +64,7 @@
       var track = root.querySelector('[data-drye-carousel-track]');
       if (!track) return;
       var slides = track.children.length;
+      if (slides < 2) return;
       var i = 0;
       function paint() { track.style.transform = 'translateX(' + (-100 * i) + '%)'; }
       root.querySelectorAll('[data-drye-carousel-prev]').forEach(function (b) {
@@ -72,14 +73,28 @@
       root.querySelectorAll('[data-drye-carousel-next]').forEach(function (b) {
         b.addEventListener('click', function () { i = (i + 1) % slides; paint(); });
       });
-      var x0 = null;
-      track.addEventListener('touchstart', function (e) { x0 = e.touches[0].clientX; }, { passive: true });
+
+      /* Axis lock. The old version fired on any touch whose horizontal delta
+         passed 48px — a diagonal scroll down the page counted as a swipe, which
+         is why the carousel jumped while the reader was only scrolling. A swipe
+         now has to be both long enough AND more horizontal than vertical. */
+      var x0 = null, y0 = null;
+      track.addEventListener('touchstart', function (e) {
+        x0 = e.touches[0].clientX;
+        y0 = e.touches[0].clientY;
+      }, { passive: true });
       track.addEventListener('touchend', function (e) {
         if (x0 === null) return;
         var dx = e.changedTouches[0].clientX - x0;
-        if (Math.abs(dx) > 48) { i = dx < 0 ? (i + 1) % slides : (i + slides - 1) % slides; paint(); }
+        var dy = e.changedTouches[0].clientY - y0;
+        if (Math.abs(dx) > 48 && Math.abs(dx) > Math.abs(dy) * 1.5) {
+          i = dx < 0 ? (i + 1) % slides : (i + slides - 1) % slides;
+          paint();
+        }
         x0 = null;
-      });
+        y0 = null;
+      }, { passive: true });
+
       paint();
     });
   }
