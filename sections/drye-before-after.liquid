@@ -30,6 +30,10 @@
 
     <div class="drye-ba-grid">
       {% for block in section.blocks %}
+        {%- liquid
+          assign before_label = block.settings.before_label | default: section.settings.before_label
+          assign after_label = block.settings.after_label | default: section.settings.after_label
+        -%}
         <article class="drye-ba-card" {{ block.shopify_attributes }}>
           <div class="drye-ba-images">
             <div class="drye-ba-image-wrap">
@@ -44,10 +48,12 @@
                 }}
               {% else %}
                 <div class="drye-ba-placeholder drye-ba-placeholder--before">
-                  <span>{{ section.settings.before_label }}</span>
+                  <span>{{ before_label }}</span>
                 </div>
               {% endif %}
-              <span class="dryeNEW-micro drye-ba-label">{{ section.settings.before_label }}</span>
+              {% if before_label != blank %}
+                <span class="dryeNEW-micro drye-ba-label">{{ before_label }}</span>
+              {% endif %}
             </div>
 
             <div class="drye-ba-image-wrap">
@@ -62,10 +68,12 @@
                 }}
               {% else %}
                 <div class="drye-ba-placeholder drye-ba-placeholder--after">
-                  <span>{{ section.settings.after_label }}</span>
+                  <span>{{ after_label }}</span>
                 </div>
               {% endif %}
-              <span class="dryeNEW-micro drye-ba-label">{{ section.settings.after_label }}</span>
+              {% if after_label != blank %}
+                <span class="dryeNEW-micro drye-ba-label">{{ after_label }}</span>
+              {% endif %}
             </div>
 
             <div class="drye-ba-divider" aria-hidden="true"></div>
@@ -116,19 +124,33 @@
     { "type": "text", "id": "heading_line_1", "label": "Heading line 1", "default": "Before and after." },
     { "type": "text", "id": "heading_line_2", "label": "Heading line 2", "default": "No filters. No staging." },
     { "type": "textarea", "id": "intro", "label": "Intro text", "default": "These are unsolicited photos sent directly to us by users. We didn't ask for them. They sent them because the results were that visible." },
-    { "type": "text", "id": "before_label", "label": "Before label", "default": "Before" },
-    { "type": "text", "id": "after_label", "label": "After label", "default": "After" },
-    { "type": "text", "id": "note", "label": "Bottom note", "default": "123" }
+    {
+      "type": "header",
+      "content": "Default image labels"
+    },
+    {
+      "type": "paragraph",
+      "content": "Used when a card has no label of its own. Dates are stronger than 'Before' and 'After' — a date is a fact, 'after' is a claim."
+    },
+    { "type": "text", "id": "before_label", "label": "Default left label", "default": "Before" },
+    { "type": "text", "id": "after_label", "label": "Default right label", "default": "After" },
+    {
+      "type": "header",
+      "content": "Footnote"
+    },
+    { "type": "textarea", "id": "note", "label": "Bottom note", "default": "Photos sent to us by users, unedited. Individual results vary — these are single cases, not typical outcomes." }
   ],
   "blocks": [
     {
       "type": "case",
       "name": "Before / after card",
       "settings": [
-        { "type": "image_picker", "id": "before_image", "label": "Before image" },
-        { "type": "text", "id": "before_alt", "label": "Before image alt text", "default": "Before image" },
-        { "type": "image_picker", "id": "after_image", "label": "After image" },
-        { "type": "text", "id": "after_alt", "label": "After image alt text", "default": "After image" },
+        { "type": "image_picker", "id": "before_image", "label": "Left image" },
+        { "type": "text", "id": "before_alt", "label": "Left image alt text", "default": "Hand before regular use of the DRYE liner" },
+        { "type": "text", "id": "before_label", "label": "Left label", "info": "Leave blank to use the section default. A date beats the word 'Before'." },
+        { "type": "image_picker", "id": "after_image", "label": "Right image" },
+        { "type": "text", "id": "after_alt", "label": "Right image alt text", "default": "Same hand after regular use of the DRYE liner" },
+        { "type": "text", "id": "after_label", "label": "Right label", "info": "Leave blank to use the section default." },
         { "type": "text", "id": "timeline", "label": "Timeline", "default": "After 5 months" },
         { "type": "textarea", "id": "quote", "label": "Quote", "default": "\"I had problems for years, and it just kept getting worse. I still moisturize sometimes — but my hands are honestly just normal now.\"" },
         { "type": "text", "id": "attribution", "label": "Attribution", "default": "— Jens Stålnacke, Mine Worker, Luleå" },
@@ -142,9 +164,39 @@
     {
       "name": "DRYE Before / After",
       "blocks": [
-        { "type": "case", "settings": { "timeline": "After first use", "quote": "\"These gloves completely solved my contact dermatitis problems, and as a bonus my hands no longer smell bad after a game!\"", "attribution": "— Chris P., Fort Worth, Texas", "cta_label": "Read his story" } },
-        { "type": "case", "settings": { "timeline": "After one season", "quote": "\"Cracks all over my knuckles, redness and eczema. My hands stay drier, grip is better, skin holds up.\"", "attribution": "— Linnéa Pettersson Dove, SDHL Swedish Champion 2025, Frölunda HC", "cta_label": "Read her story" } },
-        { "type": "case", "settings": { "timeline": "After 5 months", "quote": "\"Real skin problems started in 2017 – pain, open scars and wounds. Nothing worked for years.\"", "attribution": "— Jens Stålnacke, Mine Worker, Luleå", "cta_label": "Read his story" } }
+        {
+          "type": "case",
+          "settings": {
+            "before_label": "14 March",
+            "after_label": "21 March",
+            "timeline": "One week",
+            "quote": "\"These gloves completely solved my contact dermatitis problems.\"",
+            "attribution": "— Chris P., Fort Worth, Texas",
+            "cta_label": "Read his story"
+          }
+        },
+        {
+          "type": "case",
+          "settings": {
+            "before_label": "Nov 2022",
+            "after_label": "One season on",
+            "timeline": "After one season",
+            "quote": "\"Cracks all over my knuckles, redness and eczema. My hands stay drier, grip is better, skin holds up.\"",
+            "attribution": "— Linnéa Pettersson Dove, SDHL Swedish Champion 2025, Frölunda HC",
+            "cta_label": "Read her story"
+          }
+        },
+        {
+          "type": "case",
+          "settings": {
+            "before_label": "Month 1",
+            "after_label": "Month 5",
+            "timeline": "After 5 months",
+            "quote": "\"Real skin problems started in 2017 – pain, open scars and wounds. Nothing worked for years.\"",
+            "attribution": "— Jens Stålnacke, Mine Worker, Luleå",
+            "cta_label": "Read his story"
+          }
+        }
       ]
     }
   ]
