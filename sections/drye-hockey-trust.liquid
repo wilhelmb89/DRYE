@@ -1,0 +1,49 @@
+{{ 'drye-hockey-trust.css' | asset_url | stylesheet_tag }}
+
+<section
+  class="dryeNEW-section drye-trust-section"
+  id="drye-hockey-trust-{{ section.id }}"
+  data-section-id="{{ section.id }}"
+  data-drye-section
+  data-section-name="trust"
+>
+  <div class="dryeNEW-container">
+    {% if section.settings.micro_label != blank %}
+      <span class="dryeNEW-micro drye-trust-micro">{{ section.settings.micro_label }}</span>
+    {% endif %}
+
+    <div class="drye-trust-bar">
+      {% if section.settings.logo != blank %}
+        {{
+          section.settings.logo
+          | image_url: width: 420
+          | image_tag:
+            loading: 'lazy',
+            class: 'drye-trust-logo',
+            alt: section.settings.logo_alt | escape
+        }}
+      {% else %}
+        <span class="drye-trust-logo-fallback">{{ section.settings.logo_alt }}</span>
+      {% endif %}
+
+      {% if section.settings.explainer != blank %}
+        <p class="drye-trust-explainer drye-trust-claim">{{ section.settings.explainer }}</p>
+      {% endif %}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "DRYE Trust Bar",
+  "tag": "section",
+  "class": "shopify-section-drye-hockey-trust",
+  "settings": [
+    { "type": "image_picker", "id": "logo", "label": "Partner logo (SICO)" },
+    { "type": "text", "id": "logo_alt", "label": "Logo alt / fallback text", "default": "SICO — the Swedish ice hockey players' union" },
+    { "type": "text", "id": "micro_label", "label": "Micro label", "default": "Backed By" },
+    { "type": "textarea", "id": "explainer", "label": "Explainer", "default": "The Swedish ice hockey players' union — every professional in SHL, SDHL and Hockeyallsvenskan." }
+  ],
+  "presets": [{ "name": "DRYE Trust Bar" }]
+}
+{% endschema %}
