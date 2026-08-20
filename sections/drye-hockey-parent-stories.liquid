@@ -8,46 +8,66 @@
   permission on file — never paraphrase them into DRYE's own voice.
   The pendulum lives in its own section (drye-hockey-pendulum) so this one owns
   nothing but the carousel.
+
+  Native scroll-snap, not a translateX carousel: the browser has to own the
+  gesture, or a horizontal swipe scrolls the page instead of the row.
+  Behaviour is strips() in drye-hockey-lp.js.
 {%- endcomment -%}
 
-<section class="dryeNEW-section drye-hockey-stories" id="{{ section.settings.anchor_id | default: 'parent-stories' }}" data-section-id="{{ section.id }}" data-drye-section="hockey-stories">
+<section
+  class="dryeNEW-section drye-hockey-stories"
+  id="{{ section.settings.anchor_id | default: 'parent-stories' }}-{{ section.id }}"
+  data-section-id="{{ section.id }}"
+  data-drye-section="hockey-stories"
+>
   <div class="dryeNEW-container">
-    <div class="drye-hockey-stories__wrap" data-drye-carousel>
-      <div class="drye-hockey-stories__view">
-        <div class="drye-hockey-stories__track" data-drye-carousel-track>
-          {%- for block in section.blocks -%}
-            <div class="drye-hockey-stories__slide" {{ block.shopify_attributes }}>
-              <div class="drye-hockey-stories__copy">
-                {%- if block.settings.when != blank -%}
-                  <span class="dryeNEW-micro drye-hockey-stories__when">{{ block.settings.when | escape }}</span>
-                {%- endif -%}
-                <h2 class="dryeNEW-h2 drye-hockey-stories__head">{{ block.settings.head }}</h2>
-                {%- if block.settings.body != blank -%}
-                  <div class="dryeNEW-body drye-hockey-stories__body">{{ block.settings.body }}</div>
-                {%- endif -%}
-                {%- if block.settings.punch != blank -%}
-                  <figure class="drye-hockey-stories__card">
-                    <blockquote class="dryeNEW-h3 drye-hockey-stories__punch">{{ block.settings.punch }}</blockquote>
-                    <figcaption class="dryeNEW-body--caption drye-hockey-stories__who">{{ block.settings.who | escape }}</figcaption>
-                  </figure>
-                {%- endif -%}
-              </div>
+    <div class="drye-hockey-stories__wrap" data-drye-strip data-drye-strip-dot-class="drye-hockey-stories__dot">
+      <button type="button" class="dryeNEW-nav dryeNEW-nav--prev" data-drye-strip-prev aria-label="Previous story">
+        <span aria-hidden="true">&larr;</span>
+      </button>
+      <button type="button" class="dryeNEW-nav dryeNEW-nav--next" data-drye-strip-next aria-label="Next story">
+        <span aria-hidden="true">&rarr;</span>
+      </button>
 
-              <div class="drye-hockey-stories__media">
-                {%- if block.settings.image != blank -%}
-                  {{ block.settings.image | image_url: width: 900 | image_tag: loading: 'lazy', sizes: '(min-width: 768px) 460px, 100vw', alt: block.settings.image_alt }}
-                {%- endif -%}
-              </div>
+      {%- if section.settings.hint_label != blank -%}
+        <div class="drye-hockey-stories__hint" data-drye-strip-hint aria-hidden="true">{{ section.settings.hint_label | escape }}</div>
+      {%- endif -%}
+
+      <div class="drye-hockey-stories__track" data-drye-strip-track>
+        {%- for block in section.blocks -%}
+          <div class="drye-hockey-stories__slide" {{ block.shopify_attributes }}>
+            <div class="drye-hockey-stories__copy">
+              {%- if block.settings.when != blank -%}
+                <span class="dryeNEW-micro drye-hockey-stories__when">{{ block.settings.when | escape }}</span>
+              {%- endif -%}
+
+              <h2 class="dryeNEW-h2 drye-hockey-stories__head">{{ block.settings.head }}</h2>
+
+              {%- if block.settings.body != blank -%}
+                <div class="dryeNEW-body drye-hockey-stories__body">{{ block.settings.body }}</div>
+              {%- endif -%}
+
+              {%- if block.settings.punch != blank -%}
+                <figure class="drye-hockey-stories__card">
+                  <blockquote class="dryeNEW-h3 drye-hockey-stories__punch">{{ block.settings.punch }}</blockquote>
+                  <figcaption class="dryeNEW-body--caption drye-hockey-stories__who">{{ block.settings.who | escape }}</figcaption>
+                </figure>
+              {%- endif -%}
             </div>
-          {%- endfor -%}
-        </div>
-      </div>
 
-      <button type="button" class="dryeNEW-nav dryeNEW-nav--prev" data-drye-carousel-prev aria-label="Previous story">&larr;</button>
-      <button type="button" class="dryeNEW-nav dryeNEW-nav--next" data-drye-carousel-next aria-label="Next story">&rarr;</button>
+            <div class="drye-hockey-stories__media">
+              {%- if block.settings.image != blank -%}
+                {{ block.settings.image | image_url: width: 900 | image_tag: loading: 'lazy', sizes: '(min-width: 768px) 460px, 100vw', alt: block.settings.image_alt }}
+              {%- endif -%}
+            </div>
+          </div>
+        {%- endfor -%}
+      </div>
     </div>
 
-    {% render 'drye-hockey-swipe-hint' %}
+    {%- if section.blocks.size > 1 -%}
+      <div class="drye-hockey-stories__dots" data-drye-strip-dots aria-hidden="true"></div>
+    {%- endif -%}
   </div>
 </section>
 
@@ -57,7 +77,8 @@
   "tag": "section",
   "class": "shopify-section",
   "settings": [
-    { "type": "text", "id": "anchor_id", "label": "Anchor id", "default": "parent-stories" }
+    { "type": "text", "id": "anchor_id", "label": "Anchor id", "default": "parent-stories" },
+    { "type": "text", "id": "hint_label", "label": "Mobile swipe pill (blank to hide)", "default": "Swipe" }
   ],
   "blocks": [
     {
