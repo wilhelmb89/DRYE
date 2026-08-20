@@ -98,16 +98,16 @@
 .drye-hockey-hiw__figure,
 .drye-hockey-hiw__num { transition: opacity 0.4s var(--ease-standard); }
 
-.drye-hockey-hiw.is-visible .drye-hockey-hiw__step--1 { animation: drye-hiw-lit1 9s linear infinite; }
-.drye-hockey-hiw.is-visible .drye-hockey-hiw__step--2 { animation: drye-hiw-lit2 9s linear infinite; }
-.drye-hockey-hiw.is-visible .drye-hockey-hiw__step--3 { animation: drye-hiw-lit3 9s linear infinite; }
+.drye-hockey-hiw.is-running .drye-hockey-hiw__step--1 { animation: drye-hiw-lit1 9s linear infinite; }
+.drye-hockey-hiw.is-running .drye-hockey-hiw__step--2 { animation: drye-hiw-lit2 9s linear infinite; }
+.drye-hockey-hiw.is-running .drye-hockey-hiw__step--3 { animation: drye-hiw-lit3 9s linear infinite; }
 
-.drye-hockey-hiw.is-visible .drye-hockey-hiw__step--1 .drye-hockey-hiw__figure,
-.drye-hockey-hiw.is-visible .drye-hockey-hiw__step--1 .drye-hockey-hiw__num { animation: drye-hiw-wake1 9s linear infinite; }
-.drye-hockey-hiw.is-visible .drye-hockey-hiw__step--2 .drye-hockey-hiw__figure,
-.drye-hockey-hiw.is-visible .drye-hockey-hiw__step--2 .drye-hockey-hiw__num { animation: drye-hiw-wake2 9s linear infinite; }
-.drye-hockey-hiw.is-visible .drye-hockey-hiw__step--3 .drye-hockey-hiw__figure,
-.drye-hockey-hiw.is-visible .drye-hockey-hiw__step--3 .drye-hockey-hiw__num { animation: drye-hiw-wake3 9s linear infinite; }
+.drye-hockey-hiw.is-running .drye-hockey-hiw__step--1 .drye-hockey-hiw__figure,
+.drye-hockey-hiw.is-running .drye-hockey-hiw__step--1 .drye-hockey-hiw__num { animation: drye-hiw-wake1 9s linear infinite; }
+.drye-hockey-hiw.is-running .drye-hockey-hiw__step--2 .drye-hockey-hiw__figure,
+.drye-hockey-hiw.is-running .drye-hockey-hiw__step--2 .drye-hockey-hiw__num { animation: drye-hiw-wake2 9s linear infinite; }
+.drye-hockey-hiw.is-running .drye-hockey-hiw__step--3 .drye-hockey-hiw__figure,
+.drye-hockey-hiw.is-running .drye-hockey-hiw__step--3 .drye-hockey-hiw__num { animation: drye-hiw-wake3 9s linear infinite; }
 
 /* Active window per card: 01 = 0-32%, 02 = 33-65%, 03 = 66-98%. */
 @keyframes drye-hiw-lit1 { 0%, 30% { background-color: #E3F0EE; } 38%, 100% { background-color: #F1F4F7; } }
@@ -120,16 +120,16 @@
 
 /* ---- the shared 9s loop. All three cards read the same clock, so the droplet
    that leaves card 01 is the one that arrives in card 02. ---- */
-.drye-hockey-hiw.is-visible .drye-hockey-hiw__knit { animation: drye-hiw-draw 9s ease-in-out infinite; }
-.drye-hockey-hiw.is-visible .drye-hockey-hiw__drop--1 { animation: drye-hiw-cross 9s cubic-bezier(0.4, 0, 0.5, 1) infinite; }
-.drye-hockey-hiw.is-visible .drye-hockey-hiw__drop--2 { animation: drye-hiw-rise 9s cubic-bezier(0.4, 0, 0.5, 1) infinite; }
-.drye-hockey-hiw.is-visible .drye-hockey-hiw__pool { animation: drye-hiw-pool 9s cubic-bezier(0.3, 0, 0.4, 1) infinite; }
-.drye-hockey-hiw.is-visible .drye-hockey-hiw__wet--2 { animation: drye-hiw-wet2 9s ease-in-out infinite; }
-.drye-hockey-hiw.is-visible .drye-hockey-hiw__wet--3 { animation: drye-hiw-wet3 9s ease-in-out infinite; }
-.drye-hockey-hiw.is-visible .drye-hockey-hiw__fill { animation: drye-hiw-fill 9s linear infinite; }
-.drye-hockey-hiw.is-visible .drye-hockey-hiw__step--1 .drye-hockey-hiw__meter i { animation: drye-hiw-m1 9s linear infinite; }
-.drye-hockey-hiw.is-visible .drye-hockey-hiw__step--2 .drye-hockey-hiw__meter i { animation: drye-hiw-m2 9s linear infinite; }
-.drye-hockey-hiw.is-visible .drye-hockey-hiw__step--3 .drye-hockey-hiw__meter i { animation: drye-hiw-m3 9s linear infinite; }
+.drye-hockey-hiw.is-running .drye-hockey-hiw__knit { animation: drye-hiw-draw 9s ease-in-out infinite; }
+.drye-hockey-hiw.is-running .drye-hockey-hiw__drop--1 { animation: drye-hiw-cross 9s cubic-bezier(0.4, 0, 0.5, 1) infinite; }
+.drye-hockey-hiw.is-running .drye-hockey-hiw__drop--2 { animation: drye-hiw-rise 9s cubic-bezier(0.4, 0, 0.5, 1) infinite; }
+.drye-hockey-hiw.is-running .drye-hockey-hiw__pool { animation: drye-hiw-pool 9s cubic-bezier(0.3, 0, 0.4, 1) infinite; }
+.drye-hockey-hiw.is-running .drye-hockey-hiw__wet--2 { animation: drye-hiw-wet2 9s ease-in-out infinite; }
+.drye-hockey-hiw.is-running .drye-hockey-hiw__wet--3 { animation: drye-hiw-wet3 9s ease-in-out infinite; }
+.drye-hockey-hiw.is-running .drye-hockey-hiw__fill { animation: drye-hiw-fill 9s linear infinite; }
+.drye-hockey-hiw.is-running .drye-hockey-hiw__step--1 .drye-hockey-hiw__meter i { animation: drye-hiw-m1 9s linear infinite; }
+.drye-hockey-hiw.is-running .drye-hockey-hiw__step--2 .drye-hockey-hiw__meter i { animation: drye-hiw-m2 9s linear infinite; }
+.drye-hockey-hiw.is-running .drye-hockey-hiw__step--3 .drye-hockey-hiw__meter i { animation: drye-hiw-m3 9s linear infinite; }
 
 .drye-hockey-hiw__knit { stroke-dasharray: 640; stroke-dashoffset: 470; }
 .drye-hockey-hiw__fill { position: absolute; left: 0; top: 15%; height: 14%; width: 0; background: rgba(44, 166, 224, 0.5); }
@@ -210,13 +210,13 @@
     max-height: 0;
   }
 
-  .drye-hockey-hiw.is-visible .drye-hockey-hiw__step--2 {
+  .drye-hockey-hiw.is-running .drye-hockey-hiw__step--2 {
     animation: drye-hiw-unfold 9s linear 1 forwards,
                drye-hiw-lit2 9s linear infinite;
     animation-delay: 3s, 0s;
   }
 
-  .drye-hockey-hiw.is-visible .drye-hockey-hiw__step--3 {
+  .drye-hockey-hiw.is-running .drye-hockey-hiw__step--3 {
     animation: drye-hiw-unfold 9s linear 1 forwards,
                drye-hiw-lit3 9s linear infinite;
     animation-delay: 6s, 0s;
@@ -224,8 +224,8 @@
 
   /* Once unfolded the dimming would hide a card the reader is looking at, so
      mobile keeps every revealed figure at full strength. */
-  .drye-hockey-hiw.is-visible .drye-hockey-hiw__figure,
-  .drye-hockey-hiw.is-visible .drye-hockey-hiw__num {
+  .drye-hockey-hiw.is-running .drye-hockey-hiw__figure,
+  .drye-hockey-hiw.is-running .drye-hockey-hiw__num {
     animation: none !important;
     opacity: 1 !important;
   }

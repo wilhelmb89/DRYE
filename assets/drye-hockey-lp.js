@@ -121,10 +121,34 @@
     });
   }
 
+  /* Animation clocks. Separate from reveal on purpose: reveal fires early (so
+     nothing pops in), but a looping figure must not start counting until the
+     thing it animates is actually on screen. data-drye-anim holds an optional
+     selector for the element to watch; the section itself is the fallback. */
+  function anims(scope) {
+    scope.querySelectorAll('[data-drye-anim]:not([data-drye-anim-bound])').forEach(function (root) {
+      root.setAttribute('data-drye-anim-bound', '1');
+      if (reduce || !('IntersectionObserver' in window)) {
+        root.classList.add('is-running');
+        return;
+      }
+      var sel = root.getAttribute('data-drye-anim');
+      var target = (sel && root.querySelector(sel)) || root;
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) {
+          if (!e.isIntersecting) return;
+          root.classList.add('is-running');
+          io.unobserve(e.target);
+        });
+      }, { threshold: 0, rootMargin: '0px 0px -30% 0px' });
+      io.observe(target);
+    });
+  }
+
   window.DRYEHockey = {
     init: function (scope) {
       var t = scope || document;
-      reveal(t); rails(t); carousels(t); clocks(t);
+      reveal(t); rails(t); carousels(t); clocks(t); anims(t);
     }
   };
 
