@@ -23,6 +23,92 @@
         "subtext": "<p>DRYE is a patent-pending textile construction developed for closed glove environments — where standard wicking materials fail.</p>"
       }
     },
+    "drye_mechanics_saturation_DzjNTn": {
+      "type": "drye-mechanics-saturation",
+      "blocks": {
+        "fiber_row_3GdkJA": {
+          "type": "fiber_row",
+          "settings": {
+            "fiber_name": "Merino wool",
+            "fiber_note": "Soaks like a sponge. Stays heavy.",
+            "value": "15–18%",
+            "bar_percent": 100,
+            "is_highlighted": false
+          }
+        },
+        "fiber_row_BAYdfz": {
+          "type": "fiber_row",
+          "settings": {
+            "fiber_name": "Bamboo viscose",
+            "fiber_note": "Soft-sell marketing. Wetter than cotton.",
+            "value": "13%",
+            "bar_percent": 78,
+            "is_highlighted": false
+          }
+        },
+        "fiber_row_dCLAG4": {
+          "type": "fiber_row",
+          "settings": {
+            "fiber_name": "Silk",
+            "fiber_note": "Soaks slow. Dries slower.",
+            "value": "11%",
+            "bar_percent": 65,
+            "is_highlighted": false
+          }
+        },
+        "fiber_row_F6nCk3": {
+          "type": "fiber_row",
+          "settings": {
+            "fiber_name": "Cotton",
+            "fiber_note": "Wet in under an hour.",
+            "value": "7–8%",
+            "bar_percent": 47,
+            "is_highlighted": false
+          }
+        },
+        "fiber_row_xGqXTb": {
+          "type": "fiber_row",
+          "settings": {
+            "fiber_name": "Polyester",
+            "fiber_note": "Wets fast. Dries slow.",
+            "value": "0.4%",
+            "bar_percent": 3,
+            "is_highlighted": false
+          }
+        },
+        "fiber_row_cXPR3X": {
+          "type": "fiber_row",
+          "settings": {
+            "fiber_name": "DRYE Asymmetric layering",
+            "fiber_note": "Can't fill. Stays dry — full shift.",
+            "value": "<0.1%",
+            "bar_percent": 1,
+            "is_highlighted": true
+          }
+        }
+      },
+      "block_order": [
+        "fiber_row_3GdkJA",
+        "fiber_row_BAYdfz",
+        "fiber_row_dCLAG4",
+        "fiber_row_F6nCk3",
+        "fiber_row_xGqXTb",
+        "fiber_row_cXPR3X"
+      ],
+      "name": "DRYE Saturation Point",
+      "settings": {
+        "section_id": "mechanics-saturation",
+        "eyebrow": "The invention",
+        "heading_line_1": "Every other liner saturates.",
+        "heading_echo": "Ours physically can't.",
+        "subheading": "Every fibre that's ever been inside your glove fills up with sweat. Then it stops moving. The rest of the shift, it sits against your hand.",
+        "drye_chip": "Skin-side dry",
+        "close_heading": "",
+        "close_body": "",
+        "close_statement": "",
+        "cite": "Moisture regain references: Kadolph 2014 · ASTM D2654 · CN GB national standard. Transport mechanism independently verified at the Swedish School of Textiles, 2025."
+      }
+    },
     "drye_hockey_how_it_works_F3Y84M": {
       "type": "drye-hockey-how-it-works",
       "blocks": {
@@ -68,6 +154,7 @@
     },
     "drye_nt_trapped_7w3J7A": {
       "type": "drye-nt-trapped",
+      "disabled": true,
       "settings": {
         "chapter": "02",
         "glove_anno": "Your nitrile glove",
@@ -334,92 +421,6 @@
         "guarantee_text": "30-Day Money Back Guarantee"
       }
     },
-    "drye_mechanics_saturation_DzjNTn": {
-      "type": "drye-mechanics-saturation",
-      "blocks": {
-        "fiber_row_3GdkJA": {
-          "type": "fiber_row",
-          "settings": {
-            "fiber_name": "Merino wool",
-            "fiber_note": "Soaks like a sponge. Stays heavy.",
-            "value": "15–18%",
-            "bar_percent": 100,
-            "is_highlighted": false
-          }
-        },
-        "fiber_row_BAYdfz": {
-          "type": "fiber_row",
-          "settings": {
-            "fiber_name": "Bamboo viscose",
-            "fiber_note": "Soft-sell marketing. Wetter than cotton.",
-            "value": "13%",
-            "bar_percent": 78,
-            "is_highlighted": false
-          }
-        },
-        "fiber_row_dCLAG4": {
-          "type": "fiber_row",
-          "settings": {
-            "fiber_name": "Silk",
-            "fiber_note": "Soaks slow. Dries slower.",
-            "value": "11%",
-            "bar_percent": 65,
-            "is_highlighted": false
-          }
-        },
-        "fiber_row_F6nCk3": {
-          "type": "fiber_row",
-          "settings": {
-            "fiber_name": "Cotton",
-            "fiber_note": "Wet in under an hour.",
-            "value": "7–8%",
-            "bar_percent": 47,
-            "is_highlighted": false
-          }
-        },
-        "fiber_row_xGqXTb": {
-          "type": "fiber_row",
-          "settings": {
-            "fiber_name": "Polyester",
-            "fiber_note": "Wets fast. Dries slow.",
-            "value": "0.4%",
-            "bar_percent": 3,
-            "is_highlighted": false
-          }
-        },
-        "fiber_row_cXPR3X": {
-          "type": "fiber_row",
-          "settings": {
-            "fiber_name": "DRYE Asymmetric layering",
-            "fiber_note": "Can't fill. Stays dry — full shift.",
-            "value": "<0.1%",
-            "bar_percent": 1,
-            "is_highlighted": true
-          }
-        }
-      },
-      "block_order": [
-        "fiber_row_3GdkJA",
-        "fiber_row_BAYdfz",
-        "fiber_row_dCLAG4",
-        "fiber_row_F6nCk3",
-        "fiber_row_xGqXTb",
-        "fiber_row_cXPR3X"
-      ],
-      "name": "DRYE Saturation Point",
-      "settings": {
-        "section_id": "mechanics-saturation",
-        "eyebrow": "The invention",
-        "heading_line_1": "Every other liner saturates.",
-        "heading_echo": "Ours physically can't.",
-        "subheading": "Every fibre that's ever been inside your glove fills up with sweat. Then it stops moving. The rest of the shift, it sits against your hand.",
-        "drye_chip": "Skin-side dry",
-        "close_heading": "",
-        "close_body": "",
-        "close_statement": "",
-        "cite": "Moisture regain references: Kadolph 2014 · ASTM D2654 · CN GB national standard. Transport mechanism independently verified at the Swedish School of Textiles, 2025."
-      }
-    },
     "drye_section_06_faq_8w34Ye": {
       "type": "drye-section-06-faq",
       "blocks": {
@@ -489,6 +490,7 @@
   },
   "order": [
     "drye_how_it_works_hero_LiYY94",
+    "drye_mechanics_saturation_DzjNTn",
     "drye_hockey_how_it_works_F3Y84M",
     "drye_nt_trapped_7w3J7A",
     "drye_nt_tradeoff_M9TeWV",
@@ -499,7 +501,6 @@
     "drye_liner_product_clarity_Kx873m",
     "drye_liner_proof_fVmEKL",
     "drye_liner_risk_reversal_8phaia",
-    "drye_mechanics_saturation_DzjNTn",
     "drye_section_06_faq_8w34Ye",
     "drye_about_cta_eei9qN"
   ]
