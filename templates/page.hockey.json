@@ -449,6 +449,66 @@
         "anchor_id": "parent-stories"
       }
     },
+    "drye_hockey_pendulum_L8iiC6": {
+      "type": "drye-hockey-pendulum",
+      "blocks": {
+        "pendulum_epdeJq": {
+          "type": "pendulum",
+          "settings": {
+            "label": "Grip",
+            "wet": 26,
+            "drye": 86
+          }
+        },
+        "pendulum_r77iEQ": {
+          "type": "pendulum",
+          "settings": {
+            "label": "Comfort",
+            "wet": 22,
+            "drye": 80
+          }
+        },
+        "pendulum_mAeGqX": {
+          "type": "pendulum",
+          "settings": {
+            "label": "Skin",
+            "wet": 15,
+            "drye": 72
+          }
+        },
+        "pendulum_FMjcXr": {
+          "type": "pendulum",
+          "settings": {
+            "label": "Smell",
+            "wet": 12,
+            "drye": 70
+          }
+        },
+        "pendulum_wTtttd": {
+          "type": "pendulum",
+          "settings": {
+            "label": "Routine",
+            "wet": 20,
+            "drye": 88
+          }
+        }
+      },
+      "block_order": [
+        "pendulum_epdeJq",
+        "pendulum_r77iEQ",
+        "pendulum_mAeGqX",
+        "pendulum_FMjcXr",
+        "pendulum_wTtttd"
+      ],
+      "name": "drye-Hockey Pendulum",
+      "settings": {
+        "anchor_id": "pendulum",
+        "pend_title": "Same glove, same session",
+        "pend_key_a": "Wet glove",
+        "pend_key_b": "With DRYE",
+        "pend_note": "<p>Positions are relative, not measured values — based on what users describe in interviews and field studies.</p>"
+      }
+    },
     "objections": {
       "type": "drye-hockey-objections",
       "blocks": {
@@ -465,11 +525,11 @@
         "objection_2": {
           "type": "objection",
           "settings": {
-            "profile": "Durability",
+            "profile": "Performance",
             "question": "Will the seams hold?",
             "answer": "",
-            "proof": "“Six ice times a week.”",
-            "who": "Eric Dyke · hockey parent"
+            "proof": "\"A year later, they're still holding up.\"",
+            "who": "Siobhan Brown · hockey parent"
           }
         },
         "objection_3": {
@@ -513,6 +573,7 @@
       "settings": {
         "anchor_id": "objections",
         "heading": "What you'd ask another parent.",
+        "hint_label": "Swipe",
         "background": "shopify://shop_images/Gemini_Generated_Image_t4kjkvt4kjkvt4kj_1.webp"
       }
     },
@@ -764,66 +825,6 @@
         "cta_url": "shopify://products/drye-moisture-routing-glove-liners",
         "sizeguide_label": "Size guide",
         "sizeguide": ""
-      }
-    },
-    "drye_hockey_pendulum_L8iiC6": {
-      "type": "drye-hockey-pendulum",
-      "blocks": {
-        "pendulum_epdeJq": {
-          "type": "pendulum",
-          "settings": {
-            "label": "Grip",
-            "wet": 26,
-            "drye": 86
-          }
-        },
-        "pendulum_r77iEQ": {
-          "type": "pendulum",
-          "settings": {
-            "label": "Comfort",
-            "wet": 22,
-            "drye": 80
-          }
-        },
-        "pendulum_mAeGqX": {
-          "type": "pendulum",
-          "settings": {
-            "label": "Skin",
-            "wet": 15,
-            "drye": 72
-          }
-        },
-        "pendulum_FMjcXr": {
-          "type": "pendulum",
-          "settings": {
-            "label": "Smell",
-            "wet": 12,
-            "drye": 70
-          }
-        },
-        "pendulum_wTtttd": {
-          "type": "pendulum",
-          "settings": {
-            "label": "Routine",
-            "wet": 20,
-            "drye": 88
-          }
-        }
-      },
-      "block_order": [
-        "pendulum_epdeJq",
-        "pendulum_r77iEQ",
-        "pendulum_mAeGqX",
-        "pendulum_FMjcXr",
-        "pendulum_wTtttd"
-      ],
-      "name": "drye-Hockey Pendulum",
-      "settings": {
-        "anchor_id": "pendulum",
-        "pend_title": "Same glove, same session",
-        "pend_key_a": "Wet glove",
-        "pend_key_b": "With DRYE",
-        "pend_note": "<p>Positions are relative, not measured values — based on what users describe in interviews and field studies.</p>"
       }
     }
   },
