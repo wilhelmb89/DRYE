@@ -55,7 +55,9 @@
 
 .drye-hockey-mech__halo,
 .drye-hockey-mech__fx { position: absolute; inset: 0; }
-.drye-hockey-mech__halo span { position: absolute; inset: 0; }
+/* will-change keeps the three halo layers on their own compositor layers, so
+   their opacity/scale ramp never touches the main thread. */
+.drye-hockey-mech__halo span { position: absolute; inset: 0; will-change: opacity, transform; }
 
 .drye-hockey-mech__drip {
   position: absolute;
@@ -133,8 +135,21 @@
   font-variant-numeric: tabular-nums;
 }
 
-.drye-hockey-mech__meter { position: relative; display: block; height: 2px; background: var(--white-015); }
-.drye-hockey-mech__meter i { position: absolute; left: 0; top: 0; bottom: 0; width: 0; background: #5FCFC1; }
+.drye-hockey-mech__meter { position: relative; display: block; height: 2px; background: var(--white-015); overflow: hidden; }
+
+/* Full width, scaled down. The clock used to animate this as a percentage width,
+   which relayouts the meter on every tick; scaleX is composited. */
+.drye-hockey-mech__meter i {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 100%;
+  transform: scaleX(0);
+  transform-origin: left center;
+  background: #5FCFC1;
+  will-change: transform;
+}
 
 .drye-hockey-mech__period {
   font-size: var(--fs-micro-3);
@@ -186,6 +201,23 @@
 
 .drye-hockey-mech__hand { transform: translateX(-105%); }
 
+/* The rim glow, rasterized ONCE.
+
+   This used to live inside @keyframes drye-mech-inhand: two drop-shadows
+   ramping to a 46px blur radius, on an <img> that is 278% wide. filter is not
+   a compositor property, so the browser re-rasterized that shadow every frame
+   of a 9s infinite loop. It was the most expensive thing on the page, and it
+   is what made the period clock stutter.
+
+   The intensity ramp it drew is already drawn by the three __halo layers,
+   which animate opacity and transform only. So the ramp stays and the
+   per-frame raster goes: a static filter plus an opacity fade over it. */
+.drye-hockey-mech__inhand {
+  filter:
+    drop-shadow(0 0 22px rgba(13, 148, 136, 0.62))
+    drop-shadow(0 0 18px rgba(96, 165, 250, 0.26));
+}
+
 .drye-hockey-mech.is-visible .drye-hockey-mech__hand { animation: drye-mech-handin 9s cubic-bezier(0.2, 0.72, 0.18, 1) 0.2s infinite; }
 .drye-hockey-mech.is-visible .drye-hockey-mech__glove { animation: drye-mech-xray 9s ease 0.2s infinite; }
 .drye-hockey-mech.is-visible .drye-hockey-mech__edge { animation: drye-mech-edge 9s ease 0.2s infinite; }
@@ -206,14 +238,14 @@
 @keyframes drye-mech-xray { 0%, 22% { opacity: 1; } 25%, 88% { opacity: 0; } 96%, 100% { opacity: 1; } }
 @keyframes drye-mech-edge { 0%, 22% { opacity: 0; } 25%, 88% { opacity: 1; } 96%, 100% { opacity: 0; } }
 
+/* Opacity only — the filter is static now, see .drye-hockey-mech__inhand above. */
 @keyframes drye-mech-inhand {
-  0%, 22% { opacity: 0; filter: drop-shadow(0 0 8px rgba(95,207,193,0)); }
-  27% { opacity: 0.85; filter: drop-shadow(0 0 10px rgba(95,207,193,0.22)) drop-shadow(0 0 14px rgba(96,165,250,0.2)); }
-  45% { opacity: 0.85; filter: drop-shadow(0 0 18px rgba(95,207,193,0.4)) drop-shadow(0 0 18px rgba(96,165,250,0.24)); }
-  60% { opacity: 0.85; filter: drop-shadow(0 0 26px rgba(13,148,136,0.58)) drop-shadow(0 0 22px rgba(96,165,250,0.26)); }
-  75% { opacity: 0.85; filter: drop-shadow(0 0 36px rgba(13,148,136,0.72)) drop-shadow(0 0 26px rgba(96,165,250,0.28)); }
-  88% { opacity: 0.85; filter: drop-shadow(0 0 46px rgba(13,148,136,0.88)) drop-shadow(0 0 30px rgba(96,165,250,0.3)); }
-  95%, 100% { opacity: 0; filter: drop-shadow(0 0 12px rgba(95,207,193,0)); }
+  0%, 22% { opacity: 0; }
+  27% { opacity: 0.55; }
+  45% { opacity: 0.7; }
+  60% { opacity: 0.8; }
+  88% { opacity: 0.85; }
+  95%, 100% { opacity: 0; }
 }
 
 @keyframes drye-mech-fxon { 0%, 22.5% { opacity: 0; } 29%, 88% { opacity: 1; } 95%, 100% { opacity: 0; } }
