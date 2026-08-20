@@ -361,73 +361,6 @@
         "mat_clear": "Stays clear"
       }
     },
-    "objections": {
-      "type": "drye-hockey-objections",
-      "blocks": {
-        "objection_1": {
-          "type": "objection",
-          "settings": {
-            "profile": "Grip",
-            "question": "Will it affect their play?",
-            "answer": "",
-            "proof": "“Cotton liners made my daughter’s hands slippery inside the glove and it affected her grip. DRYE fit tight and didn’t slip.”",
-            "who": "Eric Dyke · hockey parent"
-          }
-        },
-        "objection_2": {
-          "type": "objection",
-          "settings": {
-            "profile": "Durability",
-            "question": "Will the seams hold?",
-            "answer": "",
-            "proof": "“Six ice times a week.”",
-            "who": "Eric Dyke · hockey parent"
-          }
-        },
-        "objection_3": {
-          "type": "objection",
-          "settings": {
-            "profile": "Timeline",
-            "question": "How fast does anything change?",
-            "answer": "",
-            "proof": "“No cream or prescription helped for years. His hands cleared after three ice times.”",
-            "who": "Adam Todd · hockey parent"
-          }
-        },
-        "objection_4": {
-          "type": "objection",
-          "settings": {
-            "profile": "Fit",
-            "question": "Does it fit a child’s hand?",
-            "answer": "",
-            "proof": "“Ten years old, travel team, severe eczema. His hands healed completely.”",
-            "who": "Allison M. Goldberg · hockey parent"
-          }
-        },
-        "objection_5": {
-          "type": "objection",
-          "settings": {
-            "profile": "Price",
-            "question": "Why does it cost more than cotton gloves?",
-            "answer": "",
-            "proof": "",
-            "who": ""
-          }
-        }
-      },
-      "block_order": [
-        "objection_1",
-        "objection_2",
-        "objection_3",
-        "objection_4",
-        "objection_5"
-      ],
-      "settings": {
-        "anchor_id": "objections",
-        "heading": "What you'd ask another parent.",
-        "background": "shopify://shop_images/Gemini_Generated_Image_t4kjkvt4kjkvt4kj_1.webp"
-      }
-    },
     "stories": {
       "type": "drye-hockey-parent-stories",
       "blocks": {
@@ -502,46 +435,6 @@
             "image": "shopify://shop_images/Gemini_Generated_Image_4nnlck4nnlck4nnl.webp",
             "image_alt": ""
           }
-        },
-        "pendulum_5": {
-          "type": "pendulum",
-          "settings": {
-            "label": "Grip",
-            "wet": 26,
-            "drye": 86
-          }
-        },
-        "pendulum_6": {
-          "type": "pendulum",
-          "settings": {
-            "label": "Comfort",
-            "wet": 22,
-            "drye": 80
-          }
-        },
-        "pendulum_7": {
-          "type": "pendulum",
-          "settings": {
-            "label": "Skin",
-            "wet": 15,
-            "drye": 89
-          }
-        },
-        "pendulum_8": {
-          "type": "pendulum",
-          "settings": {
-            "label": "Smell",
-            "wet": 12,
-            "drye": 65
-          }
-        },
-        "pendulum_9": {
-          "type": "pendulum",
-          "settings": {
-            "label": "Routine",
-            "wet": 20,
-            "drye": 68
-          }
         }
       },
       "block_order": [
@@ -550,19 +443,77 @@
         "story_1",
         "story_2",
         "story_3",
-        "story_4",
-        "pendulum_5",
-        "pendulum_6",
-        "pendulum_7",
-        "pendulum_8",
-        "pendulum_9"
+        "story_4"
       ],
       "settings": {
-        "anchor_id": "parent-stories",
-        "pend_title": "Same glove, same session",
-        "pend_key_a": "Wet glove",
-        "pend_key_b": "With DRYE",
-        "pend_note": "<p>Positions are relative, not measured values — based on what users describe in interviews and field studies.</p>"
+        "anchor_id": "parent-stories"
+      }
+    },
+    "objections": {
+      "type": "drye-hockey-objections",
+      "blocks": {
+        "objection_1": {
+          "type": "objection",
+          "settings": {
+            "profile": "Grip",
+            "question": "Will it affect their play?",
+            "answer": "",
+            "proof": "“Cotton liners made my daughter’s hands slippery inside the glove and it affected her grip. DRYE fit tight and didn’t slip.”",
+            "who": "Eric Dyke · hockey parent"
+          }
+        },
+        "objection_2": {
+          "type": "objection",
+          "settings": {
+            "profile": "Durability",
+            "question": "Will the seams hold?",
+            "answer": "",
+            "proof": "“Six ice times a week.”",
+            "who": "Eric Dyke · hockey parent"
+          }
+        },
+        "objection_3": {
+          "type": "objection",
+          "settings": {
+            "profile": "Timeline",
+            "question": "How fast does anything change?",
+            "answer": "",
+            "proof": "“No cream or prescription helped for years. His hands cleared after three ice times.”",
+            "who": "Adam Todd · hockey parent"
+          }
+        },
+        "objection_4": {
+          "type": "objection",
+          "settings": {
+            "profile": "Fit",
+            "question": "Does it fit a child’s hand?",
+            "answer": "",
+            "proof": "“Ten years old, travel team, severe eczema. His hands healed completely.”",
+            "who": "Allison M. Goldberg · hockey parent"
+          }
+        },
+        "objection_5": {
+          "type": "objection",
+          "settings": {
+            "profile": "Price",
+            "question": "Why does it cost more than cotton gloves?",
+            "answer": "",
+            "proof": "",
+            "who": ""
+          }
+        }
+      },
+      "block_order": [
+        "objection_1",
+        "objection_2",
+        "objection_3",
+        "objection_4",
+        "objection_5"
+      ],
+      "settings": {
+        "anchor_id": "objections",
+        "heading": "What you'd ask another parent.",
+        "background": "shopify://shop_images/Gemini_Generated_Image_t4kjkvt4kjkvt4kj_1.webp"
       }
     },
     "gallery": {
@@ -825,8 +776,8 @@
     "clarity",
     "drye_research_video_full_76TKtF",
     "hiw",
-    "objections",
     "stories",
+    "objections",
     "gallery",
     "drye_nt_trust_badges_kmjhiL",
     "drye_mechanics_cta_jQNPXc",
