@@ -1,19 +1,33 @@
-/* drye-hockey-peer-voices.css — problem-state quote marquee. */
+/* drye-hockey-peer-voices.css — problem-state quote marquee.
+
+   The drift is driven by scrollLeft from drye-hockey-lp.js, not by a CSS
+   animation. A transform marquee cannot be swiped: there is no scroll container,
+   so a finger has nothing to grab. This section IS the scroll container, and JS
+   nudges its scrollLeft each frame. Without JS it degrades to a plain swipeable
+   row, which is the better failure. */
 
 .drye-hockey-voices {
   padding-block: var(--space-28);
   border-block: var(--border-base);
-  overflow: hidden;
+
+  overflow-x: auto;
+  overflow-y: hidden;
+  /* No scroll-snap: a marquee has no pages to land on, and mandatory snap would
+     cancel every programmatic scrollLeft write instantly. */
+  overscroll-behavior-x: contain;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  /* Must NOT be smooth — it would fight the per-frame writes. */
+  scroll-behavior: auto;
 }
+
+.drye-hockey-voices::-webkit-scrollbar { display: none; }
 
 .drye-hockey-voices__track {
   display: flex;
   width: max-content;
   align-items: stretch;
-  animation: drye-hockey-marquee 34s linear infinite;
 }
-
-.drye-hockey-voices:hover .drye-hockey-voices__track { animation-play-state: paused; }
 
 .drye-hockey-voices__run { display: flex; align-items: stretch; flex: 0 0 auto; }
 
@@ -44,13 +58,4 @@
 @media (min-width: 768px) {
   .drye-hockey-voices { padding-block: var(--space-40); }
   .drye-hockey-voices__item { width: 26vw; max-width: 360px; padding-inline: var(--space-28); }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .drye-hockey-voices__track { animation: none !important; }
-}
-
-@keyframes drye-hockey-marquee {
-  from { transform: translateX(0); }
-  to { transform: translateX(-50%); }
 }

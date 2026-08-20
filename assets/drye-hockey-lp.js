@@ -382,10 +382,138 @@
     });
   }
 
+  /* Continuous quote marquee — drye-hockey-peer-voices.
+
+     Native scroll, not transform. The old version moved the track with
+     translateX, which is pure paint: there is no scroll container, so a finger
+     has nothing to grab. Writing scrollLeft per frame instead means swipe,
+     momentum and gesture direction-locking are the browser's job, and the
+     marquee is a normal horizontal scroller that happens to drift.
+
+     The section renders its blocks TWICE. Half the track width is therefore one
+     full set, and wrapping by that amount is invisible. Wrapping works in both
+     directions, so the reader can also swipe backwards forever.
+
+     Deliberately not the carousel() pattern: this has no pages, no dots and no
+     arrows, so paginated stepping would fight the drift. */
+  function marquees(scope) {
+    scope.querySelectorAll('[data-drye-marquee]:not([data-drye-marquee-bound])').forEach(function (port) {
+      port.setAttribute('data-drye-marquee-bound', '1');
+      var track = port.querySelector('[data-drye-marquee-track]');
+      if (!track) return;
+
+      /* Half the track, remeasured on resize: the cards are sized in vw. */
+      var half = 0;
+      function measure() { half = track.scrollWidth / 2; }
+      measure();
+      window.addEventListener('resize', measure);
+
+      /* Start one set in, so a backwards swipe has somewhere to go immediately. */
+      port.scrollLeft = 0;
+
+      /* Reduced motion: no drift, still a swipeable row. Nothing else to do. */
+      if (reduce) return;
+
+      var speed = parseFloat(port.getAttribute('data-drye-marquee-speed')) || 26; // px/sec
+      var pos = 0;
+      var last = 0;
+      var frame = null;
+      var onscreen = false;
+      var held = false;
+      var idle = null;
+
+      function wrap() {
+        if (!half) return;
+        if (pos >= half) pos -= half;
+        else if (pos < 0) pos += half;
+      }
+
+      function tick(now) {
+        frame = null;
+        if (!onscreen || held) return;
+        if (!last) last = now;
+        pos += speed * ((now - last) / 1000);
+        last = now;
+        wrap();
+        /* Keep the float ourselves — scrollLeft rounds, and re-reading it every
+           frame would make the drift stutter at sub-pixel speeds. */
+        port.scrollLeft = pos;
+        frame = requestAnimationFrame(tick);
+      }
+
+      function start() {
+        if (frame || held || !onscreen) return;
+        last = 0;
+        frame = requestAnimationFrame(tick);
+      }
+
+      function stop() {
+        if (!frame) return;
+        cancelAnimationFrame(frame);
+        frame = null;
+      }
+
+      /* Hand control over the moment the reader touches it, and take it back
+         only once they have been still for a beat. Resuming mid-momentum would
+         yank the row out from under the finger. */
+      function hold() {
+        held = true;
+        stop();
+        if (idle) clearTimeout(idle);
+      }
+
+      function release(delay) {
+        if (idle) clearTimeout(idle);
+        idle = setTimeout(function () {
+          held = false;
+          pos = port.scrollLeft;
+          wrap();
+          start();
+        }, delay);
+      }
+
+      ['pointerdown', 'touchstart', 'wheel'].forEach(function (ev) {
+        port.addEventListener(ev, hold, { passive: true });
+      });
+      ['pointerup', 'pointercancel', 'touchend', 'touchcancel', 'mouseleave'].forEach(function (ev) {
+        port.addEventListener(ev, function () { release(1600); }, { passive: true });
+      });
+
+      /* Momentum scrolling on iOS fires no pointer event at all, so a raw scroll
+         that we did not write also counts as the reader taking over. */
+      port.addEventListener('scroll', function () {
+        if (frame && Math.abs(port.scrollLeft - pos) < 2) return;
+        hold();
+        release(1600);
+      }, { passive: true });
+
+      /* Hover pause on desktop, as before. */
+      port.addEventListener('mouseenter', hold, { passive: true });
+
+      /* Never animate a section nobody is looking at — and never keep a rAF loop
+         alive in a backgrounded tab. */
+      if ('IntersectionObserver' in window) {
+        new IntersectionObserver(function (entries) {
+          entries.forEach(function (e) {
+            onscreen = e.isIntersecting;
+            if (onscreen) start(); else stop();
+          });
+        }, { threshold: 0 }).observe(port);
+      } else {
+        onscreen = true;
+        start();
+      }
+
+      document.addEventListener('visibilitychange', function () {
+        if (document.hidden) stop(); else start();
+      });
+    });
+  }
+
   window.DRYEHockey = {
     init: function (scope) {
       var t = scope || document;
-      reveal(t); rails(t); strips(t); carousels(t); clocks(t); anims(t);
+      reveal(t); rails(t); strips(t); carousels(t); clocks(t); anims(t); marquees(t);
     }
   };
 
