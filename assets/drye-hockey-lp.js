@@ -121,53 +121,38 @@
     });
   }
 
-  /* Animation clocks + arrival sequencing.
-
-     Separate from reveal on purpose: reveal fires early (so nothing pops in),
-     but a looping figure must not start counting until the thing it animates is
-     actually on screen.
-
-       data-drye-anim           selector for the element to watch (section is fallback)
-       data-drye-anim-steps     how many cards arrive in sequence (omit = no sequence)
-       data-drye-anim-step-ms   ms between arrivals, default 3000
-
-     Sets .is-seq at bind time (collapsed start state — gated so that if this
-     never runs, everything renders normally), then .is-running plus a
-     data-step counter on intersection. Single pass; loops keep running. */
+  /* Animation clocks. Separate from reveal on purpose: reveal fires early (so
+     nothing pops in), but a looping figure must not start counting until the
+     thing it animates is actually on screen. data-drye-anim holds an optional
+     selector for the element to watch; the section itself is the fallback. */
   function anims(scope) {
     scope.querySelectorAll('[data-drye-anim]:not([data-drye-anim-bound])').forEach(function (root) {
       root.setAttribute('data-drye-anim-bound', '1');
-
-      var steps = parseInt(root.getAttribute('data-drye-anim-steps'), 10) || 0;
-      var gap = parseInt(root.getAttribute('data-drye-anim-step-ms'), 10) || 3000;
-
       if (reduce || !('IntersectionObserver' in window)) {
-        if (steps) root.setAttribute('data-step', String(steps));
         root.classList.add('is-running');
         return;
       }
-
-      if (steps) root.classList.add('is-seq');
-
       var sel = root.getAttribute('data-drye-anim');
       var target = (sel && root.querySelector(sel)) || root;
-
       var io = new IntersectionObserver(function (entries) {
         entries.forEach(function (e) {
           if (!e.isIntersecting) return;
-          io.unobserve(e.target);
           root.classList.add('is-running');
-          if (!steps) return;
-          var i = 1;
-          root.setAttribute('data-step', '1');
-          var t = setInterval(function () {
-            i += 1;
-            root.setAttribute('data-step', String(i));
-            if (i >= steps) clearInterval(t);
-          }, gap);
+          io.unobserve(e.target);
         });
-      }, { threshold: 0, rootMargin: '0px 0px -25% 0px' });
-
+      }, { threshold: 0, rootMargin: '0px 0px -30% 0px' });
       io.observe(target);
     });
   }
+
+  window.DRYEHockey = {
+    init: function (scope) {
+      var t = scope || document;
+      reveal(t); rails(t); carousels(t); clocks(t); anims(t);
+    }
+  };
+
+  document.addEventListener('DOMContentLoaded', function () { window.DRYEHockey.init(); });
+  document.addEventListener('shopify:section:load', function (e) { window.DRYEHockey.init(e.target); });
+  if (document.readyState !== 'loading') window.DRYEHockey.init();
+})();

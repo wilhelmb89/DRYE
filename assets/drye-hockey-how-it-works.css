@@ -1,13 +1,9 @@
 /* drye-hockey-how-it-works.css — three arrow-shaped steps.
+   Reveal is base.css .dryeNEW-reveal + .dryeNEW-rd1/2/3.
 
    The three figures are INLINE SVG/DOM, not uploaded images — an <img> cannot
    animate its own contents, so an uploaded SVG renders as a frozen frame. All three
-   share one 9s clock so the droplet reads as the same droplet moving between cards.
-
-   Sequencing is driven by data-step on the section (set by drye-hockey-lp.js),
-   NOT by animation-delay. Delays start counting the moment their trigger class
-   lands, which made the mobile unfold fire while the reader was still on the
-   headline — and made all three arrive at once once the trigger moved later. */
+   share one 9s clock so the droplet reads as the same droplet moving between cards. */
 
 .drye-hockey-hiw__head {
   display: flex;
@@ -21,18 +17,13 @@
 .drye-hockey-hiw__eyebrow,
 .drye-hockey-hiw__patent { margin-bottom: 0; }
 .drye-hockey-hiw__eyebrow { color: var(--emerald); }
-
-.drye-hockey-hiw__title {
-  margin-top: var(--space-36);
-  margin-bottom: var(--space-20);
-  color: var(--deep);
-}
+.drye-hockey-hiw__title { margin-top: var(--space-28); color: var(--deep); }
 
 .drye-hockey-hiw__grid {
   display: grid;
   grid-template-columns: minmax(0, 1fr);
   gap: var(--space-6);
-  margin-top: 0;
+  margin-top: var(--space-32);
 }
 
 .drye-hockey-hiw__card {
@@ -76,6 +67,7 @@
   overflow: hidden;
 }
 
+.drye-hockey-hiw__figure { background: var(--bg-soft); }
 .drye-hockey-hiw__figure svg { position: absolute; inset: 0; width: 100%; height: 100%; }
 .drye-hockey-hiw__band { position: absolute; left: 0; right: 0; height: 14%; }
 .drye-hockey-hiw__band--outer { top: 15%; background: #CFE9E5; }
@@ -101,33 +93,6 @@
 .drye-hockey-hiw__meter { height: 2px; background: var(--border); }
 .drye-hockey-hiw__meter i { display: block; height: 2px; background: var(--emerald); transform-origin: left center; transform: scaleX(0); }
 
-/* ==========================================================================
-   ARRIVAL SEQUENCE — cards 02 and 03 arrive as the droplet reaches them.
-
-   .is-seq   set by JS at bind time: the collapsed/hidden start state. Gated on
-             it so that if JS never runs, all three cards render normally.
-   data-step "1" on first intersection, then 2 and 3 at 3s intervals — the same
-             thirds the 9s droplet loop uses. Single pass; the loop keeps going.
-   ========================================================================== */
-
-.drye-hockey-hiw.is-seq .drye-hockey-hiw__step--2,
-.drye-hockey-hiw.is-seq .drye-hockey-hiw__step--3 {
-  opacity: 0;
-  transform: translateY(14px);
-  transition:
-    opacity 0.55s var(--ease-standard),
-    transform 0.55s var(--ease-standard),
-    max-height 0.75s var(--ease-standard),
-    background-color 0.4s var(--ease-standard);
-}
-
-.drye-hockey-hiw.is-seq[data-step="2"] .drye-hockey-hiw__step--2,
-.drye-hockey-hiw.is-seq[data-step="3"] .drye-hockey-hiw__step--2,
-.drye-hockey-hiw.is-seq[data-step="3"] .drye-hockey-hiw__step--3 {
-  opacity: 1;
-  transform: none;
-}
-
 /* ---- one card lit at a time, so the eye is told where the droplet is ---- */
 .drye-hockey-hiw__card { transition: background-color 0.4s var(--ease-standard); }
 .drye-hockey-hiw__figure,
@@ -149,13 +114,9 @@
 @keyframes drye-hiw-lit2 { 0%, 32% { background-color: #F1F4F7; } 36%, 63% { background-color: #E3F0EE; } 71%, 100% { background-color: #F1F4F7; } }
 @keyframes drye-hiw-lit3 { 0%, 65% { background-color: #F1F4F7; } 69%, 96% { background-color: #E3F0EE; } 100% { background-color: #F1F4F7; } }
 
-/* 0.16 rather than 0.32: at a third of full strength the inactive figures still
-   competed for the first read on desktop, which is the whole thing we are
-   trying to avoid. The card-head text stays at full strength — only the figure
-   and the numeral dim, so the three headlines remain scannable. */
-@keyframes drye-hiw-wake1 { 0%, 30% { opacity: 1; } 38%, 100% { opacity: 0.16; } }
-@keyframes drye-hiw-wake2 { 0%, 32% { opacity: 0.16; } 36%, 63% { opacity: 1; } 71%, 100% { opacity: 0.16; } }
-@keyframes drye-hiw-wake3 { 0%, 65% { opacity: 0.16; } 69%, 96% { opacity: 1; } 100% { opacity: 0.16; } }
+@keyframes drye-hiw-wake1 { 0%, 30% { opacity: 1; } 38%, 100% { opacity: 0.32; } }
+@keyframes drye-hiw-wake2 { 0%, 32% { opacity: 0.32; } 36%, 63% { opacity: 1; } 71%, 100% { opacity: 0.32; } }
+@keyframes drye-hiw-wake3 { 0%, 65% { opacity: 0.32; } 69%, 96% { opacity: 1; } 100% { opacity: 0.32; } }
 
 /* ---- the shared 9s loop. All three cards read the same clock, so the droplet
    that leaves card 01 is the one that arrives in card 02. ---- */
@@ -190,6 +151,18 @@
 @keyframes drye-hiw-m2 { 0%, 33% { transform: scaleX(0); } 63%, 100% { transform: scaleX(1); } }
 @keyframes drye-hiw-m3 { 0%, 66% { transform: scaleX(0); } 96%, 100% { transform: scaleX(1); } }
 
+@media (prefers-reduced-motion: reduce) {
+  .drye-hockey-hiw__knit { animation: none !important; stroke-dashoffset: 0 !important; }
+  .drye-hockey-hiw__drop,
+  .drye-hockey-hiw__pool,
+  .drye-hockey-hiw__wet { animation: none !important; opacity: 0.6 !important; }
+  .drye-hockey-hiw__fill { animation: none !important; width: 100% !important; }
+  .drye-hockey-hiw__meter i { animation: none !important; transform: scaleX(1) !important; }
+  .drye-hockey-hiw__card,
+  .drye-hockey-hiw__figure,
+  .drye-hockey-hiw__num { animation: none !important; opacity: 1 !important; }
+}
+
 .drye-hockey-hiw__note {
   padding: 0 var(--space-4) var(--space-16);
   font-size: var(--fs-micro-4);
@@ -222,24 +195,31 @@
 /* ==========================================================================
    MOBILE: one step at a time.
    Stacked, all three visible at once is three things competing for a first
-   read. So 02 and 03 start collapsed and unfold as the droplet reaches them.
+   read. So 02 and 03 start collapsed and unfold as the droplet reaches them —
+   a single pass, not a loop, or the page would reflow every 9 seconds.
    ========================================================================== */
 
 @media (max-width: 767px) {
-  /* max-height carries the collapse. opacity is off limits alone here: the cards
-     carry .dryeNEW-reveal, and base's ".js .dryeNEW-reveal.is-visible {opacity:1}"
-     is three classes deep. base never touches max-height. */
-  .drye-hockey-hiw.is-seq .drye-hockey-hiw__step--2,
-  .drye-hockey-hiw.is-seq .drye-hockey-hiw__step--3 {
+  /* Collapse with max-height ONLY. opacity is off limits here: the cards carry
+     .dryeNEW-reveal, and base's ".js .dryeNEW-reveal.is-visible { opacity: 1 }" is
+     three classes deep — it beat the single-class rule that used to sit here, so
+     the cards never collapsed. base never touches max-height. */
+  .drye-hockey-hiw__step--2,
+  .drye-hockey-hiw__step--3 {
     overflow: hidden;
     max-height: 0;
-    transform: none;
   }
 
-  .drye-hockey-hiw.is-seq[data-step="2"] .drye-hockey-hiw__step--2,
-  .drye-hockey-hiw.is-seq[data-step="3"] .drye-hockey-hiw__step--2,
-  .drye-hockey-hiw.is-seq[data-step="3"] .drye-hockey-hiw__step--3 {
-    max-height: 1200px;
+  .drye-hockey-hiw.is-running .drye-hockey-hiw__step--2 {
+    animation: drye-hiw-unfold 9s linear 1 forwards,
+               drye-hiw-lit2 9s linear infinite;
+    animation-delay: 3s, 0s;
+  }
+
+  .drye-hockey-hiw.is-running .drye-hockey-hiw__step--3 {
+    animation: drye-hiw-unfold 9s linear 1 forwards,
+               drye-hiw-lit3 9s linear infinite;
+    animation-delay: 6s, 0s;
   }
 
   /* Once unfolded the dimming would hide a card the reader is looking at, so
@@ -251,22 +231,15 @@
   }
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .drye-hockey-hiw__knit { animation: none !important; stroke-dashoffset: 0 !important; }
-  .drye-hockey-hiw__drop,
-  .drye-hockey-hiw__pool,
-  .drye-hockey-hiw__wet { animation: none !important; opacity: 0.6 !important; }
-  .drye-hockey-hiw__fill { animation: none !important; width: 100% !important; }
-  .drye-hockey-hiw__meter i { animation: none !important; transform: scaleX(1) !important; }
-  .drye-hockey-hiw__card,
-  .drye-hockey-hiw__figure,
-  .drye-hockey-hiw__num { animation: none !important; opacity: 1 !important; }
+@keyframes drye-hiw-unfold {
+  0% { max-height: 0; }
+  30%, 100% { max-height: 900px; }
+}
 
+@media (prefers-reduced-motion: reduce) {
   .drye-hockey-hiw__step--2,
   .drye-hockey-hiw__step--3 {
     max-height: none !important;
-    opacity: 1 !important;
-    transform: none !important;
-    transition: none !important;
+    animation: none !important;
   }
 }
