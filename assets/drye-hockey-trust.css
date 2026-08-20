@@ -1,0 +1,78 @@
+/* Slim credibility strip: logo left, one line of context right. It sits directly
+   under the hero and must not compete with it — no headline, no proof list. */
+
+.drye-trust-section {
+  padding-top: var(--space-24);
+  padding-bottom: var(--space-24);
+  background: var(--bg);
+}
+
+/* One row at every width — the strip stays a single glance, never a stacked block
+   the reader has to scroll past. */
+.drye-trust-bar {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: var(--space-16);
+  align-items: center;
+  padding: var(--space-16);
+  background: var(--white-100);
+  border: var(--border-base);
+}
+
+.drye-trust-logo {
+  display: block;
+  width: auto;
+  height: 38px;
+  max-width: 130px;
+  object-fit: contain;
+  object-position: left center;
+}
+
+/* Shown until the real logo is uploaded — reads as a wordmark, not a broken image. */
+.drye-trust-logo-fallback {
+  font-family: var(--font-display);
+  font-size: 26px;
+  font-weight: var(--fw-semibold);
+  letter-spacing: 0.04em;
+  line-height: 1;
+  color: var(--deep);
+}
+
+/* Sits above the card, muted — a label for the card, not a claim inside it. */
+.drye-trust-micro {
+  display: block;
+  margin-bottom: var(--space-12);
+  color: var(--caption);
+}
+
+.drye-trust-explainer {
+  max-width: 52ch;
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--deep);
+  text-wrap: pretty;
+}
+
+@media (min-width: 700px) {
+  .drye-trust-bar {
+    gap: var(--space-28);
+    padding: var(--space-20) var(--space-24);
+  }
+
+  .drye-trust-logo {
+    height: 48px;
+    max-width: 160px;
+  }
+
+  .drye-trust-explainer {
+    font-size: 16px;
+    line-height: 1.6;
+  }
+
+  .drye-trust-claim {
+    padding-left: var(--space-28);
+    border-left: var(--border-base);
+  }
+}
