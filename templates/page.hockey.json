@@ -359,6 +359,41 @@
         "mat_clear": "Stays clear"
       }
     },
+    "timeline": {
+      "type": "drye-hockey-timeline",
+      "blocks": {
+        "stage_1": {
+          "type": "stage",
+          "settings": {
+            "when": "Week 1",
+            "text": "<p>Four skates with nothing bunching or going slick. The pair washes with the jerseys.</p>"
+          }
+        },
+        "stage_2": {
+          "type": "stage",
+          "settings": {
+            "when": "Month 1",
+            "text": "<p>This is when parents write to us. Adam Todd’s son: nothing had held for years, then his hands cleared after three ice times.</p>"
+          }
+        },
+        "stage_3": {
+          "type": "stage",
+          "settings": {
+            "when": "Season 1",
+            "text": "<p>One pair carried through. Then summer, and hands get to just be hands.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "stage_1",
+        "stage_2",
+        "stage_3"
+      ],
+      "settings": {
+        "anchor_id": "timeline",
+        "silhouette": "shopify://shop_images/hockey-kids-silhouette-trim.png"
+      }
+    },
     "objections": {
       "type": "drye-hockey-objections",
       "blocks": {
@@ -447,16 +482,6 @@
         "heading": "What every hockey parent asks first.",
         "hint_label": "Swipe",
         "background": "shopify://shop_images/Gemini_Generated_Image_t4kjkvt4kjkvt4kj_1.webp"
-      }
-    },
-    "drye_hockey_trust_BwRYhw": {
-      "type": "drye-hockey-trust",
-      "name": "DRYE Trust Bar",
-      "settings": {
-        "logo": "shopify://shop_images/Skarmavbild-2020-12-16-kl.-07.38.57.webp",
-        "logo_alt": "",
-        "micro_label": "Backed By",
-        "explainer": "The Swedish ice hockey players' union — every professional in SHL, SDHL and Hockeyallsvenskan."
       }
     },
     "stories": {
@@ -548,39 +573,14 @@
         "hint_label": "Swipe"
       }
     },
-    "timeline": {
-      "type": "drye-hockey-timeline",
-      "blocks": {
-        "stage_1": {
-          "type": "stage",
-          "settings": {
-            "when": "Week 1",
-            "text": "<p>Four skates with nothing bunching or going slick. The pair washes with the jerseys.</p>"
-          }
-        },
-        "stage_2": {
-          "type": "stage",
-          "settings": {
-            "when": "Month 1",
-            "text": "<p>This is when parents write to us. Adam Todd’s son: nothing had held for years, then his hands cleared after three ice times.</p>"
-          }
-        },
-        "stage_3": {
-          "type": "stage",
-          "settings": {
-            "when": "Season 1",
-            "text": "<p>One pair carried through. Then summer, and hands get to just be hands.</p>"
-          }
-        }
-      },
-      "block_order": [
-        "stage_1",
-        "stage_2",
-        "stage_3"
-      ],
+    "drye_hockey_trust_BwRYhw": {
+      "type": "drye-hockey-trust",
+      "name": "DRYE Trust Bar",
       "settings": {
-        "anchor_id": "timeline",
-        "silhouette": "shopify://shop_images/hockey-kids-silhouette-trim.png"
+        "logo": "shopify://shop_images/Skarmavbild-2020-12-16-kl.-07.38.57.webp",
+        "logo_alt": "",
+        "micro_label": "Backed By",
+        "explainer": "The Swedish ice hockey players' union — every professional in SHL, SDHL and Hockeyallsvenskan."
       }
     },
     "drye_nt_trust_badges_kmjhiL": {
@@ -837,7 +837,7 @@
         "micro_label": "",
         "heading_line_1": "",
         "heading_line_2": "",
-        "intro": "You can't treat your way out of a wet glove. You can change the glove.",
+        "intro": "You can't treat your way out of a wet glove.",
         "before_label": "Before",
         "after_label": "After",
         "note": ""
