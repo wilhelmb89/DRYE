@@ -1,14 +1,30 @@
 {{ 'base.css' | asset_url | stylesheet_tag }}
 
+{{ 'drye-hockey-lp.js' | asset_url | script_tag }}
 {{ 'drye-hockey-peer-voices.css' | asset_url | stylesheet_tag }}
 
 {%- comment -%}
   Peer recognition, problem state. Blocks are quotes in the customer's own words —
   never solution-state testimonials, and never a cohort other than hockey.
+
+  The row is a native horizontal scroller: drye-hockey-lp.js drifts it by writing
+  scrollLeft, so the reader can swipe it, stop it, and swipe it backwards. The
+  blocks are rendered TWICE so the wrap point is invisible — the second pass is
+  aria-hidden, and the whole strip is aria-hidden from the drift's point of view
+  only, never from the reader's.
 {%- endcomment -%}
 
-<section class="drye-hockey-voices" data-drye-section="hockey-voices">
-  <div class="drye-hockey-voices__track">
+<section
+  class="drye-hockey-voices"
+  data-section-id="{{ section.id }}"
+  data-drye-section="hockey-voices"
+  data-drye-marquee
+  data-drye-marquee-speed="{% if section.settings.direction == 'ltr' %}-{% endif %}{{ section.settings.speed | default: 26 }}"
+  tabindex="0"
+  role="region"
+  aria-label="{{ section.settings.aria_label | default: 'What hockey parents say' | escape }}"
+>
+  <div class="drye-hockey-voices__track" data-drye-marquee-track>
     {%- for pass in (1..2) -%}
       <div class="drye-hockey-voices__run" {% if pass == 2 %}aria-hidden="true"{% endif %}>
         {%- for block in section.blocks -%}
@@ -30,7 +46,11 @@
   "name": "drye-Hockey Voices",
   "tag": "section",
   "class": "shopify-section",
-  "settings": [],
+  "settings": [
+    { "type": "range", "id": "speed", "label": "Drift speed", "min": 0, "max": 80, "step": 2, "unit": "px", "default": 26, "info": "Pixels per second. 0 stops the drift and leaves the row swipeable." },
+    { "type": "select", "id": "direction", "label": "Drift direction", "default": "rtl", "options": [{ "value": "rtl", "label": "Right to left" }, { "value": "ltr", "label": "Left to right" }] },
+    { "type": "text", "id": "aria_label", "label": "Screen-reader label for the row", "default": "What hockey parents say" }
+  ],
   "blocks": [
     {
       "type": "voice",
