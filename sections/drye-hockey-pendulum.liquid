@@ -1,0 +1,71 @@
+{{ 'base.css' | asset_url | stylesheet_tag }}
+{{ 'drye-hockey-pendulum.css' | asset_url | stylesheet_tag }}
+
+{%- comment -%}
+  The pendulum rows are RELATIVE positions, not measured values. The disclaimer
+  under it is required; do not remove it.
+{%- endcomment -%}
+
+<section class="dryeNEW-section drye-hockey-pend-sec" id="{{ section.settings.anchor_id | default: 'pendulum' }}" data-section-id="{{ section.id }}" data-drye-section="hockey-pendulum">
+  <div class="dryeNEW-container">
+    <div class="drye-hockey-pend">
+      <div class="drye-hockey-pend__head">
+        <span class="drye-hockey-pend__title">{{ section.settings.pend_title | escape }}</span>
+        <span class="drye-hockey-pend__key">
+          <span class="drye-hockey-pend__key--wet"><i></i>{{ section.settings.pend_key_a | escape }}</span>
+          <span class="drye-hockey-pend__key--drye"><i></i>{{ section.settings.pend_key_b | escape }}</span>
+        </span>
+      </div>
+
+      {%- for block in section.blocks -%}
+        <div class="drye-hockey-pend__row" {{ block.shopify_attributes }}>
+          <span class="drye-hockey-pend__label">{{ block.settings.label | escape }}</span>
+          <span class="drye-hockey-pend__scale" role="img" aria-label="{{ block.settings.label | escape }}: wet glove {{ block.settings.wet }} percent, with DRYE {{ block.settings.drye }} percent, relative">
+            <span class="drye-hockey-pend__dot drye-hockey-pend__dot--wet" style="left: {{ block.settings.wet }}%"></span>
+            <span class="drye-hockey-pend__dot drye-hockey-pend__dot--drye" style="left: {{ block.settings.drye }}%"></span>
+          </span>
+        </div>
+      {%- endfor -%}
+
+      <p class="dryeNEW-body--caption drye-hockey-pend__note">{{ section.settings.pend_note }}</p>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "drye-Hockey Pendulum",
+  "tag": "section",
+  "class": "shopify-section",
+  "settings": [
+    { "type": "text", "id": "anchor_id", "label": "Anchor id", "default": "pendulum" },
+    { "type": "text", "id": "pend_title", "label": "Pendulum title", "default": "Same glove, same session" },
+    { "type": "text", "id": "pend_key_a", "label": "Key A", "default": "Wet glove" },
+    { "type": "text", "id": "pend_key_b", "label": "Key B", "default": "With DRYE" },
+    { "type": "richtext", "id": "pend_note", "label": "Disclaimer (required)", "default": "<p>Positions are relative, not measured values — based on what users describe in interviews and field studies.</p>" }
+  ],
+  "blocks": [
+    {
+      "type": "pendulum",
+      "name": "Pendulum row",
+      "settings": [
+        { "type": "text", "id": "label", "label": "Label" },
+        { "type": "range", "id": "wet", "label": "Wet glove position", "min": 0, "max": 100, "step": 1, "unit": "%", "default": 22 },
+        { "type": "range", "id": "drye", "label": "With DRYE position", "min": 0, "max": 100, "step": 1, "unit": "%", "default": 84 }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "drye-Hockey Pendulum",
+      "blocks": [
+        { "type": "pendulum", "settings": { "label": "Grip", "wet": 26, "drye": 86 } },
+        { "type": "pendulum", "settings": { "label": "Comfort", "wet": 22, "drye": 80 } },
+        { "type": "pendulum", "settings": { "label": "Skin", "wet": 15, "drye": 72 } },
+        { "type": "pendulum", "settings": { "label": "Smell", "wet": 12, "drye": 70 } },
+        { "type": "pendulum", "settings": { "label": "Routine", "wet": 20, "drye": 88 } }
+      ]
+    }
+  ]
+}
+{% endschema %}
