@@ -23,8 +23,52 @@
         "subtext": "<p>DRYE is a patent-pending textile construction developed for closed glove environments — where standard wicking materials fail.</p>"
       }
     },
+    "drye_hockey_how_it_works_F3Y84M": {
+      "type": "drye-hockey-how-it-works",
+      "blocks": {
+        "step_GdJecK": {
+          "type": "step",
+          "settings": {
+            "step": "5–10 min after glove use",
+            "figure": "beads",
+            "note": "Inner layer"
+          }
+        },
+        "step_96Vfez": {
+          "type": "step",
+          "settings": {
+            "step": "Material starts routing",
+            "figure": "routing",
+            "note": "Inner layer"
+          }
+        },
+        "step_89q8J3": {
+          "type": "step",
+          "settings": {
+            "step": "Material starts storing sweat into small pockets",
+            "figure": "stored",
+            "note": "Outer layer"
+          }
+        }
+      },
+      "block_order": [
+        "step_GdJecK",
+        "step_96Vfez",
+        "step_89q8J3"
+      ],
+      "settings": {
+        "anchor_id": "how-it-works",
+        "eyebrow": "Asymmetric layering",
+        "patent": "Patent pending · SE 2615359-3",
+        "heading": "How it works",
+        "mat_outer": "Outer lyocell",
+        "mat_inner": "Inner · polypropylene",
+        "mat_clear": "Stays clear"
+      }
+    },
     "drye_nt_trapped_7w3J7A": {
       "type": "drye-nt-trapped",
+      "disabled": true,
       "settings": {
         "chapter": "02",
         "glove_anno": "Your nitrile glove",
@@ -140,6 +184,7 @@
         "word_YzMYKk",
         "word_4YgiPt"
       ],
+      "disabled": true,
       "settings": {
         "eyebrow": "One glove. Too many tradeoffs.",
         "footer": "Keep the protection. Lose the tradeoff."
@@ -445,6 +490,7 @@
   },
   "order": [
     "drye_how_it_works_hero_LiYY94",
+    "drye_hockey_how_it_works_F3Y84M",
     "drye_nt_trapped_7w3J7A",
     "drye_nt_tradeoff_M9TeWV",
     "drye_nt_barrier_choice_E6DK3t",
