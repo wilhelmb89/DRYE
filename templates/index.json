@@ -92,6 +92,90 @@
         "bg_color": "#ffffff"
       }
     },
+    "drye_hockey_fail_timeline_ekg84e": {
+      "type": "drye-hockey-fail-timeline",
+      "blocks": {
+        "fix_rnj8Cb": {
+          "type": "fix",
+          "settings": {
+            "label": "Gear spray",
+            "note": "",
+            "reach": 2,
+            "aria": "",
+            "is_drye": false
+          }
+        },
+        "fix_LfQN9z": {
+          "type": "fix",
+          "settings": {
+            "label": "Cream",
+            "note": "",
+            "reach": 3,
+            "aria": "",
+            "is_drye": false
+          }
+        },
+        "fix_kGdKFq": {
+          "type": "fix",
+          "settings": {
+            "label": "Glove dryer",
+            "note": "",
+            "reach": 9,
+            "aria": "",
+            "is_drye": false
+          }
+        },
+        "fix_WQ94Ka": {
+          "type": "fix",
+          "settings": {
+            "label": "Barrier cream",
+            "note": "",
+            "reach": 11,
+            "aria": "",
+            "is_drye": false
+          }
+        },
+        "fix_MmdgKW": {
+          "type": "fix",
+          "settings": {
+            "label": "Cotton liner",
+            "note": "Saturates, then holds the wet against the skin.",
+            "reach": 27,
+            "aria": "",
+            "is_drye": false
+          }
+        },
+        "fix_QemXyF": {
+          "type": "fix",
+          "settings": {
+            "label": "DRYE",
+            "note": "routes sweat off skin side while they play.",
+            "reach": 100,
+            "aria": "",
+            "is_drye": true
+          }
+        }
+      },
+      "block_order": [
+        "fix_rnj8Cb",
+        "fix_LfQN9z",
+        "fix_kGdKFq",
+        "fix_WQ94Ka",
+        "fix_MmdgKW",
+        "fix_QemXyF"
+      ],
+      "settings": {
+        "anchor_id": "what-fails",
+        "heading": "You can't clean, cream, dry or cotton your way out of a sealed glove.",
+        "image": "shopify://shop_images/Screenshot_39.png",
+        "image_alt": "A kid in full gear sitting on his bag at the rink",
+        "mark_1": "Warm-up",
+        "mark_2": "1st",
+        "mark_3": "2nd",
+        "mark_4": "Horn",
+        "build_caption": "Trapped sweat builds"
+      }
+    },
     "drye_mechanics_identification_gallery_b99Ezp": {
       "type": "drye-mechanics-identification-gallery",
       "blocks": {
@@ -741,6 +825,7 @@
     "drye_hockey_hero_PUxDcX",
     "drye_featured_in_GDPJ49",
     "drye_industry_cards_JPH7Be",
+    "drye_hockey_fail_timeline_ekg84e",
     "drye_mechanics_identification_gallery_b99Ezp",
     "drye_product_reality_grid_pgX4xi",
     "drye_blog_cta_strip_DzayyA",
