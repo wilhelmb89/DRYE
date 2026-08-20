@@ -3,6 +3,18 @@
    swap the literals here. */
 /* drye-hockey-hero.css — hero photo + layer stack. Base handles type/tokens. */
 
+/* DARKENING — read this before touching opacity anywhere in this file.
+   Exactly ONE thing in this hero is allowed to darken: .drye-hockey-hero__scrim,
+   which sits at z-index 1 over the photo and under .drye-hockey-hero__inner
+   (z-index 2). Nothing in the copy or the layer stack carries its own tint or
+   opacity — three such patches used to exist and they were what made the whole
+   hero read as flat:
+     · .drye-hockey-hero__stack had opacity: 0.9 on mobile
+     · .drye-hockey-hero__em had its own rgba(30,58,76,0.55) block
+     · the dashed layer box was fully transparent, so it showed the darkened photo
+   If the copy needs more contrast, raise the scrim in the editor. Do not add a
+   second dimmer. */
+
 .drye-hockey-hero {
   position: relative;
   display: flex;
@@ -28,10 +40,9 @@
 
 .drye-hockey-hero__media--desktop { display: none; }
 
-/* On mobile the stack is a supporting note, not the anchor — the headline is.
-   Roughly half the visual weight: shorter boxes, smaller labels, tighter arrows. */
 /* Flat tint over the photo, under the copy. Opacity comes from the section's
-   --hero-scrim (desktop) / --hero-scrim-mobile, both set per section in the editor. */
+   --hero-scrim (desktop) / --hero-scrim-mobile, both set per section in the editor.
+   This is the only darkening in the hero. */
 .drye-hockey-hero__scrim {
   position: absolute;
   inset: 0;
@@ -45,11 +56,14 @@
   .drye-hockey-hero__scrim { opacity: var(--hero-scrim-mobile, 0.45); }
 }
 
+/* On mobile the stack is a supporting note, not the anchor — the headline is.
+   Roughly half the visual weight: shorter boxes, smaller labels, tighter arrows.
+   Weight comes from SIZE, not from opacity. */
 @media (max-width: 767px) {
   /* min-width: 0 is the point — flex-basis 360px with min-width 280px made the
      stack fill the screen at 390px wide, so max-width: 300px never applied and
      the diagram outweighed the headline. */
-  .drye-hockey-hero__stack { flex: 0 1 auto; min-width: 0; max-width: 262px; opacity: 0.9; }
+  .drye-hockey-hero__stack { flex: 0 1 auto; min-width: 0; max-width: 262px; }
   .drye-hockey-hero__box { min-height: 30px; padding: var(--space-6) var(--space-10); }
   .drye-hockey-hero__box--layer { padding: var(--space-5) var(--space-8); }
   .drye-hockey-hero__label { font-size: var(--fs-micro-2); letter-spacing: 0.08em; }
@@ -77,13 +91,14 @@
 }
 
 /* The italic line reads as the second half of the sentence, so it keeps the h1's
-   size and sits flush left with it despite its own padding. */
+   size and sits flush left with it. It used to carry its own
+   background: rgba(30,58,76,0.55) — a legibility patch from before the scrim
+   existed. With a scrim behind the photo that was double darkening on the same
+   area, and it is what made the headline block look like a panel. */
 .drye-hockey-hero__em {
   display: inline-block;
   margin-top: var(--space-10);
-  margin-left: calc(var(--space-16) * -1);
-  padding: 0 var(--space-16) var(--space-4);
-  background: rgba(30, 58, 76, 0.55);
+  padding-bottom: var(--space-4);
   color: var(--white-100);
   font-size: var(--fs-hero-h1);
   line-height: 1;
@@ -114,11 +129,14 @@
   text-align: center;
 }
 
+/* Not fully transparent: on a darkened photo a transparent box reads as a hole,
+   not as a layer. A faint navy fill keeps the dashed edge legible while still
+   sitting visibly lighter than the two solid layers around it. */
 .drye-hockey-hero__box--layer {
   align-items: baseline;
   min-height: 0;
   padding: var(--space-10) var(--space-14);
-  background: transparent;
+  background: rgba(22, 38, 58, 0.45);
   border: 1px dashed #5FCFC1;
   column-gap: var(--space-10);
   row-gap: var(--space-2);
