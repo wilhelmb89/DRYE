@@ -163,7 +163,7 @@
   window.DRYEHockey = {
     init: function (scope) {
       var t = scope || document;
-      reveal(t); rails(t); carousels(t); clocks(t); anims(t);
+      reveal(t); rails(t); strips(t); carousels(t); clocks(t); anims(t);
     }
   };
 
