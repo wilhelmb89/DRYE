@@ -10,10 +10,11 @@
    opacity — three such patches used to exist and they were what made the whole
    hero read as flat:
      · .drye-hockey-hero__stack had opacity: 0.9 on mobile
-     · .drye-hockey-hero__em had its own rgba(30,58,76,0.55) block
      · the dashed layer box was fully transparent, so it showed the darkened photo
+   The navy band on .drye-hockey-hero__em is NOT one of these — it sits behind
+   the glyphs and raises contrast. Leave it.
    If the copy needs more contrast, raise the scrim in the editor. Do not add a
-   second dimmer. */
+   second dimmer on top of the content. */
 
 .drye-hockey-hero {
   position: relative;
@@ -91,14 +92,15 @@
 }
 
 /* The italic line reads as the second half of the sentence, so it keeps the h1's
-   size and sits flush left with it. It used to carry its own
-   background: rgba(30,58,76,0.55) — a legibility patch from before the scrim
-   existed. With a scrim behind the photo that was double darkening on the same
-   area, and it is what made the headline block look like a panel. */
+   size and sits flush left with it despite its own padding. The navy band is a
+   backing plate, not a dimmer: it sits BEHIND the glyphs and raises their
+   contrast against the photo. The text itself stays at full strength. */
 .drye-hockey-hero__em {
   display: inline-block;
   margin-top: var(--space-10);
-  padding-bottom: var(--space-4);
+  margin-left: calc(var(--space-16) * -1);
+  padding: 0 var(--space-16) var(--space-4);
+  background: rgba(30, 58, 76, 0.55);
   color: var(--white-100);
   font-size: var(--fs-hero-h1);
   line-height: 1;
