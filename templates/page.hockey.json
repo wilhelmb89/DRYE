@@ -486,6 +486,9 @@
     },
     "drye_hockey_trust_BwRYhw": {
       "type": "drye-hockey-trust",
+      "custom_css": [
+        ".drye-trust-section {padding-top: clamp(16px, 3vw, 32px) !important;}"
+      ],
       "name": "DRYE Trust Bar",
       "settings": {
         "logo": "shopify://shop_images/Skarmavbild-2020-12-16-kl.-07.38.57.webp",
