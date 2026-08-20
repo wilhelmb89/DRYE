@@ -170,4 +170,127 @@
   document.addEventListener('DOMContentLoaded', function () { window.DRYEHockey.init(); });
   document.addEventListener('shopify:section:load', function (e) { window.DRYEHockey.init(e.target); });
   if (document.readyState !== 'loading') window.DRYEHockey.init();
+
+  /* Swipe strip: snap columns, dots, mobile pill hint, desktop arrows.
+     Behaviour lives here rather than in a per-section inline <script> so it
+     also re-arms on shopify:section:load. */
+  function strips(scope) {
+    scope.querySelectorAll('[data-drye-strip]:not([data-drye-strip-bound])').forEach(function (root) {
+      root.setAttribute('data-drye-strip-bound', '1');
+      var track = root.querySelector('[data-drye-strip-track]');
+      if (!track) return;
+
+      var cards = Array.prototype.slice.call(track.children);
+      var hint = root.querySelector('[data-drye-strip-hint]');
+      /* dots live outside the wrap, so search the section, not the wrap */
+      var section = root.closest('[data-drye-section]') || root.parentElement;
+      var dotsWrap = section ? section.querySelector('[data-drye-strip-dots]') : null;
+
+      if (cards.length < 2) {
+        if (hint) hint.classList.add('is-hidden');
+        track.classList.add('is-at-end');
+        return;
+      }
+
+      var dots = [];
+      if (dotsWrap) {
+        cards.forEach(function (_, i) {
+          var d = document.createElement('span');
+          d.className = 'drye-hockey-obj__dot' + (i === 0 ? ' is-active' : '');
+          dotsWrap.appendChild(d);
+          dots.push(d);
+        });
+      }
+
+      function step() {
+        var first = cards[0];
+        if (!first) return track.clientWidth * 0.8;
+        var cs = getComputedStyle(track);
+        var gap = parseFloat(cs.columnGap || cs.gap) || 0;
+        return first.getBoundingClientRect().width + gap;
+      }
+
+      var touched = false;
+
+      function paint() {
+        var s = step();
+        var i = s ? Math.round(track.scrollLeft / s) : 0;
+        if (i < 0) i = 0;
+        if (i > cards.length - 1) i = cards.length - 1;
+
+        dots.forEach(function (d, n) { d.classList.toggle('is-active', n === i); });
+
+        var max = track.scrollWidth - track.clientWidth;
+        track.classList.toggle('is-at-end', track.scrollLeft >= max - 8);
+
+        if (hint) {
+          var wide = window.matchMedia('(min-width: 768px)').matches;
+          hint.classList.toggle('is-hidden', wide || max <= 8 || track.scrollLeft > 16 || touched);
+        }
+      }
+
+      var queued = false;
+      track.addEventListener('scroll', function () {
+        if (queued) return;
+        queued = true;
+        requestAnimationFrame(function () { queued = false; paint(); });
+      }, { passive: true });
+
+      function touch() {
+        if (touched) return;
+        touched = true;
+        if (hint) hint.classList.add('is-hidden');
+        if (dotsWrap) dotsWrap.classList.add('is-faded');
+      }
+      track.addEventListener('touchstart', touch, { passive: true });
+      track.addEventListener('pointerdown', touch, { passive: true });
+
+      root.querySelectorAll('[data-drye-strip-prev]').forEach(function (b) {
+        b.addEventListener('click', function () { track.scrollBy({ left: -step(), behavior: 'smooth' }); });
+      });
+      root.querySelectorAll('[data-drye-strip-next]').forEach(function (b) {
+        b.addEventListener('click', function () { track.scrollBy({ left: step(), behavior: 'smooth' }); });
+      });
+
+      window.addEventListener('resize', function () {
+        if (queued) return;
+        queued = true;
+        requestAnimationFrame(function () { queued = false; paint(); });
+      });
+
+      paint();
+      nudge(track);
+    });
+  }
+
+  /* One-time nudge so the reader physically feels the row is swipeable.
+
+     Two things the inline version got wrong. It fired 700ms after page load —
+     while the section was still far below the fold, so the affordance was spent
+     unseen. And it scrolled against scroll-snap-type: x mandatory, which
+     cancels a short programmatic scroll instantly, so nothing moved at all.
+     Snap is switched off for the duration and the whole thing waits for the
+     row to be on screen. */
+  function nudge(scroller) {
+    if (reduce || !scroller || !('IntersectionObserver' in window)) return;
+    var spent = false;
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (!e.isIntersecting || spent) return;
+        spent = true;
+        io.disconnect();
+        if (scroller.scrollWidth <= scroller.clientWidth + 4) return;
+        setTimeout(function () {
+          var prev = scroller.style.scrollSnapType;
+          scroller.style.scrollSnapType = 'none';
+          scroller.scrollTo({ left: 44, behavior: 'smooth' });
+          setTimeout(function () {
+            scroller.scrollTo({ left: 0, behavior: 'smooth' });
+            setTimeout(function () { scroller.style.scrollSnapType = prev; }, 500);
+          }, 460);
+        }, 320);
+      });
+    }, { threshold: 0.35 });
+    io.observe(scroller);
+  }
 })();
