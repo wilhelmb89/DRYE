@@ -20,12 +20,24 @@
         "image_desktop": "shopify://shop_images/Project_-_Aug_19_05_48_PM_-_5.webp",
         "image_mobile": "shopify://shop_images/Screenshot_2_40727e9f-72b3-4d66-a7ec-79cbe2124e7b.webp",
         "image_alt": "A player pulling a hockey glove on over the DRYE liner",
+        "scrim": 30,
+        "scrim_mobile": 45,
         "stack_alt": "The hockey glove seals; DRYE sits between the glove and the skin",
         "layer_top": "Hockey glove",
         "layer_mid": "DRYE · Asymmetric layering",
         "layer_mid_sub": "one layer, one direction — 0.4 mm",
         "layer_bottom": "Skin stays dry",
         "layer_bottom_sub": ""
+      }
+    },
+    "drye_hockey_trust_BwRYhw": {
+      "type": "drye-hockey-trust",
+      "name": "DRYE Trust Bar",
+      "settings": {
+        "logo": "shopify://shop_images/Skarmavbild-2020-12-16-kl.-07.38.57.webp",
+        "logo_alt": "",
+        "micro_label": "Backed By",
+        "explainer": "The Swedish ice hockey players' union — every professional in SHL, SDHL and Hockeyallsvenskan."
       }
     },
     "voices": {
@@ -799,6 +811,7 @@
   },
   "order": [
     "hero",
+    "drye_hockey_trust_BwRYhw",
     "voices",
     "mech",
     "fails",
