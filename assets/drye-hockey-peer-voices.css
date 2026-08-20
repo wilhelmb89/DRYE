@@ -43,7 +43,16 @@
   border-right: var(--border-base);
 }
 
-.drye-hockey-voices__quote { color: var(--deep); line-height: var(--lh-body-tight); text-wrap: pretty; }
+/* Italic: these are verbatim quotes, and the italic separates them from every
+   other body run on the page. <cite> below is reset to normal on purpose —
+   browsers italicise it by default, and an italic attribution under an italic
+   quote loses the distinction. */
+.drye-hockey-voices__quote {
+  color: var(--deep);
+  font-style: italic;
+  line-height: var(--lh-body-tight);
+  text-wrap: pretty;
+}
 .drye-hockey-voices__meta { display: flex; flex-direction: column; gap: var(--space-3); }
 .drye-hockey-voices__who { font-size: var(--fs-caption); font-weight: var(--fw-semibold); font-style: normal; color: var(--deep); }
 
