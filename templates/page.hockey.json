@@ -102,16 +102,6 @@
       ],
       "settings": {}
     },
-    "drye_hockey_trust_BwRYhw": {
-      "type": "drye-hockey-trust",
-      "name": "DRYE Trust Bar",
-      "settings": {
-        "logo": "shopify://shop_images/Skarmavbild-2020-12-16-kl.-07.38.57.webp",
-        "logo_alt": "",
-        "micro_label": "Backed By",
-        "explainer": "The Swedish ice hockey players' union — every professional in SHL, SDHL and Hockeyallsvenskan."
-      }
-    },
     "mech": {
       "type": "drye-hockey-mechanism",
       "blocks": {
@@ -369,6 +359,106 @@
         "mat_clear": "Stays clear"
       }
     },
+    "objections": {
+      "type": "drye-hockey-objections",
+      "blocks": {
+        "objection_e3xFdV": {
+          "type": "objection",
+          "settings": {
+            "profile": "WEAR",
+            "question": "Will they actually wear them?",
+            "answer": "",
+            "proof": "“Every practice and game.”<br>\n<br>\n“Six ice times a week.”",
+            "who": "Allison M. Goldberg & Eric Dyke · hockey parents"
+          }
+        },
+        "objection_1": {
+          "type": "objection",
+          "settings": {
+            "profile": "Grip",
+            "question": "Will it affect their play?",
+            "answer": "",
+            "proof": "“Cotton liners made my daughter’s hands slippery inside the glove and it affected her grip. DRYE fit tight and didn’t slip.”",
+            "who": "Eric Dyke · hockey parent"
+          }
+        },
+        "objection_LV7Hrw": {
+          "type": "objection",
+          "settings": {
+            "profile": "Price",
+            "question": "Why not just use cotton liners?",
+            "answer": "",
+            "proof": "“No cream or prescription helped for years. His hands cleared after three ice times.”",
+            "who": "Adam Todd · hockey parent"
+          }
+        },
+        "objection_2": {
+          "type": "objection",
+          "settings": {
+            "profile": "Performance",
+            "question": "Will the seams hold?",
+            "answer": "",
+            "proof": "\"A year later, they're still holding up.\"",
+            "who": "Siobhan Brown · hockey parent"
+          }
+        },
+        "objection_3": {
+          "type": "objection",
+          "settings": {
+            "profile": "Timeline",
+            "question": "How fast does anything change?",
+            "answer": "",
+            "proof": "“No cream or prescription helped for years. His hands cleared after three ice times.”",
+            "who": "Adam Todd · hockey parent"
+          }
+        },
+        "objection_4": {
+          "type": "objection",
+          "settings": {
+            "profile": "Skin",
+            "question": "How fast does anything change?",
+            "answer": "",
+            "proof": "“Ten years old, travel team, severe eczema. His hands healed completely.”",
+            "who": "Allison M. Goldberg · hockey parent"
+          }
+        },
+        "objection_5": {
+          "type": "objection",
+          "settings": {
+            "profile": "FIT",
+            "question": "Does it fit a child’s hand?",
+            "answer": "",
+            "proof": "“Size 7 was still too big, so 6.5 was made for him. Fit really well.”",
+            "who": "Siobhan Brown · hockey parent"
+          }
+        }
+      },
+      "block_order": [
+        "objection_e3xFdV",
+        "objection_1",
+        "objection_LV7Hrw",
+        "objection_2",
+        "objection_3",
+        "objection_4",
+        "objection_5"
+      ],
+      "settings": {
+        "anchor_id": "objections",
+        "heading": "What every hockey parent asks first.",
+        "hint_label": "Swipe",
+        "background": "shopify://shop_images/Gemini_Generated_Image_t4kjkvt4kjkvt4kj_1.webp"
+      }
+    },
+    "drye_hockey_trust_BwRYhw": {
+      "type": "drye-hockey-trust",
+      "name": "DRYE Trust Bar",
+      "settings": {
+        "logo": "shopify://shop_images/Skarmavbild-2020-12-16-kl.-07.38.57.webp",
+        "logo_alt": "",
+        "micro_label": "Backed By",
+        "explainer": "The Swedish ice hockey players' union — every professional in SHL, SDHL and Hockeyallsvenskan."
+      }
+    },
     "stories": {
       "type": "drye-hockey-parent-stories",
       "blocks": {
@@ -458,94 +548,39 @@
         "hint_label": "Swipe"
       }
     },
-    "objections": {
-      "type": "drye-hockey-objections",
+    "timeline": {
+      "type": "drye-hockey-timeline",
       "blocks": {
-        "objection_e3xFdV": {
-          "type": "objection",
+        "stage_1": {
+          "type": "stage",
           "settings": {
-            "profile": "WEAR",
-            "question": "Will they actually wear them?",
-            "answer": "",
-            "proof": "“Every practice and game.”<br>\n<br>\n“Six ice times a week.”",
-            "who": "Allison M. Goldberg & Eric Dyke · hockey parents"
+            "when": "Week 1",
+            "text": "<p>Four skates with nothing bunching or going slick. The pair washes with the jerseys.</p>"
           }
         },
-        "objection_1": {
-          "type": "objection",
+        "stage_2": {
+          "type": "stage",
           "settings": {
-            "profile": "Grip",
-            "question": "Will it affect their play?",
-            "answer": "",
-            "proof": "“Cotton liners made my daughter’s hands slippery inside the glove and it affected her grip. DRYE fit tight and didn’t slip.”",
-            "who": "Eric Dyke · hockey parent"
+            "when": "Month 1",
+            "text": "<p>This is when parents write to us. Adam Todd’s son: nothing had held for years, then his hands cleared after three ice times.</p>"
           }
         },
-        "objection_LV7Hrw": {
-          "type": "objection",
+        "stage_3": {
+          "type": "stage",
           "settings": {
-            "profile": "Price",
-            "question": "Why not just use cotton liners?",
-            "answer": "",
-            "proof": "“No cream or prescription helped for years. His hands cleared after three ice times.”",
-            "who": "Adam Todd · hockey parent"
-          }
-        },
-        "objection_2": {
-          "type": "objection",
-          "settings": {
-            "profile": "Performance",
-            "question": "Will the seams hold?",
-            "answer": "",
-            "proof": "\"A year later, they're still holding up.\"",
-            "who": "Siobhan Brown · hockey parent"
-          }
-        },
-        "objection_3": {
-          "type": "objection",
-          "settings": {
-            "profile": "Timeline",
-            "question": "How fast does anything change?",
-            "answer": "",
-            "proof": "“No cream or prescription helped for years. His hands cleared after three ice times.”",
-            "who": "Adam Todd · hockey parent"
-          }
-        },
-        "objection_4": {
-          "type": "objection",
-          "settings": {
-            "profile": "Skin",
-            "question": "How fast does anything change?",
-            "answer": "",
-            "proof": "“Ten years old, travel team, severe eczema. His hands healed completely.”",
-            "who": "Allison M. Goldberg · hockey parent"
-          }
-        },
-        "objection_5": {
-          "type": "objection",
-          "settings": {
-            "profile": "FIT",
-            "question": "Does it fit a child’s hand?",
-            "answer": "",
-            "proof": "“Size 7 was still too big, so 6.5 was made for him. Fit really well.”",
-            "who": "Siobhan Brown · hockey parent"
+            "when": "Season 1",
+            "text": "<p>One pair carried through. Then summer, and hands get to just be hands.</p>"
           }
         }
       },
       "block_order": [
-        "objection_e3xFdV",
-        "objection_1",
-        "objection_LV7Hrw",
-        "objection_2",
-        "objection_3",
-        "objection_4",
-        "objection_5"
+        "stage_1",
+        "stage_2",
+        "stage_3"
       ],
       "settings": {
-        "anchor_id": "objections",
-        "heading": "What every hockey parent asks first.",
-        "hint_label": "Swipe",
-        "background": "shopify://shop_images/Gemini_Generated_Image_t4kjkvt4kjkvt4kj_1.webp"
+        "anchor_id": "timeline",
+        "silhouette": "shopify://shop_images/hockey-kids-silhouette-trim.png"
       }
     },
     "drye_nt_trust_badges_kmjhiL": {
@@ -808,41 +843,6 @@
         "note": ""
       }
     },
-    "timeline": {
-      "type": "drye-hockey-timeline",
-      "blocks": {
-        "stage_1": {
-          "type": "stage",
-          "settings": {
-            "when": "Week 1",
-            "text": "<p>Four skates with nothing bunching or going slick. The pair washes with the jerseys.</p>"
-          }
-        },
-        "stage_2": {
-          "type": "stage",
-          "settings": {
-            "when": "Month 1",
-            "text": "<p>This is when parents write to us. Adam Todd’s son: nothing had held for years, then his hands cleared after three ice times.</p>"
-          }
-        },
-        "stage_3": {
-          "type": "stage",
-          "settings": {
-            "when": "Season 1",
-            "text": "<p>One pair carried through. Then summer, and hands get to just be hands.</p>"
-          }
-        }
-      },
-      "block_order": [
-        "stage_1",
-        "stage_2",
-        "stage_3"
-      ],
-      "settings": {
-        "anchor_id": "timeline",
-        "silhouette": "shopify://shop_images/hockey-kids-silhouette-trim.png"
-      }
-    },
     "offer": {
       "type": "drye-hockey-offer",
       "settings": {
@@ -867,15 +867,15 @@
     "clarity",
     "drye_research_video_full_76TKtF",
     "hiw",
+    "timeline",
     "objections",
-    "drye_hockey_trust_BwRYhw",
     "stories",
+    "drye_hockey_trust_BwRYhw",
     "drye_nt_trust_badges_kmjhiL",
     "drye_hockey_pendulum_L8iiC6",
     "gallery",
     "drye_mechanics_cta_jQNPXc",
     "drye_before_after_crcTXh",
-    "timeline",
     "offer"
   ]
 }
