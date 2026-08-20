@@ -38,6 +38,39 @@
     });
   }
 
+  /* One-time nudge so the reader physically feels a row is swipeable.
+
+     Two things the old per-section inline version got wrong. It fired 700ms
+     after page load — while the section was still far below the fold, so the
+     affordance was spent unseen. And it scrolled against scroll-snap-type: x
+     mandatory, which cancels a short programmatic scroll instantly, so nothing
+     moved at all. Snap is switched off for the duration, and the whole thing
+     waits for the row to be on screen. */
+  function nudge(scroller) {
+    if (reduce || !scroller || !('IntersectionObserver' in window)) return;
+    var spent = false;
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (!e.isIntersecting || spent) return;
+        spent = true;
+        io.disconnect();
+        if (scroller.scrollWidth <= scroller.clientWidth + 4) return;
+        setTimeout(function () {
+          var prev = scroller.style.scrollSnapType;
+          scroller.style.scrollSnapType = 'none';
+          scroller.scrollTo({ left: 44, behavior: 'smooth' });
+          setTimeout(function () {
+            scroller.scrollTo({ left: 0, behavior: 'smooth' });
+            setTimeout(function () { scroller.style.scrollSnapType = prev; }, 500);
+          }, 460);
+        }, 320);
+      });
+    }, { threshold: 0.35 });
+    io.observe(scroller);
+  }
+
+  /* Legacy rail: overflow on the track, arrows overlaying it. Kept as-is for
+     the sections still on it. New sections should use strips() instead. */
   function rails(scope) {
     scope.querySelectorAll('[data-drye-rail]:not([data-drye-rail-bound])').forEach(function (root) {
       root.setAttribute('data-drye-rail-bound', '1');
@@ -55,6 +88,104 @@
       root.querySelectorAll('[data-drye-rail-next]').forEach(function (b) {
         b.addEventListener('click', function () { track.scrollBy({ left: step() * 2, behavior: 'smooth' }); });
       });
+    });
+  }
+
+  /* Swipe strip: snap columns, dots, mobile pill hint, desktop arrows.
+     Behaviour lives here rather than in a per-section inline <script> so it
+     also re-arms on shopify:section:load.
+
+     Hooks:  [data-drye-strip]              wrapper
+             [data-drye-strip-track]        the scroll container
+             [data-drye-strip-hint]         mobile pill, hidden on first touch
+             [data-drye-strip-dots]         empty container, filled here
+             [data-drye-strip-prev/next]    arrows
+             data-drye-strip-dot-class      class for generated dots */
+  function strips(scope) {
+    scope.querySelectorAll('[data-drye-strip]:not([data-drye-strip-bound])').forEach(function (root) {
+      root.setAttribute('data-drye-strip-bound', '1');
+      var track = root.querySelector('[data-drye-strip-track]');
+      if (!track) return;
+
+      var cards = Array.prototype.slice.call(track.children);
+      var hint = root.querySelector('[data-drye-strip-hint]');
+      /* dots sit outside the wrapper, so search the section, not the wrapper */
+      var section = root.closest('[data-drye-section]') || root.parentElement;
+      var dotsWrap = section ? section.querySelector('[data-drye-strip-dots]') : null;
+
+      if (cards.length < 2) {
+        if (hint) hint.classList.add('is-hidden');
+        track.classList.add('is-at-end');
+        return;
+      }
+
+      var dots = [];
+      if (dotsWrap) {
+        var dotClass = root.getAttribute('data-drye-strip-dot-class') || 'drye-hockey-obj__dot';
+        cards.forEach(function (_, i) {
+          var d = document.createElement('span');
+          d.className = dotClass + (i === 0 ? ' is-active' : '');
+          dotsWrap.appendChild(d);
+          dots.push(d);
+        });
+      }
+
+      function step() {
+        var first = cards[0];
+        if (!first) return track.clientWidth * 0.8;
+        var cs = getComputedStyle(track);
+        var gap = parseFloat(cs.columnGap || cs.gap) || 0;
+        return first.getBoundingClientRect().width + gap;
+      }
+
+      var touched = false;
+
+      function paint() {
+        var s = step();
+        var i = s ? Math.round(track.scrollLeft / s) : 0;
+        if (i < 0) i = 0;
+        if (i > cards.length - 1) i = cards.length - 1;
+
+        dots.forEach(function (d, n) { d.classList.toggle('is-active', n === i); });
+
+        var max = track.scrollWidth - track.clientWidth;
+        track.classList.toggle('is-at-end', track.scrollLeft >= max - 8);
+
+        if (hint) {
+          var wide = window.matchMedia('(min-width: 768px)').matches;
+          hint.classList.toggle('is-hidden', wide || max <= 8 || track.scrollLeft > 16 || touched);
+        }
+      }
+
+      var queued = false;
+      function schedule() {
+        if (queued) return;
+        queued = true;
+        requestAnimationFrame(function () { queued = false; paint(); });
+      }
+
+      track.addEventListener('scroll', schedule, { passive: true });
+      window.addEventListener('resize', schedule);
+
+      /* The pill has done its job the moment the reader touches the row. */
+      function touch() {
+        if (touched) return;
+        touched = true;
+        if (hint) hint.classList.add('is-hidden');
+        if (dotsWrap) dotsWrap.classList.add('is-faded');
+      }
+      track.addEventListener('touchstart', touch, { passive: true });
+      track.addEventListener('pointerdown', touch, { passive: true });
+
+      root.querySelectorAll('[data-drye-strip-prev]').forEach(function (b) {
+        b.addEventListener('click', function () { track.scrollBy({ left: -step(), behavior: 'smooth' }); });
+      });
+      root.querySelectorAll('[data-drye-strip-next]').forEach(function (b) {
+        b.addEventListener('click', function () { track.scrollBy({ left: step(), behavior: 'smooth' }); });
+      });
+
+      paint();
+      nudge(track);
     });
   }
 
@@ -99,63 +230,154 @@
     });
   }
 
-  /* Period clock for drye-hockey-mechanism: counts one period, then the next. */
+  /* Period clock for drye-hockey-mechanism: counts one period, then the next.
+
+     requestAnimationFrame off a real timestamp, not setInterval. setInterval is
+     not frame-synced: when the main thread is busy its ticks are deferred and
+     queued, so the clock drifts and stutters. Elapsed time is read from the
+     clock the browser gives us, so a dropped frame costs nothing — the next
+     frame lands on the correct value instead of trying to catch up.
+
+     Writes are also gated: the DOM is only touched when the rendered value
+     actually changes. The old version rewrote the period line 4.5 times a
+     second for a string that changes once per period. */
   function clocks(scope) {
     scope.querySelectorAll('[data-drye-clock]:not([data-drye-clock-bound])').forEach(function (root) {
       root.setAttribute('data-drye-clock-bound', '1');
       if (reduce) return;
+
       var mins = parseInt(root.getAttribute('data-drye-clock-minutes'), 10) || 20;
       var periods = parseInt(root.getAttribute('data-drye-clock-periods'), 10) || 3;
+      var speed = parseFloat(root.getAttribute('data-drye-clock-speed')) || 55;
+
       var timeEl = root.querySelector('[data-drye-clock-time]');
       var meterEl = root.querySelector('[data-drye-clock-meter]');
       var perEl = root.querySelector('[data-drye-clock-period]');
+
       var words = perEl ? perEl.textContent.trim().split(/\s+/) : ['Period', '1', 'of'];
       var word = words[0] || 'Period';
       var of = words[2] || 'of';
+
       var total = mins * 60;
       var sec = 0;
       var period = 1;
       var running = !('IntersectionObserver' in window);
+      var last = 0;
+      var shownSec = -1;
+      var shownPeriod = 0;
+      var frame = null;
+
+      function paint() {
+        var s = Math.floor(sec);
+        if (s !== shownSec) {
+          shownSec = s;
+          if (timeEl) {
+            var m = Math.floor(s / 60);
+            var r = s % 60;
+            timeEl.textContent = m + ':' + (r < 10 ? '0' : '') + r;
+          }
+          /* scaleX, not width: a percentage width relayouts the meter every
+             tick, a transform is composited. */
+          if (meterEl) meterEl.style.transform = 'scaleX(' + (s / total).toFixed(4) + ')';
+        }
+        if (period !== shownPeriod) {
+          shownPeriod = period;
+          if (perEl) perEl.textContent = word + ' ' + period + ' ' + of + ' ' + periods;
+        }
+      }
+
+      function tick(now) {
+        frame = null;
+        if (!running) return;
+        if (!last) last = now;
+        sec += ((now - last) / 1000) * speed;
+        last = now;
+        if (sec >= total) { sec = 0; period = period % periods + 1; }
+        paint();
+        frame = requestAnimationFrame(tick);
+      }
+
+      function start() {
+        if (frame) return;
+        last = 0;
+        frame = requestAnimationFrame(tick);
+      }
+
+      function stop() {
+        if (!frame) return;
+        cancelAnimationFrame(frame);
+        frame = null;
+      }
 
       if ('IntersectionObserver' in window) {
         new IntersectionObserver(function (entries) {
-          entries.forEach(function (e) { running = e.isIntersecting; });
+          entries.forEach(function (e) {
+            running = e.isIntersecting;
+            if (running) start(); else stop();
+          });
         }, { threshold: 0.2 }).observe(root);
+      } else {
+        start();
       }
 
-      setInterval(function () {
-        if (!running) return;
-        sec += 12;
-        if (sec >= total) { sec = 0; period = period % periods + 1; }
-        var m = Math.floor(sec / 60);
-        var s = sec % 60;
-        if (timeEl) timeEl.textContent = m + ':' + (s < 10 ? '0' : '') + s;
-        if (meterEl) meterEl.style.width = (sec / total * 100).toFixed(1) + '%';
-        if (perEl) perEl.textContent = word + ' ' + period + ' ' + of + ' ' + periods;
-      }, 220);
+      /* A backgrounded tab throttles rAF to a stop; resume cleanly instead of
+         jumping by however long the phone was locked. */
+      document.addEventListener('visibilitychange', function () {
+        if (document.hidden) stop();
+        else if (running) start();
+      });
+
+      paint();
     });
   }
 
-  /* Animation clocks. Separate from reveal on purpose: reveal fires early (so
-     nothing pops in), but a looping figure must not start counting until the
-     thing it animates is actually on screen. data-drye-anim holds an optional
-     selector for the element to watch; the section itself is the fallback. */
+  /* Animation clocks + arrival sequencing.
+
+     Separate from reveal on purpose: reveal fires early (so nothing pops in),
+     but a looping figure must not start counting until the thing it animates is
+     actually on screen.
+
+       data-drye-anim           selector for the element to watch (section is fallback)
+       data-drye-anim-steps     how many cards arrive in sequence (omit = no sequence)
+       data-drye-anim-step-ms   ms between arrivals, default 3000
+
+     Sets .is-seq at bind time (the collapsed start state — gated on it so that
+     if this never runs, everything renders normally), then .is-running plus a
+     data-step counter on intersection. Single pass; loops keep running. */
   function anims(scope) {
     scope.querySelectorAll('[data-drye-anim]:not([data-drye-anim-bound])').forEach(function (root) {
       root.setAttribute('data-drye-anim-bound', '1');
+
+      var steps = parseInt(root.getAttribute('data-drye-anim-steps'), 10) || 0;
+      var gap = parseInt(root.getAttribute('data-drye-anim-step-ms'), 10) || 3000;
+
       if (reduce || !('IntersectionObserver' in window)) {
+        if (steps) root.setAttribute('data-step', String(steps));
         root.classList.add('is-running');
         return;
       }
+
+      if (steps) root.classList.add('is-seq');
+
       var sel = root.getAttribute('data-drye-anim');
       var target = (sel && root.querySelector(sel)) || root;
+
       var io = new IntersectionObserver(function (entries) {
         entries.forEach(function (e) {
           if (!e.isIntersecting) return;
-          root.classList.add('is-running');
           io.unobserve(e.target);
+          root.classList.add('is-running');
+          if (!steps) return;
+          var i = 1;
+          root.setAttribute('data-step', '1');
+          var t = setInterval(function () {
+            i += 1;
+            root.setAttribute('data-step', String(i));
+            if (i >= steps) clearInterval(t);
+          }, gap);
         });
-      }, { threshold: 0, rootMargin: '0px 0px -30% 0px' });
+      }, { threshold: 0, rootMargin: '0px 0px -25% 0px' });
+
       io.observe(target);
     });
   }
@@ -170,127 +392,4 @@
   document.addEventListener('DOMContentLoaded', function () { window.DRYEHockey.init(); });
   document.addEventListener('shopify:section:load', function (e) { window.DRYEHockey.init(e.target); });
   if (document.readyState !== 'loading') window.DRYEHockey.init();
-
-  /* Swipe strip: snap columns, dots, mobile pill hint, desktop arrows.
-     Behaviour lives here rather than in a per-section inline <script> so it
-     also re-arms on shopify:section:load. */
-  function strips(scope) {
-    scope.querySelectorAll('[data-drye-strip]:not([data-drye-strip-bound])').forEach(function (root) {
-      root.setAttribute('data-drye-strip-bound', '1');
-      var track = root.querySelector('[data-drye-strip-track]');
-      if (!track) return;
-
-      var cards = Array.prototype.slice.call(track.children);
-      var hint = root.querySelector('[data-drye-strip-hint]');
-      /* dots live outside the wrap, so search the section, not the wrap */
-      var section = root.closest('[data-drye-section]') || root.parentElement;
-      var dotsWrap = section ? section.querySelector('[data-drye-strip-dots]') : null;
-
-      if (cards.length < 2) {
-        if (hint) hint.classList.add('is-hidden');
-        track.classList.add('is-at-end');
-        return;
-      }
-
-      var dots = [];
-      if (dotsWrap) {
-        cards.forEach(function (_, i) {
-          var d = document.createElement('span');
-          d.className = 'drye-hockey-obj__dot' + (i === 0 ? ' is-active' : '');
-          dotsWrap.appendChild(d);
-          dots.push(d);
-        });
-      }
-
-      function step() {
-        var first = cards[0];
-        if (!first) return track.clientWidth * 0.8;
-        var cs = getComputedStyle(track);
-        var gap = parseFloat(cs.columnGap || cs.gap) || 0;
-        return first.getBoundingClientRect().width + gap;
-      }
-
-      var touched = false;
-
-      function paint() {
-        var s = step();
-        var i = s ? Math.round(track.scrollLeft / s) : 0;
-        if (i < 0) i = 0;
-        if (i > cards.length - 1) i = cards.length - 1;
-
-        dots.forEach(function (d, n) { d.classList.toggle('is-active', n === i); });
-
-        var max = track.scrollWidth - track.clientWidth;
-        track.classList.toggle('is-at-end', track.scrollLeft >= max - 8);
-
-        if (hint) {
-          var wide = window.matchMedia('(min-width: 768px)').matches;
-          hint.classList.toggle('is-hidden', wide || max <= 8 || track.scrollLeft > 16 || touched);
-        }
-      }
-
-      var queued = false;
-      track.addEventListener('scroll', function () {
-        if (queued) return;
-        queued = true;
-        requestAnimationFrame(function () { queued = false; paint(); });
-      }, { passive: true });
-
-      function touch() {
-        if (touched) return;
-        touched = true;
-        if (hint) hint.classList.add('is-hidden');
-        if (dotsWrap) dotsWrap.classList.add('is-faded');
-      }
-      track.addEventListener('touchstart', touch, { passive: true });
-      track.addEventListener('pointerdown', touch, { passive: true });
-
-      root.querySelectorAll('[data-drye-strip-prev]').forEach(function (b) {
-        b.addEventListener('click', function () { track.scrollBy({ left: -step(), behavior: 'smooth' }); });
-      });
-      root.querySelectorAll('[data-drye-strip-next]').forEach(function (b) {
-        b.addEventListener('click', function () { track.scrollBy({ left: step(), behavior: 'smooth' }); });
-      });
-
-      window.addEventListener('resize', function () {
-        if (queued) return;
-        queued = true;
-        requestAnimationFrame(function () { queued = false; paint(); });
-      });
-
-      paint();
-      nudge(track);
-    });
-  }
-
-  /* One-time nudge so the reader physically feels the row is swipeable.
-
-     Two things the inline version got wrong. It fired 700ms after page load —
-     while the section was still far below the fold, so the affordance was spent
-     unseen. And it scrolled against scroll-snap-type: x mandatory, which
-     cancels a short programmatic scroll instantly, so nothing moved at all.
-     Snap is switched off for the duration and the whole thing waits for the
-     row to be on screen. */
-  function nudge(scroller) {
-    if (reduce || !scroller || !('IntersectionObserver' in window)) return;
-    var spent = false;
-    var io = new IntersectionObserver(function (entries) {
-      entries.forEach(function (e) {
-        if (!e.isIntersecting || spent) return;
-        spent = true;
-        io.disconnect();
-        if (scroller.scrollWidth <= scroller.clientWidth + 4) return;
-        setTimeout(function () {
-          var prev = scroller.style.scrollSnapType;
-          scroller.style.scrollSnapType = 'none';
-          scroller.scrollTo({ left: 44, behavior: 'smooth' });
-          setTimeout(function () {
-            scroller.scrollTo({ left: 0, behavior: 'smooth' });
-            setTimeout(function () { scroller.style.scrollSnapType = prev; }, 500);
-          }, 460);
-        }, 320);
-      });
-    }, { threshold: 0.35 });
-    io.observe(scroller);
-  }
 })();
