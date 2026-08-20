@@ -573,55 +573,6 @@
         "hint_label": "Swipe"
       }
     },
-    "drye_hockey_trust_BwRYhw": {
-      "type": "drye-hockey-trust",
-      "name": "DRYE Trust Bar",
-      "settings": {
-        "logo": "shopify://shop_images/Skarmavbild-2020-12-16-kl.-07.38.57.webp",
-        "logo_alt": "",
-        "micro_label": "Backed By",
-        "explainer": "The Swedish ice hockey players' union — every professional in SHL, SDHL and Hockeyallsvenskan."
-      }
-    },
-    "drye_nt_trust_badges_kmjhiL": {
-      "type": "drye-nt-trust-badges",
-      "blocks": {
-        "stars_X9F6aM": {
-          "type": "stars",
-          "settings": {
-            "score": "4.8/5",
-            "count": "59 reviews",
-            "url": "shopify://products/drye-moisture-routing-glove-liners",
-            "cta_label": "See all our reviews"
-          }
-        },
-        "award_iyaaqM": {
-          "type": "award",
-          "settings": {
-            "emblem": "shopify://shop_images/skapa-emblem-small.png",
-            "name": "SKAPA",
-            "caption": "Innovation Award — in memory of the inventor Alfred Nobel"
-          }
-        },
-        "trustpilot_XTME8G": {
-          "type": "trustpilot",
-          "settings": {
-            "logo": "shopify://shop_images/trustpilot-logo-trimmed.png",
-            "score": "4.4/5",
-            "count": "10 reviews",
-            "url": "https://se.trustpilot.com/review/hudsverige.se",
-            "cta_label": "See all reviews on Trustpilot"
-          }
-        }
-      },
-      "block_order": [
-        "stars_X9F6aM",
-        "award_iyaaqM",
-        "trustpilot_XTME8G"
-      ],
-      "name": "DRYE NT — Trust badges",
-      "settings": {}
-    },
     "drye_hockey_pendulum_L8iiC6": {
       "type": "drye-hockey-pendulum",
       "blocks": {
@@ -681,6 +632,55 @@
         "pend_key_b": "With DRYE",
         "pend_note": "<p>Positions are relative, not measured values — based on what users describe in interviews and field studies.</p>"
       }
+    },
+    "drye_hockey_trust_BwRYhw": {
+      "type": "drye-hockey-trust",
+      "name": "DRYE Trust Bar",
+      "settings": {
+        "logo": "shopify://shop_images/Skarmavbild-2020-12-16-kl.-07.38.57.webp",
+        "logo_alt": "",
+        "micro_label": "Backed By",
+        "explainer": "The Swedish ice hockey players' union — every professional in SHL, SDHL and Hockeyallsvenskan."
+      }
+    },
+    "drye_nt_trust_badges_kmjhiL": {
+      "type": "drye-nt-trust-badges",
+      "blocks": {
+        "stars_X9F6aM": {
+          "type": "stars",
+          "settings": {
+            "score": "4.8/5",
+            "count": "59 reviews",
+            "url": "shopify://products/drye-moisture-routing-glove-liners",
+            "cta_label": "See all our reviews"
+          }
+        },
+        "award_iyaaqM": {
+          "type": "award",
+          "settings": {
+            "emblem": "shopify://shop_images/skapa-emblem-small.png",
+            "name": "SKAPA",
+            "caption": "Innovation Award — in memory of the inventor Alfred Nobel"
+          }
+        },
+        "trustpilot_XTME8G": {
+          "type": "trustpilot",
+          "settings": {
+            "logo": "shopify://shop_images/trustpilot-logo-trimmed.png",
+            "score": "4.4/5",
+            "count": "10 reviews",
+            "url": "https://se.trustpilot.com/review/hudsverige.se",
+            "cta_label": "See all reviews on Trustpilot"
+          }
+        }
+      },
+      "block_order": [
+        "stars_X9F6aM",
+        "award_iyaaqM",
+        "trustpilot_XTME8G"
+      ],
+      "name": "DRYE NT — Trust badges",
+      "settings": {}
     },
     "gallery": {
       "type": "drye-hockey-gallery",
@@ -870,9 +870,9 @@
     "timeline",
     "objections",
     "stories",
+    "drye_hockey_pendulum_L8iiC6",
     "drye_hockey_trust_BwRYhw",
     "drye_nt_trust_badges_kmjhiL",
-    "drye_hockey_pendulum_L8iiC6",
     "gallery",
     "drye_mechanics_cta_jQNPXc",
     "drye_before_after_crcTXh",
