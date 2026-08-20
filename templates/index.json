@@ -9,100 +9,6 @@
  */
 {
   "sections": {
-    "drye_new_hero_ypJLCW": {
-      "type": "dryeNEW-hero",
-      "blocks": {
-        "credibility_item_Pxx36i": {
-          "type": "credibility_item",
-          "settings": {
-            "text": "SKAPA Prize — Nobel memory, 2020"
-          }
-        },
-        "credibility_item_CVckyE": {
-          "type": "credibility_item",
-          "settings": {
-            "text": "Swedish School of Textiles"
-          }
-        },
-        "credibility_item_nPrCNJ": {
-          "type": "credibility_item",
-          "settings": {
-            "text": "Uppsala University"
-          }
-        },
-        "credibility_item_e9ftxL": {
-          "type": "credibility_item",
-          "settings": {
-            "text": "Patent pending"
-          }
-        },
-        "stat_item_bgVXww": {
-          "type": "stat_item",
-          "settings": {
-            "value": "Dry hands",
-            "label_line_1": "through the shift",
-            "label_line_2": ""
-          }
-        },
-        "stat_item_YkLwNB": {
-          "type": "stat_item",
-          "settings": {
-            "value": "Less glove fighting",
-            "label_line_1": "no wet-skin drag",
-            "label_line_2": ""
-          }
-        },
-        "stat_item_hXwU8P": {
-          "type": "stat_item",
-          "settings": {
-            "value": "Cleaner hands",
-            "label_line_1": "when gloves come off",
-            "label_line_2": ""
-          }
-        },
-        "stat_item_iWabNB": {
-          "type": "stat_item",
-          "settings": {
-            "value": "6–12 months",
-            "label_line_1": "washable use",
-            "label_line_2": ""
-          }
-        }
-      },
-      "block_order": [
-        "credibility_item_Pxx36i",
-        "credibility_item_CVckyE",
-        "credibility_item_nPrCNJ",
-        "credibility_item_e9ftxL",
-        "stat_item_bgVXww",
-        "stat_item_YkLwNB",
-        "stat_item_hXwU8P",
-        "stat_item_iWabNB"
-      ],
-      "disabled": true,
-      "name": "DRYE NEW Hero",
-      "settings": {
-        "section_id": "hero",
-        "poster_image_desktop": "shopify://shop_images/Gemini_Generated_Image_2rtxik2rtxik2rtx.webp",
-        "poster_image_mobile": "shopify://shop_images/5Y9A9324.webp",
-        "video_hls_url_desktop": "",
-        "video_hls_url_mobile": "",
-        "heading_line_1": "Add one <span style=\"text-decoration:underline\">dry layer</span>",
-        "heading_line_2": "under your gloves.",
-        "heading_echo": "",
-        "subheading_line_1": "",
-        "subheading_line_2": "0.4mm thin. Worn inside your existing glove — nitrile, latex, rubber or HV. Your outer glove stays the same. ",
-        "subheading_emphasis": "What changes is what your skin sits against.",
-        "path_1_label": "IF YOUR GLOVES FEEL WET",
-        "path_1_text_line_1": "Show me what changes ↓",
-        "path_1_text_line_2": "",
-        "path_1_link": "",
-        "path_2_label": "IF YOU WANT THE PROOF",
-        "path_2_text_line_1": "See why it works ↓",
-        "path_2_text_line_2": "",
-        "path_2_link": "#system"
-      }
-    },
     "drye_hockey_hero_PUxDcX": {
       "type": "drye-hockey-hero",
       "settings": {
@@ -114,6 +20,8 @@
         "image_desktop": "shopify://shop_images/Gemini_Generated_Image_2rtxik2rtxik2rtx.webp",
         "image_mobile": "shopify://shop_images/5Y9A9331_1_1.webp",
         "image_alt": "A player pulling a hockey glove on over the DRYE liner",
+        "scrim": 30,
+        "scrim_mobile": 45,
         "stack_alt": "The hockey glove seals; DRYE sits between the glove and the skin",
         "layer_top": "Nitrile glove",
         "layer_mid": "DRYE · Asymmetric layering",
@@ -135,6 +43,53 @@
         "pad_bottom": 28,
         "bygg_url": "",
         "gnosjo_url": ""
+      }
+    },
+    "drye_industry_cards_JPH7Be": {
+      "type": "drye-industry-cards",
+      "blocks": {
+        "card_iJwf9p": {
+          "type": "card",
+          "settings": {
+            "image": "shopify://shop_images/Gemini_Generated_Image_een107een107een1.webp",
+            "label": "Automotive / Industry",
+            "link": "shopify://pages/mechanics"
+          }
+        },
+        "card_hGGrWy": {
+          "type": "card",
+          "settings": {
+            "image": "shopify://shop_images/Gemini_Generated_Image_89c4g189c4g189c4_1.webp",
+            "label": "Sports",
+            "link": "shopify://pages/hockey"
+          }
+        },
+        "card_jFgk6i": {
+          "type": "card",
+          "settings": {
+            "image": "shopify://shop_images/Screenshot_26_4c9e936b-10db-4cf4-b8e8-9feb4e919c47.webp",
+            "label": "Outdoor",
+            "link": ""
+          }
+        },
+        "card_GtfHW4": {
+          "type": "card",
+          "settings": {
+            "image": "shopify://shop_images/Gemini_Generated_Image_snqdsjsnqdsjsnqd.webp",
+            "label": "Military",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "card_iJwf9p",
+        "card_hGGrWy",
+        "card_jFgk6i",
+        "card_GtfHW4"
+      ],
+      "name": "DRYE Industry Cards",
+      "settings": {
+        "bg_color": "#ffffff"
       }
     },
     "drye_mechanics_identification_gallery_b99Ezp": {
@@ -783,9 +738,9 @@
     }
   },
   "order": [
-    "drye_new_hero_ypJLCW",
     "drye_hockey_hero_PUxDcX",
     "drye_featured_in_GDPJ49",
+    "drye_industry_cards_JPH7Be",
     "drye_mechanics_identification_gallery_b99Ezp",
     "drye_product_reality_grid_pgX4xi",
     "drye_blog_cta_strip_DzayyA",
