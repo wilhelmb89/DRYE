@@ -765,6 +765,66 @@
         "sizeguide_label": "Size guide",
         "sizeguide": ""
       }
+    },
+    "drye_hockey_pendulum_L8iiC6": {
+      "type": "drye-hockey-pendulum",
+      "blocks": {
+        "pendulum_epdeJq": {
+          "type": "pendulum",
+          "settings": {
+            "label": "Grip",
+            "wet": 26,
+            "drye": 86
+          }
+        },
+        "pendulum_r77iEQ": {
+          "type": "pendulum",
+          "settings": {
+            "label": "Comfort",
+            "wet": 22,
+            "drye": 80
+          }
+        },
+        "pendulum_mAeGqX": {
+          "type": "pendulum",
+          "settings": {
+            "label": "Skin",
+            "wet": 15,
+            "drye": 72
+          }
+        },
+        "pendulum_FMjcXr": {
+          "type": "pendulum",
+          "settings": {
+            "label": "Smell",
+            "wet": 12,
+            "drye": 70
+          }
+        },
+        "pendulum_wTtttd": {
+          "type": "pendulum",
+          "settings": {
+            "label": "Routine",
+            "wet": 20,
+            "drye": 88
+          }
+        }
+      },
+      "block_order": [
+        "pendulum_epdeJq",
+        "pendulum_r77iEQ",
+        "pendulum_mAeGqX",
+        "pendulum_FMjcXr",
+        "pendulum_wTtttd"
+      ],
+      "name": "drye-Hockey Pendulum",
+      "settings": {
+        "anchor_id": "pendulum",
+        "pend_title": "Same glove, same session",
+        "pend_key_a": "Wet glove",
+        "pend_key_b": "With DRYE",
+        "pend_note": "<p>Positions are relative, not measured values — based on what users describe in interviews and field studies.</p>"
+      }
     }
   },
   "order": [
@@ -777,6 +837,7 @@
     "drye_research_video_full_76TKtF",
     "hiw",
     "stories",
+    "drye_hockey_pendulum_L8iiC6",
     "objections",
     "gallery",
     "drye_nt_trust_badges_kmjhiL",
