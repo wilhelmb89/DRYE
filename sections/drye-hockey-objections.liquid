@@ -6,9 +6,11 @@
 {%- comment -%}
   Objection handling. Grip first — it is the deal-breaker. Every card carries proof
   in a customer's own words; a card without proof is a claim, not an answer.
+  Swipe strip: 82vw snap columns, pill hint on mobile, arrows on desktop. All
+  behaviour lives in drye-hockey-lp.js (strips), keyed off data-drye-strip.
 {%- endcomment -%}
 
-<section class="dryeNEW-section drye-hockey-obj" id="{{ section.settings.anchor_id | default: 'objections' }}" data-drye-section="hockey-objections">
+<section class="dryeNEW-section drye-hockey-obj" id="{{ section.settings.anchor_id | default: 'objections' }}-{{ section.id }}" data-section-id="{{ section.id }}" data-drye-section="hockey-objections">
   {%- if section.settings.background != blank -%}
     <div class="drye-hockey-obj__bg" aria-hidden="true">
       {{ section.settings.background | image_url: width: 2000 | image_tag: loading: 'lazy', sizes: '100vw', alt: '' }}
@@ -18,36 +20,48 @@
     </div>
   {%- endif -%}
 
-  <div class="dryeNEW-container drye-hockey-obj__head">
-    <h2 class="dryeNEW-h2 drye-hockey-obj__title">{{ section.settings.heading }}</h2>
-  </div>
-
-  <div class="dryeNEW-rail drye-hockey-obj__rail" data-drye-rail>
-    <div class="dryeNEW-rail__track" data-drye-rail-track>
-      {%- for block in section.blocks -%}
-        <article class="drye-hockey-obj__card" {{ block.shopify_attributes }}>
-          {%- if block.settings.profile != blank -%}
-            <span class="dryeNEW-micro drye-hockey-obj__prof">{{ block.settings.profile | escape }}</span>
-          {%- endif -%}
-          <h3 class="dryeNEW-h3 drye-hockey-obj__q">{{ block.settings.question }}</h3>
-          {%- if block.settings.answer != blank -%}
-            <div class="dryeNEW-body--sm drye-hockey-obj__a">{{ block.settings.answer }}</div>
-          {%- endif -%}
-          {%- if block.settings.proof != blank -%}
-            <p class="dryeNEW-body--sm drye-hockey-obj__proof">{{ block.settings.proof }}</p>
-          {%- endif -%}
-          {%- if block.settings.who != blank -%}
-            <p class="dryeNEW-body--caption drye-hockey-obj__who">{{ block.settings.who | escape }}</p>
-          {%- endif -%}
-        </article>
-      {%- endfor -%}
+  <div class="dryeNEW-container drye-hockey-obj__inner">
+    <div class="drye-hockey-obj__head">
+      <h2 class="dryeNEW-h2 drye-hockey-obj__title">{{ section.settings.heading }}</h2>
     </div>
 
-    <button type="button" class="dryeNEW-nav dryeNEW-nav--prev" data-drye-rail-prev aria-label="Previous questions">&larr;</button>
-    <button type="button" class="dryeNEW-nav dryeNEW-nav--next" data-drye-rail-next aria-label="Next questions">&rarr;</button>
-  </div>
+    <div class="drye-hockey-obj__strip-wrap" data-drye-strip>
+      <button type="button" class="drye-hockey-obj__arrow drye-hockey-obj__arrow--prev" data-drye-strip-prev aria-label="Previous question">
+        <span aria-hidden="true">&larr;</span>
+      </button>
+      <button type="button" class="drye-hockey-obj__arrow drye-hockey-obj__arrow--next" data-drye-strip-next aria-label="Next question">
+        <span aria-hidden="true">&rarr;</span>
+      </button>
 
-  <div class="dryeNEW-container">{% render 'drye-hockey-swipe-hint' %}</div>
+      {%- if section.settings.hint_label != blank -%}
+        <div class="drye-hockey-obj__hint" data-drye-strip-hint aria-hidden="true">{{ section.settings.hint_label | escape }}</div>
+      {%- endif -%}
+
+      <div class="drye-hockey-obj__strip" data-drye-strip-track>
+        {%- for block in section.blocks -%}
+          <article class="drye-hockey-obj__card" {{ block.shopify_attributes }}>
+            {%- if block.settings.profile != blank -%}
+              <span class="drye-hockey-obj__prof">{{ block.settings.profile | escape }}</span>
+            {%- endif -%}
+            <h3 class="dryeNEW-h3 drye-hockey-obj__q">{{ block.settings.question }}</h3>
+            {%- if block.settings.answer != blank -%}
+              <div class="dryeNEW-body--sm drye-hockey-obj__a">{{ block.settings.answer }}</div>
+            {%- endif -%}
+            {%- if block.settings.proof != blank -%}
+              <p class="dryeNEW-body--sm drye-hockey-obj__proof">{{ block.settings.proof }}</p>
+            {%- endif -%}
+            {%- if block.settings.who != blank -%}
+              <p class="dryeNEW-body--caption drye-hockey-obj__who">{{ block.settings.who | escape }}</p>
+            {%- endif -%}
+          </article>
+        {%- endfor -%}
+      </div>
+    </div>
+
+    {%- if section.blocks.size > 1 -%}
+      <div class="drye-hockey-obj__dots" data-drye-strip-dots aria-hidden="true"></div>
+    {%- endif -%}
+  </div>
 </section>
 
 {% schema %}
@@ -58,6 +72,7 @@
   "settings": [
     { "type": "text", "id": "anchor_id", "label": "Anchor id", "default": "objections" },
     { "type": "html", "id": "heading", "label": "Headline", "default": "What you'd ask another parent." },
+    { "type": "text", "id": "hint_label", "label": "Mobile swipe pill (blank to hide)", "default": "Swipe" },
     { "type": "image_picker", "id": "background", "label": "Background photo (optional)" }
   ],
   "blocks": [
