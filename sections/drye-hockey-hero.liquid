@@ -1,12 +1,13 @@
 {{ 'base.css' | asset_url | stylesheet_tag }}
 
+{{ 'drye-hockey-lp.js' | asset_url | script_tag }}
 {{ 'drye-hockey-hero.css' | asset_url | stylesheet_tag }}
 
 {%- liquid
   assign ss = section.settings
 -%}
 
-<section class="dryeNEW-section drye-hockey-hero" id="{{ ss.anchor_id | default: 'hero' }}" data-drye-section="hockey-hero" style="--hero-scrim: {{ ss.scrim | divided_by: 100.0 }}; --hero-scrim-mobile: {{ ss.scrim_mobile | divided_by: 100.0 }};">
+<section class="dryeNEW-section drye-hockey-hero" id="{{ ss.anchor_id | default: 'hero' }}" data-drye-section="hockey-hero" data-drye-video style="--hero-scrim: {{ ss.scrim | divided_by: 100.0 }}; --hero-scrim-mobile: {{ ss.scrim_mobile | divided_by: 100.0 }};">
   {%- if ss.image_desktop != blank -%}
     <div class="drye-hockey-hero__media drye-hockey-hero__media--desktop">
       {{ ss.image_desktop | image_url: width: 2400 | image_tag: sizes: '100vw', loading: 'eager', fetchpriority: 'high', alt: ss.image_alt }}
@@ -17,6 +18,56 @@
     <div class="drye-hockey-hero__media drye-hockey-hero__media--mobile">
       {{ ss.image_mobile | image_url: width: 1200 | image_tag: sizes: '100vw', loading: 'eager', fetchpriority: 'high', alt: ss.image_alt }}
     </div>
+  {%- endif -%}
+
+  {%- comment -%}
+    Background video — strictly optional, strictly an enhancement.
+
+    The <source> is deliberately absent: the URLs sit on data-src-* and
+    drye-hockey-lp.js attaches a real <source> only once the hero is on screen,
+    on a connection worth it, and outside prefers-reduced-motion. Until then the
+    browser requests nothing at all, so the eager poster image above stays the
+    LCP element and the video can never delay it.
+
+    An external URL (Cloudflare R2, any CDN) wins over an uploaded Shopify file
+    when both are set, so you can move hosts without clearing the picker.
+  {%- endcomment -%}
+  {%- liquid
+    assign vid_desktop = ss.video_url_desktop | strip
+    assign vid_mobile = ss.video_url_mobile | strip
+
+    if vid_desktop == blank and ss.video_file_desktop != blank
+      for source in ss.video_file_desktop.sources
+        if source.format == 'mp4'
+          assign vid_desktop = source.url
+        endif
+      endfor
+    endif
+
+    if vid_mobile == blank and ss.video_file_mobile != blank
+      for source in ss.video_file_mobile.sources
+        if source.format == 'mp4'
+          assign vid_mobile = source.url
+        endif
+      endfor
+    endif
+  -%}
+
+  {%- if vid_desktop != blank or vid_mobile != blank -%}
+    <video
+      class="drye-hockey-hero__video"
+      data-drye-video-el
+      data-src-desktop="{{ vid_desktop | default: vid_mobile }}"
+      data-src-mobile="{{ vid_mobile | default: vid_desktop }}"
+      muted
+      playsinline
+      loop
+      disablepictureinpicture
+      disableremoteplayback
+      preload="none"
+      tabindex="-1"
+      aria-hidden="true"
+    ></video>
   {%- endif -%}
 
   {%- comment -%} Flat tint, not a gradient — sits over the photo, under the copy. {%- endcomment -%}
@@ -47,7 +98,14 @@
         {%- endif -%}
       </div>
 
-      <div class="drye-hockey-hero__stack">
+      {%- comment -%}
+        Off by default on neither breakpoint — the two toggles are independent so
+        the diagram can carry the desktop hero while the phone hero stays a
+        headline over the photo, which is the usual right answer with a video
+        behind it.
+      {%- endcomment -%}
+      {%- if ss.show_stack or ss.show_stack_mobile -%}
+      <div class="drye-hockey-hero__stack{% unless ss.show_stack %} drye-hockey-hero__stack--desktop-off{% endunless %}{% unless ss.show_stack_mobile %} drye-hockey-hero__stack--mobile-off{% endunless %}">
         <div role="img" aria-label="{{ ss.stack_alt | escape }}">
           <div class="drye-hockey-hero__box">
             <span class="drye-hockey-hero__label">{{ ss.layer_top | escape }}</span>
@@ -68,6 +126,7 @@
           </div>
         </div>
       </div>
+      {%- endif -%}
     </div>
   </div>
 </section>
@@ -89,7 +148,16 @@
     { "type": "text", "id": "image_alt", "label": "Image alt", "default": "A player pulling a hockey glove on over the DRYE liner" },
     { "type": "range", "id": "scrim", "label": "Photo darkening \u2014 desktop", "min": 0, "max": 80, "step": 5, "unit": "%", "default": 30 },
     { "type": "range", "id": "scrim_mobile", "label": "Photo darkening \u2014 mobile", "min": 0, "max": 80, "step": 5, "unit": "%", "default": 45 },
+    { "type": "header", "content": "Background video (optional)" },
+    { "type": "paragraph", "content": "Muted, looping, decorative. The photo above stays the poster and stays the LCP element \u2014 the video is only fetched once the hero is on screen, and never on Save-Data, slow connections, or reduced-motion. Leave every field blank for a photo-only hero." },
+    { "type": "video", "id": "video_file_desktop", "label": "Desktop video \u2014 uploaded (16:9)" },
+    { "type": "video", "id": "video_file_mobile", "label": "Mobile video \u2014 uploaded (9:16)" },
+    { "type": "text", "id": "video_url_desktop", "label": "Desktop video \u2014 external MP4 URL", "info": "Overrides the uploaded file. A direct .mp4 link (Cloudflare R2, Bunny, S3). Not a Cloudflare Stream or YouTube page URL." },
+    { "type": "text", "id": "video_url_mobile", "label": "Mobile video \u2014 external MP4 URL", "info": "Leave blank to use the desktop encode on phones too." },
     { "type": "header", "content": "Layer stack" },
+    { "type": "checkbox", "id": "show_stack", "label": "Show on desktop", "default": true },
+    { "type": "checkbox", "id": "show_stack_mobile", "label": "Show on mobile", "default": true },
+    { "type": "paragraph", "content": "Turn both off to hide the diagram entirely. With a background video running, a phone hero often reads better as headline only." },
     { "type": "text", "id": "stack_alt", "label": "Diagram alt", "default": "The hockey glove seals; DRYE sits between the glove and the skin" },
     { "type": "text", "id": "layer_top", "label": "Top layer", "default": "Hockey glove — sealed" },
     { "type": "text", "id": "layer_mid", "label": "Middle layer", "default": "DRYE · Asymmetric layering" },
