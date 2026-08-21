@@ -522,10 +522,97 @@
     });
   }
 
+  /* Hero background video — progressive enhancement over the poster image.
+
+     The poster image is the LCP element and must stay that way: it is eager +
+     fetchpriority=high, and the video is not even requested until this runs.
+     Nothing here can delay first paint.
+
+     Skipped entirely when: reduced motion, Save-Data, a 2g/3g effective
+     connection, or the section is off-screen. The <source> carries no src
+     attribute at all until we attach it — a preload="none" video still costs a
+     metadata request in some browsers, and an unattached source costs nothing. */
+  function videos(scope) {
+    scope.querySelectorAll('[data-drye-video]:not([data-drye-video-bound])').forEach(function (host) {
+      host.setAttribute('data-drye-video-bound', '1');
+
+      var vid = host.querySelector('video[data-drye-video-el]');
+      if (!vid) return;
+
+      if (reduce) return;
+
+      var conn = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
+      if (conn) {
+        if (conn.saveData) return;
+        if (/2g/.test(conn.effectiveType || '')) return;
+      }
+
+      /* Which encode: the mobile URL below 768px if one was given, else the
+         desktop one. Chosen at load time, not per resize — swapping a playing
+         video's source mid-session restarts the download for no visual gain. */
+      var wide = window.matchMedia('(min-width: 768px)').matches;
+      var url = (wide ? vid.getAttribute('data-src-desktop') : vid.getAttribute('data-src-mobile'))
+             || vid.getAttribute('data-src-desktop');
+      if (!url) return;
+
+      var started = false;
+
+      function load() {
+        if (started) return;
+        started = true;
+
+        var src = document.createElement('source');
+        src.setAttribute('src', url);
+        src.setAttribute('type', url.indexOf('.webm') > -1 ? 'video/webm' : 'video/mp4');
+        vid.appendChild(src);
+
+        /* Only fade in once there is a frame to show. Without this the poster
+           blinks to black for a beat on slower connections. */
+        vid.addEventListener('loadeddata', function () {
+          host.classList.add('is-playing');
+        }, { once: true });
+
+        /* A failed video must leave the poster exactly as it was, not a black
+           box — so drop the element rather than letting it paint empty. */
+        vid.addEventListener('error', function () {
+          host.classList.remove('is-playing');
+          vid.remove();
+        }, { once: true });
+
+        vid.load();
+        var p = vid.play();
+        if (p && p.catch) p.catch(function () { /* autoplay refused; poster stands */ });
+      }
+
+      /* Pause off-screen. A hero video that keeps decoding while the reader is
+         six sections down is pure battery cost. */
+      if ('IntersectionObserver' in window) {
+        new IntersectionObserver(function (entries) {
+          entries.forEach(function (e) {
+            if (e.isIntersecting) {
+              load();
+              if (started && vid.paused) { var p = vid.play(); if (p && p.catch) p.catch(function () {}); }
+            } else if (started) {
+              vid.pause();
+            }
+          });
+        }, { threshold: 0.01 }).observe(host);
+      } else {
+        load();
+      }
+
+      document.addEventListener('visibilitychange', function () {
+        if (!started) return;
+        if (document.hidden) vid.pause();
+        else { var p = vid.play(); if (p && p.catch) p.catch(function () {}); }
+      });
+    });
+  }
+
   window.DRYEHockey = {
     init: function (scope) {
       var t = scope || document;
-      reveal(t); rails(t); strips(t); carousels(t); clocks(t); anims(t); marquees(t);
+      reveal(t); rails(t); strips(t); carousels(t); clocks(t); anims(t); marquees(t); videos(t);
     }
   };
 
