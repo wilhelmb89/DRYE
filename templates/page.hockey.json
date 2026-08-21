@@ -100,7 +100,11 @@
         "voice_6",
         "voice_7"
       ],
-      "settings": {}
+      "settings": {
+        "speed": 26,
+        "direction": "rtl",
+        "aria_label": "What hockey parents say"
+      }
     },
     "mech": {
       "type": "drye-hockey-mechanism",
@@ -316,6 +320,95 @@
         "video_caption": "Sealed gloves trap sweat. DRYE routes it outward."
       }
     },
+    "stories": {
+      "type": "drye-hockey-parent-stories",
+      "blocks": {
+        "story_tQdULR": {
+          "type": "story",
+          "settings": {
+            "when": "two to three games a week",
+            "head": "“They work well, and his hands have improved.”",
+            "body": "<p>My son wears them under his hockey gloves because he has eczema. He thinks they work well, and his hands have gotten better.</p>",
+            "punch": "“His hands have improved”",
+            "who": "Liza Dahlin · hockey parent · May 2025",
+            "image": "shopify://shop_images/3312_1.webp",
+            "image_alt": "Practice at the rink in Dallas"
+          }
+        },
+        "story_Rm9V68": {
+          "type": "story",
+          "settings": {
+            "when": "three seasons in",
+            "head": "“They are great, thank you.”",
+            "body": "<p>My son is an ice hockey goalie, and sweat from his glove and blocker irritates his hands. After trying DRYE, she wrote back: ‘They are great, thank you.</p>",
+            "punch": "“They are great, thank you”",
+            "who": "Katherine Wilberton · hockey parent · March 2026",
+            "image": "shopify://shop_images/Gemini_Generated_Image_4nnlck4nnlck4nnl.webp",
+            "image_alt": ""
+          }
+        },
+        "story_1": {
+          "type": "story",
+          "settings": {
+            "when": "after 3 ice times",
+            "head": "“After three ice times, his hands completely cleared up.”",
+            "body": "<p>My son has been struggling with severe dry hands because of his hockey gloves for the past few years. No cream or prescription has helped.</p>",
+            "punch": "\"Absolute game changer\"",
+            "who": "Adam Todd · hockey parent · January 2026",
+            "image": "shopify://shop_images/pexels-tima-miroshnichenko-6847605.webp",
+            "image_alt": ""
+          }
+        },
+        "story_2": {
+          "type": "story",
+          "settings": {
+            "when": "after 4 weeks",
+            "head": "“He was embarrassed at school. Now his hands have completely healed.”",
+            "body": "<p>Ten years old, travel hockey, severe eczema on his hands. He was embarrassed at school and had trouble playing comfortably. He ordered a second pair so there is always a dry one in the bag.</p>",
+            "punch": "\"They have truly been a game changer\"",
+            "who": "Allison M. Goldberg · hockey parent · October 2025",
+            "image": "shopify://shop_images/Gemini_Generated_Image_t4kjkvt4kjkvt4kj_1.webp",
+            "image_alt": ""
+          }
+        },
+        "story_3": {
+          "type": "story",
+          "settings": {
+            "when": "six times a week",
+            "head": "“The first pair I ordered helped significantly.”",
+            "body": "<p>My daughter has severe eczema on her hands and plays a lot of ice hockey. She uses them something like six times a week — she wore the first pair out, hence the order.</p>",
+            "punch": "\"Thanks for making those\"",
+            "who": "Eric Dyke · hockey parent · February 2026",
+            "image": "shopify://shop_images/Gemini_Generated_Image_k03wuhk03wuhk03w.webp",
+            "image_alt": ""
+          }
+        },
+        "story_4": {
+          "type": "story",
+          "settings": {
+            "when": "one year on",
+            "head": "“They have helped with the eczema quite a bit.”",
+            "body": "<p>I was looking for options for my son due to his eczema. He loves to play hockey and lacrosse, but the gloves make his eczema worse. Size 7 was still too big, so DRYE made him a custom 6.5. A year later, the gloves are still holding up.</p>",
+            "punch": "“Fit really well”",
+            "who": "Siobhan Brown · hockey parent · March 2026",
+            "image": "shopify://shop_images/Gemini_Generated_Image_osnin4osnin4osni_1.webp",
+            "image_alt": ""
+          }
+        }
+      },
+      "block_order": [
+        "story_tQdULR",
+        "story_Rm9V68",
+        "story_1",
+        "story_2",
+        "story_3",
+        "story_4"
+      ],
+      "settings": {
+        "anchor_id": "parent-stories",
+        "hint_label": "Swipe"
+      }
+    },
     "hiw": {
       "type": "drye-hockey-how-it-works",
       "blocks": {
@@ -392,6 +485,21 @@
       "settings": {
         "anchor_id": "timeline",
         "silhouette": "shopify://shop_images/hockey-kids-silhouette-trim.png"
+      }
+    },
+    "drye_hockey_offer_HLxyqq": {
+      "type": "drye-hockey-offer",
+      "settings": {
+        "anchor_id": "offer",
+        "heading": "Thirty days. Full refund. No forms.",
+        "body": "<p>Six or seven skates is enough to know. If it isn't doing anything, email us and the money goes back. </p>",
+        "price": "$49",
+        "unit": "one pair · a season of regular use",
+        "math": "<p> At 90 skates a season, that’s <strong>54¢ a skate</strong>. Machine washable, so it’s the same pair every time.</p>",
+        "cta_label": "Take me to the shop page",
+        "cta_url": "shopify://products/drye-moisture-routing-glove-liners",
+        "sizeguide_label": "Size guide",
+        "sizeguide": ""
       }
     },
     "objections": {
@@ -495,95 +603,6 @@
         "logo_alt": "",
         "micro_label": "Backed By",
         "explainer": "The Swedish ice hockey players' union — every professional in SHL, SDHL and Hockeyallsvenskan."
-      }
-    },
-    "stories": {
-      "type": "drye-hockey-parent-stories",
-      "blocks": {
-        "story_tQdULR": {
-          "type": "story",
-          "settings": {
-            "when": "two to three games a week",
-            "head": "“They work well, and his hands have improved.”",
-            "body": "<p>My son wears them under his hockey gloves because he has eczema. He thinks they work well, and his hands have gotten better.</p>",
-            "punch": "“His hands have improved”",
-            "who": "Liza Dahlin · hockey parent · May 2025",
-            "image": "shopify://shop_images/3312_1.webp",
-            "image_alt": "Practice at the rink in Dallas"
-          }
-        },
-        "story_Rm9V68": {
-          "type": "story",
-          "settings": {
-            "when": "three seasons in",
-            "head": "“They are great, thank you.”",
-            "body": "<p>My son is an ice hockey goalie, and sweat from his glove and blocker irritates his hands. After trying DRYE, she wrote back: ‘They are great, thank you.</p>",
-            "punch": "“They are great, thank you”",
-            "who": "Katherine Wilberton · hockey parent · March 2026",
-            "image": "shopify://shop_images/Gemini_Generated_Image_4nnlck4nnlck4nnl.webp",
-            "image_alt": ""
-          }
-        },
-        "story_1": {
-          "type": "story",
-          "settings": {
-            "when": "after 3 ice times",
-            "head": "“After three ice times, his hands completely cleared up.”",
-            "body": "<p>My son has been struggling with severe dry hands because of his hockey gloves for the past few years. No cream or prescription has helped.</p>",
-            "punch": "\"Absolute game changer\"",
-            "who": "Adam Todd · hockey parent · January 2026",
-            "image": "shopify://shop_images/pexels-tima-miroshnichenko-6847605.webp",
-            "image_alt": ""
-          }
-        },
-        "story_2": {
-          "type": "story",
-          "settings": {
-            "when": "after 4 weeks",
-            "head": "“He was embarrassed at school. Now his hands have completely healed.”",
-            "body": "<p>Ten years old, travel hockey, severe eczema on his hands. He was embarrassed at school and had trouble playing comfortably. He ordered a second pair so there is always a dry one in the bag.</p>",
-            "punch": "\"They have truly been a game changer\"",
-            "who": "Allison M. Goldberg · hockey parent · October 2025",
-            "image": "shopify://shop_images/Gemini_Generated_Image_t4kjkvt4kjkvt4kj_1.webp",
-            "image_alt": ""
-          }
-        },
-        "story_3": {
-          "type": "story",
-          "settings": {
-            "when": "six times a week",
-            "head": "“The first pair I ordered helped significantly.”",
-            "body": "<p>My daughter has severe eczema on her hands and plays a lot of ice hockey. She uses them something like six times a week — she wore the first pair out, hence the order.</p>",
-            "punch": "\"Thanks for making those\"",
-            "who": "Eric Dyke · hockey parent · February 2026",
-            "image": "shopify://shop_images/Gemini_Generated_Image_k03wuhk03wuhk03w.webp",
-            "image_alt": ""
-          }
-        },
-        "story_4": {
-          "type": "story",
-          "settings": {
-            "when": "one year on",
-            "head": "“They have helped with the eczema quite a bit.”",
-            "body": "<p>I was looking for options for my son due to his eczema. He loves to play hockey and lacrosse, but the gloves make his eczema worse. Size 7 was still too big, so DRYE made him a custom 6.5. A year later, the gloves are still holding up.</p>",
-            "punch": "“Fit really well”",
-            "who": "Siobhan Brown · hockey parent · March 2026",
-            "image": "shopify://shop_images/Gemini_Generated_Image_osnin4osnin4osni_1.webp",
-            "image_alt": ""
-          }
-        }
-      },
-      "block_order": [
-        "story_tQdULR",
-        "story_Rm9V68",
-        "story_1",
-        "story_2",
-        "story_3",
-        "story_4"
-      ],
-      "settings": {
-        "anchor_id": "parent-stories",
-        "hint_label": "Swipe"
       }
     },
     "drye_hockey_pendulum_L8iiC6": {
@@ -872,11 +891,12 @@
     "fails",
     "clarity",
     "drye_research_video_full_76TKtF",
+    "stories",
     "hiw",
     "timeline",
+    "drye_hockey_offer_HLxyqq",
     "objections",
     "drye_hockey_trust_BwRYhw",
-    "stories",
     "drye_hockey_pendulum_L8iiC6",
     "drye_nt_trust_badges_kmjhiL",
     "gallery",
