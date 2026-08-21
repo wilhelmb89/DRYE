@@ -41,6 +41,32 @@
 
 .drye-hockey-hero__media--desktop { display: none; }
 
+/* Background video — sits over the poster image, under the scrim (z-index 1),
+   under the copy (z-index 2). No z-index of its own: it is later in the DOM than
+   .drye-hockey-hero__media, which is enough to paint on top of it.
+
+   opacity 0 until drye-hockey-lp.js has an actual decoded frame. The poster
+   image stays the LCP element and stays visible the whole time the video is
+   loading, so a slow or failed video costs nothing but a still photo. */
+.drye-hockey-hero__video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transition: opacity 700ms var(--ease-standard, ease);
+  pointer-events: none;
+}
+
+.drye-hockey-hero.is-playing .drye-hockey-hero__video { opacity: 1; }
+
+/* Reduced motion never loads the video at all (the JS returns early), but if it
+   is somehow already playing, stop the transition from running. */
+@media (prefers-reduced-motion: reduce) {
+  .drye-hockey-hero__video { display: none; }
+}
+
 /* Flat tint over the photo, under the copy. Opacity comes from the section's
    --hero-scrim (desktop) / --hero-scrim-mobile, both set per section in the editor.
    This is the only darkening in the hero. */
@@ -118,6 +144,17 @@
 .drye-hockey-hero__lead { margin-top: var(--space-24); }
 
 .drye-hockey-hero__stack { flex: 1 1 360px; min-width: 280px; max-width: 460px; }
+
+/* Per-breakpoint visibility, driven by the two section checkboxes. display:none
+   rather than visibility/opacity: a hidden diagram must not hold flex space, or
+   the copy column keeps the narrow width it was sharing. */
+@media (max-width: 767px) {
+  .drye-hockey-hero__stack--mobile-off { display: none; }
+}
+
+@media (min-width: 768px) {
+  .drye-hockey-hero__stack--desktop-off { display: none; }
+}
 
 .drye-hockey-hero__box {
   display: flex;
