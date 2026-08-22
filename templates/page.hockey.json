@@ -32,23 +32,43 @@
     "drye_new_identification_aDLhc3": {
       "type": "dryeNEW-identification",
       "blocks": {
+        "profession_item_yXNLcn": {
+          "type": "profession_item",
+          "settings": {
+            "image": "shopify://shop_images/Gemini_Generated_Image_rpcm9urpcm9urpcm.webp",
+            "image_url": "https://images.unsplash.com/photo-1551522435-a13afa10f103?w=1200&q=75",
+            "fallback_color": "#1E3A4C",
+            "label": "Washing and scrubbing",
+            "body": ""
+          }
+        },
+        "profession_item_7FLeCV": {
+          "type": "profession_item",
+          "settings": {
+            "image": "shopify://shop_images/Gemini_Generated_Image_2bkszx2bkszx2bks.webp",
+            "image_url": "",
+            "fallback_color": "",
+            "label": "GLOVE DRYER",
+            "body": ""
+          }
+        },
         "profession_item_eb99Dn": {
           "type": "profession_item",
           "settings": {
-            "image": "shopify://shop_images/Gemini_Generated_Image_bfsmfebfsmfebfsm.webp",
+            "image": "shopify://shop_images/Gemini_Generated_Image_f7hqayf7hqayf7hq.webp",
             "image_url": "https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?w=1200&q=75",
             "fallback_color": "#1E3A4C",
-            "label": "Gear spray",
+            "label": "Ointments & Barrier creams",
             "body": ""
           }
         },
         "profession_item_KNQfRQ": {
           "type": "profession_item",
           "settings": {
-            "image": "shopify://shop_images/Gemini_Generated_Image_4kecos4kecos4kec.webp",
+            "image": "shopify://shop_images/Screenshot_3.png",
             "image_url": "https://images.unsplash.com/photo-1530026405186-ed1f139313f8?w=1200&q=75",
             "fallback_color": "#1E3A4C",
-            "label": "GLOVE FLIPS",
+            "label": "PRESCRIPTIONS",
             "body": ""
           }
         },
@@ -62,28 +82,9 @@
             "body": ""
           }
         },
-        "profession_item_7FLeCV": {
-          "type": "profession_item",
-          "settings": {
-            "image": "shopify://shop_images/ChatGPT_Image_Aug_22_2026_08_09_04_PM.webp",
-            "image_url": "",
-            "fallback_color": "",
-            "label": "DRYER",
-            "body": ""
-          }
-        },
-        "profession_item_yXNLcn": {
-          "type": "profession_item",
-          "settings": {
-            "image": "shopify://shop_images/Gemini_Generated_Image_dp0gkpdp0gkpdp0g.webp",
-            "image_url": "https://images.unsplash.com/photo-1551522435-a13afa10f103?w=1200&q=75",
-            "fallback_color": "#1E3A4C",
-            "label": "barrier creams",
-            "body": ""
-          }
-        },
         "occlusion_step_KzfLcn": {
           "type": "occlusion_step",
+          "disabled": true,
           "settings": {
             "step_number": "01",
             "title": "20 minutes in",
@@ -92,6 +93,7 @@
         },
         "occlusion_step_qAti3c": {
           "type": "occlusion_step",
+          "disabled": true,
           "settings": {
             "step_number": "02",
             "title": "Saturation point",
@@ -100,6 +102,7 @@
         },
         "occlusion_step_HnEhFP": {
           "type": "occlusion_step",
+          "disabled": true,
           "settings": {
             "step_number": "03",
             "title": "Monday again",
@@ -108,11 +111,11 @@
         }
       },
       "block_order": [
+        "profession_item_yXNLcn",
+        "profession_item_7FLeCV",
         "profession_item_eb99Dn",
         "profession_item_KNQfRQ",
         "profession_item_bPwHdG",
-        "profession_item_7FLeCV",
-        "profession_item_yXNLcn",
         "occlusion_step_KzfLcn",
         "occlusion_step_qAti3c",
         "occlusion_step_HnEhFP"
