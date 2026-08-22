@@ -21,18 +21,50 @@
   margin: 0;
 }
 
+/* MOBILE: a native scroll-snap rail, not a stack. Three full-width cards ran
+   about 2400px of scroll; one card at a time is ~700px with the other two a
+   swipe away.
+
+   The rail breaks out of .dryeNEW-container's padding with a negative margin and
+   pays it back as padding, so the first card starts flush with the copy above it
+   and the last one can still reach the left edge. scroll-padding-inline-start
+   makes snap land on that same line instead of hard against the viewport.
+
+   No JS: scroll-snap-type does the paging, the browser owns the gesture. That is
+   also why the section cannot fight a vertical page scroll. */
 .drye-ba-grid {
   display: grid;
-  grid-template-columns: minmax(0, 1fr);
-  gap: var(--space-20);
+  grid-auto-flow: column;
+  grid-auto-columns: 82vw;
+  gap: var(--space-14);
   margin-top: var(--space-36);
+  margin-inline: calc(var(--page-pad) * -1);
+  padding-inline: var(--page-pad);
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scroll-snap-type: x mandatory;
+  scroll-padding-inline-start: var(--page-pad);
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+
+.drye-ba-grid::-webkit-scrollbar {
+  display: none;
 }
 
 .drye-ba-card {
   display: flex;
   flex-direction: column;
+  min-width: 0;
   background: var(--bg);
   border: var(--border-base);
+  scroll-snap-align: start;
+}
+
+/* Mobile-only cue. Markup and animation live in base.css (.swipe-hint,
+   @keyframes swipe-travel) — this only places and hides it. */
+.drye-ba-hint {
+  margin-top: var(--space-14);
 }
 
 /* A fixed ratio, not a min-height: the photos have different natural heights, so
@@ -174,10 +206,22 @@
 }
 
 @media (min-width: 768px) {
+  /* Back to a plain three-column grid: no rail, no snap, no overflow. */
   .drye-ba-grid {
+    display: grid;
+    grid-auto-flow: row;
     grid-template-columns: var(--grid-3-col-desktop);
+    grid-auto-columns: auto;
     gap: var(--space-20);
     align-items: stretch;
+    margin-inline: 0;
+    padding-inline: 0;
+    overflow: visible;
+    scroll-snap-type: none;
+  }
+
+  .drye-ba-hint {
+    display: none;
   }
 
   .drye-ba-body {
