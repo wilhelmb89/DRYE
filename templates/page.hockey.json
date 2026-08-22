@@ -767,10 +767,19 @@
       "blocks": {
         "frame_1": {
           "type": "frame",
+          "disabled": true,
           "settings": {
             "image": "shopify://shop_images/3e76a13e-2476-4336-905c-232227259759.webp",
             "tag": "Before",
             "quote": "“I was fiery red. I had sores on my knuckles.”"
+          }
+        },
+        "frame_4": {
+          "type": "frame",
+          "settings": {
+            "image": "shopify://shop_images/9.webp",
+            "tag": "Grip",
+            "quote": "“I get a better grip inside the glove than without them.”"
           }
         },
         "frame_3": {
@@ -789,19 +798,11 @@
             "quote": "“It doesn’t stink as much in the glove afterwards.”"
           }
         },
-        "frame_4": {
-          "type": "frame",
-          "settings": {
-            "image": "shopify://shop_images/9.webp",
-            "tag": "Grip",
-            "quote": "“I get a better grip inside the glove than without them.”"
-          }
-        },
         "frame_2": {
           "type": "frame",
           "settings": {
             "image": "shopify://shop_images/7.webp",
-            "tag": "Eczema",
+            "tag": "Skin",
             "quote": "“It’s helped my eczema. Very, very much. It was far worse before.”"
           }
         },
@@ -824,9 +825,9 @@
       },
       "block_order": [
         "frame_1",
+        "frame_4",
         "frame_3",
         "frame_6",
-        "frame_4",
         "frame_2",
         "frame_5",
         "frame_7"
