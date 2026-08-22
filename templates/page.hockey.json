@@ -29,6 +29,53 @@
         "quote_4": "“blocker irritates his hands” "
       }
     },
+    "drye_nt_loop_QAEc3k": {
+      "type": "drye-nt-loop",
+      "blocks": {
+        "quote_4XRDzM": {
+          "type": "quote",
+          "settings": {
+            "quote": "I’ve tried every cleaning solution I can think of but it’s not going away",
+            "advice": "Looks like a mild heat rash"
+          }
+        },
+        "quote_X4NXzm": {
+          "type": "quote",
+          "settings": {
+            "quote": "I wore gloves even though I got a contact allergy every time",
+            "advice": "Use Gloves in a Bottle"
+          }
+        },
+        "quote_3B48dF": {
+          "type": "quote",
+          "settings": {
+            "quote": "cotton liners make my hands sweaty after 30 min.",
+            "advice": "Thin later of hydrocortisone on the affected area"
+          }
+        },
+        "quote_ihD46J": {
+          "type": "quote",
+          "settings": {
+            "quote": "I hate my sweaty gloves in summer. They keep splitting.",
+            "advice": "I have a glove dryer that I use regularly. "
+          }
+        }
+      },
+      "block_order": [
+        "quote_4XRDzM",
+        "quote_X4NXzm",
+        "quote_3B48dF",
+        "quote_ihD46J"
+      ],
+      "disabled": true,
+      "name": "DRYE NT — Advice Loop",
+      "settings": {
+        "chap_no": "03",
+        "eyebrow": "The never-ending loop",
+        "title": "",
+        "aria_label": "Common advice nail techs hear"
+      }
+    },
     "voices": {
       "type": "drye-hockey-peer-voices",
       "blocks": {
@@ -869,6 +916,7 @@
   },
   "order": [
     "drye_mechanics_herov2_43Cpdw",
+    "drye_nt_loop_QAEc3k",
     "voices",
     "mech",
     "fails",

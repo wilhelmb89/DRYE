@@ -1042,6 +1042,52 @@
         "guarantee": "30-Day Money Back Guarantee",
         "sources": "Park & Lee 2025 · Warner, Stone & Boissy, J Invest Dermatol 2003 · Gunt & Kasting, Int J Pharm 2007 · Nogueira et al., Thermochim Acta 2009 · Repeated-occlusion reference pending verification"
       }
+    },
+    "drye_nt_loop_3kHMcG": {
+      "type": "drye-nt-loop",
+      "blocks": {
+        "quote_wNdEAL": {
+          "type": "quote",
+          "settings": {
+            "quote": "am I doomed to this for the rest of my career?",
+            "advice": "Use thicker mils"
+          }
+        },
+        "quote_Hkxg4r": {
+          "type": "quote",
+          "settings": {
+            "quote": "I wore gloves even though I got a contact allergy every time",
+            "advice": "Use Gloves in a Bottle"
+          }
+        },
+        "quote_crGKVm": {
+          "type": "quote",
+          "settings": {
+            "quote": "cotton liners make my hands sweaty after 30 min.",
+            "advice": "Double up"
+          }
+        },
+        "quote_QiefrD": {
+          "type": "quote",
+          "settings": {
+            "quote": "I hate my sweaty gloves in summer. They keep splitting.",
+            "advice": "Cut the fingertips off"
+          }
+        }
+      },
+      "block_order": [
+        "quote_wNdEAL",
+        "quote_Hkxg4r",
+        "quote_crGKVm",
+        "quote_QiefrD"
+      ],
+      "name": "DRYE NT — Advice Loop",
+      "settings": {
+        "chap_no": "03",
+        "eyebrow": "The never-ending loop",
+        "title": "POV: You’re stuck in the nail tech advice loop.",
+        "aria_label": "Common advice nail techs hear"
+      }
     }
   },
   "order": [
@@ -1064,6 +1110,7 @@
     "drye_nt_validation_Ep7qKR",
     "drye_mechanics_cta_KQaVwL",
     "drye_nt_real_reviews_dHDWiM",
-    "nt_close"
+    "nt_close",
+    "drye_nt_loop_3kHMcG"
   ]
 }
