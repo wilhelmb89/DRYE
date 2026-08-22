@@ -29,6 +29,103 @@
         "quote_4": "“blocker irritates his hands” "
       }
     },
+    "drye_new_identification_aDLhc3": {
+      "type": "dryeNEW-identification",
+      "blocks": {
+        "profession_item_eb99Dn": {
+          "type": "profession_item",
+          "settings": {
+            "image": "shopify://shop_images/Gemini_Generated_Image_bfsmfebfsmfebfsm.webp",
+            "image_url": "https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?w=1200&q=75",
+            "fallback_color": "#1E3A4C",
+            "label": "Gear spray",
+            "body": ""
+          }
+        },
+        "profession_item_KNQfRQ": {
+          "type": "profession_item",
+          "settings": {
+            "image": "shopify://shop_images/Gemini_Generated_Image_4kecos4kecos4kec.webp",
+            "image_url": "https://images.unsplash.com/photo-1530026405186-ed1f139313f8?w=1200&q=75",
+            "fallback_color": "#1E3A4C",
+            "label": "GLOVE FLIPS",
+            "body": ""
+          }
+        },
+        "profession_item_bPwHdG": {
+          "type": "profession_item",
+          "settings": {
+            "image": "shopify://shop_images/Screenshot_22.webp",
+            "image_url": "https://images.unsplash.com/photo-1587293852726-70cdb56c2866?w=1200&q=75",
+            "fallback_color": "#1E3A4C",
+            "label": "Cotton liners",
+            "body": ""
+          }
+        },
+        "profession_item_7FLeCV": {
+          "type": "profession_item",
+          "settings": {
+            "image": "shopify://shop_images/ChatGPT_Image_Aug_22_2026_08_09_04_PM.webp",
+            "image_url": "",
+            "fallback_color": "",
+            "label": "DRYER",
+            "body": ""
+          }
+        },
+        "profession_item_yXNLcn": {
+          "type": "profession_item",
+          "settings": {
+            "image": "shopify://shop_images/Gemini_Generated_Image_dp0gkpdp0gkpdp0g.webp",
+            "image_url": "https://images.unsplash.com/photo-1551522435-a13afa10f103?w=1200&q=75",
+            "fallback_color": "#1E3A4C",
+            "label": "barrier creams",
+            "body": ""
+          }
+        },
+        "occlusion_step_KzfLcn": {
+          "type": "occlusion_step",
+          "settings": {
+            "step_number": "01",
+            "title": "20 minutes in",
+            "body": "<p>Sweat has nowhere to go. Fabric, powder, cream — they all soak it up. It sits against your skin.<br/><br/></p>"
+          }
+        },
+        "occlusion_step_qAti3c": {
+          "type": "occlusion_step",
+          "settings": {
+            "step_number": "02",
+            "title": "Saturation point",
+            "body": "<p>Every absorbent material hits a wall. Then it sits wet against your skin for the rest of the shift.</p>"
+          }
+        },
+        "occlusion_step_HnEhFP": {
+          "type": "occlusion_step",
+          "settings": {
+            "step_number": "03",
+            "title": "Monday again",
+            "body": "<p>Weekend off. Skin recovers. Monday morning the same wet gloves is waiting. Nothing breaks the cycle.<br/></p>"
+          }
+        }
+      },
+      "block_order": [
+        "profession_item_eb99Dn",
+        "profession_item_KNQfRQ",
+        "profession_item_bPwHdG",
+        "profession_item_7FLeCV",
+        "profession_item_yXNLcn",
+        "occlusion_step_KzfLcn",
+        "occlusion_step_qAti3c",
+        "occlusion_step_HnEhFP"
+      ],
+      "name": "DRYE NEW Identification",
+      "settings": {
+        "section_id": "identification",
+        "eyebrow": "",
+        "heading": "You've tried everything.",
+        "heading_echo": "Nothing worked.",
+        "body": ""
+      }
+    },
     "drye_nt_loop_QAEc3k": {
       "type": "drye-nt-loop",
       "blocks": {
@@ -916,6 +1013,7 @@
   },
   "order": [
     "drye_mechanics_herov2_43Cpdw",
+    "drye_new_identification_aDLhc3",
     "drye_nt_loop_QAEc3k",
     "voices",
     "mech",
