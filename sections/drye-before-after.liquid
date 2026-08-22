@@ -28,7 +28,21 @@
       </div>
     {% endif %}
 
-    <div class="drye-ba-grid">
+    {%- comment -%}
+      Mobile: a scroll-snap rail, one card per swipe. Desktop: the same
+      three-column grid as before. All of it is CSS — scroll-snap-type does the
+      paging, so the browser owns the gesture and this rail cannot fight a
+      vertical page scroll.
+
+      role/aria-label + tabindex are what make a horizontal scroller reachable
+      by keyboard; without tabindex the arrow keys do nothing here.
+    {%- endcomment -%}
+    <div
+      class="drye-ba-grid"
+      tabindex="0"
+      role="region"
+      aria-label="{{ section.settings.rail_label | default: 'Before and after cases' | escape }}"
+    >
       {% for block in section.blocks %}
         {%- liquid
           assign before_label = block.settings.before_label | default: section.settings.before_label
@@ -44,6 +58,7 @@
                   | image_tag:
                     loading: 'lazy',
                     class: 'drye-ba-image',
+                    sizes: '(min-width: 768px) 30vw, 41vw',
                     alt: block.settings.before_alt | escape
                 }}
               {% else %}
@@ -64,6 +79,7 @@
                   | image_tag:
                     loading: 'lazy',
                     class: 'drye-ba-image',
+                    sizes: '(min-width: 768px) 30vw, 41vw',
                     alt: block.settings.after_alt | escape
                 }}
               {% else %}
@@ -106,6 +122,18 @@
       {% endfor %}
     </div>
 
+    {%- comment -%}
+      Mobile-only swipe cue. The .swipe-hint primitive lives in base.css — the
+      same one used by the objections strip, the stories carousel and the B2B
+      sections. Only shown when there is actually more than one card to reach.
+    {%- endcomment -%}
+    {% if section.settings.swipe_label != blank and section.blocks.size > 1 %}
+      <div class="swipe-hint drye-ba-hint" aria-hidden="true">
+        <span class="swipe-hint__label">{{ section.settings.swipe_label }}</span>
+        <span class="swipe-hint__track"><i class="swipe-hint__dot"></i></span>
+      </div>
+    {% endif %}
+
     {% if section.settings.note != blank %}
       <div class="dryeNEW-body--caption drye-ba-note">
         <p>{{ section.settings.note }}</p>
@@ -124,6 +152,16 @@
     { "type": "text", "id": "heading_line_1", "label": "Heading line 1", "default": "Before and after." },
     { "type": "text", "id": "heading_line_2", "label": "Heading line 2", "default": "No filters. No staging." },
     { "type": "textarea", "id": "intro", "label": "Intro text", "default": "These are unsolicited photos sent directly to us by users. We didn't ask for them. They sent them because the results were that visible." },
+    {
+      "type": "header",
+      "content": "Mobile"
+    },
+    {
+      "type": "paragraph",
+      "content": "On phones the cards become a horizontal swipe rail — one card per swipe. Desktop stays a three-column grid."
+    },
+    { "type": "text", "id": "swipe_label", "label": "Swipe label", "default": "Swipe", "info": "Leave blank to hide the cue." },
+    { "type": "text", "id": "rail_label", "label": "Screen-reader label for the rail", "default": "Before and after cases" },
     {
       "type": "header",
       "content": "Default image labels"
