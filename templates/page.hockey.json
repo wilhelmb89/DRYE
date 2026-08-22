@@ -440,8 +440,8 @@
       "type": "drye-research-video-full",
       "name": "DRYE Research Video Full",
       "settings": {
-        "video_src_desktop": "https://customer-fqpngdzqcoky7qmz.cloudflarestream.com/453bb4cae9bd147b7a10fc6213e64b12/manifest/video.m3u8",
-        "video_src_mobile": "https://customer-fqpngdzqcoky7qmz.cloudflarestream.com/ed9ad690d7f5c27060e215f05f9e4f8e/manifest/video.m3u8",
+        "video_src_desktop": "https://customer-fqpngdzqcoky7qmz.cloudflarestream.com/2074c6781ae24384969440304777244c/manifest/video.m3u8",
+        "video_src_mobile": "https://customer-fqpngdzqcoky7qmz.cloudflarestream.com/bf313ff6a700494aa1c04501e7af5bb2/manifest/video.m3u8",
         "video_label": "Development — Swedish School of Textiles, Borås",
         "video_caption": "Cotton holds sweat. DRYE moves it outward."
       }
@@ -808,70 +808,6 @@
         "explainer": "The Swedish ice hockey players' union — every professional in SHL, SDHL and Hockeyallsvenskan."
       }
     },
-    "drye_hockey_pendulum_L8iiC6": {
-      "type": "drye-hockey-pendulum",
-      "blocks": {
-        "pendulum_epdeJq": {
-          "type": "pendulum",
-          "settings": {
-            "label": "Grip",
-            "wet": 26,
-            "drye": 86
-          }
-        },
-        "pendulum_r77iEQ": {
-          "type": "pendulum",
-          "settings": {
-            "label": "Comfort",
-            "wet": 22,
-            "drye": 80
-          }
-        },
-        "pendulum_mAeGqX": {
-          "type": "pendulum",
-          "settings": {
-            "label": "Skin",
-            "wet": 15,
-            "drye": 72
-          }
-        },
-        "pendulum_FMjcXr": {
-          "type": "pendulum",
-          "settings": {
-            "label": "Smell",
-            "wet": 12,
-            "drye": 70
-          }
-        },
-        "pendulum_wTtttd": {
-          "type": "pendulum",
-          "settings": {
-            "label": "Routine",
-            "wet": 20,
-            "drye": 88
-          }
-        }
-      },
-      "block_order": [
-        "pendulum_epdeJq",
-        "pendulum_r77iEQ",
-        "pendulum_mAeGqX",
-        "pendulum_FMjcXr",
-        "pendulum_wTtttd"
-      ],
-      "disabled": true,
-      "custom_css": [
-        ".drye-hockey-pend-sec {padding-top: 0 !important;}"
-      ],
-      "name": "drye-Hockey Pendulum",
-      "settings": {
-        "anchor_id": "pendulum",
-        "pend_title": "Same glove, same session",
-        "pend_key_a": "Wet glove",
-        "pend_key_b": "With DRYE",
-        "pend_note": "<p>Positions are relative, not measured values — based on what users describe in interviews and field studies.</p>"
-      }
-    },
     "drye_mechanics_cta_jQNPXc": {
       "type": "drye-mechanics-cta",
       "name": "DRYE Mechanics CTA",
@@ -1027,7 +963,6 @@
     "gallery",
     "timeline",
     "drye_hockey_trust_BwRYhw",
-    "drye_hockey_pendulum_L8iiC6",
     "drye_mechanics_cta_jQNPXc",
     "drye_before_after_crcTXh",
     "drye_nt_trust_badges_kmjhiL",
