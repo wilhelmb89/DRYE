@@ -456,19 +456,121 @@
         "video_caption": "Cotton holds sweat. DRYE moves it outward."
       }
     },
+    "hiw": {
+      "type": "drye-hockey-how-it-works",
+      "blocks": {
+        "step_1": {
+          "type": "step",
+          "settings": {
+            "step": "5–10 min after glove use",
+            "figure": "beads",
+            "note": "Inner layer"
+          }
+        },
+        "step_2": {
+          "type": "step",
+          "settings": {
+            "step": "Material starts routing",
+            "figure": "routing",
+            "note": "Inner layer"
+          }
+        },
+        "step_3": {
+          "type": "step",
+          "settings": {
+            "step": "Material starts storing sweat into small pockets",
+            "figure": "stored",
+            "note": "Outer layer"
+          }
+        }
+      },
+      "block_order": [
+        "step_1",
+        "step_2",
+        "step_3"
+      ],
+      "settings": {
+        "anchor_id": "how-it-works",
+        "eyebrow": "Asymmetric layering",
+        "patent": "Patent pending · SE 2615359-3",
+        "heading": "How it works",
+        "mat_outer": "Outer lyocell",
+        "mat_inner": "Inner · polypropylene",
+        "mat_clear": "Stays clear"
+      }
+    },
+    "drye_before_after_crcTXh": {
+      "type": "drye-before-after",
+      "blocks": {
+        "case_YPVMJb": {
+          "type": "case",
+          "settings": {
+            "before_image": "shopify://shop_images/PXL_20250222_150439970.MP_1.webp",
+            "before_alt": "Before image",
+            "before_label": "",
+            "after_image": "shopify://shop_images/PXL_20250411_133548754.MP_1.webp",
+            "after_alt": "After image",
+            "after_label": "After first use",
+            "timeline": "",
+            "quote": "\"These gloves completely solved my contact dermatitis problems, and as a bonus my hands no longer smell bad after a game!\"",
+            "attribution": "— Chris Pickett, Recreational hockey player, Fort Worth, Texas",
+            "cta_label": "Read the story",
+            "cta_url": "shopify://blogs/insights/contact-dermatitis-hockey-gloves-case-study"
+          }
+        },
+        "case_YQWpiW": {
+          "type": "case",
+          "settings": {
+            "before_image": "shopify://shop_images/c875f5ab-ae50-4921-a2a5-56b7ebd0b2d5_1_1.webp",
+            "before_alt": "Before image",
+            "before_label": "",
+            "after_image": "shopify://shop_images/6.webp",
+            "after_alt": "After image",
+            "after_label": "After one season",
+            "timeline": "",
+            "quote": "\"Cracks all over my knuckles, redness and eczema. My hands stay drier, grip is better, skin holds up.\"",
+            "attribution": "— Linnéa Pettersson Dove, SDHL Swedish Champion 2025, Frölunda HC",
+            "cta_label": "Read the story",
+            "cta_url": "shopify://blogs/insights/hockey-pro-relieves-eczema-completely-with-drye-glove-liner"
+          }
+        },
+        "case_EmJhqF": {
+          "type": "case",
+          "disabled": true,
+          "settings": {
+            "before_image": "shopify://shop_images/3312_1.webp",
+            "before_alt": "After image",
+            "before_label": "",
+            "after_image": "shopify://shop_images/1.webp",
+            "after_alt": "After image",
+            "after_label": "",
+            "timeline": "",
+            "quote": "",
+            "attribution": "— Jens Stålnacke, Mine Worker, Luleå",
+            "cta_label": "",
+            "cta_url": ""
+          }
+        }
+      },
+      "block_order": [
+        "case_YPVMJb",
+        "case_YQWpiW",
+        "case_EmJhqF"
+      ],
+      "name": "DRYE Before / After",
+      "settings": {
+        "micro_label": "",
+        "heading_line_1": "",
+        "heading_line_2": "",
+        "intro": "",
+        "before_label": "Before",
+        "after_label": "After",
+        "note": ""
+      }
+    },
     "objections": {
       "type": "drye-hockey-objections",
       "blocks": {
-        "objection_e3xFdV": {
-          "type": "objection",
-          "settings": {
-            "profile": "WEAR",
-            "question": "Will they actually wear them?",
-            "answer": "",
-            "proof": "“Every practice and game.”<br>, “Six ice times a week.”",
-            "who": "Allison M. Goldberg & Eric Dyke · Hockey parents"
-          }
-        },
         "objection_1": {
           "type": "objection",
           "settings": {
@@ -477,6 +579,16 @@
             "answer": "",
             "proof": "“Cotton liners made my daughter’s hands slippery inside the glove and it affected her grip. DRYE fit tight and didn’t slip.”",
             "who": "Eric Dyke · Hockey parent · Montréal, QC, Canada · Feb 2026"
+          }
+        },
+        "objection_e3xFdV": {
+          "type": "objection",
+          "settings": {
+            "profile": "WEAR",
+            "question": "Will they actually wear them?",
+            "answer": "",
+            "proof": "“Every practice and game.”<br>, “Six ice times a week.”",
+            "who": "Allison M. Goldberg & Eric Dyke · Hockey parents"
           }
         },
         "objection_LV7Hrw": {
@@ -531,8 +643,8 @@
         }
       },
       "block_order": [
-        "objection_e3xFdV",
         "objection_1",
+        "objection_e3xFdV",
         "objection_LV7Hrw",
         "objection_2",
         "objection_3",
@@ -632,49 +744,6 @@
       "settings": {
         "anchor_id": "parent-stories",
         "hint_label": "Swipe"
-      }
-    },
-    "hiw": {
-      "type": "drye-hockey-how-it-works",
-      "blocks": {
-        "step_1": {
-          "type": "step",
-          "settings": {
-            "step": "5–10 min after glove use",
-            "figure": "beads",
-            "note": "Inner layer"
-          }
-        },
-        "step_2": {
-          "type": "step",
-          "settings": {
-            "step": "Material starts routing",
-            "figure": "routing",
-            "note": "Inner layer"
-          }
-        },
-        "step_3": {
-          "type": "step",
-          "settings": {
-            "step": "Material starts storing sweat into small pockets",
-            "figure": "stored",
-            "note": "Outer layer"
-          }
-        }
-      },
-      "block_order": [
-        "step_1",
-        "step_2",
-        "step_3"
-      ],
-      "settings": {
-        "anchor_id": "how-it-works",
-        "eyebrow": "Asymmetric layering",
-        "patent": "Patent pending · SE 2615359-3",
-        "heading": "How it works",
-        "mat_outer": "Outer lyocell",
-        "mat_inner": "Inner · polypropylene",
-        "mat_clear": "Stays clear"
       }
     },
     "drye_hockey_offer_HLxyqq": {
@@ -804,21 +873,9 @@
         "silhouette": "shopify://shop_images/hockey-kids-silhouette-trim.png"
       }
     },
-    "drye_hockey_trust_BwRYhw": {
-      "type": "drye-hockey-trust",
-      "custom_css": [
-        ".drye-trust-section {padding-top: clamp(16px, 3vw, 32px) !important;}"
-      ],
-      "name": "DRYE Trust Bar",
-      "settings": {
-        "logo": "shopify://shop_images/Skarmavbild-2020-12-16-kl.-07.38.57.webp",
-        "logo_alt": "",
-        "micro_label": "Backed By",
-        "explainer": "The Swedish ice hockey players' union — every professional in SHL, SDHL and Hockeyallsvenskan."
-      }
-    },
     "drye_mechanics_cta_jQNPXc": {
       "type": "drye-mechanics-cta",
+      "disabled": true,
       "name": "DRYE Mechanics CTA",
       "settings": {
         "eyebrow": "",
@@ -832,78 +889,17 @@
         "secondary_link": "shopify://blogs/insights/automotive-mechanics-field-study"
       }
     },
-    "drye_before_after_crcTXh": {
-      "type": "drye-before-after",
-      "blocks": {
-        "case_YPVMJb": {
-          "type": "case",
-          "settings": {
-            "before_image": "shopify://shop_images/PXL_20250222_150439970.MP_1.webp",
-            "before_alt": "Before image",
-            "before_label": "",
-            "after_image": "shopify://shop_images/PXL_20250411_133548754.MP_1.webp",
-            "after_alt": "After image",
-            "after_label": "After first use",
-            "timeline": "",
-            "quote": "\"These gloves completely solved my contact dermatitis problems, and as a bonus my hands no longer smell bad after a game!\"",
-            "attribution": "— Chris Pickett, Recreational hockey player, Fort Worth, Texas",
-            "cta_label": "Read the story",
-            "cta_url": "shopify://blogs/insights/contact-dermatitis-hockey-gloves-case-study"
-          }
-        },
-        "case_YQWpiW": {
-          "type": "case",
-          "settings": {
-            "before_image": "shopify://shop_images/c875f5ab-ae50-4921-a2a5-56b7ebd0b2d5_1_1.webp",
-            "before_alt": "Before image",
-            "before_label": "",
-            "after_image": "shopify://shop_images/6.webp",
-            "after_alt": "After image",
-            "after_label": "After one season",
-            "timeline": "",
-            "quote": "\"Cracks all over my knuckles, redness and eczema. My hands stay drier, grip is better, skin holds up.\"",
-            "attribution": "— Linnéa Pettersson Dove, SDHL Swedish Champion 2025, Frölunda HC",
-            "cta_label": "Read the story",
-            "cta_url": "shopify://blogs/insights/hockey-pro-relieves-eczema-completely-with-drye-glove-liner"
-          }
-        },
-        "case_EmJhqF": {
-          "type": "case",
-          "disabled": true,
-          "settings": {
-            "before_image": "shopify://shop_images/3312_1.webp",
-            "before_alt": "After image",
-            "before_label": "",
-            "after_image": "shopify://shop_images/1.webp",
-            "after_alt": "After image",
-            "after_label": "",
-            "timeline": "",
-            "quote": "",
-            "attribution": "— Jens Stålnacke, Mine Worker, Luleå",
-            "cta_label": "",
-            "cta_url": ""
-          }
-        }
-      },
-      "block_order": [
-        "case_YPVMJb",
-        "case_YQWpiW",
-        "case_EmJhqF"
-      ],
-      "name": "DRYE Before / After",
-      "settings": {
-        "micro_label": "",
-        "heading_line_1": "",
-        "heading_line_2": "",
-        "intro": "",
-        "before_label": "Before",
-        "after_label": "After",
-        "note": ""
-      }
-    },
     "drye_nt_trust_badges_kmjhiL": {
       "type": "drye-nt-trust-badges",
       "blocks": {
+        "award_arjHW3": {
+          "type": "award",
+          "settings": {
+            "emblem": "shopify://shop_images/Skarmavbild-2020-12-16-kl.-07.38.57.webp",
+            "name": "",
+            "caption": "Backed by the Swedish ice hockey players' union — every professional in SHL, SDHL and Hockeyallsvenskan."
+          }
+        },
         "stars_X9F6aM": {
           "type": "stars",
           "settings": {
@@ -933,6 +929,7 @@
         }
       },
       "block_order": [
+        "award_arjHW3",
         "stars_X9F6aM",
         "award_iyaaqM",
         "trustpilot_XTME8G"
@@ -966,15 +963,14 @@
     "fails",
     "clarity",
     "drye_research_video_full_7NQgYt",
+    "hiw",
+    "drye_before_after_crcTXh",
     "objections",
     "stories",
-    "hiw",
     "drye_hockey_offer_HLxyqq",
     "gallery",
     "timeline",
-    "drye_hockey_trust_BwRYhw",
     "drye_mechanics_cta_jQNPXc",
-    "drye_before_after_crcTXh",
     "drye_nt_trust_badges_kmjhiL",
     "offer"
   ]
