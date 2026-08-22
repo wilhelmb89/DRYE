@@ -1,3 +1,12 @@
+/* dryeNEW-identification.css
+
+   TYPE NOTE — read before changing any font-size here.
+   dryeNEW-h4 must not be used in this section. --fs-h4 is 14px on mobile and
+   17px on desktop, while --fs-body is 16px at both, so an h4 heading over body
+   copy INVERTS at the breakpoint: on a phone the body reads larger than its own
+   heading. The step titles use dryeNEW-h3 (--fs-sub-h3, 21px at both
+   breakpoints) over dryeNEW-body (16px). */
+
 .dryeNEW-identification {
   background: var(--bg);
   border-bottom: var(--border-base);
@@ -31,6 +40,8 @@
 .dryeNEW-identification__body p {
   margin: 0;
 }
+
+/* ── profession strip ──────────────────────────────────────────────────── */
 
 .dryeNEW-identification__strip-wrap {
   position: relative;
@@ -70,10 +81,14 @@
   filter: saturate(0.7);
 }
 
+.dryeNEW-identification__profession-copy {
+  padding: var(--space-12) 0 var(--space-20);
+}
+
 .dryeNEW-identification__profession-label {
   display: block;
-  margin: var(--space-8) 0 0;
-  padding-bottom: var(--space-20);
+  margin: 0 0 var(--space-6);
+  padding: 0;
   text-align: center;
   font-family: var(--font-body);
   font-size: var(--fs-micro-1);
@@ -84,9 +99,23 @@
   color: var(--caption);
 }
 
+.dryeNEW-identification__profession-body {
+  max-width: 92%;
+  margin: 0 auto;
+  color: var(--muted);
+  text-align: center;
+  text-wrap: pretty;
+}
+
+.dryeNEW-identification__profession-body p {
+  margin: 0;
+}
+
 .dryeNEW-identification__swipe-hint {
   display: none;
 }
+
+/* ── occlusion steps ──────────────────────────────────────────────────── */
 
 .dryeNEW-identification__occlusion {
   display: flex;
@@ -106,7 +135,9 @@
 .dryeNEW-identification__step-number {
   flex: 0 0 auto;
   min-width: 20px;
-  padding-top: 2px;
+  /* 4px, was 2px: the title is 21px now, so the numeral needs a touch more to
+     sit on its cap line rather than above it. */
+  padding-top: 4px;
   font-family: var(--font-body);
   font-size: var(--fs-micro-2);
   font-weight: var(--fw-semibold);
@@ -114,9 +145,15 @@
   color: var(--caption);
 }
 
+/* 21px via dryeNEW-h3 in the liquid, up from dryeNEW-h4 — --fs-h4 is 14px on
+   mobile while --fs-body is 16px, so the body copy was rendering LARGER than
+   its own heading. --fs-sub-h3 is 21px at both breakpoints.
+   10px below, up from --space-5 (5px): at 5px with --lh-heading-tight the
+   descenders sat on the first line of the body — the "licking". */
 .dryeNEW-identification__step-title {
-  margin-bottom: var(--space-5);
+  margin: 0 0 var(--space-10);
   color: var(--deep);
+  text-wrap: pretty;
 }
 
 .dryeNEW-identification__step-body {
@@ -131,6 +168,8 @@
   font-weight: var(--fw-medium);
   color: var(--body);
 }
+
+/* ── mobile ───────────────────────────────────────────────────────────── */
 
 @media (max-width: 767px) {
   .dryeNEW-identification__strip-wrap::after {
@@ -183,6 +222,8 @@
   }
 }
 
+/* ── desktop ──────────────────────────────────────────────────────────── */
+
 @media (min-width: 768px) {
   .dryeNEW-identification__intro {
     max-width: 720px;
@@ -213,8 +254,12 @@
     filter: saturate(1) brightness(0.9);
   }
 
-  .dryeNEW-identification__profession-label {
-    padding-bottom: var(--space-4);
+  .dryeNEW-identification__profession-copy {
+    padding: var(--space-12) var(--space-8) var(--space-4);
+  }
+
+  .dryeNEW-identification__profession-body {
+    max-width: 100%;
   }
 
   .dryeNEW-identification__swipe-hint {
@@ -245,63 +290,17 @@
   }
 
   .dryeNEW-identification__step-title {
-    margin-bottom: var(--space-8);
+    margin-bottom: var(--space-12);
   }
 }
 
 @keyframes dryeNEW-identification-swipe-arrow {
-  0% {
-    transform: translateX(0);
-    opacity: 0.55;
-  }
-  50% {
-    transform: translateX(6px);
-    opacity: 1;
-  }
-  100% {
-    transform: translateX(0);
-    opacity: 0.55;
-  }
+  0% { transform: translateX(0); opacity: 0.55; }
+  50% { transform: translateX(6px); opacity: 1; }
+  100% { transform: translateX(0); opacity: 0.55; }
 }
 
 @keyframes dryeNEW-identification-swipe-fade {
-  0%, 100% {
-    opacity: 0.55;
-  }
-  50% {
-    opacity: 0.9;
-  }
-}
-.dryeNEW-identification__profession-copy {
-  padding: var(--space-12) 0 var(--space-20);
-}
-
-.dryeNEW-identification__profession-label {
-  margin: 0 0 var(--space-6);
-  padding-bottom: 0;
-}
-
-.dryeNEW-identification__profession-body {
-  color: var(--muted);
-  text-align: center;
-  max-width: 92%;
-  margin: 0 auto;
-}
-
-.dryeNEW-identification__profession-body p {
-  margin: 0;
-}
-
-@media (min-width: 768px) {
-  .dryeNEW-identification__profession-copy {
-    padding: var(--space-12) var(--space-8) var(--space-4);
-  }
-
-  .dryeNEW-identification__profession-label {
-    padding-bottom: 0;
-  }
-
-  .dryeNEW-identification__profession-body {
-    max-width: 100%;
-  }
+  0%, 100% { opacity: 0.55; }
+  50% { opacity: 0.9; }
 }
