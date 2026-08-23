@@ -1,0 +1,281 @@
+{{ 'base.css' | asset_url | stylesheet_tag }}
+{{ 'drye-layer-mechanism.css' | asset_url | stylesheet_tag }}
+{{ 'drye-layer-mechanism.js' | asset_url | script_tag }}
+
+{%- comment -%}
+  The DRYE layer opens and shows its two faces.
+
+  Claim discipline: every number here is either measured at fabric level by the
+  Swedish School of Textiles (4.4 in / 112 mm max wetted diameter, 4 s to the
+  outer face) or a published material constant (polypropylene moisture regain
+  0.1%). Neither is an outcome claim. Do NOT rewrite these into "keeps hands
+  dry for X hours" — no rewet or drying-rate test exists yet, and the one user
+  report on duration says two hours.
+
+  All geometry and behaviour lives in the CSS and JS. The section owns copy.
+{%- endcomment -%}
+
+{%- liquid
+  assign ss = section.settings
+-%}
+
+<section
+  class="drye-layers"
+  id="drye-layers-{{ section.id }}"
+  data-section-id="{{ section.id }}"
+  data-drye-section
+  data-section-name="layer_mechanism"
+  data-drye-layers
+  {% if ss.start_open %}data-drye-layers-open-default{% endif %}
+>
+  <div class="drye-layers__shell">
+    <div class="drye-layers__col">
+
+      {%- if ss.eyebrow != blank -%}
+        <span class="drye-layers__eyebrow">{{ ss.eyebrow }}</span>
+      {%- endif -%}
+
+      {%- if ss.heading != blank or ss.heading_em != blank -%}
+        <h2 class="drye-layers__head">
+          {{ ss.heading }}
+          {%- if ss.heading_em != blank -%}
+            <br><span class="drye-layers__head-em">{{ ss.heading_em }}</span>
+          {%- endif -%}
+        </h2>
+      {%- endif -%}
+
+      <div class="drye-layers__stack">
+
+        <div class="drye-layers__bar">
+          <span class="drye-layers__bar-label">{{ ss.glove_label }}</span>
+        </div>
+
+        <div class="drye-layers__arrows" data-drye-layers-toparrows aria-hidden="true">
+          <i></i><i></i><i></i>
+        </div>
+        <div class="drye-layers__spacer" data-drye-layers-topspacer hidden></div>
+
+        {%- comment -%} Collapsed: the whole box is the tap target. {%- endcomment -%}
+        <div class="drye-layers__panelwrap" data-drye-layers-panelwrap>
+          <button type="button" class="drye-layers__trigger" data-drye-layers-open aria-expanded="false">
+            <span class="drye-layers__trigger-title">{{ ss.layer_label }}</span>
+            {%- if ss.layer_sub != blank -%}
+              <span class="drye-layers__trigger-sub">{{ ss.layer_sub }}</span>
+            {%- endif -%}
+          </button>
+
+          {%- if ss.click_label != blank -%}
+            <div class="drye-layers__cal drye-layers__cal--click" data-drye-layers-cal="click" aria-hidden="true">
+              <span>{{ ss.click_label }}</span>
+              <svg viewBox="0 0 160 100" width="118" height="74" fill="none" stroke="rgba(255,255,255,0.85)" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M154 4 C142 26, 110 52, 66 70 C48 78, 30 86, 15 90"></path>
+                <path d="M34 93 L14 90 L28 76"></path>
+              </svg>
+            </div>
+          {%- endif -%}
+        </div>
+
+        {%- comment -%} Opened. {%- endcomment -%}
+        <div class="drye-layers__panel" data-drye-layers-panel hidden>
+
+          <div class="drye-layers__panelhead">
+            <span class="drye-layers__panelhead-title" data-drye-layers-head="drye">{{ ss.layer_label }}</span>
+            <span class="drye-layers__panelhead-title drye-layers__panelhead-title--cotton" data-drye-layers-head="cotton" hidden>{{ ss.cotton_head }}</span>
+
+            <span class="drye-layers__dots" data-drye-layers-dots aria-hidden="true">
+              <i></i><i></i><i></i>
+            </span>
+
+            <button type="button" class="drye-layers__close" data-drye-layers-close aria-label="{{ ss.close_label | default: 'Close the layer' | escape }}">&times;</button>
+          </div>
+
+          {%- comment -%} DRYE: two faces, opposite jobs. {%- endcomment -%}
+          <div class="drye-layers__body" data-drye-layers-pane="drye">
+            <div class="drye-layers__anchor">
+              <div class="drye-layers__bandbox">
+
+                <div class="drye-layers__drops" data-drye-layers-drops aria-hidden="true" hidden>
+                  <span class="drye-layers__drop drye-layers__drop--1"></span>
+                  <span class="drye-layers__drop drye-layers__drop--2"></span>
+                  <span class="drye-layers__drop drye-layers__drop--3"></span>
+                  <span class="drye-layers__drop drye-layers__drop--4"></span>
+                </div>
+
+                <div class="drye-layers__bands">
+                  <div class="drye-layers__band drye-layers__band--outer">
+                    <span data-drye-layers-pool aria-hidden="true" hidden>
+                      <i class="drye-layers__pool"></i>
+                      <i class="drye-layers__fill"></i>
+                    </span>
+                    <span class="drye-layers__band-title">{{ ss.outer_title }}</span>
+                    <span class="drye-layers__band-tag drye-layers__band-tag--outer">{{ ss.outer_tag }}</span>
+                  </div>
+
+                  <div class="drye-layers__band drye-layers__band--inner">
+                    <span class="drye-layers__band-title">{{ ss.inner_title }}</span>
+                    <span class="drye-layers__band-tag">{{ ss.inner_tag }}</span>
+                  </div>
+                </div>
+              </div>
+
+              {%- comment -%}
+                Three beats, cumulative. Each arrow is anchored to the centre of
+                the band it points at — see the geometry note in the CSS before
+                changing any offset.
+              {%- endcomment -%}
+              <div class="drye-layers__cal drye-layers__cal--knit" data-drye-layers-cal="knit" aria-hidden="true" hidden>
+                <span>{{ ss.cal_knit }}</span>
+                <svg viewBox="0 0 160 100" width="118" height="74" fill="none" stroke="rgba(255,255,255,0.85)" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M154 4 C142 26, 110 52, 66 70 C48 78, 30 86, 15 90"></path>
+                  <path d="M34 93 L14 90 L28 76"></path>
+                </svg>
+              </div>
+
+              <div class="drye-layers__cal drye-layers__cal--cross" data-drye-layers-cal="cross" aria-hidden="true" hidden>
+                <span>{{ ss.cal_cross }}</span>
+                <svg viewBox="0 0 160 100" width="118" height="74" fill="none" stroke="rgba(255,255,255,0.85)" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M154 4 C142 26, 110 52, 66 70 C48 78, 30 86, 15 90"></path>
+                  <path d="M34 93 L14 90 L28 76"></path>
+                </svg>
+              </div>
+
+              <div class="drye-layers__cal drye-layers__cal--spread" data-drye-layers-cal="spread" aria-hidden="true" hidden>
+                <span>{{ ss.cal_spread }}</span>
+                <svg viewBox="0 0 160 100" width="118" height="74" fill="none" stroke="rgba(255,255,255,0.85)" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M154 4 C142 26, 110 52, 66 70 C48 78, 30 86, 15 90"></path>
+                  <path d="M34 93 L14 90 L28 76"></path>
+                </svg>
+              </div>
+            </div>
+          </div>
+
+          {%- comment -%} Cotton: the same on both faces, so nothing has a direction. {%- endcomment -%}
+          <div class="drye-layers__body" data-drye-layers-pane="cotton" hidden>
+            <div class="drye-layers__anchor">
+              <div class="drye-layers__bandbox">
+
+                <div class="drye-layers__drops" aria-hidden="true">
+                  <span class="drye-layers__drop drye-layers__drop--held drye-layers__drop--1"></span>
+                  <span class="drye-layers__drop drye-layers__drop--held drye-layers__drop--2"></span>
+                  <span class="drye-layers__drop drye-layers__drop--held drye-layers__drop--3"></span>
+                </div>
+
+                <div class="drye-layers__bands">
+                  <div class="drye-layers__band drye-layers__band--cotton">
+                    <i class="drye-layers__soak" aria-hidden="true"></i>
+                    <span class="drye-layers__band-title">{{ ss.cotton_title }}</span>
+                    <span class="drye-layers__band-tag">{{ ss.cotton_tag }}</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="drye-layers__arrows" data-drye-layers-arrows="up" aria-hidden="true">
+          <i></i><i></i><i></i>
+        </div>
+        <div class="drye-layers__arrows drye-layers__arrows--down" data-drye-layers-arrows="down" aria-hidden="true" hidden>
+          <i></i><i></i><i></i>
+        </div>
+
+        <div class="drye-layers__bar" data-drye-layers-skin="calm">
+          <span class="drye-layers__bar-label">{{ ss.skin_label }}</span>
+        </div>
+
+        <div class="drye-layers__bar drye-layers__bar--risk" data-drye-layers-skin="risk" hidden>
+          <span class="drye-layers__bar-label">{{ ss.skin_label }}</span>
+          {%- if ss.risk_label != blank -%}
+            <span class="drye-layers__risk">{{ ss.risk_label }}</span>
+          {%- endif -%}
+        </div>
+
+        {%- if ss.press_label != blank -%}
+          <div class="drye-layers__presscue" data-drye-layers-presscue aria-hidden="true">
+            <i></i><span>{{ ss.press_label }}</span>
+          </div>
+        {%- endif -%}
+      </div>
+
+      {%- if ss.compare_label != blank -%}
+        <div class="drye-layers__compare" data-drye-layers-compare hidden>
+          <span class="drye-layers__compare-label">{{ ss.compare_label }}</span>
+          <div class="drye-layers__switch">
+            <button type="button" class="is-on" data-drye-layers-pick="drye" aria-pressed="true">{{ ss.switch_drye }}</button>
+            <button type="button" data-drye-layers-pick="cotton" aria-pressed="false">{{ ss.switch_cotton }}</button>
+          </div>
+        </div>
+      {%- endif -%}
+
+      {%- if ss.source != blank -%}
+        <p class="drye-layers__source">{{ ss.source }}</p>
+      {%- endif -%}
+
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "DRYE Layer Mechanism",
+  "tag": "section",
+  "class": "shopify-section-drye-layer-mechanism",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "The invention" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Engineered for one thing:" },
+    { "type": "text", "id": "heading_em", "label": "Heading — editorial line", "default": "hands sealed inside a glove for hours.", "info": "Playfair italic on a navy plate. Says what the product is BUILT FOR, which needs no substantiation \u2014 unlike what it delivers." },
+    {
+      "type": "header",
+      "content": "The stack"
+    },
+    { "type": "text", "id": "glove_label", "label": "Top bar", "default": "Hockey glove — sealed" },
+    { "type": "text", "id": "layer_label", "label": "Layer label", "default": "DRYE · Asymmetric layering" },
+    { "type": "text", "id": "layer_sub", "label": "Layer sub-line", "default": "one layer, one direction — 0.4 mm" },
+    { "type": "text", "id": "skin_label", "label": "Bottom bar", "default": "Skin — where the sweat starts" },
+    {
+      "type": "header",
+      "content": "The two faces"
+    },
+    { "type": "text", "id": "outer_title", "label": "Outer face — what it does", "default": "Spreads it 4.4 inches wide" },
+    { "type": "text", "id": "outer_tag", "label": "Outer face — material", "default": "Lyocell" },
+    { "type": "text", "id": "inner_title", "label": "Inner face — what it does", "default": "Repels it — 0.1% water" },
+    { "type": "text", "id": "inner_tag", "label": "Inner face — material", "default": "Polypropylene" },
+    {
+      "type": "header",
+      "content": "The three beats"
+    },
+    {
+      "type": "paragraph",
+      "content": "Revealed one at a time and left on screen. The arrows are shown from 1020px up; below that each line appears as a compact ticked row."
+    },
+    { "type": "text", "id": "cal_knit", "label": "Beat 1", "default": "Two layers knitted into one" },
+    { "type": "text", "id": "cal_cross", "label": "Beat 2", "default": "Sweat crosses in 4 seconds" },
+    { "type": "text", "id": "cal_spread", "label": "Beat 3", "default": "Spread wider than your palm" },
+    {
+      "type": "header",
+      "content": "Cotton comparison"
+    },
+    { "type": "text", "id": "cotton_head", "label": "Panel title", "default": "Cotton liner · Same both sides" },
+    { "type": "text", "id": "cotton_title", "label": "What it does", "default": "Soaks it up, saturated after 20 min+", "info": "This is a comparative performance claim about a competing material and no head-to-head test exists yet. \u201cSoaks it up, then holds it\u201d is the safe version." },
+    { "type": "text", "id": "cotton_tag", "label": "Material tag", "default": "Both faces" },
+    { "type": "text", "id": "risk_label", "label": "Skin warning line", "default": "Occlusion risk arises" },
+    { "type": "text", "id": "compare_label", "label": "Switch label", "default": "Compare" },
+    { "type": "text", "id": "switch_drye", "label": "Switch — left", "default": "DRYE" },
+    { "type": "text", "id": "switch_cotton", "label": "Switch — right", "default": "Cotton liner" },
+    {
+      "type": "header",
+      "content": "Prompts"
+    },
+    { "type": "text", "id": "click_label", "label": "Desktop arrow prompt", "default": "Click here" },
+    { "type": "text", "id": "press_label", "label": "Mobile prompt", "default": "Press to see inside the layer" },
+    { "type": "text", "id": "close_label", "label": "Close button aria-label", "default": "Close the layer" },
+    { "type": "checkbox", "id": "start_open", "label": "Start opened", "default": false, "info": "Leave off so the tap is a measurable signal of interest." },
+    {
+      "type": "header",
+      "content": "Source"
+    },
+    { "type": "textarea", "id": "source", "label": "Source line", "default": "Fabric-level lab test on the DRYE weave, wetted with artificial sweat. 4.4 in = 112 mm max wetted diameter; moisture reached the outer face in 4 seconds. Swedish School of Textiles, Borås, 2025. Moisture regain is a standard material property, not a DRYE test: polypropylene 0.1%, cotton ~8.5%." }
+  ],
+  "presets": [{ "name": "DRYE Layer Mechanism" }]
+}
+{% endschema %}
