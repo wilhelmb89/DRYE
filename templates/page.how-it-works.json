@@ -23,6 +23,62 @@
         "subtext": "<p>DRYE is a patent-pending textile construction developed for closed glove environments — where standard wicking materials fail.</p>"
       }
     },
+    "drye_nt_barrier_choice_E6DK3t": {
+      "type": "drye-nt-barrier-choice",
+      "name": "DRYE NT — Barrier choice",
+      "settings": {
+        "chapter": "04",
+        "heading": "Why your skin and nails get worse inside gloves over time.",
+        "pick_label": "Choose your starting point",
+        "btn_healthy": "My skin feels fine",
+        "btn_damaged": "My skin is already irritated",
+        "exposure": "Under glove 6 hours/day",
+        "risk_label": "Maceration risk rises",
+        "chart_alt": "Stylised overhydration in the skin across two weeks of daily glove occlusion",
+        "day_1": "Day 1",
+        "day_2": "Day 3",
+        "day_3": "Day 7",
+        "day_4": "Day 14",
+        "aud_healthy": "Healthy skin",
+        "healthy_d3": "No significant barrier change",
+        "healthy_d14": "Significant barrier impairment",
+        "aud_damaged": "Already irritated skin",
+        "damaged_d3": "Significant barrier impairment",
+        "source": "Sources: Ramsing & Agner, Contact Dermatitis, 1996 — short- and long-term experimental glove occlusion."
+      }
+    },
+    "drye_layer_mechanism_GFgfww": {
+      "type": "drye-layer-mechanism",
+      "name": "DRYE Layer Mechanism",
+      "settings": {
+        "eyebrow": "The invention",
+        "heading": "Engineered for one thing:",
+        "heading_em": "hands sealed inside a glove for hours.",
+        "glove_label": "Hockey glove — sealed",
+        "layer_label": "DRYE · Asymmetric layering",
+        "layer_sub": "one layer, one direction — 0.4 mm",
+        "skin_label": "Skin — where the sweat starts",
+        "outer_title": "Spreads it 4.4 inches wide",
+        "outer_tag": "Lyocell",
+        "inner_title": "Repels it — 0.1% water",
+        "inner_tag": "Polypropylene",
+        "cal_knit": "Two layers knitted into one",
+        "cal_cross": "Sweat crosses in 4 seconds",
+        "cal_spread": "Spread wider than your palm",
+        "cotton_head": "Cotton liner · Same both sides",
+        "cotton_title": "Soaks it up, saturated after 20 min+",
+        "cotton_tag": "Both faces",
+        "risk_label": "Occlusion risk arises",
+        "compare_label": "Compare",
+        "switch_drye": "DRYE",
+        "switch_cotton": "Cotton liner",
+        "click_label": "Click here",
+        "press_label": "Press to see inside the layer",
+        "close_label": "Close the layer",
+        "start_open": false,
+        "source": "Fabric-level lab test on the DRYE weave, wetted with artificial sweat. 4.4 in = 112 mm max wetted diameter; moisture reached the outer face in 4 seconds. Swedish School of Textiles, Borås, 2025. Moisture regain is a standard material property, not a DRYE test: polypropylene 0.1%, cotton ~8.5%."
+      }
+    },
     "drye_mechanics_saturation_DzjNTn": {
       "type": "drye-mechanics-saturation",
       "blocks": {
@@ -95,6 +151,7 @@
         "fiber_row_xGqXTb",
         "fiber_row_cXPR3X"
       ],
+      "disabled": true,
       "name": "DRYE Saturation Point",
       "settings": {
         "section_id": "mechanics-saturation",
@@ -107,49 +164,6 @@
         "close_body": "",
         "close_statement": "",
         "cite": "Moisture regain references: Kadolph 2014 · ASTM D2654 · CN GB national standard. Transport mechanism independently verified at the Swedish School of Textiles, 2025."
-      }
-    },
-    "drye_hockey_how_it_works_F3Y84M": {
-      "type": "drye-hockey-how-it-works",
-      "blocks": {
-        "step_GdJecK": {
-          "type": "step",
-          "settings": {
-            "step": "5–10 min after glove use",
-            "figure": "beads",
-            "note": "Inner layer"
-          }
-        },
-        "step_96Vfez": {
-          "type": "step",
-          "settings": {
-            "step": "Material starts routing",
-            "figure": "routing",
-            "note": "Inner layer"
-          }
-        },
-        "step_89q8J3": {
-          "type": "step",
-          "settings": {
-            "step": "Material starts storing sweat into small pockets",
-            "figure": "stored",
-            "note": "Outer layer"
-          }
-        }
-      },
-      "block_order": [
-        "step_GdJecK",
-        "step_96Vfez",
-        "step_89q8J3"
-      ],
-      "settings": {
-        "anchor_id": "how-it-works",
-        "eyebrow": "Asymmetric layering",
-        "patent": "Patent pending · SE 2615359-3",
-        "heading": "How it works",
-        "mat_outer": "Outer lyocell",
-        "mat_inner": "Inner · polypropylene",
-        "mat_clear": "Stays clear"
       }
     },
     "drye_nt_trapped_7w3J7A": {
@@ -276,52 +290,11 @@
         "footer": "Keep the protection. Lose the tradeoff."
       }
     },
-    "drye_nt_barrier_choice_E6DK3t": {
-      "type": "drye-nt-barrier-choice",
-      "name": "DRYE NT — Barrier choice",
-      "settings": {
-        "chapter": "04",
-        "heading": "Why your skin and nails get worse inside gloves over time.",
-        "pick_label": "Choose your starting point",
-        "btn_healthy": "My skin feels fine",
-        "btn_damaged": "My skin is already irritated",
-        "exposure": "Under glove 6 hours/day",
-        "risk_label": "Maceration risk rises",
-        "chart_alt": "Stylised overhydration in the skin across two weeks of daily glove occlusion",
-        "day_1": "Day 1",
-        "day_2": "Day 3",
-        "day_3": "Day 7",
-        "day_4": "Day 14",
-        "aud_healthy": "Healthy skin",
-        "healthy_d3": "No significant barrier change",
-        "healthy_d14": "Significant barrier impairment",
-        "aud_damaged": "Already irritated skin",
-        "damaged_d3": "Significant barrier impairment",
-        "source": "Sources: Ramsing & Agner, Contact Dermatitis, 1996 — short- and long-term experimental glove occlusion."
-      }
-    },
     "drye_nt_cotton_q_pRB48M": {
       "type": "drye-nt-cotton-q",
       "custom_css": [],
       "settings": {
         "quote": "“I’ve tried cotton, but it gets wet very quickly. Is this cotton?”"
-      }
-    },
-    "drye_nt_mechanism_AwYm77": {
-      "type": "drye-nt-mechanism",
-      "name": "DRYE NT — Mechanism",
-      "settings": {
-        "section_id": "liner-mechanism",
-        "heading": "Cotton under an occlusive glove ",
-        "heading_emphasis": "did not prevent barrier change.",
-        "heading_source": "Ramsing & Agner, Contact Dermatitis, 1996",
-        "vs_label": "Cotton · DRYE",
-        "cotton_name": "Cotton",
-        "cotton_physics": "An absorbent.",
-        "cotton_steps": "Holds sweat — doesn't move it.\nAt saturation, moisture sits on skin\nSame wet glove on shift 1 as shift 8",
-        "drye_name": "DRYE Liner",
-        "drye_physics": "Asymmetric layering",
-        "drye_steps": "Skin-side: repels & transports sweat — no saturation against skin\nOuter-side: locks moisture into fibre pockets, away from skin"
       }
     },
     "drye_research_video_full_rftE34": {
@@ -490,13 +463,12 @@
   },
   "order": [
     "drye_how_it_works_hero_LiYY94",
+    "drye_nt_barrier_choice_E6DK3t",
+    "drye_layer_mechanism_GFgfww",
     "drye_mechanics_saturation_DzjNTn",
-    "drye_hockey_how_it_works_F3Y84M",
     "drye_nt_trapped_7w3J7A",
     "drye_nt_tradeoff_M9TeWV",
-    "drye_nt_barrier_choice_E6DK3t",
     "drye_nt_cotton_q_pRB48M",
-    "drye_nt_mechanism_AwYm77",
     "drye_research_video_full_rftE34",
     "drye_liner_product_clarity_Kx873m",
     "drye_liner_proof_fVmEKL",
