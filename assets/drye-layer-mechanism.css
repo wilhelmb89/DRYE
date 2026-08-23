@@ -1,9 +1,16 @@
 /* drye-layer-mechanism.css — the DRYE layer opens and shows the two faces.
 
-   Type, colour and spacing come from base.css. The one literal is #5FCFC1:
-   base has --sage (#5F8A8B), a muted grey-teal that goes flat on a navy field,
-   which is why the hockey mechanism section carries the same literal. If you
-   add it to base as --mint, swap every #5FCFC1 here for var(--mint).
+   Type, colour and spacing come from base.css. Two literals, both because base
+   has no token for them:
+
+     #5FCFC1  base has --sage (#5F8A8B), a muted grey-teal that goes flat on a
+              navy field — which is why drye-hockey-mechanism.css already
+              carries this same literal. Add it to base as --mint and swap.
+
+     #16263A  the darker navy for the glove and skin bars. Do NOT reach for
+              --deep here: --deep is #1E3A4C, which is the SAME value as
+              --bg-ink, so the bars would be invisible against this section's
+              own background. Add it to base as --deep-ink and swap.
 
    Geometry note for the callouts, further down: each one is a ZERO-HEIGHT
    anchor at the centre of the band it points at, and the arrow is positioned
@@ -43,17 +50,18 @@
   text-wrap: pretty;
 }
 
-/* The navy plate behind the editorial line. It is a backing plate, not a
-   dimmer — it sits behind the glyphs. --deep rather than the hero's
-   rgba(30,58,76,.55): that value IS this section's background, so it would be
-   invisible here. Using --deep also matches the glove and skin bars, so the
-   headline reads as a fourth layer in the same stack. */
+/* The navy plate behind the editorial line. A backing plate, not a dimmer —
+   it sits behind the glyphs and raises their contrast.
+
+   Not the hero's rgba(30,58,76,0.55): that value IS this section's background,
+   so the plate would be invisible. #16263A also matches the glove and skin
+   bars, so the headline reads as a fourth layer in the same stack. */
 .drye-layers__head-em {
   display: inline-block;
   margin-top: var(--space-6);
   margin-left: -16px;
   padding: 2px 16px 6px;
-  background: var(--deep);
+  background: #16263A;
   font-family: var(--font-editorial);
   font-style: italic;
   font-weight: var(--fw-regular);
@@ -66,7 +74,7 @@
 
 .drye-layers__bar {
   padding: 15px var(--space-18);
-  background: var(--deep);
+  background: #16263A; /* not --deep — see the note at the top of this file */
   text-align: center;
 }
 
@@ -447,12 +455,8 @@
 .drye-layers__switch button.is-on {
   background: #5FCFC1;
   border-color: #5FCFC1;
-  color: var(--deep);
+  color: #16263A;
 }
-
-/* ── state ─────────────────────────────────────────────────────────────── */
-
-.drye-layers [hidden] { display: none !important; }
 
 /* ── mobile ────────────────────────────────────────────────────────────── */
 
