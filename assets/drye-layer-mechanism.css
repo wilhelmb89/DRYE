@@ -56,22 +56,23 @@
   text-wrap: pretty;
 }
 
-/* The navy plate behind the editorial line. A backing plate, not a dimmer —
-   it sits behind the glyphs and raises their contrast.
+/* The plate behind the editorial line — same translucent treatment as the
+   hero, not a solid fill.
 
-   Not the hero's rgba(30,58,76,0.55): that value IS this section's background,
-   so the plate would be invisible. #16263A also matches the glove and skin
-   bars, so the headline reads as a fourth layer in the same stack. */
+   The hero's own value, rgba(30,58,76,0.55), cannot be reused literally: that
+   colour IS this section's background, so at any alpha it renders invisible.
+   This is the same alpha over a darker navy, which gives the identical soft
+   translucent plate on a flat field that the hero gets over a photo. */
 .drye-layers__head-em {
   display: inline-block;
   margin-top: var(--space-6);
   margin-left: -16px;
   padding: 2px 16px 6px;
-  background: #16263A;
+  background: rgba(11, 24, 36, 0.55);
   font-family: var(--font-editorial);
   font-style: italic;
   font-weight: var(--fw-regular);
-  color: #5FCFC1;
+  color: var(--white-100);
 }
 
 /* ── the stack ─────────────────────────────────────────────────────────── */
