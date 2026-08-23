@@ -8,17 +8,23 @@
               carries this same literal. Add it to base as --mint and swap.
 
      #16263A  the darker navy for the glove and skin bars. Do NOT reach for
-              --deep here: --deep is #1E3A4C, which is the SAME value as
-              --bg-ink, so the bars would be invisible against this section's
-              own background. Add it to base as --deep-ink and swap.
+              --deep here: --deep is #1E3A4C, the SAME value as --bg-ink, so
+              the bars would be invisible against this section's background.
+
+     #1E3A4C  the section field. Deliberately NOT var(--bg-ink) — see the note
+              on .drye-layers below.
 
    Geometry note for the callouts, further down: each one is a ZERO-HEIGHT
    anchor at the centre of the band it points at, and the arrow is positioned
    off its own tip. Do not convert them back to a flex column — the tip then
    moves every time a label wraps to a different number of lines. */
 
+/* Literal, not var(--bg-ink): section-drye-cart-drawer.css declares a global
+   :root{} that loads AFTER base.css and resets --bg-ink to #0F2230 sitewide.
+   drye-hockey-mechanism.css already carries the same literal for this reason —
+   a section must not be at the mercy of another section's stylesheet. */
 .drye-layers {
-  background: var(--bg-ink);
+  background: #1E3A4C;
   padding-block: var(--space-56);
   padding-inline: var(--page-pad);
   color: var(--white-100);
@@ -358,7 +364,17 @@
   animation: drye-layers-cal-in 400ms ease both;
 }
 
-.drye-layers__cal > svg { position: absolute; top: -67px; }
+/* max-width: none and an explicit width are both required. base.css resets
+   svg { max-width: 100% }, and this wrapper is absolutely positioned with no
+   width of its own (its label is absolute too), so it shrinks to 0 and the
+   arrow gets clamped out of existence. */
+.drye-layers__cal > svg {
+  position: absolute;
+  top: -67px;
+  width: 118px;
+  height: 74px;
+  max-width: none;
+}
 .drye-layers__cal > span {
   position: absolute;
   bottom: 68px;
