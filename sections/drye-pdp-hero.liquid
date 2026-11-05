@@ -2,7 +2,7 @@
   assign current_product = product
   assign selected_variant = current_product.selected_or_first_available_variant
   assign review_rating = product.metafields.reviews.rating.value.rating | default: section.settings.review_rating_fallback | round: 1
-assign review_rating = product.metafields.reviews.rating.value.rating | round: 1 | default: section.settings.review_rating_fallback
+  assign review_count = product.metafields.reviews.rating_count.value | default: section.settings.review_count_fallback
   assign review_anchor = '#judgeme_product_reviews'
   assign price_note = section.settings.price_note
   assign sticky_button_label = section.settings.sticky_button_label
