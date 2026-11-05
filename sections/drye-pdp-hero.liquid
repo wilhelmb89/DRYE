@@ -1033,23 +1033,7 @@ assign review_count = section.settings.review_count_fallback
   </div>
 </section>
 
-{% if review_rating != blank and review_count != blank %}
-  <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "Product",
-      "name": {{ current_product.title | json }},
-      {% if current_product.featured_image %}
-        "image": [{{ current_product.featured_image | image_url: width: 1200 | json }}],
-      {% endif %}
-      "aggregateRating": {
-        "@type": "AggregateRating",
-        "ratingValue": {{ review_rating | json }},
-        "reviewCount": {{ review_count | json }}
-      }
-    }
-  </script>
-{% endif %}
+
 
 <script>
   (() => {
